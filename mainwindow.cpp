@@ -49,11 +49,12 @@ void MainWindow::loadProject(const KUrl &url)
 {
     // Add it to the recent files first.
     
+    QList<KUrl> recentFiles;
     KConfig c;
     KConfigGroup cg = c.group("General");
-    QList<KUrl> recentFiles = recentFiles();
+    recentFiles = recentProjects();
     
-    if (recentFiles.contains(url));
+    if (recentFiles.contains(url)) {
         recentFiles.removeAt(recentFiles.indexOf(url));
     }
     
@@ -64,7 +65,7 @@ void MainWindow::loadProject(const KUrl &url)
     // Load the needed widgets...
 }
 
-QList<KUrl> MainWindow::recentFiles() // TODO Limit to 5 
+QList<KUrl> MainWindow::recentProjects() // TODO Limit to 5 
 {
     KConfig c;
     KConfigGroup cg = c.group("General");

@@ -56,7 +56,7 @@ void StartPage::createWidgets() // Make this a QGV? Use Plasma::Theme?
 
 void StartPage::populateRecentProjects()
 {
-    QList<KUrl> recentFiles = m_parent->recentFiles();
+    QList<KUrl> recentFiles = m_parent->recentProjects();
     
     for (int i = 0; i < recentFiles.size(); i++) {
         const KUrl u = recentFiles.at(i);
@@ -69,5 +69,7 @@ void StartPage::populateRecentProjects()
 void StartPage::emitProjectSelected(const QModelIndex &index)
 {
     QAbstractItemModel *m = m_recentProjects->model();
-    kDebug() << m->data(index, FullPathRole);
+    KUrl url = m->data(index, FullPathRole).value<KUrl>();
+    kDebug() << "Loading project file:" << m->data(index, FullPathRole);
+    emit projectSelected(url);
 }

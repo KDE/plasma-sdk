@@ -25,7 +25,7 @@ class MainWindow : public KMainWindow
         MainWindow(QWidget *parent = 0);
         ~MainWindow();
 
-        QList<KUrl> recentFiles();
+        QList<KUrl> recentProjects();
         
     public Q_SLOTS:
         void quit();
