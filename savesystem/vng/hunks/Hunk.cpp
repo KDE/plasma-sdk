@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "hunk.h"
+#include "Hunk.h"
 
 #include <QDebug>
 #include <QRegExp>
@@ -57,7 +57,6 @@ public:
 
     QByteArray patchForAccepted(bool inverse);
 };
-
 
 Hunk::Hunk()
     : d(new Private())
