@@ -21,6 +21,10 @@ class QModelIndex;
 class KPushButton;
 class MainWindow;
 
+namespace Ui {
+    class StartPage;
+}
+
 class StartPage : public QWidget
 {
     Q_OBJECT
@@ -49,9 +53,10 @@ class StartPage : public QWidget
         void conditionallyEnableNewProjectButton();
         
     private:
-        void createWidgets();
+        void setupWidgets();
         void refreshRecentProjectsList();
         
+        Ui::StartPage *ui;
         QLabel *m_createNewLabel, *m_openExistingLabel, *m_continueWorkingLabel;
         QComboBox *m_contentTypes;
         QListWidget *m_recentProjects;
