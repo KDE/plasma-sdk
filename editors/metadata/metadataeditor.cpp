@@ -45,6 +45,8 @@ void MetaDataEditor::readFile()
 //    view->icon_button->setIcon( desktopFile.readIcon() );
 //    connect( view->icon_button, SIGNAL(iconChanged(const QString &)),
 //	     view->icon_edit, SLOT(setText(const QString &)) );
+    if ( view->icon_edit->text().isEmpty() )
+	view->icon_button->setIcon("kde");
 
     view->pluginname_edit->setText( metadata->pluginName() );
 
