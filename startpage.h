@@ -48,7 +48,7 @@ class StartPage : public QWidget
         Q_DECLARE_FLAGS(ProjectType, ProjectTypes);
         
     signals:
-        void projectSelected(KUrl url);
+        void projectSelected(QString name);
         
     private Q_SLOTS:
         void emitProjectSelected(const QModelIndex &);

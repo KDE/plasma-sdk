@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
     createMenus();
     
     m_startPage = new StartPage(this);
-    connect(m_startPage, SIGNAL(projectSelected(KUrl)), this, SLOT(loadProject(KUrl)));
+    connect(m_startPage, SIGNAL(projectSelected(QString)), this, SLOT(loadProject(QString)));
     setCentralWidget(m_startPage);
     int oldTab = 0; // always startPage
 }
@@ -58,25 +58,25 @@ void MainWindow::createDockWidgets()
 {
     QDockWidget *workflow = new QDockWidget(i18n("Workflow"), this);
     
-    KListWidget *list = new KListWidget(workflow);
-    list->addItem(new QListWidgetItem(KIcon("go-home"), i18n("Start page")));
-    list->addItem(new QListWidgetItem(KIcon("accessories-text-editor"), i18n("Edit")));
-    list->addItem(new QListWidgetItem(KIcon("krfb"), i18n("Publish")));
-    list->addItem(new QListWidgetItem(KIcon("help-contents"), i18n("Documentation")));
-    list->addItem(new QListWidgetItem(KIcon("system-run"), i18n("Preview")));
-    list->setIconSize(QSize(48, 48));
-    list->setViewMode(QListView::IconMode);
-    list->setFlow(QListView::TopToBottom);
-    list->setMovement(QListView::Static);
-    list->setResizeMode(QListView::Adjust);
+    sidebar = new KListWidget(workflow);
+    sidebar->addItem(new QListWidgetItem(KIcon("go-home"), i18n("Start page")));
+    sidebar->addItem(new QListWidgetItem(KIcon("accessories-text-editor"), i18n("Edit")));
+    sidebar->addItem(new QListWidgetItem(KIcon("krfb"), i18n("Publish")));
+    sidebar->addItem(new QListWidgetItem(KIcon("help-contents"), i18n("Documentation")));
+    sidebar->addItem(new QListWidgetItem(KIcon("system-run"), i18n("Preview")));
+    sidebar->setIconSize(QSize(48, 48));
+    sidebar->setViewMode(QListView::IconMode);
+    sidebar->setFlow(QListView::TopToBottom);
+    sidebar->setMovement(QListView::Static);
+    sidebar->setResizeMode(QListView::Adjust);
     
-    connect(list, SIGNAL(currentRowChanged(int)),
+    connect(sidebar, SIGNAL(currentRowChanged(int)),
             this, SLOT(changeTab(int)));
     
-//     SidebarDelegate *delegate = new SidebarDelegate(list);
-//     list->setItemDelegate(delegate);
+//     SidebarDelegate *delegate = new SidebarDelegate(sidebar);
+//     sidebar->setItemDelegate(delegate);
     
-    workflow->setWidget(list);
+    workflow->setWidget(sidebar);
     addDockWidget(Qt::LeftDockWidgetArea, workflow);
 }
 
@@ -119,40 +119,41 @@ void MainWindow::changeTab(int tab)
     oldTab = tab;
 }
 
-void MainWindow::loadProject(const KUrl &url)
+void MainWindow::loadProject(const QString &name)
 {
-    kDebug() << "Loading project at" << url << "...";
+    kDebug() << "Loading project named" << name << "...";
 
     // Add it to the recent files first.
     
-    KUrl::List recentFiles;
+    QStringList recentFiles;
     KConfig c;
     KConfigGroup cg = c.group("General");
     recentFiles = recentProjects();
     
-    if (recentFiles.contains(url)) {
-        recentFiles.removeAt(recentFiles.indexOf(url));
+    if (recentFiles.contains(name)) {
+        recentFiles.removeAt(recentFiles.indexOf(name));
     }
     
-    if (url.isValid()) {
-        recentFiles.prepend(url);
+    if (!name.isEmpty()) {
+        recentFiles.prepend(name);
     }
     
-    kDebug() << "Writing the following list of recent files to the config:" << recentFiles.toStringList();
+    kDebug() << "Writing the following sidebar of recent files to the config:" << recentFiles;
     
-    cg.writeEntry("recentFiles", recentFiles.toStringList());
+    cg.writeEntry("recentFiles", recentFiles);
     
     c.sync();
     
-    // Load the needed widgets...
+    // Load the needed widgets, switch to page 1 (edit)...
     createDockWidgets();
+    sidebar->setCurrentRow(1);
 }
 
-KUrl::List MainWindow::recentProjects() // TODO Limit to 5 
+QStringList MainWindow::recentProjects() // TODO Limit to 5 
 {
     KConfig c;
     KConfigGroup cg = c.group("General");
-    KUrl::List l = cg.readEntry("recentFiles", QStringList());
+    QStringList l = cg.readEntry("recentFiles", QStringList());
 //     kDebug() << l.toStringList();
     
     return l;

@@ -24,8 +24,7 @@
 #include <KUrlRequester>
 #include <KStandardDirs>
 
-#include <Plasma/PackageMetadata>
-
+#include "packagemodel.h"
 #include "startpage.h"
 #include "mainwindow.h"
 #include "ui_startpage.h"
@@ -78,18 +77,18 @@ void StartPage::resetStatus()
 void StartPage::refreshRecentProjectsList()
 {
     ui->recentProjects->clear();
-    QList<KUrl> recentFiles = m_parent->recentProjects();
+    QStringList recentFiles = m_parent->recentProjects();
     
     for (int i = 0; i < recentFiles.size(); i++) {
-        Plasma::PackageMetadata metadata(recentFiles.at(i).path());
+        Plasma::PackageMetadata metadata(KStandardDirs::locateLocal("appdata", recentFiles.at(i) + '/'));
         QString projectName = metadata.name();
         
-        if (projectName.isEmpty()) {
-            continue;
-        }
+//         if (projectName.isEmpty()) {
+//             continue;
+//         }
         
-        kDebug() << projectName;
-        QListWidgetItem *item = new QListWidgetItem(projectName);
+        kDebug() << "adding" << projectName << "to the list of recent projects...";
+        QListWidgetItem *item = new QListWidgetItem(projectName); // TODO make me the user "nice" name
         item->setData(FullPathRole, projectName);
         
         QString serviceType = metadata.serviceType();
@@ -112,21 +111,26 @@ void StartPage::refreshRecentProjectsList()
 
 void StartPage::createNewProject()
 {
-    Plasma::PackageMetadata *metadata = new Plasma::PackageMetadata;
+    PackageModel *model = new PackageModel(this);
     
-    QString filename = KStandardDirs::locateLocal("appdata", ui->projectName->text().toLower() + "/metadata.desktop");
+    
+//     Plasma::PackageMetadata *metadata = new Plasma::PackageMetadata;
+    
+//     QString filename = KStandardDirs::locateLocal("appdata", ui->projectName->text().toLower() + "/metadata.desktop");
 
-    metadata->setName(ui->projectName->text());
+//     metadata->setName(ui->projectName->text());
 
     if (ui->contentTypes->currentRow() == 0) {
-        metadata->setServiceType("Plasma/Applet");
+        model->setPackageType("Plasma/Applet");
     } else if (ui->contentTypes->currentRow() == 1) {
-        metadata->setServiceType("Plasma/DataEngine");
+        model->setPackageType("Plasma/DataEngine");
     } else if (ui->contentTypes->currentRow() == 2) {
-        metadata->setServiceType("Plasma/Theme");
+        model->setPackageType("Plasma/Theme");
     } else if (ui->contentTypes->currentRow() == 3) {
-        metadata->setServiceType("Plasma/Runner");
+        model->setPackageType("Plasma/Runner");
     }
+
+    model->setPackage(KStandardDirs::locateLocal("appdata", ui->projectName->text().toLower() + '/'));
 
 // TODO
 //     metadata->setPluginName( view->pluginname_edit->text() );
@@ -136,17 +140,17 @@ void StartPage::createNewProject()
 //     metadata->setEmail( view->email_edit->text() );
 //     metadata->setLicense( view->license_edit->text() );
 
-    metadata->write(filename);
+//     metadata->write(filename);
     
-    KUrl url = filename;
+//     KUrl url = model->package() + "metadata.desktop";
     
-    emit projectSelected(url);
+    emit projectSelected(ui->projectName->text().toLower());
 }
 
 void StartPage::emitProjectSelected(const QModelIndex &index)
 {
     QAbstractItemModel *m = ui->recentProjects->model();
-    KUrl url = m->data(index, FullPathRole).value<KUrl>();
+    QString url = m->data(index, FullPathRole).value<QString>();
     kDebug() << "Loading project file:" << m->data(index, FullPathRole);
     emit projectSelected(url);
 }
