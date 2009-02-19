@@ -19,6 +19,7 @@ class QListWidget;
 class QVBoxLayout;
 class QModelIndex;
 class KPushButton;
+class KLineEdit;
 class MainWindow;
 
 namespace Ui {
@@ -49,8 +50,9 @@ class StartPage : public QWidget
         
     private Q_SLOTS:
         void emitProjectSelected(const QModelIndex &);
+        void changeStackedWidgetPage();
+        void createNewProject();
         void launchNewProjectWizard();
-        void conditionallyEnableNewProjectButton();
         
     private:
         void setupWidgets();
@@ -60,7 +62,8 @@ class StartPage : public QWidget
         QLabel *m_createNewLabel, *m_openExistingLabel, *m_continueWorkingLabel;
         QComboBox *m_contentTypes;
         QListWidget *m_recentProjects;
-        KPushButton *m_newProjectWizardButton;
+//         KPushButton *m_createNewProjectButton;
+        KLineEdit *m_newProjectName;
         QVBoxLayout *m_layout;
         MainWindow *m_parent;
 };

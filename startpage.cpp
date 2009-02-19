@@ -18,6 +18,7 @@
 
 #include <KLocalizedString>
 #include <KDebug>
+#include <KLineEdit>
 #include <KPushButton>
 #include <KSeparator>
 #include <KUrlRequester>
@@ -40,52 +41,25 @@ void StartPage::setupWidgets()
     ui = new Ui::StartPage;
     ui->setupUi(this);
     
-//     m_layout = new QVBoxLayout(this);
-//     
-//     QHBoxLayout *continueWorkingLayout = new QHBoxLayout;
-//     m_continueWorkingLabel = new QLabel(i18n("Continue working on..."), this);
-//     m_recentProjects = new QListWidget(this);
-//     continueWorkingLayout->addWidget(m_continueWorkingLabel);
-//     continueWorkingLayout->addWidget(m_recentProjects);
+
     connect(ui->recentProjects, SIGNAL(clicked(const QModelIndex)),
             this, SLOT(emitProjectSelected(const QModelIndex)));
-//     
-//     QHBoxLayout *newProjectLayout = new QHBoxLayout;
-//     m_createNewLabel = new QLabel(i18n("Create new..."), this);
-//     m_contentTypes = new QComboBox(this);
-//     m_contentTypes->addItem(i18n("select project type..."));
+    connect(ui->contentTypes, SIGNAL(clicked(const QModelIndex)),
+            this, SLOT(changeStackedWidgetPage()));
+    connect(ui->newProjectButton, SIGNAL(clicked()),
+            this, SLOT(createNewProject()));
+    
     new QListWidgetItem(KIcon("application-x-plasma"), i18n("Plasmoid"), ui->contentTypes);
     new QListWidgetItem(KIcon("kexi"), i18n("Data Engine"), ui->contentTypes);
     new QListWidgetItem(KIcon("system-run"), i18n("Runner"), ui->contentTypes);
     new QListWidgetItem(KIcon("inkscape"), i18n("Theme"), ui->contentTypes);
 
-//     m_newProjectWizardButton = new KPushButton(i18n("Create!"), this);
-//     m_newProjectWizardButton->setEnabled(false);
-//     
-//     newProjectLayout->addWidget(m_createNewLabel);
-//     newProjectLayout->addWidget(m_contentTypes);
-//     newProjectLayout->addWidget(m_newProjectWizardButton);
-//     
-//     connect(ui->contentTypes, SIGNAL(currentIndexChanged(int)), this, SLOT(conditionallyEnableNewProjectButton()));
 //     connect(ui->newProjectButton, SIGNAL(clicked()), this, SLOT(launchNewProjectWizard()));
-//     
-//     QHBoxLayout *openExistingLayout = new QHBoxLayout;
-//     openExistingLayout->addWidget(new QLabel(i18n("Open existing project..."), this));
-//     openExistingLayout->addWidget(new KUrlRequester(this));
-//     
-//     m_layout->addWidget(new KSeparator(this));
-//     m_layout->addItem(continueWorkingLayout);
-//     m_layout->addWidget(new KSeparator(this));
-//     m_layout->addItem(newProjectLayout);
-//     m_layout->addWidget(new KSeparator(this));
-//     m_layout->addItem(openExistingLayout);
-//     
-//     setLayout(m_layout);
 }
 
-void StartPage::conditionallyEnableNewProjectButton()
+void StartPage::changeStackedWidgetPage()
 {
-//     ui->newProjectWizardButton->setEnabled(ui->contentTypes->currentIndex() != 0);
+    ui->layoutHackStackedWidget->setCurrentIndex(1);
 }
 
 void StartPage::launchNewProjectWizard()
@@ -116,6 +90,11 @@ void StartPage::refreshRecentProjectsList()
         item->setData(FullPathRole, project);
         ui->recentProjects->addItem(item);
     }
+}
+
+void StartPage::createNewProject()
+{
+    
 }
 
 void StartPage::emitProjectSelected(const QModelIndex &index)
