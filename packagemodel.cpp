@@ -1,6 +1,10 @@
 
 #include <packagemodel.h>
 
+#include <QDir>
+#include <QFile>
+#include <QFileInfo>
+
 #include <KDirWatch>
 
 #include <Plasma/Package>
@@ -156,18 +160,36 @@ void PackageModel::loadPackage()
         return;
     }
 
-    foreach (const char *key, m_structure->directories()) {
+    QDir dir(m_package->path());
+    Plasma::PackageStructure::Ptr structure = m_package->structure();
+
+    foreach (const char *key, structure->directories()) {
+        QString path = structure->path(key);
+        if (!dir.exists(path)) {
+            kDebug() << "making" << path << dir.relativeFilePath(path);
+            dir.mkpath(path);
+        }
+
         m_topEntries.append(key);
     }
 
-    foreach (const char *key, m_structure->files()) {
+    foreach (const char *key, structure->files()) {
+        QString path = structure->path(key);
+        if (!dir.exists(path)) {
+            kDebug() << "making" << path;
+            QFileInfo info(dir.path() + '/' + path);
+            dir.mkpath(dir.relativeFilePath(info.absolutePath()));
+            QFile f(dir.path() + '/' + path);
+            f.open(QIODevice::WriteOnly);
+        }
+
         m_topEntries.append(key);
     }
 
     beginInsertRows(QModelIndex(), 0, m_topEntries.count() - 1);
     endInsertRows();
 
-    foreach (const char *key, m_structure->directories()) {
+    foreach (const char *key, structure->directories()) {
         QStringList files = m_package->entryList(key);
         m_files[key] = files;
 
@@ -184,7 +206,6 @@ void PackageModel::loadPackage()
 void PackageModel::fileAddedOnDisk(const QString &path)
 {
     kDebug() << path;
-
 }
 
 void PackageModel::fileDeletedOnDisk(const QString &path)
