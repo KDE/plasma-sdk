@@ -31,7 +31,7 @@ KUrl NewProjectWizard::projectFile()
     return m_metadataUrl;
 }
 
-void NewProjectWizard::accept()
+void NewProjectWizard::accept() // FIXME: port to PackageStructure
 {
     QByteArray m; // metadata.desktop
     QByteArray c; // code file
