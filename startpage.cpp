@@ -54,6 +54,11 @@ void StartPage::createWidgets() // Make this a QGV? Use Plasma::Theme?
     setLayout(m_layout);
 }
 
+void StartPage::launchNewProjectWizard(ProjectType type)
+{
+    
+}
+
 void StartPage::populateRecentProjects()
 {
     QList<KUrl> recentFiles = m_parent->recentProjects();

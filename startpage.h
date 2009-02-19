@@ -18,6 +18,7 @@ class QComboBox;
 class QListWidget;
 class QHBoxLayout;
 class QModelIndex;
+class KPushButton;
 class MainWindow;
 
 class StartPage : public QWidget
@@ -28,6 +29,14 @@ class StartPage : public QWidget
         FullPathRole = Qt::UserRole + 1
     };
     
+    enum ProjectTypes {
+        Theme           = 1,
+        Plasmoid        = 2,
+        DataEngine      = 4
+    };
+    
+    Q_DECLARE_FLAGS(ProjectType, ProjectTypes);
+    
     public:
         StartPage(MainWindow *parent);
     
@@ -36,6 +45,7 @@ class StartPage : public QWidget
         
     public Q_SLOTS:
         void emitProjectSelected(const QModelIndex &);
+        void launchNewProjectWizard(ProjectType type);
         
     private:
         void createWidgets();
@@ -44,6 +54,7 @@ class StartPage : public QWidget
         QLabel *m_createNewLabel, *m_openExistingLabel, *m_continueWorkingLabel;
         QComboBox *m_contentTypes;
         QListWidget *m_recentProjects;
+        KPushButton *m_launchNewProjectWizard;
         QHBoxLayout *m_layout;
         MainWindow *m_parent;
 };
