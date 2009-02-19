@@ -1,0 +1,184 @@
+PlasMate
+
+=== First Impressions ===
+
+On launch the window will contain only a "start page". Logo at the top, tagline
+describing what it does right under that (bonus points for an animation when it
+appears).
+
+Beneath that three sets of options: Continue Working On.., Create a New...,
+Open An Existing...
+
+Each of those options will then have a list of clickable links to get started.
+
+Continue Working On will list the last few projects opened, or be hidden if
+there are no recent projects.
+
+Create A New will include options for Widgets, DataEngine or Theme.
+
+Open An Existing will provide those as well, but launch a file dialog.
+
+The intended user experience is "launch, click, work!" No menu bars, no project
+workspace by default (like a normal IDE tends to) on first launch.
+
+Once started, the work flow is: edit, preview, repeat, save point, repeat,
+publish ... repeat. ;) 
+
+
+=== The Work Interface ===
+
+The main work interface will be divided into two area: the editor/viewer as the
+main widget, and toolboxes to provide workflow.
+
+The most important toolbox will be the Package Listing. This will be a tree that
+shows the contents of a Plasma::PackageStructure. Given that we know from the
+PackageStructure the mimetypes, etc, of each entry we can use this to make it
+easy to add items.
+
+Each directory in the listing will have an "Add.." entry, and the 
+metadata.desktop file will also be listed. Behind the scenes, it will use a
+KDirWatch to update based on the filesystem.
+
+Other toolboxes will include:
+
+* the Widget previewer: with buttons to set the form factor and location as well
+as reload the widget. This way the author can simply preview their widget as
+they go, including interction.
+
+* timeline: save point browser and selector
+
+* notes/todos: a place for the author to collect their thoughts as they work (<-- very very nice idea)
+
+* documentation
+
+* widgets explorer (listing of Plasma::Widgets, links to the doc)
+
+
+=== Editor / Viewer ===
+
+When an entry is selected in the Package Listing, the selected file will be
+shown in the Editor/Viewer. Using KParts for all but a few types of entries will
+allow the user to edit code, view SVGs (we probably don't want the user to
+view/edit svgs with a kpart. dunno if you remember the application i made some
+time ago to help testing themes, but I think that i can integrate that with some
+information taken from plasma, like elements that can be themed... this requires
+some thinking...), etc. without having to write any appreciable amount of code
+ourselves.
+
+There are some editors that will need to be written from scratch, however. These
+include:
+
+* Metadata: a simple form that lets one fill in the metadata. Plasmagik should
+have some code about this.
+
+* KConfigXt: a form to create KConfigXt files; this will be used for both the
+configuration entries in a widget as well as Service .operation files.
+
+* SVG theme visualizer (look at ruphy's app)
+
+Integrating Qt Designer would also be a goal at some point. Tricky though,
+especially for the code it will generate. Requires further thinking, and not for
+the first releases.
+
+=== Integrated Revision Control, or the Save-less Interface ===
+
+Integrating a simple git-based revision control system will be critical to
+providing both a smooth user experience as well as making publishing and social
+interaction possible.
+
+When creating a new widget, it will be automatically saved into the plasmate
+appdata dir and a local git repository started for it. The user will be able to
+create Save Points as they go. This will simply do a git commit of all the work
+done to this point, adding files that are new, etc. The user will be prompted
+for a summary of changes.
+
+This will allow the user to then "roll back" to any given save point via the
+timeline toolbox.
+
+We will then provide an online git hosting system on plasma.kde.org. (based on
+gitorious?) When the user hits "Publish" they will be prompted whether they
+would like to create a local package or publish it publicly. If the latter is
+chosen, a git push will be done and their work will appear on our shared git
+repo. 
+
+The hosting system will create Plasma::Packages out of the git repos for
+download; this is simply a matter of getting rid of any git metadata in the
+directry structure and creating a zip archive out of that, which is an easily
+automated task. Consumers will get Packages, creators can push and pull repos.
+
+Neither consumer nor user should have to understand what's actually happening.
+
+If the user does not already have an account on the shared git repo, they will
+be prompted to create one at this point. Some basic oversight will be needed:
+basically, just watching what new stuff goes up.
+
+Eventually, we will want to have a widget browser integrated into Plasmate so
+that the user can see what is already available on plasma.kde.org and, with a
+click of a button, fork that widget and start working on it locally.
+
+The required git functionality is therefore pretty basic on the Plasmate side:
+
+* init a repo (milestone 1)
+* add files (milestone 1)
+* simple commits (milestone 1)
+* change to a different commit, aka "roll back" (milestone 2)
+* push (milestone 2)
+* diffs (milestone 2)
+* pull (milestone 3)
+
+(what about enabling powerful users to get access to more advanced solutions? hmmm...
+obviously we should only do that if it doesn't clutter things for the target audience)
+
+=== User Actions ===
+
+Actions will be provided to the user in the work interface through a simple 
+"see and click" interface that will be more like a toolbar or ribbon than a menu
+bar. These actions will include:
+
+* Save Point
+* Roll back (with history graph provided by the Timeline toolbox)
+* Publish
+* Exit / Leave
+
+
+=== Code Design ===
+
+Classes:
+
+* StartPage
+	* Takes a pointer ot the main window
+	* Creates the ProjectBox and other default toolboxes for a given action
+	  when selected
+
+* ProjectBox
+	* ProjectView tree (maybe just a generic QTreeView?)
+	* ProjectModel
+		* based on Plasma::Package
+		* uses a KDirModel internally to keep sync'd with disk
+	* Takes a pointer to the main window to load viewers/editors with
+	* Hosts the revision control object
+
+* WidgetPreview
+	* Provides a Corona and View
+	* Controls for: form factor, location, refresh. Translucent buttons at
+	  the top of the Previewer with those labels? Click on FF or L and a
+	  list of relevant choices will appear as an overlay?
+
+* Actions
+
+* Timeline
+
+* SaveSystem
+	* Use the git classes from vng?
+
+* Application
+	* Creates the main window
+	* Creates the start page
+
+=== Art / Design ===
+
+Artwork and design work required:
+
+* PlasMate logo: the Plasma logo with some elegant text
+* The PlasMate tagline
+* The layout of the main page. Qt Creator's take on this is very nice; should feel "webby"
