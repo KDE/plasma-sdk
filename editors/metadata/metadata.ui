@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>524</width>
-    <height>517</height>
+    <width>534</width>
+    <height>564</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -228,6 +228,16 @@
       </item>
       <item row="1" column="1">
        <widget class="KLineEdit" name="pluginname_edit"/>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_12">
+        <property name="text">
+         <string>API:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="KLineEdit" name="api_edit"/>
       </item>
      </layout>
     </widget>

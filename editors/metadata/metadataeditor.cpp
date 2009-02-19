@@ -50,6 +50,7 @@ void MetaDataEditor::readFile()
     }
 
     view->pluginname_edit->setText( metadata->pluginName() );
+    view->api_edit->setText( metadata->implementationApi() );
 
     QString serviceType = metadata->serviceType();
 
@@ -106,6 +107,7 @@ void MetaDataEditor::writeFile()
 	metadata->setServiceType("Plasma/Theme");
 
     metadata->setCategory( view->category_combo->currentText() );
+    metadata->setImplementationApi( view->api_edit->text() );
     metadata->setPluginName( view->pluginname_edit->text() );
     metadata->setVersion( view->version_edit->text() );
     metadata->setWebsite( view->website_edit->text() );
