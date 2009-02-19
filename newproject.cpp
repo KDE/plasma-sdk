@@ -77,7 +77,7 @@ void NewProjectWizard::accept()
     m_metadataUrl = w->outputDir->url().path() + "/metadata.desktop";
          
     QFile metadataFile(m_metadataUrl.path());
-    kDebug() << "Writing metadata.desktop to: " << m_metadataUrl;
+    kDebug() << "Writing metadata.desktop to:" << m_metadataUrl;
     
     if (!metadataFile.open(QFile::WriteOnly | QFile::Text)) {
 //         TODO: Handle errors

@@ -84,6 +84,7 @@ void StartPage::launchNewProjectWizard()
     }
     
     w.exec();
+    emit(projectSelected(w.projectFile()));
 }
 
 void StartPage::populateRecentProjects()

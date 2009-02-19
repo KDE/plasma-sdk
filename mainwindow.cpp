@@ -11,6 +11,7 @@
 #include <KMenuBar>
 #include <KConfig>
 #include <KConfigGroup>
+#include <KDebug>
 
 #include "startpage.h"
 
@@ -21,7 +22,9 @@ MainWindow::MainWindow(QWidget *parent)
     : KMainWindow(parent)
 {   
     createMenus();
-    setCentralWidget(new StartPage(this));
+    StartPage *startPage = new StartPage(this);
+    connect(startPage, SIGNAL(projectSelected(KUrl)), this, SLOT(loadProject(KUrl)));
+    setCentralWidget(startPage);
 }
 
 MainWindow::~MainWindow()
@@ -47,6 +50,8 @@ void MainWindow::quit()
 
 void MainWindow::loadProject(const KUrl &url)
 {
+    kDebug() << "Loading project at" << url << "...";
+
     // Add it to the recent files first.
     
     QList<KUrl> recentFiles;
