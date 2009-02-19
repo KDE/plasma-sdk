@@ -161,7 +161,7 @@ void PreviewContainment::changeLocation()
     QAction *fullscreen = new QAction(KIcon("user-trash"),
                                       i18n("FullScreen"), m_options);
     QAction *topEdge = new QAction(KIcon("user-trash"),
-                                   i18n("Top Edje"), m_options);
+                                   i18n("Top Edge"), m_options);
     QAction *bottomEdge = new QAction(KIcon("user-trash"),
                                       i18n("Bottom Edge"), m_options);
     QAction *leftEdge = new QAction(KIcon("user-trash"),
