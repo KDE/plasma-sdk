@@ -10,22 +10,23 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <kxmlguiwindow.h>
+#include <KParts/MainWindow>
+#include <KLibLoader>
 
 class QModelIndex;
 
 namespace Ui {
     class MainWindowClass;
-}
+};
 
 class KListWidget;
 class StartPage;
 class QStringList;
 class QDockWidget;
-
+// class KLibFactory;
 class Sidebar;
 
-class MainWindow : public KXmlGuiWindow
+class MainWindow : public KParts::MainWindow
 {
     Q_OBJECT
 
@@ -49,6 +50,8 @@ class MainWindow : public KXmlGuiWindow
         QDockWidget *workflow;
 //         KListWidget *sidebar;
         Sidebar *sidebar;
+        KLibFactory *m_factory;
+        KParts::ReadWritePart *m_part;
         int oldTab;
 };
 

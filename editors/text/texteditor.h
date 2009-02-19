@@ -15,7 +15,7 @@
 class TextEditor : public QWidget
 {
     public:
-        TextEditor();
+        TextEditor(QWidget *parent = 0);
 };
  
 #endif // TEXTEDITOR_H

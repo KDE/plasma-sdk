@@ -21,7 +21,7 @@ add_subdirectory( editors )
 include_directories(${KDE4_INCLUDES})
 
 kde4_add_executable(plasmate ${PlasMate_SRC})
-target_link_libraries(plasmate ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBRARY} ${KDE4_PLASMA_LIBS})
+target_link_libraries(plasmate ${KDE4_KDEUI_LIBS} ${KDE4_KPARTS_LIBS} ${KDE4_KIO_LIBRARY} ${KDE4_PLASMA_LIBS})
 
 install(TARGETS plasmate DESTINATION ${BIN_INSTALL_DIR})
-# install(FILES PlasMateui.rc  DESTINATION ${DATA_INSTALL_DIR}/plasmate)
+install(FILES plasmateui.rc  DESTINATION ${DATA_INSTALL_DIR}/plasmate)

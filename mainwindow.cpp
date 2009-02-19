@@ -17,6 +17,7 @@
 
 #include <KAction>
 #include <KConfig>
+#include <KStandardDirs>
 #include <KConfigGroup>
 #include <KDebug>
 #include <KMenu>
@@ -24,6 +25,7 @@
 #include <KStandardAction>
 #include <KUrl>
 #include <KListWidget>
+#include <KParts/Part>
 
 #include "startpage.h"
 #include "sidebar.h"
@@ -31,14 +33,19 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : KXmlGuiWindow(parent)
+    : KParts::MainWindow(parent, 0)
 {    
     createMenus();
+    
+    m_factory = 0;
     
     m_startPage = new StartPage(this);
     connect(m_startPage, SIGNAL(projectSelected(QString)), this, SLOT(loadProject(QString)));
     setCentralWidget(m_startPage);
     int oldTab = 0; // always startPage
+
+//     /*setXMLFile(*/kDebug() << KStandardDirs::locate("appdata", "plasmateui.rc")//);
+    setXMLFile("plasmateui.rc");
 }
 
 MainWindow::~MainWindow()
@@ -112,9 +119,47 @@ void MainWindow::changeTab(int tab)
         m_startPage = new StartPage(this);
         setCentralWidget(m_startPage);
     } else if (tab == 1) {
-        KTextEdit *l = new KTextEdit(this);
+        if (!m_factory) {
+            m_factory = KLibLoader::self()->factory("katepart");
+        }
+            if (m_factory) {
+                // now that the Part is loaded, we cast it to a Part to get
+                // our hands on it
+                m_part = static_cast<KParts::ReadWritePart *>(m_factory->create(this, "KatePart"));
+                if (m_part) {
+                    // tell the KParts::MainWindow that this is indeed
+                    // the main widget
+//                     setCentralWidget(m_part->widget());
+//                     m_part->widget()->show();
+        
+                    setupGUI(ToolBar | Keys | StatusBar | Save);
+        
+                    // and integrate the part's GUI with the shell's
+                    createGUI(m_part);
+                } 
+            }
+//         }
+                if (m_part) {
+
+                    // tell the KParts::MainWindow that this is indeed
+                    // the main widget
+
+                    setCentralWidget(m_part->widget());
+//                     setupGUI(ToolBar | Keys | StatusBar | Save);
+
+
+//                     m_part->widget()->show();
+        
+//                     setupGUI(StatusBar | Save);
+        
+                   // and integrate the part's GUI with the shell's
+//                     createGUI(m_part);
+                } 
+//             } 
+//         }
+//         KTextEdit *l = new KTextEdit(this);
 //         l->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
-        setCentralWidget(l);
+//         setCentralWidget(l);
     } else if (tab == 2) {
         QLabel *l = new QLabel(i18n("Publish widget will go here!"));
         setCentralWidget(l);

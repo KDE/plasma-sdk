@@ -395,7 +395,6 @@ Sidebar::Sidebar( QWidget *parent )
     d->vlay->addWidget( d->stack );
     d->sideContainer->hide();
 
-    connect( d->list, SIGNAL( itemClicked( QListWidgetItem* ) ), this, SLOT( itemClicked( QListWidgetItem* ) ) );
     connect( d->list, SIGNAL( currentRowChanged( int ) ),
              this, SIGNAL( currentIndexChanged( int ) ) );
 }
