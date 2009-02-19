@@ -33,6 +33,9 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : KParts::MainWindow(parent, 0)
+    m_factory(0),
+    m_part(0),
+    oldTab(0) // we start from startPage
 {    
    createMenus();
     
@@ -42,10 +45,8 @@ MainWindow::MainWindow(QWidget *parent)
     m_startPage = new StartPage(this);
     connect(m_startPage, SIGNAL(projectSelected(QString)), this, SLOT(loadProject(QString)));
     setCentralWidget(m_startPage);
-    int oldTab = 0; // always startPage
 
     setXMLFile("plasmateui.rc");
-//     createShellGUI();
 }
 
 MainWindow::~MainWindow()
@@ -70,22 +71,11 @@ void MainWindow::createDockWidgets()
     
     sidebar = new Sidebar(workflow);
     
-//     sidebar = new KListWidget(workflow);
     sidebar->addItem(KIcon("go-home"), i18n("Start page"));
     sidebar->addItem(KIcon("accessories-text-editor"), i18n("Edit"));
     sidebar->addItem(KIcon("krfb"), i18n("Publish"));
     sidebar->addItem(KIcon("help-contents"), i18n("Documentation"));
     sidebar->addItem(KIcon("system-run"), i18n("Preview"));
-//     sidebar->addItem(new QListWidgetItem(KIcon("go-home"), i18n("Start page")));
-//     sidebar->addItem(new QListWidgetItem(KIcon("accessories-text-editor"), i18n("Edit")));
-//     sidebar->addItem(new QListWidgetItem(KIcon("krfb"), i18n("Publish")));
-//     sidebar->addItem(new QListWidgetItem(KIcon("help-contents"), i18n("Documentation")));
-//     sidebar->addItem(new QListWidgetItem(KIcon("system-run"), i18n("Preview")));
-//     sidebar->setIconSize(QSize(48, 48));
-//     sidebar->setViewMode(QListView::IconMode);
-//     sidebar->setFlow(QListView::TopToBottom);
-//     sidebar->setMovement(QListView::Static);
-//     sidebar->setResizeMode(QListView::Adjust);
     
     workflow->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
         
@@ -130,7 +120,6 @@ void MainWindow::changeTab(int tab)
         setCentralWidget(m_startPage);
     } else if (tab == 1) {
         kDebug() << "tab 1";
-//         centralWidget()->deleteLater();
         kDebug() << m_factory;
         kDebug() << "and m_part";
 //         kDebug() << m_part;
@@ -141,20 +130,13 @@ void MainWindow::changeTab(int tab)
         m_part = 0;
         if (m_factory && !m_part) {
             kDebug() << "babla";
-                // now that the Part is loaded, we cast it to a Part to get
-                // our hands on it
             m_part = static_cast<KParts::ReadWritePart *>(m_factory->create(this, "KatePart"));
             if (m_part) {
                 kDebug() << "if mpart";
-                    // tell the KParts::MainWindow that this is indeed
-                    // the main widget
                 setCentralWidget(m_part->widget());
-//                     m_part->widget()->show();
                 kDebug() << "set";
 //                 setupGUI(ToolBar | Keys | StatusBar | Save);
-//                     setupGUI();
                 kDebug() << "setup or create?!;";
-                    // and integrate the part's GUI with the shell's
                 //createGUI(m_part);
                 kDebug() << "created";
             } 
@@ -171,12 +153,7 @@ void MainWindow::changeTab(int tab)
         
                     // and integrate the part's GUI with the shell's
                 createGUI(m_part);
-            } 
-//             } 
-//         }
-//         KTextEdit *l = new KTextEdit(this);
-//         l->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
-//         setCentralWidget(l);
+            }
     } else if (tab == 2) {
         QLabel *l = new QLabel(i18n("Publish widget will go here!"));
         setCentralWidget(l);
