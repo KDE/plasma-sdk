@@ -29,17 +29,17 @@ class StartPage : public QWidget
         FullPathRole = Qt::UserRole + 1
     };
     
-    enum ProjectTypes {
-        Theme           = 1,
-        Plasmoid        = 2,
-        DataEngine      = 4
-    };
-    
-    Q_DECLARE_FLAGS(ProjectType, ProjectTypes);
-    
     public:
         StartPage(MainWindow *parent);
-    
+        
+        enum ProjectTypes {
+            Theme           = 1,
+            Plasmoid        = 2,
+            DataEngine      = 4
+        };
+        
+        Q_DECLARE_FLAGS(ProjectType, ProjectTypes);
+        
     signals:
         void projectSelected(KUrl url);
         

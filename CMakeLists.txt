@@ -7,7 +7,8 @@ set (PlasMate_SRC
     main.cpp
     mainwindow.cpp
     startpage.cpp
-)
+    newproject.cpp
+    )
 
 kde4_add_ui_files (PlasMate_SRC
     newproject.ui

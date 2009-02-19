@@ -25,7 +25,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="KLineEdit" name="klineedit_2"/>
+       <widget class="KLineEdit" name="projectName"/>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_2">
@@ -35,7 +35,7 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="KLineEdit" name="klineedit"/>
+       <widget class="KLineEdit" name="author"/>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="label_3">
@@ -45,7 +45,7 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="KUrlRequester" name="kurlrequester"/>
+       <widget class="KUrlRequester" name="outputDir"/>
       </item>
      </layout>
     </item>

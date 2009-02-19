@@ -22,7 +22,7 @@
 
 #include "startpage.h"
 #include "mainwindow.h"
-#include "ui_newproject.h"
+#include "newproject.h"
 
 StartPage::StartPage(MainWindow *parent)
     : QWidget(parent),
@@ -47,7 +47,7 @@ void StartPage::createWidgets() // Make this a QGV? Use Plasma::Theme?
     QVBoxLayout *createNewLayout = new QVBoxLayout;
     m_createNewLabel = new QLabel(i18n("Create new..."), this);
     m_contentTypes = new QComboBox(this);
-    m_contentTypes->addItem(i18n("<select project type...>"));
+    m_contentTypes->addItem(i18n("select project type..."));
     m_contentTypes->addItem(i18n("Plasmoid"));
     m_contentTypes->addItem(i18n("Data engine"));
     m_contentTypes->addItem(i18n("Theme"));
@@ -73,10 +73,17 @@ void StartPage::conditionallyEnableNewProjectButton()
 
 void StartPage::launchNewProjectWizard()
 {
-    Ui::Wizard w;
-    QWizard d;
-    w.setupUi(&d);
-    d.exec();
+    NewProjectWizard w;
+    switch (m_contentTypes->currentIndex()) {
+        case 1:
+            w.setProjectType(Plasmoid);
+        case 2:
+            w.setProjectType(DataEngine);
+        case 3:
+            w.setProjectType(Theme);
+    }
+    
+    w.exec();
 }
 
 void StartPage::populateRecentProjects()
