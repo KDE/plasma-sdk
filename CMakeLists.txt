@@ -12,6 +12,7 @@ set (PlasMate_SRC
 
 kde4_add_ui_files (PlasMate_SRC
    mainwindow.ui
+   startpage.ui
    newproject.ui
 )
 
