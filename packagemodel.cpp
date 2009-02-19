@@ -81,7 +81,7 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
             return l.at(index.row());
         }
     } else if (role == Qt::DisplayRole) {
-        return m_structure->name(key);
+        return m_structure->name(m_topEntries.at(index.row()));
     }
 
     return QVariant();
@@ -101,7 +101,7 @@ QModelIndex PackageModel::index(int row, int column, const QModelIndex &parent) 
     }
 
     if (row < m_topEntries.count()) {
-        return createIndex(row, column, (void*)m_topEntries.at(row));
+        return createIndex(row, column, (void*)0);
     }
 
     return QModelIndex();
