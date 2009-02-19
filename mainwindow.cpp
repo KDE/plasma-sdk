@@ -8,8 +8,8 @@
 */
 
 #include <QDockWidget>
+#include <QListWidgetItem>
 
-#include <KListWidget>
 #include <KAction>
 #include <KConfig>
 #include <KConfigGroup>
@@ -18,6 +18,7 @@
 #include <KMenuBar>
 #include <KStandardAction>
 #include <KUrl>
+#include <KListWidget>
 
 #include "startpage.h"
 
@@ -55,7 +56,16 @@ void MainWindow::createDockWidgets()
     QDockWidget *workflow = new QDockWidget(i18n("Workflow"), this);
     
     KListWidget *list = new KListWidget(workflow);
-    list->addItem("test");
+    list->addItem(new QListWidgetItem(KIcon("plasma"), "test"));
+    list->addItem(new QListWidgetItem(KIcon("plasmagik"), "test2"));
+    list->setIconSize(QSize(48, 48));
+    list->setViewMode(QListView::IconMode);
+    list->setFlow(QListView::TopToBottom);
+    list->setMovement(QListView::Static);
+    list->setResizeMode(QListView::Adjust);
+    
+//     SidebarDelegate *delegate = new SidebarDelegate(list);
+//     list->setItemDelegate(delegate);
     
     workflow->setWidget(list);
     addDockWidget(Qt::LeftDockWidgetArea, workflow);
