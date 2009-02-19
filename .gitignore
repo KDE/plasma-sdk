@@ -1,0 +1,8 @@
+Makefile
+Makefile.Debug
+Makefile.Release
+debug/
+plasma-studio.pro.user
+qtc-gdbmacros/
+src
+ui_mainwindow.h
