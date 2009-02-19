@@ -20,13 +20,14 @@ class QHBoxLayout;
 class StartPage : public QWidget
 {
     public:
-        StartPage();
+        StartPage(QWidget *parent);
+        
     private:
         void createWidgets();
         
-        QLabel m_createNew_l, m_openExisting_l, m_continueWorking_l;
-        QComboBox m_contentTypes;
-        QListView m_recentProjects;
+        QLabel *m_createNewLabel, *m_openExistingLabel, *m_continueWorkingLabel;
+        QComboBox *m_contentTypes;
+        QListView *m_recentProjects;
         QHBoxLayout *m_layout;
 };
 

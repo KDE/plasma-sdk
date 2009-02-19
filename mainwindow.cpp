@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     : KMainWindow(parent)
 {   
     createMenus();
+    setCentralWidget(new StartPage(this));
 }
 
 MainWindow::~MainWindow()
