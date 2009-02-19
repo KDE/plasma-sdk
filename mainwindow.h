@@ -29,6 +29,9 @@ class PackageModel;
 class StartPage;
 class Sidebar;
 
+// our own previewer
+class Previewer;
+
 class MainWindow : public KParts::MainWindow
 {
     Q_OBJECT
@@ -60,6 +63,9 @@ class MainWindow : public KParts::MainWindow
         StartPage *m_startPage;
         QDockWidget *m_workflow;
         Sidebar *m_sidebar;
+        QDockWidget *m_previewerWidget;
+        Previewer *m_previewer;
+
         KLibFactory *m_factory;
         EditPage *m_editPage;
         KParts::ReadWritePart *m_part;

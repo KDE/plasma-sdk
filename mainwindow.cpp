@@ -37,11 +37,13 @@
 #include "sidebar.h"
 #include "startpage.h"
 #include "ui_mainwindow.h"
+#include "previewer/previewer.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : KParts::MainWindow(parent, 0),
       m_workflow(0),
       m_sidebar(0),
+      m_previewer(0),
       m_factory(0),
       m_part(0),
       m_model(0),
@@ -59,11 +61,13 @@ MainWindow::~MainWindow()
 {
     delete m_startPage;
     delete m_factory;
+    delete m_previewer;
+    delete m_previewerWidget;
 }
 
 void MainWindow::createMenus()
 {
-    KStandardAction::quit(this, SLOT(quit()), actionCollection());  
+    KStandardAction::quit(this, SLOT(quit()), actionCollection());
     menuBar()->addMenu(helpMenu());
     setupGUI();
 }
@@ -77,7 +81,6 @@ void MainWindow::createDockWidgets()
     m_sidebar->addItem(KIcon("accessories-text-editor"), i18n("Edit"));
     m_sidebar->addItem(KIcon("krfb"), i18n("Publish"));
     m_sidebar->addItem(KIcon("help-contents"), i18n("Documentation"));
-    m_sidebar->addItem(KIcon("system-run"), i18n("Preview"));
 
     m_workflow->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
     connect(m_sidebar, SIGNAL(currentIndexChanged(int)),
@@ -85,6 +88,11 @@ void MainWindow::createDockWidgets()
 
     m_workflow->setWidget(m_sidebar);
     addDockWidget(Qt::LeftDockWidgetArea, m_workflow);
+
+    m_previewerWidget = new QDockWidget(i18n("Previewer"), this);
+    m_previewer = new Previewer();
+    m_previewerWidget->setWidget(m_previewer);
+    addDockWidget(Qt::BottomDockWidgetArea, m_previewerWidget);
 }
 
 void MainWindow::quit()
@@ -145,17 +153,12 @@ void MainWindow::changeTab(int tab)
         }
         break;
         case PublishTab: {
-            QLabel *l = new QLabel(i18n("Publish widget will go here!"));
+            QLabel *l = new QLabel(i18n("Publish widget will go here!"), this);
             setCentralWidget(l);
         }
         break;
         case DocsTab: {
-            QLabel *l = new QLabel(i18n("Documentation widget will go here!"));
-            setCentralWidget(l);
-        }
-        break;
-        case PreviewTab: {
-            QLabel *l = new QLabel(i18n("Preview widget will go here!"));
+            QLabel *l = new QLabel(i18n("Documentation widget will go here!"), this);
             setCentralWidget(l);
         }
         break;
