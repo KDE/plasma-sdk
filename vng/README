@@ -1,0 +1,33 @@
+Introduction and initial release (at 0.22) can be read at;
+http://labs.trolltech.com/blogs/2008/03/30/sourcecode-collaboration/
+
+Compiling
+=========
+To compile this project you need Qt4.4 or later, only the qt-core library is used.
+
+To generate a makefile call the 'qmake' command in the vng directory.  Make
+sure you call the one from the right Qt release.
+Some linux distros ship this command names 'qmake-qt4'
+
+After calling qmake, compile the project like you would any other.  This is
+platform dependent and could be "nmake", "make" etc.
+
+You will find the "vng" command line in the build directory, on Windows it will
+be in a subdirectory like debug\vng.exe or release\vng.exe.
+
+Thats all!
+
+
+Pushing & Committing
+====================
+
+if you make any changes to the sourcecode, it would be great if you can share that with us.
+The hosting site http://repo.or.cz/w/vng.git allows you to share your recorded changes
+with minimal fuss with us.
+After recording your changes all you need to do is to call
+  git push git+ssh://repo.or.cz/srv/git/vng.git +master:mob
+this will push your changes so the rest of the world can see them.  Be sure to write
+easy to understand comments for your commits!
+
+
+Have fun.

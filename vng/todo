@@ -1,0 +1,61 @@
+Commands still missing completely;
+      replace       Replace a token with a new value for that token.
+      resolve       Mark any conflicts to the working copy for manual resolution.
+      tag           Tag the contents of the repository with a version name.
+      setpref       Set a value for a preference (test, predist, ...).
+      rollback      Record an inverse patch without changing the working directory.
+      diff          Create a diff between two versions of the repository.
+      annotate      Display which patch last modified something.
+      trackdown     Locate the most recent version lacking an error.
+      query         Query information which is stored by vng.
+      pull          Copy and apply patches from another repository to this one.
+      unpull        Opposite of pull; unsafe if patch is not in remote repository.
+      obliterate    Delete selected patches from the repository. (UNSAFE!)
+      send          Send by email a bundle of one or more patches.
+      apply         Apply patches (from an email bundle) to the repository.
+      get           Create a local copy of another repository.
+      put           Makes a copy of the repository
+      optimize      Optimize the repository.
+      check         Check the repository for consistency.
+      repair        Repair the corrupted repository.
+
+------
+
+Missing features;
+    * grep for 'TODO'
+    * cursor help (when typing '?') seems to be hardcoded to 'revert'.
+    * test each command to honor its arguments and options.
+    * Use pager for help :)
+    * Use $PAGER for pager
+    * For a record -a let no more than, say, 30 seconds pass before just popping up the
+      editor without all of the hunks fetched.
+    * Make the --debug option only available when compiling as debug-build
+
+Bugs
+* record on a non-clear repo (where some things have been added or an added file has been removed from FS)
+    should be debugged.
+* Also show / store file permissions in the diff and thus in revert
+* Instead of hardcoding '.git' as a dirname; use git-rev-parse in Configuration and in commits/Commit
+    Maybe we should just use $GIT_DIR ?
+* After a revert, and the file ends up with no changes, we should do an update-index on it.
+* changes does not detect renames
+* On a big windows repo fetching initial diff may timeout. :(
+* --last with a non numeric value should trigger a warning
+
+use git-read-tree --reset HEAD   and  git-update-index --refresh  to implement 'check'
+use 'prune' and 'pack' to implement optimize.
+
+pull;
+    git ls-remote -h -t [remote] to fetch all branches.
+    allow the user to select the branches he wants to mirror.
+    use git fetch
+    git merge
+
+[09:31] <brad> git people: is it possible to push just a single commit to devil, or does it ineed to be a branch?
+[09:31] <simon> brad: you can for example do: git push <remote> <sha1>:name-of-new-branch
+[09:31] <simon> brad: and later remove the branch again with git push <remote> :name-of-new-branch
+[09:31] <brad> ahh, cool
+
+
+http://wiki.winehq.org/GitWine
+
