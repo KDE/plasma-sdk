@@ -87,6 +87,10 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
             }
         }
     } else if (role == Qt::DisplayRole) {
+        if (index.row() == m_topEntries.count()) {
+            return i18n("Metadata");
+        }
+
         return m_structure->name(m_topEntries.at(index.row()));
     }
 
@@ -111,7 +115,7 @@ QModelIndex PackageModel::index(int row, int column, const QModelIndex &parent) 
         }
     }
 
-    if (row < m_topEntries.count()) {
+    if (row <= m_topEntries.count()) {
         return createIndex(row, column);
     }
 
@@ -148,7 +152,7 @@ int PackageModel::rowCount(const QModelIndex &parent) const
         }
     }
 
-    return m_topEntries.count();
+    return m_topEntries.count() + 1;
 }
 
 void PackageModel::loadPackage()
@@ -163,10 +167,20 @@ void PackageModel::loadPackage()
     QDir dir(m_package->path());
     Plasma::PackageStructure::Ptr structure = m_package->structure();
 
+    if (!dir.exists("metadata.desktop")) {
+        QFile f(dir.path() + "/metadata.desktop");
+        f.open(QIODevice::WriteOnly);
+    }
+
+    QString contents = structure->contentsPrefix();
+    if (!contents.isEmpty()) {
+        dir.mkpath(contents);
+        dir.cd(contents);
+    }
+
     foreach (const char *key, structure->directories()) {
         QString path = structure->path(key);
         if (!dir.exists(path)) {
-            kDebug() << "making" << path << dir.relativeFilePath(path);
             dir.mkpath(path);
         }
 
@@ -176,7 +190,6 @@ void PackageModel::loadPackage()
     foreach (const char *key, structure->files()) {
         QString path = structure->path(key);
         if (!dir.exists(path)) {
-            kDebug() << "making" << path;
             QFileInfo info(dir.path() + '/' + path);
             dir.mkpath(dir.relativeFilePath(info.absolutePath()));
             QFile f(dir.path() + '/' + path);
@@ -186,7 +199,8 @@ void PackageModel::loadPackage()
         m_topEntries.append(key);
     }
 
-    beginInsertRows(QModelIndex(), 0, m_topEntries.count() - 1);
+    // we don't -1 because we have a "ghost" metadata entry
+    beginInsertRows(QModelIndex(), 0, m_topEntries.count());
     endInsertRows();
 
     foreach (const char *key, structure->directories()) {
@@ -198,7 +212,7 @@ void PackageModel::loadPackage()
         }
 
         //kDebug() << m_topEntries.indexOf(key) << key << "has" << files.count() << "files" << files;
-        beginInsertRows(createIndex(m_topEntries.indexOf(key), 0), 0, files.count());
+        beginInsertRows(createIndex(m_topEntries.indexOf(key), 0), 0, files.count() - 1);
         endInsertRows();
     }
 }
