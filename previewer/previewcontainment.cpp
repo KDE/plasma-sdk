@@ -64,9 +64,179 @@ void PreviewContainment::setupHeader()
 
     location = new Plasma::IconWidget(this);
 
+    // add actions
+    QAction *action1 = new QAction(KIcon("list-add"), "", this);
+    connect(action1, SIGNAL(triggered()), this, SLOT(changeFormFactor()));
+    form->setAction(action1);
 
+    QAction *action2 = new QAction(KIcon("list-add"), "", this);
+    connect(action2, SIGNAL(triggered()), this, SLOT(changeLocation()));
+    location->setAction(action2);
 
+    // add the toolboxes
+    m_header->addItem(form);
+    m_header->addItem(refresh);
+    m_header->addItem(location);
 }
+
+void PreviewContainment::changeFormFactor()
+{
+    if (m_options) {
+        delete m_options;
+    }
+
+    m_options = new OverlayToolBox(this);
+    m_options->setGeometry(geometry());
+    m_options->setZValue(100000000);
+
+    QAction *planar = new QAction(KIcon("user-desktop"),
+                                  i18n("Planar"), m_options);
+    QAction *mediacenter = new QAction(KIcon("user-desktop"),
+                                       i18n("Media Center"), m_options);
+    QAction *horizontal = new QAction(KIcon("user-desktop"),
+                                      i18n("Horizontal"), m_options);
+    QAction *vertical = new QAction(KIcon("user-desktop"),
+                                    i18n("Vertical"), m_options);
+    QAction *cancel = new QAction(KIcon("dialog-cancel"),
+                                  i18n("Cancel"), m_options);
+
+    m_options->addTool(planar);
+    m_options->addTool(mediacenter);
+    m_options->addTool(horizontal);
+    m_options->addTool(vertical);
+    m_options->addTool(cancel);
+
+    connect(planar, SIGNAL(triggered(bool)), this, SLOT(planarTriggered(bool)));
+    connect(mediacenter, SIGNAL(triggered(bool)), this, SLOT(mediacenterTriggered(bool)));
+    connect(horizontal, SIGNAL(triggered(bool)), this, SLOT(horizontalTriggered(bool)));
+    connect(vertical, SIGNAL(triggered(bool)), this, SLOT(verticalTriggered(bool)));
+    connect(cancel, SIGNAL(triggered(bool)), this, SLOT(cancelOption(bool)));
+
+    m_options->show();
+}
+
+void PreviewContainment::planarTriggered(bool)
+{
+    m_options->hide();
+    setFormFactor(Plasma::Planar);
+}
+
+void PreviewContainment::mediacenterTriggered(bool)
+{
+    m_options->hide();
+    setFormFactor(Plasma::Vertical);
+}
+
+void PreviewContainment::horizontalTriggered(bool)
+{
+    m_options->hide();
+    setFormFactor(Plasma::Vertical);
+}
+
+void PreviewContainment::verticalTriggered(bool)
+{
+    m_options->hide();
+    setFormFactor(Plasma::Vertical);
+}
+
+void PreviewContainment::changeLocation()
+{
+    if (m_options) {
+        delete m_options;
+    }
+
+    m_options = new OverlayToolBox(this);
+    m_options->setGeometry(geometry());
+    m_options->setZValue(100);
+
+    QAction *floating = new QAction(KIcon("user-trash"),
+                                    i18n("Floating"), m_options);
+    QAction *desktop = new QAction(KIcon("user-trash"),
+                                   i18n("Desktop"), m_options);
+    QAction *fullscreen = new QAction(KIcon("user-trash"),
+                                      i18n("FullScreen"), m_options);
+    QAction *topEdge = new QAction(KIcon("user-trash"),
+                                   i18n("Top Edje"), m_options);
+    QAction *bottomEdge = new QAction(KIcon("user-trash"),
+                                      i18n("Bottom Edge"), m_options);
+    QAction *leftEdge = new QAction(KIcon("user-trash"),
+                                    i18n("Left Edge"), m_options);
+    QAction *rightEdge = new QAction(KIcon("user-trash"),
+                                     i18n("Right Edge"), m_options);
+    QAction *cancel = new QAction(KIcon("dialog-cancel"),
+                                  i18n("Cancel"), m_options);
+
+    m_options->addTool(floating);
+    m_options->addTool(desktop);
+    m_options->addTool(fullscreen);
+    m_options->addTool(topEdge);
+    m_options->addTool(bottomEdge);
+    m_options->addTool(leftEdge);
+    m_options->addTool(rightEdge);
+    m_options->addTool(cancel);
+
+    connect(floating, SIGNAL(triggered(bool)), this, SLOT(floatingTriggered(bool)));
+    connect(desktop, SIGNAL(triggered(bool)), this, SLOT(desktopTriggered(bool)));
+    connect(fullscreen, SIGNAL(triggered(bool)), this, SLOT(fullscreenTriggered(bool)));
+    connect(topEdge, SIGNAL(triggered(bool)), this, SLOT(topEdgeTriggered(bool)));
+    connect(bottomEdge, SIGNAL(triggered(bool)), this, SLOT(bottomEdgeTriggered(bool)));
+    connect(leftEdge, SIGNAL(triggered(bool)), this, SLOT(leftEdgeTriggered(bool)));
+    connect(rightEdge, SIGNAL(triggered(bool)), this, SLOT(rightEdgeTriggered(bool)));
+    connect(cancel, SIGNAL(triggered(bool)), this, SLOT(cancelOption(bool)));
+
+    m_options->show();
+}
+
+void PreviewContainment::floatingTriggered(bool)
+{
+    m_options->hide();
+    setLocation(Plasma::Desktop);
+}
+
+void PreviewContainment::desktopTriggered(bool)
+{
+    m_options->hide();
+    setLocation(Plasma::Desktop);
+}
+
+void PreviewContainment::fullscreenTriggered(bool)
+{
+    m_options->hide();
+    setLocation(Plasma::FullScreen);
+}
+
+void PreviewContainment::topEdgeTriggered(bool)
+{
+    m_options->hide();
+    setLocation(Plasma::TopEdge);
+}
+
+void PreviewContainment::bottomEdgeTriggered(bool)
+{
+    m_options->hide();
+    setLocation(Plasma::BottomEdge);
+}
+
+void PreviewContainment::leftEdgeTriggered(bool)
+{
+    m_options->hide();
+    setLocation(Plasma::LeftEdge);
+}
+
+void PreviewContainment::rightEdgeTriggered(bool)
+{
+    m_options->hide();
+    setLocation(Plasma::RightEdge);
+}
+
+void PreviewContainment::cancelOption(bool)
+{
+    m_options->hide();
+}
+
+void PreviewContainment::constraintsEvent(Plasma::Constraints constraints)
+{
+    Q_UNUSED(constraints);
 
     if (m_options) {
         m_options->setGeometry(geometry());

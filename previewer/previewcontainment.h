@@ -32,6 +32,9 @@ public:
     PreviewContainment(QObject *parent, const QVariantList &args = QVariantList());
     ~PreviewContainment();
 
+public slots:
+    void changeFormFactor();
+    void changeLocation();
 
 protected slots:
     void constraintsEvent(Plasma::Constraints constraints);
@@ -39,6 +42,24 @@ protected slots:
     void onAppletAdded(Plasma::Applet *, const QPointF &);
     void onAppletRemoved(Plasma::Applet *);
     void onAppletGeometryChanged();
+
+    void cancelOption(bool);
+
+    void planarTriggered(bool);
+    void mediacenterTriggered(bool);
+    void horizontalTriggered(bool);
+    void verticalTriggered(bool);
+
+    void floatingTriggered(bool);
+    void desktopTriggered(bool);
+    void fullscreenTriggered(bool);
+    void topEdgeTriggered(bool);
+    void bottomEdgeTriggered(bool);
+    void leftEdgeTriggered(bool);
+    void rightEdgeTriggered(bool);
+
+protected:
+    void setupHeader();
 
 private:
     OverlayToolBox *m_options;
