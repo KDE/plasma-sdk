@@ -31,7 +31,7 @@ int main( int argc, char **argv )
 
     viewer->setFilename( filename );
     viewer->readFile();
-
+    top->resize( 400, 300 );
     top->show();
 
     return app.exec();
