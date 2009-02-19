@@ -9,9 +9,9 @@ set (PlasMate_SRC
     startpage.cpp
 )
 
-# kde4_add_ui_files (PlasMate_SRC
-#     mainwindow.ui
-# )
+kde4_add_ui_files (PlasMate_SRC
+    newproject.ui
+)
 
 include_directories(${KDE4_INCLUDES})
 
