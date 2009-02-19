@@ -132,10 +132,33 @@ void MetaDataEditor::serviceTypeChanged()
     }
 
     view->api_combo->setEnabled( true );
-    QStringList apis = Plasma::knownLanguages( currentType );
+    apis = Plasma::knownLanguages( currentType );
+    apis.append( QString() ); // Add empty string for native
+
+    kDebug() << "Got apis " << apis;
+    // Map to friendly names (TODO: fix in library)
+    QString api;
+    QStringList apiNames;
+
+    foreach( const QString &api, apis ) {
+	if ( api == QString("dashboard") )
+	    apiNames.append("Dashboard");
+	else if ( api == QString("javascript") )
+	    apiNames.append("Javascript");
+	else if ( api == QString("ruby-script") )
+	    apiNames.append("Ruby");
+	else if ( api == QString("webkit") )
+	    apiNames.append("Webkit");
+	else if ( api == QString() )
+	    apiNames.append("C++");
+	else {
+	    kWarning() << "Unknown API " << api;
+	    apiNames.append( api );
+	}
+    }
+
     view->api_combo->clear();
-    view->api_combo->insertItems( 0, apis ); // TODO: Map to friendly names
-    view->api_combo->addItem( QString("Native") );
+    view->api_combo->insertItems( 0, apiNames );
 
     int idx = view->api_combo->findText(metadata->implementationApi());
     if ( idx != -1 ) {
@@ -160,10 +183,7 @@ void MetaDataEditor::writeFile()
     //desktopGroup.writeEntry( "Icon", view->icon_edit->text() );
 
     metadata->setCategory( view->category_combo->currentText() );
-    if ( view->api_combo->currentIndex() != view->api_combo->count()-1 )
-	metadata->setImplementationApi( view->api_combo->currentText() );
-    else
-	metadata->setImplementationApi( QString() );
+    metadata->setImplementationApi( apis[view->api_combo->currentIndex()] );
     metadata->setPluginName( view->pluginname_edit->text() );
     metadata->setVersion( view->version_edit->text() );
     metadata->setWebsite( view->website_edit->text() );
