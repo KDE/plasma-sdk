@@ -15,11 +15,13 @@
 #ifndef PREVIEWCONTAINMENT_H
 #define PREVIEWCONTAINMENT_H
 
+#include "overlaytoolbox.h"
+
 #include <QGraphicsView>
 #include <QGraphicsLinearLayout>
 
 #include <Plasma/Containment>
-#include <Plasma/Label>
+#include <Plasma/IconWidget>
 
 
 class PreviewContainment : public Plasma::Containment
@@ -28,15 +30,27 @@ class PreviewContainment : public Plasma::Containment
 
 public:
     PreviewContainment(QObject *parent, const QVariantList &args = QVariantList());
+    ~PreviewContainment();
+
 
 protected slots:
+    void constraintsEvent(Plasma::Constraints constraints);
+
     void onAppletAdded(Plasma::Applet *, const QPointF &);
     void onAppletRemoved(Plasma::Applet *);
     void onAppletGeometryChanged();
 
 private:
+    OverlayToolBox *m_options;
+
     QGraphicsLinearLayout *m_layout;
-    Plasma::Label *label;
+    QGraphicsLinearLayout *m_header;
+
+    Plasma::Applet *m_applet;
+
+    Plasma::IconWidget *form;
+    Plasma::IconWidget *refresh;
+    Plasma::IconWidget *location;
 };
 
 

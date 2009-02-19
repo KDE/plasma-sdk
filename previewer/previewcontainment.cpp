@@ -13,15 +13,19 @@
 
 
 #include "previewcontainment.h"
+#include "overlaytoolbox.h"
+
+#include <QAction>
+#include <QPainter>
+#include <QGraphicsLayoutItem>
 
 #include <Plasma/Label>
+#include <KIcon>
 #include <KDebug>
-
-#include <QGraphicsLayoutItem>
 
 
 PreviewContainment::PreviewContainment(QObject *parent, const QVariantList &args)
-    : Containment(parent, args)
+    : Containment(parent, args), m_options(0), m_applet(0)
 {
     connect(this, SIGNAL(appletAdded(Plasma::Applet *, const QPointF &)),
             this, SLOT(onAppletAdded(Plasma::Applet *, const QPointF &)));
@@ -33,13 +37,40 @@ PreviewContainment::PreviewContainment(QObject *parent, const QVariantList &args
     setHasConfigurationInterface(false);
 
     m_layout = new QGraphicsLinearLayout(Qt::Vertical);
-    m_layout->setContentsMargins(5, 5, 5, 10);
-    setLayout(m_layout);
+    m_layout->setContentsMargins(5, 0, 5, 10);
 
-    label = new Plasma::Label(this);
-    label->setText("Hey how, let's go");
-    label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    m_layout->addItem(label);
+    m_header = new QGraphicsLinearLayout(Qt::Horizontal);
+    m_header->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+
+    m_layout->addItem(m_header);
+    setupHeader();
+    setLayout(m_layout);
+}
+
+PreviewContainment::~PreviewContainment()
+{
+    if (m_options) {
+        delete m_options;
+    }
+}
+
+void PreviewContainment::setupHeader()
+{
+    // setup toolboxes
+    form = new Plasma::IconWidget(this);
+
+    refresh = new Plasma::IconWidget(this);
+    refresh->setIcon(KIcon("user-desktop"));
+
+    location = new Plasma::IconWidget(this);
+
+
+
+}
+
+    if (m_options) {
+        m_options->setGeometry(geometry());
+    }
 }
 
 void PreviewContainment::onAppletAdded(Plasma::Applet *applet, const QPointF &pos)
