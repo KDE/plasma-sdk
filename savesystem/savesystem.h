@@ -33,4 +33,4 @@ class SaveSystem
         void commit(const QString &log);
 };
  
-#endif // TEXTEDITOR_H
+#endif // SAVESYSTEM_H
