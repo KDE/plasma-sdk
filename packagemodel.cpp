@@ -90,7 +90,7 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
                 return KIcon("file-new");
             }
         } else if (index.row() <= l.count()) {
-            //kDebug() << "got" << l.at(index.row());
+            //kDebug() << "got" << l.at(index.row() - 1);
             if (role == Qt::DisplayRole) {
                 return l.at(index.row() - 1);
             }
@@ -110,12 +110,13 @@ QModelIndex PackageModel::index(int row, int column, const QModelIndex &parent) 
 {
     if (parent.isValid()) {
         if (parent.row() >= m_topEntries.count() || parent.parent().isValid()) {
+            //kDebug() << "FAIL" << row << column;
             return QModelIndex();
         }
 
         const char *key = m_topEntries.at(parent.row());
 
-        if (row < m_files[key].count()) {
+        if (row <= m_files[key].count()) {
             //kDebug() << "going to return" << row << column << key;
             return createIndex(row, column, (void*)key);
         } else {
@@ -124,7 +125,7 @@ QModelIndex PackageModel::index(int row, int column, const QModelIndex &parent) 
         }
     }
 
-    if (row <= m_topEntries.count()) {
+    if (row < m_topEntries.count()) {
         return createIndex(row, column);
     }
 
@@ -155,7 +156,7 @@ int PackageModel::rowCount(const QModelIndex &parent) const
         if (parent.row() < m_topEntries.count()) {
             const char *key = m_topEntries.at(parent.row());
             //kDebug() << "looking for" << key << m_files[key].count();
-            return m_files[key].count();
+            return m_files.contains(key) ? m_files[key].count() + 1 : 0;
         } else {
             return 0;
         }
@@ -222,7 +223,7 @@ void PackageModel::loadPackage()
         QStringList files = m_package->entryList(key);
         m_files[key] = files;
 
-        //kDebug() << m_topEntries.indexOf(key) << key << "has" << files.count() << "files" << files;
+        kDebug() << m_topEntries.indexOf(key) << key << "has" << files.count() << "files" << files;
         beginInsertRows(createIndex(m_topEntries.indexOf(key), 0), 0, files.count());
         endInsertRows();
     }
