@@ -30,8 +30,8 @@ int main(int argc, char *argv[])
     KCmdLineArgs::parsedArgs();
     KApplication app;
     
-    MainWindow w;
-    w.show();
+    MainWindow *w = new MainWindow();
+    w->show();
 
     return app.exec();
 }
