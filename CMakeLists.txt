@@ -21,7 +21,7 @@ include_directories(${KDE4_INCLUDES})
 
 add_subdirectory( editors )
 add_subdirectory( previewer )
-add_subdirectory( savesystem )
+#add_subdirectory( savesystem )
 
 kde4_add_executable(plasmate ${PlasMate_SRC})
 target_link_libraries(plasmate ${KDE4_KDEUI_LIBS} ${KDE4_KPARTS_LIBS} ${KDE4_KIO_LIBRARY} ${KDE4_PLASMA_LIBS})

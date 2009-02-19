@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Commit.h"
-#include "../hunks/ChangeSet.h"
+#include "commit.h"
+// #include "../hunks/ChangeSet.h"
 
 class CommitPrivate
 {
@@ -30,7 +30,7 @@ public:
     QString resolvedTreeIsm; // same as treeIsm except converted to a sha1 if treeIsm is a ref
     QList<QString> parentTreeisms;
     QList<Commit> previousCommits;
-    ChangeSet changeSet;
+//     ChangeSet changeSet;
     int ref;
     Vng::Acceptance acceptance;
 };
