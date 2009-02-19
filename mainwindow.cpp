@@ -17,7 +17,6 @@
 
 #include <KAction>
 #include <KConfig>
-#include <KStandardDirs>
 #include <KConfigGroup>
 #include <KDebug>
 #include <KMenu>
@@ -35,17 +34,18 @@
 MainWindow::MainWindow(QWidget *parent)
     : KParts::MainWindow(parent, 0)
 {    
-    createMenus();
+   createMenus();
     
     m_factory = 0;
+    m_part = 0;
     
     m_startPage = new StartPage(this);
     connect(m_startPage, SIGNAL(projectSelected(QString)), this, SLOT(loadProject(QString)));
     setCentralWidget(m_startPage);
     int oldTab = 0; // always startPage
 
-//     /*setXMLFile(*/kDebug() << KStandardDirs::locate("appdata", "plasmateui.rc")//);
     setXMLFile("plasmateui.rc");
+//     createShellGUI();
 }
 
 MainWindow::~MainWindow()
@@ -113,48 +113,65 @@ void MainWindow::changeTab(int tab)
         return;
     }
     
-    centralWidget()->deleteLater(); // clean
+//     centralWidget()->deleteLater(); // clean
+//     if (oldTab == 1) {
+//         m_part->closeUrl();
+//     }
+    kDebug() << "here we are";
+    
+//     if (centralWidget() && m_part && centralWidget() != m_part->widget()) {
+        centralWidget()->deleteLater();
+//     }
+    
+    kDebug() << "deletalater";
     
     if (tab == 0) {
         m_startPage = new StartPage(this);
         setCentralWidget(m_startPage);
     } else if (tab == 1) {
+        kDebug() << "tab 1";
+//         centralWidget()->deleteLater();
+        kDebug() << m_factory;
+        kDebug() << "and m_part";
+//         kDebug() << m_part;
+
         if (!m_factory) {
             m_factory = KLibLoader::self()->factory("katepart");
         }
-            if (m_factory) {
+        m_part = 0;
+        if (m_factory && !m_part) {
+            kDebug() << "babla";
                 // now that the Part is loaded, we cast it to a Part to get
                 // our hands on it
-                m_part = static_cast<KParts::ReadWritePart *>(m_factory->create(this, "KatePart"));
-                if (m_part) {
+            m_part = static_cast<KParts::ReadWritePart *>(m_factory->create(this, "KatePart"));
+            if (m_part) {
+                kDebug() << "if mpart";
                     // tell the KParts::MainWindow that this is indeed
                     // the main widget
-//                     setCentralWidget(m_part->widget());
+                setCentralWidget(m_part->widget());
+//                     m_part->widget()->show();
+                kDebug() << "set";
+//                 setupGUI(ToolBar | Keys | StatusBar | Save);
+//                     setupGUI();
+                kDebug() << "setup or create?!;";
+                    // and integrate the part's GUI with the shell's
+                createGUI(m_part);
+                kDebug() << "created";
+            } 
+        }
+        
+            if (m_part) {
+                    // tell the KParts::MainWindow that this is indeed
+                    // the main widget
+                setCentralWidget(m_part->widget());
+                kDebug() << "setCentralWidget i said";
 //                     m_part->widget()->show();
         
-                    setupGUI(ToolBar | Keys | StatusBar | Save);
+//                     setupGUI();
         
                     // and integrate the part's GUI with the shell's
-                    createGUI(m_part);
-                } 
-            }
-//         }
-                if (m_part) {
-
-                    // tell the KParts::MainWindow that this is indeed
-                    // the main widget
-
-                    setCentralWidget(m_part->widget());
-//                     setupGUI(ToolBar | Keys | StatusBar | Save);
-
-
-//                     m_part->widget()->show();
-        
-//                     setupGUI(StatusBar | Save);
-        
-                   // and integrate the part's GUI with the shell's
-//                     createGUI(m_part);
-                } 
+//                 createGUI(m_part);
+            } 
 //             } 
 //         }
 //         KTextEdit *l = new KTextEdit(this);

@@ -1,7 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<gui name="plasmate" version="1">
-
-
-</gui>
-
+<kpartgui name="plasmate" version="1">
+<MenuBar>
+  <Menu noMerge="1" name="file"><text>&amp;File</text>
+<!--     <Action name="file_open"/> -->
+<!--     <Separator/> -->
+    <Merge/>
+<!--     <Separator/> -->
+<!--     <Action name="file_quit"/> -->
+  </Menu>
+ 
+  <Merge />
+</MenuBar>
+<ToolBar> noMerge="1" name="mainToolBar"><text>Main Toolbar</text>
+<!--   <Action name="file_open"/> -->
+  <Merge/>
+</ToolBar>
+</kpartgui>
