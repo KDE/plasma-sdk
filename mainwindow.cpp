@@ -75,8 +75,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::createMenus()
 {
-    KStandardAction::open(this, SLOT(fileOpen()), 
-        actionCollection());
+//     KStandardAction::open(this, SLOT(fileOpen()), 
+//         actionCollection());
     KStandardAction::quit(qApp, SLOT(closeAllWindows()),
         actionCollection());
     
@@ -96,7 +96,7 @@ void MainWindow::createMenus()
 //     KStandardAction::quit(this, SLOT(quit()), actionCollection());
 
 //     menuBar()->addMenu(file);
-//     menuBar()->addMenu(helpMenu());
+    menuBar()->addMenu(helpMenu());
 
     setupGUI();
 }
