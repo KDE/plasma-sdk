@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MetaDataEditor</class>
+ <widget class="QWidget" name="MetaDataEditor">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>614</width>
+    <height>452</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Name:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="KLineEdit" name="name_edit"/>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Comment:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="KLineEdit" name="comment_edit"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Icon:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="KLineEdit" name="icon_edit"/>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Type:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="KComboBox" name="type_combo">
+     <item>
+      <property name="text">
+       <string>Applet</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Runner</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Library Name:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="KLineEdit" name="library_edit"/>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Version:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="KLineEdit" name="version_edit"/>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_7">
+     <property name="text">
+      <string>Website:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="KLineEdit" name="website_edit"/>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="label_8">
+     <property name="text">
+      <string>Author:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="KLineEdit" name="author_edit"/>
+   </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="label_9">
+     <property name="text">
+      <string>Email:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <widget class="KLineEdit" name="email_edit"/>
+   </item>
+   <item row="9" column="0">
+    <widget class="QLabel" name="label_10">
+     <property name="text">
+      <string>Category:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <widget class="KLineEdit" name="version_edit_3"/>
+   </item>
+   <item row="10" column="0">
+    <widget class="QLabel" name="label_11">
+     <property name="text">
+      <string>License:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="1">
+    <widget class="KLineEdit" name="license_edit"/>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
