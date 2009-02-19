@@ -46,7 +46,6 @@ private:
     QHash<const char *, QStringList> m_files;
     Plasma::PackageStructure::Ptr m_structure;
     Plasma::Package *m_package;
-    uint m_rowCount;
 };
 
 #endif

@@ -9,8 +9,7 @@ PackageModel::PackageModel(QObject *parent)
     : QAbstractItemModel(parent),
       m_directory(0),
       m_structure(0),
-      m_package(0),
-      m_rowCount(0)
+      m_package(0)
 {
 }
 
@@ -73,12 +72,15 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    QModelIndex parent = index.parent();
+    //TODO: other display roles!
     const char *key = static_cast<const char *>(index.internalPointer());
-    if (parent.isValid()) {
-        QStringList l = m_files[key];
+    if (key) {
+        QStringList l = m_files.value(key);
         if (index.row() < l.count()) {
-            return l.at(index.row());
+            //kDebug() << "got" << l.at(index.row());
+            if (role == Qt::DisplayRole) {
+                return l.at(index.row());
+            }
         }
     } else if (role == Qt::DisplayRole) {
         return m_structure->name(m_topEntries.at(index.row()));
@@ -90,18 +92,23 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
 QModelIndex PackageModel::index(int row, int column, const QModelIndex &parent) const
 {
     if (parent.isValid()) {
-        //FIXME: do some bounds checking on the file list
-        const char *key = static_cast<const char *>(parent.internalPointer());
+        if (parent.row() >= m_topEntries.count()) {
+            return QModelIndex();
+        }
+
+        const char *key = m_topEntries.at(parent.row());
 
         if (row < m_files[key].count()) {
-            return createIndex(row, column, parent.internalPointer());
+            //kDebug() << "going to return" << row << column << key;
+            return createIndex(row, column, (void*)key);
         } else {
+            //kDebug() << "FAIL";
             return QModelIndex();
         }
     }
 
     if (row < m_topEntries.count()) {
-        return createIndex(row, column, (void*)0);
+        return createIndex(row, column);
     }
 
     return QModelIndex();
@@ -112,7 +119,7 @@ QModelIndex PackageModel::parent(const QModelIndex &index) const
     const char *key = static_cast<const char *>(index.internalPointer());
 
     if (m_topEntries.contains(key)) {
-        createIndex(m_topEntries.indexOf(key), 0, (void*)key);
+        return createIndex(m_topEntries.indexOf(key), 0);
     }
 
     return QModelIndex();
@@ -128,8 +135,13 @@ int PackageModel::columnCount(const QModelIndex &parent) const
 int PackageModel::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid()) {
-        const char *key = static_cast<const char *>(parent.internalPointer());
-        return m_files[key].count();
+        if (parent.row() < m_topEntries.count()) {
+            const char *key = m_topEntries.at(parent.row());
+            //kDebug() << "looking for" << key << m_files[key].count();
+            return m_files[key].count();
+        } else {
+            return 0;
+        }
     }
 
     return m_topEntries.count();
@@ -163,7 +175,8 @@ void PackageModel::loadPackage()
             continue;
         }
 
-        beginInsertRows(createIndex(m_topEntries.indexOf(key), 0, (void*)key), 0, m_files[key].count());
+        //kDebug() << m_topEntries.indexOf(key) << key << "has" << files.count() << "files" << files;
+        beginInsertRows(createIndex(m_topEntries.indexOf(key), 0), 0, files.count());
         endInsertRows();
     }
 }
