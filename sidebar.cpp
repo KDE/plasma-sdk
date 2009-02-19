@@ -405,9 +405,8 @@ Sidebar::Sidebar( QWidget *parent )
     d->sideContainer->hide();
 
     connect( d->list, SIGNAL( itemClicked( QListWidgetItem* ) ), this, SLOT( itemClicked( QListWidgetItem* ) ) );
-//     connect( d->list, SIGNAL( customContextMenuRequested( const QPoint & ) ),
-//              this, SLOT( listContextMenu( const QPoint & ) ) );
-    connect( d->splitter, SIGNAL( splitterMoved( int, int ) ), this, SLOT( splitterMoved( int, int ) ) );
+    connect( d->list, SIGNAL( currentRowChanged( int ) ),
+             this, SIGNAL( currentIndexChanged( int ) ) );
 }
 
 Sidebar::~Sidebar()

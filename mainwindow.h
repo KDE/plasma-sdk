@@ -10,7 +10,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <kmainwindow.h>
+#include <kxmlguiwindow.h>
 
 class QModelIndex;
 
@@ -22,7 +22,9 @@ class KListWidget;
 class StartPage;
 class QStringList;
 
-class MainWindow : public KMainWindow
+class Sidebar;
+
+class MainWindow : public KXmlGuiWindow
 {
     Q_OBJECT
 
@@ -43,7 +45,8 @@ class MainWindow : public KMainWindow
         void createDockWidgets();
         
         StartPage *m_startPage;
-        KListWidget *sidebar;
+//         KListWidget *sidebar;
+        Sidebar *sidebar;
         int oldTab;
 };
 

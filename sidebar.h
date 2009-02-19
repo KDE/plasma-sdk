@@ -36,6 +36,9 @@ class Sidebar : public QWidget
         void setSidebarVisibility( bool visible );
         bool isSidebarVisible() const;
 
+    signals:
+        void currentIndexChanged(int);
+        
     private slots:
         void itemClicked( QListWidgetItem *item );
 //         void splitterMoved( int pos, int index );

@@ -23,13 +23,13 @@
 #include <KListWidget>
 
 #include "startpage.h"
-
+#include "sidebar.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : KMainWindow(parent)
-{   
+    : KXmlGuiWindow(parent)
+{    
     createMenus();
     
     m_startPage = new StartPage(this);
@@ -58,19 +58,27 @@ void MainWindow::createDockWidgets()
 {
     QDockWidget *workflow = new QDockWidget(i18n("Workflow"), this);
     
-    sidebar = new KListWidget(workflow);
-    sidebar->addItem(new QListWidgetItem(KIcon("go-home"), i18n("Start page")));
-    sidebar->addItem(new QListWidgetItem(KIcon("accessories-text-editor"), i18n("Edit")));
-    sidebar->addItem(new QListWidgetItem(KIcon("krfb"), i18n("Publish")));
-    sidebar->addItem(new QListWidgetItem(KIcon("help-contents"), i18n("Documentation")));
-    sidebar->addItem(new QListWidgetItem(KIcon("system-run"), i18n("Preview")));
-    sidebar->setIconSize(QSize(48, 48));
-    sidebar->setViewMode(QListView::IconMode);
-    sidebar->setFlow(QListView::TopToBottom);
-    sidebar->setMovement(QListView::Static);
-    sidebar->setResizeMode(QListView::Adjust);
+    sidebar = new Sidebar(workflow);
     
-    connect(sidebar, SIGNAL(currentRowChanged(int)),
+//     sidebar = new KListWidget(workflow);
+    sidebar->addItem(new QWidget(sidebar), KIcon("go-home"), i18n("Start page"));
+    sidebar->addItem(new QWidget(sidebar), KIcon("accessories-text-editor"), i18n("Edit"));
+    sidebar->addItem(new QWidget(sidebar), KIcon("krfb"), i18n("Publish"));
+    sidebar->addItem(new QWidget(sidebar), KIcon("help-contents"), i18n("Documentation"));
+    sidebar->addItem(new QWidget(sidebar), KIcon("system-run"), i18n("Preview"));
+//     sidebar->addItem(new QListWidgetItem(KIcon("go-home"), i18n("Start page")));
+//     sidebar->addItem(new QListWidgetItem(KIcon("accessories-text-editor"), i18n("Edit")));
+//     sidebar->addItem(new QListWidgetItem(KIcon("krfb"), i18n("Publish")));
+//     sidebar->addItem(new QListWidgetItem(KIcon("help-contents"), i18n("Documentation")));
+//     sidebar->addItem(new QListWidgetItem(KIcon("system-run"), i18n("Preview")));
+//     sidebar->setIconSize(QSize(48, 48));
+//     sidebar->setViewMode(QListView::IconMode);
+//     sidebar->setFlow(QListView::TopToBottom);
+//     sidebar->setMovement(QListView::Static);
+//     sidebar->setResizeMode(QListView::Adjust);
+    
+    
+    connect(sidebar, SIGNAL(currentIndexChanged(int)),
             this, SLOT(changeTab(int)));
     
 //     SidebarDelegate *delegate = new SidebarDelegate(sidebar);
@@ -146,7 +154,7 @@ void MainWindow::loadProject(const QString &name)
     
     // Load the needed widgets, switch to page 1 (edit)...
     createDockWidgets();
-    sidebar->setCurrentRow(1);
+    sidebar->setCurrentIndex(1);
 }
 
 QStringList MainWindow::recentProjects() // TODO Limit to 5 
