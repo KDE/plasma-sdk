@@ -4,6 +4,7 @@ find_package(KDE4)
 include(KDE4Defaults)
 
 set (PlasMate_SRC
+    editors/editpage.cpp
     main.cpp
     mainwindow.cpp
     sidebar.cpp
