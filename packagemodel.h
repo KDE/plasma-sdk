@@ -44,6 +44,7 @@ private:
     KDirWatch *m_directory;
     QVector<const char *> m_topEntries;
     QHash<const char *, QStringList> m_files;
+    QHash<const char *, QList<const char *> > m_namedFiles;
     Plasma::PackageStructure::Ptr m_structure;
     Plasma::Package *m_package;
 };

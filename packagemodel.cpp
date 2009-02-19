@@ -82,17 +82,25 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
     //TODO: other display roles!
     const char *key = static_cast<const char *>(index.internalPointer());
     if (key) {
-        QStringList l = m_files.value(key);
         if (index.row() == 0) {
             if (role == Qt::DisplayRole) {
-                return i18n("New");
-            } else if (role == Qt::DecorationRole) {
+                return i18n("New...");
+            } /* else if (role == Qt::DecorationRole) {
                 return KIcon("file-new");
+            } */
+        } else if (role == Qt::DisplayRole) {
+            QList<const char *> named = m_namedFiles.value(key);
+            int row = index.row() - 1;
+
+            if (row < named.count()) {
+                return m_package->structure()->name(named.at(row));
             }
-        } else if (index.row() <= l.count()) {
+
+            row -= named.count();
+            QStringList l = m_files.value(key);
+            if (index.row() < l.count()) {
             //kDebug() << "got" << l.at(index.row() - 1);
-            if (role == Qt::DisplayRole) {
-                return l.at(index.row() - 1);
+                return l.at(index.row());
             }
         }
     } else if (role == Qt::DisplayRole) {
@@ -116,7 +124,7 @@ QModelIndex PackageModel::index(int row, int column, const QModelIndex &parent) 
 
         const char *key = m_topEntries.at(parent.row());
 
-        if (row <= m_files[key].count()) {
+        if (row <= m_files[key].count() + m_namedFiles[key].count()) {
             //kDebug() << "going to return" << row << column << key;
             return createIndex(row, column, (void*)key);
         } else {
@@ -156,7 +164,7 @@ int PackageModel::rowCount(const QModelIndex &parent) const
         if (parent.row() < m_topEntries.count()) {
             const char *key = m_topEntries.at(parent.row());
             //kDebug() << "looking for" << key << m_files[key].count();
-            return m_files.contains(key) ? m_files[key].count() + 1 : 0;
+            return m_files.contains(key) ? m_files[key].count() + m_namedFiles[key].count() + 1 : 0;
         } else {
             return 0;
         }
@@ -203,6 +211,8 @@ void PackageModel::loadPackage()
         m_topEntries.append(key);
     }
 
+    QList<const char *> files = structure->files();
+    QHash<QString, const char *> indexedFiles;
     foreach (const char *key, structure->files()) {
         QString path = structure->path(key);
         if (!dir.exists(path)) {
@@ -212,7 +222,7 @@ void PackageModel::loadPackage()
             f.open(QIODevice::WriteOnly);
         }
 
-        m_topEntries.append(key);
+        indexedFiles.insert(path, key);
     }
 
     // we don't -1 because we have a "ghost" metadata entry
@@ -220,11 +230,37 @@ void PackageModel::loadPackage()
     endInsertRows();
 
     foreach (const char *key, structure->directories()) {
+        QString path = structure->path(key);
+        if (!path.endsWith('/')) {
+            path += '/';
+        }
+
         QStringList files = m_package->entryList(key);
-        m_files[key] = files;
+        QList<const char *> namedFiles;
+        QStringList userFiles;
+        foreach (const QString &file, files) {
+            QString filePath = path + file;
+            if (indexedFiles.contains(filePath)) {
+                namedFiles.append(indexedFiles.value(filePath));
+                indexedFiles.remove(filePath);
+            } else {
+                userFiles.append(file);
+            }
+        }
+        m_files[key] = userFiles;
+        m_namedFiles[key] = namedFiles;
 
         kDebug() << m_topEntries.indexOf(key) << key << "has" << files.count() << "files" << files;
         beginInsertRows(createIndex(m_topEntries.indexOf(key), 0), 0, files.count());
+        endInsertRows();
+    }
+
+    if (!indexedFiles.empty()) {
+        int currentTopCount = m_topEntries.count();
+        foreach (const char *key, indexedFiles) {
+            m_topEntries.append(key);
+        }
+        beginInsertRows(QModelIndex(), currentTopCount, indexedFiles.count());
         endInsertRows();
     }
 }
