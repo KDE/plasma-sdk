@@ -31,7 +31,6 @@ MainWindow::MainWindow(QWidget *parent)
     : KMainWindow(parent)
 {   
     createMenus();
-    createDockWidgets();
     
     m_startPage = new StartPage(this);
     connect(m_startPage, SIGNAL(projectSelected(KUrl)), this, SLOT(loadProject(KUrl)));
@@ -146,6 +145,7 @@ void MainWindow::loadProject(const KUrl &url)
     c.sync();
     
     // Load the needed widgets...
+    createDockWidgets();
 }
 
 KUrl::List MainWindow::recentProjects() // TODO Limit to 5 
