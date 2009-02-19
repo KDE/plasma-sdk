@@ -14,7 +14,8 @@ int main( int argc, char **argv )
     QApplication app(argc, argv);
     MetaDataEditor ed;
 
-    ed.readConfig( QDir::currentPath() + "/tests/plasma-applet-systemtray.desktop" );
+    ed.setFilename( QDir::currentPath() + "/tests/plasma-applet-systemtray.desktop" );
+    ed.readFile();
     ed.show();
 
     return app.exec();

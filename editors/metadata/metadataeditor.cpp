@@ -11,15 +11,22 @@ MetaDataEditor::MetaDataEditor( QWidget *parent )
 {
     view = new Ui::MetaDataEditor;
     view->setupUi(this);
+
+    connect( view->write_button, SIGNAL(clicked()), this, SLOT(writeFile()) );
 }
 
 MetaDataEditor::~MetaDataEditor()
 {
 }
 
-void MetaDataEditor::readConfig( const QString &filename )
+void MetaDataEditor::setFilename( const QString &filename  )
 {
-    kDebug() << "readConfig file" << filename;
+    this->filename = filename;
+}
+
+void MetaDataEditor::readFile()
+{
+    kDebug() << "readFile file" << filename;
 
     KDesktopFile desktopFile( filename );
     KConfigGroup desktopGroup = desktopFile.desktopGroup();
@@ -34,4 +41,23 @@ void MetaDataEditor::readConfig( const QString &filename )
     view->author_edit->setText( desktopGroup.readEntry("X-KDE-PluginInfo-Author") );
     view->email_edit->setText( desktopGroup.readEntry("X-KDE-PluginInfo-Email") );
     view->license_edit->setText( desktopGroup.readEntry("X-KDE-PluginInfo-License") );
+}
+
+void MetaDataEditor::writeFile()
+{
+    KConfig desktopFile( filename, KConfig::SimpleConfig );
+    KConfigGroup desktopGroup = desktopFile.group( "Desktop Entry" );
+
+    desktopGroup.writeEntry( "Name", view->name_edit->text() );
+    desktopGroup.writeEntry( "Comment", view->comment_edit->text() );
+    // desktopGroup.writeEntry( "Icon", view->version_edit->text() );
+
+    desktopGroup.writeEntry( "X-KDE-Library", view->library_edit->text() );
+    desktopGroup.writeEntry( "X-KDE-PluginInfo-Version", view->version_edit->text() );
+    desktopGroup.writeEntry( "X-KDE-PluginInfo-Website", view->website_edit->text() );
+    desktopGroup.writeEntry( "X-KDE-PluginInfo-Author", view->author_edit->text() );
+    desktopGroup.writeEntry( "X-KDE-PluginInfo-Email", view->email_edit->text() );
+    desktopGroup.writeEntry( "X-KDE-PluginInfo-License", view->license_edit->text() );
+
+    desktopFile.sync();
 }

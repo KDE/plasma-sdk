@@ -15,10 +15,15 @@ public:
     MetaDataEditor( QWidget *parent = 0 );
     ~MetaDataEditor();
 
-    void readConfig( const QString &filename );
+    void setFilename( const QString &filename );
+
+public slots:
+    void readFile();
+    void writeFile();
 
 private:
     Ui::MetaDataEditor *view;
+    QString filename;
 };
 
 #endif // METADATAEDITOR__H
