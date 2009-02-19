@@ -7,15 +7,15 @@
   (at your option) any later version.
 */
  
-#ifndef EDITORWIDGET_H
-#define EDITORWIDGET_H
+#ifndef TEXTEDITOR_H
+#define TEXTEDITOR_H
  
 #include <QWidget>
  
-class EditorWidget : public QWidget
+class TextEditor : public QWidget
 {
     public:
-        EditorWidget();
+        TextEditor();
 };
  
-#endif // EDITORWIDGET_H
+#endif // TEXTEDITOR_H

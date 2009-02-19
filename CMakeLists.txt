@@ -6,7 +6,6 @@ include(KDE4Defaults)
 set (PlasMate_SRC
     main.cpp
     mainwindow.cpp
-    newproject.cpp
     startpage.cpp
     packagemodel.cpp
     )
@@ -14,7 +13,6 @@ set (PlasMate_SRC
 kde4_add_ui_files (PlasMate_SRC
    mainwindow.ui
    startpage.ui
-   newproject.ui
 )
 
 add_subdirectory( editors )

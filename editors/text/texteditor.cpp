@@ -7,8 +7,8 @@
   (at your option) any later version.
 */
  
-#include "editorwidget.h"
+#include "texteditor.h"
  
-EditorWidget::EditorWidget()
+TextEditor::TextEditor()
 {
 }
