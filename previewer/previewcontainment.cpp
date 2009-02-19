@@ -44,6 +44,11 @@ PreviewContainment::PreviewContainment(QObject *parent, const QVariantList &args
 
     m_layout->addItem(m_header);
     setupHeader();
+
+    m_tmp = new QGraphicsWidget();
+    m_layout->addItem(m_tmp);
+    m_layout->setStretchFactor(m_tmp, 2);
+
     setLayout(m_layout);
 }
 
@@ -238,14 +243,18 @@ void PreviewContainment::constraintsEvent(Plasma::Constraints constraints)
 {
     Q_UNUSED(constraints);
 
-    if (m_options) {
-        m_options->setGeometry(geometry());
+    if (constraints == Plasma::SizeConstraint) {
+        if (m_options) {
+            m_options->setGeometry(geometry());
+        }
     }
 }
 
 void PreviewContainment::onAppletAdded(Plasma::Applet *applet, const QPointF &pos)
 {
     Q_UNUSED(pos);
+    m_layout->removeItem(m_tmp);
+
     m_layout->addItem(applet);
     connect(applet, SIGNAL(geometryChanged()), this, SLOT(onAppletGeometryChanged()));
 }
@@ -254,6 +263,9 @@ void PreviewContainment::onAppletRemoved(Plasma::Applet *applet)
 {
     disconnect(applet, SIGNAL(geometryChanged()), this, SLOT(onAppletGeometryChanged()));
     m_layout->removeItem(applet);
+
+    m_layout->addItem(m_tmp);
+    m_layout->setStretchFactor(m_tmp, 2);
 }
 
 void PreviewContainment::onAppletGeometryChanged()

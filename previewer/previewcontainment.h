@@ -64,6 +64,11 @@ protected:
 private:
     OverlayToolBox *m_options;
 
+    // Little dirty hack to make previewer
+    // look more beautiful when there is no applet.
+    // XXX: Improve this ?
+    QGraphicsWidget *m_tmp;
+
     QGraphicsLinearLayout *m_layout;
     QGraphicsLinearLayout *m_header;
 
