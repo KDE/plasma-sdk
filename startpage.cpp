@@ -16,7 +16,8 @@
 #include <QModelIndex>
 #include <QAbstractItemModel>
 
-#include <KLocalizedString>
+#include <KUser>
+// #include <KLocalizedString>
 #include <KDebug>
 #include <KLineEdit>
 #include <KPushButton>
@@ -114,20 +115,24 @@ void StartPage::createNewProject()
     PackageModel *model = new PackageModel(this);
     
     
-//     Plasma::PackageMetadata *metadata = new Plasma::PackageMetadata;
+    Plasma::PackageMetadata *metadata = new Plasma::PackageMetadata;
     
 //     QString filename = KStandardDirs::locateLocal("appdata", ui->projectName->text().toLower() + "/metadata.desktop");
 
-//     metadata->setName(ui->projectName->text());
+    metadata->setName(ui->projectName->text());
 
     if (ui->contentTypes->currentRow() == 0) {
         model->setPackageType("Plasma/Applet");
+        metadata->setServiceType("Plasma/Applet");
     } else if (ui->contentTypes->currentRow() == 1) {
         model->setPackageType("Plasma/DataEngine");
+        metadata->setServiceType("Plasma/DataEngine");
     } else if (ui->contentTypes->currentRow() == 2) {
         model->setPackageType("Plasma/Theme");
+        metadata->setServiceType("Plasma/Theme");
     } else if (ui->contentTypes->currentRow() == 3) {
         model->setPackageType("Plasma/Runner");
+        metadata->setServiceType("Plasma/Runner");
     }
 
     model->setPackage(KStandardDirs::locateLocal("appdata", ui->projectName->text().toLower() + '/'));
@@ -135,14 +140,11 @@ void StartPage::createNewProject()
 // TODO
 //     metadata->setPluginName( view->pluginname_edit->text() );
 
-// TODO: Fill with KUser, default to GPL
-//     metadata->setAuthor( view->author_edit->text() );
-//     metadata->setEmail( view->email_edit->text() );
-//     metadata->setLicense( view->license_edit->text() );
+    KUser user;
+    metadata->setAuthor(user.fullName());
+    metadata->setLicense("GPL");
 
-//     metadata->write(filename);
-    
-//     KUrl url = model->package() + "metadata.desktop";
+    metadata->write(model->package() + "metadata.desktop");
     
     emit projectSelected(ui->projectName->text().toLower());
 }
