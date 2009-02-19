@@ -48,7 +48,7 @@ void NewProjectWizard::accept()
          "Icon=\n"
          "Type=Service\n";
          
-    if (!m_type == StartPage::Theme) { // so it's a javascript thingie
+    if (m_type != StartPage::Theme) { // so it's a javascript thingy
         m += "X-Plasma-API=javascript\n"
              "X-Plasma-MainScript=main.js\n";
              "X-Plasma-DefaultSize=200,100\n";
