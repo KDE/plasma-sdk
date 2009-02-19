@@ -7,6 +7,8 @@
   (at your option) any later version.
 */
 
+#include <QDockWidget>
+
 #include <KAction>
 #include <KConfig>
 #include <KConfigGroup>
@@ -49,7 +51,12 @@ void MainWindow::createMenus()
 
 void MainWindow::createDockWidgets()
 {
-    
+//     QDockWidget *workflow = new QDockWidget(i18n("Workflow"), this);
+//     workflow->setAllowedAreas(Qt::AllDockWidgetAreas);
+//     Qt::LeftDockWidgetArea |
+//                               Qt::RightDockWidgetArea);
+//     workflow->setWidget(new QWidget());
+//     addDockWidget(Qt::AllDockWidgetAreas, new QDockWidget("test", this));
 }
 
 void MainWindow::quit()
