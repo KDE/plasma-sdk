@@ -43,12 +43,12 @@ OverlayToolBox::~OverlayToolBox()
 void OverlayToolBox::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
     m_background.resizeFrame(event->newSize());
-}
 
-void OverlayToolBox::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-    Q_UNUSED(event);
-    // handle mouse clicks
+    foreach (QGraphicsItem *child, QGraphicsItem::children()) {
+        Plasma::IconWidget *tool = dynamic_cast<Plasma::IconWidget*>(child);
+        tool->resize(size().width() - 60, tool->size().height());
+    }
+
 }
 
 void OverlayToolBox::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,

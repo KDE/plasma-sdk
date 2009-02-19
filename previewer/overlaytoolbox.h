@@ -44,7 +44,6 @@ protected:
                QWidget *widget = 0);
 
     void resizeEvent(QGraphicsSceneResizeEvent *event);
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
 private:
     int m_totalActions;
