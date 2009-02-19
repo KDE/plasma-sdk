@@ -42,6 +42,8 @@ private Q_SLOTS:
 
 private:
     KDirWatch *m_directory;
+    QVector<const char *> m_topEntries;
+    QHash<const char *, QStringList> m_files;
     Plasma::PackageStructure::Ptr m_structure;
     Plasma::Package *m_package;
     uint m_rowCount;
