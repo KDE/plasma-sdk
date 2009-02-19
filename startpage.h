@@ -46,6 +46,7 @@ class StartPage : public QWidget
     private Q_SLOTS:
         void emitProjectSelected(const QModelIndex &);
         void launchNewProjectWizard();
+        void conditionallyEnableNewProjectButton();
         
     private:
         void createWidgets();

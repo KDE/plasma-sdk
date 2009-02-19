@@ -47,20 +47,28 @@ void StartPage::createWidgets() // Make this a QGV? Use Plasma::Theme?
     QVBoxLayout *createNewLayout = new QVBoxLayout;
     m_createNewLabel = new QLabel(i18n("Create new..."), this);
     m_contentTypes = new QComboBox(this);
-    m_contentTypes->addItem("");
+    m_contentTypes->addItem(i18n("<select project type...>"));
     m_contentTypes->addItem(i18n("Plasmoid"));
     m_contentTypes->addItem(i18n("Data engine"));
     m_contentTypes->addItem(i18n("Theme"));
     m_newProjectWizardButton = new KPushButton(i18n("Create!"), this);
+    m_newProjectWizardButton->setEnabled(false);
     createNewLayout->addWidget(m_createNewLabel);
     createNewLayout->addWidget(m_contentTypes);
     createNewLayout->addWidget(m_newProjectWizardButton);
-    connect(m_newProjectWizardButton, SIGNAL(clicked()), this, SLOT(launchNewProjectWizard()));
     
+    connect(m_contentTypes, SIGNAL(currentIndexChanged(int)), this, SLOT(conditionallyEnableNewProjectButton()));
+    connect(m_newProjectWizardButton, SIGNAL(clicked()), this, SLOT(launchNewProjectWizard()));
+        
     m_layout->addItem(continueWorkingLayout);
     m_layout->addItem(createNewLayout);
     
     setLayout(m_layout);
+}
+
+void StartPage::conditionallyEnableNewProjectButton()
+{
+    m_newProjectWizardButton->setEnabled(m_contentTypes->currentIndex() != 0);
 }
 
 void StartPage::launchNewProjectWizard()
