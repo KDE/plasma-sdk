@@ -9,13 +9,12 @@
 
 #include "savesystem.h"
  
-SaveSystem::SaveSystem(QWidget *parent)
-    : QWidget(parent)
+SaveSystem::SaveSystem()
 {
 
 }
 
-SaveSystem::init()
+void SaveSystem::init()
 {
 
 

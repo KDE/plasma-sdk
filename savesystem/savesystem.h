@@ -10,12 +10,27 @@
 #ifndef SAVESYSTEM_H
 #define SAVESYSTEM_H
  
-#include <QWidget>
- 
-class SaveSystem : public QWidget
+// #include <QWidget>
+
+class QString;
+
+class SaveSystem
 {
     public:
-        SaveSystem(QWidget *parent = 0);
+        SaveSystem();
+        
+        void setAuthor(const QString &author);
+        QString author();
+        
+        void setEmail(const QString &email);
+        QString email();
+        
+        // inits the git repo
+        void init();
+        
+        void add(const QString &path);
+        
+        void commit(const QString &log);
 };
  
 #endif // TEXTEDITOR_H
