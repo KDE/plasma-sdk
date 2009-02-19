@@ -5,8 +5,8 @@
 
 class StartPage : public QWidget
 {
-public:
-    StartPage();
+    public:
+        StartPage();
 };
 
 #endif // STARTPAGE_H
