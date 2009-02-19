@@ -12,10 +12,22 @@
 
 #include <QWidget>
 
+class QLabel;
+class QComboBox;
+class QListView;
+class QHBoxLayout;
+
 class StartPage : public QWidget
 {
     public:
         StartPage();
+    private:
+        void createWidgets();
+        
+        QLabel m_createNew_l, m_openExisting_l, m_continueWorking_l;
+        QComboBox m_contentTypes;
+        QListView m_recentProjects;
+        QHBoxLayout *m_layout;
 };
 
 #endif // STARTPAGE_H

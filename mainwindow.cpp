@@ -10,6 +10,8 @@
 #include <KMenu>
 #include <KMenuBar>
 
+#include "startpage.h"
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -17,6 +19,11 @@ MainWindow::MainWindow(QWidget *parent)
     : KMainWindow(parent)
 {   
     createMenus();
+}
+
+MainWindow::~MainWindow()
+{
+
 }
 
 void MainWindow::createMenus()
@@ -35,7 +42,3 @@ void MainWindow::quit()
     deleteLater();
 }
 
-MainWindow::~MainWindow()
-{
-
-}

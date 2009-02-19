@@ -7,11 +7,22 @@
   (at your option) any later version.
 */
 
+#include <QLabel>
+#include <QComboBox>
+#include <QListView>
+#include <QHBoxLayout>
+
 #include "startpage.h"
 
 StartPage::StartPage()
 {
+    createWidgets();
+}
 
+void StartPage::createWidgets()
+{
+    m_layout = new QHBoxLayout(this);
+    
 }
 
 
