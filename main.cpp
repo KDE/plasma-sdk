@@ -16,7 +16,7 @@
 
 int main(int argc, char *argv[])
 {
-    KAboutData aboutData("PlasMate", 0, ki18n("PlasMate"),
+    KAboutData aboutData("plasmate", 0, ki18n("PlasMate"),
                          "0.1", ki18n("A Plasma friendly IDE"), 
                          KAboutData::License_GPL,
                          ki18n("(c) 2009  Riccardo Iaconelli"), 
