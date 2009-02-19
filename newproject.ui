@@ -62,7 +62,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>When you press &quot;Finish&quot;, the directory will be created with everything.</string>
+     <string>When you press &quot;Finish&quot;, the directory will be created with everything blabla.</string>
     </property>
     <property name="wordWrap">
      <bool>true</bool>

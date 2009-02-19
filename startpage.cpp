@@ -47,6 +47,10 @@ void StartPage::createWidgets() // Make this a QGV? Use Plasma::Theme?
     QVBoxLayout *createNewLayout = new QVBoxLayout;
     m_createNewLabel = new QLabel(i18n("Create new..."), this);
     m_contentTypes = new QComboBox(this);
+    m_contentTypes->addItem("");
+    m_contentTypes->addItem(i18n("Plasmoid"));
+    m_contentTypes->addItem(i18n("Data engine"));
+    m_contentTypes->addItem(i18n("Theme"));
     m_newProjectWizardButton = new KPushButton(i18n("Create!"), this);
     createNewLayout->addWidget(m_createNewLabel);
     createNewLayout->addWidget(m_contentTypes);
