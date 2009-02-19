@@ -53,7 +53,8 @@ MainWindow::MainWindow(QWidget *parent)
     createMenus();
 
     m_startPage = new StartPage(this);
-    connect(m_startPage, SIGNAL(projectSelected(QString,QString)), this, SLOT(loadProject(QString,QString)));
+    connect(m_startPage, SIGNAL(projectSelected(QString,QString)),
+            this, SLOT(loadProject(QString,QString)));
     setCentralWidget(m_startPage);
 }
 
@@ -86,12 +87,14 @@ void MainWindow::createDockWidgets()
     m_sidebar->addItem(KIcon("krfb"), i18n("Publish"));
     m_sidebar->addItem(KIcon("help-contents"), i18n("Documentation"));
 
-    m_workflow->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
     connect(m_sidebar, SIGNAL(currentIndexChanged(int)),
             this, SLOT(changeTab(int)));
 
     m_workflow->setWidget(m_sidebar);
     addDockWidget(Qt::LeftDockWidgetArea, m_workflow);
+
+    m_workflow->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
+    m_sidebar->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
 
     m_previewerWidget = new QDockWidget(i18n("Previewer"), this);
     m_previewerWidget->setObjectName("workflow");
