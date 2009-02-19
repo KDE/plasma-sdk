@@ -5,9 +5,17 @@
 #include <KDebug>
 
 #include <plasma/packagemetadata.h>
+#include <plasma/plasma.h>
+#include <plasma/scripting/scriptengine.h>
 
 #include "ui_metadata.h"
 #include "metadataeditor.h"
+
+//
+// TODO: Now we know what this does it needs rewriting to use the metadata object
+// as its main store. And to handle updates in a clean per-change way rather than
+// the hacks that are there right now.
+//
 
 MetaDataEditor::MetaDataEditor( QWidget *parent )
     : QWidget( parent ),
@@ -15,6 +23,8 @@ MetaDataEditor::MetaDataEditor( QWidget *parent )
 {
     view = new Ui::MetaDataEditor;
     view->setupUi(this);
+
+    connect( view->type_combo, SIGNAL(currentIndexChanged(int)), SLOT(updateKnownApis()) );
 }
 
 MetaDataEditor::~MetaDataEditor()
@@ -50,7 +60,7 @@ void MetaDataEditor::readFile()
     }
 
     view->pluginname_edit->setText( metadata->pluginName() );
-    view->api_edit->setText( metadata->implementationApi() );
+    updateKnownApis();
 
     QString serviceType = metadata->serviceType();
 
@@ -91,6 +101,50 @@ void MetaDataEditor::readFile()
     view->license_edit->setText( metadata->license() );
 }
 
+void MetaDataEditor::updateKnownApis()
+{
+    Plasma::ComponentTypes currentType;
+
+    switch( view->type_combo->currentIndex() ) {
+	case 0:
+	    currentType = Plasma::AppletComponent;
+	    break;
+	case 1:
+	    currentType = Plasma::DataEngineComponent;
+	    break;
+	case 2:
+	    // theme
+	    view->api_combo->setEnabled(false);
+	    return;
+	    break;
+	case 3:
+	    currentType = Plasma::RunnerComponent;
+	    break;
+	default:
+	    kWarning() << "Unknown service type" << currentType;
+	    return;
+    }
+
+    view->api_combo->setEnabled( true );
+    QStringList apis = Plasma::knownLanguages( currentType );
+    view->api_combo->clear();
+    view->api_combo->insertItems( 0, apis ); // TODO: Map to friendly names
+    view->api_combo->addItem( QString("Native") );
+
+    int idx = view->api_combo->findText(metadata->implementationApi());
+    if ( idx != -1 ) {
+        view->api_combo->setCurrentIndex( idx );
+    }
+    else if ( metadata->implementationApi().isEmpty() ) {
+        view->api_combo->setCurrentIndex( view->api_combo->count()-1 ); // Native
+    }
+    else {
+        kWarning() << "Unknown category detected " << metadata->category() << "using miscellaneous instead";
+        view->category_combo->setCurrentIndex( view->category_combo->count()-1 ); // misc is last
+    }
+
+}
+
 void MetaDataEditor::writeFile()
 {
     metadata->setName( view->name_edit->text() );
@@ -107,7 +161,10 @@ void MetaDataEditor::writeFile()
 	metadata->setServiceType("Plasma/Theme");
 
     metadata->setCategory( view->category_combo->currentText() );
-    metadata->setImplementationApi( view->api_edit->text() );
+    if ( view->api_combo->currentIndex() != view->api_combo->count()-1 )
+	metadata->setImplementationApi( view->api_combo->currentText() );
+    else
+	metadata->setImplementationApi( QString() );
     metadata->setPluginName( view->pluginname_edit->text() );
     metadata->setVersion( view->version_edit->text() );
     metadata->setWebsite( view->website_edit->text() );

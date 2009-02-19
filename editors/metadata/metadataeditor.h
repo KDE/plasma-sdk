@@ -25,6 +25,9 @@ public slots:
     void readFile();
     void writeFile();
 
+private slots:
+    void updateKnownApis();
+
 private:
     Ui::MetaDataEditor *view;
     QString filename;
