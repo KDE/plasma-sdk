@@ -49,7 +49,7 @@
          <item>
           <widget class="QLabel" name="label_2">
            <property name="text">
-            <string>Open existing projects...</string>
+            <string>Import existing project</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

@@ -8,8 +8,8 @@
 */
 
 #include <QDockWidget>
-#include <QListWidget>
 
+#include <KListWidget>
 #include <KAction>
 #include <KConfig>
 #include <KConfigGroup>
@@ -54,7 +54,7 @@ void MainWindow::createDockWidgets()
 {
     QDockWidget *workflow = new QDockWidget(i18n("Workflow"), this);
     
-    QListWidget *list = new QListWidget(workflow);
+    KListWidget *list = new KListWidget(workflow);
     list->addItem("test");
     
     workflow->setWidget(list);
