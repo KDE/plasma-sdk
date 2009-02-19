@@ -7,11 +7,13 @@
   (at your option) any later version.
 */
 
-#include <KMenu>
-#include <KMenuBar>
+#include <KAction>
 #include <KConfig>
 #include <KConfigGroup>
 #include <KDebug>
+#include <KMenu>
+#include <KMenuBar>
+#include <KStandardAction>
 #include <KUrl>
 
 #include "startpage.h"
@@ -35,11 +37,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::createMenus()
 {
+    //FIXME: should be using XMLGUI for this
     KMenu *file = new KMenu("File", this);
-    
-    QAction *quit;
-    quit = file->addAction(KIcon("application-exit"), "Quit", this, SLOT(quit()));
-    
+
+    file->addAction(KStandardAction::quit(this, SLOT(quit()), file));
+
     menuBar()->addMenu(file);
     menuBar()->addMenu(helpMenu());
 }
