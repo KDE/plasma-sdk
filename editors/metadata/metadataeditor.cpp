@@ -45,27 +45,28 @@ void MetaDataEditor::readFile()
 //    view->icon_button->setIcon( desktopFile.readIcon() );
 //    connect( view->icon_button, SIGNAL(iconChanged(const QString &)),
 //	     view->icon_edit, SLOT(setText(const QString &)) );
-    if ( view->icon_edit->text().isEmpty() )
-	view->icon_button->setIcon("kde");
+    if ( view->icon_edit->text().isEmpty() ) {
+        view->icon_button->setIcon("kde");
+    }
 
     view->pluginname_edit->setText( metadata->pluginName() );
 
     QString serviceType = metadata->serviceType();
 
     if ( serviceType == QString("Plasma/Applet") ) {
-	view->type_combo->setCurrentIndex(0);
+        view->type_combo->setCurrentIndex(0);
     }
     else if ( serviceType == QString("Plasma/DataEngine") ) {
-	view->type_combo->setCurrentIndex(1);
+        view->type_combo->setCurrentIndex(1);
     }
     else if ( serviceType == QString("Plasma/Theme") ) {
-	view->type_combo->setCurrentIndex(2);
+        view->type_combo->setCurrentIndex(2);
     }
     else if ( serviceType == QString("Plasma/Runner") ) {
-	view->type_combo->setCurrentIndex(3);
+        view->type_combo->setCurrentIndex(3);
     }
     else {
-	kWarning() << "Unknown service type" << serviceType;
+        kWarning() << "Unknown service type" << serviceType;
     }
 
     // Enforce the security restriction from package.cpp in the input field
@@ -75,11 +76,11 @@ void MetaDataEditor::readFile()
 
     int idx = view->category_combo->findText(metadata->category());
     if ( idx != -1 ) {
-	view->category_combo->setCurrentIndex( idx );
+        view->category_combo->setCurrentIndex( idx );
     }
     else {
-	kWarning() << "Unknown category detected " << metadata->category() << "using miscellaneous instead";
-	view->category_combo->setCurrentIndex( view->category_combo->count()-1 ); // misc is last
+        kWarning() << "Unknown category detected " << metadata->category() << "using miscellaneous instead";
+        view->category_combo->setCurrentIndex( view->category_combo->count()-1 ); // misc is last
     }
 
     view->version_edit->setText( metadata->version() );
