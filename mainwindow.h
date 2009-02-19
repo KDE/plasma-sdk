@@ -19,11 +19,13 @@ namespace Ui {
     class MainWindowClass;
 };
 
-class KListWidget;
-class StartPage;
-class QStringList;
 class QDockWidget;
-// class KLibFactory;
+class QStringList;
+
+class KListWidget;
+
+class PackageModel;
+class StartPage;
 class Sidebar;
 
 class MainWindow : public KParts::MainWindow
@@ -40,7 +42,7 @@ class MainWindow : public KParts::MainWindow
         void quit();
 
         void changeTab(int tab);
-        void loadProject(const QString &name);
+        void loadProject(const QString &name, const QString &type);
 
     private:
         enum WorkflowTabs { StartPageTab = 0,
@@ -50,8 +52,8 @@ class MainWindow : public KParts::MainWindow
                             PreviewTab };
 
         void createMenus();
-        void showKatePart();
-        void hideKatePart();
+        void showEditor();
+        void hideEditor();
         void createDockWidgets();
 
         StartPage *m_startPage;
@@ -59,6 +61,7 @@ class MainWindow : public KParts::MainWindow
         Sidebar *m_sidebar;
         KLibFactory *m_factory;
         KParts::ReadWritePart *m_part;
+        PackageModel *m_model;
         int m_oldTab;
 };
 

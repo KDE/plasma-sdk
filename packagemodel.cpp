@@ -7,8 +7,10 @@
 
 #include <KDirWatch>
 #include <KIcon>
+#include <KUser>
 
 #include <Plasma/Package>
+#include <Plasma/PackageMetadata>
 
 PackageModel::PackageModel(QObject *parent)
     : QAbstractItemModel(parent),
@@ -175,8 +177,14 @@ void PackageModel::loadPackage()
     Plasma::PackageStructure::Ptr structure = m_package->structure();
 
     if (!dir.exists("metadata.desktop")) {
-        QFile f(dir.path() + "/metadata.desktop");
-        f.open(QIODevice::WriteOnly);
+        KUser user;
+        Plasma::PackageMetadata metadata;
+        metadata.setAuthor(user.fullName());
+        metadata.setLicense("GPL");
+        metadata.setName(dir.dirName());
+        metadata.setServiceType(structure->type());
+
+        metadata.write(dir.path() + "metadata.desktop");
     }
 
     QString contents = structure->contentsPrefix();

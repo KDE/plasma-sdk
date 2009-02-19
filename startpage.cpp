@@ -117,41 +117,21 @@ void StartPage::refreshRecentProjectsList()
 
 void StartPage::createNewProject()
 {
-    PackageModel *model = new PackageModel(this);
-    
-    
-    Plasma::PackageMetadata *metadata = new Plasma::PackageMetadata;
-    
-//     QString filename = KStandardDirs::locateLocal("appdata", ui->projectName->text().toLower() + "/metadata.desktop");
-
-    metadata->setName(ui->projectName->text());
-
-    if (ui->contentTypes->currentRow() == 0) {
-        model->setPackageType("Plasma/Applet");
-        metadata->setServiceType("Plasma/Applet");
-    } else if (ui->contentTypes->currentRow() == 1) {
-        model->setPackageType("Plasma/DataEngine");
-        metadata->setServiceType("Plasma/DataEngine");
-    } else if (ui->contentTypes->currentRow() == 2) {
-        model->setPackageType("Plasma/Theme");
-        metadata->setServiceType("Plasma/Theme");
-    } else if (ui->contentTypes->currentRow() == 3) {
-        model->setPackageType("Plasma/Runner");
-        metadata->setServiceType("Plasma/Runner");
-    }
-
-    model->setPackage(KStandardDirs::locateLocal("appdata", ui->projectName->text().toLower() + '/'));
-
 // TODO
 //     metadata->setPluginName( view->pluginname_edit->text() );
 
-    KUser user;
-    metadata->setAuthor(user.fullName());
-    metadata->setLicense("GPL");
+    QString type;
+    if (ui->contentTypes->currentRow() == 0) {
+        type = "Plasma/Applet";
+    } else if (ui->contentTypes->currentRow() == 1) {
+        type = "Plasma/DataEngine";
+    } else if (ui->contentTypes->currentRow() == 2) {
+        type = "Plasma/Theme";
+    } else if (ui->contentTypes->currentRow() == 3) {
+        type = "Plasma/Runner";
+    }
 
-    metadata->write(model->package() + "metadata.desktop");
-    
-    emit projectSelected(ui->projectName->text().toLower());
+    emit projectSelected(ui->projectName->text().toLower(), type);
 }
 
 void StartPage::emitProjectSelected(const QModelIndex &index)
@@ -159,5 +139,6 @@ void StartPage::emitProjectSelected(const QModelIndex &index)
     QAbstractItemModel *m = ui->recentProjects->model();
     QString url = m->data(index, FullPathRole).value<QString>();
     kDebug() << "Loading project file:" << m->data(index, FullPathRole);
-    emit projectSelected(url);
+    emit projectSelected(url, QString());
 }
+

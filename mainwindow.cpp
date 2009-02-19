@@ -7,6 +7,7 @@
   (at your option) any later version.
 */
 
+#include <QDir>
 #include <QDockWidget>
 #include <QListWidgetItem>
 #include <QModelIndex>
@@ -26,10 +27,14 @@
 #include <KListWidget>
 #include <KActionCollection>
 #include <KParts/Part>
+#include <KStandardDirs>
 
-#include "startpage.h"
-#include "sidebar.h"
+#include <Plasma/PackageMetadata>
+
 #include "mainwindow.h"
+#include "packagemodel.h"
+#include "sidebar.h"
+#include "startpage.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -38,13 +43,14 @@ MainWindow::MainWindow(QWidget *parent)
       m_sidebar(0),
       m_factory(0),
       m_part(0),
+      m_model(0),
       m_oldTab(0) // we start from startPage
 {
     setXMLFile("plasmateui.rc");
     createMenus();
 
     m_startPage = new StartPage(this);
-    connect(m_startPage, SIGNAL(projectSelected(QString)), this, SLOT(loadProject(QString)));
+    connect(m_startPage, SIGNAL(projectSelected(QString,QString)), this, SLOT(loadProject(QString,QString)));
     setCentralWidget(m_startPage);
 }
 
@@ -86,17 +92,17 @@ void MainWindow::quit()
 //     deleteLater();
 }
 
-void MainWindow::showKatePart()
+void MainWindow::showEditor()
 {
     if (!m_factory) {
         m_factory = KLibLoader::self()->factory("katepart");
-    
+
         m_part = 0;
         if (m_factory) {
             m_part = static_cast<KParts::ReadWritePart *>(m_factory->create(this, "KatePart"));
         }
     }
-    
+
     if (m_part) {
         m_part = static_cast<KParts::ReadWritePart *>(m_factory->create(this, "KatePart"));
         setCentralWidget(m_part->widget());
@@ -104,9 +110,10 @@ void MainWindow::showKatePart()
     }
 }
 
-void MainWindow::hideKatePart()
+void MainWindow::hideEditor()
 {
     m_part->closeUrl();
+    m_part = 0;
     createGUI(0);
 }
 
@@ -121,22 +128,15 @@ void MainWindow::changeTab(int tab)
         return;
     }
 
-    if (m_oldTab == EditTab) {
-        hideKatePart();
-    } else {
-        centralWidget()->deleteLater();
-        m_startPage = 0;
-    }
+    centralWidget()->deleteLater();
+    m_startPage = 0;
 
     switch (tab) {
         case StartPageTab:
-            if (!m_startPage) {
-                m_startPage = new StartPage(this);
-            }
+            m_startPage = new StartPage(this);
             setCentralWidget(m_startPage);
         break;
         case EditTab:
-            showKatePart();
         break;
         case PublishTab: {
             QLabel *l = new QLabel(i18n("Publish widget will go here!"));
@@ -158,11 +158,26 @@ void MainWindow::changeTab(int tab)
    m_oldTab = tab;
 }
 
-void MainWindow::loadProject(const QString &name)
+void MainWindow::loadProject(const QString &name, const QString &type)
 {
     kDebug() << "Loading project named" << name << "...";
+    delete m_model;
+
+    QString packagePath = KStandardDirs::locateLocal("appdata", name + '/');
+    QString actualType = type;
+
+    if (actualType.isEmpty()) {
+        QDir dir(packagePath);
+        if (dir.exists("metadata.desktop")) {
+            Plasma::PackageMetadata metadata;
+            actualType = metadata.serviceType();
+        }
+    }
 
     // Add it to the recent files first.
+    m_model = new PackageModel(this);
+    m_model->setPackageType(actualType);
+    m_model->setPackage(packagePath);
 
     QStringList recentFiles;
     KConfig c;

@@ -37,29 +37,29 @@ class StartPage : public QWidget
     public:
         StartPage(MainWindow *parent);
         ~StartPage();
-        
+
         void resetStatus();
-        
+
         enum ProjectTypes {
             Theme           = 1,
             Plasmoid        = 2,
             DataEngine      = 4
         };
-        
+
         Q_DECLARE_FLAGS(ProjectType, ProjectTypes);
-        
+
     signals:
-        void projectSelected(QString name);
-        
+        void projectSelected(const QString &name, const QString &type);
+
     private Q_SLOTS:
         void emitProjectSelected(const QModelIndex &);
         void changeStackedWidgetPage();
         void createNewProject();
-        
+
     private:
         void setupWidgets();
         void refreshRecentProjectsList();
-        
+
         Ui::StartPage *ui;
         QLabel *m_createNewLabel, *m_openExistingLabel, *m_continueWorkingLabel;
         QComboBox *m_contentTypes;
