@@ -14,9 +14,6 @@ Author::Author()
 
 }
 
-void Author::init()
-{
 
 
-}
 

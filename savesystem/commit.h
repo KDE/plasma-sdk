@@ -18,7 +18,7 @@
 #ifndef COMMIT_H
 #define COMMIT_H
 
-#include "../Vng.h"
+#include "vng.h"
 
 #include <QString>
 #include <QDateTime>
@@ -26,6 +26,7 @@
 class CommitPrivate;
 class ChangeSet;
 class File;
+class Author;
 
 class Commit
 {
@@ -92,5 +93,18 @@ protected:
 private:
     static Commit createFromStream(QIODevice *device, CommitPrivate *priv);
 };
+
+class CommitData
+{
+    public:
+        CommitData();
+        
+        void setLog(const QString &log);
+        QString log();
+    
+        void setAuthor(const Author &author);
+        Author author();
+}
+
 
 #endif

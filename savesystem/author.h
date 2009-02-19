@@ -10,15 +10,18 @@
 #ifndef AUTHOR_H
 #define AUTHOR_H
  
-// #include <QWidget>
-
 class QString;
 
 class Author
 {
     public:
         Author();
+
+        void setName(const QString &name);
+        QString name();
         
+        void setEmail(const QString &email);
+        QString email();
 };
  
 #endif // AUTHOR_H

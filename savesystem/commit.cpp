@@ -16,9 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Commit.h"
-#include "Commit_p.h"
-#include "../GitRunner.h"
+#include "commit.h"
+#include "commit_p.h"
+#include "gitrunner.h"
 #include "../Logger.h"
 
 #include <QProcess>

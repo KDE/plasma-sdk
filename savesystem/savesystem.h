@@ -9,28 +9,25 @@
  
 #ifndef SAVESYSTEM_H
 #define SAVESYSTEM_H
- 
-// #include <QWidget>
 
 class QString;
+class Author;
+class CommitData;
 
 class SaveSystem
 {
     public:
         SaveSystem();
         
-        void setAuthor(const QString &author);
-        QString author();
-        
-        void setEmail(const QString &email);
-        QString email();
-        
+        void setAuthor(const Author &author);
+        Author author();
+
         // inits the git repo
         void init();
         
         void add(const QString &path);
         
-        void commit(const QString &log);
+        void commit(const CommitData &data);
 };
  
 #endif // SAVESYSTEM_H
