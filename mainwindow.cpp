@@ -8,6 +8,7 @@
 */
 
 #include <QDockWidget>
+#include <QListWidget>
 
 #include <KAction>
 #include <KConfig>
@@ -52,10 +53,11 @@ void MainWindow::createMenus()
 void MainWindow::createDockWidgets()
 {
     QDockWidget *workflow = new QDockWidget(i18n("Workflow"), this);
-//     workflow->setAllowedAreas(Qt::AllDockWidgetAreas);
-//     Qt::LeftDockWidgetArea |
-//                               Qt::RightDockWidgetArea);
-    workflow->setWidget(new QWidget(workflow));
+    
+    QListWidget *list = new QListWidget(workflow);
+    list->addItem("test");
+    
+    workflow->setWidget(list);
     addDockWidget(Qt::LeftDockWidgetArea, workflow);
 }
 

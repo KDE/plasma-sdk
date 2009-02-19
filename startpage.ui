@@ -156,7 +156,7 @@ It's time the desktop caught up with us.</string>
                <property name="currentIndex">
                 <number>0</number>
                </property>
-               <widget class="QWidget" name="stackedWidgetPageOne" native="true">
+               <widget class="QWidget" name="stackedWidgetPageOne">
                 <layout class="QGridLayout" name="gridLayout_5">
                  <item row="0" column="0">
                   <widget class="QGroupBox" name="groupBox">
@@ -165,7 +165,7 @@ It's time the desktop caught up with us.</string>
                    </property>
                    <layout class="QGridLayout" name="gridLayout">
                     <item row="1" column="1">
-                     <widget class="QListWidget" name="recentProjects">
+                     <widget class="KListWidget" name="recentProjects">
                       <property name="palette">
                        <palette>
                         <active>
@@ -218,7 +218,7 @@ It's time the desktop caught up with us.</string>
                    </property>
                    <layout class="QGridLayout" name="gridLayout_2">
                     <item row="0" column="0">
-                     <widget class="QListWidget" name="contentTypes">
+                     <widget class="KListWidget" name="contentTypes">
                       <property name="palette">
                        <palette>
                         <active>
@@ -265,9 +265,6 @@ It's time the desktop caught up with us.</string>
                   </widget>
                  </item>
                 </layout>
-                <zorder>groupBox</zorder>
-                <zorder>groupBox_2</zorder>
-                <zorder>groupBox_2</zorder>
                </widget>
                <widget class="QWidget" name="stackedWidgetPageTwo">
                 <layout class="QGridLayout" name="gridLayout_6">
@@ -416,21 +413,13 @@ It's time the desktop caught up with us.</string>
     </layout>
    </item>
   </layout>
-  <zorder>groupBox</zorder>
-  <zorder>groupBox_2</zorder>
-  <zorder>kurlrequester</zorder>
-  <zorder>logoLabel</zorder>
-  <zorder>horizontalSpacer</zorder>
-  <zorder>horizontalSpacer_2</zorder>
-  <zorder>horizontalSpacer_3</zorder>
-  <zorder>verticalSpacer</zorder>
-  <zorder>kurlrequester</zorder>
-  <zorder>verticalSpacer_2</zorder>
-  <zorder>welcomeText</zorder>
-  <zorder>kurlrequester</zorder>
-  <zorder>kurlrequester</zorder>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>KListWidget</class>
+   <extends>QListWidget</extends>
+   <header>klistwidget.h</header>
+  </customwidget>
   <customwidget>
    <class>KPushButton</class>
    <extends>QPushButton</extends>
