@@ -184,7 +184,7 @@ void PackageModel::loadPackage()
         metadata.setName(dir.dirName());
         metadata.setServiceType(structure->type());
 
-        metadata.write(dir.path() + "metadata.desktop");
+        metadata.write(dir.path() + "/metadata.desktop");
     }
 
     QString contents = structure->contentsPrefix();
