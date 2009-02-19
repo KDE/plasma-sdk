@@ -25,7 +25,6 @@
 
 #include "startpage.h"
 #include "mainwindow.h"
-#include "newproject.h"
 #include "ui_startpage.h"
 
 StartPage::StartPage(MainWindow *parent) // TODO set a palette so it will look identical with any color scheme.
@@ -60,22 +59,6 @@ void StartPage::setupWidgets()
 void StartPage::changeStackedWidgetPage()
 {
     ui->layoutHackStackedWidget->setCurrentIndex(1);
-}
-
-void StartPage::launchNewProjectWizard()
-{
-    NewProjectWizard w;
-//     switch (m_contentTypes->currentIndex()) {
-//         case 1:
-//             w.setProjectType(Plasmoid);
-//         case 2:
-//             w.setProjectType(DataEngine);
-// //         case 3:
-//             w.setProjectType(Theme);
-//     }
-    
-    w.exec();
-    emit(projectSelected(w.projectFile()));
 }
 
 void StartPage::refreshRecentProjectsList()

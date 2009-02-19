@@ -52,7 +52,6 @@ class StartPage : public QWidget
         void emitProjectSelected(const QModelIndex &);
         void changeStackedWidgetPage();
         void createNewProject();
-        void launchNewProjectWizard();
         
     private:
         void setupWidgets();
