@@ -19,6 +19,8 @@
 #include <KLocalizedString>
 #include <KDebug>
 #include <KPushButton>
+#include <KSeparator>
+#include <KUrlRequester>
 
 #include "startpage.h"
 #include "mainwindow.h"
@@ -37,14 +39,14 @@ void StartPage::createWidgets() // Make this a QGV? Use Plasma::Theme?
     m_layout = new QVBoxLayout(this);
     
     QHBoxLayout *continueWorkingLayout = new QHBoxLayout;
-    m_continueWorkingLabel = new QLabel(i18n("Continue working on.."), this);
+    m_continueWorkingLabel = new QLabel(i18n("Continue working on..."), this);
     m_recentProjects = new QListWidget(this);
     continueWorkingLayout->addWidget(m_continueWorkingLabel);
     continueWorkingLayout->addWidget(m_recentProjects);
     connect(m_recentProjects, SIGNAL(clicked(const QModelIndex)),
             this, SLOT(emitProjectSelected(const QModelIndex)));
     
-    QHBoxLayout *createNewLayout = new QHBoxLayout;
+    QHBoxLayout *newProjectLayout = new QHBoxLayout;
     m_createNewLabel = new QLabel(i18n("Create new..."), this);
     m_contentTypes = new QComboBox(this);
     m_contentTypes->addItem(i18n("select project type..."));
@@ -54,15 +56,23 @@ void StartPage::createWidgets() // Make this a QGV? Use Plasma::Theme?
     m_newProjectWizardButton = new KPushButton(i18n("Create!"), this);
     m_newProjectWizardButton->setEnabled(false);
     
-    createNewLayout->addWidget(m_createNewLabel);
-    createNewLayout->addWidget(m_contentTypes);
-    createNewLayout->addWidget(m_newProjectWizardButton);
+    newProjectLayout->addWidget(m_createNewLabel);
+    newProjectLayout->addWidget(m_contentTypes);
+    newProjectLayout->addWidget(m_newProjectWizardButton);
     
     connect(m_contentTypes, SIGNAL(currentIndexChanged(int)), this, SLOT(conditionallyEnableNewProjectButton()));
     connect(m_newProjectWizardButton, SIGNAL(clicked()), this, SLOT(launchNewProjectWizard()));
-        
+    
+    QHBoxLayout *openExistingLayout = new QHBoxLayout;
+    openExistingLayout->addWidget(new QLabel(i18n("Open existing project..."), this));
+    openExistingLayout->addWidget(new KUrlRequester(this));
+    
+    m_layout->addWidget(new KSeparator(this));
     m_layout->addItem(continueWorkingLayout);
-    m_layout->addItem(createNewLayout);
+    m_layout->addWidget(new KSeparator(this));
+    m_layout->addItem(newProjectLayout);
+    m_layout->addWidget(new KSeparator(this));
+    m_layout->addItem(openExistingLayout);
     
     setLayout(m_layout);
 }
