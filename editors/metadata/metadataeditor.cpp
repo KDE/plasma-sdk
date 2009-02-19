@@ -85,6 +85,7 @@ void MetaDataEditor::readFile()
     QRegExpValidator *pluginname_validator = new QRegExpValidator( view->pluginname_edit );
     QRegExp validatePluginName("^[\\w-\\.]+$"); // Only allow letters, numbers, underscore and period.
     pluginname_validator->setRegExp(validatePluginName);
+    view->pluginname_edit->setValidator(pluginname_validator);
 
     int idx = view->category_combo->findText(metadata->category());
     if ( idx != -1 ) {
