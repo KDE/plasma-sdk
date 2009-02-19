@@ -7,6 +7,10 @@ namespace Ui {
     class MetaDataEditor;
 };
 
+namespace Plasma {
+    class PackageMetadata;
+};
+
 class MetaDataEditor : public QWidget
 {
     Q_OBJECT
@@ -24,6 +28,7 @@ public slots:
 private:
     Ui::MetaDataEditor *view;
     QString filename;
+    Plasma::PackageMetadata *metadata;
 };
 
 #endif // METADATAEDITOR__H
