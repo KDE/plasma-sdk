@@ -6,6 +6,7 @@ include(KDE4Defaults)
 set (PlasMate_SRC
     main.cpp
     mainwindow.cpp
+    sidebar.cpp
     startpage.cpp
     packagemodel.cpp
     )
