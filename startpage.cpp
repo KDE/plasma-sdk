@@ -22,6 +22,9 @@
 #include <KPushButton>
 #include <KSeparator>
 #include <KUrlRequester>
+#include <KStandardDirs>
+
+#include <Plasma/PackageMetadata>
 
 #include "startpage.h"
 #include "mainwindow.h"
@@ -40,7 +43,11 @@ void StartPage::setupWidgets()
     ui = new Ui::StartPage;
     ui->setupUi(this);
     
-
+    // Enforce the security restriction from package.cpp in the input field
+    QRegExpValidator *pluginname_validator = new QRegExpValidator(ui->projectName);
+    QRegExp validatePluginName("^[\\w-\\.]+$"); // Only allow letters, numbers, underscore and period.
+    pluginname_validator->setRegExp(validatePluginName);
+    
     connect(ui->recentProjects, SIGNAL(clicked(const QModelIndex)),
             this, SLOT(emitProjectSelected(const QModelIndex)));
     connect(ui->contentTypes, SIGNAL(clicked(const QModelIndex)),
@@ -67,7 +74,8 @@ void StartPage::refreshRecentProjectsList()
     QList<KUrl> recentFiles = m_parent->recentProjects();
     
     for (int i = 0; i < recentFiles.size(); i++) {
-        QString project = recentFiles.at(i).directory();
+        Plasma::PackageMetadata metadata(recentFiles.at(i).path());
+        QString project = metadata.name();
         kDebug() << project;
         QListWidgetItem *item = new QListWidgetItem(project);
         item->setData(FullPathRole, project);
@@ -77,7 +85,35 @@ void StartPage::refreshRecentProjectsList()
 
 void StartPage::createNewProject()
 {
+    Plasma::PackageMetadata *metadata = new Plasma::PackageMetadata;
     
+    QString filename = KStandardDirs::locateLocal("appdata", ui->projectName->text().toLower() + "/metadata.desktop");
+
+    metadata->setName(ui->projectName->text());
+
+    if (ui->contentTypes->currentRow() == 0) {
+        metadata->setServiceType("Plasma/Applet");
+    } else if (ui->contentTypes->currentRow() == 1) {
+        metadata->setServiceType("Plasma/DataEngine");
+    } else if (ui->contentTypes->currentRow() == 2) {
+        metadata->setServiceType("Plasma/Theme");
+    } else if (ui->contentTypes->currentRow() == 3) {
+        metadata->setServiceType("Plasma/Runner");
+    }
+
+// TODO
+//     metadata->setPluginName( view->pluginname_edit->text() );
+
+// TODO: Fill with KUser, default to GPL
+//     metadata->setAuthor( view->author_edit->text() );
+//     metadata->setEmail( view->email_edit->text() );
+//     metadata->setLicense( view->license_edit->text() );
+
+    metadata->write(filename);
+    
+    KUrl url = filename;
+    
+    emit projectSelected(url);
 }
 
 void StartPage::emitProjectSelected(const QModelIndex &index)
