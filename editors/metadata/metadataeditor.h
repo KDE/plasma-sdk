@@ -34,6 +34,7 @@ private:
     QString filename;
     Plasma::PackageMetadata *metadata;
     QStringList apis;
+    QStringList categories;
 };
 
 #endif // METADATAEDITOR__H
