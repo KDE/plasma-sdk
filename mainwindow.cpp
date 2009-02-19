@@ -24,6 +24,7 @@
 #include <KStandardAction>
 #include <KUrl>
 #include <KListWidget>
+#include <KActionCollection>
 #include <KParts/Part>
 
 #include "startpage.h"
@@ -32,21 +33,39 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : KParts::MainWindow(parent, 0)
+    : KParts::MainWindow(parent, 0),
     m_factory(0),
     m_part(0),
     oldTab(0) // we start from startPage
 {    
-   createMenus();
-    
-    m_factory = 0;
-    m_part = 0;
-    
-    m_startPage = new StartPage(this);
-    connect(m_startPage, SIGNAL(projectSelected(QString)), this, SLOT(loadProject(QString)));
-    setCentralWidget(m_startPage);
-
     setXMLFile("plasmateui.rc");
+    createMenus();
+    
+        // this routine will find and load our Part.  
+    m_factory = KLibLoader::self()->factory("katepart");
+    if (m_factory)
+    {
+        // now that the Part is loaded, we cast it to a Part to get
+        // our hands on it
+        m_part = static_cast<KParts::ReadWritePart *>
+                 (m_factory->create(this, "KatePart" ));
+ 
+        if (m_part)
+        {
+            // tell the KParts::MainWindow that this is indeed
+            // the main widget
+            setCentralWidget(m_part->widget());
+ 
+            setupGUI(ToolBar | Keys | StatusBar | Save);
+ 
+            // and integrate the part's GUI with the shell's
+            createGUI(m_part);
+        }
+    }
+    
+//     m_startPage = new StartPage(this);
+//     connect(m_startPage, SIGNAL(projectSelected(QString)), this, SLOT(loadProject(QString)));
+//     setCentralWidget(m_startPage);
 }
 
 MainWindow::~MainWindow()
@@ -56,13 +75,30 @@ MainWindow::~MainWindow()
 
 void MainWindow::createMenus()
 {
+    KStandardAction::open(this, SLOT(fileOpen()), 
+        actionCollection());
+    KStandardAction::quit(qApp, SLOT(closeAllWindows()),
+        actionCollection());
+    
+    
+    
     //FIXME: should be using XMLGUI for this
-    KMenu *file = new KMenu("File", this);
+    
+//       KAction* clearAction = new KAction(this);
+//   clearAction->setText(i18n("Clear"));
+//   clearAction->setIcon(KIcon("document-new"));
+//   clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
+//   actionCollection()->addAction("clear", clearAction);
+    
+//     KMenu *file = new KMenu("File", this);
 
-    file->addAction(KStandardAction::quit(this, SLOT(quit()), file));
+//     file->addAction(KStandardAction::quit(this, SLOT(quit()), actionCollection()));
+//     KStandardAction::quit(this, SLOT(quit()), actionCollection());
 
-    menuBar()->addMenu(file);
-    menuBar()->addMenu(helpMenu());
+//     menuBar()->addMenu(file);
+//     menuBar()->addMenu(helpMenu());
+
+    setupGUI();
 }
 
 void MainWindow::createDockWidgets()
@@ -119,41 +155,34 @@ void MainWindow::changeTab(int tab)
         m_startPage = new StartPage(this);
         setCentralWidget(m_startPage);
     } else if (tab == 1) {
-        kDebug() << "tab 1";
-        kDebug() << m_factory;
-        kDebug() << "and m_part";
-//         kDebug() << m_part;
-
-        if (!m_factory) {
-            m_factory = KLibLoader::self()->factory("katepart");
-        }
-        m_part = 0;
-        if (m_factory && !m_part) {
-            kDebug() << "babla";
-            m_part = static_cast<KParts::ReadWritePart *>(m_factory->create(this, "KatePart"));
-            if (m_part) {
-                kDebug() << "if mpart";
-                setCentralWidget(m_part->widget());
-                kDebug() << "set";
-//                 setupGUI(ToolBar | Keys | StatusBar | Save);
-                kDebug() << "setup or create?!;";
-                //createGUI(m_part);
-                kDebug() << "created";
-            } 
-        }
-        
-            if (m_part) {
-                    // tell the KParts::MainWindow that this is indeed
-                    // the main widget
-                setCentralWidget(m_part->widget());
-                kDebug() << "setCentralWidget i said";
-//                     m_part->widget()->show();
-        
-//                     setupGUI();
-        
-                    // and integrate the part's GUI with the shell's
-                createGUI(m_part);
-            }
+//         kDebug() << "tab 1";
+//         kDebug() << m_factory;
+//         kDebug() << "and m_part";
+// //         kDebug() << m_part;
+// 
+//         if (!m_factory) {
+//             m_factory = KLibLoader::self()->factory("katepart");
+//         }
+//         m_part = 0;
+//         if (m_factory && !m_part) {
+//             kDebug() << "babla";
+//             m_part = static_cast<KParts::ReadWritePart *>(m_factory->create(this, "KatePart"));
+//             if (m_part) {
+//                 kDebug() << "if mpart";
+//                 setCentralWidget(m_part->widget());
+//                 kDebug() << "set";
+// //                 setupGUI(ToolBar | Keys | StatusBar | Save);
+//                 kDebug() << "setup or create?!;";
+//                 //createGUI(m_part);
+//                 kDebug() << "created";
+//             } 
+//         }
+//         if (m_part) {
+//             setCentralWidget(m_part->widget());
+//             kDebug() << "setCentralWidget i said";
+// //             setupGUI();
+//             createGUI(m_part);
+//         }
     } else if (tab == 2) {
         QLabel *l = new QLabel(i18n("Publish widget will go here!"));
         setCentralWidget(l);
