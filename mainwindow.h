@@ -35,10 +35,10 @@ class MainWindow : public KParts::MainWindow
         ~MainWindow();
 
         QStringList recentProjects();
-        
+
     public Q_SLOTS:
         void quit();
-        
+
         void changeTab(int tab);
         void loadProject(const QString &name);
 
@@ -47,14 +47,13 @@ class MainWindow : public KParts::MainWindow
         void showKatePart();
         void hideKatePart();
         void createDockWidgets();
-        
+
         StartPage *m_startPage;
-        QDockWidget *workflow;
-//         KListWidget *sidebar;
-        Sidebar *sidebar;
+        QDockWidget *m_workflow;
+        Sidebar *m_sidebar;
         KLibFactory *m_factory;
         KParts::ReadWritePart *m_part;
-        int oldTab;
+        int m_oldTab;
 };
 
 #endif // MAINWINDOW_H

@@ -34,15 +34,15 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : KParts::MainWindow(parent, 0),
-    m_factory(0),
-    sidebar(0),
-    workflow(0),
-    m_part(0),
-    oldTab(0) // we start from startPage
-{    
+      m_workflow(0),
+      m_sidebar(0),
+      m_factory(0),
+      m_part(0),
+      m_oldTab(0) // we start from startPage
+{
     setXMLFile("plasmateui.rc");
     createMenus();
-       
+
     m_startPage = new StartPage(this);
     connect(m_startPage, SIGNAL(projectSelected(QString)), this, SLOT(loadProject(QString)));
     setCentralWidget(m_startPage);
@@ -59,8 +59,8 @@ MainWindow::~MainWindow()
         delete m_part;
     }
     
-    delete sidebar;
-    delete workflow;
+    delete m_sidebar;
+    delete m_workflow;
 }
 
 void MainWindow::createMenus()
@@ -72,23 +72,23 @@ void MainWindow::createMenus()
 
 void MainWindow::createDockWidgets()
 {
-    workflow = new QDockWidget(i18n("Workflow"), this);
+    m_workflow = new QDockWidget(i18n("Workflow"), this);
     
-    sidebar = new Sidebar(workflow);
+    m_sidebar = new Sidebar(m_workflow);
     
-    sidebar->addItem(KIcon("go-home"), i18n("Start page"));
-    sidebar->addItem(KIcon("accessories-text-editor"), i18n("Edit"));
-    sidebar->addItem(KIcon("krfb"), i18n("Publish"));
-    sidebar->addItem(KIcon("help-contents"), i18n("Documentation"));
-    sidebar->addItem(KIcon("system-run"), i18n("Preview"));
+    m_sidebar->addItem(KIcon("go-home"), i18n("Start page"));
+    m_sidebar->addItem(KIcon("accessories-text-editor"), i18n("Edit"));
+    m_sidebar->addItem(KIcon("krfb"), i18n("Publish"));
+    m_sidebar->addItem(KIcon("help-contents"), i18n("Documentation"));
+    m_sidebar->addItem(KIcon("system-run"), i18n("Preview"));
     
-    workflow->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
+    m_workflow->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
         
-    connect(sidebar, SIGNAL(currentIndexChanged(int)),
+    connect(m_sidebar, SIGNAL(currentIndexChanged(int)),
             this, SLOT(changeTab(int)));
     
-    workflow->setWidget(sidebar);
-    addDockWidget(Qt::LeftDockWidgetArea, workflow);
+    m_workflow->setWidget(m_sidebar);
+    addDockWidget(Qt::LeftDockWidgetArea, m_workflow);
 }
 
 void MainWindow::quit()
@@ -123,21 +123,21 @@ void MainWindow::hideKatePart()
 
 void MainWindow::changeTab(int tab)
 {
-//     kDebug() << "Clicked sidebar item number" << tab;
-    
-    if (tab == oldTab) { // user clicked on the current tab 
+//     kDebug() << "Clicked m_sidebar item number" << tab;
+
+    if (tab == m_oldTab) { // user clicked on the current tab 
         if (tab == 0) {
             m_startPage->resetStatus();
-        }   
+        }
         return;
     }
-    
-    if (oldTab == 1) {
+
+    if (m_oldTab == 1) {
         hideKatePart();
     } else {
         centralWidget()->deleteLater();
     }
-    
+
     if (tab == 0) {
         m_startPage = new StartPage(this);
         setCentralWidget(m_startPage);
@@ -153,8 +153,8 @@ void MainWindow::changeTab(int tab)
         QLabel *l = new QLabel(i18n("Preview widget will go here!"));
         setCentralWidget(l);
     }
-    
-    oldTab = tab;
+
+   m_oldTab = tab;
 }
 
 void MainWindow::loadProject(const QString &name)
@@ -176,7 +176,7 @@ void MainWindow::loadProject(const QString &name)
         recentFiles.prepend(name);
     }
     
-    kDebug() << "Writing the following sidebar of recent files to the config:" << recentFiles;
+    kDebug() << "Writing the following m_sidebar of recent files to the config:" << recentFiles;
     
     cg.writeEntry("recentFiles", recentFiles);
     
@@ -184,7 +184,7 @@ void MainWindow::loadProject(const QString &name)
     
     // Load the needed widgets, switch to page 1 (edit)...
     createDockWidgets();
-    sidebar->setCurrentIndex(1);
+    m_sidebar->setCurrentIndex(1);
 }
 
 QStringList MainWindow::recentProjects() // TODO Limit to 5?
