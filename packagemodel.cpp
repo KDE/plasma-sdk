@@ -6,6 +6,7 @@
 #include <QFileInfo>
 
 #include <KDirWatch>
+#include <KIcon>
 
 #include <Plasma/Package>
 
@@ -80,10 +81,16 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
     const char *key = static_cast<const char *>(index.internalPointer());
     if (key) {
         QStringList l = m_files.value(key);
-        if (index.row() < l.count()) {
+        if (index.row() == 0) {
+            if (role == Qt::DisplayRole) {
+                return i18n("New");
+            } else if (role == Qt::DecorationRole) {
+                return KIcon("file-new");
+            }
+        } else if (index.row() <= l.count()) {
             //kDebug() << "got" << l.at(index.row());
             if (role == Qt::DisplayRole) {
-                return l.at(index.row());
+                return l.at(index.row() - 1);
             }
         }
     } else if (role == Qt::DisplayRole) {
@@ -212,7 +219,7 @@ void PackageModel::loadPackage()
         }
 
         //kDebug() << m_topEntries.indexOf(key) << key << "has" << files.count() << "files" << files;
-        beginInsertRows(createIndex(m_topEntries.indexOf(key), 0), 0, files.count() - 1);
+        beginInsertRows(createIndex(m_topEntries.indexOf(key), 0), 0, files.count());
         endInsertRows();
     }
 }
