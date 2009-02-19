@@ -11,7 +11,8 @@ set (PlasMate_SRC
     )
 
 kde4_add_ui_files (PlasMate_SRC
-    newproject.ui
+   mainwindow.ui
+   newproject.ui
 )
 
 include_directories(${KDE4_INCLUDES})
