@@ -18,6 +18,7 @@
 
 #include "commit.h"
 // #include "../hunks/ChangeSet.h"
+#include "vng.h"
 
 class CommitPrivate
 {

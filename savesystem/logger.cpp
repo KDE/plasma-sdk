@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Logger.h"
-#include "Logger_p.h"
+#include "logger.h"
+#include "logger_p.h"
 #include <QDebug>
 #include <QThread>
 

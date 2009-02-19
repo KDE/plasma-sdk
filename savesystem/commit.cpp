@@ -17,12 +17,30 @@
  */
 
 #include "commit.h"
-#include "commit_p.h"
+// #include "commit_p.h"
+#include "changeset.h"
 #include "gitrunner.h"
-#include "../Logger.h"
+#include "logger.h"
 
 #include <QProcess>
+#include <QDir>
 #include <QDebug>
+
+class CommitPrivate
+{
+public:
+    CommitPrivate() : ref(1), acceptance(Vng::Undecided) { }
+
+    Commit child;
+    QString author, committer, tree, treeIsm;
+    QByteArray logMessage;
+    QString resolvedTreeIsm; // same as treeIsm except converted to a sha1 if treeIsm is a ref
+    QList<QString> parentTreeisms;
+    QList<Commit> previousCommits;
+    ChangeSet changeSet;
+    int ref;
+    Vng::Acceptance acceptance;
+};
 
 static QDateTime timeFromSecondsSinceEpoch(const QString &string) {
     const int split = string.lastIndexOf('>');
@@ -165,7 +183,7 @@ QString Commit::commitTreeIsmSha1() const
     else
         arguments << "show-ref" << "--hash" << d->treeIsm;
     GitRunner runner(git, arguments);
-    AbstractCommand::ReturnCodes rc = runner.start(GitRunner::WaitForStandardOutput);
+    GitRunner::ReturnCodes rc = runner.start(GitRunner::WaitForStandardOutput);
     if (rc)
         return d->treeIsm;
 
@@ -251,7 +269,7 @@ void Commit::fillFromTreeIsm(const QString &treeIsm)
     QStringList arguments;
     arguments << "cat-file" << "commit" << treeIsm;
     GitRunner runner(git, arguments);
-    AbstractCommand::ReturnCodes rc = runner.start(GitRunner::WaitForStandardOutput);
+    GitRunner::ReturnCodes rc = runner.start(GitRunner::WaitForStandardOutput);
     if (rc) {
         Logger::info() << "Invalid treeIsm passed " << treeIsm << endl;
         delete d;
@@ -363,8 +381,8 @@ QList<File> Commit::allFiles(const QString &commitTreeIsm)
     QStringList arguments;
     arguments << "ls-tree" << "-r" << commitTreeIsm;
     GitRunner runner(git, arguments);
-    AbstractCommand::ReturnCodes rc = runner.start(GitRunner::WaitForStandardOutput);
-    if (rc != AbstractCommand::Ok)
+    GitRunner::ReturnCodes rc = runner.start(GitRunner::WaitForStandardOutput);
+    if (rc != GitRunner::Ok)
         return files;
     char buf[4000];
     while(true) {

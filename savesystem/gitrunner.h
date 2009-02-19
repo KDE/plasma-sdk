@@ -25,6 +25,7 @@
 
 class GitRunner
 {
+public:
     enum ReturnCodes {
         // note that Unix requires 'Ok' to be zero.
         Ok = 0,
@@ -39,7 +40,6 @@ class GitRunner
         GitTimedOut
     };
     
-public:
     enum WaitCondition {
         WaitForStandardOutput,
         WaitForStandardError,
