@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     : KMainWindow(parent)
 {   
     createMenus();
+    createDockWidgets();
     StartPage *startPage = new StartPage(this);
     connect(startPage, SIGNAL(projectSelected(KUrl)), this, SLOT(loadProject(KUrl)));
     setCentralWidget(startPage);
@@ -44,6 +45,11 @@ void MainWindow::createMenus()
 
     menuBar()->addMenu(file);
     menuBar()->addMenu(helpMenu());
+}
+
+void MainWindow::createDockWidgets()
+{
+    
 }
 
 void MainWindow::quit()

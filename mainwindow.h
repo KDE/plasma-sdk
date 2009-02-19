@@ -35,6 +35,7 @@ class MainWindow : public KMainWindow
 
     private:
         void createMenus();
+        void createWidgets();
 };
 
 #endif // MAINWINDOW_H
