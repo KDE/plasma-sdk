@@ -61,8 +61,11 @@ MainWindow::~MainWindow()
 {
     delete m_startPage;
     delete m_factory;
-    delete m_previewer;
-    delete m_previewerWidget;
+
+    if (m_previewer) {
+        delete m_previewer;
+        delete m_previewerWidget;
+    }
 }
 
 void MainWindow::createMenus()
