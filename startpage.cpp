@@ -38,6 +38,11 @@ StartPage::StartPage(MainWindow *parent) // TODO set a palette so it will look i
     refreshRecentProjectsList();
 }
 
+StartPage::~StartPage()
+{
+    delete ui;
+}
+
 void StartPage::setupWidgets()
 {
     ui = new Ui::StartPage;

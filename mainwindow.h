@@ -44,6 +44,8 @@ class MainWindow : public KParts::MainWindow
 
     private:
         void createMenus();
+        void showKatePart();
+        void hideKatePart();
         void createDockWidgets();
         
         StartPage *m_startPage;

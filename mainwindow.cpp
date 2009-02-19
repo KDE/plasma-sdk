@@ -42,62 +42,51 @@ MainWindow::MainWindow(QWidget *parent)
     createMenus();
     
         // this routine will find and load our Part.  
-    m_factory = KLibLoader::self()->factory("katepart");
-    if (m_factory)
-    {
-        // now that the Part is loaded, we cast it to a Part to get
-        // our hands on it
-        m_part = static_cast<KParts::ReadWritePart *>
-                 (m_factory->create(this, "KatePart" ));
- 
-        if (m_part)
-        {
-            // tell the KParts::MainWindow that this is indeed
-            // the main widget
-            setCentralWidget(m_part->widget());
- 
-            setupGUI(ToolBar | Keys | StatusBar | Save);
- 
-            // and integrate the part's GUI with the shell's
-            createGUI(m_part);
-        }
-    }
-    
-//     m_startPage = new StartPage(this);
-//     connect(m_startPage, SIGNAL(projectSelected(QString)), this, SLOT(loadProject(QString)));
-//     setCentralWidget(m_startPage);
+//     m_factory = KLibLoader::self()->factory("katepart");
+//     if (m_factory)
+//     {
+//         // now that the Part is loaded, we cast it to a Part to get
+//         // our hands on it
+//         m_part = static_cast<KParts::ReadWritePart *>
+//                  (m_factory->create(this, "KatePart" ));
+//  
+//         if (m_part)
+//         {
+//             // tell the KParts::MainWindow that this is indeed
+//             // the main widget
+//             setCentralWidget(m_part->widget());
+//  
+//             setupGUI(ToolBar | Keys | StatusBar | Save);
+//  
+//             // and integrate the part's GUI with the shell's
+//             createGUI(m_part);
+//         }
+//     }
+//     
+    m_startPage = new StartPage(this);
+    connect(m_startPage, SIGNAL(projectSelected(QString)), this, SLOT(loadProject(QString)));
+    setCentralWidget(m_startPage);
 }
 
 MainWindow::~MainWindow()
 {
-
+    delete m_startPage;
+    if (m_factory) {
+        delete m_factory;
+    }
+    
+    if (m_part) {
+        delete m_part;
+    }
+    
+    delete sidebar;
+    delete workflow;
 }
 
 void MainWindow::createMenus()
 {
-//     KStandardAction::open(this, SLOT(fileOpen()), 
-//         actionCollection());
-    KStandardAction::quit(qApp, SLOT(closeAllWindows()),
-        actionCollection());
-    
-    
-    
-    //FIXME: should be using XMLGUI for this
-    
-//       KAction* clearAction = new KAction(this);
-//   clearAction->setText(i18n("Clear"));
-//   clearAction->setIcon(KIcon("document-new"));
-//   clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
-//   actionCollection()->addAction("clear", clearAction);
-    
-//     KMenu *file = new KMenu("File", this);
-
-//     file->addAction(KStandardAction::quit(this, SLOT(quit()), actionCollection()));
-//     KStandardAction::quit(this, SLOT(quit()), actionCollection());
-
-//     menuBar()->addMenu(file);
+    KStandardAction::quit(this, SLOT(quit()), actionCollection());  
     menuBar()->addMenu(helpMenu());
-
     setupGUI();
 }
 
@@ -124,7 +113,46 @@ void MainWindow::createDockWidgets()
 
 void MainWindow::quit()
 {
-    deleteLater();
+    qApp->closeAllWindows();
+//     deleteLater();
+}
+
+void MainWindow::showKatePart()
+{
+    if (!m_factory) {
+        m_factory = KLibLoader::self()->factory("katepart");
+    
+        m_part = 0;
+        if (m_factory) {
+            kDebug() << "babla";
+            m_part = static_cast<KParts::ReadWritePart *>(m_factory->create(this, "KatePart"));
+            if (m_part) {
+                kDebug() << "if mpart";
+                setCentralWidget(m_part->widget());
+                kDebug() << "set";
+    //                 setupGUI(ToolBar | Keys | StatusBar | Save);
+                kDebug() << "setup or create?!;";
+                //createGUI(m_part);
+                kDebug() << "created";
+            } 
+        }
+    }
+    if (m_part) {
+        kDebug() << "we do have m_part";
+        m_part = static_cast<KParts::ReadWritePart *>(m_factory->create(this, "KatePart"));
+        setCentralWidget(m_part->widget());
+        kDebug() << "and it's not even crashy";
+//             kDebug() << "setCentralWidget i said";
+//             setupGUI();
+        createGUI(m_part);
+        kDebug() << "woo, we created a GUI";
+    }
+}
+
+void MainWindow::hideKatePart()
+{
+    m_part->closeUrl();
+    createGUI(0);
 }
 
 void MainWindow::changeTab(int tab)
@@ -140,14 +168,12 @@ void MainWindow::changeTab(int tab)
     }
     
 //     centralWidget()->deleteLater(); // clean
-//     if (oldTab == 1) {
-//         m_part->closeUrl();
-//     }
-    kDebug() << "here we are";
-    
-//     if (centralWidget() && m_part && centralWidget() != m_part->widget()) {
+    if (oldTab == 1) {
+        hideKatePart();
+    } else {
         centralWidget()->deleteLater();
-//     }
+    }
+//     kDebug() << "here we are";
     
     kDebug() << "deletalater";
     
@@ -155,34 +181,9 @@ void MainWindow::changeTab(int tab)
         m_startPage = new StartPage(this);
         setCentralWidget(m_startPage);
     } else if (tab == 1) {
-//         kDebug() << "tab 1";
-//         kDebug() << m_factory;
-//         kDebug() << "and m_part";
-// //         kDebug() << m_part;
-// 
-//         if (!m_factory) {
-//             m_factory = KLibLoader::self()->factory("katepart");
-//         }
-//         m_part = 0;
-//         if (m_factory && !m_part) {
-//             kDebug() << "babla";
-//             m_part = static_cast<KParts::ReadWritePart *>(m_factory->create(this, "KatePart"));
-//             if (m_part) {
-//                 kDebug() << "if mpart";
-//                 setCentralWidget(m_part->widget());
-//                 kDebug() << "set";
-// //                 setupGUI(ToolBar | Keys | StatusBar | Save);
-//                 kDebug() << "setup or create?!;";
-//                 //createGUI(m_part);
-//                 kDebug() << "created";
-//             } 
-//         }
-//         if (m_part) {
-//             setCentralWidget(m_part->widget());
-//             kDebug() << "setCentralWidget i said";
-// //             setupGUI();
-//             createGUI(m_part);
-//         }
+        kDebug() << "Show Kate Part!";
+        showKatePart();
+        kDebug() << "kate part without crashing, please";
     } else if (tab == 2) {
         QLabel *l = new QLabel(i18n("Publish widget will go here!"));
         setCentralWidget(l);
@@ -197,8 +198,8 @@ void MainWindow::changeTab(int tab)
     oldTab = tab;
 //     removeDockWidget(workflow);
 //     addDockWidget(Qt::LeftDockWidgetArea, workflow);
-    workflow->hide();
-    workflow->show();
+//     workflow->hide();
+//     workflow->show();
 }
 
 void MainWindow::loadProject(const QString &name)

@@ -36,6 +36,7 @@ class StartPage : public QWidget
     
     public:
         StartPage(MainWindow *parent);
+        ~StartPage();
         
         void resetStatus();
         
