@@ -131,6 +131,91 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <item>
+      <property name="text">
+       <string>Application Launchers</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Astronomy</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Date and Time</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Development Tools</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Education</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Environment and Weather</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Examples</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>File System</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Fun and Games</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Graphics</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Language</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Mapping</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Online Services</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>System Information</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Utilities</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Windows and Tasks</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Miscellaneous</string>
+      </property>
+     </item>
     </widget>
    </item>
    <item row="6" column="0">

@@ -26,6 +26,10 @@ MetaDataEditor::MetaDataEditor( QWidget *parent )
 
     connect( view->type_combo, SIGNAL(currentIndexChanged(int)), SLOT(serviceTypeChanged()) );
 
+    // This list contains the untranslated version of the categories so that we
+    // write the correct version into the package metadata. The list MUST be kept
+    // in sync with the one in metadata.ui. The list of allowed categories can be
+    // found at http://techbase.kde.org/Projects/Plasma/PIG#Category_Names
     categories << QString("Application Launchers")                                 
 	       << QString("Astronomy")                                             
 	       << QString("Date and Time")                                         
@@ -43,11 +47,6 @@ MetaDataEditor::MetaDataEditor( QWidget *parent )
 	       << QString("Utilities")
 	       << QString("Windows and Tasks")
 	       << QString("Miscellaneous");
-    QString category;
-    foreach( const QString &category, categories ) {
-	// TODO: i18n
-	view->category_combo->addItem( category );
-    }
 }
 
 MetaDataEditor::~MetaDataEditor()
