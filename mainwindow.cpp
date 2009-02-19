@@ -24,7 +24,7 @@ void MainWindow::createMenus()
     KMenu *file = new KMenu("File", this);
     
     QAction *quit;
-    quit = file->addAction(KIcon("file-quit"), "Quit", this, SLOT(quit()));
+    quit = file->addAction(KIcon("application-exit"), "Quit", this, SLOT(quit()));
     
     menuBar()->addMenu(file);
     menuBar()->addMenu(helpMenu());
