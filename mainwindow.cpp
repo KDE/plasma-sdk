@@ -175,7 +175,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     if (actualType.isEmpty()) {
         QDir dir(packagePath);
         if (dir.exists("metadata.desktop")) {
-            Plasma::PackageMetadata metadata;
+            Plasma::PackageMetadata metadata(packagePath + "metadata.desktop");
             actualType = metadata.serviceType();
         }
     }
