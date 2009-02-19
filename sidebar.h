@@ -22,7 +22,7 @@ class Sidebar : public QWidget
         Sidebar( QWidget *parent = 0 );
         ~Sidebar();
 
-        int addItem( QWidget *widget, const QIcon &icon, const QString &text );
+        int addItem( const QIcon &icon, const QString &text );
 
 //         void setMainWidget( QWidget *widget );
 //         void setBottomWidget( QWidget *widget );
@@ -39,8 +39,8 @@ class Sidebar : public QWidget
     signals:
         void currentIndexChanged(int);
         
-    private slots:
-        void itemClicked( QListWidgetItem *item );
+//     private slots:
+//         void itemClicked( QListWidgetItem *item );
 //         void splitterMoved( int pos, int index );
 //         void showTextToggled( bool );
 //         void iconSizeChanged( QAction *action );

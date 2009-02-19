@@ -21,6 +21,7 @@ namespace Ui {
 class KListWidget;
 class StartPage;
 class QStringList;
+class QDockWidget;
 
 class Sidebar;
 
@@ -45,6 +46,7 @@ class MainWindow : public KXmlGuiWindow
         void createDockWidgets();
         
         StartPage *m_startPage;
+        QDockWidget *workflow;
 //         KListWidget *sidebar;
         Sidebar *sidebar;
         int oldTab;

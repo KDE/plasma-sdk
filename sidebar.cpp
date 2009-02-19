@@ -36,23 +36,14 @@ static const int SidebarItemType = QListWidgetItem::UserType + 1;
 class SidebarItem : public QListWidgetItem
 {
     public:
-        SidebarItem( QWidget* w, const QIcon &icon, const QString &text )
-            : QListWidgetItem( 0, SidebarItemType ),
-              m_widget( w )
+        SidebarItem( const QIcon &icon, const QString &text )
+            : QListWidgetItem( 0, SidebarItemType )
         {
             setFlags( Qt::ItemIsSelectable | Qt::ItemIsEnabled );
             setIcon( icon );
             setText( text );
             setToolTip( text );
         }
-
-        QWidget* widget() const
-        {
-            return m_widget;
-        }
-
-    private:
-        QWidget *m_widget;
 };
 
 
@@ -414,16 +405,11 @@ Sidebar::~Sidebar()
     delete d;
 }
 
-int Sidebar::addItem( QWidget *widget, const QIcon &icon, const QString &text )
+int Sidebar::addItem( const QIcon &icon, const QString &text )
 {
-    if ( !widget )
-        return -1;
-
-    SidebarItem *newitem = new SidebarItem( widget, icon, text );
+    SidebarItem *newitem = new SidebarItem( icon, text );
     d->list->addItem( newitem );
     d->pages.append( newitem );
-    widget->setParent( d->stack );
-    d->stack->addWidget( widget );
     // updating the minimum height of the icon view, so all are visible with no scrolling
     d->adjustListSize( false, true );
     return d->pages.count() - 1;
@@ -471,7 +457,6 @@ void Sidebar::setCurrentIndex( int index )
     if ( index < 0 || index >= d->pages.count() || !isItemEnabled( index ) )
         return;
 
-    itemClicked( d->pages.at( index ) );
     QModelIndex modelindex = d->list->model()->index( index, 0 );
     d->list->setCurrentIndex( modelindex );
     d->list->selectionModel()->select( modelindex, QItemSelectionModel::ClearAndSelect );
@@ -506,36 +491,5 @@ bool Sidebar::isSidebarVisible() const
 {
     return !d->sideContainer->isHidden();
 }
-
-void Sidebar::itemClicked( QListWidgetItem *item )
-{
-    if ( !item )
-        return;
-
-    SidebarItem* sbItem = dynamic_cast< SidebarItem* >( item );
-    if ( !sbItem )
-        return;
-
-    if ( sbItem->widget() == d->stack->currentWidget() )
-    {
-        if ( d->sideContainer->isVisible() )
-        {
-            d->list->selectionModel()->clear();
-            d->sideContainer->hide();
-        }
-        else
-        {
-            d->sideContainer->show();
-        }
-    }
-    else
-    {
-        if ( d->sideContainer->isHidden() )
-            d->sideContainer->show();
-        d->stack->setCurrentWidget( sbItem->widget() );
-        d->sideTitle->setText( sbItem->toolTip() );
-    }
-}
-
 
 #include "sidebar.moc"

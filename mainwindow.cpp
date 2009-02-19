@@ -11,6 +11,9 @@
 #include <QListWidgetItem>
 #include <QModelIndex>
 #include <QLabel>
+#include <QGridLayout>
+
+#include <KTextEdit>
 
 #include <KAction>
 #include <KConfig>
@@ -56,16 +59,16 @@ void MainWindow::createMenus()
 
 void MainWindow::createDockWidgets()
 {
-    QDockWidget *workflow = new QDockWidget(i18n("Workflow"), this);
+    workflow = new QDockWidget(i18n("Workflow"), this);
     
     sidebar = new Sidebar(workflow);
     
 //     sidebar = new KListWidget(workflow);
-    sidebar->addItem(new QWidget(sidebar), KIcon("go-home"), i18n("Start page"));
-    sidebar->addItem(new QWidget(sidebar), KIcon("accessories-text-editor"), i18n("Edit"));
-    sidebar->addItem(new QWidget(sidebar), KIcon("krfb"), i18n("Publish"));
-    sidebar->addItem(new QWidget(sidebar), KIcon("help-contents"), i18n("Documentation"));
-    sidebar->addItem(new QWidget(sidebar), KIcon("system-run"), i18n("Preview"));
+    sidebar->addItem(KIcon("go-home"), i18n("Start page"));
+    sidebar->addItem(KIcon("accessories-text-editor"), i18n("Edit"));
+    sidebar->addItem(KIcon("krfb"), i18n("Publish"));
+    sidebar->addItem(KIcon("help-contents"), i18n("Documentation"));
+    sidebar->addItem(KIcon("system-run"), i18n("Preview"));
 //     sidebar->addItem(new QListWidgetItem(KIcon("go-home"), i18n("Start page")));
 //     sidebar->addItem(new QListWidgetItem(KIcon("accessories-text-editor"), i18n("Edit")));
 //     sidebar->addItem(new QListWidgetItem(KIcon("krfb"), i18n("Publish")));
@@ -77,12 +80,10 @@ void MainWindow::createDockWidgets()
 //     sidebar->setMovement(QListView::Static);
 //     sidebar->setResizeMode(QListView::Adjust);
     
-    
+    workflow->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
+        
     connect(sidebar, SIGNAL(currentIndexChanged(int)),
             this, SLOT(changeTab(int)));
-    
-//     SidebarDelegate *delegate = new SidebarDelegate(sidebar);
-//     sidebar->setItemDelegate(delegate);
     
     workflow->setWidget(sidebar);
     addDockWidget(Qt::LeftDockWidgetArea, workflow);
@@ -111,7 +112,8 @@ void MainWindow::changeTab(int tab)
         m_startPage = new StartPage(this);
         setCentralWidget(m_startPage);
     } else if (tab == 1) {
-        QLabel *l = new QLabel(i18n("Edit widget will go here!"));
+        KTextEdit *l = new KTextEdit(this);
+//         l->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         setCentralWidget(l);
     } else if (tab == 2) {
         QLabel *l = new QLabel(i18n("Publish widget will go here!"));
@@ -125,6 +127,10 @@ void MainWindow::changeTab(int tab)
     }
     
     oldTab = tab;
+//     removeDockWidget(workflow);
+//     addDockWidget(Qt::LeftDockWidgetArea, workflow);
+    workflow->hide();
+    workflow->show();
 }
 
 void MainWindow::loadProject(const QString &name)
