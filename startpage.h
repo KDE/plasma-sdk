@@ -50,7 +50,7 @@ class StartPage : public QWidget
         
     private:
         void createWidgets();
-        void populateRecentProjects();
+        void refreshRecentProjectsList();
         
         QLabel *m_createNewLabel, *m_openExistingLabel, *m_continueWorkingLabel;
         QComboBox *m_contentTypes;

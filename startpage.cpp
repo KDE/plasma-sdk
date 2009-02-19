@@ -29,7 +29,7 @@ StartPage::StartPage(MainWindow *parent)
     m_parent(parent)
 {
     createWidgets();
-    populateRecentProjects();
+    refreshRecentProjectsList();
 }
 
 void StartPage::createWidgets() // Make this a QGV? Use Plasma::Theme?
@@ -53,6 +53,7 @@ void StartPage::createWidgets() // Make this a QGV? Use Plasma::Theme?
     m_contentTypes->addItem(i18n("Theme"));
     m_newProjectWizardButton = new KPushButton(i18n("Create!"), this);
     m_newProjectWizardButton->setEnabled(false);
+    
     createNewLayout->addWidget(m_createNewLabel);
     createNewLayout->addWidget(m_contentTypes);
     createNewLayout->addWidget(m_newProjectWizardButton);
@@ -87,14 +88,16 @@ void StartPage::launchNewProjectWizard()
     emit(projectSelected(w.projectFile()));
 }
 
-void StartPage::populateRecentProjects()
+void StartPage::refreshRecentProjectsList()
 {
+    m_recentProjects->clear();
     QList<KUrl> recentFiles = m_parent->recentProjects();
     
     for (int i = 0; i < recentFiles.size(); i++) {
-        const KUrl u = recentFiles.at(i);
-        QListWidgetItem *item = new QListWidgetItem(u.fileName());
-        item->setData(FullPathRole, u);
+        QString project = recentFiles.at(i).directory();
+        kDebug() << project;
+        QListWidgetItem *item = new QListWidgetItem(project);
+        item->setData(FullPathRole, project);
         m_recentProjects->addItem(item);
     }
 }

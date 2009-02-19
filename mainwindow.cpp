@@ -64,7 +64,9 @@ void MainWindow::loadProject(const KUrl &url)
         recentFiles.removeAt(recentFiles.indexOf(url));
     }
     
-    recentFiles.prepend(url);
+    if (url.isValid()) {
+        recentFiles.prepend(url);
+    }
     
     kDebug() << "Writing the following list of recent files to the config:" << recentFiles.toStringList();
     
