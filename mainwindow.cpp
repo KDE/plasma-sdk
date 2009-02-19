@@ -155,7 +155,7 @@ void MainWindow::changeTab(int tab)
 //                     setupGUI();
                 kDebug() << "setup or create?!;";
                     // and integrate the part's GUI with the shell's
-                createGUI(m_part);
+                //createGUI(m_part);
                 kDebug() << "created";
             } 
         }
@@ -170,7 +170,7 @@ void MainWindow::changeTab(int tab)
 //                     setupGUI();
         
                     // and integrate the part's GUI with the shell's
-//                 createGUI(m_part);
+                createGUI(m_part);
             } 
 //             } 
 //         }
