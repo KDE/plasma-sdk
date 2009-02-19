@@ -85,6 +85,8 @@ void NewProjectWizard::accept()
     
     metadataFile.write(m);
     
+    
+    
     QWizard::accept();
 }
 

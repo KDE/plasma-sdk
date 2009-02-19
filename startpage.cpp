@@ -24,7 +24,7 @@
 #include "mainwindow.h"
 #include "newproject.h"
 
-StartPage::StartPage(MainWindow *parent)
+StartPage::StartPage(MainWindow *parent) // TODO set a palette so it will look identical with any color scheme.
     : QWidget(parent),
     m_parent(parent)
 {
@@ -34,9 +34,9 @@ StartPage::StartPage(MainWindow *parent)
 
 void StartPage::createWidgets() // Make this a QGV? Use Plasma::Theme?
 {
-    m_layout = new QHBoxLayout(this);
+    m_layout = new QVBoxLayout(this);
     
-    QVBoxLayout *continueWorkingLayout = new QVBoxLayout;
+    QHBoxLayout *continueWorkingLayout = new QHBoxLayout;
     m_continueWorkingLabel = new QLabel(i18n("Continue working on.."), this);
     m_recentProjects = new QListWidget(this);
     continueWorkingLayout->addWidget(m_continueWorkingLabel);
@@ -44,7 +44,7 @@ void StartPage::createWidgets() // Make this a QGV? Use Plasma::Theme?
     connect(m_recentProjects, SIGNAL(clicked(const QModelIndex)),
             this, SLOT(emitProjectSelected(const QModelIndex)));
     
-    QVBoxLayout *createNewLayout = new QVBoxLayout;
+    QHBoxLayout *createNewLayout = new QHBoxLayout;
     m_createNewLabel = new QLabel(i18n("Create new..."), this);
     m_contentTypes = new QComboBox(this);
     m_contentTypes->addItem(i18n("select project type..."));

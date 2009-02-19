@@ -16,7 +16,7 @@
 class QLabel;
 class QComboBox;
 class QListWidget;
-class QHBoxLayout;
+class QVBoxLayout;
 class QModelIndex;
 class KPushButton;
 class MainWindow;
@@ -56,7 +56,7 @@ class StartPage : public QWidget
         QComboBox *m_contentTypes;
         QListWidget *m_recentProjects;
         KPushButton *m_newProjectWizardButton;
-        QHBoxLayout *m_layout;
+        QVBoxLayout *m_layout;
         MainWindow *m_parent;
 };
 
