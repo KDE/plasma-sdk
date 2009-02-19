@@ -11,24 +11,41 @@
 #define STARTPAGE_H
 
 #include <QWidget>
+#include <KUrl>
 
 class QLabel;
 class QComboBox;
-class QListView;
+class QListWidget;
 class QHBoxLayout;
+class QModelIndex;
+class MainWindow;
 
 class StartPage : public QWidget
 {
+    Q_OBJECT
+    
+    enum Roles { 
+        FullPathRole = Qt::UserRole + 1
+    };
+    
     public:
-        StartPage(QWidget *parent);
+        StartPage(MainWindow *parent);
+    
+    signals:
+        void projectSelected(KUrl url);
+        
+    public Q_SLOTS:
+        void emitProjectSelected(const QModelIndex &);
         
     private:
         void createWidgets();
+        void populateRecentProjects();
         
         QLabel *m_createNewLabel, *m_openExistingLabel, *m_continueWorkingLabel;
         QComboBox *m_contentTypes;
-        QListView *m_recentProjects;
+        QListWidget *m_recentProjects;
         QHBoxLayout *m_layout;
+        MainWindow *m_parent;
 };
 
 #endif // STARTPAGE_H

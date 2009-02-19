@@ -25,8 +25,11 @@ class MainWindow : public KMainWindow
         MainWindow(QWidget *parent = 0);
         ~MainWindow();
 
+        QList<KUrl> recentFiles();
+        
     public Q_SLOTS:
         void quit();
+        void loadProject(const KUrl &url);
 
     private:
         void createMenus();

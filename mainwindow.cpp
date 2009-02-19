@@ -9,6 +9,8 @@
 
 #include <KMenu>
 #include <KMenuBar>
+#include <KConfig>
+#include <KConfigGroup>
 
 #include "startpage.h"
 
@@ -41,5 +43,33 @@ void MainWindow::createMenus()
 void MainWindow::quit()
 {
     deleteLater();
+}
+
+void MainWindow::loadProject(const KUrl &url)
+{
+    // Add it to the recent files first.
+    
+    KConfig c;
+    KConfigGroup cg = c.group("General");
+    QList<KUrl> recentFiles = recentFiles();
+    
+    if (recentFiles.contains(url));
+        recentFiles.removeAt(recentFiles.indexOf(url));
+    }
+    
+    recentFiles.prepend(url);
+    cg.writeEntry("recentFiles", recentFiles);
+    c.sync();
+    
+    // Load the needed widgets...
+}
+
+QList<KUrl> MainWindow::recentFiles() // TODO Limit to 5 
+{
+    KConfig c;
+    KConfigGroup cg = c.group("General");
+    QList<KUrl> l = cg.readEntry("recentFiles", QList<KUrl>());
+    
+    return l;
 }
 

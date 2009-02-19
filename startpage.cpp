@@ -9,18 +9,25 @@
 
 #include <QLabel>
 #include <QComboBox>
-#include <QListView>
+#include <QListWidget>
+#include <QListWidgetItem>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QModelIndex>
+#include <QAbstractItemModel>
 
 #include <KLocalizedString>
+#include <KDebug>
 
 #include "startpage.h"
+#include "mainwindow.h"
 
-StartPage::StartPage(QWidget *parent = 0)
-    : QWidget(parent)
+StartPage::StartPage(MainWindow *parent)
+    : QWidget(parent),
+    m_parent(parent)
 {
     createWidgets();
+    populateRecentProjects();
 }
 
 void StartPage::createWidgets() // Make this a QGV? Use Plasma::Theme?
@@ -29,9 +36,11 @@ void StartPage::createWidgets() // Make this a QGV? Use Plasma::Theme?
     
     QVBoxLayout *continueWorkingLayout = new QVBoxLayout;
     m_continueWorkingLabel = new QLabel(i18n("Continue working on.."), this);
-    m_recentProjects = new QListView(this);
+    m_recentProjects = new QListWidget(this);
     continueWorkingLayout->addWidget(m_continueWorkingLabel);
     continueWorkingLayout->addWidget(m_recentProjects);
+    connect(m_recentProjects, SIGNAL(clicked(const QModelIndex)),
+            this, SLOT(emitProjectSelected(const QModelIndex)));
     
     QVBoxLayout *createNewLayout = new QVBoxLayout;
     m_createNewLabel = new QLabel(i18n("Create new..."), this);
@@ -45,5 +54,20 @@ void StartPage::createWidgets() // Make this a QGV? Use Plasma::Theme?
     setLayout(m_layout);
 }
 
+void StartPage::populateRecentProjects()
+{
+    QList<KUrl> recentFiles = m_parent->recentFiles();
+    
+    for (int i = 0; i < recentFiles.size(); i++) {
+        const KUrl u = recentFiles.at(i);
+        QListWidgetItem *item = new QListWidgetItem(u.fileName());
+        item->setData(FullPathRole, u);
+        m_recentProjects->addItem(item);
+    }
+}
 
-
+void StartPage::emitProjectSelected(const QModelIndex &index)
+{
+    QAbstractItemModel *m = m_recentProjects->model();
+    kDebug() << m->data(index, FullPathRole);
+}
