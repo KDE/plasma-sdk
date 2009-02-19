@@ -11,8 +11,6 @@ MetaDataEditor::MetaDataEditor( QWidget *parent )
 {
     view = new Ui::MetaDataEditor;
     view->setupUi(this);
-
-    connect( view->write_button, SIGNAL(clicked()), this, SLOT(writeFile()) );
 }
 
 MetaDataEditor::~MetaDataEditor()
@@ -34,7 +32,18 @@ void MetaDataEditor::readFile()
     view->name_edit->setText( desktopFile.readName() );
     view->comment_edit->setText( desktopFile.readComment() );
     view->icon_edit->setText( desktopFile.readIcon() );
-    //type
+
+    QString serviceType = desktopGroup.readEntry("X-KDE-ServiceTypes");
+    if ( serviceType == QString("Plasma/Applet") )
+	view->type_combo->setCurrentIndex(0);
+    else if ( serviceType == QString("Plasma/DataEngine") )
+	view->type_combo->setCurrentIndex(1);
+    else if ( serviceType == QString("Plasma/Theme") )
+	view->type_combo->setCurrentIndex(2);
+    else {
+	kWarning() << "Unknown service type" << serviceType;
+    }
+
     view->library_edit->setText( desktopGroup.readEntry("X-KDE-Library") );
     view->version_edit->setText( desktopGroup.readEntry("X-KDE-PluginInfo-Version") );
     view->website_edit->setText( desktopGroup.readEntry("X-KDE-PluginInfo-Website") );
@@ -50,7 +59,14 @@ void MetaDataEditor::writeFile()
 
     desktopGroup.writeEntry( "Name", view->name_edit->text() );
     desktopGroup.writeEntry( "Comment", view->comment_edit->text() );
-    // desktopGroup.writeEntry( "Icon", view->version_edit->text() );
+    desktopGroup.writeEntry( "Icon", view->icon_edit->text() );
+
+    if ( view->type_combo->currentIndex() == 0 )
+	desktopGroup.writeEntry( "X-KDE-ServiceTypes", "Plasma/Applet" );
+    else if ( view->type_combo->currentIndex() == 1 )
+	desktopGroup.writeEntry( "X-KDE-ServiceTypes", "Plasma/DataEngine" );
+    else if ( view->type_combo->currentIndex() == 2 )
+	desktopGroup.writeEntry( "X-KDE-ServiceTypes", "Plasma/Theme" );
 
     desktopGroup.writeEntry( "X-KDE-Library", view->library_edit->text() );
     desktopGroup.writeEntry( "X-KDE-PluginInfo-Version", view->version_edit->text() );
