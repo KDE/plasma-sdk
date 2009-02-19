@@ -29,6 +29,7 @@ class Previewer : public QGraphicsView
 public:
     Previewer(QWidget *parent = 0);
     void addApplet(const QString &name, const QVariantList &args = QVariantList());
+    void clearApplets();
 
 private slots:
     void sceneRectChanged(const QRectF &rect);

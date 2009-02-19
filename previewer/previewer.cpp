@@ -44,6 +44,11 @@ void Previewer::addApplet(const QString &name, const QVariantList &args)
     resize(m_applet->preferredSize().toSize());
 }
 
+void Previewer::clearApplets()
+{
+    m_containment->clearApplets();
+}
+
 void Previewer::appletRemoved()
 {
     m_applet = 0;
