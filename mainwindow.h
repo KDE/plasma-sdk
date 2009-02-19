@@ -43,6 +43,12 @@ class MainWindow : public KParts::MainWindow
         void loadProject(const QString &name);
 
     private:
+        enum WorkflowTabs { StartPageTab = 0,
+                            EditTab,
+                            PublishTab,
+                            DocsTab,
+                            PreviewTab };
+
         void createMenus();
         void showKatePart();
         void hideKatePart();

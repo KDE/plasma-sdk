@@ -51,16 +51,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete m_startPage;
-    if (m_factory) {
-        delete m_factory;
-    }
-    
-    if (m_part) {
-        delete m_part;
-    }
-    
-    delete m_sidebar;
-    delete m_workflow;
+    delete m_factory;
 }
 
 void MainWindow::createMenus()
@@ -73,20 +64,18 @@ void MainWindow::createMenus()
 void MainWindow::createDockWidgets()
 {
     m_workflow = new QDockWidget(i18n("Workflow"), this);
-    
     m_sidebar = new Sidebar(m_workflow);
-    
+
     m_sidebar->addItem(KIcon("go-home"), i18n("Start page"));
     m_sidebar->addItem(KIcon("accessories-text-editor"), i18n("Edit"));
     m_sidebar->addItem(KIcon("krfb"), i18n("Publish"));
     m_sidebar->addItem(KIcon("help-contents"), i18n("Documentation"));
     m_sidebar->addItem(KIcon("system-run"), i18n("Preview"));
-    
+
     m_workflow->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
-        
     connect(m_sidebar, SIGNAL(currentIndexChanged(int)),
             this, SLOT(changeTab(int)));
-    
+
     m_workflow->setWidget(m_sidebar);
     addDockWidget(Qt::LeftDockWidgetArea, m_workflow);
 }
@@ -126,32 +115,44 @@ void MainWindow::changeTab(int tab)
 //     kDebug() << "Clicked m_sidebar item number" << tab;
 
     if (tab == m_oldTab) { // user clicked on the current tab 
-        if (tab == 0) {
+        if (tab == StartPageTab) {
             m_startPage->resetStatus();
         }
         return;
     }
 
-    if (m_oldTab == 1) {
+    if (m_oldTab == EditTab) {
         hideKatePart();
     } else {
         centralWidget()->deleteLater();
+        m_startPage = 0;
     }
 
-    if (tab == 0) {
-        m_startPage = new StartPage(this);
-        setCentralWidget(m_startPage);
-    } else if (tab == 1) {
-        showKatePart();
-    } else if (tab == 2) {
-        QLabel *l = new QLabel(i18n("Publish widget will go here!"));
-        setCentralWidget(l);
-    } else if (tab == 3) {
-        QLabel *l = new QLabel(i18n("Documentation widget will go here!"));
-        setCentralWidget(l);
-    } else if (tab == 4) {
-        QLabel *l = new QLabel(i18n("Preview widget will go here!"));
-        setCentralWidget(l);
+    switch (tab) {
+        case StartPageTab:
+            if (!m_startPage) {
+                m_startPage = new StartPage(this);
+            }
+            setCentralWidget(m_startPage);
+        break;
+        case EditTab:
+            showKatePart();
+        break;
+        case PublishTab: {
+            QLabel *l = new QLabel(i18n("Publish widget will go here!"));
+            setCentralWidget(l);
+        }
+        break;
+        case DocsTab: {
+            QLabel *l = new QLabel(i18n("Documentation widget will go here!"));
+            setCentralWidget(l);
+        }
+        break;
+        case PreviewTab: {
+            QLabel *l = new QLabel(i18n("Preview widget will go here!"));
+            setCentralWidget(l);
+        }
+        break;
     }
 
    m_oldTab = tab;
@@ -162,26 +163,25 @@ void MainWindow::loadProject(const QString &name)
     kDebug() << "Loading project named" << name << "...";
 
     // Add it to the recent files first.
-    
+
     QStringList recentFiles;
     KConfig c;
     KConfigGroup cg = c.group("General");
     recentFiles = recentProjects();
-    
+
     if (recentFiles.contains(name)) {
         recentFiles.removeAt(recentFiles.indexOf(name));
     }
-    
+
     if (!name.isEmpty()) {
         recentFiles.prepend(name);
     }
-    
+
     kDebug() << "Writing the following m_sidebar of recent files to the config:" << recentFiles;
-    
+
     cg.writeEntry("recentFiles", recentFiles);
-    
     c.sync();
-    
+
     // Load the needed widgets, switch to page 1 (edit)...
     createDockWidgets();
     m_sidebar->setCurrentIndex(1);
@@ -193,7 +193,7 @@ QStringList MainWindow::recentProjects() // TODO Limit to 5?
     KConfigGroup cg = c.group("General");
     QStringList l = cg.readEntry("recentFiles", QStringList());
 //     kDebug() << l.toStringList();
-    
+
     return l;
 }
 
