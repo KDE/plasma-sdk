@@ -29,17 +29,17 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="1427.7438"
-     inkscape:cy="810.5725"
+     inkscape:cx="389.8614"
+     inkscape:cy="634.38902"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
      inkscape:window-width="1270"
-     inkscape:window-height="806"
+     inkscape:window-height="773"
      inkscape:window-x="0"
-     inkscape:window-y="-36"
+     inkscape:window-y="0"
      showborder="false"
      inkscape:showpageshadow="false">
     <inkscape:grid
@@ -198,14 +198,6 @@
        y1="53.540611"
        x2="-9.098712"
        y2="49.158356" />
-    <filter
-       inkscape:collect="always"
-       id="filter3809">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="2.2684156"
-         id="feGaussianBlur3811" />
-    </filter>
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3722"
@@ -527,14 +519,6 @@
          sodipodi:rx="36"
          sodipodi:ry="36" />
     </clipPath>
-    <filter
-       id="filter7317"
-       inkscape:collect="always">
-      <feGaussianBlur
-         id="feGaussianBlur7319"
-         stdDeviation="2.8805897"
-         inkscape:collect="always" />
-    </filter>
     <linearGradient
        y2="82.680611"
        x2="309.21854"
@@ -620,14 +604,6 @@
          id="path3438"
          sodipodi:nodetypes="cssssssss" />
     </clipPath>
-    <filter
-       inkscape:collect="always"
-       id="filter3430">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.039810557"
-         id="feGaussianBlur3432" />
-    </filter>
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient7417"
@@ -1025,14 +1001,6 @@
        id="radialGradient3992"
        xlink:href="#linearGradient3984"
        inkscape:collect="always" />
-    <filter
-       id="filter4050"
-       inkscape:collect="always">
-      <feGaussianBlur
-         id="feGaussianBlur4052"
-         stdDeviation="1.405"
-         inkscape:collect="always" />
-    </filter>
     <inkscape:perspective
        sodipodi:type="inkscape:persp3d"
        inkscape:vp_x="0 : 526.18109 : 1"
@@ -7108,6 +7076,13 @@
        fx="180.79793"
        fy="164.86226"
        r="287.5" />
+    <inkscape:perspective
+       id="perspective6202"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
   </defs>
   <metadata
      id="metadata7">
@@ -7301,24 +7276,6 @@
        width="32"
        sodipodi:absref="/home/kde4/kdesvn/kdebase/runtime/pics/oxygen/32x32/actions/view-preview.png"
        xlink:href="/home/kde4/kdesvn/kdebase/runtime/pics/oxygen/32x32/actions/view-preview.png" />
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
-       x="294"
-       y="116.36218"
-       id="text37560"><tspan
-         sodipodi:role="line"
-         id="tspan37562"
-         x="294"
-         y="116.36218">Funky</tspan><tspan
-         sodipodi:role="line"
-         x="294"
-         y="166.36218"
-         id="tspan37564">Plasma Studio</tspan><tspan
-         sodipodi:role="line"
-         x="294"
-         y="216.36218"
-         id="tspan37566">logo. here.</tspan></text>
     <g
        transform="translate(0,225)"
        id="g37967">
@@ -8068,6 +8025,15 @@
        rx="4.7435379"
        ry="4.7426577" />
     <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect42104"
+       width="566"
+       height="518"
+       x="1193"
+       y="109.36218"
+       rx="5"
+       ry="5" />
+    <rect
        ry="11"
        rx="11"
        y="3.362175"
@@ -8393,7 +8359,7 @@
          id="tspan41748"
          sodipodi:role="line">Timeline</tspan></text>
     <image
-       y="601.36218"
+       y="597.36218"
        x="1055"
        id="image41955"
        height="32"
@@ -8404,15 +8370,15 @@
        xml:space="preserve"
        style="font-size:13.35373878px;font-style:normal;font-weight:normal;fill:#555753;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
        x="1095.7565"
-       y="615.08643"
+       y="611.08643"
        id="text41959"><tspan
          sodipodi:role="line"
          x="1095.7565"
-         y="615.08643"
+         y="611.08643"
          id="tspan41963">Browse</tspan><tspan
          sodipodi:role="line"
          x="1095.7565"
-         y="631.77863"
+         y="627.77863"
          id="tspan42094">API doc</tspan></text>
     <text
        id="text42096"
@@ -8434,5 +8400,25 @@
          id="tspan42102"
          x="1084.5171"
          y="44.636101">Help</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:13px;font-style:normal;font-weight:normal;fill:#2e3436;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="14.51709"
+       y="44.636101"
+       id="text42106"><tspan
+         sodipodi:role="line"
+         id="tspan42108"
+         x="14.51709"
+         y="44.636101">File</tspan></text>
+    <text
+       id="text42110"
+       y="44.636101"
+       x="48.51709"
+       style="font-size:13px;font-style:normal;font-weight:normal;fill:#2e3436;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         y="44.636101"
+         x="48.51709"
+         id="tspan42112"
+         sodipodi:role="line">Help</tspan></text>
   </g>
 </svg>
