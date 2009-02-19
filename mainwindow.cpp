@@ -78,6 +78,7 @@ void MainWindow::createMenus()
 void MainWindow::createDockWidgets()
 {
     m_workflow = new QDockWidget(i18n("Workflow"), this);
+    m_workflow->setObjectName("workflow");
     m_sidebar = new Sidebar(m_workflow);
 
     m_sidebar->addItem(KIcon("go-home"), i18n("Start page"));
@@ -93,6 +94,7 @@ void MainWindow::createDockWidgets()
     addDockWidget(Qt::LeftDockWidgetArea, m_workflow);
 
     m_previewerWidget = new QDockWidget(i18n("Previewer"), this);
+    m_previewerWidget->setObjectName("workflow");
     m_previewer = new Previewer();
     m_previewerWidget->setWidget(m_previewer);
     addDockWidget(Qt::BottomDockWidgetArea, m_previewerWidget);
