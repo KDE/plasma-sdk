@@ -31,6 +31,7 @@
 
 #include <Plasma/PackageMetadata>
 
+#include "editors/editpage.h"
 #include "mainwindow.h"
 #include "packagemodel.h"
 #include "sidebar.h"
@@ -132,11 +133,16 @@ void MainWindow::changeTab(int tab)
     m_startPage = 0;
 
     switch (tab) {
-        case StartPageTab:
+        case StartPageTab: {
             m_startPage = new StartPage(this);
             setCentralWidget(m_startPage);
+        }
         break;
-        case EditTab:
+        case EditTab: {
+            m_editPage = new EditPage(this);
+            m_editPage->setModel(m_model);
+            setCentralWidget(m_editPage);
+        }
         break;
         case PublishTab: {
             QLabel *l = new QLabel(i18n("Publish widget will go here!"));

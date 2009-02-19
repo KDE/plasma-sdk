@@ -24,6 +24,7 @@ class QStringList;
 
 class KListWidget;
 
+class EditPage;
 class PackageModel;
 class StartPage;
 class Sidebar;
@@ -60,6 +61,7 @@ class MainWindow : public KParts::MainWindow
         QDockWidget *m_workflow;
         Sidebar *m_sidebar;
         KLibFactory *m_factory;
+        EditPage *m_editPage;
         KParts::ReadWritePart *m_part;
         PackageModel *m_model;
         int m_oldTab;
