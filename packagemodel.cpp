@@ -109,7 +109,7 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
 QModelIndex PackageModel::index(int row, int column, const QModelIndex &parent) const
 {
     if (parent.isValid()) {
-        if (parent.row() >= m_topEntries.count()) {
+        if (parent.row() >= m_topEntries.count() || parent.parent().isValid()) {
             return QModelIndex();
         }
 
@@ -221,10 +221,6 @@ void PackageModel::loadPackage()
     foreach (const char *key, structure->directories()) {
         QStringList files = m_package->entryList(key);
         m_files[key] = files;
-
-        if (files.isEmpty()) {
-            continue;
-        }
 
         //kDebug() << m_topEntries.indexOf(key) << key << "has" << files.count() << "files" << files;
         beginInsertRows(createIndex(m_topEntries.indexOf(key), 0), 0, files.count());
