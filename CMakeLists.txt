@@ -15,6 +15,8 @@ kde4_add_ui_files (PlasMate_SRC
    newproject.ui
 )
 
+add_subdirectory( editors )
+
 include_directories(${KDE4_INCLUDES})
 
 kde4_add_executable(plasmate ${PlasMate_SRC})
