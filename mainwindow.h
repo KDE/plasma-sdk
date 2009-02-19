@@ -10,10 +10,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <kurl.h>
+
 #include <kmainwindow.h>
 
-namespace Ui
-{
+namespace Ui {
     class MainWindowClass;
 }
 
@@ -25,7 +26,7 @@ class MainWindow : public KMainWindow
         MainWindow(QWidget *parent = 0);
         ~MainWindow();
 
-        QList<KUrl> recentProjects();
+        KUrl::List recentProjects();
         
     public Q_SLOTS:
         void quit();

@@ -12,6 +12,7 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KDebug>
+#include <KUrl>
 
 #include "startpage.h"
 
@@ -54,7 +55,7 @@ void MainWindow::loadProject(const KUrl &url)
 
     // Add it to the recent files first.
     
-    QList<KUrl> recentFiles;
+    KUrl::List recentFiles;
     KConfig c;
     KConfigGroup cg = c.group("General");
     recentFiles = recentProjects();
@@ -64,17 +65,22 @@ void MainWindow::loadProject(const KUrl &url)
     }
     
     recentFiles.prepend(url);
-    cg.writeEntry("recentFiles", recentFiles);
+    
+    kDebug() << "Writing the following list of recent files to the config:" << recentFiles.toStringList();
+    
+    cg.writeEntry("recentFiles", recentFiles.toStringList());
+    
     c.sync();
     
     // Load the needed widgets...
 }
 
-QList<KUrl> MainWindow::recentProjects() // TODO Limit to 5 
+KUrl::List MainWindow::recentProjects() // TODO Limit to 5 
 {
     KConfig c;
     KConfigGroup cg = c.group("General");
-    QList<KUrl> l = cg.readEntry("recentFiles", QList<KUrl>());
+    KUrl::List l = cg.readEntry("recentFiles", QStringList());
+    kDebug() << l.toStringList();
     
     return l;
 }
