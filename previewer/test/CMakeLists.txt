@@ -1,5 +1,5 @@
 set(previewer_SRCS
-    previewer.cpp
+    ../previewer.cpp
     main.cpp
 )
 

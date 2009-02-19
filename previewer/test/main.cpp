@@ -24,7 +24,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "previewer.h"
+#include "../previewer.h"
 
 #include <QPixmapCache>
 

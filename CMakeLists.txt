@@ -9,6 +9,7 @@ set (PlasMate_SRC
     sidebar.cpp
     startpage.cpp
     packagemodel.cpp
+    previewer/previewer.cpp
     )
 
 kde4_add_ui_files (PlasMate_SRC
@@ -16,9 +17,10 @@ kde4_add_ui_files (PlasMate_SRC
    startpage.ui
 )
 
-add_subdirectory( editors )
-
 include_directories(${KDE4_INCLUDES})
+
+add_subdirectory( editors )
+add_subdirectory( previewer )
 
 kde4_add_executable(plasmate ${PlasMate_SRC})
 target_link_libraries(plasmate ${KDE4_KDEUI_LIBS} ${KDE4_KPARTS_LIBS} ${KDE4_KIO_LIBRARY} ${KDE4_PLASMA_LIBS})
