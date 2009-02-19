@@ -56,8 +56,11 @@ void MainWindow::createDockWidgets()
     QDockWidget *workflow = new QDockWidget(i18n("Workflow"), this);
     
     KListWidget *list = new KListWidget(workflow);
-    list->addItem(new QListWidgetItem(KIcon("plasma"), "test"));
-    list->addItem(new QListWidgetItem(KIcon("plasmagik"), "test2"));
+    list->addItem(new QListWidgetItem(KIcon("go-home"), i18n("Start page")));
+    list->addItem(new QListWidgetItem(KIcon("accessories-text-editor"), i18n("Edit")));
+    list->addItem(new QListWidgetItem(KIcon("krfb"), i18n("Publish")));
+    list->addItem(new QListWidgetItem(KIcon("help-contents"), i18n("Documentation")));
+    list->addItem(new QListWidgetItem(KIcon("system-run"), i18n("Preview")));
     list->setIconSize(QSize(48, 48));
     list->setViewMode(QListView::IconMode);
     list->setFlow(QListView::TopToBottom);
