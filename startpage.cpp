@@ -45,7 +45,7 @@ void StartPage::setupWidgets()
     
     // Enforce the security restriction from package.cpp in the input field
     QRegExpValidator *pluginname_validator = new QRegExpValidator(ui->projectName);
-    QRegExp validatePluginName("^[\\w-\\.]+$"); // Only allow letters, numbers, underscore and period.
+    QRegExp validatePluginName("^[\\w-\\.]+$"); // Only allow letters, numbers, underscore and period. FIXME doesn't work
     pluginname_validator->setRegExp(validatePluginName);
     
     connect(ui->recentProjects, SIGNAL(clicked(const QModelIndex)),
@@ -66,6 +66,13 @@ void StartPage::setupWidgets()
 void StartPage::changeStackedWidgetPage()
 {
     ui->layoutHackStackedWidget->setCurrentIndex(1);
+}
+
+void StartPage::resetStatus()
+{
+    kDebug() << "Reset status!";
+    ui->layoutHackStackedWidget->setCurrentIndex(0);
+    refreshRecentProjectsList();
 }
 
 void StartPage::refreshRecentProjectsList()

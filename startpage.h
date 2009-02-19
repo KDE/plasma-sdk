@@ -37,6 +37,8 @@ class StartPage : public QWidget
     public:
         StartPage(MainWindow *parent);
         
+        void resetStatus();
+        
         enum ProjectTypes {
             Theme           = 1,
             Plasmoid        = 2,

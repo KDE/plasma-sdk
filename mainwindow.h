@@ -14,9 +14,13 @@
 
 #include <kmainwindow.h>
 
+class QModelIndex;
+
 namespace Ui {
     class MainWindowClass;
 }
+
+class StartPage;
 
 class MainWindow : public KMainWindow
 {
@@ -31,11 +35,15 @@ class MainWindow : public KMainWindow
     public Q_SLOTS:
         void quit();
         
+        void changeTab(int tab);
         void loadProject(const KUrl &url);
 
     private:
         void createMenus();
         void createDockWidgets();
+        
+        StartPage *m_startPage;
+        int oldTab;
 };
 
 #endif // MAINWINDOW_H
