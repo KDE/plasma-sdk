@@ -60,7 +60,7 @@ void OverlayToolBox::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     m_background.paintFrame(painter);
 }
 
-void OverlayToolBox::addTool(QAction *action)
+void OverlayToolBox::addTool(KAction *action)
 {
     if (!action) {
         return;

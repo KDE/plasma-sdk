@@ -20,7 +20,7 @@
 #ifndef OVERLAYTOOLBOX_H
 #define OVERLAYTOOLBOX_H
 
-#include <QAction>
+#include <KAction>
 #include <QGraphicsWidget>
 #include <QGraphicsSceneResizeEvent>
 #include <QGraphicsSceneMouseEvent>
@@ -37,7 +37,7 @@ public:
     OverlayToolBox(QGraphicsWidget *parent = 0);
     ~OverlayToolBox();
 
-    void addTool(QAction *action);
+    void addTool(KAction *action);
 
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,

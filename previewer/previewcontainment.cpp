@@ -15,13 +15,12 @@
 #include "previewcontainment.h"
 #include "overlaytoolbox.h"
 
-#include <QAction>
 #include <QPainter>
 #include <QGraphicsLayoutItem>
 
 #include <Plasma/Label>
 #include <KIcon>
-#include <KDebug>
+#include <KAction>
 
 
 PreviewContainment::PreviewContainment(QObject *parent, const QVariantList &args)
@@ -70,11 +69,11 @@ void PreviewContainment::setupHeader()
     location = new Plasma::IconWidget(this);
 
     // add actions
-    QAction *action1 = new QAction(KIcon("list-add"), "", this);
+    KAction *action1 = new KAction(KIcon("list-add"), "", this);
     connect(action1, SIGNAL(triggered()), this, SLOT(changeFormFactor()));
     form->setAction(action1);
 
-    QAction *action2 = new QAction(KIcon("list-add"), "", this);
+    KAction *action2 = new KAction(KIcon("list-add"), "", this);
     connect(action2, SIGNAL(triggered()), this, SLOT(changeLocation()));
     location->setAction(action2);
 
@@ -94,15 +93,15 @@ void PreviewContainment::changeFormFactor()
     m_options->setGeometry(geometry());
     m_options->setZValue(100000000);
 
-    QAction *planar = new QAction(KIcon("user-desktop"),
+    KAction *planar = new KAction(KIcon("user-desktop"),
                                   i18n("Planar"), m_options);
-    QAction *mediacenter = new QAction(KIcon("user-desktop"),
+    KAction *mediacenter = new KAction(KIcon("user-desktop"),
                                        i18n("Media Center"), m_options);
-    QAction *horizontal = new QAction(KIcon("user-desktop"),
+    KAction *horizontal = new KAction(KIcon("user-desktop"),
                                       i18n("Horizontal"), m_options);
-    QAction *vertical = new QAction(KIcon("user-desktop"),
+    KAction *vertical = new KAction(KIcon("user-desktop"),
                                     i18n("Vertical"), m_options);
-    QAction *cancel = new QAction(KIcon("dialog-cancel"),
+    KAction *cancel = new KAction(KIcon("dialog-cancel"),
                                   i18n("Cancel"), m_options);
 
     m_options->addTool(planar);
@@ -154,21 +153,21 @@ void PreviewContainment::changeLocation()
     m_options->setGeometry(geometry());
     m_options->setZValue(100);
 
-    QAction *floating = new QAction(KIcon("user-trash"),
+    KAction *floating = new KAction(KIcon("user-trash"),
                                     i18n("Floating"), m_options);
-    QAction *desktop = new QAction(KIcon("user-trash"),
+    KAction *desktop = new KAction(KIcon("user-trash"),
                                    i18n("Desktop"), m_options);
-    QAction *fullscreen = new QAction(KIcon("user-trash"),
+    KAction *fullscreen = new KAction(KIcon("user-trash"),
                                       i18n("FullScreen"), m_options);
-    QAction *topEdge = new QAction(KIcon("user-trash"),
+    KAction *topEdge = new KAction(KIcon("user-trash"),
                                    i18n("Top Edge"), m_options);
-    QAction *bottomEdge = new QAction(KIcon("user-trash"),
+    KAction *bottomEdge = new KAction(KIcon("user-trash"),
                                       i18n("Bottom Edge"), m_options);
-    QAction *leftEdge = new QAction(KIcon("user-trash"),
+    KAction *leftEdge = new KAction(KIcon("user-trash"),
                                     i18n("Left Edge"), m_options);
-    QAction *rightEdge = new QAction(KIcon("user-trash"),
+    KAction *rightEdge = new KAction(KIcon("user-trash"),
                                      i18n("Right Edge"), m_options);
-    QAction *cancel = new QAction(KIcon("dialog-cancel"),
+    KAction *cancel = new KAction(KIcon("dialog-cancel"),
                                   i18n("Cancel"), m_options);
 
     m_options->addTool(floating);
