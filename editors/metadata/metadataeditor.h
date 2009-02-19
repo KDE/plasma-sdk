@@ -26,7 +26,7 @@ public slots:
     void writeFile();
 
 private slots:
-    void updateKnownApis();
+    void serviceTypeChanged();
 
 private:
     Ui::MetaDataEditor *view;

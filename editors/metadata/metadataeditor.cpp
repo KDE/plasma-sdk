@@ -24,7 +24,7 @@ MetaDataEditor::MetaDataEditor( QWidget *parent )
     view = new Ui::MetaDataEditor;
     view->setupUi(this);
 
-    connect( view->type_combo, SIGNAL(currentIndexChanged(int)), SLOT(updateKnownApis()) );
+    connect( view->type_combo, SIGNAL(currentIndexChanged(int)), SLOT(serviceTypeChanged()) );
 }
 
 MetaDataEditor::~MetaDataEditor()
@@ -41,6 +41,7 @@ void MetaDataEditor::readFile()
 {
     kDebug() << "readFile file" << filename;
 
+    delete metadata;
     metadata = new Plasma::PackageMetadata( filename );
 
     if ( !metadata->isValid() ) {
@@ -60,7 +61,6 @@ void MetaDataEditor::readFile()
     }
 
     view->pluginname_edit->setText( metadata->pluginName() );
-    updateKnownApis();
 
     QString serviceType = metadata->serviceType();
 
@@ -79,6 +79,7 @@ void MetaDataEditor::readFile()
     else {
         kWarning() << "Unknown service type" << serviceType;
     }
+    serviceTypeChanged();
 
     // Enforce the security restriction from package.cpp in the input field
     QRegExpValidator *pluginname_validator = new QRegExpValidator( view->pluginname_edit );
@@ -101,23 +102,27 @@ void MetaDataEditor::readFile()
     view->license_edit->setText( metadata->license() );
 }
 
-void MetaDataEditor::updateKnownApis()
+void MetaDataEditor::serviceTypeChanged()
 {
     Plasma::ComponentTypes currentType;
 
     switch( view->type_combo->currentIndex() ) {
 	case 0:
+	    metadata->setServiceType("Plasma/Applet");
 	    currentType = Plasma::AppletComponent;
 	    break;
 	case 1:
+	    metadata->setServiceType("Plasma/DataEngine");
 	    currentType = Plasma::DataEngineComponent;
 	    break;
 	case 2:
-	    // theme
+	    metadata->setServiceType("Plasma/Theme");
 	    view->api_combo->setEnabled(false);
 	    return;
 	    break;
 	case 3:
+	    metadata->setServiceType("Plasma/Runner");
+	    view->api_combo->setEnabled(false);
 	    currentType = Plasma::RunnerComponent;
 	    break;
 	default:
@@ -152,13 +157,6 @@ void MetaDataEditor::writeFile()
 
     //TODO
     //desktopGroup.writeEntry( "Icon", view->icon_edit->text() );
-
-    if ( view->type_combo->currentIndex() == 0 )
-	metadata->setServiceType("Plasma/Applet");
-    else if ( view->type_combo->currentIndex() == 1 )
-	metadata->setServiceType("Plasma/DataEngine");
-    else if ( view->type_combo->currentIndex() == 2 )
-	metadata->setServiceType("Plasma/Theme");
 
     metadata->setCategory( view->category_combo->currentText() );
     if ( view->api_combo->currentIndex() != view->api_combo->count()-1 )
