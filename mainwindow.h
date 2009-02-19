@@ -23,10 +23,13 @@ class MainWindow : public KMainWindow
 
     public:
         MainWindow(QWidget *parent = 0);
-//         ~MainWindow();
+        ~MainWindow();
+
+    public Q_SLOTS:
+        void quit();
 
     private:
-        Ui::MainWindowClass *ui;
+        void createMenus();
 };
 
 #endif // MAINWINDOW_H

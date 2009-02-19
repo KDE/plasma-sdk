@@ -7,16 +7,35 @@
   (at your option) any later version.
 */
 
+#include <KMenu>
+#include <KMenuBar>
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : KMainWindow(parent), ui(new Ui::MainWindowClass)
-{
-    ui->setupUi(this);
+    : KMainWindow(parent)
+{   
+    createMenus();
 }
 
-// MainWindow::~MainWindow()
-// {
-//     delete ui;
-// }
+void MainWindow::createMenus()
+{
+    KMenu *file = new KMenu("File", this);
+    
+    QAction *quit;
+    quit = file->addAction(KIcon("file-quit"), "Quit", this, SLOT(quit()));
+    
+    menuBar()->addMenu(file);
+    menuBar()->addMenu(helpMenu());
+}
+
+void MainWindow::quit()
+{
+    deleteLater();
+}
+
+MainWindow::~MainWindow()
+{
+
+}
