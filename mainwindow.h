@@ -29,6 +29,7 @@ class MainWindow : public KMainWindow
         
     public Q_SLOTS:
         void quit();
+        
         void loadProject(const KUrl &url);
 
     private:

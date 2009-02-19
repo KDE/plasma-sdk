@@ -43,9 +43,9 @@ class StartPage : public QWidget
     signals:
         void projectSelected(KUrl url);
         
-    public Q_SLOTS:
+    private Q_SLOTS:
         void emitProjectSelected(const QModelIndex &);
-        void launchNewProjectWizard(ProjectType type);
+        void launchNewProjectWizard();
         
     private:
         void createWidgets();
@@ -54,7 +54,7 @@ class StartPage : public QWidget
         QLabel *m_createNewLabel, *m_openExistingLabel, *m_continueWorkingLabel;
         QComboBox *m_contentTypes;
         QListWidget *m_recentProjects;
-        KPushButton *m_launchNewProjectWizard;
+        KPushButton *m_newProjectWizardButton;
         QHBoxLayout *m_layout;
         MainWindow *m_parent;
 };

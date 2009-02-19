@@ -18,9 +18,11 @@
 
 #include <KLocalizedString>
 #include <KDebug>
+#include <KPushButton>
 
 #include "startpage.h"
 #include "mainwindow.h"
+#include "ui_newproject.h"
 
 StartPage::StartPage(MainWindow *parent)
     : QWidget(parent),
@@ -45,8 +47,11 @@ void StartPage::createWidgets() // Make this a QGV? Use Plasma::Theme?
     QVBoxLayout *createNewLayout = new QVBoxLayout;
     m_createNewLabel = new QLabel(i18n("Create new..."), this);
     m_contentTypes = new QComboBox(this);
+    m_newProjectWizardButton = new KPushButton(i18n("Create!"), this);
     createNewLayout->addWidget(m_createNewLabel);
     createNewLayout->addWidget(m_contentTypes);
+    createNewLayout->addWidget(m_newProjectWizardButton);
+    connect(m_newProjectWizardButton, SIGNAL(clicked()), this, SLOT(launchNewProjectWizard()));
     
     m_layout->addItem(continueWorkingLayout);
     m_layout->addItem(createNewLayout);
@@ -54,9 +59,12 @@ void StartPage::createWidgets() // Make this a QGV? Use Plasma::Theme?
     setLayout(m_layout);
 }
 
-void StartPage::launchNewProjectWizard(ProjectType type)
+void StartPage::launchNewProjectWizard()
 {
-    
+    Ui::Wizard w;
+    QWizard d;
+    w.setupUi(&d);
+    d.exec();
 }
 
 void StartPage::populateRecentProjects()
