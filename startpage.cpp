@@ -79,6 +79,21 @@ void StartPage::refreshRecentProjectsList()
         kDebug() << project;
         QListWidgetItem *item = new QListWidgetItem(project);
         item->setData(FullPathRole, project);
+        
+        QString serviceType = metadata.serviceType();
+        
+        if ( serviceType == QString("Plasma/Applet") ) {
+            item->setIcon(KIcon("application-x-plasma"));
+        } else if ( serviceType == QString("Plasma/DataEngine") ) {
+            item->setIcon(KIcon("kexi"));
+        } else if ( serviceType == QString("Plasma/Theme") ) {
+            item->setIcon(KIcon("inkscape"));
+        } else if ( serviceType == QString("Plasma/Runner") ) {
+            item->setIcon(KIcon("system-run"));
+        } else {
+            kWarning() << "Unknown service type" << serviceType;
+        }
+        
         ui->recentProjects->addItem(item);
     }
 }
