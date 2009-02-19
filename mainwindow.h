@@ -17,7 +17,7 @@ class QModelIndex;
 
 namespace Ui {
     class MainWindowClass;
-};
+}
 
 class QDockWidget;
 class QStringList;

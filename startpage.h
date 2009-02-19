@@ -46,7 +46,7 @@ class StartPage : public QWidget
             DataEngine      = 4
         };
 
-        Q_DECLARE_FLAGS(ProjectType, ProjectTypes);
+        Q_DECLARE_FLAGS(ProjectType, ProjectTypes)
 
     signals:
         void projectSelected(const QString &name, const QString &type);

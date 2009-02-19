@@ -6,11 +6,11 @@
 
 namespace Ui {
     class MetaDataEditor;
-};
+}
 
 namespace Plasma {
     class PackageMetadata;
-};
+}
 
 class MetaDataEditor : public QWidget
 {

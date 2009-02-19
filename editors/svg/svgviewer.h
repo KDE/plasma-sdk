@@ -5,7 +5,7 @@
 
 namespace Plasma {
     class FrameSvg;
-};
+}
 
 class SvgViewer : public QWidget
 {
