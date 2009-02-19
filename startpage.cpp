@@ -75,10 +75,15 @@ void StartPage::refreshRecentProjectsList()
     
     for (int i = 0; i < recentFiles.size(); i++) {
         Plasma::PackageMetadata metadata(recentFiles.at(i).path());
-        QString project = metadata.name();
-        kDebug() << project;
-        QListWidgetItem *item = new QListWidgetItem(project);
-        item->setData(FullPathRole, project);
+        QString projectName = metadata.name();
+        
+        if (projectName.isEmpty()) {
+            continue;
+        }
+        
+        kDebug() << projectName;
+        QListWidgetItem *item = new QListWidgetItem(projectName);
+        item->setData(FullPathRole, projectName);
         
         QString serviceType = metadata.serviceType();
         
