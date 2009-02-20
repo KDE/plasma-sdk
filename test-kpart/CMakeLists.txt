@@ -13,6 +13,6 @@ kde4_add_executable(kparttut1 ${kparttut1_SRCS})
 target_link_libraries(kparttut1 ${KDE4_KDEUI_LIBS} ${KDE4_KPARTS_LIBS})
  
 ########### install files ###############
-install(TARGETS kparttut1 DESTINATION ${BIN_INSTALL_DIR} )
+install(TARGETS kparttut1 ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install( FILES kparttut1ui.rc 
     DESTINATION  ${DATA_INSTALL_DIR}/kparttut1 )
