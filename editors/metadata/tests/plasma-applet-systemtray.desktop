@@ -1,7 +1,14 @@
 [Desktop Entry]
 Comment=Access hidden applications minimized in the system tray
+Comment[fr]=Applications dont l'accès est caché, minimisées dans la boîte à miniatures
+Comment[sv]=Åtkomst av dolda program minimerade till systembrickan
+Comment[uk]=Доступ до прихованих програм, мінімізованих до системного лотка
 Encoding=UTF-8
 Name=System Tray
+Name[fr]=Boîte à miniature
+Name[ga]=Tráidire an Chórais
+Name[sv]=Systembricka
+Name[uk]=Системний лоток
 Type=Service
 X-KDE-Library=plasma_applet_systemtray
 X-KDE-ParentApp=

@@ -1,6 +1,10 @@
 [Desktop Entry]
 Name=StudioPreviewer
+Name[sv]=Förhandsgranskning i Studio
 Comment=Containment used to preview plasmoids on Plasma Studio
+Comment[fr]=Conteneur utilisé pour prévisualiser des plasmoïdes sur Plasma Studio
+Comment[sv]=En behållare för att förhandsgranska plasmoider i Plasma Studio
+Comment[uk]=Контейнер, який використовується для попереднього перегляду плазмоїдів у Plasma Studio
 Icon=user-desktop
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
