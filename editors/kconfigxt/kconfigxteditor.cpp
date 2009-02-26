@@ -24,6 +24,7 @@
 #include <KDebug>
 #include <KIcon>
 #include <QFile>
+#include <QHeaderView>
 
 class KConfigXtEditorPrivate
 {
