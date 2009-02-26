@@ -35,7 +35,34 @@ public:
     KConfigXtEditor(QWidget *parent = 0);
     ~KConfigXtEditor();
 
+    /**
+     * Sets filename to edit
+     */
+    void setFilename(const QString& filename);
+
+public slots:
+    /**
+     * Sets up editor widgets according to contents of config file
+     * specified with setFilename
+     */
+    void readFile();
+
+    /**
+     * Writes config values to config file specified with setFilename according
+     * to current editor widgets state
+     */
+    void writeFile();
+
+private:
+    /**
+     * Sets up editor widgets for a new file
+     * (e.g. creates a default group etc)
+     */
+    void setupWidgetsForNewFile();
+
+private:
     Ui::KConfigXtEditor *m_ui;
+    QString m_filename;
 };
 
 #endif

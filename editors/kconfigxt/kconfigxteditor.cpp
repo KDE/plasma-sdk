@@ -21,6 +21,9 @@
 #include "kconfigxteditor.h"
 #include "ui_kconfigxteditor.h"
 
+#include <KDebug>
+#include <QFile>
+
 KConfigXtEditor::KConfigXtEditor(QWidget *parent)
     : QWidget(parent)
 {
@@ -31,4 +34,34 @@ KConfigXtEditor::KConfigXtEditor(QWidget *parent)
 KConfigXtEditor::~KConfigXtEditor()
 {
     delete m_ui;
+}
+
+void KConfigXtEditor::setFilename(const QString& filename)
+{
+    m_filename = filename;
+}
+
+void KConfigXtEditor::readFile()
+{
+    if (m_filename.isEmpty()) {
+        kDebug() << "Empty filename given!";
+        return;
+    }
+
+    if (!QFile::exists(m_filename)) {
+        setupWidgetsForNewFile();
+        return;
+    }
+
+    // TODO: reading goes here
+}
+
+void KConfigXtEditor::writeFile()
+{
+    // TODO: writing goes here
+}
+
+void KConfigXtEditor::setupWidgetsForNewFile()
+{
+
 }
