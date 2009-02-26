@@ -22,10 +22,7 @@
 
 #include <QWidget>
 
-namespace Ui
-{
-    class KConfigXtEditor;
-}
+class KConfigXtEditorPrivate;
 
 class KConfigXtEditor : public QWidget
 {
@@ -53,6 +50,12 @@ public slots:
      */
     void writeFile();
 
+private slots:
+    /**
+     * Creates new kconfig group
+     */
+    void createNewGroup();
+
 private:
     /**
      * Sets up editor widgets for a new file
@@ -61,8 +64,7 @@ private:
     void setupWidgetsForNewFile();
 
 private:
-    Ui::KConfigXtEditor *m_ui;
-    QString m_filename;
+    KConfigXtEditorPrivate *const d;
 };
 
 #endif

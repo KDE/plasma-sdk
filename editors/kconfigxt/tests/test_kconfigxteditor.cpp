@@ -30,10 +30,8 @@ int main( int argc, char **argv )
         filename = QDir::currentPath() + '/' + argv[1];
     }
 
-    if (!filename.isEmpty()) {
-        ed->setFilename( filename );
-        ed->readFile();
-    }
+    ed->setFilename( filename );
+    ed->readFile();
 
     QObject::connect( save, SIGNAL(clicked()), ed, SLOT(writeFile()) );
 

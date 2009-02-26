@@ -22,33 +22,50 @@
 #include "ui_kconfigxteditor.h"
 
 #include <KDebug>
+#include <KIcon>
 #include <QFile>
 
-KConfigXtEditor::KConfigXtEditor(QWidget *parent)
-    : QWidget(parent)
+class KConfigXtEditorPrivate
 {
-    m_ui = new Ui::KConfigXtEditor;
-    m_ui->setupUi(this);
+public:
+    Ui::KConfigXtEditor *ui;
+    QString filename;
+    QStringList groups;
+};
+
+KConfigXtEditor::KConfigXtEditor(QWidget *parent)
+    : QWidget(parent), d(new KConfigXtEditorPrivate)
+{
+    d->ui = new Ui::KConfigXtEditor;
+    d->ui->setupUi(this);
+
+    d->ui->twKeyValues->header()->setResizeMode(QHeaderView::ResizeToContents);
+    d->ui->twGroups->header()->setResizeMode(QHeaderView::ResizeToContents);
+
+    d->ui->lblHintIcon->setPixmap(KIcon("dialog-information").pixmap(16,16));
+
+    connect(d->ui->pbAddGroup, SIGNAL(clicked()), SLOT(createNewGroup()));
 }
 
 KConfigXtEditor::~KConfigXtEditor()
 {
-    delete m_ui;
+    delete d->ui;
+    delete d;
 }
 
 void KConfigXtEditor::setFilename(const QString& filename)
 {
-    m_filename = filename;
+    d->filename = filename;
 }
 
 void KConfigXtEditor::readFile()
 {
-    if (m_filename.isEmpty()) {
+    if (d->filename.isEmpty()) {
         kDebug() << "Empty filename given!";
         return;
     }
 
-    if (!QFile::exists(m_filename)) {
+    if (!QFile::exists(d->filename)) {
         setupWidgetsForNewFile();
         return;
     }
@@ -63,5 +80,32 @@ void KConfigXtEditor::writeFile()
 
 void KConfigXtEditor::setupWidgetsForNewFile()
 {
+    // Add default group
+    createNewGroup();
+}
 
+void KConfigXtEditor::createNewGroup()
+{
+    QString newGroupName;
+    if (d->groups.isEmpty()) {
+        newGroupName = "General";
+    } else {
+        int counter = 1;
+        newGroupName = QString("Group %1").arg(counter);
+        while (d->groups.contains(newGroupName)) {
+            counter++;
+            newGroupName = QString("Group %1").arg(counter);
+        }
+    }
+
+    d->groups.append(newGroupName);
+
+    QTreeWidgetItem* item = new QTreeWidgetItem;
+    item->setText(0, newGroupName);
+    item->setFlags(item->flags() | Qt::ItemIsEditable);
+
+    d->ui->twGroups->addTopLevelItem(item);
+
+    d->ui->twGroups->setCurrentItem(item);
+    d->ui->twGroups->editItem(item);
 }
