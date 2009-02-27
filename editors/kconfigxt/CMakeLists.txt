@@ -4,7 +4,8 @@ find_package(KDE4)
 include(KDE4Defaults)
 
 set(kconfigxt_editor_SRCS
-    kconfigxteditor.cpp)
+    kconfigxteditor.cpp
+    kconfigxtparser.cpp)
 
 kde4_add_ui_files (kconfigxt_editor_SRCS
    kconfigxteditor.ui
@@ -18,6 +19,7 @@ target_link_libraries(plasmate_kconfigxt_editor ${KDE4_PLASMA_LIBS} ${KDE4_KIO_L
 
 set( testkconfigxt_SRCS tests/test_kconfigxteditor.cpp
      kconfigxteditor.cpp
+     kconfigxtparser.cpp
       )
 
 kde4_add_ui_files (testkconfigxt_SRCS
