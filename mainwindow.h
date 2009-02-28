@@ -19,6 +19,12 @@ namespace Ui {
     class MainWindowClass;
 }
 
+namespace KTextEditor {
+    class Document;
+    class View;
+}
+
+
 class QDockWidget;
 class QStringList;
 
@@ -66,9 +72,10 @@ class MainWindow : public KParts::MainWindow
         QDockWidget *m_previewerWidget;
         Previewer *m_previewer;
 
-        KLibFactory *m_factory;
+        KTextEditor::Document *m_doc;
+        KTextEditor::View *m_editorView;
+
         EditPage *m_editPage;
-        KParts::ReadWritePart *m_part;
         PackageModel *m_model;
         int m_oldTab;
 };

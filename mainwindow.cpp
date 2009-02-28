@@ -39,14 +39,21 @@
 #include "ui_mainwindow.h"
 #include "previewer/previewer.h"
 
+#include <ktexteditor/document.h>
+#include <ktexteditor/view.h>
+#include <ktexteditor/editor.h>
+#include <ktexteditor/editorchooser.h>
+
+
+
 MainWindow::MainWindow(QWidget *parent)
     : KParts::MainWindow(parent, 0),
       m_workflow(0),
       m_sidebar(0),
       m_previewer(0),
-      m_factory(0),
-      m_part(0),
       m_model(0),
+      m_editorView(0),
+      m_doc(0),
       m_oldTab(0) // we start from startPage
 {
     setXMLFile("plasmateui.rc");
@@ -61,7 +68,10 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete m_startPage;
-    delete m_factory;
+
+    if (m_editorView) {
+        delete m_editorView;
+    }
 
     if (m_previewer) {
         delete m_previewer;
@@ -111,34 +121,27 @@ void MainWindow::quit()
 
 void MainWindow::showEditor()
 {
-    if (!m_factory) {
-        m_factory = KLibLoader::self()->factory("katepart");
-
-        m_part = 0;
-        if (m_factory) {
-            m_part = static_cast<KParts::ReadWritePart *>(m_factory->create(this, "KatePart"));
-        }
-    }
-
-    if (m_part) {
-        m_part = static_cast<KParts::ReadWritePart *>(m_factory->create(this, "KatePart"));
-        setCentralWidget(m_part->widget());
-        createGUI(m_part);
+    if (!m_editorView) {
+        KTextEditor::Editor *editor = KTextEditor::EditorChooser::editor();
+        m_doc = editor->createDocument(0);
+        m_editorView = m_doc->createView(this);
+        setCentralWidget(m_editorView);
     }
 }
 
 void MainWindow::hideEditor()
 {
-    m_part->closeUrl();
-    m_part = 0;
-    createGUI(0);
+    delete m_editorView;
+    delete m_doc;
+
+    m_editorView = 0;
+    m_doc = 0;
 }
 
 void MainWindow::changeTab(int tab)
 {
-//     kDebug() << "Clicked m_sidebar item number" << tab;
 
-    if (tab == m_oldTab) { // user clicked on the current tab 
+    if (tab == m_oldTab) { // user clicked on the current tab
         if (tab == StartPageTab) {
             m_startPage->resetStatus();
         }
@@ -163,6 +166,7 @@ void MainWindow::changeTab(int tab)
         case PublishTab: {
             QLabel *l = new QLabel(i18n("Publish widget will go here!"), this);
             setCentralWidget(l);
+            showEditor();
         }
         break;
         case DocsTab: {

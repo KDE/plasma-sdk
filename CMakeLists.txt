@@ -25,7 +25,7 @@ add_subdirectory( previewer )
 add_subdirectory( savesystem )
 
 kde4_add_executable(plasmate ${PlasMate_SRC})
-target_link_libraries(plasmate ${KDE4_KDEUI_LIBS} ${KDE4_KPARTS_LIBS} ${KDE4_KIO_LIBRARY} ${KDE4_PLASMA_LIBS})
+target_link_libraries(plasmate ${KDE4_KDEUI_LIBS} ${KDE4_KTEXTEDITOR_LIBS} ${KDE4_KPARTS_LIBS} ${KDE4_KIO_LIBRARY} ${KDE4_PLASMA_LIBS})
 
 install(TARGETS plasmate ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES plasmateui.rc  DESTINATION ${DATA_INSTALL_DIR}/plasmate)
