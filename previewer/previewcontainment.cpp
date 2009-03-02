@@ -85,9 +85,7 @@ void PreviewContainment::setupHeader()
 
 void PreviewContainment::changeFormFactor()
 {
-    if (m_options) {
-        delete m_options;
-    }
+    delete m_options;
 
     m_options = new OverlayToolBox(this);
     m_options->setGeometry(geometry());
@@ -145,9 +143,7 @@ void PreviewContainment::verticalTriggered(bool)
 
 void PreviewContainment::changeLocation()
 {
-    if (m_options) {
-        delete m_options;
-    }
+    delete m_options;
 
     m_options = new OverlayToolBox(this);
     m_options->setGeometry(geometry());
