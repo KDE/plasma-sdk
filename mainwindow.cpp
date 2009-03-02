@@ -51,9 +51,9 @@ MainWindow::MainWindow(QWidget *parent)
       m_workflow(0),
       m_sidebar(0),
       m_previewer(0),
-      m_model(0),
-      m_editorView(0),
       m_doc(0),
+      m_editorView(0),
+      m_model(0),
       m_oldTab(0) // we start from startPage
 {
     setXMLFile("plasmateui.rc");
@@ -69,9 +69,7 @@ MainWindow::~MainWindow()
 {
     delete m_startPage;
 
-    if (m_editorView) {
-        delete m_editorView;
-    }
+    delete m_editorView;
 
     if (m_previewer) {
         delete m_previewer;
