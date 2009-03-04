@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Access hidden applications minimized in the system tray
+Comment[et]=Süsteemisalve minimeeritud peidetud rakenduste kasutamine
 Comment[fr]=Applications dont l'accès est caché, minimisées dans la boîte à miniatures
 Comment[pt]=Aceder às aplicações escondidas e minimizadas na bandeja do sistema
 Comment[pt_BR]=Aceder às aplicações escondidas e minimizadas na bandeja do sistema
@@ -7,8 +8,10 @@ Comment[sv]=Åtkomst av dolda program minimerade till systembrickan
 Comment[uk]=Доступ до прихованих програм, мінімізованих до системного лотка
 Encoding=UTF-8
 Name=System Tray
+Name[et]=Süsteemisalv
 Name[fr]=Boîte à miniature
 Name[ga]=Tráidire an Chórais
+Name[nds]=Paneel-Systeemafsnitt
 Name[pt]=Bandeja do Sistema
 Name[pt_BR]=Bandeja do Sistema
 Name[sv]=Systembricka

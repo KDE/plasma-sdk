@@ -1,7 +1,10 @@
 [Desktop Entry]
 Name=StudioPreviewer
+Name[et]=Stuudio eelvaatlus
+Name[nds]=Studio-Vöransicht
 Name[sv]=Förhandsgranskning i Studio
 Comment=Containment used to preview plasmoids on Plasma Studio
+Comment[et]=Konteiner, mis võimaldab plasmoide eelvaadelda Plasma stuudios
 Comment[fr]=Conteneur utilisé pour prévisualiser des plasmoïdes sur Plasma Studio
 Comment[pt]=Contentor usado para a antevisão de plasmóides no Plasma Studio
 Comment[pt_BR]=Contentor usado para a antevisão de plasmóides no Plasma Studio
