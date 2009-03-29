@@ -1,8 +1,10 @@
 [Desktop Entry]
 Comment=Access hidden applications minimized in the system tray
 Comment[de]=Ermöglicht den Zugriff auf Programme, die im Systemabschnitt der Kontrollleiste laufen.
+Comment[en_GB]=Access hidden applications minimised in the system tray
 Comment[et]=Süsteemisalve minimeeritud peidetud rakenduste kasutamine
 Comment[fr]=Applications dont l'accès est caché, minimisées dans la boîte à miniatures
+Comment[gl]=Acede a programas ocultos minimizados na bandexa do sistema
 Comment[pt]=Aceder às aplicações escondidas e minimizadas na bandeja do sistema
 Comment[pt_BR]=Aceder às aplicações escondidas e minimizadas na bandeja do sistema
 Comment[sv]=Åtkomst av dolda program minimerade till systembrickan
@@ -13,6 +15,7 @@ Name=System Tray
 Name[et]=Süsteemisalv
 Name[fr]=Boîte à miniature
 Name[ga]=Tráidire an Chórais
+Name[gl]=Bandexa do sistema
 Name[nds]=Paneel-Systeemafsnitt
 Name[pt]=Bandeja do Sistema
 Name[pt_BR]=Bandeja do Sistema
