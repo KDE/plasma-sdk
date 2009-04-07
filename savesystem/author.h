@@ -10,10 +10,13 @@
 #ifndef AUTHOR_H
 #define AUTHOR_H
  
-class QString;
+#include <QObject>
+#include <QString>
 
-class Author
+class Author : public QObject
 {
+    Q_OBJECT
+
     public:
         Author();
 
@@ -22,6 +25,10 @@ class Author
         
         void setEmail(const QString &email);
         QString email();
+        
+    private:
+        QString m_name;
+        QString m_email;
 };
  
 #endif // AUTHOR_H

@@ -9,11 +9,32 @@
 
 #include "author.h"
  
-Author::Author()
+Author::Author() : QObject(),
+    m_name(0),
+    m_email(0)
 {
-
 }
 
+void Author::setName(const QString &name)
+{
+    m_name = name;
+}
+
+
+QString Author::name()
+{
+    return m_name;
+}
+
+void Author::setEmail(const QString &email)
+{
+    m_email = email;
+}
+
+QString Author::email()
+{
+    return m_email;
+}
 
 
 
