@@ -12,6 +12,7 @@
 
 #include <KParts/MainWindow>
 #include <KLibLoader>
+#include <kservice.h>
 
 class QModelIndex;
 
@@ -53,6 +54,8 @@ class MainWindow : public KParts::MainWindow
 
         void changeTab(int tab);
         void loadProject(const QString &name, const QString &type);
+
+        void loadRequiredEditor(const KService::List offers);
 
     private:
         enum WorkflowTabs { StartPageTab = 0,

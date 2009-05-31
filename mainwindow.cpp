@@ -159,6 +159,7 @@ void MainWindow::changeTab(int tab)
             m_editPage = new EditPage(this);
             m_editPage->setModel(m_model);
             setCentralWidget(m_editPage);
+	    connect(m_editPage, SIGNAL(loadEditor(const KService::List offers)), this, SLOT(loadRequiredEditor(const KService::List offers)));
         }
         break;
         case PublishTab: {
@@ -175,6 +176,17 @@ void MainWindow::changeTab(int tab)
     }
 
    m_oldTab = tab;
+}
+
+void MainWindow::loadRequiredEditor(const KService::List offers)
+{
+    QWidget *newWidget = new QWidget(this);
+    
+    QStringList args;
+    QString error; // we should show this via debug if we fail
+    QWidget *part = offers.at(0)->createInstance(newWidget, args, error);
+
+    setCentralWidget(newWidget);
 }
 
 void MainWindow::loadProject(const QString &name, const QString &type)

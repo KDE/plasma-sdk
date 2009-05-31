@@ -85,6 +85,9 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         if (index.row() == 0) {
             if (role == Qt::DisplayRole) {
                 return i18n("New...");
+	    }
+	    if (role == MimeTypeRole) {
+                return m_package->structure()->mimetypes(key);
             } /* else if (role == Qt::DecorationRole) {
                 return KIcon("file-new");
             } */
@@ -93,6 +96,7 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
             int row = index.row() - 1;
 
             if (row < named.count()) {
+	      //kDebug() << m_package->structure()->name(named.at(row));
                 return m_package->structure()->name(named.at(row));
             }
 
