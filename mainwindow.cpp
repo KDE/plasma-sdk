@@ -180,11 +180,20 @@ void MainWindow::changeTab(int tab)
 
 void MainWindow::loadRequiredEditor(const KService::List offers)
 {
+    if (offers.isEmpty()) {
+        kDebug() << "No offers for editor, can not load.";
+        return;
+    }
+
     QWidget *newWidget = new QWidget(this);
-    
-    QStringList args;
+
+    QVariantList args;
     QString error; // we should show this via debug if we fail
-    QWidget *part = offers.at(0)->createInstance(newWidget, args, error);
+    QWidget *part = offers.at(0)->createInstance<QWidget>(newWidget, args, &error);
+
+    if (!part) {
+        kDebug() << "Failed to load editor:" << error;
+    }
 
     setCentralWidget(newWidget);
 }
