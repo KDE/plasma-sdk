@@ -159,7 +159,7 @@ void MainWindow::changeTab(int tab)
             m_editPage = new EditPage(this);
             m_editPage->setModel(m_model);
             setCentralWidget(m_editPage);
-	    connect(m_editPage, SIGNAL(loadEditor(const KService::List offers)), this, SLOT(loadRequiredEditor(const KService::List offers)));
+	    connect(m_editPage, SIGNAL(loadEditor(KService::List)), this, SLOT(loadRequiredEditor(const KService::List)));
         }
         break;
         case PublishTab: {
@@ -189,13 +189,16 @@ void MainWindow::loadRequiredEditor(const KService::List offers)
 
     QVariantList args;
     QString error; // we should show this via debug if we fail
-    QWidget *part = offers.at(0)->createInstance<QWidget>(newWidget, args, &error);
+    m_part = offers.at(0)->createInstance<KParts::Part>(newWidget, args, &error);
 
-    if (!part) {
+    if (!m_part) {
         kDebug() << "Failed to load editor:" << error;
     }
 
-    setCentralWidget(newWidget);
+    setCentralWidget(m_part->widget());
+ 
+    //Add the part's GUI
+    createGUI(m_part);
 }
 
 void MainWindow::loadProject(const QString &name, const QString &type)

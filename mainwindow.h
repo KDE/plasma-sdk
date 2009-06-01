@@ -81,6 +81,8 @@ class MainWindow : public KParts::MainWindow
         EditPage *m_editPage;
         PackageModel *m_model;
         int m_oldTab;
+	
+	KParts::Part *m_part;
 };
 
 #endif // MAINWINDOW_H
