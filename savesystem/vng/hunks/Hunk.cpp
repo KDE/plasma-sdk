@@ -251,12 +251,12 @@ QByteArray Hunk::Private::patchForAccepted(bool inverse)
         else {
             const int end = sh->start + sh->length;
             bool startOfLine = true;
-            bool skipLine;
+            bool skipLine = false;
             int lastLineStart = 0;
             for (int x = sh->start; x < end; x++) {
                 if (startOfLine) {
                     startOfLine = false;
-                    skipLine = myDiff[x] == '-';
+                    skipLine = (myDiff[x] == '-');
                     if (! skipLine) {
                         out.writeRawData(space, 1);
                         lastLineStart = x + 1;
@@ -285,7 +285,7 @@ QByteArray Hunk::Private::patchForAccepted(bool inverse)
         +" +"+ QString::number(lineNumber) +","+  QString::number(linesAfter) + " @@\n";
 
     QByteArray answer;
-    answer.append(header);
+    answer.append(header.toLocal8Bit());
     answer.append(patch);
     return answer;
 }
