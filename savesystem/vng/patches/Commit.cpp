@@ -342,7 +342,7 @@ Commit Commit::createFromStream(QIODevice *device, CommitPrivate *priv)
             else {
                 if (state == Init && ! priv->logMessage.isEmpty())
                     priv->logMessage.append('\n');
-                priv->logMessage += line;
+                priv->logMessage += line.toLocal8Bit();
             }
             continue;
         }
