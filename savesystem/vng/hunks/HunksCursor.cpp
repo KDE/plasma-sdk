@@ -338,7 +338,7 @@ QString HunksCursor::currentText() const
     Hunk hunk = file.hunks()[m_hunkIndex - 2];
     bytes.append(file.fileName());
     bytes.append(" ");
-    bytes.append(QString::number(hunk.lineNumber(m_subHunkIndex)));
+    bytes.append(QString::number(hunk.lineNumber(m_subHunkIndex)).toLocal8Bit());
 //bytes.append("[subhunk "+ QString::number(m_subHunkIndex + 1) +"/"+ QString::number(hunk.subHunkCount()) +"]");
     bytes.append("\n");
 
@@ -346,7 +346,7 @@ QString HunksCursor::currentText() const
     //m_config.normalColor(out);
     if (patch.contains((char) 0)) { // binary
         //m_config.colorize(out);
-        bytes.append(QString("binary data\n"));
+        bytes.append("binary data\n");
         //m_config.normalColor(out);
     }
     else

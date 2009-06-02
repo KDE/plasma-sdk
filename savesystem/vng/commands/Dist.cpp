@@ -27,6 +27,8 @@
 #include <QDir>
 #include <QDebug>
 
+#include <unistd.h>
+
 static const CommandLineOption options[] = {
     {"-d, --dist-name DISTNAME", "name of version"},
     {"-j, --bzip2", "Create a tar-file with bzip2 compression"},
@@ -119,7 +121,7 @@ AbstractCommand::ReturnCodes Dist::run()
 #if defined (Q_OS_UNIX)
         int rc = link(fileName.constData(), dest.constData());
         if (rc == -1) { // this probably means the dirs should be created first.
-            int separator = dest.lastIndexOf(QDir::separator());
+            int separator = dest.lastIndexOf(QString(QDir::separator()).toLocal8Bit());
             Q_ASSERT(separator > 0);
             QDir::current().mkpath(QString::fromLocal8Bit(dest.constData(), separator));
             rc = link(fileName.constData(), dest.constData());
