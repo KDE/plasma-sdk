@@ -35,6 +35,7 @@ public:
 public slots:
     void changeFormFactor();
     void changeLocation();
+    void refreshApplet();
 
 protected slots:
     void constraintsEvent(Plasma::Constraints constraints);
@@ -60,6 +61,9 @@ protected slots:
 
 protected:
     void setupHeader();
+    void destroyHeader();
+    void hoverEnterEvent (QGraphicsSceneHoverEvent* event);
+    void hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
 
 private:
     OverlayToolBox *m_options;
@@ -68,6 +72,7 @@ private:
     // look more beautiful when there is no applet.
     // XXX: Improve this ?
     QGraphicsWidget *m_tmp;
+    QGraphicsWidget *m_controls;
 
     QGraphicsLinearLayout *m_layout;
     QGraphicsLinearLayout *m_header;

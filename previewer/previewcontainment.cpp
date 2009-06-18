@@ -41,7 +41,11 @@ PreviewContainment::PreviewContainment(QObject *parent, const QVariantList &args
     m_header = new QGraphicsLinearLayout(Qt::Horizontal);
     m_header->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
-    m_layout->addItem(m_header);
+    m_controls = new QGraphicsWidget(this);
+    m_controls->setLayout(m_header);
+    m_controls->setZValue(99);
+    m_controls->resize(100, 70);
+    m_controls->hide();
     setupHeader();
 
     m_tmp = new QGraphicsWidget();
@@ -64,7 +68,6 @@ void PreviewContainment::setupHeader()
     form = new Plasma::IconWidget(this);
 
     refresh = new Plasma::IconWidget(this);
-    refresh->setIcon(KIcon("user-desktop"));
 
     location = new Plasma::IconWidget(this);
 
@@ -77,10 +80,19 @@ void PreviewContainment::setupHeader()
     connect(action2, SIGNAL(triggered()), this, SLOT(changeLocation()));
     location->setAction(action2);
 
+    KAction *action3 = new KAction(KIcon("user-desktop"), "", this);
+    connect(action3, SIGNAL(triggered()), this, SLOT(refreshApplet()));
+    refresh->setAction(action3);
+
     // add the toolboxes
-    m_header->addItem(form);
     m_header->addItem(refresh);
+    m_header->addItem(form);
     m_header->addItem(location);
+}
+
+void PreviewContainment::refreshApplet() {
+    clearApplets();
+    addApplet(m_applet->pluginName());
 }
 
 void PreviewContainment::changeFormFactor()
@@ -248,9 +260,11 @@ void PreviewContainment::constraintsEvent(Plasma::Constraints constraints)
 void PreviewContainment::onAppletAdded(Plasma::Applet *applet, const QPointF &pos)
 {
     Q_UNUSED(pos);
+    m_applet = applet;
     m_layout->removeItem(m_tmp);
 
     m_layout->addItem(applet);
+    m_layout->setStretchFactor(applet, 3);
     connect(applet, SIGNAL(geometryChanged()), this, SLOT(onAppletGeometryChanged()));
 }
 
@@ -268,6 +282,15 @@ void PreviewContainment::onAppletGeometryChanged()
     // deal with sizing here.
 }
 
+void PreviewContainment::hoverEnterEvent(QGraphicsSceneHoverEvent* event) {
+  m_controls->show();
+  Containment::hoverEnterEvent(event);
+}
+
+void PreviewContainment::hoverLeaveEvent(QGraphicsSceneHoverEvent* event) {
+  m_controls->hide();
+  Containment::hoverLeaveEvent(event);
+}
 
 K_EXPORT_PLASMA_APPLET(studiopreviewer, PreviewContainment)
 
