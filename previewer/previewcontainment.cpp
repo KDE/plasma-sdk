@@ -91,6 +91,8 @@ void PreviewContainment::setupHeader()
 }
 
 void PreviewContainment::refreshApplet() {
+    if (!m_applet)
+      return;
     clearApplets();
     addApplet(m_applet->pluginName());
 }
