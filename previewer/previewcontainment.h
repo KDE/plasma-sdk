@@ -35,6 +35,7 @@ public:
 public slots:
     void changeFormFactor();
     void changeLocation();
+    void changeWallpaper();
     void refreshApplet();
 
 protected slots:
@@ -59,6 +60,8 @@ protected slots:
     void leftEdgeTriggered(bool);
     void rightEdgeTriggered(bool);
 
+    void setWallpaperPlugin(const QString&);
+    
 protected:
     void setupHeader();
     void destroyHeader();
@@ -82,6 +85,7 @@ private:
     Plasma::IconWidget *form;
     Plasma::IconWidget *refresh;
     Plasma::IconWidget *location;
+    Plasma::IconWidget *wallpaper;
 };
 
 

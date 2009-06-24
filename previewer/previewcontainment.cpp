@@ -17,8 +17,10 @@
 
 #include <QPainter>
 #include <QGraphicsLayoutItem>
+#include <QSignalMapper>
 
 #include <Plasma/Label>
+#include <Plasma/Wallpaper>
 #include <KIcon>
 #include <KAction>
 
@@ -70,8 +72,14 @@ void PreviewContainment::setupHeader()
     refresh = new Plasma::IconWidget(this);
 
     location = new Plasma::IconWidget(this);
+    
+    wallpaper = new Plasma::IconWidget(this);
 
     // add actions
+    KAction *action0 = new KAction(KIcon("list-add"), "", this);
+    connect(action0, SIGNAL(triggered()), this, SLOT(changeWallpaper()));
+    wallpaper->setAction(action0);
+
     KAction *action1 = new KAction(KIcon("list-add"), "", this);
     connect(action1, SIGNAL(triggered()), this, SLOT(changeFormFactor()));
     form->setAction(action1);
@@ -85,6 +93,7 @@ void PreviewContainment::setupHeader()
     refresh->setAction(action3);
 
     // add the toolboxes
+    m_header->addItem(wallpaper);
     m_header->addItem(refresh);
     m_header->addItem(form);
     m_header->addItem(location);
@@ -126,6 +135,35 @@ void PreviewContainment::changeFormFactor()
     connect(mediacenter, SIGNAL(triggered(bool)), this, SLOT(mediacenterTriggered(bool)));
     connect(horizontal, SIGNAL(triggered(bool)), this, SLOT(horizontalTriggered(bool)));
     connect(vertical, SIGNAL(triggered(bool)), this, SLOT(verticalTriggered(bool)));
+    connect(cancel, SIGNAL(triggered(bool)), this, SLOT(cancelOption(bool)));
+
+    m_options->show();
+}
+
+void PreviewContainment::changeWallpaper()
+{
+    delete m_options;
+
+    m_options = new OverlayToolBox(this);
+    m_options->setGeometry(geometry());
+    m_options->setZValue(100000000);
+
+    QSignalMapper *signalMapper = new QSignalMapper(this);
+
+    // create a menu item for each wallpaper plugin installed
+    foreach (const KPluginInfo &info, Plasma::Wallpaper::listWallpaperInfo()) {
+      KAction *plugin = new KAction(KIcon("user-desktop"),
+                                    i18n(info.pluginName().toStdString().c_str()), m_options);
+      signalMapper->setMapping(plugin, info.pluginName());
+      m_options->addTool(plugin);
+      connect(signalMapper, SIGNAL(mapped(const QString &)), this, SLOT(setWallpaperPlugin(const QString &)));
+      connect(plugin, SIGNAL(triggered(bool)), signalMapper, SLOT(map()));
+    }
+    
+    // cancel button
+    KAction *cancel = new KAction(KIcon("dialog-cancel"),
+                                  i18n("Cancel"), m_options);
+    m_options->addTool(cancel);
     connect(cancel, SIGNAL(triggered(bool)), this, SLOT(cancelOption(bool)));
 
     m_options->show();
@@ -246,6 +284,11 @@ void PreviewContainment::rightEdgeTriggered(bool)
 void PreviewContainment::cancelOption(bool)
 {
     m_options->hide();
+}
+
+void PreviewContainment::setWallpaperPlugin(const QString& name) {
+    m_options->hide();
+    setWallpaper(name);
 }
 
 void PreviewContainment::constraintsEvent(Plasma::Constraints constraints)
