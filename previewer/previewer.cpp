@@ -14,6 +14,9 @@
 #include "previewer.h"
 #include "previewcontainment.h"
 
+#include <QFileInfo>
+#include <QDir>
+
 #include <Plasma/Containment>
 
 Previewer::Previewer(QWidget *parent)
@@ -39,7 +42,22 @@ Previewer::Previewer(QWidget *parent)
 
 void Previewer::addApplet(const QString &name, const QVariantList &args)
 {
-    m_applet = m_containment->addApplet(name, args, QRectF(0, 0, -1, -1));
+    QFileInfo info(name);
+    if (!info.isAbsolute()) {
+        info = QFileInfo(QDir::currentPath() + "/" + name);
+    }
+
+    // load from package if we have a path
+    if (info.exists()) {
+        m_applet = Applet::loadPlasmoid(info.absoluteFilePath());
+    }
+
+    if (!m_applet) {
+        m_applet = m_containment->addApplet(name, args, QRectF(0, 0, -1, -1));
+    } else {
+        m_containment->addApplet(m_applet, QPointF(-1, -1), false);
+    }
+
     m_applet->setFlag(QGraphicsItem::ItemIsMovable, false);
     resize(m_applet->preferredSize().toSize());
 }

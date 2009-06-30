@@ -21,6 +21,7 @@
 
 #include <Plasma/Label>
 #include <Plasma/Wallpaper>
+#include <Plasma/Package>
 #include <KIcon>
 #include <KAction>
 
@@ -99,11 +100,23 @@ void PreviewContainment::setupHeader()
     m_header->addItem(location);
 }
 
-void PreviewContainment::refreshApplet() {
+// Fixme(?): Does not currently respect arguments passed in during
+// initialization. Will reload applet without arguments
+void PreviewContainment::refreshApplet()
+{
     if (!m_applet)
       return;
     clearApplets();
-    addApplet(m_applet->pluginName());
+
+    if (m_applet->package()) {
+      m_applet = Applet::loadPlasmoid(m_applet->package()->path());
+      addApplet(m_applet, QPointF(-1, -1), false);
+    } else {
+      m_applet = addApplet(m_applet->pluginName(), 
+                            QVariantList(), QRectF(0, 0, -1, -1));
+    }
+
+    m_applet->setFlag(QGraphicsItem::ItemIsMovable, false);
 }
 
 void PreviewContainment::changeFormFactor()
