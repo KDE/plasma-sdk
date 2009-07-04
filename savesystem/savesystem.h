@@ -20,7 +20,7 @@ class SaveSystem : public QObject
     public:
         SaveSystem(QObject *parent = 0);
 
-        bool canRollback(); // we have a clean index, other things...
+        bool canRollback(); // if we have a clean index, other things...
 
     public slots:
         void snapshot();
