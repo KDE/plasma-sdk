@@ -9,7 +9,8 @@
 
 #include "savesystem.h"
  
-SaveSystem::SaveSystem()
+SaveSystem::SaveSystem(QObject *parent)
+  : QObject(parent)
 {
 
 }

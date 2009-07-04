@@ -10,15 +10,18 @@
 #ifndef SAVESYSTEM_H
 #define SAVESYSTEM_H
 
-class QString;
-class Author;
-class CommitData;
+#include <QObject>
 
-class SaveSystem
+class QString;
+
+class SaveSystem : public QObject
 {
+    Q_OBJECT
     public:
-        SaveSystem();
-        
+        SaveSystem(QObject *parent = 0);
+
+        bool canRollback(); // we have a clean index, other things...
+
     public slots:
         void snapshot();
 
