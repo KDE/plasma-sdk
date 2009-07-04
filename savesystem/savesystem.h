@@ -19,15 +19,9 @@ class SaveSystem
     public:
         SaveSystem();
         
-        void setAuthor(const Author &author);
-        Author author();
+    public slots:
+        void snapshot();
 
-        // inits the git repo
-        void init();
-        
-        void add(const QString &path);
-        
-        void commit(const CommitData &data);
 };
  
 #endif // SAVESYSTEM_H

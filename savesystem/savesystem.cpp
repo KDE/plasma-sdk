@@ -14,7 +14,7 @@ SaveSystem::SaveSystem()
 
 }
 
-void SaveSystem::init()
+void SaveSystem::snapshot()
 {
 
 
