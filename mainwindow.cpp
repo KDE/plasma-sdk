@@ -60,8 +60,8 @@ MainWindow::MainWindow(QWidget *parent)
     createMenus();
 
     m_startPage = new StartPage(this);
-    connect(m_startPage, SIGNAL(projectSelected(QString,QString)),
-            this, SLOT(loadProject(QString,QString)));
+    connect(m_startPage, SIGNAL(projectSelected(QString, QString)),
+            this, SLOT(loadProject(QString, QString)));
     setCentralWidget(m_startPage);
 }
 
@@ -69,7 +69,9 @@ MainWindow::~MainWindow()
 {
     delete m_startPage;
 
-    delete m_editorView;
+    if (m_editorView) {
+      hideEditor();
+    }
 
     if (m_previewer) {
         delete m_previewer;
@@ -138,7 +140,6 @@ void MainWindow::hideEditor()
 
 void MainWindow::changeTab(int tab)
 {
-
     if (tab == m_oldTab) { // user clicked on the current tab
         if (tab == StartPageTab) {
             m_startPage->resetStatus();
