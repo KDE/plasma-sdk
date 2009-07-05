@@ -6,8 +6,17 @@ include(KDE4Defaults)
 set (PlasMate_SRC
     editors/editpage.cpp
     main.cpp
-    mainwindow.cpp
+    sidebaritem.cpp
+    sidebardelegate.cpp
+    sidebarlistwidget.cpp
+    sidebarprivatestorage.cpp
     sidebar.cpp
+    savesystem/timelineitem.cpp
+    savesystem/timelinedelegate.cpp
+    savesystem/timelinelistwidget.cpp
+    savesystem/timelineprivatestorage.cpp
+    savesystem/timeline.cpp
+    mainwindow.cpp
     startpage.cpp
     packagemodel.cpp
     previewer/previewer.cpp

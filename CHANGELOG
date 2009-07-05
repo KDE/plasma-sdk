@@ -1,3 +1,8 @@
+--June 5, 2009--
+- Splitted the Sidebar class, coded the following git action: init, add, commit, isValidDirectory
+  andclone ( only with local repo, for now ). Wrote a simple test case, and start integrating it
+  in the timeline class.
+
 --June 1, 2009--
 -Appropriate kpart shown when an item is selected from the tree in the Edit tab.
 

@@ -16,7 +16,7 @@
 #include	<QModelIndex>
 #include	<QSize>
 
-#include	"sidebardelegate.h"
+#include	"timelinedelegate.h"
 
 /* A simple delegate to paint the icon of each item */
 static const int ITEM_MARGIN_LEFT		= 5;
@@ -27,26 +27,26 @@ static const int ITEM_PADDING			= 5;
 
 
 
-SidebarDelegate::SidebarDelegate( QObject *parent )
+TimeLineDelegate::TimeLineDelegate( QObject *parent )
 	: QAbstractItemDelegate( parent ), m_showText( true )
 {
 }
 
-SidebarDelegate::~SidebarDelegate()
+TimeLineDelegate::~TimeLineDelegate()
 {
 }
 
-void SidebarDelegate::setShowText( bool show )
+void TimeLineDelegate::setShowText( bool show )
 {
 	m_showText = show;
 }
 
-bool SidebarDelegate::isTextShown() const
+bool TimeLineDelegate::isTextShown() const
 {
 	return m_showText;
 }
 
-void SidebarDelegate::paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const
+void TimeLineDelegate::paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const
 {
 	QBrush backBrush;
 	QColor foreColor;
@@ -117,7 +117,7 @@ void SidebarDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opti
 	}
 }
 
-QSize SidebarDelegate::sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const
+QSize TimeLineDelegate::sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const
 {
 	QSize baseSize( option.decorationSize.width(), option.decorationSize.height() );
 	if ( m_showText )
