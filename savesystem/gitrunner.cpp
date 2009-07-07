@@ -1,27 +1,69 @@
-/**
-  *	Git Hanlder class
-  */
+
+
+
 
 #include	<KDebug>
+#include	<KProcess>
 #include	<QFileInfo>
 #include	<QDir>
-#include	<QDateTime>
 #include	<QProcess>
-#include	<QRegExp>
 
 
+#include	"gitrunner.h"
 #include "dvcsjob.h"
-#include "gitrunner.h"
+
 
 
 GitRunner::GitRunner(  )
 {
-	branchesShas = QList<QStringList>();
+	m_job = new DvcsJob();
+	m_commMode = KProcess::SeparateChannels;
 	m_lastRepoRoot = new KUrl();
+	m_result = QString();
+	m_isRunning = false;
+
 }
 
 GitRunner::~GitRunner()
 {
+	if( m_job )
+		delete m_job;
+	if( m_lastRepoRoot )
+		delete m_lastRepoRoot;
+}
+
+void GitRunner::resetJob()
+{
+	m_job = new DvcsJob();
+	m_job->setCommunicationMode( m_commMode );
+	m_job->setDirectory( QDir( m_lastRepoRoot->pathOrUrl() ) );
+	*m_job<< "git";
+	m_job->start();
+	m_result.clear();
+	m_isRunning = false;
+}
+
+void GitRunner::startJob()
+{
+	m_isRunning = true;
+	m_job->start();
+	m_result.append( m_job->output() );
+	m_isRunning = false;
+}
+
+void GitRunner::setCommunicationMode(KProcess::OutputChannelMode comm)
+{
+	m_commMode = comm;
+}
+
+void GitRunner::setDirectory(const QDir &dir)
+{
+	m_lastRepoRoot = new KUrl( dir.absolutePath() );
+}
+
+bool GitRunner::isRunning()
+{
+	return m_isRunning;
 }
 
 bool GitRunner::isValidDirectory(const KUrl & dirPath)
@@ -29,15 +71,14 @@ bool GitRunner::isValidDirectory(const KUrl & dirPath)
 	const QString initialPath(dirPath.toLocalFile(KUrl::RemoveTrailingSlash));
 
 	// A possible git repo has a .git subdicerctory
-	static const QString gitDir(".git");
+	const QString gitDir(".git");
+
 	// Also, git rev-parse --is-inside-work-tree returns "true" if we are
 	// inside any subdirectory of the git tree.
-	DvcsJob *j = new DvcsJob();
-	j->setDirectory( QDir( initialPath ) );
-	*j<< "git";
-	*j<< "rev-parse";
-	*j<< "--is-inside-work-tree";
-	j->start();
+	resetJob();
+	*m_job<< "rev-parse";
+	*m_job<< "--is-inside-work-tree";
+	startJob();
 
 	QFileInfo finfo(initialPath);
 	QDir dir;
@@ -50,222 +91,173 @@ bool GitRunner::isValidDirectory(const KUrl & dirPath)
 		dir.makeAbsolute();
 	}
 
-	if( dir.exists( gitDir ) && j->output().compare( QString( "true" ) ) ) {
-		m_lastRepoRoot = new KUrl( initialPath );
-		return true;
-	}
-	return false;
+	return (dir.exists( gitDir ) && m_job->output().compare( QString( "true" ) ) ) ? true : false;
 }
 
-void GitRunner::init(const KUrl &directory)
+QString& GitRunner::getResult()
 {
-	DvcsJob* job = new DvcsJob();
-	job->setDirectory( QDir( directory.pathOrUrl() ) );
-	*job << "git";
-	*job << "init";
-	job->start();
+	return	m_result;
+}
+
+
+DvcsJob::JobStatus GitRunner::init(const KUrl &directory)
+{
+	// We need to change dir!
 	m_lastRepoRoot = new KUrl( directory );
+	resetJob();
+
+	*m_job<< "init";
+	startJob();
+	return m_job->status();
 }
 
-void GitRunner::setDirectory(const QDir &dir)
-{
-	m_lastRepoRoot = new KUrl( dir.absolutePath() );
-}
 
-void GitRunner::createWorkingCopy(const KUrl& repoOrigin, const KUrl& repoDestination)
+DvcsJob::JobStatus GitRunner::createWorkingCopy(const KUrl& repoOrigin, const KUrl& repoDestination)
 {
 	// TODO: now supports only cloning a local repo ( not very useful, I know =P ), so extend the method
 	// to be used over the Internet.
-	DvcsJob* job = new DvcsJob();
-	job->setCommunicationMode( KProcess::SeparateChannels );
-	job->setDirectory( QDir( repoDestination.pathOrUrl() ) );
-	*job << "git";
-	*job << "clone";
-	*job << repoOrigin.pathOrUrl();
-	job->start();
+	m_lastRepoRoot = new KUrl( repoDestination );
+	resetJob();
+
+	*m_job << "clone";
+	*m_job << repoOrigin.pathOrUrl();
+	startJob();
+	return m_job->status();
 }
 
-void GitRunner::add(const KUrl::List& localLocations)
+DvcsJob::JobStatus GitRunner::add(const KUrl::List& localLocations)
 {
 	if (localLocations.empty())
-		return;
+		return DvcsJob::JobCancelled;
 
-	DvcsJob* job = new DvcsJob();
-	job->setCommunicationMode( KProcess::SeparateChannels );
-	job->setDirectory( QDir( m_lastRepoRoot->pathOrUrl() ) );
-	*job << "git";
-	*job << "add";
+	resetJob();
+	*m_job<< "add";
 
+	// Adding files to the runner.
 	QStringList stringFiles = localLocations.toStringList();
 	while( !stringFiles.isEmpty() )
 	{
-		*job<<  m_lastRepoRoot->pathOrUrl()+QString("/")+stringFiles.takeAt(0);
+		*m_job<<  m_lastRepoRoot->pathOrUrl()+QString("/")+stringFiles.takeAt(0);
 	}
-	job->start();
+
+	startJob();
+	return m_job->status();
 }
 
-DvcsJob* GitRunner::status(const KUrl::List& localLocations, int recursionMode)
+DvcsJob::JobStatus GitRunner::status(const KUrl &dirPath)
 {
-	Q_UNUSED(recursionMode)
-	//it's a hack!!! See VcsCommitDialog::setCommitCandidates and the usage of DvcsJob/IDVCSexecutor
-	//We need results just in status, so we set them here before execution in VcsCommitDialog::setCommitCandidates
-	QString repo = localLocations[0].toLocalFile();
-	QList<QVariant> statuses;
-	qDebug("GitRunner::status");
-	/*statuses << getCachedFiles(repo)
-			 << getModifiedFiles(repo)
-			 << getOtherFiles(repo);*/
-	DvcsJob * noOp = new DvcsJob();
-	noOp->setResults(QVariant(statuses));
-	return noOp;
+	m_lastRepoRoot = new KUrl( dirPath );
+	resetJob();
+	*m_job<< "status";
+
+	startJob();
+	return m_job->status();
 }
 
 
-void GitRunner::commit(const QString& message, const KUrl::List& localLocations)
+DvcsJob::JobStatus GitRunner::commit(const QString& message)
 {
 	// NOTE: git doesn't allow empty commit !
-	if (localLocations.empty() || message.isEmpty())
-		return;
+	if (message.isEmpty())
+		return DvcsJob::JobCancelled;
 
-	DvcsJob* job = new DvcsJob();
-	job->setDirectory( QDir( m_lastRepoRoot->pathOrUrl() ) );
-	*job << "git";
-	*job << "commit";
-	*job << "-m";
-	//Note: the message is quoted somewhere else, so if we quote here then we have quotes in the commit log
-	*job << message;
+	resetJob();
+	*m_job << "commit";
+	*m_job << "-m";
+	//Note: the message is quoted somewhere else, so if we quote here then we have quotes in the commit slotSaveResult
+	*m_job << message;
 
-	/*QStringList stringFiles = localLocations.toStringList();
-	while( !stringFiles.isEmpty() )
-	{
-		*job<<  m_lastRepoRoot->pathOrUrl()+QString("/")+stringFiles.takeAt(0);
-	}*/
-	job->start();
-
+	startJob();
+	return m_job->status();
 }
 
-DvcsJob* GitRunner::remove(const KUrl::List& files)
+DvcsJob::JobStatus GitRunner::remove(const KUrl::List& files)
 {
 	if (files.empty())
-		return NULL;
+		return DvcsJob::JobCancelled;
 
-	DvcsJob* job = new DvcsJob();
-	*job << "git";
-	*job << "rm";
+	resetJob();
+	*m_job << "rm";
+	QStringList stringFiles = files.toStringList();
+	while( !stringFiles.isEmpty() )
+	{
+		*m_job<<  m_lastRepoRoot->pathOrUrl()+QString("/")+stringFiles.takeAt(0);
+	}
 
-	addFileList(job, files);
-	return job;
+	startJob();
+	return m_job->status();
 }
 
 
-DvcsJob* GitRunner::log(const KUrl& localLocation,	unsigned long limit)
+DvcsJob::JobStatus GitRunner::log(const KUrl& localLocation)
 {
-	Q_UNUSED(limit)
-	DvcsJob* job = new DvcsJob();
-	*job << "git";
-	*job << "log";
-	*job << "--date=raw";
+	m_lastRepoRoot = new KUrl( localLocation );
+	resetJob();
+	*m_job << "log";
 
-	addFileList(job, localLocation);
-	connect(job, SIGNAL(readyForParsing(DvcsJob*)), this, SLOT(parseGitLogOutput(DvcsJob*)));
-	return job;
+	startJob();
+	return m_job->status();
 }
 
-DvcsJob* GitRunner::annotate(const KUrl &localLocation)
-{
+DvcsJob::JobStatus GitRunner::annotate(const KUrl &localLocation)
+{/*
 	DvcsJob* job = new DvcsJob();
 	*job << "git";
 	*job << "blame";
 	*job << "--root";
 	*job << "-t";
 
+	if (job)
+	{
+		delete job;
+		return NULL;
+	}
 	addFileList(job, localLocation);
 	connect(job, SIGNAL(readyForParsing(DvcsJob*)), this, SLOT(parseGitBlameOutput(DvcsJob*)));
-	return job;
-}
-
-// To be implemented
-void GitRunner::parseGitBlameOutput(DvcsJob *job)
-{
-
-}
-
-void GitRunner::addFileList( DvcsJob *j,const KUrl::List &files )
-{
-
-}
-
-DvcsJob* GitRunner::switchBranch(const QString &repository, const QString &GitRunner)
-{
-
-}
-
-void GitRunner::branch()
-{
-	// Need to be revised
-	DvcsJob* job = new DvcsJob();
-	job->setDirectory( QDir( m_lastRepoRoot->pathOrUrl() ) );
-	*job << "git";
-	*job << "branch";
-	job->start();
-	QString branch( job->output() );
-	branch = branch.prepend('\n').section("\n*", 1);
-	branch = branch.section('\n', 0, 0).trimmed();
-	kDebug() << "Current branch is: " << branch;
-	m_currentBranch = new QString( branch );
-
-}
-
-void GitRunner::parseBranch(DvcsJob *job)
-{
-	Q_UNUSED(job)
-}
-
-void GitRunner::reset(const KUrl& repository, const QStringList &args, const KUrl::List& files)
-{
-	Q_UNUSED(repository)
-	Q_UNUSED(files)
-	Q_UNUSED(args)
-}
-
-void GitRunner::lsFiles(const QString &repository, const QStringList &args)
-{
-	Q_UNUSED(repository)
-	Q_UNUSED(args)
-
-}
-
-QString GitRunner::curBranch(const QString &repository)
-{
-	Q_UNUSED(repository)
-}
-
-QStringList GitRunner::branches(const QString &repository)
-{
-	Q_UNUSED(repository)
-}
-
-void GitRunner::initBranchHash(const QString &repo)
-{
-	Q_UNUSED(repo)
-}
-
-void GitRunner::parseGitLogOutput(DvcsJob * job)
-{
-	Q_UNUSED(job)
+	return job;*/
+	return DvcsJob::JobNotStarted;
 }
 
 
-QStringList GitRunner::getLsFiles(const QString &directory, const QStringList &args)
+DvcsJob::JobStatus GitRunner::switchBranch(const QString &newBranch)
 {
-	Q_UNUSED(directory)
-	Q_UNUSED(args)
+	resetJob();
+	*m_job << "checkout";
+	*m_job << newBranch;
+
+	startJob();
+	return m_job->status();
 }
 
-void GitRunner::gitRevParse(const QString &repository, const QStringList &args)
+DvcsJob::JobStatus GitRunner::branches()
 {
-	Q_UNUSED(repository)
-	Q_UNUSED(args)
+	resetJob();
+	*m_job << "branch";
+	m_job->start();
+
+	startJob();
+	return m_job->status();
+}
+
+DvcsJob::JobStatus GitRunner::newBranch(const QString &newBranch)
+{
+	resetJob();
+	*m_job<< "branch";
+	*m_job<< newBranch;
+
+	startJob();
+	return m_job->status();
+}
+
+DvcsJob::JobStatus GitRunner::reset(const QStringList &args)
+{
+	resetJob();
+	*m_job << "reset";
+	if (!args.isEmpty())
+		*m_job << args;
+
+	startJob();
+	return m_job->status();
 }
 
 #include "gitrunner.moc"

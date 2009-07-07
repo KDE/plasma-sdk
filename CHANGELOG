@@ -1,6 +1,11 @@
+--June 7, 2009--
+- Fixed DvcsJob behaviour when are performed sequential calls, like in the unit test.
+  Added the following action in the GitRunner class: remove, status, log, reset, newBranch,
+  switchBranch, branches.
+
 --June 5, 2009--
 - Splitted the Sidebar class, coded the following git action: init, add, commit, isValidDirectory
-  andclone ( only with local repo, for now ). Wrote a simple test case, and start integrating it
+  and clone ( only with local repo, for now ). Wrote a simple test case, and start integrating it
   in the timeline class.
 
 --June 1, 2009--

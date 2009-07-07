@@ -1,23 +1,24 @@
-/*
- *	Class which represents the Distributed Version Control job.
- */
-
 #include "dvcsjob.h"
 
 DvcsJob::DvcsJob()
 {
 	m_process = new KProcess();
+	this->clear();
 }
 
 DvcsJob::~DvcsJob()
 {
-
+	if( m_process )
+		delete m_process;
+	m_process = 0;
 }
 
 void DvcsJob::clear()
 {
+	//Do not use KProcess::clearEnvironment() (it sets the environment to kde_dummy.
 	m_command.clear();
 	m_output.clear();
+	m_comm = KProcess::SeparateChannels;
 	m_directory = QDir::temp();
 	m_isRunning = m_failed = m_wasStarted = false;
 }
@@ -72,7 +73,7 @@ QString DvcsJob::output() const
 	QByteArray stdoutbuf = rawOutput();
 	int endpos = stdoutbuf.size();
 	if (isRunning()) {    // We may have received only part of a code-point
-		endpos = stdoutbuf.lastIndexOf('\n')+1; // Include the final newline or become 0, when there is no newline
+		endpos = stdoutbuf.lastIndexOf('\n')+1; // Include the final newline or become 0, when there isRun no newline
 	}
 
 	return QString::fromLocal8Bit(stdoutbuf, endpos);
@@ -100,35 +101,33 @@ void DvcsJob::setExitStatus(const bool exitStatus)
 
 void DvcsJob::start()
 {
+	// Should be remove before releasing it!
+	//Q_ASSERT_X(!m_isRunning, "DVCSjob::start", "Another proccess was started using this job class");
+
 	m_wasStarted = true;
 	QString workingDirectory = m_directory.absolutePath();
 	m_process->setWorkingDirectory( workingDirectory );
 
 	// Processing the signal result
-	connect(m_process, SIGNAL(started()),
-			this, SLOT(slotStarted()));
-	connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)),
-			this, SLOT(slotProcessExited(int, QProcess::ExitStatus)));
-	connect(m_process, SIGNAL(error( QProcess::ProcessError )),
-			this, SLOT(slotProcessError(QProcess::ProcessError)));
-	connect(m_process, SIGNAL(readyReadStandardError()),
-			this, SLOT(slotReceivedStderr()));
-	connect(m_process, SIGNAL(readyReadStandardOutput()),
-			this, SLOT(slotReceivedStdout()));
+	//connect(m_process, SIGNAL(started()), this, SLOT(slotStarted()));
+	connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)),	this, SLOT(slotProcessExited(int, QProcess::ExitStatus)));
+	connect(m_process, SIGNAL(error( QProcess::ProcessError )), this, SLOT(slotProcessError(QProcess::ProcessError)));
+	connect(m_process, SIGNAL(readyReadStandardError()), this, SLOT(slotReceivedStderr()));
+	connect(m_process, SIGNAL(readyReadStandardOutput()), this, SLOT(slotReceivedStdout()));
 
 	m_output.clear();
 	m_isRunning = true;
-	m_process->setOutputChannelMode( comm );
+	m_process->setOutputChannelMode( m_comm );
 	m_process->setProgram( m_command );
 	m_process->setEnvironment(QProcess::systemEnvironment());
 	//the started() and error() signals may be delayed! It causes crash with deferred deletion!!!
-	m_process->waitForStarted();
 	m_process->start();
+	m_process->waitForFinished(-1);
 }
 
-void DvcsJob::setCommunicationMode(KProcess::OutputChannelMode comm)
+void DvcsJob::setCommunicationMode(KProcess::OutputChannelMode m_comm)
 {
-	comm = comm;
+	m_comm = m_comm;
 }
 
 void DvcsJob::cancel()
@@ -152,6 +151,8 @@ void DvcsJob::slotProcessError( QProcess::ProcessError err )
 	setErrorText( i18n("Process exited with status %1", m_process->exitCode() ) );
 
 	QString errorValue;
+	//if trolls add Q_ENUMS for QProcess, then we can use better solution than switch:
+	//QMetaObject::indexOfEnumerator(char*), QLatin1String(QMetaEnum::valueToKey())...
 	switch (err)
 	{
 	case QProcess::FailedToStart:
@@ -176,11 +177,6 @@ void DvcsJob::slotProcessError( QProcess::ProcessError err )
 	kDebug() << "oops, found an error while running" << dvcsCommand() << ":" << errorValue
 													 << "Exit code is:" << m_process->exitCode();
 	jobIsReady();
-}
-
-void DvcsJob::slotStarted()
-{
-
 }
 
 void DvcsJob::slotProcessExited(int exitCode, QProcess::ExitStatus exitStatus)
@@ -232,7 +228,7 @@ void DvcsJob::jobIsReady()
 	emitResult(); //KJob
 	emit resultsReady(this); //VcsJob
 	//reset stases;
-	m_isRunning = m_failed = m_wasStarted = false;
+	m_isRunning = m_failed = false;
 }
 
 KProcess* DvcsJob::getChildproc()

@@ -1,74 +1,52 @@
 
-#ifndef		GITRUNNER_H
-#define		GITRUNNER_H
+#ifndef	GITRUNNER_H
+#define	GITRUNNER_H
 
 #include	<QObject>
 #include	<KUrl>
 #include	<QStringList>
 #include	<QDir>
+#include	<KProcess>
 
-class DvcsJob;
+#include	"dvcsjob.h"
 
-class GitRunner : public QObject
+class GitRunner
 {
-	Q_OBJECT
+	public:
+		GitRunner();
+		~GitRunner();
 
-public:
-	GitRunner();
-	~GitRunner();
+		bool isValidDirectory(const KUrl &dirPath);
+		bool isRunning();
 
-	bool isValidDirectory(const KUrl &dirPath);
-	void setDirectory(const QDir &dir );
+		void setDirectory(const QDir &dir );
+		void setCommunicationMode(KProcess::OutputChannelMode comm);
 
-	void add(const KUrl::List& localLocations);
-	void createWorkingCopy(const KUrl& repoOrigin, const KUrl& repoDestination);
+		DvcsJob::JobStatus add(const KUrl::List& localLocations);
+		DvcsJob::JobStatus createWorkingCopy(const KUrl& repoOrigin, const KUrl& repoDestination);
+		DvcsJob::JobStatus remove(const KUrl::List& files);
+		DvcsJob::JobStatus status(const KUrl &dirPath);
+		DvcsJob::JobStatus commit(const QString& message);
+		DvcsJob::JobStatus log(const KUrl& localLocation);
+		DvcsJob::JobStatus annotate(const KUrl &localLocation );
+		DvcsJob::JobStatus init(const KUrl & directory);
+		DvcsJob::JobStatus reset(const QStringList &args);
+		DvcsJob::JobStatus newBranch(const QString &newBranch);
+		DvcsJob::JobStatus switchBranch(const QString &newBranch);
+		DvcsJob::JobStatus branches();
 
-	DvcsJob* remove(const KUrl::List& files);
-	DvcsJob* status(const KUrl::List& localLocations,
-							 int recursionMode);
-	void commit(const QString& message, const KUrl::List& localLocations);
+		QString& getResult();
 
+	private:
+		void resetJob();
+		void startJob();
 
-	DvcsJob* log(const KUrl& localLocation, unsigned long limit);
-	DvcsJob* annotate(const KUrl &localLocation );
-
-	void init(const KUrl & directory);
-	void reset(const KUrl& repository, const QStringList &args,	const KUrl::List& files);
-
-
-	DvcsJob* switchBranch(const QString &repository, const QString &branch);
-	void branch();
-
-	QString curBranch(const QString &repository);
-	QStringList branches(const QString &repository);
-
-	//used in log
-	//QStringList parseLogOutput(const DvcsJob * job) const;
-
-protected:
-
-
-	void addFileList( DvcsJob *j, const KUrl::List &files );
-
-	void lsFiles(const QString &repository, const QStringList &args);
-	DvcsJob* gitRevList(const QString &repository, const QStringList &args);
-	void gitRevParse(const QString &repository, const QStringList &args);
-
-protected slots:
-	void parseGitBlameOutput(DvcsJob *job);
-	void parseGitLogOutput(DvcsJob *job);
-	void parseBranch(DvcsJob *job);
-
-private:
-	//commit dialog "main" helper
-	QStringList getLsFiles(const QString &directory, const QStringList &args = QStringList());
-
-	void initBranchHash(const QString &repo);
-
-
-	QList<QStringList> branchesShas;
-	QString	*m_currentBranch;
-	KUrl	*m_lastRepoRoot;
+		QString						*m_currentBranch;
+		QString						m_result;
+		KUrl						*m_lastRepoRoot;
+		DvcsJob						*m_job;
+		KProcess::OutputChannelMode	m_commMode;
+		volatile bool				m_isRunning;
 };
 
 #endif

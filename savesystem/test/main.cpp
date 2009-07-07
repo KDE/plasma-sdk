@@ -11,8 +11,10 @@
 #include	<QString>
 #include	<QDir>
 #include	<QFile>
+#include	<QMessageBox>
 
-#include "../gitrunner.h"
+#include	"../gitrunner.h"
+#include	"../dvcsjob.h"
 
 int main(int argc, char *argv[])
 {
@@ -28,62 +30,97 @@ int main(int argc, char *argv[])
 	KApplication app;
 	QString appDir = app.applicationDirPath();
 	QDir dirHandler = QDir( appDir );
-
-
-	// Let's build a simple directory structure, with some files
-	if( !dirHandler.mkdir( "root" ) )										// Start with creating our root dir.
-		return 1;															// if not possible, exit.
-
 	QString rootDir = appDir+QString( "/root/" );
 
-	QFile *main = new QFile( QString( rootDir+QString( "main.cpp" ) ) );	// Defining ../root/main.cpp
-	QFile *h1 = new QFile( QString( rootDir+QString( "h1.h" ) ) );			// Defining ../root/h1.h
+	// Let's build a simple directory structure, with some files
+	if( dirHandler.mkdir( "root" ) )											// Start with creating our root dir.
+	{
+		// If success, add create a file named main.cpp .
+		QFile *main = new QFile( QString( rootDir+QString( "main.cpp" ) ) );	// Defining ../root/main.cpp
+		main->open(QIODevice::WriteOnly);
+		main->close();
+	}
+
+	// Init our GitRunner instanxe
+	GitRunner *git = new GitRunner();
+
+	// Perform a check on the folder to cofirm we have a valid git repo
+	if( !git->isValidDirectory( rootDir ) )
+		git->init( KUrl( rootDir ) );											// Init an empty repo
+
+	// Note: in the following GitRunner call, I'll skip testing the JobStatus value returned,
+	// in order to focus the reader on how the runner works; in a real application, always
+	// perform that check !!!
+
+
+	// Eventually set the repo directory
+	git->setDirectory( QDir( rootDir ) );
+
+	// Ok, now let's add and commit one file
+	QStringList *list= new QStringList( QString("main.cpp") );
+	git->add( KUrl::List( *list ) )	;										// Add the element in the git index
+	git->commit( QString( "This is a comment: committed main." ) );			// Commit it
+
+	// Now create some other files
 	QFile *src1 = new QFile( QString( rootDir+QString( "src1.cpp" ) ) );	// Defining ../root/src2.cpp
 	QFile *src2 = new QFile( QString( rootDir+QString( "src2.cpp" ) ) );	// Defining ../root/src2.cpp
 	QFile *src3 = new QFile( QString( rootDir+QString( "src3.cpp" ) ) );	// Defining ../root/src2.cpp
-	main->open(QIODevice::WriteOnly);
-	h1->open(QIODevice::WriteOnly);
 	src1->open(QIODevice::WriteOnly);
 	src2->open(QIODevice::WriteOnly);
 	src3->open(QIODevice::WriteOnly);
-	main->close();
-	h1->close();
 	src1->close();
 	src2->close();
 	src3->close();
 
+	// Now add them and then commit
+	list= new QStringList( QString("src1.cpp") );
+	*list << QString( "src1.cpp" );
+	*list << QString( "src2.cpp" );
+	git->add( KUrl::List( *list ) );
+	git->commit( QString( "Multiline comment.\n\nThe first line briefly explains the commits purpose,\nwhile the remaining lines add more details." ) );
 
-	// Note: since the parseOutput function is not ready, to see the final result you
-	// have to to the root directory and call git log =)
-	// If you want to re-run the test, delete the root folder.
+	// Now lets create a new branch
+	QString brName( "devel" );
+	git->newBranch( brName );
+	// Switch to the new branch
+	git->switchBranch( brName );
 
-	// Init our GitRunner instanxe
-	GitRunner *git = new GitRunner();
-	// Init an empty repo
-	git->init( KUrl( rootDir ) );
+	// Add an other file
+	QFile *h1 = new QFile( QString( rootDir+QString( "h1.h" ) ) );			// Defining ../root/h1.h
+	h1->open(QIODevice::WriteOnly);
+	h1->close();
 
-	// Perform a check on the folder to cofirm we have a valid git repo
-	if( git->isValidDirectory( rootDir ) ) {
-
-		//Eventually set the repo directory
-		git->setDirectory( QDir( rootDir ) );
-
-		// Ok, now let's add and commit some files
-		QStringList *list= new QStringList( QString("main.cpp") );
-		git->add( KUrl::List( *list ) );
-		*list << QString( "src1.cpp" );
-		*list << QString( "src2.cpp" );
-		*list << QString( "src3.cpp" );
-		git->commit( QString( "This is a comment: committed main, src1/2/3." ), KUrl::List( *list ) );
+	// Lets perform an other add/commit action
+	list= new QStringList( QString("h1.h") );
+	git->add( KUrl::List( *list ) );
+	git->commit( QString( "Added h1.h in branch \"devel\"." ) );
 
 
-		// Try if it works with a list with only one element
-		list= new QStringList( QString("h1.h") );
-		git->add( KUrl::List( *list ) );
-		git->commit( QString( "Multiline comment.\n\nThe first line briefly explains the commits purpose,\nwhile the remaining lines are more detailed" ), KUrl::List( *list ) );
+		// Note: you can also try  git->createWorkingCopy(), to clone a local repo from an other.
 
-		// Note: you can also try  git->createWorkingCopy(), to clone a local repo to an other.
-	}
+	// Show the logs regarding the devel branch
+	// Note: it derives from "master", so there will be also
+	// the commits made in "master" since "devel" creation.
+	git->log( rootDir );
+	QString log = git->getResult();
+	QMessageBox *mb = new QMessageBox ( QMessageBox::NoIcon, QString("Log result in \"devel\":") , log, 0, 0, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint );
+	mb->exec();
+
+	// Switch branch
+	git->switchBranch( QString( "master" ) );
+
+	// Show the logs regarding the "master" branch
+	// Note: the commit made inside "devel" branch won't be listed!
+	git->log( rootDir );
+	QString log1 = git->getResult();
+	QMessageBox *mb1 = new QMessageBox ( QMessageBox::NoIcon, QString("Log result in \"master\":") , log1, 0, 0, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint );
+	mb1->exec();
+	
+	// Show branches
+	git->branches();
+	QString br = git->getResult();
+	QMessageBox *mb2 = new QMessageBox ( QMessageBox::NoIcon, QString("Log result in \"master\":") , br, 0, 0, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint );
+	mb2->exec();
 
 	return 0;
 }
