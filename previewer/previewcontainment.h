@@ -19,6 +19,7 @@
 
 #include <QGraphicsView>
 #include <QGraphicsLinearLayout>
+#include <KMenu>
 
 #include <Plasma/Containment>
 #include <Plasma/IconWidget>
@@ -69,7 +70,12 @@ protected:
     void hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
 
 private:
+    // this is a rough gauge for now
+    static const int MIN_HEIGHT_FOR_OVERLAY = 250;
+  
+    enum menu_type { KMENU, OVERLAY } m_menutype;
     OverlayToolBox *m_options;
+    KMenu *m_menu;
 
     // Little dirty hack to make previewer
     // look more beautiful when there is no applet.
@@ -86,6 +92,10 @@ private:
     Plasma::IconWidget *refresh;
     Plasma::IconWidget *location;
     Plasma::IconWidget *wallpaper;
+    
+    void initMenu();
+    QAction* addMenuItem(const KIcon &icon, const QString &title);
+    void showMenu();
 };
 
 

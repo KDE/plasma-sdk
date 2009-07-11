@@ -27,7 +27,7 @@
 
 
 PreviewContainment::PreviewContainment(QObject *parent, const QVariantList &args)
-    : Containment(parent, args), m_options(0), m_applet(0)
+    : Containment(parent, args), m_options(0), m_applet(0), m_menu(0), m_menutype(OVERLAY)
 {
     connect(this, SIGNAL(appletAdded(Plasma::Applet *, const QPointF &)),
             this, SLOT(onAppletAdded(Plasma::Applet *, const QPointF &)));
@@ -62,6 +62,10 @@ PreviewContainment::~PreviewContainment()
 {
     if (m_options) {
         delete m_options;
+    }
+    
+    if(m_menu) {
+        delete m_menu;
     }
 }
 
@@ -102,6 +106,7 @@ void PreviewContainment::setupHeader()
 
 // Fixme(?): Does not currently respect arguments passed in during
 // initialization. Will reload applet without arguments
+// reloaded applet is also often smaller than original for some reason
 void PreviewContainment::refreshApplet()
 {
     if (!m_applet)
@@ -121,28 +126,18 @@ void PreviewContainment::refreshApplet()
 
 void PreviewContainment::changeFormFactor()
 {
-    delete m_options;
+    initMenu();
 
-    m_options = new OverlayToolBox(this);
-    m_options->setGeometry(geometry());
-    m_options->setZValue(100000000);
-
-    KAction *planar = new KAction(KIcon("user-desktop"),
-                                  i18n("Planar"), m_options);
-    KAction *mediacenter = new KAction(KIcon("user-desktop"),
-                                       i18n("Media Center"), m_options);
-    KAction *horizontal = new KAction(KIcon("user-desktop"),
-                                      i18n("Horizontal"), m_options);
-    KAction *vertical = new KAction(KIcon("user-desktop"),
-                                    i18n("Vertical"), m_options);
-    KAction *cancel = new KAction(KIcon("dialog-cancel"),
-                                  i18n("Cancel"), m_options);
-
-    m_options->addTool(planar);
-    m_options->addTool(mediacenter);
-    m_options->addTool(horizontal);
-    m_options->addTool(vertical);
-    m_options->addTool(cancel);
+    QAction *planar = addMenuItem(KIcon("user-desktop"),
+                                  i18n("Planar"));
+    QAction *mediacenter = addMenuItem(KIcon("user-desktop"),
+                                       i18n("Media Center"));
+    QAction *horizontal = addMenuItem(KIcon("user-desktop"),
+                                      i18n("Horizontal"));
+    QAction *vertical = addMenuItem(KIcon("user-desktop"),
+                                    i18n("Vertical"));
+    QAction *cancel = addMenuItem(KIcon("dialog-cancel"),
+                                  i18n("Cancel"));
 
     connect(planar, SIGNAL(triggered(bool)), this, SLOT(planarTriggered(bool)));
     connect(mediacenter, SIGNAL(triggered(bool)), this, SLOT(mediacenterTriggered(bool)));
@@ -150,95 +145,79 @@ void PreviewContainment::changeFormFactor()
     connect(vertical, SIGNAL(triggered(bool)), this, SLOT(verticalTriggered(bool)));
     connect(cancel, SIGNAL(triggered(bool)), this, SLOT(cancelOption(bool)));
 
-    m_options->show();
+    showMenu();
 }
 
 void PreviewContainment::changeWallpaper()
 {
-    delete m_options;
-
-    m_options = new OverlayToolBox(this);
-    m_options->setGeometry(geometry());
-    m_options->setZValue(100000000);
+    initMenu();
 
     QSignalMapper *signalMapper = new QSignalMapper(this);
 
     // create a menu item for each wallpaper plugin installed
     foreach (const KPluginInfo &info, Plasma::Wallpaper::listWallpaperInfo()) {
-      KAction *plugin = new KAction(KIcon("user-desktop"),
-                                    i18n(info.pluginName().toStdString().c_str()), m_options);
+      QAction *plugin = addMenuItem(KIcon("user-desktop"),
+                                           i18n(info.pluginName().toStdString().c_str()));
       signalMapper->setMapping(plugin, info.pluginName());
-      m_options->addTool(plugin);
       connect(signalMapper, SIGNAL(mapped(const QString &)), this, SLOT(setWallpaperPlugin(const QString &)));
       connect(plugin, SIGNAL(triggered(bool)), signalMapper, SLOT(map()));
     }
     
     // cancel button
-    KAction *cancel = new KAction(KIcon("dialog-cancel"),
-                                  i18n("Cancel"), m_options);
-    m_options->addTool(cancel);
+    QAction *cancel = addMenuItem(KIcon("dialog-cancel"), i18n("Cancel"));
     connect(cancel, SIGNAL(triggered(bool)), this, SLOT(cancelOption(bool)));
 
-    m_options->show();
+    showMenu();
 }
 
 void PreviewContainment::planarTriggered(bool)
 {
-    m_options->hide();
+    if (m_options)
+        m_options->hide();
     setFormFactor(Plasma::Planar);
 }
 
 void PreviewContainment::mediacenterTriggered(bool)
 {
-    m_options->hide();
+    if (m_options)
+        m_options->hide();
     setFormFactor(Plasma::Vertical);
 }
 
 void PreviewContainment::horizontalTriggered(bool)
 {
-    m_options->hide();
+    if (m_options)
+        m_options->hide();
     setFormFactor(Plasma::Vertical);
 }
 
 void PreviewContainment::verticalTriggered(bool)
 {
-    m_options->hide();
+    if (m_options)
+        m_options->hide();
     setFormFactor(Plasma::Vertical);
 }
 
 void PreviewContainment::changeLocation()
 {
-    delete m_options;
+    initMenu();
 
-    m_options = new OverlayToolBox(this);
-    m_options->setGeometry(geometry());
-    m_options->setZValue(100);
-
-    KAction *floating = new KAction(KIcon("user-trash"),
-                                    i18n("Floating"), m_options);
-    KAction *desktop = new KAction(KIcon("user-trash"),
-                                   i18n("Desktop"), m_options);
-    KAction *fullscreen = new KAction(KIcon("user-trash"),
-                                      i18n("FullScreen"), m_options);
-    KAction *topEdge = new KAction(KIcon("user-trash"),
-                                   i18n("Top Edge"), m_options);
-    KAction *bottomEdge = new KAction(KIcon("user-trash"),
-                                      i18n("Bottom Edge"), m_options);
-    KAction *leftEdge = new KAction(KIcon("user-trash"),
-                                    i18n("Left Edge"), m_options);
-    KAction *rightEdge = new KAction(KIcon("user-trash"),
-                                     i18n("Right Edge"), m_options);
-    KAction *cancel = new KAction(KIcon("dialog-cancel"),
-                                  i18n("Cancel"), m_options);
-
-    m_options->addTool(floating);
-    m_options->addTool(desktop);
-    m_options->addTool(fullscreen);
-    m_options->addTool(topEdge);
-    m_options->addTool(bottomEdge);
-    m_options->addTool(leftEdge);
-    m_options->addTool(rightEdge);
-    m_options->addTool(cancel);
+    QAction *floating = addMenuItem(KIcon("user-trash"),
+                                    i18n("Floating"));
+    QAction *desktop = addMenuItem(KIcon("user-trash"),
+                                   i18n("Desktop"));
+    QAction *fullscreen = addMenuItem(KIcon("user-trash"),
+                                      i18n("FullScreen"));
+    QAction *topEdge = addMenuItem(KIcon("user-trash"),
+                                   i18n("Top Edge"));
+    QAction *bottomEdge = addMenuItem(KIcon("user-trash"),
+                                      i18n("Bottom Edge"));
+    QAction *leftEdge = addMenuItem(KIcon("user-trash"),
+                                    i18n("Left Edge"));
+    QAction *rightEdge = addMenuItem(KIcon("user-trash"),
+                                     i18n("Right Edge"));
+    QAction *cancel = addMenuItem(KIcon("dialog-cancel"),
+                                  i18n("Cancel"));
 
     connect(floating, SIGNAL(triggered(bool)), this, SLOT(floatingTriggered(bool)));
     connect(desktop, SIGNAL(triggered(bool)), this, SLOT(desktopTriggered(bool)));
@@ -249,58 +228,67 @@ void PreviewContainment::changeLocation()
     connect(rightEdge, SIGNAL(triggered(bool)), this, SLOT(rightEdgeTriggered(bool)));
     connect(cancel, SIGNAL(triggered(bool)), this, SLOT(cancelOption(bool)));
 
-    m_options->show();
+    showMenu();
 }
 
 void PreviewContainment::floatingTriggered(bool)
 {
-    m_options->hide();
+    if (m_options)
+        m_options->hide();
     setLocation(Plasma::Desktop);
 }
 
 void PreviewContainment::desktopTriggered(bool)
 {
-    m_options->hide();
+    if (m_options)
+        m_options->hide();
     setLocation(Plasma::Desktop);
 }
 
 void PreviewContainment::fullscreenTriggered(bool)
 {
-    m_options->hide();
+    if (m_options)
+        m_options->hide();
     setLocation(Plasma::FullScreen);
 }
 
 void PreviewContainment::topEdgeTriggered(bool)
 {
-    m_options->hide();
+    if (m_options)
+        m_options->hide();
     setLocation(Plasma::TopEdge);
 }
 
 void PreviewContainment::bottomEdgeTriggered(bool)
 {
-    m_options->hide();
+    if (m_options)
+        m_options->hide();
     setLocation(Plasma::BottomEdge);
 }
 
 void PreviewContainment::leftEdgeTriggered(bool)
 {
-    m_options->hide();
+    if (m_options)
+        m_options->hide();
     setLocation(Plasma::LeftEdge);
 }
 
 void PreviewContainment::rightEdgeTriggered(bool)
 {
-    m_options->hide();
+    if (m_options)
+        m_options->hide();
     setLocation(Plasma::RightEdge);
 }
 
 void PreviewContainment::cancelOption(bool)
 {
-    m_options->hide();
+    if (m_options)
+        m_options->hide();
 }
 
 void PreviewContainment::setWallpaperPlugin(const QString& name) {
-    m_options->hide();
+    if (m_options)
+        m_options->hide();
     setWallpaper(name);
 }
 
@@ -341,13 +329,43 @@ void PreviewContainment::onAppletGeometryChanged()
 }
 
 void PreviewContainment::hoverEnterEvent(QGraphicsSceneHoverEvent* event) {
-  m_controls->show();
-  Containment::hoverEnterEvent(event);
+    m_controls->show();
+    Containment::hoverEnterEvent(event);
 }
 
 void PreviewContainment::hoverLeaveEvent(QGraphicsSceneHoverEvent* event) {
-  m_controls->hide();
-  Containment::hoverLeaveEvent(event);
+    m_controls->hide();
+    Containment::hoverLeaveEvent(event);
+}
+
+void PreviewContainment::initMenu() {
+    if (size().height() < MIN_HEIGHT_FOR_OVERLAY) {
+        delete m_menu;
+        m_menu = new KMenu();
+        m_menutype = KMENU;
+    } else {
+        delete m_options;
+        m_options = new OverlayToolBox(this);
+        m_options->setGeometry(geometry());
+        m_options->setZValue(100);
+        m_menutype = OVERLAY;
+    }
+}
+
+QAction *PreviewContainment::addMenuItem(const KIcon &icon, const QString& title) {
+    if (m_menutype == OVERLAY) {
+        KAction *ret = new KAction(icon, title, m_options);
+        m_options->addTool(ret);
+        return ret;
+    }
+    return m_menu->addAction(icon, title);
+}
+
+void PreviewContainment::showMenu() {
+    if (m_menutype == KMENU)
+        m_menu->popup(QCursor::pos());
+    else
+        m_options->show();
 }
 
 K_EXPORT_PLASMA_APPLET(studiopreviewer, PreviewContainment)
