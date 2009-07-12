@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 
 
 	// Eventually set the repo directory
-	git->setDirectory( QDir( rootDir ) );
+	git->setDirectory( KUrl( rootDir ) );
 
 	// Ok, now let's add and commit one file
 	QStringList *list= new QStringList( QString("main.cpp") );
@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
 	QString log1 = git->getResult();
 	QMessageBox *mb1 = new QMessageBox ( QMessageBox::NoIcon, QString("Log result in \"master\":") , log1, 0, 0, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint );
 	mb1->exec();
-	
+
 	// Show branches
 	git->branches();
 	QString br = git->getResult();

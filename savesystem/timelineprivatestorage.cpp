@@ -10,7 +10,7 @@
 #include	<QList>
 
 
-#include	"timelineitem.cpp"
+#include	"timelineitem.h"
 #include	"timelinedelegate.h"
 #include	"timelinelistwidget.h"
 #include	"timelineprivatestorage.h"

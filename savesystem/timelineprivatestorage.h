@@ -1,6 +1,16 @@
 #ifndef TIMELINEPRIVATESTORAGE_H
 #define TIMELINEPRIVATESTORAGE_H
 
+class	TimeLineListwidget;
+class	TimeLineItem;
+class	TimeLineDelegate;
+class	TimeLineListWidget;
+class	TimeLinePrivateStorage;
+
+class QSplitter;
+class QStackedWidget;
+class QStackedWidget;
+
 class TimeLinePrivateStorage
 {
 public:

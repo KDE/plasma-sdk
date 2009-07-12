@@ -4,25 +4,51 @@
 
 
 #include	<QListWidgetItem>
-#include	<QDateTime>
+#include	<klocalizedstring.h>
+
+#include	"timelineitem.h"
 
 static const int TimeLineItemType = QListWidgetItem::UserType + 1;
 
-class TimeLineItem : public QListWidgetItem
-{
-	public:
-		/* List item representing a timeline entry. */
-		TimeLineItem( const QIcon &icon, const QString &text, const QString &commit )
-					: QListWidgetItem( 0, QListWidgetItem::UserType )
-		{
-					setFlags( Qt::ItemIsSelectable | Qt::ItemIsEnabled );
-					setIcon( icon );
-					setText( text );
-					setToolTip( commit );
-					m_commitInfo = new QString( commit );
-		}
+/* List item representing a timeline entry. */
+TimeLineItem::TimeLineItem( const QIcon &icon,
+					  QStringList &dataList,
+					  const TimeLineItem::ItemIdentifier id,
+					  const Qt::ItemFlag flag)
+					  : QListWidgetItem( 0, TimeLineItemType )
 
-	private:
-		QString *m_commitInfo;
-		QDateTime *m_commitDate;
-};
+{
+	//	Note: we expect dataList is as follows:
+	//	dataList(0) = text string that will be showed
+	//	dataList(1) = commit string used for tooltip
+	//	dataList(2) = sha1 sum
+
+	setFlags( flag );
+	setIcon( icon );
+	setText( dataList.takeFirst() );
+	setToolTip( dataList.takeFirst() );
+	m_type = id;
+	m_sha1sum = new QString( dataList.takeFirst() );
+}
+
+
+void TimeLineItem::setHash( const QString &hash )
+{
+	m_sha1sum = new QString( hash );
+}
+
+void TimeLineItem::setIdentifier( const TimeLineItem::ItemIdentifier id  )
+{
+	m_type = id;
+}
+
+QString& TimeLineItem::getHash( )
+{
+	return *m_sha1sum;
+}
+
+TimeLineItem::	ItemIdentifier TimeLineItem::getIdentifier()
+{
+	return m_type;
+}
+

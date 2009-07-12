@@ -19,7 +19,7 @@ class GitRunner
 		bool isValidDirectory(const KUrl &dirPath);
 		bool isRunning();
 
-		void setDirectory(const QDir &dir );
+		void setDirectory(const KUrl &dir );
 		void setCommunicationMode(KProcess::OutputChannelMode comm);
 
 		DvcsJob::JobStatus add(const KUrl::List& localLocations);
@@ -33,6 +33,7 @@ class GitRunner
 		DvcsJob::JobStatus reset(const QStringList &args);
 		DvcsJob::JobStatus newBranch(const QString &newBranch);
 		DvcsJob::JobStatus switchBranch(const QString &newBranch);
+		DvcsJob::JobStatus currentBranch();
 		DvcsJob::JobStatus branches();
 
 		QString& getResult();
@@ -40,11 +41,12 @@ class GitRunner
 	private:
 		void resetJob();
 		void startJob();
+		void initJob( DvcsJob &job );
+		void startJob( DvcsJob &job );
 
-		QString						*m_currentBranch;
 		QString						m_result;
 		KUrl						*m_lastRepoRoot;
-		DvcsJob						*m_job;
+		DvcsJob::JobStatus			m_jobStatus;
 		KProcess::OutputChannelMode	m_commMode;
 		volatile bool				m_isRunning;
 };

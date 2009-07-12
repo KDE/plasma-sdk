@@ -28,38 +28,44 @@
 #include <kiconloader.h>
 #include <klocale.h>
 #include <KUrl>
-#include <QMessageBox>
+#include <KIcon>
+#include	<QListWidget>
+#include	<QRegExp>
+#include	<QMessageBox>
 
 
-
-#include	"timelineitem.cpp"
+#include	"timelineitem.h"
 #include	"timelinedelegate.h"
 #include	"timelinelistwidget.h"
 #include	"timelineprivatestorage.h"
 #include	"timeline.h"
-#include	"gitrunner.h"
 
 
 
 //using namespace KDevelop;
 
-TimeLine::TimeLine( QWidget *parent, KUrl *dir )
+TimeLine::TimeLine( QWidget *parent, const KUrl &dir )
 	: QWidget( parent ), d( new TimeLinePrivateStorage )
 {
-
-
+	m_gitRunner = new GitRunner();
+	setWorkingDir( dir );
 	initUI( parent );
 
 }
 
 TimeLine::~TimeLine()
 {
+	if( m_workingDir )
+		delete m_workingDir;
 	delete d;
 }
 
-int TimeLine::uiAddItem( const QIcon &icon, const QString &text )
+int TimeLine::uiAddItem( const QIcon &icon,
+						 QStringList &data,
+						 const TimeLineItem::ItemIdentifier id,
+						 const Qt::ItemFlag flag )
 {
-	TimeLineItem *newitem = new TimeLineItem( icon, text, text );
+	TimeLineItem *newitem = new TimeLineItem( icon, data, id, flag );
 	d->list->addItem( newitem );
 	d->pages.append( newitem );
 	// updating the minimum height of the icon view, so all are visible with no scrolling
@@ -67,9 +73,125 @@ int TimeLine::uiAddItem( const QIcon &icon, const QString &text )
 	return d->pages.count() - 1;
 }
 
-bool TimeLine::initDirectoryTree( const KUrl *dir )
+void TimeLine::loadTimeLine( KUrl &dir )
 {
-	return true;
+	QStringList list = QStringList();
+
+	// Ensure we are on a valid Git directory
+	bool res = m_gitRunner->isValidDirectory( dir );
+	if( !res )
+	{
+		// If the dir hasn't a git tree we have to create only one item,
+		// used to notify the user that a timeline should be created
+		// ( that is, call GitRunner::init() ).
+		list.append( i18n( "Not a SavePoint" ) );
+		list.append( i18n( "Click here to save your first SavePoint!\nHint: try to always add a small comment ;)" ) );
+		list.append( QString() );				// We don't have a sha1sum now, so set an empty string
+
+		this->uiAddItem( KIcon( "document-save" ),
+						 list,
+						 TimeLineItem::NotACommit,
+						 Qt::ItemIsEnabled );
+
+		return;
+	}
+
+	// Now we can mark dir as current directory
+	m_gitRunner->setDirectory( dir );
+
+	// The first element of the timeline is used to prompt the user to
+	// add a SavePoint
+	list.append( i18n( "Not a SavePoint" ) );
+	list.append( i18n( "Click here to save your first SavePoint!\nHint: try to always add a small comment ;)" ) );
+	list.append( QString() );				// We don't have a sha1sum now, so set an empty string
+	this->uiAddItem( KIcon( "document-save" ),
+					list,
+					TimeLineItem::NotACommit,
+					Qt::ItemIsEnabled );
+
+
+	if( m_gitRunner->currentBranch() != DvcsJob::JobSucceeded )
+	{
+		// handle error
+		return;
+	}
+	m_currentBranch = new QString( m_gitRunner->getResult() );
+
+	if( m_gitRunner->branches() != DvcsJob::JobSucceeded )
+	{
+		// handle error
+		return;
+	}
+	QString branches = m_gitRunner->getResult();
+
+	if( m_gitRunner->log( dir ) != DvcsJob::JobSucceeded )
+	{
+		// handle error
+		return;
+	}
+
+	QString rawCommits = m_gitRunner->getResult();
+	QRegExp rx( "(commit )" );
+	// For now, we assume to find only commits
+	QStringList commits = rawCommits.split( rx, QString::SkipEmptyParts );
+	int index = commits.size();
+
+	// Iterate every commit and create an element in the sidebar.
+	for( int i = 0; i < index; i++ )
+	{
+		// Save commit(index) and split it
+		QStringList tmp = commits.takeFirst().split( "\n" );
+		QString sha1sum = tmp.takeFirst();
+		QString author = tmp.takeFirst().remove( 0, 8 );
+		QString date = tmp.takeFirst().remove( 0, 6 );
+
+		QString commitInfo = ( i18n( "SavePoint created on " ) + date );
+		commitInfo.append( i18n( "\nBy " ) + author + "\n" );
+		commitInfo.append( i18n( "Comment:\n" ) );
+		int tmpSize = tmp.size();
+		for( int c = 0; c < tmpSize-1; c++ )
+		{
+			commitInfo.append( tmp.takeFirst().append( "\n" ) );
+			//commitInfo.append( "\n" );
+		}
+		QString text = QString( "SavePoint #" );
+		QString savePointNumber = QString();
+		savePointNumber.setNum( i );
+		text.append( savePointNumber );
+
+		QStringList list = QStringList( text );
+		list.append( commitInfo );
+		list.append( sha1sum );
+		this->uiAddItem( KIcon( "dialog-ok" ),
+						 list,
+						 TimeLineItem::Commit,
+						 Qt::ItemIsEnabled );
+
+	}
+
+	// As last element, show the current branch
+	QString info = QString();
+	list.clear();
+	info.append( i18n( "On branch: " ) );
+	info.append( m_currentBranch );
+	list.append( info );
+
+	info.clear();
+	info.append( i18n( "You are currently working on branch:\n" ) );
+	info.append( m_currentBranch );
+	info.append( i18n( "\n" ) );
+	info.append( i18n( "\nOther available branches are:\n" ) );
+	info.append( branches );
+	info.append( i18n( "\nClick here to switch to those branches." ) );
+
+	list.append( info );
+	list.append( i18n( "" ) );
+
+	this->uiAddItem( KIcon( "system-switch-user" ),
+						 list,
+						 TimeLineItem::Branch,
+						 Qt::ItemIsEnabled );
+
 }
 
 void TimeLine::setItemEnabled( int index, bool enabled )
@@ -149,19 +271,14 @@ bool TimeLine::isTimeLineVisible() const
 	return !d->sideContainer->isHidden();
 }
 
-void TimeLine::setWorkingDir( KUrl &dir )
+void TimeLine::setWorkingDir( const KUrl &dir )
 {
 	m_workingDir = new KUrl( dir );
 }
 
-void TimeLine::parseTimeLine()
-{
-
-}
-
 void TimeLine::initUI( QWidget *parent )
 {
-		QVBoxLayout *mainlay = new QVBoxLayout( this );
+	QVBoxLayout *mainlay = new QVBoxLayout( this );
 	mainlay->setMargin( 0 );
 	mainlay->setSpacing( 0 );
 
@@ -186,8 +303,8 @@ void TimeLine::initUI( QWidget *parent )
 	d->splitter->setChildrenCollapsible( false );
 
 	d->sideContainer = new QWidget( d->splitter );
-	//d->sideContainer->setMinimumWidth( 90 );
-	//d->sideContainer->setMaximumWidth( 600 );
+	d->sideContainer->setMinimumWidth( 90 );
+	d->sideContainer->setMaximumWidth( 600 );
 	d->vlay = new QHBoxLayout( d->sideContainer );
 	d->vlay->setMargin( 0 );
 

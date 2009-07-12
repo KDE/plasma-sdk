@@ -11,6 +11,8 @@ set (PlasMate_SRC
     sidebarlistwidget.cpp
     sidebarprivatestorage.cpp
     sidebar.cpp
+    savesystem/dvcsjob.cpp
+    savesystem/gitrunner.cpp
     savesystem/timelineitem.cpp
     savesystem/timelinedelegate.cpp
     savesystem/timelinelistwidget.cpp

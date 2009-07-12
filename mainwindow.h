@@ -17,12 +17,12 @@
 class QModelIndex;
 
 namespace Ui {
-    class MainWindowClass;
+	class MainWindowClass;
 }
 
 namespace KTextEditor {
-    class Document;
-    class View;
+	class Document;
+	class View;
 }
 
 
@@ -35,54 +35,57 @@ class EditPage;
 class PackageModel;
 class StartPage;
 class Sidebar;
+class TimeLine;
 
 // our own previewer
 class Previewer;
 
 class MainWindow : public KParts::MainWindow
 {
-    Q_OBJECT
+	Q_OBJECT
 
-    public:
-        MainWindow(QWidget *parent = 0);
-        ~MainWindow();
+	public:
+		MainWindow(QWidget *parent = 0);
+		~MainWindow();
 
-        QStringList recentProjects();
+		QStringList recentProjects();
 
-    public Q_SLOTS:
-        void quit();
+	public Q_SLOTS:
+		void quit();
 
-        void changeTab(int tab);
-        void loadProject(const QString &name, const QString &type);
+		void changeTab(int tab);
+		void loadProject(const QString &name, const QString &type);
 
-        void loadRequiredEditor(const KService::List offers);
+		void loadRequiredEditor(const KService::List offers);
 
-    private:
-        enum WorkflowTabs { StartPageTab = 0,
-                            EditTab,
-                            PublishTab,
-                            DocsTab,
-                            PreviewTab };
+	private:
+		enum WorkflowTabs { StartPageTab = 0,
+							EditTab,
+							PublishTab,
+							DocsTab,
+							PreviewTab };
 
-        void createMenus();
-        void showEditor();
-        void hideEditor();
-        void createDockWidgets();
+		void createMenus();
+		void showEditor();
+		void hideEditor();
+		void createDockWidgets();
 
-        StartPage *m_startPage;
-        QDockWidget *m_workflow;
-        Sidebar *m_sidebar;
-        QDockWidget *m_previewerWidget;
-        Previewer *m_previewer;
+		StartPage *m_startPage;
+		QDockWidget *m_workflow;
+		Sidebar *m_sidebar;
+		QDockWidget	*m_dockTimeLine;
+		TimeLine	*m_timeLine;
+		QDockWidget *m_previewerWidget;
+		Previewer *m_previewer;
 
-        KTextEditor::Document *m_doc;
-        KTextEditor::View *m_editorView;
+		KTextEditor::Document *m_doc;
+		KTextEditor::View *m_editorView;
 
-        EditPage *m_editPage;
-        PackageModel *m_model;
-        int m_oldTab;
-	
-	KParts::Part *m_part;
+		EditPage *m_editPage;
+		PackageModel *m_model;
+		int m_oldTab;
+
+		KParts::Part *m_part;
 };
 
 #endif // MAINWINDOW_H
