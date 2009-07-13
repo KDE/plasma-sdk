@@ -157,7 +157,7 @@ void PreviewContainment::changeWallpaper()
     // create a menu item for each wallpaper plugin installed
     foreach (const KPluginInfo &info, Plasma::Wallpaper::listWallpaperInfo()) {
       QAction *plugin = addMenuItem(KIcon("user-desktop"),
-                                           i18n(info.pluginName().toStdString().c_str()));
+                                           info.pluginName());
       signalMapper->setMapping(plugin, info.pluginName());
       connect(signalMapper, SIGNAL(mapped(const QString &)), this, SLOT(setWallpaperPlugin(const QString &)));
       connect(plugin, SIGNAL(triggered(bool)), signalMapper, SLOT(map()));
