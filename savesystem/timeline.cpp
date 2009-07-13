@@ -185,7 +185,7 @@ void TimeLine::loadTimeLine( KUrl &dir )
 	info.append( i18n( "\nClick here to switch to those branches." ) );
 
 	list.append( info );
-	list.append( i18n( "" ) );
+	list.append( QString() );
 
 	this->uiAddItem( KIcon( "system-switch-user" ),
 						 list,
