@@ -42,5 +42,5 @@ void SidebarPrivateStorage::adjustListSize( bool recalc, bool expand )
 	int newWidth = expand
 				   ? qMax( bottomElemRect.width() + list->frameWidth() * 2, curWidth )
 				   : qMin( bottomElemRect.width() + list->frameWidth() * 2, curWidth );
-	//list->setFixedWidth( newWidth );
+	list->setFixedWidth( newWidth );
 }

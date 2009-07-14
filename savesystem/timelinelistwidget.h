@@ -8,7 +8,7 @@ class TimeLineListWidget : public QListWidget
 		~TimeLineListWidget();
 
 	protected:
-		// from QListWidget
+		// from QWidget
 		void mouseDoubleClickEvent( QMouseEvent *event );
 		void mouseMoveEvent( QMouseEvent *event );
 		void mousePressEvent( QMouseEvent *event );

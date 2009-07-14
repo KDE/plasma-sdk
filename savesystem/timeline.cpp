@@ -32,6 +32,9 @@
 #include	<QListWidget>
 #include	<QRegExp>
 #include	<QMessageBox>
+#include	<KMenu>
+#include	<QMenu>
+#include	<QRect>
 
 
 #include	"timelineitem.h"
@@ -75,8 +78,8 @@ int TimeLine::uiAddItem( const QIcon &icon,
 
 void TimeLine::loadTimeLine( KUrl &dir )
 {
+	d->list->clear();
 	QStringList list = QStringList();
-
 	// Ensure we are on a valid Git directory
 	bool res = m_gitRunner->isValidDirectory( dir );
 	if( !res )
@@ -122,7 +125,18 @@ void TimeLine::loadTimeLine( KUrl &dir )
 		// handle error
 		return;
 	}
+
+	// Scan available branches,and save them
 	QString branches = m_gitRunner->getResult();
+	m_branches = new QStringList( branches.split( "\n", QString::SkipEmptyParts ) );
+	int index = m_branches->size();
+	// Clean the strings
+	for( int i = 0; i < index; i++ )
+	{
+		QString tmp = m_branches->takeFirst();
+		tmp.remove( 0, 2 );
+		m_branches->append( tmp );
+	}
 
 	if( m_gitRunner->log( dir ) != DvcsJob::JobSucceeded )
 	{
@@ -133,8 +147,9 @@ void TimeLine::loadTimeLine( KUrl &dir )
 	QString rawCommits = m_gitRunner->getResult();
 	QRegExp rx( "(commit )" );
 	// For now, we assume to find only commits
+	// TODO: parse also merges !!
 	QStringList commits = rawCommits.split( rx, QString::SkipEmptyParts );
-	int index = commits.size();
+	index = commits.size();
 
 	// Iterate every commit and create an element in the sidebar.
 	for( int i = 0; i < index; i++ )
@@ -180,7 +195,7 @@ void TimeLine::loadTimeLine( KUrl &dir )
 	info.append( i18n( "You are currently working on branch:\n" ) );
 	info.append( m_currentBranch );
 	info.append( i18n( "\n" ) );
-	info.append( i18n( "\nOther available branches are:\n" ) );
+	info.append( i18n( "\nAvailable branches are:\n" ) );
 	info.append( branches );
 	info.append( i18n( "\nClick here to switch to those branches." ) );
 
@@ -192,6 +207,64 @@ void TimeLine::loadTimeLine( KUrl &dir )
 						 TimeLineItem::Branch,
 						 Qt::ItemIsEnabled );
 
+	// Now the TimeLineItem can emit signal customContextMenuRequested()
+	setContextMenuPolicy( Qt::CustomContextMenu );
+
+	connect( d->list, SIGNAL( itemClicked ( QListWidgetItem * ) ),
+				 this, SLOT( customContextMenuPainter( QListWidgetItem * ) ) );
+
+}
+
+void TimeLine::customContextMenuPainter( QListWidgetItem *item )
+{
+
+	TimeLineItem *tlItem = dynamic_cast<TimeLineItem*> (item);
+
+	if( tlItem->getIdentifier() == TimeLineItem::NotACommit )
+	{
+		m_gitRunner->add( KUrl::List( QString( "." ) ) );
+		m_gitRunner->commit( QString( "asd" ) );
+		d->list->disconnect();					// Always perform this call, before reloading the TimeLine =)
+		this->loadTimeLine( *m_workingDir );
+		return;
+
+	}
+
+	QRect rc = d->list->visualItemRect( item );
+	KMenu menu( this );
+
+	if( tlItem->getIdentifier() == TimeLineItem::Commit )
+	{
+		menu.addTitle( tlItem->text() );
+		menu.addSeparator();
+		QAction *deleteCommit = menu.addAction( i18n( "Delete" ) );
+		QAction *moveToCommit = menu.addAction( i18n( "Move to this SavePoint" ) );
+
+	} else if( tlItem->getIdentifier() == TimeLineItem::Branch )
+	{
+		menu.addTitle( tlItem->text() );
+		menu.addSeparator();
+		QAction *createBranch = menu.addAction( i18n( "Create new Branch" ) );
+
+		QMenu *switchBranchMenu = menu.addMenu( i18n( "Switch to Branch:" ) );
+		int index = m_branches->size();
+		for( int i = 0; i < index; i++ )
+		{
+			QString tmp = m_branches->takeFirst();
+			connect( switchBranchMenu->addAction( tmp ), SIGNAL( triggered( bool ) ),
+					 this, SLOT( switchBranch( ) ) );
+			m_branches->append( tmp );
+		}
+		QAction *renameBranch = menu.addAction( i18n( "Rename current Branch" ) );
+		QAction *deleteBranch = menu.addAction( i18n( "Delete current Branch" ) );
+
+	} else
+	{
+		// TODO: implement case  TimeLineItem::Merge
+	}
+
+	menu.addSeparator();
+	menu.exec( mapToGlobal( rc.topLeft() ) );
 }
 
 void TimeLine::setItemEnabled( int index, bool enabled )
@@ -220,6 +293,16 @@ void TimeLine::setItemEnabled( int index, bool enabled )
 				setCurrentIndex( i );
 				break;
 			}
+}
+
+void TimeLine::switchBranch( )
+{
+	QAction *sender = dynamic_cast<QAction*> ( this->sender() );
+	QString branch = sender->text();
+	branch.remove( 0, 1 );		// Seems like text() returns branch  name with "&" as first character O.o
+	m_gitRunner->switchBranch( branch );
+	d->list->disconnect();					// Always perform this call, before reloading the TimeLine =)
+	loadTimeLine( *m_workingDir );
 }
 
 bool TimeLine::isItemEnabled( int index ) const
@@ -320,8 +403,8 @@ void TimeLine::initUI( QWidget *parent )
 	d->vlay->addWidget( d->stack );
 	d->sideContainer->hide();
 
-	connect( d->list, SIGNAL( currentRowChanged( int ) ),
-			 this, SIGNAL( currentIndexChanged( int ) ) );
+	//connect( d->list, SIGNAL( currentRowChanged( int ) ),
+	//		 this, SIGNAL( currentIndexChanged( int ) ) );
 }
 
 #include "timeline.moc"

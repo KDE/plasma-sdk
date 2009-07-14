@@ -26,11 +26,10 @@ TimeLineItem::TimeLineItem( const QIcon &icon,
 	setFlags( flag );
 	setIcon( icon );
 	setText( dataList.takeFirst() );
-	setToolTip( dataList.takeFirst() );
+	QListWidgetItem::setToolTip( dataList.takeFirst() );
 	m_type = id;
 	m_sha1sum = new QString( dataList.takeFirst() );
 }
-
 
 void TimeLineItem::setHash( const QString &hash )
 {

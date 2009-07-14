@@ -15,6 +15,7 @@ TimeLineListWidget::TimeLineListWidget( QWidget *parent )
 {
 }
 
+
 TimeLineListWidget::~TimeLineListWidget()
 {
 }
@@ -49,10 +50,13 @@ void TimeLineListWidget::mousePressEvent( QMouseEvent *event )
 void TimeLineListWidget::mouseReleaseEvent( QMouseEvent *event )
 {
 	QModelIndex index = indexAt( event->pos() );
-	if ( index.isValid() && !( index.flags() & Qt::ItemIsSelectable ) )
-		return;
+	//if ( index.isValid() && !( index.flags() & Qt::ItemIsSelectable ) )
+		//return;
 
-	QListWidget::mouseReleaseEvent( event );
+	//QListWidget::mouseReleaseEvent( event );
+	if( event->button() == Qt::RightButton )
+		emit itemClicked( itemFromIndex( index ) );
+	// TODO : if left button pressed, could be useful to assign an user defined actionS
 }
 
 QModelIndex TimeLineListWidget::moveCursor( QAbstractItemView::CursorAction cursorAction, Qt::KeyboardModifiers modifiers )

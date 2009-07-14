@@ -48,10 +48,13 @@ class TimeLine : public QWidget
 		void loadTimeLine( KUrl &dir );
 
 
+	public slots:
+		void customContextMenuPainter( QListWidgetItem *item );
 	signals:
 		void currentIndexChanged(int);
 
-	// private slots:
+	private slots:
+		void switchBranch();
 	// void itemClicked( QListWidgetItem *item );
 	// void splitterMoved( int pos, int index );
 	// void showTextToggled( bool );
@@ -70,6 +73,7 @@ class TimeLine : public QWidget
 		KUrl		*m_workingDir;
 		GitRunner	*m_gitRunner;
 		QString		*m_currentBranch;
+		QStringList	*m_branches;
 		TimeLinePrivateStorage *d;
 
 
