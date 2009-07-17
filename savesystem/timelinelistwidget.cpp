@@ -53,7 +53,7 @@ void TimeLineListWidget::mouseReleaseEvent( QMouseEvent *event )
 	//if ( index.isValid() && !( index.flags() & Qt::ItemIsSelectable ) )
 		//return;
 
-	//QListWidget::mouseReleaseEvent( event );
+	QListWidget::mouseReleaseEvent( event );
 	if( event->button() == Qt::RightButton )
 		emit itemClicked( itemFromIndex( index ) );
 	// TODO : if left button pressed, could be useful to assign an user defined actionS

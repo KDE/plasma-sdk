@@ -3,6 +3,8 @@ project(plasmate-savesystem)
 set (savesystem_SRCS
   author.cpp
   savesystem.cpp
+  branchdialog.cpp
+  commitdialog.cpp
   dvcsjob.cpp
   gitrunner.cpp
   timelineitem.cpp

@@ -16,23 +16,28 @@ class GitRunner
 		GitRunner();
 		~GitRunner();
 
-		bool isValidDirectory(const KUrl &dirPath);
+		bool isValidDirectory( const KUrl &dirPath );
 		bool isRunning();
 
-		void setDirectory(const KUrl &dir );
-		void setCommunicationMode(KProcess::OutputChannelMode comm);
+		void setDirectory( const KUrl &dir );
+		void setCommunicationMode( KProcess::OutputChannelMode comm );
 
-		DvcsJob::JobStatus add(const KUrl::List& localLocations);
-		DvcsJob::JobStatus createWorkingCopy(const KUrl& repoOrigin, const KUrl& repoDestination);
-		DvcsJob::JobStatus remove(const KUrl::List& files);
-		DvcsJob::JobStatus status(const KUrl &dirPath);
-		DvcsJob::JobStatus commit(const QString& message);
-		DvcsJob::JobStatus log(const KUrl& localLocation);
-		DvcsJob::JobStatus annotate(const KUrl &localLocation );
-		DvcsJob::JobStatus init(const KUrl & directory);
-		DvcsJob::JobStatus reset(const QStringList &args);
-		DvcsJob::JobStatus newBranch(const QString &newBranch);
-		DvcsJob::JobStatus switchBranch(const QString &newBranch);
+		DvcsJob::JobStatus add (const KUrl::List& localLocations );
+		DvcsJob::JobStatus createWorkingCopy( const KUrl& repoOrigin, const KUrl& repoDestination );
+		DvcsJob::JobStatus remove( const KUrl::List& files );
+		DvcsJob::JobStatus status( const KUrl &dirPath );
+		DvcsJob::JobStatus commit( const QString& message );
+		DvcsJob::JobStatus moveToCommit( const QString& sha1hash, const QString& newBranch );
+		DvcsJob::JobStatus deleteCommit( const QString& sha1hash );
+		DvcsJob::JobStatus log( const KUrl& localLocation );
+		DvcsJob::JobStatus annotate( const KUrl &localLocation );
+		DvcsJob::JobStatus init( const KUrl & directory );
+		DvcsJob::JobStatus reset( const QStringList &args );
+
+		DvcsJob::JobStatus newBranch( const QString &newBranch );
+		DvcsJob::JobStatus renameBranch( const QString &newBranch );
+		DvcsJob::JobStatus switchBranch( const QString &newBranch );
+		DvcsJob::JobStatus deleteBranch( const QString &branch );
 		DvcsJob::JobStatus currentBranch();
 		DvcsJob::JobStatus branches();
 

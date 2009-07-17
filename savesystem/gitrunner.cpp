@@ -198,6 +198,39 @@ DvcsJob::JobStatus GitRunner::commit(const QString& message)
 	return m_jobStatus;
 }
 
+DvcsJob::JobStatus GitRunner::moveToCommit( const QString &sha1hash, const QString& newBranch )
+{
+	DvcsJob *job = new DvcsJob();
+	initJob( *job );
+	*job << "checkout";
+	*job << sha1hash;
+
+	startJob( *job );
+	if( m_jobStatus != DvcsJob::JobSucceeded )
+		return m_jobStatus;
+
+	job = new DvcsJob();
+	initJob( *job );
+	*job << "checkout";
+	*job << "-b";
+	*job << newBranch;
+
+	startJob( *job );
+	return m_jobStatus;
+}
+
+DvcsJob::JobStatus GitRunner::deleteCommit( const QString &sha1hash )
+{
+	DvcsJob *job = new DvcsJob();
+	initJob( *job );
+	*job << "reset";
+	*job << "--hard";
+	*job << sha1hash;
+
+	startJob( *job );
+	return m_jobStatus;
+}
+
 DvcsJob::JobStatus GitRunner::remove(const KUrl::List& files)
 {
 	if (files.empty())
@@ -258,6 +291,17 @@ DvcsJob::JobStatus GitRunner::switchBranch(const QString &newBranch)
 	startJob( *job );
 	return m_jobStatus;
 }
+DvcsJob::JobStatus GitRunner::deleteBranch( const QString &branch )
+{
+	DvcsJob *job = new DvcsJob();
+	initJob( *job );
+	*job << "branch";
+	*job << "-D";
+	*job << branch;
+
+	startJob( *job );
+	return m_jobStatus;
+}
 
 DvcsJob::JobStatus GitRunner::currentBranch()
 {
@@ -291,6 +335,18 @@ DvcsJob::JobStatus GitRunner::newBranch(const QString &newBranch)
 	DvcsJob *job = new DvcsJob();
 	initJob( *job );
 	*job<< "branch";
+	*job<< newBranch;
+
+	startJob( *job );
+	return m_jobStatus;
+}
+
+DvcsJob::JobStatus GitRunner::renameBranch( const QString &newBranch )
+{
+	DvcsJob *job = new DvcsJob();
+	initJob( *job );
+	*job<< "branch";
+	*job<< "-m";
 	*job<< newBranch;
 
 	startJob( *job );

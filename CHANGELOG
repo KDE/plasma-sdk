@@ -1,3 +1,8 @@
+--July 17, 2009--
+- TimeLine now is able to create/delete branches, move to a selected commit ( creating also a new
+  branch to preserve other commits ), restore the current state to whatever commit ( deleting all
+  the commits performed after it, in the same branch ), init itself and save commits.
+
 --July 14, 2009--
 - Now the TimeLine sets-up a menu for each item, available by right-clicking on it: implemented the
   switch branch feature.

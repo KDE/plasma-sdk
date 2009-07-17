@@ -41,10 +41,10 @@ int main(int argc, char *argv[])
 		main->close();
 	}
 
-	// Init our GitRunner instanxe
+	// Init our GitRunner instance
 	GitRunner *git = new GitRunner();
 
-	// Perform a check on the folder to cofirm we have a valid git repo
+	// Perform a check on the folder to confirm we have a valid git repo
 	if( !git->isValidDirectory( rootDir ) )
 		git->init( KUrl( rootDir ) );											// Init an empty repo
 
@@ -74,8 +74,8 @@ int main(int argc, char *argv[])
 
 	// Now add them and then commit
 	list= new QStringList( QString("src1.cpp") );
-	*list << QString( "src1.cpp" );
 	*list << QString( "src2.cpp" );
+	*list << QString( "src3.cpp" );
 	git->add( KUrl::List( *list ) );
 	git->commit( QString( "Multiline comment.\n\nThe first line briefly explains the commits purpose,\nwhile the remaining lines add more details." ) );
 

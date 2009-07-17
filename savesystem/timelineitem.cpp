@@ -21,7 +21,7 @@ TimeLineItem::TimeLineItem( const QIcon &icon,
 	//	Note: we expect dataList is as follows:
 	//	dataList(0) = text string that will be showed
 	//	dataList(1) = commit string used for tooltip
-	//	dataList(2) = sha1 sum
+	//	dataList(2) = sha1 hash
 
 	setFlags( flag );
 	setIcon( icon );

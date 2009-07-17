@@ -44,17 +44,23 @@ class TimeLine : public QWidget
 		void setTimeLineVisibility( bool visible );
 		bool isTimeLineVisible() const;
 
-		void setWorkingDir( const KUrl &dir );
-		void loadTimeLine( KUrl &dir );
+		void setWorkingDir( const KUrl& dir );
+		void loadTimeLine( KUrl& dir );
 
 
 	public slots:
-		void customContextMenuPainter( QListWidgetItem *item );
+		void customContextMenuPainter( QListWidgetItem* item );
 	signals:
 		void currentIndexChanged(int);
 
 	private slots:
+		void restoreCommit();
+		void moveToCommit();
+
 		void switchBranch();
+		void createBranch();
+		void renameBranch();
+		void deleteBranch();
 	// void itemClicked( QListWidgetItem *item );
 	// void splitterMoved( int pos, int index );
 	// void showTextToggled( bool );
@@ -62,8 +68,8 @@ class TimeLine : public QWidget
 
 	private:
 		// adds an item in the list
-		int uiAddItem( const QIcon &icon,
-					   QStringList &data,
+		int uiAddItem( const QIcon& icon,
+					   QStringList& data,
 					   const TimeLineItem::ItemIdentifier id,
 					   const Qt::ItemFlag flag );
 

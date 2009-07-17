@@ -26,17 +26,21 @@
 #include <qstackedwidget.h>
 
 #include <kiconloader.h>
-#include <klocale.h>
-#include <KUrl>
-#include <KIcon>
+
+
+#include	<KUrl>
+#include	<KIcon>
 #include	<QListWidget>
 #include	<QRegExp>
 #include	<QMessageBox>
 #include	<KMenu>
 #include	<QMenu>
 #include	<QRect>
+#include	<QLineEdit>
+#include	<QPlainTextEdit>
 
-
+#include	"branchdialog.h"
+#include	"commitdialog.h"
 #include	"timelineitem.h"
 #include	"timelinedelegate.h"
 #include	"timelinelistwidget.h"
@@ -47,7 +51,7 @@
 
 //using namespace KDevelop;
 
-TimeLine::TimeLine( QWidget *parent, const KUrl &dir )
+TimeLine::TimeLine( QWidget* parent, const KUrl& dir )
 	: QWidget( parent ), d( new TimeLinePrivateStorage )
 {
 	m_gitRunner = new GitRunner();
@@ -63,8 +67,8 @@ TimeLine::~TimeLine()
 	delete d;
 }
 
-int TimeLine::uiAddItem( const QIcon &icon,
-						 QStringList &data,
+int TimeLine::uiAddItem( const QIcon& icon,
+						 QStringList& data,
 						 const TimeLineItem::ItemIdentifier id,
 						 const Qt::ItemFlag flag )
 {
@@ -80,32 +84,33 @@ void TimeLine::loadTimeLine( KUrl &dir )
 {
 	d->list->clear();
 	QStringList list = QStringList();
-	// Ensure we are on a valid Git directory
+
+	m_gitRunner->setDirectory( dir );
 	bool res = m_gitRunner->isValidDirectory( dir );
+
 	if( !res )
 	{
 		// If the dir hasn't a git tree we have to create only one item,
 		// used to notify the user that a timeline should be created
 		// ( that is, call GitRunner::init() ).
 		list.append( i18n( "Not a SavePoint" ) );
-		list.append( i18n( "Click here to save your first SavePoint!\nHint: try to always add a small comment ;)" ) );
+		list.append( i18n( "No TimeLine found.\nClick to init the TimeLine and store your first SavePoint !" ) );
 		list.append( QString() );				// We don't have a sha1sum now, so set an empty string
 
 		this->uiAddItem( KIcon( "document-save" ),
 						 list,
-						 TimeLineItem::NotACommit,
+						 TimeLineItem::OutsideWorkingDir,
 						 Qt::ItemIsEnabled );
 
+		connect( d->list, SIGNAL( itemClicked ( QListWidgetItem * ) ),
+				 this, SLOT( customContextMenuPainter( QListWidgetItem * ) ) );
 		return;
 	}
-
-	// Now we can mark dir as current directory
-	m_gitRunner->setDirectory( dir );
 
 	// The first element of the timeline is used to prompt the user to
 	// add a SavePoint
 	list.append( i18n( "Not a SavePoint" ) );
-	list.append( i18n( "Click here to save your first SavePoint!\nHint: try to always add a small comment ;)" ) );
+	list.append( i18n( "Click here to store a new SavePoint!" ) );
 	list.append( QString() );				// We don't have a sha1sum now, so set an empty string
 	this->uiAddItem( KIcon( "document-save" ),
 					list,
@@ -118,6 +123,7 @@ void TimeLine::loadTimeLine( KUrl &dir )
 		// handle error
 		return;
 	}
+
 	m_currentBranch = new QString( m_gitRunner->getResult() );
 
 	if( m_gitRunner->branches() != DvcsJob::JobSucceeded )
@@ -164,7 +170,7 @@ void TimeLine::loadTimeLine( KUrl &dir )
 		commitInfo.append( i18n( "\nBy " ) + author + "\n" );
 		commitInfo.append( i18n( "Comment:\n" ) );
 		int tmpSize = tmp.size();
-		for( int c = 0; c < tmpSize-1; c++ )
+		for( int j = 0; j < tmpSize-1; j++ )
 		{
 			commitInfo.append( tmp.takeFirst().append( "\n" ) );
 			//commitInfo.append( "\n" );
@@ -187,17 +193,17 @@ void TimeLine::loadTimeLine( KUrl &dir )
 	// As last element, show the current branch
 	QString info = QString();
 	list.clear();
-	info.append( i18n( "On branch: " ) );
+	info.append( i18n( "On Section: " ) );
 	info.append( m_currentBranch );
 	list.append( info );
 
 	info.clear();
-	info.append( i18n( "You are currently working on branch:\n" ) );
+	info.append( i18n( "You are currently working on Section:\n" ) );
 	info.append( m_currentBranch );
 	info.append( i18n( "\n" ) );
-	info.append( i18n( "\nAvailable branches are:\n" ) );
+	info.append( i18n( "\nAvailable Sections are:\n" ) );
 	info.append( branches );
-	info.append( i18n( "\nClick here to switch to those branches." ) );
+	info.append( i18n( "\nClick here to switch to those Sections." ) );
 
 	list.append( info );
 	list.append( QString() );
@@ -209,7 +215,6 @@ void TimeLine::loadTimeLine( KUrl &dir )
 
 	// Now the TimeLineItem can emit signal customContextMenuRequested()
 	setContextMenuPolicy( Qt::CustomContextMenu );
-
 	connect( d->list, SIGNAL( itemClicked ( QListWidgetItem * ) ),
 				 this, SLOT( customContextMenuPainter( QListWidgetItem * ) ) );
 
@@ -217,46 +222,99 @@ void TimeLine::loadTimeLine( KUrl &dir )
 
 void TimeLine::customContextMenuPainter( QListWidgetItem *item )
 {
-
 	TimeLineItem *tlItem = dynamic_cast<TimeLineItem*> (item);
 
-	if( tlItem->getIdentifier() == TimeLineItem::NotACommit )
+	if( tlItem->getIdentifier() == TimeLineItem::OutsideWorkingDir )
 	{
+		// These lines are only for testing purpose !
+		m_gitRunner->init( *m_workingDir );
 		m_gitRunner->add( KUrl::List( QString( "." ) ) );
-		m_gitRunner->commit( QString( "asd" ) );
-		d->list->disconnect();					// Always perform this call, before reloading the TimeLine =)
+
+		CommitDialog *commitDialog= new CommitDialog();
+		commitDialog->exec();
+
+		QString commit = QString( commitDialog->m_commitBriefText->text() );
+		QString optionalComment = QString( commitDialog->m_commitFullText->toPlainText() );
+		if( optionalComment.compare( "" ) != 0 )
+		{
+			commit.append( "\n\n" );
+			commit.append( optionalComment );
+		}
+
+		m_gitRunner->commit( commit );
+		d->list->disconnect();
 		this->loadTimeLine( *m_workingDir );
 		return;
 
+	} else if( tlItem->getIdentifier() == TimeLineItem::NotACommit )
+	{
+		// This line is only for testing purpose !
+		m_gitRunner->add( KUrl::List( QString( "." ) ) );
+
+		CommitDialog *commitDialog= new CommitDialog();
+		commitDialog->exec();
+
+		QString commit = QString( commitDialog->m_commitBriefText->text() );
+		QString optionalComment = QString( commitDialog->m_commitFullText->toPlainText() );
+		if( optionalComment.compare( "" ) != 0 )
+		{
+			commit.append( "\n\n" );
+			commit.append( optionalComment );
+		}
+
+		m_gitRunner->commit( commit );
+		d->list->disconnect();
+		this->loadTimeLine( *m_workingDir );
+
+		return;
 	}
 
 	QRect rc = d->list->visualItemRect( item );
 	KMenu menu( this );
+	menu.addTitle( tlItem->text() );
+	menu.addSeparator();
 
 	if( tlItem->getIdentifier() == TimeLineItem::Commit )
 	{
-		menu.addTitle( tlItem->text() );
-		menu.addSeparator();
-		QAction *deleteCommit = menu.addAction( i18n( "Delete" ) );
+
+		QAction *restoreCommit = menu.addAction( i18n( "Restore SavePoint" ) );
+		restoreCommit->setData( QVariant( tlItem->getHash() ) );
 		QAction *moveToCommit = menu.addAction( i18n( "Move to this SavePoint" ) );
+		moveToCommit->setData( QVariant( tlItem->getHash() ) );
+
+		connect( restoreCommit, SIGNAL( triggered( bool ) ),
+					 this, SLOT( restoreCommit( ) ) );
+		connect( moveToCommit, SIGNAL( triggered( bool ) ),
+					 this, SLOT( moveToCommit( ) ) );
 
 	} else if( tlItem->getIdentifier() == TimeLineItem::Branch )
 	{
-		menu.addTitle( tlItem->text() );
-		menu.addSeparator();
-		QAction *createBranch = menu.addAction( i18n( "Create new Branch" ) );
 
-		QMenu *switchBranchMenu = menu.addMenu( i18n( "Switch to Branch:" ) );
+		QAction *createBranch = menu.addAction( i18n( "Create new Section" ) );
+		QMenu *switchBranchMenu = menu.addMenu( i18n( "Switch to Section:" ) );
+		QAction *renameBranch = menu.addAction( i18n( "Rename current Section" ) );
+		QMenu *deleteBranchMenu = menu.addMenu( i18n( "Delete Section:" ) );
 		int index = m_branches->size();
+
+		// Scan all the branches and, create a menu item for each item, and connect them
 		for( int i = 0; i < index; i++ )
 		{
 			QString tmp = m_branches->takeFirst();
+			if( tmp.compare( *m_currentBranch ) == 0 )
+				continue;
+
 			connect( switchBranchMenu->addAction( tmp ), SIGNAL( triggered( bool ) ),
 					 this, SLOT( switchBranch( ) ) );
+			connect( deleteBranchMenu->addAction( tmp ), SIGNAL( triggered( bool ) ),
+					 this, SLOT( deleteBranch( ) ) );
+
 			m_branches->append( tmp );
 		}
-		QAction *renameBranch = menu.addAction( i18n( "Rename current Branch" ) );
-		QAction *deleteBranch = menu.addAction( i18n( "Delete current Branch" ) );
+
+		connect( createBranch, SIGNAL( triggered( bool ) ),
+					 this, SLOT( createBranch( ) ) );
+		connect( renameBranch, SIGNAL( triggered( bool ) ),
+					 this, SLOT( renameBranch( ) ) );
 
 	} else
 	{
@@ -264,7 +322,7 @@ void TimeLine::customContextMenuPainter( QListWidgetItem *item )
 	}
 
 	menu.addSeparator();
-	menu.exec( mapToGlobal( rc.topLeft() ) );
+	menu.exec( mapToGlobal( rc.bottomLeft() ) );
 }
 
 void TimeLine::setItemEnabled( int index, bool enabled )
@@ -295,13 +353,151 @@ void TimeLine::setItemEnabled( int index, bool enabled )
 			}
 }
 
+void TimeLine::restoreCommit()
+{
+	QMessageBox warningMB;
+	warningMB.setIcon( QMessageBox::Information );
+	warningMB.setWindowTitle( i18n( "Information" ) );
+	warningMB.setText( i18n( "You are restoring the selected SavePoint." ) );
+	warningMB.setInformativeText( i18n( "With this operation, all the SavePoints and Branches created starting from it, will be deleted.\nContinue anyway?" ) );
+	warningMB.setStandardButtons( QMessageBox::Ok | QMessageBox::Discard );
+	warningMB.setDefaultButton( QMessageBox::Discard );
+	if( warningMB.exec() == QMessageBox::Discard )
+		return;
+
+	QAction *sender = dynamic_cast<QAction*> ( this->sender() );
+	QVariant data = sender->data();
+	m_gitRunner->deleteCommit( data.toString() );
+	d->list->disconnect();
+	loadTimeLine( *m_workingDir );
+
+}
+
+void TimeLine::moveToCommit()
+{
+	QMessageBox warningMB;
+	warningMB.setIcon( QMessageBox::Information );
+	warningMB.setWindowTitle( i18n( "Information" ) );
+	warningMB.setText( i18n( "You are going to move to the selected SavePoint." ) );
+	warningMB.setInformativeText( i18n( "To perform this, a new branch will be created and your current work may be lost if you don't have saved it as a Savepoint.\nContinue?" ) );
+	warningMB.setStandardButtons( QMessageBox::Ok | QMessageBox::Discard );
+	warningMB.setDefaultButton( QMessageBox::Discard );
+	if( warningMB.exec() == QMessageBox::Discard )
+		return;
+
+	BranchDialog *newBranch = new BranchDialog();
+
+	if ( newBranch->exec() == QDialog::Rejected )
+		return;
+
+	QString newBranchName = QString( newBranch->m_branchEdit->text() );
+
+	if( m_branches->contains( newBranchName ) )
+	{
+		QMessageBox *mb = new QMessageBox ( QMessageBox::Warning,
+											i18n( "Warning" ),
+											i18n( "Can't rename the Section.\nReason: a Section with this name already exists." ),
+											QMessageBox::NoButton,
+											this,Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+		mb->exec();
+		return;
+	}
+
+
+	QAction *sender = dynamic_cast<QAction*> ( this->sender() );
+	QVariant data = sender->data();
+	m_gitRunner->moveToCommit( data.toString(), newBranchName );
+	d->list->disconnect();
+	loadTimeLine( *m_workingDir );
+}
+
 void TimeLine::switchBranch( )
 {
 	QAction *sender = dynamic_cast<QAction*> ( this->sender() );
 	QString branch = sender->text();
-	branch.remove( 0, 1 );		// Seems like text() returns branch  name with "&" as first character O.o
+	branch.remove( "&" );
 	m_gitRunner->switchBranch( branch );
-	d->list->disconnect();					// Always perform this call, before reloading the TimeLine =)
+	d->list->disconnect();
+	loadTimeLine( *m_workingDir );
+}
+
+void TimeLine::deleteBranch( )
+{
+	QMessageBox warningMB;
+	warningMB.setIcon( QMessageBox::Warning );
+	warningMB.setWindowTitle( i18n( "Warning" ) );
+	warningMB.setText( i18n( "<b>You are going to remove the selected Section.</b>" ) );
+	warningMB.setInformativeText( i18n( "With this operation, you'll also delete all SavePoints/Sections performed inside it.\nContinue anyway?" ) );
+	warningMB.setStandardButtons( QMessageBox::Ok | QMessageBox::Discard );
+	warningMB.setDefaultButton( QMessageBox::Discard );
+	int result = warningMB.exec();
+
+	if( result == QMessageBox::Discard )
+		return;
+
+	QAction *sender = dynamic_cast<QAction*> ( this->sender() );
+	QString branch = sender->text();
+	branch.remove( "&" );
+	m_gitRunner->deleteBranch( branch );
+	d->list->disconnect();
+	loadTimeLine( *m_workingDir );
+}
+
+void TimeLine::renameBranch( )
+{
+	QAction *sender = dynamic_cast<QAction*> ( this->sender() );
+	QString branch = sender->text();
+	branch.remove( "&" );
+
+	BranchDialog *renameBranch = new BranchDialog();
+
+	if ( renameBranch->exec() == QDialog::Rejected )
+		return;
+
+	QString newBranchName = QString( renameBranch->m_branchEdit->text() );
+
+	if( m_branches->contains( newBranchName ) )
+	{
+		QMessageBox *mb = new QMessageBox ( QMessageBox::Warning,
+											i18n( "Warning" ),
+											i18n( "Can't rename the Section.\nReason: a Section with this name already exists." ),
+											QMessageBox::NoButton,
+											this,Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+		mb->exec();
+		return;
+	}
+
+	m_gitRunner->renameBranch( newBranchName );
+	d->list->disconnect();
+	loadTimeLine( *m_workingDir );
+}
+
+void TimeLine::createBranch( )
+{
+	QAction *sender = dynamic_cast<QAction*> ( this->sender() );
+	QString branch = sender->text();
+	branch.remove( "&" );
+
+	BranchDialog *createBranch = new BranchDialog();
+
+	if ( createBranch->exec() == QDialog::Rejected )
+		return;
+
+	QString newBranchName = QString( createBranch->m_branchEdit->text() );
+
+	if( m_branches->contains( newBranchName ) )
+	{
+		QMessageBox *mb = new QMessageBox ( QMessageBox::Warning,
+											i18n( "Warning" ),
+											i18n( "Can't create the Section.\nReason: a Section with this name already exists." ),
+											QMessageBox::NoButton,
+											this,Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+		mb->exec();
+		return;
+	}
+
+	m_gitRunner->newBranch( newBranchName );
+	d->list->disconnect();
 	loadTimeLine( *m_workingDir );
 }
 
@@ -340,6 +536,7 @@ void TimeLine::setTimeLineVisibility( bool visible )
 	if ( visible )
 	{
 		d->sideContainer->setHidden( !sideWasVisible );
+
 		sideWasVisible = true;
 	}
 	else
@@ -383,10 +580,11 @@ void TimeLine::initUI( QWidget *parent )
 	d->splitter = new QSplitter( this );
 	mainlay->addWidget( d->splitter );
 	d->splitter->setOpaqueResize( true );
-	d->splitter->setChildrenCollapsible( false );
+	d->splitter->setChildrenCollapsible( true );
 
 	d->sideContainer = new QWidget( d->splitter );
 	d->sideContainer->setMinimumWidth( 90 );
+	d->sideContainer->setMinimumHeight( 90 );
 	d->sideContainer->setMaximumWidth( 600 );
 	d->vlay = new QHBoxLayout( d->sideContainer );
 	d->vlay->setMargin( 0 );

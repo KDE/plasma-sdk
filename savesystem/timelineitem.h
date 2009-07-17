@@ -9,10 +9,11 @@ class TimeLineItem : public QListWidgetItem
 
 		enum ItemIdentifier
 		{
-			NotACommit = 0,
-			Commit = 1,
-			Branch = 2,
-			Merge = 3
+			OutsideWorkingDir = 0,
+			NotACommit = 1,
+			Commit = 2,
+			Branch = 3,
+			Merge = 4
 		};
 
 		/* List item representing a timeline entry. */

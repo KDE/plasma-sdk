@@ -41,7 +41,7 @@ void TimeLinePrivateStorage::adjustListSize( bool recalc, bool expand )
 	}
 	bottomElemRect.translate( 0, bottomElemRect.height() * ( list->count() - 1 ) );
 	itemsHeight = bottomElemRect.height() * list->count();
-	list->setMinimumHeight( itemsHeight + list->frameWidth() * 2 );
+	//list->setMinimumHeight( itemsHeight + list->frameWidth() * 2 );
 	int curWidth = list->minimumWidth();
 	int newWidth = expand
 				   ? qMax( bottomElemRect.width() + list->frameWidth() * 2, curWidth )
