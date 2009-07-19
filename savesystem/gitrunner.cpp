@@ -291,6 +291,21 @@ DvcsJob::JobStatus GitRunner::switchBranch(const QString &newBranch)
 	startJob( *job );
 	return m_jobStatus;
 }
+
+DvcsJob::JobStatus GitRunner::mergeBranch( const QString &branchName, const QString& message )
+{
+	DvcsJob *job = new DvcsJob();
+	initJob( *job );
+	*job << "merge";
+	*job << "--no-ff";
+	*job <<"-m";
+	*job << message;
+	*job << branchName;
+
+	startJob( *job );
+	return m_jobStatus;
+}
+
 DvcsJob::JobStatus GitRunner::deleteBranch( const QString &branch )
 {
 	DvcsJob *job = new DvcsJob();

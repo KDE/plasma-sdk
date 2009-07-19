@@ -60,6 +60,7 @@ class TimeLine : public QWidget
 		void switchBranch();
 		void createBranch();
 		void renameBranch();
+		void mergeBranch();
 		void deleteBranch();
 	// void itemClicked( QListWidgetItem *item );
 	// void splitterMoved( int pos, int index );

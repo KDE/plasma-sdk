@@ -151,30 +151,44 @@ void TimeLine::loadTimeLine( KUrl &dir )
 	}
 
 	QString rawCommits = m_gitRunner->getResult();
+
+	// Split the string according with the regexp
 	QRegExp rx( "(commit )" );
-	// For now, we assume to find only commits
-	// TODO: parse also merges !!
 	QStringList commits = rawCommits.split( rx, QString::SkipEmptyParts );
 	index = commits.size();
 
 	// Iterate every commit and create an element in the sidebar.
 	for( int i = 0; i < index; i++ )
 	{
+		bool isMerge = false;
+
 		// Save commit(index) and split it
 		QStringList tmp = commits.takeFirst().split( "\n" );
 		QString sha1sum = tmp.takeFirst();
-		QString author = tmp.takeFirst().remove( 0, 8 );
+		QString author = tmp.takeFirst();
+		//QString tmpString = tmp.takeFirst();
+		if( author.contains( "Merge", Qt::CaseSensitive ) )
+		{
+			isMerge = true;
+			author = tmp.takeFirst().remove( 0, 8 );
+		}
+		//QString sha1sum = tmp.takeFirst();
+
 		QString date = tmp.takeFirst().remove( 0, 6 );
 
-		QString commitInfo = ( i18n( "SavePoint created on " ) + date );
-		commitInfo.append( i18n( "\nBy " ) + author + "\n" );
+		QString commitInfo = ( i18n( "SavePoint created on: " ) + date );
+		commitInfo.append( i18n( "\nBy: " ) + author + "\n" );
 		commitInfo.append( i18n( "Comment:\n" ) );
+
 		int tmpSize = tmp.size();
 		for( int j = 0; j < tmpSize-1; j++ )
 		{
 			commitInfo.append( tmp.takeFirst().append( "\n" ) );
 			//commitInfo.append( "\n" );
+			if( isMerge && ( j == tmpSize - 4 ) )
+				break;
 		}
+
 		QString text = QString( "SavePoint #" );
 		QString savePointNumber = QString();
 		savePointNumber.setNum( i );
@@ -183,10 +197,12 @@ void TimeLine::loadTimeLine( KUrl &dir )
 		QStringList list = QStringList( text );
 		list.append( commitInfo );
 		list.append( sha1sum );
-		this->uiAddItem( KIcon( "dialog-ok" ),
+		this->uiAddItem( isMerge ? KIcon( "svn_merge" ) : KIcon( "dialog-ok" ),
 						 list,
-						 TimeLineItem::Commit,
+						 isMerge ? TimeLineItem::Merge : TimeLineItem::Commit,
 						 Qt::ItemIsEnabled );
+
+		isMerge = false;
 
 	}
 
@@ -274,7 +290,7 @@ void TimeLine::customContextMenuPainter( QListWidgetItem *item )
 	menu.addTitle( tlItem->text() );
 	menu.addSeparator();
 
-	if( tlItem->getIdentifier() == TimeLineItem::Commit )
+	if( tlItem->getIdentifier() == TimeLineItem::Commit || tlItem->getIdentifier() == TimeLineItem::Merge )
 	{
 
 		QAction *restoreCommit = menu.addAction( i18n( "Restore SavePoint" ) );
@@ -292,7 +308,9 @@ void TimeLine::customContextMenuPainter( QListWidgetItem *item )
 
 		QAction *createBranch = menu.addAction( i18n( "Create new Section" ) );
 		QMenu *switchBranchMenu = menu.addMenu( i18n( "Switch to Section:" ) );
+		QMenu *mergeBranchMenu = menu.addMenu( i18n( "Combine into Section:" ) );
 		QAction *renameBranch = menu.addAction( i18n( "Rename current Section" ) );
+		menu.addSeparator();
 		QMenu *deleteBranchMenu = menu.addMenu( i18n( "Delete Section:" ) );
 		int index = m_branches->size();
 
@@ -305,6 +323,8 @@ void TimeLine::customContextMenuPainter( QListWidgetItem *item )
 
 			connect( switchBranchMenu->addAction( tmp ), SIGNAL( triggered( bool ) ),
 					 this, SLOT( switchBranch( ) ) );
+			connect( mergeBranchMenu->addAction( tmp ), SIGNAL( triggered( bool ) ),
+					 this, SLOT( mergeBranch( ) ) );
 			connect( deleteBranchMenu->addAction( tmp ), SIGNAL( triggered( bool ) ),
 					 this, SLOT( deleteBranch( ) ) );
 
@@ -316,12 +336,9 @@ void TimeLine::customContextMenuPainter( QListWidgetItem *item )
 		connect( renameBranch, SIGNAL( triggered( bool ) ),
 					 this, SLOT( renameBranch( ) ) );
 
-	} else
-	{
-		// TODO: implement case  TimeLineItem::Merge
 	}
 
-	menu.addSeparator();
+
 	menu.exec( mapToGlobal( rc.bottomLeft() ) );
 }
 
@@ -359,7 +376,7 @@ void TimeLine::restoreCommit()
 	warningMB.setIcon( QMessageBox::Information );
 	warningMB.setWindowTitle( i18n( "Information" ) );
 	warningMB.setText( i18n( "You are restoring the selected SavePoint." ) );
-	warningMB.setInformativeText( i18n( "With this operation, all the SavePoints and Branches created starting from it, will be deleted.\nContinue anyway?" ) );
+	warningMB.setInformativeText( i18n( "With this operation, all the SavePoints and Sections created starting from it, will be deleted.\nContinue anyway?" ) );
 	warningMB.setStandardButtons( QMessageBox::Ok | QMessageBox::Discard );
 	warningMB.setDefaultButton( QMessageBox::Discard );
 	if( warningMB.exec() == QMessageBox::Discard )
@@ -421,6 +438,46 @@ void TimeLine::switchBranch( )
 	loadTimeLine( *m_workingDir );
 }
 
+void TimeLine::mergeBranch( )
+{
+	// Prompt the user that a new SavePoint will be created; if so,
+	// popup a Savepoint dialog.
+	QMessageBox warningMB;
+	warningMB.setIcon( QMessageBox::Information );
+	warningMB.setWindowTitle( i18n( "Information" ) );
+	warningMB.setText( i18n( "You are going to combine two Sections." ) );
+	warningMB.setInformativeText( i18n( "With this operation, a new SavePoint will be created; then you should have to manually resolve some conflicts on source code. Continue?" ) );
+	warningMB.setStandardButtons( QMessageBox::Ok | QMessageBox::Discard );
+	warningMB.setDefaultButton( QMessageBox::Discard );
+	if( warningMB.exec() == QMessageBox::Discard )
+		return;
+
+	CommitDialog *commitDialog = new CommitDialog();
+	if ( commitDialog->exec() == QDialog::Rejected )
+		return;
+
+	QString commit = QString( commitDialog->m_commitBriefText->text() );
+		QString optionalComment = QString( commitDialog->m_commitFullText->toPlainText() );
+		if( optionalComment.compare( "" ) != 0 )
+		{
+			commit.append( "\n\n" );
+			commit.append( optionalComment );
+		}
+
+	QString *branchToMerge = m_currentBranch;
+	QAction *sender = dynamic_cast<QAction*> ( this->sender() );
+	QString branch = sender->text();
+	branch.remove( "&" );
+
+	// To merge current branch into the selected one, first whe have to
+	// move to the selected branch and then call merge function !
+	m_gitRunner->switchBranch( branch );
+	m_gitRunner->mergeBranch( *													branchToMerge, commit );
+
+	d->list->disconnect();
+	loadTimeLine( *m_workingDir );
+}
+
 void TimeLine::deleteBranch( )
 {
 	QMessageBox warningMB;
@@ -430,9 +487,7 @@ void TimeLine::deleteBranch( )
 	warningMB.setInformativeText( i18n( "With this operation, you'll also delete all SavePoints/Sections performed inside it.\nContinue anyway?" ) );
 	warningMB.setStandardButtons( QMessageBox::Ok | QMessageBox::Discard );
 	warningMB.setDefaultButton( QMessageBox::Discard );
-	int result = warningMB.exec();
-
-	if( result == QMessageBox::Discard )
+	if( warningMB.exec() == QMessageBox::Discard )
 		return;
 
 	QAction *sender = dynamic_cast<QAction*> ( this->sender() );
