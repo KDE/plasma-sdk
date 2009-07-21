@@ -1,3 +1,7 @@
+--July 21, 2009--
+- Fixed the issue with the KRestrictedLine form; now it accepts correctly all names composed by
+  characters a-z,A-Z,0-9, and "_", "."
+
 --July 19, 2009--
 - Added merge capabilities to TimeLine class.
 

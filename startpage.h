@@ -23,51 +23,52 @@ class KLineEdit;
 class MainWindow;
 
 namespace Ui {
-    class StartPage;
+	class StartPage;
 }
 
 class StartPage : public QWidget
 {
-    Q_OBJECT
-    
-    enum Roles { 
-        FullPathRole = Qt::UserRole + 1
-    };
-    
-    public:
-        StartPage(MainWindow *parent);
-        ~StartPage();
+	Q_OBJECT
 
-        void resetStatus();
+	enum Roles {
+		FullPathRole = Qt::UserRole + 1
+	};
 
-        enum ProjectTypes {
-            Theme           = 1,
-            Plasmoid        = 2,
-            DataEngine      = 4
-        };
+	public:
+		StartPage(MainWindow *parent);
+		~StartPage();
 
-        Q_DECLARE_FLAGS(ProjectType, ProjectTypes)
+		void resetStatus();
 
-    signals:
-        void projectSelected(const QString &name, const QString &type);
+		enum ProjectTypes {
+			Theme           = 1,
+			Plasmoid        = 2,
+			DataEngine      = 4
+		};
 
-    private Q_SLOTS:
-        void emitProjectSelected(const QModelIndex &);
-        void changeStackedWidgetPage();
-        void createNewProject();
+		Q_DECLARE_FLAGS(ProjectType, ProjectTypes)
 
-    private:
-        void setupWidgets();
-        void refreshRecentProjectsList();
+	signals:
+		void projectSelected(const QString &name, const QString &type);
 
-        Ui::StartPage *ui;
-        QLabel *m_createNewLabel, *m_openExistingLabel, *m_continueWorkingLabel;
-        QComboBox *m_contentTypes;
-        QListWidget *m_recentProjects;
+	private Q_SLOTS:
+		void emitProjectSelected(const QModelIndex &);
+		void changeStackedWidgetPage();
+		void createNewProject();
+		void processProjectName( const QString& );
+
+	private:
+		void setupWidgets();
+		void refreshRecentProjectsList();
+
+		Ui::StartPage *ui;
+		QLabel *m_createNewLabel, *m_openExistingLabel, *m_continueWorkingLabel;
+		QComboBox *m_contentTypes;
+		QListWidget *m_recentProjects;
 //         KPushButton *m_createNewProjectButton;
-        KLineEdit *m_newProjectName;
-        QVBoxLayout *m_layout;
-        MainWindow *m_parent;
+		KLineEdit *m_newProjectName;
+		QVBoxLayout *m_layout;
+		MainWindow *m_parent;
 };
 
 #endif // STARTPAGE_H

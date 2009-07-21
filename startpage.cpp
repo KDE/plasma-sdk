@@ -15,6 +15,7 @@
 #include <QVBoxLayout>
 #include <QModelIndex>
 #include <QAbstractItemModel>
+#include	<QValidator>
 
 #include <KUser>
 // #include <KLocalizedString>
@@ -31,88 +32,108 @@
 #include "ui_startpage.h"
 
 StartPage::StartPage(MainWindow *parent) // TODO set a palette so it will look identical with any color scheme.
-    : QWidget(parent),
-    m_parent(parent)
+	: QWidget(parent),
+	m_parent(parent)
 {
-    setupWidgets();
-    refreshRecentProjectsList();
+	setupWidgets();
+	refreshRecentProjectsList();
 }
 
 StartPage::~StartPage()
 {
-    delete ui;
+	delete ui;
 }
 
 void StartPage::setupWidgets()
 {
-    ui = new Ui::StartPage;
-    ui->setupUi(this);
-    
-    // Enforce the security restriction from package.cpp in the input field
-    QRegExpValidator *pluginname_validator = new QRegExpValidator(ui->projectName);
-    QRegExp validatePluginName("^[\\w-\\.]+$"); // Only allow letters, numbers, underscore and period. FIXME doesn't work
-    pluginname_validator->setRegExp(validatePluginName);
-    
-    connect(ui->recentProjects, SIGNAL(clicked(const QModelIndex)),
-            this, SLOT(emitProjectSelected(const QModelIndex)));
-    connect(ui->contentTypes, SIGNAL(clicked(const QModelIndex)),
-            this, SLOT(changeStackedWidgetPage()));
-    connect(ui->newProjectButton, SIGNAL(clicked()),
-            this, SLOT(createNewProject()));
-    
-    new QListWidgetItem(KIcon("application-x-plasma"), i18n("Plasmoid"), ui->contentTypes);
-    new QListWidgetItem(KIcon("kexi"), i18n("Data Engine"), ui->contentTypes);
-    new QListWidgetItem(KIcon("system-run"), i18n("Runner"), ui->contentTypes);
-    new QListWidgetItem(KIcon("inkscape"), i18n("Theme"), ui->contentTypes);
+	ui = new Ui::StartPage;
+	ui->setupUi(this);
+
+	// Enforce the security restriction from package.cpp in the input field
+
+	// Solution #1, with KRestrictedLine --> but still accepts @#[]{}
+	//ui->projectName->setValidChars( "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_." );
+
+	// Solution #2, connecting properly the signals
+	connect(ui->projectName, SIGNAL(textEdited( const QString& )),
+			this, SLOT( processProjectName(const QString& ) ) );
+
+	connect(ui->recentProjects, SIGNAL(clicked(const QModelIndex)),
+			this, SLOT(emitProjectSelected(const QModelIndex)));
+	connect(ui->contentTypes, SIGNAL(clicked(const QModelIndex)),
+			this, SLOT(changeStackedWidgetPage()));
+	connect(ui->newProjectButton, SIGNAL(clicked()),
+			this, SLOT(createNewProject()));
+
+	new QListWidgetItem(KIcon("application-x-plasma"), i18n("Plasmoid"), ui->contentTypes);
+	new QListWidgetItem(KIcon("kexi"), i18n("Data Engine"), ui->contentTypes);
+	new QListWidgetItem(KIcon("system-run"), i18n("Runner"), ui->contentTypes);
+	new QListWidgetItem(KIcon("inkscape"), i18n("Theme"), ui->contentTypes);
 
 //     connect(ui->newProjectButton, SIGNAL(clicked()), this, SLOT(launchNewProjectWizard()));
 }
 
+void StartPage::processProjectName( const QString& name )
+{
+	QRegExp validatePluginName("[a-zA-Z0-9_.]*");
+	if( !validatePluginName.exactMatch( name ) )
+	{
+		int pos = 0;
+		for( int i = 0; i < name.size(); i++)
+		{
+			if( validatePluginName.indexIn( name, pos, QRegExp::CaretAtZero ) == -1 )
+				break;
+			pos += validatePluginName.matchedLength();
+		}
+		ui->projectName->setText( QString( name ).remove( pos, 1 ) );
+	}
+}
+
 void StartPage::changeStackedWidgetPage()
 {
-    ui->layoutHackStackedWidget->setCurrentIndex(1);
+	ui->layoutHackStackedWidget->setCurrentIndex(1);
 }
 
 void StartPage::resetStatus()
 {
-    kDebug() << "Reset status!";
-    ui->layoutHackStackedWidget->setCurrentIndex(0);
-    refreshRecentProjectsList();
+	kDebug() << "Reset status!";
+	ui->layoutHackStackedWidget->setCurrentIndex(0);
+	refreshRecentProjectsList();
 }
 
 void StartPage::refreshRecentProjectsList()
 {
-    ui->recentProjects->clear();
-    QStringList recentFiles = m_parent->recentProjects();
-    
-    for (int i = 0; i < recentFiles.size(); i++) {
-        Plasma::PackageMetadata metadata(KStandardDirs::locateLocal("appdata", recentFiles.at(i) + '/'));
-        QString projectName = metadata.name();
-        
+	ui->recentProjects->clear();
+	QStringList recentFiles = m_parent->recentProjects();
+
+	for (int i = 0; i < recentFiles.size(); i++) {
+		Plasma::PackageMetadata metadata(KStandardDirs::locateLocal("appdata", recentFiles.at(i) + '/'));
+		QString projectName = metadata.name();
+
 //         if (projectName.isEmpty()) {
 //             continue;
 //         }
-        
-        kDebug() << "adding" << projectName << "to the list of recent projects...";
-        QListWidgetItem *item = new QListWidgetItem(projectName); // TODO make me the user "nice" name
-        item->setData(FullPathRole, projectName);
-        
-        QString serviceType = metadata.serviceType();
-        
-        if ( serviceType == QString("Plasma/Applet") ) {
-            item->setIcon(KIcon("application-x-plasma"));
-        } else if ( serviceType == QString("Plasma/DataEngine") ) {
-            item->setIcon(KIcon("kexi"));
-        } else if ( serviceType == QString("Plasma/Theme") ) {
-            item->setIcon(KIcon("inkscape"));
-        } else if ( serviceType == QString("Plasma/Runner") ) {
-            item->setIcon(KIcon("system-run"));
-        } else {
-            kWarning() << "Unknown service type" << serviceType;
-        }
-        
-        ui->recentProjects->addItem(item);
-    }
+
+		kDebug() << "adding" << projectName << "to the list of recent projects...";
+		QListWidgetItem *item = new QListWidgetItem(projectName); // TODO make me the user "nice" name
+		item->setData(FullPathRole, projectName);
+
+		QString serviceType = metadata.serviceType();
+
+		if ( serviceType == QString("Plasma/Applet") ) {
+			item->setIcon(KIcon("application-x-plasma"));
+		} else if ( serviceType == QString("Plasma/DataEngine") ) {
+			item->setIcon(KIcon("kexi"));
+		} else if ( serviceType == QString("Plasma/Theme") ) {
+			item->setIcon(KIcon("inkscape"));
+		} else if ( serviceType == QString("Plasma/Runner") ) {
+			item->setIcon(KIcon("system-run"));
+		} else {
+			kWarning() << "Unknown service type" << serviceType;
+		}
+
+		ui->recentProjects->addItem(item);
+	}
 }
 
 void StartPage::createNewProject()
@@ -120,25 +141,25 @@ void StartPage::createNewProject()
 // TODO
 //     metadata->setPluginName( view->pluginname_edit->text() );
 
-    QString type;
-    if (ui->contentTypes->currentRow() == 0) {
-        type = "Plasma/Applet";
-    } else if (ui->contentTypes->currentRow() == 1) {
-        type = "Plasma/DataEngine";
-    } else if (ui->contentTypes->currentRow() == 2) {
-        type = "Plasma/Theme";
-    } else if (ui->contentTypes->currentRow() == 3) {
-        type = "Plasma/Runner";
-    }
+	QString type;
+	if (ui->contentTypes->currentRow() == 0) {
+		type = "Plasma/Applet";
+	} else if (ui->contentTypes->currentRow() == 1) {
+		type = "Plasma/DataEngine";
+	} else if (ui->contentTypes->currentRow() == 2) {
+		type = "Plasma/Theme";
+	} else if (ui->contentTypes->currentRow() == 3) {
+		type = "Plasma/Runner";
+	}
 
-    emit projectSelected(ui->projectName->text().toLower(), type);
+	emit projectSelected(ui->projectName->text().toLower(), type);
 }
 
 void StartPage::emitProjectSelected(const QModelIndex &index)
 {
-    QAbstractItemModel *m = ui->recentProjects->model();
-    QString url = m->data(index, FullPathRole).value<QString>();
-    kDebug() << "Loading project file:" << m->data(index, FullPathRole);
-    emit projectSelected(url, QString());
+	QAbstractItemModel *m = ui->recentProjects->model();
+	QString url = m->data(index, FullPathRole).value<QString>();
+	kDebug() << "Loading project file:" << m->data(index, FullPathRole);
+	emit projectSelected(url, QString());
 }
 
