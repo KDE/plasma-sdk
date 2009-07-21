@@ -70,8 +70,9 @@ protected:
     void hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
 
 private:
-    // this is a rough gauge for now
+    // these are a rough gauge for now
     static const int MIN_HEIGHT_FOR_OVERLAY = 250;
+    static const int MIN_WIDTH_FOR_OVERLAY = 200;
   
     enum menu_type { KMENU, OVERLAY } m_menutype;
     OverlayToolBox *m_options;

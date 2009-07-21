@@ -339,7 +339,7 @@ void PreviewContainment::hoverLeaveEvent(QGraphicsSceneHoverEvent* event) {
 }
 
 void PreviewContainment::initMenu() {
-    if (size().height() < MIN_HEIGHT_FOR_OVERLAY) {
+    if ((size().height() < MIN_HEIGHT_FOR_OVERLAY) || (size().width() < MIN_WIDTH_FOR_OVERLAY)) {
         delete m_menu;
         m_menu = new KMenu();
         m_menutype = KMENU;
