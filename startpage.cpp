@@ -50,11 +50,6 @@ void StartPage::setupWidgets()
 	ui->setupUi(this);
 
 	// Enforce the security restriction from package.cpp in the input field
-
-	// Solution #1, with KRestrictedLine --> but still accepts @#[]{}
-	//ui->projectName->setValidChars( "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_." );
-
-	// Solution #2, connecting properly the signals
 	connect(ui->projectName, SIGNAL(textEdited( const QString& )),
 			this, SLOT( processProjectName(const QString& ) ) );
 
