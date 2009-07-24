@@ -1,3 +1,6 @@
+--July 25, 2009--
+- The loading of a text editor at the Publish tab was unnecessary. Removed.
+
 --July 21, 2009--
 - Fixed the issue with the KRestrictedLine form; now it accepts correctly all names composed by
   characters a-z,A-Z,0-9, and "_", "."
