@@ -20,12 +20,6 @@ namespace Ui {
 	class MainWindowClass;
 }
 
-namespace KTextEditor {
-	class Document;
-	class View;
-}
-
-
 class QDockWidget;
 class QStringList;
 
@@ -66,8 +60,6 @@ class MainWindow : public KParts::MainWindow
 							PreviewTab };
 
 		void createMenus();
-		void showEditor();
-		void hideEditor();
 		void createDockWidgets();
 
 		StartPage *m_startPage;
@@ -77,9 +69,6 @@ class MainWindow : public KParts::MainWindow
 		TimeLine	*m_timeLine;
 		QDockWidget *m_previewerWidget;
 		Previewer *m_previewer;
-
-		KTextEditor::Document *m_doc;
-		KTextEditor::View *m_editorView;
 
 		EditPage *m_editPage;
 		PackageModel *m_model;

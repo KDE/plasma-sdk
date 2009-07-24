@@ -40,12 +40,6 @@
 #include "ui_mainwindow.h"
 #include "previewer/previewer.h"
 
-#include <ktexteditor/document.h>
-#include <ktexteditor/view.h>
-#include <ktexteditor/editor.h>
-#include <ktexteditor/editorchooser.h>
-
-
 
 MainWindow::MainWindow(QWidget *parent)
 	: KParts::MainWindow(parent, 0),
@@ -54,8 +48,6 @@ MainWindow::MainWindow(QWidget *parent)
 	  m_dockTimeLine(0),
 	  m_timeLine(0),
 	  m_previewer(0),
-	  m_doc(0),
-	  m_editorView(0),
 	  m_model(0),
 	  m_oldTab(0) // we start from startPage
 {
@@ -71,10 +63,6 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
 	delete m_startPage;
-
-	if (m_editorView) {
-	  hideEditor();
-	}
 
 	if (m_previewer) {
 		delete m_previewer;
@@ -143,25 +131,6 @@ void MainWindow::quit()
 //     deleteLater();
 }
 
-void MainWindow::showEditor()
-{
-	if (!m_editorView) {
-		KTextEditor::Editor *editor = KTextEditor::EditorChooser::editor();
-		m_doc = editor->createDocument(0);
-		m_editorView = m_doc->createView(this);
-		setCentralWidget(m_editorView);
-	}
-}
-
-void MainWindow::hideEditor()
-{
-	delete m_editorView;
-	delete m_doc;
-
-	m_editorView = 0;
-	m_doc = 0;
-}
-
 void MainWindow::changeTab(int tab)
 {
 	if (tab == m_oldTab) { // user clicked on the current tab
@@ -190,7 +159,6 @@ void MainWindow::changeTab(int tab)
 		case PublishTab: {
 			QLabel *l = new QLabel(i18n("Publish widget will go here!"), this);
 			setCentralWidget(l);
-			showEditor();
 		}
 		break;
 		case DocsTab: {
