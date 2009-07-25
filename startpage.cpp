@@ -15,7 +15,7 @@
 #include <QVBoxLayout>
 #include <QModelIndex>
 #include <QAbstractItemModel>
-#include	<QValidator>
+#include <QValidator>
 
 #include <KUser>
 // #include <KLocalizedString>
@@ -57,8 +57,12 @@ void StartPage::setupWidgets()
 			this, SLOT(emitProjectSelected(const QModelIndex)));
 	connect(ui->contentTypes, SIGNAL(clicked(const QModelIndex)),
 			this, SLOT(changeStackedWidgetPage()));
+	connect(ui->contentTypes, SIGNAL(clicked(const QModelIndex)),
+			ui->projectName, SLOT(setFocus()));
 	connect(ui->newProjectButton, SIGNAL(clicked()),
 			this, SLOT(createNewProject()));
+	connect(ui->cancelNewProjectButton, SIGNAL(clicked()),
+			this, SLOT(cancelNewProject()));
 
 	new QListWidgetItem(KIcon("application-x-plasma"), i18n("Plasmoid"), ui->contentTypes);
 	new QListWidgetItem(KIcon("kexi"), i18n("Data Engine"), ui->contentTypes);
@@ -148,6 +152,11 @@ void StartPage::createNewProject()
 	}
 
 	emit projectSelected(ui->projectName->text().toLower(), type);
+}
+
+void StartPage::cancelNewProject()
+{
+    resetStatus();
 }
 
 void StartPage::emitProjectSelected(const QModelIndex &index)

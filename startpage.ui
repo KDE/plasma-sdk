@@ -317,7 +317,7 @@ It's time the desktop caught up with us.</string>
                       </spacer>
                      </item>
                      <item>
-                      <layout class="QFormLayout" name="formLayout">
+                      <layout class="QGridLayout" name="gridLayout_5">
                        <item row="0" column="0">
                         <widget class="QLabel" name="label">
                          <property name="text">
@@ -325,15 +325,28 @@ It's time the desktop caught up with us.</string>
                          </property>
                         </widget>
                        </item>
-                       <item row="1" column="0" colspan="2">
+                       <item row="0" column="1">
+                        <widget class="KLineEdit" name="projectName"/>
+                       </item>
+                       <item row="1" column="1">
                         <widget class="KPushButton" name="newProjectButton">
                          <property name="text">
                           <string>Create!</string>
                          </property>
+                         <property name="autoDefault">
+                          <bool>true</bool>
+                         </property>
+                         <property name="default">
+                          <bool>false</bool>
+                         </property>
                         </widget>
                        </item>
-                       <item row="0" column="1">
-                        <widget class="KLineEdit" name="projectName"/>
+                       <item row="1" column="0">
+                        <widget class="KPushButton" name="cancelNewProjectButton">
+                         <property name="text">
+                          <string>Cancel</string>
+                         </property>
+                        </widget>
                        </item>
                       </layout>
                      </item>
@@ -463,6 +476,14 @@ It's time the desktop caught up with us.</string>
    <header>klineedit.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>recentProjects</tabstop>
+  <tabstop>contentTypes</tabstop>
+  <tabstop>kurlrequester</tabstop>
+  <tabstop>projectName</tabstop>
+  <tabstop>cancelNewProjectButton</tabstop>
+  <tabstop>newProjectButton</tabstop>
+ </tabstops>
  <resources>
   <include location="../../test.qrc"/>
  </resources>

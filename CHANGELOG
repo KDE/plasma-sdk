@@ -1,5 +1,6 @@
 --July 25, 2009--
 - The loading of a text editor at the Publish tab was unnecessary. Removed.
+- Cancel button added to new project screen.
 
 --July 21, 2009--
 - Fixed the issue with the KRestrictedLine form; now it accepts correctly all names composed by

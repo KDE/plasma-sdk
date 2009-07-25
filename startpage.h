@@ -55,6 +55,7 @@ class StartPage : public QWidget
 		void emitProjectSelected(const QModelIndex &);
 		void changeStackedWidgetPage();
 		void createNewProject();
+		void cancelNewProject();
 		void processProjectName( const QString& );
 
 	private:
