@@ -62,14 +62,69 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-	delete m_startPage;
+	// Saving docks position
+	KConfig c;
+	KConfigGroup configDock = c.group( "DocksPosition" );
 
-	if (m_previewer) {
+	if( m_workflow ) {
+		configDock.writeEntry( "FloatingStartPage", m_workflow->isFloating() );
+		configDock.writeEntry( "StartPagePosition", convertDockState( m_workflow ) );
+		delete m_startPage;
+		delete m_workflow;
+	}
+
+	if ( m_previewer ) {
+		configDock.writeEntry( "FloatingPreviewer", m_previewerWidget->isFloating() );
+		configDock.writeEntry( "PreviewerPosition", convertDockState( m_previewerWidget ) );
 		delete m_previewer;
 		delete m_previewerWidget;
 	}
-	if( m_timeLine )
+	if( m_dockTimeLine ) {
+		configDock.writeEntry( "FloatingTimeLine", m_dockTimeLine->isFloating() );
+		configDock.writeEntry( "TimeLinePosition", convertDockState( m_dockTimeLine ) );
 		delete m_timeLine;
+		delete m_dockTimeLine;
+	}
+
+	c.sync();
+}
+
+int MainWindow::convertDockState( QDockWidget *widget )
+{
+	switch( dockWidgetArea( widget ) )
+	{
+		case Qt::LeftDockWidgetArea:
+			return 1;
+		case Qt::RightDockWidgetArea:
+			return 2;
+		case Qt::TopDockWidgetArea:
+			return 4;
+		case Qt::BottomDockWidgetArea:
+			return 8;
+		case Qt::AllDockWidgetAreas:
+			return 16;
+		case Qt::NoDockWidgetArea:
+			return 0;
+	}
+}
+
+Qt::DockWidgetArea MainWindow::convertDockState( int id )
+{
+	switch( id )
+	{
+		case 1:
+			return Qt::LeftDockWidgetArea;
+		case 2:
+			return Qt::RightDockWidgetArea;
+		case 4:
+			return Qt::TopDockWidgetArea;
+		case 8:
+			return Qt::BottomDockWidgetArea;
+		case 16:
+			return Qt::AllDockWidgetAreas;
+		case 0:
+			return Qt::NoDockWidgetArea;
+	}
 }
 
 void MainWindow::createMenus()
@@ -81,6 +136,8 @@ void MainWindow::createMenus()
 
 void MainWindow::createDockWidgets()
 {
+	KConfig c;
+	KConfigGroup configDock = c.group( "DocksPosition" );
 	/////////////////////////////////////////////////////////////////////////
 	m_workflow = new QDockWidget(i18n("Workflow"), this);
 	m_workflow->setObjectName("workflow");
@@ -95,10 +152,12 @@ void MainWindow::createDockWidgets()
 			this, SLOT(changeTab(int)));
 
 	m_workflow->setWidget(m_sidebar);
-	addDockWidget(Qt::LeftDockWidgetArea, m_workflow);
+	addDockWidget( convertDockState( configDock.readEntry( "StartPagePosition", 1 ) ) , m_workflow );
 
 	m_workflow->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
 	m_sidebar->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
+
+	m_workflow->setFloating( configDock.readEntry( "FloatingStartPage", false ) );
 
 	/////////////////////////////////////////////////////////////////////////
 	m_dockTimeLine = new QDockWidget( i18n( "TimeLine" ), this );
@@ -112,17 +171,22 @@ void MainWindow::createDockWidgets()
 			this, SLOT(changeTab(int)));
 
 	m_dockTimeLine->setWidget( m_timeLine );
-	addDockWidget( Qt::RightDockWidgetArea, m_dockTimeLine );
+
+	addDockWidget( convertDockState( configDock.readEntry( "TimeLinePosition", 1 ) ) , m_dockTimeLine );
 
 	m_dockTimeLine->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
 	m_timeLine->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
+
+	m_workflow->setFloating( configDock.readEntry( "FloatingTimeLine", false ) );
 
 	/////////////////////////////////////////////////////////////////////////
 	m_previewerWidget = new QDockWidget(i18n("Previewer"), this);
 	m_previewerWidget->setObjectName("workflow");
 	m_previewer = new Previewer();
 	m_previewerWidget->setWidget(m_previewer);
-	addDockWidget(Qt::BottomDockWidgetArea, m_previewerWidget);
+	addDockWidget( convertDockState( configDock.readEntry( "PreviewerPosition", 1 ) ) , m_previewerWidget );
+
+	m_workflow->setFloating( configDock.readEntry( "FloatingPreviewer", false ) );
 }
 
 void MainWindow::quit()
@@ -226,7 +290,8 @@ void MainWindow::loadProject(const QString &name, const QString &type)
 
 	if (!name.isEmpty()) {
 		recentFiles.prepend(name);
-	}
+	} else
+		return;
 
 	kDebug() << "Writing the following m_sidebar of recent files to the config:" << recentFiles;
 

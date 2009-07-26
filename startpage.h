@@ -43,7 +43,8 @@ class StartPage : public QWidget
 		enum ProjectTypes {
 			Theme           = 1,
 			Plasmoid        = 2,
-			DataEngine      = 4
+			DataEngine      = 4,
+			Runner			= 8
 		};
 
 		Q_DECLARE_FLAGS(ProjectType, ProjectTypes)

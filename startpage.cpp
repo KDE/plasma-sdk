@@ -25,6 +25,7 @@
 #include <KSeparator>
 #include <KUrlRequester>
 #include <KStandardDirs>
+#include <QMessageBox>
 
 #include "packagemodel.h"
 #include "startpage.h"
@@ -53,6 +54,8 @@ void StartPage::setupWidgets()
 	connect(ui->projectName, SIGNAL(textEdited( const QString& )),
 			this, SLOT( processProjectName(const QString& ) ) );
 
+	connect(ui->projectName, SIGNAL(returnPressed()),
+			this, SLOT(createNewProject()));
 	connect(ui->recentProjects, SIGNAL(clicked(const QModelIndex)),
 			this, SLOT(emitProjectSelected(const QModelIndex)));
 	connect(ui->contentTypes, SIGNAL(clicked(const QModelIndex)),
@@ -66,7 +69,8 @@ void StartPage::setupWidgets()
 
 	new QListWidgetItem(KIcon("application-x-plasma"), i18n("Plasmoid"), ui->contentTypes);
 	new QListWidgetItem(KIcon("kexi"), i18n("Data Engine"), ui->contentTypes);
-	new QListWidgetItem(KIcon("system-run"), i18n("Runner"), ui->contentTypes);
+	QListWidgetItem *runnerItem = new QListWidgetItem(KIcon("system-run"), i18n("Runner"), ui->contentTypes);
+	runnerItem->setHidden(true);
 	new QListWidgetItem(KIcon("inkscape"), i18n("Theme"), ui->contentTypes);
 
 //     connect(ui->newProjectButton, SIGNAL(clicked()), this, SLOT(launchNewProjectWizard()));
@@ -91,6 +95,13 @@ void StartPage::processProjectName( const QString& name )
 void StartPage::changeStackedWidgetPage()
 {
 	ui->layoutHackStackedWidget->setCurrentIndex(1);
+	if( ui->contentTypes->currentRow() == 3 )
+	{
+		ui->frame->setEnabled( false );
+		//ui->radioButtonJs->setEnabled( false );
+		//ui->radioButtonPy->setEnabled( false );
+		//ui->radioButtonRb->setEnabled( false );
+	}
 }
 
 void StartPage::resetStatus()
@@ -156,7 +167,7 @@ void StartPage::createNewProject()
 
 void StartPage::cancelNewProject()
 {
-    resetStatus();
+	resetStatus();
 }
 
 void StartPage::emitProjectSelected(const QModelIndex &index)
