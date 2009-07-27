@@ -27,7 +27,7 @@
 
 
 PreviewContainment::PreviewContainment(QObject *parent, const QVariantList &args)
-    : Containment(parent, args), m_options(0), m_applet(0), m_menu(0), m_menutype(OVERLAY)
+    : Containment(parent, args), m_menutype(OVERLAY), m_options(0), m_menu(0), m_applet(0)
 {
     connect(this, SIGNAL(appletAdded(Plasma::Applet *, const QPointF &)),
             this, SLOT(onAppletAdded(Plasma::Applet *, const QPointF &)));
@@ -63,7 +63,7 @@ PreviewContainment::~PreviewContainment()
     if (m_options) {
         delete m_options;
     }
-    
+
     if(m_menu) {
         delete m_menu;
     }
@@ -77,7 +77,7 @@ void PreviewContainment::setupHeader()
     refresh = new Plasma::IconWidget(this);
 
     location = new Plasma::IconWidget(this);
-    
+
     wallpaper = new Plasma::IconWidget(this);
 
     // add actions
@@ -117,7 +117,7 @@ void PreviewContainment::refreshApplet()
       m_applet = Applet::loadPlasmoid(m_applet->package()->path());
       addApplet(m_applet, QPointF(-1, -1), false);
     } else {
-      m_applet = addApplet(m_applet->pluginName(), 
+      m_applet = addApplet(m_applet->pluginName(),
                             QVariantList(), QRectF(0, 0, -1, -1));
     }
 
@@ -162,7 +162,7 @@ void PreviewContainment::changeWallpaper()
       connect(signalMapper, SIGNAL(mapped(const QString &)), this, SLOT(setWallpaperPlugin(const QString &)));
       connect(plugin, SIGNAL(triggered(bool)), signalMapper, SLOT(map()));
     }
-    
+
     // cancel button
     QAction *cancel = addMenuItem(KIcon("dialog-cancel"), i18n("Cancel"));
     connect(cancel, SIGNAL(triggered(bool)), this, SLOT(cancelOption(bool)));
