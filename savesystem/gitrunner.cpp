@@ -380,4 +380,3 @@ DvcsJob::JobStatus GitRunner::reset(const QStringList &args)
 	return m_jobStatus;
 }
 
-#include "gitrunner.moc"
