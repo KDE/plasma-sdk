@@ -162,10 +162,7 @@ void MainWindow::createDockWidgets()
 	/////////////////////////////////////////////////////////////////////////
 	m_dockTimeLine = new QDockWidget( i18n( "TimeLine" ), this );
 	m_dockTimeLine->setObjectName( "timeline" );
-	KUrl path = KUrl( QString( "/home/polentino/root" ) );
-	m_timeLine = new TimeLine( this, path );
-
-	m_timeLine->loadTimeLine( path );
+	m_timeLine = new TimeLine(this, m_model->package());
 
 	connect(m_timeLine, SIGNAL(currentIndexChanged(int)),
 			this, SLOT(changeTab(int)));
@@ -280,8 +277,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
 	m_model->setPackage(packagePath);
 
 	QStringList recentFiles;
-	KConfig c;
-	KConfigGroup cg = c.group("General");
+	KConfigGroup cg = KGlobal::config()->group("General");
 	recentFiles = recentProjects();
 
 	if (recentFiles.contains(name)) {
@@ -296,7 +292,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
 	kDebug() << "Writing the following m_sidebar of recent files to the config:" << recentFiles;
 
 	cg.writeEntry("recentFiles", recentFiles);
-	c.sync();
+        KGlobal::config()->sync();
 
 	// Load the needed widgets, switch to page 1 (edit)...
 	createDockWidgets();
@@ -305,8 +301,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
 
 QStringList MainWindow::recentProjects() // TODO Limit to 5?
 {
-	KConfig c;
-	KConfigGroup cg = c.group("General");
+	KConfigGroup cg = KGlobal::config()->group("General");
 	QStringList l = cg.readEntry("recentFiles", QStringList());
 //     kDebug() << l.toStringList();
 
