@@ -45,7 +45,7 @@ class TimeLine : public QWidget
 		bool isTimeLineVisible() const;
 
 		void setWorkingDir( const KUrl& dir );
-		void loadTimeLine( KUrl& dir );
+		void loadTimeLine( const KUrl& dir );
 
 
 	public slots:
@@ -77,10 +77,10 @@ class TimeLine : public QWidget
 		void saveSplitterSize() const;
 		void initUI( QWidget *parent );
 
-		KUrl		*m_workingDir;
+		KUrl		m_workingDir;
 		GitRunner	*m_gitRunner;
-		QString		*m_currentBranch;
-		QStringList	*m_branches;
+		QString		m_currentBranch;
+		QStringList	m_branches;
 		TimeLinePrivateStorage *d;
 
 

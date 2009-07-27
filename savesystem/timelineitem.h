@@ -27,12 +27,12 @@ class TimeLineItem : public QListWidgetItem
 
 		void setIdentifier( const TimeLineItem::ItemIdentifier id );
 
-		QString& getHash();
+		QString getHash();
 
 		TimeLineItem::ItemIdentifier getIdentifier();
 
 	private:
-		QString *m_sha1sum;
+		QString m_sha1sum;
 		ItemIdentifier m_type;
 };
 

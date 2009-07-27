@@ -55,15 +55,16 @@ TimeLine::TimeLine( QWidget* parent, const KUrl& dir )
 	: QWidget( parent ), d( new TimeLinePrivateStorage )
 {
 	m_gitRunner = new GitRunner();
-	setWorkingDir( dir );
 	initUI( parent );
 
+	if (dir.isValid()) {
+		setWorkingDir( dir );
+		loadTimeLine( dir );
+	}
 }
 
 TimeLine::~TimeLine()
 {
-	if( m_workingDir )
-		delete m_workingDir;
 	delete d;
 }
 
@@ -80,7 +81,7 @@ int TimeLine::uiAddItem( const QIcon& icon,
 	return d->pages.count() - 1;
 }
 
-void TimeLine::loadTimeLine( KUrl &dir )
+void TimeLine::loadTimeLine( const KUrl &dir )
 {
 	d->list->clear();
 	QStringList list = QStringList();
@@ -124,7 +125,7 @@ void TimeLine::loadTimeLine( KUrl &dir )
 		return;
 	}
 
-	m_currentBranch = new QString( m_gitRunner->getResult() );
+	m_currentBranch = m_gitRunner->getResult();
 
 	if( m_gitRunner->branches() != DvcsJob::JobSucceeded )
 	{
@@ -134,14 +135,14 @@ void TimeLine::loadTimeLine( KUrl &dir )
 
 	// Scan available branches,and save them
 	QString branches = m_gitRunner->getResult();
-	m_branches = new QStringList( branches.split( "\n", QString::SkipEmptyParts ) );
-	int index = m_branches->size();
+	m_branches = branches.split("\n", QString::SkipEmptyParts);
+	int index = m_branches.size();
 	// Clean the strings
 	for( int i = 0; i < index; i++ )
 	{
-		QString tmp = m_branches->takeFirst();
+		QString tmp = m_branches.takeFirst();
 		tmp.remove( 0, 2 );
-		m_branches->append( tmp );
+		m_branches.append( tmp );
 	}
 
 	if( m_gitRunner->log( dir ) != DvcsJob::JobSucceeded )
@@ -207,8 +208,8 @@ void TimeLine::loadTimeLine( KUrl &dir )
 	}
 
 	// As last element, show the current branch
-	QString info = QString();
 	list.clear();
+	QString info;
 	info.append( i18n( "On Section: " ) );
 	info.append( m_currentBranch );
 	list.append( info );
@@ -243,7 +244,7 @@ void TimeLine::customContextMenuPainter( QListWidgetItem *item )
 	if( tlItem->getIdentifier() == TimeLineItem::OutsideWorkingDir )
 	{
 		// These lines are only for testing purpose !
-		m_gitRunner->init( *m_workingDir );
+		m_gitRunner->init( m_workingDir );
 		m_gitRunner->add( KUrl::List( QString( "." ) ) );
 
 		CommitDialog *commitDialog= new CommitDialog();
@@ -259,7 +260,7 @@ void TimeLine::customContextMenuPainter( QListWidgetItem *item )
 
 		m_gitRunner->commit( commit );
 		d->list->disconnect();
-		this->loadTimeLine( *m_workingDir );
+		loadTimeLine( m_workingDir );
 		return;
 
 	} else if( tlItem->getIdentifier() == TimeLineItem::NotACommit )
@@ -280,7 +281,7 @@ void TimeLine::customContextMenuPainter( QListWidgetItem *item )
 
 		m_gitRunner->commit( commit );
 		d->list->disconnect();
-		this->loadTimeLine( *m_workingDir );
+		loadTimeLine( m_workingDir );
 
 		return;
 	}
@@ -312,13 +313,13 @@ void TimeLine::customContextMenuPainter( QListWidgetItem *item )
 		QAction *renameBranch = menu.addAction( i18n( "Rename current Section" ) );
 		menu.addSeparator();
 		QMenu *deleteBranchMenu = menu.addMenu( i18n( "Delete Section:" ) );
-		int index = m_branches->size();
+		int index = m_branches.size();
 
 		// Scan all the branches and, create a menu item for each item, and connect them
 		for( int i = 0; i < index; i++ )
 		{
-			QString tmp = m_branches->takeFirst();
-			if( tmp.compare( *m_currentBranch ) == 0 )
+			QString tmp = m_branches.takeFirst();
+			if( tmp.compare( m_currentBranch ) == 0 )
 				continue;
 
 			connect( switchBranchMenu->addAction( tmp ), SIGNAL( triggered( bool ) ),
@@ -328,7 +329,7 @@ void TimeLine::customContextMenuPainter( QListWidgetItem *item )
 			connect( deleteBranchMenu->addAction( tmp ), SIGNAL( triggered( bool ) ),
 					 this, SLOT( deleteBranch( ) ) );
 
-			m_branches->append( tmp );
+			m_branches.append( tmp );
 		}
 
 		connect( createBranch, SIGNAL( triggered( bool ) ),
@@ -386,8 +387,7 @@ void TimeLine::restoreCommit()
 	QVariant data = sender->data();
 	m_gitRunner->deleteCommit( data.toString() );
 	d->list->disconnect();
-	loadTimeLine( *m_workingDir );
-
+	loadTimeLine( m_workingDir );
 }
 
 void TimeLine::moveToCommit()
@@ -409,7 +409,7 @@ void TimeLine::moveToCommit()
 
 	QString newBranchName = QString( newBranch->m_branchEdit->text() );
 
-	if( m_branches->contains( newBranchName ) )
+	if( m_branches.contains( newBranchName ) )
 	{
 		QMessageBox *mb = new QMessageBox ( QMessageBox::Warning,
 											i18n( "Warning" ),
@@ -425,7 +425,7 @@ void TimeLine::moveToCommit()
 	QVariant data = sender->data();
 	m_gitRunner->moveToCommit( data.toString(), newBranchName );
 	d->list->disconnect();
-	loadTimeLine( *m_workingDir );
+	loadTimeLine( m_workingDir );
 }
 
 void TimeLine::switchBranch( )
@@ -435,7 +435,7 @@ void TimeLine::switchBranch( )
 	branch.remove( "&" );
 	m_gitRunner->switchBranch( branch );
 	d->list->disconnect();
-	loadTimeLine( *m_workingDir );
+	loadTimeLine( m_workingDir );
 }
 
 void TimeLine::mergeBranch( )
@@ -464,7 +464,7 @@ void TimeLine::mergeBranch( )
 			commit.append( optionalComment );
 		}
 
-	QString *branchToMerge = m_currentBranch;
+	QString branchToMerge = m_currentBranch;
 	QAction *sender = dynamic_cast<QAction*> ( this->sender() );
 	QString branch = sender->text();
 	branch.remove( "&" );
@@ -472,10 +472,10 @@ void TimeLine::mergeBranch( )
 	// To merge current branch into the selected one, first whe have to
 	// move to the selected branch and then call merge function !
 	m_gitRunner->switchBranch( branch );
-	m_gitRunner->mergeBranch( *													branchToMerge, commit );
+	m_gitRunner->mergeBranch( branchToMerge, commit );
 
 	d->list->disconnect();
-	loadTimeLine( *m_workingDir );
+	loadTimeLine( m_workingDir );
 }
 
 void TimeLine::deleteBranch( )
@@ -495,7 +495,7 @@ void TimeLine::deleteBranch( )
 	branch.remove( "&" );
 	m_gitRunner->deleteBranch( branch );
 	d->list->disconnect();
-	loadTimeLine( *m_workingDir );
+	loadTimeLine( m_workingDir );
 }
 
 void TimeLine::renameBranch( )
@@ -511,7 +511,7 @@ void TimeLine::renameBranch( )
 
 	QString newBranchName = QString( renameBranch->m_branchEdit->text() );
 
-	if( m_branches->contains( newBranchName ) )
+	if( m_branches.contains( newBranchName ) )
 	{
 		QMessageBox *mb = new QMessageBox ( QMessageBox::Warning,
 											i18n( "Warning" ),
@@ -524,7 +524,7 @@ void TimeLine::renameBranch( )
 
 	m_gitRunner->renameBranch( newBranchName );
 	d->list->disconnect();
-	loadTimeLine( *m_workingDir );
+	loadTimeLine( m_workingDir );
 }
 
 void TimeLine::createBranch( )
@@ -540,7 +540,7 @@ void TimeLine::createBranch( )
 
 	QString newBranchName = QString( createBranch->m_branchEdit->text() );
 
-	if( m_branches->contains( newBranchName ) )
+	if( m_branches.contains( newBranchName ) )
 	{
 		QMessageBox *mb = new QMessageBox ( QMessageBox::Warning,
 											i18n( "Warning" ),
@@ -553,7 +553,7 @@ void TimeLine::createBranch( )
 
 	m_gitRunner->newBranch( newBranchName );
 	d->list->disconnect();
-	loadTimeLine( *m_workingDir );
+	loadTimeLine( m_workingDir );
 }
 
 bool TimeLine::isItemEnabled( int index ) const
@@ -608,7 +608,7 @@ bool TimeLine::isTimeLineVisible() const
 
 void TimeLine::setWorkingDir( const KUrl &dir )
 {
-	m_workingDir = new KUrl( dir );
+	m_workingDir = dir;
 }
 
 void TimeLine::initUI( QWidget *parent )

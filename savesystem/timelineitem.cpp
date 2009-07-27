@@ -28,12 +28,12 @@ TimeLineItem::TimeLineItem( const QIcon &icon,
 	setText( dataList.takeFirst() );
 	QListWidgetItem::setToolTip( dataList.takeFirst() );
 	m_type = id;
-	m_sha1sum = new QString( dataList.takeFirst() );
+	m_sha1sum = dataList.takeFirst();
 }
 
 void TimeLineItem::setHash( const QString &hash )
 {
-	m_sha1sum = new QString( hash );
+	m_sha1sum = hash;
 }
 
 void TimeLineItem::setIdentifier( const TimeLineItem::ItemIdentifier id  )
@@ -41,9 +41,9 @@ void TimeLineItem::setIdentifier( const TimeLineItem::ItemIdentifier id  )
 	m_type = id;
 }
 
-QString& TimeLineItem::getHash( )
+QString TimeLineItem::getHash( )
 {
-	return *m_sha1sum;
+	return m_sha1sum;
 }
 
 TimeLineItem::	ItemIdentifier TimeLineItem::getIdentifier()
