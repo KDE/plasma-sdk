@@ -4,12 +4,14 @@
 #include <QWidget>
 #include <QStringList>
 
-namespace Ui {
-    class MetaDataEditor;
+namespace Ui
+{
+class MetaDataEditor;
 }
 
-namespace Plasma {
-    class PackageMetadata;
+namespace Plasma
+{
+class PackageMetadata;
 }
 
 class MetaDataEditor : public QWidget
@@ -17,10 +19,10 @@ class MetaDataEditor : public QWidget
     Q_OBJECT
 
 public:
-    MetaDataEditor( QWidget *parent = 0 );
+    MetaDataEditor(QWidget *parent = 0);
     ~MetaDataEditor();
 
-    void setFilename( const QString &filename );
+    void setFilename(const QString &filename);
 
 public slots:
     void readFile();

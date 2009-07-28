@@ -8,7 +8,7 @@
 
 #include "../kconfigxteditor.h"
 
-int main( int argc, char **argv )
+int main(int argc, char **argv)
 {
 //    KCmdLineArgs::init(argc, argv);
 //    KApplication app;
@@ -18,22 +18,22 @@ int main( int argc, char **argv )
     QWidget *top = new QWidget();
     QVBoxLayout *vbox = new QVBoxLayout(top);
 
-    KConfigXtEditor *ed = new KConfigXtEditor( top );
+    KConfigXtEditor *ed = new KConfigXtEditor(top);
     vbox->addWidget(ed);
 
-    KPushButton *save = new KPushButton( top );
+    KPushButton *save = new KPushButton(top);
     save->setText("&Save");
     vbox->addWidget(save);
 
     QString filename;
-    if ( argc == 2 ) {
+    if (argc == 2) {
         filename = QDir::currentPath() + '/' + argv[1];
     }
 
-    ed->setFilename( filename );
+    ed->setFilename(filename);
     ed->readFile();
 
-    QObject::connect( save, SIGNAL(clicked()), ed, SLOT(writeFile()) );
+    QObject::connect(save, SIGNAL(clicked()), ed, SLOT(writeFile()));
 
     top->show();
 

@@ -15,31 +15,31 @@
 class QIcon;
 class QListWidgetItem;
 
-#include	"sidebarprivatestorage.h"
+#include    "sidebarprivatestorage.h"
 
 class Sidebar : public QWidget
 {
-	Q_OBJECT
-	public:
-		Sidebar( QWidget *parent = 0 );
-		~Sidebar();
+    Q_OBJECT
+public:
+    Sidebar(QWidget *parent = 0);
+    ~Sidebar();
 
-		int addItem( const QIcon &icon, const QString &text );
+    int addItem(const QIcon &icon, const QString &text);
 
 //         void setMainWidget( QWidget *widget );
 //         void setBottomWidget( QWidget *widget );
 
-		void setItemEnabled( int index, bool enabled );
-		bool isItemEnabled( int index ) const;
+    void setItemEnabled(int index, bool enabled);
+    bool isItemEnabled(int index) const;
 
-		void setCurrentIndex( int index );
-		int currentIndex() const;
+    void setCurrentIndex(int index);
+    int currentIndex() const;
 
-		void setSidebarVisibility( bool visible );
-		bool isSidebarVisible() const;
+    void setSidebarVisibility(bool visible);
+    bool isSidebarVisible() const;
 
-	signals:
-		void currentIndexChanged(int);
+signals:
+    void currentIndexChanged(int);
 
 //     private slots:
 //         void itemClicked( QListWidgetItem *item );
@@ -47,12 +47,12 @@ class Sidebar : public QWidget
 //         void showTextToggled( bool );
 //         void iconSizeChanged( QAction *action );
 
-	private:
-		void saveSplitterSize() const;
+private:
+    void saveSplitterSize() const;
 
-		// private storage
-		//class SidebarPrivateStorage;
-		SidebarPrivateStorage *d;
+    // private storage
+    //class SidebarPrivateStorage;
+    SidebarPrivateStorage *d;
 };
 
 #endif

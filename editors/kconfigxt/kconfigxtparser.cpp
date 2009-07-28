@@ -29,7 +29,7 @@ public:
 };
 
 KConfigXtParser::KConfigXtParser()
-    : d(new KConfigXtParserPrivate())
+        : d(new KConfigXtParserPrivate())
 {
 
 }

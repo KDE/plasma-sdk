@@ -13,10 +13,10 @@
 #include <Plasma/PackageMetadata>
 
 PackageModel::PackageModel(QObject *parent)
-    : QAbstractItemModel(parent),
-      m_directory(0),
-      m_structure(0),
-      m_package(0)
+        : QAbstractItemModel(parent),
+        m_directory(0),
+        m_structure(0),
+        m_package(0)
 {
 }
 
@@ -85,8 +85,8 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         if (index.row() == 0) {
             if (role == Qt::DisplayRole) {
                 return i18n("New...");
-	    }
-	    if (role == MimeTypeRole) {
+            }
+            if (role == MimeTypeRole) {
                 return m_package->structure()->mimetypes(key);
             } /* else if (role == Qt::DecorationRole) {
                 return KIcon("file-new");
@@ -96,14 +96,14 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
             int row = index.row() - 1;
 
             if (row < named.count()) {
-	      //kDebug() << m_package->structure()->name(named.at(row));
+                //kDebug() << m_package->structure()->name(named.at(row));
                 return m_package->structure()->name(named.at(row));
             }
 
             row -= named.count();
             QStringList l = m_files.value(key);
             if (index.row() < l.count()) {
-            //kDebug() << "got" << l.at(index.row() - 1);
+                //kDebug() << "got" << l.at(index.row() - 1);
                 return l.at(index.row());
             }
         }
@@ -206,7 +206,7 @@ void PackageModel::loadPackage()
         dir.cd(contents);
     }
 
-    foreach (const char *key, structure->directories()) {
+    foreach(const char *key, structure->directories()) {
         QString path = structure->path(key);
         if (!dir.exists(path)) {
             dir.mkpath(path);
@@ -217,7 +217,7 @@ void PackageModel::loadPackage()
 
     QList<const char *> files = structure->files();
     QHash<QString, const char *> indexedFiles;
-    foreach (const char *key, structure->files()) {
+    foreach(const char *key, structure->files()) {
         QString path = structure->path(key);
         if (!dir.exists(path)) {
             QFileInfo info(dir.path() + '/' + path);
@@ -233,7 +233,7 @@ void PackageModel::loadPackage()
     beginInsertRows(QModelIndex(), 0, m_topEntries.count());
     endInsertRows();
 
-    foreach (const char *key, structure->directories()) {
+    foreach(const char *key, structure->directories()) {
         QString path = structure->path(key);
         if (!path.endsWith('/')) {
             path += '/';
@@ -242,7 +242,7 @@ void PackageModel::loadPackage()
         QStringList files = m_package->entryList(key);
         QList<const char *> namedFiles;
         QStringList userFiles;
-        foreach (const QString &file, files) {
+        foreach(const QString &file, files) {
             QString filePath = path + file;
             if (indexedFiles.contains(filePath)) {
                 namedFiles.append(indexedFiles.value(filePath));
@@ -261,7 +261,7 @@ void PackageModel::loadPackage()
 
     if (!indexedFiles.empty()) {
         int currentTopCount = m_topEntries.count();
-        foreach (const char *key, indexedFiles) {
+        foreach(const char *key, indexedFiles) {
             m_topEntries.append(key);
         }
         beginInsertRows(QModelIndex(), currentTopCount, indexedFiles.count());

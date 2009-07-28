@@ -3,8 +3,9 @@
 
 #include <QWidget>
 
-namespace Plasma {
-    class FrameSvg;
+namespace Plasma
+{
+class FrameSvg;
 }
 
 class SvgViewer : public QWidget
@@ -13,23 +14,23 @@ class SvgViewer : public QWidget
 
 public:
     enum Mode {
-	ModeSvg,
-	ModeFrameSvg
+        ModeSvg,
+        ModeFrameSvg
     };
 
-    SvgViewer( QWidget *parent );
+    SvgViewer(QWidget *parent);
     ~SvgViewer();
 
-    void setFilename( const QString &filename );
+    void setFilename(const QString &filename);
     void readFile();
 
-    void setMode( SvgViewer::Mode mode );
+    void setMode(SvgViewer::Mode mode);
     SvgViewer::Mode mode() const;
 
 protected:
-    void paintEvent( QPaintEvent *p );
+    void paintEvent(QPaintEvent *p);
 //    void mouseReleaseEvent( QMouseEvent *e );
-    void resizeEvent( QResizeEvent *e );
+    void resizeEvent(QResizeEvent *e);
 
     SvgViewer::Mode detectMode();
 

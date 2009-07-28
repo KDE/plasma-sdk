@@ -22,55 +22,56 @@ class KPushButton;
 class KLineEdit;
 class MainWindow;
 
-namespace Ui {
-	class StartPage;
+namespace Ui
+{
+class StartPage;
 }
 
 class StartPage : public QWidget
 {
-	Q_OBJECT
+    Q_OBJECT
 
-	enum Roles {
-		FullPathRole = Qt::UserRole + 1
-	};
+    enum Roles {
+        FullPathRole = Qt::UserRole + 1
+    };
 
-	public:
-		StartPage(MainWindow *parent);
-		~StartPage();
+public:
+    StartPage(MainWindow *parent);
+    ~StartPage();
 
-		void resetStatus();
+    void resetStatus();
 
-		enum ProjectTypes {
-			Theme           = 1,
-			Plasmoid        = 2,
-			DataEngine      = 4,
-			Runner			= 8
-		};
+    enum ProjectTypes {
+        Theme           = 1,
+        Plasmoid        = 2,
+        DataEngine      = 4,
+        Runner          = 8
+    };
 
-		Q_DECLARE_FLAGS(ProjectType, ProjectTypes)
+    Q_DECLARE_FLAGS(ProjectType, ProjectTypes)
 
-	signals:
-		void projectSelected(const QString &name, const QString &type);
+signals:
+    void projectSelected(const QString &name, const QString &type);
 
-	private Q_SLOTS:
-		void emitProjectSelected(const QModelIndex &);
-		void changeStackedWidgetPage();
-		void createNewProject();
-		void cancelNewProject();
-		void processProjectName( const QString& );
+private Q_SLOTS:
+    void emitProjectSelected(const QModelIndex &);
+    void changeStackedWidgetPage();
+    void createNewProject();
+    void cancelNewProject();
+    void processProjectName(const QString&);
 
-	private:
-		void setupWidgets();
-		void refreshRecentProjectsList();
+private:
+    void setupWidgets();
+    void refreshRecentProjectsList();
 
-		Ui::StartPage *ui;
-		QLabel *m_createNewLabel, *m_openExistingLabel, *m_continueWorkingLabel;
-		QComboBox *m_contentTypes;
-		QListWidget *m_recentProjects;
+    Ui::StartPage *ui;
+    QLabel *m_createNewLabel, *m_openExistingLabel, *m_continueWorkingLabel;
+    QComboBox *m_contentTypes;
+    QListWidget *m_recentProjects;
 //         KPushButton *m_createNewProjectButton;
-		KLineEdit *m_newProjectName;
-		QVBoxLayout *m_layout;
-		MainWindow *m_parent;
+    KLineEdit *m_newProjectName;
+    QVBoxLayout *m_layout;
+    MainWindow *m_parent;
 };
 
 #endif // STARTPAGE_H

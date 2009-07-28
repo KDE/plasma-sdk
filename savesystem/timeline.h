@@ -11,12 +11,12 @@
 #ifndef _TIMELINE_H_
 #define _TIMELINE_H_
 
-#include	<QWidget>
+#include    <QWidget>
 
-#include	"timelineprivatestorage.h"
-#include	"timelineitem.h"
-#include	"dvcsjob.h"
-#include	"gitrunner.h"
+#include    "timelineprivatestorage.h"
+#include    "timelineitem.h"
+#include    "dvcsjob.h"
+#include    "gitrunner.h"
 
 
 class QIcon;
@@ -25,63 +25,63 @@ class QListWidgetItem;
 
 class TimeLine : public QWidget
 {
-	Q_OBJECT
-	public:
-		TimeLine( QWidget *parent, const KUrl &dir );
-		~TimeLine();
+    Q_OBJECT
+public:
+    TimeLine(QWidget *parent, const KUrl &dir);
+    ~TimeLine();
 
 
 
-		// void setMainWidget( QWidget *widget );
-		// void setBottomWidget( QWidget *widget );
+    // void setMainWidget( QWidget *widget );
+    // void setBottomWidget( QWidget *widget );
 
-		void setItemEnabled( int index, bool enabled );
-		bool isItemEnabled( int index ) const;
+    void setItemEnabled(int index, bool enabled);
+    bool isItemEnabled(int index) const;
 
-		void setCurrentIndex( int index );
-		int currentIndex() const;
+    void setCurrentIndex(int index);
+    int currentIndex() const;
 
-		void setTimeLineVisibility( bool visible );
-		bool isTimeLineVisible() const;
+    void setTimeLineVisibility(bool visible);
+    bool isTimeLineVisible() const;
 
-		void setWorkingDir( const KUrl& dir );
-		void loadTimeLine( const KUrl& dir );
+    void setWorkingDir(const KUrl& dir);
+    void loadTimeLine(const KUrl& dir);
 
 
-	public slots:
-		void customContextMenuPainter( QListWidgetItem* item );
-	signals:
-		void currentIndexChanged(int);
+public slots:
+    void customContextMenuPainter(QListWidgetItem* item);
+signals:
+    void currentIndexChanged(int);
 
-	private slots:
-		void restoreCommit();
-		void moveToCommit();
+private slots:
+    void restoreCommit();
+    void moveToCommit();
 
-		void switchBranch();
-		void createBranch();
-		void renameBranch();
-		void mergeBranch();
-		void deleteBranch();
-	// void itemClicked( QListWidgetItem *item );
-	// void splitterMoved( int pos, int index );
-	// void showTextToggled( bool );
-	// void iconSizeChanged( QAction *action );
+    void switchBranch();
+    void createBranch();
+    void renameBranch();
+    void mergeBranch();
+    void deleteBranch();
+    // void itemClicked( QListWidgetItem *item );
+    // void splitterMoved( int pos, int index );
+    // void showTextToggled( bool );
+    // void iconSizeChanged( QAction *action );
 
-	private:
-		// adds an item in the list
-		int uiAddItem( const QIcon& icon,
-					   QStringList& data,
-					   const TimeLineItem::ItemIdentifier id,
-					   const Qt::ItemFlag flag );
+private:
+    // adds an item in the list
+    int uiAddItem(const QIcon& icon,
+                  QStringList& data,
+                  const TimeLineItem::ItemIdentifier id,
+                  const Qt::ItemFlag flag);
 
-		void saveSplitterSize() const;
-		void initUI( QWidget *parent );
+    void saveSplitterSize() const;
+    void initUI(QWidget *parent);
 
-		KUrl		m_workingDir;
-		GitRunner	*m_gitRunner;
-		QString		m_currentBranch;
-		QStringList	m_branches;
-		TimeLinePrivateStorage *d;
+    KUrl        m_workingDir;
+    GitRunner   *m_gitRunner;
+    QString     m_currentBranch;
+    QStringList m_branches;
+    TimeLinePrivateStorage *d;
 
 
 };

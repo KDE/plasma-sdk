@@ -16,8 +16,9 @@
 
 class QModelIndex;
 
-namespace Ui {
-	class MainWindowClass;
+namespace Ui
+{
+class MainWindowClass;
 }
 
 class QDockWidget;
@@ -36,47 +37,48 @@ class Previewer;
 
 class MainWindow : public KParts::MainWindow
 {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		MainWindow(QWidget *parent = 0);
-		~MainWindow();
+public:
+    MainWindow(QWidget *parent = 0);
+    ~MainWindow();
 
-		QStringList recentProjects();
+    QStringList recentProjects();
 
-	public Q_SLOTS:
-		void quit();
+public Q_SLOTS:
+    void quit();
 
-		void changeTab(int tab);
-		void loadProject(const QString &name, const QString &type);
+    void changeTab(int tab);
+    void loadProject(const QString &name, const QString &type);
 
-		void loadRequiredEditor(const KService::List offers);
+    void loadRequiredEditor(const KService::List offers);
 
-	private:
-		enum WorkflowTabs { StartPageTab = 0,
-							EditTab,
-							PublishTab,
-							DocsTab,
-							PreviewTab };
+private:
+    enum WorkflowTabs { StartPageTab = 0,
+                        EditTab,
+                        PublishTab,
+                        DocsTab,
+                        PreviewTab
+                      };
 
-		void createMenus();
-		void createDockWidgets();
-		int convertDockState( QDockWidget *widget );
-		Qt::DockWidgetArea convertDockState( int id );
+    void createMenus();
+    void createDockWidgets();
+    int convertDockState(QDockWidget *widget);
+    Qt::DockWidgetArea convertDockState(int id);
 
-		StartPage *m_startPage;
-		QDockWidget *m_workflow;
-		Sidebar *m_sidebar;
-		QDockWidget	*m_dockTimeLine;
-		TimeLine	*m_timeLine;
-		QDockWidget *m_previewerWidget;
-		Previewer *m_previewer;
+    StartPage *m_startPage;
+    QDockWidget *m_workflow;
+    Sidebar *m_sidebar;
+    QDockWidget *m_dockTimeLine;
+    TimeLine    *m_timeLine;
+    QDockWidget *m_previewerWidget;
+    Previewer *m_previewer;
 
-		EditPage *m_editPage;
-		PackageModel *m_model;
-		int m_oldTab;
+    EditPage *m_editPage;
+    PackageModel *m_model;
+    int m_oldTab;
 
-		KParts::Part *m_part;
+    KParts::Part *m_part;
 };
 
 #endif // MAINWINDOW_H

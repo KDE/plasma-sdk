@@ -20,9 +20,9 @@
 #include <Plasma/Containment>
 
 Previewer::Previewer(QWidget *parent)
-    : QGraphicsView(parent),
-      m_containment(0),
-      m_applet(0)
+        : QGraphicsView(parent),
+        m_containment(0),
+        m_applet(0)
 {
     setScene(&m_corona);
     connect(&m_corona, SIGNAL(sceneRectChanged(QRectF)), this, SLOT(sceneRectChanged(QRectF)));

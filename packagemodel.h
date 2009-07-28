@@ -10,7 +10,7 @@ class KDirWatch;
 
 namespace Plasma
 {
-    class Package;
+class Package;
 } // namespace Plasma
 
 class PackageModel : public QAbstractItemModel
@@ -32,7 +32,7 @@ public:
     QModelIndex parent(const QModelIndex &index) const;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
-    
+
     enum DataRoles { MimeTypeRole = Qt::UserRole + 1 };
 
 private:

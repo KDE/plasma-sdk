@@ -27,7 +27,7 @@
 
 
 PreviewContainment::PreviewContainment(QObject *parent, const QVariantList &args)
-    : Containment(parent, args), m_menutype(OVERLAY), m_options(0), m_menu(0), m_applet(0)
+        : Containment(parent, args), m_menutype(OVERLAY), m_options(0), m_menu(0), m_applet(0)
 {
     connect(this, SIGNAL(appletAdded(Plasma::Applet *, const QPointF &)),
             this, SLOT(onAppletAdded(Plasma::Applet *, const QPointF &)));
@@ -64,7 +64,7 @@ PreviewContainment::~PreviewContainment()
         delete m_options;
     }
 
-    if(m_menu) {
+    if (m_menu) {
         delete m_menu;
     }
 }
@@ -110,15 +110,15 @@ void PreviewContainment::setupHeader()
 void PreviewContainment::refreshApplet()
 {
     if (!m_applet)
-      return;
+        return;
     clearApplets();
 
     if (m_applet->package()) {
-      m_applet = Applet::loadPlasmoid(m_applet->package()->path());
-      addApplet(m_applet, QPointF(-1, -1), false);
+        m_applet = Applet::loadPlasmoid(m_applet->package()->path());
+        addApplet(m_applet, QPointF(-1, -1), false);
     } else {
-      m_applet = addApplet(m_applet->pluginName(),
-                            QVariantList(), QRectF(0, 0, -1, -1));
+        m_applet = addApplet(m_applet->pluginName(),
+                             QVariantList(), QRectF(0, 0, -1, -1));
     }
 
     m_applet->setFlag(QGraphicsItem::ItemIsMovable, false);
@@ -155,12 +155,12 @@ void PreviewContainment::changeWallpaper()
     QSignalMapper *signalMapper = new QSignalMapper(this);
 
     // create a menu item for each wallpaper plugin installed
-    foreach (const KPluginInfo &info, Plasma::Wallpaper::listWallpaperInfo()) {
-      QAction *plugin = addMenuItem(KIcon("user-desktop"),
-                                           info.pluginName());
-      signalMapper->setMapping(plugin, info.pluginName());
-      connect(signalMapper, SIGNAL(mapped(const QString &)), this, SLOT(setWallpaperPlugin(const QString &)));
-      connect(plugin, SIGNAL(triggered(bool)), signalMapper, SLOT(map()));
+    foreach(const KPluginInfo &info, Plasma::Wallpaper::listWallpaperInfo()) {
+        QAction *plugin = addMenuItem(KIcon("user-desktop"),
+                                      info.pluginName());
+        signalMapper->setMapping(plugin, info.pluginName());
+        connect(signalMapper, SIGNAL(mapped(const QString &)), this, SLOT(setWallpaperPlugin(const QString &)));
+        connect(plugin, SIGNAL(triggered(bool)), signalMapper, SLOT(map()));
     }
 
     // cancel button
@@ -286,7 +286,8 @@ void PreviewContainment::cancelOption(bool)
         m_options->hide();
 }
 
-void PreviewContainment::setWallpaperPlugin(const QString& name) {
+void PreviewContainment::setWallpaperPlugin(const QString& name)
+{
     if (m_options)
         m_options->hide();
     setWallpaper(name);
@@ -328,17 +329,20 @@ void PreviewContainment::onAppletGeometryChanged()
     // deal with sizing here.
 }
 
-void PreviewContainment::hoverEnterEvent(QGraphicsSceneHoverEvent* event) {
+void PreviewContainment::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
+{
     m_controls->show();
     Containment::hoverEnterEvent(event);
 }
 
-void PreviewContainment::hoverLeaveEvent(QGraphicsSceneHoverEvent* event) {
+void PreviewContainment::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
+{
     m_controls->hide();
     Containment::hoverLeaveEvent(event);
 }
 
-void PreviewContainment::initMenu() {
+void PreviewContainment::initMenu()
+{
     if ((size().height() < MIN_HEIGHT_FOR_OVERLAY) || (size().width() < MIN_WIDTH_FOR_OVERLAY)) {
         delete m_menu;
         m_menu = new KMenu();
@@ -352,7 +356,8 @@ void PreviewContainment::initMenu() {
     }
 }
 
-QAction *PreviewContainment::addMenuItem(const KIcon &icon, const QString& title) {
+QAction *PreviewContainment::addMenuItem(const KIcon &icon, const QString& title)
+{
     if (m_menutype == OVERLAY) {
         KAction *ret = new KAction(icon, title, m_options);
         m_options->addTool(ret);
@@ -361,7 +366,8 @@ QAction *PreviewContainment::addMenuItem(const KIcon &icon, const QString& title
     return m_menu->addAction(icon, title);
 }
 
-void PreviewContainment::showMenu() {
+void PreviewContainment::showMenu()
+{
     if (m_menutype == KMENU)
         m_menu->popup(QCursor::pos());
     else

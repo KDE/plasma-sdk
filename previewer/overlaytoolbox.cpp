@@ -28,7 +28,7 @@
 using namespace Plasma;
 
 OverlayToolBox::OverlayToolBox(QGraphicsWidget *parent)
-    : QGraphicsWidget(parent), m_totalActions(0)
+        : QGraphicsWidget(parent), m_totalActions(0)
 {
     setAcceptsHoverEvents(true);
 
@@ -44,7 +44,7 @@ void OverlayToolBox::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
     m_background.resizeFrame(event->newSize());
 
-    foreach (QGraphicsItem *child, QGraphicsItem::children()) {
+    foreach(QGraphicsItem *child, QGraphicsItem::children()) {
         Plasma::IconWidget *tool = dynamic_cast<Plasma::IconWidget*>(child);
         tool->resize(size().width() - 60, tool->size().height());
     }

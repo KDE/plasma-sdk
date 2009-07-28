@@ -8,7 +8,7 @@
 
 #include "../svgviewer.h"
 
-int main( int argc, char **argv )
+int main(int argc, char **argv)
 {
 //    KCmdLineArgs::init(argc, argv);
 //    KApplication app;
@@ -18,20 +18,19 @@ int main( int argc, char **argv )
     QWidget *top = new QWidget();
     QVBoxLayout *vbox = new QVBoxLayout(top);
 
-    SvgViewer *viewer = new SvgViewer( top );
+    SvgViewer *viewer = new SvgViewer(top);
     vbox->addWidget(viewer);
 
     QString filename;
-    if ( argc != 2 ) {
-	filename = QDir::currentPath() + "/tests/battery-oxygen.svgz";
-    }
-    else {
-	filename = QDir::currentPath() + "/" + argv[1];
+    if (argc != 2) {
+        filename = QDir::currentPath() + "/tests/battery-oxygen.svgz";
+    } else {
+        filename = QDir::currentPath() + "/" + argv[1];
     }
 
-    viewer->setFilename( filename );
+    viewer->setFilename(filename);
     viewer->readFile();
-    top->resize( 400, 300 );
+    top->resize(400, 300);
     top->show();
 
     return app.exec();

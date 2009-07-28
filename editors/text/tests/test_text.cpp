@@ -8,7 +8,7 @@
 
 #include "../texteditor.h"
 
-int main( int argc, char **argv )
+int main(int argc, char **argv)
 {
 //    KCmdLineArgs::init(argc, argv);
 //    KApplication app;
@@ -27,10 +27,10 @@ int main( int argc, char **argv )
 
 //     QString filename;
 //     if ( argc != 2 ) {
-// 	filename = QDir::currentPath() + "/tests/plasma-applet-systemtray.desktop";
+//  filename = QDir::currentPath() + "/tests/plasma-applet-systemtray.desktop";
 //     }
 //     else {
-// 	filename = QDir::currentPath() + "/" + argv[1];
+//  filename = QDir::currentPath() + "/" + argv[1];
 //     }
 
 //     ed->setFilename( filename );

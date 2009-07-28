@@ -35,7 +35,7 @@ public:
 };
 
 KConfigXtEditor::KConfigXtEditor(QWidget *parent)
-    : QWidget(parent), d(new KConfigXtEditorPrivate)
+        : QWidget(parent), d(new KConfigXtEditorPrivate)
 {
     d->ui = new Ui::KConfigXtEditor;
     d->ui->setupUi(this);
@@ -43,7 +43,7 @@ KConfigXtEditor::KConfigXtEditor(QWidget *parent)
     d->ui->twKeyValues->header()->setResizeMode(QHeaderView::ResizeToContents);
     d->ui->twGroups->header()->setResizeMode(QHeaderView::ResizeToContents);
 
-    d->ui->lblHintIcon->setPixmap(KIcon("dialog-information").pixmap(16,16));
+    d->ui->lblHintIcon->setPixmap(KIcon("dialog-information").pixmap(16, 16));
 
     connect(d->ui->pbAddGroup, SIGNAL(clicked()), SLOT(createNewGroup()));
 }

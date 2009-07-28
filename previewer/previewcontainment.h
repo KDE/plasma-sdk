@@ -62,18 +62,18 @@ protected slots:
     void rightEdgeTriggered(bool);
 
     void setWallpaperPlugin(const QString&);
-    
+
 protected:
     void setupHeader();
     void destroyHeader();
-    void hoverEnterEvent (QGraphicsSceneHoverEvent* event);
-    void hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
+    void hoverEnterEvent(QGraphicsSceneHoverEvent* event);
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
 
 private:
     // these are a rough gauge for now
     static const int MIN_HEIGHT_FOR_OVERLAY = 250;
     static const int MIN_WIDTH_FOR_OVERLAY = 200;
-  
+
     enum menu_type { KMENU, OVERLAY } m_menutype;
     OverlayToolBox *m_options;
     KMenu *m_menu;
@@ -93,7 +93,7 @@ private:
     Plasma::IconWidget *refresh;
     Plasma::IconWidget *location;
     Plasma::IconWidget *wallpaper;
-    
+
     void initMenu();
     QAction* addMenuItem(const KIcon &icon, const QString &title);
     void showMenu();

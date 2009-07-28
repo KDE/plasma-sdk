@@ -17,9 +17,9 @@
 int main(int argc, char *argv[])
 {
     KAboutData aboutData("plasmate", 0, ki18n("PlasMate"),
-                         "0.1", ki18n("A Plasma friendly IDE"), 
+                         "0.1", ki18n("A Plasma friendly IDE"),
                          KAboutData::License_GPL,
-                         ki18n("(c) 2009  Riccardo Iaconelli"), 
+                         ki18n("(c) 2009  Riccardo Iaconelli"),
                          KLocalizedString(), "", "riccardo@kde.org");
     aboutData.addAuthor(ki18n("Riccardo Iaconelli"), ki18n("Author"), "riccardo@kde.org");
 
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     KCmdLineArgs::addCmdLineOptions(options);
     KCmdLineArgs::parsedArgs();
     KApplication app;
-    
+
     MainWindow *w = new MainWindow();
     w->show();
 
