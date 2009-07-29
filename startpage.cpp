@@ -16,6 +16,8 @@
 #include <QModelIndex>
 #include <QAbstractItemModel>
 #include <QValidator>
+#include <QFile>
+#include <QTextStream>
 
 #include <KUser>
 // #include <KLocalizedString>
@@ -69,8 +71,7 @@ void StartPage::setupWidgets()
 
     new QListWidgetItem(KIcon("application-x-plasma"), i18n("Plasmoid"), ui->contentTypes);
     new QListWidgetItem(KIcon("kexi"), i18n("Data Engine"), ui->contentTypes);
-    QListWidgetItem *runnerItem = new QListWidgetItem(KIcon("system-run"), i18n("Runner"), ui->contentTypes);
-    runnerItem->setHidden(true);
+    new QListWidgetItem(KIcon("system-run"), i18n("Runner"), ui->contentTypes);
     new QListWidgetItem(KIcon("inkscape"), i18n("Theme"), ui->contentTypes);
 
 //     connect(ui->newProjectButton, SIGNAL(clicked()), this, SLOT(launchNewProjectWizard()));
@@ -148,16 +149,71 @@ void StartPage::createNewProject()
 // TODO
 //     metadata->setPluginName( view->pluginname_edit->text() );
 
+    kDebug() << "Creating simple folder structure for the project ";
+
+    QString templateFilePath = KStandardDirs::locate("appdata", "templates/");
+
     QString type;
     if (ui->contentTypes->currentRow() == 0) {
         type = "Plasma/Applet";
+        templateFilePath.append("mainPlasmoid");
     } else if (ui->contentTypes->currentRow() == 1) {
         type = "Plasma/DataEngine";
+        templateFilePath.append("mainDataEngine");
     } else if (ui->contentTypes->currentRow() == 2) {
         type = "Plasma/Theme";
     } else if (ui->contentTypes->currentRow() == 3) {
         type = "Plasma/Runner";
+        templateFilePath.append("mainRunner");
     }
+
+    QString scriptFileName = ui->projectName->text().toLower();
+    // Append the desired extension
+    if (ui->radioButtonJs->isChecked()) {
+        templateFilePath.append(".js");
+        scriptFileName.append(".js");
+    } else if (ui->radioButtonPy->isChecked()) {
+        templateFilePath.append(".py");
+        scriptFileName.append(".py");
+    } else if (ui->radioButtonRb->isChecked()) {
+        templateFilePath.append(".rb");
+        scriptFileName.append(".rb");
+    }
+
+    // Creating the corresponding folder
+    QString packagePath = KStandardDirs::locateLocal("appdata", ui->projectName->text().toLower() + '/');
+    QDir packageSubDirs(packagePath);
+    packageSubDirs.mkdir("contents");
+    packageSubDirs.cd("contents");
+    packageSubDirs.mkdir("code");
+    QString sourcesFilesPath = packagePath;
+
+    // Add to the script name the full path, so we can create it later
+    sourcesFilesPath.append("contents/code/");
+    scriptFileName.prepend(sourcesFilesPath);
+
+    // Create a QFile object that points to the template we need to copy
+    QFile sourceFile(templateFilePath);
+    QFile destinationFile(scriptFileName);
+
+    // Now open these files, and substitute the main class, author, email and date fields
+    sourceFile.open(QIODevice::ReadOnly);
+    destinationFile.open(QIODevice::ReadWrite);
+
+    QByteArray rawData = sourceFile.readAll();
+    QByteArray replacedString("$PLASMOID_NAME");
+    if(rawData.contains(replacedString)) {
+        rawData.replace(replacedString, ui->projectName->text().toAscii());
+    }
+    replacedString.clear();
+    replacedString.append("$DATAENGINE_NAME");
+    if(rawData.contains(replacedString)) {
+        rawData.replace(replacedString, ui->projectName->text().toAscii());
+        replacedString.clear();
+    }
+
+    destinationFile.write(rawData);
+    destinationFile.close();
 
     emit projectSelected(ui->projectName->text().toLower(), type);
 }
@@ -172,6 +228,7 @@ void StartPage::emitProjectSelected(const QModelIndex &index)
     QAbstractItemModel *m = ui->recentProjects->model();
     QString url = m->data(index, FullPathRole).value<QString>();
     kDebug() << "Loading project file:" << m->data(index, FullPathRole);
+
     emit projectSelected(url, QString());
 }
 

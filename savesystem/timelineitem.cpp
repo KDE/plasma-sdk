@@ -3,10 +3,10 @@
   */
 
 
-#include    <QListWidgetItem>
-#include    <klocalizedstring.h>
+#include <QListWidgetItem>
+#include <klocalizedstring.h>
 
-#include    "timelineitem.h"
+#include "timelineitem.h"
 
 static const int TimeLineItemType = QListWidgetItem::UserType + 1;
 

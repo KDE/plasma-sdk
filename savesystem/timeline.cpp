@@ -239,7 +239,8 @@ void TimeLine::customContextMenuPainter(QListWidgetItem *item)
         m_gitRunner->add(KUrl::List(QString(".")));
 
         CommitDialog *commitDialog = new CommitDialog();
-        commitDialog->exec();
+        if(commitDialog->exec() == QDialog::Rejected)
+            return;
 
         QString commit = QString(commitDialog->m_commitBriefText->text());
         QString optionalComment = QString(commitDialog->m_commitFullText->toPlainText());
@@ -258,7 +259,8 @@ void TimeLine::customContextMenuPainter(QListWidgetItem *item)
         m_gitRunner->add(KUrl::List(QString(".")));
 
         CommitDialog *commitDialog = new CommitDialog();
-        commitDialog->exec();
+        if(commitDialog->exec() == QDialog::Rejected)
+            return;
 
         QString commit = QString(commitDialog->m_commitBriefText->text());
         QString optionalComment = QString(commitDialog->m_commitFullText->toPlainText());

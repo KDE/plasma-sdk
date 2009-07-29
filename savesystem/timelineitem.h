@@ -1,7 +1,7 @@
 #ifndef TIMELINEITEM_H
 #define TIMELINEITEM_H
 
-#include    <QListWidgetItem>
+#include <QListWidgetItem>
 
 class TimeLineItem : public QListWidgetItem
 {

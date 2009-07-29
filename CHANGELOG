@@ -1,3 +1,9 @@
+--July 29, 2009--
+- Fixed saving/reloading layout ( still need some fixing with previewer dimensions btw )
+- Now templates are installed under $KDEDIR/share/apps/plasmate/templates
+- When creating a new project, PlasMate makes a copy of the corresponding template in the
+  working directory, modify its file name and the main class to match the project name. 
+
 --July 26, 2009--
 - Added radio button to select the scripting language, connected KLineEdit::returnPressed()
   signal, saved docks position so the next time PlasMate is loaded, it reloads docks previous

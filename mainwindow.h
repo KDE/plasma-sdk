@@ -63,8 +63,6 @@ private:
 
     void createMenus();
     void createDockWidgets();
-    int convertDockState(QDockWidget *widget);
-    Qt::DockWidgetArea convertDockState(int id);
 
     StartPage *m_startPage;
     QDockWidget *m_workflow;

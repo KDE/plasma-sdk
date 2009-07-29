@@ -65,7 +65,9 @@ private:
     void refreshRecentProjectsList();
 
     Ui::StartPage *ui;
-    QLabel *m_createNewLabel, *m_openExistingLabel, *m_continueWorkingLabel;
+    QLabel *m_createNewLabel;
+    QLabel *m_openExistingLabel;
+    QLabel *m_continueWorkingLabel;
     QComboBox *m_contentTypes;
     QListWidget *m_recentProjects;
 //         KPushButton *m_createNewProjectButton;

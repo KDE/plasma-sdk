@@ -35,6 +35,7 @@ include_directories(${KDE4_INCLUDES})
 
 add_subdirectory( editors )
 add_subdirectory( previewer )
+add_subdirectory(templates)
 #add_subdirectory( savesystem )
 
 kde4_add_executable(plasmate ${PlasMate_SRC})
