@@ -1,3 +1,8 @@
+--July 30, 2009--
+- New Project page displays now two fields, Author and Email, defaulted to <username> and
+  <username>@none.org. These values are inserted in the header contained int the main script
+  file.
+
 --July 29, 2009--
 - Fixed saving/reloading layout ( still need some fixing with previewer dimensions btw )
 - Now templates are installed under $KDEDIR/share/apps/plasmate/templates

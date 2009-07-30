@@ -18,6 +18,7 @@
 #include <QValidator>
 #include <QFile>
 #include <QTextStream>
+#include <QDateTime>
 
 #include <KUser>
 // #include <KLocalizedString>
@@ -27,6 +28,7 @@
 #include <KSeparator>
 #include <KUrlRequester>
 #include <KStandardDirs>
+#include <KUser>
 #include <QMessageBox>
 
 #include "packagemodel.h"
@@ -51,6 +53,29 @@ void StartPage::setupWidgets()
 {
     ui = new Ui::StartPage;
     ui->setupUi(this);
+
+    // Set some default parameters, like username/email and preferred scripting language
+    KConfigGroup cg = KGlobal::config()->group("NewProjectDefaultPreferences");
+    KUser user = KUser(KUser::UseRealUserID);
+
+    QString userName = cg.readEntry("Username", user.loginName());
+    QString userEmail = cg.readEntry("Email", userName+"@none.org");
+
+    // If username or email are empty string, i.e. in the previous project the
+    // developer deleted it, restore the defaul values
+    if(userName.isEmpty()) {
+        userName = user.loginName();
+    }
+    if(userEmail.isEmpty()) {
+        userEmail.append(user.loginName()+"@none.org");
+    }
+
+    ui->authorTextField->setText(userName);
+    ui->emailTextField->setText(userEmail);
+
+    ui->radioButtonJs->setChecked(cg.readEntry("radioButtonJsChecked", false));
+    ui->radioButtonPy->setChecked(cg.readEntry("radioButtonPyChecked", true));
+    ui->radioButtonRb->setChecked(cg.readEntry("radioButtonRbChecked", false));
 
     // Enforce the security restriction from package.cpp in the input field
     connect(ui->projectName, SIGNAL(textEdited(const QString&)),
@@ -100,6 +125,31 @@ void StartPage::changeStackedWidgetPage()
         //ui->radioButtonPy->setEnabled( false );
         //ui->radioButtonRb->setEnabled( false );
     }
+}
+
+QString StartPage::userName()
+{
+    return ui->authorTextField->text();
+}
+
+QString StartPage::userEmail()
+{
+    return ui->emailTextField->text();
+}
+
+bool StartPage::selectedJsRadioButton()
+{
+    return ui->radioButtonJs->isChecked();
+}
+
+bool StartPage::selectedRbRadioButton()
+{
+    return ui->radioButtonRb->isChecked();
+}
+
+bool StartPage::selectedPyRadioButton()
+{
+    return ui->radioButtonPy->isChecked();
 }
 
 void StartPage::resetStatus()
@@ -209,7 +259,26 @@ void StartPage::createNewProject()
     replacedString.append("$DATAENGINE_NAME");
     if(rawData.contains(replacedString)) {
         rawData.replace(replacedString, ui->projectName->text().toAscii());
-        replacedString.clear();
+    }
+    replacedString.clear();
+    replacedString.append("$AUTHOR");
+    if(rawData.contains(replacedString)) {
+        rawData.replace(replacedString, ui->authorTextField->text().toAscii());
+    }
+    replacedString.clear();
+    replacedString.append("$EMAIL");
+    if(rawData.contains(replacedString)) {
+        rawData.replace(replacedString, ui->emailTextField->text().toAscii());
+    }
+    replacedString.clear();
+
+    QDate date = QDate::currentDate();
+    QByteArray datetime(date.toString().toUtf8());
+    QTime time = QTime::currentTime();
+    datetime.append(", "+time.toString());
+    replacedString.append("$DATE");
+    if(rawData.contains(replacedString)) {
+        rawData.replace(replacedString, datetime);
     }
 
     destinationFile.write(rawData);

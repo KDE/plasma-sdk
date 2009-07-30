@@ -219,6 +219,17 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     kDebug() << "Loading project named" << name << "...";
     delete m_model;
 
+    // Saving NewProject preferences
+    KConfigGroup preferences = KGlobal::config()->group("NewProjectDefaultPreferences");
+
+    preferences.writeEntry("Username", m_startPage->userName());
+    preferences.writeEntry("Email", m_startPage->userEmail());
+
+    preferences.writeEntry("radioButtonJsChecked", m_startPage->selectedJsRadioButton());
+    preferences.writeEntry("radioButtonPyChecked", m_startPage->selectedPyRadioButton());
+    preferences.writeEntry("radioButtonRbChecked", m_startPage->selectedRbRadioButton());
+    preferences.sync();
+
     QString packagePath = KStandardDirs::locateLocal("appdata", name + '/');
     QString actualType = type;
 

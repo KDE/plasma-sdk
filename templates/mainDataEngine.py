@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Author: $AUTHOR <$MAIL>
+# Author: $AUTHOR <$EMAIL>
 # Date: $DATE
 #
 # This program is free software; you can redistribute it and/or modify

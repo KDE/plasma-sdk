@@ -39,6 +39,13 @@ public:
     StartPage(MainWindow *parent);
     ~StartPage();
 
+    QString userName();
+    QString userEmail();
+
+    bool selectedJsRadioButton();
+    bool selectedRbRadioButton();
+    bool selectedPyRadioButton();
+
     void resetStatus();
 
     enum ProjectTypes {
