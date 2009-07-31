@@ -275,7 +275,7 @@ void StartPage::createNewProject()
     QDate date = QDate::currentDate();
     QByteArray datetime(date.toString().toUtf8());
     QTime time = QTime::currentTime();
-    datetime.append(", "+time.toString());
+    datetime.append(", "+time.toString().toUtf8());
     replacedString.append("$DATE");
     if(rawData.contains(replacedString)) {
         rawData.replace(replacedString, datetime);
