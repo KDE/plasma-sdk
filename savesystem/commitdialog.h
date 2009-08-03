@@ -1,8 +1,10 @@
 #ifndef COMMITDIALOG_H
 #define COMMITDIALOG_H
 
-class QLineEdit;
-class QPlainTextEdit;
+#include <QDialog>
+#include <QLineEdit>
+#include <QPlainTextEdit>
+#include <QLabel>
 
 class CommitDialog : public QDialog
 {

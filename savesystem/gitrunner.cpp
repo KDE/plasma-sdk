@@ -321,7 +321,7 @@ DvcsJob::JobStatus GitRunner::currentBranch()
         return status;
     // Every branch is listed in one line. so first split by lines,
     // then look for the branch marked with a "*".
-    QStringList list = m_result.split("\n");
+    QStringList list = m_result.split('\n');
     QString tmp = list.takeFirst();
     while (!tmp.contains(QString("*"), Qt::CaseInsensitive))
         tmp = list.takeFirst();

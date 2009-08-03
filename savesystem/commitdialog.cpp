@@ -2,15 +2,11 @@
   * Simple class that pops-up a dialog to add a comment to the commit
   */
 
+#include "commitdialog.h"
+
 #include <klocale.h>
-#include <QDialog>
 #include <QDialogButtonBox>
 #include <QPushButton>
-#include <QLineEdit>
-#include <QLabel>
-#include <QPlainTextEdit>
-
-#include "commitdialog.h"
 
 CommitDialog::CommitDialog()
 {

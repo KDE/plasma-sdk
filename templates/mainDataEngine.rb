@@ -24,41 +24,41 @@
 require 'plasma_applet'
 
 module $DATAENGINE_NAME
-  
+
 # Declare our main class as PlasmaScripting::DataEngine subclass
 class Main$DATAENGINE_NAME < PlasmaScripting::DataEngine
 
 
-    #	Constructor, forward initialization to its superclass
-    #	Note: try to NOT modify this constructor; all the setup code
-    #	should be placed in the init method.
+    #   Constructor, forward initialization to its superclass
+    #   Note: try to NOT modify this constructor; all the setup code
+    #   should be placed in the init method.
     def initialize(parent, args = nil)
       super(parent)
     end
 
-    #	Init method
-    #	Put here all the code needed to initialize our plasmoid
+    #   Init method
+    #   Put here all the code needed to initialize our plasmoid
     def init
       setMinimumPollingInterval(333)
     end
 
-    #	sources method
-    #	Used by applets to request what data source the DataEngine has
+    #   sources method
+    #   Used by applets to request what data source the DataEngine has
     def sources
       timezones = KDE::SystemTimeZones.zones.keys
       timezones << "Local"
       return timezones
     end
 
-    #	sourceRequestEvent method
-    #	Called when an applet access the DataEngine and request for
-    #	a specific source ( name )
+    #   sourceRequestEvent method
+    #   Called when an applet access the DataEngine and request for
+    #   a specific source (name)
     def sourceRequestEvent(name)
       return updateSourceEvent(name)
     end
 
-    #	updateSourceEvent method
-    #	The main function for a DataEngine
+    #   updateSourceEvent method
+    #   The main function for a DataEngine
     def updateSourceEvent(tz)
       # Add custom code here
       return true

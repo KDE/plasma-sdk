@@ -1,9 +1,11 @@
 #ifndef BRANCHDIALOG_H
 #define BRANCHDIALOG_H
 
-class QDialog;
-class QLabel;
-class QLineEdit;
+
+#include <QDialog>
+#include <QString>
+#include <QLineEdit>
+#include <QLabel>
 
 class BranchDialog : public QDialog
 {

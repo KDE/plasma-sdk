@@ -62,7 +62,7 @@ void StartPage::setupWidgets()
     QString userEmail = cg.readEntry("Email", userName+"@none.org");
 
     // If username or email are empty string, i.e. in the previous project the
-    // developer deleted it, restore the defaul values
+    // developer deleted it, restore the default values
     if(userName.isEmpty()) {
         userName = user.loginName();
     }

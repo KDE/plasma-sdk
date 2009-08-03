@@ -2,16 +2,15 @@
   * Simple class that pops-up a dialog to create/rename a  branch
   */
 
+#include "branchdialog.h"
+
 #include <klocale.h>
-#include <QDialog>
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-#include <QLineEdit>
-#include <QLabel>
-
-#include "branchdialog.h"
+//#include <QLineEdit>
+//#include <QLabel>
 
 BranchDialog::BranchDialog()
 {

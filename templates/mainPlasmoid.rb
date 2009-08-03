@@ -22,33 +22,33 @@
 
 # Load QT and KDE Ruby bindings
 require 'plasma_applet'
- 
+
 module $PLASMOID_NAME
-  
+
   # Declare our main class as PlasmaScripting::Applet subclass
   class Main$PLASMOID_NAME < PlasmaScripting::Applet
-    
-    #	Constructor, forward initialization to its superclass
-    #	Note: try to NOT modify this constructor; all the setup code
-    #	should be placed in the init method.
+
+    #   Constructor, forward initialization to its superclass
+    #   Note: try to NOT modify this constructor; all the setup code
+    #   should be placed in the init method.
     def initialize parent
       super parent
     end
-    
-    #	Init method
-    #	Put here all the code needed to initialize our plasmoid
+
+    #   Init method
+    #   Put here all the code needed to initialize our plasmoid
     def init
       self.has_configuration_interface = false
       resize 125, 125
       self.aspect_ratio_mode = Plasma::Square
     end
- 
-    #	Simple painting function
+
+    #   Simple painting function
     def paintInterface(painter, option, rect)
       painter.save
       # Simple paint code example
       #painter.pen = Qt::Color.new Qt::white
-      #painter.draw_text rect, Qt::AlignVCenter | Qt::AlignHCenter, "Hello Ruby!" 
+      #painter.draw_text rect, Qt::AlignVCenter | Qt::AlignHCenter, "Hello Ruby!"
       painter.restore
     end
   end

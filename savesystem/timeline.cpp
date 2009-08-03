@@ -38,6 +38,7 @@
 #include <QRect>
 #include <QLineEdit>
 #include <QPlainTextEdit>
+#include <QPointer>
 #include <Plasma/PackageMetadata>
 
 #include "branchdialog.h"
@@ -133,7 +134,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
     // Scan available branches,and save them
     QString branches = m_gitRunner->getResult();
-    m_branches = branches.split("\n", QString::SkipEmptyParts);
+    m_branches = branches.split('\n', QString::SkipEmptyParts);
     int index = m_branches.size();
     // Clean the strings
     for (int i = 0; i < index; i++) {
@@ -159,7 +160,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
         bool isMerge = false;
 
         // Save commit(index) and split it
-        QStringList tmp = commits.takeFirst().split("\n");
+        QStringList tmp = commits.takeFirst().split('\n');
         QString sha1sum = tmp.takeFirst();
         QString author = tmp.takeFirst();
         //QString tmpString = tmp.takeFirst();
@@ -171,20 +172,19 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
         QString date = tmp.takeFirst().remove(0, 6);
 
-        QString commitInfo = (i18n("SavePoint created on: ") + date + "\n");
-        commitInfo.append(author + "\n");
+        QString commitInfo = (i18n("SavePoint created on: ") + date + '\n');
+        commitInfo.append(author + '\n');
         commitInfo.append(i18n("Comment:\n"));
 
         int tmpSize = tmp.size();
         for (int j = 0; j < tmpSize - 1; j++) {
-            commitInfo.append(tmp.takeFirst().append("\n"));
-            //commitInfo.append( "\n" );
+            commitInfo.append(tmp.takeFirst().append('\n'));
             if (isMerge && (j == tmpSize - 4))
                 break;
         }
 
         QString text = QString("SavePoint #");
-        QString savePointNumber = QString();
+        QString savePointNumber;
         savePointNumber.setNum(i);
         text.append(savePointNumber);
 
@@ -210,7 +210,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     info.clear();
     info.append(i18n("You are currently working on Section:\n"));
     info.append(m_currentBranch);
-    info.append(i18n("\n"));
+    info.append('\n');
     info.append(i18n("\nAvailable Sections are:\n"));
     info.append(branches);
     info.append(i18n("\nClick here to switch to those Sections."));
@@ -240,18 +240,19 @@ void TimeLine::customContextMenuPainter(QListWidgetItem *item)
 
         // Retrieve Name and Email, and set git global parameters
         Plasma::PackageMetadata metadata(m_workingDir.pathOrUrl() + "metadata.desktop");
-
         m_gitRunner->setAuthor(metadata.author());
         m_gitRunner->setEmail(metadata.email());
 
         m_gitRunner->add(KUrl::List(QString(".")));
 
-        CommitDialog *commitDialog = new CommitDialog();
+        QPointer<CommitDialog> commitDialog = new CommitDialog();
         if(commitDialog->exec() == QDialog::Rejected)
             return;
 
         QString commit = QString(commitDialog->m_commitBriefText->text());
         QString optionalComment = QString(commitDialog->m_commitFullText->toPlainText());
+        delete commitDialog;
+
         if (optionalComment.compare("") != 0) {
             commit.append("\n\n");
             commit.append(optionalComment);
@@ -266,12 +267,14 @@ void TimeLine::customContextMenuPainter(QListWidgetItem *item)
         // This line is only for testing purpose !
         m_gitRunner->add(KUrl::List(QString(".")));
 
-        CommitDialog *commitDialog = new CommitDialog();
+        QPointer<CommitDialog> commitDialog = new CommitDialog();
         if(commitDialog->exec() == QDialog::Rejected)
             return;
 
         QString commit = QString(commitDialog->m_commitBriefText->text());
         QString optionalComment = QString(commitDialog->m_commitFullText->toPlainText());
+        delete commitDialog;
+
         if (optionalComment.compare("") != 0) {
             commit.append("\n\n");
             commit.append(optionalComment);
@@ -366,15 +369,17 @@ void TimeLine::setItemEnabled(int index, bool enabled)
 
 void TimeLine::restoreCommit()
 {
-    QMessageBox warningMB;
-    warningMB.setIcon(QMessageBox::Information);
-    warningMB.setWindowTitle(i18n("Information"));
-    warningMB.setText(i18n("You are restoring the selected SavePoint."));
-    warningMB.setInformativeText(i18n("With this operation, all the SavePoints and Sections created starting from it, will be deleted.\nContinue anyway?"));
-    warningMB.setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
-    warningMB.setDefaultButton(QMessageBox::Discard);
-    if (warningMB.exec() == QMessageBox::Discard)
+    QPointer<QMessageBox> warningMB = new QMessageBox(0);
+    warningMB->setIcon(QMessageBox::Information);
+    warningMB->setWindowTitle(i18n("Information"));
+    warningMB->setText(i18n("You are restoring the selected SavePoint."));
+    warningMB->setInformativeText(i18n("With this operation, all the SavePoints and Sections created starting from it, will be deleted.\nContinue anyway?"));
+    warningMB->setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
+    warningMB->setDefaultButton(QMessageBox::Discard);
+    if (warningMB->exec() == QMessageBox::Discard)
         return;
+
+    delete warningMB;
 
     QAction *sender = dynamic_cast<QAction*>(this->sender());
     QVariant data = sender->data();
@@ -385,22 +390,24 @@ void TimeLine::restoreCommit()
 
 void TimeLine::moveToCommit()
 {
-    QMessageBox warningMB;
-    warningMB.setIcon(QMessageBox::Information);
-    warningMB.setWindowTitle(i18n("Information"));
-    warningMB.setText(i18n("You are going to move to the selected SavePoint."));
-    warningMB.setInformativeText(i18n("To perform this, a new Section will be created and your current work may be lost if you don't have saved it as a Savepoint.\nContinue?"));
-    warningMB.setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
-    warningMB.setDefaultButton(QMessageBox::Discard);
-    if (warningMB.exec() == QMessageBox::Discard)
+    QPointer<QMessageBox> warningMB = new QMessageBox(0);
+    warningMB->setIcon(QMessageBox::Information);
+    warningMB->setWindowTitle(i18n("Information"));
+    warningMB->setText(i18n("You are going to move to the selected SavePoint."));
+    warningMB->setInformativeText(i18n("To perform this, a new Section will be created and your current work may be lost if you don't have saved it as a Savepoint.\nContinue?"));
+    warningMB->setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
+    warningMB->setDefaultButton(QMessageBox::Discard);
+    if (warningMB->exec() == QMessageBox::Discard)
         return;
 
-    BranchDialog *newBranch = new BranchDialog();
+    delete warningMB;
 
+    QPointer<BranchDialog> newBranch = new BranchDialog();
     if (newBranch->exec() == QDialog::Rejected)
         return;
 
     QString newBranchName = QString(newBranch->m_branchEdit->text());
+    delete newBranch;
 
     if (m_branches.contains(newBranchName)) {
         QMessageBox *mb = new QMessageBox(QMessageBox::Warning,
@@ -412,7 +419,7 @@ void TimeLine::moveToCommit()
         return;
     }
 
-
+    // Retrieve data from the sender
     QAction *sender = dynamic_cast<QAction*>(this->sender());
     QVariant data = sender->data();
     m_gitRunner->moveToCommit(data.toString(), newBranchName);
@@ -424,7 +431,7 @@ void TimeLine::switchBranch()
 {
     QAction *sender = dynamic_cast<QAction*>(this->sender());
     QString branch = sender->text();
-    branch.remove("&");
+    branch.remove('&');
     m_gitRunner->switchBranch(branch);
     d->list->disconnect();
     loadTimeLine(m_workingDir);
@@ -434,23 +441,27 @@ void TimeLine::mergeBranch()
 {
     // Prompt the user that a new SavePoint will be created; if so,
     // popup a Savepoint dialog.
-    QMessageBox warningMB;
-    warningMB.setIcon(QMessageBox::Information);
-    warningMB.setWindowTitle(i18n("Information"));
-    warningMB.setText(i18n("You are going to combine two Sections."));
-    warningMB.setInformativeText(i18n("With this operation, a new SavePoint will be created; then you should have to manually resolve some conflicts on source code. Continue?"));
-    warningMB.setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
-    warningMB.setDefaultButton(QMessageBox::Discard);
-    if (warningMB.exec() == QMessageBox::Discard)
+    QPointer<QMessageBox> warningMB = new QMessageBox(0);
+    warningMB->setIcon(QMessageBox::Information);
+    warningMB->setWindowTitle(i18n("Information"));
+    warningMB->setText(i18n("You are going to combine two Sections."));
+    warningMB->setInformativeText(i18n("With this operation, a new SavePoint will be created; then you should have to manually resolve some conflicts on source code. Continue?"));
+    warningMB->setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
+    warningMB->setDefaultButton(QMessageBox::Discard);
+    if (warningMB->exec() == QMessageBox::Discard)
         return;
 
-    CommitDialog *commitDialog = new CommitDialog();
+    delete warningMB;
+
+    QPointer<CommitDialog> commitDialog = new CommitDialog();
     if (commitDialog->exec() == QDialog::Rejected)
         return;
 
     QString commit = QString(commitDialog->m_commitBriefText->text());
     QString optionalComment = QString(commitDialog->m_commitFullText->toPlainText());
-    if (optionalComment.compare("") != 0) {
+    delete commitDialog;
+
+    if (!optionalComment.isEmpty()) {
         commit.append("\n\n");
         commit.append(optionalComment);
     }
@@ -458,7 +469,7 @@ void TimeLine::mergeBranch()
     QString branchToMerge = m_currentBranch;
     QAction *sender = dynamic_cast<QAction*>(this->sender());
     QString branch = sender->text();
-    branch.remove("&");
+    branch.remove('&');
 
     // To merge current branch into the selected one, first whe have to
     // move to the selected branch and then call merge function !
@@ -471,19 +482,21 @@ void TimeLine::mergeBranch()
 
 void TimeLine::deleteBranch()
 {
-    QMessageBox warningMB;
-    warningMB.setIcon(QMessageBox::Warning);
-    warningMB.setWindowTitle(i18n("Warning"));
-    warningMB.setText(i18n("<b>You are going to remove the selected Section.</b>"));
-    warningMB.setInformativeText(i18n("With this operation, you'll also delete all SavePoints/Sections performed inside it.\nContinue anyway?"));
-    warningMB.setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
-    warningMB.setDefaultButton(QMessageBox::Discard);
-    if (warningMB.exec() == QMessageBox::Discard)
+    QPointer<QMessageBox> warningMB = new QMessageBox(0);
+    warningMB->setIcon(QMessageBox::Warning);
+    warningMB->setWindowTitle(i18n("Warning"));
+    warningMB->setText(i18n("<b>You are going to remove the selected Section.</b>"));
+    warningMB->setInformativeText(i18n("With this operation, you'll also delete all SavePoints/Sections performed inside it.\nContinue anyway?"));
+    warningMB->setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
+    warningMB->setDefaultButton(QMessageBox::Discard);
+    if (warningMB->exec() == QMessageBox::Discard)
         return;
+
+    delete warningMB;
 
     QAction *sender = dynamic_cast<QAction*>(this->sender());
     QString branch = sender->text();
-    branch.remove("&");
+    branch.remove('&');
     m_gitRunner->deleteBranch(branch);
     d->list->disconnect();
     loadTimeLine(m_workingDir);
@@ -493,15 +506,16 @@ void TimeLine::renameBranch()
 {
     QAction *sender = dynamic_cast<QAction*>(this->sender());
     QString branch = sender->text();
-    branch.remove("&");
+    branch.remove('&');
 
-    BranchDialog *renameBranch = new BranchDialog();
+    QPointer<BranchDialog> renameBranch = new BranchDialog();
 
     if (renameBranch->exec() == QDialog::Rejected) {
         return;
     }
 
     QString newBranchName = QString(renameBranch->m_branchEdit->text());
+    delete renameBranch;
 
     if (m_branches.contains(newBranchName)) {
         QMessageBox *mb = new QMessageBox(QMessageBox::Warning,
@@ -522,15 +536,16 @@ void TimeLine::createBranch()
 {
     QAction *sender = dynamic_cast<QAction*>(this->sender());
     QString branch = sender->text();
-    branch.remove("&");
+    branch.remove('&');
 
-    BranchDialog *createBranch = new BranchDialog();
+    QPointer<BranchDialog> createBranch = new BranchDialog();
 
     if (createBranch->exec() == QDialog::Rejected) {
         return;
     }
 
     QString newBranchName = QString(createBranch->m_branchEdit->text());
+    delete createBranch;
 
     if (m_branches.contains(newBranchName)) {
         QMessageBox *mb = new QMessageBox(QMessageBox::Warning,

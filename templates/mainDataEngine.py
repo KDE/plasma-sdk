@@ -26,38 +26,38 @@ from PyKDE4 import plasmascript
 
 class $DATAENGINE_NAME(plasmascript.DataEngine):
 
-    #	Constructor, forward initialization to its superclass
-    #	Note: try to NOT modify this constructor; all the setup code
-    #	should be placed in the init method.	
+    #   Constructor, forward initialization to its superclass
+    #   Note: try to NOT modify this constructor; all the setup code
+    #   should be placed in the init method.
     def __init__(self,parent,args=None):
         plasmascript.DataEngine.__init__(self,parent)
 
-    #	init method
-    #	Put here all the code needed to initialize our plasmoid
+    #   init method
+    #   Put here all the code needed to initialize our plasmoid
     def init(self):
         self.setMinimumPollingInterval(333)
 
-    #	sources method
-    #	Used by applets to request what data source the DataEngine has
+    #   sources method
+    #   Used by applets to request what data source the DataEngine has
     def sources(self):
-	# Add custom code here
+    # Add custom code here
         return sources
 
-    #	sourceRequestEvent method
-    #	Called when an applet access the DataEngine and request for
-    #	a specific source ( name )
+    #   sourceRequestEvent method
+    #   Called when an applet access the DataEngine and request for
+    #   a specific source ( name )
     def sourceRequestEvent(self, name):
-	# Add custom code here
+    # Add custom code here
         return self.updateSourceEvent(name)
 
-    #	updateSourceEvent method
-    #	The main function for a DataEngine
+    #   updateSourceEvent method
+    #   The main function for a DataEngine
     def updateSourceEvent(self, tz):
-	# Add custom code here
+        # Add custom code here
         return True
 
-    #	CreateDataEngine method
-    #	Note: do NOT modify it, needed by Plasma
+    #   CreateDataEngine method
+    #   Note: do NOT modify it, needed by Plasma
 def CreateDataEngine(parent):
     return $DATAENGINE_NAME(parent)
- 
+

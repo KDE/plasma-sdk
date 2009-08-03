@@ -28,28 +28,28 @@ from PyKDE4 import plasmascript
 
 class $PLASMOID_NAME(plasmascript.Applet):
 
-    #	Constructor, forward initialization to its superclass
-    #	Note: try to NOT modify this constructor; all the setup code
-    #	should be placed in the init method.
+    #   Constructor, forward initialization to its superclass
+    #   Note: try to NOT modify this constructor; all the setup code
+    #   should be placed in the init method.
     def __init__(self,parent,args=None):
         plasmascript.Applet.__init__(self,parent)
- 
-    #	init method
-    #	Put here all the code needed to initialize our plasmoid
+
+    #   init method
+    #   Put here all the code needed to initialize our plasmoid
     def init(self):
         self.setHasConfigurationInterface(False)
         self.resize(125, 125)
         self.setAspectRatioMode(Plasma.Square)
- 
-    #	Simple painting function
+
+    #   Simple painting function
     def paintInterface(self, painter, option, rect):
         painter.save()
-	# Simple paint code example
+        # Simple paint code example
         #painter.setPen(Qt.white)
         #painter.drawText(rect, Qt.AlignVCenter | Qt.AlignHCenter, "Hello Python!")
         painter.restore()
 
-    #	CreateApplet method
-    #	Note: do NOT modify it, needed by Plasma
+    #   CreateApplet method
+    #   Note: do NOT modify it, needed by Plasma
 def CreateApplet(parent):
-    return $PLASMOID_NAME(parent) 
+    return $PLASMOID_NAME(parent)
