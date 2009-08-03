@@ -376,3 +376,26 @@ DvcsJob::JobStatus GitRunner::reset(const QStringList &args)
     return m_jobStatus;
 }
 
+DvcsJob::JobStatus GitRunner::setAuthor(const QString &username)
+{
+    DvcsJob *job = new DvcsJob();
+    initJob(*job);
+    *job << "config";
+    *job << "user.name";
+    *job << username;
+
+    startJob(*job);
+    return m_jobStatus;
+}
+
+DvcsJob::JobStatus GitRunner::setEmail(const QString &email)
+{
+    DvcsJob *job = new DvcsJob();
+    initJob(*job);
+    *job << "config";
+    *job << "user.email";
+    *job << email;
+
+    startJob(*job);
+    return m_jobStatus;
+}

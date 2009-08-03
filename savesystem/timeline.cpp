@@ -28,24 +28,25 @@
 #include <kiconloader.h>
 
 
-#include    <KUrl>
-#include    <KIcon>
-#include    <QListWidget>
-#include    <QRegExp>
-#include    <QMessageBox>
-#include    <KMenu>
-#include    <QMenu>
-#include    <QRect>
-#include    <QLineEdit>
-#include    <QPlainTextEdit>
+#include <KUrl>
+#include <KIcon>
+#include <QListWidget>
+#include <QRegExp>
+#include <QMessageBox>
+#include <KMenu>
+#include <QMenu>
+#include <QRect>
+#include <QLineEdit>
+#include <QPlainTextEdit>
+#include <Plasma/PackageMetadata>
 
-#include    "branchdialog.h"
-#include    "commitdialog.h"
-#include    "timelineitem.h"
-#include    "timelinedelegate.h"
-#include    "timelinelistwidget.h"
-#include    "timelineprivatestorage.h"
-#include    "timeline.h"
+#include "branchdialog.h"
+#include "commitdialog.h"
+#include "timelineitem.h"
+#include "timelinedelegate.h"
+#include "timelinelistwidget.h"
+#include "timelineprivatestorage.h"
+#include "timeline.h"
 
 
 
@@ -170,8 +171,8 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
         QString date = tmp.takeFirst().remove(0, 6);
 
-        QString commitInfo = (i18n("SavePoint created on: ") + date);
-        commitInfo.append(i18n("\nBy: ") + author + "\n");
+        QString commitInfo = (i18n("SavePoint created on: ") + date + "\n");
+        commitInfo.append(author + "\n");
         commitInfo.append(i18n("Comment:\n"));
 
         int tmpSize = tmp.size();
@@ -236,6 +237,13 @@ void TimeLine::customContextMenuPainter(QListWidgetItem *item)
     if (tlItem->getIdentifier() == TimeLineItem::OutsideWorkingDir) {
         // These lines are only for testing purpose !
         m_gitRunner->init(m_workingDir);
+
+        // Retrieve Name and Email, and set git global parameters
+        Plasma::PackageMetadata metadata(m_workingDir.pathOrUrl() + "metadata.desktop");
+
+        m_gitRunner->setAuthor(metadata.author());
+        m_gitRunner->setEmail(metadata.email());
+
         m_gitRunner->add(KUrl::List(QString(".")));
 
         CommitDialog *commitDialog = new CommitDialog();
@@ -381,7 +389,7 @@ void TimeLine::moveToCommit()
     warningMB.setIcon(QMessageBox::Information);
     warningMB.setWindowTitle(i18n("Information"));
     warningMB.setText(i18n("You are going to move to the selected SavePoint."));
-    warningMB.setInformativeText(i18n("To perform this, a new branch will be created and your current work may be lost if you don't have saved it as a Savepoint.\nContinue?"));
+    warningMB.setInformativeText(i18n("To perform this, a new Section will be created and your current work may be lost if you don't have saved it as a Savepoint.\nContinue?"));
     warningMB.setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
     warningMB.setDefaultButton(QMessageBox::Discard);
     if (warningMB.exec() == QMessageBox::Discard)

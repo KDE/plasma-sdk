@@ -29,7 +29,7 @@
 #include <KUrlRequester>
 #include <KStandardDirs>
 #include <KUser>
-#include <QMessageBox>
+#include <Plasma/PackageMetadata>
 
 #include "packagemodel.h"
 #include "startpage.h"
@@ -166,7 +166,7 @@ void StartPage::refreshRecentProjectsList()
 
     for (int i = 0; i < recentFiles.size(); i++) {
         Plasma::PackageMetadata metadata(KStandardDirs::locateLocal("appdata", recentFiles.at(i) + '/'));
-        QString projectName = metadata.name();
+        QString projectName = metadata.pluginName();
 
 //         if (projectName.isEmpty()) {
 //             continue;
@@ -198,85 +198,91 @@ void StartPage::createNewProject()
 {
 // TODO
 //     metadata->setPluginName( view->pluginname_edit->text() );
-
     kDebug() << "Creating simple folder structure for the project ";
 
-    QString templateFilePath = KStandardDirs::locate("appdata", "templates/");
+    // packagePath -> projectPath
+    QString projectNameLowerCase = ui->projectName->text().toLower();
+    QString projectName = ui->projectName->text();
+    QString projectFileExtension;
 
-    QString type;
+    QString templateFilePath = KStandardDirs::locate("appdata", "templates/");
+    QString projectPath = KStandardDirs::locateLocal("appdata", projectNameLowerCase + '/');
+
+    Plasma::PackageMetadata metadata;
+
+    // type -> serviceTypes
+    QString serviceTypes;
     if (ui->contentTypes->currentRow() == 0) {
-        type = "Plasma/Applet";
+        serviceTypes = "Plasma/Applet";
         templateFilePath.append("mainPlasmoid");
     } else if (ui->contentTypes->currentRow() == 1) {
-        type = "Plasma/DataEngine";
+        serviceTypes = "Plasma/DataEngine";
         templateFilePath.append("mainDataEngine");
     } else if (ui->contentTypes->currentRow() == 2) {
-        type = "Plasma/Theme";
+        serviceTypes = "Plasma/Theme";
     } else if (ui->contentTypes->currentRow() == 3) {
-        type = "Plasma/Runner";
+        serviceTypes = "Plasma/Runner";
         templateFilePath.append("mainRunner");
     }
 
-    QString scriptFileName = ui->projectName->text().toLower();
     // Append the desired extension
     if (ui->radioButtonJs->isChecked()) {
-        templateFilePath.append(".js");
-        scriptFileName.append(".js");
+        metadata.setImplementationApi("javascript");
+        projectFileExtension.append(".js");
     } else if (ui->radioButtonPy->isChecked()) {
-        templateFilePath.append(".py");
-        scriptFileName.append(".py");
+        metadata.setImplementationApi("python");
+        projectFileExtension.append(".py");
     } else if (ui->radioButtonRb->isChecked()) {
-        templateFilePath.append(".rb");
-        scriptFileName.append(".rb");
+        metadata.setImplementationApi("ruby-script");
+        projectFileExtension.append(".rb");
     }
 
     // Creating the corresponding folder
-    QString packagePath = KStandardDirs::locateLocal("appdata", ui->projectName->text().toLower() + '/');
-    QDir packageSubDirs(packagePath);
-    packageSubDirs.mkdir("contents");
-    packageSubDirs.cd("contents");
-    packageSubDirs.mkdir("code");
-    QString sourcesFilesPath = packagePath;
-
-    // Add to the script name the full path, so we can create it later
-    sourcesFilesPath.append("contents/code/");
-    scriptFileName.prepend(sourcesFilesPath);
+    QDir packageSubDirs(projectPath);
+    packageSubDirs.mkpath("contents/code/");
 
     // Create a QFile object that points to the template we need to copy
-    QFile sourceFile(templateFilePath);
-    QFile destinationFile(scriptFileName);
+    QFile sourceFile(templateFilePath + projectFileExtension);
+    QFile destinationFile(projectPath +
+                          "contents/code/" +
+                          projectNameLowerCase +
+                          projectFileExtension);
 
     // Now open these files, and substitute the main class, author, email and date fields
     sourceFile.open(QIODevice::ReadOnly);
     destinationFile.open(QIODevice::ReadWrite);
 
     QByteArray rawData = sourceFile.readAll();
+
     QByteArray replacedString("$PLASMOID_NAME");
     if(rawData.contains(replacedString)) {
-        rawData.replace(replacedString, ui->projectName->text().toAscii());
+        rawData.replace(replacedString, projectName.toAscii());
     }
     replacedString.clear();
+
     replacedString.append("$DATAENGINE_NAME");
     if(rawData.contains(replacedString)) {
-        rawData.replace(replacedString, ui->projectName->text().toAscii());
+        rawData.replace(replacedString, projectName.toAscii());
     }
     replacedString.clear();
+
     replacedString.append("$AUTHOR");
     if(rawData.contains(replacedString)) {
         rawData.replace(replacedString, ui->authorTextField->text().toAscii());
     }
     replacedString.clear();
+
     replacedString.append("$EMAIL");
     if(rawData.contains(replacedString)) {
         rawData.replace(replacedString, ui->emailTextField->text().toAscii());
     }
     replacedString.clear();
 
+    replacedString.append("$DATE");
     QDate date = QDate::currentDate();
     QByteArray datetime(date.toString().toUtf8());
     QTime time = QTime::currentTime();
-    datetime.append(", "+time.toString().toUtf8());
-    replacedString.append("$DATE");
+    datetime.append(", "+time.toString());
     if(rawData.contains(replacedString)) {
         rawData.replace(replacedString, datetime);
     }
@@ -284,7 +290,30 @@ void StartPage::createNewProject()
     destinationFile.write(rawData);
     destinationFile.close();
 
-    emit projectSelected(ui->projectName->text().toLower(), type);
+    // Write the .desktop file
+    metadata.setName(projectName);
+    metadata.setPluginName(projectNameLowerCase);
+    metadata.setServiceType(serviceTypes);
+    metadata.setAuthor(ui->authorTextField->text());
+    metadata.setEmail(ui->emailTextField->text());
+    metadata.setLicense("GPL");
+    metadata.write(projectPath + "metadata.desktop");
+
+    // Note: since PackageMetadata lacks of a good api to add X-Plasma-* entries,
+    // we add it manually until a patch is released.
+    QFile metaFile(projectPath + "metadata.desktop");
+    metaFile.open(QIODevice::Append);
+    QByteArray entry = "X-Plasma-Mainscript=code/" +
+                       projectNameLowerCase.toUtf8() +
+                       projectFileExtension.toUtf8() +
+                       "\n";
+    metaFile.write(entry);
+    entry.clear();
+    entry.append("X-Plasma-DefaultSize=200,100\n");
+    metaFile.write(entry);
+    metaFile.close();
+
+    emit projectSelected(projectNameLowerCase, serviceTypes);
 }
 
 void StartPage::cancelNewProject()

@@ -4,6 +4,7 @@
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
+#include <QTextStream>
 
 #include <KDirWatch>
 #include <KIcon>
@@ -203,8 +204,9 @@ void PackageModel::loadPackage()
     QString contents = structure->contentsPrefix();
     if (!contents.isEmpty()) {
         dir.mkpath(contents);
-        dir.cd(contents);
+        //dir.cd(contents);
     }
+    dir.cd(contents);
 
     foreach(const char *key, structure->directories()) {
         QString path = structure->path(key);
@@ -218,6 +220,33 @@ void PackageModel::loadPackage()
     QList<const char *> files = structure->files();
     QHash<QString, const char *> indexedFiles;
     foreach(const char *key, structure->files()) {
+
+        // If the key is "main", skip its creation because we provide a custom
+        // main with a different name and extension, and add to the index file.
+        // Note: to be improved
+        if(QString::compare(key, "mainscript")) {
+            dir.cdUp();
+            // Since a PackageMetadata::getMainScript() isn't yet implemented,
+            // we have to iterate the file to find its name.
+            QTextStream f(dir.path().toUtf8() + '/' + "metadata.desktop", QIODevice::ReadOnly);
+            //f.open(QIODevice::ReadOnly);
+            QString string;
+            while(!f.atEnd()) {
+                string = f.readLine(0);
+                if(string.contains("X-Plasma-Mainscript=code/"))
+                    break;
+            }
+
+            if(string.isEmpty())
+                continue;
+
+            string.remove("X-Plasma-Mainscript=code/");
+
+            indexedFiles.insert(string, key);
+            dir.cd(contents);
+            continue;
+        }
+
         QString path = structure->path(key);
         if (!dir.exists(path)) {
             QFileInfo info(dir.path() + '/' + path);

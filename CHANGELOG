@@ -1,3 +1,8 @@
+--August 3,2009--
+- When creating a new project, metadata.desktop file is filled with the required fields
+- Added setAuthor and setEmail to GitRunner class, so now TimeLine can set that fields
+- Review createNewProject code.
+
 --July 30, 2009--
 - New Project page displays now two fields, Author and Email, defaulted to <username> and
   <username>@none.org. These values are inserted in the header contained int the main script

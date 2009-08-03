@@ -42,6 +42,10 @@ public:
     DvcsJob::JobStatus currentBranch();
     DvcsJob::JobStatus branches();
 
+    // Utilities
+    DvcsJob::JobStatus setAuthor(const QString &username);
+    DvcsJob::JobStatus setEmail(const QString &email);
+
     QString& getResult();
 
 private:
