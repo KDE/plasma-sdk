@@ -4,8 +4,9 @@
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
-#include <QTextStream>
 
+#include <KConfigGroup>
+#include <KDesktopFile>
 #include <KDirWatch>
 #include <KIcon>
 #include <KUser>
@@ -193,7 +194,7 @@ void PackageModel::loadPackage()
     if (!dir.exists("metadata.desktop")) {
         KUser user;
         Plasma::PackageMetadata metadata;
-        metadata.setAuthor(user.fullName());
+        metadata.setAuthor(user.property(KUser::FullName).toString());
         metadata.setLicense("GPL");
         metadata.setName(dir.dirName());
         metadata.setServiceType(structure->type());
@@ -219,31 +220,22 @@ void PackageModel::loadPackage()
 
     QList<const char *> files = structure->files();
     QHash<QString, const char *> indexedFiles;
-    foreach(const char *key, structure->files()) {
-
+    foreach (const char *key, structure->files()) {
         // If the key is "main", skip its creation because we provide a custom
         // main with a different name and extension, and add to the index file.
         // Note: to be improved
-        if(QString::compare(key, "mainscript")) {
-            dir.cdUp();
-            // Since a PackageMetadata::getMainScript() isn't yet implemented,
-            // we have to iterate the file to find its name.
-            QTextStream f(dir.path().toUtf8() + '/' + "metadata.desktop", QIODevice::ReadOnly);
-            //f.open(QIODevice::ReadOnly);
-            QString string;
-            while(!f.atEnd()) {
-                string = f.readLine(0);
-                if(string.contains("X-Plasma-Mainscript=code/"))
-                    break;
+        if (QString::compare(key, "mainscript")) {
+            // TODO: add QString Plasma::PackageMetadata::getMainFile() const?
+            KDesktopFile cg(m_package->path() + "/../metadata.desktop");
+            QString mainScript = cg.desktopGroup().readEntry("X-Plasma-Mainscript", QString());
+
+            if (mainScript.isEmpty()) {
+                continue;
             }
 
-            if(string.isEmpty())
-                continue;
-
-            string.remove("X-Plasma-Mainscript=code/");
-
-            indexedFiles.insert(string, key);
-            dir.cd(contents);
+            // semi-dangerous assumption that it begins with code/
+            mainScript.remove("code/");
+            indexedFiles.insert(mainScript, key);
             continue;
         }
 
@@ -290,9 +282,10 @@ void PackageModel::loadPackage()
 
     if (!indexedFiles.empty()) {
         int currentTopCount = m_topEntries.count();
-        foreach(const char *key, indexedFiles) {
+        foreach (const char *key, indexedFiles) {
             m_topEntries.append(key);
         }
+
         beginInsertRows(QModelIndex(), currentTopCount, indexedFiles.count());
         endInsertRows();
     }
