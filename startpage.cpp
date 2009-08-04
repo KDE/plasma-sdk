@@ -273,7 +273,7 @@ void StartPage::createNewProject()
     replacedString.clear();
 
     replacedString.append("$EMAIL");
-    if(rawData.contains(replacedString)) {
+    if (rawData.contains(replacedString)) {
         rawData.replace(replacedString, ui->emailTextField->text().toAscii());
     }
     replacedString.clear();
@@ -282,8 +282,8 @@ void StartPage::createNewProject()
     QDate date = QDate::currentDate();
     QByteArray datetime(date.toString().toUtf8());
     QTime time = QTime::currentTime();
-    datetime.append(", "+time.toString());
-    if(rawData.contains(replacedString)) {
+    datetime.append(", " + time.toString().toUtf8());
+    if (rawData.contains(replacedString)) {
         rawData.replace(replacedString, datetime);
     }
 
