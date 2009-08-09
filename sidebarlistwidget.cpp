@@ -1,9 +1,9 @@
 
-#include    <QWidget>
-#include    <QMouseEvent>
-#include    <QModelIndex>
-#include    <QAbstractItemView>
-#include    <QListWidget>
+#include <QWidget>
+#include <QMouseEvent>
+#include <QModelIndex>
+#include <QAbstractItemView>
+#include  <QListWidget>
 
 #include "sidebarlistwidget.h"
 

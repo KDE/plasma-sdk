@@ -1,15 +1,15 @@
-#include    <QSplitter>
-#include    <QStackedWidget>
-#include    <QWidget>
-#include    <QLabel>
-#include    <QVBoxLayout>
-#include    <QList>
+#include <QSplitter>
+#include <QStackedWidget>
+#include <QWidget>
+#include <QLabel>
+#include <QVBoxLayout>
+#include <QList>
 
 
-#include    "sidebaritem.cpp"
-#include    "sidebardelegate.h"
-#include    "sidebarlistwidget.h"
-#include    "sidebarprivatestorage.h"
+#include "sidebaritem.cpp"
+#include "sidebardelegate.h"
+#include "sidebarlistwidget.h"
+#include "sidebarprivatestorage.h"
 
 
 SidebarPrivateStorage::SidebarPrivateStorage()

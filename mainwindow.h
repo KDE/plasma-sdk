@@ -48,14 +48,17 @@ public:
 public Q_SLOTS:
     void quit();
 
-    void changeTab(int tab);
+    void changeTab(const QModelIndex &);
     void loadProject(const QString &name, const QString &type);
 
     void loadRequiredEditor(const KService::List offers);
+signals:
+    void newSavePointClicked();
 
 private:
     enum WorkflowTabs { StartPageTab = 0,
                         EditTab,
+                        SavePoint,
                         PublishTab,
                         DocsTab,
                         PreviewTab
@@ -75,6 +78,7 @@ private:
     EditPage *m_editPage;
     PackageModel *m_model;
     int m_oldTab;
+    bool docksCreated;
 
     KParts::Part *m_part;
 };

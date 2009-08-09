@@ -1,11 +1,11 @@
 #ifndef SIDEBARPRIVATESTORAGE_H
 #define SIDEBARPRIVATESTORAGE_H
 
-class   SidebarListwidget;
-class   SidebarItem;
-class   SidebarDelegate;
-class   SidebarListWidget;
-class   SidebarPrivateStorage;
+class SidebarListwidget;
+class SidebarItem;
+class SidebarDelegate;
+class SidebarListWidget;
+class SidebarPrivateStorage;
 
 
 class QSplitter;

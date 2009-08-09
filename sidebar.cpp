@@ -31,10 +31,10 @@
 
 // #include "settings.h"
 
-#include    "sidebaritem.cpp"
-#include    "sidebardelegate.h"
-#include    "sidebarlistwidget.h"
-#include    "sidebarprivatestorage.h"
+#include "sidebaritem.cpp"
+#include "sidebardelegate.h"
+#include "sidebarlistwidget.h"
+#include "sidebarprivatestorage.h"
 #include "sidebar.h"
 
 
@@ -84,8 +84,9 @@ Sidebar::Sidebar(QWidget *parent)
     d->vlay->addWidget(d->stack);
     d->sideContainer->hide();
 
-    connect(d->list, SIGNAL(currentRowChanged(int)),
-            this, SIGNAL(currentIndexChanged(int)));
+    connect(d->list, SIGNAL(clicked(const QModelIndex &)),
+            this, SIGNAL(currentIndexClicked(const QModelIndex &)));
+
 }
 
 Sidebar::~Sidebar()

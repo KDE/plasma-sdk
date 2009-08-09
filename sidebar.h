@@ -26,9 +26,6 @@ public:
 
     int addItem(const QIcon &icon, const QString &text);
 
-//         void setMainWidget( QWidget *widget );
-//         void setBottomWidget( QWidget *widget );
-
     void setItemEnabled(int index, bool enabled);
     bool isItemEnabled(int index) const;
 
@@ -39,19 +36,11 @@ public:
     bool isSidebarVisible() const;
 
 signals:
-    void currentIndexChanged(int);
-
-//     private slots:
-//         void itemClicked( QListWidgetItem *item );
-//         void splitterMoved( int pos, int index );
-//         void showTextToggled( bool );
-//         void iconSizeChanged( QAction *action );
+    void currentIndexClicked(const QModelIndex &item);
 
 private:
     void saveSplitterSize() const;
 
-    // private storage
-    //class SidebarPrivateStorage;
     SidebarPrivateStorage *d;
 };
 

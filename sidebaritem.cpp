@@ -1,5 +1,5 @@
 
-#include    <QListWidgetItem>
+#include <QListWidgetItem>
 
 //#include "sidebaritem.h"
 #ifndef SIDEBARITEM_H

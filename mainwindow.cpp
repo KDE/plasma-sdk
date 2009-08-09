@@ -53,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     setXMLFile("plasmateui.rc");
     createMenus();
-
+    docksCreated = false;
     m_startPage = new StartPage(this);
     connect(m_startPage, SIGNAL(projectSelected(QString, QString)),
             this, SLOT(loadProject(QString, QString)));
@@ -69,7 +69,6 @@ MainWindow::~MainWindow()
     c.sync();
 
     if (m_workflow) {
-        delete m_startPage;
         delete m_workflow;
     }
 
@@ -80,8 +79,7 @@ MainWindow::~MainWindow()
         delete m_previewer;
         delete m_previewerWidget;
     }
-    if (m_dockTimeLine) {
-        delete m_timeLine;
+    if (m_dockTimeLine) {;
         delete m_dockTimeLine;
     }
 }
@@ -104,11 +102,12 @@ void MainWindow::createDockWidgets()
 
     m_sidebar->addItem(KIcon("go-home"), i18n("Start page"));
     m_sidebar->addItem(KIcon("accessories-text-editor"), i18n("Edit"));
+    m_sidebar->addItem(KIcon("document-save"),i18n("New SavePoint"));
     m_sidebar->addItem(KIcon("krfb"), i18n("Publish"));
     m_sidebar->addItem(KIcon("help-contents"), i18n("Documentation"));
 
-    connect(m_sidebar, SIGNAL(currentIndexChanged(int)),
-            this, SLOT(changeTab(int)));
+    connect(m_sidebar, SIGNAL(currentIndexClicked(const QModelIndex &)),
+            this, SLOT(changeTab(const QModelIndex &)));
 
     m_workflow->setWidget(m_sidebar);
     addDockWidget(Qt::LeftDockWidgetArea, m_workflow);
@@ -120,9 +119,6 @@ void MainWindow::createDockWidgets()
     m_dockTimeLine = new QDockWidget(i18n("TimeLine"), this);
     m_dockTimeLine->setObjectName("timeline");
     m_timeLine = new TimeLine(this, m_model->package());
-
-    connect(m_timeLine, SIGNAL(currentIndexChanged(int)),
-            this, SLOT(changeTab(int)));
 
     m_dockTimeLine->setWidget(m_timeLine);
 
@@ -143,6 +139,11 @@ void MainWindow::createDockWidgets()
 
     // Restoring the previous layout
     restoreState(configDock.readEntry("MainWindowLayout",QByteArray()), 0);
+
+    connect(this, SIGNAL(newSavePointClicked()),
+            m_timeLine, SLOT(newSavePoint()));
+
+    docksCreated = true;
 }
 
 void MainWindow::quit()
@@ -151,8 +152,9 @@ void MainWindow::quit()
 //     deleteLater();
 }
 
-void MainWindow::changeTab(int tab)
+void MainWindow::changeTab(const QModelIndex &item)
 {
+    int tab = item.row();
     if (tab == m_oldTab) { // user clicked on the current tab
         if (tab == StartPageTab) {
             m_startPage->resetStatus();
@@ -162,6 +164,12 @@ void MainWindow::changeTab(int tab)
 
     centralWidget()->deleteLater();
     m_startPage = 0;
+
+    if(tab == SavePoint) {
+        emit newSavePointClicked();
+        m_sidebar->setCurrentIndex(m_oldTab);
+        tab = m_oldTab;
+    }
 
     switch (tab) {
     case StartPageTab: {
@@ -265,11 +273,20 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     KGlobal::config()->sync();
 
     // Load the needed widgets, switch to page 1 (edit)...
-    createDockWidgets();
-    m_sidebar->setCurrentIndex(1);
+    if(!docksCreated)
+        createDockWidgets();
+
+    m_editPage = new EditPage(this);
+    m_editPage->setModel(m_model);
+    setCentralWidget(m_editPage);
+    m_oldTab = EditTab;
+    m_sidebar->setCurrentIndex(m_oldTab);
 }
 
-QStringList MainWindow::recentProjects() // TODO Limit to 5?
+QStringList MainWindow::recentProjects()
+        // Q: TODO Limit to 5?
+        // A: Before limiting, we need to provide an "Export" feature so
+        // the developer can save his projects and import it later for review.
 {
     KConfigGroup cg = KGlobal::config()->group("General");
     QStringList l = cg.readEntry("recentFiles", QStringList());

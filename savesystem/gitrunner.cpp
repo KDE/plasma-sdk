@@ -2,15 +2,15 @@
 
 
 
-#include    <KDebug>
-#include    <KProcess>
-#include    <QFileInfo>
-#include    <QDir>
-#include    <QProcess>
+#include <KDebug>
+#include <KProcess>
+#include <QFileInfo>
+#include <QDir>
+#include <QProcess>
 
 
-#include    "gitrunner.h"
-#include    "dvcsjob.h"
+#include "gitrunner.h"
+#include "dvcsjob.h"
 
 
 
@@ -31,25 +31,6 @@ GitRunner::~GitRunner()
         delete m_job;*/
     if (m_lastRepoRoot)
         delete m_lastRepoRoot;
-}
-
-void GitRunner::resetJob()
-{/*
-    m_job = new DvcsJob();
-    m_job->setCommunicationMode( m_commMode );
-    m_job->setDirectory( QDir( m_lastRepoRoot->pathOrUrl() ) );
-    *m_job<< "git";
-    m_job->start();
-    m_result.clear();
-    m_isRunning = false;*/
-}
-
-void GitRunner::startJob()
-{/*
-    m_isRunning = true;
-    m_job->start();
-    m_result.append( m_job->output() );
-    m_isRunning = false;*/
 }
 
 void GitRunner::initJob(DvcsJob &job)
@@ -112,6 +93,20 @@ bool GitRunner::isValidDirectory(const KUrl & dirPath)
     }
 
     return (dir.exists(gitDir) && m_result.compare(QString("true"))) ? true : false;
+}
+
+bool GitRunner::hasNewChangesToCommit()
+{
+    DvcsJob *job = new DvcsJob();
+    initJob(*job);
+    *job << "status";
+    startJob(*job);
+
+    if(m_result.contains("nothing to commit (working directory clean)",
+                         Qt::CaseSensitive))
+        return false;
+
+    return true;
 }
 
 QString& GitRunner::getResult()

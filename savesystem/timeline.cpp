@@ -89,36 +89,24 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     QStringList list = QStringList();
 
     m_gitRunner->setDirectory(dir);
-    bool res = m_gitRunner->isValidDirectory(dir);
 
-    if (!res) {
+    if (!m_gitRunner->isValidDirectory(dir)) {
         // If the dir hasn't a git tree we have to create only one item,
         // used to notify the user that a timeline should be created
         // ( that is, call GitRunner::init() ).
-        list.append(i18n("Not a SavePoint"));
-        list.append(i18n("No TimeLine found.\nClick to init the TimeLine and store your first SavePoint !"));
+        list.append(i18n("No TimeLine found"));
+        list.append(i18n("To start a new one, simply click on \"New SavePoint button !"));
         list.append(QString());                  // We don't have a sha1sum now, so set an empty string
 
-        this->uiAddItem(KIcon("document-save"),
+        this->uiAddItem(KIcon("dialog-ok"),
                         list,
                         TimeLineItem::OutsideWorkingDir,
-                        Qt::ItemIsEnabled);
+                        Qt::NoItemFlags);
 
         connect(d->list, SIGNAL(itemClicked(QListWidgetItem *)),
                 this, SLOT(customContextMenuPainter(QListWidgetItem *)));
         return;
     }
-
-    // The first element of the timeline is used to prompt the user to
-    // add a SavePoint
-    list.append(i18n("Not a SavePoint"));
-    list.append(i18n("Click here to store a new SavePoint!"));
-    list.append(QString());                  // We don't have a sha1sum now, so set an empty string
-    this->uiAddItem(KIcon("document-save"),
-                    list,
-                    TimeLineItem::NotACommit,
-                    Qt::ItemIsEnabled);
-
 
     if (m_gitRunner->currentBranch() != DvcsJob::JobSucceeded) {
         // handle error
@@ -147,6 +135,29 @@ void TimeLine::loadTimeLine(const KUrl &dir)
         // handle error
         return;
     }
+
+    QString info;
+    info.append(i18n("On Section: "));
+    info.append(m_currentBranch);
+    list.append(info);
+
+    info.clear();
+    info.append(i18n("You are currently working on Section:\n"));
+    info.append(m_currentBranch);
+    info.append('\n');
+    info.append(i18n("\nAvailable Sections are:\n"));
+    info.append(branches);
+    info.append(i18n("\nClick here to switch to those Sections."));
+
+    list.append(info);
+    list.append(QString());
+
+    this->uiAddItem(KIcon("system-switch-user"),
+                    list,
+                    TimeLineItem::Branch,
+                    Qt::ItemIsEnabled);
+
+    list.clear();
 
     QString rawCommits = m_gitRunner->getResult();
 
@@ -200,29 +211,6 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
     }
 
-    // As last element, show the current branch
-    list.clear();
-    QString info;
-    info.append(i18n("On Section: "));
-    info.append(m_currentBranch);
-    list.append(info);
-
-    info.clear();
-    info.append(i18n("You are currently working on Section:\n"));
-    info.append(m_currentBranch);
-    info.append('\n');
-    info.append(i18n("\nAvailable Sections are:\n"));
-    info.append(branches);
-    info.append(i18n("\nClick here to switch to those Sections."));
-
-    list.append(info);
-    list.append(QString());
-
-    this->uiAddItem(KIcon("system-switch-user"),
-                    list,
-                    TimeLineItem::Branch,
-                    Qt::ItemIsEnabled);
-
     // Now the TimeLineItem can emit signal customContextMenuRequested()
     setContextMenuPolicy(Qt::CustomContextMenu);
     connect(d->list, SIGNAL(itemClicked(QListWidgetItem *)),
@@ -233,59 +221,6 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 void TimeLine::customContextMenuPainter(QListWidgetItem *item)
 {
     TimeLineItem *tlItem = dynamic_cast<TimeLineItem*>(item);
-
-    if (tlItem->getIdentifier() == TimeLineItem::OutsideWorkingDir) {
-        // These lines are only for testing purpose !
-        m_gitRunner->init(m_workingDir);
-
-        // Retrieve Name and Email, and set git global parameters
-        Plasma::PackageMetadata metadata(m_workingDir.pathOrUrl() + "metadata.desktop");
-        m_gitRunner->setAuthor(metadata.author());
-        m_gitRunner->setEmail(metadata.email());
-
-        m_gitRunner->add(KUrl::List(QString(".")));
-
-        QPointer<CommitDialog> commitDialog = new CommitDialog();
-        if(commitDialog->exec() == QDialog::Rejected)
-            return;
-
-        QString commit = QString(commitDialog->m_commitBriefText->text());
-        QString optionalComment = QString(commitDialog->m_commitFullText->toPlainText());
-        delete commitDialog;
-
-        if (optionalComment.compare("") != 0) {
-            commit.append("\n\n");
-            commit.append(optionalComment);
-        }
-
-        m_gitRunner->commit(commit);
-        d->list->disconnect();
-        loadTimeLine(m_workingDir);
-        return;
-
-    } else if (tlItem->getIdentifier() == TimeLineItem::NotACommit) {
-        // This line is only for testing purpose !
-        m_gitRunner->add(KUrl::List(QString(".")));
-
-        QPointer<CommitDialog> commitDialog = new CommitDialog();
-        if(commitDialog->exec() == QDialog::Rejected)
-            return;
-
-        QString commit = QString(commitDialog->m_commitBriefText->text());
-        QString optionalComment = QString(commitDialog->m_commitFullText->toPlainText());
-        delete commitDialog;
-
-        if (optionalComment.compare("") != 0) {
-            commit.append("\n\n");
-            commit.append(optionalComment);
-        }
-
-        m_gitRunner->commit(commit);
-        d->list->disconnect();
-        loadTimeLine(m_workingDir);
-
-        return;
-    }
 
     QRect rc = d->list->visualItemRect(item);
     KMenu menu(this);
@@ -339,6 +274,44 @@ void TimeLine::customContextMenuPainter(QListWidgetItem *item)
 
 
     menu.exec(mapToGlobal(rc.bottomLeft()));
+}
+
+void TimeLine::newSavePoint()
+{
+    if(!m_gitRunner->isValidDirectory(m_workingDir)) {
+
+        m_gitRunner->init(m_workingDir);
+        // Retrieve Name and Email, and set git global parameters
+        Plasma::PackageMetadata metadata(m_workingDir.pathOrUrl() + "metadata.desktop");
+        m_gitRunner->setAuthor(metadata.author());
+        m_gitRunner->setEmail(metadata.email());
+    }
+
+    if(!m_gitRunner->hasNewChangesToCommit())
+        return;
+
+    m_gitRunner->add(KUrl::List(QString(".")));
+
+    QPointer<CommitDialog> commitDialog = new CommitDialog();
+    if(commitDialog->exec() == QDialog::Rejected)
+        return;
+
+    QString commit = QString(commitDialog->m_commitBriefText->text());
+    // Ensure the required comment is not empty
+    if(commit.isEmpty())
+        return;
+
+    QString optionalComment = QString(commitDialog->m_commitFullText->toPlainText());
+    delete commitDialog;
+
+    if (!optionalComment.isEmpty() != 0) {
+        commit.append("\n\n");
+        commit.append(optionalComment);
+    }
+
+    m_gitRunner->commit(commit);
+    d->list->disconnect();
+    loadTimeLine(m_workingDir);
 }
 
 void TimeLine::setItemEnabled(int index, bool enabled)

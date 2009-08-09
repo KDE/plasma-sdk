@@ -2,13 +2,13 @@
 #ifndef GITRUNNER_H
 #define GITRUNNER_H
 
-#include    <QObject>
-#include    <KUrl>
-#include    <QStringList>
-#include    <QDir>
-#include    <KProcess>
+#include <QObject>
+#include <KUrl>
+#include <QStringList>
+#include <QDir>
+#include <KProcess>
 
-#include    "dvcsjob.h"
+#include "dvcsjob.h"
 
 class GitRunner
 {
@@ -17,6 +17,7 @@ public:
     ~GitRunner();
 
     bool isValidDirectory(const KUrl &dirPath);
+    bool hasNewChangesToCommit();
     bool isRunning();
 
     void setDirectory(const KUrl &dir);
@@ -49,8 +50,6 @@ public:
     QString& getResult();
 
 private:
-    void resetJob();
-    void startJob();
     void initJob(DvcsJob &job);
     void startJob(DvcsJob &job);
 

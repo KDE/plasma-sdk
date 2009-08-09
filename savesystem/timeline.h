@@ -11,12 +11,12 @@
 #ifndef _TIMELINE_H_
 #define _TIMELINE_H_
 
-#include    <QWidget>
+#include <QWidget>
 
-#include    "timelineprivatestorage.h"
-#include    "timelineitem.h"
-#include    "dvcsjob.h"
-#include    "gitrunner.h"
+#include "timelineprivatestorage.h"
+#include "timelineitem.h"
+#include "dvcsjob.h"
+#include "gitrunner.h"
 
 
 class QIcon;
@@ -26,14 +26,10 @@ class QListWidgetItem;
 class TimeLine : public QWidget
 {
     Q_OBJECT
+
 public:
     TimeLine(QWidget *parent, const KUrl &dir);
     ~TimeLine();
-
-
-
-    // void setMainWidget( QWidget *widget );
-    // void setBottomWidget( QWidget *widget );
 
     void setItemEnabled(int index, bool enabled);
     bool isItemEnabled(int index) const;
@@ -50,6 +46,8 @@ public:
 
 public slots:
     void customContextMenuPainter(QListWidgetItem* item);
+    void newSavePoint();
+
 signals:
     void currentIndexChanged(int);
 

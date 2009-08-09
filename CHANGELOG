@@ -1,4 +1,16 @@
---August 3,2009--
+--August 9, 2009--
+- Moved "New SavePoint" buttom from timeline to workflow dock widget. Changed workflow
+  signals connection in order to restore the previous tab after setting a SavePoint.
+- Added bool GitRunner::hasNewChangesToCommit(), so New SavePoint dialog is triggered only if
+  there are uncommitted changes.
+- Moved "On Section: <name>" button on the top of TimeLine dock for usability reason, because
+  if there are lots of SavePoints, the user has to scroll down each time he want to perfom an
+  action Section-related.
+- Fixed plasma-containment-studiopreviewer.desktop file; now it doesn't interacts with 
+  "Desktop Settings" -> "Desktop Activity" entries.
+- Some fixes and coding style fix.
+
+--August 3, 2009--
 - When creating a new project, metadata.desktop file is filled with the required fields
 - Added setAuthor and setEmail to GitRunner class, so now TimeLine can set that fields
 - Review createNewProject code.

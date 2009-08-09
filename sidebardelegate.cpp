@@ -9,12 +9,12 @@
 
 // Stolen from okular :-)
 
-#include    <QApplication>
-#include    <QAbstractItemDelegate>
-#include    <QPainter>
-#include    <QStyleOptionViewItem>
-#include    <QModelIndex>
-#include    <QSize>
+#include <QApplication>
+#include <QAbstractItemDelegate>
+#include <QPainter>
+#include <QStyleOptionViewItem>
+#include <QModelIndex>
+#include <QSize>
 
 #include    "sidebardelegate.h"
 
