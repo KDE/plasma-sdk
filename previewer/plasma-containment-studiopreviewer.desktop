@@ -17,7 +17,7 @@ Comment[x-test]=xxContainment used to preview plasmoids on Plasma Studioxx
 Icon=user-desktop
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
-X-Plasma-ContainmentCategories=desktop
+X-Plasma-ContainmentCategories=development
 NoDisplay=true
 
 X-KDE-Library=plasma_containment_studiopreviewer
