@@ -1,6 +1,7 @@
 --August 10, 2009--
 - Fixed StartPage issue: opening/creating a project, when an other one is already open, now
   works.
+- TimeLine didn't reload properly when changing from an existing project to an other. Fixed.
 
 --August 9, 2009--
 - Moved "New SavePoint" buttom from timeline to workflow dock widget. Changed workflow

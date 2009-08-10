@@ -174,11 +174,12 @@ void MainWindow::changeTab(const QModelIndex &item)
     switch (tab) {
     case StartPageTab: {
         m_startPage = new StartPage(this);
+        setCentralWidget(m_startPage);
 
         connect(m_startPage, SIGNAL(projectSelected(QString, QString)),
             this, SLOT(loadProject(QString, QString)));
 
-        setCentralWidget(m_startPage);
+
     }
     break;
     case EditTab: {
@@ -285,6 +286,9 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     setCentralWidget(m_editPage);
     m_oldTab = EditTab;
     m_sidebar->setCurrentIndex(m_oldTab);
+
+    m_timeLine->setWorkingDir(KUrl(packagePath));
+    m_timeLine->loadTimeLine(KUrl(packagePath));
 
 }
 

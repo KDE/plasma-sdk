@@ -105,6 +105,9 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
         connect(d->list, SIGNAL(itemClicked(QListWidgetItem *)),
                 this, SLOT(customContextMenuPainter(QListWidgetItem *)));
+        
+        setWorkingDir(dir);
+        
         return;
     }
 
