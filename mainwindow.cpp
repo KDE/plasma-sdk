@@ -174,6 +174,10 @@ void MainWindow::changeTab(const QModelIndex &item)
     switch (tab) {
     case StartPageTab: {
         m_startPage = new StartPage(this);
+
+        connect(m_startPage, SIGNAL(projectSelected(QString, QString)),
+            this, SLOT(loadProject(QString, QString)));
+
         setCentralWidget(m_startPage);
     }
     break;
@@ -281,6 +285,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     setCentralWidget(m_editPage);
     m_oldTab = EditTab;
     m_sidebar->setCurrentIndex(m_oldTab);
+
 }
 
 QStringList MainWindow::recentProjects()
