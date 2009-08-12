@@ -9,6 +9,7 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QRegExp>
 //#include <QLineEdit>
 //#include <QLabel>
 
@@ -38,8 +39,28 @@ BranchDialog::BranchDialog()
     vlayout->addWidget(buttonBox);
     setLayout(vlayout);
 
-    connect(m_branchEdit, SIGNAL(returnPressed()), this, SLOT(accept()));
-    connect(buttonBox, SIGNAL(clicked(QAbstractButton *)), this, SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    // For security reasons, allow standard chars to be inserted
+    connect(m_branchEdit, SIGNAL(textEdited(const QString&)),
+            this, SLOT(validateBranchName(const QString&)));
+
+    connect(m_branchEdit, SIGNAL(returnPressed()),
+            this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(clicked(QAbstractButton *)),
+            this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()),
+            this, SLOT(reject()));
 }
 
+void BranchDialog::validateBranchName(const QString& name)
+{
+    QRegExp validatePluginName("[a-zA-Z0-9_.]*");
+    if (!validatePluginName.exactMatch(name)) {
+        int pos = 0;
+        for (int i = 0; i < name.size(); i++) {
+            if (validatePluginName.indexIn(name, pos, QRegExp::CaretAtZero) == -1)
+                break;
+            pos += validatePluginName.matchedLength();
+        }
+        m_branchEdit->setText(QString(name).remove(pos, 1));
+    }
+}

@@ -9,11 +9,16 @@
 
 class BranchDialog : public QDialog
 {
+Q_OBJECT
+
 public:
     BranchDialog();
     QString &text();
 
     QLineEdit *m_branchEdit;
+
+private Q_SLOTS:
+    void validateBranchName(const QString& name);
 
 private:
     QLabel *m_branchLabel;
