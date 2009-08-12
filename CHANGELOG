@@ -1,6 +1,7 @@
 --August 12, 2009--
 - Added to BranchDialog class a simple regexp validator, in order to avoid use of non-standard
   characters when the user types a new branch name.
+- Starting writing apidox documentation, removin useless methods and fixing style.
 
 --August 10, 2009--
 - Fixed StartPage issue: opening/creating a project, when an other one is already open, now
