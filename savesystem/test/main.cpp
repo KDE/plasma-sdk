@@ -6,15 +6,15 @@
 #include <KAboutData>
 #include <KLocale>
 #include <KCmdLineArgs>
-#include    <KUrl>
+#include <KUrl>
 
-#include    <QString>
-#include    <QDir>
-#include    <QFile>
-#include    <QMessageBox>
+#include <QString>
+#include <QDir>
+#include <QFile>
+#include <QMessageBox>
 
-#include    "../gitrunner.h"
-#include    "../dvcsjob.h"
+#include "../gitrunner.h"
+#include "../dvcsjob.h"
 
 int main(int argc, char *argv[])
 {
@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     KCmdLineArgs::init(argc, argv, &aboutData);
 
     KApplication app;
-    QString appDir = app.applicationDirPath();
+    QString appDir = "/home/polentino";//app.applicationDirPath();
     QDir dirHandler = QDir(appDir);
     QString rootDir = appDir + QString("/root/");
 
@@ -43,27 +43,26 @@ int main(int argc, char *argv[])
     // Init our GitRunner instance
     GitRunner *git = new GitRunner();
 
+    // Set the repo directory
+    git->setDirectory(KUrl(rootDir));
+
     // Perform a check on the folder to confirm we have a valid git repo
-    if (!git->isValidDirectory(rootDir))
+    if (!git->isValidDirectory())
         git->init(KUrl(rootDir));                                             // Init an empty repo
 
     // Note: in the following GitRunner call, I'll skip testing the JobStatus value returned,
     // in order to focus the reader on how the runner works; in a real application, always
     // perform that check !!!
 
-
-    // Eventually set the repo directory
-    git->setDirectory(KUrl(rootDir));
-
     // Ok, now let's add and commit one file
-    QStringList *list = new QStringList(QString("main.cpp"));
+    QStringList *list = new QStringList("main.cpp");
     git->add(KUrl::List(*list))   ;                                           // Add the element in the git index
     git->commit(QString("This is a comment: committed main."));               // Commit it
 
     // Now create some other files
-    QFile *src1 = new QFile(QString(rootDir + QString("src1.cpp")));       // Defining ../root/src2.cpp
-    QFile *src2 = new QFile(QString(rootDir + QString("src2.cpp")));       // Defining ../root/src2.cpp
-    QFile *src3 = new QFile(QString(rootDir + QString("src3.cpp")));       // Defining ../root/src2.cpp
+    QFile *src1 = new QFile(rootDir + "src1.cpp");       // Defining ../root/src2.cpp
+    QFile *src2 = new QFile(rootDir + "src2.cpp");       // Defining ../root/src2.cpp
+    QFile *src3 = new QFile(rootDir + "src3.cpp");       // Defining ../root/src2.cpp
     src1->open(QIODevice::WriteOnly);
     src2->open(QIODevice::WriteOnly);
     src3->open(QIODevice::WriteOnly);
@@ -72,11 +71,11 @@ int main(int argc, char *argv[])
     src3->close();
 
     // Now add them and then commit
-    list = new QStringList(QString("src1.cpp"));
-    *list << QString("src2.cpp");
-    *list << QString("src3.cpp");
+    //list = new QStringList(QString("src1.cpp"));
+    *list << "src2.cpp";
+    *list << "src3.cpp";
     git->add(KUrl::List(*list));
-    git->commit(QString("Multiline comment.\n\nThe first line briefly explains the commits purpose,\nwhile the remaining lines add more details."));
+    git->commit("Multiline comment.\n\nThe first line briefly explains the commits purpose,\nwhile the remaining lines add more details.");
 
     // Now lets create a new branch
     QString brName("devel");
@@ -85,12 +84,13 @@ int main(int argc, char *argv[])
     git->switchBranch(brName);
 
     // Add an other file
-    QFile *h1 = new QFile(QString(rootDir + QString("h1.h")));             // Defining ../root/h1.h
+    QFile *h1 = new QFile(rootDir + "h1.h");             // Defining ../root/h1.h
     h1->open(QIODevice::WriteOnly);
     h1->close();
 
     // Lets perform an other add/commit action
-    list = new QStringList(QString("h1.h"));
+    list->clear();
+    list->append("h1.h");
     git->add(KUrl::List(*list));
     git->commit(QString("Added h1.h in branch \"devel\"."));
 
@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
     // Show the logs regarding the devel branch
     // Note: it derives from "master", so there will be also
     // the commits made in "master" since "devel" creation.
-    git->log(rootDir);
+    git->log();
     QString log = git->getResult();
     QMessageBox *mb = new QMessageBox(QMessageBox::NoIcon, QString("Log result in \"devel\":") , log, 0, 0, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
     mb->exec();
@@ -110,7 +110,7 @@ int main(int argc, char *argv[])
 
     // Show the logs regarding the "master" branch
     // Note: the commit made inside "devel" branch won't be listed!
-    git->log(rootDir);
+    git->log();
     QString log1 = git->getResult();
     QMessageBox *mb1 = new QMessageBox(QMessageBox::NoIcon, QString("Log result in \"master\":") , log1, 0, 0, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
     mb1->exec();

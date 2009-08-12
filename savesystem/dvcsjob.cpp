@@ -1,3 +1,22 @@
+/******************************************************************************
+ * Copyright (C) 2009 by Diego '[Po]lentino' Casella <polentino911@gmail.com> *
+ *                                                                            *
+ *    This program is free software; you can redistribute it and/or modify    *
+ *    it under the terms of the GNU General Public License as published by    *
+ *    the Free Software Foundation; either version 2 of the License, or       *
+ *    (at your option) any later version.                                     *
+ *                                                                            *
+ *    This program is distributed in the hope that it will be useful, but     *
+ *    WITHOUT ANY WARRANTY; without even the implied warranty of              *
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU       *
+ *    General Public License for more details.                                *
+ *                                                                            *
+ *    You should have received a copy of the GNU General Public License       *
+ *    along with this program; if not, write to the Free Software Foundation  *
+ *    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA        *
+ *                                                                            *
+ ******************************************************************************/
+
 #include "dvcsjob.h"
 
 DvcsJob::DvcsJob()
@@ -15,7 +34,8 @@ DvcsJob::~DvcsJob()
 
 void DvcsJob::clear()
 {
-    //Do not use KProcess::clearEnvironment() (it sets the environment to kde_dummy.
+    //Do not use KProcess::clearEnvironment()
+    // (it sets the environment to kde_dummy)
     m_command.clear();
     m_output.clear();
     m_comm = KProcess::SeparateChannels;
@@ -25,7 +45,7 @@ void DvcsJob::clear()
 
 
 
-void DvcsJob::setDirectory(const QDir& directory)
+void DvcsJob::setDirectory(const QDir &directory)
 {
     m_directory = directory;
 }
@@ -45,19 +65,19 @@ bool DvcsJob::isRunning() const
     return m_isRunning;
 }
 
-DvcsJob& DvcsJob::operator<<(const QString& arg)
+DvcsJob& DvcsJob::operator<<(const QString &arg)
 {
     m_command.append(arg);
     return *this;
 }
 
-DvcsJob& DvcsJob::operator<<(const char* arg)
+DvcsJob& DvcsJob::operator<<(const char *arg)
 {
     m_command.append(arg);
     return *this;
 }
 
-DvcsJob& DvcsJob::operator<<(const QStringList& args)
+DvcsJob& DvcsJob::operator<<(const QStringList &args)
 {
     m_command << args;
     return *this;
@@ -84,36 +104,21 @@ QByteArray DvcsJob::rawOutput() const
     return m_output;
 }
 
-void DvcsJob::setResults(const QVariant &res)
-{
-    m_results = res;
-}
-
-QVariant DvcsJob::fetchResults()
-{
-    return m_results;
-}
-
-void DvcsJob::setExitStatus(const bool exitStatus)
-{
-    m_failed = exitStatus;
-}
-
 void DvcsJob::start()
 {
-    // Should be remove before releasing it!
-    //Q_ASSERT_X(!m_isRunning, "DVCSjob::start", "Another proccess was started using this job class");
-
     m_wasStarted = true;
     QString workingDirectory = m_directory.absolutePath();
     m_process->setWorkingDirectory(workingDirectory);
 
     // Processing the signal result
-    //connect(m_process, SIGNAL(started()), this, SLOT(slotStarted()));
-    connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(slotProcessExited(int, QProcess::ExitStatus)));
-    connect(m_process, SIGNAL(error(QProcess::ProcessError)), this, SLOT(slotProcessError(QProcess::ProcessError)));
-    connect(m_process, SIGNAL(readyReadStandardError()), this, SLOT(slotReceivedStderr()));
-    connect(m_process, SIGNAL(readyReadStandardOutput()), this, SLOT(slotReceivedStdout()));
+    connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)),
+            this, SLOT(slotProcessExited(int, QProcess::ExitStatus)));
+    connect(m_process, SIGNAL(error(QProcess::ProcessError)),
+            this, SLOT(slotProcessError(QProcess::ProcessError)));
+    connect(m_process, SIGNAL(readyReadStandardError()),
+            this, SLOT(slotReceivedStderr()));
+    connect(m_process, SIGNAL(readyReadStandardOutput()),
+            this, SLOT(slotReceivedStdout()));
 
     m_output.clear();
     m_isRunning = true;
@@ -135,7 +140,7 @@ void DvcsJob::cancel()
     m_process->kill();
 }
 
-void DvcsJob::slotProcessError(QProcess::ProcessError err)
+void DvcsJob::slotProcessError(QProcess::ProcessError error)
 {
     // disconnect all connections to childproc's signals; they are no longer needed
     m_process->disconnect();
@@ -153,7 +158,7 @@ void DvcsJob::slotProcessError(QProcess::ProcessError err)
     QString errorValue;
     //if trolls add Q_ENUMS for QProcess, then we can use better solution than switch:
     //QMetaObject::indexOfEnumerator(char*), QLatin1String(QMetaEnum::valueToKey())...
-    switch (err) {
+    switch (error) {
     case QProcess::FailedToStart:
         errorValue = "FailedToStart";
         break;
@@ -223,9 +228,9 @@ DvcsJob::JobStatus DvcsJob::status() const
 
 void DvcsJob::jobIsReady()
 {
-    emit readyForParsing(this); //let parsers to set status
+    //emit readyForParsing(this); //let parsers to set status
     emitResult(); //KJob
-    emit resultsReady(this); //VcsJob
+    //emit resultsReady(this); //VcsJob
     //reset stases;
     m_isRunning = m_failed = false;
 }
@@ -237,8 +242,3 @@ KProcess* DvcsJob::getChildproc()
 
 
 #include "moc_dvcsjob.cpp"
-
-
-
-
-
