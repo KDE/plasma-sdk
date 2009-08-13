@@ -205,7 +205,7 @@ private Q_SLOTS:
 private:
 
     /**
-      * @return Whehter the job is running or not.
+      * @return whehter the job is running or not.
       */
     bool isRunning() const;
 

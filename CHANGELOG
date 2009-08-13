@@ -1,3 +1,6 @@
+--August 13, 2009--
+- Commented the remaining headers under /savesystem, removed unused files and the /vng dir.
+
 --August 12, 2009--
 - Added to BranchDialog class a simple regexp validator, in order to avoid use of non-standard
   characters when the user types a new branch name.

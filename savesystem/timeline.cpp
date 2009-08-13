@@ -1,14 +1,30 @@
-/***************************************************************************
- *   Copyright (C) 2007 by Pino Toscano <pino@kde.org>                     *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- ***************************************************************************/
+/******************************************************************************
+ * Copyright (C) 2007 by Pino Toscano <pino@kde.org>                          *
+ * Copyright (C) 2009 by Diego '[Po]lentino' Casella <polentino911@gmail.com> *
+ *                                                                            *
+ *    This program is free software; you can redistribute it and/or modify    *
+ *    it under the terms of the GNU General Public License as published by    *
+ *    the Free Software Foundation; either version 2 of the License, or       *
+ *    (at your option) any later version.                                     *
+ *                                                                            *
+ *    This program is distributed in the hope that it will be useful, but     *
+ *    WITHOUT ANY WARRANTY; without even the implied warranty of              *
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU       *
+ *    General Public License for more details.                                *
+ *                                                                            *
+ *    You should have received a copy of the GNU General Public License       *
+ *    along with this program; if not, write to the Free Software Foundation  *
+ *    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA        *
+ *                                                                            *
+ ******************************************************************************/
 
-
-
+#include "branchdialog.h"
+#include "commitdialog.h"
+#include "timelineitem.h"
+#include "timelinedelegate.h"
+#include "timelinelistwidget.h"
+#include "timelineprivatestorage.h"
+#include "timeline.h"
 
 #include <qabstractitemdelegate.h>
 #include <qaction.h>
@@ -25,35 +41,27 @@
 #include <qsplitter.h>
 #include <qstackedwidget.h>
 
-#include <kiconloader.h>
-
-
-#include <KUrl>
-#include <KIcon>
 #include <QListWidget>
 #include <QRegExp>
 #include <QMessageBox>
-#include <KMenu>
 #include <QMenu>
 #include <QRect>
 #include <QLineEdit>
 #include <QPlainTextEdit>
 #include <QPointer>
+
+#include <kiconloader.h>
+#include <KUrl>
+#include <KIcon>
+#include <KMenu>
 #include <Plasma/PackageMetadata>
 
-#include "branchdialog.h"
-#include "commitdialog.h"
-#include "timelineitem.h"
-#include "timelinedelegate.h"
-#include "timelinelistwidget.h"
-#include "timelineprivatestorage.h"
-#include "timeline.h"
 
 
 
 //using namespace KDevelop;
 
-TimeLine::TimeLine(QWidget* parent, const KUrl& dir)
+TimeLine::TimeLine(QWidget* parent, const KUrl &dir)
         : QWidget(parent), d(new TimeLinePrivateStorage)
 {
     m_gitRunner = new GitRunner();
@@ -70,8 +78,8 @@ TimeLine::~TimeLine()
     delete d;
 }
 
-int TimeLine::uiAddItem(const QIcon& icon,
-                        QStringList& data,
+int TimeLine::uiAddItem(const QIcon &icon,
+                        QStringList &data,
                         const TimeLineItem::ItemIdentifier id,
                         const Qt::ItemFlag flag)
 {
@@ -90,7 +98,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
     m_gitRunner->setDirectory(dir);
 
-    if (!m_gitRunner->isValidDirectory(dir)) {
+    if (!m_gitRunner->isValidDirectory()) {
         // If the dir hasn't a git tree we have to create only one item,
         // used to notify the user that a timeline should be created
         // ( that is, call GitRunner::init() ).
@@ -110,6 +118,8 @@ void TimeLine::loadTimeLine(const KUrl &dir)
         
         return;
     }
+
+    setWorkingDir(dir);
 
     if (m_gitRunner->currentBranch() != DvcsJob::JobSucceeded) {
         // handle error
@@ -134,7 +144,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
         m_branches.append(tmp);
     }
 
-    if (m_gitRunner->log(dir) != DvcsJob::JobSucceeded) {
+    if (m_gitRunner->log() != DvcsJob::JobSucceeded) {
         // handle error
         return;
     }
@@ -177,12 +187,11 @@ void TimeLine::loadTimeLine(const KUrl &dir)
         QStringList tmp = commits.takeFirst().split('\n');
         QString sha1sum = tmp.takeFirst();
         QString author = tmp.takeFirst();
-        //QString tmpString = tmp.takeFirst();
+
         if (author.contains("Merge", Qt::CaseSensitive)) {
             isMerge = true;
             author = tmp.takeFirst().remove(0, 8);
         }
-        //QString sha1sum = tmp.takeFirst();
 
         QString date = tmp.takeFirst().remove(0, 6);
 
@@ -230,7 +239,8 @@ void TimeLine::customContextMenuPainter(QListWidgetItem *item)
     menu.addTitle(tlItem->text());
     menu.addSeparator();
 
-    if (tlItem->getIdentifier() == TimeLineItem::Commit || tlItem->getIdentifier() == TimeLineItem::Merge) {
+    if (tlItem->getIdentifier() == TimeLineItem::Commit ||
+        tlItem->getIdentifier() == TimeLineItem::Merge) {
 
         QAction *restoreCommit = menu.addAction(i18n("Restore SavePoint"));
         restoreCommit->setData(QVariant(tlItem->getHash()));
@@ -275,13 +285,12 @@ void TimeLine::customContextMenuPainter(QListWidgetItem *item)
 
     }
 
-
     menu.exec(mapToGlobal(rc.bottomLeft()));
 }
 
 void TimeLine::newSavePoint()
 {
-    if(!m_gitRunner->isValidDirectory(m_workingDir)) {
+    if(!m_gitRunner->isValidDirectory()) {
 
         m_gitRunner->init(m_workingDir);
         // Retrieve Name and Email, and set git global parameters
@@ -293,7 +302,7 @@ void TimeLine::newSavePoint()
     if(!m_gitRunner->hasNewChangesToCommit())
         return;
 
-    m_gitRunner->add(KUrl::List(QString(".")));
+    m_gitRunner->add(KUrl::List(QString('.')));
 
     QPointer<CommitDialog> commitDialog = new CommitDialog();
     if(commitDialog->exec() == QDialog::Rejected)
@@ -594,6 +603,8 @@ void TimeLine::setWorkingDir(const KUrl &dir)
 
 void TimeLine::initUI(QWidget *parent)
 {
+    Q_UNUSED(parent)
+
     QVBoxLayout *mainlay = new QVBoxLayout(this);
     mainlay->setMargin(0);
     mainlay->setSpacing(0);
@@ -637,8 +648,6 @@ void TimeLine::initUI(QWidget *parent)
     d->vlay->addWidget(d->stack);
     d->sideContainer->hide();
 
-    //connect( d->list, SIGNAL( currentRowChanged( int ) ),
-    //       this, SIGNAL( currentIndexChanged( int ) ) );
 }
 
 #include "timeline.moc"

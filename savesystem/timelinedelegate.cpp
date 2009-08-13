@@ -1,31 +1,37 @@
-/***************************************************************************
- *   Copyright (C) 2007 by Pino Toscano <pino@kde.org>                     *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- ***************************************************************************/
-
-// Stolen from okular :-)
-
-#include    <QApplication>
-#include    <QAbstractItemDelegate>
-#include    <QPainter>
-#include    <QStyleOptionViewItem>
-#include    <QModelIndex>
-#include    <QSize>
+/******************************************************************************
+ * Copyright (C) 2007 by Pino Toscano <pino@kde.org>                          *
+ * Copyright (C) 2009 by Diego '[Po]lentino' Casella <polentino911@gmail.com> *
+ *                                                                            *
+ *    This program is free software; you can redistribute it and/or modify    *
+ *    it under the terms of the GNU General Public License as published by    *
+ *    the Free Software Foundation; either version 2 of the License, or       *
+ *    (at your option) any later version.                                     *
+ *                                                                            *
+ *    This program is distributed in the hope that it will be useful, but     *
+ *    WITHOUT ANY WARRANTY; without even the implied warranty of              *
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU       *
+ *    General Public License for more details.                                *
+ *                                                                            *
+ *    You should have received a copy of the GNU General Public License       *
+ *    along with this program; if not, write to the Free Software Foundation  *
+ *    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA        *
+ *                                                                            *
+ ******************************************************************************/
 
 #include    "timelinedelegate.h"
 
-/* A simple delegate to paint the icon of each item */
+#include <QApplication>
+#include <QPainter>
+#include <QStyleOptionViewItem>
+#include <QModelIndex>
+#include <QSize>
+
+
 static const int ITEM_MARGIN_LEFT       = 5;
 static const int ITEM_MARGIN_TOP        = 5;
 static const int ITEM_MARGIN_RIGHT      = 5;
 static const int ITEM_MARGIN_BOTTOM     = 5;
 static const int ITEM_PADDING           = 5;
-
-
 
 TimeLineDelegate::TimeLineDelegate(QObject *parent)
         : QAbstractItemDelegate(parent), m_showText(true)
