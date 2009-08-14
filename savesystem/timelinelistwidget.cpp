@@ -20,12 +20,9 @@
 
 #include "timelinelistwidget.h"
 
-#include <QAbstractItemView>
 #include <QModelIndex>
 #include <QMouseEvent>
 #include <QWidget>
-
-
 
 TimeLineListWidget::TimeLineListWidget(QWidget *parent)
         : QListWidget(parent)

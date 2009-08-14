@@ -26,40 +26,22 @@
 #include "timelineprivatestorage.h"
 #include "timeline.h"
 
-#include <qabstractitemdelegate.h>
-#include <qaction.h>
-#include <qapplication.h>
-#include <qevent.h>
-#include <qfont.h>
-#include <qfontmetrics.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qlist.h>
-#include <qlistwidget.h>
-#include <qpainter.h>
-#include <qscrollbar.h>
-#include <qsplitter.h>
-#include <qstackedwidget.h>
-
-#include <QListWidget>
-#include <QRegExp>
+#include <QAction>
+#include <QFont>
+#include <QLabel>
+#include <QLayout>
 #include <QMessageBox>
 #include <QMenu>
-#include <QRect>
-#include <QLineEdit>
-#include <QPlainTextEdit>
 #include <QPointer>
+#include <QRect>
+#include <QRegExp>
+#include <QSplitter>
+#include <QStackedWidget>
 
-#include <kiconloader.h>
 #include <KUrl>
 #include <KIcon>
 #include <KMenu>
 #include <Plasma/PackageMetadata>
-
-
-
-
-//using namespace KDevelop;
 
 TimeLine::TimeLine(QWidget* parent, const KUrl &dir)
         : QWidget(parent), d(new TimeLinePrivateStorage)

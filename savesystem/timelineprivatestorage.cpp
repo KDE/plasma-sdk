@@ -23,14 +23,7 @@
 #include "timelinelistwidget.h"
 #include "timelineprivatestorage.h"
 
-#include <QHBoxLayout>
-#include <QLabel>
-#include <QList>
-#include <QSplitter>
-#include <QStackedWidget>
 #include <QWidget>
-
-
 
 TimeLinePrivateStorage::TimeLinePrivateStorage()
         : sideWidget(0), bottomWidget(0), splitterSizesSet(false),

@@ -1,6 +1,7 @@
 --August 14, 2009--
 - Updated the TimeLine test class, now it shows a simple widget with the TimeLine and a button
   used to create new SavePoints.
+- Removed useless header from timeline* sources.
 
 --August 13, 2009--
 - Commented the remaining headers under /savesystem, removed unused files and the /vng dir.

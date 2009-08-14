@@ -18,8 +18,6 @@
  *                                                                            *
  ******************************************************************************/
 
-#include <klocalizedstring.h>
-
 #include "timelineitem.h"
 
 static const int TimeLineItemType = QListWidgetItem::UserType + 1;

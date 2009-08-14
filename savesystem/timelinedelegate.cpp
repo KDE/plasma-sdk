@@ -21,11 +21,10 @@
 #include    "timelinedelegate.h"
 
 #include <QApplication>
-#include <QPainter>
-#include <QStyleOptionViewItem>
 #include <QModelIndex>
+#include <QPainter>
 #include <QSize>
-
+#include <QStyleOptionViewItem>
 
 static const int ITEM_MARGIN_LEFT       = 5;
 static const int ITEM_MARGIN_TOP        = 5;
