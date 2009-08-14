@@ -4,38 +4,35 @@
 
 #include <KApplication>
 #include <KAboutData>
+#include <KIcon>
 #include <KLocale>
 #include <KCmdLineArgs>
 #include <KUrl>
 
-#include <QString>
+#include <QDialog>
 #include <QDir>
+#include <QDockWidget>
 #include <QFile>
+#include <QMainWindow>
 #include <QMessageBox>
+#include <QPushButton>
+#include <QString>
 
 #include "../gitrunner.h"
 #include "../dvcsjob.h"
+#include "../timeline.h"
 
-int main(int argc, char *argv[])
-{
-    KAboutData aboutData("gitrunner_test", 0, ki18n("GitRunner Test app"),
-                         "0.1", ki18n("Shows how to use GitRunner"),
-                         KAboutData::License_GPL,
-                         ki18n("Diego [Po]lentino Casella"),
-                         KLocalizedString(), "", "polentino911@gmail.com");
-    aboutData.addAuthor(ki18n("Diego [Po]lentino Casella"), ki18n("Author"), "polentino911@gmail.com");
+QString appDir;
+QString rootDir;
 
-    KCmdLineArgs::init(argc, argv, &aboutData);
 
-    KApplication app;
-    QString appDir = "/home/polentino";//app.applicationDirPath();
-    QDir dirHandler = QDir(appDir);
-    QString rootDir = appDir + QString("/root/");
+void testGitRunner() {
+        QDir dirHandler = QDir(appDir);
 
     // Let's build a simple directory structure, with some files
     if (dirHandler.mkdir("root")) {                                           // Start with creating our root dir.
         // If success, add create a file named main.cpp .
-        QFile *main = new QFile(QString(rootDir + QString("main.cpp")));       // Defining ../root/main.cpp
+        QFile *main = new QFile(rootDir + "main.cpp");       // Defining ../root/main.cpp
         main->open(QIODevice::WriteOnly);
         main->close();
     }
@@ -71,7 +68,8 @@ int main(int argc, char *argv[])
     src3->close();
 
     // Now add them and then commit
-    //list = new QStringList(QString("src1.cpp"));
+    list->clear();
+    *list << "src1.cpp";
     *list << "src2.cpp";
     *list << "src3.cpp";
     git->add(KUrl::List(*list));
@@ -92,7 +90,7 @@ int main(int argc, char *argv[])
     list->clear();
     list->append("h1.h");
     git->add(KUrl::List(*list));
-    git->commit(QString("Added h1.h in branch \"devel\"."));
+    git->commit("Added h1.h in branch \"devel\".");
 
 
     // Note: you can also try  git->createWorkingCopy(), to clone a local repo from an other.
@@ -121,6 +119,61 @@ int main(int argc, char *argv[])
     QMessageBox *mb2 = new QMessageBox(QMessageBox::NoIcon, QString("Log result in \"master\":") , br, 0, 0, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
     mb2->exec();
 
-    return 0;
+    // Now lets create an other file, but we don't commit it, so in the testTimeLine()
+    // you'll be able to perform a new SavePoint by clicking the button.
+    QFile *src4 = new QFile(rootDir + "src4.cpp");       // Defining ../root/src2.cpp
+    src4->open(QIODevice::WriteOnly);
+    src4->close();
+}
+
+void testTimeLine() {
+    // Setup the main window, a dock widget and the TimeLine
+    QMainWindow *w = new QMainWindow(0, Qt::Window);
+    QDockWidget *dockTimeLine = new QDockWidget(i18n("TimeLine"), w);
+    TimeLine *timeline = new TimeLine(w, KUrl(rootDir));
+
+    // Setting some relationships between widgets
+    dockTimeLine->setWidget(timeline);
+    w->addDockWidget(Qt::LeftDockWidgetArea, dockTimeLine);
+
+    // Some policy
+    dockTimeLine->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
+    timeline->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
+
+    // Now lets create a New SavePoint button, that will be connected to the
+    // TimeLine::newSavePoint() slot
+    QWidget *centralDialog = new QWidget(w);
+    QPushButton *newCommit = new QPushButton(KIcon("document-save"),
+                                             i18n("New SavePoint"),
+                                             centralDialog);
+    w->setCentralWidget(centralDialog);
+    centralDialog->show();
+
+    QObject::connect(newCommit, SIGNAL(clicked()),
+            timeline, SLOT(newSavePoint()));
+
+    w->resize(400, 400);
+    w->show();
+}
+
+int main(int argc, char *argv[])
+{
+    KAboutData aboutData("timeline_test", 0, ki18n("TimeLine and GitRunner Test app"),
+                         "0.1", ki18n("Shows how to use TimeLine and GitRunner"),
+                         KAboutData::License_GPL,
+                         ki18n("Diego [Po]lentino Casella"),
+                         KLocalizedString(), "", "polentino911@gmail.com");
+    aboutData.addAuthor(ki18n("Diego [Po]lentino Casella"), ki18n("Author"), "polentino911@gmail.com");
+
+    KCmdLineArgs::init(argc, argv, &aboutData);
+
+    KApplication app;
+    appDir = app.applicationDirPath();
+    rootDir = appDir + "/root/";
+
+    testGitRunner();
+    testTimeLine();
+
+    return app.exec();
 }
 

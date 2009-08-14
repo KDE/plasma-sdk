@@ -49,7 +49,7 @@
   *         // Now suppose to create some files named foo.h foo.cpp under "foo/":
   *         // we add it to the git index by doing this
   *         QStringList *list = new QStringList();
-  *         list << "foo.h" << "foo.cpp";
+  *         *list << "foo.h" << "foo.cpp";
   *
   *         // Note: sometimes is more easy to pass a list with only an argument: '.',
   *         // so git will automatically add all new/changed files under the working
