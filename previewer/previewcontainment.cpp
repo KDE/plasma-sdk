@@ -126,7 +126,7 @@ void PreviewContainment::refreshApplet()
 
 void PreviewContainment::changeFormFactor()
 {
-    initMenu();
+    initMenu(i18n("Change Form Factor"));
 
     QAction *planar = addMenuItem(KIcon("user-desktop"),
                                   i18n("Planar"));
@@ -150,7 +150,7 @@ void PreviewContainment::changeFormFactor()
 
 void PreviewContainment::changeWallpaper()
 {
-    initMenu();
+    initMenu(i18n("Change Wallpaper"));
 
     QSignalMapper *signalMapper = new QSignalMapper(this);
 
@@ -200,7 +200,7 @@ void PreviewContainment::verticalTriggered(bool)
 
 void PreviewContainment::changeLocation()
 {
-    initMenu();
+    initMenu(i18n("Change Location"));
 
     QAction *floating = addMenuItem(KIcon("user-trash"),
                                     i18n("Floating"));
@@ -341,15 +341,16 @@ void PreviewContainment::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
     Containment::hoverLeaveEvent(event);
 }
 
-void PreviewContainment::initMenu()
+void PreviewContainment::initMenu(const QString &title)
 {
     if ((size().height() < MIN_HEIGHT_FOR_OVERLAY) || (size().width() < MIN_WIDTH_FOR_OVERLAY)) {
         delete m_menu;
         m_menu = new KMenu();
         m_menutype = KMENU;
+        m_menu->addTitle(title);
     } else {
         delete m_options;
-        m_options = new OverlayToolBox(this);
+        m_options = new OverlayToolBox(title, this);
         m_options->setGeometry(geometry());
         m_options->setZValue(100);
         m_menutype = OVERLAY;

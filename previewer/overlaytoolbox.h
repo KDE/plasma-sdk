@@ -34,7 +34,7 @@ class OverlayToolBox : public QGraphicsWidget
     Q_OBJECT
 
 public:
-    OverlayToolBox(QGraphicsWidget *parent = 0);
+    OverlayToolBox(const QString &title, QGraphicsWidget *parent = 0);
     ~OverlayToolBox();
 
     void addTool(KAction *action);

@@ -71,7 +71,7 @@ protected:
 
 private:
     // these are a rough gauge for now
-    static const int MIN_HEIGHT_FOR_OVERLAY = 250;
+    static const int MIN_HEIGHT_FOR_OVERLAY = 300;
     static const int MIN_WIDTH_FOR_OVERLAY = 200;
 
     enum menu_type { KMENU, OVERLAY } m_menutype;
@@ -94,7 +94,7 @@ private:
     Plasma::IconWidget *location;
     Plasma::IconWidget *wallpaper;
 
-    void initMenu();
+    void initMenu(const QString &title);
     QAction* addMenuItem(const KIcon &icon, const QString &title);
     void showMenu();
 };

@@ -27,13 +27,24 @@
 
 using namespace Plasma;
 
-OverlayToolBox::OverlayToolBox(QGraphicsWidget *parent)
-        : QGraphicsWidget(parent), m_totalActions(0)
+OverlayToolBox::OverlayToolBox(const QString &title, QGraphicsWidget *parent)
+        : QGraphicsWidget(parent), m_totalActions(2)
 {
     setAcceptsHoverEvents(true);
 
     m_background.setImagePath("widgets/translucentbackground");
     m_background.setEnabledBorders(FrameSvg::AllBorders);
+    
+    Plasma::IconWidget *tool = new Plasma::IconWidget(title, this);
+
+    // Add menu title
+    tool->setAction(0L);
+    tool->setOrientation(Qt::Horizontal);
+    tool->resize(tool->sizeFromIconSize(22));
+
+    tool->setPos(QPoint(30, 10));
+    tool->resize(size().width() - 60, tool->size().height() + 50);
+    tool->setZValue(zValue() + 10);
 }
 
 OverlayToolBox::~OverlayToolBox()

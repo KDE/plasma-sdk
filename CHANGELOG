@@ -1,3 +1,6 @@
+--August 22, 2009--
+- Added titles to the previewer tool menus.
+
 --August 14, 2009--
 - Updated the TimeLine test class, now it shows a simple widget with the TimeLine and a button
   used to create new SavePoints.
