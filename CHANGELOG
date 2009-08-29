@@ -1,3 +1,7 @@
+--August 29, 2009--
+- Modified the newSavePoint() method to prevent a crash when the user want to store his first 
+  SavePoint, but then it discard the "new SavePoint" dialog.
+
 --August 22, 2009--
 - Added titles to the previewer tool menus.
 

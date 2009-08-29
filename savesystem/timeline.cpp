@@ -272,7 +272,16 @@ void TimeLine::customContextMenuPainter(QListWidgetItem *item)
 
 void TimeLine::newSavePoint()
 {
+    QPointer<CommitDialog> commitDialog = new CommitDialog();
+    bool dialogAlreadyOpen = false;
     if(!m_gitRunner->isValidDirectory()) {
+
+        if(!m_gitRunner->hasNewChangesToCommit())
+            return;
+        dialogAlreadyOpen = true;
+
+        if(commitDialog->exec() == QDialog::Rejected)
+            return;
 
         m_gitRunner->init(m_workingDir);
         // Retrieve Name and Email, and set git global parameters
@@ -284,12 +293,10 @@ void TimeLine::newSavePoint()
     if(!m_gitRunner->hasNewChangesToCommit())
         return;
 
-    m_gitRunner->add(KUrl::List(QString('.')));
-
-    QPointer<CommitDialog> commitDialog = new CommitDialog();
-    if(commitDialog->exec() == QDialog::Rejected)
-        return;
-
+    if(!dialogAlreadyOpen) {
+        if(commitDialog->exec() == QDialog::Rejected)
+            return;
+    }
     QString commit = QString(commitDialog->m_commitBriefText->text());
     // Ensure the required comment is not empty
     if(commit.isEmpty())
@@ -303,6 +310,7 @@ void TimeLine::newSavePoint()
         commit.append(optionalComment);
     }
 
+    m_gitRunner->add(KUrl::List(QString('.')));
     m_gitRunner->commit(commit);
     d->list->disconnect();
     loadTimeLine(m_workingDir);
