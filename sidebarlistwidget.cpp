@@ -19,8 +19,9 @@ SidebarListWidget::~SidebarListWidget()
 void SidebarListWidget::mouseDoubleClickEvent(QMouseEvent *event)
 {
     QModelIndex index = indexAt(event->pos());
-    if (index.isValid() && !(index.flags() & Qt::ItemIsSelectable))
+    if (index.isValid() && !(index.flags() & Qt::ItemIsSelectable)) {
         return;
+    }
 
     QListWidget::mouseDoubleClickEvent(event);
 }
@@ -28,8 +29,9 @@ void SidebarListWidget::mouseDoubleClickEvent(QMouseEvent *event)
 void SidebarListWidget::mouseMoveEvent(QMouseEvent *event)
 {
     QModelIndex index = indexAt(event->pos());
-    if (index.isValid() && !(index.flags() & Qt::ItemIsSelectable))
+    if (index.isValid() && !(index.flags() & Qt::ItemIsSelectable)) {
         return;
+    }
 
     QListWidget::mouseMoveEvent(event);
 }
@@ -37,8 +39,9 @@ void SidebarListWidget::mouseMoveEvent(QMouseEvent *event)
 void SidebarListWidget::mousePressEvent(QMouseEvent *event)
 {
     QModelIndex index = indexAt(event->pos());
-    if (index.isValid() && !(index.flags() & Qt::ItemIsSelectable))
+    if (index.isValid() && !(index.flags() & Qt::ItemIsSelectable)) {
         return;
+    }
 
     QListWidget::mousePressEvent(event);
 }
@@ -46,8 +49,9 @@ void SidebarListWidget::mousePressEvent(QMouseEvent *event)
 void SidebarListWidget::mouseReleaseEvent(QMouseEvent *event)
 {
     QModelIndex index = indexAt(event->pos());
-    if (index.isValid() && !(index.flags() & Qt::ItemIsSelectable))
+    if (index.isValid() && !(index.flags() & Qt::ItemIsSelectable)) {
         return;
+    }
 
     QListWidget::mouseReleaseEvent(event);
 }
@@ -101,5 +105,7 @@ QModelIndex SidebarListWidget::moveCursor(QAbstractItemView::CursorAction cursor
     if (oldindex != newindex) {
         emit itemClicked(itemFromIndex(newindex));
     }
+
     return newindex;
 }
+
