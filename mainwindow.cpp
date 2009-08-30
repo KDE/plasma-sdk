@@ -118,7 +118,7 @@ void MainWindow::createDockWidgets()
     /////////////////////////////////////////////////////////////////////////
     m_dockTimeLine = new QDockWidget(i18n("TimeLine"), this);
     m_dockTimeLine->setObjectName("timeline");
-    m_timeLine = new TimeLine(this, m_model->package());
+    m_timeLine = new TimeLine(m_dockTimeLine, m_model->package());
 
     m_dockTimeLine->setWidget(m_timeLine);
 

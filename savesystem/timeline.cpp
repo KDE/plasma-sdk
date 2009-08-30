@@ -51,7 +51,7 @@ TimeLine::TimeLine(QWidget* parent, const KUrl &dir)
 
     if (dir.isValid()) {
         setWorkingDir(dir);
-        loadTimeLine(dir);
+        //loadTimeLine(dir);
     }
 }
 
@@ -81,20 +81,8 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     m_gitRunner->setDirectory(dir);
 
     if (!m_gitRunner->isValidDirectory()) {
-        // If the dir hasn't a git tree we have to create only one item,
-        // used to notify the user that a timeline should be created
-        // ( that is, call GitRunner::init() ).
-        list.append(i18n("No TimeLine found"));
-        list.append(i18n("To start a new one, simply click on \"New SavePoint button !"));
-        list.append(QString());                  // We don't have a sha1sum now, so set an empty string
-
-        this->uiAddItem(KIcon("dialog-ok"),
-                        list,
-                        TimeLineItem::OutsideWorkingDir,
-                        Qt::NoItemFlags);
-
-        setWorkingDir(dir);
-        
+        // If the dir hasn't a git tree, don't show nothig!
+        parentWidget()->hide();
         return;
     }
 
@@ -183,12 +171,17 @@ void TimeLine::loadTimeLine(const KUrl &dir)
         commitInfo.append(author + '\n');
         commitInfo.append(i18n("Comment:\n"));
 
-        int tmpSize = tmp.size();
+        kDebug() << tmp ;
+        commitInfo.append('\n' + tmp.value(4));
+
+        if(tmp.size() > 5)
+            commitInfo.append("\n\n" + tmp.value(6));
+        /*int tmpSize = tmp.size();
         for (int j = 0; j < tmpSize - 1; j++) {
-            commitInfo.append(tmp.value(4).append('\n'));
+            commitInfo.append(tmp.value(4));
             if (isMerge && (j == tmpSize - 4))
                 break;
-        }
+        }*/
 
         QString text = QString("SavePoint #");
         QString savePointNumber;
@@ -205,6 +198,9 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
         isMerge = false;
     }
+    parentWidget()->show();
+    connect(d->list, SIGNAL(contextMenuRequested(QListWidgetItem*)),
+            this, SLOT(showContextMenu(QListWidgetItem*)));
 }
 
 void TimeLine::showContextMenu(QListWidgetItem *item)
@@ -618,8 +614,8 @@ void TimeLine::initUI(QWidget *parent)
     connect(d->list, SIGNAL(itemClicked(QListWidgetItem *)),
             this, SLOT((QListWidgetItem *)));
             */
-    connect(d->list, SIGNAL(contextMenuRequested(QListWidgetItem*)),
-            this, SLOT(showContextMenu(QListWidgetItem*)));
+    /*connect(d->list, SIGNAL(contextMenuRequested(QListWidgetItem*)),
+            this, SLOT(showContextMenu(QListWidgetItem*)));*/
 
     d->splitter = new QSplitter(this);
     mainlay->addWidget(d->splitter);
