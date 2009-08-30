@@ -209,7 +209,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
 void TimeLine::showContextMenu(QListWidgetItem *item)
 {
-    TimeLineItem *tlItem = dynamic_cast<TimeLineItem*>(d->list->currentItem());
+    TimeLineItem *tlItem = dynamic_cast<TimeLineItem*>(item);
     kDebug() << d->list->currentItem() << tlItem;
 
     if (!tlItem) {
