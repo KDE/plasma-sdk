@@ -73,8 +73,8 @@ void StartPage::setupWidgets()
     ui->authorTextField->setText(userName);
     ui->emailTextField->setText(userEmail);
 
-    ui->radioButtonJs->setChecked(cg.readEntry("radioButtonJsChecked", false));
-    ui->radioButtonPy->setChecked(cg.readEntry("radioButtonPyChecked", true));
+    ui->radioButtonJs->setChecked(cg.readEntry("radioButtonJsChecked", true));
+    ui->radioButtonPy->setChecked(cg.readEntry("radioButtonPyChecked", false));
     ui->radioButtonRb->setChecked(cg.readEntry("radioButtonRbChecked", false));
 
     // Enforce the security restriction from package.cpp in the input field
