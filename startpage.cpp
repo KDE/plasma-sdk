@@ -166,7 +166,7 @@ void StartPage::refreshRecentProjectsList()
 
     for (int i = 0; i < recentFiles.size(); i++) {
         Plasma::PackageMetadata metadata(KStandardDirs::locateLocal("appdata", recentFiles.at(i) + '/'));
-        QString projectName = metadata.pluginName();
+        QString projectName = metadata.name();
 
 //         if (projectName.isEmpty()) {
 //             continue;
@@ -174,7 +174,7 @@ void StartPage::refreshRecentProjectsList()
 
         kDebug() << "adding" << projectName << "to the list of recent projects...";
         QListWidgetItem *item = new QListWidgetItem(projectName); // TODO make me the user "nice" name
-        item->setData(FullPathRole, projectName);
+        item->setData(FullPathRole, projectName.toLower());
 
         QString serviceType = metadata.serviceType();
 
