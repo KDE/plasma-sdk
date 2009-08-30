@@ -154,11 +154,11 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
     list.clear();
 
-    QString rawCommits = m_gitRunner->getResult();
+    const QString rawCommits = m_gitRunner->getResult();
 
     // Split the string according with the regexp
-    QRegExp rx("(commit )");
-    QStringList commits = rawCommits.split(rx, QString::SkipEmptyParts);
+    const QRegExp rx("^commit [0-9a-ef]+$");
+    const QStringList commits = rawCommits.split(rx, QString::SkipEmptyParts);
     index = commits.size();
 
     // Iterate every commit and create an element in the sidebar.
@@ -166,16 +166,21 @@ void TimeLine::loadTimeLine(const KUrl &dir)
         bool isMerge = false;
 
         // Save commit(index) and split it
-        QStringList tmp = commits.takeFirst().split('\n');
-        QString sha1sum = tmp.takeFirst();
-        QString author = tmp.takeFirst();
+        const QStringList tmp = commits.value(i).split('\n');
+
+        if (tmp.count() < 5) {
+            continue;
+        }
+
+        QString sha1sum = tmp.value(0);
+        QString author = tmp.value(1);
 
         if (author.contains("Merge", Qt::CaseSensitive)) {
             isMerge = true;
-            author = tmp.takeFirst().remove(0, 8);
+            author = tmp.value(2).remove(0, 8);
         }
 
-        QString date = tmp.takeFirst().remove(0, 6);
+        QString date = tmp.value(3).remove(0, 6);
 
         QString commitInfo = (i18n("SavePoint created on: ") + date + '\n');
         commitInfo.append(author + '\n');
@@ -183,7 +188,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
         int tmpSize = tmp.size();
         for (int j = 0; j < tmpSize - 1; j++) {
-            commitInfo.append(tmp.takeFirst().append('\n'));
+            commitInfo.append(tmp.value(4).append('\n'));
             if (isMerge && (j == tmpSize - 4))
                 break;
         }
@@ -202,7 +207,6 @@ void TimeLine::loadTimeLine(const KUrl &dir)
                         Qt::ItemIsEnabled);
 
         isMerge = false;
-
     }
 
     // Now the TimeLineItem can emit signal customContextMenuRequested()
@@ -245,10 +249,14 @@ void TimeLine::customContextMenuPainter(QListWidgetItem *item)
         int index = m_branches.size();
 
         // Scan all the branches and, create a menu item for each item, and connect them
-        for (int i = 0; i < index; i++) {
-            QString tmp = m_branches.takeFirst();
-            if (tmp.compare(m_currentBranch) == 0)
+        for (int i = 0; i < index; ++i) {
+            QString tmp = m_branches.value(i);
+            if (tmp.compare(m_currentBranch) == 0) {
+                m_branches.takeAt(i);
+                --index;
+                --i;
                 continue;
+            }
 
             connect(switchBranchMenu->addAction(tmp), SIGNAL(triggered(bool)),
                     this, SLOT(switchBranch()));
@@ -256,8 +264,6 @@ void TimeLine::customContextMenuPainter(QListWidgetItem *item)
                     this, SLOT(mergeBranch()));
             connect(deleteBranchMenu->addAction(tmp), SIGNAL(triggered(bool)),
                     this, SLOT(deleteBranch()));
-
-            m_branches.append(tmp);
         }
 
         connect(createBranch, SIGNAL(triggered(bool)),
