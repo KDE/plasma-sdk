@@ -129,7 +129,7 @@ public Q_SLOTS:
       * Creates a custom menu based on the QListWidgetItem that has triggered the event.
       * @param item Reference to the event sender.
       */
-    void customContextMenuPainter(QListWidgetItem* item);
+    void showContextMenu(QListWidgetItem *item);
 
     /**
       * Creates a new SavePoint, if there are uncommitted/new files.

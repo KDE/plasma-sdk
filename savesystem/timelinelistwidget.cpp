@@ -24,6 +24,8 @@
 #include <QMouseEvent>
 #include <QWidget>
 
+#include <KDebug>
+
 TimeLineListWidget::TimeLineListWidget(QWidget *parent)
         : QListWidget(parent)
 {
@@ -45,8 +47,9 @@ void TimeLineListWidget::mouseMoveEvent(QMouseEvent *event)
 void TimeLineListWidget::mousePressEvent(QMouseEvent *event)
 {
     QModelIndex index = indexAt(event->pos());
-    if (index.isValid() && !(index.flags() & Qt::ItemIsSelectable))
+    if (index.isValid() && !(index.flags() & Qt::ItemIsSelectable)) {
         return;
+    }
 
     QListWidget::mousePressEvent(event);
 }
@@ -58,7 +61,15 @@ void TimeLineListWidget::mouseReleaseEvent(QMouseEvent *event)
     //return;
 
     QListWidget::mouseReleaseEvent(event);
-    if (event->button() == Qt::RightButton)
+    if (event->button() == Qt::LeftButton) {
         emit itemClicked(itemFromIndex(index));
-    // TODO : if left button pressed, could be useful to assign an user defined actionS
+    }
 }
+
+void TimeLineListWidget::contextMenuEvent(QContextMenuEvent *event)
+{
+    kDebug();
+    emit contextMenuRequested(itemAt(event->pos()));
+}
+
+#include "timelinelistwidget.moc"

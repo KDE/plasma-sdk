@@ -93,9 +93,6 @@ void TimeLine::loadTimeLine(const KUrl &dir)
                         TimeLineItem::OutsideWorkingDir,
                         Qt::NoItemFlags);
 
-        connect(d->list, SIGNAL(itemClicked(QListWidgetItem *)),
-                this, SLOT(customContextMenuPainter(QListWidgetItem *)));
-        
         setWorkingDir(dir);
         
         return;
@@ -208,19 +205,18 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
         isMerge = false;
     }
-
-    // Now the TimeLineItem can emit signal customContextMenuRequested()
-    setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(d->list, SIGNAL(itemClicked(QListWidgetItem *)),
-            this, SLOT(customContextMenuPainter(QListWidgetItem *)));
-
 }
 
-void TimeLine::customContextMenuPainter(QListWidgetItem *item)
+void TimeLine::showContextMenu(QListWidgetItem *item)
 {
-    TimeLineItem *tlItem = dynamic_cast<TimeLineItem*>(item);
+    TimeLineItem *tlItem = dynamic_cast<TimeLineItem*>(d->list->currentItem());
+    kDebug() << d->list->currentItem() << tlItem;
 
-    QRect rc = d->list->visualItemRect(item);
+    if (!tlItem) {
+        return;
+    }
+
+    QRect rc = d->list->visualItemRect(tlItem);
     KMenu menu(this);
     menu.addTitle(tlItem->text());
     menu.addSeparator();
@@ -239,22 +235,18 @@ void TimeLine::customContextMenuPainter(QListWidgetItem *item)
                 this, SLOT(moveToCommit()));
 
     } else if (tlItem->getIdentifier() == TimeLineItem::Branch) {
-
         QAction *createBranch = menu.addAction(i18n("Create new Section"));
-        QMenu *switchBranchMenu = menu.addMenu(i18n("Switch to Section:"));
-        QMenu *mergeBranchMenu = menu.addMenu(i18n("Combine into Section:"));
+        QMenu *switchBranchMenu = menu.addMenu(i18n("Switch to Section"));
+        QMenu *mergeBranchMenu = menu.addMenu(i18n("Combine into Section"));
         QAction *renameBranch = menu.addAction(i18n("Rename current Section"));
         menu.addSeparator();
-        QMenu *deleteBranchMenu = menu.addMenu(i18n("Delete Section:"));
-        int index = m_branches.size();
+        QMenu *deleteBranchMenu = menu.addMenu(i18n("Delete Section"));
+        const int index = m_branches.size();
 
         // Scan all the branches and, create a menu item for each item, and connect them
         for (int i = 0; i < index; ++i) {
-            QString tmp = m_branches.value(i);
+            const QString tmp = m_branches.value(i);
             if (tmp.compare(m_currentBranch) == 0) {
-                m_branches.takeAt(i);
-                --index;
-                --i;
                 continue;
             }
 
@@ -271,6 +263,9 @@ void TimeLine::customContextMenuPainter(QListWidgetItem *item)
         connect(renameBranch, SIGNAL(triggered(bool)),
                 this, SLOT(renameBranch()));
 
+        switchBranchMenu->setEnabled(!switchBranchMenu->actions().isEmpty());
+        mergeBranchMenu->setEnabled(!mergeBranchMenu->actions().isEmpty());
+        deleteBranchMenu->setEnabled(!deleteBranchMenu->actions().isEmpty());
     }
 
     menu.exec(mapToGlobal(rc.bottomLeft()));
@@ -617,8 +612,14 @@ void TimeLine::initUI(QWidget *parent)
     d->list->setIconSize(QSize(iconsize, iconsize));
     d->list->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     d->list->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-    d->list->setContextMenuPolicy(Qt::CustomContextMenu);
     d->list->viewport()->setAutoFillBackground(false);
+    // TODO : if left button pressed, could be useful to assign an user defined actionS
+    /*
+    connect(d->list, SIGNAL(itemClicked(QListWidgetItem *)),
+            this, SLOT((QListWidgetItem *)));
+            */
+    connect(d->list, SIGNAL(contextMenuRequested(QListWidgetItem*)),
+            this, SLOT(showContextMenu(QListWidgetItem*)));
 
     d->splitter = new QSplitter(this);
     mainlay->addWidget(d->splitter);

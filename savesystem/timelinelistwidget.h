@@ -28,12 +28,17 @@
   */
 class TimeLineListWidget : public QListWidget
 {
+    Q_OBJECT
+
 public:
     /**
       * Default ctor, actually it does nothing =)
       */
     TimeLineListWidget(QWidget *parent = 0);
     ~TimeLineListWidget();
+
+Q_SIGNALS:
+    void contextMenuRequested(QListWidgetItem*);
 
 protected:
 
@@ -57,6 +62,8 @@ protected:
       * @param event The mouse event triggered by the user interaction.
       */
     void mouseReleaseEvent(QMouseEvent *event);
+
+    void contextMenuEvent(QContextMenuEvent *event);
 };
 
 #endif // TIMELINELISTWIDGET_H
