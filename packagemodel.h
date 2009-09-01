@@ -26,6 +26,7 @@ public:
 
     void setPackage(const QString &path);
     QString package() const;
+    QString contentsPrefix() const;
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;

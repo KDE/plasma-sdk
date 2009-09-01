@@ -44,6 +44,11 @@ QString PackageModel::packageType() const
     return QString();
 }
 
+QString PackageModel::contentsPrefix() const
+{
+    return m_structure->contentsPrefix();
+}
+
 void PackageModel::setPackage(const QString &path)
 {
     if (!m_structure) {
@@ -194,7 +199,7 @@ void PackageModel::loadPackage()
     if (!dir.exists("metadata.desktop")) {
         KUser user;
         Plasma::PackageMetadata metadata;
-        metadata.setAuthor(user.property(KUser::FullName).toString());
+        metadata.setAuthor(user.fullName());
         metadata.setLicense("GPL");
         metadata.setName(dir.dirName());
         metadata.setServiceType(structure->type());
@@ -205,9 +210,8 @@ void PackageModel::loadPackage()
     QString contents = structure->contentsPrefix();
     if (!contents.isEmpty()) {
         dir.mkpath(contents);
-        //dir.cd(contents);
+        dir.cd(contents);
     }
-    dir.cd(contents);
 
     foreach(const char *key, structure->directories()) {
         QString path = structure->path(key);
@@ -220,25 +224,7 @@ void PackageModel::loadPackage()
 
     QList<const char *> files = structure->files();
     QHash<QString, const char *> indexedFiles;
-    foreach (const char *key, structure->files()) {
-        // If the key is "main", skip its creation because we provide a custom
-        // main with a different name and extension, and add to the index file.
-        // Note: to be improved
-        if (QString::compare(key, "mainscript")) {
-            // TODO: add QString Plasma::PackageMetadata::getMainFile() const?
-            KDesktopFile cg(m_package->path() + "/../metadata.desktop");
-            QString mainScript = cg.desktopGroup().readEntry("X-Plasma-Mainscript", QString());
-
-            if (mainScript.isEmpty()) {
-                continue;
-            }
-
-            // semi-dangerous assumption that it begins with code/
-            mainScript.remove("code/");
-            indexedFiles.insert(mainScript, key);
-            continue;
-        }
-
+    foreach(const char *key, structure->files()) {
         QString path = structure->path(key);
         if (!dir.exists(path)) {
             QFileInfo info(dir.path() + '/' + path);
@@ -282,13 +268,13 @@ void PackageModel::loadPackage()
 
     if (!indexedFiles.empty()) {
         int currentTopCount = m_topEntries.count();
-        foreach (const char *key, indexedFiles) {
+        foreach(const char *key, indexedFiles) {
             m_topEntries.append(key);
         }
-
         beginInsertRows(QModelIndex(), currentTopCount, indexedFiles.count());
         endInsertRows();
     }
+
 }
 
 void PackageModel::fileAddedOnDisk(const QString &path)

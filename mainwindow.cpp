@@ -290,6 +290,13 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     m_timeLine->setWorkingDir(KUrl(packagePath));
     m_timeLine->loadTimeLine(KUrl(packagePath));
 
+    // Now, setup some useful properties such as the project name in the title bar
+    // and setting the current working directory.
+    Plasma::PackageMetadata metadata(packagePath + "metadata.desktop");
+    setCaption("[Project:" + metadata.name() + ']');
+    kDebug() << "Content prefix: " << m_model->contentsPrefix() ;
+    QDir::setCurrent(m_model->package() + m_model->contentsPrefix());
+
 }
 
 QStringList MainWindow::recentProjects()
