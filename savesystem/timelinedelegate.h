@@ -23,7 +23,6 @@
 
 #include <QAbstractItemDelegate>
 
-class QApplication;
 class QModelIndex;
 class QPainter;
 class QSize;

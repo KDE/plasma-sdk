@@ -1,7 +1,6 @@
 #ifndef SIDEBARPRIVATESTORAGE_H
 #define SIDEBARPRIVATESTORAGE_H
 
-class SidebarListwidget;
 class SidebarItem;
 class SidebarDelegate;
 class SidebarListWidget;

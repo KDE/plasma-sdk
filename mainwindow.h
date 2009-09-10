@@ -18,13 +18,11 @@ class QModelIndex;
 
 namespace Ui
 {
-class MainWindowClass;
 }
 
 class QDockWidget;
 class QStringList;
 
-class KListWidget;
 
 class EditPage;
 class PackageModel;

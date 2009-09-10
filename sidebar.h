@@ -13,7 +13,6 @@
 #include <QWidget>
 
 class QIcon;
-class QListWidgetItem;
 
 #include    "sidebarprivatestorage.h"
 
