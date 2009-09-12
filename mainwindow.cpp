@@ -289,6 +289,9 @@ void MainWindow::loadProject(const QString &name, const QString &type)
 
     m_timeLine->setWorkingDir(KUrl(packagePath));
     m_timeLine->loadTimeLine(KUrl(packagePath));
+    
+    // load project in previewer
+    m_previewer->addApplet(packagePath);
 
     // Now, setup some useful properties such as the project name in the title bar
     // and setting the current working directory.
