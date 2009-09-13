@@ -69,6 +69,7 @@ MainWindow::~MainWindow()
     c.sync();
 
     if (m_workflow) {
+        //delete m_startPage;
         delete m_workflow;
     }
 
@@ -79,7 +80,8 @@ MainWindow::~MainWindow()
         delete m_previewer;
         delete m_previewerWidget;
     }
-    if (m_dockTimeLine) {;
+    if (m_dockTimeLine) {
+        delete m_timeLine;
         delete m_dockTimeLine;
     }
 }

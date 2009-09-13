@@ -142,62 +142,87 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     const QString rawCommits = m_gitRunner->getResult();
 
     // Split the string according with the regexp
-    const QRegExp rx("^commit [0-9a-ef]+$");
-    const QStringList commits = rawCommits.split(rx, QString::SkipEmptyParts);
-    index = commits.size();
+    const QString regExp("(commit\\s[0-9a-f]{40})");
+    const QRegExp rx(regExp);
 
+    const QStringList commitList = rawCommits.split('\n',QString::SkipEmptyParts);
+
+    index = 0;
+    int commitIndex = 0;
+    kDebug() << "DIOCANEEEEEEEEEEEEEEEEEEEE" << commitList.size();
     // Iterate every commit and create an element in the sidebar.
-    for (int i = 0; i < index; i++) {
+    while(index < commitList.size()) {
         bool isMerge = false;
+        QStringList list;
+        QString commitInfo;
+        QString sha1hash;
+        QString text;
+        QString author;
+        QString date;
 
-        // Save commit(index) and split it
-        const QStringList tmp = commits.value(i).split('\n');
+        if(commitList.at(index).contains(rx)) {
+            const QString commit("commit ");
+            // We can do this because now we are sure that the indexed string contains the sha1 hash =)
+            sha1hash = commitList.at(index);
+            list = sha1hash.split(commit,
+                              QString::SkipEmptyParts,
+                              Qt::CaseSensitive);
 
-        if (tmp.count() < 5) {
-            continue;
+            sha1hash = list.at(0);
+            list.clear();
+            ++index;
+
+            if(commitList.at(index).contains("Merge: ", Qt::CaseSensitive)) {
+                    isMerge = true;
+                    ++index;
+            }
+            // Now check the "Author" field
+            author = commitList.at(index);
+            author = author.replace("Author",
+                                i18n("Author"),
+                                Qt::CaseSensitive);
+            author.append("\n\n");
+            ++index;
+            // Check the "Date" field
+            date = commitList.at(index);
+            date = date.remove("Date",
+                                  Qt::CaseSensitive);
+            date.append('\n');
+            ++index;
         }
 
-        QString sha1sum = tmp.value(0);
-        QString author = tmp.value(1);
-
-        if (author.contains("Merge", Qt::CaseSensitive)) {
-            isMerge = true;
-            author = tmp.value(2).remove(0, 8);
-        }
-
-        QString date = tmp.value(3).remove(0, 6);
-
-        QString commitInfo = (i18n("SavePoint created on: ") + date + '\n');
-        commitInfo.append(author + '\n');
-        commitInfo.append(i18n("Comment:\n"));
-
-        kDebug() << tmp ;
-        commitInfo.append('\n' + tmp.value(4));
-
-        if(tmp.size() > 5)
-            commitInfo.append("\n\n" + tmp.value(6));
-        /*int tmpSize = tmp.size();
-        for (int j = 0; j < tmpSize - 1; j++) {
-            commitInfo.append(tmp.value(4));
-            if (isMerge && (j == tmpSize - 4))
+        // Ok, start grouping the needed infos
+        commitInfo.append(i18n("Comment:\n\n"));
+        while(index < commitList.size()) {
+            if(commitList.at(index).contains(rx)) {
                 break;
-        }*/
+            }
+            commitInfo.append(commitList.at(index));
+            commitInfo.append("\n");
+            ++index;
+        }
 
-        QString text = QString("SavePoint #");
-        QString savePointNumber;
-        savePointNumber.setNum(i);
-        text.append(savePointNumber);
+        // Put all together
+        date.prepend(i18n("SavePoint created on: "));
 
-        QStringList list = QStringList(text);
+        commitInfo.prepend(author);
+        commitInfo.prepend(date);
+
+        text.setNum(commitIndex);
+        text.prepend("SavePoint #");
+        list.append(text);
         list.append(commitInfo);
-        list.append(sha1sum);
+        list.append(sha1hash);
+
         this->uiAddItem(isMerge ? KIcon("svn_merge") : KIcon("dialog-ok"),
                         list,
                         isMerge ? TimeLineItem::Merge : TimeLineItem::Commit,
                         Qt::ItemIsEnabled);
 
         isMerge = false;
+        ++commitIndex;
     }
+
     parentWidget()->show();
     connect(d->list, SIGNAL(contextMenuRequested(QListWidgetItem*)),
             this, SLOT(showContextMenu(QListWidgetItem*)));
