@@ -1,3 +1,7 @@
+--September 20, 2009--
+- Fixed previewer refresh code: Refreshing now properly reflects changes since previous
+  refresh. Also fixed issue with refreshed plasmoid being smaller than original.
+
 --September 12, 2009--
 - Loading a project now also attempts to load a preview in previewer
 

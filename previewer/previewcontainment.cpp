@@ -106,7 +106,6 @@ void PreviewContainment::setupHeader()
 
 // Fixme(?): Does not currently respect arguments passed in during
 // initialization. Will reload applet without arguments
-// reloaded applet is also often smaller than original for some reason
 void PreviewContainment::refreshApplet()
 {
     if (!m_applet)
@@ -114,10 +113,14 @@ void PreviewContainment::refreshApplet()
     clearApplets();
 
     if (m_applet->package()) {
-        m_applet = Applet::loadPlasmoid(m_applet->package()->path());
+        QString path = m_applet->package()->path();
+        delete m_applet;
+        m_applet = Applet::loadPlasmoid(path);
         addApplet(m_applet, QPointF(-1, -1), false);
     } else {
-        m_applet = addApplet(m_applet->pluginName(),
+        QString pluginName = m_applet->pluginName();
+        delete m_applet;
+        m_applet = addApplet(pluginName,
                              QVariantList(), QRectF(0, 0, -1, -1));
     }
 
