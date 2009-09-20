@@ -34,7 +34,7 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
 
-    enum DataRoles { MimeTypeRole = Qt::UserRole + 1 };
+    enum DataRoles { MimeTypeRole = Qt::UserRole + 1, UrlRole };
 
 private:
     void loadPackage();

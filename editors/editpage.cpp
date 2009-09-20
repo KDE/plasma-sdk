@@ -26,6 +26,7 @@ void EditPage::findEditor(const QModelIndex &index)
     QStringList mimetypes = index.data(PackageModel::MimeTypeRole).toStringList();
     foreach(const QString &mimetype, mimetypes) {
         KService::List offers = KMimeTypeTrader::self()->query(mimetype, "KParts/ReadWritePart");
+        QString target = index.data(PackageModel::UrlRole).toString();
         kDebug() << mimetype;
         if (offers.isEmpty()) {
             offers = KMimeTypeTrader::self()->query(mimetype, "KParts/ReadOnlyPart");
@@ -34,7 +35,7 @@ void EditPage::findEditor(const QModelIndex &index)
             //create the part using offers.at(0)
             //kDebug() << offers.at(0);
             //offers.at(0)->createInstance(parentWidget);
-            emit loadEditor(offers);
+            emit loadEditor(offers, KUrl(target));
             return;
         }
     }

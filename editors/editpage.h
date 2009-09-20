@@ -29,7 +29,7 @@ private Q_SLOTS:
     void findEditor(const QModelIndex &index);
 
 signals:
-    void loadEditor(const KService::List offers);
+    void loadEditor(const KService::List offers, KUrl target);
 };
 
 #endif

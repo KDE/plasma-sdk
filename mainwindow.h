@@ -49,7 +49,7 @@ public Q_SLOTS:
     void changeTab(const QModelIndex &);
     void loadProject(const QString &name, const QString &type);
 
-    void loadRequiredEditor(const KService::List offers);
+    void loadRequiredEditor(const KService::List offers, KUrl target);
 signals:
     void newSavePointClicked();
 
@@ -78,7 +78,7 @@ private:
     int m_oldTab;
     bool docksCreated;
 
-    KParts::Part *m_part;
+    KParts::ReadOnlyPart *m_part;
 };
 
 #endif // MAINWINDOW_H

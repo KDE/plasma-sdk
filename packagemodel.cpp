@@ -89,13 +89,20 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
     //TODO: other display roles!
     const char *key = static_cast<const char *>(index.internalPointer());
     if (key) {
+        if (role == MimeTypeRole) {
+            return m_package->structure()->mimetypes(key);
+        }
+        if (role == UrlRole) {
+            return m_package->filePath(key) + "/" +
+                      m_package->entryList(key).at(index.row());
+        }
         if (index.row() == 0) {
             if (role == Qt::DisplayRole) {
                 return i18n("New...");
             }
-            if (role == MimeTypeRole) {
+            /*if (role == MimeTypeRole) {
                 return m_package->structure()->mimetypes(key);
-            } /* else if (role == Qt::DecorationRole) {
+            }  else if (role == Qt::DecorationRole) {
                 return KIcon("file-new");
             } */
         } else if (role == Qt::DisplayRole) {

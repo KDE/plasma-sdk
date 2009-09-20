@@ -1,4 +1,9 @@
 --September 20, 2009--
+- Editor component now makes a (buggy) attempt to load clicked project files
+  with an editor kpart. Also fixed a bug causing editor kpart to
+  not load the first time the editor component is loaded.
+
+--September 19, 2009--
 - Fixed previewer refresh code: Refreshing now properly reflects changes since previous
   refresh. Also fixed issue with refreshed plasmoid being smaller than original.
 

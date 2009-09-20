@@ -188,7 +188,7 @@ void MainWindow::changeTab(const QModelIndex &item)
         m_editPage = new EditPage(this);
         m_editPage->setModel(m_model);
         setCentralWidget(m_editPage);
-        connect(m_editPage, SIGNAL(loadEditor(KService::List)), this, SLOT(loadRequiredEditor(const KService::List)));
+        connect(m_editPage, SIGNAL(loadEditor(KService::List, KUrl)), this, SLOT(loadRequiredEditor(const KService::List, KUrl)));
     }
     break;
     case PublishTab: {
@@ -206,7 +206,7 @@ void MainWindow::changeTab(const QModelIndex &item)
     m_oldTab = tab;
 }
 
-void MainWindow::loadRequiredEditor(const KService::List offers)
+void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
 {
     if (offers.isEmpty()) {
         kDebug() << "No offers for editor, can not load.";
@@ -217,7 +217,9 @@ void MainWindow::loadRequiredEditor(const KService::List offers)
 
     QVariantList args;
     QString error; // we should show this via debug if we fail
-    m_part = offers.at(0)->createInstance<KParts::Part>(newWidget, args, &error);
+    m_part = dynamic_cast<KParts::ReadOnlyPart*>(
+              offers.at(0)->createInstance<KParts::Part>(
+                newWidget, args, &error));
 
     if (!m_part) {
         kDebug() << "Failed to load editor:" << error;
@@ -225,6 +227,8 @@ void MainWindow::loadRequiredEditor(const KService::List offers)
 
     setCentralWidget(m_part->widget());
 
+    // open the target for editting/viewing
+    m_part->openUrl(target);
     //Add the part's GUI
     createGUI(m_part);
 }
@@ -286,6 +290,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     m_editPage = new EditPage(this);
     m_editPage->setModel(m_model);
     setCentralWidget(m_editPage);
+    connect(m_editPage, SIGNAL(loadEditor(KService::List, KUrl)), this, SLOT(loadRequiredEditor(const KService::List, KUrl)));
     m_oldTab = EditTab;
     m_sidebar->setCurrentIndex(m_oldTab);
 
