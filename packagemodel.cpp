@@ -93,8 +93,9 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
             return m_package->structure()->mimetypes(key);
         }
         if (role == UrlRole) {
-            return m_package->filePath(key) + "/" +
-                      m_package->entryList(key).at(index.row());
+            QString path = m_package->filePath(key);
+            return (path.endsWith("/") ? path : (path + "/")) +
+                      m_package->entryList(key).at(index.row() - 1);
         }
         if (index.row() == 0) {
             if (role == Qt::DisplayRole) {
