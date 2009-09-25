@@ -93,9 +93,24 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
             return m_package->structure()->mimetypes(key);
         }
         if (role == UrlRole) {
-            QString path = m_package->filePath(key);
-            return (path.endsWith("/") ? path : (path + "/")) +
-                      m_package->entryList(key).at(index.row() - 1);
+            QList<const char *> named = m_namedFiles.value(key);
+            int row = index.row() - 1;
+            QString path = "", file = "";
+            if (row < named.count()) {
+                path = m_package->path();
+                QString contents = m_package->structure()->contentsPrefix();
+                path = path.endsWith("/") ? path + contents : path + "/" + contents;
+                file = m_package->structure()->path(named.at(row));
+            } else {
+                row -= named.count();
+                QStringList l = m_files.value(key);
+                if (row < l.count()) {
+                    path = m_package->filePath(key);
+                    file = l.at(row);
+                }
+            }
+            path = path.endsWith("/") ? path : path + "/";
+            return path + file;
         }
         if (index.row() == 0) {
             if (role == Qt::DisplayRole) {
@@ -117,9 +132,9 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
 
             row -= named.count();
             QStringList l = m_files.value(key);
-            if (index.row() < l.count()) {
+            if (row < l.count()) {
                 //kDebug() << "got" << l.at(index.row() - 1);
-                return l.at(index.row());
+                return l.at(row);
             }
         }
     } else if (role == Qt::DisplayRole) {

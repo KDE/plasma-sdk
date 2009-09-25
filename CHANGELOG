@@ -1,3 +1,7 @@
+--September 26, 2009--
+- Fixed more editor issues : all tree widget entries are now correctly named
+  and properly mapped to their respective files.
+
 --September 23, 2009--
 - Fixed clicking certain files in the editor component tree widget causing plasmate
   to crash. Issues remaining for editor:
