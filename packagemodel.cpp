@@ -86,13 +86,16 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    //TODO: other display roles!
     const char *key = static_cast<const char *>(index.internalPointer());
-    if (key) {
-        if (role == MimeTypeRole) {
+    if (key) { // it's a child item
+        switch (role) {
+        case MimeTypeRole: {
             return m_package->structure()->mimetypes(key);
         }
-        if (role == UrlRole) {
+        break;        
+        case UrlRole: {
+            if (index.row() <= 0)
+                break;
             QList<const char *> named = m_namedFiles.value(key);
             int row = index.row() - 1;
             QString path = "", file = "";
@@ -112,24 +115,16 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
             path = path.endsWith("/") ? path : path + "/";
             return path + file;
         }
-        if (index.row() == 0) {
-            if (role == Qt::DisplayRole) {
-                return i18n("New...");
-            }
-            /*if (role == MimeTypeRole) {
-                return m_package->structure()->mimetypes(key);
-            }  else if (role == Qt::DecorationRole) {
-                return KIcon("file-new");
-            } */
-        } else if (role == Qt::DisplayRole) {
+        break;        
+        case Qt::DisplayRole: {
+            if (index.row() == 0)
+              return i18n("New...");
             QList<const char *> named = m_namedFiles.value(key);
             int row = index.row() - 1;
-
             if (row < named.count()) {
                 //kDebug() << m_package->structure()->name(named.at(row));
                 return m_package->structure()->name(named.at(row));
             }
-
             row -= named.count();
             QStringList l = m_files.value(key);
             if (row < l.count()) {
@@ -137,14 +132,35 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
                 return l.at(row);
             }
         }
-    } else if (role == Qt::DisplayRole) {
-        if (index.row() == m_topEntries.count()) {
-            return i18n("Metadata");
+        break;        
+        case Qt::DecorationRole: {
+            if (index.row() == 0)
+                return KIcon("file-new");
         }
-
-        return m_structure->name(m_topEntries.at(index.row()));
+        break;        
+        }
+    } else { // it's a top level item
+        switch (role) {
+        case Qt::DisplayRole: {
+            if (index.row() == m_topEntries.count()) {
+                return i18n("Metadata");
+            }
+            return m_structure->name(m_topEntries.at(index.row()));
+        }
+        break;        
+        case MimeTypeRole: {
+            if (index.row() == m_topEntries.count()) {
+                return QStringList("text/plain");
+            }
+        }
+        break;
+        case UrlRole: {
+            if (index.row() == m_topEntries.count())
+                return m_package->path() + "metadata.desktop";
+        }
+        break;
+        }
     }
-
     return QVariant();
 }
 
@@ -167,7 +183,7 @@ QModelIndex PackageModel::index(int row, int column, const QModelIndex &parent) 
         }
     }
 
-    if (row < m_topEntries.count()) {
+    if (row <= m_topEntries.count()) {
         return createIndex(row, column);
     }
 
@@ -227,7 +243,7 @@ void PackageModel::loadPackage()
         metadata.setName(dir.dirName());
         metadata.setServiceType(structure->type());
 
-        metadata.write(dir.path() + "/metadata.desktop");
+        metadata.write(dir.path() + "metadata.desktop");
     }
 
     QString contents = structure->contentsPrefix();

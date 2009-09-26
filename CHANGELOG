@@ -1,4 +1,7 @@
---September 26, 2009--
+--September 26,2009--
+- Package metadata file is now visible and editable in the editor.
+
+--September 25, 2009--
 - Fixed more editor issues : all tree widget entries are now correctly named
   and properly mapped to their respective files.
 
