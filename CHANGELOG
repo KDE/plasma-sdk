@@ -1,3 +1,7 @@
+--October 1,2009--
+- Experimental separation of editor tree-widget into a QDockWidget. Still
+  UGLY and BUGGY.
+
 --September 26,2009--
 - Package metadata file is now visible and editable in the editor.
 

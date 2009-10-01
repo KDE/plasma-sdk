@@ -73,6 +73,7 @@ private:
     QDockWidget *m_previewerWidget;
     Previewer *m_previewer;
 
+    QDockWidget *m_editWidget;
     EditPage *m_editPage;
     PackageModel *m_model;
     int m_oldTab;

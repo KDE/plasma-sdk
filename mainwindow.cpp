@@ -49,6 +49,8 @@ MainWindow::MainWindow(QWidget *parent)
         m_timeLine(0),
         m_previewer(0),
         m_model(0),
+        m_editPage(0),
+        m_editWidget(0),
         m_oldTab(0) // we start from startPage
 {
     setXMLFile("plasmateui.rc");
@@ -83,6 +85,11 @@ MainWindow::~MainWindow()
     if (m_dockTimeLine) {
         delete m_timeLine;
         delete m_dockTimeLine;
+    }
+    
+    if (m_editPage) {
+        delete m_editPage;
+        delete m_editWidget;
     }
 }
 
@@ -138,7 +145,18 @@ void MainWindow::createDockWidgets()
 
     m_previewerWidget->updateGeometry();
     m_previewer->updateGeometry();
+    
+    /////////////////////////////////////////////////////////////////////////
+    m_editPage = new EditPage();
+    m_editPage->setModel(m_model);
 
+    m_editWidget = new QDockWidget(i18n("Files"), this);
+    m_editWidget->setObjectName("edit tree");
+    m_editWidget->setWidget(m_editPage);
+    addDockWidget(Qt::TopDockWidgetArea, m_editWidget);
+
+    connect(m_editPage, SIGNAL(loadEditor(KService::List, KUrl)), this, SLOT(loadRequiredEditor(const KService::List, KUrl)));
+    
     // Restoring the previous layout
     restoreState(configDock.readEntry("MainWindowLayout",QByteArray()), 0);
 
@@ -185,10 +203,12 @@ void MainWindow::changeTab(const QModelIndex &item)
     }
     break;
     case EditTab: {
-        m_editPage = new EditPage(this);
+/*        m_editPage = new EditPage(this);
         m_editPage->setModel(m_model);
         setCentralWidget(m_editPage);
-        connect(m_editPage, SIGNAL(loadEditor(KService::List, KUrl)), this, SLOT(loadRequiredEditor(const KService::List, KUrl)));
+        connect(m_editPage, SIGNAL(loadEditor(KService::List, KUrl)), this, SLOT(loadRequiredEditor(const KService::List, KUrl)));*/
+        QLabel *l = new QLabel(i18n("Select a file to edit!"), this);
+        setCentralWidget(l);
     }
     break;
     case PublishTab: {
@@ -230,7 +250,7 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
     // open the target for editting/viewing
     m_part->openUrl(target);
     //Add the part's GUI
-    createGUI(m_part);
+    //createGUI(m_part);
 }
 
 void MainWindow::loadProject(const QString &name, const QString &type)
@@ -286,11 +306,10 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     // Load the needed widgets, switch to page 1 (edit)...
     if(!docksCreated)
         createDockWidgets();
+    
+    QLabel *l = new QLabel(i18n("Select a file to edit!"), this);
+    setCentralWidget(l);
 
-    m_editPage = new EditPage(this);
-    m_editPage->setModel(m_model);
-    setCentralWidget(m_editPage);
-    connect(m_editPage, SIGNAL(loadEditor(KService::List, KUrl)), this, SLOT(loadRequiredEditor(const KService::List, KUrl)));
     m_oldTab = EditTab;
     m_sidebar->setCurrentIndex(m_oldTab);
 
