@@ -60,6 +60,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_startPage, SIGNAL(projectSelected(QString, QString)),
             this, SLOT(loadProject(QString, QString)));
     setCentralWidget(m_startPage);
+    setDockOptions(QMainWindow::AllowNestedDocks); // why not?
 }
 
 MainWindow::~MainWindow()
@@ -125,6 +126,24 @@ void MainWindow::createDockWidgets()
     m_sidebar->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
 
     /////////////////////////////////////////////////////////////////////////
+    m_editPage = new EditPage();
+    m_editPage->setModel(m_model);
+
+    m_editWidget = new QDockWidget(i18n("Files"), this);
+    m_editWidget->setObjectName("edit tree");
+    m_editWidget->setWidget(m_editPage);
+    addDockWidget(Qt::RightDockWidgetArea, m_editWidget);
+
+    connect(m_editPage, SIGNAL(loadEditor(KService::List, KUrl)), this, SLOT(loadRequiredEditor(const KService::List, KUrl)));
+
+    m_editPage->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
+    m_editWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
+
+    // Nest these two docks
+    tabifyDockWidget(m_workflow, m_editWidget);
+    splitDockWidget(m_workflow, m_editWidget, Qt::Horizontal);
+
+    /////////////////////////////////////////////////////////////////////////
     m_dockTimeLine = new QDockWidget(i18n("TimeLine"), this);
     m_dockTimeLine->setObjectName("timeline");
     m_timeLine = new TimeLine(m_dockTimeLine, m_model->package());
@@ -146,20 +165,9 @@ void MainWindow::createDockWidgets()
     m_previewerWidget->updateGeometry();
     m_previewer->updateGeometry();
     
-    /////////////////////////////////////////////////////////////////////////
-    m_editPage = new EditPage();
-    m_editPage->setModel(m_model);
-
-    m_editWidget = new QDockWidget(i18n("Files"), this);
-    m_editWidget->setObjectName("edit tree");
-    m_editWidget->setWidget(m_editPage);
-    addDockWidget(Qt::TopDockWidgetArea, m_editWidget);
-
-    connect(m_editPage, SIGNAL(loadEditor(KService::List, KUrl)), this, SLOT(loadRequiredEditor(const KService::List, KUrl)));
-    
     // Restoring the previous layout
     restoreState(configDock.readEntry("MainWindowLayout",QByteArray()), 0);
-
+    adjustSize();
     connect(this, SIGNAL(newSavePointClicked()),
             m_timeLine, SLOT(newSavePoint()));
 
@@ -233,13 +241,11 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
         return;
     }
 
-    QWidget *newWidget = new QWidget(this);
-
     QVariantList args;
     QString error; // we should show this via debug if we fail
     m_part = dynamic_cast<KParts::ReadOnlyPart*>(
               offers.at(0)->createInstance<KParts::Part>(
-                newWidget, args, &error));
+                this, args, &error));
 
     if (!m_part) {
         kDebug() << "Failed to load editor:" << error;
