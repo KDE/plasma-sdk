@@ -1,3 +1,7 @@
+--October 18,2009--
+- Selecting metadata now brings up the metadata editor GUI - but it doesn't
+  really work.
+
 --October 1,2009--
 - Experimental separation of editor tree-widget into a QDockWidget. Still
   UGLY and BUGGY.

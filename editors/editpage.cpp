@@ -5,7 +5,6 @@
 #include <QTreeView>
 #include <kservice.h>
 #include <kmimetypetrader.h>
-
 #include "packagemodel.h"
 
 EditPage::EditPage(QWidget *parent)
@@ -25,8 +24,12 @@ void EditPage::findEditor(const QModelIndex &index)
 {
     QStringList mimetypes = index.data(PackageModel::MimeTypeRole).toStringList();
     foreach(const QString &mimetype, mimetypes) {
-        KService::List offers = KMimeTypeTrader::self()->query(mimetype, "KParts/ReadWritePart");
         QString target = index.data(PackageModel::UrlRole).toString();
+        if (mimetype == "text/metadata") {
+            emit loadMetaDataEditor(target);
+            return;
+        }
+        KService::List offers = KMimeTypeTrader::self()->query(mimetype, "KParts/ReadWritePart");
         kDebug() << mimetype;
         if (offers.isEmpty()) {
             offers = KMimeTypeTrader::self()->query(mimetype, "KParts/ReadOnlyPart");

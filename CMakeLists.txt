@@ -5,6 +5,7 @@ include(KDE4Defaults)
 
 set (PlasMate_SRC
     editors/editpage.cpp
+    editors/metadata/metadataeditor.cpp
     main.cpp
     sidebaritem.cpp
     sidebardelegate.cpp

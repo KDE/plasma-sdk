@@ -150,7 +150,8 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         break;        
         case MimeTypeRole: {
             if (index.row() == m_topEntries.count()) {
-                return QStringList("text/plain");
+                // not sure if this is good, but will do for now
+                return QStringList("text/metadata");
             }
         }
         break;

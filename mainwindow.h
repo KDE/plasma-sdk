@@ -29,6 +29,7 @@ class PackageModel;
 class StartPage;
 class Sidebar;
 class TimeLine;
+class MetaDataEditor;
 
 // our own previewer
 class Previewer;
@@ -50,6 +51,7 @@ public Q_SLOTS:
     void loadProject(const QString &name, const QString &type);
 
     void loadRequiredEditor(const KService::List offers, KUrl target);
+    void loadMetaDataEditor(KUrl target);
 signals:
     void newSavePointClicked();
 
@@ -72,6 +74,7 @@ private:
     TimeLine    *m_timeLine;
     QDockWidget *m_previewerWidget;
     Previewer *m_previewer;
+    MetaDataEditor *m_metaEditor;
 
     QDockWidget *m_editWidget;
     EditPage *m_editPage;

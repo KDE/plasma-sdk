@@ -32,6 +32,7 @@
 #include <Plasma/PackageMetadata>
 
 #include "editors/editpage.h"
+#include "editors/metadata/metadataeditor.h"
 #include "savesystem/timeline.h"
 #include "mainwindow.h"
 #include "packagemodel.h"
@@ -51,6 +52,7 @@ MainWindow::MainWindow(QWidget *parent)
         m_model(0),
         m_editPage(0),
         m_editWidget(0),
+        m_metaEditor(0),
         m_oldTab(0) // we start from startPage
 {
     setXMLFile("plasmateui.rc");
@@ -135,6 +137,7 @@ void MainWindow::createDockWidgets()
     addDockWidget(Qt::RightDockWidgetArea, m_editWidget);
 
     connect(m_editPage, SIGNAL(loadEditor(KService::List, KUrl)), this, SLOT(loadRequiredEditor(const KService::List, KUrl)));
+    connect(m_editPage, SIGNAL(loadMetaDataEditor(KUrl)), this, SLOT(loadMetaDataEditor(KUrl)));
 
     m_editPage->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
     m_editWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
@@ -240,7 +243,7 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
         kDebug() << "No offers for editor, can not load.";
         return;
     }
-
+    centralWidget()->deleteLater();
     QVariantList args;
     QString error; // we should show this via debug if we fail
     m_part = dynamic_cast<KParts::ReadOnlyPart*>(
@@ -257,6 +260,14 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
     m_part->openUrl(target);
     //Add the part's GUI
     //createGUI(m_part);
+}
+
+void MainWindow::loadMetaDataEditor(KUrl target) {
+    centralWidget()->deleteLater();
+    m_metaEditor = new MetaDataEditor(this);
+    m_metaEditor->setFilename(target.url());
+    m_metaEditor->readFile();
+    setCentralWidget(m_metaEditor);
 }
 
 void MainWindow::loadProject(const QString &name, const QString &type)
