@@ -78,13 +78,13 @@ MainWindow::~MainWindow()
         delete m_workflow;
     }
 
-    if (m_previewer) {
+    /*if (m_previewer) {
         configDock.writeEntry("PreviewerHeight", m_previewerWidget->height());
         configDock.writeEntry("PreviewerWidth", m_previewerWidget->width());
         c.sync();
         delete m_previewer;
         delete m_previewerWidget;
-    }
+    }*/
     if (m_dockTimeLine) {
         delete m_timeLine;
         delete m_dockTimeLine;
@@ -117,6 +117,7 @@ void MainWindow::createDockWidgets()
     m_sidebar->addItem(KIcon("document-save"),i18n("New SavePoint"));
     m_sidebar->addItem(KIcon("krfb"), i18n("Publish"));
     m_sidebar->addItem(KIcon("help-contents"), i18n("Documentation"));
+    m_sidebar->addItem(KIcon("user-desktop"), i18n("Preview"));
 
     connect(m_sidebar, SIGNAL(currentIndexClicked(const QModelIndex &)),
             this, SLOT(changeTab(const QModelIndex &)));
@@ -159,14 +160,14 @@ void MainWindow::createDockWidgets()
     m_timeLine->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
 
     /////////////////////////////////////////////////////////////////////////
-    m_previewerWidget = new QDockWidget(i18n("Previewer"), this);
+    /*m_previewerWidget = new QDockWidget(i18n("Previewer"), this);
     m_previewerWidget->setObjectName("workflow");
     m_previewer = new Previewer();
     m_previewerWidget->setWidget(m_previewer);
     addDockWidget(Qt::BottomDockWidgetArea, m_previewerWidget);
 
     m_previewerWidget->updateGeometry();
-    m_previewer->updateGeometry();
+    m_previewer->updateGeometry();*/
     
     // Restoring the previous layout
     restoreState(configDock.readEntry("MainWindowLayout",QByteArray()), 0);
@@ -232,6 +233,11 @@ void MainWindow::changeTab(const QModelIndex &item)
         setCentralWidget(l);
     }
     break;
+    case PreviewTab: {
+        m_previewer = new Previewer();
+        m_previewer->addApplet(m_model->package());
+        setCentralWidget(m_previewer);
+    }
     }
 
     m_oldTab = tab;
@@ -260,14 +266,20 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
     m_part->openUrl(target);
     //Add the part's GUI
     //createGUI(m_part);
+    
+    m_sidebar->setCurrentIndex(EditTab);
+    m_oldTab = EditTab;
 }
 
 void MainWindow::loadMetaDataEditor(KUrl target) {
     centralWidget()->deleteLater();
     m_metaEditor = new MetaDataEditor(this);
-    m_metaEditor->setFilename(target.url());
+    m_metaEditor->setFilename(target.path());
     m_metaEditor->readFile();
     setCentralWidget(m_metaEditor);
+
+    m_sidebar->setCurrentIndex(EditTab);
+    m_oldTab = EditTab;
 }
 
 void MainWindow::loadProject(const QString &name, const QString &type)
@@ -334,7 +346,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     m_timeLine->loadTimeLine(KUrl(packagePath));
     
     // load project in previewer
-    m_previewer->addApplet(packagePath);
+    //m_previewer->addApplet(packagePath);
 
     // Now, setup some useful properties such as the project name in the title bar
     // and setting the current working directory.

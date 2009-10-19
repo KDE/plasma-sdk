@@ -59,7 +59,7 @@ void Previewer::addApplet(const QString &name, const QVariantList &args)
     }
 
     m_applet->setFlag(QGraphicsItem::ItemIsMovable, false);
-    resize(m_applet->preferredSize().toSize());
+    //resize(m_applet->preferredSize().toSize());
 }
 
 void Previewer::clearApplets()
@@ -115,7 +115,8 @@ void Previewer::resizeEvent(QResizeEvent *event)
     // check if the rect is valid, or else it seems to try to allocate
     // up to infinity memory in exponential increments
     if (newSize.isValid()) {
-        m_containment->resize(QSizeF(newWidth, newHeight));
+        m_containment->resize(newSize);
+        resize(newWidth, newHeight);
     }
 }
 

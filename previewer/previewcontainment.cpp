@@ -53,7 +53,6 @@ PreviewContainment::PreviewContainment(QObject *parent, const QVariantList &args
 
     m_tmp = new QGraphicsWidget();
     m_layout->addItem(m_tmp);
-    m_layout->setStretchFactor(m_tmp, 2);
 
     setLayout(m_layout);
 }
@@ -314,7 +313,6 @@ void PreviewContainment::onAppletAdded(Plasma::Applet *applet, const QPointF &po
     m_layout->removeItem(m_tmp);
 
     m_layout->addItem(applet);
-    m_layout->setStretchFactor(applet, 3);
     connect(applet, SIGNAL(geometryChanged()), this, SLOT(onAppletGeometryChanged()));
 }
 
@@ -324,7 +322,6 @@ void PreviewContainment::onAppletRemoved(Plasma::Applet *applet)
     m_layout->removeItem(applet);
 
     m_layout->addItem(m_tmp);
-    m_layout->setStretchFactor(m_tmp, 2);
 }
 
 void PreviewContainment::onAppletGeometryChanged()

@@ -1,3 +1,7 @@
+--October 29,2009--
+- Metadata editor now loads properly (but still unable to save). Previewer is
+  now in a tab of its own.
+
 --October 18,2009--
 - Selecting metadata now brings up the metadata editor GUI - but it doesn't
   really work.
