@@ -53,7 +53,8 @@ MainWindow::MainWindow(QWidget *parent)
         m_editPage(0),
         m_editWidget(0),
         m_metaEditor(0),
-        m_oldTab(0) // we start from startPage
+        m_oldTab(0), // we start from startPage
+        m_part(0)
 {
     setXMLFile("plasmateui.rc");
     createMenus();
@@ -249,6 +250,11 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
         kDebug() << "No offers for editor, can not load.";
         return;
     }
+
+    if (qobject_cast<KParts::ReadWritePart*>(m_part)) {
+        static_cast<KParts::ReadWritePart*>(m_part)->save();
+    }
+
     centralWidget()->deleteLater();
     QVariantList args;
     QString error; // we should show this via debug if we fail
@@ -266,7 +272,7 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
     m_part->openUrl(target);
     //Add the part's GUI
     //createGUI(m_part);
-    
+
     m_sidebar->setCurrentIndex(EditTab);
     m_oldTab = EditTab;
 }

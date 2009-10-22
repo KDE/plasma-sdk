@@ -280,7 +280,7 @@ void PackageModel::loadPackage()
     beginInsertRows(QModelIndex(), 0, m_topEntries.count());
     endInsertRows();
 
-    foreach(const char *key, structure->directories()) {
+    foreach (const char *key, structure->directories()) {
         QString path = structure->path(key);
         if (!path.endsWith('/')) {
             path += '/';
