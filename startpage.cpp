@@ -303,7 +303,7 @@ void StartPage::createNewProject()
     // we add it manually until a patch is released.
     QFile metaFile(projectPath + "metadata.desktop");
     metaFile.open(QIODevice::Append);
-    QByteArray entry = "X-Plasma-Mainscript=code/" +
+    QByteArray entry = "X-Plasma-MainScript=code/" +
                        projectNameLowerCase.toUtf8() +
                        projectFileExtension.toUtf8() +
                        "\n";
