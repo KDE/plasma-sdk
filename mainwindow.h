@@ -52,6 +52,7 @@ public Q_SLOTS:
 
     void loadRequiredEditor(const KService::List offers, KUrl target);
     void loadMetaDataEditor(KUrl target);
+    void saveEditorData();
 signals:
     void newSavePointClicked();
 

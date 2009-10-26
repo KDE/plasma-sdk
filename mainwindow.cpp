@@ -74,6 +74,13 @@ MainWindow::~MainWindow()
     configDock.writeEntry("MainWindowLayout", saveState(0));
     c.sync();
 
+    // if the user closes the application with an editor open, should
+    // save its contents
+    saveEditorData();
+    delete m_part, m_metaEditor;
+    m_part = 0;
+    m_metaEditor = 0;
+
     if (m_workflow) {
         //delete m_startPage;
         delete m_workflow;
@@ -90,7 +97,7 @@ MainWindow::~MainWindow()
         delete m_timeLine;
         delete m_dockTimeLine;
     }
-    
+
     if (m_editPage) {
         delete m_editPage;
         delete m_editWidget;
@@ -187,6 +194,12 @@ void MainWindow::quit()
 
 void MainWindow::changeTab(const QModelIndex &item)
 {
+    // should save data in any open editors when changing tabs
+    saveEditorData();
+    delete m_part, m_metaEditor;
+    m_part = 0;
+    m_metaEditor = 0;
+
     int tab = item.row();
     if (tab == m_oldTab) { // user clicked on the current tab
         if (tab == StartPageTab) {
@@ -216,10 +229,6 @@ void MainWindow::changeTab(const QModelIndex &item)
     }
     break;
     case EditTab: {
-/*        m_editPage = new EditPage(this);
-        m_editPage->setModel(m_model);
-        setCentralWidget(m_editPage);
-        connect(m_editPage, SIGNAL(loadEditor(KService::List, KUrl)), this, SLOT(loadRequiredEditor(const KService::List, KUrl)));*/
         QLabel *l = new QLabel(i18n("Select a file to edit!"), this);
         setCentralWidget(l);
     }
@@ -244,15 +253,26 @@ void MainWindow::changeTab(const QModelIndex &item)
     m_oldTab = tab;
 }
 
+void MainWindow::saveEditorData() {
+    if (qobject_cast<KParts::ReadWritePart*>(m_part)) {
+        static_cast<KParts::ReadWritePart*>(m_part)->save();
+    }
+    if (m_metaEditor) {
+        m_metaEditor->writeFile();
+    }
+}
+
 void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
 {
+    // save any previous editor content
+    saveEditorData();
+    delete m_part, m_metaEditor;
+    m_part = 0;
+    m_metaEditor = 0;
+
     if (offers.isEmpty()) {
         kDebug() << "No offers for editor, can not load.";
         return;
-    }
-
-    if (qobject_cast<KParts::ReadWritePart*>(m_part)) {
-        static_cast<KParts::ReadWritePart*>(m_part)->save();
     }
 
     centralWidget()->deleteLater();
@@ -278,7 +298,12 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
 }
 
 void MainWindow::loadMetaDataEditor(KUrl target) {
-    centralWidget()->deleteLater();
+    // save any previous editor content
+    saveEditorData();
+    delete m_part, m_metaEditor;
+    m_part = 0;
+    m_metaEditor = 0;
+
     m_metaEditor = new MetaDataEditor(this);
     m_metaEditor->setFilename(target.path());
     m_metaEditor->readFile();
@@ -341,7 +366,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     // Load the needed widgets, switch to page 1 (edit)...
     if(!docksCreated)
         createDockWidgets();
-    
+
     QLabel *l = new QLabel(i18n("Select a file to edit!"), this);
     setCentralWidget(l);
 
@@ -350,7 +375,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
 
     m_timeLine->setWorkingDir(KUrl(packagePath));
     m_timeLine->loadTimeLine(KUrl(packagePath));
-    
+
     // load project in previewer
     //m_previewer->addApplet(packagePath);
 

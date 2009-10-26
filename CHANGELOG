@@ -1,4 +1,8 @@
---October 29,2009--
+--October 26,2009--
+- Editor contents are now automagically saved on swapping files/tabs and
+  on exit.
+
+--October 19,2009--
 - Metadata editor now loads properly (but still unable to save). Previewer is
   now in a tab of its own.
 
