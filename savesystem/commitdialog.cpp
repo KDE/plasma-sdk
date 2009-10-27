@@ -38,7 +38,7 @@ CommitDialog::CommitDialog()
     setMaximumWidth(300);
     setMaximumHeight(300);
 
-    m_commitBriefLabel = new QLabel(i18n("Brief comment ( required ):"), this);
+    m_commitBriefLabel = new QLabel(i18n("Brief comment (required):"), this);
     m_commitBriefLabel->setGeometry(QRect(10, 0, 280, 40));
 
     m_commitBriefText = new QLineEdit(i18n("Type here a brief description"), this);

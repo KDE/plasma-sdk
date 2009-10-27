@@ -409,7 +409,7 @@ void TimeLine::moveToCommit()
     if (m_branches.contains(newBranchName)) {
         QMessageBox *mb = new QMessageBox(QMessageBox::Warning,
                                           i18n("Warning"),
-                                          i18n("Can't rename the Section.\nReason: a Section with this name already exists."),
+                                          i18n("Cannot rename the section: a section with this name already exists."),
                                           QMessageBox::NoButton,
                                           this, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
         mb->exec();
@@ -517,7 +517,7 @@ void TimeLine::renameBranch()
     if (m_branches.contains(newBranchName)) {
         QMessageBox *mb = new QMessageBox(QMessageBox::Warning,
                                           i18n("Warning"),
-                                          i18n("Can't rename the Section.\nReason: a Section with this name already exists."),
+                                          i18n("Cannot rename the section: a section with this name already exists."),
                                           QMessageBox::NoButton,
                                           this, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
         mb->exec();
@@ -547,7 +547,7 @@ void TimeLine::createBranch()
     if (m_branches.contains(newBranchName)) {
         QMessageBox *mb = new QMessageBox(QMessageBox::Warning,
                                           i18n("Warning"),
-                                          i18n("Can't create the Section.\nReason: a Section with this name already exists."),
+                                          i18n("Cannot create section: a section with this name already exists."),
                                           QMessageBox::NoButton,
                                           this, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
         mb->exec();

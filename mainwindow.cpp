@@ -236,17 +236,17 @@ void MainWindow::changeTab(const QModelIndex &item)
     }
     break;
     case EditTab: {
-        QLabel *l = new QLabel(i18n("Select a file to edit!"), this);
+        QLabel *l = new QLabel(i18n("Select a file to edit."), this);
         setCentralWidget(l);
     }
     break;
     case PublishTab: {
-        QLabel *l = new QLabel(i18n("Publish widget will go here!"), this);
+        QLabel *l = new QLabel(i18n("Publish widget will go here."), this);
         setCentralWidget(l);
     }
     break;
     case DocsTab: {
-        QLabel *l = new QLabel(i18n("Documentation widget will go here!"), this);
+        QLabel *l = new QLabel(i18n("Documentation widget will go here."), this);
         setCentralWidget(l);
     }
     break;
@@ -379,7 +379,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     if(!docksCreated)
         createDockWidgets();
 
-    QLabel *l = new QLabel(i18n("Select a file to edit!"), this);
+    QLabel *l = new QLabel(i18n("Select a file to edit."), this);
     setCentralWidget(l);
 
     m_oldTab = EditTab;
