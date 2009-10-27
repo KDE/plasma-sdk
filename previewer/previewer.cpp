@@ -37,6 +37,11 @@ Previewer::Previewer(QWidget *parent)
     m_containment->setLocation(Plasma::Floating);
     connect(m_containment, SIGNAL(appletRemoved(Plasma::Applet*)), this, SLOT(appletRemoved()));
 
+    // we do a two-way connect here to allow the previewer containment
+    // and main window to tell each other to save/refresh
+    connect(m_containment, SIGNAL(refreshClicked()), parent, SLOT(saveAndRefresh()));
+    connect(parent, SIGNAL(refreshRequested()), m_containment, SLOT(refreshApplet()));
+
     setScene(m_containment->scene());
 }
 

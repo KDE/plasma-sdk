@@ -53,8 +53,11 @@ public Q_SLOTS:
     void loadRequiredEditor(const KService::List offers, KUrl target);
     void loadMetaDataEditor(KUrl target);
     void saveEditorData();
+    void saveAndRefresh();
+
 signals:
     void newSavePointClicked();
+    void refreshRequested();
 
 private:
     enum WorkflowTabs { StartPageTab = 0,
@@ -73,7 +76,7 @@ private:
     Sidebar *m_sidebar;
     QDockWidget *m_dockTimeLine;
     TimeLine    *m_timeLine;
-    // QDockWidget *m_previewerWidget;
+    QDockWidget *m_previewerWidget;
     Previewer *m_previewer;
     MetaDataEditor *m_metaEditor;
 

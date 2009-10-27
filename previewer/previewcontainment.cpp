@@ -93,7 +93,7 @@ void PreviewContainment::setupHeader()
     location->setAction(action2);
 
     KAction *action3 = new KAction(KIcon("user-desktop"), "", this);
-    connect(action3, SIGNAL(triggered()), this, SLOT(refreshApplet()));
+    connect(action3, SIGNAL(triggered()), this, SLOT(refreshAndEmit()));
     refresh->setAction(action3);
 
     // add the toolboxes
@@ -124,6 +124,16 @@ void PreviewContainment::refreshApplet()
     }
 
     m_applet->setFlag(QGraphicsItem::ItemIsMovable, false);
+}
+
+void PreviewContainment::refreshAndEmit() {
+    // improve me?
+    // basically if we're running inside plasmate, we want
+    // to show the latest state of the code, so we emit a
+    // signal that tells the main window to save its contents
+    // and then do one more refresh
+    refreshApplet();
+    emit refreshClicked();
 }
 
 void PreviewContainment::changeFormFactor()

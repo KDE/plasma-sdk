@@ -86,13 +86,13 @@ MainWindow::~MainWindow()
         delete m_workflow;
     }
 
-    /*if (m_previewer) {
+    if (m_previewer) {
         configDock.writeEntry("PreviewerHeight", m_previewerWidget->height());
         configDock.writeEntry("PreviewerWidth", m_previewerWidget->width());
         c.sync();
         delete m_previewer;
         delete m_previewerWidget;
-    }*/
+    }
     if (m_dockTimeLine) {
         delete m_timeLine;
         delete m_dockTimeLine;
@@ -107,6 +107,9 @@ MainWindow::~MainWindow()
 void MainWindow::createMenus()
 {
     KStandardAction::quit(this, SLOT(quit()), actionCollection());
+    KAction *refresh = KStandardAction::redisplay(this, SLOT(saveAndRefresh()), actionCollection());
+    refresh->setShortcut(tr("Ctrl+F5"));
+    refresh->setText("Refresh Previewer");
     menuBar()->addMenu(helpMenu());
     setupGUI();
 }
@@ -168,18 +171,22 @@ void MainWindow::createDockWidgets()
     m_timeLine->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
 
     /////////////////////////////////////////////////////////////////////////
-    /*m_previewerWidget = new QDockWidget(i18n("Previewer"), this);
+    m_previewerWidget = new QDockWidget(i18n("Previewer"), this);
     m_previewerWidget->setObjectName("workflow");
-    m_previewer = new Previewer();
+    m_previewer = new Previewer(this);
     m_previewerWidget->setWidget(m_previewer);
-    addDockWidget(Qt::BottomDockWidgetArea, m_previewerWidget);
+    addDockWidget(Qt::RightDockWidgetArea, m_previewerWidget);
 
     m_previewerWidget->updateGeometry();
-    m_previewer->updateGeometry();*/
-    
+    m_previewer->updateGeometry();
+
+    // fixme: these sizing stuff are a little wrong
+    m_previewer->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
+    m_previewerWidget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
+
     // Restoring the previous layout
     restoreState(configDock.readEntry("MainWindowLayout",QByteArray()), 0);
-    adjustSize();
+
     connect(this, SIGNAL(newSavePointClicked()),
             m_timeLine, SLOT(newSavePoint()));
 
@@ -244,9 +251,9 @@ void MainWindow::changeTab(const QModelIndex &item)
     }
     break;
     case PreviewTab: {
-        m_previewer = new Previewer();
-        m_previewer->addApplet(m_model->package());
-        setCentralWidget(m_previewer);
+        Previewer *tabPreviewer = new Previewer(this);
+        tabPreviewer->addApplet(m_model->package());
+        setCentralWidget(tabPreviewer);
     }
     }
 
@@ -260,6 +267,11 @@ void MainWindow::saveEditorData() {
     if (m_metaEditor) {
         m_metaEditor->writeFile();
     }
+}
+
+void MainWindow::saveAndRefresh() {
+    saveEditorData();
+    emit refreshRequested();
 }
 
 void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
@@ -377,7 +389,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     m_timeLine->loadTimeLine(KUrl(packagePath));
 
     // load project in previewer
-    //m_previewer->addApplet(packagePath);
+    m_previewer->addApplet(packagePath);
 
     // Now, setup some useful properties such as the project name in the title bar
     // and setting the current working directory.

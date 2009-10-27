@@ -1,3 +1,9 @@
+--October 27,2009--
+- Restored previewer dockwidget (while retaining previewer tab for now).
+  Previewer refresh button now asks the mainwindow to save any unsaved
+  data so that the preview is up to date. Also added a 'Refresh Previewer'
+  menubar item with a keyboard shortcut (Ctrl-F5 for now) that does the same.
+
 --October 26,2009--
 - Editor contents are now automagically saved on swapping files/tabs and
   on exit.

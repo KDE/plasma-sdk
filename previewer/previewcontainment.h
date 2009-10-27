@@ -39,7 +39,11 @@ public slots:
     void changeWallpaper();
     void refreshApplet();
 
+signals:
+    void refreshClicked();
+
 protected slots:
+    void refreshAndEmit();
     void constraintsEvent(Plasma::Constraints constraints);
 
     void onAppletAdded(Plasma::Applet *, const QPointF &);
