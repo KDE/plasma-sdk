@@ -6,46 +6,43 @@
   the Free Software Foundation; either version 2 of the License, or
   (at your option) any later version.
 */
-#include <kaction.h>
-#include <kactioncollection.h>
-#include <kconfig.h>
-#include <kedittoolbar.h>
-#include <kfiledialog.h>
-#include <kshortcutsdialog.h>
-#include <klibloader.h>
-#include <kmessagebox.h>
-#include <kstandardaction.h>
-#include <kstatusbar.h>
-#include <kurl.h>
-#include <kparts/part.h>
+
+#include "texteditor.h"
 
 #include <QHBoxLayout>
 
-#include "texteditor.h"
+#include <KService>
+#include <KServiceTypeTrader>
+#include <KTextEditor/ConfigInterface>
+#include <KTextEditor/Document>
+#include <KTextEditor/View>
 
 TextEditor::TextEditor(QWidget *parent)
         : QWidget(parent)
 {
-    QHBoxLayout l;
+    QHBoxLayout *l = new QHBoxLayout(this);
 
-    KLibFactory *factory = KLibLoader::self()->factory("katepart");
-    if (factory) {
-        // now that the Part is loaded, we cast it to a Part to get
-        // our hands on it
-        KParts::ReadWritePart *m_part = static_cast<KParts::ReadWritePart *>(factory->create(this, "KatePart"));
+    KService::List offers = KServiceTypeTrader::self()->query("KTextEditor/Document");
+    foreach (const KService::Ptr service, offers) {
+        KTextEditor::Document *editorPart = service->createInstance<KTextEditor::Document>(this);
+        if (editorPart) {
+            editorPart->setHighlightingMode("JavaScript/PlasmaDesktop");
 
-        if (m_part) {
-            // tell the KParts::MainWindow that this is indeed
-            // the main widget
-            l.addWidget(m_part->widget());
-//             setCentralWidget(m_part->widget());
+            KTextEditor::View *view = editorPart->createView(this);
+            view->setContextMenu(view->defaultContextMenu());
+
+            KTextEditor::ConfigInterface *config = qobject_cast<KTextEditor::ConfigInterface*>(view);
+            if (config) {
+                config->setConfigValue("line-numbers", true);
+                config->setConfigValue("dynamic-word-wrap", true);
+                config->setConfigValue("backup-on-save-prefix", '.');
+            }
 
 //             setupGUI(ToolBar | Keys | StatusBar | Save);
 
             // and integrate the part's GUI with the shell's
 //             createGUI(m_part);
+            l->addWidget(view);
         }
     }
-
-    setLayout(&l);
 }
