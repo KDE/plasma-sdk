@@ -46,22 +46,22 @@
 
 
 MainWindow::MainWindow(QWidget *parent)
-        : KParts::MainWindow(parent, 0),
-        m_workflow(0),
-        m_sidebar(0),
-        m_dockTimeLine(0),
-        m_timeLine(0),
-        m_previewer(0),
-        m_model(0),
-        m_editPage(0),
-        m_editWidget(0),
-        m_metaEditor(0),
-        m_oldTab(0), // we start from startPage
-        m_part(0)
+    : KParts::MainWindow(parent, 0),
+      m_workflow(0),
+      m_sidebar(0),
+      m_dockTimeLine(0),
+      m_timeLine(0),
+      m_previewer(0),
+      m_metaEditor(0),
+      m_editWidget(0),
+      m_editPage(0),
+      m_model(0),
+      m_oldTab(0), // we start from startPage
+      docksCreated(false),
+      m_part(0)
 {
     setXMLFile("plasmateui.rc");
     createMenus();
-    docksCreated = false;
     m_startPage = new StartPage(this);
     connect(m_startPage, SIGNAL(projectSelected(QString, QString)),
             this, SLOT(loadProject(QString, QString)));
@@ -80,8 +80,9 @@ MainWindow::~MainWindow()
     // if the user closes the application with an editor open, should
     // save its contents
     saveEditorData();
-    delete m_part, m_metaEditor;
+    delete m_part;
     m_part = 0;
+    delete m_metaEditor;
     m_metaEditor = 0;
 
     if (m_workflow) {
@@ -208,8 +209,9 @@ void MainWindow::changeTab(const QModelIndex &item)
 {
     // should save data in any open editors when changing tabs
     saveEditorData();
-    delete m_part, m_metaEditor;
+    delete m_part;
     m_part = 0;
+    delete m_metaEditor;
     m_metaEditor = 0;
 
     int tab = item.row();
@@ -352,8 +354,9 @@ void MainWindow::setupTextEditor(KTextEditor::Document *editorPart)
 void MainWindow::loadMetaDataEditor(KUrl target) {
     // save any previous editor content
     saveEditorData();
-    delete m_part, m_metaEditor;
+    delete m_part;
     m_part = 0;
+    delete m_metaEditor;
     m_metaEditor = 0;
 
     m_metaEditor = new MetaDataEditor(this);
