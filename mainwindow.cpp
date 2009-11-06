@@ -151,12 +151,8 @@ void MainWindow::createDockWidgets()
     connect(m_editPage, SIGNAL(loadEditor(KService::List, KUrl)), this, SLOT(loadRequiredEditor(const KService::List, KUrl)));
     connect(m_editPage, SIGNAL(loadMetaDataEditor(KUrl)), this, SLOT(loadMetaDataEditor(KUrl)));
 
-    m_editPage->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
-    m_editWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
-
-    // Nest these two docks
-    tabifyDockWidget(m_workflow, m_editWidget);
-    splitDockWidget(m_workflow, m_editWidget, Qt::Horizontal);
+    m_editPage->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
+    m_editWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 
     /////////////////////////////////////////////////////////////////////////
     m_dockTimeLine = new QDockWidget(i18n("TimeLine"), this);
@@ -175,14 +171,16 @@ void MainWindow::createDockWidgets()
     m_previewerWidget->setObjectName("workflow");
     m_previewer = new Previewer(this);
     m_previewerWidget->setWidget(m_previewer);
-    addDockWidget(Qt::RightDockWidgetArea, m_previewerWidget);
+    addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
 
     m_previewerWidget->updateGeometry();
     m_previewer->updateGeometry();
 
-    // fixme: these sizing stuff are a little wrong
-    m_previewer->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
-    m_previewerWidget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
+    m_previewer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    m_previewerWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    splitDockWidget(m_workflow, m_editWidget, Qt::Horizontal);
+    splitDockWidget(m_editWidget, m_previewerWidget, Qt::Vertical);
 
     // Restoring the previous layout
     restoreState(configDock.readEntry("MainWindowLayout",QByteArray()), 0);
@@ -191,6 +189,10 @@ void MainWindow::createDockWidgets()
             m_timeLine, SLOT(newSavePoint()));
 
     docksCreated = true;
+
+    int w = size().width() < sizeHint().width() ? sizeHint().width() : size().width();
+    int h = size().height() < sizeHint().height() ? sizeHint().height() : size().height();
+    resize(w, h);
 }
 
 void MainWindow::quit()
