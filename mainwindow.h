@@ -37,6 +37,7 @@ class Previewer;
 namespace KTextEditor
 {
     class Document;
+    class View;
 } // namespace KTextEditor
 
 class MainWindow : public KParts::MainWindow
@@ -75,7 +76,7 @@ private:
 
     void createMenus();
     void createDockWidgets();
-    void setupTextEditor(KTextEditor::Document *editorPart);
+    void setupTextEditor(KTextEditor::Document *editorPart, KTextEditor::View *view);
 
     StartPage *m_startPage;
     QDockWidget *m_workflow;

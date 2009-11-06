@@ -303,12 +303,15 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
               offers.at(0)->createInstance<KParts::Part>(
                 this, args, &error));
 
+    QWidget *mainWidget = 0;
     if (m_part == 0 || !part->inherits(m_part->metaObject()->className())) {
         delete m_part; // reuse if we can
         m_part = part;
         KTextEditor::Document *editorPart = qobject_cast<KTextEditor::Document *>(m_part);
         if (editorPart) {
-            setupTextEditor(editorPart);
+            KTextEditor::View *view = qobject_cast<KTextEditor::View *>(editorPart->widget());
+            setupTextEditor(editorPart, view);
+            mainWidget = view;
         }
     } else {
         delete part;
@@ -318,7 +321,7 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
         kDebug() << "Failed to load editor:" << error;
     }
 
-    setCentralWidget(m_part->widget());
+    setCentralWidget(mainWidget ? mainWidget : m_part->widget());
 
     // open the target for editting/viewing
     m_part->openUrl(target);
@@ -330,22 +333,23 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
     m_oldTab = EditTab;
 }
 
-void MainWindow::setupTextEditor(KTextEditor::Document *editorPart)
+void MainWindow::setupTextEditor(KTextEditor::Document *editorPart, KTextEditor::View *view)
 {
     //FIXME: we should be setting the highlight based on the type of document
     //editorPart->setHighlightingMode("JavaScript");
 
-    KTextEditor::View *view = editorPart->createView(this);
-    view->setContextMenu(view->defaultContextMenu());
+    if (view) {
+        view->setContextMenu(view->defaultContextMenu());
 
-    KTextEditor::ConfigInterface *config = qobject_cast<KTextEditor::ConfigInterface*>(view);
-    if (config) {
-        kDebug() << "setting various config values...";
-        config->setConfigValue("line-numbers", true);
-        config->setConfigValue("dynamic-word-wrap", true);
+        KTextEditor::ConfigInterface *config = qobject_cast<KTextEditor::ConfigInterface*>(view);
+        if (config) {
+            kDebug() << "setting various config values...";
+            config->setConfigValue("line-numbers", true);
+            config->setConfigValue("dynamic-word-wrap", true);
+        }
     }
 
-    config = dynamic_cast<KTextEditor::ConfigInterface*>(editorPart);
+    KTextEditor::ConfigInterface *config = dynamic_cast<KTextEditor::ConfigInterface*>(editorPart);
     if (config) {
         config->setConfigValue("backup-on-save-prefix", ".");
     }
