@@ -280,8 +280,7 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
 {
     // save any previous editor content
     saveEditorData();
-    delete m_part, m_metaEditor;
-    m_part = 0;
+    delete m_metaEditor;
     m_metaEditor = 0;
 
     if (offers.isEmpty()) {
@@ -289,12 +288,20 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
         return;
     }
 
-    centralWidget()->deleteLater();
+    if (!m_part || centralWidget() != m_part->widget())
+        centralWidget()->deleteLater();
     QVariantList args;
     QString error; // we should show this via debug if we fail
-    m_part = dynamic_cast<KParts::ReadOnlyPart*>(
+    KParts::ReadOnlyPart *part = dynamic_cast<KParts::ReadOnlyPart*>(
               offers.at(0)->createInstance<KParts::Part>(
                 this, args, &error));
+
+    if (m_part == 0 || !part->inherits(m_part->metaObject()->className())) {
+        delete m_part; // reuse if we can
+        m_part = part;
+    } else {
+        delete part;
+    }
 
     if (!m_part) {
         kDebug() << "Failed to load editor:" << error;
@@ -304,6 +311,7 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
 
     // open the target for editting/viewing
     m_part->openUrl(target);
+    centralWidget()->setMinimumWidth(300);
     //Add the part's GUI
     //createGUI(m_part);
 
