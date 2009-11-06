@@ -34,6 +34,11 @@ class MetaDataEditor;
 // our own previewer
 class Previewer;
 
+namespace KTextEditor
+{
+    class Document;
+} // namespace KTextEditor
+
 class MainWindow : public KParts::MainWindow
 {
     Q_OBJECT
@@ -70,6 +75,7 @@ private:
 
     void createMenus();
     void createDockWidgets();
+    void setupTextEditor(KTextEditor::Document *editorPart);
 
     StartPage *m_startPage;
     QDockWidget *m_workflow;

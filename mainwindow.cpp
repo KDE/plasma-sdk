@@ -22,6 +22,9 @@
 #include <KDebug>
 #include <KMenu>
 #include <KMenuBar>
+#include <KTextEditor/ConfigInterface>
+#include <KTextEditor/Document>
+#include <KTextEditor/View>
 #include <KStandardAction>
 #include <KUrl>
 #include <KListWidget>
@@ -288,8 +291,10 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
         return;
     }
 
-    if (!m_part || centralWidget() != m_part->widget())
+    if (!m_part || centralWidget() != m_part->widget()) {
         centralWidget()->deleteLater();
+    }
+
     QVariantList args;
     QString error; // we should show this via debug if we fail
     KParts::ReadOnlyPart *part = dynamic_cast<KParts::ReadOnlyPart*>(
@@ -299,6 +304,10 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
     if (m_part == 0 || !part->inherits(m_part->metaObject()->className())) {
         delete m_part; // reuse if we can
         m_part = part;
+        KTextEditor::Document *editorPart = qobject_cast<KTextEditor::Document *>(m_part);
+        if (editorPart) {
+            setupTextEditor(editorPart);
+        }
     } else {
         delete part;
     }
@@ -317,6 +326,27 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
 
     m_sidebar->setCurrentIndex(EditTab);
     m_oldTab = EditTab;
+}
+
+void MainWindow::setupTextEditor(KTextEditor::Document *editorPart)
+{
+    //FIXME: we should be setting the highlight based on the type of document
+    //editorPart->setHighlightingMode("JavaScript");
+
+    KTextEditor::View *view = editorPart->createView(this);
+    view->setContextMenu(view->defaultContextMenu());
+
+    KTextEditor::ConfigInterface *config = qobject_cast<KTextEditor::ConfigInterface*>(view);
+    if (config) {
+        kDebug() << "setting various config values...";
+        config->setConfigValue("line-numbers", true);
+        config->setConfigValue("dynamic-word-wrap", true);
+    }
+
+    config = dynamic_cast<KTextEditor::ConfigInterface*>(editorPart);
+    if (config) {
+        config->setConfigValue("backup-on-save-prefix", ".");
+    }
 }
 
 void MainWindow::loadMetaDataEditor(KUrl target) {
