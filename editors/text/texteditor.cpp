@@ -24,9 +24,11 @@ TextEditor::TextEditor(QWidget *parent)
 
     KService::List offers = KServiceTypeTrader::self()->query("KTextEditor/Document");
     foreach (const KService::Ptr service, offers) {
+        kDebug() << "trying for ..." << service->name();
         KTextEditor::Document *editorPart = service->createInstance<KTextEditor::Document>(this);
         if (editorPart) {
-            editorPart->setHighlightingMode("JavaScript/PlasmaDesktop");
+            //FIXME: we should be setting the highlight based on the type of document
+            //editorPart->setHighlightingMode("JavaScript");
 
             KTextEditor::View *view = editorPart->createView(this);
             view->setContextMenu(view->defaultContextMenu());
@@ -35,7 +37,11 @@ TextEditor::TextEditor(QWidget *parent)
             if (config) {
                 config->setConfigValue("line-numbers", true);
                 config->setConfigValue("dynamic-word-wrap", true);
-                config->setConfigValue("backup-on-save-prefix", '.');
+            }
+
+            config = dynamic_cast<KTextEditor::ConfigInterface*>(editorPart);
+            if (config) {
+                config->setConfigValue("backup-on-save-prefix", ".");
             }
 
 //             setupGUI(ToolBar | Keys | StatusBar | Save);
