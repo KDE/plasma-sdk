@@ -1,3 +1,6 @@
+--November 13,2009--
+- Editor tree now dynamically reflects changes in the directory
+
 --October 27,2009--
 - Restored previewer dockwidget (while retaining previewer tab for now).
   Previewer refresh button now asks the mainwindow to save any unsaved

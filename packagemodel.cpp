@@ -63,7 +63,7 @@ void PackageModel::setPackage(const QString &path)
 
     delete m_directory;
     m_directory = new KDirWatch(this);
-    m_directory->addDir(path, KDirWatch::WatchSubDirs);
+    m_directory->addDir(path, KDirWatch::WatchSubDirs | KDirWatch::WatchFiles);
 
     loadPackage();
 
@@ -92,7 +92,7 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         case MimeTypeRole: {
             return m_package->structure()->mimetypes(key);
         }
-        break;        
+        break;
         case UrlRole: {
             if (index.row() <= 0)
                 break;
@@ -115,7 +115,7 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
             path = path.endsWith("/") ? path : path + "/";
             return path + file;
         }
-        break;        
+        break;
         case Qt::DisplayRole: {
             if (index.row() == 0)
               return i18n("New...");
@@ -132,12 +132,12 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
                 return l.at(row);
             }
         }
-        break;        
+        break;
         case Qt::DecorationRole: {
             if (index.row() == 0)
                 return KIcon("file-new");
         }
-        break;        
+        break;
         }
     } else { // it's a top level item
         switch (role) {
@@ -147,7 +147,7 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
             }
             return m_structure->name(m_topEntries.at(index.row()));
         }
-        break;        
+        break;
         case MimeTypeRole: {
             if (index.row() == m_topEntries.count()) {
                 // not sure if this is good, but will do for now
@@ -319,11 +319,65 @@ void PackageModel::loadPackage()
 
 void PackageModel::fileAddedOnDisk(const QString &path)
 {
-    kDebug() << path;
+    KUrl toAdd(path);
+    int parentCount = rowCount(QModelIndex());
+    for (int i=0; i < parentCount; i++) {
+        const char *key = m_topEntries.at(i);
+        QList<const char *> named = m_namedFiles.value(key);
+        KUrl target(m_package->filePath(key));
+        if (target.equals(toAdd.directory())) {
+            QModelIndex parent = index(i, 0, QModelIndex());
+            int ind = rowCount(parent);
+            for (int ii=0; ii<ind; ii++) {
+                QModelIndex child = index(ii, 0, parent);
+                KUrl childPath(child.data(PackageModel::UrlRole).toString());
+                if (childPath.equals(toAdd)) // let's not double-add
+                    return;
+            }
+            m_files[key].append(toAdd.fileName());
+            beginInsertRows(parent, ind, ind);
+            endInsertRows();
+        }
+    }
 }
 
 void PackageModel::fileDeletedOnDisk(const QString &path)
 {
-    kDebug() << path;
+    if (QFile::exists(path)) // KDirWatch seems overparanoid, so we quickcheck
+        return;
+
+    // Probably not the most efficient way to do it but
+    // it works :)
+    KUrl toDelete(path);
+
+    // Iterate through every tree element and check if it matches
+    // the deleted file
+    int parentCount = rowCount(QModelIndex());
+    for (int i=0; i < parentCount; i++) {
+        QModelIndex parent = index(i, 0, QModelIndex());
+        int childCount = rowCount(parent);
+        for (int ii=1; ii < childCount; ii++) {
+            QModelIndex child = index(ii, 0, parent);
+            KUrl childPath(child.data(PackageModel::UrlRole).toString());
+            if (childPath.equals(toDelete)) {
+                // match!! remove it!
+                beginRemoveRows(parent, ii, ii);
+                endRemoveRows();
+                const char *key = m_topEntries.at(i);
+                QList<const char *> &named = m_namedFiles[key];
+                int row = ii-1;
+                if (row < named.count()) {
+                    named.removeAt(row);
+                } else {
+                    row -= named.count();
+                    QStringList &l = m_files[key];
+                    if (row < l.count()) {
+                        l.removeAt(row);
+                    }
+                }
+                break;
+            }
+        }
+    }
 }
 
