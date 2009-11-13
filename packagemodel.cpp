@@ -90,16 +90,20 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
     if (key) { // it's a child item
         switch (role) {
         case MimeTypeRole: {
+            if (index.row() == 0)
+                return QStringList("[plasmate]/new");
             return m_package->structure()->mimetypes(key);
         }
         break;
         case UrlRole: {
-            if (index.row() <= 0)
+            if (index.row() < 0)
                 break;
             QList<const char *> named = m_namedFiles.value(key);
             int row = index.row() - 1;
             QString path = "", file = "";
-            if (row < named.count()) {
+            if (row < 0) { // 'New' entry, return the directory path
+                path = m_package->filePath(key);
+            } else if (row < named.count()) {
                 path = m_package->path();
                 QString contents = m_package->structure()->contentsPrefix();
                 path = path.endsWith("/") ? path + contents : path + "/" + contents;
@@ -151,7 +155,9 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         case MimeTypeRole: {
             if (index.row() == m_topEntries.count()) {
                 // not sure if this is good, but will do for now
-                return QStringList("text/metadata");
+                // use special wildcard to indicate stuff that
+                // plasmate should handle in it's own way
+                return QStringList("[plasmate]/metadata");
             }
         }
         break;
@@ -321,7 +327,7 @@ void PackageModel::fileAddedOnDisk(const QString &path)
 {
     KUrl toAdd(path);
     int parentCount = rowCount(QModelIndex());
-    for (int i=0; i < parentCount; i++) {
+    for (int i=0; i < parentCount-1; i++) {
         const char *key = m_topEntries.at(i);
         QList<const char *> named = m_namedFiles.value(key);
         KUrl target(m_package->filePath(key));
@@ -337,6 +343,7 @@ void PackageModel::fileAddedOnDisk(const QString &path)
             m_files[key].append(toAdd.fileName());
             beginInsertRows(parent, ind, ind);
             endInsertRows();
+            break;
         }
     }
 }

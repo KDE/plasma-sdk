@@ -1,3 +1,7 @@
+--November 14,2009--
+- New files can now be added to the project by clicking 'New' in the editor
+  tree, and existing files can be deleted by doing a right-click > Delete.
+
 --November 13,2009--
 - Editor tree now dynamically reflects changes in the directory
 
