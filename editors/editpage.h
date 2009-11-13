@@ -6,27 +6,27 @@
 #include <QModelIndex>
 #include <kparts/part.h>
 #include <kservice.h>
+#include <KMenu>
+#include <QTreeView>
 
-class QTreeView;
 class QWidget;
 
 class PackageModel;
 
-class EditPage : public QWidget
+class EditPage : public QTreeView
 {
     Q_OBJECT
 
 public:
     explicit EditPage(QWidget *parent = 0);
 
-    void setModel(PackageModel *model);
-
 private:
-    QTreeView *m_tree;
-    QWidget *m_editor;
+    KMenu *m_contextMenu;
 
 private Q_SLOTS:
     void findEditor(const QModelIndex &index);
+    void showTreeContextMenu(const QPoint&);
+    void doDelete(bool);
 
 signals:
     void loadEditor(const KService::List offers, KUrl target);

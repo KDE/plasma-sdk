@@ -2,22 +2,53 @@
 #include "editpage.h"
 
 #include <QHBoxLayout>
-#include <QTreeView>
-#include <kservice.h>
+#include <QFile>
+#include <KIcon>
+#include <KMessageBox>
 #include <kmimetypetrader.h>
 #include "packagemodel.h"
 
 EditPage::EditPage(QWidget *parent)
-        : QWidget(parent)
+        : QTreeView(parent)
 {
-    m_tree = new QTreeView(this);
-    m_editor = new QWidget(this);
+    m_contextMenu = new KMenu();
+    QAction *del = m_contextMenu->addAction(KIcon("window-close"), "Delete");
+    connect(del, SIGNAL(triggered(bool)), this, SLOT(doDelete(bool)));
 
-    QHBoxLayout *layout = new QHBoxLayout(this);
-    layout->addWidget(m_tree);
-    layout->addWidget(m_editor);
+    setContextMenuPolicy(Qt::CustomContextMenu);
 
-    connect(m_tree, SIGNAL(activated(const QModelIndex &)), this, SLOT(findEditor(const QModelIndex &)));
+    connect(this, SIGNAL(activated(const QModelIndex &)), this, SLOT(findEditor(const QModelIndex &)));
+    connect(this, SIGNAL(customContextMenuRequested(const QPoint&)),
+        this, SLOT(showTreeContextMenu(const QPoint&)));
+}
+
+void EditPage::doDelete(bool)
+{
+    QModelIndexList items = selectedIndexes();
+    if (items.empty())
+        return; // this shouldn't happen
+    QModelIndex selected = items.at(0); // only one can be selected
+    QString path = selected.data(PackageModel::UrlRole).toString();
+    QString name = selected.data(Qt::DisplayRole).toString();
+    int code = KMessageBox::warningContinueCancel(this, 
+                  "Are you sure you want to delete '" + name + "'?");
+    if (code == KMessageBox::Continue)
+        QFile::remove(path);
+}
+
+void EditPage::showTreeContextMenu(const QPoint& here)
+{
+    QModelIndexList items = selectedIndexes();
+    if (items.empty())
+        return;
+
+    const char *key = static_cast<const char *>
+                              (items.at(0).internalPointer());
+    if (!key || // top level item
+          items.at(0).row() == 0) // 'New' entry
+        return;
+
+    m_contextMenu->popup(QCursor::pos());
 }
 
 void EditPage::findEditor(const QModelIndex &index)
@@ -43,11 +74,4 @@ void EditPage::findEditor(const QModelIndex &index)
         }
     }
 }
-
-void EditPage::setModel(PackageModel *model)
-{
-    m_tree->setModel(model);
-}
-
-#include "editpage.moc"
 
