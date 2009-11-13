@@ -68,7 +68,7 @@ int main(int argc, char **argv)
     options.add("p");
     options.add("pixmapcache <size>", ki18n("The size in KB to set the pixmap cache to"));
     options.add("+applet", ki18n("Name of applet to add (required)"));
-    options.add("+[args]", ki18n("Optional arguments of the applet to add"));
+    options.add("+[args]", ki18n("Optional arguments for the applet to add"));
     KCmdLineArgs::addCmdLineOptions(options);
 
     KApplication app;
