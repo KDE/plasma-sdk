@@ -43,6 +43,7 @@
 #include "startpage.h"
 #include "ui_mainwindow.h"
 #include "previewer/previewer.h"
+#include "publisher/publisher.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -52,6 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
       m_dockTimeLine(0),
       m_timeLine(0),
       m_previewer(0),
+      m_publisher(0),
       m_metaEditor(0),
       m_editWidget(0),
       m_editPage(0),
@@ -248,8 +250,8 @@ void MainWindow::changeTab(const QModelIndex &item)
     }
     break;
     case PublishTab: {
-        QLabel *l = new QLabel(i18n("Publish widget will go here."), this);
-        setCentralWidget(l);
+        Publisher *p = new Publisher(this, m_model->package());
+        setCentralWidget(p);
     }
     break;
     case DocsTab: {

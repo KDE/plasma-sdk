@@ -25,6 +25,7 @@ set (PlasMate_SRC
     startpage.cpp
     packagemodel.cpp
     previewer/previewer.cpp
+    publisher/publisher.cpp
     )
 
 kde4_add_ui_files (PlasMate_SRC
@@ -37,7 +38,8 @@ include_directories(${KDE4_INCLUDES})
 
 add_subdirectory( editors )
 add_subdirectory( previewer )
-add_subdirectory(templates)
+add_subdirectory( templates )
+add_subdirectory( publisher )
 #add_subdirectory( savesystem )
 
 kde4_add_executable(plasmate ${PlasMate_SRC})

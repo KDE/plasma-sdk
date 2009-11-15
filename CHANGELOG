@@ -1,3 +1,7 @@
+--November 15,2009--
+- Added a simple, draft publisher widget. Exporting and installing plasmoids
+  work, but online publishing doesn't for now.
+
 --November 14,2009--
 - New files can now be added to the project by clicking 'New' in the editor
   tree, and existing files can be deleted by doing a right-click > Delete.
