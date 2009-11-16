@@ -25,15 +25,11 @@ Publisher::Publisher(QWidget *parent, const KUrl &path)
     // something simple and plasmoid-specific for now
     // These should probably be refined at some point
     QString exportLabel = i18n("Export plasmoid");
-    QString exportText = i18n("Choose a target file to export the current plasmoid ") +
-	i18n("to an installable package file on your system.");
+    QString exportText = i18n("Choose a target file to export the current plasmoid to an installable package file on your system.");
     QString installLabel = i18n("Install plasmoid");
-    QString installText = i18n("Click to install the current plasmoid ") +
-	i18n("directly onto your computer.");
+    QString installText = i18n("Click to install the current plasmoid directly onto your computer.");
     QString publishLabel = i18n("Publish plasmoid");
-    QString publishText = i18n("Click to publish the current plasmoid ") +
-	i18n("online, so that other people can find and install it over ") +
-	i18n("the internet.");
+    QString publishText = i18n("Click to publish the current plasmoid online, so that other people can find and install it using the Internet.");
 
     m_exporterUrl = new KUrlRequester(this);
     m_exporterUrl->setFilter("*.plasmoid");
@@ -87,13 +83,13 @@ void Publisher::doExport()
 {
     if (!m_exporterUrl->url().isLocalFile() ||
           QDir(m_exporterUrl->url().path()).exists()) {
-        KMessageBox::error(this, i18n("The file you entered is invalid!"));
+        KMessageBox::error(this, i18n("The file you entered is invalid."));
         return;
     }
     exportPackage(m_projectPath, m_exporterUrl->url());
     // TODO: probably check for errors and stuff instead of announcing
     // succcess in a 'leap of faith'
-    KMessageBox::information(this, i18n("Plasmoid has been exported to ") + m_exporterUrl->url().path());
+    KMessageBox::information(this, i18n("Plasmoid has been exported to %1.", m_exporterUrl->url().path()));
 }
 
 void Publisher::doInstall()
