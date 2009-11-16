@@ -2,6 +2,7 @@
 Comment=Access hidden applications minimized in the system tray
 Comment[de]=Ermöglicht den Zugriff auf Programme, die im Systemabschnitt der Kontrollleiste laufen.
 Comment[en_GB]=Access hidden applications minimised in the system tray
+Comment[eo]=Atingi kaŝitan minimumigitajn aplikaĵojn en la taskopleto
 Comment[es]=Accede a aplicaciones ocultas minimizadas en la bandeja del sistema
 Comment[et]=Süsteemisalve minimeeritud peidetud rakenduste kasutamine
 Comment[fr]=Applications dont l'accès est caché, minimisées dans la boîte à miniatures
@@ -17,6 +18,7 @@ Comment[x-test]=xxAccess hidden applications minimized in the system trayxx
 Encoding=UTF-8
 Name=System Tray
 Name[en_GB]=System Tray
+Name[eo]=Sistempleto
 Name[es]=Bandeja del sistema
 Name[et]=Süsteemisalv
 Name[fr]=Boîte à miniature
