@@ -15,6 +15,7 @@
 #include <KLocalizedString>
 #include <KProcess>
 #include <KMessageBox>
+#include <KZip>
 
 #include "publisher.h"
 
@@ -39,6 +40,7 @@ Publisher::Publisher(QWidget *parent, const KUrl &path)
     m_installerButton = new QPushButton(i18n("Install current plasmoid"), this);
     m_publisherButton = new QPushButton(i18n("Publish current plasmoid"), this);
 
+    connect(m_exporterUrl, SIGNAL(urlSelected(const KUrl&)), this, SLOT(addSuffix()));
     connect(m_exporterButton, SIGNAL(clicked()), this, SLOT(doExport()));
     connect(m_installerButton, SIGNAL(clicked()), this, SLOT(doInstall()));
     connect(m_publisherButton, SIGNAL(clicked()), this, SLOT(doPublish()));
@@ -79,6 +81,15 @@ Publisher::Publisher(QWidget *parent, const KUrl &path)
     setLayout(layout);
 }
 
+void Publisher::addSuffix()
+{
+    QString selected = m_exporterUrl->url().path();
+    QString suffix = QFileInfo(selected).suffix();
+    if (suffix != "plasmoid" && suffix != "zip") {
+        m_exporterUrl->setUrl(selected + ".plasmoid");
+    }
+}
+
 void Publisher::doExport()
 {
     if (!m_exporterUrl->url().isLocalFile() ||
@@ -87,9 +98,11 @@ void Publisher::doExport()
         return;
     }
     exportPackage(m_projectPath, m_exporterUrl->url());
-    // TODO: probably check for errors and stuff instead of announcing
-    // succcess in a 'leap of faith'
-    KMessageBox::information(this, i18n("Plasmoid has been exported to %1.", m_exporterUrl->url().path()));
+    // should probably do more error checking here before reporting success
+    if (QFile::exists(m_exporterUrl->url().path()))
+        KMessageBox::information(this, i18n("Plasmoid has been exported to %1.", m_exporterUrl->url().path()));
+    else
+        KMessageBox::error(this, i18n("Something appears to have gone wrong with the export! Please check the write permissions in the target directory."));
 }
 
 void Publisher::doInstall()
@@ -117,14 +130,10 @@ void Publisher::doPublish()
 
 void Publisher::exportPackage(const KUrl &toExport, const KUrl &targetFile)
 {
-    QStringList argv("zip");
-    argv.append("-r");
-    argv.append(targetFile.path());
-    argv.append(".");
-    KProcess p;
-    p.setProgram(argv);
-    p.setWorkingDirectory(toExport.path());
-    p.execute();
+    KZip plasmoid(targetFile.path());
+    plasmoid.open(QIODevice::WriteOnly);
+    plasmoid.addLocalDirectory(toExport.path(), ".");
+    plasmoid.close();
 }
 
 void Publisher::importPackage(const KUrl &toImport, const KUrl &targetLocation)

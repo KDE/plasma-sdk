@@ -32,6 +32,7 @@ public:
 
 private slots:
     void doExport();
+    void addSuffix();
     void doInstall();
     void doPublish();
 
