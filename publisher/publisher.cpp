@@ -102,7 +102,7 @@ void Publisher::doExport()
     if (QFile::exists(m_exporterUrl->url().path()))
         KMessageBox::information(this, i18n("Plasmoid has been exported to %1.", m_exporterUrl->url().path()));
     else
-        KMessageBox::error(this, i18n("Something appears to have gone wrong with the export! Please check the write permissions in the target directory."));
+        KMessageBox::error(this, i18n("An error has occurred during the export. Please check the write permissions in the target directory."));
 }
 
 void Publisher::doInstall()
