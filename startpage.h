@@ -66,6 +66,7 @@ private Q_SLOTS:
     void createNewProject();
     void cancelNewProject();
     void processProjectName(const QString&);
+    void doImport();
 
 private:
     void setupWidgets();

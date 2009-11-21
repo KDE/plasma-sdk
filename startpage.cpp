@@ -29,12 +29,14 @@
 #include <KUrlRequester>
 #include <KStandardDirs>
 #include <KUser>
+#include <KMessageBox>
 #include <Plasma/PackageMetadata>
 
 #include "packagemodel.h"
 #include "startpage.h"
 #include "mainwindow.h"
 #include "ui_startpage.h"
+#include "publisher/publisher.h"
 
 StartPage::StartPage(MainWindow *parent) // TODO set a palette so it will look identical with any color scheme.
         : QWidget(parent),
@@ -93,6 +95,8 @@ void StartPage::setupWidgets()
             this, SLOT(createNewProject()));
     connect(ui->cancelNewProjectButton, SIGNAL(clicked()),
             this, SLOT(cancelNewProject()));
+    connect(ui->importButton, SIGNAL(clicked()),
+            this, SLOT(doImport()));
 
     new QListWidgetItem(KIcon("application-x-plasma"), i18n("Plasmoid"), ui->contentTypes);
     new QListWidgetItem(KIcon("kexi"), i18n("Data Engine"), ui->contentTypes);
@@ -166,7 +170,18 @@ void StartPage::refreshRecentProjectsList()
 
     for (int i = 0; i < recentFiles.size(); i++) {
         Plasma::PackageMetadata metadata(KStandardDirs::locateLocal("appdata", recentFiles.at(i) + '/'));
-        QString projectName = metadata.name();
+
+        // The loading code expects this to be the folder name, not the plasmoid name.
+        // Note : Here we're effectively allowing plasmoid name and project folder name
+        //        to be decoupled - so that the user is able to change the plasmoid name via
+        //        the metadata editor, while the project folder name remains fixed.
+        //        Alternatives are:
+        //        1) Always rename the project folder when user changes plasmoid name
+        //           - difficult to do and can get messy
+        //        2) Don't allow the user to change plasmoid name once it is set
+        //           - pretty inflexibly imo
+        // QString projectName = metadata.name();
+        QString projectName = recentFiles.at(i);
 
 //         if (projectName.isEmpty()) {
 //             continue;
@@ -330,3 +345,25 @@ void StartPage::emitProjectSelected(const QModelIndex &index)
     emit projectSelected(url, QString());
 }
 
+void StartPage::doImport()
+{
+    KUrl target = ui->importUrl->url();
+
+    if (!target.isLocalFile() ||
+          !QFile::exists(target.path()) ||
+          QDir(target.path()).exists()) {
+        KMessageBox::error(this, i18n("The file you entered is invalid."));
+        return;
+    }
+
+    // TODO: Should check for existing folder before importing.
+    // In the short term show a simple overwrite-or-cancel dialog.
+    // In the long term a more advanced conflict resolution dialog
+    // that allows renaming should be offered here.
+    QString projectName = QFileInfo(target.path()).baseName();
+    QString projectPath = KStandardDirs::locateLocal("appdata", projectName + '/');
+    if (!Publisher::importPackage(target, projectPath)) {
+        KMessageBox::information(this, i18n("A problem has occured during import."));
+    }
+    emit projectSelected(projectName, QString());
+}

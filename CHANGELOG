@@ -1,3 +1,8 @@
+--November 21,2009--
+- Added preliminary support for importing plasmoids.
+  'Recent project list' now shows project folder names instead of 
+  plasmoid names to avoid confusion.
+
 --November 15,2009--
 - Added a simple, draft publisher widget. Exporting and installing plasmoids
   work, but online publishing doesn't for now.

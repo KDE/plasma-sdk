@@ -97,9 +97,8 @@ void Publisher::doExport()
         KMessageBox::error(this, i18n("The file you entered is invalid."));
         return;
     }
-    exportPackage(m_projectPath, m_exporterUrl->url());
-    // should probably do more error checking here before reporting success
-    if (QFile::exists(m_exporterUrl->url().path()))
+    bool ok = exportPackage(m_projectPath, m_exporterUrl->url());
+    if (QFile::exists(m_exporterUrl->url().path()) && ok)
         KMessageBox::information(this, i18n("Plasmoid has been exported to %1.", m_exporterUrl->url().path()));
     else
         KMessageBox::error(this, i18n("An error has occurred during the export. Please check the write permissions in the target directory."));
@@ -128,16 +127,26 @@ void Publisher::doPublish()
     KMessageBox::information(this, "Do funky stuff here");
 }
 
-void Publisher::exportPackage(const KUrl &toExport, const KUrl &targetFile)
+bool Publisher::exportPackage(const KUrl &toExport, const KUrl &targetFile)
 {
+    bool ret = true;
     KZip plasmoid(targetFile.path());
-    plasmoid.open(QIODevice::WriteOnly);
-    plasmoid.addLocalDirectory(toExport.path(), ".");
+    if (!plasmoid.open(QIODevice::WriteOnly)) {
+        return false;
+    }
+    ret = plasmoid.addLocalDirectory(toExport.path(), ".");
     plasmoid.close();
+    return ret;
 }
 
-void Publisher::importPackage(const KUrl &toImport, const KUrl &targetLocation)
+bool Publisher::importPackage(const KUrl &toImport, const KUrl &targetLocation)
 {
-    // TODO: implement this, then use this to import packages in the
-    // start page
+    bool ret = true;
+    KZip plasmoid(toImport.path());
+    if (!plasmoid.open(QIODevice::ReadOnly)) {
+        return false;
+    }
+    plasmoid.directory()->copyTo(targetLocation.path());
+    plasmoid.close();
+    return ret;
 }

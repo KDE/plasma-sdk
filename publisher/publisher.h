@@ -27,8 +27,8 @@ class Publisher : public QWidget
 public:
     Publisher(QWidget* parent, const KUrl &path);
 
-    static void exportPackage(const KUrl &toExport, const KUrl &targetFile);
-    static void importPackage(const KUrl &toImport, const KUrl &targetLocation);
+    static bool exportPackage(const KUrl &toExport, const KUrl &targetFile);
+    static bool importPackage(const KUrl &toImport, const KUrl &targetLocation);
 
 private slots:
     void doExport();
