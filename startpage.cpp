@@ -363,7 +363,7 @@ void StartPage::doImport()
     QString projectName = QFileInfo(target.path()).baseName();
     QString projectPath = KStandardDirs::locateLocal("appdata", projectName + '/');
     if (!Publisher::importPackage(target, projectPath)) {
-        KMessageBox::information(this, i18n("A problem has occured during import."));
+        KMessageBox::information(this, i18n("A problem has occurred during import."));
     }
     emit projectSelected(projectName, QString());
 }
