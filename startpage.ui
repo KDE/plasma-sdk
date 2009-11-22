@@ -73,7 +73,7 @@
               <string>Hello!
 Desktop computing has changed radically in the last 20 years,
 yet our desktops are essentially the same as they were in 1984.
-It's time the desktop caught up with us.</string>
+It is time the desktop caught up with us.</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
