@@ -427,6 +427,14 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     // Load the needed widgets, switch to page 1 (edit)...
     if(!docksCreated)
         createDockWidgets();
+    else { // loading a new project!
+        // workaround to completely clear previewer
+        delete m_previewer;
+        m_previewer = new Previewer(this);
+        m_previewerWidget->setWidget(m_previewer);
+        // point editor tree to new model
+        m_editPage->setModel(m_model);
+    }
 
     QLabel *l = new QLabel(i18n("Select a file to edit."), this);
     setCentralWidget(l);
@@ -446,7 +454,6 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     setCaption("[Project:" + metadata.name() + ']');
     kDebug() << "Content prefix: " << m_model->contentsPrefix() ;
     QDir::setCurrent(m_model->package() + m_model->contentsPrefix());
-
 }
 
 QStringList MainWindow::recentProjects()
