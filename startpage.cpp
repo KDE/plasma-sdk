@@ -171,25 +171,25 @@ void StartPage::refreshRecentProjectsList()
     for (int i = 0; i < recentFiles.size(); i++) {
         Plasma::PackageMetadata metadata(KStandardDirs::locateLocal("appdata", recentFiles.at(i) + '/'));
 
-        // The loading code expects this to be the folder name, not the plasmoid name.
-        // Note : Here we're effectively allowing plasmoid name and project folder name
-        //        to be decoupled - so that the user is able to change the plasmoid name via
-        //        the metadata editor, while the project folder name remains fixed.
-        //        Alternatives are:
-        //        1) Always rename the project folder when user changes plasmoid name
-        //           - difficult to do and can get messy
-        //        2) Don't allow the user to change plasmoid name once it is set
-        //           - pretty inflexibly imo
-        // QString projectName = metadata.name();
-        QString projectName = recentFiles.at(i);
+        // Changed this back on second thought. It's better that we
+        // do not expose the idea of a 'folder name' to the user -
+        // we keep the folder hidden and name it whatever we want as
+        // long as it's unique. Only the plasmoid name, which the user
+        // sets in the metadata editor, will ever be visible in the UI.
+        QString projectName = metadata.name();
+        // QString projectName = recentFiles.at(i);
 
 //         if (projectName.isEmpty()) {
 //             continue;
 //         }
 
         kDebug() << "adding" << projectName << "to the list of recent projects...";
-        QListWidgetItem *item = new QListWidgetItem(projectName); // TODO make me the user "nice" name
-        item->setData(FullPathRole, projectName.toLower());
+        QListWidgetItem *item = new QListWidgetItem(projectName); // show the user-set plasmoid name in the UI
+
+        // the loading code uses this to find the project to load.
+        // since folder name and plasmoid name can be different, this
+        // should be set to the folder name, which the loading code expects.
+        item->setData(FullPathRole, recentFiles.at(i));
 
         QString serviceType = metadata.serviceType();
 
@@ -356,14 +356,22 @@ void StartPage::doImport()
         return;
     }
 
-    // TODO: Should check for existing folder before importing.
-    // In the short term show a simple overwrite-or-cancel dialog.
-    // In the long term a more advanced conflict resolution dialog
-    // that allows renaming should be offered here.
-    QString projectName = QFileInfo(target.path()).baseName();
-    QString projectPath = KStandardDirs::locateLocal("appdata", projectName + '/');
+    // brain-dead way to find a unique project folder name :P
+    // we can do this because this is 'under the hood'
+    // the user should never be aware of any 'folder names'
+    // This nicely eliminates the need for a 'conflict resolution' dialog :)
+    QString suggested = QFileInfo(target.path()).baseName();
+    QString projectFolder = suggested;
+    int suffix = 1;
+    while (!KStandardDirs::locate("appdata", projectFolder + '/').isEmpty()) {
+        projectFolder = suggested + QString::number(suffix);
+        suffix++;
+    }
+
+    QString projectPath = KStandardDirs::locateLocal("appdata", projectFolder + '/');
+
     if (!Publisher::importPackage(target, projectPath)) {
         KMessageBox::information(this, i18n("A problem has occurred during import."));
     }
-    emit projectSelected(projectName, QString());
+    emit projectSelected(projectFolder, QString());
 }
