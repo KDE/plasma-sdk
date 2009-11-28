@@ -44,6 +44,7 @@
 #include "ui_mainwindow.h"
 #include "previewer/previewer.h"
 #include "publisher/publisher.h"
+#include "docbrowser/docbrowser.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -255,8 +256,10 @@ void MainWindow::changeTab(const QModelIndex &item)
     }
     break;
     case DocsTab: {
-        QLabel *l = new QLabel(i18n("Documentation widget will go here."), this);
-        setCentralWidget(l);
+        //TODO: should probably restore the page the user previously
+        // browsed to, perhaps even cache it somewhere for fast restoration
+        DocBrowser *d = new DocBrowser(this);
+        setCentralWidget(d);
     }
     break;
     case PreviewTab: {

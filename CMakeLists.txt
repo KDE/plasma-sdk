@@ -26,6 +26,7 @@ set (PlasMate_SRC
     packagemodel.cpp
     previewer/previewer.cpp
     publisher/publisher.cpp
+    docbrowser/docbrowser.cpp
     )
 
 kde4_add_ui_files (PlasMate_SRC
@@ -40,6 +41,7 @@ add_subdirectory( editors )
 add_subdirectory( previewer )
 add_subdirectory( templates )
 add_subdirectory( publisher )
+add_subdirectory( docbrowser )
 #add_subdirectory( savesystem )
 
 kde4_add_executable(plasmate ${PlasMate_SRC})

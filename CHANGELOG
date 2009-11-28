@@ -1,3 +1,6 @@
+--November 28,2009--
+- Added simple documentation widget.
+
 --November 23,2009--
 - Reverted 'Recent project list' to showing plasmoid names and fixed
   so it works. Import plasmoids now works.

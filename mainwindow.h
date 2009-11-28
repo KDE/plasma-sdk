@@ -33,7 +33,7 @@ class MetaDataEditor;
 
 // our own previewer
 class Previewer;
-
+class DocBrowser;
 class Publisher;
 
 namespace KTextEditor
@@ -89,6 +89,7 @@ private:
     Previewer *m_previewer;
     MetaDataEditor *m_metaEditor;
     Publisher *m_publisher;
+    DocBrowser *m_browser;
 
     QDockWidget *m_editWidget;
     EditPage *m_editPage;
