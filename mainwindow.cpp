@@ -47,6 +47,25 @@
 #include "docbrowser/docbrowser.h"
 
 
+MainWindow::CentralContainer::CentralContainer(QWidget* parent)
+    : QWidget(parent),
+      m_curWidget(0)
+{
+    m_layout = new QVBoxLayout();
+    setLayout(m_layout);
+}
+
+void MainWindow::CentralContainer::switchTo(QWidget* newWidget)
+{
+    if (m_curWidget) {
+        m_curWidget->hide();
+        m_layout->removeWidget(m_curWidget);
+    }
+    m_curWidget = newWidget;
+    m_layout->addWidget(m_curWidget);
+    m_curWidget->show();
+}
+
 MainWindow::MainWindow(QWidget *parent)
     : KParts::MainWindow(parent, 0),
       m_workflow(0),
@@ -55,6 +74,7 @@ MainWindow::MainWindow(QWidget *parent)
       m_timeLine(0),
       m_previewer(0),
       m_publisher(0),
+      m_browser(0),
       m_metaEditor(0),
       m_editWidget(0),
       m_editPage(0),
@@ -68,7 +88,9 @@ MainWindow::MainWindow(QWidget *parent)
     m_startPage = new StartPage(this);
     connect(m_startPage, SIGNAL(projectSelected(QString, QString)),
             this, SLOT(loadProject(QString, QString)));
-    setCentralWidget(m_startPage);
+    m_central = new CentralContainer(this);
+    setCentralWidget(m_central);
+    m_central->switchTo(m_startPage);
     setDockOptions(QMainWindow::AllowNestedDocks); // why not?
 }
 
@@ -212,21 +234,10 @@ void MainWindow::changeTab(const QModelIndex &item)
 {
     // should save data in any open editors when changing tabs
     saveEditorData();
-    delete m_part;
-    m_part = 0;
-    delete m_metaEditor;
-    m_metaEditor = 0;
 
     int tab = item.row();
-    if (tab == m_oldTab) { // user clicked on the current tab
-        if (tab == StartPageTab) {
-            m_startPage->resetStatus();
-        }
-        return;
-    }
 
-    centralWidget()->deleteLater();
-    m_startPage = 0;
+    m_startPage->resetStatus();
 
     if(tab == SavePoint) {
         emit newSavePointClicked();
@@ -236,36 +247,33 @@ void MainWindow::changeTab(const QModelIndex &item)
 
     switch (tab) {
     case StartPageTab: {
-        m_startPage = new StartPage(this);
-        setCentralWidget(m_startPage);
-
-        connect(m_startPage, SIGNAL(projectSelected(QString, QString)),
-            this, SLOT(loadProject(QString, QString)));
-
-
+        m_central->switchTo(m_startPage);
     }
     break;
     case EditTab: {
+        // TODO: Restore the previous file that was being editted.
+        // and FIX LEAK
         QLabel *l = new QLabel(i18n("Select a file to edit."), this);
-        setCentralWidget(l);
+        m_central->switchTo(l);
     }
     break;
     case PublishTab: {
-        Publisher *p = new Publisher(this, m_model->package());
-        setCentralWidget(p);
+        if (!m_publisher)
+            m_publisher = new Publisher(this, m_model->package());
+        m_central->switchTo(m_publisher);
     }
     break;
     case DocsTab: {
-        //TODO: should probably restore the page the user previously
-        // browsed to, perhaps even cache it somewhere for fast restoration
-        DocBrowser *d = new DocBrowser(this);
-        setCentralWidget(d);
+        if (!m_browser)
+            m_browser = new DocBrowser(this);
+        m_central->switchTo(m_browser);
     }
     break;
     case PreviewTab: {
+        // FIXME: LEAK!
         Previewer *tabPreviewer = new Previewer(this);
         tabPreviewer->addApplet(m_model->package());
-        setCentralWidget(tabPreviewer);
+        m_central->switchTo(tabPreviewer);
     }
     }
 
@@ -290,16 +298,10 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
 {
     // save any previous editor content
     saveEditorData();
-    delete m_metaEditor;
-    m_metaEditor = 0;
 
     if (offers.isEmpty()) {
         kDebug() << "No offers for editor, can not load.";
         return;
-    }
-
-    if (!m_part || centralWidget() != m_part->widget()) {
-        centralWidget()->deleteLater();
     }
 
     QVariantList args;
@@ -309,7 +311,7 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
                 this, args, &error));
 
     QWidget *mainWidget = 0;
-    if (m_part == 0 || !part->inherits(m_part->metaObject()->className())) {
+    if (!m_part || !part->inherits(m_part->metaObject()->className())) {
         delete m_part; // reuse if we can
         m_part = part;
         KTextEditor::Document *editorPart = qobject_cast<KTextEditor::Document *>(m_part);
@@ -317,20 +319,24 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
             KTextEditor::View *view = qobject_cast<KTextEditor::View *>(editorPart->widget());
             setupTextEditor(editorPart, view);
             mainWidget = view;
+        } else {
+            mainWidget = m_part->widget();
         }
     } else {
         delete part;
+        mainWidget = m_part->widget();
     }
 
     if (!m_part) {
         kDebug() << "Failed to load editor:" << error;
     }
 
-    setCentralWidget(mainWidget ? mainWidget : m_part->widget());
+    m_central->switchTo(mainWidget);
 
     // open the target for editting/viewing
-    m_part->openUrl(target);
-    centralWidget()->setMinimumWidth(300);
+    if (!target.equals(m_part->url()))
+        m_part->openUrl(target);
+    mainWidget->setMinimumWidth(300);
     //Add the part's GUI
     //createGUI(m_part);
 
@@ -363,15 +369,13 @@ void MainWindow::setupTextEditor(KTextEditor::Document *editorPart, KTextEditor:
 void MainWindow::loadMetaDataEditor(KUrl target) {
     // save any previous editor content
     saveEditorData();
-    delete m_part;
-    m_part = 0;
-    delete m_metaEditor;
-    m_metaEditor = 0;
 
-    m_metaEditor = new MetaDataEditor(this);
+    if (!m_metaEditor)
+        m_metaEditor = new MetaDataEditor(this);
+
     m_metaEditor->setFilename(target.path());
     m_metaEditor->readFile();
-    setCentralWidget(m_metaEditor);
+    m_central->switchTo(m_metaEditor);
 
     m_sidebar->setCurrentIndex(EditTab);
     m_oldTab = EditTab;
@@ -437,10 +441,13 @@ void MainWindow::loadProject(const QString &name, const QString &type)
         m_previewerWidget->setWidget(m_previewer);
         // point editor tree to new model
         m_editPage->setModel(m_model);
+        // delete old publisher
+        delete m_publisher;
+        m_publisher = 0;
     }
 
     QLabel *l = new QLabel(i18n("Select a file to edit."), this);
-    setCentralWidget(l);
+    m_central->switchTo(l);
 
     m_oldTab = EditTab;
     m_sidebar->setCurrentIndex(m_oldTab);

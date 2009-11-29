@@ -1,3 +1,8 @@
+--November 29,2009--
+- The state of central widgets (editor, publisher, documentation etc)
+  are no longer reloaded, but are remembered and restored as the user
+  switches between them.
+
 --November 28,2009--
 - Added simple documentation widget.
 

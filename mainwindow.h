@@ -68,6 +68,22 @@ signals:
     void refreshRequested();
 
 private:
+
+    // QMainWindow takes control of and DELETES the previous centralWidget
+    // whenever a new one is set - this is bad because we want to preserve
+    // the state of the previous centralWidget for when it becomes active again.
+    // This class is a workaround - we set an instance as the permanent
+    // centralWidget, and use it to do graceful, non-destructive widget-switching.
+    class CentralContainer : public QWidget
+    {
+    public:
+        CentralContainer(QWidget* parent);
+        void switchTo(QWidget* newWidget);
+    private:
+        QLayout *m_layout;
+        QWidget *m_curWidget;
+    };
+
     enum WorkflowTabs { StartPageTab = 0,
                         EditTab,
                         SavePoint,
@@ -96,6 +112,7 @@ private:
     PackageModel *m_model;
     int m_oldTab;
     bool docksCreated;
+    CentralContainer *m_central;
 
     KParts::ReadOnlyPart *m_part;
 };
