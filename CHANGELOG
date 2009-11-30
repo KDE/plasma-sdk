@@ -1,3 +1,7 @@
+--November 30,2009--
+- Selecting the editor tab now loads the previous active editor (if exists)
+  instead of showing the 'select a file' QWidget.
+
 --November 29,2009--
 - The state of central widgets (editor, publisher, documentation etc)
   are no longer reloaded, but are remembered and restored as the user

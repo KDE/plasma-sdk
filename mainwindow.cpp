@@ -251,10 +251,17 @@ void MainWindow::changeTab(const QModelIndex &item)
     }
     break;
     case EditTab: {
-        // TODO: Restore the previous file that was being editted.
-        // and FIX LEAK
-        QLabel *l = new QLabel(i18n("Select a file to edit."), this);
-        m_central->switchTo(l);
+        // see if there is a previously active editor to restore
+        // TODO: immediately shift focus to the editor (instead of the tabbar)
+        if (m_metaEditor) {
+            m_central->switchTo(m_metaEditor);
+        } else if (m_part) {
+            m_central->switchTo(m_part->widget());
+        } else {
+            //FIXME: LEAK!
+            QLabel *l = new QLabel(i18n("Select a file to edit."), this);
+            m_central->switchTo(l);
+        }
     }
     break;
     case PublishTab: {
@@ -339,6 +346,11 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
     mainWidget->setMinimumWidth(300);
     //Add the part's GUI
     //createGUI(m_part);
+
+    // We keep only one editor object alive at a time -
+    // so we know who to activate when the edit tab is reselected
+    delete m_metaEditor;
+    m_metaEditor = 0;
 
     m_sidebar->setCurrentIndex(EditTab);
     m_oldTab = EditTab;
