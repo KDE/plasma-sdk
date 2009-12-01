@@ -252,11 +252,11 @@ void MainWindow::changeTab(const QModelIndex &item)
     break;
     case EditTab: {
         // see if there is a previously active editor to restore
-        // TODO: immediately shift focus to the editor (instead of the tabbar)
         if (m_metaEditor) {
             m_central->switchTo(m_metaEditor);
         } else if (m_part) {
             m_central->switchTo(m_part->widget());
+            m_part->widget()->setFocus(Qt::OtherFocusReason);
         } else {
             //FIXME: LEAK!
             QLabel *l = new QLabel(i18n("Select a file to edit."), this);
