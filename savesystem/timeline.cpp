@@ -1,51 +1,38 @@
-/******************************************************************************
- * Copyright (C) 2007 by Pino Toscano <pino@kde.org>                          *
- * Copyright (C) 2009 by Diego '[Po]lentino' Casella <polentino911@gmail.com> *
- *                                                                            *
- *    This program is free software; you can redistribute it and/or modify    *
- *    it under the terms of the GNU General Public License as published by    *
- *    the Free Software Foundation; either version 2 of the License, or       *
- *    (at your option) any later version.                                     *
- *                                                                            *
- *    This program is distributed in the hope that it will be useful, but     *
- *    WITHOUT ANY WARRANTY; without even the implied warranty of              *
- *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU       *
- *    General Public License for more details.                                *
- *                                                                            *
- *    You should have received a copy of the GNU General Public License       *
- *    along with this program; if not, write to the Free Software Foundation  *
- *    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA        *
- *                                                                            *
- ******************************************************************************/
-
-#include "branchdialog.h"
-#include "commitdialog.h"
-#include "timelineitem.h"
-#include "timelinedelegate.h"
-#include "timelinelistwidget.h"
-#include "timelineprivatestorage.h"
-#include "timeline.h"
-
-#include <QAction>
-#include <QFont>
-#include <QLabel>
-#include <QLayout>
-#include <QMessageBox>
-#include <QMenu>
-#include <QPointer>
-#include <QRect>
-#include <QRegExp>
-#include <QSplitter>
-#include <QStackedWidget>
-
-#include <KUrl>
+#include <KAction>
+#include <KConfig>
 #include <KIcon>
 #include <KMenu>
 #include <Plasma/PackageMetadata>
 
-TimeLine::TimeLine(QWidget* parent, const KUrl &dir)
-        : QWidget(parent), d(new TimeLinePrivateStorage)
+#include <QDockWidget>
+#include <QMessageBox>
+#include <QPoint>
+#include <QPointer>
+#include <QRect>
+#include <QRegExp>
+#include <QResizeEvent>
+#include <QStringList>
+
+
+//#include <QDebug>
+
+#include "timeline.h"
+
+#include "tablewidget.h"
+#include "tabledelegate.h"
+#include "timelineitem.h"
+#include "dvcsjob.h"
+#include "gitrunner.h"
+#include "branchdialog.h"
+#include "commitdialog.h"
+
+TimeLine::TimeLine(QWidget *parent,
+                   const KUrl &dir,
+                   Qt::DockWidgetArea location)
+                   :QDockWidget(i18n("TimeLine"))
 {
+    Q_UNUSED(location)
+
     m_gitRunner = new GitRunner();
     initUI(parent);
 
@@ -55,34 +42,16 @@ TimeLine::TimeLine(QWidget* parent, const KUrl &dir)
     }
 }
 
-TimeLine::~TimeLine()
-{
-    delete d;
-}
-
-int TimeLine::uiAddItem(const QIcon &icon,
-                        QStringList &data,
-                        const TimeLineItem::ItemIdentifier id,
-                        const Qt::ItemFlag flag)
-{
-    TimeLineItem *newitem = new TimeLineItem(icon, data, id, flag);
-    d->list->addItem(newitem);
-    d->pages.append(newitem);
-    // updating the minimum height of the icon view, so all are visible with no scrolling
-    d->adjustListSize(false, true);
-    return d->pages.count() - 1;
-}
-
 void TimeLine::loadTimeLine(const KUrl &dir)
 {
-    d->list->clear();
+    m_table->clear();
     QStringList list = QStringList();
 
     m_gitRunner->setDirectory(dir);
 
     if (!m_gitRunner->isValidDirectory()) {
         // If the dir hasn't a git tree, don't show nothig!
-        parentWidget()->hide();
+        hide();
         return;
     }
 
@@ -132,10 +101,15 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     list.append(info);
     list.append(QString());
 
-    this->uiAddItem(KIcon("system-switch-user"),
+    /*this->uiAddItem(KIcon("system-switch-user"),
                     list,
                     TimeLineItem::Branch,
-                    Qt::ItemIsEnabled);
+                    Qt::ItemIsEnabled);*/
+    TimeLineItem *item = new TimeLineItem(KIcon("system-switch-user"),
+                                          list,
+                                          TimeLineItem::Branch,
+                                          Qt::ItemIsEnabled);
+    m_table->addItem(item);
 
     list.clear();
 
@@ -149,7 +123,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
     index = 0;
     int commitIndex = 0;
-    kDebug() << "DIOCANEEEEEEEEEEEEEEEEEEEE" << commitList.size();
+
     // Iterate every commit and create an element in the sidebar.
     while(index < commitList.size()) {
         bool isMerge = false;
@@ -214,30 +188,31 @@ void TimeLine::loadTimeLine(const KUrl &dir)
         list.append(commitInfo);
         list.append(sha1hash);
 
-        this->uiAddItem(isMerge ? KIcon("svn_merge") : KIcon("dialog-ok"),
-                        list,
-                        isMerge ? TimeLineItem::Merge : TimeLineItem::Commit,
-                        Qt::ItemIsEnabled);
+        TimeLineItem *item1 = new TimeLineItem(isMerge ? KIcon("svn_merge") : KIcon("dialog-ok"),
+                                               list,
+                                               isMerge ? TimeLineItem::Merge : TimeLineItem::Commit,
+                                               Qt::ItemIsEnabled);
+        m_table->addItem(item1);
 
         isMerge = false;
         ++commitIndex;
     }
 
     parentWidget()->show();
-    connect(d->list, SIGNAL(contextMenuRequested(QListWidgetItem*)),
-            this, SLOT(showContextMenu(QListWidgetItem*)));
+    connect(m_table, SIGNAL(itemClicked(QTableWidgetItem *)),
+            this, SLOT(showContextMenu(QTableWidgetItem *)));
 }
 
-void TimeLine::showContextMenu(QListWidgetItem *item)
+void TimeLine::showContextMenu(QTableWidgetItem *item)
 {
     TimeLineItem *tlItem = dynamic_cast<TimeLineItem*>(item);
-    kDebug() << d->list->currentItem() << tlItem;
+    //kDebug() << table->currentItem() << tlItem;
 
     if (!tlItem) {
         return;
     }
 
-    QRect rc = d->list->visualItemRect(tlItem);
+    QRect rc = m_table->visualItemRect(tlItem);
     KMenu menu(this);
     menu.addTitle(tlItem->text());
     menu.addSeparator();
@@ -334,34 +309,10 @@ void TimeLine::newSavePoint()
 
     m_gitRunner->add(KUrl::List(QString('.')));
     m_gitRunner->commit(commit);
-    d->list->disconnect();
+    m_table->disconnect();
     loadTimeLine(m_workingDir);
-}
-
-void TimeLine::setItemEnabled(int index, bool enabled)
-{
-    if (index < 0 || index >= d->pages.count()) {
-        return;
-    }
-
-    Qt::ItemFlags f = d->pages.at(index)->flags();
-    if (enabled) {
-        f |= Qt::ItemIsEnabled;
-        f |= Qt::ItemIsSelectable;
-    } else {
-        f &= ~Qt::ItemIsEnabled;
-        f &= ~Qt::ItemIsSelectable;
-    }
-    d->pages.at(index)->setFlags(f);
-
-    if (!enabled && index == currentIndex()) {
-        // find an enabled item, and select that one
-        for (int i = 0; i < d->pages.count(); ++i)
-            if (d->pages.at(i)->flags() & Qt::ItemIsEnabled) {
-                setCurrentIndex(i);
-                break;
-            }
-    }
+    if(isHidden())
+        show();
 }
 
 void TimeLine::restoreCommit()
@@ -381,7 +332,7 @@ void TimeLine::restoreCommit()
     QAction *sender = dynamic_cast<QAction*>(this->sender());
     QVariant data = sender->data();
     m_gitRunner->deleteCommit(data.toString());
-    d->list->disconnect();
+    m_table->disconnect();
     loadTimeLine(m_workingDir);
 }
 
@@ -420,7 +371,7 @@ void TimeLine::moveToCommit()
     QAction *sender = dynamic_cast<QAction*>(this->sender());
     QVariant data = sender->data();
     m_gitRunner->moveToCommit(data.toString(), newBranchName);
-    d->list->disconnect();
+    m_table->disconnect();
     loadTimeLine(m_workingDir);
 }
 
@@ -430,7 +381,7 @@ void TimeLine::switchBranch()
     QString branch = sender->text();
     branch.remove('&');
     m_gitRunner->switchBranch(branch);
-    d->list->disconnect();
+    m_table->disconnect();
     loadTimeLine(m_workingDir);
 }
 
@@ -473,7 +424,7 @@ void TimeLine::mergeBranch()
     m_gitRunner->switchBranch(branch);
     m_gitRunner->mergeBranch(branchToMerge, commit);
 
-    d->list->disconnect();
+    m_table->disconnect();
     loadTimeLine(m_workingDir);
 }
 
@@ -495,7 +446,7 @@ void TimeLine::deleteBranch()
     QString branch = sender->text();
     branch.remove('&');
     m_gitRunner->deleteBranch(branch);
-    d->list->disconnect();
+    m_table->disconnect();
     loadTimeLine(m_workingDir);
 }
 
@@ -525,7 +476,7 @@ void TimeLine::renameBranch()
     }
 
     m_gitRunner->renameBranch(newBranchName);
-    d->list->disconnect();
+    m_table->disconnect();
     loadTimeLine(m_workingDir);
 }
 
@@ -555,57 +506,8 @@ void TimeLine::createBranch()
     }
 
     m_gitRunner->newBranch(newBranchName);
-    d->list->disconnect();
+    m_table->disconnect();
     loadTimeLine(m_workingDir);
-}
-
-bool TimeLine::isItemEnabled(int index) const
-{
-    if (index < 0 || index >= d->pages.count()) {
-        return false;
-    }
-
-    Qt::ItemFlags f = d->pages.at(index)->flags();
-    return (f & Qt::ItemIsEnabled) == Qt::ItemIsEnabled;
-}
-
-void TimeLine::setCurrentIndex(int index)
-{
-    if (index < 0 || index >= d->pages.count() || !isItemEnabled(index)) {
-        return;
-    }
-
-    QModelIndex modelindex = d->list->model()->index(index, 0);
-    d->list->setCurrentIndex(modelindex);
-    d->list->selectionModel()->select(modelindex, QItemSelectionModel::ClearAndSelect);
-}
-
-int TimeLine::currentIndex() const
-{
-    return d->list->currentRow();
-}
-
-void TimeLine::setTimeLineVisibility(bool visible)
-{
-    if (visible != d->list->isHidden())
-        return;
-
-    static bool sideWasVisible = !d->sideContainer->isHidden();
-
-    d->list->setHidden(!visible);
-    if (visible) {
-        d->sideContainer->setHidden(!sideWasVisible);
-
-        sideWasVisible = true;
-    } else {
-        sideWasVisible = !d->sideContainer->isHidden();
-        d->sideContainer->setHidden(true);
-    }
-}
-
-bool TimeLine::isTimeLineVisible() const
-{
-    return !d->sideContainer->isHidden();
 }
 
 void TimeLine::setWorkingDir(const KUrl &dir)
@@ -613,59 +515,64 @@ void TimeLine::setWorkingDir(const KUrl &dir)
     m_workingDir = dir;
 }
 
-void TimeLine::initUI(QWidget *parent)
+void TimeLine::initUI(QWidget *parent,Qt::DockWidgetArea location)
 {
     Q_UNUSED(parent)
 
-    QVBoxLayout *mainlay = new QVBoxLayout(this);
-    mainlay->setMargin(0);
-    mainlay->setSpacing(0);
+    setFeatures(QDockWidget::AllDockWidgetFeatures);
+    m_table = new TableWidget(location);
+    m_table->setParent(this);
+    setWidget(m_table);
 
-    d->list = new TimeLineListWidget(this);
-    mainlay->addWidget(d->list);
-    d->list->setMouseTracking(true);
-    d->list->viewport()->setAttribute(Qt::WA_Hover);
-    d->sideDelegate = new TimeLineDelegate(d->list);
-    d->list->setItemDelegate(d->sideDelegate);
-    d->list->setUniformItemSizes(true);
-    d->list->setSelectionMode(QAbstractItemView::SingleSelection);
-    int iconsize = 32;// Okular::Settings::timelineIconSize();
-    d->list->setIconSize(QSize(iconsize, iconsize));
-    d->list->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    d->list->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-    d->list->viewport()->setAutoFillBackground(false);
-    // TODO : if left button pressed, could be useful to assign an user defined actionS
-    /*
-    connect(d->list, SIGNAL(itemClicked(QListWidgetItem *)),
-            this, SLOT((QListWidgetItem *)));
-            */
-    /*connect(d->list, SIGNAL(contextMenuRequested(QListWidgetItem*)),
-            this, SLOT(showContextMenu(QListWidgetItem*)));*/
+    m_delegate = new TableDelegate();
+    m_table->setItemDelegate(m_delegate);
 
-    d->splitter = new QSplitter(this);
-    mainlay->addWidget(d->splitter);
-    d->splitter->setOpaqueResize(true);
-    d->splitter->setChildrenCollapsible(true);
-
-    d->sideContainer = new QWidget(d->splitter);
-    d->sideContainer->setMinimumWidth(90);
-    d->sideContainer->setMinimumHeight(90);
-    d->sideContainer->setMaximumWidth(600);
-    d->vlay = new QHBoxLayout(d->sideContainer);
-    d->vlay->setMargin(0);
-
-    d->sideTitle = new QLabel(d->sideContainer);
-    d->vlay->addWidget(d->sideTitle);
-    QFont tf = d->sideTitle->font();
-    tf.setBold(true);
-    d->sideTitle->setFont(tf);
-    d->sideTitle->setMargin(3);
-    d->sideTitle->setIndent(3);
-
-    d->stack = new QStackedWidget(d->sideContainer);
-    d->vlay->addWidget(d->stack);
-    d->sideContainer->hide();
-
+    connect(this, SIGNAL(dockLocationChanged(Qt::DockWidgetArea)),
+            m_table,SLOT(updateLayout(Qt::DockWidgetArea)));
 }
 
-#include "timeline.moc"
+void TimeLine::resizeEvent (QResizeEvent * event)
+{
+    /*
+      I've reimplemented this event handler because, when resizing the main widget to a size
+      smaller than the dockwidget, a bothersome effects appears. According with the orientation,
+      it appears a scrollbar INSIDE the m_table widget, which hovers partially the icons when
+      the dock is vertical, and hovers completely the text when it is horizontal.
+      So I've implemented this simple workaround, in order to expand the dockwidget when a
+      scrollbar is shown.
+      I know that resizing a child widget inside a parent resizeEvent() is dangerous at 98%,
+      by the way this trick is very simple and well structured, so it wont cause issues I hope =)
+      */
+
+    QSize newSize = event->size();
+    //qDebug() << "New size: " << newSize;
+    //qDebug() << "m_table size:" << m_table->size();
+    //qDebug() << "m_table total lenght" << m_table->totalLenght();
+
+    bool vertical = ((m_table->location() == Qt::RightDockWidgetArea) ||
+                    (m_table->location() == Qt::LeftDockWidgetArea));
+
+    if(vertical) {
+        if(m_table->totalLenght() > newSize.height()) {
+            m_table->setFixedWidth(m_table->columnWidth(0) + m_table->scrollbarSize(vertical).width());
+            return;
+        } else {
+            if(m_table->columnWidth(0) < newSize.width()) {
+                m_table->setFixedWidth(m_table->columnWidth(0));
+                return;
+            }
+        }
+    } else {
+        if(m_table->totalLenght() > newSize.width()) {
+            m_table->setFixedHeight(m_table->rowHeight(0) + m_table->scrollbarSize(vertical).height());
+            return;
+        } else {
+            if(m_table->rowHeight(0) < newSize.height()) {
+                m_table->setFixedHeight(m_table->rowHeight(0));
+                return;
+            }
+        }
+    }
+}
+
+#include "moc_timeline.cpp"

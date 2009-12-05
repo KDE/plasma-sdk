@@ -1,3 +1,7 @@
+--December 5, 2009--
+- Rewritten the TimeLine widget in order to allow the user to place it both
+  in vertical and horizontal position.
+
 --November 30,2009--
 - Selecting the editor tab now loads the previous active editor (if exists)
   instead of showing the 'select a file' QWidget.

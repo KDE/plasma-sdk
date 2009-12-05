@@ -129,25 +129,28 @@ void testGitRunner() {
 void testTimeLine() {
     // Setup the main window, a dock widget and the TimeLine
     QMainWindow *w = new QMainWindow(0, Qt::Window);
-    QDockWidget *dockTimeLine = new QDockWidget(i18n("TimeLine"), w);
-    TimeLine *timeline = new TimeLine(w, KUrl(rootDir));
+    //QDockWidget *dockTimeLine = new QDockWidget(i18n("TimeLine"), w);
+    TimeLine *timeline = new TimeLine(w,
+                                      KUrl(rootDir),
+                                      Qt::RightDockWidgetArea);
 
     // Setting some relationships between widgets
-    dockTimeLine->setWidget(timeline);
-    w->addDockWidget(Qt::LeftDockWidgetArea, dockTimeLine);
+    //dockTimeLine->setWidget(timeline);
+    w->addDockWidget(Qt::LeftDockWidgetArea, timeline);
+    timeline->loadTimeLine(KUrl(rootDir));
 
     // Some policy
-    dockTimeLine->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
-    timeline->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
+    //dockTimeLine->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
+    //timeline->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
 
     // Now lets create a New SavePoint button, that will be connected to the
     // TimeLine::newSavePoint() slot
-    QWidget *centralDialog = new QWidget(w);
+    //QWidget *centralDialog = new QWidget(w);
     QPushButton *newCommit = new QPushButton(KIcon("document-save"),
                                              i18n("New SavePoint"),
-                                             centralDialog);
-    w->setCentralWidget(centralDialog);
-    centralDialog->show();
+                                             w);//centralDialog);
+    //w->setCentralWidget(centralDialog);
+    //centralDialog->show();
 
     QObject::connect(newCommit, SIGNAL(clicked()),
             timeline, SLOT(newSavePoint()));

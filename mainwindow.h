@@ -99,7 +99,6 @@ private:
     StartPage *m_startPage;
     QDockWidget *m_workflow;
     Sidebar *m_sidebar;
-    QDockWidget *m_dockTimeLine;
     TimeLine    *m_timeLine;
     QDockWidget *m_previewerWidget;
     Previewer *m_previewer;

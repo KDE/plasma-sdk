@@ -11,9 +11,8 @@ set (gitrunner_test_SRC
     ../commitdialog.cpp
     ../branchdialog.cpp
     ../timelineitem.cpp
-    ../timelinedelegate.cpp
-    ../timelinelistwidget.cpp
-    ../timelineprivatestorage.cpp
+    ../tabledelegate.cpp
+    ../tablewidget.cpp
     ../timeline.cpp
     main.cpp
     )

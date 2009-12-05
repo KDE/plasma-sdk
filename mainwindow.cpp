@@ -70,7 +70,6 @@ MainWindow::MainWindow(QWidget *parent)
     : KParts::MainWindow(parent, 0),
       m_workflow(0),
       m_sidebar(0),
-      m_dockTimeLine(0),
       m_timeLine(0),
       m_previewer(0),
       m_publisher(0),
@@ -122,9 +121,8 @@ MainWindow::~MainWindow()
         delete m_previewer;
         delete m_previewerWidget;
     }
-    if (m_dockTimeLine) {
+    if (m_timeLine) {
         delete m_timeLine;
-        delete m_dockTimeLine;
     }
 
     if (m_editPage) {
@@ -184,17 +182,10 @@ void MainWindow::createDockWidgets()
     m_editWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 
     /////////////////////////////////////////////////////////////////////////
-    m_dockTimeLine = new QDockWidget(i18n("TimeLine"), this);
-    m_dockTimeLine->setObjectName("timeline");
-    m_timeLine = new TimeLine(m_dockTimeLine, m_model->package());
+    m_timeLine = new TimeLine(this, m_model->package());
+    m_timeLine->setObjectName("timeline");
 
-    m_dockTimeLine->setWidget(m_timeLine);
-
-    addDockWidget(Qt::RightDockWidgetArea, m_dockTimeLine);
-
-    m_dockTimeLine->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
-    m_timeLine->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
-
+    addDockWidget(Qt::BottomDockWidgetArea, m_timeLine);
     /////////////////////////////////////////////////////////////////////////
     m_previewerWidget = new QDockWidget(i18n("Previewer"), this);
     m_previewerWidget->setObjectName("workflow");

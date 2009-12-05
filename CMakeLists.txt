@@ -17,9 +17,8 @@ set (PlasMate_SRC
     savesystem/branchdialog.cpp
     savesystem/commitdialog.cpp
     savesystem/timelineitem.cpp
-    savesystem/timelinedelegate.cpp
-    savesystem/timelinelistwidget.cpp
-    savesystem/timelineprivatestorage.cpp
+    savesystem/tabledelegate.cpp
+    savesystem/tablewidget.cpp
     savesystem/timeline.cpp
     mainwindow.cpp
     startpage.cpp
@@ -39,6 +38,7 @@ include_directories(${KDE4_INCLUDES})
 
 add_subdirectory( editors )
 add_subdirectory( previewer )
+add_subdirectory( savesystem )
 add_subdirectory( templates )
 add_subdirectory( publisher )
 add_subdirectory( docbrowser )
