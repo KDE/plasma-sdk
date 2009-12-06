@@ -77,9 +77,14 @@ private:
     class CentralContainer : public QWidget
     {
     public:
+        enum SwitchMode {
+            Preserve,
+            DeleteAfter
+        };
         CentralContainer(QWidget* parent);
-        void switchTo(QWidget* newWidget);
+        void switchTo(QWidget* newWidget, SwitchMode mode = Preserve);
     private:
+        SwitchMode m_curMode;
         QLayout *m_layout;
         QWidget *m_curWidget;
     };

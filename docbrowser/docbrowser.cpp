@@ -13,6 +13,7 @@
 
 #include <KPushButton>
 #include <KLocalizedString>
+#include <KUrl>
 
 #include "docbrowser.h"
 
@@ -35,6 +36,16 @@ DocBrowser::DocBrowser(QWidget *parent)
     layout->addWidget(m_view);
     setLayout(layout);
     showTutorial();
+}
+
+KUrl DocBrowser::currentPage() const
+{
+    return KUrl(m_view->url());
+}
+
+void DocBrowser::load(KUrl page)
+{
+    m_view->load(page);
 }
 
 void DocBrowser::showApi()

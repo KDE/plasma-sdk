@@ -1,3 +1,7 @@
+--December 6,2009--
+- Documentation widget now saves its current page on exit and restores
+  it the next time PlasMate starts.
+
 --December 5, 2009--
 - Rewritten the TimeLine widget in order to allow the user to place it both
   in vertical and horizontal position.

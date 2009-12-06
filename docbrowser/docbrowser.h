@@ -13,6 +13,7 @@
 #include <QWidget>
 
 class QWebView;
+class KUrl;
 
 namespace Ui
 {
@@ -24,6 +25,8 @@ class DocBrowser : public QWidget
     Q_OBJECT;
 public:
     DocBrowser(QWidget* parent);
+    KUrl currentPage() const;
+    void load(KUrl page);
 
 public slots:
     void showTutorial();

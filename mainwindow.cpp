@@ -49,18 +49,22 @@
 
 MainWindow::CentralContainer::CentralContainer(QWidget* parent)
     : QWidget(parent),
-      m_curWidget(0)
+      m_curWidget(0),
+      m_curMode(Preserve)
 {
     m_layout = new QVBoxLayout();
     setLayout(m_layout);
 }
 
-void MainWindow::CentralContainer::switchTo(QWidget* newWidget)
+void MainWindow::CentralContainer::switchTo(QWidget* newWidget, SwitchMode mode)
 {
     if (m_curWidget) {
         m_curWidget->hide();
         m_layout->removeWidget(m_curWidget);
+        if (m_curMode == DeleteAfter)
+            delete m_curWidget;
     }
+    m_curMode = mode;
     m_curWidget = newWidget;
     m_layout->addWidget(m_curWidget);
     m_curWidget->show();
@@ -121,6 +125,20 @@ MainWindow::~MainWindow()
         delete m_previewer;
         delete m_previewerWidget;
     }
+
+    if (m_browser) {
+        // save current page for restoration next time
+        // TODO: Maybe it makes more sense to save this per-project?
+        KConfigGroup cg = KGlobal::config()->group("General");
+        cg.writeEntry("lastBrowserPage", m_browser->currentPage().toEncoded());
+        KGlobal::config()->sync();
+        delete m_browser;
+    }
+
+    if (m_publisher) {
+        delete m_publisher;
+    }
+
     if (m_timeLine) {
         delete m_timeLine;
     }
@@ -208,6 +226,13 @@ void MainWindow::createDockWidgets()
     connect(this, SIGNAL(newSavePointClicked()),
             m_timeLine, SLOT(newSavePoint()));
 
+    // Restore browser widget if there is something to restore
+    KConfigGroup cg = KGlobal::config()->group("General");
+    QString lastPage = cg.readEntry("lastBrowserPage");
+    if (lastPage != QString::null) { // restore!
+        m_browser = new DocBrowser(this);
+        m_browser->load(lastPage);
+    }
     docksCreated = true;
 
     int w = size().width() < sizeHint().width() ? sizeHint().width() : size().width();
@@ -249,9 +274,8 @@ void MainWindow::changeTab(const QModelIndex &item)
             m_central->switchTo(m_part->widget());
             m_part->widget()->setFocus(Qt::OtherFocusReason);
         } else {
-            //FIXME: LEAK!
             QLabel *l = new QLabel(i18n("Select a file to edit."), this);
-            m_central->switchTo(l);
+            m_central->switchTo(l, CentralContainer::DeleteAfter);
         }
     }
     break;
@@ -268,10 +292,9 @@ void MainWindow::changeTab(const QModelIndex &item)
     }
     break;
     case PreviewTab: {
-        // FIXME: LEAK!
         Previewer *tabPreviewer = new Previewer(this);
         tabPreviewer->addApplet(m_model->package());
-        m_central->switchTo(tabPreviewer);
+        m_central->switchTo(tabPreviewer, CentralContainer::DeleteAfter);
     }
     }
 
