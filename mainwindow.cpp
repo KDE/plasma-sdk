@@ -25,6 +25,8 @@
 #include <KTextEditor/ConfigInterface>
 #include <KTextEditor/Document>
 #include <KTextEditor/View>
+#include <KTextEditor/Editor>
+#include <KTextEditor/CommandInterface>
 #include <KStandardAction>
 #include <KUrl>
 #include <KListWidget>
@@ -383,6 +385,13 @@ void MainWindow::setupTextEditor(KTextEditor::Document *editorPart, KTextEditor:
             kDebug() << "setting various config values...";
             config->setConfigValue("line-numbers", true);
             config->setConfigValue("dynamic-word-wrap", true);
+        }
+
+        // set a nicer default indent mode
+        KTextEditor::CommandInterface *command = qobject_cast<KTextEditor::CommandInterface *>(editorPart->editor());
+        if (command) {
+            QString ret;
+            command->queryCommand("set-indent-mode")->exec(view, "set-indent-mode normal", ret);
         }
     }
 
