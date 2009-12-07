@@ -4,7 +4,7 @@
 #include <QFontMetrics>
 #include <QScrollBar>
 
-#include <QDebug>
+//#include <QDebug>
 
 #include "tablewidget.h"
 #include "timelineitem.h"
@@ -27,7 +27,8 @@ TableWidget::TableWidget(Qt::DockWidgetArea location, QWidget *parent)
     verticalHeader()->setVisible(false);
     setIconSize(QSize(32,32));
     setShowGrid(false);
-    setMouseTracking(false);
+    setMouseTracking(true);
+    viewport()->setAutoFillBackground(false);
 
     m_horizontalSB = horizontalScrollBar();
     m_verticalSB = verticalScrollBar();
@@ -183,7 +184,7 @@ void TableWidget::updateSize(TimeLineItem *item)
     QFontMetrics font(item->font());
     QSize rect(ITEM_MARGIN_LEFT + qMax(iconSize().width(), font.width(item->text())) + ITEM_MARGIN_RIGHT,
                ITEM_MARGIN_TOP + iconSize().height() + ITEM_PADDING +
-               font.boundingRect(item->text()).height() + ITEM_MARGIN_BOTTOM );
+               font.boundingRect(item->text()).height() + 2*ITEM_MARGIN_BOTTOM );
 
 
     //qDebug() << "TableWidget::updateSize = " << rect;
@@ -200,8 +201,8 @@ void TableWidget::updateSize(TimeLineItem *item)
         setMaximumHeight(16777215);
         setColumnWidth(1,m_maxCellDimension);
         setColumnWidth(0,m_maxCellDimension);
-        setMinimumWidth(m_maxCellDimension);
-        setMaximumWidth(m_maxCellDimension);
+        setMinimumWidth(m_maxCellDimension+5);
+        setMaximumWidth(m_maxCellDimension+5);
 
     } else {
         setColumnWidth(item->column(),rect.width());
@@ -215,7 +216,7 @@ void TableWidget::updateSize(TimeLineItem *item)
         setMaximumWidth(16777215);
         setRowHeight(1,m_maxCellDimension);
         setRowHeight(0,m_maxCellDimension);
-        setMinimumHeight(m_maxCellDimension);
-        setMaximumHeight(m_maxCellDimension);
+        setMinimumHeight(m_maxCellDimension+5);
+        setMaximumHeight(m_maxCellDimension+5);
     }
 }
