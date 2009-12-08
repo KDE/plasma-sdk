@@ -40,6 +40,11 @@ public:
       */
     void loadTimeLine(const KUrl &dir);
 
+    /**
+      * Returns the location of the dockwidget.
+      */
+    Qt::DockWidgetArea location();
+
 
 public Q_SLOTS:
 

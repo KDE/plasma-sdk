@@ -31,10 +31,8 @@ TimeLine::TimeLine(QWidget *parent,
                    Qt::DockWidgetArea location)
                    :QDockWidget(i18n("TimeLine"))
 {
-    Q_UNUSED(location)
-
     m_gitRunner = new GitRunner();
-    initUI(parent);
+    initUI(parent, location);
 
     if (dir.isValid()) {
         setWorkingDir(dir);
@@ -201,6 +199,11 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     parentWidget()->show();
     connect(m_table, SIGNAL(itemClicked(QTableWidgetItem *)),
             this, SLOT(showContextMenu(QTableWidgetItem *)));
+}
+
+Qt::DockWidgetArea TimeLine::location()
+{
+    return m_table->location();
 }
 
 void TimeLine::showContextMenu(QTableWidgetItem *item)

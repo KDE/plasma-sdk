@@ -117,6 +117,7 @@ MainWindow::~MainWindow()
 
     if (m_workflow) {
         //delete m_startPage;
+        //configDock.writeEntry("WorkflowLocation", QVariant(m_workflow->location()));
         delete m_workflow;
     }
 
@@ -142,6 +143,7 @@ MainWindow::~MainWindow()
     }
 
     if (m_timeLine) {
+        configDock.writeEntry("TimeLineLocation", QVariant(m_timeLine->location()));
         delete m_timeLine;
     }
 
@@ -202,10 +204,14 @@ void MainWindow::createDockWidgets()
     m_editWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 
     /////////////////////////////////////////////////////////////////////////
-    m_timeLine = new TimeLine(this, m_model->package());
-    m_timeLine->setObjectName("timeline");
+    Qt::DockWidgetArea location = (Qt::DockWidgetArea) configDock.readEntry("TimeLineLocation",
+                                                                            QVariant(Qt::BottomDockWidgetArea)).toInt();
+    m_timeLine = new TimeLine(this,
+                              m_model->package(),
+                              location);
 
-    addDockWidget(Qt::BottomDockWidgetArea, m_timeLine);
+    m_timeLine->setObjectName("timeline");
+    addDockWidget(location, m_timeLine);
     /////////////////////////////////////////////////////////////////////////
     m_previewerWidget = new QDockWidget(i18n("Previewer"), this);
     m_previewerWidget->setObjectName("workflow");
