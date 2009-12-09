@@ -1,3 +1,10 @@
+--December 9,2009--
+- Refactored the Sidebar in order to inherit from QTableWidget, now it can
+  be placed both in vertical and horizontal position; btw it need some 
+  polishing yet =)
+- Fixed font rendering, now it doesn't cut the ending of the string
+- Updated older and obsolete includes
+
 --December 6,2009--
 - Documentation widget now saves its current page on exit and restores
   it the next time PlasMate starts.

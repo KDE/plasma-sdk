@@ -95,6 +95,7 @@ void SidebarDelegate::paint(QPainter *painter, const QStyleOptionViewItem &optio
     if (m_showText) {
         QString text = index.data(Qt::DisplayRole).toString();
         QRect fontBoundaries = QFontMetrics(option.font).boundingRect(text);
+        fontBoundaries.setWidth(fontBoundaries.width() + ITEM_PADDING);
         QPoint textPos(
             ITEM_MARGIN_LEFT + (option.rect.width() - ITEM_MARGIN_LEFT - ITEM_MARGIN_RIGHT - fontBoundaries.width()) / 2,
             ITEM_MARGIN_TOP + option.decorationSize.height() + ITEM_PADDING

@@ -10,22 +10,23 @@
 #ifndef _SIDEBAR_H_
 #define _SIDEBAR_H_
 
-#include <QWidget>
+#include <QDockWidget>
 
 class QIcon;
+class SidebarTableWidget;
+class SidebarDelegate;
 
-#include    "sidebarprivatestorage.h"
-
-class Sidebar : public QWidget
+class Sidebar : public QDockWidget
 {
     Q_OBJECT
 public:
-    Sidebar(QWidget *parent = 0);
+    Sidebar(QWidget *parent = 0,
+            Qt::DockWidgetArea location = Qt::TopDockWidgetArea);
     ~Sidebar();
 
-    int addItem(const QIcon &icon, const QString &text);
+    Qt::DockWidgetArea location();
+    void addItem(const QIcon &icon, const QString &text);
 
-    void setItemEnabled(int index, bool enabled);
     bool isItemEnabled(int index) const;
 
     void setCurrentIndex(int index);
@@ -34,13 +35,19 @@ public:
     void setSidebarVisibility(bool visible);
     bool isSidebarVisible() const;
 
+    bool isVertical();
+
 signals:
     void currentIndexClicked(const QModelIndex &item);
+
+protected:
+    void resizeEvent(QResizeEvent * event);
 
 private:
     void saveSplitterSize() const;
 
-    SidebarPrivateStorage *d;
+    SidebarTableWidget *m_table;
+    SidebarDelegate *m_delegate;
 };
 
 #endif

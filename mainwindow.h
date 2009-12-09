@@ -102,7 +102,6 @@ private:
     void setupTextEditor(KTextEditor::Document *editorPart, KTextEditor::View *view);
 
     StartPage *m_startPage;
-    QDockWidget *m_workflow;
     Sidebar *m_sidebar;
     TimeLine    *m_timeLine;
     QDockWidget *m_previewerWidget;

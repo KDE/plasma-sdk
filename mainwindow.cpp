@@ -74,7 +74,6 @@ void MainWindow::CentralContainer::switchTo(QWidget* newWidget, SwitchMode mode)
 
 MainWindow::MainWindow(QWidget *parent)
     : KParts::MainWindow(parent, 0),
-      m_workflow(0),
       m_sidebar(0),
       m_timeLine(0),
       m_previewer(0),
@@ -105,6 +104,8 @@ MainWindow::~MainWindow()
     KConfig c;
     KConfigGroup configDock = c.group("DocksPosition");
     configDock.writeEntry("MainWindowLayout", saveState(0));
+    configDock.writeEntry("WorkflowLocation", QVariant(m_sidebar->location()));
+    configDock.writeEntry("TimeLineLocation", QVariant(m_timeLine->location()));
     c.sync();
 
     // if the user closes the application with an editor open, should
@@ -115,10 +116,9 @@ MainWindow::~MainWindow()
     delete m_metaEditor;
     m_metaEditor = 0;
 
-    if (m_workflow) {
+    if (m_sidebar) {
         //delete m_startPage;
-        //configDock.writeEntry("WorkflowLocation", QVariant(m_workflow->location()));
-        delete m_workflow;
+        delete m_sidebar;
     }
 
     if (m_previewer) {
@@ -143,7 +143,6 @@ MainWindow::~MainWindow()
     }
 
     if (m_timeLine) {
-        configDock.writeEntry("TimeLineLocation", QVariant(m_timeLine->location()));
         delete m_timeLine;
     }
 
@@ -168,9 +167,12 @@ void MainWindow::createDockWidgets()
     KConfig c;
     KConfigGroup configDock = c.group("DocksPosition");
     /////////////////////////////////////////////////////////////////////////
-    m_workflow = new QDockWidget(i18n("Workflow"), this);
-    m_workflow->setObjectName("workflow");
-    m_sidebar = new Sidebar(m_workflow);
+    Qt::DockWidgetArea location = (Qt::DockWidgetArea) configDock.readEntry("WorkflowLocation",
+                                                                            QVariant(Qt::TopDockWidgetArea)).toInt();
+    m_sidebar = new Sidebar(this,
+                            location);
+    m_sidebar->setObjectName("workflow");
+    addDockWidget(location, m_sidebar);
 
     m_sidebar->addItem(KIcon("go-home"), i18n("Start page"));
     m_sidebar->addItem(KIcon("accessories-text-editor"), i18n("Edit"));
@@ -182,11 +184,6 @@ void MainWindow::createDockWidgets()
     connect(m_sidebar, SIGNAL(currentIndexClicked(const QModelIndex &)),
             this, SLOT(changeTab(const QModelIndex &)));
 
-    m_workflow->setWidget(m_sidebar);
-    addDockWidget(Qt::LeftDockWidgetArea, m_workflow);
-
-    m_workflow->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
-    m_sidebar->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
 
     /////////////////////////////////////////////////////////////////////////
     m_editPage = new EditPage();
@@ -204,8 +201,8 @@ void MainWindow::createDockWidgets()
     m_editWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 
     /////////////////////////////////////////////////////////////////////////
-    Qt::DockWidgetArea location = (Qt::DockWidgetArea) configDock.readEntry("TimeLineLocation",
-                                                                            QVariant(Qt::BottomDockWidgetArea)).toInt();
+    location = (Qt::DockWidgetArea) configDock.readEntry("TimeLineLocation",
+                                                         QVariant(Qt::BottomDockWidgetArea)).toInt();
     m_timeLine = new TimeLine(this,
                               m_model->package(),
                               location);
@@ -214,7 +211,7 @@ void MainWindow::createDockWidgets()
     addDockWidget(location, m_timeLine);
     /////////////////////////////////////////////////////////////////////////
     m_previewerWidget = new QDockWidget(i18n("Previewer"), this);
-    m_previewerWidget->setObjectName("workflow");
+    m_previewerWidget->setObjectName("preview");
     m_previewer = new Previewer(this);
     m_previewerWidget->setWidget(m_previewer);
     addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
@@ -225,7 +222,7 @@ void MainWindow::createDockWidgets()
     m_previewer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_previewerWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    splitDockWidget(m_workflow, m_editWidget, Qt::Horizontal);
+    //splitDockWidget(m_workflow, m_editWidget, Qt::Horizontal);
     splitDockWidget(m_editWidget, m_previewerWidget, Qt::Vertical);
 
     // Restoring the previous layout
@@ -259,7 +256,7 @@ void MainWindow::changeTab(const QModelIndex &item)
     // should save data in any open editors when changing tabs
     saveEditorData();
 
-    int tab = item.row();
+    int tab = (m_sidebar->isVertical()) ? item.row(): item.column();
 
     m_startPage->resetStatus();
 

@@ -1,177 +1,162 @@
-/***************************************************************************
- *   Copyright (C) 2007 by Pino Toscano <pino@kde.org>                     *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- ***************************************************************************/
+/****************************************************************************
+ * Copyright (C) 2007 by Diego [Po]lentino Casella <polentino911@gmail.com> *
+ *                                                                          *
+ *   This program is free software; you can redistribute it and/or modify   *
+ *   it under the terms of the GNU General Public License as published by   *
+ *   the Free Software Foundation; either version 2 of the License, or      *
+ *   (at your option) any later version.                                    *
+ ****************************************************************************/
 
+#include <KConfig>
+#include <KIcon>
+#include <KLocalizedString>
 
+#include <QDockWidget>
+#include <QModelIndex>
+#include <QResizeEvent>
+#include <QString>
 
+//#include <QDebug>
 
-#include <qabstractitemdelegate.h>
-#include <qaction.h>
-#include <qapplication.h>
-#include <qevent.h>
-#include <qfont.h>
-#include <qfontmetrics.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qlist.h>
-#include <qlistwidget.h>
-#include <qpainter.h>
-#include <qscrollbar.h>
-#include <qsplitter.h>
-#include <qstackedwidget.h>
-
-#include <kiconloader.h>
-#include <klocale.h>
-#include <kmenu.h>
-
-// #include "settings.h"
-
-#include "sidebaritem.cpp"
-#include "sidebardelegate.h"
-#include "sidebarlistwidget.h"
-#include "sidebarprivatestorage.h"
 #include "sidebar.h"
+#include "sidebartablewidget.h"
+#include "sidebardelegate.h"
+#include "sidebaritem.cpp"
 
-
-Sidebar::Sidebar(QWidget *parent)
-        : QWidget(parent), d(new SidebarPrivateStorage)
+Sidebar::Sidebar(QWidget *parent, Qt::DockWidgetArea location)
+        :QDockWidget(i18n("Workflow"))
 {
-    QHBoxLayout *mainlay = new QHBoxLayout(this);
-    mainlay->setMargin(0);
-    mainlay->setSpacing(0);
+    Q_UNUSED(parent)
 
-    d->list = new SidebarListWidget(this);
-    mainlay->addWidget(d->list);
-    d->list->setMouseTracking(true);
-    d->list->viewport()->setAttribute(Qt::WA_Hover);
-    d->sideDelegate = new SidebarDelegate(d->list);
-//     d->sideDelegate->setShowText( Okular::Settings::sidebarShowText() );
-    d->list->setItemDelegate(d->sideDelegate);
-    d->list->setUniformItemSizes(true);
-    d->list->setSelectionMode(QAbstractItemView::SingleSelection);
-    int iconsize = 32;// Okular::Settings::sidebarIconSize();
-    d->list->setIconSize(QSize(iconsize, iconsize));
-    d->list->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    d->list->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    d->list->setContextMenuPolicy(Qt::CustomContextMenu);
-    d->list->viewport()->setAutoFillBackground(false);
+    setFeatures(QDockWidget::AllDockWidgetFeatures);
+    m_table = new SidebarTableWidget(location);
+    m_table->setParent(this);
+    setWidget(m_table);
 
-    d->splitter = new QSplitter(this);
-    mainlay->addWidget(d->splitter);
-    d->splitter->setOpaqueResize(true);
-    d->splitter->setChildrenCollapsible(false);
+    m_delegate = new SidebarDelegate();
+    m_table->setItemDelegate(m_delegate);
 
-    d->sideContainer = new QWidget(d->splitter);
-    d->sideContainer->setMinimumWidth(90);
-    d->sideContainer->setMaximumWidth(600);
-    d->vlay = new QVBoxLayout(d->sideContainer);
-    d->vlay->setMargin(0);
-
-    d->sideTitle = new QLabel(d->sideContainer);
-    d->vlay->addWidget(d->sideTitle);
-    QFont tf = d->sideTitle->font();
-    tf.setBold(true);
-    d->sideTitle->setFont(tf);
-    d->sideTitle->setMargin(3);
-    d->sideTitle->setIndent(3);
-
-    d->stack = new QStackedWidget(d->sideContainer);
-    d->vlay->addWidget(d->stack);
-    d->sideContainer->hide();
-
-    connect(d->list, SIGNAL(clicked(const QModelIndex &)),
+    connect(m_table, SIGNAL(clicked(const QModelIndex &)),
             this, SIGNAL(currentIndexClicked(const QModelIndex &)));
+
+    connect(this, SIGNAL(dockLocationChanged(Qt::DockWidgetArea)),
+            m_table,SLOT(updateLayout(Qt::DockWidgetArea)));
 
 }
 
 Sidebar::~Sidebar()
 {
-    delete d;
+    //delete d;
 }
 
-int Sidebar::addItem(const QIcon &icon, const QString &text)
+Qt::DockWidgetArea Sidebar::location()
 {
-    SidebarItem *newitem = new SidebarItem(icon, text);
-    d->list->addItem(newitem);
-    d->pages.append(newitem);
-    // updating the minimum height of the icon view, so all are visible with no scrolling
-    d->adjustListSize(false, true);
-    return d->pages.count() - 1;
+    return m_table->location();
 }
 
-void Sidebar::setItemEnabled(int index, bool enabled)
+void Sidebar::resizeEvent(QResizeEvent * event)
 {
-    if (index < 0 || index >= d->pages.count())
-        return;
+    /*
+      I've reimplemented this event handler because, when resizing the main widget to a size
+      smaller than the dockwidget, a bothersome effects appears. According with the orientation,
+      it appears a scrollbar INSIDE the m_table widget, which hovers partially the icons when
+      the dock is vertical, and hovers completely the text when it is horizontal.
+      So I've implemented this simple workaround, in order to expand the dockwidget when a
+      scrollbar is shown.
+      I know that resizing a child widget inside a parent resizeEvent() is dangerous at 98%,
+      by the way this trick is very simple and well structured, so it wont cause issues I hope =)
+      */
 
-    Qt::ItemFlags f = d->pages.at(index)->flags();
-    if (enabled) {
-        f |= Qt::ItemIsEnabled;
-        f |= Qt::ItemIsSelectable;
-    } else {
-        f &= ~Qt::ItemIsEnabled;
-        f &= ~Qt::ItemIsSelectable;
-    }
-    d->pages.at(index)->setFlags(f);
+    QSize newSize = event->size();
+    //qDebug() << "New size: " << newSize;
+    //qDebug() << "m_table size:" << m_table->size();
+    //qDebug() << "m_table total lenght" << m_table->totalLenght();
 
-    if (!enabled && index == currentIndex())
-        // find an enabled item, and select that one
-        for (int i = 0; i < d->pages.count(); ++i)
-            if (d->pages.at(i)->flags() & Qt::ItemIsEnabled) {
-                setCurrentIndex(i);
-                break;
+    bool vertical = ((m_table->location() == Qt::RightDockWidgetArea) ||
+                    (m_table->location() == Qt::LeftDockWidgetArea));
+
+    if(vertical) {
+        if(m_table->totalLenght() > newSize.height()) {
+            m_table->setFixedWidth(m_table->columnWidth(0) + m_table->scrollbarSize(vertical).width());
+            return;
+        } else {
+            if(m_table->columnWidth(0) < newSize.width()) {
+                m_table->setFixedWidth(m_table->columnWidth(0));
+                return;
             }
+        }
+    } else {
+        if(m_table->totalLenght() > newSize.width()) {
+            m_table->setFixedHeight(m_table->rowHeight(0) + m_table->scrollbarSize(vertical).height());
+            return;
+        } else {
+            if(m_table->rowHeight(0) < newSize.height()) {
+                m_table->setFixedHeight(m_table->rowHeight(0));
+                return;
+            }
+        }
+    }
+}
+
+void Sidebar::addItem(const QIcon &icon, const QString &text)
+{
+    SidebarItem *newItem = new SidebarItem(icon, text);
+    m_table->addItem(newItem);
+}
+
+bool Sidebar::isVertical()
+{
+    return ((m_table->location() == Qt::LeftDockWidgetArea)||(m_table->location() == Qt::RightDockWidgetArea));
 }
 
 bool Sidebar::isItemEnabled(int index) const
 {
-    if (index < 0 || index >= d->pages.count())
+    /*if (index < 0 || index >= d->pages.count())
         return false;
 
     Qt::ItemFlags f = d->pages.at(index)->flags();
-    return (f & Qt::ItemIsEnabled) == Qt::ItemIsEnabled;
+    return (f & Qt::ItemIsEnabled) == Qt::ItemIsEnabled;*/
+    return true;
 }
 
 void Sidebar::setCurrentIndex(int index)
 {
-    if (index < 0 || index >= d->pages.count() || !isItemEnabled(index))
-        return;
+    /*if (index < 0 || index >= d->pages.count() || !isItemEnabled(index))
+        return;*/
+    bool vertical = ((m_table->location() == Qt::LeftDockWidgetArea)||
+                     (m_table->location() == Qt::RightDockWidgetArea));
 
-    QModelIndex modelindex = d->list->model()->index(index, 0);
-    d->list->setCurrentIndex(modelindex);
-    d->list->selectionModel()->select(modelindex, QItemSelectionModel::ClearAndSelect);
+    QModelIndex modelindex = m_table->model()->index(vertical? 0: index,
+                                                     vertical? index: 0);
+    m_table->setCurrentIndex(modelindex);
+    m_table->selectionModel()->select(modelindex, QItemSelectionModel::ClearAndSelect);
 }
 
 int Sidebar::currentIndex() const
 {
-    return d->list->currentRow();
+    return m_table->currentRow();
 }
 
 void Sidebar::setSidebarVisibility(bool visible)
 {
-    if (visible != d->list->isHidden())
+    if (visible != m_table->isHidden())
         return;
 
-    static bool sideWasVisible = !d->sideContainer->isHidden();
+    static bool sideWasVisible = !isHidden();
 
-    d->list->setHidden(!visible);
+    m_table->setHidden(!visible);
     if (visible) {
-        d->sideContainer->setHidden(!sideWasVisible);
+        setHidden(!sideWasVisible);
         sideWasVisible = true;
     } else {
-        sideWasVisible = !d->sideContainer->isHidden();
-        d->sideContainer->setHidden(true);
+        sideWasVisible = !isHidden();
+        setHidden(true);
     }
 }
 
 bool Sidebar::isSidebarVisible() const
 {
-    return !d->sideContainer->isHidden();
+    return !isHidden();
 }
 
 #include "sidebar.moc"

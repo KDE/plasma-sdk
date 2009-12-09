@@ -9,8 +9,7 @@ set (PlasMate_SRC
     main.cpp
     sidebaritem.cpp
     sidebardelegate.cpp
-    sidebarlistwidget.cpp
-    sidebarprivatestorage.cpp
+    sidebartablewidget.cpp
     sidebar.cpp
     savesystem/dvcsjob.cpp
     savesystem/gitrunner.cpp
