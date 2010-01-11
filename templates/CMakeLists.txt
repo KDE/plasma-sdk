@@ -1,4 +1,5 @@
 install(FILES 
+  mainRunner.py
   mainDataEngine.py
   mainDataEngine.rb
   mainPlasmoid.js

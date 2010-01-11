@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: iso-8859-1 -*-
 #
 # Author: $AUTHOR <$EMAIL>
 # Date: $DATE

@@ -1,4 +1,8 @@
---December 9,2009--
+--January 11, 2010--
+- Added python runner template, fixed encoding signature and runner creation.
+- Fixed silly crash happening when starting PlasMate and then closing it.
+
+--December 9, 2009--
 - Refactored the Sidebar in order to inherit from QTableWidget, now it can
   be placed both in vertical and horizontal position; btw it need some 
   polishing yet =)

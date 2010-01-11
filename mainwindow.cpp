@@ -104,8 +104,6 @@ MainWindow::~MainWindow()
     KConfig c;
     KConfigGroup configDock = c.group("DocksPosition");
     configDock.writeEntry("MainWindowLayout", saveState(0));
-    configDock.writeEntry("WorkflowLocation", QVariant(m_sidebar->location()));
-    configDock.writeEntry("TimeLineLocation", QVariant(m_timeLine->location()));
     c.sync();
 
     // if the user closes the application with an editor open, should
@@ -118,6 +116,7 @@ MainWindow::~MainWindow()
 
     if (m_sidebar) {
         //delete m_startPage;
+        configDock.writeEntry("WorkflowLocation", QVariant(m_sidebar->location()));
         delete m_sidebar;
     }
 
@@ -143,6 +142,7 @@ MainWindow::~MainWindow()
     }
 
     if (m_timeLine) {
+        configDock.writeEntry("TimeLineLocation", QVariant(m_timeLine->location()));
         delete m_timeLine;
     }
 
@@ -150,6 +150,7 @@ MainWindow::~MainWindow()
         delete m_editPage;
         delete m_editWidget;
     }
+    c.sync();
 }
 
 void MainWindow::createMenus()

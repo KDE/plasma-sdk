@@ -234,10 +234,10 @@ void StartPage::createNewProject()
         serviceTypes = "Plasma/DataEngine";
         templateFilePath.append("mainDataEngine");
     } else if (ui->contentTypes->currentRow() == 2) {
-        serviceTypes = "Plasma/Theme";
-    } else if (ui->contentTypes->currentRow() == 3) {
         serviceTypes = "Plasma/Runner";
         templateFilePath.append("mainRunner");
+    } else if (ui->contentTypes->currentRow() == 3) {
+        serviceTypes = "Plasma/Theme";
     }
 
     // Append the desired extension
@@ -276,6 +276,12 @@ void StartPage::createNewProject()
     replacedString.clear();
 
     replacedString.append("$DATAENGINE_NAME");
+    if(rawData.contains(replacedString)) {
+        rawData.replace(replacedString, projectName.toAscii());
+    }
+    replacedString.clear();
+    
+    replacedString.append("$RUNNER_NAME");
     if(rawData.contains(replacedString)) {
         rawData.replace(replacedString, projectName.toAscii());
     }
