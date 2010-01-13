@@ -39,8 +39,6 @@ add_subdirectory( editors )
 add_subdirectory( previewer )
 add_subdirectory( savesystem )
 add_subdirectory( templates )
-add_subdirectory( publisher )
-add_subdirectory( docbrowser )
 #add_subdirectory( savesystem )
 
 kde4_add_executable(plasmate ${PlasMate_SRC})
