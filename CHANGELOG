@@ -1,3 +1,7 @@
+--January 21, 2010--
+- Added not-so-pretty-but-usable (I think :P ) find text functionality
+  to documentation widget.
+
 --January 11, 2010--
 - Added python runner template, fixed encoding signature and runner creation.
 - Fixed silly crash happening when starting PlasMate and then closing it.

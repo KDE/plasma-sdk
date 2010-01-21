@@ -10,8 +10,10 @@
 #include <QWebView>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QLabel>
 
 #include <KPushButton>
+#include <KLineEdit>
 #include <KLocalizedString>
 #include <KUrl>
 
@@ -21,21 +23,53 @@ DocBrowser::DocBrowser(QWidget *parent)
     :QWidget(parent)
 {
     m_view = new QWebView(this);
-    QHBoxLayout *bar = new QHBoxLayout();
+    connect(m_view, SIGNAL(loadFinished(bool)), this, SLOT(focusSearchField()));
+
+    QHBoxLayout *topbar = new QHBoxLayout();
+    QHBoxLayout *btmbar = new QHBoxLayout();
 
     KPushButton *linkButton = new KPushButton(KIcon("favorites"), i18n("Tutorials"), this);
     connect(linkButton, SIGNAL(clicked()), this, SLOT(showTutorial()));
-    bar->addWidget(linkButton);
+    topbar->addWidget(linkButton);
 
     linkButton = new KPushButton(KIcon("favorites"), i18n("API Reference"), this);
     connect(linkButton, SIGNAL(clicked()), this, SLOT(showApi()));
-    bar->addWidget(linkButton);
+    topbar->addWidget(linkButton);
+
+    searchLabel = new QLabel(i18n("Find : "));
+    btmbar->addWidget(searchLabel);
+
+    // TODO: should probably respond to the common 'Ctrl-F' by
+    //       highlight-focusing the search field
+    searchField = new KLineEdit(this);
+    connect(searchField, SIGNAL(textChanged(const QString&)), this, SLOT(findText(const QString&)));
+    connect(searchField, SIGNAL(returnPressed()), this, SLOT(findNext()));
+    btmbar->addWidget(searchField);
+
+    KPushButton *searchButton = new KPushButton(i18n("Next"), this);
+    connect(searchButton, SIGNAL(clicked()), this, SLOT(findNext()));
+    btmbar->addWidget(searchButton);
 
     QVBoxLayout *layout = new QVBoxLayout();
-    layout->addLayout(bar);
+    layout->addLayout(topbar);
     layout->addWidget(m_view);
+    layout->addLayout(btmbar);
     setLayout(layout);
     showTutorial();
+}
+
+void DocBrowser::findText(const QString& toFind)
+{
+    if (!m_view->findText(toFind, 
+              QWebPage::FindWrapsAroundDocument))
+        searchLabel->setText(i18n("(Text not found!)"));
+    else
+        searchLabel->setText(i18n("Find : "));
+}
+
+void DocBrowser::findNext()
+{
+    m_view->findText(searchField->text(), QWebPage::FindWrapsAroundDocument);
 }
 
 KUrl DocBrowser::currentPage() const
@@ -62,4 +96,10 @@ void DocBrowser::showTutorial()
                       i18n("Loading tutorials...") + 
                       "</h3></center>");
     m_view->load(QUrl("http://techbase.kde.org/Development/Tutorials/Plasma"));
+}
+
+void DocBrowser::focusSearchField()
+{
+    searchField->setFocus(Qt::OtherFocusReason);
+    searchField->selectAll();
 }

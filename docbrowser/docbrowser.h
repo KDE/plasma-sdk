@@ -14,6 +14,7 @@
 
 class QWebView;
 class KUrl;
+class QLabel;
 
 namespace Ui
 {
@@ -31,9 +32,14 @@ public:
 public slots:
     void showTutorial();
     void showApi();
+    void findText(const QString& toFind);
+    void findNext();
+    void focusSearchField();
 
 private:
     QWebView *m_view;
+    KLineEdit *searchField;
+    QLabel *searchLabel;
 };
 
 #endif // PUBLISHER_H

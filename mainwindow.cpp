@@ -295,6 +295,7 @@ void MainWindow::changeTab(const QModelIndex &item)
         if (!m_browser)
             m_browser = new DocBrowser(this);
         m_central->switchTo(m_browser);
+        m_browser->focusSearchField();
     }
     break;
     case PreviewTab: {
