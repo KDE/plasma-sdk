@@ -41,6 +41,11 @@ private slots:
    void emitProjectSelected();
 
 private:
+//TODO: Implement:
+//      search/filterbar,
+//      project deletion,
+//      project multi-export,
+//      project multi-import.
     QListWidget *projectList;
     QPushButton *loadButton;
 };

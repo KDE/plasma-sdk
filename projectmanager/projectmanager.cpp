@@ -23,7 +23,7 @@ ProjectManager::ProjectManager(QWidget* parent) : QDialog(parent)
     projectList = new QListWidget();
     connect(projectList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(emitProjectSelected()));
 
-    loadButton = new QPushButton("Load Project");
+    loadButton = new QPushButton(i18n("Load Project"));
     connect(loadButton, SIGNAL(clicked()), this, SLOT(emitProjectSelected()));
 
     QVBoxLayout *lay = new QVBoxLayout();
