@@ -1,3 +1,9 @@
+--January 27, 2010--
+- Limited recent project list on startpage to showing 5 projects.
+- Added "More Projects" button to startpage, as well as a beginning
+  implementation of a Project Management Dialog, that currently only
+  loads projects.
+
 --January 21, 2010--
 - Added not-so-pretty-but-usable (I think :P ) find text functionality
   to documentation widget.

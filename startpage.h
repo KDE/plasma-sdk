@@ -21,6 +21,7 @@ class QModelIndex;
 class KPushButton;
 class KLineEdit;
 class MainWindow;
+class ProjectManager;
 
 namespace Ui
 {
@@ -34,6 +35,8 @@ class StartPage : public QWidget
     enum Roles {
         FullPathRole = Qt::UserRole + 1
     };
+
+    friend class ProjectManager;
 
 public:
     StartPage(MainWindow *parent);
@@ -62,11 +65,13 @@ signals:
 
 private Q_SLOTS:
     void emitProjectSelected(const QModelIndex &);
+    void emitProjectSelected(const QString &name, const QString &type);
     void changeStackedWidgetPage();
     void createNewProject();
     void cancelNewProject();
     void processProjectName(const QString&);
     void doImport();
+    void showMoreDialog();
 
 private:
     void setupWidgets();
@@ -82,6 +87,8 @@ private:
     KLineEdit *m_newProjectName;
     QVBoxLayout *m_layout;
     MainWindow *m_parent;
+
+    ProjectManager *projectManager;
 };
 
 #endif // STARTPAGE_H

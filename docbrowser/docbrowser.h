@@ -42,4 +42,4 @@ private:
     QLabel *searchLabel;
 };
 
-#endif // PUBLISHER_H
+#endif // DOCBROWSER_H

@@ -37,6 +37,7 @@
 #include "mainwindow.h"
 #include "ui_startpage.h"
 #include "publisher/publisher.h"
+#include "projectmanager/projectmanager.h"
 
 StartPage::StartPage(MainWindow *parent) // TODO set a palette so it will look identical with any color scheme.
         : QWidget(parent),
@@ -53,6 +54,7 @@ StartPage::~StartPage()
 
 void StartPage::setupWidgets()
 {
+    projectManager = new ProjectManager(this);
     ui = new Ui::StartPage;
     ui->setupUi(this);
 
@@ -97,6 +99,11 @@ void StartPage::setupWidgets()
             this, SLOT(cancelNewProject()));
     connect(ui->importButton, SIGNAL(clicked()),
             this, SLOT(doImport()));
+    connect(ui->moreButton, SIGNAL(clicked()),
+            this, SLOT(showMoreDialog()));
+
+    connect(projectManager, SIGNAL(projectSelected(QString, QString)),
+            this, SLOT(emitProjectSelected(QString, QString)));
 
     new QListWidgetItem(KIcon("application-x-plasma"), i18n("Plasmoid"), ui->contentTypes);
     new QListWidgetItem(KIcon("kexi"), i18n("Data Engine"), ui->contentTypes);
@@ -166,6 +173,7 @@ void StartPage::resetStatus()
 void StartPage::refreshRecentProjectsList()
 {
     ui->recentProjects->clear();
+    projectManager->clearProjects();
     QStringList recentFiles = m_parent->recentProjects();
 
     for (int i = 0; i < recentFiles.size(); i++) {
@@ -205,7 +213,11 @@ void StartPage::refreshRecentProjectsList()
             kWarning() << "Unknown service type" << serviceType;
         }
 
-        ui->recentProjects->addItem(item);
+        projectManager->addProject(item);
+        // limit to 5 projects to display up front
+        if (i < 5) {
+            ui->recentProjects->addItem(new QListWidgetItem(*item));
+        }
     }
 }
 
@@ -348,7 +360,12 @@ void StartPage::emitProjectSelected(const QModelIndex &index)
     QString url = m->data(index, FullPathRole).value<QString>();
     kDebug() << "Loading project file:" << m->data(index, FullPathRole);
 
-    emit projectSelected(url, QString());
+    emitProjectSelected(url, QString());
+}
+
+void StartPage::emitProjectSelected(const QString &name, const QString &type)
+{
+    emit projectSelected(name, type);
 }
 
 void StartPage::doImport()
@@ -380,4 +397,9 @@ void StartPage::doImport()
         KMessageBox::information(this, i18n("A problem has occurred during import."));
     }
     emit projectSelected(projectFolder, QString());
+}
+
+void StartPage::showMoreDialog()
+{
+    projectManager->exec();
 }

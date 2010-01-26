@@ -25,6 +25,7 @@ set (PlasMate_SRC
     previewer/previewer.cpp
     publisher/publisher.cpp
     docbrowser/docbrowser.cpp
+    projectmanager/projectmanager.cpp
     )
 
 kde4_add_ui_files (PlasMate_SRC
