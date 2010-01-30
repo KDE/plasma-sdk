@@ -14,6 +14,7 @@
 
 class QWebView;
 class KUrl;
+class KLineEdit;
 class QLabel;
 
 namespace Ui
