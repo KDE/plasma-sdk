@@ -11,9 +11,9 @@
 #define PUBLISHER_H
 
 #include <QWidget>
+#include <KUrl>
 
 class KUrlRequester;
-class KUrl;
 class QPushButton;
 
 namespace Ui
