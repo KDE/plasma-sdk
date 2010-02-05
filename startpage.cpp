@@ -233,7 +233,8 @@ void StartPage::createNewProject()
     QString projectFileExtension;
 
     QString templateFilePath = KStandardDirs::locate("appdata", "templates/");
-    QString projectPath = KStandardDirs::locateLocal("appdata", projectNameLowerCase + '/');
+    QString projectFolderName = generateProjectFolderName(projectNameLowerCase);
+    QString projectPath = KStandardDirs::locateLocal("appdata", projectFolderName + '/');
 
     Plasma::PackageMetadata metadata;
 
@@ -346,7 +347,8 @@ void StartPage::createNewProject()
     metaFile.write(entry);
     metaFile.close();
 
-    emit projectSelected(projectNameLowerCase, serviceTypes);
+    // the loading code expects the FOLDER NAME
+    emit projectSelected(projectFolderName, serviceTypes);
 }
 
 void StartPage::cancelNewProject()
@@ -379,17 +381,11 @@ void StartPage::doImport()
         return;
     }
 
-    // brain-dead way to find a unique project folder name :P
     // we can do this because this is 'under the hood'
     // the user should never be aware of any 'folder names'
     // This nicely eliminates the need for a 'conflict resolution' dialog :)
     QString suggested = QFileInfo(target.path()).baseName();
-    QString projectFolder = suggested;
-    int suffix = 1;
-    while (!KStandardDirs::locate("appdata", projectFolder + '/').isEmpty()) {
-        projectFolder = suggested + QString::number(suffix);
-        suffix++;
-    }
+    QString projectFolder = generateProjectFolderName(suggested);
 
     QString projectPath = KStandardDirs::locateLocal("appdata", projectFolder + '/');
 
@@ -402,4 +398,18 @@ void StartPage::doImport()
 void StartPage::showMoreDialog()
 {
     projectManager->exec();
+}
+
+/**
+ * Brain-dead way of generating a unique folder name.
+ */
+const QString StartPage::generateProjectFolderName(const QString& suggestion)
+{
+    QString projectFolder = suggestion;
+    int suffix = 1;
+    while (!KStandardDirs::locate("appdata", projectFolder + '/').isEmpty()) {
+        projectFolder = suggestion + QString::number(suffix);
+        suffix++;
+    }
+    return projectFolder;
 }

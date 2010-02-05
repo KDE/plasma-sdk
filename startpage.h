@@ -76,6 +76,7 @@ private Q_SLOTS:
 private:
     void setupWidgets();
     void refreshRecentProjectsList();
+    const QString generateProjectFolderName(const QString& suggestion);
 
     Ui::StartPage *ui;
     QLabel *m_createNewLabel;
