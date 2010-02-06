@@ -65,6 +65,12 @@ Q_SIGNALS:
       */
     void currentIndexChanged(int,int);
 
+    /**
+      * Emitted when the timeline performs a switch to an other branch, or a move to
+      * a different commit than HEAD; so the editor can update its current view.
+      */
+    void sourceDirectoryChanged();
+
 private Q_SLOTS:
 
     /**

@@ -340,6 +340,8 @@ void TimeLine::restoreCommit()
     m_gitRunner->deleteCommit(data.toString());
     m_table->disconnect();
     loadTimeLine(m_workingDir);
+
+    emit sourceDirectoryChanged();
 }
 
 void TimeLine::moveToCommit()
@@ -379,6 +381,8 @@ void TimeLine::moveToCommit()
     m_gitRunner->moveToCommit(data.toString(), newBranchName);
     m_table->disconnect();
     loadTimeLine(m_workingDir);
+
+    emit sourceDirectoryChanged();
 }
 
 void TimeLine::switchBranch()
@@ -389,6 +393,8 @@ void TimeLine::switchBranch()
     m_gitRunner->switchBranch(branch);
     m_table->disconnect();
     loadTimeLine(m_workingDir);
+
+    emit sourceDirectoryChanged();
 }
 
 void TimeLine::mergeBranch()
@@ -432,6 +438,8 @@ void TimeLine::mergeBranch()
 
     m_table->disconnect();
     loadTimeLine(m_workingDir);
+
+    emit sourceDirectoryChanged();
 }
 
 void TimeLine::deleteBranch()

@@ -1,3 +1,8 @@
+--February 6, 2010--
+- Added basic git ignore capabilities
+- Added sourceDirectoryChanged to notify when the git repo is changed
+  (now, we have to connect it to the editor, to refresh the view)
+
 --January 27, 2010--
 - Limited recent project list on startpage to showing 5 projects.
 - Added "More Projects" button to startpage, as well as a beginning
