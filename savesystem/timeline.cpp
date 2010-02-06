@@ -288,6 +288,9 @@ void TimeLine::newSavePoint()
         Plasma::PackageMetadata metadata(m_workingDir.pathOrUrl() + "metadata.desktop");
         m_gitRunner->setAuthor(metadata.author());
         m_gitRunner->setEmail(metadata.email());
+
+        // Set up a basic .gitignore file
+        m_gitRunner->addIgnoredFileExtension("*.~");
     }
 
     if(!m_gitRunner->hasNewChangesToCommit())

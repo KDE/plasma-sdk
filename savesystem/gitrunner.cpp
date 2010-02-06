@@ -139,6 +139,19 @@ DvcsJob::JobStatus GitRunner::init(const KUrl &directory)
     return m_jobStatus;
 }
 
+void GitRunner::addIgnoredFileExtension(const QString ignoredFileExtension)
+{
+    QFile gitIgnoreFile(this->m_lastRepoRoot->path() + "/.gitignore");
+    if(!gitIgnoreFile.exists()) {
+        gitIgnoreFile.open(QIODevice::ReadWrite);
+        gitIgnoreFile.write(ignoredFileExtension.toUtf8() + '\n');
+
+    } else {
+        gitIgnoreFile.open(QIODevice::Append);
+        gitIgnoreFile.write(ignoredFileExtension.toUtf8() + '\n');
+    }
+    gitIgnoreFile.close();
+}
 
 DvcsJob::JobStatus GitRunner::createWorkingCopy(const KUrl &repoOrigin,
                                                 const KUrl &repoDestination)

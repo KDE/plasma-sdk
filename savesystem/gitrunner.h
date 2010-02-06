@@ -201,6 +201,12 @@ public:
     DvcsJob::JobStatus init(const KUrl &directory);
 
     /**
+      * It adds a new line inside the .gitignore file (if any, will be created too)
+      * @param file extension to be ignored from git
+      */
+    void addIgnoredFileExtension(const QString ignoredFileExtension);
+
+    /**
       * Create a new branch with the given name.
       * @param newBranch The string containing the new branch name.
       * @return The status of the performed operation.
