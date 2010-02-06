@@ -89,10 +89,15 @@ void StartPage::setupWidgets()
             this, SLOT(createNewProject()));
     connect(ui->recentProjects, SIGNAL(clicked(const QModelIndex)),
             this, SLOT(emitProjectSelected(const QModelIndex)));
+
+    // When there will be a good API for js and rb dataengines and runners, remove the
+    // first connect() statement and uncomment the one below :)
     connect(ui->contentTypes, SIGNAL(clicked(const QModelIndex)),
-            this, SLOT(changeStackedWidgetPage()));
-    connect(ui->contentTypes, SIGNAL(clicked(const QModelIndex)),
-            ui->projectName, SLOT(setFocus()));
+            this, SLOT(validateProjectType(const QModelIndex)));
+    /*connect(ui->contentTypes, SIGNAL(clicked(const QModelIndex)),
+            ui->projectName, SLOT(setFocus()));*/
+
+
     connect(ui->newProjectButton, SIGNAL(clicked()),
             this, SLOT(createNewProject()));
     connect(ui->cancelNewProjectButton, SIGNAL(clicked()),
@@ -127,15 +132,31 @@ void StartPage::processProjectName(const QString& name)
     }
 }
 
-void StartPage::changeStackedWidgetPage()
+void StartPage::validateProjectType(const QModelIndex &sender)
 {
-    ui->layoutHackStackedWidget->setCurrentIndex(1);
-    if (ui->contentTypes->currentRow() == 3) {
-        ui->frame->setEnabled(false);
-        //ui->radioButtonJs->setEnabled( false );
-        //ui->radioButtonPy->setEnabled( false );
-        //ui->radioButtonRb->setEnabled( false );
+
+    if ((sender.row() == 1) ||
+        (sender.row() == 2)) {
+
+        ui->radioButtonPy->setEnabled(false);
+        ui->radioButtonRb->setEnabled(false);
+
+    }else if (sender.row() == 3) {
+
+        ui->radioButtonJs->setEnabled(false);
+        ui->radioButtonPy->setEnabled(false);
+        ui->radioButtonRb->setEnabled(false);
+        //ui->frame->setEnabled(false);
+
+    }else /*if (sender.row() == 0) */{
+
+        ui->radioButtonJs->setEnabled(true);
+        ui->radioButtonPy->setEnabled(true);
+        ui->radioButtonRb->setEnabled(true);
     }
+
+    ui->layoutHackStackedWidget->setCurrentIndex(1);
+    ui->projectName->setFocus();
 }
 
 QString StartPage::userName()
