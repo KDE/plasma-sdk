@@ -209,6 +209,8 @@ void MainWindow::createDockWidgets()
                               location);
 
     m_timeLine->setObjectName("timeline");
+    connect(m_timeLine, SIGNAL(sourceDirectoryChanged()),
+            this, SLOT(editorDestructiveRefresh()));
     addDockWidget(location, m_timeLine);
     /////////////////////////////////////////////////////////////////////////
     m_previewerWidget = new QDockWidget(i18n("Previewer"), this);
@@ -308,7 +310,8 @@ void MainWindow::changeTab(const QModelIndex &item)
     m_oldTab = tab;
 }
 
-void MainWindow::saveEditorData() {
+void MainWindow::saveEditorData()
+{
     if (qobject_cast<KParts::ReadWritePart*>(m_part)) {
         static_cast<KParts::ReadWritePart*>(m_part)->save();
     }
@@ -317,9 +320,21 @@ void MainWindow::saveEditorData() {
     }
 }
 
-void MainWindow::saveAndRefresh() {
+void MainWindow::saveAndRefresh()
+{
     saveEditorData();
     emit refreshRequested();
+}
+
+void MainWindow::editorDestructiveRefresh()
+{
+    if (qobject_cast<KParts::ReadOnlyPart*>(m_part)) {
+        static_cast<KParts::ReadOnlyPart*>(m_part)->openUrl(
+              static_cast<KParts::ReadOnlyPart*>(m_part)->url());
+    }
+    if (m_metaEditor) {
+        m_metaEditor->readFile();
+    }
 }
 
 void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)

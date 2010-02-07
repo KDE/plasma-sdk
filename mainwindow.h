@@ -62,6 +62,8 @@ public Q_SLOTS:
     void loadMetaDataEditor(KUrl target);
     void saveEditorData();
     void saveAndRefresh();
+    // refreshes editor, killing all local changes
+    void editorDestructiveRefresh();
 
 signals:
     void newSavePointClicked();

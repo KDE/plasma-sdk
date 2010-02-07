@@ -1,3 +1,8 @@
+--February 7, 2010--
+- Prevented creation of "theme" projects since there are no templates for it.
+- Connected sourceDirectoryChanged() to a slot that destructive-refreshes
+  any open editor's contents. Timeline works beautifully now! \o/
+
 --February 6, 2010--
 - Added basic git ignore capabilities
 - Added sourceDirectoryChanged to notify when the git repo is changed
