@@ -137,22 +137,24 @@ void StartPage::validateProjectType(const QModelIndex &sender)
 
     if ((sender.row() == 1) ||
         (sender.row() == 2)) {
-
-        ui->radioButtonPy->setEnabled(false);
+        ui->radioButtonJs->setEnabled(false);
+        // gotta explicitly set this to true in case it
+        // was falsed before!
+        ui->radioButtonPy->setEnabled(true);
         ui->radioButtonRb->setEnabled(false);
+        ui->newProjectButton->setEnabled(true); // in case previously falsed
 
-    }else if (sender.row() == 3) {
-
+    } else if (sender.row() == 3) {
         ui->radioButtonJs->setEnabled(false);
         ui->radioButtonPy->setEnabled(false);
         ui->radioButtonRb->setEnabled(false);
-        //ui->frame->setEnabled(false);
+        ui->newProjectButton->setEnabled(false); // disable the create button too.
 
-    }else /*if (sender.row() == 0) */{
-
+    } else /* if (sender.row() == 0) */ {
         ui->radioButtonJs->setEnabled(true);
         ui->radioButtonPy->setEnabled(true);
         ui->radioButtonRb->setEnabled(true);
+        ui->newProjectButton->setEnabled(true); // in case previously falsed
     }
 
     ui->layoutHackStackedWidget->setCurrentIndex(1);
