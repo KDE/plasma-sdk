@@ -40,6 +40,9 @@ Publisher::Publisher(QWidget *parent, const KUrl &path)
     m_installerButton = new QPushButton(i18n("Install current plasmoid"), this);
     m_publisherButton = new QPushButton(i18n("Publish current plasmoid"), this);
 
+    // Disable publish button first since it isn't implemented.
+    m_publisherButton->setEnabled(false);
+
     connect(m_exporterUrl, SIGNAL(urlSelected(const KUrl&)), this, SLOT(addSuffix()));
     connect(m_exporterButton, SIGNAL(clicked()), this, SLOT(doExport()));
     connect(m_installerButton, SIGNAL(clicked()), this, SLOT(doInstall()));

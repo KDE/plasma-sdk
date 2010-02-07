@@ -20,7 +20,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Plasmoid Info</string>
+      <string>Project Info</string>
      </property>
     </widget>
    </item>
@@ -418,11 +418,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
-  </customwidget>
-  <customwidget>
    <class>KIconButton</class>
    <extends>QPushButton</extends>
    <header>kicondialog.h</header>
@@ -431,6 +426,11 @@
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
