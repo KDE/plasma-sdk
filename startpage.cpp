@@ -314,6 +314,18 @@ void StartPage::createNewProject()
     }
     replacedString.clear();
 
+    replacedString.append("$RUBY_CAMEL_NAME");
+    if(rawData.contains(replacedString)) {
+        QByteArray replacement(projectName.toAscii());
+        if(replacement[0] >= 'a' && replacement[0] <= 'z')
+            replacement[0] = replacement[0] + 'A' - 'a';
+        for(size_t i = 1; i < replacement.size(); ++i)
+            if(replacement[i] >= 'A' && replacement[i] <= 'Z')
+                replacement[i] = replacement[i] + 'a' - 'A';
+        rawData.replace(replacedString, replacement);
+    }
+    replacedString.clear();
+
     replacedString.append("$DATAENGINE_NAME");
     if(rawData.contains(replacedString)) {
         rawData.replace(replacedString, projectName.toAscii());
