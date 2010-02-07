@@ -325,6 +325,9 @@ void PackageModel::loadPackage()
 
 void PackageModel::fileAddedOnDisk(const QString &path)
 {
+    if (QFileInfo(path).fileName().at(0) == QChar('.')) {
+        return; // we ignore hidden files
+    }
     KUrl toAdd(path);
     int parentCount = rowCount(QModelIndex());
     for (int i=0; i < parentCount-1; i++) {
