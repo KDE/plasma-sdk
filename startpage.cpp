@@ -316,15 +316,12 @@ void StartPage::createNewProject()
     }
     replacedString.clear();
 
-    replacedString.append("$RUBY_CAMEL_NAME");
+
+    // @schmidt-domine : thanks for committing the lines I forgot adding,
+    // BUT please comply with the TAGS already assigned :)
+    replacedString.append("$PLASMOID_NAME");
     if(rawData.contains(replacedString)) {
-        QByteArray replacement(projectName.toAscii());
-        if(replacement[0] >= 'a' && replacement[0] <= 'z')
-            replacement[0] = replacement[0] + 'A' - 'a';
-        for(size_t i = 1; i < replacement.size(); ++i)
-            if(replacement[i] >= 'A' && replacement[i] <= 'Z')
-                replacement[i] = replacement[i] + 'a' - 'A';
-        rawData.replace(replacedString, replacement);
+        rawData.replace(replacedString, projectName.toAscii());
     }
     replacedString.clear();
 
