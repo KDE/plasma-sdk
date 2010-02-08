@@ -211,6 +211,8 @@ void MainWindow::createDockWidgets()
     m_timeLine->setObjectName("timeline");
     connect(m_timeLine, SIGNAL(sourceDirectoryChanged()),
             this, SLOT(editorDestructiveRefresh()));
+    connect(m_timeLine, SIGNAL(savePointClicked()),
+            this, SLOT(saveEditorData()));
     addDockWidget(location, m_timeLine);
     /////////////////////////////////////////////////////////////////////////
     m_previewerWidget = new QDockWidget(i18n("Previewer"), this);

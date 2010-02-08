@@ -208,6 +208,7 @@ Qt::DockWidgetArea TimeLine::location()
 
 void TimeLine::showContextMenu(QTableWidgetItem *item)
 {
+    emit savePointClicked();
     TimeLineItem *tlItem = dynamic_cast<TimeLineItem*>(item);
     //kDebug() << table->currentItem() << tlItem;
 

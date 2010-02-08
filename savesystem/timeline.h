@@ -71,6 +71,12 @@ Q_SIGNALS:
       */
     void sourceDirectoryChanged();
 
+    /**
+     * Emitted when a timeline item is clicked - to notify mainwindow to
+     * make preparations for a possible save point move/restore.
+     */
+    void savePointClicked();
+
 private Q_SLOTS:
 
     /**

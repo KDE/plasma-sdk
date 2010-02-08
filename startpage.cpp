@@ -203,7 +203,9 @@ void StartPage::refreshRecentProjectsList()
     QStringList recentFiles = m_parent->recentProjects();
 
     for (int i = 0; i < recentFiles.size(); i++) {
-        Plasma::PackageMetadata metadata(KStandardDirs::locateLocal("appdata", recentFiles.at(i) + '/'));
+        // Specify path + filename as well to avoid mistaking .gitignore
+        // as being the metadata file.
+        Plasma::PackageMetadata metadata(KStandardDirs::locateLocal("appdata", recentFiles.at(i) + "/metadata.desktop"));
 
         // Changed this back on second thought. It's better that we
         // do not expose the idea of a 'folder name' to the user -
