@@ -290,7 +290,8 @@ void TimeLine::newSavePoint()
         m_gitRunner->setEmail(metadata.email());
 
         // Set up a basic .gitignore file
-        m_gitRunner->addIgnoredFileExtension("*.~");
+        m_gitRunner->addIgnoredFileExtension("*.*~");
+        m_gitRunner->addIgnoredFileExtension("*.*bak");
     }
 
     if(!m_gitRunner->hasNewChangesToCommit())
