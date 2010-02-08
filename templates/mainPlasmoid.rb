@@ -24,10 +24,10 @@
 # Load QT and KDE Ruby bindings
 require 'plasma_applet'
 
-module $RUBY_CAMEL_NAME
+module $PLASMOID_NAME
 
   # Declare our main class as PlasmaScripting::Applet subclass
-  class $RUBY_CAMEL_NAME < PlasmaScripting::Applet
+  class Main$PLASMOID_NAME < PlasmaScripting::Applet
 
     #   Constructor, forward initialization to its superclass
     #   Note: try to NOT modify this constructor; all the setup code
