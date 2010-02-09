@@ -16,11 +16,16 @@
 
 int main(int argc, char *argv[])
 {
-    KAboutData aboutData("plasmate", 0, ki18n("PlasMate"),
-                         "0.1", ki18n("A Plasma friendly IDE"),
+    KAboutData aboutData("plasmate", 0, ki18n("Plasmate"),
+                         "0.1alpha1", ki18n("A Plasma Add-ons Creator"),
                          KAboutData::License_GPL,
-                         ki18n("(c) 2009  Riccardo Iaconelli"),
-                         KLocalizedString(), "", "riccardo@kde.org");
+                         ki18n("(c) 2009-2010 Plasma Development Team"),
+                         KLocalizedString(), "", "plasma-devel@kde.org");
+
+    aboutData.addAuthor(ki18n("Shantanu Tushar Jha"), ki18n("Author"), "jhahoneyk@gmail.com");
+    aboutData.addAuthor(ki18n("Diego Casella"), ki18n("Author"), "polentino911@gmail.com");
+    aboutData.addAuthor(ki18n("Yuen Hoe Lim"), ki18n("Author"), "yuenhoe86@gmail.com");
+    aboutData.addAuthor(ki18n("Aaron Seigo"), ki18n("Author"), "aseigo@kde.org");
     aboutData.addAuthor(ki18n("Riccardo Iaconelli"), ki18n("Author"), "riccardo@kde.org");
 
     KCmdLineArgs::init(argc, argv, &aboutData);

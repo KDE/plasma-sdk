@@ -1,5 +1,14 @@
 PlasMate
 
+=== Development and Feedback ===
+Please report bugs to http://bugs.kde.org under the plasmate coponent.
+
+Development discussion occurs on the plasma-deve@kde.org mailing list and #plasma on irc.freenode.net.
+
+Patch review is done on http://reviewboard.kde.org and patches should be assigned to the plasma group.
+
+Coding style is the KDE Libs Coding Style: http://techbase.kde.org/Policies/Kdelibs_Coding_Style
+
 === First Impressions ===
 
 On launch the window will contain only a "start page". Logo at the top, tagline
