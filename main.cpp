@@ -25,6 +25,9 @@ int main(int argc, char *argv[])
     aboutData.addAuthor(ki18n("Shantanu Tushar Jha"), ki18n("Author"), "jhahoneyk@gmail.com");
     aboutData.addAuthor(ki18n("Diego Casella"), ki18n("Author"), "polentino911@gmail.com");
     aboutData.addAuthor(ki18n("Yuen Hoe Lim"), ki18n("Author"), "yuenhoe86@gmail.com");
+    aboutData.addAuthor(ki18n("Richard Moore"), ki18n("Author"), "richmoore44@gmail.com");
+    aboutData.addAuthor(ki18n("Artur Duque de Souza"), ki18n("Author"), "morpheuz@gmail.com");
+    aboutData.addAuthor(ki18n("Frerich Raabe"), ki18n("Author"), "raabe@kde.org");
     aboutData.addAuthor(ki18n("Aaron Seigo"), ki18n("Author"), "aseigo@kde.org");
     aboutData.addAuthor(ki18n("Riccardo Iaconelli"), ki18n("Author"), "riccardo@kde.org");
 
