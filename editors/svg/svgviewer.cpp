@@ -68,7 +68,7 @@ SvgViewer::Mode SvgViewer::mode() const
     return m_mode;
 }
 
-void SvgViewer::paintEvent(QPaintEvent *e)
+void SvgViewer::paintEvent(QPaintEvent *)
 {
     QPainter p(this);
 
@@ -84,7 +84,7 @@ void SvgViewer::mouseReleaseEvent(QMouseEvent *e)
 }
 #endif
 
-void SvgViewer::resizeEvent(QResizeEvent *e)
+void SvgViewer::resizeEvent(QResizeEvent *)
 {
     if (!m_renderer)
         return;
