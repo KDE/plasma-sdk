@@ -51,8 +51,8 @@
 
 MainWindow::CentralContainer::CentralContainer(QWidget* parent)
     : QWidget(parent),
-      m_curWidget(0),
-      m_curMode(Preserve)
+      m_curMode(Preserve),
+      m_curWidget(0)
 {
     m_layout = new QVBoxLayout();
     setLayout(m_layout);
@@ -73,13 +73,13 @@ void MainWindow::CentralContainer::switchTo(QWidget* newWidget, SwitchMode mode)
 }
 
 MainWindow::MainWindow(QWidget *parent)
-    : KParts::MainWindow(parent, 0),
+    : KParts::MainWindow(parent, Qt::Widget),
       m_sidebar(0),
       m_timeLine(0),
       m_previewer(0),
+      m_metaEditor(0),
       m_publisher(0),
       m_browser(0),
-      m_metaEditor(0),
       m_editWidget(0),
       m_editPage(0),
       m_model(0),
