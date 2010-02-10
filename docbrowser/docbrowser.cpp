@@ -7,6 +7,8 @@
   (at your option) any later version.
 */
 
+#include "docbrowser.h"
+
 #include <QWebView>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -17,10 +19,11 @@
 #include <KLocalizedString>
 #include <KUrl>
 
-#include "docbrowser.h"
+#include "packagemodel.h"
 
-DocBrowser::DocBrowser(QWidget *parent)
-    :QWidget(parent)
+DocBrowser::DocBrowser(const PackageModel *package, QWidget *parent)
+    : QWidget(parent),
+      m_package(package)
 {
     m_view = new QWebView(this);
     connect(m_view, SIGNAL(loadFinished(bool)), this, SLOT(focusSearchField()));
@@ -40,15 +43,15 @@ DocBrowser::DocBrowser(QWidget *parent)
     connect(linkButton, SIGNAL(clicked()), this, SLOT(showHelp()));
     topbar->addWidget(linkButton);
 
-    searchLabel = new QLabel(i18n("Find : "));
-    btmbar->addWidget(searchLabel);
+    m_searchLabel = new QLabel(i18n("Find : "));
+    btmbar->addWidget(m_searchLabel);
 
     // TODO: should probably respond to the common 'Ctrl-F' by
     //       highlight-focusing the search field
-    searchField = new KLineEdit(this);
-    connect(searchField, SIGNAL(textChanged(const QString&)), this, SLOT(findText(const QString&)));
-    connect(searchField, SIGNAL(returnPressed()), this, SLOT(findNext()));
-    btmbar->addWidget(searchField);
+    m_searchField = new KLineEdit(this);
+    connect(m_searchField, SIGNAL(textChanged(const QString&)), this, SLOT(findText(const QString&)));
+    connect(m_searchField, SIGNAL(returnPressed()), this, SLOT(findNext()));
+    btmbar->addWidget(m_searchField);
 
     KPushButton *searchButton = new KPushButton(i18n("Next"), this);
     connect(searchButton, SIGNAL(clicked()), this, SLOT(findNext()));
@@ -64,16 +67,16 @@ DocBrowser::DocBrowser(QWidget *parent)
 
 void DocBrowser::findText(const QString& toFind)
 {
-    if (!m_view->findText(toFind, 
-              QWebPage::FindWrapsAroundDocument))
-        searchLabel->setText(i18n("(Text not found!)"));
-    else
-        searchLabel->setText(i18n("Find : "));
+    if (!m_view->findText(toFind, QWebPage::FindWrapsAroundDocument)) {
+        m_searchLabel->setText(i18n("(Text not found!)"));
+    } else {
+        m_searchLabel->setText(i18n("Find : "));
+    }
 }
 
 void DocBrowser::findNext()
 {
-    m_view->findText(searchField->text(), QWebPage::FindWrapsAroundDocument);
+    m_view->findText(m_searchField->text(), QWebPage::FindWrapsAroundDocument);
 }
 
 KUrl DocBrowser::currentPage() const
@@ -86,12 +89,35 @@ void DocBrowser::load(KUrl page)
     m_view->load(page);
 }
 
+void DocBrowser::setPackage(const PackageModel *package)
+{
+    m_package = package;
+}
+
+const PackageModel *DocBrowser::package() const
+{
+    return m_package;
+}
+
 void DocBrowser::showApi()
 {
     m_view->setHtml("<center><h3>" + 
                       i18n("Loading API reference...") + 
                       "</h3></center>");
-    m_view->load(QUrl("http://api.kde.org/4.x-api/kdelibs-apidocs/plasma/html/annotated.html"));
+    QUrl url("http://api.kde.org/4.x-api/kdelibs-apidocs/plasma/html/annotated.html");
+
+    if (m_package) {
+        //TODO: API specific to each kind of package!
+        //kDebug() << m_package->implementationApi() << m_package->packageType();
+        if (m_package->packageType() == "Plasma/Applet") {
+            if (m_package->implementationApi().toLower() == "javascript") {
+                url = QUrl("http://techbase.kde.org/Development/Tutorials/Plasma/JavaScript/API");
+            }
+        }
+    }
+
+    kDebug() << "loading" << url;
+    m_view->load(url);
 }
 
 void DocBrowser::showTutorial()
@@ -112,6 +138,6 @@ void DocBrowser::showHelp()
 
 void DocBrowser::focusSearchField()
 {
-    searchField->setFocus(Qt::OtherFocusReason);
-    searchField->selectAll();
+    m_searchField->setFocus(Qt::OtherFocusReason);
+    m_searchField->selectAll();
 }

@@ -116,7 +116,7 @@ private:
     EditPage *m_editPage;
     PackageModel *m_model;
     int m_oldTab;
-    bool docksCreated;
+    bool m_docksCreated;
     CentralContainer *m_central;
 
     KParts::ReadOnlyPart *m_part;

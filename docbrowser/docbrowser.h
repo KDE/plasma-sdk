@@ -19,16 +19,21 @@ class QLabel;
 
 namespace Ui
 {
-class DocBrowser;
+    class DocBrowser;
 }
+
+class PackageModel;
 
 class DocBrowser : public QWidget
 {
     Q_OBJECT;
 public:
-    DocBrowser(QWidget* parent);
+    DocBrowser(const PackageModel *package, QWidget* parent);
     KUrl currentPage() const;
     void load(KUrl page);
+
+    void setPackage(const PackageModel *package);
+    const PackageModel *package() const;
 
 public slots:
     void showTutorial();
@@ -40,8 +45,9 @@ public slots:
 
 private:
     QWebView *m_view;
-    KLineEdit *searchField;
-    QLabel *searchLabel;
+    KLineEdit *m_searchField;
+    QLabel *m_searchLabel;
+    const PackageModel *m_package;
 };
 
 #endif // DOCBROWSER_H

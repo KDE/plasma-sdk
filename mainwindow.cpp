@@ -84,7 +84,7 @@ MainWindow::MainWindow(QWidget *parent)
       m_editPage(0),
       m_model(0),
       m_oldTab(0), // we start from startPage
-      docksCreated(false),
+      m_docksCreated(false),
       m_part(0)
 {
     setXMLFile("plasmateui.rc");
@@ -240,10 +240,14 @@ void MainWindow::createDockWidgets()
     KConfigGroup cg = KGlobal::config()->group("General");
     QString lastPage = cg.readEntry("lastBrowserPage");
     if (lastPage != QString::null) { // restore!
-        m_browser = new DocBrowser(this);
+        if (!m_browser) {
+            m_browser = new DocBrowser(m_model, this);
+        }
+
         m_browser->load(lastPage);
     }
-    docksCreated = true;
+
+    m_docksCreated = true;
 
     int w = size().width() < sizeHint().width() ? sizeHint().width() : size().width();
     int h = size().height() < sizeHint().height() ? sizeHint().height() : size().height();
@@ -296,8 +300,9 @@ void MainWindow::changeTab(const QModelIndex &item)
     }
     break;
     case DocsTab: {
-        if (!m_browser)
-            m_browser = new DocBrowser(this);
+        if (!m_browser) {
+            m_browser = new DocBrowser(m_model, this);
+        }
         m_central->switchTo(m_browser);
         m_browser->focusSearchField();
     }
@@ -480,8 +485,9 @@ void MainWindow::loadProject(const QString &name, const QString &type)
 
     if (!name.isEmpty()) {
         recentFiles.prepend(name);
-    } else
+    } else {
         return;
+    }
 
     kDebug() << "Writing the following m_sidebar of recent files to the config:" << recentFiles;
 
@@ -489,9 +495,9 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     KGlobal::config()->sync();
 
     // Load the needed widgets, switch to page 1 (edit)...
-    if(!docksCreated)
+    if (!m_docksCreated) {
         createDockWidgets();
-    else { // loading a new project!
+    } else { // loading a new project!
         // workaround to completely clear previewer
         delete m_previewer;
         m_previewer = new Previewer(this);
@@ -501,6 +507,10 @@ void MainWindow::loadProject(const QString &name, const QString &type)
         // delete old publisher
         delete m_publisher;
         m_publisher = 0;
+
+        if (m_browser) {
+            m_browser->setPackage(m_model);
+        }
     }
 
     QLabel *l = new QLabel(i18n("Select a file to edit."), this);
