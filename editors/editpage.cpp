@@ -38,7 +38,7 @@ void EditPage::doDelete(bool)
         QFile::remove(path);
 }
 
-void EditPage::showTreeContextMenu(const QPoint& her)
+void EditPage::showTreeContextMenu(const QPoint&)
 {
     QModelIndexList items = selectedIndexes();
     if (items.empty())
