@@ -36,6 +36,10 @@ DocBrowser::DocBrowser(QWidget *parent)
     connect(linkButton, SIGNAL(clicked()), this, SLOT(showApi()));
     topbar->addWidget(linkButton);
 
+    linkButton = new KPushButton(KIcon("plasmagik"), i18n("Plasmate"), this);
+    connect(linkButton, SIGNAL(clicked()), this, SLOT(showHelp()));
+    topbar->addWidget(linkButton);
+
     searchLabel = new QLabel(i18n("Find : "));
     btmbar->addWidget(searchLabel);
 
@@ -96,6 +100,14 @@ void DocBrowser::showTutorial()
                       i18n("Loading tutorials...") + 
                       "</h3></center>");
     m_view->load(QUrl("http://techbase.kde.org/Development/Tutorials/Plasma"));
+}
+
+void DocBrowser::showHelp()
+{
+    m_view->setHtml("<center><h3>" + 
+                      i18n("Loading Plasmate Guide...") + 
+                      "</h3></center>");
+    m_view->load(QUrl("http://userbase.kde.org/Plasmate"));
 }
 
 void DocBrowser::focusSearchField()

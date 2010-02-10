@@ -33,6 +33,7 @@ public:
 public slots:
     void showTutorial();
     void showApi();
+    void showHelp();
     void findText(const QString& toFind);
     void findNext();
     void focusSearchField();
