@@ -67,10 +67,10 @@ void StartPage::setupWidgets()
 
     // If username or email are empty string, i.e. in the previous project the
     // developer deleted it, restore the default values
-    if(userName.isEmpty()) {
+    if (userName.isEmpty()) {
         userName = user.loginName();
     }
-    if(userEmail.isEmpty()) {
+    if (userEmail.isEmpty()) {
         userEmail.append(user.loginName()+"@none.org");
     }
 
@@ -268,10 +268,7 @@ void StartPage::createNewProject()
 
     // type -> serviceTypes
     QString serviceTypes;
-    if (ui->contentTypes->currentRow() == 0) {
-        serviceTypes = "Plasma/Applet";
-        templateFilePath.append("mainPlasmoid");
-    } else if (ui->contentTypes->currentRow() == 1) {
+    if (ui->contentTypes->currentRow() == 1) {
         serviceTypes = "Plasma/DataEngine";
         templateFilePath.append("mainDataEngine");
     } else if (ui->contentTypes->currentRow() == 2) {
@@ -279,18 +276,21 @@ void StartPage::createNewProject()
         templateFilePath.append("mainRunner");
     } else if (ui->contentTypes->currentRow() == 3) {
         serviceTypes = "Plasma/Theme";
+    } else {
+        serviceTypes = "Plasma/Applet";
+        templateFilePath.append("mainPlasmoid");
     }
 
     // Append the desired extension
-    if (ui->radioButtonJs->isChecked()) {
-        metadata.setImplementationApi("javascript");
-        projectFileExtension.append(".js");
-    } else if (ui->radioButtonPy->isChecked()) {
+    if (ui->radioButtonPy->isChecked()) {
         metadata.setImplementationApi("python");
         projectFileExtension.append(".py");
-    } else if (ui->radioButtonRb->isChecked()) {
+    } if (ui->radioButtonRb->isChecked()) {
         metadata.setImplementationApi("ruby-script");
         projectFileExtension.append(".rb");
+    } else {
+        metadata.setImplementationApi("javascript");
+        projectFileExtension.append(".js");
     }
 
     // Creating the corresponding folder
@@ -299,10 +299,7 @@ void StartPage::createNewProject()
 
     // Create a QFile object that points to the template we need to copy
     QFile sourceFile(templateFilePath + projectFileExtension);
-    QFile destinationFile(projectPath +
-                          "contents/code/" +
-                          projectNameLowerCase +
-                          projectFileExtension);
+    QFile destinationFile(projectPath + "contents/code/" + projectNameLowerCase + projectFileExtension);
 
     // Now open these files, and substitute the main class, author, email and date fields
     sourceFile.open(QIODevice::ReadOnly);
@@ -311,7 +308,7 @@ void StartPage::createNewProject()
     QByteArray rawData = sourceFile.readAll();
 
     QByteArray replacedString("$PLASMOID_NAME");
-    if(rawData.contains(replacedString)) {
+    if (rawData.contains(replacedString)) {
         rawData.replace(replacedString, projectName.toAscii());
     }
     replacedString.clear();
@@ -320,25 +317,25 @@ void StartPage::createNewProject()
     // @schmidt-domine : thanks for committing the lines I forgot adding,
     // BUT please comply with the TAGS already assigned :)
     replacedString.append("$PLASMOID_NAME");
-    if(rawData.contains(replacedString)) {
+    if (rawData.contains(replacedString)) {
         rawData.replace(replacedString, projectName.toAscii());
     }
     replacedString.clear();
 
     replacedString.append("$DATAENGINE_NAME");
-    if(rawData.contains(replacedString)) {
+    if (rawData.contains(replacedString)) {
         rawData.replace(replacedString, projectName.toAscii());
     }
     replacedString.clear();
-    
+
     replacedString.append("$RUNNER_NAME");
-    if(rawData.contains(replacedString)) {
+    if (rawData.contains(replacedString)) {
         rawData.replace(replacedString, projectName.toAscii());
     }
     replacedString.clear();
 
     replacedString.append("$AUTHOR");
-    if(rawData.contains(replacedString)) {
+    if (rawData.contains(replacedString)) {
         rawData.replace(replacedString, ui->authorTextField->text().toAscii());
     }
     replacedString.clear();
