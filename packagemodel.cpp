@@ -49,6 +49,15 @@ QString PackageModel::contentsPrefix() const
     return m_structure->contentsPrefix();
 }
 
+QString PackageModel::implementationApi() const
+{
+    if (m_structure) {
+        return const_cast<Plasma::PackageStructure::Ptr &>(m_structure)->metadata().implementationApi();
+    }
+
+    return QString();
+}
+
 void PackageModel::setPackage(const QString &path)
 {
     if (!m_structure) {
@@ -245,7 +254,7 @@ void PackageModel::loadPackage()
     if (!dir.exists("metadata.desktop")) {
         KUser user;
         Plasma::PackageMetadata metadata;
-        metadata.setAuthor(user.fullName());
+        metadata.setAuthor(user.property(KUser::FullName).toString());
         metadata.setLicense("GPL");
         metadata.setName(dir.dirName());
         metadata.setServiceType(structure->type());

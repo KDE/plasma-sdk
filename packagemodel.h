@@ -24,6 +24,8 @@ public:
     void setPackageType(const QString &type);
     QString packageType() const;
 
+    QString implementationApi() const;
+
     void setPackage(const QString &path);
     QString package() const;
     QString contentsPrefix() const;
