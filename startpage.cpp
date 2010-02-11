@@ -23,6 +23,7 @@
 #include <KUser>
 // #include <KLocalizedString>
 #include <KDebug>
+#include <KDesktopFile>
 #include <KLineEdit>
 #include <KPushButton>
 #include <KSeparator>
@@ -284,13 +285,13 @@ void StartPage::createNewProject()
     // Append the desired extension
     if (ui->radioButtonPy->isChecked()) {
         metadata.setImplementationApi("python");
-        projectFileExtension.append(".py");
-    } if (ui->radioButtonRb->isChecked()) {
+        projectFileExtension = ".py";
+    } else if (ui->radioButtonRb->isChecked()) {
         metadata.setImplementationApi("ruby-script");
-        projectFileExtension.append(".rb");
+        projectFileExtension = ".rb";
     } else {
         metadata.setImplementationApi("javascript");
-        projectFileExtension.append(".js");
+        projectFileExtension = ".js";
     }
 
     // Creating the corresponding folder
@@ -369,17 +370,11 @@ void StartPage::createNewProject()
 
     // Note: since PackageMetadata lacks of a good api to add X-Plasma-* entries,
     // we add it manually until a patch is released.
-    QFile metaFile(projectPath + "metadata.desktop");
-    metaFile.open(QIODevice::Append);
-    QByteArray entry = "X-Plasma-MainScript=code/" +
-                       projectNameLowerCase.toUtf8() +
-                       projectFileExtension.toUtf8() +
-                       "\n";
-    metaFile.write(entry);
-    entry.clear();
-    entry.append("X-Plasma-DefaultSize=200,100\n");
-    metaFile.write(entry);
-    metaFile.close();
+    KDesktopFile metaFile(projectPath + "metadata.desktop");
+    KConfigGroup metaDataGroup = metaFile.desktopGroup();
+    metaDataGroup.writeEntry("X-Plasma-MainScript", "code/" + projectNameLowerCase + projectFileExtension);
+    metaDataGroup.writeEntry("X-Plasma-DefaultSize", QSize(200, 100));
+    metaFile.sync();
 
     // the loading code expects the FOLDER NAME
     emit projectSelected(projectFolderName, serviceTypes);
