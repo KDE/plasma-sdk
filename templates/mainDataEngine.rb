@@ -46,9 +46,6 @@ class Main$DATAENGINE_NAME < PlasmaScripting::DataEngine
     #   sources method
     #   Used by applets to request what data source the DataEngine has
     def sources
-      timezones = KDE::SystemTimeZones.zones.keys
-      timezones << "Local"
-      return timezones
     end
 
     #   sourceRequestEvent method
@@ -60,7 +57,7 @@ class Main$DATAENGINE_NAME < PlasmaScripting::DataEngine
 
     #   updateSourceEvent method
     #   The main function for a DataEngine
-    def updateSourceEvent(tz)
+    def updateSourceEvent(source)
       # Add custom code here
       return true
     end
