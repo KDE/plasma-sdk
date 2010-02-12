@@ -76,6 +76,7 @@ private Q_SLOTS:
 private:
     void setupWidgets();
     void refreshRecentProjectsList();
+    static QString camelToSnakeCase(const QString& name);
     const QString generateProjectFolderName(const QString& suggestion);
 
     Ui::StartPage *ui;

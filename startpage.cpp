@@ -119,6 +119,13 @@ void StartPage::setupWidgets()
 //     connect(ui->newProjectButton, SIGNAL(clicked()), this, SLOT(launchNewProjectWizard()));
 }
 
+// Convert FooBar to foo_bar
+QString StartPage::camelToSnakeCase(const QString& name)
+{
+    QString result(name);
+    return result.replace(QRegExp("([A-Z])"), "_\\1").toLower().replace(QRegExp("^_"), "");
+}
+
 void StartPage::processProjectName(const QString& name)
 {
     QRegExp validatePluginName("[a-zA-Z0-9_.]*");
@@ -267,12 +274,11 @@ void StartPage::createNewProject()
 
     // packagePath -> projectPath
     QString projectNameLowerCase = ui->projectName->text().toLower();
+    QString projectNameSnakeCase = camelToSnakeCase(ui->projectName->text());
     QString projectName = ui->projectName->text();
     QString projectFileExtension;
 
     QString templateFilePath = KStandardDirs::locate("appdata", "templates/");
-    QString projectFolderName = generateProjectFolderName(projectNameLowerCase);
-    QString projectPath = KStandardDirs::locateLocal("appdata", projectFolderName + '/');
 
     Plasma::PackageMetadata metadata;
 
@@ -291,25 +297,35 @@ void StartPage::createNewProject()
         templateFilePath.append("mainPlasmoid");
     }
 
+    QString projectFolderName;
+    QString mainScriptName;
+
     // Append the desired extension
     if (ui->radioButtonPy->isChecked()) {
         metadata.setImplementationApi("python");
+        projectFolderName = generateProjectFolderName(projectNameLowerCase);
         projectFileExtension = ".py";
+        mainScriptName = projectNameLowerCase + projectFileExtension;
     } else if (ui->radioButtonRb->isChecked()) {
         metadata.setImplementationApi("ruby-script");
+        projectFolderName = generateProjectFolderName(projectNameSnakeCase);
         projectFileExtension = ".rb";
+        mainScriptName = QString("main_") + projectNameSnakeCase + projectFileExtension;
     } else {
         metadata.setImplementationApi("javascript");
+        projectFolderName = generateProjectFolderName(projectNameLowerCase);
         projectFileExtension = ".js";
+        mainScriptName = projectNameLowerCase + projectFileExtension;
     }
-
+    
     // Creating the corresponding folder
+    QString projectPath = KStandardDirs::locateLocal("appdata", projectFolderName + '/');
     QDir packageSubDirs(projectPath);
     packageSubDirs.mkpath("contents/code/");
 
     // Create a QFile object that points to the template we need to copy
     QFile sourceFile(templateFilePath + projectFileExtension);
-    QFile destinationFile(projectPath + "contents/code/" + projectNameLowerCase + projectFileExtension);
+    QFile destinationFile(projectPath + "contents/code/" + mainScriptName);
 
     // Now open these files, and substitute the main class, author, email and date fields
     sourceFile.open(QIODevice::ReadOnly);
@@ -381,7 +397,7 @@ void StartPage::createNewProject()
     // we add it manually until a patch is released.
     KDesktopFile metaFile(projectPath + "metadata.desktop");
     KConfigGroup metaDataGroup = metaFile.desktopGroup();
-    metaDataGroup.writeEntry("X-Plasma-MainScript", "code/" + projectNameLowerCase + projectFileExtension);
+    metaDataGroup.writeEntry("X-Plasma-MainScript", "code/" + mainScriptName);
     metaDataGroup.writeEntry("X-Plasma-DefaultSize", QSize(200, 100));
     metaFile.sync();
 
