@@ -1,3 +1,6 @@
+--February 13,2010--
+- Added sensible indentation/tab defaults for editor (katepart).
+
 --February 7, 2010--
 - Prevented creation of "theme" projects since there are no templates for it.
 - Connected sourceDirectoryChanged() to a slot that destructive-refreshes

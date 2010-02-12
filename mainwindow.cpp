@@ -364,8 +364,16 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
     if (!m_part || !part->inherits(m_part->metaObject()->className())) {
         delete m_part; // reuse if we can
         m_part = part;
+    } else {
+        delete part;
+        //mainWidget = m_part->widget();
+    }
+
+    // open the target for editting/viewing
+    if (!target.equals(m_part->url())) {
+        m_part->openUrl(target);
         KTextEditor::Document *editorPart = qobject_cast<KTextEditor::Document *>(m_part);
-        if (editorPart) {
+        if (editorPart) { // resetup editor if opening new/different file
             KTextEditor::View *view = qobject_cast<KTextEditor::View *>(editorPart->widget());
             setupTextEditor(editorPart, view);
             mainWidget = view;
@@ -373,8 +381,7 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
             mainWidget = m_part->widget();
         }
     } else {
-        delete part;
-        mainWidget = m_part->widget();
+      mainWidget = m_part->widget();
     }
 
     if (!m_part) {
@@ -383,9 +390,6 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
 
     m_central->switchTo(mainWidget);
 
-    // open the target for editting/viewing
-    if (!target.equals(m_part->url()))
-        m_part->openUrl(target);
     mainWidget->setMinimumWidth(300);
     //Add the part's GUI
     //createGUI(m_part);
@@ -403,7 +407,6 @@ void MainWindow::setupTextEditor(KTextEditor::Document *editorPart, KTextEditor:
 {
     //FIXME: we should be setting the highlight based on the type of document
     //editorPart->setHighlightingMode("JavaScript");
-
     if (view) {
         view->setContextMenu(view->defaultContextMenu());
 
@@ -414,11 +417,17 @@ void MainWindow::setupTextEditor(KTextEditor::Document *editorPart, KTextEditor:
             config->setConfigValue("dynamic-word-wrap", true);
         }
 
-        // set a nicer default indent mode
+        // set nice defaults for katepart
         KTextEditor::CommandInterface *command = qobject_cast<KTextEditor::CommandInterface *>(editorPart->editor());
         if (command) {
             QString ret;
-            command->queryCommand("set-indent-mode")->exec(view, "set-indent-mode normal", ret);
+            command->queryCommand("set-indent-mode")->exec(view, "set-indent-mode normal", ret); // more friendly
+            command->queryCommand("set-replace-tabs")->exec(view, "set-replace-tabs 1", ret); // important for python
+            if (m_model->implementationApi() == "python") { // 4 spaces recommended for python
+                command->queryCommand("set-indent-width")->exec(view, "set-indent-width 4", ret);
+            } else { // 2 spaces recommended for ruby, JS is agnostic
+                command->queryCommand("set-indent-width")->exec(view, "set-indent-width 2", ret);
+            }
         }
     }
 
@@ -474,7 +483,6 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     m_model = new PackageModel(this);
     m_model->setPackageType(actualType);
     m_model->setPackage(packagePath);
-
     QStringList recentFiles;
     KConfigGroup cg = KGlobal::config()->group("General");
     recentFiles = recentProjects();
