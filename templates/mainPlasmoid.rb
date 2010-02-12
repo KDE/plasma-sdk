@@ -40,7 +40,6 @@ module $PLASMOID_NAME
     #   Put here all the code needed to initialize our plasmoid
     def init
       self.has_configuration_interface = false
-      resize 125, 125
       self.aspect_ratio_mode = Plasma::Square
     end
 
