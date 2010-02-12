@@ -136,8 +136,17 @@ void StartPage::processProjectName(const QString& name)
 void StartPage::validateProjectType(const QModelIndex &sender)
 {
 
-    if ((sender.row() == 1) ||
-        (sender.row() == 2)) {
+    if (sender.row() == 1) {
+        ui->radioButtonJs->setEnabled(false);
+        // gotta explicitly setEnabled to true in case it
+        // was falsed before!
+        ui->radioButtonPy->setEnabled(true);
+        // also check this radio to prevent any disabled radios from
+        // being checked due to previous setting!
+        ui->radioButtonRb->setEnabled(true);
+        ui->newProjectButton->setEnabled(true); // in case previously falsed
+        
+    } else if (sender.row() == 2) {
         ui->radioButtonJs->setEnabled(false);
         // gotta explicitly setEnabled to true in case it
         // was falsed before!
