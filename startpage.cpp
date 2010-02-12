@@ -382,6 +382,7 @@ void StartPage::createNewProject()
 
 void StartPage::cancelNewProject()
 {
+    ui->projectName->clear();
     resetStatus();
 }
 
