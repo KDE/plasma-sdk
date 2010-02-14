@@ -138,11 +138,12 @@ void StartPage::processProjectName(const QString& name)
         }
         ui->projectName->setText(QString(name).remove(pos, 1));
     }
+
+    ui->newProjectButton->setEnabled(!ui->projectName->text().isEmpty());
 }
 
 void StartPage::validateProjectType(const QModelIndex &sender)
 {
-
     if (sender.row() == 1) {
         ui->radioButtonJs->setEnabled(false);
         // gotta explicitly setEnabled to true in case it
@@ -151,8 +152,7 @@ void StartPage::validateProjectType(const QModelIndex &sender)
         // also check this radio to prevent any disabled radios from
         // being checked due to previous setting!
         ui->radioButtonRb->setEnabled(true);
-        ui->newProjectButton->setEnabled(true); // in case previously falsed
-        
+        ui->newProjectButton->setEnabled(!ui->projectName->text().isEmpty()); // in case previously falsed
     } else if (sender.row() == 2) {
         ui->radioButtonJs->setEnabled(false);
         // gotta explicitly setEnabled to true in case it
@@ -162,19 +162,18 @@ void StartPage::validateProjectType(const QModelIndex &sender)
         // being checked due to previous setting!
         ui->radioButtonPy->setChecked(true);
         ui->radioButtonRb->setEnabled(false);
-        ui->newProjectButton->setEnabled(true); // in case previously falsed
+        ui->newProjectButton->setEnabled(!ui->projectName->text().isEmpty()); // in case previously falsed
 
     } else if (sender.row() == 3) {
         ui->radioButtonJs->setEnabled(false);
         ui->radioButtonPy->setEnabled(false);
         ui->radioButtonRb->setEnabled(false);
         ui->newProjectButton->setEnabled(false); // disable the create button too.
-
     } else /* if (sender.row() == 0) */ {
         ui->radioButtonJs->setEnabled(true);
         ui->radioButtonPy->setEnabled(true);
         ui->radioButtonRb->setEnabled(true);
-        ui->newProjectButton->setEnabled(true); // in case previously falsed
+        ui->newProjectButton->setEnabled(!ui->projectName->text().isEmpty()); // in case previously falsed
     }
 
     ui->layoutHackStackedWidget->setCurrentIndex(1);
@@ -268,14 +267,15 @@ void StartPage::refreshRecentProjectsList()
 
 void StartPage::createNewProject()
 {
-// TODO
-//     metadata->setPluginName( view->pluginname_edit->text() );
-    kDebug() << "Creating simple folder structure for the project ";
-
     // packagePath -> projectPath
-    QString projectNameLowerCase = ui->projectName->text().toLower();
-    QString projectNameSnakeCase = camelToSnakeCase(ui->projectName->text());
-    QString projectName = ui->projectName->text();
+    const QString projectName = ui->projectName->text();
+    if (projectName.isEmpty()) {
+        return;
+    }
+
+    kDebug() << "Creating simple folder structure for the project " << projectName;
+    QString projectNameLowerCase = projectName.toLower();
+    QString projectNameSnakeCase = camelToSnakeCase(projectName);
     QString projectFileExtension;
 
     QString templateFilePath = KStandardDirs::locate("appdata", "templates/");
@@ -386,6 +386,8 @@ void StartPage::createNewProject()
 
     // Write the .desktop file
     metadata.setName(projectName);
+    //FIXME: the plugin name needs to be globally unique, so should use more than just the project
+    //       name
     metadata.setPluginName(projectNameLowerCase);
     metadata.setServiceType(serviceTypes);
     metadata.setAuthor(ui->authorTextField->text());

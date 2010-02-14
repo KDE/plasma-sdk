@@ -374,6 +374,9 @@ p, li { white-space: pre-wrap; }
                 </item>
                 <item>
                  <widget class="KPushButton" name="newProjectButton">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
                   <property name="text">
                    <string>&amp;Create!</string>
                   </property>
