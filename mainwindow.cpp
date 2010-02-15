@@ -158,7 +158,7 @@ void MainWindow::createMenus()
     KStandardAction::quit(this, SLOT(quit()), actionCollection());
     KAction *refresh = KStandardAction::redisplay(this, SLOT(saveAndRefresh()), actionCollection());
     refresh->setShortcut(tr("Ctrl+F5"));
-    refresh->setText("Refresh Previewer");
+    refresh->setText(i18n("Refresh Previewer"));
     menuBar()->addMenu(helpMenu());
     setupGUI();
 }
