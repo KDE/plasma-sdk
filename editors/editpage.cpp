@@ -12,7 +12,7 @@
 EditPage::EditPage(QWidget *parent)
         : QTreeView(parent)
 {
-    m_contextMenu = new KMenu();
+    m_contextMenu = new KMenu(this);
     QAction *del = m_contextMenu->addAction(KIcon("window-close"), i18n("Delete"));
     connect(del, SIGNAL(triggered(bool)), this, SLOT(doDelete(bool)));
 
