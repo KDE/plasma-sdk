@@ -11,7 +11,6 @@
 
 class QWidget;
 
-class PackageModel;
 
 class EditPage : public QTreeView
 {

@@ -12,7 +12,6 @@
 
 #include <QDialog>
 
-class QLabel;
 class QListWidget;
 class QPushButton;
 class QListWidgetItem;
