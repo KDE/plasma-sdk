@@ -43,8 +43,7 @@ GitRunner::~GitRunner()
 {
     /*if( m_job )
         delete m_job;*/
-    if (m_lastRepoRoot)
-        delete m_lastRepoRoot;
+    delete m_lastRepoRoot;
 }
 
 void GitRunner::initJob(DvcsJob &job)
@@ -73,6 +72,7 @@ void GitRunner::setCommunicationMode(KProcess::OutputChannelMode comm)
 
 void GitRunner::setDirectory(const KUrl &dir)
 {
+    delete m_lastRepoRoot;
     m_lastRepoRoot = new KUrl(dir);
 }
 
@@ -130,6 +130,7 @@ QString& GitRunner::getResult()
 DvcsJob::JobStatus GitRunner::init(const KUrl &directory)
 {
     // We need to tell the runner to change dir!
+    delete m_lastRepoRoot;
     m_lastRepoRoot = new KUrl(directory);
     DvcsJob *job = new DvcsJob();
     initJob(*job);
@@ -158,6 +159,7 @@ DvcsJob::JobStatus GitRunner::createWorkingCopy(const KUrl &repoOrigin,
 {
     // TODO: now supports only cloning a local repo(not very useful, I know =P),
     // so extend the method to be used over the Internet.
+    delete m_lastRepoRoot;
     m_lastRepoRoot = new KUrl(repoDestination);
     DvcsJob *job = new DvcsJob();
     initJob(*job);
