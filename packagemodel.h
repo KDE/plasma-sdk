@@ -18,6 +18,12 @@ class PackageModel : public QAbstractItemModel
     Q_OBJECT
 
 public:
+
+    static const QString plasmoidType;
+    static const QString runnerType;
+    static const QString dataengineType;
+    static const QString themeType;
+
     explicit PackageModel(QObject *parent = 0);
     ~PackageModel();
 

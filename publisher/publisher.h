@@ -25,7 +25,7 @@ class Publisher : public QWidget
 {
     Q_OBJECT;
 public:
-    Publisher(QWidget* parent, const KUrl &path);
+    Publisher(QWidget* parent, const KUrl &path, const QString& type);
 
     static bool exportPackage(const KUrl &toExport, const KUrl &targetFile);
     static bool importPackage(const KUrl &toImport, const KUrl &targetLocation);
@@ -42,6 +42,8 @@ private:
     QPushButton* m_installerButton;
     QPushButton* m_publisherButton;
     KUrl m_projectPath;
+    QString m_projectType;
+    QString m_extension;
 };
 
 #endif // PUBLISHER_H

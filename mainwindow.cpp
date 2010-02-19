@@ -295,7 +295,7 @@ void MainWindow::changeTab(const QModelIndex &item)
     break;
     case PublishTab: {
         if (!m_publisher)
-            m_publisher = new Publisher(this, m_model->package());
+            m_publisher = new Publisher(this, m_model->package(), m_model->packageType());
         m_central->switchTo(m_publisher);
     }
     break;
