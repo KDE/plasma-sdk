@@ -15,10 +15,10 @@
 #include <KLocalizedString>
 #include <KProcess>
 #include <KMessageBox>
-#include <KZip>
 
 #include "publisher.h"
 #include "../packagemodel.h"
+#include "../projectmanager/projectmanager.h"
 
 Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     :QWidget(parent),
@@ -107,7 +107,7 @@ void Publisher::doExport()
         KMessageBox::error(this, i18n("The file you entered is invalid."));
         return;
     }
-    bool ok = exportPackage(m_projectPath, m_exporterUrl->url());
+    bool ok = ProjectManager::exportPackage(m_projectPath, m_exporterUrl->url());
     if (QFile::exists(m_exporterUrl->url().path()) && ok)
         KMessageBox::information(this, i18n("Project has been exported to %1.", m_exporterUrl->url().path()));
     else
@@ -118,7 +118,7 @@ void Publisher::doExport()
 void Publisher::doInstall()
 {
     KUrl tempPackage(m_projectPath.path(KUrl::AddTrailingSlash) + "package.plasmoid");
-    exportPackage(m_projectPath, tempPackage); // create temporary package
+    ProjectManager::exportPackage(m_projectPath, tempPackage); // create temporary package
 
     // we do a plasmapkg -u in case the package was installed before
     // in which case it should be updated. -u also installs the
@@ -136,28 +136,4 @@ void Publisher::doInstall()
 void Publisher::doPublish()
 {
     KMessageBox::information(this, "Do funky stuff here");
-}
-
-bool Publisher::exportPackage(const KUrl &toExport, const KUrl &targetFile)
-{
-    bool ret = true;
-    KZip plasmoid(targetFile.path());
-    if (!plasmoid.open(QIODevice::WriteOnly)) {
-        return false;
-    }
-    ret = plasmoid.addLocalDirectory(toExport.path(), ".");
-    plasmoid.close();
-    return ret;
-}
-
-bool Publisher::importPackage(const KUrl &toImport, const KUrl &targetLocation)
-{
-    bool ret = true;
-    KZip plasmoid(toImport.path());
-    if (!plasmoid.open(QIODevice::ReadOnly)) {
-        return false;
-    }
-    plasmoid.directory()->copyTo(targetLocation.path());
-    plasmoid.close();
-    return ret;
 }

@@ -1,5 +1,6 @@
 --February 19,2010--
 - Publisher now publishes non-plasmoids as *.zip. Installing non-plasmoids disallowed
+- Delete project support added.
 
 --February 13,2010--
 - Added sensible indentation/tab defaults for editor (katepart).

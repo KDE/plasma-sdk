@@ -37,7 +37,6 @@
 #include "startpage.h"
 #include "mainwindow.h"
 #include "ui_startpage.h"
-#include "publisher/publisher.h"
 #include "projectmanager/projectmanager.h"
 
 StartPage::StartPage(MainWindow *parent) // TODO set a palette so it will look identical with any color scheme.
@@ -110,6 +109,8 @@ void StartPage::setupWidgets()
 
     connect(projectManager, SIGNAL(projectSelected(QString, QString)),
             this, SLOT(emitProjectSelected(QString, QString)));
+    connect(projectManager, SIGNAL(requestRefresh()),
+            this, SLOT(refreshRecentProjectsList()));
 
     new QListWidgetItem(KIcon("application-x-plasma"), i18n("Plasmoid"), ui->contentTypes);
     new QListWidgetItem(KIcon("kexi"), i18n("Data Engine"), ui->contentTypes);
@@ -446,7 +447,7 @@ void StartPage::doImport()
 
     QString projectPath = KStandardDirs::locateLocal("appdata", projectFolder + '/');
 
-    if (!Publisher::importPackage(target, projectPath)) {
+    if (!ProjectManager::importPackage(target, projectPath)) {
         KMessageBox::information(this, i18n("A problem has occurred during import."));
     }
     emit projectSelected(projectFolder, QString());

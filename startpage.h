@@ -72,10 +72,10 @@ private Q_SLOTS:
     void processProjectName(const QString&);
     void doImport();
     void showMoreDialog();
+    void refreshRecentProjectsList();
 
 private:
     void setupWidgets();
-    void refreshRecentProjectsList();
     static QString camelToSnakeCase(const QString& name);
     const QString generateProjectFolderName(const QString& suggestion);
 
