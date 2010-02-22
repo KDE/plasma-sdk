@@ -25,7 +25,7 @@ from PyQt4 import uic
 from PyKDE4.kdeui import *
 from PyKDE4.kdecore import *
 from PyKDE4.plasma import *
-from PyKDE4.plasmascript
+from PyKDE4 import plasmascript
 
 
 class $RUNNER_NAME(plasmascript.Runner):
