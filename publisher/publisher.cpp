@@ -45,10 +45,6 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
 
     // Disable publish button first since it isn't implemented.
     m_publisherButton->setEnabled(false);
-    // Installing only works for Plasmoids
-    if (type != PackageModel::plasmoidType) {
-        m_installerButton->setEnabled(false);
-    }
 
     connect(m_exporterUrl, SIGNAL(urlSelected(const KUrl&)), this, SLOT(addSuffix()));
     connect(m_exporterButton, SIGNAL(clicked()), this, SLOT(doExport()));
@@ -117,20 +113,31 @@ void Publisher::doExport()
 // Plasmoid specific, for now
 void Publisher::doInstall()
 {
-    KUrl tempPackage(m_projectPath.path(KUrl::AddTrailingSlash) + "package.plasmoid");
+    KUrl tempPackage(m_projectPath.path(KUrl::AddTrailingSlash) + "package.zip");
     ProjectManager::exportPackage(m_projectPath, tempPackage); // create temporary package
 
+    QStringList argv("plasmapkg");
+    argv.append("-t");
+    if (m_projectType == PackageModel::runnerType) {
+        argv.append("runner");
+    } else if (m_projectType == PackageModel::dataengineType) {
+        argv.append("dataengine");
+    } else if (m_projectType == PackageModel::themeType) {
+        argv.append("theme");
+    } else {
+        // TODO: Javascript installation is bugged - investigate and fix
+        argv.append("plasmoid");
+    }
     // we do a plasmapkg -u in case the package was installed before
     // in which case it should be updated. -u also installs the
     // package if it hasn't been installed before, so it's all good.
-    QStringList argv("plasmapkg");
     argv.append("-u");
     argv.append(tempPackage.path());
     KProcess::execute(argv);
     QFile::remove(tempPackage.path()); // delete temporary package
     // TODO: probably check for errors and stuff instead of announcing
     // succcess in a 'leap of faith'
-    KMessageBox::information(this, i18n("Plasmoid has been installed"));
+    KMessageBox::information(this, i18n("Project has been installed"));
 }
 
 void Publisher::doPublish()

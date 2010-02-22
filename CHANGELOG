@@ -1,3 +1,6 @@
+--February 22,2010--
+- Implemented installing non-plasmoids via publisher.
+
 --February 19,2010--
 - Publisher now publishes non-plasmoids as *.zip. Installing non-plasmoids disallowed
 - Delete project support added.
