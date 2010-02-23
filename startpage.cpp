@@ -406,6 +406,10 @@ void StartPage::createNewProject()
 
     // the loading code expects the FOLDER NAME
     emit projectSelected(projectFolderName, serviceTypes);
+
+    // need to clear the project name field here too because startpage is still 
+    // accessible after project loads.
+    ui->projectName->clear();
 }
 
 void StartPage::cancelNewProject()
