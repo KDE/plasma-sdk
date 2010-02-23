@@ -127,6 +127,7 @@ void MetaDataEditor::readFile()
     view->author_edit->setText(metadata->author());
     view->email_edit->setText(metadata->email());
     view->license_edit->setText(metadata->license());
+    view->api_combo->setCurrentIndex(apis.indexOf(metadata->implementationApi()));
 }
 
 void MetaDataEditor::serviceTypeChanged()
