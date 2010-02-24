@@ -511,7 +511,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     QFile metadataFile(packagePath + "/metadata.desktop");
     metadataFile.open(QIODevice::ReadWrite);
     QString contents = metadataFile.readAll();
-    contents.replace("ServiceTypes", "X-KDE-ServiceTypes");
+    contents.replace(QRegExp("\nServiceTypes"), "\nX-KDE-ServiceTypes");
     metadataFile.resize(0);
     QTextStream stream(&metadataFile);
     stream << contents;
