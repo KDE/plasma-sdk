@@ -63,11 +63,11 @@ QString PackageModel::implementationApi() const
     return QString();
 }
 
-void PackageModel::setPackage(const QString &path)
+int PackageModel::setPackage(const QString &path)
 {
     if (!m_structure) {
         kDebug() << "Must set the package type FIRST!";
-        return;
+        return 0;
     }
 
     m_structure->setPath(path);
@@ -79,10 +79,13 @@ void PackageModel::setPackage(const QString &path)
     m_directory = new KDirWatch(this);
     m_directory->addDir(path, KDirWatch::WatchSubDirs | KDirWatch::WatchFiles);
 
-    loadPackage();
+    if (!loadPackage())
+        return 0;
 
     connect(m_directory, SIGNAL(created(QString)), this, SLOT(fileAddedOnDisk(QString)));
     connect(m_directory, SIGNAL(deleted(QString)), this, SLOT(fileDeletedOnDisk(QString)));
+
+    return 1;
 }
 
 QString PackageModel::package() const
@@ -244,17 +247,23 @@ int PackageModel::rowCount(const QModelIndex &parent) const
     return m_topEntries.count() + 1;
 }
 
-void PackageModel::loadPackage()
+int PackageModel::loadPackage()
 {
     reset();
 
     if (!m_package) {
         kDebug() << "No package to load.";
-        return;
+        return 0;
     }
 
     QDir dir(m_package->path());
     Plasma::PackageStructure::Ptr structure = m_package->structure();
+
+    if (!dir.exists(structure->contentsPrefix()))
+    {
+        kDebug() << "This is not a valid plasmoid package.";
+        return 0;
+    }
 
     if (!dir.exists("metadata.desktop")) {
         KUser user;
@@ -263,11 +272,11 @@ void PackageModel::loadPackage()
         metadata.setLicense("GPL");
         metadata.setName(dir.dirName());
         metadata.setServiceType(structure->type());
-
-        metadata.write(dir.path() + "metadata.desktop");
+        metadata.write(dir.path() + "/metadata.desktop");
     }
 
     QString contents = structure->contentsPrefix();
+
     if (!contents.isEmpty()) {
         dir.mkpath(contents);
         dir.cd(contents);
@@ -335,6 +344,7 @@ void PackageModel::loadPackage()
         endInsertRows();
     }
 
+    return 1;
 }
 
 void PackageModel::fileAddedOnDisk(const QString &path)

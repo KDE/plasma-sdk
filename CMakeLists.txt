@@ -52,3 +52,5 @@ target_link_libraries(plasmate ${KDE4_KDEUI_LIBS} ${KDE4_KTEXTEDITOR_LIBS} ${KDE
 
 install(TARGETS plasmate ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES plasmateui.rc  DESTINATION ${DATA_INSTALL_DIR}/plasmate)
+install(FILES plasmate.knsrc DESTINATION ${CONFIG_INSTALL_DIR})
+

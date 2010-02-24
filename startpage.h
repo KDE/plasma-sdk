@@ -71,6 +71,7 @@ private Q_SLOTS:
     void cancelNewProject();
     void processProjectName(const QString&);
     void doImport();
+    void doGHNSImport();
     void showMoreDialog();
     void refreshRecentProjectsList();
 
@@ -78,6 +79,7 @@ private:
     void setupWidgets();
     static QString camelToSnakeCase(const QString& name);
     const QString generateProjectFolderName(const QString& suggestion);
+    void selectProject(const KUrl &target);
 
     Ui::StartPage *ui;
     QLabel *m_createNewLabel;

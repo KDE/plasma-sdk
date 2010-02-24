@@ -102,6 +102,7 @@ private:
     void createMenus();
     void createDockWidgets();
     void setupTextEditor(KTextEditor::Document *editorPart, KTextEditor::View *view);
+    void loadNotesEditor(QDockWidget *container);
 
     StartPage *m_startPage;
     Sidebar *m_sidebar;
@@ -112,6 +113,8 @@ private:
     Publisher *m_publisher;
     DocBrowser *m_browser;
 
+    QDockWidget *m_projectNotes;
+
     QDockWidget *m_editWidget;
     EditPage *m_editPage;
     PackageModel *m_model;
@@ -120,6 +123,7 @@ private:
     CentralContainer *m_central;
 
     KParts::ReadOnlyPart *m_part;
+    KParts::ReadOnlyPart *m_notesPart;
 };
 
 #endif // MAINWINDOW_H

@@ -33,6 +33,8 @@
 #include <KActionCollection>
 #include <KParts/Part>
 #include <KStandardDirs>
+#include <kmimetypetrader.h>
+#include <KMessageBox>
 
 #include <Plasma/PackageMetadata>
 
@@ -85,7 +87,8 @@ MainWindow::MainWindow(QWidget *parent)
       m_model(0),
       m_oldTab(0), // we start from startPage
       m_docksCreated(false),
-      m_part(0)
+      m_part(0),
+      m_notesPart(0)
 {
     setXMLFile("plasmateui.rc");
     createMenus();
@@ -185,7 +188,6 @@ void MainWindow::createDockWidgets()
     connect(m_sidebar, SIGNAL(currentIndexClicked(const QModelIndex &)),
             this, SLOT(changeTab(const QModelIndex &)));
 
-
     /////////////////////////////////////////////////////////////////////////
     m_editPage = new EditPage();
     m_editPage->setModel(m_model);
@@ -226,6 +228,11 @@ void MainWindow::createDockWidgets()
 
     m_previewer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_previewerWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    QDockWidget *m_projectNotes = new QDockWidget(i18n("Project notes"), this);
+    m_projectNotes->setObjectName("projectNotes");
+    loadNotesEditor(m_projectNotes);
+    addDockWidget(Qt::LeftDockWidgetArea, m_projectNotes);
 
     //splitDockWidget(m_workflow, m_editWidget, Qt::Horizontal);
     splitDockWidget(m_editWidget, m_previewerWidget, Qt::Vertical);
@@ -321,6 +328,9 @@ void MainWindow::saveEditorData()
 {
     if (qobject_cast<KParts::ReadWritePart*>(m_part)) {
         static_cast<KParts::ReadWritePart*>(m_part)->save();
+    }
+    if (qobject_cast<KParts::ReadWritePart*>(m_notesPart)) {
+        static_cast<KParts::ReadWritePart*>(m_notesPart)->save();
     }
     if (m_metaEditor) {
         m_metaEditor->writeFile();
@@ -437,6 +447,32 @@ void MainWindow::setupTextEditor(KTextEditor::Document *editorPart, KTextEditor:
     }
 }
 
+void MainWindow::loadNotesEditor(QDockWidget *container)
+{
+    KService::List offers = KMimeTypeTrader::self()->query("text/plain", "KParts/ReadWritePart");
+    if (offers.isEmpty()) {
+        offers = KMimeTypeTrader::self()->query("text/plain", "KParts/ReadOnlyPart");
+    }
+    if (!offers.isEmpty()) {
+        QVariantList args;
+        QString error;
+        m_notesPart = dynamic_cast<KParts::ReadOnlyPart*>(
+                      offers.at(0)->createInstance<KParts::Part>(
+                      this, args, &error));
+
+        if (!m_notesPart) {
+            kDebug() << "Failed to load notes editor:" << error;
+        }
+
+        QString notesFile = m_model->package() + "NOTES";
+        QFile notes(notesFile);
+        if (!notes.exists())
+            notes.open(QIODevice::WriteOnly);
+        m_notesPart->openUrl(KUrl("file://" + notesFile));
+        container->setWidget(m_notesPart->widget());
+    }
+}
+
 void MainWindow::loadMetaDataEditor(KUrl target) {
     // save any previous editor content
     saveEditorData();
@@ -471,6 +507,16 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     QString packagePath = KStandardDirs::locateLocal("appdata", name + '/');
     QString actualType = type;
 
+    // Converting projects which use ServiceTypes instead of X-KDE-ServiceTypes
+    QFile metadataFile(packagePath + "/metadata.desktop");
+    metadataFile.open(QIODevice::ReadWrite);
+    QString contents = metadataFile.readAll();
+    contents.replace("ServiceTypes", "X-KDE-ServiceTypes");
+    metadataFile.resize(0);
+    QTextStream stream(&metadataFile);
+    stream << contents;
+    metadataFile.close();
+
     if (actualType.isEmpty()) {
         QDir dir(packagePath);
         if (dir.exists("metadata.desktop")) {
@@ -481,8 +527,16 @@ void MainWindow::loadProject(const QString &name, const QString &type)
 
     // Add it to the recent files first.
     m_model = new PackageModel(this);
+    kDebug() << "Setting project type to:" << actualType;
     m_model->setPackageType(actualType);
-    m_model->setPackage(packagePath);
+    kDebug() << "Setting model package to:" << packagePath;
+
+    if (!m_model->setPackage(packagePath))
+    {
+        KMessageBox::error(this, i18n("Invalid plasmagick package."));
+        return;
+    }
+
     QStringList recentFiles;
     KConfigGroup cg = KGlobal::config()->group("General");
     recentFiles = recentProjects();

@@ -32,7 +32,7 @@ public:
 
     QString implementationApi() const;
 
-    void setPackage(const QString &path);
+    int setPackage(const QString &path);
     QString package() const;
     QString contentsPrefix() const;
 
@@ -45,7 +45,7 @@ public:
     enum DataRoles { MimeTypeRole = Qt::UserRole + 1, UrlRole };
 
 private:
-    void loadPackage();
+    int loadPackage();
 
 private Q_SLOTS:
     void fileAddedOnDisk(const QString &path);

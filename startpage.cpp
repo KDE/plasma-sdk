@@ -32,6 +32,7 @@
 #include <KUser>
 #include <KMessageBox>
 #include <Plasma/PackageMetadata>
+#include <knewstuff3/downloaddialog.h>
 
 #include "packagemodel.h"
 #include "startpage.h"
@@ -104,6 +105,8 @@ void StartPage::setupWidgets()
             this, SLOT(cancelNewProject()));
     connect(ui->importButton, SIGNAL(clicked()),
             this, SLOT(doImport()));
+    connect(ui->importGHNSButton, SIGNAL(clicked()),
+            this, SLOT(doGHNSImport()));
     connect(ui->moreButton, SIGNAL(clicked()),
             this, SLOT(showMoreDialog()));
 
@@ -404,6 +407,11 @@ void StartPage::createNewProject()
     metaDataGroup.writeEntry("X-Plasma-DefaultSize", QSize(200, 100));
     metaFile.sync();
 
+    // Create the notes file
+    QFile notesFile(projectPath + "/NOTES");
+    notesFile.open(QIODevice::ReadWrite);
+    notesFile.close();
+
     // the loading code expects the FOLDER NAME
     emit projectSelected(projectFolderName, serviceTypes);
 
@@ -436,6 +444,34 @@ void StartPage::doImport()
 {
     KUrl target = ui->importUrl->url();
 
+    selectProject(target);
+}
+
+void StartPage::doGHNSImport()
+{
+    KNS3::DownloadDialog *mNewStuffDialog = new KNS3::DownloadDialog("plasmate.knsrc", this);
+    if (mNewStuffDialog->exec() == QDialog::Accepted)
+    {
+        KNS3::Entry::List installed = mNewStuffDialog->installedEntries();
+
+        if (!installed.empty())
+        {
+            KNS3::Entry entry = installed.at(0);
+            QStringList installedFiles = entry.installedFiles();
+
+            if (!installedFiles.empty())
+            {
+                QString file = installedFiles.at(0);
+                KUrl target(file);
+
+                selectProject(target);
+            }
+        }
+    }
+}
+
+void StartPage::selectProject(const KUrl &target)
+{
     if (!target.isLocalFile() ||
           !QFile::exists(target.path()) ||
           QDir(target.path()).exists()) {
@@ -446,7 +482,7 @@ void StartPage::doImport()
     // we can do this because this is 'under the hood'
     // the user should never be aware of any 'folder names'
     // This nicely eliminates the need for a 'conflict resolution' dialog :)
-    QString suggested = QFileInfo(target.path()).baseName();
+    QString suggested = QFileInfo(target.path()).completeBaseName();
     QString projectFolder = generateProjectFolderName(suggested);
 
     QString projectPath = KStandardDirs::locateLocal("appdata", projectFolder + '/');
@@ -455,6 +491,7 @@ void StartPage::doImport()
         KMessageBox::information(this, i18n("A problem has occurred during import."));
     }
     emit projectSelected(projectFolder, QString());
+
 }
 
 void StartPage::showMoreDialog()

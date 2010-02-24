@@ -16,6 +16,8 @@ class QListWidget;
 class QPushButton;
 class QListWidgetItem;
 
+class KUrl;
+
 namespace Ui
 {
 class ProjectManager;
