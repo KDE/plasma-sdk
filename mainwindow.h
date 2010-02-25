@@ -62,6 +62,7 @@ public Q_SLOTS:
     void loadMetaDataEditor(KUrl target);
     void saveEditorData();
     void saveAndRefresh();
+    void refreshNotes();
     // refreshes editor, killing all local changes
     void editorDestructiveRefresh();
 
@@ -113,7 +114,7 @@ private:
     Publisher *m_publisher;
     DocBrowser *m_browser;
 
-    QDockWidget *m_projectNotes;
+    QDockWidget *m_projectNotesWidget;
 
     QDockWidget *m_editWidget;
     EditPage *m_editPage;

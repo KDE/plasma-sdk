@@ -229,10 +229,12 @@ void MainWindow::createDockWidgets()
     m_previewer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_previewerWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    QDockWidget *m_projectNotes = new QDockWidget(i18n("Project notes"), this);
-    m_projectNotes->setObjectName("projectNotes");
-    loadNotesEditor(m_projectNotes);
-    addDockWidget(Qt::LeftDockWidgetArea, m_projectNotes);
+    // TODO: Should probably make project notes an editor-tree item instead of a
+    //       dockwidget, since we're somewhat squeezed on dockwidget space now..
+    QDockWidget *m_projectNotesWidget = new QDockWidget(i18n("Project notes"), this);
+    m_projectNotesWidget->setObjectName("projectNotes");
+    loadNotesEditor(m_projectNotesWidget);
+    addDockWidget(Qt::LeftDockWidgetArea, m_projectNotesWidget);
 
     //splitDockWidget(m_workflow, m_editWidget, Qt::Horizontal);
     splitDockWidget(m_editWidget, m_previewerWidget, Qt::Vertical);
@@ -464,13 +466,25 @@ void MainWindow::loadNotesEditor(QDockWidget *container)
             kDebug() << "Failed to load notes editor:" << error;
         }
 
-        QString notesFile = m_model->package() + "NOTES";
-        QFile notes(notesFile);
-        if (!notes.exists())
-            notes.open(QIODevice::WriteOnly);
-        m_notesPart->openUrl(KUrl("file://" + notesFile));
+        refreshNotes();
         container->setWidget(m_notesPart->widget());
     }
+}
+
+void MainWindow::refreshNotes()
+{
+    if (!m_notesPart) {
+      return;
+    }
+    KParts::ReadWritePart* part = qobject_cast<KParts::ReadWritePart*>(m_notesPart);
+    if (part && part->isModified()) {
+        part->save(); // save notes if we previously had one open.
+    }
+    QString notesFile = m_model->package() + "NOTES";
+    QFile notes(notesFile);
+    if (!notes.exists())
+        notes.open(QIODevice::WriteOnly);
+    m_notesPart->openUrl(KUrl("file://" + notesFile));
 }
 
 void MainWindow::loadMetaDataEditor(KUrl target) {
@@ -573,6 +587,8 @@ void MainWindow::loadProject(const QString &name, const QString &type)
         if (m_browser) {
             m_browser->setPackage(m_model);
         }
+
+        refreshNotes();
     }
 
     QLabel *l = new QLabel(i18n("Select a file to edit."), this);
