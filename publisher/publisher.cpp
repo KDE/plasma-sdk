@@ -15,6 +15,8 @@
 #include <KLocalizedString>
 #include <KProcess>
 #include <KMessageBox>
+#include <knewstuff3/uploaddialog.h>
+#include <KStandardDirs>
 
 #include "publisher.h"
 #include "../packagemodel.h"
@@ -42,9 +44,6 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     m_exporterButton = new QPushButton(i18n("Export current project"), this);
     m_installerButton = new QPushButton(i18n("Install current project"), this);
     m_publisherButton = new QPushButton(i18n("Publish current project"), this);
-
-    // Disable publish button first since it isn't implemented.
-    m_publisherButton->setEnabled(false);
 
     connect(m_exporterUrl, SIGNAL(urlSelected(const KUrl&)), this, SLOT(addSuffix()));
     connect(m_exporterButton, SIGNAL(clicked()), this, SLOT(doExport()));
@@ -98,12 +97,7 @@ void Publisher::addSuffix()
 
 void Publisher::doExport()
 {
-    if (!m_exporterUrl->url().isLocalFile() ||
-          QDir(m_exporterUrl->url().path()).exists()) {
-        KMessageBox::error(this, i18n("The file you entered is invalid."));
-        return;
-    }
-    bool ok = ProjectManager::exportPackage(m_projectPath, m_exporterUrl->url());
+    bool ok = exportToFile(m_exporterUrl->url());
     if (QFile::exists(m_exporterUrl->url().path()) && ok)
         KMessageBox::information(this, i18n("Project has been exported to %1.", m_exporterUrl->url().path()));
     else
@@ -142,5 +136,27 @@ void Publisher::doInstall()
 
 void Publisher::doPublish()
 {
-    KMessageBox::information(this, "Do funky stuff here");
+    kDebug() << "projectPath:" << m_projectPath.path();
+    kDebug() << "Exportando no tmp: file://" + KStandardDirs::locateLocal("appdata", "tmp/" + QFileInfo(m_projectPath.path()).baseName() + ".plasmoid");
+    KUrl url("file://" + KStandardDirs::locateLocal("appdata", "tmp/" + QFileInfo(m_projectPath.path()).baseName() + ".plasmoid"));
+    // Fix the following
+    bool ok = exportToFile(m_exporterUrl->url());
+    if (ok)
+    {
+        KNS3::UploadDialog *mNewStuffDialog = new KNS3::UploadDialog("plasmate.knsrc", this);
+        mNewStuffDialog->setUploadFile(url);
+        mNewStuffDialog->exec();
+    }
+    else
+        KMessageBox::error(this, i18n("An error has occurred during the export. Please check the write permissions in the target directory."));
+}
+
+bool Publisher::exportToFile(const KUrl& url)
+{
+    if (!m_exporterUrl->url().isLocalFile() ||
+          QDir(m_exporterUrl->url().path()).exists()) {
+        KMessageBox::error(this, i18n("The file you entered is invalid."));
+        return false;
+    }
+    return ProjectManager::exportPackage(m_projectPath, m_exporterUrl->url());
 }

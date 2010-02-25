@@ -34,6 +34,8 @@ private slots:
     void doPublish();
 
 private:
+    bool exportToFile(const KUrl& url);
+
     KUrlRequester* m_exporterUrl;
     QPushButton* m_exporterButton;
     QPushButton* m_installerButton;
