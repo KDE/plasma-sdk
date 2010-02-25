@@ -107,7 +107,7 @@ void Publisher::doExport()
 // Plasmoid specific, for now
 void Publisher::doInstall()
 {
-    KUrl tempPackage(m_projectPath.path(KUrl::AddTrailingSlash) + "package.zip");
+    KUrl tempPackage(m_projectPath.path(KUrl::AddTrailingSlash) + "package." + m_extension);
     ProjectManager::exportPackage(m_projectPath, tempPackage); // create temporary package
 
     QStringList argv("plasmapkg");
@@ -119,7 +119,6 @@ void Publisher::doInstall()
     } else if (m_projectType == PackageModel::themeType) {
         argv.append("theme");
     } else {
-        // TODO: Javascript installation is bugged - investigate and fix
         argv.append("plasmoid");
     }
     // we do a plasmapkg -u in case the package was installed before
@@ -136,27 +135,31 @@ void Publisher::doInstall()
 
 void Publisher::doPublish()
 {
+    //FIXME: should not use appdata/tmp/ because a user project may be called 'tmp'
+    //       creating a name conflict. Probably just /tmp?
     kDebug() << "projectPath:" << m_projectPath.path();
-    kDebug() << "Exportando no tmp: file://" + KStandardDirs::locateLocal("appdata", "tmp/" + QFileInfo(m_projectPath.path()).baseName() + ".plasmoid");
-    KUrl url("file://" + KStandardDirs::locateLocal("appdata", "tmp/" + QFileInfo(m_projectPath.path()).baseName() + ".plasmoid"));
-    // Fix the following
-    bool ok = exportToFile(m_exporterUrl->url());
-    if (ok)
-    {
+    kDebug() << "Exportando no tmp: file://" + KStandardDirs::locateLocal("appdata", "tmp/" + QFileInfo(m_projectPath.path()).baseName() + "package." + m_extension);
+    KUrl url("file://" + KStandardDirs::locateLocal("appdata", "tmp/" + QFileInfo(m_projectPath.path()).baseName() + "package." + m_extension));
+    // export to tmp folder
+    bool ok = exportToFile(url);
+    if (ok) {
         KNS3::UploadDialog *mNewStuffDialog = new KNS3::UploadDialog("plasmate.knsrc", this);
         mNewStuffDialog->setUploadFile(url);
         mNewStuffDialog->exec();
-    }
-    else
+        //TODO: Delete temporary package after publishing is done
+    } else {
+        // should probably eventually use a better error message
         KMessageBox::error(this, i18n("An error has occurred during the export. Please check the write permissions in the target directory."));
+    }
 }
 
 bool Publisher::exportToFile(const KUrl& url)
 {
-    if (!m_exporterUrl->url().isLocalFile() ||
-          QDir(m_exporterUrl->url().path()).exists()) {
+    //TODO: Handle existing file/overwrite etc.
+    if (!url.isLocalFile() ||
+          QDir(url.path()).exists()) {
         KMessageBox::error(this, i18n("The file you entered is invalid."));
         return false;
     }
-    return ProjectManager::exportPackage(m_projectPath, m_exporterUrl->url());
+    return ProjectManager::exportPackage(m_projectPath, url);
 }

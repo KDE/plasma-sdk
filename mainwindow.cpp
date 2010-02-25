@@ -612,9 +612,6 @@ void MainWindow::loadProject(const QString &name, const QString &type)
 }
 
 QStringList MainWindow::recentProjects()
-        // Q: TODO Limit to 5?
-        // A: Before limiting, we need to provide an "Export" feature so
-        // the developer can save his projects and import it later for review.
 {
     KConfigGroup cg = KGlobal::config()->group("General");
     QStringList l = cg.readEntry("recentFiles", QStringList());
