@@ -305,6 +305,7 @@ void MainWindow::changeTab(const QModelIndex &item)
     case PublishTab: {
         if (!m_publisher)
             m_publisher = new Publisher(this, m_model->package(), m_model->packageType());
+        m_publisher->setProjectName(m_currentProject);
         m_central->switchTo(m_publisher);
     }
     break;
@@ -609,6 +610,8 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     setCaption("[Project:" + metadata.name() + ']');
     kDebug() << "Content prefix: " << m_model->contentsPrefix() ;
     QDir::setCurrent(m_model->package() + m_model->contentsPrefix());
+
+    m_currentProject = metadata.name();
 }
 
 QStringList MainWindow::recentProjects()

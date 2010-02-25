@@ -122,6 +122,7 @@ private:
     int m_oldTab;
     bool m_docksCreated;
     CentralContainer *m_central;
+    QString m_currentProject;
 
     KParts::ReadOnlyPart *m_part;
     KParts::ReadOnlyPart *m_notesPart;

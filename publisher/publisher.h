@@ -26,6 +26,7 @@ class Publisher : public QWidget
     Q_OBJECT;
 public:
     Publisher(QWidget* parent, const KUrl &path, const QString& type);
+    void setProjectName(const QString &name);
 
 private slots:
     void doExport();
@@ -43,6 +44,7 @@ private:
     KUrl m_projectPath;
     QString m_projectType;
     QString m_extension;
+    QString m_projectName;
 };
 
 #endif // PUBLISHER_H

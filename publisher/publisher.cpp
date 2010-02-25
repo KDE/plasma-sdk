@@ -95,6 +95,11 @@ void Publisher::addSuffix()
     }
 }
 
+void Publisher::setProjectName(const QString &name)
+{
+    m_projectName = name;
+}
+
 void Publisher::doExport()
 {
     bool ok = exportToFile(m_exporterUrl->url());
@@ -138,9 +143,10 @@ void Publisher::doPublish()
     //FIXME: should not use appdata/tmp/ because a user project may be called 'tmp'
     //       creating a name conflict. Probably just /tmp?
     kDebug() << "projectPath:" << m_projectPath.path();
-    kDebug() << "Exportando no tmp: file://" + KStandardDirs::locateLocal("appdata", "tmp/" + QFileInfo(m_projectPath.path()).baseName() + "package." + m_extension);
-    KUrl url("file://" + KStandardDirs::locateLocal("appdata", "tmp/" + QFileInfo(m_projectPath.path()).baseName() + "package." + m_extension));
-    // export to tmp folder
+
+    kDebug() << "Exportando no tmp: file://" + KStandardDirs::locateLocal("appdata", "tmp/" + m_projectName + ".plasmoid");
+    KUrl url("file://" + KStandardDirs::locateLocal("appdata", "tmp/" + m_projectName + ".plasmoid"));
+
     bool ok = exportToFile(url);
     if (ok) {
         KNS3::UploadDialog *mNewStuffDialog = new KNS3::UploadDialog("plasmate.knsrc", this);
