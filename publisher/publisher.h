@@ -36,6 +36,7 @@ private slots:
 
 private:
     bool exportToFile(const KUrl& url);
+    const QString tempPackagePath();
 
     KUrlRequester* m_exporterUrl;
     QPushButton* m_exporterButton;

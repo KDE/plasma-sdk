@@ -112,7 +112,7 @@ void Publisher::doExport()
 // Plasmoid specific, for now
 void Publisher::doInstall()
 {
-    KUrl tempPackage(m_projectPath.path(KUrl::AddTrailingSlash) + "package." + m_extension);
+    KUrl tempPackage(tempPackagePath());
     ProjectManager::exportPackage(m_projectPath, tempPackage); // create temporary package
 
     QStringList argv("plasmapkg");
@@ -138,21 +138,28 @@ void Publisher::doInstall()
     KMessageBox::information(this, i18n("Project has been installed"));
 }
 
+const QString Publisher::tempPackagePath()
+{
+    // we don't want to create an extra directory for temporary packages to avoid
+    // potential name conflicts with user projects. Create temporary packages in
+    // the current project's folder instead - remember to delete after use!
+    return m_projectPath.path(KUrl::AddTrailingSlash) + m_projectName + "." + m_extension;
+}
+
 void Publisher::doPublish()
 {
-    //FIXME: should not use appdata/tmp/ because a user project may be called 'tmp'
-    //       creating a name conflict. Probably just /tmp?
+    // TODO: make sure this works with non-plasmoids too?
     kDebug() << "projectPath:" << m_projectPath.path();
 
-    kDebug() << "Exportando no tmp: file://" + KStandardDirs::locateLocal("appdata", "tmp/" + m_projectName + ".plasmoid");
-    KUrl url("file://" + KStandardDirs::locateLocal("appdata", "tmp/" + m_projectName + ".plasmoid"));
+    kDebug() << "Exportando no tmp: file://" + tempPackagePath();
+    KUrl url(tempPackagePath());
 
     bool ok = exportToFile(url);
     if (ok) {
         KNS3::UploadDialog *mNewStuffDialog = new KNS3::UploadDialog("plasmate.knsrc", this);
         mNewStuffDialog->setUploadFile(url);
         mNewStuffDialog->exec();
-        //TODO: Delete temporary package after publishing is done
+        QFile::remove(url.path()); // delete temporary package
     } else {
         // should probably eventually use a better error message
         KMessageBox::error(this, i18n("An error has occurred during the export. Please check the write permissions in the target directory."));
