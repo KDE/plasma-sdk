@@ -14,12 +14,6 @@
 #include <Plasma/Package>
 #include <Plasma/PackageMetadata>
 
-const QString PackageModel::dataengineType = "Plasma/DataEngine";
-const QString PackageModel::runnerType = "Plasma/Runner";
-const QString PackageModel::themeType = "Plasma/Theme";
-const QString PackageModel::plasmoidType = "Plasma/Applet";
-const QString PackageModel::popupType = "Plasma/PopupApplet";
-
 PackageModel::PackageModel(QObject *parent)
         : QAbstractItemModel(parent),
         m_directory(0),

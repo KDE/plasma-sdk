@@ -96,15 +96,15 @@ void MetaDataEditor::readFile()
 
     QString serviceType = metadata->serviceType();
 
-    if (serviceType == QString(PackageModel::plasmoidType)) {
+    if (serviceType == "Plasma/Applet") {
         view->type_combo->setCurrentIndex(0);
-    } else if (serviceType == QString(PackageModel::popupType)) {
+    } else if (serviceType == "Plasma/PopupApplet") {
         view->type_combo->setCurrentIndex(1);
-    } else if (serviceType == QString(PackageModel::dataengineType)) {
+    } else if (serviceType == "Plasma/DataEngine") {
         view->type_combo->setCurrentIndex(2);
-    } else if (serviceType == QString(PackageModel::themeType)) {
+    } else if (serviceType == "Plasma/Theme") {
         view->type_combo->setCurrentIndex(3);
-    } else if (serviceType == QString(PackageModel::runnerType)) {
+    } else if (serviceType == "Plasma/Runner") {
         view->type_combo->setCurrentIndex(4);
     } else {
         kWarning() << "Unknown service type" << serviceType;
@@ -139,24 +139,24 @@ void MetaDataEditor::serviceTypeChanged()
 
     switch (view->type_combo->currentIndex()) {
     case 0:
-        metadata->setServiceType(PackageModel::plasmoidType);
+        metadata->setServiceType("Plasma/Applet");
         currentType = Plasma::AppletComponent;
         break;
     case 1:
-        metadata->setServiceType(PackageModel::popupType);
+        metadata->setServiceType("Plasma/PopupApplet");
         currentType = Plasma::AppletComponent;
         break;
     case 2:
-        metadata->setServiceType(PackageModel::dataengineType);
+        metadata->setServiceType("Plasma/DataEngine");
         currentType = Plasma::DataEngineComponent;
         break;
     case 3:
-        metadata->setServiceType(PackageModel::themeType);
+        metadata->setServiceType("Plasma/Theme");
         view->api_combo->setEnabled(false);
         return;
         break;
     case 4:
-        metadata->setServiceType(PackageModel::runnerType);
+        metadata->setServiceType("Plasma/Runner");
         currentType = Plasma::RunnerComponent;
         break;
     default:

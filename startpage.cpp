@@ -249,14 +249,14 @@ void StartPage::refreshRecentProjectsList()
 
         QString serviceType = metadata.serviceType();
 
-        if (serviceType == PackageModel::plasmoidType ||
-            serviceType == PackageModel::popupType) {
+        if (serviceType == "Plasma/Applet" ||
+            serviceType == "Plasma/PopupApplet") {
             item->setIcon(KIcon("application-x-plasma"));
-        } else if (serviceType == PackageModel::dataengineType) {
+        } else if (serviceType == "Plasma/DataEngine") {
             item->setIcon(KIcon("kexi"));
-        } else if (serviceType == PackageModel::themeType) {
+        } else if (serviceType == "Plasma/Theme") {
             item->setIcon(KIcon("inkscape"));
-        } else if (serviceType == PackageModel::runnerType) {
+        } else if (serviceType == "Plasma/Runner") {
             item->setIcon(KIcon("system-run"));
         } else {
             kWarning() << "Unknown service type" << serviceType;
@@ -290,15 +290,15 @@ void StartPage::createNewProject()
     // type -> serviceTypes
     QString serviceTypes;
     if (ui->contentTypes->currentRow() == 1) {
-        serviceTypes = PackageModel::dataengineType;
+        serviceTypes = "Plasma/DataEngine";
         templateFilePath.append("mainDataEngine");
     } else if (ui->contentTypes->currentRow() == 2) {
-        serviceTypes = PackageModel::runnerType;
+        serviceTypes = "Plasma/Runner";
         templateFilePath.append("mainRunner");
     } else if (ui->contentTypes->currentRow() == 3) {
-        serviceTypes = PackageModel::themeType;
+        serviceTypes = "Plasma/Theme";
     } else {
-        serviceTypes = PackageModel::plasmoidType;
+        serviceTypes = "Plasma/Applet";
         templateFilePath.append("mainPlasmoid");
     }
 

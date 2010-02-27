@@ -34,8 +34,8 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     QString installText = i18n("Click to install the current project directly onto your computer.");
     QString publishLabel = i18n("Publish project");
     QString publishText = i18n("Click to publish the current project online, so that other people can find and install it using the Internet.");
-    
-    m_extension = type == PackageModel::plasmoidType ? "plasmoid" : "zip";
+
+    m_extension = (type == "Plasma/Applet" || type == "Plasma/PopupApplet") ? "plasmoid" : "zip";
 
     m_exporterUrl = new KUrlRequester(this);
     m_exporterUrl->setFilter(QString("*.") + m_extension);
@@ -117,11 +117,11 @@ void Publisher::doInstall()
 
     QStringList argv("plasmapkg");
     argv.append("-t");
-    if (m_projectType == PackageModel::runnerType) {
+    if (m_projectType == "Plasma/Runner") {
         argv.append("runner");
-    } else if (m_projectType == PackageModel::dataengineType) {
+    } else if (m_projectType == "Plasma/DataEngine") {
         argv.append("dataengine");
-    } else if (m_projectType == PackageModel::themeType) {
+    } else if (m_projectType == "Plasma/Theme") {
         argv.append("theme");
     } else {
         argv.append("plasmoid");
