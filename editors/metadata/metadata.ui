@@ -273,6 +273,11 @@
      </item>
      <item>
       <property name="text">
+       <string>Popup Applet</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
        <string>DataEngine</string>
       </property>
      </item>

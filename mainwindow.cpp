@@ -540,6 +540,12 @@ void MainWindow::loadProject(const QString &name, const QString &type)
         }
     }
 
+    //Workaround for Plasma::PackageStructure not recognizing Plasma/PopupApplet as a valid type
+    //FIXME:
+    if (actualType == PackageModel::popupType) {
+        actualType = PackageModel::plasmoidType;
+    }
+
     // Add it to the recent files first.
     m_model = new PackageModel(this);
     kDebug() << "Setting project type to:" << actualType;

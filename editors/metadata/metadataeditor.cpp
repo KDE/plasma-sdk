@@ -19,6 +19,7 @@
 
 #include "ui_metadata.h"
 #include "metadataeditor.h"
+#include "../../packagemodel.h"
 
 //
 // TODO: Now we know what this does it needs rewriting to use the metadata object
@@ -95,14 +96,16 @@ void MetaDataEditor::readFile()
 
     QString serviceType = metadata->serviceType();
 
-    if (serviceType == QString("Plasma/Applet")) {
+    if (serviceType == QString(PackageModel::plasmoidType)) {
         view->type_combo->setCurrentIndex(0);
-    } else if (serviceType == QString("Plasma/DataEngine")) {
+    } else if (serviceType == QString(PackageModel::popupType)) {
         view->type_combo->setCurrentIndex(1);
-    } else if (serviceType == QString("Plasma/Theme")) {
+    } else if (serviceType == QString(PackageModel::dataengineType)) {
         view->type_combo->setCurrentIndex(2);
-    } else if (serviceType == QString("Plasma/Runner")) {
+    } else if (serviceType == QString(PackageModel::themeType)) {
         view->type_combo->setCurrentIndex(3);
+    } else if (serviceType == QString(PackageModel::runnerType)) {
+        view->type_combo->setCurrentIndex(4);
     } else {
         kWarning() << "Unknown service type" << serviceType;
     }
@@ -136,21 +139,24 @@ void MetaDataEditor::serviceTypeChanged()
 
     switch (view->type_combo->currentIndex()) {
     case 0:
-        metadata->setServiceType("Plasma/Applet");
+        metadata->setServiceType(PackageModel::plasmoidType);
         currentType = Plasma::AppletComponent;
         break;
     case 1:
-        metadata->setServiceType("Plasma/DataEngine");
-        currentType = Plasma::DataEngineComponent;
+        metadata->setServiceType(PackageModel::popupType);
+        currentType = Plasma::AppletComponent;
         break;
     case 2:
-        metadata->setServiceType("Plasma/Theme");
+        metadata->setServiceType(PackageModel::dataengineType);
+        currentType = Plasma::DataEngineComponent;
+        break;
+    case 3:
+        metadata->setServiceType(PackageModel::themeType);
         view->api_combo->setEnabled(false);
         return;
         break;
-    case 3:
-        metadata->setServiceType("Plasma/Runner");
-        view->api_combo->setEnabled(false);
+    case 4:
+        metadata->setServiceType(PackageModel::runnerType);
         currentType = Plasma::RunnerComponent;
         break;
     default:
@@ -187,7 +193,7 @@ void MetaDataEditor::serviceTypeChanged()
     view->api_combo->clear();
     view->api_combo->insertItems(0, apiNames);
 
-    int idx = view->api_combo->findText(metadata->implementationApi());
+    int idx = apis.indexOf(metadata->implementationApi());
     if (idx != -1) {
         view->api_combo->setCurrentIndex(idx);
     } else if (metadata->implementationApi().isEmpty()) {
@@ -217,4 +223,5 @@ void MetaDataEditor::writeFile()
     metadata->setLicense(view->license_edit->text());
 
     metadata->write(filename);
+    //TODO: alert the necessary components (eg. packagemodel) if plugin type/api is changed
 }

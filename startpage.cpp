@@ -249,7 +249,8 @@ void StartPage::refreshRecentProjectsList()
 
         QString serviceType = metadata.serviceType();
 
-        if (serviceType == PackageModel::plasmoidType) {
+        if (serviceType == PackageModel::plasmoidType ||
+            serviceType == PackageModel::popupType) {
             item->setIcon(KIcon("application-x-plasma"));
         } else if (serviceType == PackageModel::dataengineType) {
             item->setIcon(KIcon("kexi"));

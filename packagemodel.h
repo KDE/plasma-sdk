@@ -20,6 +20,7 @@ class PackageModel : public QAbstractItemModel
 public:
 
     static const QString plasmoidType;
+    static const QString popupType;
     static const QString runnerType;
     static const QString dataengineType;
     static const QString themeType;
