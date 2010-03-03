@@ -607,8 +607,15 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     m_timeLine->setWorkingDir(KUrl(packagePath));
     m_timeLine->loadTimeLine(KUrl(packagePath));
 
-    // load project in previewer
-    m_previewer->addApplet(packagePath);
+    if (actualType == "Plasma/PopupApplet" ||
+        actualType == "Plasma/Applet") {
+        m_previewerWidget->show();
+        // load project in previewer
+        m_previewer->addApplet(packagePath);
+    } else {
+        // Previewer is useless for non-plasmoids right now. So don't show.
+        m_previewerWidget->hide();
+    }
 
     // Now, setup some useful properties such as the project name in the title bar
     // and setting the current working directory.

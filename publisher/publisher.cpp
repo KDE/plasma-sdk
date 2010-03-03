@@ -50,6 +50,9 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     connect(m_installerButton, SIGNAL(clicked()), this, SLOT(doInstall()));
     connect(m_publisherButton, SIGNAL(clicked()), this, SLOT(doPublish()));
 
+    // Publish only works right for Plasmoid now afaik. Disabling for other project types.
+    m_publisherButton->setEnabled(type == "Plasma/Applet" || type == "Plasma/PopupApplet");
+
     QVBoxLayout *layout = new QVBoxLayout();
     layout->addWidget(new QLabel("<h1>" + exportLabel + "</h1>", this));
 
