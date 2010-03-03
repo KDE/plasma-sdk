@@ -318,9 +318,15 @@ void MainWindow::changeTab(const QModelIndex &item)
     }
     break;
     case PreviewTab: {
-        Previewer *tabPreviewer = new Previewer(this);
-        tabPreviewer->addApplet(m_model->package());
-        m_central->switchTo(tabPreviewer, CentralContainer::DeleteAfter);
+        if (m_model->packageType() == "Plasma/PopupApplet" ||
+            m_model->packageType() == "Plasma/Applet") {
+            Previewer *tabPreviewer = new Previewer(this);
+            tabPreviewer->addApplet(m_model->package());
+            m_central->switchTo(tabPreviewer, CentralContainer::DeleteAfter);
+        } else {
+            QLabel *l = new QLabel(i18n("Preview is unavailable for this project type"));
+            m_central->switchTo(l, CentralContainer::DeleteAfter);
+        }
     }
     }
 
@@ -420,6 +426,8 @@ void MainWindow::setupTextEditor(KTextEditor::Document *editorPart, KTextEditor:
 {
     //FIXME: we should be setting the highlight based on the type of document
     //editorPart->setHighlightingMode("JavaScript");
+    //FIXME: (probably related to the above) If I open a python file then immediately a
+    // js file, editor tries to add a python-style encoding comment at the top of the js file.
     if (view) {
         view->setContextMenu(view->defaultContextMenu());
 
@@ -581,6 +589,10 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     if (!m_docksCreated) {
         createDockWidgets();
     } else { // loading a new project!
+        // prevent accidental loading of previous active project's file
+        // plus temporary workaround for editor issue with handling different languages
+        delete m_part;
+        m_part = 0;
         // workaround to completely clear previewer
         delete m_previewer;
         m_previewer = new Previewer(this);
