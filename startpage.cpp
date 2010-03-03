@@ -233,11 +233,6 @@ void StartPage::refreshRecentProjectsList()
         // long as it's unique. Only the plasmoid name, which the user
         // sets in the metadata editor, will ever be visible in the UI.
         QString projectName = metadata.name();
-        // QString projectName = recentFiles.at(i);
-
-//         if (projectName.isEmpty()) {
-//             continue;
-//         }
 
         kDebug() << "adding" << projectName << "to the list of recent projects...";
         QListWidgetItem *item = new QListWidgetItem(projectName); // show the user-set plasmoid name in the UI
@@ -247,20 +242,32 @@ void StartPage::refreshRecentProjectsList()
         // should be set to the folder name, which the loading code expects.
         item->setData(FullPathRole, recentFiles.at(i));
 
+        // set a tooltip for extra info and to help differentiating similar projects
+        QString tooltip = "Project : " + projectName + "\n\n";
+        tooltip += "\"" + metadata.description() + "\"\n---\n";
+        tooltip += i18n("Author") + " : " + metadata.author() + " <" + metadata.email() + ">\n";
+        tooltip += i18n("Version") + " : " + metadata.version() + "\n";
+        tooltip += i18n("API") + " : " + metadata.implementationApi() + "\n";
+
         QString serviceType = metadata.serviceType();
 
         if (serviceType == "Plasma/Applet" ||
             serviceType == "Plasma/PopupApplet") {
             item->setIcon(KIcon("application-x-plasma"));
+            tooltip += i18n("Project type") + " : " + i18n("Plasmoid");
         } else if (serviceType == "Plasma/DataEngine") {
             item->setIcon(KIcon("kexi"));
+            tooltip += i18n("Project type") + " : " + i18n("Data Engine");
         } else if (serviceType == "Plasma/Theme") {
             item->setIcon(KIcon("inkscape"));
+            tooltip += i18n("Project type") + " : " + i18n("Theme");
         } else if (serviceType == "Plasma/Runner") {
             item->setIcon(KIcon("system-run"));
+            tooltip += i18n("Project type") + " : " + i18n("Runner");
         } else {
             kWarning() << "Unknown service type" << serviceType;
         }
+        item->setToolTip(tooltip);
 
         projectManager->addProject(item);
         // limit to 5 projects to display up front
