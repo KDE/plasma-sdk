@@ -361,6 +361,10 @@ void MainWindow::editorDestructiveRefresh()
     if (m_metaEditor) {
         m_metaEditor->readFile();
     }
+    if (qobject_cast<KParts::ReadOnlyPart*>(m_notesPart)) {
+        static_cast<KParts::ReadOnlyPart*>(m_notesPart)->openUrl(
+              static_cast<KParts::ReadOnlyPart*>(m_notesPart)->url());
+    }
 }
 
 void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
@@ -473,6 +477,12 @@ void MainWindow::loadNotesEditor(QDockWidget *container)
 
         if (!m_notesPart) {
             kDebug() << "Failed to load notes editor:" << error;
+        }
+
+        // use same backup file format as above so that it is gitignored
+        KTextEditor::ConfigInterface *config = dynamic_cast<KTextEditor::ConfigInterface*>(m_notesPart);
+        if (config) {
+            config->setConfigValue("backup-on-save-prefix", ".");
         }
 
         refreshNotes();

@@ -293,6 +293,7 @@ void TimeLine::newSavePoint()
         // Set up a basic .gitignore file
         m_gitRunner->addIgnoredFileExtension("*.*~");
         m_gitRunner->addIgnoredFileExtension("*.*bak");
+        m_gitRunner->addIgnoredFileExtension("NOTES");
     }
 
     if(!m_gitRunner->hasNewChangesToCommit())
