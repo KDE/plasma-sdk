@@ -266,31 +266,6 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <item>
-      <property name="text">
-       <string>Applet</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Popup Applet</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>DataEngine</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Theme</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Runner</string>
-      </property>
-     </item>
     </widget>
    </item>
    <item row="9" column="0">

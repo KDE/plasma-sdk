@@ -96,20 +96,28 @@ void MetaDataEditor::readFile()
 
     QString serviceType = metadata->serviceType();
 
-    if (serviceType == "Plasma/Applet") {
-        view->type_combo->setCurrentIndex(0);
-    } else if (serviceType == "Plasma/PopupApplet") {
-        view->type_combo->setCurrentIndex(1);
-    } else if (serviceType == "Plasma/DataEngine") {
-        view->type_combo->setCurrentIndex(2);
+    view->type_combo->clear();
+    view->type_combo->setEnabled(false);
+    if (serviceType == "Plasma/DataEngine") {
+        view->type_combo->insertItem(0, i18n("Data Engine"));
+        metadata->setServiceType("Plasma/DataEngine");
     } else if (serviceType == "Plasma/Theme") {
-        view->type_combo->setCurrentIndex(3);
+        view->type_combo->insertItem(0, i18n("Theme"));
+        metadata->setServiceType("Plasma/Theme");
     } else if (serviceType == "Plasma/Runner") {
-        view->type_combo->setCurrentIndex(4);
+        view->type_combo->insertItem(0, i18n("Runner"));
+        metadata->setServiceType("Plasma/Runner");
     } else {
-        kWarning() << "Unknown service type" << serviceType;
+        view->type_combo->insertItem(0, i18n("Applet"));
+        view->type_combo->insertItem(1, i18n("Popup Applet"));
+        view->type_combo->setEnabled(true);
+        if (serviceType == "Plasma/Applet") {
+            view->type_combo->setCurrentIndex(0);
+        } else {
+            view->type_combo->setCurrentIndex(1);
+        }
+        serviceTypeChanged();
     }
-    serviceTypeChanged();
 
     // Enforce the security restriction from package.cpp in the input field
     QRegExpValidator *pluginname_validator = new QRegExpValidator(view->pluginname_edit);
@@ -146,7 +154,7 @@ void MetaDataEditor::serviceTypeChanged()
         metadata->setServiceType("Plasma/PopupApplet");
         currentType = Plasma::AppletComponent;
         break;
-    case 2:
+    /*case 2:   // only applet/popupapplet can be dynamically selected now
         metadata->setServiceType("Plasma/DataEngine");
         currentType = Plasma::DataEngineComponent;
         break;
@@ -158,13 +166,14 @@ void MetaDataEditor::serviceTypeChanged()
     case 4:
         metadata->setServiceType("Plasma/Runner");
         currentType = Plasma::RunnerComponent;
-        break;
+        break;*/
     default:
         kWarning() << "Unknown service type" << currentType;
         return;
     }
 
-    view->api_combo->setEnabled(true);
+    view->api_combo->setEnabled(false); // disallow dynamic changing of api
+    //FIXME: shouldn't need to do most of the stuff below anymore
     apis = Plasma::knownLanguages(currentType);
     apis.append(QString());   // Add empty string for native
 
