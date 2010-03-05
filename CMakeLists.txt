@@ -3,7 +3,7 @@ project(PlasMate)
 find_package(KDE4 REQUIRED)
 find_program(GIT_EXECUTABLE git)
 if(NOT GIT_EXECUTABLE)
-  message(FATAL_ERROR "**Git executable not found.\n**You need to install git-core it in order to use the TimeLine!")
+  message(WARNING "**Git executable not found.\n**You need to install git-core it in order to use the TimeLine!")
 endif(NOT GIT_EXECUTABLE)
 
 include(KDE4Defaults)
