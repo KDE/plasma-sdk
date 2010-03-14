@@ -25,7 +25,6 @@ set (PlasMate_SRC
     savesystem/tabledelegate.cpp
     savesystem/tablewidget.cpp
     savesystem/timeline.cpp
-    note/note.cpp
     mainwindow.cpp
     startpage.cpp
     packagemodel.cpp
