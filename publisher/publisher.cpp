@@ -105,6 +105,11 @@ void Publisher::setProjectName(const QString &name)
 
 void Publisher::doExport()
 {
+    if (QFile(m_exporterUrl->url().path()).exists()) {
+        QString dialogText = i18n("A file already exists at %1! Do you want to overwrite it?", m_exporterUrl->url().path());
+        int code = KMessageBox::warningYesNo(this, dialogText);
+        if (code != KMessageBox::Yes) return;
+    }
     bool ok = exportToFile(m_exporterUrl->url());
     if (QFile::exists(m_exporterUrl->url().path()) && ok)
         KMessageBox::information(this, i18n("Project has been exported to %1.", m_exporterUrl->url().path()));
@@ -171,11 +176,10 @@ void Publisher::doPublish()
 
 bool Publisher::exportToFile(const KUrl& url)
 {
-    //TODO: Handle existing file/overwrite etc.
     if (!url.isLocalFile() ||
           QDir(url.path()).exists()) {
         KMessageBox::error(this, i18n("The file you entered is invalid."));
         return false;
     }
-    return ProjectManager::exportPackage(m_projectPath, url);
+    return ProjectManager::exportPackage(m_projectPath, url); // will overwrite if exists!
 }

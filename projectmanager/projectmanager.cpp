@@ -98,6 +98,10 @@ void ProjectManager::emitProjectSelected()
 bool ProjectManager::exportPackage(const KUrl &toExport, const KUrl &targetFile)
 {
     bool ret = true;
+    if (QFile::exists(targetFile.path())) {
+        //TODO: Make sure this succeeds
+        QFile::remove(targetFile.path()); // overwrite!
+    }
     KZip plasmoid(targetFile.path());
     if (!plasmoid.open(QIODevice::WriteOnly)) {
         return false;
