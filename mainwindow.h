@@ -104,6 +104,7 @@ private:
     void createDockWidgets();
     void setupTextEditor(KTextEditor::Document *editorPart, KTextEditor::View *view);
     void loadNotesEditor(QDockWidget *container);
+    Previewer* createPreviewerFor(const QString& projectType);
 
     StartPage *m_startPage;
     Sidebar *m_sidebar;

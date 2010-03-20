@@ -215,11 +215,15 @@ void MainWindow::createDockWidgets()
     connect(m_timeLine, SIGNAL(savePointClicked()),
             this, SLOT(saveEditorData()));
     addDockWidget(location, m_timeLine);
-    /////////////////////////////////////////////////////////////////////////
-    m_previewerWidget = new PlasmoidPreviewer(i18n("Previewer"), this);
-    m_previewerWidget->setObjectName("preview");
-    connect(m_previewerWidget, SIGNAL(refreshRequested()), this, SLOT(saveAndRefresh()));
-    addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
+
+//     Do this in loadProject instead so we don't do it twice. It needs to be in
+//     load project because the previewer needs to be recreated everytime a project
+//     is loaded - and createDockWidgets() is only called on startup
+//     /////////////////////////////////////////////////////////////////////////
+//     m_previewerWidget = new PlasmoidPreviewer(i18n("Previewer"), this);
+//     m_previewerWidget->setObjectName("preview");
+//     connect(m_previewerWidget, SIGNAL(refreshRequested()), this, SLOT(saveAndRefresh()));
+//     addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
 
 //    m_previewerWidget->updateGeometry();
 //    m_previewer->updateGeometry();
@@ -234,7 +238,7 @@ void MainWindow::createDockWidgets()
     addDockWidget(Qt::LeftDockWidgetArea, m_projectNotesWidget);
 
     //splitDockWidget(m_workflow, m_editWidget, Qt::Horizontal);
-    splitDockWidget(m_editWidget, m_previewerWidget, Qt::Vertical);
+    //splitDockWidget(m_editWidget, m_previewerWidget, Qt::Vertical);
 
     // Restoring the previous layout
     restoreState(configDock.readEntry("MainWindowLayout",QByteArray()), 0);
@@ -600,14 +604,6 @@ void MainWindow::loadProject(const QString &name, const QString &type)
         // plus temporary workaround for editor issue with handling different languages
         delete m_part;
         m_part = 0;
-        QByteArray state = saveState();
-        // workaround to completely clear previewer
-        delete m_previewerWidget;
-        m_previewerWidget = new PlasmoidPreviewer(i18n("Previewer"), this);
-        m_previewerWidget->setObjectName("preview");
-        connect(m_previewerWidget, SIGNAL(refreshRequested()), this, SLOT(saveAndRefresh()));
-        addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
-        restoreState(state);
         // point editor tree to new model
         m_editPage->setModel(m_model);
         // delete old publisher
@@ -630,15 +626,17 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     m_timeLine->setWorkingDir(KUrl(packagePath));
     m_timeLine->loadTimeLine(KUrl(packagePath));
 
-    if (actualType == "Plasma/PopupApplet" ||
-        actualType == "Plasma/Applet") {
-        m_previewerWidget->show();
-        // load project in previewer
+    QByteArray state = saveState();
+
+    // initialize previewer
+    delete m_previewerWidget;
+    m_previewerWidget = createPreviewerFor(actualType);
+    if (m_previewerWidget) {
+        addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
+        splitDockWidget(m_editWidget, m_previewerWidget, Qt::Vertical);
         m_previewerWidget->showPreview(packagePath);
-    } else {
-        // Previewer is useless for non-plasmoids right now. So don't show.
-        m_previewerWidget->hide();
     }
+    restoreState(state);
 
     // Now, setup some useful properties such as the project name in the title bar
     // and setting the current working directory.
@@ -659,3 +657,14 @@ QStringList MainWindow::recentProjects()
     return l;
 }
 
+Previewer* MainWindow::createPreviewerFor(const QString& projectType)
+{
+    Previewer* ret = 0;
+    if (projectType == "Plasma/Applet" ||
+        projectType == "Plasma/PopupApplet") {
+        ret = new PlasmoidPreviewer(i18n("Previewer"), this);
+        ret->setObjectName("preview");
+        connect(ret, SIGNAL(refreshRequested()), this, SLOT(saveAndRefresh()));
+    }
+    return ret;
+}
