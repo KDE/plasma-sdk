@@ -24,7 +24,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../previewer.h"
+#include "../plasmoidview.h"
 
 #include <QPixmapCache>
 
@@ -118,7 +118,7 @@ int main(int argc, char **argv)
         appletArgs << args->arg(i);
     }
 
-    Previewer preview;
+    PlasmoidView preview;
     preview.addApplet(pluginName, appletArgs);
     preview.show();
 

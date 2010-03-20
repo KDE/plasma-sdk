@@ -1,5 +1,5 @@
 set(previewer_SRCS
-    ../previewer.cpp
+    ../plasmoidview.cpp
     main.cpp
 )
 
