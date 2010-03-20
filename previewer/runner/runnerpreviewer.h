@@ -8,26 +8,34 @@
  *
  */
 
-#ifndef PLASMOIDPREVIEWER_H
-#define PLASMOIDPREVIEWER_H
+#ifndef RUNNERPREVIEWER_H
+#define RUNNERPREVIEWER_H
 
 #include "../previewer.h"
-#include "plasmoidview.h"
 
-class PlasmoidPreviewer : public Previewer {
+class KLineEdit;
+class QListWidget;
+
+namespace Plasma {
+  class AbstractRunner;
+}
+
+class RunnerPreviewer : public Previewer {
 
     Q_OBJECT
 
-signals:
-    void refreshView(); // emitted to signal the containment to refresh
-
 public:
-    PlasmoidPreviewer(const QString & title, QWidget * parent = 0, Qt::WindowFlags flags = 0 );
+    RunnerPreviewer(const QString & title, QWidget * parent = 0, Qt::WindowFlags flags = 0 );
     void showPreview(const QString &packagePath);
     void refreshPreview();
 
+public slots:
+    void doQuery();
+
 private:
-    PlasmoidView* m_view;
+    KLineEdit* m_edit;
+    QListWidget* m_matches;
+    Plasma::AbstractRunner* m_runner;
 };
 
-#endif // PLASMOIDPREVIEWER_H
+#endif // RUNNERPREVIEWER_H

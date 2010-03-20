@@ -47,6 +47,7 @@
 #include "startpage.h"
 #include "ui_mainwindow.h"
 #include "previewer/plasmoid/plasmoidpreviewer.h"
+#include "previewer/runner/runnerpreviewer.h"
 #include "publisher/publisher.h"
 #include "docbrowser/docbrowser.h"
 
@@ -663,6 +664,10 @@ Previewer* MainWindow::createPreviewerFor(const QString& projectType)
     if (projectType == "Plasma/Applet" ||
         projectType == "Plasma/PopupApplet") {
         ret = new PlasmoidPreviewer(i18n("Previewer"), this);
+        ret->setObjectName("preview");
+        connect(ret, SIGNAL(refreshRequested()), this, SLOT(saveAndRefresh()));
+    } else if (projectType == "Plasma/Runner") {
+        ret = new RunnerPreviewer(i18n("Previewer"), this);
         ret->setObjectName("preview");
         connect(ret, SIGNAL(refreshRequested()), this, SLOT(saveAndRefresh()));
     }

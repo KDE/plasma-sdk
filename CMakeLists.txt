@@ -30,6 +30,7 @@ set (PlasMate_SRC
     packagemodel.cpp
     previewer/plasmoid/plasmoidpreviewer.cpp
     previewer/plasmoid/plasmoidview.cpp
+    previewer/runner/runnerpreviewer.cpp
     previewer/previewer.cpp
     publisher/publisher.cpp
     docbrowser/docbrowser.cpp
