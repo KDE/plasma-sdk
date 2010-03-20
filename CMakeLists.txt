@@ -28,6 +28,8 @@ set (PlasMate_SRC
     mainwindow.cpp
     startpage.cpp
     packagemodel.cpp
+    previewer/plasmoid/plasmoidpreviewer.cpp
+    previewer/plasmoid/plasmoidview.cpp
     previewer/previewer.cpp
     publisher/publisher.cpp
     docbrowser/docbrowser.cpp
@@ -43,7 +45,7 @@ kde4_add_ui_files (PlasMate_SRC
 include_directories(${KDE4_INCLUDES})
 
 add_subdirectory( editors )
-add_subdirectory( previewer )
+add_subdirectory( previewer/plasmoid )
 add_subdirectory( savesystem )
 add_subdirectory( templates )
 #add_subdirectory( savesystem )

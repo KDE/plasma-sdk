@@ -5,7 +5,7 @@ set(containment_SRCS
     overlaytoolbox.cpp
 )
 
-add_subdirectory(test)
+#add_subdirectory(test)
 
 kde4_add_plugin(plasma_containment_studiopreviewer ${containment_SRCS})
 target_link_libraries(plasma_containment_studiopreviewer ${KDE4_KDEUI_LIBS} ${KDE4_PLASMA_LIBS})

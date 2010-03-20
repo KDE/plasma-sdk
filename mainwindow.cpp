@@ -46,7 +46,7 @@
 #include "sidebar.h"
 #include "startpage.h"
 #include "ui_mainwindow.h"
-#include "previewer/previewer.h"
+#include "previewer/plasmoid/plasmoidpreviewer.h"
 #include "publisher/publisher.h"
 #include "docbrowser/docbrowser.h"
 
@@ -78,7 +78,7 @@ MainWindow::MainWindow(QWidget *parent)
     : KParts::MainWindow(parent, Qt::Widget),
       m_sidebar(0),
       m_timeLine(0),
-      m_previewer(0),
+      m_previewerWidget(0),
       m_metaEditor(0),
       m_publisher(0),
       m_browser(0),
@@ -123,11 +123,10 @@ MainWindow::~MainWindow()
         delete m_sidebar;
     }
 
-    if (m_previewer) {
+    if (m_previewerWidget) {
         configDock.writeEntry("PreviewerHeight", m_previewerWidget->height());
         configDock.writeEntry("PreviewerWidth", m_previewerWidget->width());
         c.sync();
-        delete m_previewer;
         delete m_previewerWidget;
     }
 
@@ -217,20 +216,18 @@ void MainWindow::createDockWidgets()
             this, SLOT(saveEditorData()));
     addDockWidget(location, m_timeLine);
     /////////////////////////////////////////////////////////////////////////
-    m_previewerWidget = new QDockWidget(i18n("Previewer"), this);
+    m_previewerWidget = new PlasmoidPreviewer(i18n("Previewer"), this);
     m_previewerWidget->setObjectName("preview");
-    m_previewer = new Previewer(this);
-    m_previewerWidget->setWidget(m_previewer);
+    connect(m_previewerWidget, SIGNAL(refreshRequested()), this, SLOT(saveAndRefresh()));
     addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
 
-    m_previewerWidget->updateGeometry();
-    m_previewer->updateGeometry();
+//    m_previewerWidget->updateGeometry();
+//    m_previewer->updateGeometry();
 
-    m_previewer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    m_previewerWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+//    m_previewer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+//    m_previewerWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    // TODO: Should probably make project notes an editor-tree item instead of a
-    //       dockwidget, since we're somewhat squeezed on dockwidget space now..
+    /////////////////////////////////////////////////////////////////////////
     QDockWidget *m_projectNotesWidget = new QDockWidget(i18n("Project notes"), this);
     m_projectNotesWidget->setObjectName("projectNotes");
     loadNotesEditor(m_projectNotesWidget);
@@ -318,15 +315,15 @@ void MainWindow::changeTab(const QModelIndex &item)
     }
     break;
     case PreviewTab: {
-        if (m_model->packageType() == "Plasma/PopupApplet" ||
+        /*if (m_model->packageType() == "Plasma/PopupApplet" ||
             m_model->packageType() == "Plasma/Applet") {
             Previewer *tabPreviewer = new Previewer(this);
             tabPreviewer->addApplet(m_model->package());
             m_central->switchTo(tabPreviewer, CentralContainer::DeleteAfter);
-        } else {
+        } else {*/
             QLabel *l = new QLabel(i18n("Preview is unavailable for this project type"));
             m_central->switchTo(l, CentralContainer::DeleteAfter);
-        }
+        //}
     }
     }
 
@@ -349,7 +346,7 @@ void MainWindow::saveEditorData()
 void MainWindow::saveAndRefresh()
 {
     saveEditorData();
-    emit refreshRequested();
+    m_previewerWidget->refreshPreview();
 }
 
 void MainWindow::editorDestructiveRefresh()
@@ -603,10 +600,14 @@ void MainWindow::loadProject(const QString &name, const QString &type)
         // plus temporary workaround for editor issue with handling different languages
         delete m_part;
         m_part = 0;
+        QByteArray state = saveState();
         // workaround to completely clear previewer
-        delete m_previewer;
-        m_previewer = new Previewer(this);
-        m_previewerWidget->setWidget(m_previewer);
+        delete m_previewerWidget;
+        m_previewerWidget = new PlasmoidPreviewer(i18n("Previewer"), this);
+        m_previewerWidget->setObjectName("preview");
+        connect(m_previewerWidget, SIGNAL(refreshRequested()), this, SLOT(saveAndRefresh()));
+        addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
+        restoreState(state);
         // point editor tree to new model
         m_editPage->setModel(m_model);
         // delete old publisher
@@ -633,7 +634,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
         actualType == "Plasma/Applet") {
         m_previewerWidget->show();
         // load project in previewer
-        m_previewer->addApplet(packagePath);
+        m_previewerWidget->showPreview(packagePath);
     } else {
         // Previewer is useless for non-plasmoids right now. So don't show.
         m_previewerWidget->hide();

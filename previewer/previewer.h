@@ -1,8 +1,5 @@
 /*
- * Copyright 2007 Frerich Raabe <raabe@kde.org>
- * Copyright 2007 Aaron Seigo <aseigo@kde.org>
- * Copyright 2008 Aleix Pol <aleixpol@gmail.com>
- * Copyright 2009 Artur Duque de Souza <morpheuz@gmail.com>
+ * Copyright 2010 Lim Yuen Hoe <yuenhoe@hotmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,33 +11,37 @@
 #ifndef PREVIEWER_H
 #define PREVIEWER_H
 
-#include "previewcontainment.h"
+#include <QDockWidget>
 
-#include <QGraphicsView>
+// This is the base previewer dockwidget class
+// All previewer types should inherit from this class
+class Previewer : public QDockWidget {
 
-#include <Plasma/Corona>
-
-using namespace Plasma;
-
-class Previewer : public QGraphicsView
-{
     Q_OBJECT
 
+signals:
+    void refreshRequested();
+
 public:
-    Previewer(QWidget *parent = 0);
-    void addApplet(const QString &name, const QVariantList &args = QVariantList());
-    void clearApplets();
+    Previewer(const QString & title, QWidget * parent = 0, Qt::WindowFlags flags = 0 );
+    Previewer(QWidget * parent = 0, Qt::WindowFlags flags = 0 );
+    /**
+     * Subclasses should override this method with actual previewing code
+     */
+    virtual void showPreview(const QString &packagePath) = 0;
+    /**
+     * Subclasses should override this method with code that refreshes the preview
+     */
+    virtual void refreshPreview() = 0;
 
-private slots:
-    void sceneRectChanged(const QRectF &rect);
-    void resizeEvent(QResizeEvent *event);
-    void appletRemoved();
-
-private:
-    Plasma::Corona m_corona;
-    Plasma::FormFactor m_formfactor;
-    Plasma::Containment *m_containment;
-    Plasma::Applet *m_applet;
+public slots:
+    /**
+     * Emits refreshRequested(), which should signal the editor to save its contents
+     * and then invoke refresh() on the previewer. All subclasses should call/connect to
+     * this when the user requests a refresh.
+     */
+    void emitRefreshRequest();
+    
 };
 
-#endif //PREVIEWER_H
+#endif // PREVIEWER_H

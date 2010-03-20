@@ -108,8 +108,7 @@ private:
     StartPage *m_startPage;
     Sidebar *m_sidebar;
     TimeLine    *m_timeLine;
-    QDockWidget *m_previewerWidget;
-    Previewer *m_previewer;
+    Previewer *m_previewerWidget;
     MetaDataEditor *m_metaEditor;
     Publisher *m_publisher;
     DocBrowser *m_browser;
