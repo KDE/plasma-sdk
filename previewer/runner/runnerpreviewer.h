@@ -15,9 +15,10 @@
 
 class KLineEdit;
 class QListWidget;
+class QListWidgetItem;
 
 namespace Plasma {
-  class AbstractRunner;
+  class RunnerManager;
 }
 
 class RunnerPreviewer : public Previewer {
@@ -26,16 +27,19 @@ class RunnerPreviewer : public Previewer {
 
 public:
     RunnerPreviewer(const QString & title, QWidget * parent = 0, Qt::WindowFlags flags = 0 );
+    ~RunnerPreviewer();
     void showPreview(const QString &packagePath);
     void refreshPreview();
 
 public slots:
     void doQuery();
+    void showMatches();
+    void executeMatch(QListWidgetItem*);
 
 private:
     KLineEdit* m_edit;
     QListWidget* m_matches;
-    Plasma::AbstractRunner* m_runner;
+    Plasma::RunnerManager* m_runner;
 };
 
 #endif // RUNNERPREVIEWER_H
