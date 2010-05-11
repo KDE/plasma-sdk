@@ -55,6 +55,7 @@ kde4_add_executable(plasmate ${PlasMate_SRC})
 target_link_libraries(plasmate ${KDE4_KDEUI_LIBS} ${KDE4_KTEXTEDITOR_LIBS} ${KDE4_KPARTS_LIBS} ${KDE4_KIO_LIBRARY} ${KDE4_PLASMA_LIBS} ${KDE4_KNEWSTUFF3_LIBRARY} ${QT_QTWEBKIT_LIBRARY})
 
 install(TARGETS plasmate ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(FILES plasmate.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES plasmateui.rc  DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 install(FILES plasmate.knsrc DESTINATION ${CONFIG_INSTALL_DIR})
 

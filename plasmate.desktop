@@ -1,0 +1,9 @@
+[Desktop Entry]
+Terminal=false
+Name=PlasMate
+GenericName=PlasMate - The Plasma Add Ons Creator
+Exec=plasmate
+Icon=plasma
+Type=Application
+InitialPreference=7
+Categories=KDE;Development;
