@@ -1,7 +1,9 @@
 [Desktop Entry]
 Terminal=false
 Name=PlasMate
+Name[x-test]=xxPlasMatexx
 GenericName=PlasMate - The Plasma Add Ons Creator
+GenericName[x-test]=xxPlasMate - The Plasma Add Ons Creatorxx
 Exec=plasmate
 Icon=plasma
 Type=Application
