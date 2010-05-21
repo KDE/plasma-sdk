@@ -2,11 +2,13 @@
 Terminal=false
 Name=PlasMate
 Name[pt]=PlasMate
+Name[pt_BR]=PlasMate
 Name[sv]=Plasmate
 Name[uk]=PlasMate
 Name[x-test]=xxPlasMatexx
 GenericName=PlasMate - The Plasma Add Ons Creator
 GenericName[pt]=PlasMate - O Criador de Extras para o Plasma
+GenericName[pt_BR]=PlasMate - O Criador de Addons para o Plasma
 GenericName[sv]=Plasmate - Skapa tillägg till Plasma
 GenericName[uk]=PlasMate — програма для створення додатків Плазми
 GenericName[x-test]=xxPlasMate - The Plasma Add Ons Creatorxx
