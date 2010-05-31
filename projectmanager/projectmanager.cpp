@@ -50,7 +50,7 @@ void ProjectManager::confirmDeletion()
 {
     //TODO: might want to disallow deleting a currently active project, or handle it
     //      gracefully somehow.
-    QString dialogText = i18n("Are you sure you want to delete the selected projects? This is not undoable!");
+    QString dialogText = i18n("Are you sure you want to delete the selected projects? This cannot be undone.");
     int code = KMessageBox::warningContinueCancel(this, dialogText);
     if (code != KMessageBox::Continue) return;
     QList<QListWidgetItem*> l = projectList->selectedItems();

@@ -106,7 +106,7 @@ void Publisher::setProjectName(const QString &name)
 void Publisher::doExport()
 {
     if (QFile(m_exporterUrl->url().path()).exists()) {
-        QString dialogText = i18n("A file already exists at %1! Do you want to overwrite it?", m_exporterUrl->url().path());
+        QString dialogText = i18n("A file already exists at %1. Do you want to overwrite it?", m_exporterUrl->url().path());
         int code = KMessageBox::warningYesNo(this, dialogText);
         if (code != KMessageBox::Yes) return;
     }

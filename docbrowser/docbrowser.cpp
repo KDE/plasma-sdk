@@ -43,7 +43,7 @@ DocBrowser::DocBrowser(const PackageModel *package, QWidget *parent)
     connect(linkButton, SIGNAL(clicked()), this, SLOT(showHelp()));
     topbar->addWidget(linkButton);
 
-    m_searchLabel = new QLabel(i18n("Find : "));
+    m_searchLabel = new QLabel(i18n("Find: "));
     btmbar->addWidget(m_searchLabel);
 
     // TODO: should probably respond to the common 'Ctrl-F' by
@@ -68,9 +68,9 @@ DocBrowser::DocBrowser(const PackageModel *package, QWidget *parent)
 void DocBrowser::findText(const QString& toFind)
 {
     if (!m_view->findText(toFind, QWebPage::FindWrapsAroundDocument)) {
-        m_searchLabel->setText(i18n("(Text not found!)"));
+        m_searchLabel->setText(i18n("(Text not found)"));
     } else {
-        m_searchLabel->setText(i18n("Find : "));
+        m_searchLabel->setText(i18n("Find: "));
     }
 }
 
