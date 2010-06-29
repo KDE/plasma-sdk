@@ -36,7 +36,7 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     QString installText = i18n("Click to install the current project directly onto your computer.");
     QString publishLabel = i18n("Publish project");
     QString publishText = i18n("Click to publish the current project online, so that other people can find and install it using the Internet.");
-    QString signatureText = i18n("Click to enable plasmoid signature.");
+    QString signatureText = i18n("Enable plasmoid signing.");
 
     m_extension = (type == "Plasma/Applet" || type == "Plasma/PopupApplet") ? "plasmoid" : "zip";
 

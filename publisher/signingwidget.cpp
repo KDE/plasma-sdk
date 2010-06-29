@@ -18,7 +18,12 @@
  */
 
 #include <QRadioButton>
+#include <QTreeWidget>
+#include <QPushButton>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <KDebug>
+#include <KIcon>
 
 
 #include "signingwidget.h"
@@ -26,8 +31,32 @@
 
 
 SigningWidget::SigningWidget()
-        : QTreeWidget(0)
+        : QWidget(0),
+        m_treeWidget(0)
 {
+    QVBoxLayout *mainlLayout = new QVBoxLayout(this);
+    QHBoxLayout *buttonLayout = new QHBoxLayout(this);
+
+    m_treeWidget = new QTreeWidget(this);
+    m_treeWidget->setHeaderLabel("Select one key from the list below:");
+
+    m_createKeyButton = new QPushButton(this);
+    m_createKeyButton->setText("Create new Key ...");
+    m_createKeyButton->setIcon(KIcon("dialog-password"));
+
+    m_deleteKeyButton = new QPushButton(this);
+    m_deleteKeyButton->setText("Delete selected key");
+    m_deleteKeyButton->setIcon(KIcon("edit-delete"));
+
+
+    buttonLayout->addWidget(m_createKeyButton);
+    buttonLayout->addWidget(m_deleteKeyButton);
+
+
+    mainlLayout->addWidget(m_treeWidget);
+    mainlLayout->addLayout(buttonLayout);
+    setLayout(mainlLayout);
+
     QCA::scanForPlugins();
     QCA::ProviderList qcaProviders = QCA::providers();
     bool hasGPGPlugin = false;
@@ -61,6 +90,7 @@ SigningWidget::SigningWidget()
     m_userKeyStore = new QCA::KeyStore(id, &m_keyStoreManager);
 
 
+
     loadKeys();
 
     connect(m_userKeyStore, SIGNAL(updated()),
@@ -70,14 +100,14 @@ SigningWidget::SigningWidget()
 void SigningWidget::loadKeys()
 {
     kDebug() << "loading keys ...";
-    clear();
+    m_treeWidget->clear();
     QList< QCA::KeyStoreEntry > entries = m_userKeyStore->entryList();
     foreach(QCA::KeyStoreEntry entry, entries) {
         if (!entry.pgpSecretKey().isNull()) {
-            QTreeWidgetItem *item = new QTreeWidgetItem(this);
+            QTreeWidgetItem *item = new QTreeWidgetItem(m_treeWidget);
             item->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
             QRadioButton *button = new QRadioButton(entry.pgpSecretKey().primaryUserId(), this);
-            setItemWidget(item, 0, button);
+            m_treeWidget->setItemWidget(item, 0, button);
         }
     }
 }

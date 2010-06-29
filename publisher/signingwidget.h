@@ -21,10 +21,13 @@
 #define SIGNINGWIDGET_H
 
 #include <QtCrypto/QtCrypto>
-#include <QTreeWidget>
+#include <QWidget>
+
+class QTreeWidget;
+class QPushButton;
 
 
-class SigningWidget : public QTreeWidget
+class SigningWidget : public QWidget
 {
     Q_OBJECT
 
@@ -32,6 +35,9 @@ public:
     SigningWidget();
 
 private:
+    QTreeWidget *m_treeWidget;
+    QPushButton *m_createKeyButton;
+    QPushButton *m_deleteKeyButton;
     QCA::Initializer init;
     QCA::KeyStoreManager m_keyStoreManager;
     QCA::KeyStore *m_userKeyStore;
