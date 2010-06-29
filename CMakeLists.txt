@@ -2,10 +2,18 @@ project(PlasMate)
 
 # Find needed packages
 find_package(KDE4 REQUIRED)
+include(MacroLibrary)
+
+set(LIBATTICA_MIN_VERSION "0.1.4")
 find_package(LibAttica REQUIRED)
+macro_log_feature(LIBATTICA_FOUND "libattica" "A library to access Open Collaboration Service providers" "http://websvn.kde.org/trunk/kdesupport/attica/" TRUE "${LIBATTICA_MIN_VERSION}" "Required uploading and downloading plasmoids using Get Hot New Stuff.")
+
+find_package(QCA2 REQUIRED)
+macro_log_feature(QCA2_FOUND "QCA2" "Qt Cryptographic Architecture" "http://delta.affinix.com/qca" TRUE "2.0.2" "Needed for plasmoid authentication.")
 
 # Find optional executables
-find_program(GIT_EXECUTABLE git)
+find_program(GIT_EXECUTABLE_FOUND git)
+macro_log_feature(GIT_EXECUTABLE_FOUND "Git" "Distributed Revision Control System" "http://git-scm.com/" FALSE "" "Runtime dependency needed to use the TimeLine feature.")
 
 include(KDE4Defaults)
 
@@ -59,32 +67,4 @@ install(FILES plasmate.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES plasmateui.rc  DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 install(FILES plasmate.knsrc DESTINATION ${CONFIG_INSTALL_DIR})
 
-message("\n******************************REQUIRED PACKAGES******************************")
-if(NOT KDE4_FOUND)
-  message("* KDE4 libraries and headers not foud! KDE libraries are required to build the whole app:")
-  message("  double check your build environment, adjust the settings and then run cmake again.")
-endif(NOT KDE4_FOUND)
-if(NOT LIBATTICA_FOUND)
-  message("* Attica library and headers not found! LibAttica is required in order to build the GHNS client.")
-endif(NOT LIBATTICA_FOUND)
-
-if(KDE4_FOUND)
-  message("* KDE4 libraries and headers found!")
-endif(KDE4_FOUND)
-if(LIBATTICA_FOUND)
-  message("* Attica library and headers found!")
-endif(LIBATTICA_FOUND)
-
-message("\n******************************OPTIONAL PACKAGES******************************")
-if(NOT GIT_EXECUTABLE)
-  message("* Git executable not found! You need to install git-core in order to use the TimeLine!")
-endif(NOT GIT_EXECUTABLE)
-
-if(GIT_EXECUTABLE)
-  message("* Git executable found! The TimeLine feature will be available!")
-endif(GIT_EXECUTABLE)
-
-if(KDE4_FOUND AND LIBATTICA_FOUND)
-  message("\nNow just run make and make install to enjoy PlasMate :)")
-endif(KDE4_FOUND AND LIBATTICA_FOUND)
-
+macro_display_feature_log()
