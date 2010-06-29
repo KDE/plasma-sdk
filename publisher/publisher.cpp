@@ -20,6 +20,7 @@
 #include <KStandardDirs>
 
 #include "publisher.h"
+#include "signingwidget.h"
 #include "../packagemodel.h"
 #include "../projectmanager/projectmanager.h"
 
@@ -35,6 +36,7 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     QString installText = i18n("Click to install the current project directly onto your computer.");
     QString publishLabel = i18n("Publish project");
     QString publishText = i18n("Click to publish the current project online, so that other people can find and install it using the Internet.");
+    QString signatureText = i18n("Click to enable plasmoid signature.");
 
     m_extension = (type == "Plasma/Applet" || type == "Plasma/PopupApplet") ? "plasmoid" : "zip";
 
@@ -83,9 +85,25 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     layout->addWidget(new QLabel(publishText, this));
     layout->addWidget(m_publisherButton);
 
-    layout->addStretch();
+    QGroupBox *signatureBox = new QGroupBox("Signing options ...",this);
+    QVBoxLayout *signatureLayout = new QVBoxLayout();
 
+    m_signCheckBox = new QCheckBox(signatureText, signatureBox);
+    m_signCheckBox->setChecked(false);
+    signatureLayout->addWidget(m_signCheckBox);
+
+    m_signingWidget = new SigningWidget();
+    m_signingWidget->setEnabled(false);
+    signatureLayout->addWidget(m_signingWidget);
+
+    signatureBox->setLayout(signatureLayout);
+    layout->addWidget(signatureBox);
+
+    layout->addStretch();
     setLayout(layout);
+
+    connect(m_signCheckBox, SIGNAL(clicked(bool)),
+            m_signingWidget, SLOT(setEnabled(bool)));
 }
 
 void Publisher::addSuffix()

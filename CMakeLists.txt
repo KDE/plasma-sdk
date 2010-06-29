@@ -40,6 +40,7 @@ set (PlasMate_SRC
     previewer/plasmoid/plasmoidview.cpp
     previewer/runner/runnerpreviewer.cpp
     previewer/previewer.cpp
+    publisher/signingwidget.cpp
     publisher/publisher.cpp
     docbrowser/docbrowser.cpp
     projectmanager/projectmanager.cpp

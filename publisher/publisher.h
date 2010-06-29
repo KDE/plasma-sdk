@@ -15,7 +15,8 @@
 
 class KUrlRequester;
 class QPushButton;
-
+class QCheckBox;
+class SigningWidget;
 namespace Ui
 {
 class Publisher;
@@ -42,6 +43,9 @@ private:
     QPushButton* m_exporterButton;
     QPushButton* m_installerButton;
     QPushButton* m_publisherButton;
+    QCheckBox* m_signCheckBox;
+    SigningWidget* m_signingWidget;
+
     KUrl m_projectPath;
     QString m_projectType;
     QString m_extension;
