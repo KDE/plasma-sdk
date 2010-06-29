@@ -20,12 +20,24 @@
 #ifndef SIGNINGWIDGET_H
 #define SIGNINGWIDGET_H
 
+#include <QtCrypto/QtCrypto>
 #include <KListWidget>
+
 
 class SigningWidget : public KListWidget
 {
+    Q_OBJECT
+
 public:
     SigningWidget();
+
+private:
+    QCA::Initializer init;
+    QCA::KeyStoreManager m_keyStoreManager;
+    QCA::KeyStore *m_userKeyStore;
+
+private Q_SLOTS:
+    void loadKeys();
 };
 
 #endif // SIGNINGWIDGET_H

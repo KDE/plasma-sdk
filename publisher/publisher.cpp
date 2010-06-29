@@ -25,9 +25,9 @@
 #include "../projectmanager/projectmanager.h"
 
 Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
-    :QWidget(parent),
-    m_projectPath(path),
-    m_projectType(type)
+        : QWidget(parent),
+        m_projectPath(path),
+        m_projectType(type)
 {
     // These should probably be refined at some point
     QString exportLabel = i18n("Export project");
@@ -85,7 +85,7 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     layout->addWidget(new QLabel(publishText, this));
     layout->addWidget(m_publisherButton);
 
-    QGroupBox *signatureBox = new QGroupBox("Signing options ...",this);
+    QGroupBox *signatureBox = new QGroupBox("Signing options ...", this);
     QVBoxLayout *signatureLayout = new QVBoxLayout();
 
     m_signCheckBox = new QCheckBox(signatureText, signatureBox);
@@ -194,7 +194,7 @@ void Publisher::doPublish()
 bool Publisher::exportToFile(const KUrl& url)
 {
     if (!url.isLocalFile() ||
-          QDir(url.path()).exists()) {
+            QDir(url.path()).exists()) {
         KMessageBox::error(this, i18n("The file you entered is invalid."));
         return false;
     }
