@@ -10,6 +10,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QCheckBox>
 
 #include <KUrlRequester>
 #include <KLocalizedString>
@@ -82,9 +83,7 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     layout->addWidget(new QLabel(publishText, this));
     layout->addWidget(m_publisherButton);
 
-    QWidget *spaceSoaker = new QWidget(this);
-    layout->addWidget(spaceSoaker);
-    layout->setStretchFactor(spaceSoaker, 100);
+    layout->addStretch();
 
     setLayout(layout);
 }
