@@ -17,15 +17,16 @@
  *
  */
 
-
+#include <QRadioButton>
 #include <KDebug>
+
 
 #include "signingwidget.h"
 
 
 
 SigningWidget::SigningWidget()
-        : KListWidget(0)
+        : QTreeWidget(0)
 {
     QCA::scanForPlugins();
     QCA::ProviderList qcaProviders = QCA::providers();
@@ -59,6 +60,7 @@ SigningWidget::SigningWidget()
     const QString id("qca-gnupg");
     m_userKeyStore = new QCA::KeyStore(id, &m_keyStoreManager);
 
+
     loadKeys();
 
     connect(m_userKeyStore, SIGNAL(updated()),
@@ -72,7 +74,10 @@ void SigningWidget::loadKeys()
     QList< QCA::KeyStoreEntry > entries = m_userKeyStore->entryList();
     foreach(QCA::KeyStoreEntry entry, entries) {
         if (!entry.pgpSecretKey().isNull()) {
-            addItem(new QListWidgetItem(entry.pgpSecretKey().primaryUserId()));
+            QTreeWidgetItem *item = new QTreeWidgetItem(this);
+            item->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+            QRadioButton *button = new QRadioButton(entry.pgpSecretKey().primaryUserId(), this);
+            setItemWidget(item, 0, button);
         }
     }
 }

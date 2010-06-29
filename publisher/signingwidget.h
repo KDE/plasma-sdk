@@ -21,10 +21,10 @@
 #define SIGNINGWIDGET_H
 
 #include <QtCrypto/QtCrypto>
-#include <KListWidget>
+#include <QTreeWidget>
 
 
-class SigningWidget : public KListWidget
+class SigningWidget : public QTreeWidget
 {
     Q_OBJECT
 
