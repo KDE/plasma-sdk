@@ -22,9 +22,11 @@
 
 #include <QtCrypto/QtCrypto>
 #include <QWidget>
+#include <QVector>
 
 class QTreeWidget;
 class QPushButton;
+class QStringList;
 
 
 class SigningWidget : public QWidget
@@ -35,15 +37,23 @@ public:
     SigningWidget();
 
 private:
+    void initUI();
+    void initKeys();
+
     QTreeWidget *m_treeWidget;
     QPushButton *m_createKeyButton;
     QPushButton *m_deleteKeyButton;
+    QStringList m_strings;
+    QString m_currentKey;
     QCA::Initializer init;
     QCA::KeyStoreManager m_keyStoreManager;
     QCA::KeyStore *m_userKeyStore;
 
 private Q_SLOTS:
+    void createKey();
+    void deleteKey();
     void loadKeys();
+    void updateCurrentKey();
 };
 
 #endif // SIGNINGWIDGET_H

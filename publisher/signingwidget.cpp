@@ -34,6 +34,13 @@ SigningWidget::SigningWidget()
         : QWidget(0),
         m_treeWidget(0)
 {
+    initUI();
+    initKeys();
+    loadKeys();
+}
+
+void SigningWidget::initUI()
+{
     QVBoxLayout *mainlLayout = new QVBoxLayout(this);
     QHBoxLayout *buttonLayout = new QHBoxLayout(this);
 
@@ -57,11 +64,20 @@ SigningWidget::SigningWidget()
     mainlLayout->addLayout(buttonLayout);
     setLayout(mainlLayout);
 
+    connect(m_createKeyButton, SIGNAL(clicked()),
+            this, SLOT(createKey()));
+    connect(m_deleteKeyButton, SIGNAL(clicked()),
+            this, SLOT(deleteKey()));
+}
+
+void SigningWidget::initKeys()
+{
+    const QString id("qca-gnupg");
     QCA::scanForPlugins();
     QCA::ProviderList qcaProviders = QCA::providers();
     bool hasGPGPlugin = false;
     for (int i = 0; i < qcaProviders.size(); ++i) {
-        if (qcaProviders[i]->name().contains("qca-gnupg")) {
+        if (qcaProviders[i]->name().contains(id)) {
             hasGPGPlugin = true;
             break;
         }
@@ -86,30 +102,93 @@ SigningWidget::SigningWidget()
     // Start the keystore manager, and get access to the user keystore
     m_keyStoreManager.start();
     m_keyStoreManager.waitForBusyFinished(); // TODO: better connect to finished() signal?
-    const QString id("qca-gnupg");
     m_userKeyStore = new QCA::KeyStore(id, &m_keyStoreManager);
-
-
-
-    loadKeys();
 
     connect(m_userKeyStore, SIGNAL(updated()),
             this, SLOT(loadKeys()));
+
+    if (m_userKeyStore->isValid()) {
+        kDebug() << "KeyStore is not valid: can't delete the key.";
+        return;
+    }
+}
+
+void SigningWidget::createKey()
+{
+
+}
+
+void SigningWidget::deleteKey()
+{
+    if (m_currentKey.isEmpty() || m_currentKey.isNull())
+        return;
+
+    QList<QCA::KeyStoreEntry> entries = m_userKeyStore->entryList();
+    foreach(QCA::KeyStoreEntry entry, entries) {
+        if (m_userKeyStore->isReadOnly()) {
+            kDebug() << "KeyStore is readonly: can't delete the key.";
+            return;
+        }
+        if (m_userKeyStore->isValid()) {
+            kDebug() << "KeyStore is not valid: can't delete the key.";
+            return;
+        }
+        if (!entry.pgpSecretKey().isNull()) {
+            kDebug() << "the key is not null.";
+            if (m_currentKey.contains(entry.pgpSecretKey().primaryUserId())) {
+                kDebug() << "Removing : " << entry.id();
+                if (m_userKeyStore->removeEntry(entry.pgpSecretKey().keyId())) {
+                    kDebug() << "Successfully removed key " << m_currentKey;
+                    m_currentKey.clear();
+                    return;
+                }
+                kDebug() << "Failed removal of key " << m_currentKey;
+                return;
+            }
+        }
+    }
 }
 
 void SigningWidget::loadKeys()
 {
     kDebug() << "loading keys ...";
     m_treeWidget->clear();
+    m_strings.clear();
     QList< QCA::KeyStoreEntry > entries = m_userKeyStore->entryList();
     foreach(QCA::KeyStoreEntry entry, entries) {
         if (!entry.pgpSecretKey().isNull()) {
             QTreeWidgetItem *item = new QTreeWidgetItem(m_treeWidget);
-            item->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
             QRadioButton *button = new QRadioButton(entry.pgpSecretKey().primaryUserId(), this);
             m_treeWidget->setItemWidget(item, 0, button);
+
+            m_strings << entry.pgpSecretKey().primaryUserId();
+
+            connect(button, SIGNAL(clicked(bool)),
+                    this, SLOT(updateCurrentKey()));
         }
     }
 }
+
+void SigningWidget::updateCurrentKey()
+{
+    QRadioButton *sender = static_cast<QRadioButton *>(QObject::sender());
+    for (int i = 0; i < sender->text().size(); ++i) {
+        int index = sender->text().indexOf('&', i);
+        QString keyInfo;
+        if (index > 0) {
+            keyInfo.append(sender->text().left(index));
+            keyInfo.append(sender->text().right(index));
+        } else if (index == 0) {
+            keyInfo.append(sender->text().mid(1));
+        } else {
+            break;
+        }
+        i = index;
+        m_currentKey = keyInfo;
+        kDebug() << "current key = " << m_currentKey;
+        break;
+    }
+}
+
 
 #include "moc_signingwidget.cpp"
