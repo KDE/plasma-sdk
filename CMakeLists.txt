@@ -8,6 +8,9 @@ set(LIBATTICA_MIN_VERSION "0.1.4")
 find_package(LibAttica REQUIRED)
 macro_log_feature(LIBATTICA_FOUND "libattica" "A library to access Open Collaboration Service providers" "http://websvn.kde.org/trunk/kdesupport/attica/" TRUE "${LIBATTICA_MIN_VERSION}" "Required uploading and downloading plasmoids using Get Hot New Stuff.")
 
+# No need to find(Qt4), since QT4_FOUND it's already set by finding kde4
+macro_log_feature(QT_QTWEBKIT_FOUND "QtWebKit" "Opensource web browser engine" "http://trac.webkit.org/wiki/QtWebKit" TRUE "" "Needed to display the online API and documentation.")
+
 find_package(QCA2 REQUIRED)
 macro_log_feature(QCA2_FOUND "QCA2" "Qt Cryptographic Architecture" "http://delta.affinix.com/qca" TRUE "2.0.2" "Needed for plasmoid authentication.")
 
@@ -52,7 +55,9 @@ kde4_add_ui_files (PlasMate_SRC
    editors/metadata/metadata.ui
 )
 
-include_directories(${KDE4_INCLUDES})
+include_directories(${KDE4_INCLUDES}
+                    ${QT_QTWEBKIT_INCLUDE_DIR}
+)
 
 add_subdirectory( editors )
 add_subdirectory( previewer/plasmoid )
@@ -61,7 +66,15 @@ add_subdirectory( templates )
 #add_subdirectory( savesystem )
 
 kde4_add_executable(plasmate ${PlasMate_SRC})
-target_link_libraries(plasmate ${KDE4_KDEUI_LIBS} ${KDE4_KTEXTEDITOR_LIBS} ${KDE4_KPARTS_LIBS} ${KDE4_KIO_LIBRARY} ${KDE4_PLASMA_LIBS} ${KDE4_KNEWSTUFF3_LIBRARY} ${QT_QTWEBKIT_LIBRARY})
+target_link_libraries(plasmate
+                      ${KDE4_KDEUI_LIBS}
+                      ${KDE4_KTEXTEDITOR_LIBS}
+                      ${KDE4_KPARTS_LIBS}
+                      ${KDE4_KIO_LIBRARY}
+                      ${KDE4_PLASMA_LIBS}
+                      ${KDE4_KNEWSTUFF3_LIBRARY}
+                      ${QT_QTWEBKIT_LIBRARY}
+)
 
 install(TARGETS plasmate ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES plasmate.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
