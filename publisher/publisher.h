@@ -43,7 +43,6 @@ private:
     QPushButton* m_exporterButton;
     QPushButton* m_installerButton;
     QPushButton* m_publisherButton;
-    QCheckBox* m_signCheckBox;
     SigningWidget* m_signingWidget;
 
     KUrl m_projectPath;

@@ -27,6 +27,7 @@
 class QTreeWidget;
 class QPushButton;
 class QStringList;
+class QCheckBox;
 
 
 class SigningWidget : public QWidget
@@ -36,13 +37,19 @@ class SigningWidget : public QWidget
 public:
     SigningWidget();
 
+public Q_SLOTS:
+    void setEnabled(const bool enabled);
+
 private:
+    void loadConfig();
     void initUI();
     void initKeys();
 
     QTreeWidget *m_treeWidget;
     QPushButton *m_createKeyButton;
     QPushButton *m_deleteKeyButton;
+    QCheckBox* m_signCheckBox;
+    bool m_signingEnabled;
     QStringList m_strings;
     QString m_currentKey;
     QCA::Initializer init;
