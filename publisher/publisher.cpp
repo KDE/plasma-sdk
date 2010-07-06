@@ -125,7 +125,6 @@ void Publisher::doExport()
 void Publisher::doInstall()
 {
     KUrl tempPackage(tempPackagePath());
-    ProjectManager::exportPackage(m_projectPath, tempPackage); // create temporary package
 
     QStringList argv("plasmapkg");
     argv.append("-t");
@@ -152,9 +151,10 @@ void Publisher::doInstall()
 
 const QString Publisher::tempPackagePath()
 {
-    // we don't want to create an extra directory for temporary packages to avoid
-    // potential name conflicts with user projects. Create temporary packages in
-    // the current project's folder instead - remember to delete after use!
+    QDir d(m_projectPath.pathOrUrl());
+    if (d.cdUp()) {
+        return d.path() + "/" + m_projectName + "." + m_extension;
+    }
     return m_projectPath.path(KUrl::AddTrailingSlash) + m_projectName + "." + m_extension;
 }
 

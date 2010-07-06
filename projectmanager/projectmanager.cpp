@@ -13,6 +13,7 @@
 #include <QVBoxLayout>
 #include <QDir>
 
+#include <KDebug>
 #include <KMessageBox>
 #include <KLocalizedString>
 #include <KZip>
@@ -58,7 +59,7 @@ void ProjectManager::confirmDeletion()
     //TODO: should probably centralize config handling code somewhere.
     KConfigGroup cg = KGlobal::config()->group("General");
     QStringList recentFiles = cg.readEntry("recentFiles", QStringList());
-    for (int i=0; i < l.size(); i++) {
+    for (int i = 0; i < l.size(); i++) {
         QString folder = l[i]->data(StartPage::FullPathRole).value<QString>();
         QString path = KStandardDirs::locateLocal("appdata", folder + '/');
         deleteProject(path);
@@ -86,8 +87,8 @@ void ProjectManager::emitProjectSelected()
 {
     QList<QListWidgetItem*> l = projectList->selectedItems();
     if (l.size() != 1) {
-      KMessageBox::information(this, i18n("Please select exactly one project to load."));
-      return;
+        KMessageBox::information(this, i18n("Please select exactly one project to load."));
+        return;
     }
     QString url = l[0]->data(StartPage::FullPathRole).value<QString>();
 
@@ -97,18 +98,35 @@ void ProjectManager::emitProjectSelected()
 
 bool ProjectManager::exportPackage(const KUrl &toExport, const KUrl &targetFile)
 {
-    bool ret = true;
+    // Think ONE minute before committing nonsense: if you want to zip a folder,
+    // and you create the *.zip file INSIDE that folder WHILE copying the files,
+    // guess what happens??
+    // This also means: always try at least once, before committing changes.
+    if (targetFile.pathOrUrl().contains(toExport.pathOrUrl())) {
+        // Sounds like we are attempting to create the package from inside the package folder, noooooo :)
+        return false;
+    }
+
     if (QFile::exists(targetFile.path())) {
         //TODO: Make sure this succeeds
         QFile::remove(targetFile.path()); // overwrite!
     }
-    KZip plasmoid(targetFile.path());
-    if (!plasmoid.open(QIODevice::WriteOnly)) {
-        return false;
+
+    // Create an empty zip file
+    KZip *z = new KZip(targetFile.pathOrUrl());
+    z->open(QIODevice::ReadWrite);
+    z->close();
+
+    // Reopen for writing
+    if (z->open(QIODevice::ReadWrite)) {
+        kDebug() << "zip file opened successfully";
+        z->addLocalDirectory(toExport.pathOrUrl(), ".");
+        z->close();
+        return true;
     }
-    ret = plasmoid.addLocalDirectory(toExport.path(), ".");
-    plasmoid.close();
-    return ret;
+
+    kDebug() << "Cant open zip file" ;
+    return false;
 }
 
 bool ProjectManager::importPackage(const KUrl &toImport, const KUrl &targetLocation)
@@ -116,6 +134,7 @@ bool ProjectManager::importPackage(const KUrl &toImport, const KUrl &targetLocat
     bool ret = true;
     KZip plasmoid(toImport.path());
     if (!plasmoid.open(QIODevice::ReadOnly)) {
+        kDebug() << "ProjectManager::importPackage can't open the plasmoid archive";
         return false;
     }
     plasmoid.directory()->copyTo(targetLocation.path());
@@ -133,7 +152,7 @@ void ProjectManager::removeDirectory(const QString& path)
 {
     QDir d(path);
     QFileInfoList list = d.entryInfoList(QDir::NoDotAndDotDot | QDir::AllEntries | QDir::Hidden);
-    for (int i=0; i<list.size(); i++) {
+    for (int i = 0; i < list.size(); i++) {
         if (list[i].isDir() && list[i].filePath() != path) {
             removeDirectory(list[i].filePath());
         }
