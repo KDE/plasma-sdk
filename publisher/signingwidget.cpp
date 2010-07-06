@@ -44,6 +44,51 @@ SigningWidget::SigningWidget()
     loadKeys();
 }
 
+bool SigningWidget::signingEnabled() const
+{
+    return m_signingEnabled;
+}
+
+bool SigningWidget::sign(const KUrl &path) const
+{
+    QList<QCA::KeyStoreEntry> entries = m_userKeyStore->entryList();
+    QCA::PGPKey myPGPKey;
+    bool keyFound = false;
+    foreach(QCA::KeyStoreEntry entry, entries) {
+        if (!entry.pgpSecretKey().isNull()) {
+            if (entry.pgpSecretKey().primaryUserId().contains(m_currentKey)) {
+                myPGPKey = entry.pgpSecretKey();
+                keyFound = true;
+                break;
+            }
+        }
+    }
+    QCA::SecureMessageKey key;
+    key.setPGPSecretKey(myPGPKey);
+
+    // our data to sign
+    QByteArray plain = "Hello, world";
+
+    // let's do it
+    QCA::OpenPGP pgp;
+    QCA::SecureMessage msg(&pgp);
+    msg.setSigner(key);
+    msg.startSign(QCA::SecureMessage::Detached);
+    msg.setFormat(QCA::SecureMessage::Ascii);
+    msg.update(plain);
+    msg.end();
+    msg.waitForFinished(-1);
+
+    if (msg.success()) {
+        QByteArray result = msg.read();
+        // result now contains the clearsign text data
+    } else {
+        // error
+
+    }
+
+}
+
 void SigningWidget::loadConfig()
 {
     KConfigGroup cg = KGlobal::config()->group("Signing Options");

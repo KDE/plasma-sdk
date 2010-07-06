@@ -125,6 +125,14 @@ void Publisher::doExport()
 void Publisher::doInstall()
 {
     KUrl tempPackage(tempPackagePath());
+    kDebug() << "tempPackagePath" << tempPackage.pathOrUrl();
+    kDebug() << "m_projectPath" << m_projectPath.pathOrUrl();
+    ProjectManager::exportPackage(m_projectPath, tempPackage); // create temporary package
+
+    if (m_signingWidget->signingEnabled()) {
+        m_signingWidget->sign(tempPackage);
+        kDebug() << "Signed";
+    }
 
     QStringList argv("plasmapkg");
     argv.append("-t");

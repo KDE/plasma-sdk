@@ -28,7 +28,7 @@ class QTreeWidget;
 class QPushButton;
 class QStringList;
 class QCheckBox;
-
+class Kurl;
 
 class SigningWidget : public QWidget
 {
@@ -36,6 +36,8 @@ class SigningWidget : public QWidget
 
 public:
     SigningWidget();
+    bool signingEnabled() const;
+    bool sign(const KUrl &path) const;
 
 public Q_SLOTS:
     void setEnabled(const bool enabled);
