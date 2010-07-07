@@ -29,6 +29,7 @@
 #include <KDebug>
 #include <KIcon>
 
+#include <gpgme++/context.h>
 
 #include "signingwidget.h"
 
@@ -40,7 +41,7 @@ SigningWidget::SigningWidget()
 {
     loadConfig();
     initUI();
-    initKeys();
+    initGpgContext();
     loadKeys();
 }
 
@@ -51,42 +52,7 @@ bool SigningWidget::signingEnabled() const
 
 bool SigningWidget::sign(const KUrl &path) const
 {
-    QList<QCA::KeyStoreEntry> entries = m_userKeyStore->entryList();
-    QCA::PGPKey myPGPKey;
-    bool keyFound = false;
-    foreach(QCA::KeyStoreEntry entry, entries) {
-        if (!entry.pgpSecretKey().isNull()) {
-            if (entry.pgpSecretKey().primaryUserId().contains(m_currentKey)) {
-                myPGPKey = entry.pgpSecretKey();
-                keyFound = true;
-                break;
-            }
-        }
-    }
-    QCA::SecureMessageKey key;
-    key.setPGPSecretKey(myPGPKey);
-
-    // our data to sign
-    QByteArray plain = "Hello, world";
-
-    // let's do it
-    QCA::OpenPGP pgp;
-    QCA::SecureMessage msg(&pgp);
-    msg.setSigner(key);
-    msg.startSign(QCA::SecureMessage::Detached);
-    msg.setFormat(QCA::SecureMessage::Ascii);
-    msg.update(plain);
-    msg.end();
-    msg.waitForFinished(-1);
-
-    if (msg.success()) {
-        QByteArray result = msg.read();
-        // result now contains the clearsign text data
-    } else {
-        // error
-
-    }
-
+    return false;
 }
 
 void SigningWidget::loadConfig()
@@ -133,47 +99,33 @@ void SigningWidget::initUI()
             this, SLOT(setEnabled(bool)));
 }
 
-void SigningWidget::initKeys()
+void SigningWidget::initGpgContext()
 {
-    const QString id("qca-gnupg");
-    QCA::scanForPlugins();
-    QCA::ProviderList qcaProviders = QCA::providers();
-    bool hasGPGPlugin = false;
-    for (int i = 0; i < qcaProviders.size(); ++i) {
-        if (qcaProviders[i]->name().contains(id)) {
-            hasGPGPlugin = true;
+    GpgME::initializeLibrary();
+    GpgME::Error error = GpgME::checkEngine(GpgME::OpenPGP);
+    if (error) {
+        kDebug() << "OpenPGP not supported!";
+        m_contextInitialized = false;
+        return;
+    }
+
+    m_gpgContext = GpgME::Context::createForProtocol(GpgME::OpenPGP);
+    if(!m_gpgContext) {
+        m_contextInitialized = true;
+    }
+}
+
+QStringList SigningWidget::gpgEntryList(const bool privateKeysOnly) const
+{
+    c->startKeyListing("", privateKeysOnly ? 1 : 0);
+    QStringList result;
+    while(!error) {
+        GpgME::Key k = c->nextKey(error);
+        if(error)
             break;
-        }
+        result << k.keyID();
     }
-
-    if (!hasGPGPlugin) {
-        kDebug() << "qca-gnupg plugin for QCA not foud: can't sign the plasmoids.";
-        return;
-    }
-
-
-    // Ensure QCA supports the public key and keystorelist plugin
-    if (!QCA::isSupported("pkey")) {
-        kDebug() << "QCA has no pkey support: can't sign the plasmoids.";
-        return;
-    }
-    if (!QCA::isSupported("keystorelist")) {
-        kDebug() << "QCA has no keystorelist support: can't retrieve the pgp keys in the keystore.";
-        return;
-    }
-
-    // Start the keystore manager, and get access to the user keystore
-    m_keyStoreManager.start();
-    m_keyStoreManager.waitForBusyFinished(); // TODO: better connect to finished() signal?
-    m_userKeyStore = new QCA::KeyStore(id, &m_keyStoreManager);
-
-    connect(m_userKeyStore, SIGNAL(updated()),
-            this, SLOT(loadKeys()));
-
-    if (m_userKeyStore->isValid()) {
-        kDebug() << "KeyStore is not valid: can't delete the key.";
-        return;
-    }
+    return result;
 }
 
 void SigningWidget::setEnabled(const bool enabled)

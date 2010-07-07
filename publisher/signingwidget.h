@@ -20,7 +20,15 @@
 #ifndef SIGNINGWIDGET_H
 #define SIGNINGWIDGET_H
 
-#include <QtCrypto/QtCrypto>
+#define _FILE_OFFSET_BITS 64
+
+#include <gpgme.h>
+#include <qgpgme/dataprovider.h>
+#include <gpgme++/data.h>
+#include <gpgme++/engineinfo.h>
+#include <gpgme++/key.h>
+#include <gpgme++/keylistresult.h>
+
 #include <QWidget>
 #include <QVector>
 
@@ -28,6 +36,7 @@ class QTreeWidget;
 class QPushButton;
 class QStringList;
 class QCheckBox;
+class QStringList;
 class Kurl;
 
 class SigningWidget : public QWidget
@@ -36,6 +45,7 @@ class SigningWidget : public QWidget
 
 public:
     SigningWidget();
+    ~SigningWidget();
     bool signingEnabled() const;
     bool sign(const KUrl &path) const;
 
@@ -45,18 +55,20 @@ public Q_SLOTS:
 private:
     void loadConfig();
     void initUI();
+    void initGpgContext();
     void initKeys();
+    QStringList gpgEntryList(const bool privateKeysOnly = false) const;
 
     QTreeWidget *m_treeWidget;
     QPushButton *m_createKeyButton;
     QPushButton *m_deleteKeyButton;
     QCheckBox* m_signCheckBox;
-    bool m_signingEnabled;
     QStringList m_strings;
     QString m_currentKey;
-    QCA::Initializer init;
-    QCA::KeyStoreManager m_keyStoreManager;
-    QCA::KeyStore *m_userKeyStore;
+    GpgME::Context *m_gpgContext;
+
+    bool m_signingEnabled;
+    bool m_contextInitialized;
 
 private Q_SLOTS:
     void createKey();
