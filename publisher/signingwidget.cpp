@@ -113,7 +113,7 @@ void SigningWidget::initGpgContext()
     }
 
     m_gpgContext = GpgME::Context::createForProtocol(GpgME::OpenPGP);
-    if(!m_gpgContext) {
+    if (!m_gpgContext) {
         m_contextInitialized = true;
     }
 }
@@ -122,9 +122,9 @@ QList< QMap<QString, QVariant> > SigningWidget::gpgEntryList(const bool privateK
 {
     GpgME::Error error = m_gpgContext->startKeyListing("", privateKeysOnly ? 1 : 0);
     QList< QMap<QString, QVariant> > result;
-    while(!error) {
+    while (!error) {
         GpgME::Key k = m_gpgContext->nextKey(error);
-        if(error)
+        if (error)
             break;
         QMap<QString, QVariant> tmp;
         tmp.insert("name", k.userID(0).name());
@@ -132,9 +132,19 @@ QList< QMap<QString, QVariant> > SigningWidget::gpgEntryList(const bool privateK
         tmp.insert("email", k.userID(0).email());
         tmp.insert("id", k.keyID());
         result << tmp;
-        kDebug() << "bah";
     }
-    kDebug() << result;
+    return result;
+}
+
+QString SigningWidget::mapKeyToString(const QMap<QString, QVariant> &map,  const bool appendKeyId) const
+{
+    QString result;
+    result.append(map["name"].toString() + " ");
+    if (!map["comment"].toString().isEmpty())
+        result.append("(" + map["comment"].toString() + ") ");
+    result.append(map["email"].toString());
+    if (appendKeyId)
+        result.append(" , " + map["id"].toString());
     return result;
 }
 
@@ -146,8 +156,8 @@ void SigningWidget::setEnabled(const bool enabled)
     cg.sync();
 
     m_treeWidget->setEnabled(m_signingEnabled);
-    m_createKeyButton->setEnabled(false/*m_signingEnabled*/);
-    m_deleteKeyButton->setEnabled(false/*m_signingEnabled*/); // Waiting for the damn qca patch again ...
+    m_createKeyButton->setEnabled(m_signingEnabled);
+    m_deleteKeyButton->setEnabled(m_signingEnabled);
 }
 
 bool SigningWidget::signingEnabled() const
@@ -169,20 +179,39 @@ void SigningWidget::deleteKey()
 {
     if (m_currentKey.isEmpty() || m_currentKey.isNull())
         return;
+
+    GpgME::Error error = m_gpgContext->startKeyListing("", 1);
+    QList< QMap<QString, QVariant> > result;
+    while (!error) {
+        GpgME::Key k = m_gpgContext->nextKey(error);
+        if (error)
+            break;
+        if (m_currentKey.contains(k.keyID())) {
+            error = m_gpgContext->deleteKey(k, true);
+            if (!error) {
+                m_currentKey.clear();
+                KConfigGroup cg = KGlobal::config()->group("Signing Options");
+                cg.writeEntry("currentSignerKey", m_currentKey);
+                cg.sync();
+                loadKeys();
+            }
+            return;
+        }
+    }
+    return;
 }
 
 void SigningWidget::loadKeys()
 {
-    kDebug() << "loading keys ...";
     m_treeWidget->clear();
     QList< QMap<QString, QVariant> > entries = gpgEntryList(true);
-    for(int i = 0; i<entries.count(); ++i) {
+    for (int i = 0; i < entries.count(); ++i) {
         QMap<QString, QVariant> entry = entries.at(i);
         QTreeWidgetItem *item = new QTreeWidgetItem(m_treeWidget);
-        QRadioButton *button = new QRadioButton(entry["name"].toString(), this);
-        button->setObjectName(entry["name"].toString());
+        QRadioButton *button = new QRadioButton(mapKeyToString(entry, false), this);
+        button->setObjectName(mapKeyToString(entry));
         if (!m_currentKey.isNull() || m_currentKey.isEmpty()) {
-            if (m_currentKey == entry["name"].toString())
+            if (m_currentKey == mapKeyToString(entry))
                 button->setChecked(true);
         }
         m_treeWidget->setItemWidget(item, 0, button);
@@ -197,10 +226,10 @@ void SigningWidget::updateCurrentKey()
     QRadioButton *sender = static_cast<QRadioButton *>(QObject::sender());
 
     m_currentKey = sender->objectName();
+    kDebug() << m_currentKey;
     KConfigGroup cg = KGlobal::config()->group("Signing Options");
     cg.writeEntry("currentSignerKey", m_currentKey);
     cg.sync();
-    kDebug() << "current key = " << m_currentKey;
 }
 
 

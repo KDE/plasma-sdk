@@ -30,8 +30,9 @@ class QCheckBox;
 class QStringList;
 class Kurl;
 
-namespace GpgME {
-    class Context;
+namespace GpgME
+{
+class Context;
 }
 
 class SigningWidget : public QWidget
@@ -53,6 +54,7 @@ private:
     void initGpgContext();
     void initKeys();
     QList< QMap<QString, QVariant> > gpgEntryList(const bool privateKeysOnly = false) const;
+    QString mapKeyToString(const QMap<QString, QVariant> &map, const bool appendKeyId = true) const;
 
     QTreeWidget *m_treeWidget;
     QPushButton *m_createKeyButton;
