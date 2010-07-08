@@ -29,6 +29,14 @@
 #include <KDebug>
 #include <KIcon>
 
+#define _FILE_OFFSET_BITS 64
+
+#include <gpgme.h>
+#include <qgpgme/dataprovider.h>
+#include <gpgme++/data.h>
+#include <gpgme++/engineinfo.h>
+#include <gpgme++/key.h>
+#include <gpgme++/keylistresult.h>
 #include <gpgme++/context.h>
 
 #include "signingwidget.h"
@@ -45,14 +53,9 @@ SigningWidget::SigningWidget()
     loadKeys();
 }
 
-bool SigningWidget::signingEnabled() const
+SigningWidget::~SigningWidget()
 {
-    return m_signingEnabled;
-}
-
-bool SigningWidget::sign(const KUrl &path) const
-{
-    return false;
+    //release context
 }
 
 void SigningWidget::loadConfig()
@@ -115,16 +118,23 @@ void SigningWidget::initGpgContext()
     }
 }
 
-QStringList SigningWidget::gpgEntryList(const bool privateKeysOnly) const
+QList< QMap<QString, QVariant> > SigningWidget::gpgEntryList(const bool privateKeysOnly) const
 {
-    c->startKeyListing("", privateKeysOnly ? 1 : 0);
-    QStringList result;
+    GpgME::Error error = m_gpgContext->startKeyListing("", privateKeysOnly ? 1 : 0);
+    QList< QMap<QString, QVariant> > result;
     while(!error) {
-        GpgME::Key k = c->nextKey(error);
+        GpgME::Key k = m_gpgContext->nextKey(error);
         if(error)
             break;
-        result << k.keyID();
+        QMap<QString, QVariant> tmp;
+        tmp.insert("name", k.userID(0).name());
+        tmp.insert("comment", k.userID(0).comment());
+        tmp.insert("email", k.userID(0).email());
+        tmp.insert("id", k.keyID());
+        result << tmp;
+        kDebug() << "bah";
     }
+    kDebug() << result;
     return result;
 }
 
@@ -140,6 +150,16 @@ void SigningWidget::setEnabled(const bool enabled)
     m_deleteKeyButton->setEnabled(false/*m_signingEnabled*/); // Waiting for the damn qca patch again ...
 }
 
+bool SigningWidget::signingEnabled() const
+{
+    return m_signingEnabled;
+}
+
+bool SigningWidget::sign(const KUrl &path) const
+{
+    return false;
+}
+
 void SigningWidget::createKey()
 {
 
@@ -149,71 +169,38 @@ void SigningWidget::deleteKey()
 {
     if (m_currentKey.isEmpty() || m_currentKey.isNull())
         return;
-
-    QList<QCA::KeyStoreEntry> entries = m_userKeyStore->entryList();
-    foreach(QCA::KeyStoreEntry entry, entries) {
-        if (!entry.pgpSecretKey().isNull()) {
-            kDebug() << "the key is not null.";
-            if (m_currentKey.contains(entry.pgpSecretKey().primaryUserId())) {
-                kDebug() << "Removing : " << entry.id();
-                if (m_userKeyStore->removeEntry(entry.pgpSecretKey().keyId())) {
-                    kDebug() << "Successfully removed key " << m_currentKey;
-                    m_currentKey.clear();
-                    return;
-                }
-                kDebug() << "Failed removal of key " << m_currentKey  << "with fingerprint " << entry.pgpSecretKey().fingerprint();
-                return;
-            }
-        }
-    }
 }
 
 void SigningWidget::loadKeys()
 {
     kDebug() << "loading keys ...";
     m_treeWidget->clear();
-    m_strings.clear();
-    QList< QCA::KeyStoreEntry > entries = m_userKeyStore->entryList();
-    foreach(QCA::KeyStoreEntry entry, entries) {
-        if (!entry.pgpSecretKey().isNull()) {
-            QTreeWidgetItem *item = new QTreeWidgetItem(m_treeWidget);
-            QRadioButton *button = new QRadioButton(entry.pgpSecretKey().primaryUserId(), this);
-            if (!m_currentKey.isNull() || m_currentKey.isEmpty()) {
-                if (m_currentKey == entry.pgpSecretKey().primaryUserId())
-                    button->setChecked(true);
-            }
-            m_treeWidget->setItemWidget(item, 0, button);
-
-            m_strings << entry.pgpSecretKey().primaryUserId();
-
-            connect(button, SIGNAL(clicked(bool)),
-                    this, SLOT(updateCurrentKey()));
+    QList< QMap<QString, QVariant> > entries = gpgEntryList(true);
+    for(int i = 0; i<entries.count(); ++i) {
+        QMap<QString, QVariant> entry = entries.at(i);
+        QTreeWidgetItem *item = new QTreeWidgetItem(m_treeWidget);
+        QRadioButton *button = new QRadioButton(entry["name"].toString(), this);
+        button->setObjectName(entry["name"].toString());
+        if (!m_currentKey.isNull() || m_currentKey.isEmpty()) {
+            if (m_currentKey == entry["name"].toString())
+                button->setChecked(true);
         }
+        m_treeWidget->setItemWidget(item, 0, button);
+
+        connect(button, SIGNAL(clicked(bool)),
+                this, SLOT(updateCurrentKey()));
     }
 }
 
 void SigningWidget::updateCurrentKey()
 {
     QRadioButton *sender = static_cast<QRadioButton *>(QObject::sender());
-    for (int i = 0; i < sender->text().size(); ++i) {
-        int index = sender->text().indexOf('&', i);
-        QString keyInfo;
-        if (index > 0) {
-            keyInfo.append(sender->text().left(index));
-            keyInfo.append(sender->text().right(index));
-        } else if (index == 0) {
-            keyInfo.append(sender->text().mid(1));
-        } else {
-            break;
-        }
-        i = index;
-        m_currentKey = keyInfo;
-        KConfigGroup cg = KGlobal::config()->group("Signing Options");
-        cg.writeEntry("currentSignerKey", m_currentKey);
-        cg.sync();
-        kDebug() << "current key = " << m_currentKey;
-        break;
-    }
+
+    m_currentKey = sender->objectName();
+    KConfigGroup cg = KGlobal::config()->group("Signing Options");
+    cg.writeEntry("currentSignerKey", m_currentKey);
+    cg.sync();
+    kDebug() << "current key = " << m_currentKey;
 }
 
 

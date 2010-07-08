@@ -20,15 +20,6 @@
 #ifndef SIGNINGWIDGET_H
 #define SIGNINGWIDGET_H
 
-#define _FILE_OFFSET_BITS 64
-
-#include <gpgme.h>
-#include <qgpgme/dataprovider.h>
-#include <gpgme++/data.h>
-#include <gpgme++/engineinfo.h>
-#include <gpgme++/key.h>
-#include <gpgme++/keylistresult.h>
-
 #include <QWidget>
 #include <QVector>
 
@@ -38,6 +29,10 @@ class QStringList;
 class QCheckBox;
 class QStringList;
 class Kurl;
+
+namespace GpgME {
+    class Context;
+}
 
 class SigningWidget : public QWidget
 {
@@ -57,13 +52,13 @@ private:
     void initUI();
     void initGpgContext();
     void initKeys();
-    QStringList gpgEntryList(const bool privateKeysOnly = false) const;
+    QList< QMap<QString, QVariant> > gpgEntryList(const bool privateKeysOnly = false) const;
 
     QTreeWidget *m_treeWidget;
     QPushButton *m_createKeyButton;
     QPushButton *m_deleteKeyButton;
     QCheckBox* m_signCheckBox;
-    QStringList m_strings;
+
     QString m_currentKey;
     GpgME::Context *m_gpgContext;
 

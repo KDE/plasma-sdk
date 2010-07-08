@@ -11,8 +11,7 @@ macro_log_feature(LIBATTICA_FOUND "libattica" "A library to access Open Collabor
 # No need to find(Qt4), since QT4_FOUND it's already set by finding kde4
 macro_log_feature(QT_QTWEBKIT_FOUND "QtWebKit" "Opensource web browser engine" "http://trac.webkit.org/wiki/QtWebKit" TRUE "" "Needed to display the online API and documentation.")
 
-find_package(Gpgme REQUIRED) # Maybe check for GPGME_PTHREAD_FOUND ?
-macro_log_feature(GPGME_FOUND "GpgME++" "C++ bindings for gpgme" "" TRUE "" "Needed for plasmoid authentication.")
+find_package(QGpgme REQUIRED) # Maybe check for GPGME_PTHREAD_FOUND ?
 
 # Find optional executables
 find_program(GIT_EXECUTABLE_FOUND git)
@@ -57,7 +56,7 @@ kde4_add_ui_files (PlasMate_SRC
 
 include_directories(${KDE4_INCLUDES}
                     ${QT_QTWEBKIT_INCLUDE_DIR}
-                    ${GPGME_INCLUDES}
+                    ${QGPGME_INCLUDE_DIR}
 )
 
 add_subdirectory( editors )
@@ -76,7 +75,7 @@ target_link_libraries(plasmate
                       ${KDE4_KNEWSTUFF3_LIBRARY}
                       ${QT_QTWEBKIT_LIBRARY}
                       ${LIBATTICA_LIBRARY_DIRS}
-                      ${GPGME_LIBRARY_DIR}
+                      ${QGPGME_LIBRARIES}
 )
 
 install(TARGETS plasmate ${INSTALL_TARGETS_DEFAULT_ARGS})
