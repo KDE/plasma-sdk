@@ -19,6 +19,8 @@
 
 #include <QCheckBox>
 #include <QRadioButton>
+#include <QDialog>
+#include <QLabel>
 #include <QTreeWidget>
 #include <QPushButton>
 #include <QHBoxLayout>
@@ -40,6 +42,7 @@
 #include <gpgme++/context.h>
 
 #include "signingwidget.h"
+#include "signingdialog.h"
 
 
 
@@ -172,7 +175,8 @@ bool SigningWidget::sign(const KUrl &path) const
 
 void SigningWidget::createKey()
 {
-
+    SigningDialog *dialog = new SigningDialog(this);
+    dialog->exec();
 }
 
 void SigningWidget::deleteKey()
