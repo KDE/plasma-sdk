@@ -1,6 +1,6 @@
 project( plasmate-kconfigxt-editor )
 
-find_package(KDE4)
+find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
 
 set(kconfigxt_editor_SRCS

@@ -1,6 +1,6 @@
 project( plasmate-svg-editor )
 
-find_package(KDE4)
+find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
 
 set(svg_viewer_SRCS

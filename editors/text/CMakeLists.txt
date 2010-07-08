@@ -1,6 +1,6 @@
 project( plasmate_text_editor )
 
-find_package(KDE4)
+find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
 
 set(text_editor_SRCS
