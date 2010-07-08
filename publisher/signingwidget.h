@@ -47,6 +47,7 @@ public:
 
 public Q_SLOTS:
     void setEnabled(const bool enabled);
+    void createKey(const QString &param);
 
 private:
     void loadConfig();
@@ -68,7 +69,7 @@ private:
     bool m_contextInitialized;
 
 private Q_SLOTS:
-    void createKey();
+    void showCreateKeyDialog();
     void deleteKey();
     void loadKeys();
     void updateCurrentKey();

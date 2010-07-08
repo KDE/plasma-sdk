@@ -98,7 +98,7 @@ void SigningWidget::initUI()
     setEnabled(m_signingEnabled);
 
     connect(m_createKeyButton, SIGNAL(clicked()),
-            this, SLOT(createKey()));
+            this, SLOT(showCreateKeyDialog()));
     connect(m_deleteKeyButton, SIGNAL(clicked()),
             this, SLOT(deleteKey()));
     connect(m_signCheckBox, SIGNAL(clicked(bool)),
@@ -173,10 +173,17 @@ bool SigningWidget::sign(const KUrl &path) const
     return false;
 }
 
-void SigningWidget::createKey()
+void SigningWidget::showCreateKeyDialog()
 {
     SigningDialog *dialog = new SigningDialog(this);
     dialog->exec();
+    connect(dialog, SIGNAL(emitCreateKey(const QString&)),
+            this, SLOT(createKey(const QString&)));
+}
+
+void SigningWidget::createKey(const QString &param)
+{
+    kDebug() << "READY TO CREATE ;)";
 }
 
 void SigningWidget::deleteKey()

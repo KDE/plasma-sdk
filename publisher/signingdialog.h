@@ -22,6 +22,8 @@
 
 #include <QDialog>
 
+
+class QCheckBox;
 class QLabel;
 class QPushButton;
 class KComboBox;
@@ -36,10 +38,13 @@ public:
     explicit SigningDialog(QWidget *parent = 0);
 
 Q_SIGNALS:
-    void createKey(const QString &param);
+    void emitCreateKey(const QString &param);
 
 public Q_SLOTS:
     void validateParams();
+    void toggleShowPassword(const bool hide);
+    void toggleExpirationLine();
+    void fetchParameters();
 
 private:
     QLabel *m_nameLabel;
@@ -48,6 +53,7 @@ private:
     QLabel *m_expirationLabel;
     QLabel *m_pwdLabel;
     QLabel *m_repeatPwdLabel;
+    QCheckBox *m_showPassword;
 
     KLineEdit *m_nameLine;
     KLineEdit *m_emailLine;
