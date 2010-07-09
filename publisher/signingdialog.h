@@ -43,14 +43,14 @@ Q_SIGNALS:
 public Q_SLOTS:
     void validateParams();
     void toggleShowPassword(const bool hide);
-    void toggleExpirationLine();
+    //void toggleExpirationLine();
     void fetchParameters();
 
 private:
     QLabel *m_nameLabel;
     QLabel *m_emailLabel;
     QLabel *m_commentLabel;
-    QLabel *m_expirationLabel;
+    //QLabel *m_expirationLabel;
     QLabel *m_pwdLabel;
     QLabel *m_repeatPwdLabel;
     QCheckBox *m_showPassword;
@@ -58,8 +58,8 @@ private:
     KLineEdit *m_nameLine;
     KLineEdit *m_emailLine;
     KLineEdit *m_commentLine;
-    KIntNumInput *m_expirationLineInput;
-    KComboBox *m_expirationComboBox;
+    //KIntNumInput *m_expirationLineInput;
+    //KComboBox *m_expirationComboBox;
     KLineEdit *m_pwdLine;
     KLineEdit *m_repeatPwdLine;
 

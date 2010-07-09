@@ -44,13 +44,13 @@ SigningDialog::SigningDialog(QWidget *parent) :
     QFrame *separator = new QFrame(this);
     QFrame *separator2 = new QFrame(this);
     QHBoxLayout *buttonLay = new QHBoxLayout(this);
-    QHBoxLayout *expirationLay = new QHBoxLayout(this);
+    //QHBoxLayout *expirationLay = new QHBoxLayout(this);
     KConfigGroup preferences = KGlobal::config()->group("NewProjectDefaultPreferences");
 
     m_nameLabel = new QLabel("Name:", this);
     m_emailLabel = new QLabel("Email:", this);
     m_commentLabel = new QLabel("Comment (optional):", this);
-    m_expirationLabel = new QLabel("Set Expiration Date:", this);
+    //m_expirationLabel = new QLabel("Set Expiration Date:", this);
     m_pwdLabel = new QLabel("Password:", this);
     m_repeatPwdLabel = new QLabel("Confirm Password:", this);
     m_showPassword = new QCheckBox("Show password", this);
@@ -60,19 +60,19 @@ SigningDialog::SigningDialog(QWidget *parent) :
     m_nameLine = new KLineEdit(preferences.readEntry("Username", QString("foo")), this);
     m_emailLine = new KLineEdit(preferences.readEntry("Email", QString("foo@foo.org")), this);
     m_commentLine = new KLineEdit(this);
-    m_expirationLineInput = new KIntNumInput(0, this);
-    m_expirationLineInput->setEnabled(false);
-    m_expirationComboBox = new KComboBox(this);
+    //m_expirationLineInput = new KIntNumInput(0, this);
+    //m_expirationLineInput->setEnabled(false);
+    //m_expirationComboBox = new KComboBox(this);
     m_pwdLine = new KLineEdit(this);
     m_repeatPwdLine = new KLineEdit(this);
 
-    m_expirationComboBox->addItem("Never");
-    m_expirationComboBox->addItem("Days");
-    m_expirationComboBox->addItem("Weeks");
-    m_expirationComboBox->addItem("Months");
-    m_expirationComboBox->addItem("Years");
-    expirationLay->addWidget(m_expirationLineInput);
-    expirationLay->addWidget(m_expirationComboBox);
+    //m_expirationComboBox->addItem("Never");
+    //m_expirationComboBox->addItem("Days");
+    //m_expirationComboBox->addItem("Weeks");
+    //m_expirationComboBox->addItem("Months");
+    //m_expirationComboBox->addItem("Years");
+    //expirationLay->addWidget(m_expirationLineInput);
+    //expirationLay->addWidget(m_expirationComboBox);
 
     separator->setFrameStyle(QFrame::HLine | QFrame::Sunken);
     separator2->setFrameStyle(QFrame::HLine | QFrame::Sunken);
@@ -94,8 +94,8 @@ SigningDialog::SigningDialog(QWidget *parent) :
     mainLay->addWidget(m_emailLine);
     mainLay->addWidget(m_commentLabel);
     mainLay->addWidget(m_commentLine);
-    mainLay->addWidget(m_expirationLabel);
-    mainLay->addLayout(expirationLay);
+    //mainLay->addWidget(m_expirationLabel);
+    //mainLay->addLayout(expirationLay);
     mainLay->addWidget(separator);
     mainLay->addWidget(m_pwdLabel);
     mainLay->addWidget(m_pwdLine);
@@ -109,10 +109,10 @@ SigningDialog::SigningDialog(QWidget *parent) :
             this, SLOT(validateParams()));
     connect(m_nameLine, SIGNAL(textChanged(const QString&)),
             this, SLOT(validateParams()));
-    connect(m_expirationLineInput, SIGNAL(valueChanged(int)),
-            this, SLOT(validateParams()));
-    connect(m_expirationComboBox, SIGNAL(currentIndexChanged(int)),
-            this, SLOT(toggleExpirationLine()));
+    //connect(m_expirationLineInput, SIGNAL(valueChanged(int)),
+    //        this, SLOT(validateParams()));
+    //connect(m_expirationComboBox, SIGNAL(currentIndexChanged(int)),
+    //        this, SLOT(toggleExpirationLine()));
     connect(m_pwdLine, SIGNAL(textChanged(const QString&)),
             this, SLOT(validateParams()));
     connect(m_repeatPwdLine, SIGNAL(textChanged(const QString&)),
@@ -141,10 +141,10 @@ void SigningDialog::validateParams()
         m_createButton->setEnabled(false);
         return;
     }
-    if (m_expirationLineInput->isEnabled() && m_expirationLineInput->value() == 0) {
-        m_createButton->setEnabled(false);
-        return;
-    }
+    //if (m_expirationLineInput->isEnabled() && m_expirationLineInput->value() == 0) {
+    //    m_createButton->setEnabled(false);
+    //    return;
+    //}
 
     // Check for a valid password
     if (m_pwdLine->text().isEmpty() && m_repeatPwdLine->text().isEmpty()) {
@@ -167,15 +167,15 @@ void SigningDialog::toggleShowPassword(const bool hide)
     m_repeatPwdLine->setEchoMode(hide ? QLineEdit::Normal : QLineEdit::Password);
 }
 
-void SigningDialog::toggleExpirationLine()
-{
-    if (m_expirationComboBox->currentIndex() != 0) {
-        m_expirationLineInput->setEnabled(true);
-    } else {
-        m_expirationLineInput->setEnabled(false);
-    }
-    validateParams();
-}
+//void SigningDialog::toggleExpirationLine()
+//{
+//    if (m_expirationComboBox->currentIndex() != 0) {
+//        m_expirationLineInput->setEnabled(true);
+//    } else {
+//        m_expirationLineInput->setEnabled(false);
+//    }
+//    validateParams();
+//}
 
 void SigningDialog::fetchParameters()
 {
@@ -201,7 +201,7 @@ void SigningDialog::fetchParameters()
     param.append("Name-Real: " + m_nameLine->text() + "\n");
     param.append("Name-Comment: " + m_commentLine->text() + "\n");
     param.append("Name-Email: " + m_emailLine->text() + "\n");
-    param.append("Expire-Date: ");
+    param.append("Expire-Date: 0");
     param.append("Passphrase: " + m_pwdLine->text() + "\n");
     param.append("</GnupgKeyParms>");
 
