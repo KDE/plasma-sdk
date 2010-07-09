@@ -43,6 +43,7 @@ set (PlasMate_SRC
     previewer/runner/runnerpreviewer.cpp
     previewer/previewer.cpp
     publisher/signingwidget.cpp
+    publisher/signingdialog.cpp
     publisher/publisher.cpp
     docbrowser/docbrowser.cpp
     projectmanager/projectmanager.cpp
