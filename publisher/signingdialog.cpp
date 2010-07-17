@@ -195,13 +195,13 @@ void SigningDialog::fetchParameters()
     QString param;
     param.append("<GnupgKeyParms format=\"internal\">\n");
     param.append("Key-Type: DSA\n");
-    param.append("Key-Length: 2048\n");
+    param.append("Key-Length: 1024\n");
     param.append("Subkey-Type: ELG-E\n");
-    param.append("Subkey-Length: 20148\n");
+    param.append("Subkey-Length: 1024\n");
     param.append("Name-Real: " + m_nameLine->text() + "\n");
     param.append("Name-Comment: " + m_commentLine->text() + "\n");
     param.append("Name-Email: " + m_emailLine->text() + "\n");
-    param.append("Expire-Date: 0");
+    param.append("Expire-Date: 0\n");
     param.append("Passphrase: " + m_pwdLine->text() + "\n");
     param.append("</GnupgKeyParms>");
 

@@ -115,6 +115,11 @@ void Publisher::doExport()
         if (code != KMessageBox::Yes) return;
     }
     bool ok = exportToFile(m_exporterUrl->url());
+
+    // If signign is enabled, lets do that!
+    if (m_signingWidget->signingEnabled()) {
+        ok = ok && m_signingWidget->sign(m_exporterUrl->url());
+    }
     if (QFile::exists(m_exporterUrl->url().path()) && ok)
         KMessageBox::information(this, i18n("Project has been exported to %1.", m_exporterUrl->url().path()));
     else

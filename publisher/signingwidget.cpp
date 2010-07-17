@@ -18,6 +18,7 @@
  */
 
 #include <QCheckBox>
+#include <QFile>
 #include <QRadioButton>
 #include <QDialog>
 #include <QLabel>
@@ -25,11 +26,14 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+
 #include <KGlobal>
 #include <KConfig>
 #include <KConfigGroup>
 #include <KDebug>
 #include <KIcon>
+#include <KLineEdit>
+#include <KPushButton>
 
 #define _FILE_OFFSET_BITS 64
 
@@ -39,10 +43,66 @@
 #include <gpgme++/engineinfo.h>
 #include <gpgme++/key.h>
 #include <gpgme++/keylistresult.h>
+#include <gpgme++/keygenerationresult.h>
 #include <gpgme++/context.h>
+#include <gpgme++/interfaces/passphraseprovider.h>
+#include <gpgme++/signingresult.h>
+
+#include <cstdio> // FILE
 
 #include "signingwidget.h"
 #include "signingdialog.h"
+
+
+namespace GpgME
+{
+class PasswordAsker : public PassphraseProvider, QDialog
+{
+public:
+    PasswordAsker(const QWidget *parent)
+            : QDialog(0) {
+        setModal(true);
+        QVBoxLayout *main = new QVBoxLayout(this);
+        QHBoxLayout *child = new QHBoxLayout(this);
+
+        m_infoLabel = new QLabel(this);
+        main->addWidget(m_infoLabel);
+
+        m_pwdLine = new KLineEdit(this);
+        main->addWidget(m_pwdLine);
+
+        m_submitButton = new KPushButton("Submit", this);
+        m_cancelButton = new KPushButton("Cancel", this);
+        child->addWidget(m_submitButton);
+        child->addWidget(m_cancelButton);
+
+        m_pwdLine->setEchoMode(QLineEdit::Password);
+        m_submitButton->setIcon(KIcon("dialog-ok"));
+        m_cancelButton->setIcon(KIcon("dialog-cancel"));
+
+        main->addLayout(child);
+
+        this->hide();
+
+        connect(m_submitButton, SIGNAL(clicked()),
+                this, SLOT(close()));
+        connect(m_cancelButton, SIGNAL(clicked()),
+                this, SLOT(close()));
+    }
+
+    char * getPassphrase(const char * useridHint, const char * description, bool previousWasBad, bool & canceled) {
+        m_infoLabel->setText("Set Password for:\n" + QString(useridHint));
+        int code = this->exec();
+        return m_pwdLine->text().toAscii().data();
+    }
+
+private:
+    QLabel *m_infoLabel;
+    KLineEdit *m_pwdLine;
+    KPushButton *m_submitButton;
+    KPushButton *m_cancelButton;
+};
+}
 
 
 
@@ -119,6 +179,8 @@ void SigningWidget::initGpgContext()
     if (!m_gpgContext) {
         m_contextInitialized = true;
     }
+
+    m_pwdAsker = new GpgME::PasswordAsker(this);
 }
 
 QList< QMap<QString, QVariant> > SigningWidget::gpgEntryList(const bool privateKeysOnly) const
@@ -135,6 +197,10 @@ QList< QMap<QString, QVariant> > SigningWidget::gpgEntryList(const bool privateK
         tmp.insert("email", k.userID(0).email());
         tmp.insert("id", k.keyID());
         result << tmp;
+    }
+    GpgME::KeyListResult lRes = m_gpgContext->endKeyListing();
+    if (lRes.error()) {
+        kDebug() << "Error while ending the keyListing operation: " << lRes.error().asString();
     }
     return result;
 }
@@ -170,20 +236,67 @@ bool SigningWidget::signingEnabled() const
 
 bool SigningWidget::sign(const KUrl &path) const
 {
+    // Ensure we have a key set
+    if (m_currentKey.isEmpty() ||  m_currentKey.isNull())
+        return false;
+
+    m_gpgContext->clearSigningKeys();
+
+    // Lets start looking for the key
+    GpgME::Error error = m_gpgContext->startKeyListing("", true);
+    while (!error) {
+        GpgME::Key k = m_gpgContext->nextKey(error);
+        if (error)
+            break;
+
+        QString fingerprint(k.subkey(0).fingerprint());
+        if (fingerprint.contains(m_currentKey)) {
+            m_gpgContext->addSigningKey(k);
+            kDebug() << "Added signer: " << k.subkey(0).fingerprint();
+            break;
+        }
+    }
+    GpgME::KeyListResult lRes = m_gpgContext->endKeyListing();
+    if (lRes.error()) {
+        kDebug() << "Error while ending the keyListing operation: " << lRes.error().asString();
+    }
+
+    m_gpgContext->setPassphraseProvider(m_pwdAsker);
+
+    FILE *fp;
+    fp = fopen(path.pathOrUrl().toAscii(), "r");
+    GpgME::Data plasmoidata(fp);
+    GpgME::Data signature;
+
+    GpgME::SigningResult sRes = m_gpgContext->sign(plasmoidata, signature, GpgME::Detached);
+    if (!sRes.error()) {
+        return true;
+    }
     return false;
 }
 
 void SigningWidget::showCreateKeyDialog()
 {
     SigningDialog *dialog = new SigningDialog(this);
-    dialog->exec();
     connect(dialog, SIGNAL(emitCreateKey(const QString&)),
             this, SLOT(createKey(const QString&)));
+    dialog->exec();
 }
 
 void SigningWidget::createKey(const QString &param)
 {
-    kDebug() << "READY TO CREATE ;)";
+    kDebug() << "READY TO CREATE:" << param;
+    GpgME::Data *data = new GpgME::Data();
+//    GpgME::KeyGenerationResult result = m_gpgContext->generateKey(param.toAscii().data(), data);
+//    if(result.primaryKeyGenerated() && result.subkeyGenerated()) {
+//        kDebug() << "Generated new key with fingerprint: " << result.fingerprint();
+//    }
+//    kDebug() << "Generated new key with fingerprint: " << result.fingerprint();
+
+    GpgME::KeyGenerationResult e  = m_gpgContext->generateKey(param.toAscii().data(), *data);
+    GpgME::Error er  = m_gpgContext->startKeyGeneration(param.toAscii().data(), *data);
+    kDebug() << "Error:" << e.error().source() << "__" << e.error().asString();
+    kDebug() << "Error:" << er.source() << "__" << er.asString();
 }
 
 void SigningWidget::deleteKey()
@@ -206,8 +319,16 @@ void SigningWidget::deleteKey()
                 cg.sync();
                 loadKeys();
             }
+            GpgME::KeyListResult lRes = m_gpgContext->endKeyListing();
+            if (lRes.error()) {
+                kDebug() << "Error while ending the keyListing operation: " << lRes.error().asString();
+            }
             return;
         }
+    }
+    GpgME::KeyListResult lRes = m_gpgContext->endKeyListing();
+    if (lRes.error()) {
+        kDebug() << "Error while ending the keyListing operation: " << lRes.error().asString();
     }
     return;
 }
