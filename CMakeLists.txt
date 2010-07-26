@@ -1,2 +1,3 @@
 add_subdirectory(engineexplorer)
+add_subdirectory(plasmoidviewer)
 add_subdirectory(wallpaperviewer)
