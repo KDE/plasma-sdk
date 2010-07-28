@@ -44,7 +44,7 @@ public:
     SigningWidget();
     ~SigningWidget();
     bool signingEnabled() const;
-    bool sign(const KUrl &path) const;
+    bool sign(const KUrl &path);
 
 public Q_SLOTS:
     void setEnabled(const bool enabled);

@@ -53,7 +53,6 @@
 #include "signingwidget.h"
 #include "signingdialog.h"
 
-
 namespace GpgME
 {
 class PasswordAsker : public PassphraseProvider, QDialog
@@ -92,8 +91,8 @@ public:
 
     char * getPassphrase(const char * useridHint, const char * description, bool previousWasBad, bool & canceled) {
         m_infoLabel->setText("Set Password for:\n" + QString(useridHint));
-        int code = this->exec();
-        return m_pwdLine->text().toAscii().data();
+        this->exec();
+        return strdup(m_pwdLine->text().append("\n").toAscii().data());
     }
 
 private:
@@ -181,6 +180,9 @@ void SigningWidget::initGpgContext()
     }
 
     m_pwdAsker = new GpgME::PasswordAsker(this);
+    m_gpgContext->setKeyListMode(GPGME_KEYLIST_MODE_LOCAL | GPGME_KEYLIST_MODE_SIGS);
+    m_gpgContext->setPassphraseProvider(m_pwdAsker);
+    m_gpgContext->setArmor(true);
 }
 
 QList< QMap<QString, QVariant> > SigningWidget::gpgEntryList(const bool privateKeysOnly) const
@@ -234,13 +236,15 @@ bool SigningWidget::signingEnabled() const
     return m_signingEnabled;
 }
 
-bool SigningWidget::sign(const KUrl &path) const
+bool SigningWidget::sign(const KUrl &path)
 {
     // Ensure we have a key set
     if (m_currentKey.isEmpty() ||  m_currentKey.isNull())
         return false;
 
     m_gpgContext->clearSigningKeys();
+
+    QString hash = m_currentKey.split(" ",QString::SkipEmptyParts).last();
 
     // Lets start looking for the key
     GpgME::Error error = m_gpgContext->startKeyListing("", true);
@@ -250,7 +254,7 @@ bool SigningWidget::sign(const KUrl &path) const
             break;
 
         QString fingerprint(k.subkey(0).fingerprint());
-        if (fingerprint.contains(m_currentKey)) {
+        if (fingerprint.contains(hash)) {
             m_gpgContext->addSigningKey(k);
             kDebug() << "Added signer: " << k.subkey(0).fingerprint();
             break;
@@ -261,15 +265,21 @@ bool SigningWidget::sign(const KUrl &path) const
         kDebug() << "Error while ending the keyListing operation: " << lRes.error().asString();
     }
 
-    m_gpgContext->setPassphraseProvider(m_pwdAsker);
 
     FILE *fp;
     fp = fopen(path.pathOrUrl().toAscii(), "r");
+    FILE *fp1;
+    fp1 = fopen(path.pathOrUrl().toAscii() +".asc", "rw");
     GpgME::Data plasmoidata(fp);
-    GpgME::Data signature;
+    GpgME::Data signature;//(fp1);
+
+    kDebug() << "Ready to sign: " << path.pathOrUrl();
 
     GpgME::SigningResult sRes = m_gpgContext->sign(plasmoidata, signature, GpgME::Detached);
-    if (!sRes.error()) {
+    error = m_gpgContext->startSigning(plasmoidata, signature, GpgME::Detached);
+    kDebug() <<"Signing result: " << m_gpgContext->signingResult().createdSignature(0).fingerprint();
+
+    if (error) {
         return true;
     }
     return false;
@@ -304,7 +314,7 @@ void SigningWidget::deleteKey()
     if (m_currentKey.isEmpty() || m_currentKey.isNull())
         return;
 
-    GpgME::Error error = m_gpgContext->startKeyListing("", 1);
+    GpgME::Error error = m_gpgContext->startKeyListing("",true);
     QList< QMap<QString, QVariant> > result;
     while (!error) {
         GpgME::Key k = m_gpgContext->nextKey(error);
