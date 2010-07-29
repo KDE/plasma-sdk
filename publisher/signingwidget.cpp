@@ -267,11 +267,11 @@ bool SigningWidget::sign(const KUrl &path)
 
 
     FILE *fp;
-    fp = fopen(path.pathOrUrl().toAscii(), "r");
+    fp = fopen(path.pathOrUrl().toUtf8().data(), "r");
     FILE *fp1;
-    fp1 = fopen(path.pathOrUrl().toAscii() +".asc", "rw");
+    fp1 = fopen(path.pathOrUrl().append(".asc").toUtf8().data(), "w");
     GpgME::Data plasmoidata(fp);
-    GpgME::Data signature;//(fp1);
+    GpgME::Data signature(fp1);
 
     kDebug() << "Ready to sign: " << path.pathOrUrl();
 
