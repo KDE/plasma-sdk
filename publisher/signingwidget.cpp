@@ -284,6 +284,8 @@ bool SigningWidget::sign(const KUrl &path)
     kDebug() <<"Signing result: " << m_gpgContext->signingResult().createdSignature(0).fingerprint();
 
     m_pwdAsker->clear();
+    fclose(fp1);
+    fclose(fp);
 
     if (!error) {
         return true;

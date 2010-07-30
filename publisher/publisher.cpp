@@ -154,19 +154,28 @@ void Publisher::doInstall()
     argv.append("-u");
     argv.append(tempPackage.path());
     bool ok = (KProcess::execute(argv) >= 0 ? true: false);
+
     if (m_signingWidget->signingEnabled()) {
         ok = ok && m_signingWidget->sign(tempPackage);
 
         QString signatureDestPath = KStandardDirs::locateLocal("data", "plasma/plasmoids/");
-        signatureDestPath.append(m_projectName).append(".asc");
+        signatureDestPath.append(m_projectName).append(".plasmoid.asc");
 
         QString signatureOrigPath(tempPackage.pathOrUrl().append(".asc"));
 
-        QFile signature(signatureDestPath);
-        if(signature.exists())
-            signature.remove(signatureDestPath);
+        QFile signatureDest(signatureDestPath);
+        if(signatureDest.open(QIODevice::ReadWrite)) {
+            signatureDest.remove(signatureDestPath);
+            signatureDest.close();
+        }
 
-        ok = ok && signature.copy(signatureOrigPath,signatureDestPath);
+        QFile signatureOrig(signatureOrigPath);
+        if(signatureOrig.open(QIODevice::ReadWrite)) {
+            ok = signatureOrig.copy(signatureOrigPath,signatureDestPath);
+        } else {
+            ok = false;
+        }
+
     }
     QFile::remove(tempPackage.path()); // delete temporary package
     // TODO: probably check for errors and stuff instead of announcing
