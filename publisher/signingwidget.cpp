@@ -89,6 +89,10 @@ public:
                 this, SLOT(close()));
     }
 
+    void clear() {
+        m_pwdLine->clear();
+    }
+
     char * getPassphrase(const char * useridHint, const char * description, bool previousWasBad, bool & canceled) {
         m_infoLabel->setText("Set Password for:\n" + QString(useridHint));
         this->exec();
@@ -117,7 +121,7 @@ SigningWidget::SigningWidget()
 
 SigningWidget::~SigningWidget()
 {
-    //release context
+    delete m_gpgContext;
 }
 
 void SigningWidget::loadConfig()
@@ -278,6 +282,8 @@ bool SigningWidget::sign(const KUrl &path)
     GpgME::SigningResult sRes = m_gpgContext->sign(plasmoidata, signature, GpgME::Detached);
     error = m_gpgContext->startSigning(plasmoidata, signature, GpgME::Detached);
     kDebug() <<"Signing result: " << m_gpgContext->signingResult().createdSignature(0).fingerprint();
+
+    m_pwdAsker->clear();
 
     if (!error) {
         return true;
