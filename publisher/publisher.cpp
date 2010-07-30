@@ -7,6 +7,7 @@
   (at your option) any later version.
 */
 
+#include <QDirIterator>
 #include <QPushButton>
 #include <QLabel>
 #include <QVBoxLayout>
@@ -15,6 +16,8 @@
 #include <KUrlRequester>
 #include <KLocalizedString>
 #include <KProcess>
+#include <KService>
+#include <KServiceTypeTrader>
 #include <KMessageBox>
 #include <knewstuff3/uploaddialog.h>
 #include <KStandardDirs>
@@ -134,11 +137,6 @@ void Publisher::doInstall()
     kDebug() << "m_projectPath" << m_projectPath.pathOrUrl();
     ProjectManager::exportPackage(m_projectPath, tempPackage); // create temporary package
 
-    if (m_signingWidget->signingEnabled()) {
-        m_signingWidget->sign(tempPackage);
-        kDebug() << "Signed";
-    }
-
     QStringList argv("plasmapkg");
     argv.append("-t");
     if (m_projectType == "Plasma/Runner") {
@@ -155,11 +153,29 @@ void Publisher::doInstall()
     // package if it hasn't been installed before, so it's all good.
     argv.append("-u");
     argv.append(tempPackage.path());
-    KProcess::execute(argv);
+    bool ok = (KProcess::execute(argv) >= 0 ? true: false);
+    if (m_signingWidget->signingEnabled()) {
+        ok = ok && m_signingWidget->sign(tempPackage);
+
+        QString signatureDestPath = KStandardDirs::locateLocal("data", "plasma/plasmoids/");
+        signatureDestPath.append(m_projectName).append(".asc");
+
+        QString signatureOrigPath(tempPackage.pathOrUrl().append(".asc"));
+
+        QFile signature(signatureDestPath);
+        if(signature.exists())
+            signature.remove(signatureDestPath);
+
+        ok = ok && signature.copy(signatureOrigPath,signatureDestPath);
+    }
     QFile::remove(tempPackage.path()); // delete temporary package
     // TODO: probably check for errors and stuff instead of announcing
     // succcess in a 'leap of faith'
-    KMessageBox::information(this, i18n("Project has been installed"));
+    if(ok) {
+        KMessageBox::information(this, i18n("Project has been installed"));
+    } else {
+        KMessageBox::error(this, i18n("Project has not been installed"));
+    }
 }
 
 const QString Publisher::tempPackagePath()

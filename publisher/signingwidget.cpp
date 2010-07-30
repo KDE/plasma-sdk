@@ -279,7 +279,7 @@ bool SigningWidget::sign(const KUrl &path)
     error = m_gpgContext->startSigning(plasmoidata, signature, GpgME::Detached);
     kDebug() <<"Signing result: " << m_gpgContext->signingResult().createdSignature(0).fingerprint();
 
-    if (error) {
+    if (!error) {
         return true;
     }
     return false;
