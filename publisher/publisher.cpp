@@ -7,7 +7,7 @@
   (at your option) any later version.
 */
 
-#include <QDirIterator>
+#include <QDBusInterface>
 #include <QPushButton>
 #include <QLabel>
 #include <QVBoxLayout>
@@ -154,6 +154,14 @@ void Publisher::doInstall()
     argv.append("-u");
     argv.append(tempPackage.path());
     bool ok = (KProcess::execute(argv) >= 0 ? true: false);
+    if(ok) {
+        QDBusInterface dbi("org.kde.kded", "/kbuildsycoca", "org.kde.kbuildsycoca");
+        dbi.call(QDBus::NoBlock, "recreate");
+    } else {
+        KMessageBox::error(this, i18n("Project has not been installed"));
+        return;
+    }
+
 
     if (m_signingWidget->signingEnabled()) {
         ok = ok && m_signingWidget->sign(tempPackage);
