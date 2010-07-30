@@ -271,9 +271,9 @@ bool SigningWidget::sign(const KUrl &path)
 
 
     FILE *fp;
-    fp = fopen(path.pathOrUrl().toUtf8().data(), "r");
+    fp = fopen(QFile::encodeName(path.pathOrUrl()).data(), "r");
     FILE *fp1;
-    fp1 = fopen(path.pathOrUrl().append(".asc").toUtf8().data(), "w");
+    fp1 = fopen(QFile::encodeName(path.pathOrUrl().append(".asc")).data(), "w");
     GpgME::Data plasmoidata(fp);
     GpgME::Data signature(fp1);
 
