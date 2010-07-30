@@ -180,6 +180,9 @@ void Publisher::doPublish()
     KUrl url(tempPackagePath());
 
     bool ok = exportToFile(url);
+    if (m_signingWidget->signingEnabled()) {
+        ok = ok && m_signingWidget->sign(url);
+    }
     if (ok) {
         KNS3::UploadDialog *mNewStuffDialog = new KNS3::UploadDialog("plasmate.knsrc", this);
         mNewStuffDialog->setUploadFile(url);
