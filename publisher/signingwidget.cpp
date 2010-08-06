@@ -142,6 +142,7 @@ void SigningWidget::initUI()
     m_createKeyButton = new QPushButton(this);
     m_createKeyButton->setText("Create new Key ...");
     m_createKeyButton->setIcon(KIcon("dialog-password"));
+    m_createKeyButton->setEnabled(false);
 
     m_deleteKeyButton = new QPushButton(this);
     m_deleteKeyButton->setText("Delete selected key");
@@ -231,7 +232,7 @@ void SigningWidget::setEnabled(const bool enabled)
     cg.sync();
 
     m_treeWidget->setEnabled(m_signingEnabled);
-    m_createKeyButton->setEnabled(m_signingEnabled);
+    //m_createKeyButton->setEnabled(m_signingEnabled);
     m_deleteKeyButton->setEnabled(m_signingEnabled);
 }
 
@@ -311,10 +312,10 @@ void SigningWidget::createKey(const QString &param)
 //    }
 //    kDebug() << "Generated new key with fingerprint: " << result.fingerprint();
 
-    GpgME::KeyGenerationResult e  = m_gpgContext->generateKey(param.toAscii().data(), *data);
-    GpgME::Error er  = m_gpgContext->startKeyGeneration(param.toAscii().data(), *data);
-    kDebug() << "Error:" << e.error().source() << "__" << e.error().asString();
-    kDebug() << "Error:" << er.source() << "__" << er.asString();
+    GpgME::KeyGenerationResult e  = m_gpgContext->generateKey(param.toUtf8().data(), *data);
+    GpgME::Error er  = m_gpgContext->startKeyGeneration(param.toUtf8().data(), *data);
+    kDebug() << "Error:" << e.error().source() << "::" << e.error().asString();
+    kDebug() << "Error:" << er.source() << "::" << er.asString();
 }
 
 void SigningWidget::deleteKey()
