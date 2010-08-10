@@ -1,4 +1,4 @@
 [KNewStuff3]
-ProvidersUrl=http://test.opendesktop.org/providers/test.xml
+ProvidersUrl=http://download.kde.org/khotnewstuff/plasmoids-providers.xml 
 TargetDir=plasmate/tmp
 UploadCategories=Plasmoid Script,Plasma Comic,Test category 1
