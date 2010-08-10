@@ -331,13 +331,31 @@ void StartPage::createNewProject()
     }
     
     // Creating the corresponding folder
-    QString projectPath = KStandardDirs::locateLocal("appdata", projectFolderName + '/');
+
+    //  From this commit, the directory is changed int the following way. Old directory structure:
+    //  <plasmateProjDir>/projectname/metadata.desktop
+    //                               /NOTES
+    //                               /.git/
+    //                               /.gitignore
+    //                               /contents/...
+    //  New directory structure:
+    //  <plasmateProjDir>/projectname/NOTES
+    //                               /.git/..
+    //                               /.gitignore
+    //                               /projectname/metadata.desktop
+    //                                           /contents/..
+    //  The reason of this change is simple: with the old directory structure, packaging the project
+    //  implied also packaging the whole git history, and the NOTES file as well (which are plasmate-only
+    //  related files). With the new structure, this won't happen again :)
+    //  Besides, this change will allow us to start implementing the per-project config file :)
+    //
+    QString projectPath = KStandardDirs::locateLocal("appdata",projectFolderName + '/');
     QDir packageSubDirs(projectPath);
-    packageSubDirs.mkpath("contents/code/");
+    packageSubDirs.mkpath(projectFolderName + "/contents/code/");
 
     // Create a QFile object that points to the template we need to copy
     QFile sourceFile(templateFilePath + projectFileExtension);
-    QFile destinationFile(projectPath + "contents/code/" + mainScriptName);
+    QFile destinationFile(projectPath + projectFolderName +  "/contents/code/" + mainScriptName);
 
     // Now open these files, and substitute the main class, author, email and date fields
     sourceFile.open(QIODevice::ReadOnly);
@@ -405,11 +423,11 @@ void StartPage::createNewProject()
     metadata.setAuthor(ui->authorTextField->text());
     metadata.setEmail(ui->emailTextField->text());
     metadata.setLicense("GPL");
-    metadata.write(projectPath + "metadata.desktop");
+    metadata.write(projectPath + projectFolderName + "/metadata.desktop");
 
     // Note: since PackageMetadata lacks of a good api to add X-Plasma-* entries,
     // we add it manually until a patch is released.
-    KDesktopFile metaFile(projectPath + "metadata.desktop");
+    KDesktopFile metaFile(projectPath + projectFolderName + "/metadata.desktop");
     KConfigGroup metaDataGroup = metaFile.desktopGroup();
     metaDataGroup.writeEntry("X-Plasma-MainScript", "code/" + mainScriptName);
     metaDataGroup.writeEntry("X-Plasma-DefaultSize", QSize(200, 100));
@@ -421,7 +439,7 @@ void StartPage::createNewProject()
     notesFile.close();
 
     // the loading code expects the FOLDER NAME
-    emit projectSelected(projectFolderName, serviceTypes);
+    emit projectSelected(projectFolderName + "/" + projectFolderName, serviceTypes);
 
     // need to clear the project name field here too because startpage is still 
     // accessible after project loads.

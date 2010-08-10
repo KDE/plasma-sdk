@@ -501,7 +501,9 @@ void MainWindow::refreshNotes()
     if (part && part->isModified()) {
         part->save(); // save notes if we previously had one open.
     }
-    QString notesFile = m_model->package() + "NOTES";
+    QDir notesDir(m_model->package());
+    notesDir.cdUp();
+    QString notesFile = notesDir.absolutePath() + "/NOTES";
     QFile notes(notesFile);
     if (!notes.exists())
         notes.open(QIODevice::WriteOnly);
@@ -624,9 +626,11 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     m_oldTab = EditTab;
     m_sidebar->setCurrentIndex(m_oldTab);
 
-    m_timeLine->setWorkingDir(KUrl(packagePath));
-    m_timeLine->loadTimeLine(KUrl(packagePath));
-
+    QDir projectPath(packagePath);
+    if(projectPath.cdUp()) {
+        m_timeLine->setWorkingDir(KUrl(projectPath.absolutePath()));
+        m_timeLine->loadTimeLine(KUrl(projectPath.absolutePath()));
+    }
     QByteArray state = saveState();
 
     // initialize previewer
