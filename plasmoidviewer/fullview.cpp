@@ -88,11 +88,17 @@ FullView::FullView(const QString &ff, const QString &loc, QWidget *parent)
     setAlignment(Qt::AlignLeft | Qt::AlignTop);
 }
 
+FullView::~FullView()
+{
+    storeCurrentApplet();
+}
+
 void FullView::addApplet(const QString &name, const QString &containment,
                          const QString& wallpaper, const QVariantList &args)
 {
     kDebug() << "adding applet" << name << "in" << containment;
-    if (!m_containment) {
+    if (!m_containment || m_containment->pluginName() != containment) {
+        delete m_containment;
         m_containment = m_corona.addContainment(containment);
         connect(m_containment, SIGNAL(appletRemoved(Plasma::Applet*)), this, SLOT(appletRemoved(Plasma::Applet*)));
     }
@@ -114,6 +120,13 @@ void FullView::addApplet(const QString &name, const QString &containment,
         return;
     }
 
+    if (m_applet) {
+        // we already have an applet!
+        storeCurrentApplet();
+        disconnect(m_applet);
+        m_applet->destroy();
+    }
+
     QFileInfo info(name);
     if (!info.isAbsolute()) {
         info = QFileInfo(QDir::currentPath() + "/" + name);
@@ -133,7 +146,15 @@ void FullView::addApplet(const QString &name, const QString &containment,
 
     if (!m_applet) {
         return;
-    }	
+    }
+
+    if (hasStorageGroupFor(m_applet)) {
+        KConfigGroup cg = m_applet->config();
+        KConfigGroup storage = storageGroup(m_applet);
+        cg.deleteGroup();
+        storage.copyTo(&cg);
+        m_applet->configChanged();
+    }
 
     setSceneRect(m_applet->sceneBoundingRect());
     m_applet->setFlag(QGraphicsItem::ItemIsMovable, false);
@@ -141,11 +162,13 @@ void FullView::addApplet(const QString &name, const QString &containment,
     setWindowIcon(SmallIcon(m_applet->icon()));
     resize(m_applet->size().toSize());
     connect(m_applet, SIGNAL(appletTransformedItself()), this, SLOT(appletTransformedItself()));
+    kDebug() << "connecting ----------------";
+    connect(m_applet, SIGNAL(appletDestroyed(Plasma::Applet*)), this, SLOT(appletDestroyed(Plasma::Applet*)));
 
     checkShotTimer();
 }
 
-void FullView::checkShotTimer()
+bool FullView::checkShotTimer()
 {
     KCmdLineArgs *cliArgs = KCmdLineArgs::parsedArgs();
     if (cliArgs->isSet("screenshot") || cliArgs->isSet("screenshot-all")) {
@@ -157,7 +180,10 @@ void FullView::checkShotTimer()
         }
 
         m_appletShotTimer->start();
+        return true;
     }
+
+    return false;
 }
 
 void FullView::screenshotAll()
@@ -241,7 +267,9 @@ void FullView::appletRemoved(Plasma::Applet *applet)
 {
     if (m_applet == applet) {
         m_applet = 0;
-        checkShotTimer();
+        if (!checkShotTimer()) {
+            close();
+        }
     }
 }
 
@@ -311,6 +339,29 @@ void FullView::sceneRectChanged(const QRectF &rect)
     Q_UNUSED(rect)
     if (m_applet) {
         setSceneRect(m_applet->sceneBoundingRect());
+    }
+}
+
+bool FullView::hasStorageGroupFor(Plasma::Applet *applet) const
+{
+    KConfigGroup stored = KConfigGroup(KGlobal::config(), "StoredApplets");
+    return stored.groupList().contains(applet->pluginName());
+}
+
+KConfigGroup FullView::storageGroup(Plasma::Applet *applet) const
+{
+    KConfigGroup stored = KConfigGroup(KGlobal::config(), "StoredApplets");
+    return KConfigGroup(&stored, applet->pluginName());
+}
+
+void FullView::storeCurrentApplet()
+{
+    if (m_applet) {
+        KConfigGroup cg = m_applet->config();
+        KConfigGroup storage = storageGroup(m_applet);
+        storage.deleteGroup();
+        cg.copyTo(&storage);
+        KGlobal::config()->sync();
     }
 }
 

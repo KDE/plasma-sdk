@@ -45,6 +45,7 @@ class FullView : public QGraphicsView
 
 public:
     explicit FullView(const QString &formfactor = "planar", const QString &location = "floating", QWidget *parent = 0);
+    ~FullView();
 
     void addApplet(const QString &name, const QString& containment,
                    const QString& wallpaper, const QVariantList &args = QVariantList());
@@ -61,7 +62,10 @@ private Q_SLOTS:
 
 private:
     void shootNextPlasmoid();
-    void checkShotTimer();
+    bool checkShotTimer();
+    KConfigGroup storageGroup(Plasma::Applet *applet) const;
+    bool hasStorageGroupFor(Plasma::Applet *applet) const;
+    void storeCurrentApplet();
 
     Plasma::Corona m_corona;
     Plasma::FormFactor m_formfactor;
