@@ -163,7 +163,6 @@ void FullView::addApplet(const QString &name, const QString &containment,
     resize(m_applet->size().toSize());
     connect(m_applet, SIGNAL(appletTransformedItself()), this, SLOT(appletTransformedItself()));
     kDebug() << "connecting ----------------";
-    connect(m_applet, SIGNAL(appletDestroyed(Plasma::Applet*)), this, SLOT(appletDestroyed(Plasma::Applet*)));
 
     checkShotTimer();
 }
