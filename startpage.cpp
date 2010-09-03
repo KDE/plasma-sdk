@@ -149,7 +149,7 @@ void StartPage::processProjectName(const QString& name)
 void StartPage::validateProjectType(const QModelIndex &sender)
 {
     if (sender.row() == 1) {
-        ui->radioButtonJs->setEnabled(false);
+        ui->radioButtonJs->setEnabled(true);
         // gotta explicitly setEnabled to true in case it
         // was falsed before!
         ui->radioButtonPy->setEnabled(true);
@@ -158,13 +158,9 @@ void StartPage::validateProjectType(const QModelIndex &sender)
         ui->radioButtonRb->setEnabled(true);
         ui->newProjectButton->setEnabled(!ui->projectName->text().isEmpty()); // in case previously falsed
     } else if (sender.row() == 2) {
-        ui->radioButtonJs->setEnabled(false);
-        // gotta explicitly setEnabled to true in case it
-        // was falsed before!
+        ui->radioButtonJs->setEnabled(true);
+        ui->radioButtonJs->setChecked(true);
         ui->radioButtonPy->setEnabled(true);
-        // also check this radio to prevent any disabled radios from
-        // being checked due to previous setting!
-        ui->radioButtonPy->setChecked(true);
         ui->radioButtonRb->setEnabled(false);
         ui->newProjectButton->setEnabled(!ui->projectName->text().isEmpty()); // in case previously falsed
 
@@ -175,6 +171,7 @@ void StartPage::validateProjectType(const QModelIndex &sender)
         ui->newProjectButton->setEnabled(false); // disable the create button too.
     } else /* if (sender.row() == 0) */ {
         ui->radioButtonJs->setEnabled(true);
+        ui->radioButtonJs->setChecked(true);
         ui->radioButtonPy->setEnabled(true);
         ui->radioButtonRb->setEnabled(true);
         ui->newProjectButton->setEnabled(!ui->projectName->text().isEmpty()); // in case previously falsed
