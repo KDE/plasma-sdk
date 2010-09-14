@@ -274,7 +274,6 @@ void MainWindow::quit()
 //     deleteLater();
 }
 
-
 void MainWindow::addAction(const char *text,const char * icon,const  char *slot, const char *name)
 {
     KAction *action = new KAction(this);
@@ -286,11 +285,11 @@ void MainWindow::addAction(const char *text,const char * icon,const  char *slot,
 
 void MainWindow::setupActions()
 {
-  addAction("New Save Point", "document-save",           SLOT(selectSavePoint()), "savepoint");
-  addAction("Publish",        "krfb",                    SLOT(selectPublish()),   "publish");
-  addAction("Preview",        "user-desktop",            SLOT(selectPreview()),   "preview");
-  addAction("Notes",          "accessories-text-editor", SLOT(selectNotes()),     "notes");
-  addAction("File List",      "system-file-manager",     SLOT(selectFileList()),  "file_list");
+    addAction("New Save Point", "document-save",           SLOT(selectSavePoint()), "savepoint");
+    addAction("Publish",        "krfb",                    SLOT(selectPublish()),   "publish");
+    addAction("Preview",        "user-desktop",            SLOT(selectPreview()),   "preview");
+    addAction("Notes",          "accessories-text-editor", SLOT(selectNotes()),     "notes");
+    addAction("File List",      "system-file-manager",     SLOT(selectFileList()),  "file_list");
 }
 
 void MainWindow::selectFileList()
