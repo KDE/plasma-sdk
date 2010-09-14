@@ -207,18 +207,18 @@ void MainWindow::createDockWidgets()
     
 
     /////////////////////////////////////////////////////////////////////////
-    location = (Qt::DockWidgetArea) configDock.readEntry("TimeLineLocation",
-                                                         QVariant(Qt::BottomDockWidgetArea)).toInt();
-    m_timeLine = new TimeLine(this,
-                              m_model->package(),
-                              location);
-
-    m_timeLine->setObjectName("timeline");
-    connect(m_timeLine, SIGNAL(sourceDirectoryChanged()),
-            this, SLOT(editorDestructiveRefresh()));
-    connect(m_timeLine, SIGNAL(savePointClicked()),
-            this, SLOT(saveEditorData()));
-    addDockWidget(location, m_timeLine);
+//     location = (Qt::DockWidgetArea) configDock.readEntry("TimeLineLocation",
+//                                                          QVariant(Qt::BottomDockWidgetArea)).toInt();
+//     m_timeLine = new TimeLine(this,
+//                               m_model->package(),
+//                               location);
+// 
+//     m_timeLine->setObjectName("timeline");
+//     connect(m_timeLine, SIGNAL(sourceDirectoryChanged()),
+//             this, SLOT(editorDestructiveRefresh()));
+//     connect(m_timeLine, SIGNAL(savePointClicked()),
+//             this, SLOT(saveEditorData()));
+//     addDockWidget(location, m_timeLine);
 
 //     Do this in loadProject instead so we don't do it twice. It needs to be in
 //     load project because the previewer needs to be recreated everytime a project
@@ -274,7 +274,7 @@ void MainWindow::quit()
 //     deleteLater();
 }
 
-void MainWindow::addAction(const char *text,const char * icon,const  char *slot, const char *name)
+void MainWindow::addAction(const char *text, const char * icon, const  char *slot, const char *name)
 {
     KAction *action = new KAction(this);
     action->setText(i18n(text));
@@ -282,7 +282,7 @@ void MainWindow::addAction(const char *text,const char * icon,const  char *slot,
     connect(action, SIGNAL(triggered(bool)), this, slot);
     actionCollection()->addAction(name, action);
 }
-
+ 
 void MainWindow::setupActions()
 {
     addAction("New Save Point", "document-save",           SLOT(selectSavePoint()), "savepoint");
@@ -290,8 +290,28 @@ void MainWindow::setupActions()
     addAction("Preview",        "user-desktop",            SLOT(selectPreview()),   "preview");
     addAction("Notes",          "accessories-text-editor", SLOT(selectNotes()),     "notes");
     addAction("File List",      "system-file-manager",     SLOT(selectFileList()),  "file_list");
+  addAction("Timeline", "process-working",  SLOT(selectTimeline()), "timeline");
 }
 
+void MainWindow::selectTimeline()
+{
+    KConfig c;
+    KConfigGroup configDock = c.group("DocksPosition");
+    Qt::DockWidgetArea location = (Qt::DockWidgetArea) configDock.readEntry("WorkflowLocation",
+                                                                            QVariant(Qt::TopDockWidgetArea)).toInt();
+    location = (Qt::DockWidgetArea) configDock.readEntry("TimeLineLocation",
+                                                         QVariant(Qt::BottomDockWidgetArea)).toInt();
+    m_timeLine = new TimeLine(this,
+                              m_model->package(),
+                              location);
+
+    m_timeLine->setObjectName("timeline");
+    connect(m_timeLine, SIGNAL(sourceDirectoryChanged()),
+            this, SLOT(editorDestructiveRefresh()));
+    connect(m_timeLine, SIGNAL(savePointClicked()),
+            this, SLOT(saveEditorData()));
+    addDockWidget(location, m_timeLine);
+}
 void MainWindow::selectFileList()
 {
     m_editWidget = new QDockWidget(i18n("Files"), this);
@@ -335,6 +355,8 @@ void MainWindow::selectPreview()
          m_central->switchTo(l, CentralContainer::DeleteAfter);
    //}
 }
+
+
 
 void MainWindow::changeTab(const QModelIndex &item)
 {
@@ -692,10 +714,10 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     m_sidebar->setCurrentIndex(m_oldTab);
 
     QDir projectPath(packagePath);
-    if(projectPath.cdUp()) {
-        m_timeLine->setWorkingDir(KUrl(projectPath.absolutePath()));
-        m_timeLine->loadTimeLine(KUrl(projectPath.absolutePath()));
-    }
+//     if(projectPath.cdUp()) {
+//         m_timeLine->setWorkingDir(KUrl(projectPath.absolutePath()));
+//         m_timeLine->loadTimeLine(KUrl(projectPath.absolutePath()));
+//     }
     QByteArray state = saveState();
 
     // initialize previewer

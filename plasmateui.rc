@@ -16,6 +16,7 @@
   <Action name="preview" />
   <Action name="notes" />
   <Action name="file_list" />
+  <Action name="timeline" />
   <Merge/>
 </ToolBar>
 </kpartgui>

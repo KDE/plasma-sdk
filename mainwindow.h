@@ -66,9 +66,8 @@ public Q_SLOTS:
     void refreshNotes();
     // refreshes editor, killing all local changes
     void editorDestructiveRefresh();
-    
     void selectSavePoint();
-    //void selectTimeline();
+    void selectTimeline();
     void selectPublish();
     void selectPreview();
     void selectNotes();
