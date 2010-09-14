@@ -274,39 +274,23 @@ void MainWindow::quit()
 //     deleteLater();
 }
 
+
+void MainWindow::addAction(const char *text,const char * icon,const  char *slot, const char *name)
+{
+    KAction *action = new KAction(this);
+    action->setText(i18n(text));
+    action->setIcon(KIcon(icon));
+    connect(action, SIGNAL(triggered(bool)), this, slot);
+    actionCollection()->addAction(name, action);
+}
+
 void MainWindow::setupActions()
 {
-  qDebug() << "TEST";
-  m_savePointAction = new KAction(this);
-  m_savePointAction->setText(i18n("New Save Point"));
-  m_savePointAction->setIcon(KIcon("document-save"));
-  connect(m_savePointAction, SIGNAL(triggered(bool)), this, SLOT(selectSavePoint()));
-  actionCollection()->addAction("savepoint", m_savePointAction);
-  
-  m_publishAction = new KAction(this);
-  m_publishAction->setText(i18n("Publish"));
-  m_publishAction->setIcon(KIcon("krfb"));
-  connect(m_publishAction, SIGNAL(triggered(bool)), this, SLOT(selectPublish()));
-  actionCollection()->addAction("publish", m_publishAction);
-  
-  m_previewAction = new KAction(this);
-  m_previewAction->setText(i18n("Preview"));
-  m_previewAction->setIcon(KIcon("user-desktop"));
-  connect(m_previewAction, SIGNAL(triggered(bool)), this, SLOT(selectPreview()));
-  actionCollection()->addAction("preview", m_previewAction);
-  
-  m_notesAction = new KAction(this);
-  m_notesAction->setText(i18n("Notes"));
-  m_notesAction->setIcon(KIcon("accessories-text-editor"));
-  connect(m_notesAction, SIGNAL(triggered(bool)), this, SLOT(selectNotes()));
-  actionCollection()->addAction("notes", m_notesAction); 
-  
- 
-  m_fileListAction = new KAction(this);
-  m_fileListAction->setText(i18n("File List"));
-  m_fileListAction->setIcon(KIcon("system-file-manager"));
-  connect(m_fileListAction, SIGNAL(triggered(bool)), this, SLOT(selectFileList()));
-  actionCollection()->addAction("filelist", m_fileListAction);
+  addAction("New Save Point", "document-save",           SLOT(selectSavePoint()), "savepoint");
+  addAction("Publish",        "krfb",                    SLOT(selectPublish()),   "publish");
+  addAction("Preview",        "user-desktop",            SLOT(selectPreview()),   "preview");
+  addAction("Notes",          "accessories-text-editor", SLOT(selectNotes()),     "notes");
+  addAction("File List",      "system-file-manager",     SLOT(selectFileList()),  "file_list");
 }
 
 void MainWindow::selectFileList()
@@ -352,8 +336,6 @@ void MainWindow::selectPreview()
          m_central->switchTo(l, CentralContainer::DeleteAfter);
    //}
 }
-
-
 
 void MainWindow::changeTab(const QModelIndex &item)
 {
