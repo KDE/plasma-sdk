@@ -28,7 +28,7 @@
 #include "../projectmanager/projectmanager.h"
 
 Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
-        : QWidget(parent),
+        : QDialog(parent),
         m_projectPath(path),
         m_projectType(type)
 {

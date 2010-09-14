@@ -12,6 +12,7 @@
 
 #include <KParts/MainWindow>
 #include <KLibLoader>
+#include <KAction>
 #include <kservice.h>
 
 class QModelIndex;
@@ -65,12 +66,28 @@ public Q_SLOTS:
     void refreshNotes();
     // refreshes editor, killing all local changes
     void editorDestructiveRefresh();
+    
+    void selectSavePoint();
+    //void selectTimeline();
+    void selectPublish();
+    void selectPreview();
+    void selectNotes();
+    void selectFileList();
 
 signals:
     void newSavePointClicked();
     void refreshRequested();
 
 private:
+  
+    KAction *m_savePointAction;
+    KAction *m_timelineAction;
+    KAction *m_publishAction;
+    KAction *m_previewAction;
+    KAction *m_notesAction;
+    KAction *m_fileListAction;
+    
+    void setupActions();
 
     // QMainWindow takes control of and DELETES the previous centralWidget
     // whenever a new one is set - this is bad because we want to preserve
@@ -105,7 +122,7 @@ private:
     void setupTextEditor(KTextEditor::Document *editorPart, KTextEditor::View *view);
     void loadNotesEditor(QDockWidget *container);
     Previewer* createPreviewerFor(const QString& projectType);
-
+    
     StartPage *m_startPage;
     Sidebar *m_sidebar;
     TimeLine    *m_timeLine;

@@ -17,6 +17,7 @@
 #include <KTextEdit>
 
 #include <KAction>
+#include <KActionCollection>
 #include <KConfig>
 #include <KConfigGroup>
 #include <KDebug>
@@ -50,6 +51,7 @@
 #include "previewer/runner/runnerpreviewer.h"
 #include "publisher/publisher.h"
 #include "docbrowser/docbrowser.h"
+#include <kaction.h>
 
 
 MainWindow::CentralContainer::CentralContainer(QWidget* parent)
@@ -100,6 +102,7 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(m_central);
     m_central->switchTo(m_startPage);
     setDockOptions(QMainWindow::AllowNestedDocks); // why not?
+    setupActions();
 }
 
 MainWindow::~MainWindow()
@@ -192,16 +195,16 @@ void MainWindow::createDockWidgets()
     m_editPage = new EditPage();
     m_editPage->setModel(m_model);
 
-    m_editWidget = new QDockWidget(i18n("Files"), this);
-    m_editWidget->setObjectName("edit tree");
-    m_editWidget->setWidget(m_editPage);
-    addDockWidget(Qt::RightDockWidgetArea, m_editWidget);
+//     m_editWidget = new QDockWidget(i18n("Files"), this);
+//     m_editWidget->setObjectName("edit tree");
+//     m_editWidget->setWidget(m_editPage);
+//     addDockWidget(Qt::RightDockWidgetArea, m_editWidget);
 
     connect(m_editPage, SIGNAL(loadEditor(KService::List, KUrl)), this, SLOT(loadRequiredEditor(const KService::List, KUrl)));
     connect(m_editPage, SIGNAL(loadMetaDataEditor(KUrl)), this, SLOT(loadMetaDataEditor(KUrl)));
 
     m_editPage->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
-    m_editWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    
 
     /////////////////////////////////////////////////////////////////////////
     location = (Qt::DockWidgetArea) configDock.readEntry("TimeLineLocation",
@@ -233,10 +236,10 @@ void MainWindow::createDockWidgets()
 //    m_previewerWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     /////////////////////////////////////////////////////////////////////////
-    QDockWidget *m_projectNotesWidget = new QDockWidget(i18n("Project notes"), this);
-    m_projectNotesWidget->setObjectName("projectNotes");
-    loadNotesEditor(m_projectNotesWidget);
-    addDockWidget(Qt::LeftDockWidgetArea, m_projectNotesWidget);
+//     QDockWidget *m_projectNotesWidget = new QDockWidget(i18n("Project notes"), this);
+//     m_projectNotesWidget->setObjectName("projectNotes");
+//     loadNotesEditor(m_projectNotesWidget);
+//     addDockWidget(Qt::LeftDockWidgetArea, m_projectNotesWidget);
 
     //splitDockWidget(m_workflow, m_editWidget, Qt::Horizontal);
     //splitDockWidget(m_editWidget, m_previewerWidget, Qt::Vertical);
@@ -270,6 +273,87 @@ void MainWindow::quit()
     qApp->closeAllWindows();
 //     deleteLater();
 }
+
+void MainWindow::setupActions()
+{
+  qDebug() << "TEST";
+  m_savePointAction = new KAction(this);
+  m_savePointAction->setText(i18n("New Save Point"));
+  m_savePointAction->setIcon(KIcon("document-save"));
+  connect(m_savePointAction, SIGNAL(triggered(bool)), this, SLOT(selectSavePoint()));
+  actionCollection()->addAction("savepoint", m_savePointAction);
+  
+  m_publishAction = new KAction(this);
+  m_publishAction->setText(i18n("Publish"));
+  m_publishAction->setIcon(KIcon("krfb"));
+  connect(m_publishAction, SIGNAL(triggered(bool)), this, SLOT(selectPublish()));
+  actionCollection()->addAction("publish", m_publishAction);
+  
+  m_previewAction = new KAction(this);
+  m_previewAction->setText(i18n("Preview"));
+  m_previewAction->setIcon(KIcon("user-desktop"));
+  connect(m_previewAction, SIGNAL(triggered(bool)), this, SLOT(selectPreview()));
+  actionCollection()->addAction("preview", m_previewAction);
+  
+  m_notesAction = new KAction(this);
+  m_notesAction->setText(i18n("Notes"));
+  m_notesAction->setIcon(KIcon("accessories-text-editor"));
+  connect(m_notesAction, SIGNAL(triggered(bool)), this, SLOT(selectNotes()));
+  actionCollection()->addAction("notes", m_notesAction); 
+  
+ 
+  m_fileListAction = new KAction(this);
+  m_fileListAction->setText(i18n("File List"));
+  m_fileListAction->setIcon(KIcon("system-file-manager"));
+  connect(m_fileListAction, SIGNAL(triggered(bool)), this, SLOT(selectFileList()));
+  actionCollection()->addAction("filelist", m_fileListAction);
+}
+
+void MainWindow::selectFileList()
+{
+    m_editWidget = new QDockWidget(i18n("Files"), this);
+    m_editWidget->setObjectName("edit tree");
+    m_editWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    m_editWidget->setWidget(m_editPage);
+    addDockWidget(Qt::RightDockWidgetArea, m_editWidget);
+}
+
+void MainWindow::selectNotes()
+{
+    QDockWidget *m_projectNotesWidget = new QDockWidget(i18n("Project notes"), this);
+    m_projectNotesWidget->setObjectName("projectNotes");
+    loadNotesEditor(m_projectNotesWidget);
+    addDockWidget(Qt::LeftDockWidgetArea, m_projectNotesWidget);
+}
+
+void MainWindow::selectSavePoint()
+{
+  emit newSavePointClicked();
+}
+
+void MainWindow::selectPublish()
+{
+  if (!m_publisher) {
+    m_publisher = new Publisher(this, m_model->package(), m_model->packageType());
+  }
+  m_publisher->setProjectName(m_currentProject);
+  m_publisher->exec();
+}
+
+void MainWindow::selectPreview()
+{
+   /*if (m_model->packageType() == "Plasma/PopupApplet" ||
+         m_model->packageType() == "Plasma/Applet") {
+             Previewer *tabPreviewer = new Previewer(this);
+             tabPreviewer->addApplet(m_model->package());
+             m_central->switchTo(tabPreviewer, CentralContainer::DeleteAfter);
+     } else {*/
+         QLabel *l = new QLabel(i18n("Preview is unavailable for this project type"));
+         m_central->switchTo(l, CentralContainer::DeleteAfter);
+   //}
+}
+
+
 
 void MainWindow::changeTab(const QModelIndex &item)
 {
@@ -554,19 +638,19 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     stream << contents;
     metadataFile.close();
 
-    if (actualType.isEmpty()) {
-        QDir dir(packagePath);
-        if (dir.exists("metadata.desktop")) {
-            Plasma::PackageMetadata metadata(packagePath + "metadata.desktop");
-            actualType = metadata.serviceType();
-        }
-    }
-
-    //Workaround for Plasma::PackageStructure not recognizing Plasma/PopupApplet as a valid type
-    //FIXME:
-    if (actualType == "Plasma/PopupApplet") {
-        actualType = "Plasma/Applet";
-    }
+ //   if (actualType.isEmpty()) {
+//         QDir dir(packagePath);
+//         if (dir.exists("metadata.desktop")) {
+//             Plasma::PackageMetadata metadata(packagePath + "metadata.desktop");
+//             actualType = metadata.serviceType();
+//         }
+//     }
+// 
+//     //Workaround for Plasma::PackageStructure not recognizing Plasma/PopupApplet as a valid type
+//     //FIXME:
+//     if (actualType == "Plasma/PopupApplet") {
+//         actualType = "Plasma/Applet";
+//     }
 
     // Add it to the recent files first.
     m_model = new PackageModel(this);

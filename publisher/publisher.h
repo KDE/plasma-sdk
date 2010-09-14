@@ -10,7 +10,7 @@
 #ifndef PUBLISHER_H
 #define PUBLISHER_H
 
-#include <QWidget>
+#include <QDialog>
 #include <KUrl>
 
 class KUrlRequester;
@@ -22,7 +22,7 @@ namespace Ui
 class Publisher;
 }
 
-class Publisher : public QWidget
+class Publisher : public QDialog
 {
     Q_OBJECT;
 public:
