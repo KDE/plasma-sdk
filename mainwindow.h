@@ -15,6 +15,7 @@
 #include <KAction>
 #include <kservice.h>
 
+class QKeyEvent;
 class QModelIndex;
 
 namespace Ui
@@ -56,7 +57,6 @@ public:
 public Q_SLOTS:
     void quit();
 
-    void changeTab(const QModelIndex &);
     void loadProject(const QString &name, const QString &type);
 
     void loadRequiredEditor(const KService::List offers, KUrl target);
@@ -72,6 +72,7 @@ public Q_SLOTS:
     void selectPreview();
     void selectNotes();
     void selectFileList();
+    void openDocumentation();
 
 signals:
     void newSavePointClicked();
@@ -117,7 +118,6 @@ private:
                       };
 
     void createMenus();
-    void createDockWidgets();
     void setupTextEditor(KTextEditor::Document *editorPart, KTextEditor::View *view);
     void loadNotesEditor(QDockWidget *container);
     Previewer* createPreviewerFor(const QString& projectType);
@@ -141,6 +141,7 @@ private:
     bool m_docksCreated;
     CentralContainer *m_central;
     QString m_currentProject;
+    QString m_currentProjectType;
 
     KParts::ReadOnlyPart *m_part;
     KParts::ReadOnlyPart *m_notesPart;

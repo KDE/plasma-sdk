@@ -10,8 +10,9 @@
 #ifndef DOCBROWSER_H
 #define DOCBROWSER_H
 
-#include <QWidget>
+#include <QDockWidget>
 
+class QDockWidget;
 class QWebView;
 class KUrl;
 class KLineEdit;
@@ -24,7 +25,7 @@ namespace Ui
 
 class PackageModel;
 
-class DocBrowser : public QWidget
+class DocBrowser : public QDockWidget
 {
     Q_OBJECT;
 public:

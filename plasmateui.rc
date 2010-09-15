@@ -17,6 +17,7 @@
   <Action name="notes" />
   <Action name="file_list" />
   <Action name="timeline" />
+  <Action name="documentation" />
   <Merge/>
 </ToolBar>
 </kpartgui>

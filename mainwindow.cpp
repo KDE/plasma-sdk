@@ -121,12 +121,6 @@ MainWindow::~MainWindow()
     delete m_metaEditor;
     m_metaEditor = 0;
 
-    if (m_sidebar) {
-        //delete m_startPage;
-        configDock.writeEntry("WorkflowLocation", QVariant(m_sidebar->location()));
-        delete m_sidebar;
-    }
-
     if (m_previewerWidget) {
         configDock.writeEntry("PreviewerHeight", m_previewerWidget->height());
         configDock.writeEntry("PreviewerWidth", m_previewerWidget->width());
@@ -159,6 +153,16 @@ MainWindow::~MainWindow()
     c.sync();
 }
 
+void MainWindow::openDocumentation()
+{
+    if (!m_browser) {
+            m_browser = new DocBrowser(m_model, 0);
+    }
+    m_browser->setObjectName("Documentation");
+    m_browser->focusSearchField();
+    addDockWidget(Qt::LeftDockWidgetArea, m_browser);
+}
+
 void MainWindow::createMenus()
 {
     KStandardAction::quit(this, SLOT(quit()), actionCollection());
@@ -167,105 +171,6 @@ void MainWindow::createMenus()
     refresh->setText(i18n("Refresh Previewer"));
     menuBar()->addMenu(helpMenu());
     setupGUI();
-}
-
-void MainWindow::createDockWidgets()
-{
-    KConfig c;
-    KConfigGroup configDock = c.group("DocksPosition");
-    /////////////////////////////////////////////////////////////////////////
-    Qt::DockWidgetArea location = (Qt::DockWidgetArea) configDock.readEntry("WorkflowLocation",
-                                                                            QVariant(Qt::TopDockWidgetArea)).toInt();
-    m_sidebar = new Sidebar(this,
-                            location);
-    m_sidebar->setObjectName("workflow");
-    addDockWidget(location, m_sidebar);
-
-    m_sidebar->addItem(KIcon("go-home"), i18n("Start page"));
-    m_sidebar->addItem(KIcon("accessories-text-editor"), i18n("Edit"));
-    m_sidebar->addItem(KIcon("document-save"),i18n("New SavePoint"));
-    m_sidebar->addItem(KIcon("krfb"), i18n("Publish"));
-    m_sidebar->addItem(KIcon("help-contents"), i18n("Documentation"));
-    m_sidebar->addItem(KIcon("user-desktop"), i18n("Preview"));
-
-    connect(m_sidebar, SIGNAL(currentIndexClicked(const QModelIndex &)),
-            this, SLOT(changeTab(const QModelIndex &)));
-
-    /////////////////////////////////////////////////////////////////////////
-    m_editPage = new EditPage();
-    m_editPage->setModel(m_model);
-
-//     m_editWidget = new QDockWidget(i18n("Files"), this);
-//     m_editWidget->setObjectName("edit tree");
-//     m_editWidget->setWidget(m_editPage);
-//     addDockWidget(Qt::RightDockWidgetArea, m_editWidget);
-
-    connect(m_editPage, SIGNAL(loadEditor(KService::List, KUrl)), this, SLOT(loadRequiredEditor(const KService::List, KUrl)));
-    connect(m_editPage, SIGNAL(loadMetaDataEditor(KUrl)), this, SLOT(loadMetaDataEditor(KUrl)));
-
-    m_editPage->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
-    
-
-    /////////////////////////////////////////////////////////////////////////
-//     location = (Qt::DockWidgetArea) configDock.readEntry("TimeLineLocation",
-//                                                          QVariant(Qt::BottomDockWidgetArea)).toInt();
-//     m_timeLine = new TimeLine(this,
-//                               m_model->package(),
-//                               location);
-// 
-//     m_timeLine->setObjectName("timeline");
-//     connect(m_timeLine, SIGNAL(sourceDirectoryChanged()),
-//             this, SLOT(editorDestructiveRefresh()));
-//     connect(m_timeLine, SIGNAL(savePointClicked()),
-//             this, SLOT(saveEditorData()));
-//     addDockWidget(location, m_timeLine);
-
-//     Do this in loadProject instead so we don't do it twice. It needs to be in
-//     load project because the previewer needs to be recreated everytime a project
-//     is loaded - and createDockWidgets() is only called on startup
-//     /////////////////////////////////////////////////////////////////////////
-//     m_previewerWidget = new PlasmoidPreviewer(i18n("Previewer"), this);
-//     m_previewerWidget->setObjectName("preview");
-//     connect(m_previewerWidget, SIGNAL(refreshRequested()), this, SLOT(saveAndRefresh()));
-//     addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
-
-//    m_previewerWidget->updateGeometry();
-//    m_previewer->updateGeometry();
-
-//    m_previewer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-//    m_previewerWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
-    /////////////////////////////////////////////////////////////////////////
-//     QDockWidget *m_projectNotesWidget = new QDockWidget(i18n("Project notes"), this);
-//     m_projectNotesWidget->setObjectName("projectNotes");
-//     loadNotesEditor(m_projectNotesWidget);
-//     addDockWidget(Qt::LeftDockWidgetArea, m_projectNotesWidget);
-
-    //splitDockWidget(m_workflow, m_editWidget, Qt::Horizontal);
-    //splitDockWidget(m_editWidget, m_previewerWidget, Qt::Vertical);
-
-    // Restoring the previous layout
-    restoreState(configDock.readEntry("MainWindowLayout",QByteArray()), 0);
-
-    connect(this, SIGNAL(newSavePointClicked()),
-            m_timeLine, SLOT(newSavePoint()));
-
-    // Restore browser widget if there is something to restore
-    KConfigGroup cg = KGlobal::config()->group("General");
-    QString lastPage = cg.readEntry("lastBrowserPage");
-    if (lastPage != QString::null) { // restore!
-        if (!m_browser) {
-            m_browser = new DocBrowser(m_model, this);
-        }
-
-        m_browser->load(lastPage);
-    }
-
-    m_docksCreated = true;
-
-    int w = size().width() < sizeHint().width() ? sizeHint().width() : size().width();
-    int h = size().height() < sizeHint().height() ? sizeHint().height() : size().height();
-    resize(w, h);
 }
 
 void MainWindow::quit()
@@ -290,7 +195,8 @@ void MainWindow::setupActions()
     addAction("Preview",        "user-desktop",            SLOT(selectPreview()),   "preview");
     addAction("Notes",          "accessories-text-editor", SLOT(selectNotes()),     "notes");
     addAction("File List",      "system-file-manager",     SLOT(selectFileList()),  "file_list");
-  addAction("Timeline", "process-working",  SLOT(selectTimeline()), "timeline");
+    addAction("Timeline", "process-working",  SLOT(selectTimeline()), "timeline");
+    addAction("Documentation", "help-contents", SLOT(openDocumentation()), "documentation");
 }
 
 void MainWindow::selectTimeline()
@@ -312,6 +218,7 @@ void MainWindow::selectTimeline()
             this, SLOT(saveEditorData()));
     addDockWidget(location, m_timeLine);
 }
+
 void MainWindow::selectFileList()
 {
     m_editWidget = new QDockWidget(i18n("Files"), this);
@@ -354,72 +261,6 @@ void MainWindow::selectPreview()
          QLabel *l = new QLabel(i18n("Preview is unavailable for this project type"));
          m_central->switchTo(l, CentralContainer::DeleteAfter);
    //}
-}
-
-
-
-void MainWindow::changeTab(const QModelIndex &item)
-{
-    // should save data in any open editors when changing tabs
-    saveEditorData();
-
-    int tab = (m_sidebar->isVertical()) ? item.row(): item.column();
-
-    m_startPage->resetStatus();
-
-    if(tab == SavePoint) {
-        emit newSavePointClicked();
-        m_sidebar->setCurrentIndex(m_oldTab);
-        tab = m_oldTab;
-    }
-
-    switch (tab) {
-    case StartPageTab: {
-        m_central->switchTo(m_startPage);
-    }
-    break;
-    case EditTab: {
-        // see if there is a previously active editor to restore
-        if (m_metaEditor) {
-            m_central->switchTo(m_metaEditor);
-        } else if (m_part) {
-            m_central->switchTo(m_part->widget());
-            m_part->widget()->setFocus(Qt::OtherFocusReason);
-        } else {
-            QLabel *l = new QLabel(i18n("Select a file to edit."), this);
-            m_central->switchTo(l, CentralContainer::DeleteAfter);
-        }
-    }
-    break;
-    case PublishTab: {
-        if (!m_publisher)
-            m_publisher = new Publisher(this, m_model->package(), m_model->packageType());
-        m_publisher->setProjectName(m_currentProject);
-        m_central->switchTo(m_publisher);
-    }
-    break;
-    case DocsTab: {
-        if (!m_browser) {
-            m_browser = new DocBrowser(m_model, this);
-        }
-        m_central->switchTo(m_browser);
-        m_browser->focusSearchField();
-    }
-    break;
-    case PreviewTab: {
-        /*if (m_model->packageType() == "Plasma/PopupApplet" ||
-            m_model->packageType() == "Plasma/Applet") {
-            Previewer *tabPreviewer = new Previewer(this);
-            tabPreviewer->addApplet(m_model->package());
-            m_central->switchTo(tabPreviewer, CentralContainer::DeleteAfter);
-        } else {*/
-            QLabel *l = new QLabel(i18n("Preview is unavailable for this project type"));
-            m_central->switchTo(l, CentralContainer::DeleteAfter);
-        //}
-    }
-    }
-
-    m_oldTab = tab;
 }
 
 void MainWindow::saveEditorData()
@@ -510,8 +351,6 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
     // so we know who to activate when the edit tab is reselected
     delete m_metaEditor;
     m_metaEditor = 0;
-
-    m_sidebar->setCurrentIndex(EditTab);
     m_oldTab = EditTab;
 }
 
@@ -614,6 +453,8 @@ void MainWindow::loadMetaDataEditor(KUrl target) {
 
 void MainWindow::loadProject(const QString &name, const QString &type)
 {
+    m_currentProject = name;
+    m_currentProjectType = type;
     kDebug() << "Loading project named" << name << "...";
     delete m_model;
 
@@ -641,19 +482,19 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     stream << contents;
     metadataFile.close();
 
- //   if (actualType.isEmpty()) {
-//         QDir dir(packagePath);
-//         if (dir.exists("metadata.desktop")) {
-//             Plasma::PackageMetadata metadata(packagePath + "metadata.desktop");
-//             actualType = metadata.serviceType();
-//         }
-//     }
-// 
-//     //Workaround for Plasma::PackageStructure not recognizing Plasma/PopupApplet as a valid type
-//     //FIXME:
-//     if (actualType == "Plasma/PopupApplet") {
-//         actualType = "Plasma/Applet";
-//     }
+   if (actualType.isEmpty()) {
+        QDir dir(packagePath);
+        if (dir.exists("metadata.desktop")) {
+            Plasma::PackageMetadata metadata(packagePath + "metadata.desktop");
+            actualType = metadata.serviceType();
+        }
+    }
+
+    //Workaround for Plasma::PackageStructure not recognizing Plasma/PopupApplet as a valid type
+    //FIXME:
+    if (actualType == "Plasma/PopupApplet") {
+        actualType = "Plasma/Applet";
+    }
 
     // Add it to the recent files first.
     m_model = new PackageModel(this);
@@ -666,6 +507,14 @@ void MainWindow::loadProject(const QString &name, const QString &type)
         KMessageBox::error(this, i18n("Invalid plasmagick package."));
         return;
     }
+    
+    m_editPage = new EditPage();
+    m_editPage->setModel(m_model);
+    
+    connect(m_editPage, SIGNAL(loadEditor(KService::List, KUrl)), this, SLOT(loadRequiredEditor(const KService::List, KUrl)));
+    connect(m_editPage, SIGNAL(loadMetaDataEditor(KUrl)), this, SLOT(loadMetaDataEditor(KUrl)));
+
+    m_editPage->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
 
     QStringList recentFiles;
     KConfigGroup cg = KGlobal::config()->group("General");
@@ -688,7 +537,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
 
     // Load the needed widgets, switch to page 1 (edit)...
     if (!m_docksCreated) {
-        createDockWidgets();
+        //createDockWidgets();
     } else { // loading a new project!
         // prevent accidental loading of previous active project's file
         // plus temporary workaround for editor issue with handling different languages
@@ -711,7 +560,6 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     m_central->switchTo(l);
 
     m_oldTab = EditTab;
-    m_sidebar->setCurrentIndex(m_oldTab);
 
     QDir projectPath(packagePath);
 //     if(projectPath.cdUp()) {

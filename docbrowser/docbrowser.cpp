@@ -22,9 +22,10 @@
 #include "packagemodel.h"
 
 DocBrowser::DocBrowser(const PackageModel *package, QWidget *parent)
-    : QWidget(parent),
+    : QDockWidget(i18n("Documentation"), parent),
       m_package(package)
 {
+    QWidget *widget = new QWidget(this);
     m_view = new QWebView(this);
     connect(m_view, SIGNAL(loadFinished(bool)), this, SLOT(focusSearchField()));
 
@@ -61,7 +62,8 @@ DocBrowser::DocBrowser(const PackageModel *package, QWidget *parent)
     layout->addLayout(topbar);
     layout->addWidget(m_view);
     layout->addLayout(btmbar);
-    setLayout(layout);
+    widget->setLayout(layout);
+    setWidget(widget);
     showTutorial();
 }
 
