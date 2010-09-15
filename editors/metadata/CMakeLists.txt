@@ -25,4 +25,4 @@ kde4_add_ui_files (testmetadata_SRCS
 )
 
 kde4_add_executable( testmetadata TEST ${testmetadata_SRCS})
-target_link_libraries( testmetadata ${KDE4_KDEUI_LIBS} ${KDE4_PLASMA_LIBS} )
+target_link_libraries( testmetadata ${KDE4_KIO_LIBS} ${KDE4_PLASMA_LIBS} )
