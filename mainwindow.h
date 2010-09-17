@@ -132,7 +132,6 @@ private:
     Publisher *m_publisher;
     DocBrowser *m_browser;
 
-    QDockWidget *m_notesWidget;
 
     QDockWidget *m_editWidget;
     EditPage *m_editPage;
@@ -145,6 +144,7 @@ private:
 
     KParts::ReadOnlyPart *m_part;
     KParts::ReadOnlyPart *m_notesPart;
+    QDockWidget *m_notesWidget;
 };
 
 #endif // MAINWINDOW_H
