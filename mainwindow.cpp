@@ -95,6 +95,7 @@ MainWindow::MainWindow(QWidget *parent)
       m_notesWidget(0)
 {
     setXMLFile("plasmateui.rc");
+    setupActions();
     createMenus();
     m_startPage = new StartPage(this);
     connect(m_startPage, SIGNAL(projectSelected(QString, QString)),
@@ -103,7 +104,6 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(m_central);
     m_central->switchTo(m_startPage);
     setDockOptions(QMainWindow::AllowNestedDocks); // why not?
-    setupActions();
 }
 
 MainWindow::~MainWindow()
