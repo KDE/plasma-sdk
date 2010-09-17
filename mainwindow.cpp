@@ -91,7 +91,8 @@ MainWindow::MainWindow(QWidget *parent)
       m_oldTab(0), // we start from startPage
       m_docksCreated(false),
       m_part(0),
-      m_notesPart(0)
+      m_notesPart(0),
+      m_notesWidget(0)
 {
     setXMLFile("plasmateui.rc");
     createMenus();
