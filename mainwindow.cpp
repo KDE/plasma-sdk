@@ -158,6 +158,7 @@ void MainWindow::openDocumentation()
     if (!m_browser) {
             m_browser = new DocBrowser(m_model, 0);
     }
+    m_browser->show();
     m_browser->setObjectName("Documentation");
     m_browser->focusSearchField();
     addDockWidget(Qt::LeftDockWidgetArea, m_browser);
@@ -207,33 +208,40 @@ void MainWindow::selectTimeline()
                                                                             QVariant(Qt::TopDockWidgetArea)).toInt();
     location = (Qt::DockWidgetArea) configDock.readEntry("TimeLineLocation",
                                                          QVariant(Qt::BottomDockWidgetArea)).toInt();
-    m_timeLine = new TimeLine(this,
-                              m_model->package(),
-                              location);
-
-    m_timeLine->setObjectName("timeline");
-    connect(m_timeLine, SIGNAL(sourceDirectoryChanged()),
-            this, SLOT(editorDestructiveRefresh()));
-    connect(m_timeLine, SIGNAL(savePointClicked()),
-            this, SLOT(saveEditorData()));
-    addDockWidget(location, m_timeLine);
+                                                         
+    if(!m_timeLine) {
+        m_timeLine = new TimeLine(this, m_model->package(), location);
+        m_timeLine->setObjectName("timeline");
+        connect(m_timeLine, SIGNAL(sourceDirectoryChanged()),
+                this, SLOT(editorDestructiveRefresh()));
+        connect(m_timeLine, SIGNAL(savePointClicked()),
+                this, SLOT(saveEditorData()));
+        addDockWidget(location, m_timeLine);
+    }
+    m_timeLine->show();
 }
 
 void MainWindow::selectFileList()
 {
-    m_editWidget = new QDockWidget(i18n("Files"), this);
-    m_editWidget->setObjectName("edit tree");
-    m_editWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-    m_editWidget->setWidget(m_editPage);
-    addDockWidget(Qt::RightDockWidgetArea, m_editWidget);
+    if(!m_editWidget) {
+        m_editWidget = new QDockWidget(i18n("Files"), this);
+        m_editWidget->setObjectName("edit tree");
+        m_editWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        m_editWidget->setWidget(m_editPage);
+        addDockWidget(Qt::RightDockWidgetArea, m_editWidget);
+    }
+    m_editWidget->show();
 }
 
 void MainWindow::selectNotes()
 {
-    QDockWidget *m_projectNotesWidget = new QDockWidget(i18n("Project notes"), this);
-    m_projectNotesWidget->setObjectName("projectNotes");
-    loadNotesEditor(m_projectNotesWidget);
-    addDockWidget(Qt::LeftDockWidgetArea, m_projectNotesWidget);
+    if(!m_notesWidget) {
+        m_notesWidget = new QDockWidget(i18n("Project notes"), this);
+        m_notesWidget->setObjectName("projectNotes");
+        loadNotesEditor(m_notesWidget);
+        addDockWidget(Qt::LeftDockWidgetArea, m_notesWidget);
+    }
+    m_notesWidget->show();
 }
 
 void MainWindow::selectSavePoint()

@@ -132,7 +132,7 @@ private:
     Publisher *m_publisher;
     DocBrowser *m_browser;
 
-    QDockWidget *m_projectNotesWidget;
+    QDockWidget *m_notesWidget;
 
     QDockWidget *m_editWidget;
     EditPage *m_editPage;
