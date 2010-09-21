@@ -159,7 +159,7 @@ void MainWindow::openDocumentation()
     if (!m_browser) {
             m_browser = new DocBrowser(m_model, 0);
     }
-    m_browser->show();
+    m_browser->setVisible(!m_browser->isVisible());
     m_browser->setObjectName("Documentation");
     m_browser->focusSearchField();
     addDockWidget(Qt::LeftDockWidgetArea, m_browser);
@@ -219,7 +219,7 @@ void MainWindow::selectTimeline()
                 this, SLOT(saveEditorData()));
         addDockWidget(location, m_timeLine);
     }
-    m_timeLine->show();
+    m_timeLine->setVisible(!m_timeLine->isVisible());
 }
 
 void MainWindow::selectFileList()
@@ -231,7 +231,7 @@ void MainWindow::selectFileList()
         m_editWidget->setWidget(m_editPage);
         addDockWidget(Qt::RightDockWidgetArea, m_editWidget);
     }
-    m_editWidget->show();
+    m_editWidget->setVisible(!m_editWidget->isVisible());
 }
 
 void MainWindow::selectNotes()
@@ -242,7 +242,7 @@ void MainWindow::selectNotes()
         loadNotesEditor(m_notesWidget);
         addDockWidget(Qt::LeftDockWidgetArea, m_notesWidget);
     }
-    m_notesWidget->show();
+    m_notesWidget->setVisible(!m_notesWidget->isVisible());
 }
 
 void MainWindow::selectSavePoint()
