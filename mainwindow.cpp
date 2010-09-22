@@ -261,15 +261,13 @@ void MainWindow::selectPublish()
 
 void MainWindow::selectPreview()
 {
-   /*if (m_model->packageType() == "Plasma/PopupApplet" ||
-         m_model->packageType() == "Plasma/Applet") {
-             Previewer *tabPreviewer = new Previewer(this);
-             tabPreviewer->addApplet(m_model->package());
-             m_central->switchTo(tabPreviewer, CentralContainer::DeleteAfter);
-     } else {*/
-         QLabel *l = new QLabel(i18n("Preview is unavailable for this project type"));
-         m_central->switchTo(l, CentralContainer::DeleteAfter);
-   //}
+  QString packagePath = KStandardDirs::locateLocal("appdata", m_currentProject + '/');
+   if(!m_previewerWidget) {
+       m_previewerWidget = createPreviewerFor(m_currentProjectType);
+       addDockWidget(Qt::RightDockWidgetArea, m_previewerWidget);
+       m_previewerWidget->showPreview(packagePath);
+   }   
+   m_previewerWidget->setVisible(!m_previewerWidget->isVisible());
 }
 
 void MainWindow::saveEditorData()
