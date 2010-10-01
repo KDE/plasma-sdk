@@ -272,6 +272,13 @@ void FullView::appletRemoved(Plasma::Applet *applet)
     }
 }
 
+void FullView::showEvent(QShowEvent *)
+{
+    if (size().width() < 10 && size().height() < 10) {
+        resize(400, 500);
+    }
+}
+
 void FullView::resizeEvent(QResizeEvent *event)
 {
     QGraphicsView::resizeEvent(event);

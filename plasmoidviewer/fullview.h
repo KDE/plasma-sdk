@@ -51,6 +51,9 @@ public:
                    const QString& wallpaper, const QVariantList &args = QVariantList());
     void screenshotAll();
 
+protected:
+    void showEvent(QShowEvent *event);
+
 private Q_SLOTS:
     void appletTransformedItself();
     void sceneRectChanged(const QRectF &rect);
