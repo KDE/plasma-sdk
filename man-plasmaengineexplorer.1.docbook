@@ -6,7 +6,7 @@
 <refentry lang="&language;">
 <refentryinfo>
 <title>KDE User's Manual</title>
-<date>Jan 2, 2008</date>
+<date>2010-10-06</date>
 <productname>K Desktop Environment</productname>
 </refentryinfo>
 
@@ -24,13 +24,15 @@
 <cmdsynopsis>
 <command>plasmaengineexplorer</command>
 
+<group choice="opt"><option>--list</option></group>
 <group choice="opt"><option>--height</option> <replaceable> pixels</replaceable></group>
 <group choice="opt"><option>--width</option> <replaceable> pixels</replaceable></group>
 <group choice="opt"><option>-x</option> <replaceable> pixels</replaceable></group>
 <group choice="opt"><option>-y</option> <replaceable> pixels</replaceable></group>
-<group choice="opt"><option>--engine</option> <replaceable> name</replaceable></group>
-<group choice="opt"><option>--source</option> <replaceable> name</replaceable></group>
+<group choice="opt"><option>--engine</option> <replaceable> data engine</replaceable></group>
+<group choice="opt"><option>--source</option> <replaceable> data engine</replaceable></group>
 <group choice="opt"><option>--interval</option> <replaceable> ms</replaceable></group>
+<group choice="opt"><option>--app</option> <replaceable> application</replaceable></group>
 
 </cmdsynopsis>
 <cmdsynopsis>
@@ -58,7 +60,11 @@ data engines to be found.</para>
 
 <variablelist>
 <varlistentry>
-<term><option>--height <replaceable>pixels</replaceable></option></term>
+<term><option>--list <replaceable>pixels</replaceable></option></term>
+<listitem><para>Displays a list of known engines and their descriptions.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term><option>--height</option></term>
 <listitem><para>Sets the height of the window, in pixels.</para></listitem>
 </varlistentry>
 <varlistentry>
@@ -74,13 +80,13 @@ data engines to be found.</para>
 <listitem><para>Sets the y (vertical) co-ordinate of the top left corner of the window, in pixels.</para></listitem>
 </varlistentry>
 <varlistentry>
-<term><option>--engine <replaceable>name</replaceable></option></term>
+<term><option>--engine <replaceable>data engine</replaceable></option></term>
 <listitem><para>Start <command>plasmaengineexplorer</command> with the given data engine
-selected.  <parameter>name</parameter> is the internal name of the data engine given by
+selected.  <parameter>data engine</parameter> is the internal name of the data engine given by
 the X-KDE-PluginInfo-Name key of the desktop file.</para></listitem>
 </varlistentry>
 <varlistentry>
-<term><option>--source <replaceable>name</replaceable></option></term>
+<term><option>--source <replaceable>data engine</replaceable></option></term>
 <listitem><para>Only valid in conjunction with <option>--engine</option>.
 Requests a specific source from the data engine when
 <command>plasmaengineexplorer</command> is started.</para></listitem>
@@ -93,6 +99,11 @@ on demand (for some sources, this will be when new data is available).</para>
 
 <para>If <option>--source</option> is specified, this is the update interval
 that will be used when requesting that source.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term><option>--app <replaceable>application</replaceable></option></term>
+<listitem><para>Only show engines associated with the parent application; maps to the 
+X-KDE-ParentApp entry in the DataEngine's .desktop file.</para></listitem>
 </varlistentry>
 
 </variablelist>
