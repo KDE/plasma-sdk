@@ -114,10 +114,10 @@ X-KDE-ParentApp entry in the DataEngine's .desktop file.</para></listitem>
 <title>See Also</title>
 
 <para>More detailed user documentation is available from <ulink
-url="help:/plasma">help:/plasma</ulink>
+url="help:/plasma-desktop">help:/plasma-desktop</ulink>
 (either enter this <acronym>URL</acronym> into &konqueror;, or run
 <userinput><command>khelpcenter</command>
-<parameter>help:/plasma</parameter></userinput>).</para>
+<parameter>help:/plasma-desktop</parameter></userinput>).</para>
 
 </refsect1>
 
