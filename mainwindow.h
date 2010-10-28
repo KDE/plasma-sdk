@@ -67,11 +67,18 @@ public Q_SLOTS:
     // refreshes editor, killing all local changes
     void editorDestructiveRefresh();
     void selectSavePoint();
-    void selectTimeline();
     void selectPublish();
-    void selectPreview();
-    void selectNotes();
-    void selectFileList();
+
+    void toggleTimeline();
+    void togglePreview();
+    void toggleNotes();
+    void toggleFileList();
+    
+    void setTimelineVisible(const bool visible);
+    void setPreviewVisible(const bool visible);
+    void setNotesVisible(const bool visible);
+    void setFileListVisible(const bool visible);
+
     void openDocumentation();
 
 signals:

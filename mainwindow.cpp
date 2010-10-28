@@ -194,23 +194,28 @@ void MainWindow::setupActions()
 {
     addAction("New Save Point", "document-save",           SLOT(selectSavePoint()), "savepoint");
     addAction("Publish",        "krfb",                    SLOT(selectPublish()),   "publish");
-    addAction("Preview",        "user-desktop",            SLOT(selectPreview()),   "preview");
-    addAction("Notes",          "accessories-text-editor", SLOT(selectNotes()),     "notes");
-    addAction("File List",      "system-file-manager",     SLOT(selectFileList()),  "file_list");
-    addAction("Timeline", "process-working",  SLOT(selectTimeline()), "timeline");
+    addAction("Preview",        "user-desktop",            SLOT(togglePreview()),   "preview");
+    addAction("Notes",          "accessories-text-editor", SLOT(toggleNotes()),     "notes");
+    addAction("File List",      "system-file-manager",     SLOT(toggleFileList()),  "file_list");
+    addAction("Timeline", "process-working",  SLOT(toggleTimeline()), "timeline");
     addAction("Documentation", "help-contents", SLOT(openDocumentation()), "documentation");
 }
 
-void MainWindow::selectTimeline()
+void MainWindow::toggleTimeline()
+{
+    setFileListVisible(!m_timeLine || !m_timeLine->isVisible());
+}
+
+void MainWindow::setTimelineVisible(const bool visible)
 {
     KConfig c;
     KConfigGroup configDock = c.group("DocksPosition");
     Qt::DockWidgetArea location = (Qt::DockWidgetArea) configDock.readEntry("WorkflowLocation",
-                                                                            QVariant(Qt::TopDockWidgetArea)).toInt();
+                          QVariant(Qt::TopDockWidgetArea)).toInt();
     location = (Qt::DockWidgetArea) configDock.readEntry("TimeLineLocation",
                                                          QVariant(Qt::BottomDockWidgetArea)).toInt();
                                                          
-    if(!m_timeLine) {
+    if (visible && !m_timeLine) {
         m_timeLine = new TimeLine(this, m_model->package(), location);
         m_timeLine->setObjectName("timeline");
         connect(m_timeLine, SIGNAL(sourceDirectoryChanged()),
@@ -219,30 +224,46 @@ void MainWindow::selectTimeline()
                 this, SLOT(saveEditorData()));
         addDockWidget(location, m_timeLine);
     }
-    m_timeLine->setVisible(!m_timeLine->isVisible());
+    if (m_timeLine) {
+        m_timeLine->setVisible(!m_timeLine->isVisible());
+    }
 }
 
-void MainWindow::selectFileList()
+void MainWindow::toggleFileList()
 {
-    if(!m_editWidget) {
+    setFileListVisible(!m_editWidget || !m_editWidget->isVisible());
+}
+
+void MainWindow::setFileListVisible(const bool visible)
+{
+    if (visible && !m_editWidget) {
         m_editWidget = new QDockWidget(i18n("Files"), this);
         m_editWidget->setObjectName("edit tree");
         m_editWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         m_editWidget->setWidget(m_editPage);
-        addDockWidget(Qt::RightDockWidgetArea, m_editWidget);
+        addDockWidget(Qt::LeftDockWidgetArea, m_editWidget);
     }
-    m_editWidget->setVisible(!m_editWidget->isVisible());
+    if (m_editWidget) {
+        m_editWidget->setVisible(visible);
+    }
 }
 
-void MainWindow::selectNotes()
+void MainWindow::toggleNotes()
 {
-    if(!m_notesWidget) {
+    setFileListVisible(!m_notesWidget || !m_notesWidget->isVisible());
+}
+
+void MainWindow::setNotesVisible(const bool visible)
+{
+    if (visible && !m_notesWidget) {
         m_notesWidget = new QDockWidget(i18n("Project notes"), this);
         m_notesWidget->setObjectName("projectNotes");
         loadNotesEditor(m_notesWidget);
         addDockWidget(Qt::LeftDockWidgetArea, m_notesWidget);
     }
-    m_notesWidget->setVisible(!m_notesWidget->isVisible());
+    if (m_notesWidget) {
+        m_notesWidget->setVisible(visible);
+    }
 }
 
 void MainWindow::selectSavePoint()
@@ -259,15 +280,22 @@ void MainWindow::selectPublish()
   m_publisher->exec();
 }
 
-void MainWindow::selectPreview()
+void MainWindow::togglePreview()
 {
-  QString packagePath = KStandardDirs::locateLocal("appdata", m_currentProject + '/');
-   if(!m_previewerWidget) {
+    setFileListVisible(!m_previewerWidget || !m_previewerWidget->isVisible());
+}
+
+void MainWindow::setPreviewVisible(const bool visible)
+{
+   if (visible && !m_previewerWidget) {
+       QString packagePath = KStandardDirs::locateLocal("appdata", m_currentProject + '/');
        m_previewerWidget = createPreviewerFor(m_currentProjectType);
        addDockWidget(Qt::RightDockWidgetArea, m_previewerWidget);
        m_previewerWidget->showPreview(packagePath);
-   }   
-   m_previewerWidget->setVisible(!m_previewerWidget->isVisible());
+   }
+   if (m_previewerWidget) {
+       m_previewerWidget->setVisible(visible);
+   }
 }
 
 void MainWindow::saveEditorData()
@@ -570,7 +598,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     m_oldTab = EditTab;
 
     QDir projectPath(packagePath);
-//     if(projectPath.cdUp()) {
+//     if (projectPath.cdUp()) {
 //         m_timeLine->setWorkingDir(KUrl(projectPath.absolutePath()));
 //         m_timeLine->loadTimeLine(KUrl(projectPath.absolutePath()));
 //     }
@@ -584,6 +612,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
         splitDockWidget(m_editWidget, m_previewerWidget, Qt::Vertical);
         m_previewerWidget->showPreview(packagePath);
     }
+    setFileListVisible(true);
     restoreState(state);
 
     // Now, setup some useful properties such as the project name in the title bar
