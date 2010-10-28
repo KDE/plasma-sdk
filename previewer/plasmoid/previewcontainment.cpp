@@ -80,19 +80,19 @@ void PreviewContainment::setupHeader()
     wallpaper = new Plasma::IconWidget(this);
 
     // add actions
-    KAction *action0 = new KAction(KIcon("list-add"), "", this);
+    KAction *action0 = new KAction(KIcon("user-desktop"), "", this);
     connect(action0, SIGNAL(triggered()), this, SLOT(changeWallpaper()));
     wallpaper->setAction(action0);
 
-    KAction *action1 = new KAction(KIcon("list-add"), "", this);
+    KAction *action1 = new KAction(KIcon("distribute-horizontal-x"), "", this);
     connect(action1, SIGNAL(triggered()), this, SLOT(changeFormFactor()));
     form->setAction(action1);
 
-    KAction *action2 = new KAction(KIcon("list-add"), "", this);
+    KAction *action2 = new KAction(KIcon("align-vertical-bottom"), "", this);
     connect(action2, SIGNAL(triggered()), this, SLOT(changeLocation()));
     location->setAction(action2);
 
-    KAction *action3 = new KAction(KIcon("user-desktop"), "", this);
+    KAction *action3 = new KAction(KIcon("view-refresh"), "", this);
     connect(action3, SIGNAL(triggered()), this, SLOT(refreshAndEmit()));
     refresh->setAction(action3);
 
@@ -142,11 +142,11 @@ void PreviewContainment::changeFormFactor()
 
     QAction *planar = addMenuItem(KIcon("user-desktop"),
                                   i18n("Planar"));
-    QAction *mediacenter = addMenuItem(KIcon("user-desktop"),
+    QAction *mediacenter = addMenuItem(KIcon("video-television"),
                                        i18n("Media Center"));
-    QAction *horizontal = addMenuItem(KIcon("user-desktop"),
+    QAction *horizontal = addMenuItem(KIcon("distribute-horizontal-x"),
                                       i18n("Horizontal"));
-    QAction *vertical = addMenuItem(KIcon("user-desktop"),
+    QAction *vertical = addMenuItem(KIcon("distribute-vertical-y"),
                                     i18n("Vertical"));
     QAction *cancel = addMenuItem(KIcon("dialog-cancel"),
                                   i18n("Cancel"));
@@ -214,19 +214,19 @@ void PreviewContainment::changeLocation()
 {
     initMenu(i18n("Change Location"));
 
-    QAction *floating = addMenuItem(KIcon("user-trash"),
+    QAction *floating = addMenuItem(KIcon("tab-detach"),
                                     i18n("Floating"));
-    QAction *desktop = addMenuItem(KIcon("user-trash"),
+    QAction *desktop = addMenuItem(KIcon("user-desktop"),
                                    i18n("Desktop"));
-    QAction *fullscreen = addMenuItem(KIcon("user-trash"),
+    QAction *fullscreen = addMenuItem(KIcon("view-fullscreen"),
                                       i18n("FullScreen"));
-    QAction *topEdge = addMenuItem(KIcon("user-trash"),
+    QAction *topEdge = addMenuItem(KIcon("align-vertical-top"),
                                    i18n("Top Edge"));
-    QAction *bottomEdge = addMenuItem(KIcon("user-trash"),
+    QAction *bottomEdge = addMenuItem(KIcon("align-vertical-bottom"),
                                       i18n("Bottom Edge"));
-    QAction *leftEdge = addMenuItem(KIcon("user-trash"),
+    QAction *leftEdge = addMenuItem(KIcon("align-horizontal-left"),
                                     i18n("Left Edge"));
-    QAction *rightEdge = addMenuItem(KIcon("user-trash"),
+    QAction *rightEdge = addMenuItem(KIcon("align-horizontal-right"),
                                      i18n("Right Edge"));
     QAction *cancel = addMenuItem(KIcon("dialog-cancel"),
                                   i18n("Cancel"));
