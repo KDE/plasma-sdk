@@ -92,36 +92,13 @@ void PlasmoidView::resizeEvent(QResizeEvent *event)
 
     // if we do not have any applet being shown
     // there is no need to do all this stuff
-    if (!m_applet) {
+    if (!m_applet || m_applet->aspectRatioMode() != Plasma::KeepAspectRatio) {
         m_containment->resize(size());
         return;
     }
-
-    qreal newWidth = 0;
-    qreal newHeight = 0;
-
-    if (m_applet->aspectRatioMode() == Plasma::KeepAspectRatio) {
-        // The applet always keeps its aspect ratio, so let's respect it.
-        qreal ratio = m_applet->size().width() / m_applet->size().height();
-        qreal widthForCurrentHeight = (qreal)size().height() * ratio;
-        if (widthForCurrentHeight > size().width()) {
-            newHeight = size().width() / ratio;
-            newWidth = newHeight * ratio;
-        } else {
-            newWidth = widthForCurrentHeight;
-            newHeight = newWidth / ratio;
-        }
-    } else {
-        newWidth = size().width();
-        newHeight = size().height();
-    }
-    QSizeF newSize(newWidth, newHeight);
-
-    // check if the rect is valid, or else it seems to try to allocate
-    // up to infinity memory in exponential increments
-    if (newSize.isValid()) {
-        m_containment->resize(newSize);
-        resize(newWidth, newHeight);
-    }
+    QSize newSize = m_containment->size().toSize();
+    newSize.scale(size(), Qt::KeepAspectRatio);
+    m_containment->resize(newSize);
+    centerOn(m_containment);
 }
 
