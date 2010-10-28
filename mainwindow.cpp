@@ -482,7 +482,9 @@ void MainWindow::loadMetaDataEditor(KUrl target) {
     m_metaEditor->readFile();
     m_central->switchTo(m_metaEditor);
 
-    m_sidebar->setCurrentIndex(EditTab);
+    if (m_sidebar) {
+        m_sidebar->setCurrentIndex(EditTab);
+    }
     m_oldTab = EditTab;
 }
 
