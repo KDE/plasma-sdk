@@ -151,7 +151,7 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         break;
         case Qt::DecorationRole: {
             if (index.row() == 0)
-                return KIcon("file-new");
+                return KIcon("document-new");
         }
         break;
         }
@@ -231,8 +231,16 @@ int PackageModel::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid()) {
         if (parent.row() < m_topEntries.count()) {
-            const char *key = m_topEntries.at(parent.row());
-            //kDebug() << "looking for" << key << m_files[key].count();
+            //const char *key = m_topEntries.at(parent.row());
+            const char *key = static_cast<const char *>(parent.internalPointer());
+            if (!key) {
+                key = m_topEntries.at(parent.row());
+            //It is a leaf
+            } else if (m_namedFiles.contains(key)) {
+                return 0;
+            }
+            //kDebug() << "looking for" << key << m_files[key].count() << m_namedFiles[key]<<key<<parent.parent();
+            
             return m_files.contains(key) ? m_files[key].count() + m_namedFiles[key].count() + 1 : 0;
         } else {
             return 0;
