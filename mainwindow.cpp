@@ -203,7 +203,7 @@ void MainWindow::setupActions()
 
 void MainWindow::toggleTimeline()
 {
-    setFileListVisible(!m_timeLine || !m_timeLine->isVisible());
+    setTimelineVisible(!m_timeLine || !m_timeLine->isVisible());
 }
 
 void MainWindow::setTimelineVisible(const bool visible)
@@ -250,7 +250,7 @@ void MainWindow::setFileListVisible(const bool visible)
 
 void MainWindow::toggleNotes()
 {
-    setFileListVisible(!m_notesWidget || !m_notesWidget->isVisible());
+    setNotesVisible(!m_notesWidget || !m_notesWidget->isVisible());
 }
 
 void MainWindow::setNotesVisible(const bool visible)
@@ -282,7 +282,7 @@ void MainWindow::selectPublish()
 
 void MainWindow::togglePreview()
 {
-    setFileListVisible(!m_previewerWidget || !m_previewerWidget->isVisible());
+    setPreviewVisible(!m_previewerWidget || !m_previewerWidget->isVisible());
 }
 
 void MainWindow::setPreviewVisible(const bool visible)
