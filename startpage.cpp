@@ -81,6 +81,7 @@ void StartPage::setupWidgets()
     ui->radioButtonJs->setChecked(cg.readEntry("radioButtonJsChecked", true));
     ui->radioButtonPy->setChecked(cg.readEntry("radioButtonPyChecked", false));
     ui->radioButtonRb->setChecked(cg.readEntry("radioButtonRbChecked", false));
+    ui->radioButtonDe->setChecked(cg.readEntry("radioButtonDeChecked", false));
 
     // Enforce the security restriction from package.cpp in the input field
     connect(ui->projectName, SIGNAL(textEdited(const QString&)),
@@ -156,22 +157,26 @@ void StartPage::validateProjectType(const QModelIndex &sender)
         // also check this radio to prevent any disabled radios from
         // being checked due to previous setting!
         ui->radioButtonRb->setEnabled(true);
+        ui->radioButtonDe->setEnabled(true);
         ui->newProjectButton->setEnabled(!ui->projectName->text().isEmpty()); // in case previously falsed
     } else if (sender.row() == 2) {
         ui->radioButtonJs->setEnabled(true);
         ui->radioButtonJs->setChecked(true);
         ui->radioButtonPy->setEnabled(true);
         ui->radioButtonRb->setEnabled(false);
+        ui->radioButtonDe->setEnabled(true);
         ui->newProjectButton->setEnabled(!ui->projectName->text().isEmpty()); // in case previously falsed
 
     } else if (sender.row() == 3) {
         ui->radioButtonJs->setEnabled(false);
         ui->radioButtonPy->setEnabled(false);
         ui->radioButtonRb->setEnabled(false);
+        ui->radioButtonDe->setEnabled(false);
         ui->newProjectButton->setEnabled(false); // disable the create button too.
     } else /* if (sender.row() == 0) */ {
         ui->radioButtonJs->setEnabled(true);
         ui->radioButtonJs->setChecked(true);
+        ui->radioButtonDe->setEnabled(true);
         ui->radioButtonPy->setEnabled(true);
         ui->radioButtonRb->setEnabled(true);
         ui->newProjectButton->setEnabled(!ui->projectName->text().isEmpty()); // in case previously falsed
@@ -204,6 +209,11 @@ bool StartPage::selectedRbRadioButton()
 bool StartPage::selectedPyRadioButton()
 {
     return ui->radioButtonPy->isChecked();
+}
+
+bool StartPage::selectedDeRadioButton()
+{
+    return ui->radioButtonDe->isChecked();
 }
 
 void StartPage::resetStatus()
@@ -320,6 +330,11 @@ void StartPage::createNewProject()
         projectFolderName = generateProjectFolderName(projectNameSnakeCase);
         projectFileExtension = ".rb";
         mainScriptName = QString("main_") + projectNameSnakeCase + projectFileExtension;
+    } else if (ui->radioButtonDe->isChecked()) {
+        metadata.setImplementationApi("declarativeappletscript");
+        projectFolderName = generateProjectFolderName(projectNameLowerCase);
+        projectFileExtension = ".qml";
+        mainScriptName = projectNameLowerCase + projectFileExtension;
     } else {
         metadata.setImplementationApi("javascript");
         projectFolderName = generateProjectFolderName(projectNameLowerCase);

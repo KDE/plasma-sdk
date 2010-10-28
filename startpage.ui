@@ -348,6 +348,16 @@ p, li { white-space: pre-wrap; }
                   </widget>
                  </item>
                  <item>
+                  <widget class="QRadioButton" name="radioButtonDe">
+                   <property name="text">
+                    <string>Declarative</string>
+                   </property>
+                   <property name="checked">
+                    <bool>false</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <widget class="QRadioButton" name="radioButtonPy">
                    <property name="text">
                     <string>Python</string>

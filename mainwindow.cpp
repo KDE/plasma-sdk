@@ -474,6 +474,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     preferences.writeEntry("radioButtonJsChecked", m_startPage->selectedJsRadioButton());
     preferences.writeEntry("radioButtonPyChecked", m_startPage->selectedPyRadioButton());
     preferences.writeEntry("radioButtonRbChecked", m_startPage->selectedRbRadioButton());
+    preferences.writeEntry("radioButtonDeChecked", m_startPage->selectedDeRadioButton());
     preferences.sync();
 
     QString packagePath = KStandardDirs::locateLocal("appdata", name + '/');

@@ -193,6 +193,8 @@ void MetaDataEditor::serviceTypeChanged()
             apiNames.append("Webkit");
         else if (api == QString())
             apiNames.append("C++");
+        else if (api == QString("declarativeappletscript"))
+            apiNames.append("declarativeappletscript");
         else {
             kWarning() << "Unknown API " << api;
             apiNames.append(api);

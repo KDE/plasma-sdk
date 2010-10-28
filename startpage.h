@@ -47,6 +47,7 @@ public:
 
     bool selectedJsRadioButton();
     bool selectedRbRadioButton();
+    bool selectedDeRadioButton();
     bool selectedPyRadioButton();
 
     void resetStatus();
