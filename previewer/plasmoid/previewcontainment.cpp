@@ -48,7 +48,9 @@ PreviewContainment::PreviewContainment(QObject *parent, const QVariantList &args
     m_controls->setLayout(m_header);
     m_controls->setZValue(99);
     m_controls->resize(100, 70);
+    m_controls->setMaximumHeight(70);
     m_controls->hide();
+    m_layout->addItem(m_controls);
     setupHeader();
 
     m_tmp = new QGraphicsWidget();
