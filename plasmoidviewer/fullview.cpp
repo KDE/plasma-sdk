@@ -38,8 +38,9 @@
 
 #include <Plasma/AccessManager>
 #include <Plasma/AccessAppletJob>
-#include <Plasma/Package>
 #include <Plasma/Containment>
+#include <Plasma/ContainmentActions>
+#include <Plasma/Package>
 #include <Plasma/Wallpaper>
 
 using namespace Plasma;
@@ -80,6 +81,14 @@ FullView::FullView(const QString &ff, const QString &loc, QWidget *parent)
     } else if (loc == "left") {
         m_location = Plasma::LeftEdge;
     }
+
+    Plasma::ContainmentActionsPluginsConfig containmentActionPlugins;
+    containmentActionPlugins.addPlugin(Qt::NoModifier, Qt::RightButton, "contextmenu");
+
+    m_corona.setContainmentActionsDefaults(Plasma::Containment::DesktopContainment, containmentActionPlugins);
+    m_corona.setContainmentActionsDefaults(Plasma::Containment::CustomContainment, containmentActionPlugins);
+    m_corona.setContainmentActionsDefaults(Plasma::Containment::PanelContainment, containmentActionPlugins);
+    m_corona.setContainmentActionsDefaults(Plasma::Containment::CustomPanelContainment, containmentActionPlugins);
 
     setScene(&m_corona);
     connect(&m_corona, SIGNAL(sceneRectChanged(QRectF)), this, SLOT(sceneRectChanged(QRectF)));
