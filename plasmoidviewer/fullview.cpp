@@ -372,7 +372,9 @@ KConfigGroup FullView::storageGroup(Plasma::Applet *applet) const
 void FullView::storeCurrentApplet()
 {
     if (m_applet) {
-        KConfigGroup cg = m_applet->config();
+        KConfigGroup cg;
+        m_applet->save(cg);
+        cg = m_applet->config();
         KConfigGroup storage = storageGroup(m_applet);
         storage.deleteGroup();
         cg.copyTo(&storage);
