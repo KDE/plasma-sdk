@@ -209,6 +209,17 @@ void WallpaperWidget::wheelEvent(QWheelEvent *event)
 void WallpaperWidget::contextMenuEvent(QContextMenuEvent *event)
 {
     QMenu m;
+    if (m_wallpaper) {
+        QList<QAction *> actions = m_wallpaper->contextualActions();
+        foreach (QAction *action, actions) {
+            m.addAction(action);
+        }
+
+        if (actions.count() > 1) {
+            m.addSeparator();
+        }
+    }
+
     m.addAction(KStandardAction::preferences(this, SLOT(configure()), &m));
     m.exec(event->globalPos());
 }
