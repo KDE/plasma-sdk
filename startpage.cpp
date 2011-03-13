@@ -78,10 +78,14 @@ void StartPage::setupWidgets()
     ui->authorTextField->setText(userName);
     ui->emailTextField->setText(userEmail);
 
-    ui->radioButtonJs->setChecked(cg.readEntry("radioButtonJsChecked", true));
+    ui->radioButtonJs->setChecked(cg.readEntry("radioButtonJsChecked", false));
     ui->radioButtonPy->setChecked(cg.readEntry("radioButtonPyChecked", false));
     ui->radioButtonRb->setChecked(cg.readEntry("radioButtonRbChecked", false));
-    ui->radioButtonDe->setChecked(cg.readEntry("radioButtonDeChecked", false));
+    ui->radioButtonDe->setChecked(cg.readEntry("radioButtonDeChecked", true));
+
+    ui->cancelNewProjectButton->setIcon(KIcon("dialog-cancel"));
+    ui->newProjectButton->setIcon(KIcon("dialog-ok"));
+    ui->titleWidget->setPixmap(KIcon("plasmagik").pixmap(48, 48), KTitleWidget::ImageRight);
 
     // Enforce the security restriction from package.cpp in the input field
     connect(ui->projectName, SIGNAL(textEdited(const QString&)),
