@@ -47,17 +47,18 @@ With Plasmate, you can easily create your own Plasma Add-Ons, for example Plasma
 &lt;/p&gt;
 &lt;h3&gt;Get started with Plasmate...&lt;/h3&gt;
 &lt;p&gt;
+&lt;br /&gt;
 Plasmate provides all the tools you need to learn creating new Plasma Widgets.
 &lt;ul&gt;
-	&lt;li&gt;Follow a &lt;b&gt;Tutorial&lt;/b&gt; to find out how to turn your ideas into reality.
+	&lt;li&gt;Follow a &lt;b&gt;Tutorial&lt;/b&gt; to gather inspiration and find out how to turn your ideas into reality.
 	&lt;/li&gt;
 	&lt;li&gt;Browse the online &lt;b&gt;Documentation&lt;/b&gt; for information about the scripting API.&lt;/li&gt;
 	&lt;li&gt;Work on your project in the &lt;b&gt;Editor&lt;/b&gt; edit scripts and add resources.
 	&lt;/li&gt;
 	&lt;li&gt;&lt;b&gt;Preview&lt;/b&gt; your widget as you work on it.&lt;/li&gt;
-	&lt;li&gt;&lt;b&gt;Export and Install&lt;/b&gt; your creation as Plasma package.
+	&lt;li&gt;&lt;b&gt;Export and Install&lt;/b&gt; the result as a Plasma package.
 	&lt;/li&gt;
-	&lt;li&gt;&lt;b&gt;Publish&lt;/b&gt; your creation via Get How New Stuff
+	&lt;li&gt;&lt;b&gt;Publish&lt;/b&gt; your creation via &lt;i&gt;Get How New Stuff&lt;/i&gt;.
 	&lt;/li&gt;
 &lt;/ul&gt;
 Have fun creating!
