@@ -1,7 +1,7 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
 Terminal=false
-Name=PlasMate
+Name=Plasmate
 Name[en_GB]=PlasMate
 Name[et]=PlasMate
 Name[km]=PlasMate
@@ -12,7 +12,7 @@ Name[pt_BR]=PlasMate
 Name[sv]=Plasmate
 Name[uk]=PlasMate
 Name[x-test]=xxPlasMatexx
-GenericName=PlasMate - The Plasma Add Ons Creator
+GenericName=PlasMate - The Plasma Add-Ons Creator
 GenericName[en_GB]=PlasMate - The Plasma Add Ons Creator
 GenericName[et]=PlasMate - Plasma lisandite looja
 GenericName[km]=PlasMate - កម្មវិធី​បង្កើត​កម្មវិធី​បន្ថែម​ប្លាស្មា
@@ -21,9 +21,9 @@ GenericName[pt_BR]=PlasMate - O Criador de Addons para o Plasma
 GenericName[sv]=Plasmate - Skapa tillägg till Plasma
 GenericName[th]=PlasMate - ตัวสร้างส่วนขยายของพลาสมา
 GenericName[uk]=PlasMate — програма для створення додатків Плазми
-GenericName[x-test]=xxPlasMate - The Plasma Add Ons Creatorxx
+GenericName[x-test]=xxPlasMate - The Plasma AddOns Creatorxx
 Exec=plasmate
-Icon=plasma
+Icon=plasmagik
 Type=Application
 InitialPreference=7
 Categories=KDE;Development;

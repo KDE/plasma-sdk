@@ -120,7 +120,7 @@ void StartPage::setupWidgets()
     connect(projectManager, SIGNAL(requestRefresh()),
             this, SLOT(refreshRecentProjectsList()));
 
-    new QListWidgetItem(KIcon("application-x-plasma"), i18n("Plasmoid"), ui->contentTypes);
+    new QListWidgetItem(KIcon("application-x-plasma"), i18n("Plasma Widget"), ui->contentTypes);
     new QListWidgetItem(KIcon("kexi"), i18n("Data Engine"), ui->contentTypes);
     new QListWidgetItem(KIcon("system-run"), i18n("Runner"), ui->contentTypes);
     new QListWidgetItem(KIcon("inkscape"), i18n("Theme"), ui->contentTypes);
@@ -154,6 +154,7 @@ void StartPage::processProjectName(const QString& name)
 void StartPage::validateProjectType(const QModelIndex &sender)
 {
     if (sender.row() == 1) {
+        ui->languageLabel->setEnabled(true);
         ui->radioButtonJs->setEnabled(true);
         // gotta explicitly setEnabled to true in case it
         // was falsed before!
@@ -164,6 +165,7 @@ void StartPage::validateProjectType(const QModelIndex &sender)
         ui->radioButtonDe->setEnabled(true);
         ui->newProjectButton->setEnabled(!ui->projectName->text().isEmpty()); // in case previously falsed
     } else if (sender.row() == 2) {
+        ui->languageLabel->setEnabled(true);
         ui->radioButtonJs->setEnabled(true);
         ui->radioButtonJs->setChecked(true);
         ui->radioButtonPy->setEnabled(true);
@@ -172,6 +174,7 @@ void StartPage::validateProjectType(const QModelIndex &sender)
         ui->newProjectButton->setEnabled(!ui->projectName->text().isEmpty()); // in case previously falsed
 
     } else if (sender.row() == 3) {
+        ui->languageLabel->setEnabled(false);
         ui->radioButtonJs->setEnabled(false);
         ui->radioButtonPy->setEnabled(false);
         ui->radioButtonRb->setEnabled(false);

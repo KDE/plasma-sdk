@@ -17,11 +17,12 @@
 int main(int argc, char *argv[])
 {
     KAboutData aboutData("plasmate", 0, ki18n("Plasmate"),
-                         "0.1alpha2", ki18n("A Plasma Add-ons Creator"),
+                         "0.1alpha2", ki18n("A Plasma Add-Ons Creator"),
                          KAboutData::License_GPL,
-                         ki18n("(c) 2009-2010 Plasma Development Team"),
+                         ki18n("Copyright 2009-2011 Plasma Development Team"),
                          KLocalizedString(), "", "plasma-devel@kde.org");
 
+    aboutData.addAuthor(ki18n("Sebastian Kügler"), ki18n("Author"), "sebas@kde.org");
     aboutData.addAuthor(ki18n("Shantanu Tushar Jha"), ki18n("Author"), "jhahoneyk@gmail.com");
     aboutData.addAuthor(ki18n("Diego Casella"), ki18n("Author"), "polentino911@gmail.com");
     aboutData.addAuthor(ki18n("Yuen Hoe Lim"), ki18n("Author"), "yuenhoe@hotmail.com");
@@ -31,7 +32,7 @@ int main(int argc, char *argv[])
     aboutData.addAuthor(ki18n("Aaron Seigo"), ki18n("Author"), "aseigo@kde.org");
     aboutData.addAuthor(ki18n("Riccardo Iaconelli"), ki18n("Author"), "riccardo@kde.org");
 
-    aboutData.setProgramIconName("plasma");
+    aboutData.setProgramIconName("plasmagik");
 
     KCmdLineArgs::init(argc, argv, &aboutData);
 
