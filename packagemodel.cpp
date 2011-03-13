@@ -301,8 +301,11 @@ int PackageModel::loadPackage()
         if (!dir.exists(path)) {
             QFileInfo info(dir.path() + '/' + path);
             dir.mkpath(dir.relativeFilePath(info.absolutePath()));
-            QFile f(dir.path() + '/' + path);
-            f.open(QIODevice::WriteOnly);
+            // Create all files, but 'code/main', as this is replaced by a template
+            if (path != "code/main") {
+                QFile f(dir.path() + '/' + path);
+                f.open(QIODevice::WriteOnly);
+            }
         }
 
         indexedFiles.insert(path, key);
