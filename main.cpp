@@ -17,7 +17,7 @@
 int main(int argc, char *argv[])
 {
     KAboutData aboutData("plasmate", 0, ki18n("Plasmate"),
-                         "0.1alpha2", ki18n("A Plasma Add-Ons Creator"),
+                         "0.1alpha3", ki18n("Plasma Add-Ons Creator"),
                          KAboutData::License_GPL,
                          ki18n("Copyright 2009-2011 Plasma Development Team"),
                          KLocalizedString(), "", "plasma-devel@kde.org");
