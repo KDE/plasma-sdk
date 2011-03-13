@@ -18,6 +18,7 @@ class EditPage : public QTreeView
 
 public:
     explicit EditPage(QWidget *parent = 0);
+    void loadFile(const KUrl &path, const QString &mimetype = QString());
 
 private:
     KMenu *m_contextMenu;

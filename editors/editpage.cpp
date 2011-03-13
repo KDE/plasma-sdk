@@ -6,6 +6,9 @@
 #include <KIcon>
 #include <KMessageBox>
 #include <KInputDialog>
+#include <kio/jobclasses.h>
+#include <KIO/MimetypeJob>
+#include <KIO/Job>
 #include <kmimetypetrader.h>
 #include "packagemodel.h"
 
@@ -88,3 +91,38 @@ void EditPage::findEditor(const QModelIndex &index)
     }
 }
 
+void EditPage::loadFile(const KUrl &path, const QString &mimetype)
+{
+    kDebug() << "Loading file: " << path << mimetype;
+    // mimetype?
+    QString _mimetype;
+
+    if (mimetype.isEmpty()) {
+        KIO::JobFlags flags = KIO::HideProgressInfo;
+        KIO::MimetypeJob *mjob = KIO::mimetype(path, flags);
+        mjob->exec();
+
+        if (mjob->error()) {
+            kWarning() << "Error retrieving mimetype from:" << path << ": " << mjob->errorText();
+            return;
+        }
+        _mimetype = mjob->mimetype();
+        kDebug() << "loaded mimetype:" << _mimetype;
+    } else {
+        _mimetype = mimetype;
+    }
+
+    KService::List offers = KMimeTypeTrader::self()->query(_mimetype, "KParts/ReadWritePart");
+    kDebug() << _mimetype;
+    if (offers.isEmpty()) {
+        offers = KMimeTypeTrader::self()->query(_mimetype, "KParts/ReadOnlyPart");
+    }
+    if (!offers.isEmpty()) {
+        //create the part using offers.at(0)
+        //kDebug() << offers.at(0);
+        //offers.at(0)->createInstance(parentWidget);
+        emit loadEditor(offers, path);
+        return;
+    }
+    kDebug() << "loading" << path;
+}

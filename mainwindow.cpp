@@ -545,10 +545,9 @@ void MainWindow::loadProject(const QString &name, const QString &type)
         KMessageBox::error(this, i18n("Invalid plasmagick package."));
         return;
     }
-    
     m_editPage = new EditPage();
     m_editPage->setModel(m_model);
-    
+
     connect(m_editPage, SIGNAL(loadEditor(KService::List, KUrl)), this, SLOT(loadRequiredEditor(const KService::List, KUrl)));
     connect(m_editPage, SIGNAL(loadMetaDataEditor(KUrl)), this, SLOT(loadMetaDataEditor(KUrl)));
 
@@ -625,6 +624,17 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     QDir::setCurrent(m_model->package() + m_model->contentsPrefix());
 
     m_currentProject = metadata.name();
+
+    // load mainscript
+    kDebug() << "loading metadata:" << packagePath + "metadata.desktop";
+    KConfig *metafile = new KConfig(packagePath + "metadata.desktop");
+    KConfigGroup meta = metafile->group("Desktop Entry");
+    QString mainScript = meta.readEntry("X-Plasma-MainScript", QString());
+    kDebug() << "read mainScript" << mainScript;
+    if (!mainScript.isEmpty()) {
+        KUrl url = KUrl(packagePath + "contents/" + mainScript);
+        m_editPage->loadFile(url);
+    }
 }
 
 QStringList MainWindow::recentProjects()
