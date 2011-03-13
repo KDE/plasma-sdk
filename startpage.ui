@@ -72,7 +72,7 @@ With Plasmate, you can easily create your own Plasma Add-Ons, for example Plasma
         </size>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="stackedWidgetPageOne">
         <layout class="QVBoxLayout" name="verticalLayout">
