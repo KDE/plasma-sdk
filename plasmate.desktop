@@ -2,26 +2,7 @@
 [Desktop Entry]
 Terminal=false
 Name=Plasmate
-Name[en_GB]=PlasMate
-Name[et]=PlasMate
-Name[km]=PlasMate
-Name[nds]=PlasMate
-Name[nl]=PlasMate
-Name[pt]=PlasMate
-Name[pt_BR]=PlasMate
-Name[sv]=Plasmate
-Name[uk]=PlasMate
-Name[x-test]=xxPlasMatexx
 GenericName=PlasMate - The Plasma Add-Ons Creator
-GenericName[en_GB]=PlasMate - The Plasma Add Ons Creator
-GenericName[et]=PlasMate - Plasma lisandite looja
-GenericName[km]=PlasMate - កម្មវិធី​បង្កើត​កម្មវិធី​បន្ថែម​ប្លាស្មា
-GenericName[pt]=PlasMate - O Criador de Extras para o Plasma
-GenericName[pt_BR]=PlasMate - O Criador de Addons para o Plasma
-GenericName[sv]=Plasmate - Skapa tillägg till Plasma
-GenericName[th]=PlasMate - ตัวสร้างส่วนขยายของพลาสมา
-GenericName[uk]=PlasMate — програма для створення додатків Плазми
-GenericName[x-test]=xxPlasMate - The Plasma AddOns Creatorxx
 Exec=plasmate
 Icon=plasmagik
 Type=Application
