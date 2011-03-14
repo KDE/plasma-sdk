@@ -59,7 +59,7 @@ PreviewContainment::PreviewContainment(QObject *parent, const QVariantList &args
     m_controls->setZValue(99);
     m_controls->resize(100, 70);
     m_controls->setMaximumHeight(70);
-    m_controls->hide();
+    m_controls->setOpacity(0.6);
     m_layout->addItem(m_controls);
     setupHeader();
 
@@ -353,13 +353,13 @@ void PreviewContainment::onAppletGeometryChanged()
 
 void PreviewContainment::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
 {
-    m_controls->show();
+    m_controls->setOpacity(1.0);
     Containment::hoverEnterEvent(event);
 }
 
 void PreviewContainment::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
 {
-    m_controls->hide();
+    m_controls->setOpacity(0.6);
     Containment::hoverLeaveEvent(event);
 }
 
