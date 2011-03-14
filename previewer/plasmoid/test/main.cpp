@@ -45,7 +45,7 @@ static const char description[] = I18N_NOOP("Test plasma-studio previewer");
 
 int main(int argc, char **argv)
 {
-    KAboutData aboutData("previewer", 0, ki18n("Plasma-Studio Previewer"),
+    KAboutData aboutData("previewer", 0, ki18n("Plasmate Previewer"),
                          "1.0", ki18n(description), KAboutData::License_BSD,
                          ki18n("XXXX"));
     aboutData.setProgramIconName("plasma");
