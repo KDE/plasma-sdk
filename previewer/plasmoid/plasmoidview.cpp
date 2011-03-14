@@ -34,6 +34,7 @@ PlasmoidView::PlasmoidView(QWidget *parent)
         m_containment(0),
         m_applet(0)
 {
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     setScene(&m_corona);
     connect(&m_corona, SIGNAL(sceneRectChanged(QRectF)), this, SLOT(sceneRectChanged(QRectF)));
     setAlignment(Qt::AlignCenter);
@@ -45,6 +46,7 @@ PlasmoidView::PlasmoidView(QWidget *parent)
     m_containment = m_corona.addContainment("studiopreviewer");
     m_containment->setFormFactor(Plasma::Planar);
     m_containment->setLocation(Plasma::Floating);
+    m_containment->setAspectRatioMode(Plasma::IgnoreAspectRatio);
     connect(m_containment, SIGNAL(appletRemoved(Plasma::Applet*)), this, SLOT(appletRemoved()));
 
     // we do a two-way connect here to allow the previewer containment
@@ -90,7 +92,6 @@ void PlasmoidView::appletRemoved()
 void PlasmoidView::sceneRectChanged(const QRectF &rect)
 {
     Q_UNUSED(rect);
-
     if (m_containment) {
         setSceneRect(m_containment->geometry());
     }
@@ -102,13 +103,14 @@ void PlasmoidView::resizeEvent(QResizeEvent *event)
 
     // if we do not have any applet being shown
     // there is no need to do all this stuff
-    if (!m_applet || m_applet->aspectRatioMode() != Plasma::KeepAspectRatio) {
+    //if (!m_applet || m_applet->aspectRatioMode() != Plasma::KeepAspectRatio) {
+    if (m_applet) {
+        m_applet->setMaximumWidth(size().width());
         m_containment->resize(size());
         return;
     }
-    QSize newSize = m_containment->size().toSize();
-    newSize.scale(size(), Qt::KeepAspectRatio);
-    m_containment->resize(newSize);
+    m_containment->resize(event->size());
     centerOn(m_containment);
+    return;
 }
 

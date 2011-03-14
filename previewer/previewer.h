@@ -49,7 +49,7 @@ public slots:
      * this when the user requests a refresh.
      */
     void emitRefreshRequest();
-    
+
 };
 
 #endif // PREVIEWER_H

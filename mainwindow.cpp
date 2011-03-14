@@ -36,6 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KTextEditor/View>
 #include <KTextEditor/Editor>
 #include <KTextEditor/CommandInterface>
+#include <KToolBar>
 #include <KStandardAction>
 #include <KUrl>
 #include <KListWidget>
@@ -105,6 +106,7 @@ MainWindow::MainWindow(QWidget *parent)
     setXMLFile("plasmateui.rc");
     setupActions();
     createMenus();
+    toolBar()->hide();
     m_startPage = new StartPage(this);
     connect(m_startPage, SIGNAL(projectSelected(QString, QString)),
             this, SLOT(loadProject(QString, QString)));
@@ -322,7 +324,9 @@ void MainWindow::saveEditorData()
 void MainWindow::saveAndRefresh()
 {
     saveEditorData();
-    m_previewerWidget->refreshPreview();
+    if (m_previewerWidget) {
+        m_previewerWidget->refreshPreview();
+    }
 }
 
 void MainWindow::editorDestructiveRefresh()
@@ -502,6 +506,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     m_currentProjectType = type;
     kDebug() << "Loading project named" << name << "...";
     delete m_model;
+    toolBar()->show();
 
     // Saving NewProject preferences
     KConfigGroup preferences = KGlobal::config()->group("NewProjectDefaultPreferences");
