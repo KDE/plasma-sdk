@@ -90,15 +90,7 @@ void MetaDataEditor::readFile()
 
     view->name_edit->setText(metadata->name());
     view->comment_edit->setText(metadata->description());
-
-// TODO: icon is missing
-//    view->icon_edit->setText( desktopFile.readIcon() );
-//    view->icon_button->setIcon( desktopFile.readIcon() );
-//    connect( view->icon_button, SIGNAL(iconChanged(const QString &)),
-//       view->icon_edit, SLOT(setText(const QString &)) );
-    if (view->icon_edit->text().isEmpty()) {
-        view->icon_button->setIcon("kde");
-    }
+    view->icon_button->setIcon(metadata->icon());
 
     view->pluginname_edit->setText(metadata->pluginName());
 
@@ -228,9 +220,7 @@ void MetaDataEditor::writeFile()
 {
     metadata->setName(view->name_edit->text());
     metadata->setDescription(view->comment_edit->text());
-
-    //TODO
-    //desktopGroup.writeEntry( "Icon", view->icon_edit->text() );
+    metadata->setIcon(view->icon_button->icon());
 
     metadata->setCategory(categories[view->category_combo->currentIndex()]);
     metadata->setImplementationApi(apis[view->api_combo->currentIndex()]);
@@ -239,6 +229,7 @@ void MetaDataEditor::writeFile()
     metadata->setWebsite(view->website_edit->text());
     metadata->setAuthor(view->author_edit->text());
     metadata->setEmail(view->email_edit->text());
+
     metadata->setLicense(view->license_edit->text());
 
     metadata->write(filename);
