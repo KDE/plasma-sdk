@@ -104,6 +104,15 @@ void StartPage::setupWidgets()
     connect(ui->recentProjects, SIGNAL(clicked(const QModelIndex)),
             this, SLOT(emitProjectSelected(const QModelIndex)));
 
+    // Enforce the security restriction from package.cpp in the input field
+    connect(ui->localProject, SIGNAL(textEdited(const QString&)),
+            this, SLOT(processLocalProject(const QString&)));
+
+    connect(ui->localProject, SIGNAL(returnPressed()),
+            this, SLOT(loadLocalProject()));
+    connect(ui->loadLocalProject, SIGNAL(clicked()),
+            this, SLOT(loadLocalProject()));
+
     // When there will be a good API for js and rb dataengines and runners, remove the
     // first connect() statement and uncomment the one below :)
     connect(ui->contentTypes, SIGNAL(clicked(const QModelIndex)),
@@ -244,10 +253,18 @@ void StartPage::refreshRecentProjectsList()
     projectManager->clearProjects();
     QStringList recentFiles = m_parent->recentProjects();
 
-    for (int i = 0; i < recentFiles.size(); i++) {
+    foreach(const QString file, recentFiles) {
         // Specify path + filename as well to avoid mistaking .gitignore
         // as being the metadata file.
-        Plasma::PackageMetadata metadata(KStandardDirs::locateLocal("appdata", recentFiles.at(i) + "/metadata.desktop"));
+        QString f = file;
+        QDir pDir(file);
+        QString pPath =  file + "/metadata.desktop";
+        kDebug() << "RECENT FILE::: " << file;
+        if (pDir.isRelative()) {
+            kDebug() << "NOT LOCAL";
+            pPath = KStandardDirs::locateLocal("appdata", file + "/metadata.desktop");
+        }
+        Plasma::PackageMetadata metadata(pPath);
 
         // Changed this back on second thought. It's better that we
         // do not expose the idea of a 'folder name' to the user -
@@ -262,7 +279,7 @@ void StartPage::refreshRecentProjectsList()
         // the loading code uses this to find the project to load.
         // since folder name and plasmoid name can be different, this
         // should be set to the folder name, which the loading code expects.
-        item->setData(FullPathRole, recentFiles.at(i));
+        item->setData(FullPathRole, file);
 
         // set a tooltip for extra info and to help differentiating similar projects
         QString tooltip = "Project : " + projectName + "\n\n";
@@ -293,7 +310,7 @@ void StartPage::refreshRecentProjectsList()
 
         projectManager->addProject(item);
         // limit to 5 projects to display up front
-        if (i < 5) {
+        if (ui->recentProjects->count() < 5) {
             ui->recentProjects->addItem(new QListWidgetItem(*item));
         }
     }
@@ -478,6 +495,19 @@ void StartPage::cancelNewProject()
     ui->projectName->clear();
     resetStatus();
 }
+
+void StartPage::processLocalProject(const QString& name)
+{
+    ui->loadLocalProject->setEnabled(name.isEmpty());
+}
+
+void StartPage::loadLocalProject()
+{
+    QString p = ui->localProject->text();
+    kDebug() << "loading local project from" << p;
+    emit projectSelected(p, QString());
+}
+
 
 void StartPage::emitProjectSelected(const QModelIndex &index)
 {

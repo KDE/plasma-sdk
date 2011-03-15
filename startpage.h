@@ -79,10 +79,12 @@ private Q_SLOTS:
     void createNewProject();
     void cancelNewProject();
     void processProjectName(const QString&);
+    void processLocalProject(const QString&);
     void doImport();
     void doGHNSImport();
     void showMoreDialog();
     void refreshRecentProjectsList();
+    void loadLocalProject();
 
 private:
     void setupWidgets();

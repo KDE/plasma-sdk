@@ -520,7 +520,14 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     preferences.writeEntry("radioButtonDeChecked", m_startPage->selectedDeRadioButton());
     preferences.sync();
 
-    QString packagePath = KStandardDirs::locateLocal("appdata", name + '/');
+    QString packagePath;
+    QDir pDir(name);
+    if (pDir.isRelative()) {
+        packagePath = KStandardDirs::locateLocal("appdata", name + '/');
+    } else {
+        packagePath = name;
+    }
+
     QString actualType = type;
 
     // Converting projects which use ServiceTypes instead of X-KDE-ServiceTypes

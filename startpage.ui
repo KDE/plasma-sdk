@@ -215,6 +215,43 @@ Have fun creating!
           </widget>
          </item>
          <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QLabel" name="label_6">
+             <property name="text">
+              <string>Local project:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="KUrlRequester" name="localProject">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="mode">
+              <set>KFile::Directory|KFile::ExistingOnly|KFile::LocalOnly</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="loadLocalProject">
+             <property name="text">
+              <string>Load</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
             <spacer name="horizontalSpacer">
@@ -250,7 +287,7 @@ Have fun creating!
            <item row="0" column="0">
             <widget class="QLabel" name="label_2">
              <property name="text">
-              <string>From your computer:</string>
+              <string>From local file</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
