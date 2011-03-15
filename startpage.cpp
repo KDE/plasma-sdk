@@ -292,7 +292,12 @@ void StartPage::refreshRecentProjectsList()
 
         if (serviceType == "Plasma/Applet" ||
             serviceType == "Plasma/PopupApplet") {
-            item->setIcon(KIcon("application-x-plasma"));
+            if (!metadata.icon().isEmpty()) {
+                item->setIcon(KIcon(metadata.icon()));
+                kDebug() << "Setting ICON:" << metadata.icon();
+            } else {
+                item->setIcon(KIcon("application-x-plasma"));
+            }
             tooltip += i18n("Project type") + " : " + i18n("Plasmoid");
         } else if (serviceType == "Plasma/DataEngine") {
             item->setIcon(KIcon("kexi"));
