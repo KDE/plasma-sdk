@@ -72,13 +72,13 @@ void Sidebar::resizeEvent(QResizeEvent * event)
       So I've implemented this simple workaround, in order to expand the dockwidget when a
       scrollbar is shown.
       I know that resizing a child widget inside a parent resizeEvent() is dangerous at 98%,
-      by the way this trick is very simple and well structured, so it wont cause issues I hope =)
+      by the way this trick is very simple and well structured, so it won't cause issues I hope =)
       */
 
     QSize newSize = event->size();
     //qDebug() << "New size: " << newSize;
     //qDebug() << "m_table size:" << m_table->size();
-    //qDebug() << "m_table total lenght" << m_table->totalLenght();
+    //qDebug() << "m_table total length" << m_table->totalLenght();
 
     bool vertical = ((m_table->location() == Qt::RightDockWidgetArea) ||
                     (m_table->location() == Qt::LeftDockWidgetArea));

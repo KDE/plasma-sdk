@@ -248,7 +248,7 @@ QModelIndex PackageModel::parent(const QModelIndex &index) const
 int PackageModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
-    //FIXME: need to accmodate more information
+    //FIXME: need to accomodate more information
     return 1;
 }
 
