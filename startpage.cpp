@@ -105,7 +105,7 @@ void StartPage::setupWidgets()
             this, SLOT(emitProjectSelected(const QModelIndex)));
 
     // Enforce the security restriction from package.cpp in the input field
-    connect(ui->localProject, SIGNAL(textEdited(const QString&)),
+    connect(ui->localProject, SIGNAL(textChanged(const QString&)),
             this, SLOT(processLocalProject(const QString&)));
 
     connect(ui->localProject, SIGNAL(returnPressed()),
