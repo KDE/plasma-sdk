@@ -372,7 +372,7 @@ int PackageModel::loadPackage()
             m_topEntries.append(key);
         }
         kDebug() << "counts:" << currentTopCount << indexedFiles.count();
-        beginInsertRows(QModelIndex(), currentTopCount, indexedFiles.count());
+        beginInsertRows(QModelIndex(), indexedFiles.count(), currentTopCount);
         endInsertRows();
     }
 
