@@ -371,6 +371,7 @@ int PackageModel::loadPackage()
         foreach(const char *key, indexedFiles) {
             m_topEntries.append(key);
         }
+        kDebug() << "counts:" << currentTopCount << indexedFiles.count();
         beginInsertRows(QModelIndex(), currentTopCount, indexedFiles.count());
         endInsertRows();
     }
