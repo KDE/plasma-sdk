@@ -199,7 +199,7 @@ void StartPage::validateProjectType(const QModelIndex &sender)
         ui->newProjectButton->setEnabled(false); // disable the create button too.
     } else /* if (sender.row() == 0) */ {
         ui->radioButtonJs->setEnabled(true);
-        ui->radioButtonJs->setChecked(true);
+        ui->radioButtonDe->setChecked(true);
         ui->radioButtonDe->setEnabled(true);
         ui->radioButtonPy->setEnabled(true);
         ui->radioButtonRb->setEnabled(true);
