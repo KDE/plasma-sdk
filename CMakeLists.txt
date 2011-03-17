@@ -58,6 +58,7 @@ kde4_add_ui_files (PlasMate_SRC
 include_directories(${KDE4_INCLUDES}
                     ${QT_QTWEBKIT_INCLUDE_DIR}
                     ${QGPGME_INCLUDE_DIR}
+		    /usr/include/gpgme/
 )
 
 add_subdirectory( editors )
