@@ -251,7 +251,11 @@ void MainWindow::setFileListVisible(const bool visible)
         m_editWidget->setObjectName("edit tree");
         m_editWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         m_editWidget->setWidget(m_editPage);
-        addDockWidget(Qt::LeftDockWidgetArea, m_editWidget);
+        if (m_previewerWidget) {
+            splitDockWidget(m_previewerWidget, m_editWidget, Qt::Vertical);
+        } else {
+            addDockWidget(Qt::LeftDockWidgetArea, m_editWidget);
+        }
     }
     if (m_editWidget) {
         m_editWidget->setVisible(visible);
@@ -300,7 +304,8 @@ void MainWindow::setPreviewVisible(const bool visible)
    if (visible && !m_previewerWidget) {
        QString packagePath = KStandardDirs::locateLocal("appdata", m_currentProject + '/');
        m_previewerWidget = createPreviewerFor(m_currentProjectType);
-       addDockWidget(Qt::RightDockWidgetArea, m_previewerWidget);
+       kDebug() << "ADding prviewer......";
+       addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
        m_previewerWidget->showPreview(packagePath);
    }
    if (m_previewerWidget) {
@@ -630,7 +635,6 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     m_previewerWidget = createPreviewerFor(actualType);
     if (m_previewerWidget) {
         addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
-        splitDockWidget(m_editWidget, m_previewerWidget, Qt::Vertical);
         m_previewerWidget->showPreview(packagePath);
     }
     setFileListVisible(true);
