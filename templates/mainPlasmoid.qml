@@ -24,8 +24,9 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
-QGraphicsWidget {
-    preferredSize: "200x300"
+Item {
+    width: 200
+    height: 300
 
     Text {
         text: i18n("Hello world")
