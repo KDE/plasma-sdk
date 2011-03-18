@@ -324,7 +324,11 @@ int PackageModel::loadPackage()
         dir.cd(contents);
     }
 
-    foreach(const char *key, structure->directories()) {
+    m_topEntries.clear();
+    const QList<const char*> dirs = structure->directories();
+    // this +1 is for the metadata entry
+    beginInsertRows(QModelIndex(), 1, dirs.count());
+    foreach (const char *key, dirs) {
         QString path = structure->path(key);
         if (!dir.exists(path)) {
             dir.mkpath(path);
@@ -332,10 +336,11 @@ int PackageModel::loadPackage()
 
         m_topEntries.append(key);
     }
+    endInsertRows();
 
     QList<const char *> files = structure->files();
     QHash<QString, const char *> indexedFiles;
-    foreach(const char *key, structure->files()) {
+    foreach (const char *key, structure->files()) {
         QString path = structure->path(key);
         if (!dir.exists(path)) {
             QFileInfo info(dir.path() + '/' + path);
@@ -350,9 +355,6 @@ int PackageModel::loadPackage()
         indexedFiles.insert(path, key);
     }
 
-    // we don't -1 because we have a "ghost" metadata entry
-    beginInsertRows(QModelIndex(), 0, m_topEntries.count());
-    endInsertRows();
 
     foreach (const char *key, structure->directories()) {
         QString path = structure->path(key);
