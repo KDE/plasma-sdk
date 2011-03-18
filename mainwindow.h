@@ -137,7 +137,7 @@ private:
     void loadNotesEditor(QDockWidget *container);
     Previewer* createPreviewerFor(const QString& projectType);
     
-    void addAction(const char *text,const char * icon,const  char *slot, const char *name);
+    void addAction(QString text, const char * icon,const  char *slot, const char *name);
 
     StartPage *m_startPage;
     Sidebar *m_sidebar;

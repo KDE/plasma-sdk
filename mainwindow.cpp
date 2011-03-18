@@ -179,7 +179,7 @@ void MainWindow::createMenus()
 {
     KStandardAction::quit(this, SLOT(quit()), actionCollection());
     KAction *refresh = KStandardAction::redisplay(this, SLOT(saveAndRefresh()), actionCollection());
-    refresh->setShortcut(tr("Ctrl+F5"));
+    refresh->setShortcut(Qt::CTRL + Qt::Key_F5);
     refresh->setText(i18n("Refresh Previewer"));
     menuBar()->addMenu(helpMenu());
     setupGUI();
@@ -191,10 +191,10 @@ void MainWindow::quit()
 //     deleteLater();
 }
 
-void MainWindow::addAction(const char *text, const char * icon, const  char *slot, const char *name)
+void MainWindow::addAction(QString text, const char * icon, const  char *slot, const char *name)
 {
     KAction *action = new KAction(this);
-    action->setText(i18n(text));
+    action->setText(text);
     action->setIcon(KIcon(icon));
     connect(action, SIGNAL(triggered(bool)), this, slot);
     actionCollection()->addAction(name, action);
@@ -202,13 +202,13 @@ void MainWindow::addAction(const char *text, const char * icon, const  char *slo
  
 void MainWindow::setupActions()
 {
-    addAction("New Save Point", "document-save",           SLOT(selectSavePoint()), "savepoint");
-    addAction("Publish",        "krfb",                    SLOT(selectPublish()),   "publish");
-    addAction("Preview",        "user-desktop",            SLOT(togglePreview()),   "preview");
-    addAction("Notes",          "accessories-text-editor", SLOT(toggleNotes()),     "notes");
-    addAction("File List",      "system-file-manager",     SLOT(toggleFileList()),  "file_list");
-    addAction("Timeline", "process-working",  SLOT(toggleTimeline()), "timeline");
-    addAction("Documentation", "help-contents", SLOT(openDocumentation()), "documentation");
+    addAction(i18n("New Save Point"), "document-save",           SLOT(selectSavePoint()), "savepoint");
+    addAction(i18n("Publish"),        "krfb",                    SLOT(selectPublish()),   "publish");
+    addAction(i18n("Preview"),        "user-desktop",            SLOT(togglePreview()),   "preview");
+    addAction(i18n("Notes"),          "accessories-text-editor", SLOT(toggleNotes()),     "notes");
+    addAction(i18n("File List"),      "system-file-manager",     SLOT(toggleFileList()),  "file_list");
+    addAction(i18n("Timeline"), "process-working",  SLOT(toggleTimeline()), "timeline");
+    addAction(i18n("Documentation"), "help-contents", SLOT(openDocumentation()), "documentation");
 }
 
 void MainWindow::toggleTimeline()

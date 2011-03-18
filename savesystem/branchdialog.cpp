@@ -29,7 +29,7 @@
 BranchDialog::BranchDialog()
 {
 
-    setWindowTitle(i18n("New Section .."));
+    setWindowTitle(i18n("New Section"));
     setModal(true);
     setMinimumWidth(300);
     setMinimumHeight(80);
