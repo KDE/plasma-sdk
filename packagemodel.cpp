@@ -99,8 +99,9 @@ int PackageModel::setPackage(const QString &path)
     m_directory = new KDirWatch(this);
     m_directory->addDir(path, KDirWatch::WatchSubDirs | KDirWatch::WatchFiles);
 
-    if (!loadPackage())
+    if (!loadPackage()) {
         return 0;
+    }
 
     connect(m_directory, SIGNAL(created(QString)), this, SLOT(fileAddedOnDisk(QString)));
     connect(m_directory, SIGNAL(deleted(QString)), this, SLOT(fileDeletedOnDisk(QString)));
@@ -124,21 +125,27 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
     }
 
     const char *key = static_cast<const char *>(index.internalPointer());
-    if (key) { // it's a child item
+    if (key) {
+        // we have a child item
         switch (role) {
         case MimeTypeRole: {
-            if (index.row() == 0)
+            if (index.row() == 0) {
                 return QStringList("[plasmate]/new");
+            }
+
             return m_package->structure()->mimetypes(key);
         }
         break;
         case UrlRole: {
-            if (index.row() < 0)
-                break;
+            if (index.row() == 0) {
+                return QVariant();
+            }
+
             QList<const char *> named = m_namedFiles.value(key);
             int row = index.row() - 1;
             QString path = "", file = "";
-            if (row < 0) { // 'New' entry, return the directory path
+            if (row < 0) {
+                // 'New' entry, return the directory path
                 path = m_package->filePath(key);
             } else if (row < named.count()) {
                 path = m_package->path();
@@ -158,8 +165,10 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         }
         break;
         case Qt::DisplayRole: {
-            if (index.row() == 0)
-              return i18n("New...");
+            if (index.row() == 0) {
+                return i18n("New...");
+            }
+
             QList<const char *> named = m_namedFiles.value(key);
             int row = index.row() - 1;
             if (row < named.count()) {
@@ -175,12 +184,14 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         }
         break;
         case Qt::DecorationRole: {
-            if (index.row() == 0)
+            if (index.row() == 0) {
                 return KIcon("document-new");
+            }
         }
         break;
         }
-    } else { // it's a top level item
+    } else {
+        // it's a top level item
         switch (role) {
         case Qt::DisplayRole: {
             if (index.row() == m_topEntries.count()) {
@@ -199,8 +210,9 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         }
         break;
         case UrlRole: {
-            if (index.row() == m_topEntries.count())
+            if (index.row() == m_topEntries.count()) {
                 return m_package->path() + "metadata.desktop";
+            }
         }
         break;
         }
@@ -260,12 +272,12 @@ int PackageModel::rowCount(const QModelIndex &parent) const
             const char *key = static_cast<const char *>(parent.internalPointer());
             if (!key) {
                 key = m_topEntries.at(parent.row());
-            //It is a leaf
             } else if (m_namedFiles.contains(key)) {
+                //It is a leaf
                 return 0;
             }
+
             //kDebug() << "looking for" << key << m_files[key].count() << m_namedFiles[key]<<key<<parent.parent();
-            
             return m_files.contains(key) ? m_files[key].count() + m_namedFiles[key].count() + 1 : 0;
         } else {
             return 0;
@@ -287,8 +299,7 @@ int PackageModel::loadPackage()
     QDir dir(m_package->path());
     Plasma::PackageStructure::Ptr structure = m_package->structure();
 
-    if (!dir.exists(structure->contentsPrefix()))
-    {
+    if (!dir.exists(structure->contentsPrefix())) {
         kDebug() << "This is not a valid plasmoid package.";
         return 0;
     }
@@ -346,10 +357,13 @@ int PackageModel::loadPackage()
             path += '/';
         }
 
+        kDebug() << m_topEntries.indexOf(key) << key << "has" << files.count() << "files" << files;
+        beginInsertRows(createIndex(m_topEntries.indexOf(key), 0), 0, files.count());
+
         QStringList files = m_package->entryList(key);
         QList<const char *> namedFiles;
         QStringList userFiles;
-        foreach(const QString &file, files) {
+        foreach (const QString &file, files) {
             QString filePath = path + file;
             if (indexedFiles.contains(filePath)) {
                 namedFiles.append(indexedFiles.value(filePath));
@@ -361,18 +375,18 @@ int PackageModel::loadPackage()
         m_files[key] = userFiles;
         m_namedFiles[key] = namedFiles;
 
-        kDebug() << m_topEntries.indexOf(key) << key << "has" << files.count() << "files" << files;
-        beginInsertRows(createIndex(m_topEntries.indexOf(key), 0), 0, files.count());
         endInsertRows();
     }
 
     if (!indexedFiles.empty()) {
-        int currentTopCount = m_topEntries.count();
-        foreach(const char *key, indexedFiles) {
+        const int currentTopCount = m_topEntries.count();
+        beginInsertRows(QModelIndex(), indexedFiles.count(), currentTopCount);
+
+        foreach (const char *key, indexedFiles) {
             m_topEntries.append(key);
         }
+
         kDebug() << "counts:" << currentTopCount << indexedFiles.count();
-        beginInsertRows(QModelIndex(), indexedFiles.count(), currentTopCount);
         endInsertRows();
     }
 
@@ -384,23 +398,29 @@ void PackageModel::fileAddedOnDisk(const QString &path)
     if (QFileInfo(path).fileName().at(0) == QChar('.')) {
         return; // we ignore hidden files
     }
-    KUrl toAdd(path);
-    int parentCount = rowCount(QModelIndex());
-    for (int i=0; i < parentCount-1; i++) {
+
+    const KUrl toAdd(path);
+    const QString toAddDir = toAdd.directory();
+    const int parentCount = rowCount(QModelIndex());
+
+    for (int i = 0; i < parentCount - 1; ++i) {
         const char *key = m_topEntries.at(i);
         QList<const char *> named = m_namedFiles.value(key);
         KUrl target(m_package->filePath(key));
-        if (target.equals(toAdd.directory())) {
+        if (target.equals(toAddDir)) {
             QModelIndex parent = index(i, 0, QModelIndex());
             int ind = rowCount(parent);
-            for (int ii=0; ii<ind; ii++) {
+            for (int ii = 0; ii < ind; ++ii) {
                 QModelIndex child = index(ii, 0, parent);
                 KUrl childPath(child.data(PackageModel::UrlRole).toString());
-                if (childPath.equals(toAdd)) // let's not double-add
+                if (childPath.equals(toAdd)) {
+                    // let's not double-add
                     return;
+                }
             }
-            m_files[key].append(toAdd.fileName());
+
             beginInsertRows(parent, ind, ind);
+            m_files[key].append(toAdd.fileName());
             endInsertRows();
             break;
         }
@@ -409,29 +429,30 @@ void PackageModel::fileAddedOnDisk(const QString &path)
 
 void PackageModel::fileDeletedOnDisk(const QString &path)
 {
-    if (QFile::exists(path)) // KDirWatch seems overparanoid, so we quickcheck
+    if (QFile::exists(path)) {
+        // KDirWatch seems overparanoid, so we quickcheck
         return;
+    }
 
     // Probably not the most efficient way to do it but
     // it works :)
-    KUrl toDelete(path);
+    const KUrl toDelete(path);
 
     // Iterate through every tree element and check if it matches
     // the deleted file
-    int parentCount = rowCount(QModelIndex());
-    for (int i=0; i < parentCount; i++) {
+    const int parentCount = rowCount(QModelIndex());
+    for (int i = 0; i < parentCount; ++i) {
         QModelIndex parent = index(i, 0, QModelIndex());
         int childCount = rowCount(parent);
-        for (int ii=1; ii < childCount; ii++) {
+        for (int ii = 1; ii < childCount; ++ii) {
             QModelIndex child = index(ii, 0, parent);
             KUrl childPath(child.data(PackageModel::UrlRole).toString());
             if (childPath.equals(toDelete)) {
                 // match!! remove it!
                 beginRemoveRows(parent, ii, ii);
-                endRemoveRows();
                 const char *key = m_topEntries.at(i);
                 QList<const char *> &named = m_namedFiles[key];
-                int row = ii-1;
+                int row = ii - 1;
                 if (row < named.count()) {
                     named.removeAt(row);
                 } else {
@@ -441,6 +462,7 @@ void PackageModel::fileDeletedOnDisk(const QString &path)
                         l.removeAt(row);
                     }
                 }
+                endRemoveRows();
                 break;
             }
         }
