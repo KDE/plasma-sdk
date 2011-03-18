@@ -192,6 +192,7 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         }
     } else {
         // it's a top level item
+        //kDebug() << "data for top level item" << index.row() << m_topEntries.count() << role << Qt::DisplayRole;
         switch (role) {
         case Qt::DisplayRole: {
             if (index.row() == m_topEntries.count()) {
@@ -326,8 +327,7 @@ int PackageModel::loadPackage()
 
     m_topEntries.clear();
     const QList<const char*> dirs = structure->directories();
-    // this +1 is for the metadata entry
-    beginInsertRows(QModelIndex(), 1, dirs.count());
+    beginInsertRows(QModelIndex(), 0, dirs.count() -1);
     foreach (const char *key, dirs) {
         QString path = structure->path(key);
         if (!dir.exists(path)) {
@@ -391,7 +391,7 @@ int PackageModel::loadPackage()
             m_topEntries.append(key);
         }
 
-        kDebug() << "counts:" << currentTopCount << indexedFiles.count();
+        //kDebug() << "counts:" << currentTopCount << indexedFiles.count();
         endInsertRows();
     }
 
