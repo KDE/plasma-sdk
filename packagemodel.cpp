@@ -239,11 +239,13 @@ QModelIndex PackageModel::index(int row, int column, const QModelIndex &parent) 
         }
     }
 
-    if (row >= 0 && row <= m_topEntries.count() && column == 0) {
-        return createIndex(row, column);
+    // top level indexes; do a sanity check first
+    if (row < 0 || row > m_topEntries.count() ||
+        column < 0 || column > MAX_COLUMN) {
+        return QModelIndex();
     }
 
-    return QModelIndex();
+    return createIndex(row, column);
 }
 
 QModelIndex PackageModel::parent(const QModelIndex &index) const
@@ -261,7 +263,7 @@ int PackageModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
     //FIXME: need to accomodate more information
-    return 1;
+    return MAX_COLUMN + 1;
 }
 
 int PackageModel::rowCount(const QModelIndex &parent) const

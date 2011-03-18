@@ -78,6 +78,8 @@ private:
     QHash<const char *, QList<const char *> > m_namedFiles;
     Plasma::PackageStructure::Ptr m_structure;
     Plasma::Package *m_package;
+
+    static const int MAX_COLUMN = 0;
 };
 
 #endif
