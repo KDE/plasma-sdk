@@ -65,7 +65,7 @@ public:
     enum DataRoles { MimeTypeRole = Qt::UserRole + 1, UrlRole };
 
 private:
-    int loadPackage();
+    bool loadPackage();
 
 private Q_SLOTS:
     void fileAddedOnDisk(const QString &path);

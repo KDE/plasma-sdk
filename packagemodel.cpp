@@ -295,21 +295,25 @@ int PackageModel::rowCount(const QModelIndex &parent) const
     return m_topEntries.count() + 1;
 }
 
-int PackageModel::loadPackage()
+bool PackageModel::loadPackage()
 {
-    reset();
+    beginResetModel();
+
+    m_topEntries.clear();
+    m_files.clear();
+    m_namedFiles.clear();
 
     if (!m_package) {
         kDebug() << "No package to load.";
-        return 0;
+        return false;
     }
 
     QDir dir(m_package->path());
     Plasma::PackageStructure::Ptr structure = m_package->structure();
 
     if (!dir.exists(structure->contentsPrefix())) {
-        kDebug() << "This is not a valid plasmoid package.";
-        return 0;
+        kDebug() << "This is not a valid package.";
+        return false;
     }
 
     if (!dir.exists("metadata.desktop")) {
@@ -329,9 +333,7 @@ int PackageModel::loadPackage()
         dir.cd(contents);
     }
 
-    m_topEntries.clear();
     const QList<const char*> dirs = structure->directories();
-    beginInsertRows(QModelIndex(), 0, dirs.count() -1);
     foreach (const char *key, dirs) {
         QString path = structure->path(key);
         if (!dir.exists(path)) {
@@ -340,9 +342,7 @@ int PackageModel::loadPackage()
 
         m_topEntries.append(key);
     }
-    endInsertRows();
 
-    QList<const char *> files = structure->files();
     QHash<QString, const char *> indexedFiles;
     foreach (const char *key, structure->files()) {
         QString path = structure->path(key);
@@ -366,9 +366,6 @@ int PackageModel::loadPackage()
             path += '/';
         }
 
-        kDebug() << m_topEntries.indexOf(key) << key << "has" << files.count() << "files" << files;
-        beginInsertRows(createIndex(m_topEntries.indexOf(key), 0), 0, files.count());
-
         QStringList files = m_package->entryList(key);
         QList<const char *> namedFiles;
         QStringList userFiles;
@@ -381,25 +378,22 @@ int PackageModel::loadPackage()
                 userFiles.append(file);
             }
         }
-        m_files[key] = userFiles;
-        m_namedFiles[key] = namedFiles;
 
-        endInsertRows();
+        //kDebug() << "results for" << m_topEntries.indexOf(key) << key << "are:" << namedFiles.count() << userFiles.count();
+        m_namedFiles.insert(key, namedFiles);
+        m_files.insert(key, userFiles);
     }
 
     if (!indexedFiles.empty()) {
-        const int currentTopCount = m_topEntries.count();
-        beginInsertRows(QModelIndex(), indexedFiles.count(), currentTopCount);
-
         foreach (const char *key, indexedFiles) {
             m_topEntries.append(key);
         }
 
-        //kDebug() << "counts:" << currentTopCount << indexedFiles.count();
-        endInsertRows();
+        //kDebug() << "counts:" << m_topEntries.count() << indexedFiles.count();
     }
 
-    return 1;
+    endResetModel();
+    return true;
 }
 
 void PackageModel::fileAddedOnDisk(const QString &path)
