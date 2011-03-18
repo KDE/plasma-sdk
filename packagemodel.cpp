@@ -141,13 +141,10 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         }
         break;
         case UrlRole: {
-            if (index.row() == 0) {
-                return QVariant();
-            }
-
             QList<const char *> named = m_namedFiles.value(key);
             int row = index.row() - 1;
-            QString path = "", file = "";
+            QString path;
+            QString file;
             if (row < 0) {
                 // 'New' entry, return the directory path
                 path = m_package->filePath(key);
@@ -164,7 +161,11 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
                     file = l.at(row);
                 }
             }
-            path = path.endsWith("/") ? path : path + "/";
+
+            if (!path.endsWith('/')) {
+                path.append('/');
+            }
+
             return path + file;
         }
         break;
