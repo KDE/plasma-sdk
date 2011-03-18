@@ -63,7 +63,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "modeltest/modeltest.h"
 
-
 MainWindow::CentralContainer::CentralContainer(QWidget* parent)
     : QWidget(parent),
       m_curMode(Preserve),
@@ -562,7 +561,9 @@ void MainWindow::loadProject(const QString &name, const QString &type)
 
     // Add it to the recent files first.
     m_model = new PackageModel(this);
+#ifdef DEBUG_MODEL
     new ModelTest(m_model, this);
+#endif
     kDebug() << "Setting project type to:" << actualType;
     m_model->setPackageType(actualType);
     kDebug() << "Setting model package to:" << packagePath;

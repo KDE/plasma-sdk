@@ -19,7 +19,11 @@ macro_log_feature(GIT_EXECUTABLE_FOUND "Git" "Distributed Revision Control Syste
 
 include(KDE4Defaults)
 
-set (DEBUG_MODEL 1)
+string(TOLOWER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE_TOLOWER)
+if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
+   add_definitions(-DDEBUG_MODEL)
+   set (DEBUG_MODEL 1)
+endif()
 
 set (PlasMate_SRC
     editors/editpage.cpp
