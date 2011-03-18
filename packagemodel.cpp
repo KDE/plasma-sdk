@@ -239,7 +239,7 @@ QModelIndex PackageModel::index(int row, int column, const QModelIndex &parent) 
         }
     }
 
-    if (row > 0 && row <= m_topEntries.count()) {
+    if (row >= 0 && row <= m_topEntries.count()) {
         return createIndex(row, column);
     }
 
