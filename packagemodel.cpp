@@ -34,6 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KDesktopFile>
 #include <KDirWatch>
 #include <KIcon>
+#include <KMimeType>
 #include <KUser>
 
 #include <Plasma/Package>
@@ -122,6 +123,37 @@ QString PackageModel::package() const
     return QString();
 }
 
+KUrl PackageModel::urlForIndex(const QModelIndex &index) const
+{
+    const char *key = static_cast<const char *>(index.internalPointer());
+    QList<const char *> named = m_namedFiles.value(key);
+    int row = index.row() - 1;
+    QString path;
+    QString file;
+    if (row < 0) {
+        // 'New' entry, return the directory path
+        path = m_package->filePath(key);
+    } else if (row < named.count()) {
+        path = m_package->path();
+        QString contents = m_package->structure()->contentsPrefix();
+        path = path.endsWith("/") ? path + contents : path + "/" + contents;
+        file = m_package->structure()->path(named.at(row));
+    } else {
+        row -= named.count();
+        QStringList l = m_files.value(key);
+        if (row < l.count()) {
+            path = m_package->filePath(key);
+            file = l.at(row);
+        }
+    }
+
+    if (!path.endsWith('/')) {
+        path.append('/');
+    }
+
+    return path + file;
+}
+
 QVariant PackageModel::data(const QModelIndex &index, int role) const
 {
     if (!m_package || !index.isValid()) {
@@ -141,32 +173,7 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         }
         break;
         case UrlRole: {
-            QList<const char *> named = m_namedFiles.value(key);
-            int row = index.row() - 1;
-            QString path;
-            QString file;
-            if (row < 0) {
-                // 'New' entry, return the directory path
-                path = m_package->filePath(key);
-            } else if (row < named.count()) {
-                path = m_package->path();
-                QString contents = m_package->structure()->contentsPrefix();
-                path = path.endsWith("/") ? path + contents : path + "/" + contents;
-                file = m_package->structure()->path(named.at(row));
-            } else {
-                row -= named.count();
-                QStringList l = m_files.value(key);
-                if (row < l.count()) {
-                    path = m_package->filePath(key);
-                    file = l.at(row);
-                }
-            }
-
-            if (!path.endsWith('/')) {
-                path.append('/');
-            }
-
-            return path + file;
+            return urlForIndex(index);
         }
         break;
         case Qt::DisplayRole: {
@@ -191,6 +198,8 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         case Qt::DecorationRole: {
             if (index.row() == 0) {
                 return KIcon("document-new");
+            } else {
+                return KIcon(KMimeType::iconNameForUrl(urlForIndex(index)));
             }
         }
         break;

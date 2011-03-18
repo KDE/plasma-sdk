@@ -66,6 +66,7 @@ public:
 
 private:
     bool loadPackage();
+    KUrl urlForIndex(const QModelIndex &index) const;
 
 private Q_SLOTS:
     void fileAddedOnDisk(const QString &path);
