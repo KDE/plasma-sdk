@@ -90,6 +90,7 @@ void EditPage::findEditor(const QModelIndex &index)
             emit loadMetaDataEditor(target);
             return;
         }
+
         if (mimetype == "[plasmate]/new") {
             QString dialogText = i18n( "Enter a name for the new file:" );
             QString file = KInputDialog::getText(QString(), dialogText);
@@ -99,7 +100,10 @@ void EditPage::findEditor(const QModelIndex &index)
                 fl.open(QIODevice::ReadWrite); // create the file
                 fl.close();
             }
+
+            return;
         }
+
         KService::List offers = KMimeTypeTrader::self()->query(mimetype, "KParts/ReadWritePart");
         kDebug() << mimetype;
         if (offers.isEmpty()) {
