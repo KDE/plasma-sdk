@@ -19,6 +19,8 @@ macro_log_feature(GIT_EXECUTABLE_FOUND "Git" "Distributed Revision Control Syste
 
 include(KDE4Defaults)
 
+set (DEBUG_MODEL 1)
+
 set (PlasMate_SRC
     editors/editpage.cpp
     editors/metadata/metadataeditor.cpp
@@ -49,6 +51,14 @@ set (PlasMate_SRC
     projectmanager/projectmanager.cpp
     )
 
+if (DEBUG_MODEL)
+      set (PlasMate_SRC
+         ${PlasMate_SRC}
+         modeltest/dynamictreemodel.cpp
+         modeltest/modeltest.cpp
+         )
+endif (DEBUG_MODEL)
+
 kde4_add_ui_files (PlasMate_SRC
    mainwindow.ui
    startpage.ui
@@ -78,6 +88,10 @@ target_link_libraries(plasmate
                       ${LIBATTICA_LIBRARY_DIRS}
                       ${QGPGME_LIBRARIES}
 )
+
+if (DEBUG_MODEL)
+   target_link_libraries(plasmate ${QT_QTTEST_LIBRARY})
+endif (DEBUG_MODEL)
 
 install(TARGETS plasmate ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES plasmate.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})

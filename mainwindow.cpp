@@ -31,6 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KDebug>
 #include <KMenu>
 #include <KMenuBar>
+#include <KMimeTypeTrader>
 #include <KTextEditor/ConfigInterface>
 #include <KTextEditor/Document>
 #include <KTextEditor/View>
@@ -43,7 +44,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KActionCollection>
 #include <KParts/Part>
 #include <KStandardDirs>
-#include <kmimetypetrader.h>
 #include <KMessageBox>
 
 #include <Plasma/PackageMetadata>
@@ -60,7 +60,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "previewer/runner/runnerpreviewer.h"
 #include "publisher/publisher.h"
 #include "docbrowser/docbrowser.h"
-#include <kaction.h>
+
+#include "modeltest/modeltest.h"
 
 
 MainWindow::CentralContainer::CentralContainer(QWidget* parent)
@@ -561,6 +562,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
 
     // Add it to the recent files first.
     m_model = new PackageModel(this);
+    new ModelTest(m_model, this);
     kDebug() << "Setting project type to:" << actualType;
     m_model->setPackageType(actualType);
     kDebug() << "Setting model package to:" << packagePath;
