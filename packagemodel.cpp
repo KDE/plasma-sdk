@@ -100,6 +100,10 @@ int PackageModel::setPackage(const QString &path)
     m_directory->addDir(path, KDirWatch::WatchSubDirs | KDirWatch::WatchFiles);
 
     if (!loadPackage()) {
+        delete m_directory;
+        m_directory = 0;
+        delete m_package;
+        m_package = 0;
         return 0;
     }
 
