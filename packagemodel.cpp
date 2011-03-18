@@ -120,7 +120,7 @@ QString PackageModel::package() const
 
 QVariant PackageModel::data(const QModelIndex &index, int role) const
 {
-    if (!m_package) {
+    if (!m_package || !index.isValid()) {
         return QVariant();
     }
 
@@ -197,6 +197,7 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
             if (index.row() == m_topEntries.count()) {
                 return i18n("Metadata");
             }
+
             return m_structure->name(m_topEntries.at(index.row()));
         }
         break;
