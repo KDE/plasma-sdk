@@ -2,15 +2,7 @@
 [Desktop Entry]
 Terminal=false
 Name=Plasmate
-Name[et]=Plasmate
-Name[pt]=Plasmate
-Name[uk]=Plasmate
-Name[x-test]=xxPlasmatexx
 GenericName=PlasMate - The Plasma Add-Ons Creator
-GenericName[et]=PlasMate - Plasma lisandite looja
-GenericName[pt]=PlasMate - O Criador de Extensões para o Plasma
-GenericName[uk]=PlasMate — програма для створення додатків Плазми
-GenericName[x-test]=xxPlasMate - The Plasma Add-Ons Creatorxx
 Exec=plasmate
 Icon=plasmagik
 Type=Application
