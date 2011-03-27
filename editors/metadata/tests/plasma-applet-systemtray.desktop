@@ -1,11 +1,13 @@
 [Desktop Entry]
 Comment=Access hidden applications minimized in the system tray
+Comment[nds]=Togriep op versteken Programmen binnen den Systeemafsnitt
 Comment[pt]=Aceder às aplicações escondidas e minimizadas na bandeja do sistema
 Comment[pt_BR]=Acessa os aplicativos ocultos minimizados na área de notificação
 Comment[uk]=Доступ до прихованих програм, мінімізованих до системного лотка
 Comment[x-test]=xxAccess hidden applications minimized in the system trayxx
 Encoding=UTF-8
 Name=System Tray
+Name[nds]=Systeemafsnitt
 Name[pt]=Bandeja do Sistema
 Name[pt_BR]=Área de notificação
 Name[uk]=Системний лоток
