@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Access hidden applications minimized in the system tray
+Comment[de]=Ermöglicht den Zugriff auf Programme, die im Systemabschnitt der Kontrollleiste laufen.
 Comment[et]=Süsteemisalve minimeeritud peidetud rakenduste kasutamine
 Comment[nds]=Togriep op versteken Programmen binnen den Systeemafsnitt
 Comment[nl]=Biedt toegang tot programma's die in het systeemvak draaien
@@ -9,6 +10,8 @@ Comment[uk]=Доступ до прихованих програм, мінімі�
 Comment[x-test]=xxAccess hidden applications minimized in the system trayxx
 Encoding=UTF-8
 Name=System Tray
+Name[cs]=Systémová část panelu
+Name[de]=Systemabschnitt der Kontrollleiste
 Name[es]=Bandeja del sistema
 Name[et]=Süsteemisalv
 Name[nds]=Systeemafsnitt
