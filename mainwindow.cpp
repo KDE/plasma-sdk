@@ -237,6 +237,9 @@ void MainWindow::initTimeLine()
         connect(this, SIGNAL(newSavePointClicked()),
                 m_timeLine, SLOT(newSavePoint()));
         addDockWidget(location, m_timeLine);
+    } else {
+        // The TimeLine is already created, but we changed project, so we need to update the working directory
+        m_timeLine->setWorkingDir(m_model->package());
     }
 }
 
