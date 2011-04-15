@@ -81,8 +81,7 @@ public Q_SLOTS:
     void togglePreview();
     void toggleNotes();
     void toggleFileList();
-    
-    void setTimelineVisible(const bool visible);
+
     void setPreviewVisible(const bool visible);
     void setNotesVisible(const bool visible);
     void setFileListVisible(const bool visible);
@@ -94,15 +93,16 @@ signals:
     void refreshRequested();
 
 private:
-  
+
     KAction *m_savePointAction;
     KAction *m_timelineAction;
     KAction *m_publishAction;
     KAction *m_previewAction;
     KAction *m_notesAction;
     KAction *m_fileListAction;
-    
+
     void setupActions();
+    void initTimeLine();
 
     // QMainWindow takes control of and DELETES the previous centralWidget
     // whenever a new one is set - this is bad because we want to preserve
@@ -136,7 +136,7 @@ private:
     void setupTextEditor(KTextEditor::Document *editorPart, KTextEditor::View *view);
     void loadNotesEditor(QDockWidget *container);
     Previewer* createPreviewerFor(const QString& projectType);
-    
+
     void addAction(QString text, const char * icon,const  char *slot, const char *name);
 
     StartPage *m_startPage;

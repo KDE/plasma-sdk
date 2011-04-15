@@ -199,7 +199,7 @@ void MainWindow::addAction(QString text, const char * icon, const  char *slot, c
     connect(action, SIGNAL(triggered(bool)), this, slot);
     actionCollection()->addAction(name, action);
 }
- 
+
 void MainWindow::setupActions()
 {
     addAction(i18n("New Save Point"), "document-save",           SLOT(selectSavePoint()), "savepoint");
@@ -213,10 +213,12 @@ void MainWindow::setupActions()
 
 void MainWindow::toggleTimeline()
 {
-    setTimelineVisible(!m_timeLine || !m_timeLine->isVisible());
+    if (m_timeLine) {
+        m_timeLine->setVisible(!m_timeLine->isVisible());
+    }
 }
 
-void MainWindow::setTimelineVisible(const bool visible)
+void MainWindow::initTimeLine()
 {
     KConfig c;
     KConfigGroup configDock = c.group("DocksPosition");
@@ -224,18 +226,17 @@ void MainWindow::setTimelineVisible(const bool visible)
                           QVariant(Qt::TopDockWidgetArea)).toInt();
     location = (Qt::DockWidgetArea) configDock.readEntry("TimeLineLocation",
                                                          QVariant(Qt::BottomDockWidgetArea)).toInt();
-                                                         
-    if (visible && !m_timeLine) {
+
+    if (!m_timeLine) {
         m_timeLine = new TimeLine(this, m_model->package(), location);
         m_timeLine->setObjectName("timeline");
         connect(m_timeLine, SIGNAL(sourceDirectoryChanged()),
                 this, SLOT(editorDestructiveRefresh()));
         connect(m_timeLine, SIGNAL(savePointClicked()),
                 this, SLOT(saveEditorData()));
+        connect(this, SIGNAL(newSavePointClicked()),
+                m_timeLine, SLOT(newSavePoint()));
         addDockWidget(location, m_timeLine);
-    }
-    if (m_timeLine) {
-        m_timeLine->setVisible(!m_timeLine->isVisible());
     }
 }
 
@@ -662,6 +663,8 @@ void MainWindow::loadProject(const QString &name, const QString &type)
         KUrl url = KUrl(packagePath + "contents/" + mainScript);
         m_editPage->loadFile(url);
     }
+    // After we loaded the project, init the TimeLine component
+    initTimeLine();
 }
 
 QStringList MainWindow::recentProjects()
