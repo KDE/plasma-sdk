@@ -173,7 +173,7 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         }
         break;
         case UrlRole: {
-            return urlForIndex(index);
+            return urlForIndex(index).pathOrUrl();
         }
         break;
         case Qt::DisplayRole: {
