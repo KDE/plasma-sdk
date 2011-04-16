@@ -151,7 +151,7 @@ void MetaDataEditor::serviceTypeChanged()
         currentType = Plasma::AppletComponent;
         break;
     case 1:
-        metadata->setServiceType("Plasma/PopupApplet");
+        metadata->setServiceType("Plasma/Applet,Plasma/PopupApplet");
         currentType = Plasma::AppletComponent;
         break;
     /*case 2:   // only applet/popupapplet can be dynamically selected now

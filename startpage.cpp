@@ -291,7 +291,7 @@ void StartPage::refreshRecentProjectsList()
         QString serviceType = metadata.serviceType();
 
         if (serviceType == "Plasma/Applet" ||
-            serviceType == "Plasma/PopupApplet") {
+            serviceType == "Plasma/Applet,Plasma/PopupApplet") {
             if (!metadata.icon().isEmpty()) {
                 item->setIcon(KIcon(metadata.icon()));
                 kDebug() << "Setting ICON:" << metadata.icon();
@@ -378,7 +378,7 @@ void StartPage::createNewProject()
         projectFileExtension = ".js";
         mainScriptName = projectNameLowerCase + projectFileExtension;
     }
-    
+
     // Creating the corresponding folder
 
     //  From this commit, the directory is changed int the following way. Old directory structure:
@@ -490,7 +490,7 @@ void StartPage::createNewProject()
     // the loading code expects the FOLDER NAME
     emit projectSelected(projectFolderName + "/" + projectFolderName, serviceTypes);
 
-    // need to clear the project name field here too because startpage is still 
+    // need to clear the project name field here too because startpage is still
     // accessible after project loads.
     ui->projectName->clear();
 }

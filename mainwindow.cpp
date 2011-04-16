@@ -237,6 +237,8 @@ void MainWindow::initTimeLine()
         connect(this, SIGNAL(newSavePointClicked()),
                 m_timeLine, SLOT(newSavePoint()));
         addDockWidget(location, m_timeLine);
+        m_timeLine->loadTimeLine(m_model->package());
+        m_timeLine->setVisible(false);
     } else {
         // The TimeLine is already created, but we changed project, so we need to update the working directory
         m_timeLine->setWorkingDir(m_model->package());
@@ -300,21 +302,20 @@ void MainWindow::selectPublish()
 
 void MainWindow::togglePreview()
 {
-    setPreviewVisible(!m_previewerWidget || !m_previewerWidget->isVisible());
+    m_previewerWidget->setVisible(!m_previewerWidget->isVisible());
 }
 
-void MainWindow::setPreviewVisible(const bool visible)
+void MainWindow::initPreviewer()
 {
-   if (visible && !m_previewerWidget) {
+   if (!m_previewerWidget) {
        QString packagePath = KStandardDirs::locateLocal("appdata", m_currentProject + '/');
        m_previewerWidget = createPreviewerFor(m_currentProjectType);
-       kDebug() << "ADding prviewer......";
+       kDebug() << "Adding prviewer......";
        addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
        m_previewerWidget->showPreview(packagePath);
    }
-   if (m_previewerWidget) {
-       m_previewerWidget->setVisible(visible);
-   }
+   m_previewerWidget->setVisible(true);
+
 }
 
 void MainWindow::saveEditorData()
@@ -559,8 +560,11 @@ void MainWindow::loadProject(const QString &name, const QString &type)
 
     //Workaround for Plasma::PackageStructure not recognizing Plasma/PopupApplet as a valid type
     //FIXME:
-    if (actualType == "Plasma/PopupApplet") {
-        actualType = "Plasma/Applet";
+   QString fixedType;
+    if (actualType == "Plasma/Applet,Plasma/PopupApplet") {
+        fixedType = "Plasma/Applet";
+    } else {
+        fixedType = actualType;
     }
 
     // Add it to the recent files first.
@@ -568,8 +572,8 @@ void MainWindow::loadProject(const QString &name, const QString &type)
 #ifdef DEBUG_MODEL
     new ModelTest(m_model, this);
 #endif
-    kDebug() << "Setting project type to:" << actualType;
-    m_model->setPackageType(actualType);
+    kDebug() << "Setting project type to:" << fixedType;
+    m_model->setPackageType(fixedType);
     kDebug() << "Setting model package to:" << packagePath;
 
     if (!m_model->setPackage(packagePath))
@@ -666,8 +670,9 @@ void MainWindow::loadProject(const QString &name, const QString &type)
         KUrl url = KUrl(packagePath + "contents/" + mainScript);
         m_editPage->loadFile(url);
     }
-    // After we loaded the project, init the TimeLine component
+    // After we loaded the project, init the TimeLine and Previewer component
     initTimeLine();
+    initPreviewer();
 }
 
 QStringList MainWindow::recentProjects()
@@ -683,7 +688,7 @@ Previewer* MainWindow::createPreviewerFor(const QString& projectType)
 {
     Previewer* ret = 0;
     if (projectType == "Plasma/Applet" ||
-        projectType == "Plasma/PopupApplet") {
+        projectType == "Plasma/Applet,Plasma/PopupApplet") {
         ret = new PlasmoidPreviewer(i18n("Previewer"), this);
         ret->setObjectName("preview");
         connect(ret, SIGNAL(refreshRequested()), this, SLOT(saveAndRefresh()));
