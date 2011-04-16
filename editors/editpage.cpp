@@ -85,7 +85,7 @@ void EditPage::findEditor(const QModelIndex &index)
 {
     QStringList mimetypes = index.data(PackageModel::MimeTypeRole).toStringList();
     foreach(const QString &mimetype, mimetypes) {
-        KUrl target = index.data(PackageModel::UrlRole).toUrl();
+        QString target = index.data(PackageModel::UrlRole).toUrl().toString();
         if (mimetype == "[plasmate]/metadata") {
             emit loadMetaDataEditor(target);
             return;
@@ -95,7 +95,7 @@ void EditPage::findEditor(const QModelIndex &index)
             QString dialogText = i18n( "Enter a name for the new file:" );
             QString file = KInputDialog::getText(QString(), dialogText);
             if (!file.isEmpty()) {
-                file = target.pathOrUrl() + file;
+                file = target + file;
                 QFile fl(file);
                 fl.open(QIODevice::ReadWrite); // create the file
                 fl.close();
@@ -113,7 +113,7 @@ void EditPage::findEditor(const QModelIndex &index)
             //create the part using offers.at(0)
             //kDebug() << offers.at(0);
             //offers.at(0)->createInstance(parentWidget);
-            emit loadEditor(offers, target);
+            emit loadEditor(offers, KUrl(target));
             return;
         }
     }
