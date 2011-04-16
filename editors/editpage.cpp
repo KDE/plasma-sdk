@@ -60,7 +60,7 @@ void EditPage::doDelete(bool)
     QString path = selected.data(PackageModel::UrlRole).toString();
     QString name = selected.data(Qt::DisplayRole).toString();
     QString dialogText = i18n("Are you sure you want to delete this file: ");
-    int code = KMessageBox::warningContinueCancel(this, 
+    int code = KMessageBox::warningContinueCancel(this,
                   dialogText + "'" + name + "'?");
     if (code == KMessageBox::Continue)
         QFile::remove(path);
@@ -85,7 +85,7 @@ void EditPage::findEditor(const QModelIndex &index)
 {
     QStringList mimetypes = index.data(PackageModel::MimeTypeRole).toStringList();
     foreach(const QString &mimetype, mimetypes) {
-        QString target = index.data(PackageModel::UrlRole).toString();
+        KUrl target = index.data(PackageModel::UrlRole).toUrl();
         if (mimetype == "[plasmate]/metadata") {
             emit loadMetaDataEditor(target);
             return;
@@ -95,7 +95,7 @@ void EditPage::findEditor(const QModelIndex &index)
             QString dialogText = i18n( "Enter a name for the new file:" );
             QString file = KInputDialog::getText(QString(), dialogText);
             if (!file.isEmpty()) {
-                file = target + file;
+                file = target.pathOrUrl() + file;
                 QFile fl(file);
                 fl.open(QIODevice::ReadWrite); // create the file
                 fl.close();
@@ -113,7 +113,7 @@ void EditPage::findEditor(const QModelIndex &index)
             //create the part using offers.at(0)
             //kDebug() << offers.at(0);
             //offers.at(0)->createInstance(parentWidget);
-            emit loadEditor(offers, KUrl(target));
+            emit loadEditor(offers, target);
             return;
         }
     }
