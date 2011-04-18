@@ -252,6 +252,12 @@ void StartPage::refreshRecentProjectsList()
     m_projectManager->clearProjects();
     const QStringList recentProjects = m_parent->recentProjects();
 
+    if (recentProjects.isEmpty()) {
+        m_ui.recentProjectsLabel->hide();
+        m_ui.recentProjects->hide();
+        return;
+    }
+
     foreach (const QString file, recentProjects) {
         // Specify path + filename as well to avoid mistaking .gitignore
         // as being the metadata file.
