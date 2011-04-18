@@ -538,6 +538,10 @@ void MainWindow::loadProject(const QString &name, const QString &type)
         packagePath = name;
     }
 
+    if (!packagePath.endsWith('/')) {
+        packagePath.append('/');
+    }
+
     QString actualType = type;
 
     // Converting projects which use ServiceTypes instead of X-KDE-ServiceTypes
