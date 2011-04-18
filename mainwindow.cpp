@@ -55,7 +55,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "packagemodel.h"
 #include "sidebar.h"
 #include "startpage.h"
-#include "ui_mainwindow.h"
 #include "previewer/plasmoid/plasmoidpreviewer.h"
 #include "previewer/runner/runnerpreviewer.h"
 #include "publisher/publisher.h"
