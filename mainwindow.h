@@ -78,7 +78,7 @@ public Q_SLOTS:
     void selectSavePoint();
     void selectPublish();
 
-    void toggleTimeline();
+    void toggleTimeLine();
     void togglePreview();
     void toggleNotes();
     void toggleFileList();
@@ -102,6 +102,7 @@ private:
     KAction *m_fileListAction;
 
     void setupActions();
+    void updateActions();
     void initTimeLine();
 
     // QMainWindow takes control of and DELETES the previous centralWidget
@@ -137,7 +138,7 @@ private:
     void loadNotesEditor(QDockWidget *container);
     Previewer* createPreviewerFor(const QString& projectType);
 
-    void addAction(QString text, const char * icon,const  char *slot, const char *name, const KShortcut &shortcut = KShortcut());
+    KAction *addAction(QString text, const char * icon,const  char *slot, const char *name, const KShortcut &shortcut = KShortcut());
 
     StartPage *m_startPage;
     Sidebar *m_sidebar;

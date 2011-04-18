@@ -170,8 +170,9 @@ MainWindow::~MainWindow()
 void MainWindow::openDocumentation()
 {
     if (!m_browser) {
-            m_browser = new DocBrowser(m_model, 0);
+        m_browser = new DocBrowser(m_model, 0);
     }
+
     m_browser->setVisible(!m_browser->isVisible());
     m_browser->setObjectName("Documentation");
     m_browser->focusSearchField();
@@ -194,7 +195,7 @@ void MainWindow::quit()
 //     deleteLater();
 }
 
-void MainWindow::addAction(QString text, const char * icon, const  char *slot, const char *name, const KShortcut &shortcut)
+KAction *MainWindow::addAction(QString text, const char * icon, const  char *slot, const char *name, const KShortcut &shortcut)
 {
     KAction *action = new KAction(this);
     action->setText(text);
@@ -202,24 +203,37 @@ void MainWindow::addAction(QString text, const char * icon, const  char *slot, c
     action->setShortcut(shortcut);
     connect(action, SIGNAL(triggered(bool)), this, slot);
     actionCollection()->addAction(name, action);
+    return action;
 }
 
 void MainWindow::setupActions()
 {
-    addAction(i18n("Create Save Point"), "document-save",           SLOT(selectSavePoint()), "savepoint", KStandardShortcut::save());
-    addAction(i18n("Publish"),        "krfb",                    SLOT(selectPublish()),   "publish");
-    addAction(i18n("Preview"),        "user-desktop",            SLOT(togglePreview()),   "preview");
-    addAction(i18n("Notes"),          "accessories-text-editor", SLOT(toggleNotes()),     "notes");
-    addAction(i18n("File List"),      "system-file-manager",     SLOT(toggleFileList()),  "file_list");
-    addAction(i18n("Timeline"), "process-working",  SLOT(toggleTimeline()), "timeline");
-    addAction(i18n("Documentation"), "help-contents", SLOT(openDocumentation()), "documentation");
+    addAction(i18n("Create Save Point"), "document-save", SLOT(selectSavePoint()), "savepoint", KStandardShortcut::save());
+    addAction(i18n("Publish"), "krfb", SLOT(selectPublish()),   "publish");
+
+    addAction(i18n("Preview"), "user-desktop", SLOT(togglePreview()), "preview")->setCheckable(true);
+    addAction(i18n("Notes"), "accessories-text-editor", SLOT(toggleNotes()), "notes")->setCheckable(true);
+    addAction(i18n("File List"), "system-file-manager", SLOT(toggleFileList()), "file_list")->setCheckable(true);
+    addAction(i18n("Timeline"), "process-working",  SLOT(toggleTimeLine()), "timeline")->setCheckable(true);
+    addAction(i18n("Documentation"), "help-contents", SLOT(openDocumentation()), "documentation")->setCheckable(true);
 }
 
-void MainWindow::toggleTimeline()
+void MainWindow::updateActions()
 {
-    if (m_timeLine) {
-        m_timeLine->setVisible(!m_timeLine->isVisible());
+    actionCollection()->action("preview")->setChecked(m_previewerWidget && m_previewerWidget->isVisible());
+    actionCollection()->action("notes")->setChecked(m_notesWidget && m_notesWidget->isVisible());
+    actionCollection()->action("file_list")->setChecked(m_editWidget && m_editWidget->isVisible());
+    actionCollection()->action("timeline")->setChecked(m_timeLine && m_timeLine->isVisible());
+    actionCollection()->action("documentation")->setChecked(m_browser && m_browser->isVisible());
+}
+
+void MainWindow::toggleTimeLine()
+{
+    if (!m_timeLine) {
+        initTimeLine();
     }
+
+    m_timeLine->setVisible(!m_timeLine->isVisible());
 }
 
 void MainWindow::initTimeLine()
@@ -234,12 +248,9 @@ void MainWindow::initTimeLine()
     if (!m_timeLine) {
         m_timeLine = new TimeLine(this, m_model->package(), location);
         m_timeLine->setObjectName("timeline");
-        connect(m_timeLine, SIGNAL(sourceDirectoryChanged()),
-                this, SLOT(editorDestructiveRefresh()));
-        connect(m_timeLine, SIGNAL(savePointClicked()),
-                this, SLOT(saveEditorData()));
-        connect(this, SIGNAL(newSavePointClicked()),
-                m_timeLine, SLOT(newSavePoint()));
+        connect(m_timeLine, SIGNAL(sourceDirectoryChanged()), this, SLOT(editorDestructiveRefresh()));
+        connect(m_timeLine, SIGNAL(savePointClicked()), this, SLOT(saveEditorData()));
+        connect(this, SIGNAL(newSavePointClicked()), m_timeLine, SLOT(newSavePoint()));
         addDockWidget(location, m_timeLine);
         m_timeLine->loadTimeLine(m_model->package());
         m_timeLine->setVisible(false);
@@ -629,7 +640,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
 
     m_oldTab = EditTab;
 
-    QDir projectPath(packagePath);
+//    QDir projectPath(packagePath);
 //     if (projectPath.cdUp()) {
 //         m_timeLine->setWorkingDir(KUrl(projectPath.absolutePath()));
 //         m_timeLine->loadTimeLine(KUrl(projectPath.absolutePath()));
@@ -668,8 +679,8 @@ void MainWindow::loadProject(const QString &name, const QString &type)
         m_editPage->loadFile(url);
     }
     // After we loaded the project, init the TimeLine and Previewer component
-    initTimeLine();
     menuBar()->show();
+    updateActions();
 }
 
 QStringList MainWindow::recentProjects()
