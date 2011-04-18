@@ -22,6 +22,8 @@ void PlasmoidPreviewer::showPreview(const QString &packagePath)
     m_view->addApplet(packagePath);
 }
 
-void PlasmoidPreviewer::refreshPreview() {
+void PlasmoidPreviewer::refreshPreview()
+{
     emit refreshView();
 }
+
