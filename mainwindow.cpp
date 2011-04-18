@@ -107,6 +107,7 @@ MainWindow::MainWindow(QWidget *parent)
     setupActions();
     createMenus();
     toolBar()->hide();
+    menuBar()->hide();
     m_startPage = new StartPage(this);
     connect(m_startPage, SIGNAL(projectSelected(QString, QString)),
             this, SLOT(loadProject(QString, QString)));
@@ -677,6 +678,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     // After we loaded the project, init the TimeLine and Previewer component
     initTimeLine();
     initPreviewer();
+    menuBar()->show();
 }
 
 QStringList MainWindow::recentProjects()
