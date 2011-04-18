@@ -23,7 +23,6 @@
 
 
 #include "previewcontainment.h"
-#include "overlaytoolbox.h"
 
 #include <QGraphicsLayoutItem>
 

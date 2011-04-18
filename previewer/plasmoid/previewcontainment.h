@@ -24,8 +24,6 @@
 #ifndef PREVIEWCONTAINMENT_H
 #define PREVIEWCONTAINMENT_H
 
-#include "overlaytoolbox.h"
-
 #include <QGraphicsView>
 #include <QGraphicsLinearLayout>
 
