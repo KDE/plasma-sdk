@@ -78,9 +78,10 @@ private Q_SLOTS:
     void validateProjectType(const QModelIndex &sender);
     void createNewProject();
     void cancelNewProject();
-    void processProjectName(const QString&);
-    void processLocalProject(const QString&);
-    void doImport();
+    void checkProjectName(const QString &name);
+    void checkLocalProjectPath(const QString &path);
+    void checkPackagePath(const QString &path);
+    void importPackage();
     void doGHNSImport();
     void showMoreDialog();
     void refreshRecentProjectsList();

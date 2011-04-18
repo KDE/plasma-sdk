@@ -33,6 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KDebug>
 #include <KDesktopFile>
 #include <KLineEdit>
+#include <KMimeType>
 #include <KPushButton>
 #include <KSeparator>
 #include <KUrlRequester>
@@ -96,6 +97,7 @@ void StartPage::setupWidgets()
     ui->newProjectButton->setIcon(KIcon("dialog-ok"));
     ui->titleWidget->setPixmap(KIcon("plasmagik").pixmap(48, 48), KTitleWidget::ImageRight);
     ui->loadLocalProject->setEnabled(false);
+    ui->importPackageButton->setEnabled(false);
 
     // Enforce the security restriction from package.cpp in the input field
     connect(ui->projectName, SIGNAL(textEdited(const QString&)),
@@ -108,12 +110,14 @@ void StartPage::setupWidgets()
 
     // Enforce the security restriction from package.cpp in the input field
     connect(ui->localProject, SIGNAL(textChanged(const QString&)),
-            this, SLOT(processLocalProject(const QString&)));
-
-    connect(ui->localProject, SIGNAL(returnPressed()),
-            this, SLOT(loadLocalProject()));
+            this, SLOT(checkLocalProjectPath(const QString&)));
     connect(ui->loadLocalProject, SIGNAL(clicked()),
             this, SLOT(loadLocalProject()));
+
+    connect(ui->importPackage, SIGNAL(textChanged(const QString&)),
+            this, SLOT(checkPackagePath(const QString&)));
+    connect(ui->importPackageButton, SIGNAL(clicked()),
+            this, SLOT(importPackage()));
 
     // When there will be a good API for js and rb dataengines and runners, remove the
     // first connect() statement and uncomment the one below :)
@@ -127,8 +131,6 @@ void StartPage::setupWidgets()
             this, SLOT(createNewProject()));
     connect(ui->cancelNewProjectButton, SIGNAL(clicked()),
             this, SLOT(cancelNewProject()));
-    connect(ui->importButton, SIGNAL(clicked()),
-            this, SLOT(doImport()));
     connect(ui->importGHNSButton, SIGNAL(clicked()),
             this, SLOT(doGHNSImport()));
     connect(ui->moreButton, SIGNAL(clicked()),
@@ -154,7 +156,7 @@ QString StartPage::camelToSnakeCase(const QString& name)
     return result.replace(QRegExp("([A-Z])"), "_\\1").toLower().replace(QRegExp("^_"), "");
 }
 
-void StartPage::processProjectName(const QString& name)
+void StartPage::checkProjectName(const QString& name)
 {
     QRegExp validatePluginName("[a-zA-Z0-9_.]*");
     if (!validatePluginName.exactMatch(name)) {
@@ -503,7 +505,7 @@ void StartPage::cancelNewProject()
     resetStatus();
 }
 
-void StartPage::processLocalProject(const QString& name)
+void StartPage::checkLocalProjectPath(const QString& name)
 {
     QDir dir(KShell::tildeExpand(name));
     kDebug() << "checking: " << name << dir.exists();
@@ -531,10 +533,17 @@ void StartPage::emitProjectSelected(const QString &name, const QString &type)
     emit projectSelected(name, type);
 }
 
-void StartPage::doImport()
+void StartPage::checkPackagePath(const QString& name)
 {
-    KUrl target = ui->importUrl->url();
+    const QString fullName = KShell::tildeExpand(name);
+    bool valid = QFile::exists(fullName) &&
+                 KMimeType::findByUrl(fullName)->is("application/x-plasma");
+    ui->importPackageButton->setEnabled(valid);
+}
 
+void StartPage::importPackage()
+{
+    const KUrl target = ui->importPackage->url();
     selectProject(target);
 }
 
