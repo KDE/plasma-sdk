@@ -10,9 +10,9 @@
   <Merge />
 </MenuBar>
 <ToolBar noMerge="1" name="mainToolBar"><text>Main Toolbar</text>
-  <Action name="file_open"/>
   <Action name="savepoint" />
   <Action name="publish" />
+  <Separator />
   <Action name="preview" />
   <Action name="notes" />
   <Action name="file_list" />
