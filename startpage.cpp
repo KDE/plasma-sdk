@@ -36,6 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KPushButton>
 #include <KSeparator>
 #include <KUrlRequester>
+#include <KShell>
 #include <KStandardDirs>
 #include <KUser>
 #include <KMessageBox>
@@ -503,16 +504,17 @@ void StartPage::cancelNewProject()
 
 void StartPage::processLocalProject(const QString& name)
 {
-    ui->loadLocalProject->setEnabled(!name.isEmpty());
+    QDir dir(KShell::tildeExpand(name));
+    kDebug() << "checking: " << name << dir.exists();
+    ui->loadLocalProject->setEnabled(!name.isEmpty() && dir.exists());
 }
 
 void StartPage::loadLocalProject()
 {
-    QString p = ui->localProject->text();
-    kDebug() << "loading local project from" << p;
-    emit projectSelected(p, QString());
+    QString path = KShell::tildeExpand(ui->localProject->text());
+    kDebug() << "loading local project from" << path;
+    emit projectSelected(path, QString());
 }
-
 
 void StartPage::emitProjectSelected(const QModelIndex &index)
 {
