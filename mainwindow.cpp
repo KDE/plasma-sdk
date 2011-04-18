@@ -77,8 +77,9 @@ void MainWindow::CentralContainer::switchTo(QWidget* newWidget, SwitchMode mode)
     if (m_curWidget) {
         m_curWidget->hide();
         m_layout->removeWidget(m_curWidget);
-        if (m_curMode == DeleteAfter)
+        if (m_curMode == DeleteAfter) {
             delete m_curWidget;
+        }
     }
     m_curMode = mode;
     m_curWidget = newWidget;
@@ -115,6 +116,10 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(m_central);
     m_central->switchTo(m_startPage);
     setDockOptions(QMainWindow::AllowNestedDocks); // why not?
+
+    if (autoSaveConfigGroup().entryMap().isEmpty()) {
+        setWindowState(Qt::WindowMaximized);
+    }
 }
 
 MainWindow::~MainWindow()
@@ -132,6 +137,12 @@ MainWindow::~MainWindow()
     m_part = 0;
     delete m_metaEditor;
     m_metaEditor = 0;
+    delete m_publisher;
+    m_publisher = 0;
+    delete m_editPage;
+    m_editPage = 0;
+    delete m_editWidget;
+    m_editWidget = 0;
 
     if (m_previewerWidget) {
         configDock.writeEntry("PreviewerHeight", m_previewerWidget->height());
@@ -149,19 +160,11 @@ MainWindow::~MainWindow()
         delete m_browser;
     }
 
-    if (m_publisher) {
-        delete m_publisher;
-    }
-
     if (m_timeLine) {
         configDock.writeEntry("TimeLineLocation", QVariant(m_timeLine->location()));
         delete m_timeLine;
     }
 
-    if (m_editPage) {
-        delete m_editPage;
-        delete m_editWidget;
-    }
     c.sync();
 }
 
