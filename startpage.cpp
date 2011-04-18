@@ -266,6 +266,11 @@ void StartPage::refreshRecentProjectsList()
             kDebug() << "NOT LOCAL";
             pPath = KStandardDirs::locateLocal("appdata", file + "/metadata.desktop");
         }
+
+        if (!QFile::exists(pPath)) {
+            continue;
+        }
+
         Plasma::PackageMetadata metadata(pPath);
 
         // Changed this back on second thought. It's better that we
