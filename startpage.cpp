@@ -503,7 +503,7 @@ void StartPage::cancelNewProject()
 
 void StartPage::processLocalProject(const QString& name)
 {
-    ui->loadLocalProject->setEnabled(name.isEmpty());
+    ui->loadLocalProject->setEnabled(!name.isEmpty());
 }
 
 void StartPage::loadLocalProject()
