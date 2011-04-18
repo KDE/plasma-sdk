@@ -21,6 +21,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QWidget>
 #include <KUrl>
 
+#include "ui_startpage.h"
+
 class QLabel;
 class QComboBox;
 class QListWidget;
@@ -30,11 +32,6 @@ class KPushButton;
 class KLineEdit;
 class MainWindow;
 class ProjectManager;
-
-namespace Ui
-{
-class StartPage;
-}
 
 class StartPage : public QWidget
 {
@@ -91,7 +88,7 @@ private:
     const QString generateProjectFolderName(const QString& suggestion);
     void selectProject(const KUrl &target);
 
-    Ui::StartPage *ui;
+    Ui::StartPage m_ui;
     QLabel *m_createNewLabel;
     QLabel *m_openExistingLabel;
     QLabel *m_continueWorkingLabel;

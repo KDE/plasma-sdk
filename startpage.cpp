@@ -47,7 +47,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "packagemodel.h"
 #include "startpage.h"
 #include "mainwindow.h"
-#include "ui_startpage.h"
 #include "projectmanager/projectmanager.h"
 
 StartPage::StartPage(MainWindow *parent) // TODO set a palette so it will look identical with any color scheme.
@@ -60,14 +59,12 @@ StartPage::StartPage(MainWindow *parent) // TODO set a palette so it will look i
 
 StartPage::~StartPage()
 {
-    delete ui;
 }
 
 void StartPage::setupWidgets()
 {
     m_projectManager = new ProjectManager(this);
-    ui = new Ui::StartPage;
-    ui->setupUi(this);
+    m_ui.setupUi(this);
 
     // Set some default parameters, like username/email and preferred scripting language
     KConfigGroup cg = KGlobal::config()->group("NewProjectDefaultPreferences");
@@ -81,56 +78,57 @@ void StartPage::setupWidgets()
     if (userName.isEmpty()) {
         userName = user.loginName();
     }
+
     if (userEmail.isEmpty()) {
         userEmail.append(user.loginName()+"@none.org");
     }
 
-    ui->authorTextField->setText(userName);
-    ui->emailTextField->setText(userEmail);
+    m_ui.authorTextField->setText(userName);
+    m_ui.emailTextField->setText(userEmail);
 
-    ui->radioButtonJs->setChecked(cg.readEntry("radioButtonJsChecked", false));
-    ui->radioButtonPy->setChecked(cg.readEntry("radioButtonPyChecked", false));
-    ui->radioButtonRb->setChecked(cg.readEntry("radioButtonRbChecked", false));
-    ui->radioButtonDe->setChecked(cg.readEntry("radioButtonDeChecked", true));
+    m_ui.radioButtonJs->setChecked(cg.readEntry("radioButtonJsChecked", false));
+    m_ui.radioButtonPy->setChecked(cg.readEntry("radioButtonPyChecked", false));
+    m_ui.radioButtonRb->setChecked(cg.readEntry("radioButtonRbChecked", false));
+    m_ui.radioButtonDe->setChecked(cg.readEntry("radioButtonDeChecked", true));
 
-    ui->cancelNewProjectButton->setIcon(KIcon("dialog-cancel"));
-    ui->newProjectButton->setIcon(KIcon("dialog-ok"));
-    ui->loadLocalProject->setEnabled(false);
-    ui->importPackageButton->setEnabled(false);
+    m_ui.cancelNewProjectButton->setIcon(KIcon("dialog-cancel"));
+    m_ui.newProjectButton->setIcon(KIcon("dialog-ok"));
+    m_ui.loadLocalProject->setEnabled(false);
+    m_ui.importPackageButton->setEnabled(false);
 
     // Enforce the security restriction from package.cpp in the input field
-    connect(ui->projectName, SIGNAL(textEdited(const QString&)),
+    connect(m_ui.projectName, SIGNAL(textEdited(const QString&)),
             this, SLOT(processProjectName(const QString&)));
 
-    connect(ui->projectName, SIGNAL(returnPressed()),
+    connect(m_ui.projectName, SIGNAL(returnPressed()),
             this, SLOT(createNewProject()));
-    connect(ui->recentProjects, SIGNAL(clicked(const QModelIndex)),
+    connect(m_ui.recentProjects, SIGNAL(clicked(const QModelIndex)),
             this, SLOT(recentProjectSelected(const QModelIndex)));
 
     // Enforce the security restriction from package.cpp in the input field
-    connect(ui->localProject, SIGNAL(textChanged(const QString&)),
+    connect(m_ui.localProject, SIGNAL(textChanged(const QString&)),
             this, SLOT(checkLocalProjectPath(const QString&)));
-    connect(ui->loadLocalProject, SIGNAL(clicked()),
+    connect(m_ui.loadLocalProject, SIGNAL(clicked()),
             this, SLOT(loadLocalProject()));
 
-    connect(ui->importPackage, SIGNAL(textChanged(const QString&)),
+    connect(m_ui.importPackage, SIGNAL(textChanged(const QString&)),
             this, SLOT(checkPackagePath(const QString&)));
-    connect(ui->importPackageButton, SIGNAL(clicked()),
+    connect(m_ui.importPackageButton, SIGNAL(clicked()),
             this, SLOT(importPackage()));
 
     // When there will be a good API for js and rb dataengines and runners, remove the
     // first connect() statement and uncomment the one below :)
-    connect(ui->contentTypes, SIGNAL(clicked(const QModelIndex)),
+    connect(m_ui.contentTypes, SIGNAL(clicked(const QModelIndex)),
             this, SLOT(validateProjectType(const QModelIndex)));
-    /*connect(ui->contentTypes, SIGNAL(clicked(const QModelIndex)),
-            ui->projectName, SLOT(setFocus()));*/
+    /*connect(m_ui.contentTypes, SIGNAL(clicked(const QModelIndex)),
+            m_ui.projectName, SLOT(setFocus()));*/
 
 
-    connect(ui->newProjectButton, SIGNAL(clicked()),
+    connect(m_ui.newProjectButton, SIGNAL(clicked()),
             this, SLOT(createNewProject()));
-    connect(ui->cancelNewProjectButton, SIGNAL(clicked()),
+    connect(m_ui.cancelNewProjectButton, SIGNAL(clicked()),
             this, SLOT(cancelNewProject()));
-    connect(ui->importGHNSButton, SIGNAL(clicked()),
+    connect(m_ui.importGHNSButton, SIGNAL(clicked()),
             this, SLOT(doGHNSImport()));
 
     connect(m_projectManager, SIGNAL(projectSelected(QString, QString)),
@@ -138,12 +136,12 @@ void StartPage::setupWidgets()
     connect(m_projectManager, SIGNAL(requestRefresh()),
             this, SLOT(refreshRecentProjectsList()));
 
-    new QListWidgetItem(KIcon("application-x-plasma"), i18n("Plasma Widget"), ui->contentTypes);
-    new QListWidgetItem(KIcon("kexi"), i18n("Data Engine"), ui->contentTypes);
-    new QListWidgetItem(KIcon("system-run"), i18n("Runner"), ui->contentTypes);
-    new QListWidgetItem(KIcon("inkscape"), i18n("Theme"), ui->contentTypes);
+    new QListWidgetItem(KIcon("application-x-plasma"), i18n("Plasma Widget"), m_ui.contentTypes);
+    new QListWidgetItem(KIcon("kexi"), i18n("Data Engine"), m_ui.contentTypes);
+    new QListWidgetItem(KIcon("system-run"), i18n("Runner"), m_ui.contentTypes);
+    new QListWidgetItem(KIcon("inkscape"), i18n("Theme"), m_ui.contentTypes);
 
-//     connect(ui->newProjectButton, SIGNAL(clicked()), this, SLOT(launchNewProjectWizard()));
+//     connect(m_ui.newProjectButton, SIGNAL(clicked()), this, SLOT(launchNewProjectWizard()));
 }
 
 // Convert FooBar to foo_bar
@@ -163,94 +161,94 @@ void StartPage::checkProjectName(const QString& name)
                 break;
             pos += validatePluginName.matchedLength();
         }
-        ui->projectName->setText(QString(name).remove(pos, 1));
+        m_ui.projectName->setText(QString(name).remove(pos, 1));
     }
 
-    ui->newProjectButton->setEnabled(!ui->projectName->text().isEmpty());
+    m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty());
 }
 
 void StartPage::validateProjectType(const QModelIndex &sender)
 {
     if (sender.row() == 1) {
-        ui->languageLabel->setEnabled(true);
-        ui->radioButtonJs->setEnabled(true);
+        m_ui.languageLabel->setEnabled(true);
+        m_ui.radioButtonJs->setEnabled(true);
         // gotta explicitly setEnabled to true in case it
         // was falsed before!
-        ui->radioButtonPy->setEnabled(true);
+        m_ui.radioButtonPy->setEnabled(true);
         // also check this radio to prevent any disabled radios from
         // being checked due to previous setting!
-        ui->radioButtonRb->setEnabled(true);
-        ui->radioButtonDe->setEnabled(true);
-        ui->newProjectButton->setEnabled(!ui->projectName->text().isEmpty()); // in case previously falsed
+        m_ui.radioButtonRb->setEnabled(true);
+        m_ui.radioButtonDe->setEnabled(true);
+        m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty()); // in case previously falsed
     } else if (sender.row() == 2) {
-        ui->languageLabel->setEnabled(true);
-        ui->radioButtonJs->setEnabled(true);
-        ui->radioButtonJs->setChecked(true);
-        ui->radioButtonPy->setEnabled(true);
-        ui->radioButtonRb->setEnabled(false);
-        ui->radioButtonDe->setEnabled(true);
-        ui->newProjectButton->setEnabled(!ui->projectName->text().isEmpty()); // in case previously falsed
+        m_ui.languageLabel->setEnabled(true);
+        m_ui.radioButtonJs->setEnabled(true);
+        m_ui.radioButtonJs->setChecked(true);
+        m_ui.radioButtonPy->setEnabled(true);
+        m_ui.radioButtonRb->setEnabled(false);
+        m_ui.radioButtonDe->setEnabled(true);
+        m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty()); // in case previously falsed
 
     } else if (sender.row() == 3) {
-        ui->languageLabel->setEnabled(false);
-        ui->radioButtonJs->setEnabled(false);
-        ui->radioButtonPy->setEnabled(false);
-        ui->radioButtonRb->setEnabled(false);
-        ui->radioButtonDe->setEnabled(false);
-        ui->newProjectButton->setEnabled(false); // disable the create button too.
+        m_ui.languageLabel->setEnabled(false);
+        m_ui.radioButtonJs->setEnabled(false);
+        m_ui.radioButtonPy->setEnabled(false);
+        m_ui.radioButtonRb->setEnabled(false);
+        m_ui.radioButtonDe->setEnabled(false);
+        m_ui.newProjectButton->setEnabled(false); // disable the create button too.
     } else /* if (sender.row() == 0) */ {
-        ui->radioButtonJs->setEnabled(true);
-        ui->radioButtonDe->setChecked(true);
-        ui->radioButtonDe->setEnabled(true);
-        ui->radioButtonPy->setEnabled(true);
-        ui->radioButtonRb->setEnabled(true);
-        ui->newProjectButton->setEnabled(!ui->projectName->text().isEmpty()); // in case previously falsed
+        m_ui.radioButtonJs->setEnabled(true);
+        m_ui.radioButtonDe->setChecked(true);
+        m_ui.radioButtonDe->setEnabled(true);
+        m_ui.radioButtonPy->setEnabled(true);
+        m_ui.radioButtonRb->setEnabled(true);
+        m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty()); // in case previously falsed
     }
 
-    ui->layoutHackStackedWidget->setCurrentIndex(1);
-    ui->projectName->setFocus();
+    m_ui.layoutHackStackedWidget->setCurrentIndex(1);
+    m_ui.projectName->setFocus();
 }
 
 QString StartPage::userName()
 {
-    return ui->authorTextField->text();
+    return m_ui.authorTextField->text();
 }
 
 QString StartPage::userEmail()
 {
-    return ui->emailTextField->text();
+    return m_ui.emailTextField->text();
 }
 
 bool StartPage::selectedJsRadioButton()
 {
-    return ui->radioButtonJs->isChecked();
+    return m_ui.radioButtonJs->isChecked();
 }
 
 bool StartPage::selectedRbRadioButton()
 {
-    return ui->radioButtonRb->isChecked();
+    return m_ui.radioButtonRb->isChecked();
 }
 
 bool StartPage::selectedPyRadioButton()
 {
-    return ui->radioButtonPy->isChecked();
+    return m_ui.radioButtonPy->isChecked();
 }
 
 bool StartPage::selectedDeRadioButton()
 {
-    return ui->radioButtonDe->isChecked();
+    return m_ui.radioButtonDe->isChecked();
 }
 
 void StartPage::resetStatus()
 {
     kDebug() << "Reset status!";
-    ui->layoutHackStackedWidget->setCurrentIndex(0);
+    m_ui.layoutHackStackedWidget->setCurrentIndex(0);
     refreshRecentProjectsList();
 }
 
 void StartPage::refreshRecentProjectsList()
 {
-    ui->recentProjects->clear();
+    m_ui.recentProjects->clear();
     m_projectManager->clearProjects();
     const QStringList recentProjects = m_parent->recentProjects();
 
@@ -321,22 +319,22 @@ void StartPage::refreshRecentProjectsList()
 
         m_projectManager->addProject(item);
         // limit to 5 projects to display up front
-        if (ui->recentProjects->count() < 5) {
-            ui->recentProjects->addItem(new QListWidgetItem(*item));
+        if (m_ui.recentProjects->count() < 5) {
+            m_ui.recentProjects->addItem(new QListWidgetItem(*item));
         }
     }
 
     if (recentProjects.count() > 4) {
         QListWidgetItem *more = new QListWidgetItem(i18n("More projects..."));
         more->setIcon(KIcon("window-new"));
-        ui->recentProjects->addItem(more);
+        m_ui.recentProjects->addItem(more);
     }
 }
 
 void StartPage::createNewProject()
 {
     // packagePath -> projectPath
-    const QString projectName = ui->projectName->text();
+    const QString projectName = m_ui.projectName->text();
     if (projectName.isEmpty()) {
         return;
     }
@@ -352,13 +350,13 @@ void StartPage::createNewProject()
 
     // type -> serviceTypes
     QString serviceTypes;
-    if (ui->contentTypes->currentRow() == 1) {
+    if (m_ui.contentTypes->currentRow() == 1) {
         serviceTypes = "Plasma/DataEngine";
         templateFilePath.append("mainDataEngine");
-    } else if (ui->contentTypes->currentRow() == 2) {
+    } else if (m_ui.contentTypes->currentRow() == 2) {
         serviceTypes = "Plasma/Runner";
         templateFilePath.append("mainRunner");
-    } else if (ui->contentTypes->currentRow() == 3) {
+    } else if (m_ui.contentTypes->currentRow() == 3) {
         serviceTypes = "Plasma/Theme";
     } else {
         serviceTypes = "Plasma/Applet";
@@ -369,17 +367,17 @@ void StartPage::createNewProject()
     QString mainScriptName;
 
     // Append the desired extension
-    if (ui->radioButtonPy->isChecked()) {
+    if (m_ui.radioButtonPy->isChecked()) {
         metadata.setImplementationApi("python");
         projectFolderName = generateProjectFolderName(projectNameLowerCase);
         projectFileExtension = ".py";
         mainScriptName = projectNameLowerCase + projectFileExtension;
-    } else if (ui->radioButtonRb->isChecked()) {
+    } else if (m_ui.radioButtonRb->isChecked()) {
         metadata.setImplementationApi("ruby-script");
         projectFolderName = generateProjectFolderName(projectNameSnakeCase);
         projectFileExtension = ".rb";
         mainScriptName = QString("main_") + projectNameSnakeCase + projectFileExtension;
-    } else if (ui->radioButtonDe->isChecked()) {
+    } else if (m_ui.radioButtonDe->isChecked()) {
         metadata.setImplementationApi("declarativeappletscript");
         projectFolderName = generateProjectFolderName(projectNameLowerCase);
         projectFileExtension = ".qml";
@@ -453,13 +451,13 @@ void StartPage::createNewProject()
 
     replacedString.append("$AUTHOR");
     if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, ui->authorTextField->text().toAscii());
+        rawData.replace(replacedString, m_ui.authorTextField->text().toAscii());
     }
     replacedString.clear();
 
     replacedString.append("$EMAIL");
     if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, ui->emailTextField->text().toAscii());
+        rawData.replace(replacedString, m_ui.emailTextField->text().toAscii());
     }
     replacedString.clear();
 
@@ -481,8 +479,8 @@ void StartPage::createNewProject()
     //       name
     metadata.setPluginName(projectNameLowerCase);
     metadata.setServiceType(serviceTypes);
-    metadata.setAuthor(ui->authorTextField->text());
-    metadata.setEmail(ui->emailTextField->text());
+    metadata.setAuthor(m_ui.authorTextField->text());
+    metadata.setEmail(m_ui.emailTextField->text());
     metadata.setLicense("GPL");
     metadata.write(projectPath + projectFolderName + "/metadata.desktop");
 
@@ -504,12 +502,12 @@ void StartPage::createNewProject()
 
     // need to clear the project name field here too because startpage is still
     // accessible after project loads.
-    ui->projectName->clear();
+    m_ui.projectName->clear();
 }
 
 void StartPage::cancelNewProject()
 {
-    ui->projectName->clear();
+    m_ui.projectName->clear();
     resetStatus();
 }
 
@@ -517,19 +515,19 @@ void StartPage::checkLocalProjectPath(const QString& name)
 {
     QDir dir(KShell::tildeExpand(name));
     kDebug() << "checking: " << name << dir.exists();
-    ui->loadLocalProject->setEnabled(!name.isEmpty() && dir.exists());
+    m_ui.loadLocalProject->setEnabled(!name.isEmpty() && dir.exists());
 }
 
 void StartPage::loadLocalProject()
 {
-    QString path = KShell::tildeExpand(ui->localProject->text());
+    QString path = KShell::tildeExpand(m_ui.localProject->text());
     kDebug() << "loading local project from" << path;
     emit projectSelected(path, QString());
 }
 
 void StartPage::recentProjectSelected(const QModelIndex &index)
 {
-    QAbstractItemModel *m = ui->recentProjects->model();
+    QAbstractItemModel *m = m_ui.recentProjects->model();
     QString url = m->data(index, FullPathRole).value<QString>();
     if (url.isEmpty()) {
         m_projectManager->exec();
@@ -545,12 +543,12 @@ void StartPage::checkPackagePath(const QString& name)
     const QString fullName = KShell::tildeExpand(name);
     bool valid = QFile::exists(fullName) &&
                  KMimeType::findByUrl(fullName)->is("application/x-plasma");
-    ui->importPackageButton->setEnabled(valid);
+    m_ui.importPackageButton->setEnabled(valid);
 }
 
 void StartPage::importPackage()
 {
-    const KUrl target = ui->importPackage->url();
+    const KUrl target = m_ui.importPackage->url();
     selectProject(target);
 }
 
