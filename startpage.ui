@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>966</width>
-    <height>661</height>
+    <height>664</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -282,7 +282,7 @@ Have fun creating!
            <item row="1" column="0">
             <widget class="QLabel" name="label_2">
              <property name="text">
-              <string>Local package file</string>
+              <string>Local package file:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -292,7 +292,7 @@ Have fun creating!
            <item row="1" column="1">
             <layout class="QHBoxLayout" name="horizontalLayout_2">
              <item>
-              <widget class="KUrlRequester" name="importUrl">
+              <widget class="KUrlRequester" name="importPackage">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                  <horstretch>0</horstretch>
@@ -308,7 +308,7 @@ Have fun creating!
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="importButton">
+              <widget class="QPushButton" name="importPackageButton">
                <property name="text">
                 <string>Import</string>
                </property>
@@ -319,14 +319,14 @@ Have fun creating!
            <item row="2" column="0">
             <widget class="QLabel" name="label_5">
              <property name="text">
-              <string>From Get Hot New Stuff</string>
+              <string>Download:</string>
              </property>
             </widget>
            </item>
            <item row="2" column="1">
             <widget class="QPushButton" name="importGHNSButton">
              <property name="text">
-              <string>Download Add-Ons</string>
+              <string>Download Add-On</string>
              </property>
             </widget>
            </item>
@@ -566,7 +566,7 @@ Have fun creating!
   <tabstop>radioButtonRb</tabstop>
   <tabstop>newProjectButton</tabstop>
   <tabstop>cancelNewProjectButton</tabstop>
-  <tabstop>importUrl</tabstop>
+  <tabstop>importPackage</tabstop>
  </tabstops>
  <resources/>
  <connections>
@@ -577,12 +577,12 @@ Have fun creating!
    <slot>animateClick()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>290</x>
-     <y>251</y>
+     <x>705</x>
+     <y>84</y>
     </hint>
     <hint type="destinationlabel">
-     <x>386</x>
-     <y>467</y>
+     <x>705</x>
+     <y>84</y>
     </hint>
    </hints>
   </connection>
@@ -593,12 +593,12 @@ Have fun creating!
    <slot>animateClick()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>317</x>
-     <y>290</y>
+     <x>705</x>
+     <y>84</y>
     </hint>
     <hint type="destinationlabel">
-     <x>356</x>
-     <y>460</y>
+     <x>705</x>
+     <y>84</y>
     </hint>
    </hints>
   </connection>
@@ -609,12 +609,44 @@ Have fun creating!
    <slot>animateClick()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>302</x>
-     <y>329</y>
+     <x>705</x>
+     <y>84</y>
     </hint>
     <hint type="destinationlabel">
-     <x>353</x>
-     <y>468</y>
+     <x>705</x>
+     <y>84</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>localProject</sender>
+   <signal>returnPressed()</signal>
+   <receiver>loadLocalProject</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>793</x>
+     <y>571</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>913</x>
+     <y>571</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>importPackage</sender>
+   <signal>returnPressed()</signal>
+   <receiver>importPackageButton</receiver>
+   <slot>animateClick()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>821</x>
+     <y>604</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>936</x>
+     <y>607</y>
     </hint>
    </hints>
   </connection>
