@@ -208,30 +208,6 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_4">
-           <item>
-            <spacer name="horizontalSpacer">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QPushButton" name="moreButton">
-             <property name="text">
-              <string>More Projects...</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
           <widget class="QLabel" name="label_4">
            <property name="text">
             <string>&lt;h3&gt;Import an existing project...&lt;/h3&gt;</string>

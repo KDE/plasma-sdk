@@ -133,8 +133,6 @@ void StartPage::setupWidgets()
             this, SLOT(cancelNewProject()));
     connect(ui->importGHNSButton, SIGNAL(clicked()),
             this, SLOT(doGHNSImport()));
-    connect(ui->moreButton, SIGNAL(clicked()),
-            this, SLOT(showMoreDialog()));
 
     connect(m_projectManager, SIGNAL(projectSelected(QString, QString)),
             this, SLOT(emitProjectSelected(QString, QString)));
@@ -255,9 +253,9 @@ void StartPage::refreshRecentProjectsList()
 {
     ui->recentProjects->clear();
     m_projectManager->clearProjects();
-    QStringList recentFiles = m_parent->recentProjects();
+    const QStringList recentProjects = m_parent->recentProjects();
 
-    foreach (const QString file, recentFiles) {
+    foreach (const QString file, recentProjects) {
         // Specify path + filename as well to avoid mistaking .gitignore
         // as being the metadata file.
         QString f = file;
@@ -322,6 +320,12 @@ void StartPage::refreshRecentProjectsList()
         if (ui->recentProjects->count() < 5) {
             ui->recentProjects->addItem(new QListWidgetItem(*item));
         }
+    }
+
+    if (recentProjects.count() > 4) {
+        QListWidgetItem *more = new QListWidgetItem(i18n("More projects..."));
+        more->setIcon(KIcon("window-new"));
+        ui->recentProjects->addItem(more);
     }
 }
 
@@ -523,6 +527,10 @@ void StartPage::emitProjectSelected(const QModelIndex &index)
 {
     QAbstractItemModel *m = ui->recentProjects->model();
     QString url = m->data(index, FullPathRole).value<QString>();
+    if (url.isEmpty()) {
+        m_projectManager->exec();
+        return;
+    }
     kDebug() << "Loading project file:" << m->data(index, FullPathRole);
 
     emitProjectSelected(url, QString());
@@ -592,11 +600,6 @@ void StartPage::selectProject(const KUrl &target)
     }
     emit projectSelected(projectFolder, QString());
 
-}
-
-void StartPage::showMoreDialog()
-{
-    m_projectManager->exec();
 }
 
 /**

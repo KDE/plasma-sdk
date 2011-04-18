@@ -83,7 +83,6 @@ private Q_SLOTS:
     void checkPackagePath(const QString &path);
     void importPackage();
     void doGHNSImport();
-    void showMoreDialog();
     void refreshRecentProjectsList();
     void loadLocalProject();
 
