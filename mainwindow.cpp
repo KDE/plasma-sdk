@@ -185,7 +185,7 @@ void MainWindow::createMenus()
     KStandardAction::quit(this, SLOT(quit()), actionCollection());
     KAction *refresh = KStandardAction::redisplay(this, SLOT(saveAndRefresh()), actionCollection());
     refresh->setShortcut(Qt::CTRL + Qt::Key_F5);
-    refresh->setText(i18n("Refresh Previewer"));
+    refresh->setText(i18n("Refresh Preview"));
     menuBar()->addMenu(helpMenu());
     setupGUI();
 }
@@ -214,7 +214,7 @@ void MainWindow::setupActions()
 
     addAction(i18n("Preview"), "user-desktop", SLOT(togglePreview()), "preview")->setCheckable(true);
     addAction(i18n("Notes"), "accessories-text-editor", SLOT(toggleNotes()), "notes")->setCheckable(true);
-    addAction(i18n("File List"), "system-file-manager", SLOT(toggleFileList()), "file_list")->setCheckable(true);
+    addAction(i18n("Files"), "system-file-manager", SLOT(toggleFileList()), "file_list")->setCheckable(true);
     addAction(i18n("Timeline"), "process-working",  SLOT(toggleTimeLine()), "timeline")->setCheckable(true);
     addAction(i18n("Documentation"), "help-contents", SLOT(openDocumentation()), "documentation")->setCheckable(true);
 }
@@ -297,7 +297,7 @@ void MainWindow::toggleNotes()
 void MainWindow::setNotesVisible(const bool visible)
 {
     if (visible && !m_notesWidget) {
-        m_notesWidget = new QDockWidget(i18n("Project notes"), this);
+        m_notesWidget = new QDockWidget(i18n("Notes"), this);
         m_notesWidget->setObjectName("projectNotes");
         loadNotesEditor(m_notesWidget);
         addDockWidget(Qt::BottomDockWidgetArea, m_notesWidget);
@@ -705,7 +705,7 @@ Previewer* MainWindow::createPreviewerFor(const QString& projectType)
     Previewer* ret = 0;
     if (projectType == "Plasma/Applet" ||
         projectType == "Plasma/Applet,Plasma/PopupApplet") {
-        ret = new PlasmoidPreviewer(i18n("Previewer"), this);
+        ret = new PlasmoidPreviewer(i18n("Preview"), this);
     } else if (projectType == "Plasma/Runner") {
         ret = new RunnerPreviewer(i18n("Previewer"), this);
     }
