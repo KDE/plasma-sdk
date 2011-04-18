@@ -106,7 +106,7 @@ void StartPage::setupWidgets()
     connect(ui->projectName, SIGNAL(returnPressed()),
             this, SLOT(createNewProject()));
     connect(ui->recentProjects, SIGNAL(clicked(const QModelIndex)),
-            this, SLOT(emitProjectSelected(const QModelIndex)));
+            this, SLOT(recentProjectSelected(const QModelIndex)));
 
     // Enforce the security restriction from package.cpp in the input field
     connect(ui->localProject, SIGNAL(textChanged(const QString&)),
@@ -135,7 +135,7 @@ void StartPage::setupWidgets()
             this, SLOT(doGHNSImport()));
 
     connect(m_projectManager, SIGNAL(projectSelected(QString, QString)),
-            this, SLOT(emitProjectSelected(QString, QString)));
+            this, SIGNAL(projectSelected(QString, QString)));
     connect(m_projectManager, SIGNAL(requestRefresh()),
             this, SLOT(refreshRecentProjectsList()));
 
@@ -523,7 +523,7 @@ void StartPage::loadLocalProject()
     emit projectSelected(path, QString());
 }
 
-void StartPage::emitProjectSelected(const QModelIndex &index)
+void StartPage::recentProjectSelected(const QModelIndex &index)
 {
     QAbstractItemModel *m = ui->recentProjects->model();
     QString url = m->data(index, FullPathRole).value<QString>();
@@ -533,12 +533,7 @@ void StartPage::emitProjectSelected(const QModelIndex &index)
     }
     kDebug() << "Loading project file:" << m->data(index, FullPathRole);
 
-    emitProjectSelected(url, QString());
-}
-
-void StartPage::emitProjectSelected(const QString &name, const QString &type)
-{
-    emit projectSelected(name, type);
+    emit projectSelected(url, QString());
 }
 
 void StartPage::checkPackagePath(const QString& name)

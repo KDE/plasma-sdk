@@ -73,8 +73,7 @@ signals:
     void projectSelected(const QString &name, const QString &type);
 
 private Q_SLOTS:
-    void emitProjectSelected(const QModelIndex &);
-    void emitProjectSelected(const QString &name, const QString &type);
+    void recentProjectSelected(const QModelIndex &);
     void validateProjectType(const QModelIndex &sender);
     void createNewProject();
     void cancelNewProject();
