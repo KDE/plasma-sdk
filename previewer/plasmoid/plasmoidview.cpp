@@ -30,9 +30,9 @@
 #include <Plasma/Containment>
 
 PlasmoidView::PlasmoidView(QWidget *parent)
-        : QGraphicsView(parent),
-        m_containment(0),
-        m_applet(0)
+    : QGraphicsView(parent),
+      m_containment(0),
+      m_applet(0)
 {
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     setScene(&m_corona);
@@ -42,40 +42,130 @@ PlasmoidView::PlasmoidView(QWidget *parent)
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    // containment stuff (must go to constructor / init ?)
     m_containment = m_corona.addContainment("studiopreviewer");
     m_containment->setFormFactor(Plasma::Planar);
     m_containment->setLocation(Plasma::Floating);
     m_containment->setAspectRatioMode(Plasma::IgnoreAspectRatio);
-    connect(m_containment, SIGNAL(appletRemoved(Plasma::Applet*)), this, SLOT(appletRemoved()));
+    m_containment->setWallpaper("color");
+
+    connect(m_containment, SIGNAL(appletRemoved(Plasma::Applet*)),
+            this, SLOT(appletRemoved(Plasma::Applet*)));
 
     // we do a two-way connect here to allow the previewer containment
     // and main window to tell each other to save/refresh
     connect(m_containment, SIGNAL(refreshClicked()), parent, SLOT(emitRefreshRequest()));
     connect(parent, SIGNAL(refreshView()), m_containment, SLOT(refreshApplet()));
 
-    setScene(m_containment->scene());
+    setScene(&m_corona);
+}
+
+PlasmoidView::~PlasmoidView()
+{
+    if (!m_currentPath.isEmpty() && m_applet) {
+        KConfigGroup cg;
+        m_applet->save(cg);
+        cg = m_applet->config();
+        KConfigGroup storage = storageGroup();
+        storage.deleteGroup();
+        cg.copyTo(&storage);
+    }
+
+    if (m_containment) {
+        KConfigGroup cg;
+        m_containment->save(cg);
+        cg = m_containment->config();
+        KConfigGroup storage = containmentStorageGroup();
+        storage.deleteGroup();
+        cg.copyTo(&storage);
+        storage.deleteGroup("Applets");
+        m_containment->destroy(false);
+    }
+
+    KGlobal::config()->sync();
+    m_corona.saveLayout();
+}
+
+bool PlasmoidView::hasStorageGroup() const
+{
+    if (m_currentPath.isEmpty()) {
+        return false;
+    }
+
+    KConfigGroup stored = KConfigGroup(KGlobal::config(), "StoredApplets");
+    return stored.groupList().contains(m_currentPath);
+}
+
+KConfigGroup PlasmoidView::storageGroup() const
+{
+    KConfigGroup stored = KConfigGroup(KGlobal::config(), "StoredApplets");
+    return KConfigGroup(&stored, m_currentPath);
+}
+
+bool PlasmoidView::hasContainmentStorageGroup() const
+{
+    if (m_currentPath.isEmpty()) {
+        return false;
+    }
+
+    KConfigGroup stored = KConfigGroup(KGlobal::config(), "StoredContainments");
+    return stored.groupList().contains(m_currentPath);
+}
+
+KConfigGroup PlasmoidView::containmentStorageGroup() const
+{
+    KConfigGroup stored = KConfigGroup(KGlobal::config(), "StoredContainments");
+    return KConfigGroup(&stored, m_currentPath);
 }
 
 void PlasmoidView::addApplet(const QString &name, const QVariantList &args)
 {
+    if (m_applet) {
+        if (m_applet->pluginName() == name) {
+            return;
+        }
+
+        delete m_applet;
+        m_applet = 0;
+    }
+
     QFileInfo info(name);
     if (!info.isAbsolute()) {
         info = QFileInfo(QDir::currentPath() + "/" + name);
     }
 
+    m_currentPath = info.absoluteFilePath();
     // load from package if we have a path
     if (info.exists()) {
-        m_applet = Applet::loadPlasmoid(info.absoluteFilePath());
+        m_applet = Applet::loadPlasmoid(m_currentPath);
     }
 
-    if (!m_applet) {
-        m_applet = m_containment->addApplet(name, args, QRectF(0, 0, -1, -1));
-    } else {
+    if (m_applet) {
+        if (hasContainmentStorageGroup()) {
+            KConfigGroup cg = m_containment->config();
+            KConfigGroup storage = containmentStorageGroup();
+            cg.deleteGroup();
+            storage.copyTo(&cg);
+            cg.deleteGroup("Applets");
+            m_containment->configChanged();
+        }
+
         m_containment->addApplet(m_applet, QPointF(-1, -1), false);
+        if (hasStorageGroup()) {
+            KConfigGroup cg = m_applet->config();
+            KConfigGroup storage = storageGroup();
+            cg.deleteGroup();
+            storage.copyTo(&cg);
+            m_applet->configChanged();
+        }
+    } else {
+        m_currentPath.clear();
+        m_applet = m_containment->addApplet(name, args, QRectF(0, 0, -1, -1));
     }
 
-    m_applet->setFlag(QGraphicsItem::ItemIsMovable, false);
+    if (m_applet) {
+        m_applet->setFlag(QGraphicsItem::ItemIsMovable, false);
+    }
+
     //resize(m_applet->preferredSize().toSize());
 }
 
@@ -84,9 +174,11 @@ void PlasmoidView::clearApplets()
     m_containment->clearApplets();
 }
 
-void PlasmoidView::appletRemoved()
+void PlasmoidView::appletRemoved(Plasma::Applet *applet)
 {
-    m_applet = 0;
+    if (applet == m_applet) {
+        m_applet = 0;
+    }
 }
 
 void PlasmoidView::sceneRectChanged(const QRectF &rect)

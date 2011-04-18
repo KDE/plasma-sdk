@@ -37,19 +37,28 @@ class PlasmoidView : public QGraphicsView
 
 public:
     PlasmoidView(QWidget *parent = 0);
+    ~PlasmoidView();
+
     void addApplet(const QString &name, const QVariantList &args = QVariantList());
     void clearApplets();
 
 private slots:
     void sceneRectChanged(const QRectF &rect);
     void resizeEvent(QResizeEvent *event);
-    void appletRemoved();
+    void appletRemoved(Plasma::Applet *applet);
 
 private:
+    bool hasStorageGroup() const;
+    KConfigGroup storageGroup() const;
+    bool hasContainmentStorageGroup() const;
+    KConfigGroup containmentStorageGroup() const;
+
     Plasma::Corona m_corona;
     Plasma::FormFactor m_formfactor;
     Plasma::Containment *m_containment;
     Plasma::Applet *m_applet;
+
+    QString m_currentPath;
 };
 
 #endif //PLASMOIDVIEW_H
