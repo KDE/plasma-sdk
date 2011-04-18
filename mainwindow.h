@@ -21,7 +21,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KParts/MainWindow>
 #include <KLibLoader>
 #include <KAction>
-#include <kservice.h>
+#include <KService>
+#include <KShortcut>
 
 class QKeyEvent;
 class QModelIndex;
@@ -137,7 +138,7 @@ private:
     void loadNotesEditor(QDockWidget *container);
     Previewer* createPreviewerFor(const QString& projectType);
 
-    void addAction(QString text, const char * icon,const  char *slot, const char *name);
+    void addAction(QString text, const char * icon,const  char *slot, const char *name, const KShortcut &shortcut = KShortcut());
 
     StartPage *m_startPage;
     Sidebar *m_sidebar;

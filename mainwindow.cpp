@@ -195,18 +195,19 @@ void MainWindow::quit()
 //     deleteLater();
 }
 
-void MainWindow::addAction(QString text, const char * icon, const  char *slot, const char *name)
+void MainWindow::addAction(QString text, const char * icon, const  char *slot, const char *name, const KShortcut &shortcut)
 {
     KAction *action = new KAction(this);
     action->setText(text);
     action->setIcon(KIcon(icon));
+    action->setShortcut(shortcut);
     connect(action, SIGNAL(triggered(bool)), this, slot);
     actionCollection()->addAction(name, action);
 }
 
 void MainWindow::setupActions()
 {
-    addAction(i18n("New Save Point"), "document-save",           SLOT(selectSavePoint()), "savepoint");
+    addAction(i18n("New Save Point"), "document-save",           SLOT(selectSavePoint()), "savepoint", KStandardShortcut::save());
     addAction(i18n("Publish"),        "krfb",                    SLOT(selectPublish()),   "publish");
     addAction(i18n("Preview"),        "user-desktop",            SLOT(togglePreview()),   "preview");
     addAction(i18n("Notes"),          "accessories-text-editor", SLOT(toggleNotes()),     "notes");
