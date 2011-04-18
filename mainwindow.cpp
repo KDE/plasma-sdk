@@ -171,6 +171,7 @@ void MainWindow::openDocumentation()
 {
     if (!m_browser) {
         m_browser = new DocBrowser(m_model, 0);
+        connect(m_browser, SIGNAL(visibilityChanged(bool)), this, SLOT(updateActions()));
     }
 
     m_browser->setVisible(!m_browser->isVisible());
@@ -250,6 +251,7 @@ void MainWindow::initTimeLine()
         m_timeLine->setObjectName("timeline");
         connect(m_timeLine, SIGNAL(sourceDirectoryChanged()), this, SLOT(editorDestructiveRefresh()));
         connect(m_timeLine, SIGNAL(savePointClicked()), this, SLOT(saveEditorData()));
+        connect(m_timeLine, SIGNAL(visibilityChanged(bool)), this, SLOT(updateActions()));
         connect(this, SIGNAL(newSavePointClicked()), m_timeLine, SLOT(newSavePoint()));
         addDockWidget(location, m_timeLine);
         m_timeLine->loadTimeLine(m_model->package());
@@ -272,12 +274,16 @@ void MainWindow::setFileListVisible(const bool visible)
         m_editWidget->setObjectName("edit tree");
         m_editWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         m_editWidget->setWidget(m_editPage);
+
         if (m_previewerWidget) {
             splitDockWidget(m_previewerWidget, m_editWidget, Qt::Vertical);
         } else {
             addDockWidget(Qt::LeftDockWidgetArea, m_editWidget);
         }
+
+        connect(m_editWidget, SIGNAL(visibilityChanged(bool)), this, SLOT(updateActions()));
     }
+
     if (m_editWidget) {
         m_editWidget->setVisible(visible);
     }
@@ -294,8 +300,10 @@ void MainWindow::setNotesVisible(const bool visible)
         m_notesWidget = new QDockWidget(i18n("Project notes"), this);
         m_notesWidget->setObjectName("projectNotes");
         loadNotesEditor(m_notesWidget);
-        addDockWidget(Qt::LeftDockWidgetArea, m_notesWidget);
+        addDockWidget(Qt::BottomDockWidgetArea, m_notesWidget);
+        connect(m_notesWidget, SIGNAL(visibilityChanged(bool)), this, SLOT(updateActions()));
     }
+
     if (m_notesWidget) {
         m_notesWidget->setVisible(visible);
     }
@@ -698,12 +706,15 @@ Previewer* MainWindow::createPreviewerFor(const QString& projectType)
     if (projectType == "Plasma/Applet" ||
         projectType == "Plasma/Applet,Plasma/PopupApplet") {
         ret = new PlasmoidPreviewer(i18n("Previewer"), this);
-        ret->setObjectName("preview");
-        connect(ret, SIGNAL(refreshRequested()), this, SLOT(saveAndRefresh()));
     } else if (projectType == "Plasma/Runner") {
         ret = new RunnerPreviewer(i18n("Previewer"), this);
+    }
+
+    if (ret) {
         ret->setObjectName("preview");
         connect(ret, SIGNAL(refreshRequested()), this, SLOT(saveAndRefresh()));
+        connect(ret, SIGNAL(visibilityChanged(bool)), this, SLOT(updateActions()));
     }
+
     return ret;
 }

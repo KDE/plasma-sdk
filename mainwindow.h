@@ -65,32 +65,37 @@ public:
 
 public Q_SLOTS:
     void quit();
-
     void loadProject(const QString &name, const QString &type);
 
-    void loadRequiredEditor(const KService::List offers, KUrl target);
-    void loadMetaDataEditor(KUrl target);
+Q_SIGNALS:
+    void newSavePointClicked();
+    void refreshRequested();
+
+private:
+    void setupActions();
+    void initTimeLine();
+
+private Q_SLOTS:
     void saveEditorData();
     void saveAndRefresh();
     void refreshNotes();
-    // refreshes editor, killing all local changes
-    void editorDestructiveRefresh();
     void selectSavePoint();
     void selectPublish();
-
-    void toggleTimeLine();
-    void togglePreview();
-    void toggleNotes();
-    void toggleFileList();
 
     void setNotesVisible(const bool visible);
     void setFileListVisible(const bool visible);
 
     void openDocumentation();
+    void loadRequiredEditor(const KService::List offers, KUrl target);
+    void loadMetaDataEditor(KUrl target);
+    void updateActions();
+    void toggleTimeLine();
+    void togglePreview();
+    void toggleNotes();
+    void toggleFileList();
 
-signals:
-    void newSavePointClicked();
-    void refreshRequested();
+    // refreshes editor, killing all local changes
+    void editorDestructiveRefresh();
 
 private:
 
@@ -100,10 +105,6 @@ private:
     KAction *m_previewAction;
     KAction *m_notesAction;
     KAction *m_fileListAction;
-
-    void setupActions();
-    void updateActions();
-    void initTimeLine();
 
     // QMainWindow takes control of and DELETES the previous centralWidget
     // whenever a new one is set - this is bad because we want to preserve
