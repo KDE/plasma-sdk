@@ -64,7 +64,6 @@ if (DEBUG_MODEL)
 endif (DEBUG_MODEL)
 
 kde4_add_ui_files (PlasMate_SRC
-   mainwindow.ui
    startpage.ui
    editors/metadata/metadata.ui
 )
