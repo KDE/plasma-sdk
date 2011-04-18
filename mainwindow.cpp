@@ -309,19 +309,6 @@ void MainWindow::togglePreview()
     m_previewerWidget->setVisible(!m_previewerWidget->isVisible());
 }
 
-void MainWindow::initPreviewer()
-{
-   if (!m_previewerWidget) {
-       QString packagePath = KStandardDirs::locateLocal("appdata", m_currentProject + '/');
-       m_previewerWidget = createPreviewerFor(m_currentProjectType);
-       kDebug() << "Adding prviewer......";
-       addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
-       m_previewerWidget->showPreview(packagePath);
-   }
-   m_previewerWidget->setVisible(true);
-
-}
-
 void MainWindow::saveEditorData()
 {
     if (qobject_cast<KParts::ReadWritePart*>(m_part)) {
@@ -656,6 +643,8 @@ void MainWindow::loadProject(const QString &name, const QString &type)
         addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
         m_previewerWidget->showPreview(packagePath);
     }
+    m_previewerWidget->setVisible(true);
+
     setFileListVisible(true);
     restoreState(state);
 
@@ -680,7 +669,6 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     }
     // After we loaded the project, init the TimeLine and Previewer component
     initTimeLine();
-    initPreviewer();
     menuBar()->show();
 }
 

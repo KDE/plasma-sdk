@@ -103,7 +103,6 @@ private:
 
     void setupActions();
     void initTimeLine();
-    void initPreviewer();
 
     // QMainWindow takes control of and DELETES the previous centralWidget
     // whenever a new one is set - this is bad because we want to preserve
