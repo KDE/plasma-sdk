@@ -206,7 +206,7 @@ void MainWindow::addAction(QString text, const char * icon, const  char *slot, c
 
 void MainWindow::setupActions()
 {
-    addAction(i18n("New Save Point"), "document-save",           SLOT(selectSavePoint()), "savepoint", KStandardShortcut::save());
+    addAction(i18n("Create Save Point"), "document-save",           SLOT(selectSavePoint()), "savepoint", KStandardShortcut::save());
     addAction(i18n("Publish"),        "krfb",                    SLOT(selectPublish()),   "publish");
     addAction(i18n("Preview"),        "user-desktop",            SLOT(togglePreview()),   "preview");
     addAction(i18n("Notes"),          "accessories-text-editor", SLOT(toggleNotes()),     "notes");
