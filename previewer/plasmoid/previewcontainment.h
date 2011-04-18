@@ -28,11 +28,10 @@
 
 #include <QGraphicsView>
 #include <QGraphicsLinearLayout>
-#include <KMenu>
 
 #include <Plasma/Containment>
-#include <Plasma/IconWidget>
 
+class KMenu;
 
 class PreviewContainment : public Plasma::Containment
 {
@@ -57,24 +56,10 @@ protected slots:
 
     void onAppletAdded(Plasma::Applet *, const QPointF &);
     void onAppletRemoved(Plasma::Applet *);
-    void onAppletGeometryChanged();
 
-    void cancelOption(bool);
-
-    void planarTriggered(bool);
-    void mediacenterTriggered(bool);
-    void horizontalTriggered(bool);
-    void verticalTriggered(bool);
-
-    void floatingTriggered(bool);
-    void desktopTriggered(bool);
-    void fullscreenTriggered(bool);
-    void topEdgeTriggered(bool);
-    void bottomEdgeTriggered(bool);
-    void leftEdgeTriggered(bool);
-    void rightEdgeTriggered(bool);
-
-    void setWallpaperPlugin(const QString&);
+    void formFactorSelected(QAction *);
+    void locationSelected(QAction *);
+    void wallpaperSelected(QAction *);
 
 protected:
     void setupHeader();
@@ -83,12 +68,7 @@ protected:
     void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
 
 private:
-    // these are a rough gauge for now
-    static const int MIN_HEIGHT_FOR_OVERLAY = 300;
-    static const int MIN_WIDTH_FOR_OVERLAY = 200;
-
-    enum menu_type { KMENU, OVERLAY } m_menutype;
-    OverlayToolBox *m_options;
+    Plasma::Applet *m_applet;
     KMenu *m_menu;
 
     // Little dirty hack to make previewer
@@ -100,15 +80,7 @@ private:
     QGraphicsLinearLayout *m_layout;
     QGraphicsLinearLayout *m_header;
 
-    Plasma::Applet *m_applet;
-
-    Plasma::IconWidget *form;
-    Plasma::IconWidget *refresh;
-    Plasma::IconWidget *location;
-    Plasma::IconWidget *wallpaper;
-
     void initMenu(const QString &title);
-    QAction* addMenuItem(const KIcon &icon, const QString &title);
     void showMenu();
 };
 
