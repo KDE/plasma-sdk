@@ -41,27 +41,21 @@
         </size>
        </property>
        <property name="text">
-        <string>&lt;h3&gt;Create and Share Plasma Addons&lt;/h3&gt;
-&lt;p&gt;
-With Plasmate, you can easily create your own Plasma Add-Ons, for example Plasma written in Qt Quick, JavaScript, Python or Ruby. Plasmate guides you through the process of importing an existing Add-On or creating a new one from scratch, implementing your functionality, and exporting ready-to-install Plasma Packages, either to your computer, or publishing to the world using the Get Hot New Stuff System. &lt;br /&gt;
-&lt;/p&gt;
-&lt;h3&gt;Get started with Plasmate...&lt;/h3&gt;
-&lt;p&gt;
-Plasmate provides all the tools you need to learn creating new Plasma Widgets.
-&lt;ul&gt;
-	&lt;li&gt;Follow a &lt;b&gt;Tutorial&lt;/b&gt; to gather inspiration and find out how to turn your ideas into reality.
-	&lt;/li&gt;
-	&lt;li&gt;Browse the online &lt;b&gt;Documentation&lt;/b&gt; for information about the scripting API.&lt;/li&gt;
-	&lt;li&gt;Work on your project in the &lt;b&gt;Editor&lt;/b&gt; edit scripts and add resources.
-	&lt;/li&gt;
-	&lt;li&gt;&lt;b&gt;Preview&lt;/b&gt; your widget as you work on it.&lt;/li&gt;
-	&lt;li&gt;&lt;b&gt;Export and Install&lt;/b&gt; the result as a Plasma package.
-	&lt;/li&gt;
-	&lt;li&gt;&lt;b&gt;Publish&lt;/b&gt; your creation via &lt;i&gt;Get Hot New Stuff&lt;/i&gt;.
-	&lt;/li&gt;
-&lt;/ul&gt;
-Have fun creating!
-&lt;/p&gt;</string>
+        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:14px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:large; font-weight:600;&quot;&gt;Create and Share Plasma Addons&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;With Plasmate, you can easily create your own Plasma Addons, for example Plasma written in Qt Quick, JavaScript, Python or Ruby. Plasmate guides you through the process of importing an existing Addon or creating a new one from scratch, implementing your functionality, and exporting ready-to-install Plasma Packages, either to your computer, or publishing to the world using the Get Hot New Stuff System. &lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:14px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:large; font-weight:600;&quot;&gt;Get started with Plasmate...&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Plasmate provides all the tools you need to learn creating new Plasma Widgets. &lt;/p&gt;
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Follow a &lt;span style=&quot; font-weight:600;&quot;&gt;Tutorial&lt;/span&gt; to gather inspiration and find out how to turn your ideas into reality. &lt;/li&gt;
+&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Browse the online &lt;span style=&quot; font-weight:600;&quot;&gt;Documentation&lt;/span&gt; for information about the scripting API. &lt;/li&gt;
+&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Work on your project in the &lt;span style=&quot; font-weight:600;&quot;&gt;Editor&lt;/span&gt; edit scripts and add resources. &lt;/li&gt;
+&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Preview&lt;/span&gt; your widget as you work on it. &lt;/li&gt;
+&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Export and Install&lt;/span&gt; the result as a Plasma package. &lt;/li&gt;
+&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Publish&lt;/span&gt; your creation via &lt;span style=&quot; font-style:italic;&quot;&gt;Get Hot New Stuff&lt;/span&gt;. &lt;/li&gt;&lt;/ul&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Have fun creating! &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignJustify|Qt::AlignTop</set>
@@ -96,7 +90,7 @@ Have fun creating!
          <item>
           <widget class="QLabel" name="label_3">
            <property name="text">
-            <string>&lt;h3&gt;Create a new Add-On...&lt;/h3&gt;</string>
+            <string>&lt;h3&gt;Create a new Addon...&lt;/h3&gt;</string>
            </property>
           </widget>
          </item>
@@ -326,7 +320,7 @@ Have fun creating!
            <item row="2" column="1">
             <widget class="QPushButton" name="importGHNSButton">
              <property name="text">
-              <string>Download Add-On</string>
+              <string>Download Addon</string>
              </property>
             </widget>
            </item>
