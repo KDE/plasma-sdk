@@ -95,6 +95,7 @@ void StartPage::setupWidgets()
     ui->cancelNewProjectButton->setIcon(KIcon("dialog-cancel"));
     ui->newProjectButton->setIcon(KIcon("dialog-ok"));
     ui->titleWidget->setPixmap(KIcon("plasmagik").pixmap(48, 48), KTitleWidget::ImageRight);
+    ui->loadLocalProject->setEnabled(false);
 
     // Enforce the security restriction from package.cpp in the input field
     connect(ui->projectName, SIGNAL(textEdited(const QString&)),
