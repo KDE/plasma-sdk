@@ -104,7 +104,7 @@ private:
     QVBoxLayout *m_layout;
     MainWindow *m_parent;
 
-    ProjectManager *projectManager;
+    ProjectManager *m_projectManager;
 };
 
 #endif // STARTPAGE_H

@@ -65,7 +65,7 @@ StartPage::~StartPage()
 
 void StartPage::setupWidgets()
 {
-    projectManager = new ProjectManager(this);
+    m_projectManager = new ProjectManager(this);
     ui = new Ui::StartPage;
     ui->setupUi(this);
 
@@ -136,9 +136,9 @@ void StartPage::setupWidgets()
     connect(ui->moreButton, SIGNAL(clicked()),
             this, SLOT(showMoreDialog()));
 
-    connect(projectManager, SIGNAL(projectSelected(QString, QString)),
+    connect(m_projectManager, SIGNAL(projectSelected(QString, QString)),
             this, SLOT(emitProjectSelected(QString, QString)));
-    connect(projectManager, SIGNAL(requestRefresh()),
+    connect(m_projectManager, SIGNAL(requestRefresh()),
             this, SLOT(refreshRecentProjectsList()));
 
     new QListWidgetItem(KIcon("application-x-plasma"), i18n("Plasma Widget"), ui->contentTypes);
@@ -254,10 +254,10 @@ void StartPage::resetStatus()
 void StartPage::refreshRecentProjectsList()
 {
     ui->recentProjects->clear();
-    projectManager->clearProjects();
+    m_projectManager->clearProjects();
     QStringList recentFiles = m_parent->recentProjects();
 
-    foreach(const QString file, recentFiles) {
+    foreach (const QString file, recentFiles) {
         // Specify path + filename as well to avoid mistaking .gitignore
         // as being the metadata file.
         QString f = file;
@@ -317,7 +317,7 @@ void StartPage::refreshRecentProjectsList()
         }
         item->setToolTip(tooltip);
 
-        projectManager->addProject(item);
+        m_projectManager->addProject(item);
         // limit to 5 projects to display up front
         if (ui->recentProjects->count() < 5) {
             ui->recentProjects->addItem(new QListWidgetItem(*item));
@@ -596,7 +596,7 @@ void StartPage::selectProject(const KUrl &target)
 
 void StartPage::showMoreDialog()
 {
-    projectManager->exec();
+    m_projectManager->exec();
 }
 
 /**
