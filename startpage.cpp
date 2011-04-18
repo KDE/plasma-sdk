@@ -98,7 +98,7 @@ void StartPage::setupWidgets()
 
     // Enforce the security restriction from package.cpp in the input field
     connect(m_ui.projectName, SIGNAL(textEdited(const QString&)),
-            this, SLOT(processProjectName(const QString&)));
+            this, SLOT(checkProjectName(const QString&)));
 
     connect(m_ui.projectName, SIGNAL(returnPressed()),
             this, SLOT(createNewProject()));
