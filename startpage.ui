@@ -290,13 +290,6 @@
         </spacer>
        </item>
       </layout>
-      <zorder>label_3</zorder>
-      <zorder>contentTypes</zorder>
-      <zorder>recentProjectsLabel</zorder>
-      <zorder>recentProjects</zorder>
-      <zorder>label_4</zorder>
-      <zorder>horizontalSpacer</zorder>
-      <zorder>welcomeText</zorder>
      </widget>
      <widget class="QWidget" name="stackedWidgetPageTwo">
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -438,7 +431,7 @@ p, li { white-space: pre-wrap; }
          <item>
           <widget class="KPushButton" name="cancelNewProjectButton">
            <property name="text">
-            <string>Cancel</string>
+            <string>Back</string>
            </property>
           </widget>
          </item>

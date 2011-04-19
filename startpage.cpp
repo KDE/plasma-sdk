@@ -38,6 +38,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KSeparator>
 #include <KUrlRequester>
 #include <KShell>
+#include <KStandardAction>
 #include <KStandardDirs>
 #include <KUser>
 #include <KMessageBox>
@@ -91,7 +92,7 @@ void StartPage::setupWidgets()
     m_ui.radioButtonRb->setChecked(cg.readEntry("radioButtonRbChecked", false));
     m_ui.radioButtonDe->setChecked(cg.readEntry("radioButtonDeChecked", true));
 
-    m_ui.cancelNewProjectButton->setIcon(KIcon("dialog-cancel"));
+    m_ui.cancelNewProjectButton->setIcon(KIcon("draw-arrow-back"));
     m_ui.newProjectButton->setIcon(KIcon("dialog-ok"));
     m_ui.loadLocalProject->setEnabled(false);
     m_ui.importPackageButton->setEnabled(false);
