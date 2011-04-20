@@ -311,6 +311,10 @@ void MainWindow::setNotesVisible(const bool visible)
 
 void MainWindow::selectSavePoint()
 {
+   if (!m_timeLine) {
+     initTimeLine();
+  }
+
   emit newSavePointClicked();
 }
 
