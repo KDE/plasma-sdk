@@ -665,8 +665,8 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     if (m_previewerWidget) {
         addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
         m_previewerWidget->showPreview(packagePath);
+        m_previewerWidget->setVisible(true);
     }
-    m_previewerWidget->setVisible(true);
 
     setFileListVisible(true);
     restoreState(state);
