@@ -83,6 +83,13 @@ private Q_SLOTS:
     void loadLocalProject();
 
 private:
+    enum NewProjectRows {
+        PlasmoidRow = 0,
+        DataEngineRow = 1,
+        RunnerRow = 2,
+        ThemeRow = 3
+    };
+
     void setupWidgets();
     static QString camelToSnakeCase(const QString& name);
     const QString generateProjectFolderName(const QString& suggestion);

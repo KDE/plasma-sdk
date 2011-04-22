@@ -170,42 +170,33 @@ void StartPage::checkProjectName(const QString& name)
 
 void StartPage::validateProjectType(const QModelIndex &sender)
 {
-    if (sender.row() == 1) {
+    if (sender.row() == DataEngineRow) {
         m_ui.languageLabel->setEnabled(true);
+        m_ui.radioButtonDe->setEnabled(false);
         m_ui.radioButtonJs->setEnabled(true);
-        // gotta explicitly setEnabled to true in case it
-        // was falsed before!
+        m_ui.radioButtonJs->setChecked(true);
         m_ui.radioButtonPy->setEnabled(true);
-        // also check this radio to prevent any disabled radios from
-        // being checked due to previous setting!
         m_ui.radioButtonRb->setEnabled(true);
-        m_ui.radioButtonDe->setEnabled(true);
-        m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty()); // in case previously falsed
-    } else if (sender.row() == 2) {
+    } else if (sender.row() == RunnerRow) {
         m_ui.languageLabel->setEnabled(true);
+        m_ui.radioButtonDe->setEnabled(false);
         m_ui.radioButtonJs->setEnabled(true);
         m_ui.radioButtonJs->setChecked(true);
         m_ui.radioButtonPy->setEnabled(true);
         m_ui.radioButtonRb->setEnabled(false);
+    } else if (sender.row() == ThemeRow) {
+        m_ui.languageLabel->hide();
+        m_ui.frame->hide();
+    } else /* if (sender.row() == PlasmaRow) */ {
         m_ui.radioButtonDe->setEnabled(true);
-        m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty()); // in case previously falsed
-
-    } else if (sender.row() == 3) {
-        m_ui.languageLabel->setEnabled(false);
-        m_ui.radioButtonJs->setEnabled(false);
-        m_ui.radioButtonPy->setEnabled(false);
-        m_ui.radioButtonRb->setEnabled(false);
-        m_ui.radioButtonDe->setEnabled(false);
-        m_ui.newProjectButton->setEnabled(false); // disable the create button too.
-    } else /* if (sender.row() == 0) */ {
-        m_ui.radioButtonJs->setEnabled(true);
         m_ui.radioButtonDe->setChecked(true);
+        m_ui.radioButtonJs->setEnabled(true);
         m_ui.radioButtonDe->setEnabled(true);
         m_ui.radioButtonPy->setEnabled(true);
         m_ui.radioButtonRb->setEnabled(true);
-        m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty()); // in case previously falsed
     }
 
+    m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty());
     m_ui.layoutHackStackedWidget->setCurrentIndex(1);
     m_ui.projectName->setFocus();
 }
