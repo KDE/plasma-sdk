@@ -170,19 +170,17 @@ void StartPage::checkProjectName(const QString& name)
 
 void StartPage::validateProjectType(const QModelIndex &sender)
 {
+    m_ui.languageLabel->show();
+    m_ui.radioButtonJs->setEnabled(true);
+    m_ui.radioButtonPy->setEnabled(true);
+
     if (sender.row() == DataEngineRow) {
-        m_ui.languageLabel->setEnabled(true);
         m_ui.radioButtonDe->setEnabled(false);
-        m_ui.radioButtonJs->setEnabled(true);
         m_ui.radioButtonJs->setChecked(true);
-        m_ui.radioButtonPy->setEnabled(true);
         m_ui.radioButtonRb->setEnabled(true);
     } else if (sender.row() == RunnerRow) {
-        m_ui.languageLabel->setEnabled(true);
         m_ui.radioButtonDe->setEnabled(false);
-        m_ui.radioButtonJs->setEnabled(true);
         m_ui.radioButtonJs->setChecked(true);
-        m_ui.radioButtonPy->setEnabled(true);
         m_ui.radioButtonRb->setEnabled(false);
     } else if (sender.row() == ThemeRow) {
         m_ui.languageLabel->hide();
@@ -190,9 +188,6 @@ void StartPage::validateProjectType(const QModelIndex &sender)
     } else /* if (sender.row() == PlasmaRow) */ {
         m_ui.radioButtonDe->setEnabled(true);
         m_ui.radioButtonDe->setChecked(true);
-        m_ui.radioButtonJs->setEnabled(true);
-        m_ui.radioButtonDe->setEnabled(true);
-        m_ui.radioButtonPy->setEnabled(true);
         m_ui.radioButtonRb->setEnabled(true);
     }
 
