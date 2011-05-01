@@ -17,6 +17,7 @@ GenericName[et]=Plasma lisandite looja
 GenericName[nl]=Plasma maker van addons
 GenericName[pt]=Criador de Extensões do Plasma
 GenericName[pt_BR]=Criador de complementos do Plasma
+GenericName[sv]=Skapa Plasma-tillägg
 GenericName[uk]=Програма для створення додатків Плазми
 GenericName[x-test]=xxPlasma Addon Creatorxx
 Exec=plasmate
