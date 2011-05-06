@@ -507,12 +507,14 @@ void MainWindow::refreshNotes()
     m_notesPart->openUrl(KUrl("file://" + notesFile));
 }
 
-void MainWindow::loadMetaDataEditor(KUrl target) {
+void MainWindow::loadMetaDataEditor(KUrl target)
+{
     // save any previous editor content
     saveEditorData();
 
-    if (!m_metaEditor)
+    if (!m_metaEditor) {
         m_metaEditor = new MetaDataEditor(this);
+    }
 
     m_metaEditor->setFilename(target.path());
     m_metaEditor->readFile();
