@@ -244,7 +244,7 @@ void StartPage::refreshRecentProjectsList()
         m_ui.recentProjects->hide();
         return;
     }
-
+    int counter = 0;
     foreach (const QString file, recentProjects) {
         // Specify path + filename as well to avoid mistaking .gitignore
         // as being the metadata file.
@@ -272,7 +272,7 @@ void StartPage::refreshRecentProjectsList()
 
         kDebug() << "adding" << projectName << "to the list of recent projects...";
         QListWidgetItem *item = new QListWidgetItem(projectName); // show the user-set plasmoid name in the UI
-
+	counter++;
         // the loading code uses this to find the project to load.
         // since folder name and plasmoid name can be different, this
         // should be set to the folder name, which the loading code expects.
@@ -317,11 +317,15 @@ void StartPage::refreshRecentProjectsList()
         }
     }
 
-    if (recentProjects.count() > 4) {
-        QListWidgetItem *more = new QListWidgetItem(i18n("More projects..."));
-        more->setIcon(KIcon("window-new"));
-        m_ui.recentProjects->addItem(more);
+    QListWidgetItem *more;
+    //if (recentProjects.count() >=0 && recentProjects.count() <=4) {
+    if (counter >=0 && counter <=4) {
+      more = new QListWidgetItem(i18n("More projects..."));
+    } else {
+	more = new QListWidgetItem(i18n("Manage and More Projects..."));
     }
+    more->setIcon(KIcon("window-new"));
+    m_ui.recentProjects->addItem(more);
 }
 
 void StartPage::createNewProject()
