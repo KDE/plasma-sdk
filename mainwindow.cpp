@@ -212,6 +212,7 @@ void MainWindow::setupActions()
     addAction(i18n("Create Save Point"), "document-save", SLOT(selectSavePoint()), "savepoint", KStandardShortcut::save());
     addAction(i18n("Publish"), "krfb", SLOT(selectPublish()),   "publish");
 
+    addAction(i18n("Close Project"), "plasmagik", SLOT(showStartPage()),   "file_startpage");
     addAction(i18n("Preview"), "user-desktop", SLOT(togglePreview()), "preview")->setCheckable(true);
     addAction(i18n("Notes"), "accessories-text-editor", SLOT(toggleNotes()), "notes")->setCheckable(true);
     addAction(i18n("Files"), "system-file-manager", SLOT(toggleFileList()), "file_list")->setCheckable(true);
@@ -226,6 +227,15 @@ void MainWindow::updateActions()
     actionCollection()->action("file_list")->setChecked(m_editWidget && m_editWidget->isVisible());
     actionCollection()->action("timeline")->setChecked(m_timeLine && m_timeLine->isVisible());
     actionCollection()->action("documentation")->setChecked(m_browser && m_browser->isVisible());
+}
+
+void MainWindow::showStartPage()
+{
+    toolBar()->hide();
+    menuBar()->hide();
+    setCentralWidget(m_central);
+    m_central->switchTo(m_startPage);
+    setDockOptions(QMainWindow::AllowNestedDocks);
 }
 
 void MainWindow::toggleTimeLine()

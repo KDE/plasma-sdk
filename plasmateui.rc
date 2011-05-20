@@ -6,6 +6,7 @@
     <Merge/>
     <Separator/>
     <Action name="file_quit"/>
+    <Action name="file_startpage"/>
   </Menu>
   <Merge />
 </MenuBar>

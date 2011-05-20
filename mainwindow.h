@@ -76,6 +76,7 @@ private:
     void initTimeLine();
 
 private Q_SLOTS:
+    void showStartPage();
     void saveEditorData();
     void saveAndRefresh();
     void refreshNotes();
