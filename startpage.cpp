@@ -319,10 +319,10 @@ void StartPage::refreshRecentProjectsList()
 
     QListWidgetItem *more;
     //if (recentProjects.count() >=0 && recentProjects.count() <=4) {
-    if (counter >=0 && counter <=4) {
-      more = new QListWidgetItem(i18n("More projects..."));
+    if (counter >= 0 && counter <= 4) {
+        more = new QListWidgetItem(i18n("Manage Projects..."));
     } else {
-	more = new QListWidgetItem(i18n("Manage and More Projects..."));
+        more = new QListWidgetItem(i18n("More projects..."));
     }
     more->setIcon(KIcon("window-new"));
     m_ui.recentProjects->addItem(more);
