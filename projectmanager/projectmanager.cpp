@@ -124,15 +124,15 @@ bool ProjectManager::exportPackage(const KUrl &toExport, const KUrl &targetFile)
     }
 
     // Create an empty zip file
-    KZip *z = new KZip(targetFile.pathOrUrl());
-    z->open(QIODevice::ReadWrite);
-    z->close();
+    KZip zip(targetFile.pathOrUrl());
+    zip.open(QIODevice::ReadWrite);
+    zip.close();
 
     // Reopen for writing
-    if (z->open(QIODevice::ReadWrite)) {
+    if (zip.open(QIODevice::ReadWrite)) {
         kDebug() << "zip file opened successfully";
-        z->addLocalDirectory(toExport.pathOrUrl(), ".");
-        z->close();
+        zip.addLocalDirectory(toExport.pathOrUrl(), ".");
+        zip.close();
         return true;
     }
 
