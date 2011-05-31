@@ -46,6 +46,8 @@ class EngineExplorer : public KDialog, public Ui::EngineExplorer
         void setInterval(const int interval);
         void requestSource(const QString &source);
 
+        static QString convertToString(const QVariant &value);
+
     public slots:
         void dataUpdated(const QString& source, const Plasma::DataEngine::Data& data);
 
@@ -59,7 +61,6 @@ class EngineExplorer : public KDialog, public Ui::EngineExplorer
 
     private:
         void listEngines();
-        QString convertToString(const QVariant &value) const;
         int showData(QStandardItem* parent, Plasma::DataEngine::Data data);
         void updateTitle();
 

@@ -289,7 +289,7 @@ void EngineExplorer::showDataContextMenu(const QPoint &point)
     }
 }
 
-QString EngineExplorer::convertToString(const QVariant &value) const
+QString EngineExplorer::convertToString(const QVariant &value)
 {
     switch (value.type())
     {

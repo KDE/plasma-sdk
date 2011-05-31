@@ -27,6 +27,8 @@
 #include <Plasma/Service>
 #include <Plasma/ServiceJob>
 
+#include "engineexplorer.h"
+
 ServiceViewer::ServiceViewer(Plasma::DataEngine *engine, const QString &source, QWidget *parent)
     : KDialog(parent),
       m_engine(engine),
@@ -171,7 +173,7 @@ void ServiceViewer::operationResult(Plasma::ServiceJob *job)
                                       QString::number(job->error()) + ": " + job->errorString()),
                                  i18n("Operation Result"));
     } else {
-        QString result = job->result().toString();
+        QString result = EngineExplorer::convertToString(job->result());
         if (result.isEmpty()) {
             result = i18n("No response from job.");
         }
