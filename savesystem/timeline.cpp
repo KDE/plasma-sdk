@@ -65,22 +65,10 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 {
     m_table->clear();
 
-    m_gitRunner->setDirectory(dir);
-
-    if (!m_gitRunner->isValidDirectory()) {
-        // If the dir hasn't a git tree, don't show nothig!
-        hide();
+    if (!isWorkingDir(dir))
         return;
-    }
 
-    setWorkingDir(dir);
-
-    if (m_gitRunner->currentBranch() != DvcsJob::JobSucceeded) {
-        // handle error
-        return;
-    }
-
-    m_currentBranch = m_gitRunner->getResult();
+    m_currentBranch = getCurrentBranch();
 
     if ( !createBranchItem() )
         return;
@@ -103,10 +91,30 @@ void TimeLine::loadTimeLine(const KUrl &dir)
             this, SLOT(showContextMenu(QTableWidgetItem *)));
 }
 
+bool TimeLine::isWorkingDir(const KUrl &dir)
+{
+    m_gitRunner->setDirectory(dir);
+
+    if (m_gitRunner->isValidDirectory()) {
+        setWorkingDir(dir);
+        return true;
+    }
+    // If the dir hasn't a git tree, don't show nothig!
+    hide();
+    return false;
+}
+
+QString TimeLine::getCurrentBranch()
+{
+    if (m_gitRunner->currentBranch() != DvcsJob::JobSucceeded) {
+        return QString();
+    }
+    return m_gitRunner->getResult();
+}
+
+
 bool TimeLine::createBranchItem()
 {
-    QStringList list;
-
     if (m_gitRunner->branches() != DvcsJob::JobSucceeded) {
         // handle error
         return false;
@@ -157,8 +165,6 @@ QList<TimeLineItem::gitCommitDAO*> TimeLine::parseGitLog(QList<TimeLineItem::git
 
     const QString rawCommits = m_gitRunner->getResult();
 
-    qDebug() << rawCommits;
-
     const QStringList rawCommitLog = rawCommits.split('\n',QString::SkipEmptyParts);
 
     // Regexp to match the sha1hash from the git commits.
@@ -168,12 +174,11 @@ QList<TimeLineItem::gitCommitDAO*> TimeLine::parseGitLog(QList<TimeLineItem::git
     QString commitLogLine;
     TimeLineItem::gitCommitDAO *commit;
 
-    // Iterate every commit lot line. the newest commits are on the top
+    // Iterate every commit log line. the newest commits are on the top
     foreach( commitLogLine, rawCommitLog ) {
 
-        // here we got the sha1hash
+        // here we got a sha1hash, hence a new commit beginns
         if ( commitLogLine.contains(rx) ) {
-            // a new commit
             commit = new TimeLineItem::gitCommitDAO();
             commitList.prepend(commit);
 
@@ -188,7 +193,6 @@ QList<TimeLineItem::gitCommitDAO*> TimeLine::parseGitLog(QList<TimeLineItem::git
             continue;
         }
 
-        // Now check the "Author" field
         if ( commitLogLine.contains("Author: ") ) {
             commit->commitInfo.append(commitLogLine.replace("Author",
                                       i18n("Author"),
@@ -196,13 +200,12 @@ QList<TimeLineItem::gitCommitDAO*> TimeLine::parseGitLog(QList<TimeLineItem::git
             continue;
         }
 
-        // Check the "Date" field
         if ( commitLogLine.contains("Date: ") ) {
             commit->commitInfo.prepend(i18n("Savepoint created on") + commitLogLine.remove("Date",Qt::CaseSensitive) + "\n");
             continue;
         }
 
-        // The rest is Commitlog info
+        // The rest is Commit log info
         commit->commitInfo.append(commitLogLine + "\n");
     }
 

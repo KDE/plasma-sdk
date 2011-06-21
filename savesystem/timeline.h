@@ -167,6 +167,8 @@ private:
     QList<TimeLineItem::gitCommitDAO*> parseGitLog(QList<TimeLineItem::gitCommitDAO*> &commitList);
 
     bool createBranchItem();
+    bool isWorkingDir(const KUrl &dir);
+    QString getCurrentBranch();
 
     /**
       * Method called whenever the user resizes the dockwidget or its parent
