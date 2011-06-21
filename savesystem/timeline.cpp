@@ -37,7 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QStringList>
 
 
-//#include <QDebug>
+#include <QDebug>
 
 #include "timeline.h"
 
@@ -46,6 +46,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "timelineitem.h"
 #include "dvcsjob.h"
 #include "gitrunner.h"
+#include "gitcommit.h"
 #include "branchdialog.h"
 #include "commitdialog.h"
 
@@ -66,7 +67,6 @@ TimeLine::TimeLine(QWidget *parent,
 void TimeLine::loadTimeLine(const KUrl &dir)
 {
     m_table->clear();
-    QStringList list = QStringList();
 
     m_gitRunner->setDirectory(dir);
 
@@ -85,9 +85,46 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
     m_currentBranch = m_gitRunner->getResult();
 
+    if( !createBranchItem() )
+      return;
+
+    
+    
+        // Put all together
+        date.prepend(i18n("SavePoint created on: "));
+
+        commitInfo.prepend(author);
+        commitInfo.prepend(date);
+
+        text.setNum(commitIndex);
+        text.prepend("SavePoint #");
+        list.append(text);
+        list.append(commitInfo);
+        list.append(sha1hash);
+
+	qDebug() << commitIndex << commitInfo << sha1hash;
+	
+        TimeLineItem *item1 = new TimeLineItem(isMerge ? KIcon("svn_merge") : KIcon("dialog-ok"),
+                                               list,
+                                               isMerge ? TimeLineItem::Merge : TimeLineItem::Commit,
+                                               Qt::ItemIsEnabled);
+        m_table->addItem(item1);
+
+        isMerge = false;
+        ++commitIndex;
+
+    parentWidget()->show();
+    connect(m_table, SIGNAL(itemClicked(QTableWidgetItem *)),
+            this, SLOT(showContextMenu(QTableWidgetItem *)));
+}
+
+bool TimeLine::createBranchItem()
+{
+    QStringList list;
+
     if (m_gitRunner->branches() != DvcsJob::JobSucceeded) {
         // handle error
-        return;
+        return false;
     }
 
     // Scan available branches,and save them
@@ -99,11 +136,6 @@ void TimeLine::loadTimeLine(const KUrl &dir)
         QString tmp = m_branches.takeFirst();
         tmp.remove(0, 2);
         m_branches.append(tmp);
-    }
-
-    if (m_gitRunner->log() != DvcsJob::JobSucceeded) {
-        // handle error
-        return;
     }
 
     QString info;
@@ -122,55 +154,64 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     list.append(info);
     list.append(QString());
 
-    /*this->uiAddItem(KIcon("system-switch-user"),
-                    list,
-                    TimeLineItem::Branch,
-                    Qt::ItemIsEnabled);*/
     TimeLineItem *item = new TimeLineItem(KIcon("system-switch-user"),
                                           list,
                                           TimeLineItem::Branch,
                                           Qt::ItemIsEnabled);
     m_table->addItem(item);
 
-    list.clear();
+    return true;
+}
+
+
+QList< QHash > TimeLine::parseGitLog()
+{
+
+    if (m_gitRunner->log() != DvcsJob::JobSucceeded) {
+        // handle error
+        return;
+    }  
+    
+    QList<GitCommit> commitList;
+
+
+    
 
     const QString rawCommits = m_gitRunner->getResult();
+    
+    qDebug() << rawCommits;
 
-    // Split the string according with the regexp
+    // Regexp to match the sha1hash from the git commits.
     const QString regExp("(commit\\s[0-9a-f]{40})");
     const QRegExp rx(regExp);
 
     const QStringList commitList = rawCommits.split('\n',QString::SkipEmptyParts);
 
-    index = 0;
-    int commitIndex = 0;
+    QString commitLogLine;
+//     int commitIndex = 0;
+    bool isMerge = false;
 
     // Iterate every commit and create an element in the sidebar.
-    while(index < commitList.size()) {
-        bool isMerge = false;
-        QStringList list;
-        QString commitInfo;
-        QString sha1hash;
-        QString text;
-        QString author;
-        QString date;
+    foreach(commitLogLine, commitList) {
+        GitCommit commit;
 
-        if(commitList.at(index).contains(rx)) {
+	// here we got the sha1hash
+        if(commitLogLine.contains(rx)) {
             const QString commit("commit ");
-            // We can do this because now we are sure that the indexed string contains the sha1 hash =)
-            sha1hash = commitList.at(index);
-            list = sha1hash.split(commit,
-                              QString::SkipEmptyParts,
-                              Qt::CaseSensitive);
+            
+	    int sha1hashStart = rx.indexIn(commitLogLine);
+	    commit.sha1hash = commitLogLine.mid(sha1hashStart, 40);
 
-            sha1hash = list.at(0);
-            list.clear();
-            ++index;
+	    qDebug() << gitCommit.value("sha1hash");
+	    
+	    continue;
+	}
 
-            if(commitList.at(index).contains("Merge: ", Qt::CaseSensitive)) {
-                    isMerge = true;
-                    ++index;
-            }
+
+	if(commitLogLine.contains("Merge: ", Qt::CaseSensitive)) {
+	    isMerge = true;
+	    ++index;
+	}
             // Now check the "Author" field
             author = commitList.at(index);
             author = author.replace("Author",
@@ -197,32 +238,10 @@ void TimeLine::loadTimeLine(const KUrl &dir)
             ++index;
         }
 
-        // Put all together
-        date.prepend(i18n("SavePoint created on: "));
-
-        commitInfo.prepend(author);
-        commitInfo.prepend(date);
-
-        text.setNum(commitIndex);
-        text.prepend("SavePoint #");
-        list.append(text);
-        list.append(commitInfo);
-        list.append(sha1hash);
-
-        TimeLineItem *item1 = new TimeLineItem(isMerge ? KIcon("svn_merge") : KIcon("dialog-ok"),
-                                               list,
-                                               isMerge ? TimeLineItem::Merge : TimeLineItem::Commit,
-                                               Qt::ItemIsEnabled);
-        m_table->addItem(item1);
-
-        isMerge = false;
-        ++commitIndex;
     }
-
-    parentWidget()->show();
-    connect(m_table, SIGNAL(itemClicked(QTableWidgetItem *)),
-            this, SLOT(showContextMenu(QTableWidgetItem *)));
+    
 }
+
 
 Qt::DockWidgetArea TimeLine::location()
 {
@@ -233,7 +252,7 @@ void TimeLine::showContextMenu(QTableWidgetItem *item)
 {
     emit savePointClicked();
     TimeLineItem *tlItem = dynamic_cast<TimeLineItem*>(item);
-    //kDebug() << table->currentItem() << tlItem;
+    qDebug() << tlItem->getHash();
 
     if (!tlItem) {
         return;

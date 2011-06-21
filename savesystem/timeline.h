@@ -162,6 +162,10 @@ private:
     void initUI(QWidget *parent,
                 Qt::DockWidgetArea location = Qt::TopDockWidgetArea);
 
+    QList<QHash> parseGitLog();
+    
+    bool createBranchItem();
+    
     /**
       * Method called whenever the user resizes the dockwidget or its parent
       * @param A reference to the QResizeEvent event.
