@@ -21,32 +21,46 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include <QTableWidgetItem>
 #include <QString>
+#include <KIcon>
 
 #include "timelineitem.h"
 
 static const int TimeLineItemType = QTableWidgetItem::UserType + 1;
 
-TimeLineItem::TimeLineItem(const QIcon &icon,
-        QStringList &dataList,
-        const TimeLineItem::ItemIdentifier id,
-        const Qt::ItemFlag flag)
+TimeLineItem::TimeLineItem(TimeLineItem::gitCommitDAO &commit,
+                           const Qt::ItemFlag flag)
         : QTableWidgetItem(0,TimeLineItemType)
 {
     setFlags(flag);
-    setIcon(icon);
-    setText(dataList.takeFirst());
-    setToolTip(dataList.takeFirst());
+
+    m_type = commit.itemIdentifier;
+
+    switch (m_type) {
+    case Merge:
+        setIcon(KIcon("svn_merge"));
+        break;
+    case Commit:
+        setIcon(KIcon("dialog-ok"));
+        break;
+    case Branch:
+        setIcon(KIcon("system-switch-user"));
+        break;
+    }
+
+    setText(commit.text);
+
+    setToolTip(commit.commitInfo);
     /*setData(Qt::DecorationRole,QVariant(icon));
     setData(Qt::DisplayRole,QVariant(dataList.takeFirst()));
     setData(Qt::ToolTipRole,QVariant(dataList.takeFirst()));*/
-    m_type = id;
-    m_sha1hash = dataList.takeFirst();
+
+    m_sha1hash = commit.sha1hash;
 }
 
-void TimeLineItem::setHash(const QString &hash)
-{
-    m_sha1hash = hash;
-}
+// void TimeLineItem::setHash(const QString &hash)
+// {
+//     m_sha1hash = hash;
+// }
 
 void TimeLineItem::setIdentifier(const TimeLineItem::ItemIdentifier id)
 {

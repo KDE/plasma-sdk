@@ -27,6 +27,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KUrl>
 #include <QDockWidget>
 
+#include "timelineitem.h"
+
 class GitRunner;
 
 class QStringList;
@@ -162,10 +164,10 @@ private:
     void initUI(QWidget *parent,
                 Qt::DockWidgetArea location = Qt::TopDockWidgetArea);
 
-    QList<QHash> parseGitLog();
-    
+    QList<TimeLineItem::gitCommitDAO*> parseGitLog(QList<TimeLineItem::gitCommitDAO*> &commitList);
+
     bool createBranchItem();
-    
+
     /**
       * Method called whenever the user resizes the dockwidget or its parent
       * @param A reference to the QResizeEvent event.

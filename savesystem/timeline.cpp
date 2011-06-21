@@ -23,7 +23,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <KAction>
 #include <KConfig>
-#include <KIcon>
 #include <KMenu>
 #include <Plasma/PackageMetadata>
 
@@ -43,17 +42,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "tablewidget.h"
 #include "tabledelegate.h"
-#include "timelineitem.h"
 #include "dvcsjob.h"
 #include "gitrunner.h"
-#include "gitcommit.h"
 #include "branchdialog.h"
 #include "commitdialog.h"
 
 TimeLine::TimeLine(QWidget *parent,
                    const KUrl &dir,
                    Qt::DockWidgetArea location)
-                   :QDockWidget(i18n("TimeLine"))
+        :QDockWidget(i18n("TimeLine"))
 {
     m_gitRunner = new GitRunner();
     initUI(parent, location);
@@ -85,33 +82,21 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
     m_currentBranch = m_gitRunner->getResult();
 
-    if( !createBranchItem() )
-      return;
+    if ( !createBranchItem() )
+        return;
 
-    
-    
-        // Put all together
-        date.prepend(i18n("SavePoint created on: "));
 
-        commitInfo.prepend(author);
-        commitInfo.prepend(date);
+    QList<TimeLineItem::gitCommitDAO*> commitList;
 
-        text.setNum(commitIndex);
-        text.prepend("SavePoint #");
-        list.append(text);
-        list.append(commitInfo);
-        list.append(sha1hash);
-
-	qDebug() << commitIndex << commitInfo << sha1hash;
-	
-        TimeLineItem *item1 = new TimeLineItem(isMerge ? KIcon("svn_merge") : KIcon("dialog-ok"),
-                                               list,
-                                               isMerge ? TimeLineItem::Merge : TimeLineItem::Commit,
-                                               Qt::ItemIsEnabled);
+    commitList = parseGitLog(commitList);
+    int commitCount = 1;
+    foreach(TimeLineItem::gitCommitDAO *gitCommit, commitList) {
+        gitCommit->text = i18n("Commit #%1").arg(commitCount++);
+        TimeLineItem *item1 = new TimeLineItem(*gitCommit, Qt::ItemIsEnabled);
         m_table->addItem(item1);
+    }
 
-        isMerge = false;
-        ++commitIndex;
+    qDeleteAll(commitList);
 
     parentWidget()->show();
     connect(m_table, SIGNAL(itemClicked(QTableWidgetItem *)),
@@ -138,10 +123,12 @@ bool TimeLine::createBranchItem()
         m_branches.append(tmp);
     }
 
+    TimeLineItem::gitCommitDAO commit;
+
     QString info;
     info.append(i18n("On Section: "));
     info.append(m_currentBranch);
-    list.append(info);
+    commit.text = info;
 
     info.clear();
     info.append(i18n("You are currently working on Section:\n"));
@@ -150,96 +137,76 @@ bool TimeLine::createBranchItem()
     info.append(i18n("\nAvailable Sections are:\n"));
     info.append(branches);
     info.append(i18n("\nClick here to switch to those Sections."));
+    commit.commitInfo = info;
 
-    list.append(info);
-    list.append(QString());
+    commit.itemIdentifier = TimeLineItem::Branch;
 
-    TimeLineItem *item = new TimeLineItem(KIcon("system-switch-user"),
-                                          list,
-                                          TimeLineItem::Branch,
-                                          Qt::ItemIsEnabled);
+    TimeLineItem *item = new TimeLineItem(commit, Qt::ItemIsEnabled);
     m_table->addItem(item);
 
     return true;
 }
 
 
-QList< QHash > TimeLine::parseGitLog()
+QList<TimeLineItem::gitCommitDAO*> TimeLine::parseGitLog(QList<TimeLineItem::gitCommitDAO*> &commitList)
 {
-
     if (m_gitRunner->log() != DvcsJob::JobSucceeded) {
         // handle error
-        return;
-    }  
-    
-    QList<GitCommit> commitList;
-
-
-    
+        return commitList;
+    }
 
     const QString rawCommits = m_gitRunner->getResult();
-    
+
     qDebug() << rawCommits;
+
+    const QStringList rawCommitLog = rawCommits.split('\n',QString::SkipEmptyParts);
 
     // Regexp to match the sha1hash from the git commits.
     const QString regExp("(commit\\s[0-9a-f]{40})");
     const QRegExp rx(regExp);
 
-    const QStringList commitList = rawCommits.split('\n',QString::SkipEmptyParts);
-
     QString commitLogLine;
-//     int commitIndex = 0;
-    bool isMerge = false;
+    TimeLineItem::gitCommitDAO *commit;
 
-    // Iterate every commit and create an element in the sidebar.
-    foreach(commitLogLine, commitList) {
-        GitCommit commit;
+    // Iterate every commit lot line. the newest commits are on the top
+    foreach( commitLogLine, rawCommitLog ) {
 
-	// here we got the sha1hash
-        if(commitLogLine.contains(rx)) {
-            const QString commit("commit ");
-            
-	    int sha1hashStart = rx.indexIn(commitLogLine);
-	    commit.sha1hash = commitLogLine.mid(sha1hashStart, 40);
+        // here we got the sha1hash
+        if ( commitLogLine.contains(rx) ) {
+            // a new commit
+            commit = new TimeLineItem::gitCommitDAO();
+            commitList.prepend(commit);
 
-	    qDebug() << gitCommit.value("sha1hash");
-	    
-	    continue;
-	}
+            commit->itemIdentifier = TimeLineItem::Commit;
 
-
-	if(commitLogLine.contains("Merge: ", Qt::CaseSensitive)) {
-	    isMerge = true;
-	    ++index;
-	}
-            // Now check the "Author" field
-            author = commitList.at(index);
-            author = author.replace("Author",
-                                i18n("Author"),
-                                Qt::CaseSensitive);
-            author.append("\n\n");
-            ++index;
-            // Check the "Date" field
-            date = commitList.at(index);
-            date = date.remove("Date",
-                                  Qt::CaseSensitive);
-            date.append('\n');
-            ++index;
+            commit->sha1hash = commitLogLine.right(40); // FIXME: sketchy, but as long as the has has 40 chars it should work.
+            continue;
         }
 
-        // Ok, start grouping the needed infos
-        commitInfo.append(i18n("Comment:\n\n"));
-        while(index < commitList.size()) {
-            if(commitList.at(index).contains(rx)) {
-                break;
-            }
-            commitInfo.append(commitList.at(index));
-            commitInfo.append("\n");
-            ++index;
+        if ( commitLogLine.contains("Merge: ", Qt::CaseSensitive) ) {
+            commit->itemIdentifier = TimeLineItem::Merge;
+            continue;
         }
 
+        // Now check the "Author" field
+        if ( commitLogLine.contains("Author: ") ) {
+            commit->commitInfo.append(commitLogLine.replace("Author",
+                                      i18n("Author"),
+                                      Qt::CaseSensitive) + "\n\n");
+            continue;
+        }
+
+        // Check the "Date" field
+        if ( commitLogLine.contains("Date: ") ) {
+            commit->commitInfo.prepend(i18n("Savepoint created on") + commitLogLine.remove("Date",Qt::CaseSensitive) + "\n");
+            continue;
+        }
+
+        // The rest is Commitlog info
+        commit->commitInfo.append(commitLogLine + "\n");
     }
-    
+
+    return commitList;
 }
 
 
@@ -264,7 +231,7 @@ void TimeLine::showContextMenu(QTableWidgetItem *item)
     menu.addSeparator();
 
     if (tlItem->getIdentifier() == TimeLineItem::Commit ||
-        tlItem->getIdentifier() == TimeLineItem::Merge) {
+            tlItem->getIdentifier() == TimeLineItem::Merge) {
 
         QAction *restoreCommit = menu.addAction(i18n("Restore SavePoint"));
         restoreCommit->setData(QVariant(tlItem->getHash()));
@@ -317,13 +284,13 @@ void TimeLine::newSavePoint()
 {
     QPointer<CommitDialog> commitDialog = new CommitDialog();
     bool dialogAlreadyOpen = false;
-    if(!m_gitRunner->isValidDirectory()) {
+    if (!m_gitRunner->isValidDirectory()) {
 
-        if(!m_gitRunner->hasNewChangesToCommit())
+        if (!m_gitRunner->hasNewChangesToCommit())
             return;
         dialogAlreadyOpen = true;
 
-        if(commitDialog->exec() == QDialog::Rejected)
+        if (commitDialog->exec() == QDialog::Rejected)
             return;
 
         m_gitRunner->init(m_workingDir);
@@ -338,16 +305,16 @@ void TimeLine::newSavePoint()
         m_gitRunner->addIgnoredFileExtension("NOTES");
     }
 
-    if(!m_gitRunner->hasNewChangesToCommit())
+    if (!m_gitRunner->hasNewChangesToCommit())
         return;
 
-    if(!dialogAlreadyOpen) {
-        if(commitDialog->exec() == QDialog::Rejected)
+    if (!dialogAlreadyOpen) {
+        if (commitDialog->exec() == QDialog::Rejected)
             return;
     }
     QString commit = QString(commitDialog->m_commitBriefText->text());
     // Ensure the required comment is not empty
-    if(commit.isEmpty())
+    if (commit.isEmpty())
         return;
 
     QString optionalComment = QString(commitDialog->m_commitFullText->toPlainText());
@@ -362,7 +329,7 @@ void TimeLine::newSavePoint()
     m_gitRunner->commit(commit);
     m_table->disconnect();
     loadTimeLine(m_workingDir);
-    if(isHidden())
+    if (isHidden())
         show();
 }
 
@@ -609,24 +576,24 @@ void TimeLine::resizeEvent (QResizeEvent * event)
     //qDebug() << "m_table total lenght" << m_table->totalLenght();
 
     bool vertical = ((m_table->location() == Qt::RightDockWidgetArea) ||
-                    (m_table->location() == Qt::LeftDockWidgetArea));
+                     (m_table->location() == Qt::LeftDockWidgetArea));
 
-    if(vertical) {
-        if(m_table->totalLenght() > newSize.height()) {
+    if (vertical) {
+        if (m_table->totalLenght() > newSize.height()) {
             m_table->setFixedWidth(m_table->columnWidth(0) + m_table->scrollbarSize(vertical).width());
             return;
         } else {
-            if(m_table->columnWidth(0) < newSize.width()) {
+            if (m_table->columnWidth(0) < newSize.width()) {
                 m_table->setFixedWidth(m_table->columnWidth(0));
                 return;
             }
         }
     } else {
-        if(m_table->totalLenght() > newSize.width()) {
+        if (m_table->totalLenght() > newSize.width()) {
             m_table->setFixedHeight(m_table->rowHeight(0) + m_table->scrollbarSize(vertical).height());
             return;
         } else {
-            if(m_table->rowHeight(0) < newSize.height()) {
+            if (m_table->rowHeight(0) < newSize.height()) {
                 m_table->setFixedHeight(m_table->rowHeight(0));
                 return;
             }

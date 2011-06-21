@@ -25,6 +25,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QTableWidgetItem>
 
+
+
 class TimeLineItem : public QTableWidgetItem
 {
 public:
@@ -34,14 +36,21 @@ public:
         Commit = 2, /**< The TimeLineItem representd Commit type. */
         Branch = 3, /**< The TimeLineItem representd Branch type. */
         Merge = 4 /**< The TimeLineItem representd Merge type. */
-        };
+    };
 
-    TimeLineItem(const QIcon &icon,
-              QStringList &dataList,
-              const TimeLineItem::ItemIdentifier id,
-              const Qt::ItemFlag flag);
+    struct gitCommitDAO {
+        QString sha1hash;
+        QString text;
+        QString commitInfo;
+        QString date;
+        QString author;
+        ItemIdentifier itemIdentifier;
+    };
 
-    void setHash(const QString &hash);
+    TimeLineItem(TimeLineItem::gitCommitDAO &commit,
+                 const Qt::ItemFlag flag);
+
+//     void setHash(const QString &hash);
     void setIdentifier(const TimeLineItem::ItemIdentifier id);
 
     QString getHash();
