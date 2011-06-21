@@ -325,6 +325,7 @@ void MainWindow::selectSavePoint()
      initTimeLine();
   }
 
+  saveEditorData();
   emit newSavePointClicked();
 }
 
