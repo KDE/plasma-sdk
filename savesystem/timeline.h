@@ -169,6 +169,7 @@ private:
     bool createBranchItem();
     bool isWorkingDir(const KUrl &dir);
     QString getCurrentBranch();
+    QStringList getGitBranches();
 
     /**
       * Method called whenever the user resizes the dockwidget or its parent
@@ -182,8 +183,6 @@ private:
     QStringList m_branches;
     TableWidget *m_table;
     TableDelegate *m_delegate;
-
-
 };
 
 #endif // TIMELINE_H

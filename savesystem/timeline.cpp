@@ -68,11 +68,12 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     if (!isWorkingDir(dir))
         return;
 
+    m_branches = getGitBranches();
+
     m_currentBranch = getCurrentBranch();
 
     if ( !createBranchItem() )
         return;
-
 
     QList<TimeLineItem::gitCommitDAO*> commitList;
 
@@ -80,6 +81,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     int commitCount = 1;
     foreach(TimeLineItem::gitCommitDAO *gitCommit, commitList) {
         gitCommit->text = i18n("Commit #%1").arg(commitCount++);
+
         TimeLineItem *item1 = new TimeLineItem(*gitCommit, Qt::ItemIsEnabled);
         m_table->addItem(item1);
     }
@@ -104,6 +106,23 @@ bool TimeLine::isWorkingDir(const KUrl &dir)
     return false;
 }
 
+QStringList TimeLine::getGitBranches()
+{
+    QStringList branchList;
+    if (m_gitRunner->branches() != DvcsJob::JobSucceeded) {
+        // handle error
+        return branchList;
+    }
+    // Scan available branches,and save them
+    const QString branches = m_gitRunner->getResult();
+
+    foreach (QString branch, branches.split('\n', QString::SkipEmptyParts)) {
+        branch.remove(0, 2); // Clean the string form *
+        branchList.append(branch);
+    }
+    return branchList;
+}
+
 QString TimeLine::getCurrentBranch()
 {
     if (m_gitRunner->currentBranch() != DvcsJob::JobSucceeded) {
@@ -115,22 +134,6 @@ QString TimeLine::getCurrentBranch()
 
 bool TimeLine::createBranchItem()
 {
-    if (m_gitRunner->branches() != DvcsJob::JobSucceeded) {
-        // handle error
-        return false;
-    }
-
-    // Scan available branches,and save them
-    QString branches = m_gitRunner->getResult();
-    m_branches = branches.split('\n', QString::SkipEmptyParts);
-    int index = m_branches.size();
-    // Clean the strings
-    for (int i = 0; i < index; i++) {
-        QString tmp = m_branches.takeFirst();
-        tmp.remove(0, 2);
-        m_branches.append(tmp);
-    }
-
     TimeLineItem::gitCommitDAO commit;
 
     QString info;
@@ -143,9 +146,9 @@ bool TimeLine::createBranchItem()
     info.append(m_currentBranch);
     info.append('\n');
     info.append(i18n("\nAvailable Sections are:\n"));
-    info.append(branches);
+    info.append(m_branches.join("\n"));
     info.append(i18n("\nClick here to switch to those Sections."));
-    commit.commitInfo = info;
+    commit.toolTipText = info;
 
     commit.itemIdentifier = TimeLineItem::Branch;
 
@@ -155,7 +158,6 @@ bool TimeLine::createBranchItem()
     return true;
 }
 
-
 QList<TimeLineItem::gitCommitDAO*> TimeLine::parseGitLog(QList<TimeLineItem::gitCommitDAO*> &commitList)
 {
     if (m_gitRunner->log() != DvcsJob::JobSucceeded) {
@@ -164,7 +166,6 @@ QList<TimeLineItem::gitCommitDAO*> TimeLine::parseGitLog(QList<TimeLineItem::git
     }
 
     const QString rawCommits = m_gitRunner->getResult();
-
     const QStringList rawCommitLog = rawCommits.split('\n',QString::SkipEmptyParts);
 
     // Regexp to match the sha1hash from the git commits.
@@ -194,19 +195,20 @@ QList<TimeLineItem::gitCommitDAO*> TimeLine::parseGitLog(QList<TimeLineItem::git
         }
 
         if ( commitLogLine.contains("Author: ") ) {
-            commit->commitInfo.append(commitLogLine.replace("Author",
-                                      i18n("Author"),
-                                      Qt::CaseSensitive) + "\n\n");
+            commit->toolTipText.append(commitLogLine.replace("Author",
+                                       i18n("Author"),
+                                       Qt::CaseSensitive) + "\n\n");
             continue;
         }
 
         if ( commitLogLine.contains("Date: ") ) {
-            commit->commitInfo.prepend(i18n("Savepoint created on") + commitLogLine.remove("Date",Qt::CaseSensitive) + "\n");
+            commit->date = commitLogLine.remove("Date: ",Qt::CaseSensitive);
+            commit->toolTipText.prepend(i18n("Savepoint created on:") + commit->date + "\n");
             continue;
         }
 
         // The rest is Commit log info
-        commit->commitInfo.append(commitLogLine + "\n");
+        commit->toolTipText.append(commitLogLine + "\n");
     }
 
     return commitList;

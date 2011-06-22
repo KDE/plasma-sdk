@@ -41,7 +41,7 @@ public:
     struct gitCommitDAO {
         QString sha1hash;
         QString text;
-        QString commitInfo;
+        QString toolTipText;
         QString date;
         QString author;
         ItemIdentifier itemIdentifier;

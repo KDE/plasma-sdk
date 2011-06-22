@@ -49,7 +49,7 @@ TimeLineItem::TimeLineItem(TimeLineItem::gitCommitDAO &commit,
 
     setText(commit.text);
 
-    setToolTip(commit.commitInfo);
+    setToolTip(commit.toolTipText);
     /*setData(Qt::DecorationRole,QVariant(icon));
     setData(Qt::DisplayRole,QVariant(dataList.takeFirst()));
     setData(Qt::ToolTipRole,QVariant(dataList.takeFirst()));*/
