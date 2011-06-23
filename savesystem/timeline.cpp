@@ -70,7 +70,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
     m_branches = getGitBranches();
 
-    m_currentBranch = getCurrentBranch();
+    m_currentBranch = currentBranch();
 
     if ( !createBranchItem() )
         return;
@@ -93,19 +93,6 @@ void TimeLine::loadTimeLine(const KUrl &dir)
             this, SLOT(showContextMenu(QTableWidgetItem *)));
 }
 
-bool TimeLine::isWorkingDir(const KUrl &dir)
-{
-    m_gitRunner->setDirectory(dir);
-
-    if (m_gitRunner->isValidDirectory()) {
-        setWorkingDir(dir);
-        return true;
-    }
-    // If the dir hasn't a git tree, don't show nothig!
-    hide();
-    return false;
-}
-
 QStringList TimeLine::getGitBranches()
 {
     QStringList branchList;
@@ -123,7 +110,7 @@ QStringList TimeLine::getGitBranches()
     return branchList;
 }
 
-QString TimeLine::getCurrentBranch()
+QString TimeLine::currentBranch()
 {
     if (m_gitRunner->currentBranch() != DvcsJob::JobSucceeded) {
         return QString();
@@ -542,9 +529,18 @@ void TimeLine::createBranch()
     loadTimeLine(m_workingDir);
 }
 
-void TimeLine::setWorkingDir(const KUrl &dir)
+bool TimeLine::setWorkingDir(const KUrl &dir)
 {
-    m_workingDir = dir;
+    m_gitRunner->setDirectory(dir);
+
+    if (m_gitRunner->isValidDirectory()) {
+        m_workingDir = dir;
+        return true;
+    }
+
+    // If the dir hasn't a git tree, don't show nothig!
+    hide();
+    return false;
 }
 
 void TimeLine::initUI(QWidget *parent,Qt::DockWidgetArea location)

@@ -56,8 +56,9 @@ public:
     /**
       * Sets the workinf directory with the one passed.
       * @param dir The path of the new working directory.
+      * @return returns true if the directory is a valid one.
       */
-    void setWorkingDir(const KUrl &dir);
+    bool setWorkingDir(const KUrl &dir);
 
     /**
       * Parses the supplied path and initialize the TimeLine object.
@@ -167,8 +168,7 @@ private:
     QList<TimeLineItem::gitCommitDAO*> parseGitLog(QList<TimeLineItem::gitCommitDAO*> &commitList);
 
     bool createBranchItem();
-    bool isWorkingDir(const KUrl &dir);
-    QString getCurrentBranch();
+    QString currentBranch();
     QStringList getGitBranches();
 
     /**
