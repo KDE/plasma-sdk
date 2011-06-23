@@ -111,54 +111,54 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     TimeLineItem *commitItem = NULL;
     int logIndex = 0;
 
-    qDebug() << "size" << commitLog.length();
-
     // Iterate every commit log line. the newest commits are on the top
-    while ( logIndex < commitLog.length()) {
+    while ( logIndex < commitLog.size()) {
+        QString toolTipText;
+        QString date;
 
         // here we got a sha1hash, hence a new commit beginns
         if (commitLog.at(logIndex).contains(rx)) {
 
             commitItem = new TimeLineItem();
 
-            // FIXME: sketchy, but as long as the has has 40 chars it should work.
-            commitItem->setHash(commitLog.at(logIndex).right(40));
-            qDebug() << commitItem->getHash();
+            // sett the hash
+            commitItem->setHash(commitLog.at(logIndex).right(40)); // FIXME: As long as the hash has 40 chars it works.
             ++logIndex;
-        }
 
-        if (commitLog.at(logIndex).contains("Merge: ", Qt::CaseSensitive)) {
-            commitItem->setIdentifier(TimeLineItem::Merge);
+            if (commitLog.at(logIndex).contains("Merge: ", Qt::CaseSensitive)) {
+                commitItem->setIdentifier(TimeLineItem::Merge);
+                ++logIndex;
+            } else {
+                commitItem->setIdentifier(TimeLineItem::Commit);
+            }
+
+            // The next line is the author
+            toolTipText = commitLog.at(logIndex) + "\n\n";
             ++logIndex;
-        } else {
-            commitItem->setIdentifier(TimeLineItem::Commit);
+
+            toolTipText.replace("Author", i18n("Author"),
+                                Qt::CaseSensitive);
+
+            // Then comes the date
+            date = commitLog.at(logIndex);
+            ++logIndex;
+
+            date.remove("Date: ",Qt::CaseSensitive);
+            toolTipText.prepend(i18n("Savepoint created on:") + date + "\n");
+
+            // Set the date as visible text.
+            date.right(date.indexOf(" "));
+            commitItem->setText(date.mid(0, date.lastIndexOf(" ")));
         }
-
-        // The next line is the author
-        QString toolTipText(commitLog.at(logIndex) + "\n\n");
-        toolTipText.replace("Author", i18n("Author"), Qt::CaseSensitive);
-        ++logIndex;
-
-        // Then comes the date
-        QString date(commitLog.at(logIndex));
-        date = date.remove("Date: ",Qt::CaseSensitive);
-        ++logIndex;
-
-        toolTipText.prepend(i18n("Savepoint created on:") + date + "\n");
-
-        // Set the date as visible text.
-        commitItem->setText(date.mid(4, date.lastIndexOf(" ")));
-
-        qDebug() << commitItem->text();
 
         // The rest is Commit log info
-        while (!commitLog.at(logIndex).contains(rx)) {
-            qDebug() << logIndex << commitLog.at(logIndex);
+        while (logIndex < commitLog.size()) {
+            if (commitLog.at(logIndex).contains(rx)) {
+                break;
+            }
             toolTipText.append(commitLog.at(logIndex) + "\n");
             ++logIndex;
         }
-
-        qDebug() << toolTipText;
 
         commitItem->setToolTip(toolTipText);
 
