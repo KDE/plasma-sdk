@@ -65,8 +65,9 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 {
     m_table->clear();
 
-    if (!isWorkingDir(dir))
+    if (!setWorkingDir(dir)) {
         return;
+    }
 
     m_branches = getGitBranches();
 
@@ -79,7 +80,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
     commitList = parseGitLog(commitList);
     int commitCount = 1;
-    foreach(TimeLineItem::gitCommitDAO *gitCommit, commitList) {
+    foreach (TimeLineItem::gitCommitDAO *gitCommit, commitList) {
         gitCommit->text = i18n("Commit #%1").arg(commitCount++);
 
         TimeLineItem *item1 = new TimeLineItem(*gitCommit, Qt::ItemIsEnabled);
@@ -166,7 +167,7 @@ QList<TimeLineItem::gitCommitDAO*> TimeLine::parseGitLog(QList<TimeLineItem::git
     foreach( commitLogLine, rawCommitLog ) {
 
         // here we got a sha1hash, hence a new commit beginns
-        if ( commitLogLine.contains(rx) ) {
+        if (commitLogLine.contains(rx)) {
             commit = new TimeLineItem::gitCommitDAO();
             commitList.prepend(commit);
 
@@ -176,19 +177,19 @@ QList<TimeLineItem::gitCommitDAO*> TimeLine::parseGitLog(QList<TimeLineItem::git
             continue;
         }
 
-        if ( commitLogLine.contains("Merge: ", Qt::CaseSensitive) ) {
+        if (commitLogLine.contains("Merge: ", Qt::CaseSensitive)) {
             commit->itemIdentifier = TimeLineItem::Merge;
             continue;
         }
 
-        if ( commitLogLine.contains("Author: ") ) {
+        if (commitLogLine.contains("Author: ")) {
             commit->toolTipText.append(commitLogLine.replace("Author",
                                        i18n("Author"),
                                        Qt::CaseSensitive) + "\n\n");
             continue;
         }
 
-        if ( commitLogLine.contains("Date: ") ) {
+        if (commitLogLine.contains("Date: ")) {
             commit->date = commitLogLine.remove("Date: ",Qt::CaseSensitive);
             commit->toolTipText.prepend(i18n("Savepoint created on:") + commit->date + "\n");
             continue;
@@ -278,12 +279,14 @@ void TimeLine::newSavePoint()
     bool dialogAlreadyOpen = false;
     if (!m_gitRunner->isValidDirectory()) {
 
-        if (!m_gitRunner->hasNewChangesToCommit())
+        if (!m_gitRunner->hasNewChangesToCommit()) {
             return;
+        }
         dialogAlreadyOpen = true;
 
-        if (commitDialog->exec() == QDialog::Rejected)
+        if (commitDialog->exec() == QDialog::Rejected) {
             return;
+        }
 
         m_gitRunner->init(m_workingDir);
         // Retrieve Name and Email, and set git global parameters
@@ -298,9 +301,9 @@ void TimeLine::newSavePoint()
         m_gitRunner->addIgnoredFileExtension("NOTES");
     }
 
-    if (!m_gitRunner->hasNewChangesToCommit())
+    if (!m_gitRunner->hasNewChangesToCommit()) {
         return;
-
+    }
     if (!dialogAlreadyOpen) {
         if (commitDialog->exec() == QDialog::Rejected)
             return;
@@ -322,8 +325,9 @@ void TimeLine::newSavePoint()
     m_gitRunner->commit(commit);
     m_table->disconnect();
     loadTimeLine(m_workingDir);
-    if (isHidden())
+    if (isHidden()) {
         show();
+    }
 }
 
 void TimeLine::restoreCommit()
@@ -358,14 +362,16 @@ void TimeLine::moveToCommit()
     warningMB->setInformativeText(i18n("To perform this, a new Section will be created and your current work may be lost if you don't have saved it as a Savepoint.\nContinue?"));
     warningMB->setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
     warningMB->setDefaultButton(QMessageBox::Discard);
-    if (warningMB->exec() == QMessageBox::Discard)
+    if (warningMB->exec() == QMessageBox::Discard) {
         return;
+    }
 
     delete warningMB;
 
     QPointer<BranchDialog> newBranch = new BranchDialog();
-    if (newBranch->exec() == QDialog::Rejected)
+    if (newBranch->exec() == QDialog::Rejected) {
         return;
+    }
 
     QString newBranchName = QString(newBranch->m_branchEdit->text());
     delete newBranch;
@@ -413,14 +419,16 @@ void TimeLine::mergeBranch()
     warningMB->setInformativeText(i18n("With this operation, a new SavePoint will be created; then you should have to manually resolve some conflicts on source code. Continue?"));
     warningMB->setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
     warningMB->setDefaultButton(QMessageBox::Discard);
-    if (warningMB->exec() == QMessageBox::Discard)
+    if (warningMB->exec() == QMessageBox::Discard) {
         return;
+    }
 
     delete warningMB;
 
     QPointer<CommitDialog> commitDialog = new CommitDialog();
-    if (commitDialog->exec() == QDialog::Rejected)
+    if (commitDialog->exec() == QDialog::Rejected) {
         return;
+    }
 
     QString commit = QString(commitDialog->m_commitBriefText->text());
     QString optionalComment = QString(commitDialog->m_commitFullText->toPlainText());
@@ -456,8 +464,9 @@ void TimeLine::deleteBranch()
     warningMB->setInformativeText(i18n("With this operation, you'll also delete all SavePoints/Sections performed inside it.\nContinue anyway?"));
     warningMB->setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
     warningMB->setDefaultButton(QMessageBox::Discard);
-    if (warningMB->exec() == QMessageBox::Discard)
+    if (warningMB->exec() == QMessageBox::Discard) {
         return;
+    }
 
     delete warningMB;
 
