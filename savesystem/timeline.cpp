@@ -73,8 +73,28 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
     m_currentBranch = currentBranch();
 
-    if ( !createBranchItem() )
-        return;
+
+    TimeLineItem::gitCommitDAO commit;
+
+    QString info;
+    info.append(i18n("On Section: "));
+    info.append(m_currentBranch);
+    commit.text = info;
+
+    info.clear();
+    info.append(i18n("You are currently working on Section:\n"));
+    info.append(m_currentBranch);
+    info.append('\n');
+    info.append(i18n("\nAvailable Sections are:\n"));
+    info.append(m_branches.join("\n"));
+    info.append(i18n("\nClick here to switch to those Sections."));
+    commit.toolTipText = info;
+
+    commit.itemIdentifier = TimeLineItem::Branch;
+
+    TimeLineItem *item = new TimeLineItem(commit, Qt::ItemIsEnabled);
+    m_table->addItem(item);
+
 
     QList<TimeLineItem::gitCommitDAO*> commitList;
 
@@ -119,32 +139,6 @@ QString TimeLine::currentBranch()
     return m_gitRunner->getResult();
 }
 
-
-bool TimeLine::createBranchItem()
-{
-    TimeLineItem::gitCommitDAO commit;
-
-    QString info;
-    info.append(i18n("On Section: "));
-    info.append(m_currentBranch);
-    commit.text = info;
-
-    info.clear();
-    info.append(i18n("You are currently working on Section:\n"));
-    info.append(m_currentBranch);
-    info.append('\n');
-    info.append(i18n("\nAvailable Sections are:\n"));
-    info.append(m_branches.join("\n"));
-    info.append(i18n("\nClick here to switch to those Sections."));
-    commit.toolTipText = info;
-
-    commit.itemIdentifier = TimeLineItem::Branch;
-
-    TimeLineItem *item = new TimeLineItem(commit, Qt::ItemIsEnabled);
-    m_table->addItem(item);
-
-    return true;
-}
 
 QList<TimeLineItem::gitCommitDAO*> TimeLine::parseGitLog(QList<TimeLineItem::gitCommitDAO*> &commitList)
 {

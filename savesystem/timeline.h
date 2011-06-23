@@ -167,7 +167,6 @@ private:
 
     QList<TimeLineItem::gitCommitDAO*> parseGitLog(QList<TimeLineItem::gitCommitDAO*> &commitList);
 
-    bool createBranchItem();
     QString currentBranch();
     QStringList getGitBranches();
 
