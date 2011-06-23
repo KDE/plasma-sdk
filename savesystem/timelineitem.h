@@ -38,19 +38,9 @@ public:
         Merge = 4 /**< The TimeLineItem representd Merge type. */
     };
 
-    struct gitCommitDAO {
-        QString sha1hash;
-        QString text;
-        QString toolTipText;
-        QString date;
-        QString author;
-        ItemIdentifier itemIdentifier;
-    };
+    TimeLineItem(const Qt::ItemFlag flag = Qt::ItemIsEnabled);
 
-    TimeLineItem(TimeLineItem::gitCommitDAO &commit,
-                 const Qt::ItemFlag flag);
-
-//     void setHash(const QString &hash);
+    void setHash(const QString &hash);
     void setIdentifier(const TimeLineItem::ItemIdentifier id);
 
     QString getHash();

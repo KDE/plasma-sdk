@@ -74,12 +74,12 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     m_currentBranch = currentBranch();
 
 
-    TimeLineItem::gitCommitDAO commit;
+    TimeLineItem *branchItem = new TimeLineItem();
 
     QString info;
     info.append(i18n("On Section: "));
     info.append(m_currentBranch);
-    commit.text = info;
+    branchItem->setText(info);
 
     info.clear();
     info.append(i18n("You are currently working on Section:\n"));
@@ -88,26 +88,82 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     info.append(i18n("\nAvailable Sections are:\n"));
     info.append(m_branches.join("\n"));
     info.append(i18n("\nClick here to switch to those Sections."));
-    commit.toolTipText = info;
+    branchItem->setToolTip(info);
 
-    commit.itemIdentifier = TimeLineItem::Branch;
+    branchItem->setIdentifier(TimeLineItem::Branch);
 
-    TimeLineItem *item = new TimeLineItem(commit, Qt::ItemIsEnabled);
-    m_table->addItem(item);
+    m_table->addItem(branchItem);
 
 
-    QList<TimeLineItem::gitCommitDAO*> commitList;
-
-    commitList = parseGitLog(commitList);
-    int commitCount = 1;
-    foreach (TimeLineItem::gitCommitDAO *gitCommit, commitList) {
-        gitCommit->text = i18n("Commit #%1").arg(commitCount++);
-
-        TimeLineItem *item1 = new TimeLineItem(*gitCommit, Qt::ItemIsEnabled);
-        m_table->addItem(item1);
+    // Log gets the full git commit list
+    if (m_gitRunner->log() != DvcsJob::JobSucceeded) {
+        // handle error
+        return;
     }
 
-    qDeleteAll(commitList);
+    const QString rawCommits = m_gitRunner->getResult();
+    const QStringList commitLog = rawCommits.split('\n',QString::SkipEmptyParts);
+
+    // Regexp to match the sha1hash from the git commits.
+    const QString regExp("(commit\\s[0-9a-f]{40})");
+    const QRegExp rx(regExp);
+
+    TimeLineItem *commitItem = NULL;
+    int logIndex = 0;
+
+    qDebug() << "size" << commitLog.length();
+
+    // Iterate every commit log line. the newest commits are on the top
+    while ( logIndex < commitLog.length()) {
+
+        // here we got a sha1hash, hence a new commit beginns
+        if (commitLog.at(logIndex).contains(rx)) {
+
+            commitItem = new TimeLineItem();
+
+            // FIXME: sketchy, but as long as the has has 40 chars it should work.
+            commitItem->setHash(commitLog.at(logIndex).right(40));
+            qDebug() << commitItem->getHash();
+            ++logIndex;
+        }
+
+        if (commitLog.at(logIndex).contains("Merge: ", Qt::CaseSensitive)) {
+            commitItem->setIdentifier(TimeLineItem::Merge);
+            ++logIndex;
+        } else {
+            commitItem->setIdentifier(TimeLineItem::Commit);
+        }
+
+        // The next line is the author
+        QString toolTipText(commitLog.at(logIndex) + "\n\n");
+        toolTipText.replace("Author", i18n("Author"), Qt::CaseSensitive);
+        ++logIndex;
+
+        // Then comes the date
+        QString date(commitLog.at(logIndex));
+        date = date.remove("Date: ",Qt::CaseSensitive);
+        ++logIndex;
+
+        toolTipText.prepend(i18n("Savepoint created on:") + date + "\n");
+
+        // Set the date as visible text.
+        commitItem->setText(date.mid(4, date.lastIndexOf(" ")));
+
+        qDebug() << commitItem->text();
+
+        // The rest is Commit log info
+        while (!commitLog.at(logIndex).contains(rx)) {
+            qDebug() << logIndex << commitLog.at(logIndex);
+            toolTipText.append(commitLog.at(logIndex) + "\n");
+            ++logIndex;
+        }
+
+        qDebug() << toolTipText;
+
+        commitItem->setToolTip(toolTipText);
+
+        m_table->addItem(commitItem);
+    }
 
     parentWidget()->show();
     connect(m_table, SIGNAL(itemClicked(QTableWidgetItem *)),
@@ -138,64 +194,6 @@ QString TimeLine::currentBranch()
     }
     return m_gitRunner->getResult();
 }
-
-
-QList<TimeLineItem::gitCommitDAO*> TimeLine::parseGitLog(QList<TimeLineItem::gitCommitDAO*> &commitList)
-{
-    if (m_gitRunner->log() != DvcsJob::JobSucceeded) {
-        // handle error
-        return commitList;
-    }
-
-    const QString rawCommits = m_gitRunner->getResult();
-    const QStringList rawCommitLog = rawCommits.split('\n',QString::SkipEmptyParts);
-
-    // Regexp to match the sha1hash from the git commits.
-    const QString regExp("(commit\\s[0-9a-f]{40})");
-    const QRegExp rx(regExp);
-
-    QString commitLogLine;
-    TimeLineItem::gitCommitDAO *commit;
-
-    // Iterate every commit log line. the newest commits are on the top
-    foreach( commitLogLine, rawCommitLog ) {
-
-        // here we got a sha1hash, hence a new commit beginns
-        if (commitLogLine.contains(rx)) {
-            commit = new TimeLineItem::gitCommitDAO();
-            commitList.prepend(commit);
-
-            commit->itemIdentifier = TimeLineItem::Commit;
-
-            commit->sha1hash = commitLogLine.right(40); // FIXME: sketchy, but as long as the has has 40 chars it should work.
-            continue;
-        }
-
-        if (commitLogLine.contains("Merge: ", Qt::CaseSensitive)) {
-            commit->itemIdentifier = TimeLineItem::Merge;
-            continue;
-        }
-
-        if (commitLogLine.contains("Author: ")) {
-            commit->toolTipText.append(commitLogLine.replace("Author",
-                                       i18n("Author"),
-                                       Qt::CaseSensitive) + "\n\n");
-            continue;
-        }
-
-        if (commitLogLine.contains("Date: ")) {
-            commit->date = commitLogLine.remove("Date: ",Qt::CaseSensitive);
-            commit->toolTipText.prepend(i18n("Savepoint created on:") + commit->date + "\n");
-            continue;
-        }
-
-        // The rest is Commit log info
-        commit->toolTipText.append(commitLogLine + "\n");
-    }
-
-    return commitList;
-}
-
 
 Qt::DockWidgetArea TimeLine::location()
 {

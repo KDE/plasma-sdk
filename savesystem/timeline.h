@@ -165,8 +165,6 @@ private:
     void initUI(QWidget *parent,
                 Qt::DockWidgetArea location = Qt::TopDockWidgetArea);
 
-    QList<TimeLineItem::gitCommitDAO*> parseGitLog(QList<TimeLineItem::gitCommitDAO*> &commitList);
-
     QString currentBranch();
     QStringList getGitBranches();
 

@@ -27,13 +27,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 static const int TimeLineItemType = QTableWidgetItem::UserType + 1;
 
-TimeLineItem::TimeLineItem(TimeLineItem::gitCommitDAO &commit,
-                           const Qt::ItemFlag flag)
+TimeLineItem::TimeLineItem(const Qt::ItemFlag flag)
         : QTableWidgetItem(0,TimeLineItemType)
 {
     setFlags(flag);
 
-    m_type = commit.itemIdentifier;
+    /*setData(Qt::DecorationRole,QVariant(icon));
+    setData(Qt::DisplayRole,QVariant(dataList.takeFirst()));
+    setData(Qt::ToolTipRole,QVariant(dataList.takeFirst()));*/
+}
+
+void TimeLineItem::setHash(const QString &hash)
+{
+    m_sha1hash = hash;
+}
+
+void TimeLineItem::setIdentifier(const TimeLineItem::ItemIdentifier id)
+{
+    m_type = id;
 
     switch (m_type) {
     case Merge:
@@ -46,25 +57,6 @@ TimeLineItem::TimeLineItem(TimeLineItem::gitCommitDAO &commit,
         setIcon(KIcon("system-switch-user"));
         break;
     }
-
-    setText(commit.text);
-
-    setToolTip(commit.toolTipText);
-    /*setData(Qt::DecorationRole,QVariant(icon));
-    setData(Qt::DisplayRole,QVariant(dataList.takeFirst()));
-    setData(Qt::ToolTipRole,QVariant(dataList.takeFirst()));*/
-
-    m_sha1hash = commit.sha1hash;
-}
-
-// void TimeLineItem::setHash(const QString &hash)
-// {
-//     m_sha1hash = hash;
-// }
-
-void TimeLineItem::setIdentifier(const TimeLineItem::ItemIdentifier id)
-{
-    m_type = id;
 }
 
 QString TimeLineItem::getHash()
