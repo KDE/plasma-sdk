@@ -63,9 +63,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "modeltest/modeltest.h"
 
 MainWindow::CentralContainer::CentralContainer(QWidget* parent)
-    : QWidget(parent),
-      m_curMode(Preserve),
-      m_curWidget(0)
+        : QWidget(parent),
+        m_curMode(Preserve),
+        m_curWidget(0)
 {
     m_layout = new QVBoxLayout();
     setLayout(m_layout);
@@ -87,21 +87,21 @@ void MainWindow::CentralContainer::switchTo(QWidget* newWidget, SwitchMode mode)
 }
 
 MainWindow::MainWindow(QWidget *parent)
-    : KParts::MainWindow(parent, Qt::Widget),
-      m_sidebar(0),
-      m_timeLine(0),
-      m_previewerWidget(0),
-      m_metaEditor(0),
-      m_publisher(0),
-      m_browser(0),
-      m_editWidget(0),
-      m_editPage(0),
-      m_model(0),
-      m_oldTab(0), // we start from startPage
-      m_docksCreated(false),
-      m_part(0),
-      m_notesPart(0),
-      m_notesWidget(0)
+        : KParts::MainWindow(parent, Qt::Widget),
+        m_sidebar(0),
+        m_timeLine(0),
+        m_previewerWidget(0),
+        m_metaEditor(0),
+        m_publisher(0),
+        m_browser(0),
+        m_editWidget(0),
+        m_editPage(0),
+        m_model(0),
+        m_oldTab(0), // we start from startPage
+        m_docksCreated(false),
+        m_part(0),
+        m_notesPart(0),
+        m_notesWidget(0)
 {
     setXMLFile("plasmateui.rc");
     setupActions();
@@ -233,7 +233,20 @@ void MainWindow::showStartPage()
 {
     toolBar()->hide();
     menuBar()->hide();
+    if (m_timeLine) {
+        m_timeLine->hide();
+    }
+    if (m_previewerWidget) {
+        m_previewerWidget->hide();
+    }
+    if (m_notesWidget) {
+        m_notesWidget->hide();
+    }
+    if (m_editWidget) {
+        m_editWidget->hide();
+    }
     setCentralWidget(m_central);
+
     m_central->switchTo(m_startPage);
     setDockOptions(QMainWindow::AllowNestedDocks);
 }
@@ -252,9 +265,9 @@ void MainWindow::initTimeLine()
     KConfig c;
     KConfigGroup configDock = c.group("DocksPosition");
     Qt::DockWidgetArea location = (Qt::DockWidgetArea) configDock.readEntry("WorkflowLocation",
-                          QVariant(Qt::TopDockWidgetArea)).toInt();
+                                  QVariant(Qt::TopDockWidgetArea)).toInt();
     location = (Qt::DockWidgetArea) configDock.readEntry("TimeLineLocation",
-                                                         QVariant(Qt::BottomDockWidgetArea)).toInt();
+               QVariant(Qt::BottomDockWidgetArea)).toInt();
 
     if (!m_timeLine) {
         m_timeLine = new TimeLine(this, m_model->package(), location);
@@ -321,21 +334,21 @@ void MainWindow::setNotesVisible(const bool visible)
 
 void MainWindow::selectSavePoint()
 {
-   if (!m_timeLine) {
-     initTimeLine();
-  }
+    if (!m_timeLine) {
+        initTimeLine();
+    }
 
-  saveEditorData();
-  emit newSavePointClicked();
+    saveEditorData();
+    emit newSavePointClicked();
 }
 
 void MainWindow::selectPublish()
 {
-  if (!m_publisher) {
-    m_publisher = new Publisher(this, m_model->package(), m_model->packageType());
-  }
-  m_publisher->setProjectName(m_currentProject);
-  m_publisher->exec();
+    if (!m_publisher) {
+        m_publisher = new Publisher(this, m_model->package(), m_model->packageType());
+    }
+    m_publisher->setProjectName(m_currentProject);
+    m_publisher->exec();
 }
 
 void MainWindow::togglePreview()
@@ -368,14 +381,14 @@ void MainWindow::editorDestructiveRefresh()
 {
     if (qobject_cast<KParts::ReadOnlyPart*>(m_part)) {
         static_cast<KParts::ReadOnlyPart*>(m_part)->openUrl(
-              static_cast<KParts::ReadOnlyPart*>(m_part)->url());
+            static_cast<KParts::ReadOnlyPart*>(m_part)->url());
     }
     if (m_metaEditor) {
         m_metaEditor->readFile();
     }
     if (qobject_cast<KParts::ReadOnlyPart*>(m_notesPart)) {
         static_cast<KParts::ReadOnlyPart*>(m_notesPart)->openUrl(
-              static_cast<KParts::ReadOnlyPart*>(m_notesPart)->url());
+            static_cast<KParts::ReadOnlyPart*>(m_notesPart)->url());
     }
 }
 
@@ -392,8 +405,8 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
     QVariantList args;
     QString error; // we should show this via debug if we fail
     KParts::ReadOnlyPart *part = dynamic_cast<KParts::ReadOnlyPart*>(
-              offers.at(0)->createInstance<KParts::Part>(
-                this, args, &error));
+                                     offers.at(0)->createInstance<KParts::Part>(
+                                         this, args, &error));
 
     QWidget *mainWidget = 0;
     if (!m_part || !part->inherits(m_part->metaObject()->className())) {
@@ -416,7 +429,7 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
             mainWidget = m_part->widget();
         }
     } else {
-      mainWidget = m_part->widget();
+        mainWidget = m_part->widget();
     }
 
     if (!m_part) {
@@ -482,8 +495,8 @@ void MainWindow::loadNotesEditor(QDockWidget *container)
         QVariantList args;
         QString error;
         m_notesPart = dynamic_cast<KParts::ReadOnlyPart*>(
-                      offers.at(0)->createInstance<KParts::Part>(
-                      this, args, &error));
+                          offers.at(0)->createInstance<KParts::Part>(
+                              this, args, &error));
 
         if (!m_notesPart) {
             kDebug() << "Failed to load notes editor:" << error;
@@ -503,7 +516,7 @@ void MainWindow::loadNotesEditor(QDockWidget *container)
 void MainWindow::refreshNotes()
 {
     if (!m_notesPart) {
-      return;
+        return;
     }
     KParts::ReadWritePart* part = qobject_cast<KParts::ReadWritePart*>(m_notesPart);
     if (part && part->isModified()) {
@@ -581,7 +594,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     stream << contents;
     metadataFile.close();
 
-   if (actualType.isEmpty()) {
+    if (actualType.isEmpty()) {
         QDir dir(packagePath);
         if (dir.exists("metadata.desktop")) {
             Plasma::PackageMetadata metadata(packagePath + "metadata.desktop");
@@ -591,7 +604,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
 
     //Workaround for Plasma::PackageStructure not recognizing Plasma/PopupApplet as a valid type
     //FIXME:
-   QString fixedType;
+    QString fixedType;
     if (actualType == "Plasma/Applet,Plasma/PopupApplet") {
         fixedType = "Plasma/Applet";
     } else {
@@ -721,7 +734,7 @@ Previewer* MainWindow::createPreviewerFor(const QString& projectType)
 {
     Previewer* ret = 0;
     if (projectType == "Plasma/Applet" ||
-        projectType == "Plasma/Applet,Plasma/PopupApplet") {
+            projectType == "Plasma/Applet,Plasma/PopupApplet") {
         ret = new PlasmoidPreviewer(i18n("Preview"), this);
     } else if (projectType == "Plasma/Runner") {
         ret = new RunnerPreviewer(i18n("Previewer"), this);
