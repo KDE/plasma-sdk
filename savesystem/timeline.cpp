@@ -69,7 +69,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
         return;
     }
 
-    m_branches = getGitBranches();
+    m_branches = listBranches();
 
     m_currentBranch = currentBranch();
 
@@ -170,7 +170,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
             this, SLOT(showContextMenu(QTableWidgetItem *)));
 }
 
-QStringList TimeLine::getGitBranches()
+QStringList TimeLine::listBranches() const
 {
     QStringList branchList;
     if (m_gitRunner->branches() != DvcsJob::JobSucceeded) {
@@ -187,7 +187,7 @@ QStringList TimeLine::getGitBranches()
     return branchList;
 }
 
-QString TimeLine::currentBranch()
+QString TimeLine::currentBranch() const
 {
     if (m_gitRunner->currentBranch() != DvcsJob::JobSucceeded) {
         return QString();

@@ -165,8 +165,8 @@ private:
     void initUI(QWidget *parent,
                 Qt::DockWidgetArea location = Qt::TopDockWidgetArea);
 
-    QString currentBranch();
-    QStringList getGitBranches();
+    QString currentBranch() const;
+    QStringList listBranches() const;
 
     /**
       * Method called whenever the user resizes the dockwidget or its parent
