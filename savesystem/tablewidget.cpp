@@ -191,11 +191,10 @@ void TableWidget::clear()
 void TableWidget::mouseReleaseEvent(QMouseEvent *event)
 {
     QModelIndex index = indexAt(event->pos());
-    if (!index.isValid())
+    if (!index.isValid()){
         return;
-    if (event->button() == Qt::RightButton) {
-        emit itemClicked(itemFromIndex(index));
     }
+   emit itemClicked(itemFromIndex(index));
 }
 
 void TableWidget::updateSize(TimeLineItem *item)
