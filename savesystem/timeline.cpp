@@ -114,7 +114,6 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     // Iterate every commit log line. the newest commits are on the top
     while ( logIndex < commitLog.size()) {
         QString toolTipText;
-        QString date;
 
         // here we got a sha1hash, hence a new commit beginns
         if (commitLog.at(logIndex).contains(rx)) {
@@ -140,15 +139,16 @@ void TimeLine::loadTimeLine(const KUrl &dir)
                                 Qt::CaseSensitive);
 
             // Then comes the date
-            date = commitLog.at(logIndex);
+            QString date = commitLog.at(logIndex);
             ++logIndex;
 
             date.remove("Date: ",Qt::CaseSensitive);
             toolTipText.prepend(i18n("Savepoint created on:") + date + "\n");
 
             // Set the date as visible text.
-            date.right(date.indexOf(" "));
-            commitItem->setText(date.mid(0, date.lastIndexOf(" ")));
+	    QStringList dateList = date.split(" ", QString::SkipEmptyParts);
+            // FIXME Localisation?
+            commitItem->setText( dateList.at(2) + "." + dateList.at(1) + "." + dateList.at(4) + " " + dateList.at(3));
         }
 
         // The rest is Commit log info
