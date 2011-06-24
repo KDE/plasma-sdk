@@ -94,6 +94,15 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
     m_table->addItem(branchItem);
 
+    TimeLineItem *saveItem = new TimeLineItem();
+    info.clear();
+    info.append(i18n("New save point"));
+    saveItem->setText(info);
+
+    saveItem->setIdentifier(TimeLineItem::NotACommit);
+
+    m_table->addItem(saveItem);
+
 
     // Log gets the full git commit list
     if (m_gitRunner->log() != DvcsJob::JobSucceeded) {
@@ -146,7 +155,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
             toolTipText.prepend(i18n("Savepoint created on:") + date + "\n");
 
             // Set the date as visible text.
-	    QStringList dateList = date.split(" ", QString::SkipEmptyParts);
+            QStringList dateList = date.split(" ", QString::SkipEmptyParts);
             // FIXME Localisation?
             commitItem->setText( dateList.at(2) + "." + dateList.at(1) + "." + dateList.at(4) + " " + dateList.at(3));
         }
@@ -164,6 +173,9 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
         m_table->addItem(commitItem);
     }
+
+    // The las Item is maked as such.
+    commitItem->setText(i18n("First save point"));
 
     parentWidget()->show();
     connect(m_table, SIGNAL(itemClicked(QTableWidgetItem *)),
@@ -260,6 +272,8 @@ void TimeLine::showContextMenu(QTableWidgetItem *item)
         switchBranchMenu->setEnabled(!switchBranchMenu->actions().isEmpty());
         mergeBranchMenu->setEnabled(!mergeBranchMenu->actions().isEmpty());
         deleteBranchMenu->setEnabled(!deleteBranchMenu->actions().isEmpty());
+    } else if (tlItem->getIdentifier() == TimeLineItem::NotACommit) {
+        newSavePoint();
     }
 
     menu.exec(mapToGlobal(rc.bottomLeft()));

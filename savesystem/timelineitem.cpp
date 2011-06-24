@@ -56,6 +56,9 @@ void TimeLineItem::setIdentifier(const TimeLineItem::ItemIdentifier id)
     case Branch:
         setIcon(KIcon("system-switch-user"));
         break;
+    case NotACommit:
+        setIcon(KIcon("document-save"));
+        break;
     }
 }
 
