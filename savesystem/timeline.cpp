@@ -56,8 +56,7 @@ TimeLine::TimeLine(QWidget *parent,
     initUI(parent, location);
 
     if (dir.isValid()) {
-        setWorkingDir(dir);
-        //loadTimeLine(dir);
+        m_workingDir = dir;
     }
 }
 
@@ -66,6 +65,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     m_table->clear();
 
     if (!setWorkingDir(dir)) {
+        newSavePoint();
         return;
     }
 
@@ -150,7 +150,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
             ++logIndex;
 
             date.remove("Date: ",Qt::CaseSensitive);
-            toolTipText.prepend(i18n("Savepoint created on:") + date + "\n");
+            toolTipText.prepend(i18n("Created on:") + date + "\n");
 
             // Set the date as visible text.
             QStringList dateList = date.split(" ", QString::SkipEmptyParts);
@@ -287,17 +287,12 @@ void TimeLine::showContextMenu(QTableWidgetItem *item)
 void TimeLine::newSavePoint()
 {
     QPointer<CommitDialog> commitDialog = new CommitDialog();
+    QString commitMessage;
     bool dialogAlreadyOpen = false;
     if (!m_gitRunner->isValidDirectory()) {
-
-        if (!m_gitRunner->hasNewChangesToCommit()) {
-            return;
-        }
         dialogAlreadyOpen = true;
 
-        if (commitDialog->exec() == QDialog::Rejected) {
-            return;
-        }
+        commitMessage = i18n("Initial Commit");
 
         m_gitRunner->init(m_workingDir);
         // Retrieve Name and Email, and set git global parameters
@@ -315,24 +310,25 @@ void TimeLine::newSavePoint()
         return;
     }
     if (!dialogAlreadyOpen) {
-        if (commitDialog->exec() == QDialog::Rejected)
+        if (commitDialog->exec() == QDialog::Rejected) {
             return;
+        }
+        commitMessage = QString(commitDialog->m_commitBriefText->text());
     }
-    QString commit = QString(commitDialog->m_commitBriefText->text());
     // Ensure the required comment is not empty
-    if (commit.isEmpty())
+    if (commitMessage.isEmpty())
         return;
 
     QString optionalComment = QString(commitDialog->m_commitFullText->toPlainText());
     delete commitDialog;
 
     if (!optionalComment.isEmpty() != 0) {
-        commit.append("\n\n");
-        commit.append(optionalComment);
+        commitMessage.append("\n\n");
+        commitMessage.append(optionalComment);
     }
 
     m_gitRunner->add(KUrl::List(QString('.')));
-    m_gitRunner->commit(commit);
+    m_gitRunner->commit(commitMessage);
     m_table->disconnect();
     loadTimeLine(m_workingDir);
     if (isHidden()) {
