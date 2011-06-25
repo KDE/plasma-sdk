@@ -73,10 +73,9 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
     m_currentBranch = currentBranch();
 
+    QString info;
 
     TimeLineItem *branchItem = new TimeLineItem();
-
-    QString info;
     info.append(i18n("On Section: "));
     info.append(m_currentBranch);
     branchItem->setText(info);
@@ -91,8 +90,8 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     branchItem->setToolTip(info);
 
     branchItem->setIdentifier(TimeLineItem::Branch);
-
     m_table->addItem(branchItem);
+
 
     TimeLineItem *saveItem = new TimeLineItem();
     info.clear();
@@ -100,7 +99,6 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     saveItem->setText(info);
 
     saveItem->setIdentifier(TimeLineItem::NotACommit);
-
     m_table->addItem(saveItem);
 
 
@@ -120,7 +118,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     TimeLineItem *commitItem = NULL;
     int logIndex = 0;
 
-    // Iterate every commit log line. the newest commits are on the top
+    // Iterate every commit log line. the newest commits are on the top of the log
     while ( logIndex < commitLog.size()) {
         QString toolTipText;
 
@@ -216,20 +214,19 @@ void TimeLine::showContextMenu(QTableWidgetItem *item)
 {
     emit savePointClicked();
     TimeLineItem *tlItem = dynamic_cast<TimeLineItem*>(item);
-    qDebug() << tlItem->getHash();
 
     if (!tlItem) {
         return;
     }
 
-    QRect rc = m_table->visualItemRect(tlItem);
     KMenu menu(this);
-    menu.addTitle(tlItem->text());
+    menu.addTitle(tlItem->toolTip());
     menu.addSeparator();
 
-    if (tlItem->getIdentifier() == TimeLineItem::Commit ||
-            tlItem->getIdentifier() == TimeLineItem::Merge) {
-
+    switch (tlItem->getIdentifier()) {
+    case TimeLineItem::Commit:
+    case TimeLineItem::Merge:
+    {
         QAction *restoreCommit = menu.addAction(i18n("Restore SavePoint"));
         restoreCommit->setData(QVariant(tlItem->getHash()));
         QAction *moveToCommit = menu.addAction(i18n("Move to this SavePoint"));
@@ -239,8 +236,10 @@ void TimeLine::showContextMenu(QTableWidgetItem *item)
                 this, SLOT(restoreCommit()));
         connect(moveToCommit, SIGNAL(triggered(bool)),
                 this, SLOT(moveToCommit()));
-
-    } else if (tlItem->getIdentifier() == TimeLineItem::Branch) {
+        break;
+    }
+    case TimeLineItem::Branch:
+    {
         QAction *createBranch = menu.addAction(i18n("Create new Section"));
         QMenu *switchBranchMenu = menu.addMenu(i18n("Switch to Section"));
         QMenu *mergeBranchMenu = menu.addMenu(i18n("Combine into Section"));
@@ -272,10 +271,16 @@ void TimeLine::showContextMenu(QTableWidgetItem *item)
         switchBranchMenu->setEnabled(!switchBranchMenu->actions().isEmpty());
         mergeBranchMenu->setEnabled(!mergeBranchMenu->actions().isEmpty());
         deleteBranchMenu->setEnabled(!deleteBranchMenu->actions().isEmpty());
-    } else if (tlItem->getIdentifier() == TimeLineItem::NotACommit) {
+        break;
+    }
+    case TimeLineItem::NotACommit:
+    {
         newSavePoint();
+        return;
+    }
     }
 
+    QRect rc = m_table->visualItemRect(tlItem);
     menu.exec(mapToGlobal(rc.bottomLeft()));
 }
 

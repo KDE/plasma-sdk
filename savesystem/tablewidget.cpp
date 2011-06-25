@@ -194,7 +194,7 @@ void TableWidget::mouseReleaseEvent(QMouseEvent *event)
     if (!index.isValid()){
         return;
     }
-   emit itemClicked(itemFromIndex(index));
+    emit itemClicked(itemFromIndex(index));
 }
 
 void TableWidget::updateSize(TimeLineItem *item)
