@@ -278,7 +278,6 @@ void MainWindow::initTimeLine()
         connect(this, SIGNAL(newSavePointClicked()), m_timeLine, SLOT(newSavePoint()));
         addDockWidget(location, m_timeLine);
         m_timeLine->loadTimeLine(m_model->package());
-        m_timeLine->setVisible(false);
     } else {
         // The TimeLine is already created, but we changed project, so we need to update the working directory
         m_timeLine->setWorkingDir(m_model->package());
@@ -718,6 +717,15 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     }
     // After we loaded the project, init the TimeLine and Previewer component
     menuBar()->show();
+    if (m_timeLine) {
+        m_timeLine->loadTimeLine(m_model->package());
+    }
+    if (m_previewerWidget) {
+        m_previewerWidget->show();
+    }
+    if (m_editWidget) {
+        m_editWidget->show();
+    }
     updateActions();
 }
 

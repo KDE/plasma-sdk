@@ -36,7 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QStringList>
 
 
-#include <QDebug>
+// #include <QDebug>
 
 #include "timeline.h"
 
@@ -127,7 +127,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
             commitItem = new TimeLineItem();
 
-            // sett the hash
+            // set the git hash
             commitItem->setHash(commitLog.at(logIndex).right(40)); // FIXME: As long as the hash has 40 chars it works.
             ++logIndex;
 
@@ -152,7 +152,6 @@ void TimeLine::loadTimeLine(const KUrl &dir)
             date.remove("Date: ",Qt::CaseSensitive);
             toolTipText.prepend(i18n("Created on:") + date + "\n");
 
-            // Set the date as visible text.
             QStringList dateList = date.split(" ", QString::SkipEmptyParts);
             // FIXME Localisation?
             commitItem->setText( dateList.at(2) + "." + dateList.at(1) + "." + dateList.at(4) + " " + dateList.at(3));
