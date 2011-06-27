@@ -42,6 +42,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "tablewidget.h"
 #include "tabledelegate.h"
+#include "timelineitem.h"
 #include "dvcsjob.h"
 #include "gitrunner.h"
 #include "branchdialog.h"
@@ -55,16 +56,16 @@ TimeLine::TimeLine(QWidget *parent,
     m_gitRunner = new GitRunner();
     initUI(parent, location);
 
-    if (dir.isValid()) {
-        m_workingDir = dir;
-    }
+    setWorkingDir(dir);
 }
 
 void TimeLine::loadTimeLine(const KUrl &dir)
 {
     m_table->clear();
 
-    if (!setWorkingDir(dir)) {
+    setWorkingDir(dir);
+
+    if (!m_gitRunner->isValidDirectory()) {
         newSavePoint();
         return;
     }
@@ -204,7 +205,7 @@ QString TimeLine::currentBranch() const
     return m_gitRunner->getResult();
 }
 
-Qt::DockWidgetArea TimeLine::location()
+Qt::DockWidgetArea TimeLine::location() const
 {
     return m_table->location();
 }
@@ -368,6 +369,7 @@ void TimeLine::moveToCommit()
     warningMB->setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
     warningMB->setDefaultButton(QMessageBox::Discard);
     if (warningMB->exec() == QMessageBox::Discard) {
+        delete warningMB;
         return;
     }
 
@@ -432,6 +434,7 @@ void TimeLine::mergeBranch()
 
     QPointer<CommitDialog> commitDialog = new CommitDialog();
     if (commitDialog->exec() == QDialog::Rejected) {
+        delete commitDialog;
         return;
     }
 
@@ -545,9 +548,8 @@ void TimeLine::createBranch()
 
 bool TimeLine::setWorkingDir(const KUrl &dir)
 {
-    m_gitRunner->setDirectory(dir);
-
-    if (m_gitRunner->isValidDirectory()) {
+    if (dir.isValid()) {
+        m_gitRunner->setDirectory(dir);
         m_workingDir = dir;
         return true;
     }

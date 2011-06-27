@@ -27,8 +27,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KUrl>
 #include <QDockWidget>
 
-#include "timelineitem.h"
-
 class GitRunner;
 
 class QStringList;
@@ -69,7 +67,7 @@ public:
     /**
       * Returns the location of the dockwidget.
       */
-    Qt::DockWidgetArea location();
+    Qt::DockWidgetArea location() const;
 
 
 public Q_SLOTS:
