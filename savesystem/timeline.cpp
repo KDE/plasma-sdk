@@ -59,6 +59,13 @@ TimeLine::TimeLine(QWidget *parent,
     setWorkingDir(dir);
 }
 
+TimeLine::~TimeLine()
+{
+    delete m_gitRunner;
+    delete m_table;
+}
+
+
 void TimeLine::loadTimeLine(const KUrl &dir)
 {
     m_table->clear();
@@ -427,6 +434,7 @@ void TimeLine::mergeBranch()
     warningMB->setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
     warningMB->setDefaultButton(QMessageBox::Discard);
     if (warningMB->exec() == QMessageBox::Discard) {
+        delete warningMB;
         return;
     }
 
@@ -473,6 +481,7 @@ void TimeLine::deleteBranch()
     warningMB->setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
     warningMB->setDefaultButton(QMessageBox::Discard);
     if (warningMB->exec() == QMessageBox::Discard) {
+        delete warningMB;
         return;
     }
 
@@ -508,6 +517,7 @@ void TimeLine::renameBranch()
                                           QMessageBox::NoButton,
                                           this, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
         mb->exec();
+        delete mb;
         return;
     }
 
@@ -525,6 +535,7 @@ void TimeLine::createBranch()
     QPointer<BranchDialog> createBranch = new BranchDialog();
 
     if (createBranch->exec() == QDialog::Rejected) {
+        delete createBranch;
         return;
     }
 
@@ -538,6 +549,7 @@ void TimeLine::createBranch()
                                           QMessageBox::NoButton,
                                           this, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
         mb->exec();
+        delete mb;
         return;
     }
 

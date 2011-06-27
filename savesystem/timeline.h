@@ -50,6 +50,7 @@ public:
     TimeLine(QWidget *parent,
              const KUrl &dir,
              Qt::DockWidgetArea location = Qt::BottomDockWidgetArea);
+    virtual ~TimeLine();
 
     /**
       * Sets the workinf directory with the one passed.
