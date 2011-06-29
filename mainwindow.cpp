@@ -236,15 +236,19 @@ void MainWindow::showStartPage()
     if (m_timeLine) {
         m_timeLine->hide();
     }
+
     if (m_previewerWidget) {
         m_previewerWidget->hide();
     }
+
     if (m_notesWidget) {
         m_notesWidget->hide();
     }
+
     if (m_editWidget) {
         m_editWidget->hide();
     }
+
     setCentralWidget(m_central);
 
     m_central->switchTo(m_startPage);
@@ -352,7 +356,9 @@ void MainWindow::selectPublish()
 
 void MainWindow::togglePreview()
 {
-    m_previewerWidget->setVisible(!m_previewerWidget->isVisible());
+    if (m_previewerWidget) {
+        m_previewerWidget->setVisible(!m_previewerWidget->isVisible());
+    }
 }
 
 void MainWindow::saveEditorData()
@@ -360,9 +366,11 @@ void MainWindow::saveEditorData()
     if (qobject_cast<KParts::ReadWritePart*>(m_part)) {
         static_cast<KParts::ReadWritePart*>(m_part)->save();
     }
+
     if (qobject_cast<KParts::ReadWritePart*>(m_notesPart)) {
         static_cast<KParts::ReadWritePart*>(m_notesPart)->save();
     }
+
     if (m_metaEditor) {
         m_metaEditor->writeFile();
     }
@@ -720,12 +728,15 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     if (m_timeLine) {
         m_timeLine->loadTimeLine(m_model->package());
     }
+
     if (m_previewerWidget) {
         m_previewerWidget->show();
     }
+
     if (m_editWidget) {
         m_editWidget->show();
     }
+
     updateActions();
 }
 
