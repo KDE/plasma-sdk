@@ -97,6 +97,7 @@ MainWindow::MainWindow(QWidget *parent)
         m_model(0),
         m_oldTab(0), // we start from startPage
         m_docksCreated(false),
+        m_isPlasmateCreatedPackage(true),
         m_part(0),
         m_notesPart(0),
         m_notesWidget(0)
@@ -529,6 +530,7 @@ void MainWindow::refreshNotes()
     QFile notes(notesFile);
     if (!notes.exists()) {
         notes.open(QIODevice::WriteOnly);
+        notes.close();
     }
     m_notesPart->openUrl(KUrl("file://" + notesFile));
 }
@@ -539,9 +541,12 @@ QString MainWindow::projectFilePath(const QString &filename)
         return QString();
     }
 
-    QDir notesDir(m_model->package());
-    notesDir.cdUp();
-    return notesDir.absolutePath() + "/" + filename;
+    QDir packageDir(m_model->package());
+    if (m_isPlasmateCreatedPackage) {
+        packageDir.cdUp();
+    }
+
+    return packageDir.absolutePath() + "/" + filename;
 }
 
 void MainWindow::saveProjectState()
@@ -550,7 +555,7 @@ void MainWindow::saveProjectState()
         return;
     }
 
-    const QString projectrc = projectFilePath(".projectrc");
+    const QString projectrc = projectFilePath(".plasmateprojectrc");
     KConfig c(projectrc);
     KConfigGroup configDock = c.group("DocksPosition");
     configDock.writeEntry("MainWindowLayout", saveState(0));
@@ -603,6 +608,9 @@ void MainWindow::loadProject(const QString &path)
     // if we had a previous project open, save its state before deleting the model
     saveProjectState();
 
+    // the project rc file is IN the package, then this was loaded from an existing local project
+    // otherwise, we assume it was created by plasmate and the project files are up one dir
+    m_isPlasmateCreatedPackage = !QFile::exists(packagePath + ".plasmateprojectrc");
     m_currentProject = path;
     kDebug() << "Loading project from" << packagePath << "...";
     KService service(packagePath + "metadata.desktop");
@@ -669,7 +677,7 @@ void MainWindow::loadProject(const QString &path)
     m_oldTab = EditTab;
 
     QByteArray state = saveState();
-    const QString projectrc = projectFilePath(".projectrc");
+    const QString projectrc = projectFilePath(".plasmateprojectrc");
     if (QFile::exists(projectrc)) {
         KConfig c(projectrc);
         KConfigGroup configDock = c.group("DocksPosition");

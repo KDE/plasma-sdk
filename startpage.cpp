@@ -485,11 +485,6 @@ void StartPage::createNewProject()
     metaDataGroup.writeEntry("X-Plasma-DefaultSize", QSize(200, 100));
     metaFile.sync();
 
-    // Create the notes file
-    QFile notesFile(projectPath + "/NOTES");
-    notesFile.open(QIODevice::ReadWrite);
-    notesFile.close();
-
     // the loading code expects the FOLDER NAME
     emit projectSelected(projectPath + projectFolderName);
 
@@ -530,6 +525,16 @@ void StartPage::loadLocalProject()
 {
     const QString path = KShell::tildeExpand(m_ui.localProject->text());
     kDebug() << "loading local project from" << path;
+    if (!QFile::exists(path)) {
+        return;
+    }
+
+    if (!QFile::exists(path + "/.plasmateprojectrc")) {
+        QFile rcfile(path + "/.plasmateprojectrc");
+        rcfile.open(QIODevice::ReadWrite);
+        rcfile.close();
+    }
+
     emit projectSelected(path);
 }
 

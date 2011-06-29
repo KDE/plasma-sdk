@@ -158,6 +158,7 @@ private:
     PackageModel *m_model;
     int m_oldTab;
     bool m_docksCreated;
+    bool m_isPlasmateCreatedPackage;
     CentralContainer *m_central;
     QString m_currentProject;
 
