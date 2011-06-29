@@ -529,8 +529,8 @@ void StartPage::loadLocalProject()
         return;
     }
 
-    if (!QFile::exists(path + "/.plasmateprojectrc")) {
-        QFile rcfile(path + "/.plasmateprojectrc");
+    if (!QFile::exists(path + '/' + PROJECTRC)) {
+        QFile rcfile(path + '/' + PROJECTRC);
         rcfile.open(QIODevice::ReadWrite);
         rcfile.close();
     }
