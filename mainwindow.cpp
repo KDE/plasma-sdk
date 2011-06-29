@@ -559,7 +559,6 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     m_currentProject = name;
     m_currentProjectType = type;
     kDebug() << "Loading project named" << name << "...";
-    delete m_model;
     toolBar()->show();
 
     // Saving NewProject preferences
@@ -607,21 +606,18 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     }
 
     //Workaround for Plasma::PackageStructure not recognizing Plasma/PopupApplet as a valid type
-    //FIXME:
-    QString fixedType;
-    if (actualType == "Plasma/Applet,Plasma/PopupApplet") {
-        fixedType = "Plasma/Applet";
-    } else {
-        fixedType = actualType;
+    if (actualType.contains("Plasma/Applet")) {
+        actualType = "Plasma/Applet";
     }
 
     // Add it to the recent files first.
+    delete m_model;
     m_model = new PackageModel(this);
 #ifdef DEBUG_MODEL
     new ModelTest(m_model, this);
 #endif
-    kDebug() << "Setting project type to:" << fixedType;
-    m_model->setPackageType(fixedType);
+    kDebug() << "Setting project type to:" << actualType;
+    m_model->setPackageType(actualType);
     kDebug() << "Setting model package to:" << packagePath;
 
     if (!m_model->setPackage(packagePath))
@@ -629,13 +625,15 @@ void MainWindow::loadProject(const QString &name, const QString &type)
         KMessageBox::error(this, i18n("Invalid plasmagick package."));
         return;
     }
-    m_editPage = new EditPage();
+
+    if (!m_editPage) {
+        m_editPage = new EditPage();
+        connect(m_editPage, SIGNAL(loadEditor(KService::List, KUrl)), this, SLOT(loadRequiredEditor(const KService::List, KUrl)));
+        connect(m_editPage, SIGNAL(loadMetaDataEditor(KUrl)), this, SLOT(loadMetaDataEditor(KUrl)));
+        m_editPage->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
+    }
+
     m_editPage->setModel(m_model);
-
-    connect(m_editPage, SIGNAL(loadEditor(KService::List, KUrl)), this, SLOT(loadRequiredEditor(const KService::List, KUrl)));
-    connect(m_editPage, SIGNAL(loadMetaDataEditor(KUrl)), this, SLOT(loadMetaDataEditor(KUrl)));
-
-    m_editPage->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
 
     QStringList recentFiles;
     KConfigGroup cg = KGlobal::config()->group("General");
