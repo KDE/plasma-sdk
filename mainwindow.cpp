@@ -60,6 +60,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "modeltest/modeltest.h"
 
+static const int STATE_VERSION = 0;
+
 MainWindow::CentralContainer::CentralContainer(QWidget* parent)
         : QWidget(parent),
         m_curMode(Preserve),
@@ -124,7 +126,7 @@ MainWindow::~MainWindow()
 {
     // Saving layout position
     KConfigGroup configDock = KGlobal::config()->group("DocksPosition");
-    configDock.writeEntry("MainWindowLayout", saveState(0));
+    configDock.writeEntry("MainWindowLayout", saveState(STATE_VERSION));
 
     saveProjectState();
 
@@ -558,7 +560,7 @@ void MainWindow::saveProjectState()
     const QString projectrc = projectFilePath(".plasmateprojectrc");
     KConfig c(projectrc);
     KConfigGroup configDock = c.group("DocksPosition");
-    configDock.writeEntry("MainWindowLayout", saveState(0));
+    configDock.writeEntry("MainWindowLayout", saveState(STATE_VERSION));
 }
 
 void MainWindow::loadMetaDataEditor(KUrl target)
@@ -676,7 +678,7 @@ void MainWindow::loadProject(const QString &path)
 
     m_oldTab = EditTab;
 
-    QByteArray state = saveState();
+    QByteArray state = saveState(STATE_VERSION);
     const QString projectrc = projectFilePath(".plasmateprojectrc");
     if (QFile::exists(projectrc)) {
         KConfig c(projectrc);
@@ -695,7 +697,7 @@ void MainWindow::loadProject(const QString &path)
     }
 
     setFileListVisible(true);
-    restoreState(state);
+    restoreState(state, STATE_VERSION);
 
     // Now, setup some useful properties such as the project name in the title bar
     // and setting the current working directory.
