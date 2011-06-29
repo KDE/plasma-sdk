@@ -33,6 +33,8 @@ class KLineEdit;
 class MainWindow;
 class ProjectManager;
 
+static const QString PROJECTRC(".plasmateprojectrc");
+
 class StartPage : public QWidget
 {
     Q_OBJECT

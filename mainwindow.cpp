@@ -557,7 +557,7 @@ void MainWindow::saveProjectState()
         return;
     }
 
-    const QString projectrc = projectFilePath(".plasmateprojectrc");
+    const QString projectrc = projectFilePath(PROJECTRC);
     KConfig c(projectrc);
     KConfigGroup configDock = c.group("DocksPosition");
     configDock.writeEntry("MainWindowLayout", saveState(STATE_VERSION));
@@ -612,7 +612,7 @@ void MainWindow::loadProject(const QString &path)
 
     // the project rc file is IN the package, then this was loaded from an existing local project
     // otherwise, we assume it was created by plasmate and the project files are up one dir
-    m_isPlasmateCreatedPackage = !QFile::exists(packagePath + ".plasmateprojectrc");
+    m_isPlasmateCreatedPackage = !QFile::exists(packagePath + PROJECTRC);
     m_currentProject = path;
     kDebug() << "Loading project from" << packagePath << "...";
     KService service(packagePath + "metadata.desktop");
@@ -679,7 +679,7 @@ void MainWindow::loadProject(const QString &path)
     m_oldTab = EditTab;
 
     QByteArray state = saveState(STATE_VERSION);
-    const QString projectrc = projectFilePath(".plasmateprojectrc");
+    const QString projectrc = projectFilePath(PROJECTRC);
     if (QFile::exists(projectrc)) {
         KConfig c(projectrc);
         KConfigGroup configDock = c.group("DocksPosition");
