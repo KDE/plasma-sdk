@@ -32,6 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KMenu>
 #include <KMenuBar>
 #include <KMimeTypeTrader>
+#include <KStandardAction>
 #include <KTextEditor/ConfigInterface>
 #include <KTextEditor/Document>
 #include <KTextEditor/View>
@@ -63,9 +64,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 static const int STATE_VERSION = 0;
 
 MainWindow::CentralContainer::CentralContainer(QWidget* parent)
-        : QWidget(parent),
-        m_curMode(Preserve),
-        m_curWidget(0)
+    : QWidget(parent),
+      m_curMode(Preserve),
+      m_curWidget(0)
 {
     m_layout = new QVBoxLayout();
     setLayout(m_layout);
@@ -94,7 +95,7 @@ MainWindow::MainWindow(QWidget *parent)
         m_metaEditor(0),
         m_publisher(0),
         m_browser(0),
-        m_editWidget(0),
+        m_filelist(0),
         m_editPage(0),
         m_model(0),
         m_oldTab(0), // we start from startPage
@@ -128,8 +129,6 @@ MainWindow::~MainWindow()
     KConfigGroup configDock = KGlobal::config()->group("DocksPosition");
     configDock.writeEntry("MainWindowLayout", saveState(STATE_VERSION));
 
-    saveProjectState();
-
     // if the user closes the application with an editor open, should
     // save its contents
     saveEditorData();
@@ -141,21 +140,13 @@ MainWindow::~MainWindow()
     m_publisher = 0;
     delete m_editPage;
     m_editPage = 0;
-    delete m_editWidget;
-    m_editWidget = 0;
+    delete m_filelist;
+    m_filelist = 0;
 
     if (m_previewerWidget) {
         configDock.writeEntry("PreviewerHeight", m_previewerWidget->height());
         configDock.writeEntry("PreviewerWidth", m_previewerWidget->width());
         delete m_previewerWidget;
-    }
-
-    if (m_browser) {
-        // save current page for restoration next time
-        // TODO: Maybe it makes more sense to save this per-project?
-        KConfigGroup cg = KGlobal::config()->group("General");
-        cg.writeEntry("lastBrowserPage", m_browser->currentPage().toEncoded());
-        delete m_browser;
     }
 
     if (m_timeLine) {
@@ -166,25 +157,30 @@ MainWindow::~MainWindow()
     KGlobal::config()->sync();
 }
 
-void MainWindow::openDocumentation()
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    saveProjectState();
+    KParts::MainWindow::closeEvent(event);
+}
+
+void MainWindow::toggleDocumentation()
 {
     if (!m_browser) {
-        m_browser = new DocBrowser(m_model, 0);
+        m_browser = new DocBrowser(m_model, this);
         connect(m_browser, SIGNAL(visibilityChanged(bool)), this, SLOT(updateActions()));
+        m_browser->setObjectName("Documentation");
+        // FIXME: should open the same place it closed at
+        addDockWidget(Qt::LeftDockWidgetArea, m_browser);
     }
 
     m_browser->setVisible(!m_browser->isVisible());
-    m_browser->setObjectName("Documentation");
-    m_browser->focusSearchField();
-    addDockWidget(Qt::LeftDockWidgetArea, m_browser);
+    if (m_browser->isVisible()) {
+        m_browser->focusSearchField();
+    }
 }
 
 void MainWindow::createMenus()
 {
-    KStandardAction::quit(this, SLOT(quit()), actionCollection());
-    KAction *refresh = KStandardAction::redisplay(this, SLOT(saveAndRefresh()), actionCollection());
-    refresh->setShortcut(Qt::CTRL + Qt::Key_F5);
-    refresh->setText(i18n("Refresh Preview"));
     menuBar()->addMenu(helpMenu());
     setupGUI();
 }
@@ -192,7 +188,6 @@ void MainWindow::createMenus()
 void MainWindow::quit()
 {
     qApp->closeAllWindows();
-//     deleteLater();
 }
 
 KAction *MainWindow::addAction(QString text, const char * icon, const  char *slot, const char *name, const KShortcut &shortcut)
@@ -208,28 +203,35 @@ KAction *MainWindow::addAction(QString text, const char * icon, const  char *slo
 
 void MainWindow::setupActions()
 {
+    KAction *close = KStandardAction::close(this, SLOT(closeProject()), actionCollection());
+    close->setText(i18n("Close Project"));
+
+    KStandardAction::quit(this, SLOT(quit()), actionCollection());
+    KAction *refresh = KStandardAction::redisplay(this, SLOT(saveAndRefresh()), actionCollection());
+    refresh->setShortcut(Qt::CTRL + Qt::Key_F5);
+    refresh->setText(i18n("Refresh Preview"));
     addAction(i18n("Create Save Point"), "document-save", SLOT(selectSavePoint()), "savepoint", KStandardShortcut::save());
     addAction(i18n("Publish"), "krfb", SLOT(selectPublish()),   "publish");
 
-    addAction(i18n("Close Project"), "plasmagik", SLOT(showStartPage()),   "file_startpage");
     addAction(i18n("Preview"), "user-desktop", SLOT(togglePreview()), "preview")->setCheckable(true);
     addAction(i18n("Notes"), "accessories-text-editor", SLOT(toggleNotes()), "notes")->setCheckable(true);
     addAction(i18n("Files"), "system-file-manager", SLOT(toggleFileList()), "file_list")->setCheckable(true);
     addAction(i18n("Timeline"), "process-working",  SLOT(toggleTimeLine()), "timeline")->setCheckable(true);
-    addAction(i18n("Documentation"), "help-contents", SLOT(openDocumentation()), "documentation")->setCheckable(true);
+    addAction(i18n("Documentation"), "help-contents", SLOT(toggleDocumentation()), "documentation")->setCheckable(true);
 }
 
 void MainWindow::updateActions()
 {
     actionCollection()->action("preview")->setChecked(m_previewerWidget && m_previewerWidget->isVisible());
     actionCollection()->action("notes")->setChecked(m_notesWidget && m_notesWidget->isVisible());
-    actionCollection()->action("file_list")->setChecked(m_editWidget && m_editWidget->isVisible());
+    actionCollection()->action("file_list")->setChecked(m_filelist && m_filelist->isVisible());
     actionCollection()->action("timeline")->setChecked(m_timeLine && m_timeLine->isVisible());
     actionCollection()->action("documentation")->setChecked(m_browser && m_browser->isVisible());
 }
 
-void MainWindow::showStartPage()
+void MainWindow::closeProject()
 {
+    saveProjectState();
     toolBar()->hide();
     menuBar()->hide();
     if (m_timeLine) {
@@ -244,8 +246,8 @@ void MainWindow::showStartPage()
         m_notesWidget->hide();
     }
 
-    if (m_editWidget) {
-        m_editWidget->hide();
+    if (m_filelist) {
+        m_filelist->hide();
     }
 
     setCentralWidget(m_central);
@@ -265,11 +267,10 @@ void MainWindow::toggleTimeLine()
 
 void MainWindow::initTimeLine()
 {
-    KConfig c;
-    KConfigGroup configDock = c.group("DocksPosition");
-    Qt::DockWidgetArea location = (Qt::DockWidgetArea)configDock.readEntry("TimeLineLocation", (int)Qt::BottomDockWidgetArea);
-
     if (!m_timeLine) {
+        //FIXME: should come from project specific save data if it exists
+        KConfigGroup configDock(KGlobal::config(), "DocksPosition");
+        Qt::DockWidgetArea location = (Qt::DockWidgetArea)configDock.readEntry("TimeLineLocation", (int)Qt::BottomDockWidgetArea);
         m_timeLine = new TimeLine(this, m_model->package(), location);
         m_timeLine->setObjectName("timeline");
         connect(m_timeLine, SIGNAL(sourceDirectoryChanged()), this, SLOT(editorDestructiveRefresh()));
@@ -277,37 +278,35 @@ void MainWindow::initTimeLine()
         connect(m_timeLine, SIGNAL(visibilityChanged(bool)), this, SLOT(updateActions()));
         connect(this, SIGNAL(newSavePointClicked()), m_timeLine, SLOT(newSavePoint()));
         addDockWidget(location, m_timeLine);
-        m_timeLine->loadTimeLine(m_model->package());
-    } else {
-        // The TimeLine is already created, but we changed project, so we need to update the working directory
-        m_timeLine->setWorkingDir(m_model->package());
     }
+
+    m_timeLine->loadTimeLine(m_model->package());
 }
 
 void MainWindow::toggleFileList()
 {
-    setFileListVisible(!m_editWidget || !m_editWidget->isVisible());
+    setFileListVisible(!m_filelist || !m_filelist->isVisible());
 }
 
 void MainWindow::setFileListVisible(const bool visible)
 {
-    if (visible && !m_editWidget) {
-        m_editWidget = new QDockWidget(i18n("Files"), this);
-        m_editWidget->setObjectName("edit tree");
-        m_editWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        m_editWidget->setWidget(m_editPage);
+    if (visible && !m_filelist) {
+        m_filelist = new QDockWidget(i18n("Files"), this);
+        m_filelist->setObjectName("edit tree");
+        m_filelist->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        m_filelist->setWidget(m_editPage);
 
         if (m_previewerWidget) {
-            splitDockWidget(m_previewerWidget, m_editWidget, Qt::Vertical);
+            splitDockWidget(m_previewerWidget, m_filelist, Qt::Vertical);
         } else {
-            addDockWidget(Qt::LeftDockWidgetArea, m_editWidget);
+            addDockWidget(Qt::LeftDockWidgetArea, m_filelist);
         }
 
-        connect(m_editWidget, SIGNAL(visibilityChanged(bool)), this, SLOT(updateActions()));
+        connect(m_filelist, SIGNAL(visibilityChanged(bool)), this, SLOT(updateActions()));
     }
 
-    if (m_editWidget) {
-        m_editWidget->setVisible(visible);
+    if (m_filelist) {
+        m_filelist->setVisible(visible);
     }
 }
 
@@ -355,6 +354,9 @@ void MainWindow::togglePreview()
 {
     if (m_previewerWidget) {
         m_previewerWidget->setVisible(!m_previewerWidget->isVisible());
+        if (m_previewerWidget->isVisible()) {
+            m_previewerWidget->refreshPreview();
+        }
     }
 }
 
@@ -491,10 +493,14 @@ void MainWindow::setupTextEditor(KTextEditor::Document *editorPart, KTextEditor:
 
 void MainWindow::loadNotesEditor(QDockWidget *container)
 {
+    delete m_notesPart;
+    m_notesPart = 0;
+
     KService::List offers = KMimeTypeTrader::self()->query("text/plain", "KParts/ReadWritePart");
     if (offers.isEmpty()) {
         offers = KMimeTypeTrader::self()->query("text/plain", "KParts/ReadOnlyPart");
     }
+
     if (!offers.isEmpty()) {
         QVariantList args;
         QString error;
@@ -559,8 +565,20 @@ void MainWindow::saveProjectState()
 
     const QString projectrc = projectFilePath(PROJECTRC);
     KConfig c(projectrc);
-    KConfigGroup configDock = c.group("DocksPosition");
-    configDock.writeEntry("MainWindowLayout", saveState(STATE_VERSION));
+    KConfigGroup configDocks = c.group("DocksPosition");
+    configDocks.writeEntry("MainWindowLayout", saveState(STATE_VERSION));
+    configDocks.writeEntry("Timeline", m_timeLine && m_timeLine->isVisible());
+    configDocks.writeEntry("Documentation", m_browser && m_browser->isVisible());
+    configDocks.writeEntry("FileList", m_filelist && m_filelist->isVisible());
+    configDocks.writeEntry("Notes", m_notesWidget && m_notesWidget->isVisible());
+    configDocks.writeEntry("Previewer", m_previewerWidget && m_previewerWidget->isVisible());
+    c.sync();
+
+    /* TODO: implement browser state loading
+    if (m_browser) {
+        KConfigGroup cg = KGlobal::config()->group("General");
+        cg.writeEntry("lastBrowserPage", m_browser->currentPage().toEncoded());
+    */
 }
 
 void MainWindow::loadMetaDataEditor(KUrl target)
@@ -585,6 +603,7 @@ void MainWindow::loadMetaDataEditor(KUrl target)
 void MainWindow::loadProject(const QString &path)
 {
     if (path.isEmpty()) {
+        kDebug() << "path is empty?!";
         return;
     }
 
@@ -602,13 +621,9 @@ void MainWindow::loadProject(const QString &path)
 
     QDir dir(packagePath);
     if (!dir.exists("metadata.desktop")) {
+        kDebug() << "no metadata.desktop?!";
         return;
     }
-
-    toolBar()->show();
-
-    // if we had a previous project open, save its state before deleting the model
-    saveProjectState();
 
     // the project rc file is IN the package, then this was loaded from an existing local project
     // otherwise, we assume it was created by plasmate and the project files are up one dir
@@ -653,25 +668,14 @@ void MainWindow::loadProject(const QString &path)
     cg.writeEntry("recentProjects", recent);
     KGlobal::config()->sync();
 
-    // Load the needed widgets, switch to page 1 (edit)...
-    if (m_docksCreated) {
-        // not our first project!
+    // prevent accidental loading of previous active project's file
+    // plus temporary workaround for editor issue with handling different languages
+    delete m_part;
+    m_part = 0;
 
-        // prevent accidental loading of previous active project's file
-        // plus temporary workaround for editor issue with handling different languages
-        delete m_part;
-        m_part = 0;
-
-        // delete old publisher
-        delete m_publisher;
-        m_publisher = 0;
-
-        if (m_browser) {
-            m_browser->setPackage(m_model);
-        }
-
-        refreshNotes();
-    }
+    // delete old publisher
+    delete m_publisher;
+    m_publisher = 0;
 
     QLabel *l = new QLabel(i18n("Select a file to edit."), this);
     m_central->switchTo(l);
@@ -680,10 +684,39 @@ void MainWindow::loadProject(const QString &path)
 
     QByteArray state = saveState(STATE_VERSION);
     const QString projectrc = projectFilePath(PROJECTRC);
+    bool showPreview = true;
     if (QFile::exists(projectrc)) {
         KConfig c(projectrc);
-        KConfigGroup configDock = c.group("DocksPosition");
-        state = configDock.readEntry("MainWindowLayout", state);
+        KConfigGroup configDocks = c.group("DocksPosition");
+        state = configDocks.readEntry("MainWindowLayout", state);
+
+        if (configDocks.readEntry("Timeline", false)) {
+            delete m_timeLine;
+            m_timeLine = 0;
+        } else {
+            initTimeLine();
+        }
+
+        if (configDocks.readEntry("Documentation", false)) {
+            delete m_browser;
+            m_browser = 0;
+        } else {
+            toggleDocumentation();
+        }
+
+        setFileListVisible(configDocks.readEntry("FileList", true));
+        setNotesVisible(configDocks.readEntry("Notes", false));
+        showPreview = configDocks.readEntry("Previewer", showPreview);
+    } else {
+        setFileListVisible(true);
+    }
+
+    if (m_browser) {
+        m_browser->setPackage(m_model);
+    }
+
+    if (m_notesPart) {
+        refreshNotes();
     }
 
     // initialize previewer
@@ -693,11 +726,11 @@ void MainWindow::loadProject(const QString &path)
     if (m_previewerWidget) {
         addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
         m_previewerWidget->showPreview(packagePath);
-        m_previewerWidget->setVisible(true);
+        m_previewerWidget->setVisible(showPreview);
     }
 
-    setFileListVisible(true);
     restoreState(state, STATE_VERSION);
+    toolBar()->show();
 
     // Now, setup some useful properties such as the project name in the title bar
     // and setting the current working directory.
@@ -722,8 +755,8 @@ void MainWindow::loadProject(const QString &path)
         m_timeLine->loadTimeLine(m_model->package());
     }
 
-    if (m_editWidget) {
-        m_editWidget->show();
+    if (m_filelist) {
+        m_filelist->show();
     }
 
     updateActions();

@@ -71,14 +71,17 @@ Q_SIGNALS:
     void newSavePointClicked();
     void refreshRequested();
 
+protected:
+    void closeEvent(QCloseEvent *event);
+
 private:
     void setupActions();
     void initTimeLine();
     QString projectFilePath(const QString &filename);
-    void saveProjectState();
 
 private Q_SLOTS:
-    void showStartPage();
+    void saveProjectState();
+    void closeProject();
     void saveEditorData();
     void saveAndRefresh();
     void refreshNotes();
@@ -88,10 +91,10 @@ private Q_SLOTS:
     void setNotesVisible(const bool visible);
     void setFileListVisible(const bool visible);
 
-    void openDocumentation();
     void loadRequiredEditor(const KService::List offers, KUrl target);
     void loadMetaDataEditor(KUrl target);
     void updateActions();
+    void toggleDocumentation();
     void toggleTimeLine();
     void togglePreview();
     void toggleNotes();
@@ -153,7 +156,7 @@ private:
     DocBrowser *m_browser;
 
 
-    QDockWidget *m_editWidget;
+    QDockWidget *m_filelist;
     EditPage *m_editPage;
     PackageModel *m_model;
     int m_oldTab;
