@@ -46,8 +46,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KStandardDirs>
 #include <KMessageBox>
 
-#include <Plasma/PackageMetadata>
-
 #include "editors/editpage.h"
 #include "editors/metadata/metadataeditor.h"
 #include "savesystem/timeline.h"
@@ -607,13 +605,11 @@ void MainWindow::loadProject(const QString &path)
 
     m_currentProject = path;
     kDebug() << "Loading project from" << packagePath << "...";
-    Plasma::PackageMetadata metadata(packagePath + "metadata.desktop");
-    QString actualType = metadata.serviceType();
+    KService service(packagePath + "metadata.desktop");
+    QStringList types = service.serviceTypes();
 
     // Workaround for Plasma::PackageStructure not recognizing Plasma/PopupApplet as a valid type
-    if (actualType.contains("Plasma/Applet")) {
-        actualType = "Plasma/Applet";
-    }
+    const QString actualType = types.contains("Plasma/Applet") ? "Plasma/Applet" : types.first();
 
     delete m_model;
     m_model = new PackageModel(this);
@@ -695,15 +691,15 @@ void MainWindow::loadProject(const QString &path)
 
     // Now, setup some useful properties such as the project name in the title bar
     // and setting the current working directory.
-    m_currentProject = metadata.name();
-    setCaption("[Project:" + m_currentProject + ']');
+    kDebug() << "loading metadata:" << packagePath + "metadata.desktop";
+    KConfig metafile(packagePath + "metadata.desktop");
+    KConfigGroup meta = metafile.group("Desktop Entry");
+    m_currentProject = meta.readEntry("Name", path);
+    setCaption(m_currentProject);
     kDebug() << "Content prefix: " << m_model->contentsPrefix() ;
     QDir::setCurrent(m_model->package() + m_model->contentsPrefix());
 
     // load mainscript
-    kDebug() << "loading metadata:" << packagePath + "metadata.desktop";
-    KConfig *metafile = new KConfig(packagePath + "metadata.desktop");
-    KConfigGroup meta = metafile->group("Desktop Entry");
     QString mainScript = meta.readEntry("X-Plasma-MainScript", QString());
     kDebug() << "read mainScript" << mainScript;
     if (!mainScript.isEmpty()) {
