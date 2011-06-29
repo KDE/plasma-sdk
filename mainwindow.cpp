@@ -347,6 +347,7 @@ void MainWindow::selectPublish()
     if (!m_publisher) {
         m_publisher = new Publisher(this, m_model->package(), m_model->packageType());
     }
+
     m_publisher->setProjectName(m_currentProject);
     m_publisher->exec();
 }
@@ -655,15 +656,14 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     KGlobal::config()->sync();
 
     // Load the needed widgets, switch to page 1 (edit)...
-    if (!m_docksCreated) {
-        //createDockWidgets();
-    } else { // loading a new project!
+    if (m_docksCreated) {
+        // not our first project!
+
         // prevent accidental loading of previous active project's file
         // plus temporary workaround for editor issue with handling different languages
         delete m_part;
         m_part = 0;
-        // point editor tree to new model
-        m_editPage->setModel(m_model);
+
         // delete old publisher
         delete m_publisher;
         m_publisher = 0;
@@ -680,11 +680,6 @@ void MainWindow::loadProject(const QString &name, const QString &type)
 
     m_oldTab = EditTab;
 
-//    QDir projectPath(packagePath);
-//     if (projectPath.cdUp()) {
-//         m_timeLine->setWorkingDir(KUrl(projectPath.absolutePath()));
-//         m_timeLine->loadTimeLine(KUrl(projectPath.absolutePath()));
-//     }
     QByteArray state = saveState();
 
     // initialize previewer
