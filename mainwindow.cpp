@@ -730,10 +730,6 @@ void MainWindow::loadProject(const QString &name, const QString &type)
         m_timeLine->loadTimeLine(m_model->package());
     }
 
-    if (m_previewerWidget) {
-        m_previewerWidget->show();
-    }
-
     if (m_editWidget) {
         m_editWidget->show();
     }
