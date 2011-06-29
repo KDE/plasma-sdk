@@ -268,10 +268,7 @@ void MainWindow::initTimeLine()
 {
     KConfig c;
     KConfigGroup configDock = c.group("DocksPosition");
-    Qt::DockWidgetArea location = (Qt::DockWidgetArea) configDock.readEntry("WorkflowLocation",
-                                  QVariant(Qt::TopDockWidgetArea)).toInt();
-    location = (Qt::DockWidgetArea) configDock.readEntry("TimeLineLocation",
-               QVariant(Qt::BottomDockWidgetArea)).toInt();
+    Qt::DockWidgetArea location = (Qt::DockWidgetArea)configDock.readEntry("TimeLineLocation", (int)Qt::BottomDockWidgetArea);
 
     if (!m_timeLine) {
         m_timeLine = new TimeLine(this, m_model->package(), location);
