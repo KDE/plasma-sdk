@@ -695,6 +695,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     // initialize previewer
     delete m_previewerWidget;
     m_previewerWidget = createPreviewerFor(actualType);
+    actionCollection()->action("preview")->setEnabled(m_previewerWidget);
     if (m_previewerWidget) {
         addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
         m_previewerWidget->showPreview(packagePath);
@@ -752,8 +753,7 @@ QStringList MainWindow::recentProjects()
 Previewer* MainWindow::createPreviewerFor(const QString& projectType)
 {
     Previewer* ret = 0;
-    if (projectType == "Plasma/Applet" ||
-            projectType == "Plasma/Applet,Plasma/PopupApplet") {
+    if (projectType.contains("Plasma/Applet")) {
         ret = new PlasmoidPreviewer(i18n("Preview"), this);
     } else if (projectType == "Plasma/Runner") {
         ret = new RunnerPreviewer(i18n("Previewer"), this);
