@@ -46,7 +46,7 @@ public:
     static bool deleteProject(const KUrl &projectLocation);
 
 signals:
-    void projectSelected(const QString &name, const QString &type);
+    void projectSelected(const QString &name);
     void requestRefresh();
 
 private slots:

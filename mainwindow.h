@@ -65,7 +65,7 @@ public:
 
 public Q_SLOTS:
     void quit();
-    void loadProject(const QString &name, const QString &type);
+    void loadProject(const QString &name);
 
 Q_SIGNALS:
     void newSavePointClicked();

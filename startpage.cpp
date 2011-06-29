@@ -54,7 +54,7 @@ StartPage::StartPage(MainWindow *parent) // TODO set a palette so it will look i
         : QWidget(parent),
         m_parent(parent)
 {
-    connect(this, SIGNAL(projectSelected(QString,QString)), this, SLOT(saveNewProjectPreferences()));
+    connect(this, SIGNAL(projectSelected(QString)), this, SLOT(saveNewProjectPreferences()));
     setupWidgets();
     refreshRecentProjectsList();
 }
@@ -133,8 +133,8 @@ void StartPage::setupWidgets()
     connect(m_ui.importGHNSButton, SIGNAL(clicked()),
             this, SLOT(doGHNSImport()));
 
-    connect(m_projectManager, SIGNAL(projectSelected(QString, QString)),
-            this, SIGNAL(projectSelected(QString, QString)));
+    connect(m_projectManager, SIGNAL(projectSelected(QString)),
+            this, SIGNAL(projectSelected(QString)));
     connect(m_projectManager, SIGNAL(requestRefresh()),
             this, SLOT(refreshRecentProjectsList()));
 
@@ -491,7 +491,7 @@ void StartPage::createNewProject()
     notesFile.close();
 
     // the loading code expects the FOLDER NAME
-    emit projectSelected(projectPath + projectFolderName, serviceTypes);
+    emit projectSelected(projectPath + projectFolderName);
 
     // need to clear the project name field here too because startpage is still
     // accessible after project loads.
@@ -530,7 +530,7 @@ void StartPage::loadLocalProject()
 {
     const QString path = KShell::tildeExpand(m_ui.localProject->text());
     kDebug() << "loading local project from" << path;
-    emit projectSelected(path, QString());
+    emit projectSelected(path);
 }
 
 void StartPage::recentProjectSelected(const QModelIndex &index)
@@ -543,7 +543,7 @@ void StartPage::recentProjectSelected(const QModelIndex &index)
     }
     kDebug() << "Loading project file:" << m->data(index, FullPathRole);
 
-    emit projectSelected(url, QString());
+    emit projectSelected(url);
 }
 
 void StartPage::checkPackagePath(const QString& name)
@@ -602,7 +602,7 @@ void StartPage::selectProject(const KUrl &target)
         KMessageBox::information(this, i18n("A problem has occurred during import."));
     }
 
-    emit projectSelected(projectFolder, QString());
+    emit projectSelected(projectFolder);
 }
 
 /**

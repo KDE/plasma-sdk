@@ -109,8 +109,8 @@ MainWindow::MainWindow(QWidget *parent)
     toolBar()->hide();
     menuBar()->hide();
     m_startPage = new StartPage(this);
-    connect(m_startPage, SIGNAL(projectSelected(QString, QString)),
-            this, SLOT(loadProject(QString, QString)));
+    connect(m_startPage, SIGNAL(projectSelected(QString)),
+            this, SLOT(loadProject(QString)));
     m_central = new CentralContainer(this);
     setCentralWidget(m_central);
     m_central->switchTo(m_startPage);
@@ -577,18 +577,11 @@ void MainWindow::loadMetaDataEditor(KUrl target)
     m_oldTab = EditTab;
 }
 
-void MainWindow::loadProject(const QString &path, const QString &type)
+void MainWindow::loadProject(const QString &path)
 {
     if (path.isEmpty()) {
         return;
     }
-
-    // if we had a previous project open, save its state before deleting the model
-    saveProjectState();
-
-    m_currentProject = path;
-    kDebug() << "Loading project from" << path << "...";
-    toolBar()->show();
 
     QString packagePath;
     QDir pDir(path);
@@ -602,24 +595,20 @@ void MainWindow::loadProject(const QString &path, const QString &type)
         packagePath.append('/');
     }
 
-    // Converting projects which use ServiceTypes instead of X-KDE-ServiceTypes
-    QFile metadataFile(packagePath + "/metadata.desktop");
-    metadataFile.open(QIODevice::ReadWrite);
-    QString contents = metadataFile.readAll();
-    contents.replace(QRegExp("\nServiceTypes"), "\nX-KDE-ServiceTypes");
-    metadataFile.resize(0);
-    QTextStream stream(&metadataFile);
-    stream << contents;
-    metadataFile.close();
-
-    QString actualType = type;
-    if (actualType.isEmpty()) {
-        QDir dir(packagePath);
-        if (dir.exists("metadata.desktop")) {
-            Plasma::PackageMetadata metadata(packagePath + "metadata.desktop");
-            actualType = metadata.serviceType();
-        }
+    QDir dir(packagePath);
+    if (!dir.exists("metadata.desktop")) {
+        return;
     }
+
+    toolBar()->show();
+
+    // if we had a previous project open, save its state before deleting the model
+    saveProjectState();
+
+    m_currentProject = path;
+    kDebug() << "Loading project from" << packagePath << "...";
+    Plasma::PackageMetadata metadata(packagePath + "metadata.desktop");
+    QString actualType = metadata.serviceType();
 
     // Workaround for Plasma::PackageStructure not recognizing Plasma/PopupApplet as a valid type
     if (actualType.contains("Plasma/Applet")) {
@@ -706,7 +695,6 @@ void MainWindow::loadProject(const QString &path, const QString &type)
 
     // Now, setup some useful properties such as the project name in the title bar
     // and setting the current working directory.
-    Plasma::PackageMetadata metadata(packagePath + "metadata.desktop");
     m_currentProject = metadata.name();
     setCaption("[Project:" + m_currentProject + ']');
     kDebug() << "Content prefix: " << m_model->contentsPrefix() ;

@@ -67,7 +67,7 @@ public:
     Q_DECLARE_FLAGS(ProjectType, ProjectTypes)
 
 signals:
-    void projectSelected(const QString &name, const QString &type);
+    void projectSelected(const QString &name);
 
 private Q_SLOTS:
     void recentProjectSelected(const QModelIndex &);

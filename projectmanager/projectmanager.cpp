@@ -103,7 +103,7 @@ void ProjectManager::emitProjectSelected()
     }
     QString url = l[0]->data(StartPage::FullPathRole).value<QString>();
 
-    emit projectSelected(url, QString());
+    emit projectSelected(url);
     done(QDialog::Accepted);
 }
 
