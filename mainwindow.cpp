@@ -625,11 +625,11 @@ void MainWindow::loadProject(const QString &path)
         return;
     }
 
-    // the project rc file is IN the package, then this was loaded from an existing local project
+    // if the project rc file is IN the package, then this was loaded from an existing local project
     // otherwise, we assume it was created by plasmate and the project files are up one dir
     m_isPlasmateCreatedPackage = !QFile::exists(packagePath + PROJECTRC);
     m_currentProject = path;
-    kDebug() << "Loading project from" << packagePath << "...";
+    kDebug() << "Loading project from" << packagePath;
     KService service(packagePath + "metadata.desktop");
     QStringList types = service.serviceTypes();
 
