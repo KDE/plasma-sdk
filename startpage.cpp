@@ -54,6 +54,7 @@ StartPage::StartPage(MainWindow *parent) // TODO set a palette so it will look i
         : QWidget(parent),
         m_parent(parent)
 {
+    connect(this, SIGNAL(projectSelected(QString,QString)), this, SLOT(saveNewProjectPreferences()));
     setupWidgets();
     refreshRecentProjectsList();
 }
@@ -388,7 +389,7 @@ void StartPage::createNewProject()
 
     // Creating the corresponding folder
 
-    //  From this commit, the directory is changed int the following way. Old directory structure:
+    //  From this commit, the directory is changed in the following way. Old directory structure:
     //  <plasmateProjDir>/projectname/metadata.desktop
     //                               /NOTES
     //                               /.git/
@@ -405,7 +406,7 @@ void StartPage::createNewProject()
     //  related files). With the new structure, this won't happen again :)
     //  Besides, this change will allow us to start implementing the per-project config file :)
     //
-    QString projectPath = KStandardDirs::locateLocal("appdata",projectFolderName + '/');
+    QString projectPath = KStandardDirs::locateLocal("appdata", projectFolderName + '/');
     QDir packageSubDirs(projectPath);
     packageSubDirs.mkpath(projectFolderName + "/contents/code/");
 
@@ -502,6 +503,21 @@ void StartPage::createNewProject()
     m_ui.projectName->clear();
 }
 
+void StartPage::saveNewProjectPreferences()
+{
+    // Saving NewProject preferences
+    KConfigGroup preferences = KGlobal::config()->group("NewProjectDefaultPreferences");
+
+    preferences.writeEntry("Username", userName());
+    preferences.writeEntry("Email", userEmail());
+
+    preferences.writeEntry("radioButtonJsChecked", selectedJsRadioButton());
+    preferences.writeEntry("radioButtonPyChecked", selectedPyRadioButton());
+    preferences.writeEntry("radioButtonRbChecked", selectedRbRadioButton());
+    preferences.writeEntry("radioButtonDeChecked", selectedDeRadioButton());
+    preferences.sync();
+}
+
 void StartPage::cancelNewProject()
 {
     m_ui.projectName->clear();
@@ -592,8 +608,8 @@ void StartPage::selectProject(const KUrl &target)
     if (!ProjectManager::importPackage(target, projectPath)) {
         KMessageBox::information(this, i18n("A problem has occurred during import."));
     }
-    emit projectSelected(projectFolder, QString());
 
+    emit projectSelected(projectFolder, QString());
 }
 
 /**

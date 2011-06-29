@@ -81,6 +81,7 @@ private Q_SLOTS:
     void doGHNSImport();
     void refreshRecentProjectsList();
     void loadLocalProject();
+    void saveNewProjectPreferences();
 
 private:
     enum NewProjectRows {
