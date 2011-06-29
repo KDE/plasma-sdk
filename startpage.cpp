@@ -264,8 +264,7 @@ void StartPage::refreshRecentProjectsList()
 
         Plasma::PackageMetadata metadata(pPath);
 
-        // Changed this back on second thought. It's better that we
-        // do not expose the idea of a 'folder name' to the user -
+        // Do not expose the idea of a 'folder name' to the user -
         // we keep the folder hidden and name it whatever we want as
         // long as it's unique. Only the plasmoid name, which the user
         // sets in the metadata editor, will ever be visible in the UI.
@@ -286,10 +285,9 @@ void StartPage::refreshRecentProjectsList()
         tooltip += i18n("Version") + " : " + metadata.version() + "\n";
         tooltip += i18n("API") + " : " + metadata.implementationApi() + "\n";
 
-        QString serviceType = metadata.serviceType();
+        const QString serviceType = metadata.serviceType();
 
-        if (serviceType == "Plasma/Applet" ||
-            serviceType == "Plasma/Applet,Plasma/PopupApplet") {
+        if (serviceType.contains("Plasma/Applet")) {
             if (!metadata.icon().isEmpty()) {
                 item->setIcon(KIcon(metadata.icon()));
                 kDebug() << "Setting ICON:" << metadata.icon();
@@ -338,13 +336,10 @@ void StartPage::createNewProject()
     }
 
     kDebug() << "Creating simple folder structure for the project " << projectName;
-    QString projectNameLowerCase = projectName.toLower();
-    QString projectNameSnakeCase = camelToSnakeCase(projectName);
+    const QString projectNameLowerCase = projectName.toLower();
     QString projectFileExtension;
 
     QString templateFilePath = KStandardDirs::locate("appdata", "templates/");
-
-    Plasma::PackageMetadata metadata;
 
     // type -> serviceTypes
     QString serviceTypes;
@@ -363,25 +358,27 @@ void StartPage::createNewProject()
 
     QString projectFolderName;
     QString mainScriptName;
+    QString api;
 
     // Append the desired extension
     if (m_ui.radioButtonPy->isChecked()) {
-        metadata.setImplementationApi("python");
+        api = "python";
         projectFolderName = generateProjectFolderName(projectNameLowerCase);
         projectFileExtension = ".py";
         mainScriptName = projectNameLowerCase + projectFileExtension;
     } else if (m_ui.radioButtonRb->isChecked()) {
-        metadata.setImplementationApi("ruby-script");
+        const QString projectNameSnakeCase = camelToSnakeCase(projectName);
+        api = "ruby-script";
         projectFolderName = generateProjectFolderName(projectNameSnakeCase);
         projectFileExtension = ".rb";
         mainScriptName = QString("main_") + projectNameSnakeCase + projectFileExtension;
     } else if (m_ui.radioButtonDe->isChecked()) {
-        metadata.setImplementationApi("declarativeappletscript");
+        api = "declarativeappletscript";
         projectFolderName = generateProjectFolderName(projectNameLowerCase);
         projectFileExtension = ".qml";
         mainScriptName = projectNameLowerCase + projectFileExtension;
     } else {
-        metadata.setImplementationApi("javascript");
+        api = "javascript";
         projectFolderName = generateProjectFolderName(projectNameLowerCase);
         projectFileExtension = ".js";
         mainScriptName = projectNameLowerCase + projectFileExtension;
@@ -426,15 +423,6 @@ void StartPage::createNewProject()
     }
     replacedString.clear();
 
-
-    // @schmidt-domine : thanks for committing the lines I forgot adding,
-    // BUT please comply with the TAGS already assigned :)
-    replacedString.append("$PLASMOID_NAME");
-    if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, projectName.toAscii());
-    }
-    replacedString.clear();
-
     replacedString.append("$DATAENGINE_NAME");
     if (rawData.contains(replacedString)) {
         rawData.replace(replacedString, projectName.toAscii());
@@ -471,21 +459,28 @@ void StartPage::createNewProject()
     destinationFile.write(rawData);
     destinationFile.close();
 
-    // Write the .desktop file
-    metadata.setName(projectName);
-    //FIXME: the plugin name needs to be globally unique, so should use more than just the project
-    //       name
-    metadata.setPluginName(projectNameLowerCase);
-    metadata.setServiceType(serviceTypes);
-    metadata.setAuthor(m_ui.authorTextField->text());
-    metadata.setEmail(m_ui.emailTextField->text());
-    metadata.setLicense("GPL");
-    metadata.write(projectPath + projectFolderName + "/metadata.desktop");
-
-    // Note: since PackageMetadata lacks of a good api to add X-Plasma-* entries,
-    // we add it manually until a patch is released.
+    // create the metadata.desktop file
+    // TODO: missing but possible entries that could be added:
+    // * Icon
+    // * Comment
+    // * Keywords
+    // * X-KDE-PluginInfo-Website
+    // * X-KDE-PluginInfo-Category
+    // * X-KDE-ParentApp
     KDesktopFile metaFile(projectPath + projectFolderName + "/metadata.desktop");
     KConfigGroup metaDataGroup = metaFile.desktopGroup();
+    metaDataGroup.writeEntry("Name", projectName);
+    //FIXME: the plugin name needs to be globally unique, so should use more than just the project
+    //       name
+    metaDataGroup.writeEntry("Type", "Service");
+    metaDataGroup.writeEntry("X-KDE-PluginInfo-Name", projectNameLowerCase);
+    metaDataGroup.writeEntry("X-KDE-ServiceTypes", serviceTypes);
+    metaDataGroup.writeEntry("X-KDE-PluginInfo-Version", 1);
+    metaDataGroup.writeEntry("X-KDE-PluginInfo-Author", m_ui.authorTextField->text());
+    metaDataGroup.writeEntry("X-KDE-PluginInfo-Email", m_ui.emailTextField->text());
+    //FIXME: this must be selectable at creation
+    metaDataGroup.writeEntry("X-KDE-PluginInfo-License", "GPL");
+    metaDataGroup.writeEntry("X-KDE-PluginInfo-Email", m_ui.emailTextField->text());
     metaDataGroup.writeEntry("X-Plasma-MainScript", "code/" + mainScriptName);
     metaDataGroup.writeEntry("X-Plasma-DefaultSize", QSize(200, 100));
     metaFile.sync();
@@ -496,7 +491,7 @@ void StartPage::createNewProject()
     notesFile.close();
 
     // the loading code expects the FOLDER NAME
-    emit projectSelected(projectFolderName + "/" + projectFolderName, serviceTypes);
+    emit projectSelected(projectPath + projectFolderName, serviceTypes);
 
     // need to clear the project name field here too because startpage is still
     // accessible after project loads.
@@ -590,9 +585,7 @@ void StartPage::doGHNSImport()
 
 void StartPage::selectProject(const KUrl &target)
 {
-    if (!target.isLocalFile() ||
-          !QFile::exists(target.path()) ||
-          QDir(target.path()).exists()) {
+    if (!target.isLocalFile() || !QFile::exists(target.path()) || QDir(target.path()).exists()) {
         KMessageBox::error(this, i18n("The file you entered is invalid."));
         return;
     }
