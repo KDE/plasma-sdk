@@ -533,7 +533,7 @@ void StartPage::checkLocalProjectPath(const QString& name)
 
 void StartPage::loadLocalProject()
 {
-    QString path = KShell::tildeExpand(m_ui.localProject->text());
+    const QString path = KShell::tildeExpand(m_ui.localProject->text());
     kDebug() << "loading local project from" << path;
     emit projectSelected(path, QString());
 }
