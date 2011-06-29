@@ -124,10 +124,10 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     // Saving layout position
-    KConfig c;
-    KConfigGroup configDock = c.group("DocksPosition");
+    KConfigGroup configDock = KGlobal::config()->group("DocksPosition");
     configDock.writeEntry("MainWindowLayout", saveState(0));
-    c.sync();
+
+    saveProjectState();
 
     // if the user closes the application with an editor open, should
     // save its contents
@@ -146,7 +146,6 @@ MainWindow::~MainWindow()
     if (m_previewerWidget) {
         configDock.writeEntry("PreviewerHeight", m_previewerWidget->height());
         configDock.writeEntry("PreviewerWidth", m_previewerWidget->width());
-        c.sync();
         delete m_previewerWidget;
     }
 
@@ -155,7 +154,6 @@ MainWindow::~MainWindow()
         // TODO: Maybe it makes more sense to save this per-project?
         KConfigGroup cg = KGlobal::config()->group("General");
         cg.writeEntry("lastBrowserPage", m_browser->currentPage().toEncoded());
-        KGlobal::config()->sync();
         delete m_browser;
     }
 
@@ -164,7 +162,7 @@ MainWindow::~MainWindow()
         delete m_timeLine;
     }
 
-    c.sync();
+    KGlobal::config()->sync();
 }
 
 void MainWindow::openDocumentation()
@@ -523,17 +521,41 @@ void MainWindow::refreshNotes()
     if (!m_notesPart) {
         return;
     }
+
     KParts::ReadWritePart* part = qobject_cast<KParts::ReadWritePart*>(m_notesPart);
     if (part && part->isModified()) {
         part->save(); // save notes if we previously had one open.
     }
+
+    const QString notesFile = projectFilePath("NOTES");
+    QFile notes(notesFile);
+    if (!notes.exists()) {
+        notes.open(QIODevice::WriteOnly);
+    }
+    m_notesPart->openUrl(KUrl("file://" + notesFile));
+}
+
+QString MainWindow::projectFilePath(const QString &filename)
+{
+    if (!m_model) {
+        return QString();
+    }
+
     QDir notesDir(m_model->package());
     notesDir.cdUp();
-    QString notesFile = notesDir.absolutePath() + "/NOTES";
-    QFile notes(notesFile);
-    if (!notes.exists())
-        notes.open(QIODevice::WriteOnly);
-    m_notesPart->openUrl(KUrl("file://" + notesFile));
+    return notesDir.absolutePath() + "/" + filename;
+}
+
+void MainWindow::saveProjectState()
+{
+    if (!m_model) {
+        return;
+    }
+
+    const QString projectrc = projectFilePath(".projectrc");
+    KConfig c(projectrc);
+    KConfigGroup configDock = c.group("DocksPosition");
+    configDock.writeEntry("MainWindowLayout", saveState(0));
 }
 
 void MainWindow::loadMetaDataEditor(KUrl target)
@@ -555,38 +577,30 @@ void MainWindow::loadMetaDataEditor(KUrl target)
     m_oldTab = EditTab;
 }
 
-void MainWindow::loadProject(const QString &name, const QString &type)
+void MainWindow::loadProject(const QString &path, const QString &type)
 {
-    m_currentProject = name;
-    m_currentProjectType = type;
-    kDebug() << "Loading project named" << name << "...";
+    if (path.isEmpty()) {
+        return;
+    }
+
+    // if we had a previous project open, save its state before deleting the model
+    saveProjectState();
+
+    m_currentProject = path;
+    kDebug() << "Loading project from" << path << "...";
     toolBar()->show();
 
-    // Saving NewProject preferences
-    KConfigGroup preferences = KGlobal::config()->group("NewProjectDefaultPreferences");
-
-    preferences.writeEntry("Username", m_startPage->userName());
-    preferences.writeEntry("Email", m_startPage->userEmail());
-
-    preferences.writeEntry("radioButtonJsChecked", m_startPage->selectedJsRadioButton());
-    preferences.writeEntry("radioButtonPyChecked", m_startPage->selectedPyRadioButton());
-    preferences.writeEntry("radioButtonRbChecked", m_startPage->selectedRbRadioButton());
-    preferences.writeEntry("radioButtonDeChecked", m_startPage->selectedDeRadioButton());
-    preferences.sync();
-
     QString packagePath;
-    QDir pDir(name);
+    QDir pDir(path);
     if (pDir.isRelative()) {
-        packagePath = KStandardDirs::locateLocal("appdata", name + '/');
+        packagePath = KStandardDirs::locateLocal("appdata", path + '/');
     } else {
-        packagePath = name;
+        packagePath = path;
     }
 
     if (!packagePath.endsWith('/')) {
         packagePath.append('/');
     }
-
-    QString actualType = type;
 
     // Converting projects which use ServiceTypes instead of X-KDE-ServiceTypes
     QFile metadataFile(packagePath + "/metadata.desktop");
@@ -598,6 +612,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     stream << contents;
     metadataFile.close();
 
+    QString actualType = type;
     if (actualType.isEmpty()) {
         QDir dir(packagePath);
         if (dir.exists("metadata.desktop")) {
@@ -606,12 +621,11 @@ void MainWindow::loadProject(const QString &name, const QString &type)
         }
     }
 
-    //Workaround for Plasma::PackageStructure not recognizing Plasma/PopupApplet as a valid type
+    // Workaround for Plasma::PackageStructure not recognizing Plasma/PopupApplet as a valid type
     if (actualType.contains("Plasma/Applet")) {
         actualType = "Plasma/Applet";
     }
 
-    // Add it to the recent files first.
     delete m_model;
     m_model = new PackageModel(this);
 #ifdef DEBUG_MODEL
@@ -621,8 +635,7 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     m_model->setPackageType(actualType);
     kDebug() << "Setting model package to:" << packagePath;
 
-    if (!m_model->setPackage(packagePath))
-    {
+    if (!m_model->setPackage(packagePath)) {
         KMessageBox::error(this, i18n("Invalid plasmagick package."));
         return;
     }
@@ -636,23 +649,13 @@ void MainWindow::loadProject(const QString &name, const QString &type)
 
     m_editPage->setModel(m_model);
 
-    QStringList recentFiles;
+    // record in recent files
+    QStringList recent = recentProjects();
+    recent.removeAll(path);
+    recent.prepend(path);
+    kDebug() << "Writing the following recent files to the config:" << recent;
     KConfigGroup cg = KGlobal::config()->group("General");
-    recentFiles = recentProjects();
-
-    if (recentFiles.contains(name)) {
-        recentFiles.removeAt(recentFiles.indexOf(name));
-    }
-
-    if (!name.isEmpty()) {
-        recentFiles.prepend(name);
-    } else {
-        return;
-    }
-
-    kDebug() << "Writing the following m_sidebar of recent files to the config:" << recentFiles;
-
-    cg.writeEntry("recentFiles", recentFiles);
+    cg.writeEntry("recentProjects", recent);
     KGlobal::config()->sync();
 
     // Load the needed widgets, switch to page 1 (edit)...
@@ -681,6 +684,12 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     m_oldTab = EditTab;
 
     QByteArray state = saveState();
+    const QString projectrc = projectFilePath(".projectrc");
+    if (QFile::exists(projectrc)) {
+        KConfig c(projectrc);
+        KConfigGroup configDock = c.group("DocksPosition");
+        state = configDock.readEntry("MainWindowLayout", state);
+    }
 
     // initialize previewer
     delete m_previewerWidget;
@@ -698,11 +707,10 @@ void MainWindow::loadProject(const QString &name, const QString &type)
     // Now, setup some useful properties such as the project name in the title bar
     // and setting the current working directory.
     Plasma::PackageMetadata metadata(packagePath + "metadata.desktop");
-    setCaption("[Project:" + metadata.name() + ']');
+    m_currentProject = metadata.name();
+    setCaption("[Project:" + m_currentProject + ']');
     kDebug() << "Content prefix: " << m_model->contentsPrefix() ;
     QDir::setCurrent(m_model->package() + m_model->contentsPrefix());
-
-    m_currentProject = metadata.name();
 
     // load mainscript
     kDebug() << "loading metadata:" << packagePath + "metadata.desktop";

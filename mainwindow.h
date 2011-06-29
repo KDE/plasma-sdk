@@ -74,6 +74,8 @@ Q_SIGNALS:
 private:
     void setupActions();
     void initTimeLine();
+    QString projectFilePath(const QString &filename);
+    void saveProjectState();
 
 private Q_SLOTS:
     void showStartPage();
@@ -158,7 +160,6 @@ private:
     bool m_docksCreated;
     CentralContainer *m_central;
     QString m_currentProject;
-    QString m_currentProjectType;
 
     KParts::ReadOnlyPart *m_part;
     KParts::ReadOnlyPart *m_notesPart;
