@@ -250,6 +250,10 @@ void MainWindow::closeProject()
         m_filelist->hide();
     }
 
+     if (m_browser) {
+        m_browser->setVisible(false);
+    }
+
     setCentralWidget(m_central);
 
     m_central->switchTo(m_startPage);
