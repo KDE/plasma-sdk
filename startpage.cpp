@@ -292,7 +292,7 @@ void StartPage::refreshRecentProjectsList()
                 item->setIcon(KIcon(metadata.icon()));
                 kDebug() << "Setting ICON:" << metadata.icon();
             } else {
-                item->setIcon(KIcon("application-x-plasma"));
+                item->setIcon(KIcon("plasma"));
             }
             tooltip += i18n("Project type") + " : " + i18n("Plasmoid");
         } else if (serviceType == "Plasma/DataEngine") {
