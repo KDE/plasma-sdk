@@ -58,7 +58,7 @@ namespace GpgME
 class PasswordAsker : public PassphraseProvider, QDialog
 {
 public:
-    PasswordAsker(QObject *parent = 0)
+    PasswordAsker(QWidget *parent = 0)
             : QDialog(parent) {
         setModal(true);
         QVBoxLayout *main = new QVBoxLayout(this);
@@ -126,7 +126,7 @@ SigningWidget::~SigningWidget()
 
 void SigningWidget::loadConfig()
 {
-    KConfigGroup cg = KGlobal::config()->group("Signing Options");
+    KConfigGroup cg(KGlobal::config(), "Signing Options");
     m_signingEnabled = cg.readEntry("signingEnabled", false);
     m_currentKey = cg.readEntry("currentSignerKey", QString());
 }
@@ -227,7 +227,7 @@ QString SigningWidget::mapKeyToString(const QMap<QString, QVariant> &map,  const
 void SigningWidget::setEnabled(const bool enabled)
 {
     m_signingEnabled = enabled;
-    KConfigGroup cg = KGlobal::config()->group("Signing Options");
+    KConfigGroup cg(KGlobal::config(), "Signing Options");
     cg.writeEntry("signingEnabled", m_signingEnabled);
     cg.sync();
 
@@ -333,7 +333,7 @@ void SigningWidget::deleteKey()
             error = m_gpgContext->deleteKey(k, true);
             if (!error) {
                 m_currentKey.clear();
-                KConfigGroup cg = KGlobal::config()->group("Signing Options");
+                KConfigGroup cg(KGlobal::config(), "Signing Options");
                 cg.writeEntry("currentSignerKey", m_currentKey);
                 cg.sync();
                 loadKeys();
@@ -378,7 +378,7 @@ void SigningWidget::updateCurrentKey()
 
     m_currentKey = sender->objectName();
     kDebug() << m_currentKey;
-    KConfigGroup cg = KGlobal::config()->group("Signing Options");
+    KConfigGroup cg(KGlobal::config(), "Signing Options");
     cg.writeEntry("currentSignerKey", m_currentKey);
     cg.sync();
 }

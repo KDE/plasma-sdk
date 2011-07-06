@@ -69,7 +69,7 @@ void StartPage::setupWidgets()
     m_ui.setupUi(this);
 
     // Set some default parameters, like username/email and preferred scripting language
-    KConfigGroup cg = KGlobal::config()->group("NewProjectDefaultPreferences");
+    KConfigGroup cg(KGlobal::config(), ("NewProjectDefaultPreferences"));
     KUser user = KUser(KUser::UseRealUserID);
 
     QString userName = cg.readEntry("Username", user.loginName());
@@ -496,7 +496,7 @@ void StartPage::createNewProject()
 void StartPage::saveNewProjectPreferences()
 {
     // Saving NewProject preferences
-    KConfigGroup preferences = KGlobal::config()->group("NewProjectDefaultPreferences");
+    KConfigGroup preferences(KGlobal::config(), "NewProjectDefaultPreferences");
 
     preferences.writeEntry("Username", userName());
     preferences.writeEntry("Email", userEmail());

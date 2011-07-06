@@ -126,7 +126,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     // Saving layout position
-    KConfigGroup configDock = KGlobal::config()->group("DocksPosition");
+    KConfigGroup configDock(KGlobal::config(), "DocksPosition");
     configDock.writeEntry("MainWindowLayout", saveState(STATE_VERSION));
 
     // if the user closes the application with an editor open, should
@@ -569,7 +569,7 @@ void MainWindow::saveProjectState()
 
     const QString projectrc = projectFilePath(PROJECTRC);
     KConfig c(projectrc);
-    KConfigGroup configDocks = c.group("DocksPosition");
+    KConfigGroup configDocks(&c, "DocksPosition");
     configDocks.writeEntry("MainWindowLayout", saveState(STATE_VERSION));
     configDocks.writeEntry("Timeline", m_timeLine && m_timeLine->isVisible());
     configDocks.writeEntry("Documentation", m_browser && m_browser->isVisible());
@@ -580,7 +580,7 @@ void MainWindow::saveProjectState()
 
     /* TODO: implement browser state loading
     if (m_browser) {
-        KConfigGroup cg = KGlobal::config()->group("General");
+        KConfigGroup cg(KGlobal::config(), "General");
         cg.writeEntry("lastBrowserPage", m_browser->currentPage().toEncoded());
     */
 }
@@ -668,7 +668,7 @@ void MainWindow::loadProject(const QString &path)
     recent.removeAll(path);
     recent.prepend(path);
     kDebug() << "Writing the following recent files to the config:" << recent;
-    KConfigGroup cg = KGlobal::config()->group("General");
+    KConfigGroup cg(KGlobal::config(), "General");
     cg.writeEntry("recentProjects", recent);
     KGlobal::config()->sync();
 
@@ -691,7 +691,7 @@ void MainWindow::loadProject(const QString &path)
     bool showPreview = true;
     if (QFile::exists(projectrc)) {
         KConfig c(projectrc);
-        KConfigGroup configDocks = c.group("DocksPosition");
+        KConfigGroup configDocks(&c, "DocksPosition");
         state = configDocks.readEntry("MainWindowLayout", state);
 
         if (configDocks.readEntry("Timeline", false)) {
@@ -740,7 +740,7 @@ void MainWindow::loadProject(const QString &path)
     // and setting the current working directory.
     kDebug() << "loading metadata:" << packagePath + "metadata.desktop";
     KConfig metafile(packagePath + "metadata.desktop");
-    KConfigGroup meta = metafile.group("Desktop Entry");
+    KConfigGroup meta(&metafile, "Desktop Entry");
     m_currentProject = meta.readEntry("Name", path);
     setCaption(m_currentProject);
     kDebug() << "Content prefix: " << m_model->contentsPrefix() ;
@@ -768,7 +768,7 @@ void MainWindow::loadProject(const QString &path)
 
 QStringList MainWindow::recentProjects()
 {
-    KConfigGroup cg = KGlobal::config()->group("General");
+    KConfigGroup cg(KGlobal::config(), "General");
     QStringList l = cg.readEntry("recentFiles", QStringList());
 //     kDebug() << l.toStringList();
 

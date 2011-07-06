@@ -68,7 +68,7 @@ void ProjectManager::confirmDeletion()
     QList<QListWidgetItem*> l = projectList->selectedItems();
 
     //TODO: should probably centralize config handling code somewhere.
-    KConfigGroup cg = KGlobal::config()->group("General");
+    KConfigGroup cg(KGlobal::config(), "General");
     QStringList recentFiles = cg.readEntry("recentFiles", QStringList());
     for (int i = 0; i < l.size(); i++) {
         QString folder = l[i]->data(StartPage::FullPathRole).value<QString>();

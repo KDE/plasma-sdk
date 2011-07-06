@@ -45,7 +45,7 @@ SigningDialog::SigningDialog(QWidget *parent) :
     QFrame *separator2 = new QFrame(this);
     QHBoxLayout *buttonLay = new QHBoxLayout(this);
     //QHBoxLayout *expirationLay = new QHBoxLayout(this);
-    KConfigGroup preferences = KGlobal::config()->group("NewProjectDefaultPreferences");
+    KConfigGroup preferences(KGlobal::config(), "NewProjectDefaultPreferences");
 
     m_nameLabel = new QLabel("Name:", this);
     m_emailLabel = new QLabel("Email:", this);
