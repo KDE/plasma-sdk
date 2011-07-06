@@ -69,17 +69,17 @@ void ProjectManager::confirmDeletion()
 
     //TODO: should probably centralize config handling code somewhere.
     KConfigGroup cg(KGlobal::config(), "General");
-    QStringList recentFiles = cg.readEntry("recentFiles", QStringList());
+    QStringList recentProjects = cg.readEntry("recentProjects", QStringList());
     for (int i = 0; i < l.size(); i++) {
         QString folder = l[i]->data(StartPage::FullPathRole).value<QString>();
         QString path = KStandardDirs::locateLocal("appdata", folder + '/');
         deleteProject(path);
-        if (recentFiles.contains(folder)) {
-            recentFiles.removeAt(recentFiles.indexOf(folder));
+        if (recentProjects.contains(folder)) {
+            recentProjects.removeAt(recentProjects.indexOf(folder));
         }
     }
     //TODO: should perform a success check here instead of assuming success.
-    cg.writeEntry("recentFiles", recentFiles);
+    cg.writeEntry("recentProjects", recentProjects);
     KGlobal::config()->sync();
     emit requestRefresh();
 }

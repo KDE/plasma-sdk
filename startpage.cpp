@@ -272,7 +272,7 @@ void StartPage::refreshRecentProjectsList()
 
         kDebug() << "adding" << projectName << "to the list of recent projects...";
         QListWidgetItem *item = new QListWidgetItem(projectName); // show the user-set plasmoid name in the UI
-	counter++;
+        counter++;
         // the loading code uses this to find the project to load.
         // since folder name and plasmoid name can be different, this
         // should be set to the folder name, which the loading code expects.
@@ -336,7 +336,7 @@ void StartPage::refreshRecentProjectsList()
     }
 
     QListWidgetItem *more;
-    //if (recentProjects.count() >=0 && recentProjects.count() <=4) {
+
     if (counter >= 0 && counter <= 4) {
         more = new QListWidgetItem(i18n("Manage Projects..."));
     } else {

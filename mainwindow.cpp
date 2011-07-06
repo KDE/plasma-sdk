@@ -769,7 +769,7 @@ void MainWindow::loadProject(const QString &path)
 QStringList MainWindow::recentProjects()
 {
     KConfigGroup cg(KGlobal::config(), "General");
-    QStringList l = cg.readEntry("recentFiles", QStringList());
+    QStringList l = cg.readEntry("recentProjects", QStringList());
 //     kDebug() << l.toStringList();
 
     return l;
