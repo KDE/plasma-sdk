@@ -34,15 +34,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KDesktopFile>
 #include <KLineEdit>
 #include <KMimeType>
+#include <KPluginInfo>
 #include <KPushButton>
 #include <KSeparator>
-#include <KUrlRequester>
 #include <KShell>
 #include <KStandardAction>
 #include <KStandardDirs>
+#include <KUrlRequester>
 #include <KUser>
 #include <KMessageBox>
-#include <Plasma/PackageMetadata>
 #include <knewstuff3/downloaddialog.h>
 
 #include "packagemodel.h"
@@ -262,13 +262,13 @@ void StartPage::refreshRecentProjectsList()
             continue;
         }
 
-        Plasma::PackageMetadata metadata(pPath);
+        KPluginInfo metadata(pPath);
 
         // Do not expose the idea of a 'folder name' to the user -
         // we keep the folder hidden and name it whatever we want as
         // long as it's unique. Only the plasmoid name, which the user
         // sets in the metadata editor, will ever be visible in the UI.
-        QString projectName = metadata.name();
+        const QString projectName = metadata.name();
 
         kDebug() << "adding" << projectName << "to the list of recent projects...";
         QListWidgetItem *item = new QListWidgetItem(projectName); // show the user-set plasmoid name in the UI
@@ -280,34 +280,53 @@ void StartPage::refreshRecentProjectsList()
 
         // set a tooltip for extra info and to help differentiating similar projects
         QString tooltip = "Project : " + projectName + "\n\n";
-        tooltip += "\"" + metadata.description() + "\"\n---\n";
-        tooltip += i18n("Author") + " : " + metadata.author() + " <" + metadata.email() + ">\n";
-        tooltip += i18n("Version") + " : " + metadata.version() + "\n";
-        tooltip += i18n("API") + " : " + metadata.implementationApi() + "\n";
+        if (!metadata.comment().isEmpty()) {
+            tooltip += "\"" + metadata.comment() + "\"\n---\n";
+        }
 
-        const QString serviceType = metadata.serviceType();
-
-        if (serviceType.contains("Plasma/Applet")) {
-            if (!metadata.icon().isEmpty()) {
-                item->setIcon(KIcon(metadata.icon()));
-                kDebug() << "Setting ICON:" << metadata.icon();
-            } else {
-                item->setIcon(KIcon("plasma"));
+        if (!metadata.author().isEmpty()) {
+            tooltip += i18n("Author") + " : " + metadata.author();
+            if (!metadata.email().isEmpty()) {
+                tooltip += " <" + metadata.email() + '>';
             }
+
+            tooltip += "\n";
+        }
+
+        if (!metadata.version().isEmpty()) {
+            tooltip += i18n("Version") + " : " + metadata.version() + "\n";
+        }
+
+
+        KService service(pPath);
+        tooltip += i18n("API") + " : " + service.property("X-Plasma-API").toString() + "\n";
+        item->setToolTip(tooltip);
+
+        const QStringList serviceTypes = service.serviceTypes();
+
+        QString defaultIconName;
+
+        if (serviceTypes.contains("Plasma/Applet")) {
+            defaultIconName = "plasma";
             tooltip += i18n("Project type") + " : " + i18n("Plasmoid");
-        } else if (serviceType == "Plasma/DataEngine") {
-            item->setIcon(KIcon("kexi"));
+        } else if (serviceTypes.contains("Plasma/DataEngine")) {
+            defaultIconName = "server-database";
             tooltip += i18n("Project type") + " : " + i18n("Data Engine");
-        } else if (serviceType == "Plasma/Theme") {
-            item->setIcon(KIcon("inkscape"));
+        } else if (serviceTypes.contains("Plasma/Theme")) {
+            defaultIconName = "preferences-desktop-theme";
             tooltip += i18n("Project type") + " : " + i18n("Theme");
-        } else if (serviceType == "Plasma/Runner") {
-            item->setIcon(KIcon("system-run"));
+        } else if (serviceTypes.contains("Plasma/Runner")) {
+            defaultIconName = "system-run";
             tooltip += i18n("Project type") + " : " + i18n("Runner");
         } else {
-            kWarning() << "Unknown service type" << serviceType;
+            kWarning() << "Unknown service type" << serviceTypes;
         }
-        item->setToolTip(tooltip);
+
+        if (metadata.icon().isEmpty()) {
+            item->setIcon(KIcon(defaultIconName));
+        } else {
+            item->setIcon(KIcon(metadata.icon()));
+        }
 
         m_projectManager->addProject(item);
         // limit to 5 projects to display up front
