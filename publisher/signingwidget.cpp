@@ -58,8 +58,8 @@ namespace GpgME
 class PasswordAsker : public PassphraseProvider, QDialog
 {
 public:
-    PasswordAsker(const QWidget *parent)
-            : QDialog(0) {
+    PasswordAsker(QObject *parent = 0)
+            : QDialog(parent) {
         setModal(true);
         QVBoxLayout *main = new QVBoxLayout(this);
         QHBoxLayout *child = new QHBoxLayout(this);
