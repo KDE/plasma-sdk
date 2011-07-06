@@ -84,8 +84,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     QString info;
 
     TimeLineItem *branchItem = new TimeLineItem();
-    info.append(i18n("On Section: "));
-    info.append(m_currentBranch);
+    info.append(i18n("On Section: %1", m_currentBranch));
     branchItem->setText(info);
 
     info.clear();
@@ -372,7 +371,7 @@ void TimeLine::moveToCommit()
     warningMB->setIcon(QMessageBox::Information);
     warningMB->setWindowTitle(i18n("Information"));
     warningMB->setText(i18n("You are going to move to the selected SavePoint."));
-    warningMB->setInformativeText(i18n("To perform this, a new Section will be created and your current work may be lost if you don't have saved it as a Savepoint.\nContinue?"));
+    warningMB->setInformativeText(i18n("To perform this, a new Section will be created and your current work may be lost if you do not have saved it as a Savepoint.\nContinue?"));
     warningMB->setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
     warningMB->setDefaultButton(QMessageBox::Discard);
     if (warningMB->exec() == QMessageBox::Discard) {
@@ -477,7 +476,7 @@ void TimeLine::deleteBranch()
     warningMB->setIcon(QMessageBox::Warning);
     warningMB->setWindowTitle(i18n("Warning"));
     warningMB->setText(i18n("<b>You are going to remove the selected Section.</b>"));
-    warningMB->setInformativeText(i18n("With this operation, you'll also delete all SavePoints/Sections performed inside it.\nContinue anyway?"));
+    warningMB->setInformativeText(i18n("With this operation, you will also delete all SavePoints/Sections performed inside it.\nContinue anyway?"));
     warningMB->setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
     warningMB->setDefaultButton(QMessageBox::Discard);
     if (warningMB->exec() == QMessageBox::Discard) {

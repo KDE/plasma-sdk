@@ -285,7 +285,7 @@ void StartPage::refreshRecentProjectsList()
         }
 
         if (!metadata.author().isEmpty()) {
-            tooltip += i18n("Author") + " : " + metadata.author();
+            tooltip += i18n("Author: %1", metadata.author());
             if (!metadata.email().isEmpty()) {
                 tooltip += " <" + metadata.email() + '>';
             }
@@ -294,12 +294,12 @@ void StartPage::refreshRecentProjectsList()
         }
 
         if (!metadata.version().isEmpty()) {
-            tooltip += i18n("Version") + " : " + metadata.version() + "\n";
+            tooltip += i18n("Version: %1", metadata.version()) + "\n";
         }
 
 
         KService service(pPath);
-        tooltip += i18n("API") + " : " + service.property("X-Plasma-API").toString() + "\n";
+        tooltip += i18n("API: %1", service.property("X-Plasma-API").toString()) + "\n";
         item->setToolTip(tooltip);
 
         const QStringList serviceTypes = service.serviceTypes();
@@ -308,16 +308,16 @@ void StartPage::refreshRecentProjectsList()
 
         if (serviceTypes.contains("Plasma/Applet")) {
             defaultIconName = "plasma";
-            tooltip += i18n("Project type") + " : " + i18n("Plasmoid");
+            tooltip += i18n("Project type: Plasmoid");
         } else if (serviceTypes.contains("Plasma/DataEngine")) {
             defaultIconName = "server-database";
-            tooltip += i18n("Project type") + " : " + i18n("Data Engine");
+            tooltip += i18n("Project type: Data Engine");
         } else if (serviceTypes.contains("Plasma/Theme")) {
             defaultIconName = "preferences-desktop-theme";
-            tooltip += i18n("Project type") + " : " + i18n("Theme");
+            tooltip += i18n("Project type: Theme");
         } else if (serviceTypes.contains("Plasma/Runner")) {
             defaultIconName = "system-run";
-            tooltip += i18n("Project type") + " : " + i18n("Runner");
+            tooltip += i18n("Project type: Runner");
         } else {
             kWarning() << "Unknown service type" << serviceTypes;
         }

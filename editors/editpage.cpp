@@ -59,9 +59,9 @@ void EditPage::doDelete(bool)
     QModelIndex selected = items.at(0); // only one can be selected
     QString path = selected.data(PackageModel::UrlRole).toString();
     QString name = selected.data(Qt::DisplayRole).toString();
-    QString dialogText = i18n("Are you sure you want to delete this file: ");
+    QString dialogText = i18n("Are you sure you want to delete the file \"%1\"?", name);
     int code = KMessageBox::warningContinueCancel(this,
-                  dialogText + "'" + name + "'?");
+                  dialogText);
     if (code == KMessageBox::Continue)
         QFile::remove(path);
 }
