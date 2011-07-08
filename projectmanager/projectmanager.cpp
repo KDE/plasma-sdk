@@ -127,19 +127,10 @@ void ProjectManager::removeSelectedProjects(bool deleteFromDisk)
 
 void ProjectManager::checkButtonState()
 {
-    QList<QListWidgetItem*> l = m_projectList->selectedItems();
-    if (l.size()==0) {
-        m_loadButton->setDisabled(true);
-        m_removeMenuButton->setDisabled(true);
-    } else if (l.size()==1) {
-        m_loadButton->setEnabled(true);
-        m_removeMenuButton->setEnabled(true);
-    } else {
-        m_loadButton->setDisabled(true);
-        m_removeMenuButton->setEnabled(true);
-    }
+    QList<QListWidgetItem *> l = m_projectList->selectedItems();
+    m_loadButton->setEnabled(l.count() == 1);
+    m_removeMenuButton->setEnabled(l.count() > 0);
 }
-
 
 void ProjectManager::addProject(QListWidgetItem *item)
 {
