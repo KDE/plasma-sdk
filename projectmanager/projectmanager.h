@@ -38,7 +38,7 @@ class ProjectManager : public QDialog
 {
     Q_OBJECT
 public:
-    ProjectManager(QWidget* parent);
+    ProjectManager(QWidget *parent);
     void addProject(QListWidgetItem *item);
     void clearProjects();
 
@@ -62,9 +62,9 @@ private:
 //      search/filterbar,
 //      project multi-export,
 //      project multi-import.
-    QListWidget* projectList;
-    KPushButton* loadButton;
-    KPushButton* removeMenuButton;
+    QListWidget *projectList;
+    KPushButton *loadButton;
+    KPushButton *removeMenuButton;
     KMenu *removeMenu;
     static void removeDirectory(const QString&);
     bool m_destroyFlag;
