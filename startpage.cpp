@@ -132,10 +132,10 @@ void StartPage::setupWidgets()
     connect(m_ui.importGHNSButton, SIGNAL(clicked()),
             this, SLOT(doGHNSImport()));
 
-    connect(m_projectManager, SIGNAL(projectSelected(QString)),
-            this, SIGNAL(projectSelected(QString)));
-    connect(m_projectManager, SIGNAL(requestRefresh()),
-            this, SLOT(refreshRecentProjectsList()));
+    // connect up the project manager to our signals and slots
+    connect(this, SIGNAL(projectSelected(QString)), m_projectManager, SLOT(addRecentProject(QString)));
+    connect(m_projectManager, SIGNAL(projectSelected(QString)), this, SIGNAL(projectSelected(QString)));
+    connect(m_projectManager, SIGNAL(requestRefresh()), this, SLOT(refreshRecentProjectsList()));
 
     new QListWidgetItem(KIcon("application-x-plasma"), i18n("Plasma Widget"), m_ui.contentTypes);
     new QListWidgetItem(KIcon("kexi"), i18n("Data Engine"), m_ui.contentTypes);
