@@ -54,7 +54,6 @@ StartPage::StartPage(MainWindow *parent) // TODO set a palette so it will look i
         : QWidget(parent),
         m_parent(parent)
 {
-    connect(this, SIGNAL(projectSelected(QString)), this, SLOT(saveNewProjectPreferences()));
     setupWidgets();
     refreshRecentProjectsList();
 }
@@ -505,6 +504,7 @@ void StartPage::createNewProject()
     metaFile.sync();
 
     // the loading code expects the FOLDER NAME
+    saveNewProjectPreferences();
     emit projectSelected(projectPath + projectFolderName);
 
     // need to clear the project name field here too because startpage is still
