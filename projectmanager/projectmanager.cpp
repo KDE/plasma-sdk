@@ -117,7 +117,6 @@ void ProjectManager::removeSelectedProjects(bool deleteFromDisk)
 
     if (checkSuccess) {
         setRecentProjects(recent);
-        emit requestRefresh();
     }
 }
 
@@ -213,6 +212,7 @@ void ProjectManager::addRecentProject(const QString &path)
     KConfigGroup cg(KGlobal::config(), "General");
     cg.writeEntry("recentProjects", recent);
     KGlobal::config()->sync();
+    emit requestRefresh();
 }
 
 void ProjectManager::setRecentProjects(const QStringList &paths)
@@ -220,6 +220,7 @@ void ProjectManager::setRecentProjects(const QStringList &paths)
     KConfigGroup cg(KGlobal::config(), "General");
     cg.writeEntry("recentProjects", paths);
     KGlobal::config()->sync();
+    emit requestRefresh();
 }
 
 void ProjectManager::deleteProject(const KUrl &projectLocation)
