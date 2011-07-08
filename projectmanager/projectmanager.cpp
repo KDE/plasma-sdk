@@ -37,7 +37,8 @@
 #include "projectmanager.h"
 #include "startpage.h"
 
-ProjectManager::ProjectManager(QWidget* parent) : QDialog(parent)
+ProjectManager::ProjectManager(QWidget* parent)
+    : QDialog(parent)
 {
     m_projectList = new QListWidget();
     m_projectList->setSelectionMode(QAbstractItemView::ExtendedSelection);
@@ -95,7 +96,7 @@ void ProjectManager::confirmRemoveFromDisk()
 
 void ProjectManager::removeSelectedProjects(bool deleteFromDisk)
 {
-    QList<QListWidgetItem*> l = m_projectList->selectedItems();
+    QList<QListWidgetItem *> l = m_projectList->selectedItems();
     bool checkSuccess = false;
 
     //TODO: should probably centralize config handling code somewhere.
@@ -144,7 +145,7 @@ void ProjectManager::clearProjects()
 
 void ProjectManager::emitProjectSelected()
 {
-    QList<QListWidgetItem*> l = m_projectList->selectedItems();
+    QList<QListWidgetItem *> l = m_projectList->selectedItems();
     if (l.isEmpty()) {
         return;
     }
