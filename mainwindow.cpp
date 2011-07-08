@@ -88,7 +88,7 @@ void MainWindow::CentralContainer::switchTo(QWidget* newWidget, SwitchMode mode)
 }
 
 MainWindow::MainWindow(QWidget *parent)
-        : KParts::MainWindow(parent, Qt::Widget),
+      : KParts::MainWindow(parent, Qt::Widget),
         m_sidebar(0),
         m_timeLine(0),
         m_previewerWidget(0),
