@@ -23,10 +23,11 @@
 #include <QDialog>
 
 class QListWidget;
-class QPushButton;
 class QListWidgetItem;
 
 class KUrl;
+class KPushButton;
+class KMenu;
 
 namespace Ui
 {
@@ -35,7 +36,7 @@ class ProjectManager;
 
 class ProjectManager : public QDialog
 {
-    Q_OBJECT;
+    Q_OBJECT
 public:
     ProjectManager(QWidget* parent);
     void addProject(QListWidgetItem *item);
@@ -51,17 +52,22 @@ signals:
 
 private slots:
    void emitProjectSelected();
-   void confirmDeletion();
+   void removeProcess();
+   void confirmRemoveFromDisk();
+   void confirmRemoveFromList();
+   void checkButtonState();
 
 private:
 //TODO: Implement:
 //      search/filterbar,
 //      project multi-export,
 //      project multi-import.
-    QListWidget *projectList;
-    QPushButton *loadButton;
-    QPushButton *deleteButton;
+    QListWidget* projectList;
+    KPushButton* loadButton;
+    KPushButton* removeMenuButton;
+    KMenu *removeMenu;
     static void removeDirectory(const QString&);
+    bool m_destroyFlag;
 };
 
 #endif // PROJECTMANAGER_H

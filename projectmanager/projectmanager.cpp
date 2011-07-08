@@ -19,7 +19,6 @@
 
 
 #include <QLabel>
-#include <QPushButton>
 #include <QListWidget>
 #include <QVBoxLayout>
 #include <QDir>
@@ -32,6 +31,8 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KStandardDirs>
+#include <KPushButton>
+#include <KMenu>
 
 #include "projectmanager.h"
 #include "startpage.h"
@@ -41,16 +42,26 @@ ProjectManager::ProjectManager(QWidget* parent) : QDialog(parent)
     projectList = new QListWidget();
     projectList->setSelectionMode(QAbstractItemView::ExtendedSelection);
     connect(projectList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(emitProjectSelected()));
+    connect(projectList,SIGNAL(itemSelectionChanged()), this, SLOT(checkButtonState()));
 
-    loadButton = new QPushButton(i18n("Load Project"));
+    loadButton = new KPushButton(i18n("Load Project"));
     connect(loadButton, SIGNAL(clicked()), this, SLOT(emitProjectSelected()));
 
-    deleteButton = new QPushButton(i18n("Delete Project"));
-    connect(deleteButton, SIGNAL(clicked()), this, SLOT(confirmDeletion()));
+    removeMenuButton = new KPushButton(i18n("Remove Project"));
+
+    removeMenu = new KMenu(i18n("Remove Project"));
+
+    removeMenuButton->setMenu(removeMenu);
+    removeMenu->addAction(i18n("From List"), this, SLOT(confirmRemoveFromList()));
+    removeMenu->addAction(i18n("From Dist"), this, SLOT(confirmRemoveFromDisk()));
 
     QHBoxLayout *hoz = new QHBoxLayout();
+
+    loadButton->setDisabled(true);
     hoz->addWidget(loadButton);
-    hoz->addWidget(deleteButton);
+
+    removeMenuButton->setDisabled(true);
+    hoz->addWidget(removeMenuButton);
 
     QVBoxLayout *lay = new QVBoxLayout();
     lay->addWidget(projectList);
@@ -58,14 +69,32 @@ ProjectManager::ProjectManager(QWidget* parent) : QDialog(parent)
     setLayout(lay);
 }
 
-void ProjectManager::confirmDeletion()
+void ProjectManager::confirmRemoveFromList()
 {
-    //TODO: might want to disallow deleting a currently active project, or handle it
-    //      gracefully somehow.
-    QString dialogText = i18n("Are you sure you want to delete the selected projects? This cannot be undone.");
+    m_destroyFlag = false;
+    QString dialogText = i18n("Are you sure you want to remove the selected projects? This cannot be undone.");
     int code = KMessageBox::warningContinueCancel(this, dialogText);
-    if (code != KMessageBox::Continue) return;
+    if (code != KMessageBox::Continue) {
+        return;
+    }
+    removeProcess();
+}
+
+void ProjectManager::confirmRemoveFromDisk()
+{
+    m_destroyFlag = true;
+    QString dialogText = i18n("Are you sure you want to remove the selected projects? This cannot be undone");
+    int code = KMessageBox::warningContinueCancel(this, dialogText);
+    if (code != KMessageBox::Continue) {
+        return;
+    }
+    removeProcess();
+}
+
+void ProjectManager::removeProcess()
+{
     QList<QListWidgetItem*> l = projectList->selectedItems();
+    bool checkSuccess = true;
 
     //TODO: should probably centralize config handling code somewhere.
     KConfigGroup cg(KGlobal::config(), "General");
@@ -73,16 +102,37 @@ void ProjectManager::confirmDeletion()
     for (int i = 0; i < l.size(); i++) {
         QString folder = l[i]->data(StartPage::FullPathRole).value<QString>();
         QString path = KStandardDirs::locateLocal("appdata", folder + '/');
-        deleteProject(path);
+        if(m_destroyFlag) {
+            deleteProject(path);
+        }
         if (recentProjects.contains(folder)) {
             recentProjects.removeAt(recentProjects.indexOf(folder));
+        } else {
+            checkSuccess = false;
         }
     }
-    //TODO: should perform a success check here instead of assuming success.
-    cg.writeEntry("recentProjects", recentProjects);
-    KGlobal::config()->sync();
-    emit requestRefresh();
+    if (checkSuccess) {
+        cg.writeEntry("recentProjects", recentProjects);
+        KGlobal::config()->sync();
+        emit requestRefresh();
+    }
 }
+
+void ProjectManager::checkButtonState()
+{
+    QList<QListWidgetItem*> l = projectList->selectedItems();
+    if (l.size()==0) {
+        loadButton->setDisabled(true);
+        removeMenuButton->setDisabled(true);
+    } else if (l.size()==1) {
+        loadButton->setEnabled(true);
+        removeMenuButton->setEnabled(true);
+    } else {
+        loadButton->setDisabled(true);
+        removeMenuButton->setEnabled(true);
+    }
+}
+
 
 void ProjectManager::addProject(QListWidgetItem *item)
 {
@@ -97,10 +147,7 @@ void ProjectManager::clearProjects()
 void ProjectManager::emitProjectSelected()
 {
     QList<QListWidgetItem*> l = projectList->selectedItems();
-    if (l.size() != 1) {
-        KMessageBox::information(this, i18n("Please select exactly one project to load."));
-        return;
-    }
+
     QString url = l[0]->data(StartPage::FullPathRole).value<QString>();
 
     emit projectSelected(url);
