@@ -39,39 +39,39 @@
 
 ProjectManager::ProjectManager(QWidget* parent) : QDialog(parent)
 {
-    projectList = new QListWidget();
-    projectList->setSelectionMode(QAbstractItemView::ExtendedSelection);
-    connect(projectList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(emitProjectSelected()));
-    connect(projectList,SIGNAL(itemSelectionChanged()), this, SLOT(checkButtonState()));
+    m_projectList = new QListWidget();
+    m_projectList->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    connect(m_projectList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(emitProjectSelected()));
+    connect(m_projectList,SIGNAL(itemSelectionChanged()), this, SLOT(checkButtonState()));
 
-    loadButton = new KPushButton(i18n("Load Project"));
-    connect(loadButton, SIGNAL(clicked()), this, SLOT(emitProjectSelected()));
+    m_loadButton = new KPushButton(i18n("Load Project"));
+    connect(m_loadButton, SIGNAL(clicked()), this, SLOT(emitProjectSelected()));
 
-    removeMenuButton = new KPushButton(i18n("Remove Project"));
+    m_removeMenuButton = new KPushButton(i18n("Remove Project"));
 
-    removeMenu = new KMenu(i18n("Remove Project"));
+    m_removeMenu = new KMenu(i18n("Remove Project"));
 
-    removeMenuButton->setMenu(removeMenu);
-    removeMenu->addAction(i18n("From List"), this, SLOT(confirmRemoveFromList()));
-    removeMenu->addAction(i18n("From Disk"), this, SLOT(confirmRemoveFromDisk()));
+    m_removeMenuButton->setMenu(m_removeMenu);
+    m_removeMenu->addAction(i18n("From List"), this, SLOT(confirmRemoveFromList()));
+    m_removeMenu->addAction(i18n("From Disk"), this, SLOT(confirmRemoveFromDisk()));
 
     QHBoxLayout *hoz = new QHBoxLayout();
 
-    loadButton->setDisabled(true);
-    hoz->addWidget(loadButton);
+    m_loadButton->setDisabled(true);
+    hoz->addWidget(m_loadButton);
 
-    removeMenuButton->setDisabled(true);
-    hoz->addWidget(removeMenuButton);
+    m_removeMenuButton->setDisabled(true);
+    hoz->addWidget(m_removeMenuButton);
 
     QVBoxLayout *lay = new QVBoxLayout();
-    lay->addWidget(projectList);
+    lay->addWidget(m_projectList);
     lay->addLayout(hoz);
     setLayout(lay);
 }
 
 void ProjectManager::confirmRemoveFromList()
 {
-    const int count = projectList->selectedItems().count();
+    const int count = m_projectList->selectedItems().count();
     QString dialogText = i18np("Are you sure you want to remove the selected project from the project list?",
                                "Are you sure you want to remove the selected projects from the project list?",
                                count);
@@ -83,7 +83,7 @@ void ProjectManager::confirmRemoveFromList()
 
 void ProjectManager::confirmRemoveFromDisk()
 {
-    const int count = projectList->selectedItems().count();
+    const int count = m_projectList->selectedItems().count();
     QString dialogText = i18np("Are you sure you want to remove the selected project from disk? This cannot be undone",
                                "Are you sure you want to remove the selected projects from disk? This cannot be undone",
                                count);
@@ -95,7 +95,7 @@ void ProjectManager::confirmRemoveFromDisk()
 
 void ProjectManager::removeSelectedProjects(bool deleteFromDisk)
 {
-    QList<QListWidgetItem*> l = projectList->selectedItems();
+    QList<QListWidgetItem*> l = m_projectList->selectedItems();
     bool checkSuccess = false;
 
     //TODO: should probably centralize config handling code somewhere.
@@ -127,33 +127,33 @@ void ProjectManager::removeSelectedProjects(bool deleteFromDisk)
 
 void ProjectManager::checkButtonState()
 {
-    QList<QListWidgetItem*> l = projectList->selectedItems();
+    QList<QListWidgetItem*> l = m_projectList->selectedItems();
     if (l.size()==0) {
-        loadButton->setDisabled(true);
-        removeMenuButton->setDisabled(true);
+        m_loadButton->setDisabled(true);
+        m_removeMenuButton->setDisabled(true);
     } else if (l.size()==1) {
-        loadButton->setEnabled(true);
-        removeMenuButton->setEnabled(true);
+        m_loadButton->setEnabled(true);
+        m_removeMenuButton->setEnabled(true);
     } else {
-        loadButton->setDisabled(true);
-        removeMenuButton->setEnabled(true);
+        m_loadButton->setDisabled(true);
+        m_removeMenuButton->setEnabled(true);
     }
 }
 
 
 void ProjectManager::addProject(QListWidgetItem *item)
 {
-    projectList->addItem(item);
+    m_projectList->addItem(item);
 }
 
 void ProjectManager::clearProjects()
 {
-    projectList->clear();
+    m_projectList->clear();
 }
 
 void ProjectManager::emitProjectSelected()
 {
-    QList<QListWidgetItem*> l = projectList->selectedItems();
+    QList<QListWidgetItem*> l = m_projectList->selectedItems();
     if (l.isEmpty()) {
         return;
     }

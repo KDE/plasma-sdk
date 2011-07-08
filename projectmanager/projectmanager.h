@@ -65,10 +65,10 @@ private:
 //      search/filterbar,
 //      project multi-export,
 //      project multi-import.
-    QListWidget *projectList;
-    KPushButton *loadButton;
-    KPushButton *removeMenuButton;
-    KMenu *removeMenu;
+    QListWidget *m_projectList;
+    KPushButton *m_loadButton;
+    KPushButton *m_removeMenuButton;
+    KMenu *m_removeMenu;
     bool m_destroyFlag;
 };
 
