@@ -52,7 +52,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "savesystem/timeline.h"
 #include "mainwindow.h"
 #include "packagemodel.h"
-#include "projectmanager/projectmanager.h"
 #include "sidebar.h"
 #include "startpage.h"
 #include "previewer/plasmoid/plasmoidpreviewer.h"
@@ -112,8 +111,7 @@ MainWindow::MainWindow(QWidget *parent)
     toolBar()->hide();
     menuBar()->hide();
     m_startPage = new StartPage(this);
-    connect(m_startPage, SIGNAL(projectSelected(QString)),
-            this, SLOT(loadProject(QString)));
+    connect(m_startPage, SIGNAL(projectSelected(QString)), this, SLOT(loadProject(QString)));
     m_central = new CentralContainer(this);
     setCentralWidget(m_central);
     m_central->switchTo(m_startPage);
@@ -663,9 +661,6 @@ void MainWindow::loadProject(const QString &path)
     }
 
     m_editPage->setModel(m_model);
-
-    // record in recent files
-    ProjectManager::addRecentProject(path);
 
     // prevent accidental loading of previous active project's file
     // plus temporary workaround for editor issue with handling different languages
