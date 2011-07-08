@@ -147,6 +147,9 @@ void ProjectManager::clearProjects()
 void ProjectManager::emitProjectSelected()
 {
     QList<QListWidgetItem*> l = projectList->selectedItems();
+    if (l.isEmpty()) {
+        return;
+    }
 
     QString url = l[0]->data(StartPage::FullPathRole).value<QString>();
 
