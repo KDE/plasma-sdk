@@ -44,6 +44,9 @@ public:
 
     static bool exportPackage(const KUrl &toExport, const KUrl &targetFile);
     static bool importPackage(const KUrl &toImport, const KUrl &targetLocation);
+    static QStringList recentProjects();
+    static void addRecentProject(const QString &path);
+    static void setRecentProjects(const QStringList &paths);
 
 signals:
     void projectSelected(const QString &name);

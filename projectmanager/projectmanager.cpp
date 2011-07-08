@@ -96,15 +96,12 @@ void ProjectManager::confirmRemoveFromDisk()
 
 void ProjectManager::removeSelectedProjects(bool deleteFromDisk)
 {
-    QList<QListWidgetItem *> l = m_projectList->selectedItems();
+    const QList<QListWidgetItem *> items = m_projectList->selectedItems();
     bool checkSuccess = false;
+    QStringList recent = recentProjects();
 
-    //TODO: should probably centralize config handling code somewhere.
-    KConfigGroup cg(KGlobal::config(), "General");
-    QStringList recentProjects = cg.readEntry("recentProjects", QStringList());
-
-    for (int i = 0; i < l.size(); i++) {
-        const QString folder = l[i]->data(StartPage::FullPathRole).value<QString>();
+    foreach (const QListWidgetItem *item, items) {
+        const QString folder = item->data(StartPage::FullPathRole).value<QString>();
 
         if (deleteFromDisk) {
             const QString path = KStandardDirs::locateLocal("appdata", folder + '/');
@@ -113,15 +110,13 @@ void ProjectManager::removeSelectedProjects(bool deleteFromDisk)
             }
         }
 
-        if (recentProjects.contains(folder)) {
-            recentProjects.removeAt(recentProjects.indexOf(folder));
+        if (recent.removeAll(folder) > 0) {
             checkSuccess = true;
         }
     }
 
     if (checkSuccess) {
-        cg.writeEntry("recentProjects", recentProjects);
-        KGlobal::config()->sync();
+        setRecentProjects(recent);
         emit requestRefresh();
     }
 }
@@ -200,6 +195,31 @@ bool ProjectManager::importPackage(const KUrl &toImport, const KUrl &targetLocat
     plasmoid.directory()->copyTo(targetLocation.path());
     plasmoid.close();
     return ret;
+}
+
+QStringList ProjectManager::recentProjects()
+{
+    KConfigGroup cg(KGlobal::config(), "General");
+    return cg.readEntry("recentProjects", QStringList());
+}
+
+void ProjectManager::addRecentProject(const QString &path)
+{
+    QStringList recent = recentProjects();
+    recent.removeAll(path);
+    recent.prepend(path);
+    //kDebug() << "Writing the following recent files to the config:" << recent;
+
+    KConfigGroup cg(KGlobal::config(), "General");
+    cg.writeEntry("recentProjects", recent);
+    KGlobal::config()->sync();
+}
+
+void ProjectManager::setRecentProjects(const QStringList &paths)
+{
+    KConfigGroup cg(KGlobal::config(), "General");
+    cg.writeEntry("recentProjects", paths);
+    KGlobal::config()->sync();
 }
 
 void ProjectManager::deleteProject(const KUrl &projectLocation)

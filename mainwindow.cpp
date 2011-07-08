@@ -52,6 +52,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "savesystem/timeline.h"
 #include "mainwindow.h"
 #include "packagemodel.h"
+#include "projectmanager/projectmanager.h"
 #include "sidebar.h"
 #include "startpage.h"
 #include "previewer/plasmoid/plasmoidpreviewer.h"
@@ -664,13 +665,7 @@ void MainWindow::loadProject(const QString &path)
     m_editPage->setModel(m_model);
 
     // record in recent files
-    QStringList recent = recentProjects();
-    recent.removeAll(path);
-    recent.prepend(path);
-    kDebug() << "Writing the following recent files to the config:" << recent;
-    KConfigGroup cg(KGlobal::config(), "General");
-    cg.writeEntry("recentProjects", recent);
-    KGlobal::config()->sync();
+    ProjectManager::addRecentProject(path);
 
     // prevent accidental loading of previous active project's file
     // plus temporary workaround for editor issue with handling different languages
