@@ -24,15 +24,15 @@
 #include <QDir>
 
 #include <KDebug>
-#include <KMessageBox>
-#include <KLocalizedString>
-#include <KZip>
-#include <KUrl>
 #include <KConfig>
 #include <KConfigGroup>
-#include <KStandardDirs>
-#include <KPushButton>
+#include <KLocalizedString>
 #include <KMenu>
+#include <KMessageBox>
+#include <KPushButton>
+#include <KStandardDirs>
+#include <KUrl>
+#include <KZip>
 
 #include "projectmanager.h"
 #include "startpage.h"
