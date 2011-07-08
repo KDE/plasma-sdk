@@ -44,15 +44,18 @@ public:
 
     static bool exportPackage(const KUrl &toExport, const KUrl &targetFile);
     static bool importPackage(const KUrl &toImport, const KUrl &targetLocation);
-    static bool deleteProject(const KUrl &projectLocation);
 
 signals:
     void projectSelected(const QString &name);
     void requestRefresh();
 
+private:
+    void removeDirectory(const QString&);
+    void deleteProject(const KUrl &projectLocation);
+
 private slots:
    void emitProjectSelected();
-   void removeProcess();
+   void removeSelectedProjects(bool deleteFromDisk);
    void confirmRemoveFromDisk();
    void confirmRemoveFromList();
    void checkButtonState();
@@ -66,7 +69,6 @@ private:
     KPushButton *loadButton;
     KPushButton *removeMenuButton;
     KMenu *removeMenu;
-    static void removeDirectory(const QString&);
     bool m_destroyFlag;
 };
 

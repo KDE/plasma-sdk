@@ -71,46 +71,53 @@ ProjectManager::ProjectManager(QWidget* parent) : QDialog(parent)
 
 void ProjectManager::confirmRemoveFromList()
 {
-    m_destroyFlag = false;
-    QString dialogText = i18n("Are you sure you want to remove the selected projects? This cannot be undone.");
-    int code = KMessageBox::warningContinueCancel(this, dialogText);
-    if (code != KMessageBox::Continue) {
-        return;
+    const int count = projectList->selectedItems().count();
+    QString dialogText = i18np("Are you sure you want to remove the selected project from the project list?",
+                               "Are you sure you want to remove the selected projects from the project list?",
+                               count);
+    const int code = KMessageBox::warningContinueCancel(this, dialogText);
+    if (code == KMessageBox::Continue) {
+        removeSelectedProjects(false);
     }
-    removeProcess();
 }
 
 void ProjectManager::confirmRemoveFromDisk()
 {
-    m_destroyFlag = true;
-    QString dialogText = i18n("Are you sure you want to remove the selected projects? This cannot be undone");
-    int code = KMessageBox::warningContinueCancel(this, dialogText);
-    if (code != KMessageBox::Continue) {
-        return;
+    const int count = projectList->selectedItems().count();
+    QString dialogText = i18np("Are you sure you want to remove the selected project from disk? This cannot be undone",
+                               "Are you sure you want to remove the selected projects from disk? This cannot be undone",
+                               count);
+    const int code = KMessageBox::warningContinueCancel(this, dialogText);
+    if (code == KMessageBox::Continue) {
+        removeSelectedProjects(true);
     }
-    removeProcess();
 }
 
-void ProjectManager::removeProcess()
+void ProjectManager::removeSelectedProjects(bool deleteFromDisk)
 {
     QList<QListWidgetItem*> l = projectList->selectedItems();
-    bool checkSuccess = true;
+    bool checkSuccess = false;
 
     //TODO: should probably centralize config handling code somewhere.
     KConfigGroup cg(KGlobal::config(), "General");
     QStringList recentProjects = cg.readEntry("recentProjects", QStringList());
+
     for (int i = 0; i < l.size(); i++) {
-        QString folder = l[i]->data(StartPage::FullPathRole).value<QString>();
-        QString path = KStandardDirs::locateLocal("appdata", folder + '/');
-        if(m_destroyFlag) {
-            deleteProject(path);
+        const QString folder = l[i]->data(StartPage::FullPathRole).value<QString>();
+
+        if (deleteFromDisk) {
+            const QString path = KStandardDirs::locateLocal("appdata", folder + '/');
+            if (!path.isEmpty()) {
+                deleteProject(path);
+            }
         }
+
         if (recentProjects.contains(folder)) {
             recentProjects.removeAt(recentProjects.indexOf(folder));
-        } else {
-            checkSuccess = false;
+            checkSuccess = true;
         }
     }
+
     if (checkSuccess) {
         cg.writeEntry("recentProjects", recentProjects);
         KGlobal::config()->sync();
@@ -203,10 +210,9 @@ bool ProjectManager::importPackage(const KUrl &toImport, const KUrl &targetLocat
     return ret;
 }
 
-bool ProjectManager::deleteProject(const KUrl &projectLocation)
+void ProjectManager::deleteProject(const KUrl &projectLocation)
 {
     removeDirectory(projectLocation.path());
-    return true;
 }
 
 void ProjectManager::removeDirectory(const QString& path)
