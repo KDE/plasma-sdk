@@ -53,7 +53,7 @@ ProjectManager::ProjectManager(QWidget* parent) : QDialog(parent)
 
     removeMenuButton->setMenu(removeMenu);
     removeMenu->addAction(i18n("From List"), this, SLOT(confirmRemoveFromList()));
-    removeMenu->addAction(i18n("From Dist"), this, SLOT(confirmRemoveFromDisk()));
+    removeMenu->addAction(i18n("From Disk"), this, SLOT(confirmRemoveFromDisk()));
 
     QHBoxLayout *hoz = new QHBoxLayout();
 
