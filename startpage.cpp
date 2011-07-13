@@ -244,11 +244,11 @@ void StartPage::refreshRecentProjectsList()
         m_ui.recentProjects->hide();
         return;
     }
+
     int counter = 0;
-    foreach (const QString file, recentProjects) {
+    foreach (const QString &file, recentProjects) {
         // Specify path + filename as well to avoid mistaking .gitignore
         // as being the metadata file.
-        QString f = file;
         QDir pDir(file);
         QString pPath =  file + "/metadata.desktop";
         kDebug() << "RECENT FILE::: " << file;
