@@ -418,12 +418,21 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
                                          this, args, &error));
 
     QWidget *mainWidget = 0;
-    if (!m_part || !part->inherits(m_part->metaObject()->className())) {
-        delete m_part; // reuse if we can
+    if (!part) {
+        delete m_part;
+        m_part = 0;
+    } else if (!m_part || !part->inherits(m_part->metaObject()->className())) {
+        delete m_part;
         m_part = part;
     } else {
+        // reuse m_part if we can
         delete part;
         //mainWidget = m_part->widget();
+    }
+
+    if (!m_part) {
+        KMessageBox::error(this, i18n("Failed to load editor for %1:\n\n%2", target.prettyUrl(), error), i18n("Loading Failure"));
+        return;
     }
 
     // open the target for editting/viewing
@@ -441,9 +450,6 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
         mainWidget = m_part->widget();
     }
 
-    if (!m_part) {
-        kDebug() << "Failed to load editor:" << error;
-    }
 
     m_central->switchTo(mainWidget);
 
