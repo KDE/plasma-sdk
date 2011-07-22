@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TIMELINEITEM_H
 
 #include <QTableWidgetItem>
-
+#include <QWidget>
 
 
 class TimeLineItem : public QTableWidgetItem

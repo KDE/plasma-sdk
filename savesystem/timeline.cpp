@@ -24,6 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KAction>
 #include <KConfig>
 #include <KMenu>
+#include <KMessageBox>
 #include <Plasma/PackageMetadata>
 
 #include <QDockWidget>
@@ -99,7 +100,6 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     branchItem->setIdentifier(TimeLineItem::Branch);
     m_table->addItem(branchItem);
 
-
     TimeLineItem *saveItem = new TimeLineItem();
     info.clear();
     info.append(i18n("New save point"));
@@ -107,7 +107,6 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
     saveItem->setIdentifier(TimeLineItem::NotACommit);
     m_table->addItem(saveItem);
-
 
     // Log gets the full git commit list
     if (m_gitRunner->log() != DvcsJob::JobSucceeded) {
@@ -313,8 +312,11 @@ void TimeLine::newSavePoint()
     }
 
     if (!m_gitRunner->hasNewChangesToCommit()) {
-        return;
+       const QString dialog = i18n("<b>No changes have been made in order to create a savepoint!</b>");
+       KMessageBox::information(this, dialog);
+       return;
     }
+
     if (!dialogAlreadyOpen) {
         if (commitDialog->exec() == QDialog::Rejected) {
             return;
