@@ -263,9 +263,9 @@ void MainWindow::toggleTimeLine()
 {
     if (!m_timeLine) {
         initTimeLine();
+    } else {
+        m_timeLine->setVisible(!m_timeLine->isVisible());
     }
-
-    m_timeLine->setVisible(!m_timeLine->isVisible());
 }
 
 void MainWindow::initTimeLine()
