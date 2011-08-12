@@ -135,7 +135,7 @@ int main(int argc, char **argv)
     options.add("l");
     options.add("location <name>", ki18nc("Do not translate floating, desktop, fullscreen, top, bottom, left nor right", "The location constraint to start the Containment with (floating, desktop, fullscreen, top, bottom, left, right)"), "floating");
     options.add("p");
-    options.add("pixmapcache <size>", ki18n("The size in KB to set the pixmap cache to"));
+    options.add("pixmapcache <size>", ki18n("The size in kB to set the pixmap cache to"));
     options.add("s");
     options.add("screenshot", ki18n("Takes a screenshot of the widget and saves it the working directory as <pluginname>.png"));
     options.add("screenshot-all", ki18n("Takes a screenshot of each widget and saves it the working directory as <pluginname>.png"));
