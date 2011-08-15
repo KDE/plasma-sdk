@@ -250,13 +250,14 @@ void MainWindow::closeProject()
     }
 
      if (m_browser) {
-        m_browser->setVisible(false);
+        m_browser->hide();
     }
 
     setCentralWidget(m_central);
 
     m_central->switchTo(m_startPage);
     setDockOptions(QMainWindow::AllowNestedDocks);
+    m_startPage->cancelNewProject();
 }
 
 void MainWindow::toggleTimeLine()

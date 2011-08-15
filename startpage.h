@@ -70,12 +70,13 @@ public:
 
 signals:
     void projectSelected(const QString &name);
+public Q_SLOTS:
+    void cancelNewProject();
 
 private Q_SLOTS:
     void recentProjectSelected(const QModelIndex &);
     void validateProjectType(const QModelIndex &sender);
     void createNewProject();
-    void cancelNewProject();
     void checkProjectName(const QString &name);
     void checkLocalProjectPath(const QString &path);
     void checkPackagePath(const QString &path);
