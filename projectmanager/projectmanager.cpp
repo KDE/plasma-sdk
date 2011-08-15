@@ -25,6 +25,7 @@
 
 #include <KDebug>
 #include <KConfig>
+#include <KIO/DeleteJob>
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <KMenu>
@@ -98,25 +99,24 @@ void ProjectManager::removeSelectedProjects(bool deleteFromDisk)
 {
     const QList<QListWidgetItem *> items = m_projectList->selectedItems();
     bool checkSuccess = false;
-    QStringList recent = recentProjects();
+    QStringList recentList = m_mainWindow->recentProjects();
 
     foreach (const QListWidgetItem *item, items) {
-        const QString folder = item->data(StartPage::FullPathRole).value<QString>();
-
-        if (deleteFromDisk) {
-            const QString path = KStandardDirs::locateLocal("appdata", folder + '/');
-            if (!path.isEmpty()) {
-                deleteProject(path);
-            }
+        QString recentProject = item->data(StartPage::FullPathRole).value<QString>();
+        recentProject.append("/");
+        if (recentProject.contains(KStandardDirs::locateLocal("appdata",""))
+            && !recentProject.isEmpty() && deleteFromDisk) {
+            deleteProject(recentProject);
+        } else if (recentProject.endsWith("package/")) {
+            deleteProject(recentProject);
         }
 
-        if (recent.removeAll(folder) > 0) {
+        if (recentList.removeAll(item->data(StartPage::FullPathRole).value<QString>()) > 0) {
             checkSuccess = true;
         }
     }
-
     if (checkSuccess) {
-        setRecentProjects(recent);
+        setRecentProjects(recentList);
     }
 }
 
@@ -196,15 +196,9 @@ bool ProjectManager::importPackage(const KUrl &toImport, const KUrl &targetLocat
     return ret;
 }
 
-QStringList ProjectManager::recentProjects()
-{
-    KConfigGroup cg(KGlobal::config(), "General");
-    return cg.readEntry("recentProjects", QStringList());
-}
-
 void ProjectManager::addRecentProject(const QString &path)
 {
-    QStringList recent = recentProjects();
+    QStringList recent = m_mainWindow->recentProjects();
     recent.removeAll(path);
     recent.prepend(path);
     //kDebug() << "Writing the following recent files to the config:" << recent;
@@ -225,18 +219,8 @@ void ProjectManager::setRecentProjects(const QStringList &paths)
 
 void ProjectManager::deleteProject(const KUrl &projectLocation)
 {
-    removeDirectory(projectLocation.path());
-}
-
-void ProjectManager::removeDirectory(const QString& path)
-{
-    QDir d(path);
-    QFileInfoList list = d.entryInfoList(QDir::NoDotAndDotDot | QDir::AllEntries | QDir::Hidden);
-    for (int i = 0; i < list.size(); i++) {
-        if (list[i].isDir() && list[i].filePath() != path) {
-            removeDirectory(list[i].filePath());
-        }
-        d.remove(list[i].fileName());
-    }
-    d.rmpath(path);
+    KUrl project = projectLocation;
+    project.cd("..");
+    project.addPath("/");
+    KIO::del(project);
 }

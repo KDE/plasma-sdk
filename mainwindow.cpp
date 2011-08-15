@@ -765,10 +765,9 @@ void MainWindow::loadProject(const QString &path)
 QStringList MainWindow::recentProjects()
 {
     KConfigGroup cg(KGlobal::config(), "General");
-    QStringList l = cg.readEntry("recentProjects", QStringList());
 //     kDebug() << l.toStringList();
 
-    return l;
+    return cg.readEntry("recentProjects", QStringList());
 }
 
 Previewer* MainWindow::createPreviewerFor(const QString& projectType)

@@ -22,6 +22,8 @@
 
 #include <QDialog>
 
+#include <mainwindow.h>
+
 class QListWidget;
 class QListWidgetItem;
 
@@ -44,7 +46,6 @@ public:
 
     static bool exportPackage(const KUrl &toExport, const KUrl &targetFile);
     static bool importPackage(const KUrl &toImport, const KUrl &targetLocation);
-    QStringList recentProjects();
 
 public Q_SLOTS:
     void addRecentProject(const QString &path);
@@ -55,7 +56,6 @@ signals:
     void requestRefresh();
 
 private:
-    void removeDirectory(const QString&);
     void deleteProject(const KUrl &projectLocation);
 
 private Q_SLOTS:
@@ -75,6 +75,7 @@ private:
     KPushButton *m_removeMenuButton;
     KMenu *m_removeMenu;
     bool m_destroyFlag;
+    MainWindow* m_mainWindow;
 };
 
 #endif // PROJECTMANAGER_H
