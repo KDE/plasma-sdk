@@ -104,14 +104,6 @@ private Q_SLOTS:
     void editorDestructiveRefresh();
 
 private:
-
-    KAction *m_savePointAction;
-    KAction *m_timelineAction;
-    KAction *m_publishAction;
-    KAction *m_previewAction;
-    KAction *m_notesAction;
-    KAction *m_fileListAction;
-
     // QMainWindow takes control of and DELETES the previous centralWidget
     // whenever a new one is set - this is bad because we want to preserve
     // the state of the previous centralWidget for when it becomes active again.

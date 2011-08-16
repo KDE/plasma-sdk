@@ -100,14 +100,6 @@ private:
     void selectProject(const KUrl &target);
 
     Ui::StartPage m_ui;
-    QLabel *m_createNewLabel;
-    QLabel *m_openExistingLabel;
-    QLabel *m_continueWorkingLabel;
-    QComboBox *m_contentTypes;
-    QListWidget *m_recentProjects;
-//         KPushButton *m_createNewProjectButton;
-    KLineEdit *m_newProjectName;
-    QVBoxLayout *m_layout;
     MainWindow *m_parent;
 
     ProjectManager *m_projectManager;

@@ -41,7 +41,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KToolBar>
 #include <KStandardAction>
 #include <KUrl>
-#include <KListWidget>
 #include <KActionCollection>
 #include <KParts/Part>
 #include <KStandardDirs>
