@@ -22,13 +22,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <KAction>
+#include <KDebug>
 #include <KConfig>
 #include <KMenu>
 #include <KMessageBox>
 #include <Plasma/PackageMetadata>
 
 #include <QDockWidget>
-#include <QMessageBox>
 #include <QPoint>
 #include <QPointer>
 #include <QRect>
@@ -36,11 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QResizeEvent>
 #include <QStringList>
 
-
-// #include <QDebug>
-
 #include "timeline.h"
-
 #include "tablewidget.h"
 #include "tabledelegate.h"
 #include "timelineitem.h"
@@ -236,7 +232,6 @@ void TimeLine::showContextMenu(QTableWidgetItem *item)
         restoreCommit->setData(QVariant(tlItem->getHash()));
         QAction *moveToCommit = menu.addAction(i18n("Move to this SavePoint"));
         moveToCommit->setData(QVariant(tlItem->getHash()));
-
         connect(restoreCommit, SIGNAL(triggered(bool)),
                 this, SLOT(restoreCommit()));
         connect(moveToCommit, SIGNAL(triggered(bool)),
@@ -249,6 +244,7 @@ void TimeLine::showContextMenu(QTableWidgetItem *item)
         QMenu *switchBranchMenu = menu.addMenu(i18n("Switch to Section"));
         QMenu *mergeBranchMenu = menu.addMenu(i18n("Combine into Section"));
         QAction *renameBranch = menu.addAction(i18n("Rename current Section"));
+
         menu.addSeparator();
         QMenu *deleteBranchMenu = menu.addMenu(i18n("Delete Section"));
         const int index = m_branches.size();
@@ -312,9 +308,9 @@ void TimeLine::newSavePoint()
     }
 
     if (!m_gitRunner->hasNewChangesToCommit()) {
-       const QString dialog = i18n("<b>No changes have been made in order to create a savepoint!</b>");
-       KMessageBox::information(this, dialog);
-       return;
+        const QString dialog = i18n("<b>No changes have been made in order to create a savepoint!</b>");
+        KMessageBox::information(this, dialog);
+        return;
     }
 
     if (!dialogAlreadyOpen) {
@@ -346,19 +342,13 @@ void TimeLine::newSavePoint()
 
 void TimeLine::restoreCommit()
 {
-    QPointer<QMessageBox> warningMB = new QMessageBox(0);
-    warningMB->setIcon(QMessageBox::Information);
-    warningMB->setWindowTitle(i18n("Information"));
-    warningMB->setText(i18n("You are restoring the selected SavePoint."));
-    warningMB->setInformativeText(i18n("With this operation, all the SavePoints and Sections created starting from it, will be deleted.\nContinue anyway?"));
-    warningMB->setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
-    warningMB->setDefaultButton(QMessageBox::Discard);
-    if (warningMB->exec() == QMessageBox::Discard)
+    const QString dialog = (i18n("<b>You are restoring the selected SavePoint.</b> \nWith this operation, all the SavePoints and Sections created starting from it, will be deleted.\nContinue anyway?"));
+    const int code = KMessageBox::warningContinueCancel(this, dialog);
+    if (code!=KMessageBox::Continue) {
         return;
+    }
 
-    delete warningMB;
-
-    QAction *sender = dynamic_cast<QAction*>(this->sender());
+    QAction *sender = qobject_cast<QAction*>(this->sender());
     QVariant data = sender->data();
     m_gitRunner->deleteCommit(data.toString());
     m_table->disconnect();
@@ -369,19 +359,11 @@ void TimeLine::restoreCommit()
 
 void TimeLine::moveToCommit()
 {
-    QPointer<QMessageBox> warningMB = new QMessageBox(0);
-    warningMB->setIcon(QMessageBox::Information);
-    warningMB->setWindowTitle(i18n("Information"));
-    warningMB->setText(i18n("You are going to move to the selected SavePoint."));
-    warningMB->setInformativeText(i18n("To perform this, a new Section will be created and your current work may be lost if you do not have saved it as a Savepoint.\nContinue?"));
-    warningMB->setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
-    warningMB->setDefaultButton(QMessageBox::Discard);
-    if (warningMB->exec() == QMessageBox::Discard) {
-        delete warningMB;
+    QString dialog = i18n("<b>You are going to move to the selected SavePoint.</b>\nTo perform this, a new Section will be created and your current work may be lost if you do not have saved it as a Savepoint.\nContinue?");
+    const int code = KMessageBox::warningContinueCancel(this,dialog);
+    if (code!=KMessageBox::Continue) {
         return;
     }
-
-    delete warningMB;
 
     QPointer<BranchDialog> newBranch = new BranchDialog();
     if (newBranch->exec() == QDialog::Rejected) {
@@ -392,17 +374,13 @@ void TimeLine::moveToCommit()
     delete newBranch;
 
     if (m_branches.contains(newBranchName)) {
-        QMessageBox *mb = new QMessageBox(QMessageBox::Warning,
-                                          i18n("Warning"),
-                                          i18n("Cannot rename the section: a section with this name already exists."),
-                                          QMessageBox::NoButton,
-                                          this, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
-        mb->exec();
+        dialog = i18n("<b>Cannot rename the section</b>: a section with this name already exists.");
+        KMessageBox::information(this, dialog);
         return;
     }
 
     // Retrieve data from the sender
-    QAction *sender = dynamic_cast<QAction*>(this->sender());
+    QAction *sender = qobject_cast<QAction*>(this->sender());
     QVariant data = sender->data();
     m_gitRunner->moveToCommit(data.toString(), newBranchName);
     m_table->disconnect();
@@ -413,7 +391,7 @@ void TimeLine::moveToCommit()
 
 void TimeLine::switchBranch()
 {
-    QAction *sender = dynamic_cast<QAction*>(this->sender());
+    QAction *sender = qobject_cast<QAction*>(this->sender());
     QString branch = sender->text();
     branch.remove('&');
     m_gitRunner->switchBranch(branch);
@@ -427,19 +405,11 @@ void TimeLine::mergeBranch()
 {
     // Prompt the user that a new SavePoint will be created; if so,
     // popup a Savepoint dialog.
-    QPointer<QMessageBox> warningMB = new QMessageBox(0);
-    warningMB->setIcon(QMessageBox::Information);
-    warningMB->setWindowTitle(i18n("Information"));
-    warningMB->setText(i18n("You are going to combine two Sections."));
-    warningMB->setInformativeText(i18n("With this operation, a new SavePoint will be created; then you should have to manually resolve some conflicts on source code. Continue?"));
-    warningMB->setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
-    warningMB->setDefaultButton(QMessageBox::Discard);
-    if (warningMB->exec() == QMessageBox::Discard) {
-        delete warningMB;
+    const QString dialog = i18n("<b>You are going to combine two Sections.</b>\n With this operation, a new SavePoint will be created; then you should have to manually resolve some conflicts on source code. Continue?");
+    const int code = KMessageBox::warningContinueCancel(this,dialog);
+    if (code!=KMessageBox::Continue) {
         return;
     }
-
-    delete warningMB;
 
     QPointer<CommitDialog> commitDialog = new CommitDialog();
     if (commitDialog->exec() == QDialog::Rejected) {
@@ -457,7 +427,7 @@ void TimeLine::mergeBranch()
     }
 
     QString branchToMerge = m_currentBranch;
-    QAction *sender = dynamic_cast<QAction*>(this->sender());
+    QAction *sender = qobject_cast<QAction*>(this->sender());
     QString branch = sender->text();
     branch.remove('&');
 
@@ -474,21 +444,13 @@ void TimeLine::mergeBranch()
 
 void TimeLine::deleteBranch()
 {
-    QPointer<QMessageBox> warningMB = new QMessageBox(0);
-    warningMB->setIcon(QMessageBox::Warning);
-    warningMB->setWindowTitle(i18n("Warning"));
-    warningMB->setText(i18n("<b>You are going to remove the selected Section.</b>"));
-    warningMB->setInformativeText(i18n("With this operation, you will also delete all SavePoints/Sections performed inside it.\nContinue anyway?"));
-    warningMB->setStandardButtons(QMessageBox::Ok | QMessageBox::Discard);
-    warningMB->setDefaultButton(QMessageBox::Discard);
-    if (warningMB->exec() == QMessageBox::Discard) {
-        delete warningMB;
+    const QString dialog = i18n("<b>You are going to remove the selected Section.</b>\n With this operation, you will also delete all SavePoints/Sections performed inside it.\nContinue anyway?");
+    const int code = KMessageBox::warningContinueCancel(this,dialog);
+    if (code!=KMessageBox::Continue) {
         return;
     }
 
-    delete warningMB;
-
-    QAction *sender = dynamic_cast<QAction*>(this->sender());
+    QAction *sender = qobject_cast<QAction*>(this->sender());
     QString branch = sender->text();
     branch.remove('&');
     m_gitRunner->deleteBranch(branch);
@@ -498,7 +460,7 @@ void TimeLine::deleteBranch()
 
 void TimeLine::renameBranch()
 {
-    QAction *sender = dynamic_cast<QAction*>(this->sender());
+    QAction *sender = qobject_cast<QAction*>(this->sender());
     QString branch = sender->text();
     branch.remove('&');
 
@@ -511,16 +473,9 @@ void TimeLine::renameBranch()
     QString newBranchName = QString(renameBranch->m_branchEdit->text());
     delete renameBranch;
 
-    if (m_branches.contains(newBranchName)) {
-        QMessageBox *mb = new QMessageBox(QMessageBox::Warning,
-                                          i18n("Warning"),
-                                          i18n("Cannot rename the section: a section with this name already exists."),
-                                          QMessageBox::NoButton,
-                                          this, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
-        mb->exec();
-        delete mb;
-        return;
-    }
+    QString dialog = i18n("Cannot rename the section: a section with this name already exists.");
+    KMessageBox::information(this, dialog);
+    return;
 
     m_gitRunner->renameBranch(newBranchName);
     m_table->disconnect();
@@ -529,7 +484,7 @@ void TimeLine::renameBranch()
 
 void TimeLine::createBranch()
 {
-    QAction *sender = dynamic_cast<QAction*>(this->sender());
+    QAction *sender = qobject_cast<QAction*>(this->sender());
     QString branch = sender->text();
     branch.remove('&');
 
@@ -540,19 +495,13 @@ void TimeLine::createBranch()
         return;
     }
 
-    QString newBranchName = QString(createBranch->m_branchEdit->text());
+    const QString newBranchName = QString(createBranch->m_branchEdit->text());
     delete createBranch;
 
-    if (m_branches.contains(newBranchName)) {
-        QMessageBox *mb = new QMessageBox(QMessageBox::Warning,
-                                          i18n("Warning"),
-                                          i18n("Cannot create section: a section with this name already exists."),
-                                          QMessageBox::NoButton,
-                                          this, Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
-        mb->exec();
-        delete mb;
-        return;
-    }
+
+    const QString dialog = i18n("<b>Cannot create section: </b>a section with this name already exists.");
+    KMessageBox::information(this, dialog);
+    return;
 
     m_gitRunner->newBranch(newBranchName);
     m_table->disconnect();
