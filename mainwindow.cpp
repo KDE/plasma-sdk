@@ -643,7 +643,8 @@ void MainWindow::loadProject(const QString &path)
     QStringList types = service.serviceTypes();
 
     // Workaround for Plasma::PackageStructure not recognizing Plasma/PopupApplet as a valid type
-    const QString actualType = types.contains("Plasma/Applet") ? "Plasma/Applet" : types.first();
+    const QString actualType = types.isEmpty() ? QString() :
+                                                 types.contains("Plasma/Applet") ? "Plasma/Applet" : types.first();
 
     delete m_model;
     m_model = new PackageModel(this);
@@ -655,7 +656,7 @@ void MainWindow::loadProject(const QString &path)
     kDebug() << "Setting model package to:" << packagePath;
 
     if (!m_model->setPackage(packagePath)) {
-        KMessageBox::error(this, i18n("Invalid plasmagick package."));
+        KMessageBox::error(this, i18n("Invalid Plasma package."));
         return;
     }
 
