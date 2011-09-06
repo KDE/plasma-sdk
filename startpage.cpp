@@ -499,6 +499,7 @@ void StartPage::createNewProject()
     //FIXME: this must be selectable at creation
     metaDataGroup.writeEntry("X-KDE-PluginInfo-License", "GPL");
     metaDataGroup.writeEntry("X-KDE-PluginInfo-Email", m_ui.emailTextField->text());
+    metaDataGroup.writeEntry("X-Plasma-API", api);
     metaDataGroup.writeEntry("X-Plasma-MainScript", "code/" + mainScriptName);
     metaDataGroup.writeEntry("X-Plasma-DefaultSize", QSize(200, 100));
     metaFile.sync();
