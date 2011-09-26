@@ -101,8 +101,6 @@ void StartPage::setupWidgets()
     connect(m_ui.projectName, SIGNAL(textEdited(const QString&)),
             this, SLOT(checkProjectName(const QString&)));
 
-    connect(m_ui.projectName, SIGNAL(returnPressed()),
-            this, SLOT(createNewProject()));
     connect(m_ui.recentProjects, SIGNAL(clicked(const QModelIndex)),
             this, SLOT(recentProjectSelected(const QModelIndex)));
 
