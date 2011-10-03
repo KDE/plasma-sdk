@@ -284,6 +284,16 @@ void MainWindow::initTimeLine()
         addDockWidget(location, m_timeLine);
     }
 
+    KUrl directory = m_model->package();
+    directory.cd("..");
+    QString plasmateProjectDirectory = directory.path();
+    plasmateProjectDirectory.append("/.plasmateprojectrc");
+    directory.addPath("/.plasmateprojectrc");
+    if (QDir(plasmateProjectDirectory).exists()) {
+        m_timeLine->loadTimeLine(directory);
+        return;
+    }
+
     m_timeLine->loadTimeLine(m_model->package());
 }
 
