@@ -229,6 +229,7 @@ void MainWindow::updateActions()
 
 void MainWindow::closeProject()
 {
+    saveEditorData();
     saveProjectState();
     toolBar()->hide();
     menuBar()->hide();
