@@ -30,7 +30,7 @@ RunnerPreviewer::RunnerPreviewer(const QString & title, QWidget * parent, Qt::Wi
     QVBoxLayout *layout = new QVBoxLayout();
     layout->addWidget(m_edit);
     layout->addWidget(m_matches);
-    QWidget *w = new QWidget(this);
+    QWidget *w = new QWidget();
     w->setLayout(layout);
     setWidget(w);
 }
@@ -41,8 +41,6 @@ RunnerPreviewer::~RunnerPreviewer()
         m_runner->matchSessionComplete();
         delete m_runner;
     }
-    delete m_matches;
-    delete m_edit;
 }
 
 void RunnerPreviewer::showPreview(const QString &packagePath)

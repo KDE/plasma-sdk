@@ -42,7 +42,7 @@ BranchDialog::BranchDialog()
     m_branchEdit->selectAll();
     hlayout->addWidget(m_branchLabel);
     hlayout->addWidget(m_branchEdit);
-    QVBoxLayout *vlayout = new QVBoxLayout();
+    QVBoxLayout *vlayout = new QVBoxLayout(this);
     QDialogButtonBox *buttonBox = new QDialogButtonBox();
     buttonBox->addButton(QDialogButtonBox::Cancel);
     buttonBox->addButton(QDialogButtonBox::Apply);

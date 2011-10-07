@@ -41,6 +41,7 @@ class ProjectManager : public QDialog
     Q_OBJECT
 public:
     ProjectManager(QWidget *parent);
+
     void addProject(QListWidgetItem *item);
     void clearProjects();
 

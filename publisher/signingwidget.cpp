@@ -109,8 +109,8 @@ private:
 
 
 
-SigningWidget::SigningWidget()
-        : QWidget(0),
+SigningWidget::SigningWidget(QWidget* parent)
+        : QWidget(parent),
         m_treeWidget(0)
 {
     loadConfig();
@@ -133,8 +133,8 @@ void SigningWidget::loadConfig()
 
 void SigningWidget::initUI()
 {
-    QVBoxLayout *mainlLayout = new QVBoxLayout(this);
-    QHBoxLayout *buttonLayout = new QHBoxLayout(this);
+    QVBoxLayout *mainlLayout = new QVBoxLayout();
+    QHBoxLayout *buttonLayout = new QHBoxLayout();
 
     m_treeWidget = new QTreeWidget(this);
     m_treeWidget->setHeaderLabel("Select one key from the list below:");

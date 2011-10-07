@@ -41,7 +41,7 @@ class SigningWidget : public QWidget
     Q_OBJECT
 
 public:
-    SigningWidget();
+    SigningWidget(QWidget *parent = 0);
     ~SigningWidget();
     bool signingEnabled() const;
     bool sign(const KUrl &path);

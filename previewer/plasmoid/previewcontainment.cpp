@@ -65,7 +65,7 @@ PreviewContainment::PreviewContainment(QObject *parent, const QVariantList &args
     m_layout->addItem(m_controls);
     setupHeader();
 
-    m_tmp = new QGraphicsWidget();
+    m_tmp = new QGraphicsWidget(this);
     m_layout->addItem(m_tmp);
 
     setLayout(m_layout);

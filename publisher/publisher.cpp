@@ -87,7 +87,7 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     layout->addWidget(new QLabel(publishText, this));
     layout->addWidget(m_publisherButton);
 
-    m_signingWidget = new SigningWidget();
+    m_signingWidget = new SigningWidget(this);
 
     layout->addWidget(m_signingWidget);
 

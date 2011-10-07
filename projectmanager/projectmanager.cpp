@@ -41,17 +41,17 @@
 ProjectManager::ProjectManager(QWidget* parent)
     : QDialog(parent)
 {
-    m_projectList = new QListWidget();
+    m_projectList = new QListWidget(this);
     m_projectList->setSelectionMode(QAbstractItemView::ExtendedSelection);
     connect(m_projectList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(emitProjectSelected()));
     connect(m_projectList,SIGNAL(itemSelectionChanged()), this, SLOT(checkButtonState()));
 
-    m_loadButton = new KPushButton(i18n("Load Project"));
+    m_loadButton = new KPushButton(i18n("Load Project"), this);
     connect(m_loadButton, SIGNAL(clicked()), this, SLOT(emitProjectSelected()));
 
-    m_removeMenuButton = new KPushButton(i18n("Remove Project"));
+    m_removeMenuButton = new KPushButton(i18n("Remove Project"), this);
 
-    m_removeMenu = new KMenu(i18n("Remove Project"));
+    m_removeMenu = new KMenu(i18n("Remove Project"), this);
 
     m_removeMenuButton->setMenu(m_removeMenu);
     m_removeMenu->addAction(i18n("From List"), this, SLOT(confirmRemoveFromList()));
@@ -70,6 +70,7 @@ ProjectManager::ProjectManager(QWidget* parent)
     lay->addLayout(hoz);
     setLayout(lay);
 }
+
 
 void ProjectManager::confirmRemoveFromList()
 {

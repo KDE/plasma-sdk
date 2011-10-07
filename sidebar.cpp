@@ -41,7 +41,7 @@ Sidebar::Sidebar(QWidget *parent, Qt::DockWidgetArea location)
     m_table->setParent(this);
     setWidget(m_table);
 
-    m_delegate = new SidebarDelegate();
+    m_delegate = new SidebarDelegate(this);
     m_table->setItemDelegate(m_delegate);
 
     connect(m_table, SIGNAL(clicked(const QModelIndex &)),
