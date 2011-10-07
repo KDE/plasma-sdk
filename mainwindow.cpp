@@ -130,16 +130,12 @@ MainWindow::~MainWindow()
     // if the user closes the application with an editor open, should
     // save its contents
     saveEditorData();
+
     delete m_part;
-    m_part = 0;
     delete m_metaEditor;
-    m_metaEditor = 0;
     delete m_publisher;
-    m_publisher = 0;
     delete m_editPage;
-    m_editPage = 0;
     delete m_filelist;
-    m_filelist = 0;
 
     if (m_previewerWidget) {
         configDock.writeEntry("PreviewerHeight", m_previewerWidget->height());
