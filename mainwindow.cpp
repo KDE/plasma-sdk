@@ -382,6 +382,8 @@ void MainWindow::saveEditorData()
 
     if (m_metaEditor) {
         m_metaEditor->writeFile();
+        connect(m_metaEditor, SIGNAL(apiChanged()), SLOT(checkProjectrc()));
+
     }
 }
 
@@ -742,7 +744,10 @@ void MainWindow::loadProject(const QString &path)
 
     // Now, setup some useful properties such as the project name in the title bar
     // and setting the current working directory.
+
+    //connect(m_metaEditor, SIGNAL(apiChanged()), SLOT(checkProjectrc()));
     kDebug() << "loading metadata:" << packagePath + "metadata.desktop";
+    checkMetafile(packagePath);
     KConfig metafile(packagePath + "metadata.desktop");
     KConfigGroup meta(&metafile, "Desktop Entry");
     m_currentProject = meta.readEntry("Name", path);
@@ -769,6 +774,64 @@ void MainWindow::loadProject(const QString &path)
 
     updateActions();
 }
+
+void MainWindow::checkMetafile(const QString &path)
+{
+  KUrl projectPath(path);
+  projectPath.cd("..");
+  QDir dir(projectPath.path());
+
+  if (!dir.exists(PROJECTRC)) {
+      kDebug() << dir.filePath(PROJECTRC)+ " file doesn't exist, metadata.desktop cannot be checked";
+      return;
+  }
+  KConfig preferencesPath(dir.path() +'/'+ PROJECTRC);
+  KConfigGroup preferences(&preferencesPath, "ProjectDefaultPreferences");
+  QString api;
+  if (preferences.readEntry("radioButtonJsChecked", false)) {
+      api.append("javascript");
+  } else if (preferences.readEntry("radioButtonPyChecked", false)) {
+      api.append("python");
+  } else if (preferences.readEntry("radioButtonRbChecked", false)) {
+      api.append("ruby-script");
+  } else if (preferences.readEntry("radioButtonDeChecked", true)) {
+      api.append("declarativeappletscript");
+  }
+
+  KConfig metafile(path + "metadata.desktop");
+  KConfigGroup meta(&metafile, "Desktop Entry");
+  meta.writeEntry("X-Plasma-API", api);
+  meta.sync();
+}
+
+void MainWindow::checkProjectrc()
+{
+  KUrl path(m_metaEditor->filename());
+  path.cd("../..");
+  QDir dir(path.path());
+  qDebug() << path.path();
+  if(!dir.exists(PROJECTRC)) {
+      kDebug() << dir.filePath(PROJECTRC)+ " file doesn't exist," << PROJECTRC <<  "cannot be checked";
+      return;
+  }
+  KConfig preferencesPath(dir.path() +'/'+ PROJECTRC);
+  KConfigGroup preferences(&preferencesPath, "ProjectDefaultPreferences");
+  QString api;
+  KConfig metafile(m_metaEditor->filename());
+  KConfigGroup meta(&metafile, "Desktop Entry");
+  api = meta.readEntry("X-Plasma-API");
+  if (api == QString("javascript")) {
+      preferences.writeEntry("radioButtonJsChecked", true);
+  } else if (api == QString("python")) {
+      preferences.writeEntry("radioButtonPyChecked", true);
+  } else if (api == QString("ruby-script")) {
+      preferences.writeEntry("radioButtonRbChecked", true);
+  } else if (api == QString("declarativeappletscript")) {
+      preferences.writeEntry("radioButtonDeChecked", true);
+  }
+  preferences.sync();
+}
+
 
 QStringList MainWindow::recentProjects()
 {

@@ -62,10 +62,12 @@ public:
     ~MainWindow();
 
     QStringList recentProjects();
+    void checkMetafile(const QString &path);
 
 public Q_SLOTS:
     void quit();
     void loadProject(const QString &name);
+    void checkProjectrc();
 
 Q_SIGNALS:
     void newSavePointClicked();

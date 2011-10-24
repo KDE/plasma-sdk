@@ -74,18 +74,23 @@ MetaDataEditor::~MetaDataEditor()
 
 void MetaDataEditor::setFilename(const QString &filename)
 {
-    this->filename = filename;
+    this->m_filename = filename;
+}
+
+const QString MetaDataEditor::filename()
+{
+    return this->m_filename;
 }
 
 void MetaDataEditor::readFile()
 {
-    kDebug() << "readFile file" << filename;
+    kDebug() << "readFile file" << m_filename;
 
     delete metadata;
-    metadata = new Plasma::PackageMetadata(filename);
+    metadata = new Plasma::PackageMetadata(m_filename);
 
     if (!metadata->isValid()) {
-        kWarning() << "Package file " << filename << " is invalid";
+        kWarning() << "Package file " << m_filename << " is invalid";
     }
 
     view->name_edit->setText(metadata->name());
@@ -138,7 +143,7 @@ void MetaDataEditor::readFile()
     view->author_edit->setText(metadata->author());
     view->email_edit->setText(metadata->email());
     view->license_edit->setText(metadata->license());
-    view->api_combo->setCurrentIndex(apis.indexOf(metadata->implementationApi()));
+    view->api_combo->setCurrentIndex(0);
 }
 
 void MetaDataEditor::serviceTypeChanged()
@@ -179,51 +184,68 @@ void MetaDataEditor::serviceTypeChanged()
 
     kDebug() << "Got apis " << apis;
     // Map to friendly names (TODO: fix in library)
-    QString api;
-    QStringList apiNames;
 
-    foreach(const QString &api, apis) {
-        if (api == QString("dashboard"))
-            apiNames.append("Dashboard");
-        else if (api == QString("javascript"))
-            apiNames.append("Javascript");
-        else if (api == QString("ruby-script"))
-            apiNames.append("Ruby");
-        else if (api == QString("webkit"))
-            apiNames.append("Webkit");
-        else if (api == QString())
-            apiNames.append("C++");
-        else if (api == QString("declarativeappletscript"))
-            apiNames.append("declarativeappletscript");
-        else {
-            kWarning() << "Unknown API " << api;
-            apiNames.append(api);
+    //add  api from the metadata.desktop inside the api
+    KConfig filenamePath(m_filename);
+    KConfigGroup metaFilePreferences(&filenamePath, "Desktop Entry");
+    QString api = metaFilePreferences.readEntry("X-Plasma-API");
+    QStringList apiName;
+    apiName << formatApi(api, MetaDataEditor::uiApi);
+    view->label_16->setVisible(false);
+    view->api_combo->clear();
+    view->api_combo->insertItems(0, apiName);
+    if (view->api_combo->currentIndex() == -1 || apiName.first().isEmpty()) {
+        view->label_16->setVisible(true);
+	view->api_combo->clear();
+	view->api_combo->insertItems(0, apis);
+	view->api_combo->setEnabled(true);
+    }
+}
+
+QString MetaDataEditor::formatApi(QString &api,  apiModes apiMode)
+{
+    if (apiMode == MetaDataEditor::uiApi) {
+        if (api == QString("dashboard")) {
+            return QString("Dashboard");
+	} else if (api == QString("javascript")) {
+            return QString("Javascript");
+	} else if (api == QString("ruby-script")) {
+            return QString("Ruby");
+	} else if (api == QString("webkit")) {
+            return QString("Webkit");
+	} else if (api == QString("python")) {
+            return QString("Python");
+	} else if (api == QString("declarativeappletscript")) {
+            return QString("declarativeappletscript");
+        }
+    } else if (apiMode == MetaDataEditor::coreApi) {
+        if (api == QString("Dashboard")) {
+            return QString("dashboard");
+	} else if (api == QString("Javascript")) {
+            return QString("javascript");
+	} else if (api == QString("Ruby")) {
+            return QString("ruby-script");
+	} else if (api == QString("Webkit")) {
+            return QString("webkit");
+	} else if (api == QString("Python")) {
+	    return QString("python");
+	} else if (api == QString("declarativeappletscript")) {
+            return QString("declarativeappletscript");
         }
     }
-
-    view->api_combo->clear();
-    view->api_combo->insertItems(0, apiNames);
-
-    int idx = apis.indexOf(metadata->implementationApi());
-    if (idx != -1) {
-        view->api_combo->setCurrentIndex(idx);
-    } else if (metadata->implementationApi().isEmpty()) {
-        view->api_combo->setCurrentIndex(view->api_combo->count() - 1); // Native
-    } else {
-        kWarning() << "Unknown api detected " << metadata->implementationApi();
-        view->api_combo->setCurrentIndex(view->api_combo->count() - 1); // C++ is last
-    }
-
+    kWarning() << "Unknown API " << api << apiMode;
+    return QString(api);
 }
 
 void MetaDataEditor::writeFile()
 {
+    QString api = view->api_combo->currentText();
     metadata->setName(view->name_edit->text());
     metadata->setDescription(view->comment_edit->text());
     metadata->setIcon(view->icon_button->icon());
 
     metadata->setCategory(categories[view->category_combo->currentIndex()]);
-    metadata->setImplementationApi(apis[view->api_combo->currentIndex()]);
+    metadata->setImplementationApi(formatApi(api, MetaDataEditor::coreApi));
     metadata->setPluginName(view->pluginname_edit->text());
     metadata->setVersion(view->version_edit->text());
     metadata->setWebsite(view->website_edit->text());
@@ -231,7 +253,7 @@ void MetaDataEditor::writeFile()
     metadata->setEmail(view->email_edit->text());
 
     metadata->setLicense(view->license_edit->text());
-
-    metadata->write(filename);
+    emit apiChanged();
+    metadata->write(m_filename);
     //TODO: alert the necessary components (eg. packagemodel) if plugin type/api is changed
 }

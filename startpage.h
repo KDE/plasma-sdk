@@ -84,7 +84,7 @@ private Q_SLOTS:
     void doGHNSImport();
     void refreshRecentProjectsList();
     void loadLocalProject();
-    void saveNewProjectPreferences();
+    void saveNewProjectPreferences(const QString &path);
 
 private:
     enum NewProjectRows {

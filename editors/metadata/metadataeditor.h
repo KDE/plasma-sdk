@@ -40,17 +40,21 @@ public:
     ~MetaDataEditor();
 
     void setFilename(const QString &filename);
-
+    enum apiModes{ coreApi, uiApi };
+    QString formatApi(QString &api, apiModes apiMode);
+    const QString filename();
 public slots:
     void readFile();
     void writeFile();
 
+Q_SIGNALS:
+    void apiChanged();
 private slots:
     void serviceTypeChanged();
 
 private:
     Ui::MetaDataEditor *view;
-    QString filename;
+    QString m_filename;
     Plasma::PackageMetadata *metadata;
     QStringList apis;
     QStringList categories;

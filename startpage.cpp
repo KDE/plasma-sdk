@@ -503,7 +503,7 @@ void StartPage::createNewProject()
     metaFile.sync();
 
     // the loading code expects the FOLDER NAME
-    saveNewProjectPreferences();
+    saveNewProjectPreferences(projectPath);
     emit projectSelected(projectPath + projectFolderName);
 
     // need to clear the project name field here too because startpage is still
@@ -511,7 +511,7 @@ void StartPage::createNewProject()
     m_ui.projectName->clear();
 }
 
-void StartPage::saveNewProjectPreferences()
+void StartPage::saveNewProjectPreferences(const QString &path)
 {
     // Saving NewProject preferences
     KConfigGroup preferences(KGlobal::config(), "NewProjectDefaultPreferences");
@@ -524,6 +524,16 @@ void StartPage::saveNewProjectPreferences()
     preferences.writeEntry("radioButtonRbChecked", selectedRbRadioButton());
     preferences.writeEntry("radioButtonDeChecked", selectedDeRadioButton());
     preferences.sync();
+
+    KConfig c(path+PROJECTRC);
+    KConfigGroup projectrcPreferences(&c, "ProjectDefaultPreferences");
+    projectrcPreferences.writeEntry("Username", userName());
+    projectrcPreferences.writeEntry("Email", userEmail());
+    projectrcPreferences.writeEntry("radioButtonJsChecked", selectedJsRadioButton());
+    projectrcPreferences.writeEntry("radioButtonPyChecked", selectedPyRadioButton());
+    projectrcPreferences.writeEntry("radioButtonRbChecked", selectedRbRadioButton());
+    projectrcPreferences.writeEntry("radioButtonDeChecked", selectedDeRadioButton());
+    projectrcPreferences.sync();
 }
 
 void StartPage::cancelNewProject()
@@ -624,7 +634,6 @@ void StartPage::selectProject(const KUrl &target)
     if (!ProjectManager::importPackage(target, projectPath)) {
         KMessageBox::information(this, i18n("A problem has occurred during import."));
     }
-
     emit projectSelected(projectFolder);
 }
 
