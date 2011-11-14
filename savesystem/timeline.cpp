@@ -177,8 +177,6 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     commitItem->setText(i18n("First save point"));
 
     parentWidget()->show();
-    connect(m_table, SIGNAL(itemClicked(QTableWidgetItem *)),
-            this, SLOT(showContextMenu(QTableWidgetItem *)));
 }
 
 QStringList TimeLine::listBranches() const
@@ -333,7 +331,6 @@ void TimeLine::newSavePoint()
 
     m_gitRunner->add(KUrl::List(QString('.')));
     m_gitRunner->commit(commitMessage);
-    m_table->disconnect();
     loadTimeLine(m_workingDir);
     if (isHidden()) {
         show();
@@ -351,7 +348,6 @@ void TimeLine::restoreCommit()
     QAction *sender = qobject_cast<QAction*>(this->sender());
     QVariant data = sender->data();
     m_gitRunner->deleteCommit(data.toString());
-    m_table->disconnect();
     loadTimeLine(m_workingDir);
 
     emit sourceDirectoryChanged();
@@ -383,7 +379,6 @@ void TimeLine::moveToCommit()
     QAction *sender = qobject_cast<QAction*>(this->sender());
     QVariant data = sender->data();
     m_gitRunner->moveToCommit(data.toString(), newBranchName);
-    m_table->disconnect();
     loadTimeLine(m_workingDir);
 
     emit sourceDirectoryChanged();
@@ -395,7 +390,6 @@ void TimeLine::switchBranch()
     QString branch = sender->text();
     branch.remove('&');
     m_gitRunner->switchBranch(branch);
-    m_table->disconnect();
     loadTimeLine(m_workingDir);
 
     emit sourceDirectoryChanged();
@@ -436,7 +430,6 @@ void TimeLine::mergeBranch()
     m_gitRunner->switchBranch(branch);
     m_gitRunner->mergeBranch(branchToMerge, commit);
 
-    m_table->disconnect();
     loadTimeLine(m_workingDir);
 
     emit sourceDirectoryChanged();
@@ -454,7 +447,6 @@ void TimeLine::deleteBranch()
     QString branch = sender->text();
     branch.remove('&');
     m_gitRunner->deleteBranch(branch);
-    m_table->disconnect();
     loadTimeLine(m_workingDir);
 }
 
@@ -478,7 +470,6 @@ void TimeLine::renameBranch()
     return;
 
     m_gitRunner->renameBranch(newBranchName);
-    m_table->disconnect();
     loadTimeLine(m_workingDir);
 }
 
@@ -504,7 +495,6 @@ void TimeLine::createBranch()
     return;
 
     m_gitRunner->newBranch(newBranchName);
-    m_table->disconnect();
     loadTimeLine(m_workingDir);
 }
 
@@ -535,6 +525,8 @@ void TimeLine::initUI(QWidget *parent,Qt::DockWidgetArea location)
 
     connect(this, SIGNAL(dockLocationChanged(Qt::DockWidgetArea)),
             m_table,SLOT(updateLayout(Qt::DockWidgetArea)));
+    connect(m_table, SIGNAL(itemClicked(QTableWidgetItem *)),
+            this, SLOT(showContextMenu(QTableWidgetItem *)));
 }
 
 void TimeLine::resizeEvent (QResizeEvent * event)
