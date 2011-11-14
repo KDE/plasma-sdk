@@ -270,6 +270,7 @@ void TimeLine::showContextMenu(QTableWidgetItem *item)
         switchBranchMenu->setEnabled(!switchBranchMenu->actions().isEmpty());
         mergeBranchMenu->setEnabled(!mergeBranchMenu->actions().isEmpty());
         deleteBranchMenu->setEnabled(!deleteBranchMenu->actions().isEmpty());
+        renameBranch->setEnabled(m_currentBranch != "master");
         break;
     }
     case TimeLineItem::NotACommit:
