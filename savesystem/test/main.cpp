@@ -147,7 +147,7 @@ void testTimeLine() {
     // TimeLine::newSavePoint() slot
     //QWidget *centralDialog = new QWidget(w);
     QPushButton *newCommit = new QPushButton(KIcon("document-save"),
-                                             i18n("New SavePoint"),
+                                             i18n("New save point"),
                                              w);//centralDialog);
     //w->setCentralWidget(centralDialog);
     //centralDialog->show();

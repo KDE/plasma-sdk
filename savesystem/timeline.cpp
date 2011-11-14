@@ -226,9 +226,9 @@ void TimeLine::showContextMenu(QTableWidgetItem *item)
     case TimeLineItem::Commit:
     case TimeLineItem::Merge:
     {
-        QAction *restoreCommit = menu.addAction(i18n("Restore SavePoint"));
+        QAction *restoreCommit = menu.addAction(i18n("Restore save point"));
         restoreCommit->setData(QVariant(tlItem->getHash()));
-        QAction *moveToCommit = menu.addAction(i18n("Move to this SavePoint"));
+        QAction *moveToCommit = menu.addAction(i18n("Move to this save point"));
         moveToCommit->setData(QVariant(tlItem->getHash()));
         connect(restoreCommit, SIGNAL(triggered(bool)),
                 this, SLOT(restoreCommit()));
@@ -278,6 +278,8 @@ void TimeLine::showContextMenu(QTableWidgetItem *item)
         newSavePoint();
         return;
     }
+    case TimeLineItem::OutsideWorkingDir:
+        break;
     }
 
     QRect rc = m_table->visualItemRect(tlItem);
@@ -340,7 +342,7 @@ void TimeLine::newSavePoint()
 
 void TimeLine::restoreCommit()
 {
-    const QString dialog = (i18n("<b>You are restoring the selected SavePoint.</b> \nWith this operation, all the SavePoints and branches created starting from it, will be deleted.\nContinue anyway?"));
+    const QString dialog = (i18n("<b>You are restoring the selected save point.</b> \nWith this operation, all the save points and branches created starting from it, will be deleted.\nContinue anyway?"));
     const int code = KMessageBox::warningContinueCancel(this, dialog);
     if (code!=KMessageBox::Continue) {
         return;
@@ -356,7 +358,7 @@ void TimeLine::restoreCommit()
 
 void TimeLine::moveToCommit()
 {
-    QString dialog = i18n("<b>You are going to move to the selected SavePoint.</b>\nTo perform this, a new branch will be created and your current work may be lost if you do not have saved it as a Savepoint.\nContinue?");
+    QString dialog = i18n("<b>You are going to move to the selected save point.</b>\nTo perform this, a new branch will be created and your current work may be lost if you do not have saved it as a Savepoint.\nContinue?");
     const int code = KMessageBox::warningContinueCancel(this,dialog);
     if (code!=KMessageBox::Continue) {
         return;
@@ -398,9 +400,9 @@ void TimeLine::switchBranch()
 
 void TimeLine::mergeBranch()
 {
-    // Prompt the user that a new SavePoint will be created; if so,
+    // Prompt the user that a new save point will be created; if so,
     // popup a Savepoint dialog.
-    const QString dialog = i18n("<b>You are going to combine two branch.</b>\n With this operation, a new SavePoint will be created; then you should have to manually resolve some conflicts on source code. Continue?");
+    const QString dialog = i18n("<b>You are going to combine two branch.</b>\n With this operation, a new save point will be created; then you should have to manually resolve some conflicts on source code. Continue?");
     const int code = KMessageBox::warningContinueCancel(this,dialog);
     if (code!=KMessageBox::Continue) {
         return;
@@ -438,7 +440,7 @@ void TimeLine::mergeBranch()
 
 void TimeLine::deleteBranch()
 {
-    const QString dialog = i18n("<b>You are going to remove the selected branch.</b>\n With this operation, you will also delete all SavePoints and branches performed inside it.\nContinue anyway?");
+    const QString dialog = i18n("<b>You are going to remove the selected branch.</b>\n With this operation, you will also delete all save points and branches performed inside it.\nContinue anyway?");
     const int code = KMessageBox::warningContinueCancel(this,dialog);
     if (code!=KMessageBox::Continue) {
         return;
