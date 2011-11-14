@@ -134,6 +134,7 @@ private:
                         PreviewTab
                       };
 
+    void showDocumentation(bool show);
     void createMenus();
     void setupTextEditor(KTextEditor::Document *editorPart, KTextEditor::View *view);
     void loadNotesEditor(QDockWidget *container);

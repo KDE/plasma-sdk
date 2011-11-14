@@ -159,7 +159,16 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::toggleDocumentation()
 {
+    showDocumentation(!m_browser || m_browser->isHidden());
+}
+
+void MainWindow::showDocumentation(bool show)
+{
     if (!m_browser) {
+        if (!show) {
+            return;
+        }
+
         m_browser = new DocBrowser(m_model, this);
         connect(m_browser, SIGNAL(visibilityChanged(bool)), this, SLOT(updateActions()));
         m_browser->setObjectName("Documentation");
@@ -167,8 +176,8 @@ void MainWindow::toggleDocumentation()
         addDockWidget(Qt::LeftDockWidgetArea, m_browser);
     }
 
-    m_browser->setVisible(!m_browser->isVisible());
-    if (m_browser->isVisible()) {
+    m_browser->setVisible(show);
+    if (show) {
         m_browser->focusSearchField();
     }
 }
@@ -575,6 +584,7 @@ QString MainWindow::projectFilePath(const QString &filename)
 
 void MainWindow::saveProjectState()
 {
+    kDebug() << m_model << saveState(STATE_VERSION);
     if (!m_model) {
         return;
     }
@@ -693,23 +703,24 @@ void MainWindow::loadProject(const QString &path)
     QByteArray state = saveState(STATE_VERSION);
     const QString projectrc = projectFilePath(PROJECTRC);
     bool showPreview = true;
+    kDebug() << "******** checking for" << projectrc;
     if (QFile::exists(projectrc)) {
         KConfig c(projectrc);
         KConfigGroup configDocks(&c, "DocksPosition");
         state = configDocks.readEntry("MainWindowLayout", state);
 
         if (configDocks.readEntry("Timeline", false)) {
+            initTimeLine();
+        } else {
             delete m_timeLine;
             m_timeLine = 0;
-        } else {
-            initTimeLine();
         }
 
         if (configDocks.readEntry("Documentation", false)) {
+            showDocumentation(true);
+        } else {
             delete m_browser;
             m_browser = 0;
-        } else {
-            toggleDocumentation();
         }
 
         setFileListVisible(configDocks.readEntry("FileList", true));
