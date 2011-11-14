@@ -76,7 +76,6 @@ include_directories(${KDE4_INCLUDES}
 
 add_subdirectory( editors )
 add_subdirectory( previewer/plasmoid )
-add_subdirectory( savesystem )
 add_subdirectory( templates )
 
 kde4_add_executable(plasmate ${PlasMate_SRC})
