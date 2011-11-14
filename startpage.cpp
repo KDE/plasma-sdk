@@ -67,6 +67,9 @@ void StartPage::setupWidgets()
     m_projectManager = new ProjectManager(this);
     m_ui.setupUi(this);
 
+    m_ui.invalidPlasmagikLabelEmpty->setVisible(false);
+    m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(false);
+
     // Set some default parameters, like username/email and preferred scripting language
     KConfigGroup cg(KGlobal::config(), ("NewProjectDefaultPreferences"));
     KUser user = KUser(KUser::UseRealUserID);
@@ -107,6 +110,7 @@ void StartPage::setupWidgets()
     // Enforce the security restriction from package.cpp in the input field
     connect(m_ui.localProject, SIGNAL(textChanged(const QString&)),
             this, SLOT(checkLocalProjectPath(const QString&)));
+
     connect(m_ui.loadLocalProject, SIGNAL(clicked()),
             this, SLOT(loadLocalProject()));
 
@@ -544,9 +548,23 @@ void StartPage::cancelNewProject()
 
 void StartPage::checkLocalProjectPath(const QString& name)
 {
+    m_ui.invalidPlasmagikLabelEmpty->setVisible(false);
+    m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(false);
     QDir dir(KShell::tildeExpand(name));
+    QFile metadataDesktop(dir.path() + "/metadata.desktop");
     kDebug() << "checking: " << name << dir.exists();
-    m_ui.loadLocalProject->setEnabled(!name.isEmpty() && dir.exists());
+    m_ui.loadLocalProject->setEnabled(metadataDesktop.exists());
+
+    if (name.isEmpty()) {
+        m_ui.invalidPlasmagikLabelEmpty->setVisible(true);
+        m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(false);
+    } else if (!metadataDesktop.exists()) {
+        m_ui.invalidPlasmagikLabelEmpty->setVisible(false);
+        m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(true);
+    } else if (!name.isEmpty()) {
+        m_ui.invalidPlasmagikLabelEmpty->setVisible(false);
+        m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(false);
+    }
 }
 
 void StartPage::loadLocalProject()
@@ -556,7 +574,6 @@ void StartPage::loadLocalProject()
     if (!QFile::exists(path)) {
         return;
     }
-
     if (!QFile::exists(path + '/' + PROJECTRC)) {
         QFile rcfile(path + '/' + PROJECTRC);
         rcfile.open(QIODevice::ReadWrite);
@@ -584,6 +601,7 @@ void StartPage::checkPackagePath(const QString& name)
     const QString fullName = KShell::tildeExpand(name);
     bool valid = QFile::exists(fullName) &&
                  KMimeType::findByUrl(fullName)->is("application/x-plasma");
+
     m_ui.importPackageButton->setEnabled(valid);
 }
 
