@@ -29,7 +29,7 @@
 BranchDialog::BranchDialog()
 {
 
-    setWindowTitle(i18n("New Section"));
+    setWindowTitle(i18n("New Branch"));
     setModal(true);
     setMinimumWidth(300);
     setMinimumHeight(80);
@@ -37,7 +37,7 @@ BranchDialog::BranchDialog()
     setMaximumHeight(80);
 
     QHBoxLayout *hlayout = new QHBoxLayout();
-    m_branchLabel = new QLabel(i18n("New Section name:"), this);
+    m_branchLabel = new QLabel(i18n("New branch name:"), this);
     m_branchEdit  = new QLineEdit(i18n("type here"), this);
     m_branchEdit->selectAll();
     hlayout->addWidget(m_branchLabel);

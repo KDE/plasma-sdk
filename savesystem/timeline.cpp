@@ -81,16 +81,16 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     QString info;
 
     TimeLineItem *branchItem = new TimeLineItem();
-    info.append(i18n("On Section: %1", m_currentBranch));
+    info.append(i18n("On branch: %1", m_currentBranch));
     branchItem->setText(info);
 
     info.clear();
-    info.append(i18n("You are currently working on Section:\n"));
+    info.append(i18n("You are currently working on branch:\n"));
     info.append(m_currentBranch);
     info.append('\n');
-    info.append(i18n("\nAvailable Sections are:\n"));
+    info.append(i18n("\nAvailable branches are:\n"));
     info.append(m_branches.join("\n"));
-    info.append(i18n("\nClick here to switch to those Sections."));
+    info.append(i18n("\nClick here to switch to those branches."));
     branchItem->setToolTip(info);
 
     branchItem->setIdentifier(TimeLineItem::Branch);
@@ -238,13 +238,13 @@ void TimeLine::showContextMenu(QTableWidgetItem *item)
     }
     case TimeLineItem::Branch:
     {
-        QAction *createBranch = menu.addAction(i18n("Create new Section"));
-        QMenu *switchBranchMenu = menu.addMenu(i18n("Switch to Section"));
-        QMenu *mergeBranchMenu = menu.addMenu(i18n("Combine into Section"));
-        QAction *renameBranch = menu.addAction(i18n("Rename current Section"));
+        QAction *createBranch = menu.addAction(i18n("Create new branch"));
+        QMenu *switchBranchMenu = menu.addMenu(i18n("Switch to branch"));
+        QMenu *mergeBranchMenu = menu.addMenu(i18n("Combine into branch"));
+        QAction *renameBranch = menu.addAction(i18n("Rename current branch"));
 
         menu.addSeparator();
-        QMenu *deleteBranchMenu = menu.addMenu(i18n("Delete Section"));
+        QMenu *deleteBranchMenu = menu.addMenu(i18n("Delete branch"));
         const int index = m_branches.size();
 
         // Scan all the branches and, create a menu item for each item, and connect them
@@ -340,7 +340,7 @@ void TimeLine::newSavePoint()
 
 void TimeLine::restoreCommit()
 {
-    const QString dialog = (i18n("<b>You are restoring the selected SavePoint.</b> \nWith this operation, all the SavePoints and Sections created starting from it, will be deleted.\nContinue anyway?"));
+    const QString dialog = (i18n("<b>You are restoring the selected SavePoint.</b> \nWith this operation, all the SavePoints and branches created starting from it, will be deleted.\nContinue anyway?"));
     const int code = KMessageBox::warningContinueCancel(this, dialog);
     if (code!=KMessageBox::Continue) {
         return;
@@ -356,7 +356,7 @@ void TimeLine::restoreCommit()
 
 void TimeLine::moveToCommit()
 {
-    QString dialog = i18n("<b>You are going to move to the selected SavePoint.</b>\nTo perform this, a new Section will be created and your current work may be lost if you do not have saved it as a Savepoint.\nContinue?");
+    QString dialog = i18n("<b>You are going to move to the selected SavePoint.</b>\nTo perform this, a new branch will be created and your current work may be lost if you do not have saved it as a Savepoint.\nContinue?");
     const int code = KMessageBox::warningContinueCancel(this,dialog);
     if (code!=KMessageBox::Continue) {
         return;
@@ -400,7 +400,7 @@ void TimeLine::mergeBranch()
 {
     // Prompt the user that a new SavePoint will be created; if so,
     // popup a Savepoint dialog.
-    const QString dialog = i18n("<b>You are going to combine two Sections.</b>\n With this operation, a new SavePoint will be created; then you should have to manually resolve some conflicts on source code. Continue?");
+    const QString dialog = i18n("<b>You are going to combine two branch.</b>\n With this operation, a new SavePoint will be created; then you should have to manually resolve some conflicts on source code. Continue?");
     const int code = KMessageBox::warningContinueCancel(this,dialog);
     if (code!=KMessageBox::Continue) {
         return;
@@ -438,7 +438,7 @@ void TimeLine::mergeBranch()
 
 void TimeLine::deleteBranch()
 {
-    const QString dialog = i18n("<b>You are going to remove the selected Section.</b>\n With this operation, you will also delete all SavePoints/Sections performed inside it.\nContinue anyway?");
+    const QString dialog = i18n("<b>You are going to remove the selected branch.</b>\n With this operation, you will also delete all SavePoints and branches performed inside it.\nContinue anyway?");
     const int code = KMessageBox::warningContinueCancel(this,dialog);
     if (code!=KMessageBox::Continue) {
         return;
