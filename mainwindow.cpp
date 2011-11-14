@@ -363,6 +363,8 @@ void MainWindow::selectPublish()
         m_publisher = new Publisher(this, m_model->package(), m_model->packageType());
     }
 
+    saveEditorData();
+
     m_publisher->setProjectName(m_currentProject);
     m_publisher->exec();
 }
