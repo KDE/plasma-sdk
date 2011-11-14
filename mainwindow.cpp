@@ -282,9 +282,7 @@ void MainWindow::initTimeLine()
 
     KUrl directory = m_model->package();
     directory.cd("..");
-    QString plasmateProjectDirectory = directory.path();
-    plasmateProjectDirectory.append("/.plasmateprojectrc");
-    directory.addPath("/.plasmateprojectrc");
+    const QString plasmateProjectDirectory = directory.path() + "/.plasmateprojectrc";
     if (QDir(plasmateProjectDirectory).exists()) {
         m_timeLine->loadTimeLine(directory);
         return;
