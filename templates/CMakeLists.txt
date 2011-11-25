@@ -6,4 +6,5 @@ install(FILES
   mainPlasmoid.py
   mainPlasmoid.qml
   mainPlasmoid.rb
+  cmakelists
   DESTINATION ${DATA_INSTALL_DIR}/plasmate/templates) 

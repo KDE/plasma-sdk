@@ -12,6 +12,7 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QCheckBox>
+#include <QComboBox>
 
 #include <KUrlRequester>
 #include <KLocalizedString>
@@ -36,7 +37,8 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     QString exportLabel = i18n("Export project");
     QString exportText = i18n("Choose a target file to export the current project to an installable package file on your system.");
     QString installLabel = i18n("Install project");
-    QString installText = i18n("Click to install the current project directly onto your computer.");
+    QString installText = i18n("Select the method with which you want to install the current project directly"
+    "onto your computer.");
     QString publishLabel = i18n("Publish project");
     QString publishText = i18n("Click to publish the current project online, so that other people can find and install it using the Internet.");
 
@@ -47,12 +49,16 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     m_exporterUrl->setMode(KFile::File | KFile::LocalOnly);
 
     m_exporterButton = new QPushButton(i18n("Export current project"), this);
-    m_installerButton = new QPushButton(i18n("Install current project"), this);
+    m_installerButton = new QComboBox(this);
+    m_installerButton->addItem("");
+    m_installerButton->addItem("Use PlasmaPkg");
+    m_installerButton->addItem("Use cmake");
     m_publisherButton = new QPushButton(i18n("Publish current project"), this);
 
     connect(m_exporterUrl, SIGNAL(urlSelected(const KUrl&)), this, SLOT(addSuffix()));
     connect(m_exporterButton, SIGNAL(clicked()), this, SLOT(doExport()));
-    connect(m_installerButton, SIGNAL(clicked()), this, SLOT(doInstall()));
+    connect(m_installerButton, SIGNAL(currentIndexChanged(int)), this, SLOT(doPlasmaPkg()));
+    connect(m_installerButton, SIGNAL(currentIndexChanged(int)), this, SLOT(doCMake()));
     connect(m_publisherButton, SIGNAL(clicked()), this, SLOT(doPublish()));
 
     // Publish only works right for Plasmoid now afaik. Disabling for other project types.
@@ -113,7 +119,8 @@ void Publisher::setProjectName(const QString &name)
 void Publisher::doExport()
 {
     if (QFile(m_exporterUrl->url().path()).exists()) {
-        QString dialogText = i18n("A file already exists at %1. Do you want to overwrite it?", m_exporterUrl->url().path());
+        QString dialogText = i18n("A file already exists at %1. Do you want to overwrite it?",
+                                  m_exporterUrl->url().path());
         int code = KMessageBox::warningYesNo(0,dialogText);
         if (code != KMessageBox::Yes) return;
     }
@@ -123,18 +130,58 @@ void Publisher::doExport()
     if (m_signingWidget->signingEnabled()) {
         ok = ok && m_signingWidget->sign(m_exporterUrl->url());
     }
-    if (QFile::exists(m_exporterUrl->url().path()) && ok)
+    if (QFile::exists(m_exporterUrl->url().path()) && ok) {
         KMessageBox::information(this, i18n("Project has been exported to %1.", m_exporterUrl->url().path()));
-    else
-        KMessageBox::error(this, i18n("An error has occurred during the export. Please check the write permissions in the target directory."));
+    } else {
+        KMessageBox::error(this, i18n("An error has occurred during the export. Please check the write permissions"
+        "in the target directory."));
+    }
 }
 
 // Plasmoid specific, for now
-void Publisher::doInstall()
+void Publisher::doCMake()
 {
-    KUrl tempPackage(tempPackagePath());
-    kDebug() << "tempPackagePath" << tempPackage.pathOrUrl();
-    kDebug() << "m_projectPath" << m_projectPath.pathOrUrl();
+    if (m_projectType != "Plasma/Applet") {
+        qDebug() << "chaos";
+        return;
+    }
+
+    qDebug() << "aei gamis";
+    const KUrl tempPackage(tempPackagePath());
+    QFile cmakeListsSourceFile(KStandardDirs::locate("appdata", "templates/") + "cmakelists");
+    QFile cmakeListsDestinationFile(m_projectPath.pathOrUrl() + "CMakeLists.txt");
+
+    cmakeListsSourceFile.open(QIODevice::ReadOnly);
+    cmakeListsDestinationFile.open(QIODevice::ReadWrite);
+
+    QByteArray cmakeListsData = cmakeListsSourceFile.readAll();
+
+    QByteArray replacedString("${projectPlasmate}");
+    if (cmakeListsData.contains(replacedString)) {
+        cmakeListsData.replace(replacedString, m_projectName.toAscii());
+        cmakeListsDestinationFile.write(cmakeListsData);
+    }
+
+    cmakeListsDestinationFile.close();
+    cmakeListsSourceFile.close();
+    QStringList argv("cmake");
+    argv.append("-DCMAKE_INSTALL_PREFIX=$HOME");
+    argv.append(tempPackagePath());
+    if(KProcess::execute(argv) >= 0 ? true: false) {
+        QDBusInterface dbi("org.kde.kded", "/kbuildsycoca", "org.kde.kbuildsycoca");
+        dbi.call(QDBus::NoBlock, "recreate");
+    } else {
+        KMessageBox::error(this, i18n("Project has not been installed"));
+        return;
+    }
+}
+
+// Plasmoid specific, for now
+void Publisher::doPlasmaPkg()
+{
+    const KUrl tempPackage(tempPackagePath());
+    qDebug() << "tempPackagePath" << tempPackage.pathOrUrl();
+    qDebug() << "m_projectPath" << m_projectPath.pathOrUrl();
     ProjectManager::exportPackage(m_projectPath, tempPackage); // create temporary package
 
     QStringList argv("plasmapkg");
@@ -162,7 +209,6 @@ void Publisher::doInstall()
         return;
     }
 
-
     if (m_signingWidget->signingEnabled()) {
         ok = ok && m_signingWidget->sign(tempPackage);
 
@@ -185,6 +231,7 @@ void Publisher::doInstall()
         }
 
     }
+
     QFile::remove(tempPackage.path()); // delete temporary package
     // TODO: probably check for errors and stuff instead of announcing
     // succcess in a 'leap of faith'

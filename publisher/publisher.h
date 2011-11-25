@@ -17,6 +17,8 @@ class KUrlRequester;
 class QPushButton;
 class QCheckBox;
 class SigningWidget;
+class QComboBox;
+
 namespace Ui
 {
 class Publisher;
@@ -32,8 +34,9 @@ public:
 private slots:
     void doExport();
     void addSuffix();
-    void doInstall();
     void doPublish();
+    void doPlasmaPkg();
+    void doCMake();
 
 private:
     bool exportToFile(const KUrl& url);
@@ -41,9 +44,9 @@ private:
 
     KUrlRequester* m_exporterUrl;
     QPushButton* m_exporterButton;
-    QPushButton* m_installerButton;
     QPushButton* m_publisherButton;
     SigningWidget* m_signingWidget;
+    QComboBox *m_installerButton;
 
     KUrl m_projectPath;
     QString m_projectType;
