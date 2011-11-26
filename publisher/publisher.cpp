@@ -37,7 +37,7 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     QString exportLabel = i18n("Export project");
     QString exportText = i18n("Choose a target file to export the current project to an installable package file on your system.");
     QString installLabel = i18n("Install project");
-    QString installText = i18n("Select the method with which you want to install the current project directly"
+    QString installText = i18n("Select the method with which you want to install the current project directly "
     "onto your computer.");
     QString publishLabel = i18n("Publish project");
     QString publishText = i18n("Click to publish the current project online, so that other people can find and install it using the Internet.");
@@ -133,7 +133,7 @@ void Publisher::doExport()
     if (QFile::exists(m_exporterUrl->url().path()) && ok) {
         KMessageBox::information(this, i18n("Project has been exported to %1.", m_exporterUrl->url().path()));
     } else {
-        KMessageBox::error(this, i18n("An error has occurred during the export. Please check the write permissions"
+        KMessageBox::error(this, i18n("An error has occurred during the export. Please check the write permissions "
         "in the target directory."));
     }
 }
