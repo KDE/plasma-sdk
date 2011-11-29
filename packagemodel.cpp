@@ -195,6 +195,9 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
             }
         }
         break;
+        case packagePathRole: {
+            return m_package ? m_package->path() : QString();
+        }
         case Qt::DecorationRole: {
             if (index.row() == 0) {
                 return KIcon("document-new");

@@ -43,6 +43,8 @@ public:
     enum apiModes{ coreApi, uiApi };
     QString formatApi(QString &api, apiModes apiMode);
     const QString filename();
+    const QString api();
+    bool isValidMetaData();
 public slots:
     void readFile();
     void writeFile();

@@ -31,6 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <kservice.h>
 #include <KMenu>
 #include <QTreeView>
+#include "editors/metadata/metadataeditor.h"
 
 class QWidget;
 
@@ -45,6 +46,8 @@ public:
 
 private:
     KMenu *m_contextMenu;
+    MetaDataEditor *m_metaEditor;
+    bool hasExtension(const QString &filename);
 
 private Q_SLOTS:
     void findEditor(const QModelIndex &index);

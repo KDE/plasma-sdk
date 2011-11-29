@@ -35,9 +35,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KIO/Job>
 #include <kmimetypetrader.h>
 #include "packagemodel.h"
+#include <QStringList>
+#include <qvarlengtharray.h>
 
 EditPage::EditPage(QWidget *parent)
-        : QTreeView(parent)
+        : QTreeView(parent),
+        m_metaEditor(0)
 {
     setHeaderHidden(true);
     m_contextMenu = new KMenu(this);
@@ -92,9 +95,36 @@ void EditPage::findEditor(const QModelIndex &index)
         }
 
         if (mimetype == "[plasmate]/new") {
+            QString packagePath = index.data(PackageModel::packagePathRole).toString();
             QString dialogText = i18n( "Enter a name for the new file:" );
             QString file = KInputDialog::getText(QString(), dialogText);
             if (!file.isEmpty()) {
+                kDebug() << target;
+                if (!m_metaEditor) {
+                    m_metaEditor = new MetaDataEditor(this);
+                    m_metaEditor->setFilename(packagePath + "/metadata.desktop");
+                }
+
+                if (m_metaEditor->isValidMetaData()) {
+                    const QString api = m_metaEditor->api();
+
+                    //we don't need the m_metaEditor anymore
+                    delete m_metaEditor;
+                    m_metaEditor = 0;
+
+                    if (!api.isEmpty()) {
+                        if (!hasExtension(file)) {
+                            if (api =="Ruby" && !file.endsWith(".rb")) {
+                                file.append(".rb");
+                            } else if (api =="Python" && !file.endsWith(".py")) {
+                                file.append(".py");
+                            } else if (api =="Javascript" && !file.endsWith(".js")) {
+                                file.append(".js");
+                            } else if (api =="declarativeappletscript" && !file.endsWith(".qml")) {
+                                file.append(".qml");
+                            }
+                        }
+                    }
                 file = target + file;
                 QFile fl(file);
                 fl.open(QIODevice::ReadWrite); // create the file
@@ -116,8 +146,22 @@ void EditPage::findEditor(const QModelIndex &index)
             emit loadEditor(offers, KUrl(target));
             return;
         }
+        }
     }
 }
+
+bool EditPage::hasExtension(const QString& filename)
+{
+    QStringList list;
+    list << ".rb" << ".js" << ".qml" << ".py";
+    foreach(QString str, list) {
+        if (filename.endsWith(str)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 
 void EditPage::loadFile(const KUrl &path, const QString &mimetype)
 {

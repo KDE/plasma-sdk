@@ -82,15 +82,22 @@ const QString MetaDataEditor::filename()
     return this->m_filename;
 }
 
-void MetaDataEditor::readFile()
+bool MetaDataEditor::isValidMetaData()
 {
     kDebug() << "readFile file" << m_filename;
 
     delete metadata;
     metadata = new Plasma::PackageMetadata(m_filename);
+    return metadata->isValid();
 
-    if (!metadata->isValid()) {
-        kWarning() << "Package file " << m_filename << " is invalid";
+}
+
+
+void MetaDataEditor::readFile()
+{
+    if (!this->isValidMetaData()) {
+      kWarning() << "MetaData cannot read the file because the filename:" + m_filename + "is not valid.";
+      return;
     }
 
     view->name_edit->setText(metadata->name());
@@ -144,6 +151,12 @@ void MetaDataEditor::readFile()
     view->email_edit->setText(metadata->email());
     view->license_edit->setText(metadata->license());
     view->api_combo->setCurrentIndex(0);
+}
+
+const QString MetaDataEditor::api()
+{
+    readFile();
+    return view->api_combo->currentText();
 }
 
 void MetaDataEditor::serviceTypeChanged()
