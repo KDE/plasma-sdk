@@ -60,7 +60,6 @@ void ImageViewer::loadImage(const KUrl& image)
 
 void ImageViewer::loadPixmap(const QImage& image)
 {
-    setImageSize(image.size());
     m_label->setPixmap(QPixmap::fromImage(image));
 }
 
@@ -68,7 +67,6 @@ void ImageViewer::loadPixmap(const QImage& image)
 void ImageViewer::loadSvg(const KUrl& image)
 {
     m_svgWidget->load(image.path());
-    setImageSize(m_svgWidget->size());
 }
 
 const KUrl ImageViewer::imagePath()

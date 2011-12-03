@@ -44,12 +44,6 @@ public:
     const KUrl imagePath();
 
     /**
-     * Returns the size of the image
-     **/
-    const QSize imageSize();
-
-
-    /**
      * Sets the directory for the image which will be displayed.
      **/
     void loadImage(const KUrl& image);
@@ -62,10 +56,8 @@ private:
     KUrl m_image;
     QSvgWidget *m_svgWidget;
     QLabel *m_label;
-    QSize m_size;
 
     void loadSvg(const KUrl& image);
-    void setImageSize(const QSize& size);
 };
 
 #endif // IMAGEVIEWER_H

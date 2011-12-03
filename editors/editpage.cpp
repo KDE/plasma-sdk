@@ -122,13 +122,8 @@ void EditPage::findEditor(const QModelIndex &index)
         }
 
         if (mimetype == "[plasmate]/new") {
-<<<<<<< HEAD
-            QString packagePath = index.data(PackageModel::packagePathRole).toString();
-            QString dialogText = i18n( "Enter a name for the new file:" );
-=======
-            QString packagePath = index.data(PackageModel::packagePathRole).toString();
-			QString dialogText = i18n( "Enter a name for the new file:" );
->>>>>>> Images can now be added to projects.
+            const QString packagePath = index.data(PackageModel::packagePathRole).toString();
+			const QString dialogText = i18n( "Enter a name for the new file:" );
             QString file = KInputDialog::getText(QString(), dialogText);
             if (!file.isEmpty()) {
                 kDebug() << target;
