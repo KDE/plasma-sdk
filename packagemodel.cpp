@@ -117,6 +117,9 @@ int PackageModel::setPackage(const QString &path)
 QString PackageModel::package() const
 {
     if (m_package) {
+        KConfigGroup cg(KGlobal::config(), "PackageModel::package");
+        cg.writeEntry("lastLoadedPackage", m_package->path());
+        cg.sync();
         return m_package->path();
     }
 
@@ -166,9 +169,15 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         switch (role) {
         case MimeTypeRole: {
             if (index.row() == 0) {
-                return QStringList("[plasmate]/new");
+                if (!qstrcmp(key, "images")) {
+                    return QStringList("[plasmate]/imageDialog");
+                } else {
+                    return QStringList("[plasmate]/new");
+                }
             }
-
+            if (!qstrcmp(key, "images")) {
+                return QStringList("[plasmate]/imageViewer");
+            }
             return m_package->structure()->mimetypes(key);
         }
         break;

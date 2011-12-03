@@ -48,6 +48,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "editors/editpage.h"
 #include "editors/metadata/metadataeditor.h"
+#include "editors/imageviewer/imageviewer.h"
 #include "savesystem/timeline.h"
 #include "mainwindow.h"
 #include "packagemodel.h"
@@ -96,6 +97,7 @@ MainWindow::MainWindow(QWidget *parent)
         m_browser(0),
         m_filelist(0),
         m_editPage(0),
+        m_imageViewer(0),
         m_model(0),
         m_oldTab(0), // we start from startPage
         m_docksCreated(false),
@@ -609,6 +611,28 @@ void MainWindow::saveProjectState()
     */
 }
 
+void MainWindow::updateSideBar()
+{
+    if (m_sidebar) {
+        m_sidebar->setCurrentIndex(EditTab);
+    }
+    m_oldTab = EditTab;
+}
+
+
+void MainWindow::loadImageViewer(const KUrl& target)
+{
+    saveEditorData();
+
+    if (m_imageViewer) {
+        delete m_imageViewer;
+    }
+    m_imageViewer = new ImageViewer(target, this);
+
+    updateSideBar();
+}
+
+
 void MainWindow::loadMetaDataEditor(KUrl target)
 {
     // save any previous editor content
@@ -622,10 +646,7 @@ void MainWindow::loadMetaDataEditor(KUrl target)
     m_metaEditor->readFile();
     m_central->switchTo(m_metaEditor);
 
-    if (m_sidebar) {
-        m_sidebar->setCurrentIndex(EditTab);
-    }
-    m_oldTab = EditTab;
+    updateSideBar();
 }
 
 void MainWindow::loadProject(const QString &path)
@@ -683,6 +704,7 @@ void MainWindow::loadProject(const QString &path)
         m_editPage = new EditPage();
         connect(m_editPage, SIGNAL(loadEditor(KService::List, KUrl)), this, SLOT(loadRequiredEditor(const KService::List, KUrl)));
         connect(m_editPage, SIGNAL(loadMetaDataEditor(KUrl)), this, SLOT(loadMetaDataEditor(KUrl)));
+        connect(m_editPage, SIGNAL(loadImageViewer(KUrl)), this, SLOT(loadImageViewer(KUrl)));
         m_editPage->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
     }
 

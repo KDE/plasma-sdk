@@ -35,7 +35,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class QWidget;
 
-
 class EditPage : public QTreeView
 {
     Q_OBJECT
@@ -57,6 +56,7 @@ private Q_SLOTS:
 signals:
     void loadEditor(const KService::List offers, KUrl target);
     void loadMetaDataEditor(KUrl target);
+    void loadImageViewer(const KUrl &target);
 };
 
 #endif

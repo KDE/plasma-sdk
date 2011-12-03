@@ -23,7 +23,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KAction>
 #include <KService>
 #include <KShortcut>
+#include <QSize>
 
+class QSvgWidget;
 class QKeyEvent;
 class QModelIndex;
 
@@ -34,13 +36,13 @@ namespace Ui
 class QDockWidget;
 class QStringList;
 
-
 class EditPage;
 class PackageModel;
 class StartPage;
 class Sidebar;
 class TimeLine;
 class MetaDataEditor;
+class ImageViewer;
 
 // our own previewer
 class Previewer;
@@ -63,6 +65,7 @@ public:
 
     QStringList recentProjects();
     void checkMetafile(const QString &path);
+    void updateSideBar();
 
 public Q_SLOTS:
     void quit();
@@ -95,6 +98,7 @@ private Q_SLOTS:
 
     void loadRequiredEditor(const KService::List offers, KUrl target);
     void loadMetaDataEditor(KUrl target);
+    void loadImageViewer(const KUrl& target);
     void updateActions();
     void toggleDocumentation();
     void toggleTimeLine();
@@ -153,6 +157,7 @@ private:
 
     QDockWidget *m_filelist;
     EditPage *m_editPage;
+    ImageViewer *m_imageViewer;
     PackageModel *m_model;
     int m_oldTab;
     bool m_docksCreated;
@@ -163,6 +168,9 @@ private:
     KParts::ReadOnlyPart *m_part;
     KParts::ReadOnlyPart *m_notesPart;
     QDockWidget *m_notesWidget;
+
+    QSvgWidget *m_svgWidget;
+    bool checkImageSize(const QSize& size);
 };
 
 #endif // MAINWINDOW_H

@@ -27,13 +27,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QHBoxLayout>
 #include <QFile>
+#include <QList>
+#include <QPixmap>
+#include <KConfigGroup>
+#include <kfiledialog.h>
 #include <KIcon>
 #include <KMessageBox>
 #include <KInputDialog>
-#include <kio/jobclasses.h>
+#include <KIO/CopyJob>
+#include <KIO/JobClasses>
 #include <KIO/MimetypeJob>
 #include <KIO/Job>
+#include <KUser>
 #include <kmimetypetrader.h>
+
 #include "packagemodel.h"
 #include <QStringList>
 #include <qvarlengtharray.h>
@@ -57,16 +64,17 @@ EditPage::EditPage(QWidget *parent)
 void EditPage::doDelete(bool)
 {
     QModelIndexList items = selectedIndexes();
-    if (items.empty())
+    if (items.empty()) {
         return; // this shouldn't happen
+    }
     QModelIndex selected = items.at(0); // only one can be selected
-    QString path = selected.data(PackageModel::UrlRole).toString();
-    QString name = selected.data(Qt::DisplayRole).toString();
-    QString dialogText = i18n("Are you sure you want to delete the file \"%1\"?", name);
-    int code = KMessageBox::warningContinueCancel(this,
-                  dialogText);
-    if (code == KMessageBox::Continue)
+    const QString path = selected.data(PackageModel::UrlRole).toString();
+    const QString name = selected.data(Qt::DisplayRole).toString();
+    const QString dialogText = i18n("Are you sure you want to delete the file \"%1\"?", name);
+    int code = KMessageBox::warningContinueCancel(this, dialogText);
+    if (code == KMessageBox::Continue) {
         QFile::remove(path);
+    }
 }
 
 void EditPage::showTreeContextMenu(const QPoint&)
@@ -88,15 +96,39 @@ void EditPage::findEditor(const QModelIndex &index)
 {
     QStringList mimetypes = index.data(PackageModel::MimeTypeRole).toStringList();
     foreach(const QString &mimetype, mimetypes) {
-        QString target = index.data(PackageModel::UrlRole).toUrl().toString();
+        const QString target = index.data(PackageModel::UrlRole).toUrl().toString();
         if (mimetype == "[plasmate]/metadata") {
             emit loadMetaDataEditor(target);
             return;
         }
 
+        if (mimetype == "[plasmate]/imageDialog") {
+            KUser user;
+            KUrl homeDir = user.homeDir();
+            const QList<KUrl> srcDir = KFileDialog::getOpenUrls(homeDir, "*.png *.gif *.svg *.jpeg *.svgz", this);
+            KConfigGroup cg(KGlobal::config(), "PackageModel::package");
+            const KUrl destinationDir(cg.readEntry("lastLoadedPackage", QString()) + "contents/images/");
+            if (!srcDir.isEmpty()) {
+                foreach(const KUrl source, srcDir) {
+                    KIO::copy(source, destinationDir, KIO::HideProgressInfo);
+                }
+            }
+            return;
+        }
+
+        if (mimetype == "[plasmate]/imageViewer") {
+            emit loadImageViewer(target);
+            return;
+        }
+
         if (mimetype == "[plasmate]/new") {
+<<<<<<< HEAD
             QString packagePath = index.data(PackageModel::packagePathRole).toString();
             QString dialogText = i18n( "Enter a name for the new file:" );
+=======
+            QString packagePath = index.data(PackageModel::packagePathRole).toString();
+			QString dialogText = i18n( "Enter a name for the new file:" );
+>>>>>>> Images can now be added to projects.
             QString file = KInputDialog::getText(QString(), dialogText);
             if (!file.isEmpty()) {
                 kDebug() << target;

@@ -28,6 +28,8 @@ endif()
 set (PlasMate_SRC
     editors/editpage.cpp
     editors/metadata/metadataeditor.cpp
+    editors/imageviewer/imageloader.cpp
+    editors/imageviewer/imageviewer.cpp
     main.cpp
     sidebaritem.cpp
     sidebardelegate.cpp
