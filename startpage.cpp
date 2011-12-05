@@ -406,30 +406,21 @@ void StartPage::createNewProject()
 
     // Creating the corresponding folder
 
-    //  From this commit, the directory is changed in the following way. Old directory structure:
-    //  <plasmateProjDir>/projectname/metadata.desktop
-    //                               /NOTES
-    //                               /.git/
-    //                               /.gitignore
-    //                               /contents/...
-    //  New directory structure:
-    //  <plasmateProjDir>/projectname/NOTES
-    //                               /.git/..
-    //                               /.gitignore
-    //                               /projectname/metadata.desktop
-    //                                           /contents/..
-    //  The reason of this change is simple: with the old directory structure, packaging the project
-    //  implied also packaging the whole git history, and the NOTES file as well (which are plasmate-only
-    //  related files). With the new structure, this won't happen again :)
-    //  Besides, this change will allow us to start implementing the per-project config file :)
-    //
-    QString projectPath = KStandardDirs::locateLocal("appdata", projectFolderName + '/');
+    //  The correct directory structure is,
+    //              <plasmateProjDir>/
+    //                               NOTES
+    //                               .git/
+    //                               .gitignore
+    //                               contents/...
+
+    QString projectPath = KStandardDirs::locateLocal("appdata", projectFolderName);
+
     QDir packageSubDirs(projectPath);
-    packageSubDirs.mkpath(projectFolderName + "/contents/code/");
+    packageSubDirs.mkpath("contents/code"); //create the necessary subdirs
 
     // Create a QFile object that points to the template we need to copy
     QFile sourceFile(templateFilePath + projectFileExtension);
-    QFile destinationFile(projectPath + projectFolderName +  "/contents/code/" + mainScriptName);
+    QFile destinationFile(projectPath + "/contents/code/" + mainScriptName);//our dest
 
     // Now open these files, and substitute the main class, author, email and date fields
     sourceFile.open(QIODevice::ReadOnly);
@@ -487,7 +478,7 @@ void StartPage::createNewProject()
     // * X-KDE-PluginInfo-Website
     // * X-KDE-PluginInfo-Category
     // * X-KDE-ParentApp
-    KDesktopFile metaFile(projectPath + projectFolderName + "/metadata.desktop");
+    KDesktopFile metaFile(projectPath + "/metadata.desktop");
     KConfigGroup metaDataGroup = metaFile.desktopGroup();
     metaDataGroup.writeEntry("Name", projectName);
     //FIXME: the plugin name needs to be globally unique, so should use more than just the project
@@ -506,9 +497,11 @@ void StartPage::createNewProject()
     metaDataGroup.writeEntry("X-Plasma-DefaultSize", QSize(200, 100));
     metaFile.sync();
 
-    // the loading code expects the FOLDER NAME
+    ensureProjectrcFileExists(projectPath);//create the plasmateProjectrc file
+
     saveNewProjectPreferences(projectPath);
-    emit projectSelected(projectPath + projectFolderName);
+
+    emit projectSelected(projectPath);
 
     // need to clear the project name field here too because startpage is still
     // accessible after project loads.
@@ -529,7 +522,7 @@ void StartPage::saveNewProjectPreferences(const QString &path)
     preferences.writeEntry("radioButtonDeChecked", selectedDeRadioButton());
     preferences.sync();
 
-    KConfig c(path+PROJECTRC);
+    KConfig c(path+ '/' + PROJECTRC);
     KConfigGroup projectrcPreferences(&c, "ProjectDefaultPreferences");
     projectrcPreferences.writeEntry("Username", userName());
     projectrcPreferences.writeEntry("Email", userEmail());
@@ -538,6 +531,14 @@ void StartPage::saveNewProjectPreferences(const QString &path)
     projectrcPreferences.writeEntry("radioButtonRbChecked", selectedRbRadioButton());
     projectrcPreferences.writeEntry("radioButtonDeChecked", selectedDeRadioButton());
     projectrcPreferences.sync();
+}
+void StartPage::ensureProjectrcFileExists(const QString& projectPath)
+{
+    if (!QFile::exists(projectPath + '/' + PROJECTRC)) {
+        QFile rcfile(projectPath + '/' + PROJECTRC);
+        rcfile.open(QIODevice::ReadWrite);
+        rcfile.close();
+    }
 }
 
 void StartPage::cancelNewProject()
@@ -574,11 +575,8 @@ void StartPage::loadLocalProject()
     if (!QFile::exists(path)) {
         return;
     }
-    if (!QFile::exists(path + '/' + PROJECTRC)) {
-        QFile rcfile(path + '/' + PROJECTRC);
-        rcfile.open(QIODevice::ReadWrite);
-        rcfile.close();
-    }
+
+    ensureProjectrcFileExists(path);
 
     emit projectSelected(path);
 }

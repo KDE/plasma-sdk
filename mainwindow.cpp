@@ -292,14 +292,9 @@ void MainWindow::initTimeLine()
     }
 
     KUrl directory = m_model->package();
-    directory.cd("..");
-    const QString plasmateProjectDirectory = directory.path() + "/.plasmateprojectrc";
-    if (QDir(plasmateProjectDirectory).exists()) {
-        m_timeLine->loadTimeLine(directory);
-        return;
+    if (QDir(directory.path() + "/contents").exists()) {
+            m_timeLine->loadTimeLine(directory);
     }
-
-    m_timeLine->loadTimeLine(m_model->package());
 }
 
 void MainWindow::toggleFileList()
@@ -563,7 +558,7 @@ void MainWindow::refreshNotes()
         part->save(); // save notes if we previously had one open.
     }
 
-    const QString notesFile = projectFilePath("NOTES");
+    const QString notesFile = projectFilePath(".NOTES");
     QFile notes(notesFile);
     if (!notes.exists()) {
         notes.open(QIODevice::WriteOnly);
@@ -811,7 +806,6 @@ void MainWindow::loadProject(const QString &path)
 void MainWindow::checkMetafile(const QString &path)
 {
   KUrl projectPath(path);
-  projectPath.cd("..");
   QDir dir(projectPath.path());
 
   if (!dir.exists(PROJECTRC)) {

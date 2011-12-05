@@ -98,6 +98,7 @@ private:
     static QString camelToSnakeCase(const QString& name);
     const QString generateProjectFolderName(const QString& suggestion);
     void selectProject(const KUrl &target);
+    void ensureProjectrcFileExists(const QString& projectPath);
 
     Ui::StartPage m_ui;
     MainWindow *m_parent;
