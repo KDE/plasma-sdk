@@ -104,7 +104,7 @@ void listPlugins(const KPluginInfo::List & plugins)
     }
 
     QMap<QString, QString>::const_iterator it;
-    for (it = applets.constBegin(); it != applets.constEnd(); it++) {
+    for (it = applets.constBegin(); it != applets.constEnd(); ++it) {
         QString applet("%1 - %2");
 
         applet = applet.arg(it.key().leftJustified(maxLen, ' ')).arg(it.value());

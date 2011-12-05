@@ -56,7 +56,7 @@ void listEngines()
     }
 
     QMap<QString, QString>::const_iterator it;
-    for (it = engines.constBegin(); it != engines.constEnd(); it++) {
+    for (it = engines.constBegin(); it != engines.constEnd(); ++it) {
         QString engine("%1 - %2");
         engine = engine.arg(it.key().leftJustified(maxLen, ' ')).arg(it.value());
         std::cout << engine.toLocal8Bit().data() << std::endl;

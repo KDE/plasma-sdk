@@ -79,7 +79,7 @@ void listWallpapers()
 
     std::cout << i18n("Installed wallpaper plugins:").toLocal8Bit().data() << std::endl << std::endl;
 
-    for (it = wallpapers.constBegin(); it != wallpapers.constEnd(); it++) {
+    for (it = wallpapers.constBegin(); it != wallpapers.constEnd(); ++it) {
         QString wallpaper = QString("%1 - %2").arg(it.key().leftJustified(maxLen, ' ')).arg(it.value());
         std::cout << wallpaper.toLocal8Bit().data() << std::endl;
 
