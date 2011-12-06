@@ -94,8 +94,8 @@ void EditPage::showTreeContextMenu(const QPoint&)
 
 void EditPage::findEditor(const QModelIndex &index)
 {
-    QStringList mimetypes = index.data(PackageModel::MimeTypeRole).toStringList();
-    foreach(const QString &mimetype, mimetypes) {
+    const QStringList mimetypes = index.data(PackageModel::MimeTypeRole).toStringList();
+    foreach (const QString &mimetype, mimetypes) {
         const QString target = index.data(PackageModel::UrlRole).toUrl().toString();
         if (mimetype == "[plasmate]/metadata") {
             emit loadMetaDataEditor(target);
@@ -152,27 +152,30 @@ void EditPage::findEditor(const QModelIndex &index)
                             }
                         }
                     }
-                file = target + file;
-                QFile fl(file);
-                fl.open(QIODevice::ReadWrite); // create the file
-                fl.close();
+
+                    file = target + file;
+                    QFile fl(file);
+                    fl.open(QIODevice::ReadWrite); // create the file
+                    fl.close();
+                }
+
             }
 
             return;
         }
 
         KService::List offers = KMimeTypeTrader::self()->query(mimetype, "KParts/ReadWritePart");
-        kDebug() << mimetype;
+        //kDebug() << mimetype;
         if (offers.isEmpty()) {
             offers = KMimeTypeTrader::self()->query(mimetype, "KParts/ReadOnlyPart");
         }
+
         if (!offers.isEmpty()) {
             //create the part using offers.at(0)
             //kDebug() << offers.at(0);
             //offers.at(0)->createInstance(parentWidget);
             emit loadEditor(offers, KUrl(target));
             return;
-        }
         }
     }
 }
