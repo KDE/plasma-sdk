@@ -619,11 +619,12 @@ void MainWindow::loadImageViewer(const KUrl& target)
 {
     saveEditorData();
 
-    if (m_imageViewer) {
-        delete m_imageViewer;
+    if (!m_imageViewer) {
+        m_imageViewer = new ImageViewer(this);
     }
-    m_imageViewer = new ImageViewer(target, this);
 
+    m_imageViewer->loadImage(target);
+    m_central->switchTo(m_imageViewer);
     updateSideBar();
 }
 
