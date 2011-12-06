@@ -20,14 +20,33 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "imageloader.h"
 
-ImageLoader::ImageLoader(const KUrl& image,QObject *parent)
-        :QObject(parent)
+ImageLoader::ImageLoader(const KUrl& image, const QSize &size, QObject *parent)
+     : QObject(parent),
+       m_image(image),
+       m_size(size)
 {
-    m_image = image;
+    setAutoDelete(true);
 }
 
 void ImageLoader::run()
 {
     QImage image(m_image.path(), "PNG JPG GIF JPEG");
-    emit loadImage(image);
+    QSize newSize = image.size();
+
+    if (newSize.width() > m_size.width()) {
+        newSize.setWidth(m_size.width());
+    }
+
+    if (newSize.height() > m_size.height()) {
+        newSize.setHeight(m_size.height());
+    }
+
+    if (newSize != image.size()) {
+        image = image.scaled(newSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    }
+
+    emit loadImage(m_image, m_size, image);
 }
+
+#include "imageloader.moc"
+

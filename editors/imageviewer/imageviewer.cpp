@@ -25,15 +25,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QThreadPool>
+#include <QTimer>
+
 #include <KMessageBox>
 
-ImageViewer::ImageViewer(const KUrl& image,QWidget* parent)
-        :QWidget(parent),
-        m_loader(0)
+ImageViewer::ImageViewer(QWidget* parent)
+        : QWidget(parent)
 {
-    m_image = image;
-
-    QHBoxLayout *layout = new QHBoxLayout();
+    QHBoxLayout *layout = new QHBoxLayout(this);
     layout->setAlignment(Qt::AlignHCenter);
 
     m_svgWidget = new QSvgWidget(this);
@@ -42,27 +41,41 @@ ImageViewer::ImageViewer(const KUrl& image,QWidget* parent)
     m_label = new QLabel(this);
     layout->addWidget(m_label);
 
-    setLayout(layout);
-
-    loadImage(m_image);
+    m_reloadRequestTimer = new QTimer(this);
+    connect(m_reloadRequestTimer, SIGNAL(timeout()), this, SLOT(reloadImage()));
 }
 
 void ImageViewer::loadImage(const KUrl& image)
 {
-    if(image.path().endsWith(".svg") || image.path().endsWith(".svgz")) {
+    m_reloadRequestTimer->stop();
+
+    m_image = image;
+
+    if (image.path().endsWith(".svg") || image.path().endsWith(".svgz")) {
         loadSvg(image);
     } else {
-        m_loader = new ImageLoader(image, this);
-        connect(m_loader, SIGNAL(loadImage(QImage)), this, SLOT(loadPixmap(QImage)));
-        QThreadPool::globalInstance()->start(m_loader);
+        ImageLoader *loader = new ImageLoader(image, size(), this);
+        connect(loader, SIGNAL(loadImage(KUrl,QSize,QImage)), this, SLOT(loadPixmap(KUrl,QSize,QImage)));
+        QThreadPool::globalInstance()->start(loader);
     }
 }
 
-void ImageViewer::loadPixmap(const QImage& image)
+void ImageViewer::resizeEvent(QResizeEvent *)
 {
-    m_label->setPixmap(QPixmap::fromImage(image));
+    m_reloadRequestTimer->start();
 }
 
+void ImageViewer::reloadImage()
+{
+    loadImage(m_image);
+}
+
+void ImageViewer::loadPixmap(const KUrl &url, const QSize &s, const QImage& image)
+{
+    if (url == m_image && s == size()) {
+        m_label->setPixmap(QPixmap::fromImage(image));
+    }
+}
 
 void ImageViewer::loadSvg(const KUrl& image)
 {
@@ -73,3 +86,6 @@ const KUrl ImageViewer::imagePath()
 {
     return m_image;
 }
+
+#include "imageviewer.moc"
+

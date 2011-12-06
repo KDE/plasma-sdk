@@ -32,15 +32,16 @@ public:
      * You just have to create an instance of the object.
      * Don't do anything else.
      **/
-    ImageLoader(const KUrl& image, QObject *parent = 0);
+    ImageLoader(const KUrl& image, const QSize &size, QObject *parent = 0);
 
     void run();
 
 Q_SIGNALS:
-    void loadImage(const QImage& image);
+    void loadImage(const KUrl &url, const QSize &size, const QImage& image);
 
 private:
     KUrl m_image;
+    QSize m_size;
 };
 
 #endif // IMAGELOADER_H

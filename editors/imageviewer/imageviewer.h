@@ -26,6 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 class ImageLoader;
 class QLabel;
 class QSvgWidget;
+class QTimer;
 
 class ImageViewer : public QWidget
 {
@@ -35,7 +36,7 @@ public:
     /**
      * A simple ctor.Nothing special.
      **/
-    ImageViewer(const KUrl& image, QWidget *parent = 0);
+    ImageViewer(QWidget *parent = 0);
 
     /**
      * Returns the directory for the image which will be displayed.
@@ -48,14 +49,19 @@ public:
      **/
     void loadImage(const KUrl& image);
 
+protected:
+    void resizeEvent(QResizeEvent *event);
+
+
 private Q_SLOTS:
-    void loadPixmap(const QImage& image);
+    void loadPixmap(const KUrl &url, const QSize &size, const QImage& image);
+    void reloadImage();
 
 private:
-    ImageLoader *m_loader;
     KUrl m_image;
     QSvgWidget *m_svgWidget;
     QLabel *m_label;
+    QTimer *m_reloadRequestTimer;
 
     void loadSvg(const KUrl& image);
 };
