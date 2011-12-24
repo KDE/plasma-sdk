@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
                          KLocalizedString(), "", "plasma-devel@kde.org");
 
     aboutData.addAuthor(ki18n("Sebastian Kügler"), ki18n("Author"), "sebas@kde.org");
-    aboutData.addAuthor(ki18n("Shantanu Tushar Jha"), ki18n("Author"), "jhahoneyk@gmail.com");
+    aboutData.addAuthor(ki18n("Shantanu Tushar Jha"), ki18n("Author"), "shaan7in@gmail.com");
     aboutData.addAuthor(ki18n("Diego Casella"), ki18n("Author"), "polentino911@gmail.com");
     aboutData.addAuthor(ki18n("Yuen Hoe Lim"), ki18n("Author"), "yuenhoe@hotmail.com");
     aboutData.addAuthor(ki18n("Richard Moore"), ki18n("Author"), "rich@kde.org");

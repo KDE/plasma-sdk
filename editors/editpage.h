@@ -1,7 +1,7 @@
 /*
 
 Copyright 2009-2010 Laurent Montel <montel@kde.org>
-Copyright 2009-2010 Shantanu Tushar Jha <jhahoneyk@gmail.com>
+Copyright 2009-2010 Shantanu Tushar Jha <shaan7in@gmail.com>
 Copyright 2009-2010 Sandro Andrade <sandroandrade@kde.org>
 Copyright 2009-2010 Lim Yuen Hoe <yuenhoe@hotmail.com>
 
