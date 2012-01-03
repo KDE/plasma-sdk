@@ -45,13 +45,14 @@
 
 using namespace Plasma;
 
-FullView::FullView(const QString &ff, const QString &loc, QWidget *parent)
+FullView::FullView(const QString &ff, const QString &loc, bool persistent, QWidget *parent)
     : QGraphicsView(parent),
       m_formfactor(Plasma::Planar),
       m_location(Plasma::Floating),
       m_containment(0),
       m_applet(0),
-      m_appletShotTimer(0)
+      m_appletShotTimer(0),
+      m_persistentConfig(persistent)
 {
     setFrameStyle(QFrame::NoFrame);
     QString formfactor = ff.toLower();
@@ -157,7 +158,7 @@ void FullView::addApplet(const QString &name, const QString &containment,
         return;
     }
 
-    if (hasStorageGroupFor(m_applet)) {
+    if (hasStorageGroupFor(m_applet) && m_persistentConfig) {
         KConfigGroup cg = m_applet->config();
         KConfigGroup storage = storageGroup(m_applet);
         cg.deleteGroup();
@@ -371,7 +372,7 @@ KConfigGroup FullView::storageGroup(Plasma::Applet *applet) const
 
 void FullView::storeCurrentApplet()
 {
-    if (m_applet) {
+    if (m_applet && m_persistentConfig) {
         KConfigGroup cg;
         m_applet->save(cg);
         cg = m_applet->config();

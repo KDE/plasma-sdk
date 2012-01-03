@@ -44,7 +44,7 @@ class FullView : public QGraphicsView
     Q_OBJECT
 
 public:
-    explicit FullView(const QString &formfactor = "planar", const QString &location = "floating", QWidget *parent = 0);
+    explicit FullView(const QString &formfactor = "planar", const QString &location = "floating", bool persistentConfig = false, QWidget *parent = 0);
     ~FullView();
 
     void addApplet(const QString &name, const QString& containment,
@@ -77,6 +77,9 @@ private:
     Plasma::Applet *m_applet;
     QStringList m_appletsToShoot;
     QTimer *m_appletShotTimer;
+    // passed through cli by default, config files
+    // are non-persistent in plasmoidviewer.
+    bool m_persistentConfig;
 };
 
 #endif
