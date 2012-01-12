@@ -168,7 +168,8 @@
   <tabstop>m_sourceRequester</tabstop>
   <tabstop>m_updateInterval</tabstop>
   <tabstop>m_sourceRequesterButton</tabstop>
-  <tabstop>m_searchLine</tabstop>
+  <tabstop>m_serviceRequester</tabstop>
+  <tabstop>m_serviceRequesterButton</tabstop>
   <tabstop>m_data</tabstop>
  </tabstops>
  <resources/>
