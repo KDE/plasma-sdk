@@ -139,8 +139,7 @@ int main(int argc, char **argv)
     options.add("location <name>", ki18nc("Do not translate floating, desktop, fullscreen, top, bottom, left nor right", "The location constraint to start the Containment with (floating, desktop, fullscreen, top, bottom, left, right)"), "floating");
     options.add("p");
     options.add("pixmapcache <size>", ki18n("The size in kB to set the pixmap cache to"));
-    options.add("pr");
-    options.add("persistent-config", ki18n("By default the config file of applets run from plasmoidviewer is NOT PERSISTENT. This makes the applets loaded able to save config files"));
+    options.add("noconfig", ki18n("Disables save and restore of the config between runs"));
     options.add("s");
     options.add("screenshot", ki18n("Takes a screenshot of the widget and saves it the working directory as <pluginname>.png"));
     options.add("sa");
@@ -214,11 +213,9 @@ int main(int argc, char **argv)
     kDebug() << "setting auth policy";
     Plasma::AuthorizationManager::self()->setAuthorizationPolicy(Plasma::AuthorizationManager::PinPairing);
 
-    bool persistentConfig = args->isSet("persistent-config");
-    if (persistentConfig) {
-        kDebug() << "persistent-config flag set. Config file will now be saved in plasmoidviewer-appletsrc";
-    } else {
-        kWarning() << "!!! WARNING: PERSISTENT CONFIG flag was NOT SET. APPLET CONFIGURATION WILL NOT BE SAVED BETWEEN RUNS!!!";
+    const bool persistentConfig = args->isSet("config");
+    if (!persistentConfig) {
+        kWarning() << "WARNING: Applet configuration will not be restored or saved.";
     }
 
     FullView view(formfactor, location, persistentConfig);
