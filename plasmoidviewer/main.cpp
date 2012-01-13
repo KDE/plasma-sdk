@@ -135,11 +135,11 @@ int main(int argc, char **argv)
     options.add("list-wallpapers", ki18n("Displays a list of known wallpapers"));
     options.add("lc");
     options.add("list-containments", ki18n("Displays a list of known containments"));
+    options.add("nosaveconfig", ki18n("Disables save and restore of the config between runs"));
     options.add("l");
     options.add("location <name>", ki18nc("Do not translate floating, desktop, fullscreen, top, bottom, left nor right", "The location constraint to start the Containment with (floating, desktop, fullscreen, top, bottom, left, right)"), "floating");
     options.add("p");
     options.add("pixmapcache <size>", ki18n("The size in kB to set the pixmap cache to"));
-    options.add("noconfig", ki18n("Disables save and restore of the config between runs"));
     options.add("s");
     options.add("screenshot", ki18n("Takes a screenshot of the widget and saves it the working directory as <pluginname>.png"));
     options.add("sa");
@@ -213,9 +213,9 @@ int main(int argc, char **argv)
     kDebug() << "setting auth policy";
     Plasma::AuthorizationManager::self()->setAuthorizationPolicy(Plasma::AuthorizationManager::PinPairing);
 
-    const bool persistentConfig = args->isSet("config");
+    const bool persistentConfig = args->isSet("saveconfig");
     if (!persistentConfig) {
-        kWarning() << "WARNING: Applet configuration will not be restored or saved.";
+        kWarning() << "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& WARNING: Applet configuration will not be restored or saved.";
     }
 
     FullView view(formfactor, location, persistentConfig);
