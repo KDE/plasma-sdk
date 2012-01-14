@@ -145,9 +145,13 @@ void EngineExplorer::dataUpdated(const QString& source, const Plasma::DataEngine
 void EngineExplorer::listEngines()
 {
     m_engines->clear();
-    QStringList engines = m_engineManager->listAllEngines(m_app);
+    KPluginInfo::List engines = m_engineManager->listEngineInfo(m_app);
     qSort(engines);
-    m_engines->addItems(engines);
+
+    foreach (const KPluginInfo engine, engines) {
+        m_engines->addItem(KIcon(engine.icon()), engine.name());
+    }
+
     m_engines->setCurrentIndex(-1);
 }
 
