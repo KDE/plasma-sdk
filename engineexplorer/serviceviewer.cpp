@@ -73,7 +73,7 @@ ServiceViewer::ServiceViewer(Plasma::DataEngine *engine, const QString &source, 
 
     setWindowTitle(i18nc("%1 is a Plasma service name", "%1 Service Explorer", serviceName));
 
-    QString title = i18nc("Source: name of the data, Service: writes data instead of fetching", "DataEngine: <b>%1</b>; Source: <b>%2</b>; Service <b>%3</b>", engineName, m_source, serviceName);
+    QString title = i18nc("Source: name of the data, Service: writes data instead of fetching", "DataEngine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>", engineName, m_source, serviceName);
     m_title->setText(title);
     m_operations->setFocus();
 }
