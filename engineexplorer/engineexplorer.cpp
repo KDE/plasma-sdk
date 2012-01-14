@@ -149,7 +149,7 @@ void EngineExplorer::listEngines()
     qSort(engines);
 
     foreach (const KPluginInfo engine, engines) {
-        m_engines->addItem(KIcon(engine.icon()), engine.name());
+        m_engines->addItem(KIcon(engine.icon()), engine.pluginName());
     }
 
     m_engines->setCurrentIndex(-1);
