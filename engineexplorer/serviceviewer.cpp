@@ -174,7 +174,7 @@ void ServiceViewer::operationResult(Plasma::ServiceJob *job)
 
     if (job->error()) {
         KMessageBox::information(this,
-                                 i18n("<b>'%1</b> operation with destination <b>'%2'</b> failed. "
+                                 i18n("<b>'%1'</b> operation with destination <b>'%2'</b> failed. "
                                       "<p>The error was: <b>'%3'</b></p>", job->operationName(), job->destination(),
                                       QString::number(job->error()) + ": " + job->errorString()),
                                  i18n("Operation Result"));
