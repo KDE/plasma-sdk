@@ -135,6 +135,8 @@ int main(int argc, char **argv)
     options.add("list-wallpapers", ki18n("Displays a list of known wallpapers"));
     options.add("lc");
     options.add("list-containments", ki18n("Displays a list of known containments"));
+    options.add("lt");
+    options.add("list-themes", ki18n("Displays a list of known themes"));
     options.add("nosaveconfig", ki18n("Disables save and restore of the config between runs"));
     options.add("l");
     options.add("location <name>", ki18nc("Do not translate floating, desktop, fullscreen, top, bottom, left nor right", "The location constraint to start the Containment with (floating, desktop, fullscreen, top, bottom, left, right)"), "floating");
@@ -171,6 +173,11 @@ int main(int argc, char **argv)
 
     if (args->isSet("list-containments")) {
         listPlugins(Plasma::Containment::listContainments());
+        return 0;
+    }
+
+    if (args->isSet("list-themes")) {
+        listPlugins(Plasma::Theme::listThemeInfo());
         return 0;
     }
 
