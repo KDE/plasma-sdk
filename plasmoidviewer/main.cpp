@@ -193,11 +193,33 @@ int main(int argc, char **argv)
     kDebug() << "setting Location to" << args->getOption("location");
 
     QString containment = args->getOption("containment");
-    kDebug() << "setting containment to" << containment;
+    if (args->isSet("containment")) {
+
+        kDebug() << "setting theme to" << containment;
+
+        KPluginInfo::List containmentList = Plasma::Containment::listContainments();
+
+        foreach (const KPluginInfo& info, containmentList) {
+
+            if (info.pluginName() == containment) {
+                goto containmentFound;
+            }
+        }
+
+        kError() << "Fatal error. Containment: " + containment +
+            " is invalid. Did you run kbuildsycoca4? List known containments through --list-containments";
+        kError() << "Note: only accepts them Plugin Name (visible through --list-containments), not user-visible name";
+        return 1;
+
+        kDebug() << "setting containment to" << containment;
+    }
+
+containmentFound:
 
     if (args->isSet("theme")) {
         QString themeName = args->getOption("theme");
 
+        kDebug() << "setting theme to" << themeName;
 
         KPluginInfo::List themeList = Plasma::Theme::listThemeInfo();
 
@@ -209,7 +231,6 @@ int main(int argc, char **argv)
                 defaultTheme->setUseGlobalSettings(false);
                 defaultTheme->setThemeName(themeName);
 
-                kDebug() << "setting theme to" << themeName;
 
                 goto themeFound;
             }
