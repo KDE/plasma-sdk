@@ -196,11 +196,33 @@ int main(int argc, char **argv)
     kDebug() << "setting containment to" << containment;
 
     if (args->isSet("theme")) {
-        QString theme = args->getOption("theme");
-        Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
-        Plasma::Theme::defaultTheme()->setThemeName(theme);
-        kDebug() << "setting theme to" << theme;
+        QString themeName = args->getOption("theme");
+
+
+        KPluginInfo::List themeList = Plasma::Theme::listThemeInfo();
+
+        foreach (const KPluginInfo& info, themeList) {
+
+            if (info.pluginName() == themeName) {
+
+                Plasma::Theme *defaultTheme = Plasma::Theme::defaultTheme();
+                defaultTheme->setUseGlobalSettings(false);
+                defaultTheme->setThemeName(themeName);
+
+                kDebug() << "setting theme to" << themeName;
+
+                goto themeFound;
+            }
+        }
+
+        kError() << "Fatal error. Theme: " + themeName +
+            " is invalid. Did you run kbuildsycoca4? List known themes through --list-themes";
+        kError() << "Note: only accepts them Plugin Name (visible through --list-themes), not user-visible name";
+        return 1;
+
     }
+
+themeFound:
 
     QString wallpaper;
     if (args->isSet("wallpaper")) {
