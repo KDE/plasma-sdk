@@ -184,7 +184,26 @@ int main(int argc, char **argv)
     QString pluginName;
     if (args->count() > 0) {
         pluginName = args->arg(0);
+
+        kDebug() << "setting applet to" << pluginName;
+
+        KPluginInfo::List appletList = Plasma::Applet::listAppletInfo();
+
+        foreach (const KPluginInfo& info, appletList) {
+
+            if (info.pluginName() == pluginName) {
+                goto appletFound;
+            }
+        }
+
+        kError() << "Fatal error. Applet: " + pluginName +
+            " is invalid. Did you run kbuildsycoca4? List known containments through --list";
+        kError() << "Note: only accepts applet Plugin Name (visible through --list), not user-visible name";
+        return 1;
+
     }
+
+appletFound:
 
     QString formfactor = args->getOption("formfactor");
     kDebug() << "setting FormFactor to" << args->getOption("formfactor");
@@ -195,7 +214,7 @@ int main(int argc, char **argv)
     QString containment = args->getOption("containment");
     if (args->isSet("containment")) {
 
-        kDebug() << "setting theme to" << containment;
+        kDebug() << "setting containment to" << containment;
 
         KPluginInfo::List containmentList = Plasma::Containment::listContainments();
 
@@ -208,10 +227,9 @@ int main(int argc, char **argv)
 
         kError() << "Fatal error. Containment: " + containment +
             " is invalid. Did you run kbuildsycoca4? List known containments through --list-containments";
-        kError() << "Note: only accepts them Plugin Name (visible through --list-containments), not user-visible name";
+        kError() << "Note: only accepts containment Plugin Name (visible through --list-containments), not user-visible name";
         return 1;
 
-        kDebug() << "setting containment to" << containment;
     }
 
 containmentFound:
@@ -238,7 +256,7 @@ containmentFound:
 
         kError() << "Fatal error. Theme: " + themeName +
             " is invalid. Did you run kbuildsycoca4? List known themes through --list-themes";
-        kError() << "Note: only accepts them Plugin Name (visible through --list-themes), not user-visible name";
+        kError() << "Note: only accepts theme Plugin Name (visible through --list-themes), not user-visible name";
         return 1;
 
     }
