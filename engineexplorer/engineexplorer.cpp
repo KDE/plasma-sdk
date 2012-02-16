@@ -30,6 +30,7 @@
 #include <KStandardAction>
 #include <KStringHandler>
 #include <KAction>
+#include <KDateTime>
 
 #ifdef FOUND_SOPRANO
 #include <Soprano/Node>
@@ -389,6 +390,18 @@ QString EngineExplorer::convertToString(const QVariant &value)
         case QVariant::Url: {
             return QString("%1").arg(value.toUrl().toString());
         }
+        case QVariant::StringList: {
+            return QString("%1").arg(value.toStringList().join(", "));
+        }
+        case QVariant::Date: {
+            return QString("%1").arg(value.toDate().toString());
+        }
+        case QVariant::DateTime: {
+            return QString("%1").arg(value.toDateTime().toString());
+        }
+        case QVariant::Time: {
+            return QString("%1").arg(value.toTime().toString());
+        }
         default: {
 #ifdef FOUND_SOPRANO
             if (QLatin1String(value.typeName()) == "Soprano::Node") {
@@ -402,6 +415,10 @@ QString EngineExplorer::convertToString(const QVariant &value)
                 }
             }
 #endif
+            if (QLatin1String(value.typeName()) == "KDateTime") {
+                return QString("%1").arg(value.value<KDateTime>().toString());
+            }
+
             Plasma::DataEngine::Data data = value.value<Plasma::DataEngine::Data>();
             if (!data.isEmpty()) {
                 QStringList result;
@@ -409,7 +426,7 @@ QString EngineExplorer::convertToString(const QVariant &value)
 
                 while (it.hasNext()) {
                     it.next();
-                    result << (it.key() + ": " + it.value().toString());
+                    result << (it.key() + ": " + convertToString(it.value()));
                 }
 
                 return result.join("\n");
