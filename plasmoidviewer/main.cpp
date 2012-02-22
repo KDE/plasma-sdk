@@ -189,21 +189,23 @@ int main(int argc, char **argv)
 
         KPluginInfo::List appletList = Plasma::Applet::listAppletInfo();
 
+        bool appletFound = false;
         foreach (const KPluginInfo& info, appletList) {
 
             if (info.pluginName() == pluginName) {
-                goto appletFound;
+                appletFound = true;
+                break;
             }
         }
 
-        kError() << "Fatal error. Applet: " + pluginName +
-            " is invalid. Did you run kbuildsycoca4? List known containments through --list";
-        kError() << "Note: only accepts applet Plugin Name (visible through --list), not user-visible name";
-        return 1;
+        if (!appletFound) {
+            kError() << "Fatal error. Applet: " + pluginName +
+                " is invalid. Did you run kbuildsycoca4? List known containments through --list";
+            kError() << "Note: only accepts applet Plugin Name (visible through --list), not user-visible name";
+            return 1;
+        }
 
     }
-
-appletFound:
 
     QString formfactor = args->getOption("formfactor");
     kDebug() << "setting FormFactor to" << args->getOption("formfactor");
@@ -218,21 +220,23 @@ appletFound:
 
         KPluginInfo::List containmentList = Plasma::Containment::listContainments();
 
+        bool containmentFound = false;
         foreach (const KPluginInfo& info, containmentList) {
 
             if (info.pluginName() == containment) {
-                goto containmentFound;
+                containmentFound = true;
+                break;
             }
         }
 
-        kError() << "Fatal error. Containment: " + containment +
-            " is invalid. Did you run kbuildsycoca4? List known containments through --list-containments";
-        kError() << "Note: only accepts containment Plugin Name (visible through --list-containments), not user-visible name";
-        return 1;
+        if (!containmentFound) {
+            kError() << "Fatal error. Containment: " + containment +
+                " is invalid. Did you run kbuildsycoca4? List known containments through --list-containments";
+            kError() << "Note: only accepts containment Plugin Name (visible through --list-containments), not user-visible name";
+            return 1;
+        }
 
     }
-
-containmentFound:
 
     if (args->isSet("theme")) {
         QString themeName = args->getOption("theme");
@@ -241,6 +245,7 @@ containmentFound:
 
         KPluginInfo::List themeList = Plasma::Theme::listThemeInfo();
 
+        bool themeFound = false;
         foreach (const KPluginInfo& info, themeList) {
 
             if (info.pluginName() == themeName) {
@@ -250,18 +255,18 @@ containmentFound:
                 defaultTheme->setThemeName(themeName);
 
 
-                goto themeFound;
+                themeFound = true;
             }
         }
 
-        kError() << "Fatal error. Theme: " + themeName +
-            " is invalid. Did you run kbuildsycoca4? List known themes through --list-themes";
-        kError() << "Note: only accepts theme Plugin Name (visible through --list-themes), not user-visible name";
-        return 1;
+        if (!themeFound) {
+            kError() << "Fatal error. Theme: " + themeName +
+                " is invalid. Did you run kbuildsycoca4? List known themes through --list-themes";
+            kError() << "Note: only accepts theme Plugin Name (visible through --list-themes), not user-visible name";
+            return 1;
+        }
 
     }
-
-themeFound:
 
     QString wallpaper;
     if (args->isSet("wallpaper")) {
