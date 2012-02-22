@@ -187,24 +187,25 @@ int main(int argc, char **argv)
 
         kDebug() << "setting applet to" << pluginName;
 
-        KPluginInfo::List appletList = Plasma::Applet::listAppletInfo();
+        if (!QFile::exists(pluginName + "/metadata.desktop")) {
+            KPluginInfo::List appletList = Plasma::Applet::listAppletInfo();
 
-        bool appletFound = false;
-        foreach (const KPluginInfo& info, appletList) {
+            bool appletFound = false;
+            foreach (const KPluginInfo& info, appletList) {
 
-            if (info.pluginName() == pluginName) {
-                appletFound = true;
-                break;
+                if (info.pluginName() == pluginName) {
+                    appletFound = true;
+                    break;
+                }
+            }
+
+            if (!appletFound) {
+                kError() << "Fatal error. Applet: " + pluginName +
+                    " is invalid. Did you run kbuildsycoca4? List known containments through --list";
+                kError() << "Note: only accepts applet Plugin Name (visible through --list), not user-visible name";
+                return 1;
             }
         }
-
-        if (!appletFound) {
-            kError() << "Fatal error. Applet: " + pluginName +
-                " is invalid. Did you run kbuildsycoca4? List known containments through --list";
-            kError() << "Note: only accepts applet Plugin Name (visible through --list), not user-visible name";
-            return 1;
-        }
-
     }
 
     QString formfactor = args->getOption("formfactor");
