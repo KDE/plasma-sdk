@@ -29,6 +29,7 @@
 #include <iostream>
 
 #include <QPixmapCache>
+#include <QFile>
 
 #include <KApplication>
 #include <KAboutData>
