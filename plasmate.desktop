@@ -31,4 +31,4 @@ Exec=plasmate
 Icon=plasmagik
 Type=Application
 InitialPreference=7
-Categories=KDE;Development;
+Categories=Qt;KDE;Development;IDE;
