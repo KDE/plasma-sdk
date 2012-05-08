@@ -20,10 +20,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QWidget>
 
+#include <KToolBar>
+
+namespace KTextEditor
+{
+    class Document;
+} // namespace KTextEditor
+
+class PackageModel;
+
 class TextEditor : public QWidget
 {
 public:
-    TextEditor(QWidget *parent = 0);
+    TextEditor(KTextEditor::Document *editorPart, PackageModel *model, QWidget *parent = 0);
+    void modifyToolBar(KToolBar *toolbar);
 };
 
 #endif // TEXTEDITOR_H

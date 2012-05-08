@@ -30,6 +30,7 @@ set (PlasMate_SRC
     editors/metadata/metadataeditor.cpp
     editors/imageviewer/imageloader.cpp
     editors/imageviewer/imageviewer.cpp
+    editors/text/texteditor.cpp
     main.cpp
     sidebaritem.cpp
     sidebardelegate.cpp
@@ -73,7 +74,7 @@ kde4_add_ui_files (PlasMate_SRC
 include_directories(${KDE4_INCLUDES}
                     ${QT_QTWEBKIT_INCLUDE_DIR}
                     ${QGPGME_INCLUDE_DIR}
-		    ${GPGME_INCLUDES}
+		            ${GPGME_INCLUDES}
 )
 
 add_subdirectory( editors )

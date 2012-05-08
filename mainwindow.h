@@ -43,6 +43,7 @@ class Sidebar;
 class TimeLine;
 class MetaDataEditor;
 class ImageViewer;
+class TextEditor;
 
 // our own previewer
 class Previewer;
@@ -153,6 +154,7 @@ private:
     MetaDataEditor *m_metaEditor;
     Publisher *m_publisher;
     DocBrowser *m_browser;
+    TextEditor *m_textEditor;
 
 
     QDockWidget *m_filelist;

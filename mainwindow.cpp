@@ -49,6 +49,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "editors/editpage.h"
 #include "editors/metadata/metadataeditor.h"
 #include "editors/imageviewer/imageviewer.h"
+#include "editors/text/texteditor.h"
 #include "savesystem/timeline.h"
 #include "mainwindow.h"
 #include "packagemodel.h"
@@ -104,7 +105,8 @@ MainWindow::MainWindow(QWidget *parent)
         m_isPlasmateCreatedPackage(true),
         m_part(0),
         m_notesPart(0),
-        m_notesWidget(0)
+        m_notesWidget(0),
+        m_textEditor(0)
 {
     setXMLFile("plasmateui.rc");
     setupActions();
@@ -426,14 +428,15 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
         return;
     }
 
-    QVariantList args;
     QString error; // we should show this via debug if we fail
     KParts::ReadOnlyPart *part = dynamic_cast<KParts::ReadOnlyPart*>(
                                      offers.at(0)->createInstance<KParts::Part>(
-                                         this, args, &error));
+                                         this, QVariantList(), &error));
 
+    //the widget which will be loaded to the plasmate
     QWidget *mainWidget = 0;
     if (!part) {
+        //this means failure. A KMessageBox will appear(see the code above)
         delete m_part;
         m_part = 0;
     } else if (!m_part || !part->inherits(m_part->metaObject()->className())) {
@@ -442,7 +445,6 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
     } else {
         // reuse m_part if we can
         delete part;
-        //mainWidget = m_part->widget();
     }
 
     if (!m_part) {
@@ -452,67 +454,34 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
 
     // open the target for editting/viewing
     if (!target.equals(m_part->url())) {
+        //the user has chosen a new file
         m_part->openUrl(target);
         KTextEditor::Document *editorPart = qobject_cast<KTextEditor::Document *>(m_part);
         if (editorPart) { // resetup editor if opening new/different file
-            KTextEditor::View *view = qobject_cast<KTextEditor::View *>(editorPart->widget());
-            setupTextEditor(editorPart, view);
-            mainWidget = view;
+            m_textEditor = new TextEditor(editorPart, m_model, this);
+            mainWidget = m_textEditor;
         } else {
+            //this means that the cast has failed and we don't have a new view.
+            //So keep the old part.
             mainWidget = m_part->widget();
         }
+    //the user hasn't chosen a new file, so keep m_part.
     } else {
         mainWidget = m_part->widget();
     }
-
 
     m_central->switchTo(mainWidget);
 
     mainWidget->setMinimumWidth(300);
     //Add the part's GUI
-    //createGUI(m_part);
+    createGUI(m_part);
+    m_textEditor->modifyToolBar(toolBar());
 
     // We keep only one editor object alive at a time -
     // so we know who to activate when the edit tab is reselected
     delete m_metaEditor;
     m_metaEditor = 0;
     m_oldTab = EditTab;
-}
-
-void MainWindow::setupTextEditor(KTextEditor::Document *editorPart, KTextEditor::View *view)
-{
-    //FIXME: we should be setting the highlight based on the type of document
-    //editorPart->setHighlightingMode("JavaScript");
-    //FIXME: (probably related to the above) If I open a python file then immediately a
-    // js file, editor tries to add a python-style encoding comment at the top of the js file.
-    if (view) {
-        view->setContextMenu(view->defaultContextMenu());
-
-        KTextEditor::ConfigInterface *config = qobject_cast<KTextEditor::ConfigInterface*>(view);
-        if (config) {
-            kDebug() << "setting various config values...";
-            config->setConfigValue("line-numbers", true);
-            config->setConfigValue("dynamic-word-wrap", true);
-        }
-
-        // set nice defaults for katepart
-        KTextEditor::CommandInterface *command = qobject_cast<KTextEditor::CommandInterface *>(editorPart->editor());
-        if (command) {
-            QString ret;
-            command->queryCommand("set-indent-mode")->exec(view, "set-indent-mode normal", ret); // more friendly
-            command->queryCommand("set-replace-tabs")->exec(view, "set-replace-tabs 1", ret); // important for python
-            if (m_model->implementationApi() == "python") { // 4 spaces recommended for python
-                command->queryCommand("set-indent-width")->exec(view, "set-indent-width 4", ret);
-            } else { // 2 spaces recommended for ruby, JS is agnostic
-                command->queryCommand("set-indent-width")->exec(view, "set-indent-width 2", ret);
-            }
-        }
-    }
-
-    KTextEditor::ConfigInterface *config = dynamic_cast<KTextEditor::ConfigInterface*>(editorPart);
-    if (config) {
-        config->setConfigValue("backup-on-save-prefix", ".");
-    }
 }
 
 void MainWindow::loadNotesEditor(QDockWidget *container)
