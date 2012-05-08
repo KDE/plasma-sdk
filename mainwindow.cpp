@@ -189,7 +189,7 @@ void MainWindow::showDocumentation(bool show)
 void MainWindow::createMenus()
 {
     menuBar()->addMenu(helpMenu());
-    setupGUI();
+    setupGUI(ToolBar | Keys | StatusBar | Save);
 }
 
 void MainWindow::quit()

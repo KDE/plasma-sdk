@@ -34,7 +34,7 @@ TextEditor::TextEditor(KTextEditor::Document *editorPart, PackageModel *model, Q
 {
     QHBoxLayout *l = new QHBoxLayout(this);
 
-    KTextEditor::View *view = editorPart->createView(this);
+    KTextEditor::View *view = qobject_cast<KTextEditor::View*>(editorPart);
     if (view) {
         view->setContextMenu(view->defaultContextMenu());
 
@@ -75,9 +75,12 @@ TextEditor::TextEditor(KTextEditor::Document *editorPart, PackageModel *model, Q
             // A: 4 spaces are recommended for python
         }*/
 
-       }
+    }
 
-    l->addWidget(view);
+    //Q: Why we need the above?
+    //A: If we don't do the above we will have conflicting shortcuts.
+    KParts::ReadWritePart *m_part = dynamic_cast<KParts::ReadWritePart *>(editorPart);
+    l->addWidget(m_part->widget());
 }
 
 void TextEditor::modifyToolBar(KToolBar* toolbar)
