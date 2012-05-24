@@ -12,9 +12,10 @@
 
 #include <QDialog>
 #include <KUrl>
+#include <KProcess>
 
 class KUrlRequester;
-class QPushButton;
+class KPushButton;
 class QCheckBox;
 class SigningWidget;
 class QComboBox;
@@ -35,10 +36,11 @@ private slots:
     void doExport();
     void addSuffix();
     void doPublish();
-    void doPlasmaPkg();
-    void doCMake();
+    void doPlasmaPkg(int index);
+    void doCMake(int index);
 
 private:
+    bool cmakeProcessStatus(QProcess::ProcessError error);
     bool exportToFile(const KUrl& url);
     const QString tempPackagePath();
 

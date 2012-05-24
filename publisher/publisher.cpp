@@ -14,9 +14,11 @@
 #include <QCheckBox>
 #include <QComboBox>
 
+#include <KConfigGroup>
+#include <KIO/DeleteJob>
+#include <KSharedConfig>
 #include <KUrlRequester>
 #include <KLocalizedString>
-#include <KProcess>
 #include <KService>
 #include <KServiceTypeTrader>
 #include <KMessageBox>
@@ -57,8 +59,8 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
 
     connect(m_exporterUrl, SIGNAL(urlSelected(const KUrl&)), this, SLOT(addSuffix()));
     connect(m_exporterButton, SIGNAL(clicked()), this, SLOT(doExport()));
-    connect(m_installerButton, SIGNAL(currentIndexChanged(int)), this, SLOT(doPlasmaPkg()));
-    connect(m_installerButton, SIGNAL(currentIndexChanged(int)), this, SLOT(doCMake()));
+    connect(m_installerButton, SIGNAL(currentIndexChanged(int)), this, SLOT(doPlasmaPkg(int)));
+    connect(m_installerButton, SIGNAL(currentIndexChanged(int)), this, SLOT(doCMake(int)));
     connect(m_publisherButton, SIGNAL(clicked()), this, SLOT(doPublish()));
 
     // Publish only works right for Plasmoid now afaik. Disabling for other project types.
@@ -126,7 +128,7 @@ void Publisher::doExport()
     }
     bool ok = exportToFile(m_exporterUrl->url());
 
-    // If signign is enabled, lets do that!
+    // If signing is enabled, lets do that!
     if (m_signingWidget->signingEnabled()) {
         ok = ok && m_signingWidget->sign(m_exporterUrl->url());
     }
@@ -139,16 +141,21 @@ void Publisher::doExport()
 }
 
 // Plasmoid specific, for now
-void Publisher::doCMake()
+void Publisher::doCMake(int index)
 {
+    //check if this the index that we want
+    if (index != 2) {
+        return;
+    }
+
     if (m_projectType != "Plasma/Applet") {
         qDebug() << "chaos";
         return;
     }
 
-    qDebug() << "aei gamis";
-    const KUrl tempPackage(tempPackagePath());
+    //this is the CMakeLists.txt from the templates directory
     QFile cmakeListsSourceFile(KStandardDirs::locate("appdata", "templates/") + "cmakelists");
+
     QFile cmakeListsDestinationFile(m_projectPath.pathOrUrl() + "CMakeLists.txt");
 
     cmakeListsSourceFile.open(QIODevice::ReadOnly);
@@ -164,21 +171,107 @@ void Publisher::doCMake()
 
     cmakeListsDestinationFile.close();
     cmakeListsSourceFile.close();
-    QStringList argv("cmake");
-    argv.append("-DCMAKE_INSTALL_PREFIX=$HOME");
-    argv.append(tempPackagePath());
-    if(KProcess::execute(argv) >= 0 ? true: false) {
+
+    //we need the last loaded package which also is the current package.
+    KConfigGroup cg(KGlobal::config(), "PackageModel::package");
+    QString packagePath(cg.readEntry("lastLoadedPackage", QString()));
+
+    //create a temporary build dir
+    QDir dir(packagePath);
+    dir.mkdir("build/");
+
+    //cd build/
+    dir.cd("build/");
+
+    //initilize the processes
+    KProcess cmake;
+    KProcess makeInstall;
+
+    //KProcess isn't aware of the QDir::cd, so we need to
+    //change current directory
+    cmake.setWorkingDirectory(dir.path());
+    makeInstall.setWorkingDirectory(dir.path());
+
+    //the cmake's arguments
+    QStringList cmakeArgv;
+   // cmakeArgv.append("-DCMAKE_INSTALL_PREFIX=`kde4-config --prefix`");
+    cmakeArgv.append("-DCMAKE_INSTALL_PREFIX=" + QString(qgetenv("KDEDIRS")));
+    cmakeArgv.append("..");
+
+    //the make install arguments
+    QStringList makeInstallArgv("install");
+
+    cmake.setProgram("cmake", cmakeArgv);
+    makeInstall.setProgram("make", makeInstallArgv);
+
+    //start the processes
+    cmake.start();
+
+    //cmake must finish before make install
+    cmake.waitForFinished();
+    makeInstall.start();
+
+    //make install must finish before the KMessageBox
+    makeInstall.waitForFinished();
+
+    bool processStatus = false;
+    processStatus = cmakeProcessStatus(cmake.error());
+    processStatus = cmakeProcessStatus(makeInstall.error());
+
+    if(processStatus) {
         QDBusInterface dbi("org.kde.kded", "/kbuildsycoca", "org.kde.kbuildsycoca");
         dbi.call(QDBus::NoBlock, "recreate");
+        KMessageBox::information(this, i18n("Project has been installed"));
     } else {
         KMessageBox::error(this, i18n("Project has not been installed"));
         return;
     }
+
+    //now delete the temporary build directory. We don't need it anymore
+    KIO::del(packagePath + "build", KIO::HideProgressInfo);
 }
 
-// Plasmoid specific, for now
-void Publisher::doPlasmaPkg()
+//we need this method in order to avoid duplication of code.
+bool Publisher::cmakeProcessStatus(QProcess::ProcessError error)
 {
+    switch (error) {
+        case QProcess::FailedToStart: {
+            return true;
+            break;
+        }
+        case QProcess::Crashed: {
+            return true;
+            break;
+        }
+        case QProcess::Timedout: {
+            return true;
+            break;
+        }
+        case QProcess::WriteError: {
+            return true;
+            break;
+        }
+        case QProcess::ReadError: {
+            return true;
+            break;
+        }
+        case QProcess::UnknownError: {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+// Plasmoid specific, for now
+void Publisher::doPlasmaPkg(int index)
+{
+    //check if this the index that we want
+    if (index != 1) {
+        return;
+    }
+
     const KUrl tempPackage(tempPackagePath());
     qDebug() << "tempPackagePath" << tempPackage.pathOrUrl();
     qDebug() << "m_projectPath" << m_projectPath.pathOrUrl();

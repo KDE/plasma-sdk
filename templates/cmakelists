@@ -12,5 +12,6 @@ include_directories(
    ${KDE4_INCLUDES}
    )
 
-install(DIRECTORY ${projectPlasmate}/ DESTINATION ${DATA_INSTALL_DIR}/plasma/plasmoids/${projectPlasmate})
-install(FILES ${projectPlasmate}/metadata.desktop DESTINATION ${SERVICES_INSTALL_DIR} RENAME plasma-applet-${projectPlasmate}.desktop)
+install(DIRECTORY contents/ DESTINATION ${DATA_INSTALL_DIR}/plasma/plasmoids/${projectPlasmate})
+install(FILES metadata.desktop DESTINATION ${DATA_INSTALL_DIR}/plasma/plasmoids/${projectPlasmate})
+install(FILES metadata.desktop DESTINATION ${SERVICES_INSTALL_DIR} RENAME plasma-applet-${projectPlasmate}.desktop)
