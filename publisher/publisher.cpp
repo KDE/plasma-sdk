@@ -8,11 +8,7 @@
 */
 
 #include <QDBusInterface>
-#include <QPushButton>
-#include <QLabel>
 #include <QVBoxLayout>
-#include <QCheckBox>
-#include <QComboBox>
 
 #include <KConfigGroup>
 #include <KIO/DeleteJob>
@@ -33,83 +29,51 @@
 Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
         : QDialog(parent),
         m_projectPath(path),
-        m_projectType(type)
+        m_projectType(type),
+        m_comboBoxIndex(0),
+        m_signingWidget(0)
 {
-    // These should probably be refined at some point
-    QString exportLabel = i18n("Export project");
-    QString exportText = i18n("Choose a target file to export the current project to an installable package file on your system.");
-    QString installLabel = i18n("Install project");
-    QString installText = i18n("Select the method with which you want to install the current project directly "
-    "onto your computer.");
-    QString publishLabel = i18n("Publish project");
-    QString publishText = i18n("Click to publish the current project online, so that other people can find and install it using the Internet.");
+    QWidget *uiWidget = new QWidget();
+    m_ui.setupUi(uiWidget);
+
+    m_signingWidget = new SigningWidget();
+
+    //merge the ui file with the SigningWidget
+    QVBoxLayout *layout = new QVBoxLayout();
+    layout->addWidget(uiWidget);
+    layout->addWidget(m_signingWidget);
 
     m_extension = (type == "Plasma/Applet" || type == "Plasma/PopupApplet") ? "plasmoid" : "zip";
 
-    m_exporterUrl = new KUrlRequester(this);
-    m_exporterUrl->setFilter(QString("*.") + m_extension);
-    m_exporterUrl->setMode(KFile::File | KFile::LocalOnly);
+    m_ui.exporterUrl->setFilter(QString("*.") + m_extension);
+    m_ui.exporterUrl->setMode(KFile::File | KFile::LocalOnly);
 
-    m_exporterButton = new QPushButton(i18n("Export current project"), this);
-    m_installerButton = new QComboBox(this);
-    m_installerButton->addItem("");
-    m_installerButton->addItem("Use PlasmaPkg");
-    m_installerButton->addItem("Use cmake");
-    m_publisherButton = new QPushButton(i18n("Publish current project"), this);
+    //we want the installButton to be enabled only when the comboBox's current index is valid.
+    m_ui.installButton->setEnabled(false);
 
-    connect(m_exporterUrl, SIGNAL(urlSelected(const KUrl&)), this, SLOT(addSuffix()));
-    connect(m_exporterButton, SIGNAL(clicked()), this, SLOT(doExport()));
-    connect(m_installerButton, SIGNAL(currentIndexChanged(int)), this, SLOT(doPlasmaPkg(int)));
-    connect(m_installerButton, SIGNAL(currentIndexChanged(int)), this, SLOT(doCMake(int)));
-    connect(m_publisherButton, SIGNAL(clicked()), this, SLOT(doPublish()));
+    //populate the comboBox
+    m_ui.installerButton->addItem("");
+    m_ui.installerButton->addItem("Use PlasmaPkg");
+    m_ui.installerButton->addItem("Use cmake");
+
+    connect(m_ui.exporterUrl, SIGNAL(urlSelected(const KUrl&)), this, SLOT(addSuffix()));
+    connect(m_ui.exporterButton, SIGNAL(clicked()), this, SLOT(doExport()));
+    connect(m_ui.installerButton, SIGNAL(currentIndexChanged(int)), this, SLOT(checkInstallButtonState(int)));
+    connect(m_ui.installButton, SIGNAL(clicked()), this, SLOT(doInstall()));
+    connect(m_ui.publisherButton, SIGNAL(clicked()), this, SLOT(doPublish()));
 
     // Publish only works right for Plasmoid now afaik. Disabling for other project types.
-    m_publisherButton->setEnabled(type == "Plasma/Applet" || type == "Plasma/PopupApplet");
+    m_ui.publisherButton->setEnabled(type == "Plasma/Applet" || type == "Plasma/PopupApplet");
 
-    QVBoxLayout *layout = new QVBoxLayout();
-    layout->addWidget(new QLabel("<h1>" + exportLabel + "</h1>", this));
-
-    QFrame *separator = new QFrame();
-    separator->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-
-    layout->addWidget(separator);
-    layout->addWidget(new QLabel(exportText, this));
-    layout->addWidget(m_exporterUrl);
-    layout->addWidget(m_exporterButton);
-
-    layout->addWidget(new QLabel("<h1>" + installLabel + "</h1>", this));
-
-    separator = new QFrame();
-    separator->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-
-    layout->addWidget(separator);
-    layout->addWidget(new QLabel(installText, this));
-    layout->addWidget(m_installerButton);
-
-    layout->addWidget(new QLabel("<h1>" + publishLabel + "</h1>", this));
-
-    separator = new QFrame();
-    separator->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-
-    layout->addWidget(separator);
-    layout->addWidget(new QLabel(publishText, this));
-    layout->addWidget(m_publisherButton);
-
-    m_signingWidget = new SigningWidget(this);
-
-    layout->addWidget(m_signingWidget);
-
-    layout->addStretch();
     setLayout(layout);
-
 }
 
 void Publisher::addSuffix()
 {
-    QString selected = m_exporterUrl->url().path();
+    QString selected = m_ui.exporterUrl->url().path();
     QString suffix = QFileInfo(selected).suffix();
     if (suffix != m_extension && suffix != "zip") {
-        m_exporterUrl->setUrl(selected + "." + m_extension);
+        m_ui.exporterUrl->setUrl(selected + "." + m_extension);
     }
 }
 
@@ -120,34 +84,55 @@ void Publisher::setProjectName(const QString &name)
 
 void Publisher::doExport()
 {
-    if (QFile(m_exporterUrl->url().path()).exists()) {
+    if (QFile(m_ui.exporterUrl->url().path()).exists()) {
         QString dialogText = i18n("A file already exists at %1. Do you want to overwrite it?",
-                                  m_exporterUrl->url().path());
+                                  m_ui.exporterUrl->url().path());
         int code = KMessageBox::warningYesNo(0,dialogText);
         if (code != KMessageBox::Yes) return;
     }
-    bool ok = exportToFile(m_exporterUrl->url());
+    bool ok = exportToFile(m_ui.exporterUrl->url());
 
     // If signing is enabled, lets do that!
     if (m_signingWidget->signingEnabled()) {
-        ok = ok && m_signingWidget->sign(m_exporterUrl->url());
+        ok = ok && m_signingWidget->sign(m_ui.exporterUrl->url());
     }
-    if (QFile::exists(m_exporterUrl->url().path()) && ok) {
-        KMessageBox::information(this, i18n("Project has been exported to %1.", m_exporterUrl->url().path()));
+    if (QFile::exists(m_ui.exporterUrl->url().path()) && ok) {
+        KMessageBox::information(this, i18n("Project has been exported to %1.", m_ui.exporterUrl->url().path()));
     } else {
         KMessageBox::error(this, i18n("An error has occurred during the export. Please check the write permissions "
         "in the target directory."));
     }
 }
 
-// Plasmoid specific, for now
-void Publisher::doCMake(int index)
+//we want the installButton to be enabled only when comboBox's index is valid.
+void Publisher::checkInstallButtonState(int comboBoxCurrentIndex)
 {
-    //check if this the index that we want
-    if (index != 2) {
-        return;
+    if (comboBoxCurrentIndex == 1) {
+        m_ui.installButton->setEnabled(true);
+        m_comboBoxIndex = 1;
+    } else if (comboBoxCurrentIndex == 2) {
+        m_ui.installButton->setEnabled(true);
+        m_comboBoxIndex = 2;
+    } else {
+        m_ui.installButton->setEnabled(false);
+        m_comboBoxIndex = 0;
     }
+}
 
+//choose the method which which we will install the project
+//according to comboBox's index
+void Publisher::doInstall()
+{
+    if (m_comboBoxIndex == 1) {
+        doPlasmaPkg();
+    } else if (m_comboBoxIndex == 2) {
+        doCMake();
+    }
+}
+
+// Plasmoid specific, for now
+void Publisher::doCMake()
+{
     if (m_projectType != "Plasma/Applet") {
         qDebug() << "chaos";
         return;
@@ -263,15 +248,8 @@ bool Publisher::cmakeProcessStatus(QProcess::ProcessError error)
     return false;
 }
 
-
-// Plasmoid specific, for now
-void Publisher::doPlasmaPkg(int index)
+void Publisher::doPlasmaPkg()
 {
-    //check if this the index that we want
-    if (index != 1) {
-        return;
-    }
-
     const KUrl tempPackage(tempPackagePath());
     qDebug() << "tempPackagePath" << tempPackage.pathOrUrl();
     qDebug() << "m_projectPath" << m_projectPath.pathOrUrl();

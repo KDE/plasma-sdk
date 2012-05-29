@@ -106,6 +106,7 @@ private Q_SLOTS:
     void togglePreview();
     void toggleNotes();
     void toggleFileList();
+    void installPackage();
 
     // refreshes editor, killing all local changes
     void editorDestructiveRefresh();

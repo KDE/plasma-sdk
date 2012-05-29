@@ -14,16 +14,9 @@
 #include <KUrl>
 #include <KProcess>
 
-class KUrlRequester;
-class KPushButton;
-class QCheckBox;
-class SigningWidget;
-class QComboBox;
+#include "ui_publisher.h"
 
-namespace Ui
-{
-class Publisher;
-}
+class SigningWidget;
 
 class Publisher : public QDialog
 {
@@ -32,28 +25,31 @@ public:
     Publisher(QWidget* parent, const KUrl &path, const QString& type);
     void setProjectName(const QString &name);
 
+public slots:
+    void doPlasmaPkg();
+
 private slots:
     void doExport();
     void addSuffix();
     void doPublish();
-    void doPlasmaPkg(int index);
-    void doCMake(int index);
+    void doCMake();
+    void doInstall();
+    void checkInstallButtonState(int comboBoxCurrentIndex);
 
 private:
     bool cmakeProcessStatus(QProcess::ProcessError error);
     bool exportToFile(const KUrl& url);
     const QString tempPackagePath();
 
-    KUrlRequester* m_exporterUrl;
-    QPushButton* m_exporterButton;
-    QPushButton* m_publisherButton;
     SigningWidget* m_signingWidget;
-    QComboBox *m_installerButton;
 
     KUrl m_projectPath;
     QString m_projectType;
     QString m_extension;
     QString m_projectName;
+    int m_comboBoxIndex;
+
+    Ui::Publisher m_ui;
 };
 
 #endif // PUBLISHER_H

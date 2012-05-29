@@ -15,6 +15,7 @@
   <Action name="publish" />
   <Separator />
   <Action name="preview" />
+  <Action name="installproject" />
   <Action name="notes" />
   <Action name="file_list" />
   <Action name="timeline" />

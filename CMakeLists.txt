@@ -69,12 +69,13 @@ endif (DEBUG_MODEL)
 kde4_add_ui_files (PlasMate_SRC
    startpage.ui
    editors/metadata/metadata.ui
+   publisher/publisher.ui
 )
 
 include_directories(${KDE4_INCLUDES}
                     ${QT_QTWEBKIT_INCLUDE_DIR}
                     ${QGPGME_INCLUDE_DIR}
-		            ${GPGME_INCLUDES}
+                    ${GPGME_INCLUDES}
 )
 
 add_subdirectory( editors )

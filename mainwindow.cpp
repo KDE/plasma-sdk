@@ -223,9 +223,10 @@ void MainWindow::setupActions()
     KAction *refresh = KStandardAction::redisplay(this, SLOT(saveAndRefresh()), actionCollection());
     refresh->setShortcut(Qt::CTRL + Qt::Key_F5);
     refresh->setText(i18n("Refresh Preview"));
+
+    addAction(i18n("Install Project"), "plasmagik", SLOT(installPackage()), "installproject", KShortcut(Qt::META + Qt::Key_I));
     addAction(i18n("Create Save Point"), "document-save", SLOT(selectSavePoint()), "savepoint", KStandardShortcut::save());
     addAction(i18n("Publish"), "krfb", SLOT(selectPublish()),   "publish");
-
     addAction(i18n("Preview"), "user-desktop", SLOT(togglePreview()), "preview")->setCheckable(true);
     addAction(i18n("Notes"), "accessories-text-editor", SLOT(toggleNotes()), "notes")->setCheckable(true);
     addAction(i18n("Files"), "system-file-manager", SLOT(toggleFileList()), "file_list")->setCheckable(true);
@@ -240,6 +241,18 @@ void MainWindow::updateActions()
     actionCollection()->action("file_list")->setChecked(m_filelist && m_filelist->isVisible());
     actionCollection()->action("timeline")->setChecked(m_timeLine && m_timeLine->isVisible());
     actionCollection()->action("documentation")->setChecked(m_browser && m_browser->isVisible());
+}
+
+void MainWindow::installPackage()
+{
+    if (!m_publisher) {
+        m_publisher = new Publisher(this, m_model->package(), m_model->packageType());
+    }
+
+    saveEditorData();
+
+    m_publisher->setProjectName(m_currentProject);
+    m_publisher->doPlasmaPkg();
 }
 
 void MainWindow::closeProject()
