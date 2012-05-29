@@ -676,6 +676,7 @@ void MainWindow::loadProject(const QString &path)
     }
 
     m_editPage->setModel(m_model);
+    m_editPage->expandAll();
 
     // prevent accidental loading of previous active project's file
     // plus temporary workaround for editor issue with handling different languages
