@@ -80,14 +80,15 @@ void EditPage::doDelete(bool)
 void EditPage::showTreeContextMenu(const QPoint&)
 {
     QModelIndexList items = selectedIndexes();
-    if (items.empty())
+    if (items.empty()) {
         return;
+    }
 
-    const char *key = static_cast<const char *>
-                              (items.at(0).internalPointer());
-    if (!key || // top level item
-          items.at(0).row() == 0) // 'New' entry
+    const char *key = static_cast<const char *>(items.at(0).internalPointer());
+    // no key means its a top level item; an index of 0 means its the "New" entry
+    if (!key || items.at(0).row() == 0) {
         return;
+    }
 
     m_contextMenu->popup(QCursor::pos());
 }
@@ -123,7 +124,7 @@ void EditPage::findEditor(const QModelIndex &index)
 
         if (mimetype == "[plasmate]/new") {
             const QString packagePath = index.data(PackageModel::packagePathRole).toString();
-			const QString dialogText = i18n( "Enter a name for the new file:" );
+            const QString dialogText = i18n("Enter a name for the new file:");
             QString file = KInputDialog::getText(QString(), dialogText);
             if (!file.isEmpty()) {
                 kDebug() << target;
@@ -184,7 +185,7 @@ bool EditPage::hasExtension(const QString& filename)
 {
     QStringList list;
     list << ".rb" << ".js" << ".qml" << ".py";
-    foreach(QString str, list) {
+    foreach (const QString &str, list) {
         if (filename.endsWith(str)) {
             return true;
         }
