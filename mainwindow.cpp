@@ -96,6 +96,7 @@ MainWindow::MainWindow(QWidget *parent)
         m_metaEditor(0),
         m_publisher(0),
         m_browser(0),
+        m_textEditor(0),
         m_filelist(0),
         m_editPage(0),
         m_imageViewer(0),
@@ -105,8 +106,7 @@ MainWindow::MainWindow(QWidget *parent)
         m_isPlasmateCreatedPackage(true),
         m_part(0),
         m_notesPart(0),
-        m_notesWidget(0),
-        m_textEditor(0)
+        m_notesWidget(0)
 {
     setXMLFile("plasmateui.rc");
     setupActions();
