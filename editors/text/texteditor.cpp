@@ -34,7 +34,8 @@ TextEditor::TextEditor(KTextEditor::Document *editorPart, PackageModel *model, Q
 {
     QHBoxLayout *l = new QHBoxLayout(this);
 
-    KTextEditor::View *view = qobject_cast<KTextEditor::View*>(editorPart);
+    QWidget *centralWidget = editorPart->widget();
+    KTextEditor::View *view = qobject_cast<KTextEditor::View*>(centralWidget);
     if (view) {
         view->setContextMenu(view->defaultContextMenu());
 
@@ -50,7 +51,7 @@ TextEditor::TextEditor(KTextEditor::Document *editorPart, PackageModel *model, Q
         }
 
         // set nice defaults for katepart
-                KTextEditor::CommandInterface *command = dynamic_cast<KTextEditor::CommandInterface *>(editorPart->editor());
+        KTextEditor::CommandInterface *command = dynamic_cast<KTextEditor::CommandInterface *>(editorPart->editor());
         QString ret;
         if (command) { //generic
             command->queryCommand("set-indent-mode")->exec(view, "set-indent-mode normal", ret); // more friendly
@@ -77,10 +78,7 @@ TextEditor::TextEditor(KTextEditor::Document *editorPart, PackageModel *model, Q
 
     }
 
-    //Q: Why we need the above?
-    //A: If we don't do the above we will have conflicting shortcuts.
-    KParts::ReadWritePart *m_part = dynamic_cast<KParts::ReadWritePart *>(editorPart);
-    l->addWidget(m_part->widget());
+    l->addWidget(centralWidget);
 }
 
 void TextEditor::modifyToolBar(KToolBar* toolbar)
