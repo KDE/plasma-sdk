@@ -396,7 +396,7 @@ bool PackageModel::loadPackage()
             if (indexedFiles.contains(filePath)) {
                 namedFiles.append(indexedFiles.value(filePath));
                 indexedFiles.remove(filePath);
-            } else {
+            } else if (!file.endsWith('~')) {
                 userFiles.append(file);
             }
         }
@@ -420,8 +420,10 @@ bool PackageModel::loadPackage()
 
 void PackageModel::fileAddedOnDisk(const QString &path)
 {
-    if (QFileInfo(path).fileName().at(0) == QChar('.')) {
-        return; // we ignore hidden files
+    if (QFileInfo(path).fileName().at(0) == QChar('.') ||
+        path.endsWith('~')) {
+        // we ignore hidden files and backup files
+        return;
     }
 
     const KUrl toAdd(path);
