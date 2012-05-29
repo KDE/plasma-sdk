@@ -75,6 +75,10 @@ MainWindow::CentralContainer::CentralContainer(QWidget* parent)
 
 void MainWindow::CentralContainer::switchTo(QWidget* newWidget, SwitchMode mode)
 {
+    if (m_curWidget == newWidget) {
+        return;
+    }
+
     if (m_curWidget) {
         m_curWidget->hide();
         m_layout->removeWidget(m_curWidget);
@@ -430,54 +434,61 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
         return;
     }
 
-    QString error; // we should show this via debug if we fail
-    KParts::ReadOnlyPart *part = dynamic_cast<KParts::ReadOnlyPart*>(
-                                     offers.at(0)->createInstance<KParts::Part>(
-                                         this, QVariantList(), &error));
+    KService::Ptr service = offers.at(0);
+    if (!m_partService || m_partService->storageId() != service->storageId()) {
+        m_partService = service;
+        QString error; // we should show this via debug if we fail
+        KParts::ReadOnlyPart *part = dynamic_cast<KParts::ReadOnlyPart*>(
+                offers.at(0)->createInstance<KParts::Part>(
+                    this, QVariantList(), &error));
 
-    //the widget which will be loaded to the plasmate
-    QWidget *mainWidget = 0;
-    if (!part) {
-        //this means failure. A KMessageBox will appear(see the code above)
-        delete m_part;
-        m_part = 0;
-    } else if (!m_part || !part->inherits(m_part->metaObject()->className())) {
-        delete m_part;
-        m_part = part;
-    } else {
-        // reuse m_part if we can
-        delete part;
+        //the widget which will be loaded to the plasmate
+        if (!part) {
+            //this means failure. A KMessageBox will appear(see the code above)
+            delete m_textEditor;
+            m_textEditor = 0;
+
+            delete m_part;
+            m_part = 0;
+        } else if (!m_part || !part->inherits(m_part->metaObject()->className())) {
+            delete m_textEditor;
+            m_textEditor = 0;
+
+            delete m_part;
+            m_part = part;
+            KTextEditor::Document *editorPart = qobject_cast<KTextEditor::Document *>(m_part);
+            if (editorPart) {
+                m_textEditor = new TextEditor(editorPart, m_model, this);
+            }
+            createGUI(m_part);
+        } else {
+            // reuse m_part if we can
+            delete part;
+        }
+
+        if (!m_part) {
+            KMessageBox::error(this, i18n("Failed to load editor for %1:\n\n%2", target.prettyUrl(), error), i18n("Loading Failure"));
+            return;
+        }
     }
 
     if (!m_part) {
-        KMessageBox::error(this, i18n("Failed to load editor for %1:\n\n%2", target.prettyUrl(), error), i18n("Loading Failure"));
+        KMessageBox::error(this, i18n("Failed to load editor for %1", target.prettyUrl()), i18n("Loading Failure"));
         return;
     }
 
-    // open the target for editting/viewing
+    // open the target for editting/viewing if it isn't already viewing that file
     if (!target.equals(m_part->url())) {
-        //the user has chosen a new file
         m_part->openUrl(target);
-        KTextEditor::Document *editorPart = qobject_cast<KTextEditor::Document *>(m_part);
-        if (editorPart) { // resetup editor if opening new/different file
-            m_textEditor = new TextEditor(editorPart, m_model, this);
-            mainWidget = m_textEditor;
-        } else {
-            //this means that the cast has failed and we don't have a new view.
-            //So keep the old part.
-            mainWidget = m_part->widget();
-        }
-    //the user hasn't chosen a new file, so keep m_part.
-    } else {
-        mainWidget = m_part->widget();
     }
 
+    QWidget *mainWidget = m_textEditor ? m_textEditor : m_part->widget();
     m_central->switchTo(mainWidget);
-
     mainWidget->setMinimumWidth(300);
     //Add the part's GUI
-    createGUI(m_part);
-    m_textEditor->modifyToolBar(toolBar());
+    if (m_textEditor) {
+        m_textEditor->modifyToolBar(toolBar());
+    }
 
     // We keep only one editor object alive at a time -
     // so we know who to activate when the edit tab is reselected

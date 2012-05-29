@@ -167,6 +167,7 @@ private:
     CentralContainer *m_central;
     QString m_currentProject;
 
+    KService::Ptr m_partService;
     KParts::ReadOnlyPart *m_part;
     KParts::ReadOnlyPart *m_notesPart;
     QDockWidget *m_notesWidget;
