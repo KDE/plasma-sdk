@@ -213,7 +213,9 @@ void MainWindow::setupActions()
     KAction *close = KStandardAction::close(this, SLOT(closeProject()), actionCollection());
     close->setText(i18n("Close Project"));
 
-    KStandardAction::quit(this, SLOT(quit()), actionCollection());
+    KAction *quitAction = KStandardAction::quit(this, SLOT(quit()), actionCollection());
+    QWidget::addAction(quitAction);
+
     KAction *refresh = KStandardAction::redisplay(this, SLOT(saveAndRefresh()), actionCollection());
     refresh->setShortcut(Qt::CTRL + Qt::Key_F5);
     refresh->setText(i18n("Refresh Preview"));
