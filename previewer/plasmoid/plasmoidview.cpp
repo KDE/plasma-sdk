@@ -54,6 +54,7 @@ PlasmoidView::PlasmoidView(QWidget *parent)
     // we do a two-way connect here to allow the previewer containment
     // and main window to tell each other to save/refresh
     connect(m_containment, SIGNAL(refreshClicked()), parent, SLOT(emitRefreshRequest()));
+    connect(m_containment, SIGNAL(showKonsole()), parent, SLOT(emitShowKonsole()));
     connect(parent, SIGNAL(refreshView()), m_containment, SLOT(refreshApplet()));
 
     setScene(&m_corona);

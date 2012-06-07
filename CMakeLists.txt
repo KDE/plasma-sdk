@@ -54,6 +54,7 @@ set (PlasMate_SRC
     publisher/signingwidget.cpp
     publisher/signingdialog.cpp
     publisher/publisher.cpp
+    konsole/konsolepreviewer.cpp
     docbrowser/docbrowser.cpp
     projectmanager/projectmanager.cpp
     )
