@@ -91,7 +91,8 @@ private:
         PlasmoidRow = 0,
         DataEngineRow = 1,
         RunnerRow = 2,
-        ThemeRow = 3
+        ThemeRow = 3,
+        WindowSwitcherRow = 4
     };
 
     void setupWidgets();

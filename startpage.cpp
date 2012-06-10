@@ -143,6 +143,7 @@ void StartPage::setupWidgets()
     new QListWidgetItem(KIcon("kexi"), i18n("Data Engine"), m_ui.contentTypes);
     new QListWidgetItem(KIcon("system-run"), i18n("Runner"), m_ui.contentTypes);
     new QListWidgetItem(KIcon("inkscape"), i18n("Theme"), m_ui.contentTypes);
+    new QListWidgetItem(KIcon("window-duplicate"), i18n("Window Switcher"), m_ui.contentTypes);
 
 //     connect(m_ui.newProjectButton, SIGNAL(clicked()), this, SLOT(launchNewProjectWizard()));
 }
@@ -173,6 +174,7 @@ void StartPage::checkProjectName(const QString& name)
 void StartPage::validateProjectType(const QModelIndex &sender)
 {
     m_ui.languageLabel->show();
+    m_ui.frame->show();
     m_ui.radioButtonJs->setEnabled(true);
     m_ui.radioButtonPy->setEnabled(true);
 
@@ -187,10 +189,16 @@ void StartPage::validateProjectType(const QModelIndex &sender)
     } else if (sender.row() == ThemeRow) {
         m_ui.languageLabel->hide();
         m_ui.frame->hide();
-    } else /* if (sender.row() == PlasmaRow) */ {
-        m_ui.radioButtonDe->setEnabled(true);
+    } else if (sender.row() == PlasmoidRow) {
+      m_ui.radioButtonDe->setEnabled(true);
         m_ui.radioButtonDe->setChecked(true);
         m_ui.radioButtonRb->setEnabled(true);
+    } else if (sender.row() == WindowSwitcherRow) {
+        m_ui.radioButtonDe->setEnabled(true);
+        m_ui.radioButtonRb->setEnabled(false);
+        m_ui.radioButtonJs->setEnabled(false);
+        m_ui.radioButtonPy->setEnabled(false);
+        m_ui.radioButtonDe->setChecked(true);
     }
 
     m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty());
@@ -319,6 +327,9 @@ void StartPage::refreshRecentProjectsList()
         } else if (serviceTypes.contains("Plasma/Runner")) {
             defaultIconName = "system-run";
             tooltip += i18n("Project type: Runner");
+        } else if (serviceTypes.contains("KWin/WindowSwitcher")) {
+            defaultIconName = "window-duplicate";
+            tooltip += i18n("Project Type: Window Switcher");
         } else {
             kWarning() << "Unknown service type" << serviceTypes;
         }
@@ -363,7 +374,10 @@ void StartPage::createNewProject()
 
     // type -> serviceTypes
     QString serviceTypes;
-    if (m_ui.contentTypes->currentRow() == 1) {
+    if (m_ui.contentTypes->currentRow() == 0) {
+        serviceTypes = "Plasma/Applet";
+        templateFilePath.append("mainPlasmoid");
+    } else if (m_ui.contentTypes->currentRow() == 1) {
         serviceTypes = "Plasma/DataEngine";
         templateFilePath.append("mainDataEngine");
     } else if (m_ui.contentTypes->currentRow() == 2) {
@@ -371,9 +385,9 @@ void StartPage::createNewProject()
         templateFilePath.append("mainRunner");
     } else if (m_ui.contentTypes->currentRow() == 3) {
         serviceTypes = "Plasma/Theme";
-    } else {
-        serviceTypes = "Plasma/Applet";
-        templateFilePath.append("mainPlasmoid");
+    } else if (m_ui.contentTypes->currentRow() == 4) {
+        serviceTypes = "KWin/WindowSwitcher,Plasma/Applet";
+        templateFilePath.append("mainTabbox");
     }
 
     QString projectFolderName;

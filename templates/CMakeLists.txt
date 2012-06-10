@@ -1,4 +1,4 @@
-install(FILES 
+install(FILES
   mainRunner.py
   mainDataEngine.py
   mainDataEngine.rb
@@ -6,5 +6,6 @@ install(FILES
   mainPlasmoid.py
   mainPlasmoid.qml
   mainPlasmoid.rb
+  mainTabbox.qml
   cmakelists
-  DESTINATION ${DATA_INSTALL_DIR}/plasmate/templates) 
+  DESTINATION ${DATA_INSTALL_DIR}/plasmate/templates)
