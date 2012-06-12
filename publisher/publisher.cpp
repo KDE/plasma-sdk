@@ -35,7 +35,6 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
 {
     QWidget *uiWidget = new QWidget();
     m_ui.setupUi(uiWidget);
-
     m_signingWidget = new SigningWidget();
 
     //merge the ui file with the SigningWidget
@@ -133,13 +132,21 @@ void Publisher::doInstall()
 // Plasmoid specific, for now
 void Publisher::doCMake()
 {
-    if (m_projectType != "Plasma/Applet") {
+    if (m_projectType != "Plasma/Applet" && m_projectType != "KWin/WindowSwitcher") {
         qDebug() << "chaos";
         return;
     }
 
+    //Here we choose which template file we what to use.
+    QString templateFile;//
+    if (m_projectType == "KWin/WindowSwitcher") {
+        templateFile = "cmakelistsWindowSwitcher";
+    } else {
+        templateFile = "cmakelists";
+    }
+
     //this is the CMakeLists.txt from the templates directory
-    QFile cmakeListsSourceFile(KStandardDirs::locate("appdata", "templates/") + "cmakelists");
+    QFile cmakeListsSourceFile(KStandardDirs::locate("appdata", "templates/") + templateFile);
 
     QFile cmakeListsDestinationFile(m_projectPath.pathOrUrl() + "CMakeLists.txt");
 
@@ -263,9 +270,12 @@ void Publisher::doPlasmaPkg()
         argv.append("dataengine");
     } else if (m_projectType == "Plasma/Theme") {
         argv.append("theme");
-    } else {
+    } else if (m_projectType == "Plasma/Applet") {
         argv.append("plasmoid");
+    } else if (m_projectType == "KWin/WindowSwitcher") {
+        argv.append("windowswitcher");
     }
+
     // we do a plasmapkg -u in case the package was installed before
     // in which case it should be updated. -u also installs the
     // package if it hasn't been installed before, so it's all good.

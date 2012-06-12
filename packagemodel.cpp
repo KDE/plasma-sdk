@@ -64,7 +64,15 @@ void PackageModel::setPackageType(const QString &type)
 QString PackageModel::packageType() const
 {
     if (m_structure) {
-        return m_structure->type();
+
+        //Plasma:PackageStructure is not able to understand the KWin staff that are
+        //written with QML. So we need to retrieve that information inside from the
+        //metadata.desktop file
+        const QString metadataFile = package() + "metadata.desktop";
+        KConfig c(metadataFile);
+        KConfigGroup projectInformation(&c, "Desktop Entry");
+        const QString projectType = projectInformation.readEntry("X-KDE-ServiceTypes");
+        return projectType;
     }
 
     return QString();
