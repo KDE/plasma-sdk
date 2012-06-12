@@ -57,6 +57,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "startpage.h"
 #include "previewer/plasmoid/plasmoidpreviewer.h"
 #include "previewer/runner/runnerpreviewer.h"
+#include "previewer/windowswitcher/tabboxpreviewer.h"
 #include "publisher/publisher.h"
 #include "docbrowser/docbrowser.h"
 
@@ -675,8 +676,11 @@ void MainWindow::loadProject(const QString &path)
 
     // Workaround for Plasma::PackageStructure not recognizing Plasma/PopupApplet as a valid type
     const QString actualType = types.isEmpty() ? QString() :
+                                                 types.contains("KWin/WindowSwitcher") ? "Plasma/Applet" :
                                                  types.contains("Plasma/Applet") ? "Plasma/Applet" : types.first();
 
+    const QString previewerType = types.isEmpty() ? QString() :
+                                                 types.contains("KWin/WindowSwitcher") ? "KWin/WindowSwitcher" : actualType;
     delete m_model;
     m_model = new PackageModel(this);
 #ifdef DEBUG_MODEL
@@ -756,7 +760,7 @@ void MainWindow::loadProject(const QString &path)
 
     // initialize previewer
     delete m_previewerWidget;
-    m_previewerWidget = createPreviewerFor(actualType);
+    m_previewerWidget = createPreviewerFor(previewerType);
     actionCollection()->action("preview")->setEnabled(m_previewerWidget);
     if (m_previewerWidget) {
         addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
@@ -868,7 +872,9 @@ QStringList MainWindow::recentProjects()
 Previewer* MainWindow::createPreviewerFor(const QString& projectType)
 {
     Previewer* ret = 0;
-    if (projectType.contains("Plasma/Applet")) {
+    if (projectType.contains("KWin/WindowSwitcher")) {
+        ret = new TabBoxPreviewer(i18nc("Window Title", "Window Switcher Previewer"), this);
+    } else if (projectType.contains("Plasma/Applet")) {
         ret = new PlasmoidPreviewer(i18n("Preview"), this);
     } else if (projectType == "Plasma/Runner") {
         ret = new RunnerPreviewer(i18n("Previewer"), this);

@@ -119,9 +119,9 @@ void MetaDataEditor::readFile()
     } else if (serviceType == "Plasma/Runner") {
         view->type_combo->insertItem(0, i18n("Runner"));
         metadata->setServiceType("Plasma/Runner");
-    } else if (serviceType == "KWin/WindowSwitcher,Plasma/Applet") {
+    } else if (serviceType == "KWin/WindowSwitcher") {
         view->type_combo->insertItem(0,i18n("Window Switcher"));
-        metadata->setServiceType("KWin/WindowSwitcher,Plasma/Applet");
+        metadata->setServiceType("KWin/WindowSwitcher");
     } else {
         view->type_combo->insertItem(0, i18n("Applet"));
         view->type_combo->insertItem(1, i18n("Popup Applet"));

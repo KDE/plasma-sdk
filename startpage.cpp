@@ -315,7 +315,10 @@ void StartPage::refreshRecentProjectsList()
 
         QString defaultIconName;
 
-        if (serviceTypes.contains("Plasma/Applet")) {
+       if (serviceTypes.contains("KWin/WindowSwitcher")) {
+            defaultIconName = "window-duplicate";
+            tooltip += i18n("Project Type: Window Switcher");
+       } else if (serviceTypes.contains("Plasma/Applet")) {
             defaultIconName = "plasma";
             tooltip += i18n("Project type: Plasmoid");
         } else if (serviceTypes.contains("Plasma/DataEngine")) {
@@ -327,9 +330,6 @@ void StartPage::refreshRecentProjectsList()
         } else if (serviceTypes.contains("Plasma/Runner")) {
             defaultIconName = "system-run";
             tooltip += i18n("Project type: Runner");
-        } else if (serviceTypes.contains("KWin/WindowSwitcher")) {
-            defaultIconName = "window-duplicate";
-            tooltip += i18n("Project Type: Window Switcher");
         } else {
             kWarning() << "Unknown service type" << serviceTypes;
         }
@@ -386,7 +386,7 @@ void StartPage::createNewProject()
     } else if (m_ui.contentTypes->currentRow() == 3) {
         serviceTypes = "Plasma/Theme";
     } else if (m_ui.contentTypes->currentRow() == 4) {
-        serviceTypes = "KWin/WindowSwitcher,Plasma/Applet";
+        serviceTypes = "KWin/WindowSwitcher";
         templateFilePath.append("mainTabbox");
     }
 

@@ -3,7 +3,7 @@ project(PlasMate)
 # Find needed packages
 find_package(KDE4 REQUIRED)
 include(MacroLibrary)
-
+find_package(KDeclarative REQUIRED)
 set(LIBATTICA_MIN_VERSION "0.1.4")
 find_package(LibAttica REQUIRED)
 macro_log_feature(LIBATTICA_FOUND "libattica" "A library to access Open Collaboration Service providers" "http://websvn.kde.org/trunk/kdesupport/attica/" TRUE "${LIBATTICA_MIN_VERSION}" "Required uploading and downloading plasmoids using Get Hot New Stuff.")
@@ -50,6 +50,9 @@ set (PlasMate_SRC
     previewer/plasmoid/plasmoidpreviewer.cpp
     previewer/plasmoid/plasmoidview.cpp
     previewer/runner/runnerpreviewer.cpp
+    previewer/windowswitcher/windowswitcher.cpp
+    previewer/windowswitcher/thumbnailitem.cpp
+    previewer/windowswitcher/tabboxpreviewer.cpp
     previewer/previewer.cpp
     publisher/signingwidget.cpp
     publisher/signingdialog.cpp
@@ -58,6 +61,14 @@ set (PlasMate_SRC
     projectmanager/projectmanager.cpp
     )
 
+set (WindowSwitcherPreviewer_SRC
+    previewer/windowswitcher/windowswitcher.cpp
+    previewer/windowswitcher/thumbnailitem.cpp
+    previewer/windowswitcher/tabboxpreviewer.cpp
+    previewer/previewer.cpp
+    previewer/windowswitcher/standalone/main.cpp
+    previewer/windowswitcher/standalone/windowswitcherpreviewer.cpp
+)
 if (DEBUG_MODEL)
       set (PlasMate_SRC
          ${PlasMate_SRC}
@@ -76,6 +87,7 @@ include_directories(${KDE4_INCLUDES}
                     ${QT_QTWEBKIT_INCLUDE_DIR}
                     ${QGPGME_INCLUDE_DIR}
                     ${GPGME_INCLUDES}
+                    ${KDECLARATIVE_INCLUDE_DIR}
 )
 
 add_subdirectory( editors )
@@ -93,15 +105,35 @@ target_link_libraries(plasmate
                       ${QT_QTWEBKIT_LIBRARY}
                       ${LIBATTICA_LIBRARY_DIRS}
                       ${QGPGME_LIBRARIES}
+                      ${QT_QTDECLARATIVE_LIBRARIES}
+                      ${KDECLARATIVE_LIBRARIES}
 )
+
+kde4_add_executable(windowswitcherpreviewer ${WindowSwitcherPreviewer_SRC})
+target_link_libraries(windowswitcherpreviewer
+                      ${KDE4_KDEUI_LIBS}
+                      ${KDE4_KIO_LIBRARY}
+                      ${QT_QTDECLARATIVE_LIBRARIES}
+                      ${KDECLARATIVE_LIBRARIES}
+)
+
+
 
 if (DEBUG_MODEL)
    target_link_libraries(plasmate ${QT_QTTEST_LIBRARY})
 endif (DEBUG_MODEL)
 
+install(TARGETS windowswitcherpreviewer ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(TARGETS plasmate ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES plasmate.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES plasmateui.rc  DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 install(FILES plasmate.knsrc DESTINATION ${CONFIG_INSTALL_DIR})
 
+install( FILES previewer/windowswitcher/tabboxpreviewer.h DESTINATION ${INCLUDE_INSTALL_DIR})
+install( FILES previewer/windowswitcher/thumbnails/konqueror.png
+previewer/windowswitcher/thumbnails/kmail.png
+previewer/windowswitcher/thumbnails/systemsettings.png
+previewer/windowswitcher/thumbnails/dolphin.png
+DESTINATION ${DATA_INSTALL_DIR}/plasmate)
+install( FILES previewer/windowswitcher/tabboxdelegate.qml DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 macro_display_feature_log()
