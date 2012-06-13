@@ -675,12 +675,28 @@ void MainWindow::loadProject(const QString &path)
     QStringList types = service.serviceTypes();
 
     // Workaround for Plasma::PackageStructure not recognizing Plasma/PopupApplet as a valid type
-    const QString actualType = types.isEmpty() ? QString() :
-                                                 types.contains("KWin/WindowSwitcher") ? "Plasma/Applet" :
-                                                 types.contains("Plasma/Applet") ? "Plasma/Applet" : types.first();
+    QString actualType;
+    if (types.contains("KWin/WindowSwitcher")) {
+        actualType = "Plasma/Applet";
+    } else if (types.contains("KWin/Script")) {
+        actualType = "Plasma/Applet";
+    } else if (types.contains("Plasma/Applet")) {
+        actualType = "Plasma/Applet";
+    } else {
+        actualType = types.first();
+    }
 
-    const QString previewerType = types.isEmpty() ? QString() :
-                                                 types.contains("KWin/WindowSwitcher") ? "KWin/WindowSwitcher" : actualType;
+    QString previewerType;
+    if (types.contains("KWin/WindowSwitcher")) {
+        previewerType = "KWin/WindowSwitcher";
+    } else if (types.contains("KWin/Script")) {
+        //KWin Scripts doesn't have a previewer but we want the previewer to store their type
+        //because we will not use it on MainWindow::createPreviewerFor, so the previewer will be disable
+        previewerType = "KWin/Script";
+    } else {
+        previewerType = actualType;
+    }
+
     delete m_model;
     m_model = new PackageModel(this);
 #ifdef DEBUG_MODEL

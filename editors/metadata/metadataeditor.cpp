@@ -122,6 +122,9 @@ void MetaDataEditor::readFile()
     } else if (serviceType == "KWin/WindowSwitcher") {
         view->type_combo->insertItem(0,i18n("Window Switcher"));
         metadata->setServiceType("KWin/WindowSwitcher");
+    } else if (serviceType == "KWin/Script") {
+        view->type_combo->insertItem(0, i18n("KWin Script"));
+        metadata->setServiceType("KWin/Script");
     } else {
         view->type_combo->insertItem(0, i18n("Applet"));
         view->type_combo->insertItem(1, i18n("Popup Applet"));

@@ -92,7 +92,8 @@ private:
         DataEngineRow = 1,
         RunnerRow = 2,
         ThemeRow = 3,
-        WindowSwitcherRow = 4
+        WindowSwitcherRow = 4,
+        KWinScriptRow = 5
     };
 
     void setupWidgets();

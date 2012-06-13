@@ -7,5 +7,6 @@ install(FILES
   mainPlasmoid.qml
   mainPlasmoid.rb
   mainTabbox.qml
+  mainKWinScript.js
   cmakelists
   DESTINATION ${DATA_INSTALL_DIR}/plasmate/templates)
