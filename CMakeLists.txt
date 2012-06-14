@@ -31,6 +31,8 @@ set (PlasMate_SRC
     editors/imageviewer/imageloader.cpp
     editors/imageviewer/imageviewer.cpp
     editors/text/texteditor.cpp
+    editors/kconfigxt/kconfigxteditor.cpp
+    editors/kconfigxt/kconfigxtparser.cpp
     main.cpp
     sidebaritem.cpp
     sidebardelegate.cpp
@@ -69,6 +71,7 @@ set (WindowSwitcherPreviewer_SRC
     previewer/windowswitcher/standalone/main.cpp
     previewer/windowswitcher/standalone/windowswitcherpreviewer.cpp
 )
+
 if (DEBUG_MODEL)
       set (PlasMate_SRC
          ${PlasMate_SRC}
@@ -81,6 +84,7 @@ kde4_add_ui_files (PlasMate_SRC
    startpage.ui
    editors/metadata/metadata.ui
    publisher/publisher.ui
+   editors/kconfigxt/kconfigxteditor.ui
 )
 
 include_directories(${KDE4_INCLUDES}
@@ -103,6 +107,7 @@ target_link_libraries(plasmate
                       ${KDE4_PLASMA_LIBS}
                       ${KDE4_KNEWSTUFF3_LIBRARY}
                       ${QT_QTWEBKIT_LIBRARY}
+                      ${QT_QTXML_LIBRARY}
                       ${LIBATTICA_LIBRARY_DIRS}
                       ${QGPGME_LIBRARIES}
                       ${QT_QTDECLARATIVE_LIBRARIES}
@@ -136,4 +141,25 @@ previewer/windowswitcher/thumbnails/systemsettings.png
 previewer/windowswitcher/thumbnails/dolphin.png
 DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 install( FILES previewer/windowswitcher/tabboxdelegate.qml DESTINATION ${DATA_INSTALL_DIR}/plasmate)
+
+#plasmakconfigxteditor
+set(plasmakconfigxt_SRCS
+     editors/kconfigxt/kconfigxteditor.cpp
+     editors/kconfigxt/kconfigxtparser.cpp
+     editors/kconfigxt/standalone/plasmakconfigxteditor.cpp
+     editors/kconfigxt/standalone/main.cpp
+)
+
+kde4_add_ui_files (plasmakconfigxt_SRCS
+    editors/kconfigxt/kconfigxteditor.ui
+)
+
+kde4_add_executable(plasmakconfigxteditor ${plasmakconfigxt_SRCS})
+target_link_libraries(plasmakconfigxteditor
+                        ${KDE4_KDEUI_LIBS}
+                        ${KDE4_KIO_LIBRARY}
+                        ${QT_QTXML_LIBRARY}
+)
+
+install(TARGETS plasmakconfigxteditor ${INSTALL_TARGETS_DEFAULT_ARGS})
 macro_display_feature_log()

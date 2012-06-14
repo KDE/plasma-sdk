@@ -20,9 +20,12 @@
 #ifndef KCONFIGXT_EDITOR_H
 #define KCONFIGXT_EDITOR_H
 
-#include <QWidget>
+#include "ui_kconfigxteditor.h"
 
-class KConfigXtEditorPrivate;
+#include "kconfigxtparser.h"
+
+#include <QWidget>
+#include <KUrl>
 
 class KConfigXtEditor : public QWidget
 {
@@ -30,12 +33,11 @@ class KConfigXtEditor : public QWidget
 
 public:
     KConfigXtEditor(QWidget *parent = 0);
-    ~KConfigXtEditor();
 
     /**
      * Sets filename to edit
      */
-    void setFilename(const QString& filename);
+    void setFilename(const KUrl& filename);
 
 public slots:
     /**
@@ -56,6 +58,9 @@ private slots:
      */
     void createNewGroup();
 
+protected:
+    Ui::KConfigXtEditor m_ui;
+
 private:
     /**
      * Sets up editor widgets for a new file
@@ -63,8 +68,10 @@ private:
      */
     void setupWidgetsForNewFile();
 
-private:
-    KConfigXtEditorPrivate *const d;
+    KUrl m_filename;
+    QStringList m_groups;
+
+    KConfigXtParser m_parser;
 };
 
 #endif

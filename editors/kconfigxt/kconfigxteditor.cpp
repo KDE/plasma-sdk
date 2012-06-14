@@ -19,56 +19,50 @@
 */
 
 #include "kconfigxteditor.h"
-#include "ui_kconfigxteditor.h"
 
 #include <KDebug>
 #include <KIcon>
 #include <QFile>
 #include <QHeaderView>
-
-class KConfigXtEditorPrivate
-{
-public:
-    Ui::KConfigXtEditor *ui;
-    QString filename;
-    QStringList groups;
-};
+#include <QTreeWidgetItem>
 
 KConfigXtEditor::KConfigXtEditor(QWidget *parent)
-        : QWidget(parent), d(new KConfigXtEditorPrivate)
+        : QWidget(parent)
 {
-    d->ui = new Ui::KConfigXtEditor;
-    d->ui->setupUi(this);
+    m_ui.setupUi(this);
 
-    d->ui->twKeyValues->header()->setResizeMode(QHeaderView::ResizeToContents);
-    d->ui->twGroups->header()->setResizeMode(QHeaderView::ResizeToContents);
+    m_ui.twKeyValues->header()->setResizeMode(QHeaderView::ResizeToContents);
+    m_ui.twGroups->header()->setResizeMode(QHeaderView::ResizeToContents);
 
-    d->ui->lblHintIcon->setPixmap(KIcon("dialog-information").pixmap(16, 16));
+    m_ui.lblHintIcon->setPixmap(KIcon("dialog-information").pixmap(16, 16));
 
-    connect(d->ui->pbAddGroup, SIGNAL(clicked()), SLOT(createNewGroup()));
+    connect(m_ui.pbAddGroup, SIGNAL(clicked()), SLOT(createNewGroup()));
+
+    //hide the source related ui stuff
+    m_ui.srcLabel1->setVisible(false);
+    m_ui.srcLabel2->setVisible(false);
+    m_ui.srcRequester->setVisible(false);
+    m_ui.srcSeparator->setVisible(false);
 }
 
-KConfigXtEditor::~KConfigXtEditor()
+void KConfigXtEditor::setFilename(const KUrl& filename)
 {
-    delete d->ui;
-    delete d;
-}
-
-void KConfigXtEditor::setFilename(const QString& filename)
-{
-    d->filename = filename;
+    m_filename = filename;
 }
 
 void KConfigXtEditor::readFile()
 {
-    if (d->filename.isEmpty()) {
+    if (m_filename.isEmpty()) {
         kDebug() << "Empty filename given!";
         return;
     }
 
-    if (!QFile::exists(d->filename)) {
+    if (!QFile::exists(m_filename.pathOrUrl())) {
         setupWidgetsForNewFile();
         return;
+    } else {
+        m_parser.setConfigXmlFile(m_filename.pathOrUrl());
+        m_parser.parse();
     }
 
     // TODO: reading goes here
@@ -88,25 +82,25 @@ void KConfigXtEditor::setupWidgetsForNewFile()
 void KConfigXtEditor::createNewGroup()
 {
     QString newGroupName;
-    if (d->groups.isEmpty()) {
+    if (m_groups.isEmpty()) {
         newGroupName = "General";
     } else {
         int counter = 1;
         newGroupName = QString("Group %1").arg(counter);
-        while (d->groups.contains(newGroupName)) {
+        while (m_groups.contains(newGroupName)) {
             counter++;
             newGroupName = QString("Group %1").arg(counter);
         }
     }
 
-    d->groups.append(newGroupName);
+    m_groups.append(newGroupName);
 
     QTreeWidgetItem* item = new QTreeWidgetItem;
     item->setText(0, newGroupName);
     item->setFlags(item->flags() | Qt::ItemIsEditable);
 
-    d->ui->twGroups->addTopLevelItem(item);
+    m_ui.twGroups->addTopLevelItem(item);
 
-    d->ui->twGroups->setCurrentItem(item);
-    d->ui->twGroups->editItem(item);
+    m_ui.twGroups->setCurrentItem(item);
+    m_ui.twGroups->editItem(item);
 }

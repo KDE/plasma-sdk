@@ -50,6 +50,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "editors/metadata/metadataeditor.h"
 #include "editors/imageviewer/imageviewer.h"
 #include "editors/text/texteditor.h"
+#include "editors/kconfigxt/kconfigxteditor.h"
 #include "savesystem/timeline.h"
 #include "mainwindow.h"
 #include "packagemodel.h"
@@ -111,6 +112,7 @@ MainWindow::MainWindow(QWidget *parent)
         m_isPlasmateCreatedPackage(true),
         m_part(0),
         m_notesPart(0),
+        m_kconfigXtEditor(0),
         m_notesWidget(0)
 {
     setXMLFile("plasmateui.rc");
@@ -624,6 +626,20 @@ void MainWindow::loadImageViewer(const KUrl& target)
     updateSideBar();
 }
 
+void MainWindow::loadKConfigXtEditor(const KUrl& target)
+{
+    saveEditorData();
+    if (!m_kconfigXtEditor) {
+        m_kconfigXtEditor = new KConfigXtEditor(this);
+    }
+
+    m_kconfigXtEditor->setFilename(target);
+    qDebug() << "xmllllllllllllllll" << target.pathOrUrl();
+    m_kconfigXtEditor->readFile();
+    m_central->switchTo(m_kconfigXtEditor);
+
+    updateSideBar();
+}
 
 void MainWindow::loadMetaDataEditor(KUrl target)
 {
@@ -700,6 +716,7 @@ void MainWindow::loadProject(const QString &path)
         connect(m_editPage, SIGNAL(loadEditor(KService::List, KUrl)), this, SLOT(loadRequiredEditor(const KService::List, KUrl)));
         connect(m_editPage, SIGNAL(loadMetaDataEditor(KUrl)), this, SLOT(loadMetaDataEditor(KUrl)));
         connect(m_editPage, SIGNAL(loadImageViewer(KUrl)), this, SLOT(loadImageViewer(KUrl)));
+        connect(m_editPage, SIGNAL(loadKConfigXtEditor(KUrl)), this, SLOT(loadKConfigXtEditor(KUrl)));
         m_editPage->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
     }
 

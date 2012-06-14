@@ -122,6 +122,11 @@ void EditPage::findEditor(const QModelIndex &index)
             return;
         }
 
+        if (mimetype == "[plasmate]/kconfigxteditor") {
+            emit loadKConfigXtEditor(target);
+            return;
+        }
+
         if (mimetype == "[plasmate]/new") {
             const QString packagePath = index.data(PackageModel::packagePathRole).toString();
             const QString dialogText = i18n("Enter a name for the new file:");
@@ -184,7 +189,7 @@ void EditPage::findEditor(const QModelIndex &index)
 bool EditPage::hasExtension(const QString& filename)
 {
     QStringList list;
-    list << ".rb" << ".js" << ".qml" << ".py";
+    list << ".rb" << ".js" << ".qml" << ".py" << ".xml";
     foreach (const QString &str, list) {
         if (filename.endsWith(str)) {
             return true;

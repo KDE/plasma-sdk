@@ -20,41 +20,99 @@
 
 #include "kconfigxtparser.h"
 
-class KConfigXtParserPrivate
-{
-public:
-    QString filename;
-    QStringList groups;
-    QHash<QString, QVariant> keysAndValues;
-};
+#include <KMessageBox>
+#include <KLocalizedString>
 
-KConfigXtParser::KConfigXtParser()
-        : d(new KConfigXtParserPrivate())
+#include <QFile>
+#include <QXmlStreamReader>
+/*#include <QDomElement>
+#include <QDomNode>*/
+
+KConfigXtParser::KConfigXtParser(QObject *parent)
+        : QObject(parent)
 {
 
-}
-
-KConfigXtParser::~KConfigXtParser()
-{
-    delete d;
 }
 
 void KConfigXtParser::setConfigXmlFile(const QString& filename)
 {
-    d->filename = filename;
+    m_filename = filename;
+}
+#include <QDebug>
+void KConfigXtParser::parse()
+{
+    QFile xmlFile(m_filename);
+
+    if (!xmlFile.open(QIODevice::ReadWrite)) {
+        KMessageBox::error(0, i18n("The xml file isn't writable"));
+        return;
+    }
+
+    //we need a temporary hash
+    QHash<QString, QVariant> tmpHash;
+
+    QXmlStreamReader reader;
+    reader.setDevice(&xmlFile);
+QStringList groups;
+QStringList entries;
+QStringList elses;
+
+    QStringList groupNameList;
+    QStringList entriesList;
+
+    while (!reader.atEnd()) {
+        //for as long as we are still in the same element take the data
+        if (reader.readNextStartElement()) {
+        //ignore all the elements that are
+        //named "kcfg" and "kcgfile" or they are ""
+        //we don't want those to appear in the ui
+            if (reader.name() != "kcfg" && reader.name() != "kcfgfile" && !reader.name().isEmpty()) {
+                //qDebug() << "element text" <<reader.attributes().data()->value().toString();
+              //  qDebug() << "element name" << reader.name().toString()
+                if (reader.name() == "group") {
+                    //we have a new group
+                  //  tmpHash["group"] = reader.attributes().data()->value().toString();
+                    groupNameList << reader.attributes().data()->value().toString();
+                } else if(reader.name() == "entry") {
+                    //we have a new entry
+                    entriesList << reader.attributes().data()->value().toString();
+                } else {
+                  //  reader.readNext();
+                    elses <<  reader.name().toString() + ":" + reader.attributes().data()->value().toString();
+                    //QVector<QXmlStreamAttribute> vector = reader.attributes().data();
+                    qDebug() << "qualifiedName:" + reader.qualifiedName().toString();
+                    qDebug() << "qualifiedValue:" << reader.attributes().value(reader.qualifiedName().toString());
+                }
+            }
+        }
+    }
+
+
+    foreach(const QString& groupName, groupNameList) {
+        foreach(const QString& entry, entriesList) {
+            m_groups[groupName] << entry;
+        }
+    }
+    
+    
+    foreach(QString g, groupNameList) {
+        qDebug() << "groups:" <<g;
+    }
+    foreach(QString e, entriesList) {
+        qDebug() << "entries:"<< e;
+    }
+    
+    foreach(QString e, elses) {
+        qDebug() << "elses:"<< e;
+    }
 }
 
-bool KConfigXtParser::parse()
+QHash<QString, QStringList> KConfigXtParser::groups() const
 {
-    return true;
-}
-
-QStringList KConfigXtParser::groups() const
-{
-    return d->groups;
+    return m_groups;
 }
 
 QHash<QString, QVariant> KConfigXtParser::keysAndValues() const
 {
-    return d->keysAndValues;
+    return m_keysAndValues;
 }

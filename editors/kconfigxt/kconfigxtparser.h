@@ -25,13 +25,10 @@
 #include <QHash>
 #include <QVariant>
 
-class KConfigXtParserPrivate;
-
-class KConfigXtParser
+class KConfigXtParser : public QObject
 {
 public:
-    KConfigXtParser();
-    ~KConfigXtParser();
+    KConfigXtParser(QObject *parent = 0);
 
     void setConfigXmlFile(const QString& filename);
 
@@ -39,13 +36,13 @@ public:
      * Parses a kcfg file.
      * Should be called after setConfigXmlFile()
      */
-    bool parse();
+    void parse();
 
     /*
      * Returns a list of group names from config file.
      * Valid only after a successful call to parse()
      */
-    QStringList groups() const;
+    QHash<QString, QStringList> groups() const;
 
     /*
      * Returns a map of keys and values from config file.
@@ -54,7 +51,9 @@ public:
     QHash<QString, QVariant> keysAndValues() const;
 
 private:
-    KConfigXtParserPrivate *const d;
+    QString m_filename;
+    QHash<QString, QStringList> m_groups;
+    QHash<QString, QVariant> m_keysAndValues;
 };
 
 #endif

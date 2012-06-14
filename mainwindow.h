@@ -41,6 +41,7 @@ class PackageModel;
 class StartPage;
 class Sidebar;
 class TimeLine;
+class KConfigXtEditor;
 class MetaDataEditor;
 class ImageViewer;
 class TextEditor;
@@ -100,6 +101,7 @@ private Q_SLOTS:
     void loadRequiredEditor(const KService::List offers, KUrl target);
     void loadMetaDataEditor(KUrl target);
     void loadImageViewer(const KUrl& target);
+    void loadKConfigXtEditor(const KUrl& target);
     void updateActions();
     void toggleDocumentation();
     void toggleTimeLine();
@@ -156,7 +158,7 @@ private:
     Publisher *m_publisher;
     DocBrowser *m_browser;
     TextEditor *m_textEditor;
-
+    KConfigXtEditor *m_kconfigXtEditor;
 
     QDockWidget *m_filelist;
     EditPage *m_editPage;
