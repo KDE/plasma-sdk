@@ -111,7 +111,8 @@ private:
 
 SigningWidget::SigningWidget(QWidget* parent)
         : QWidget(parent),
-        m_treeWidget(0)
+        m_treeWidget(0),
+        m_noSigningButton(0)
 {
     loadConfig();
     initUI();
@@ -139,6 +140,8 @@ void SigningWidget::initUI()
     m_treeWidget = new QTreeWidget(this);
     m_treeWidget->setHeaderLabel("Select one key from the list below:");
 
+    m_noSigningButton = new QRadioButton("No signing key.", this);
+
     m_createKeyButton = new QPushButton(this);
     m_createKeyButton->setText("Create new Key ...");
     m_createKeyButton->setIcon(KIcon("dialog-password"));
@@ -148,25 +151,26 @@ void SigningWidget::initUI()
     m_deleteKeyButton->setText("Delete selected key");
     m_deleteKeyButton->setIcon(KIcon("edit-delete"));
 
-    m_signCheckBox = new QCheckBox("Enable plasmoid signing.", this);
-    m_signCheckBox->setChecked(m_signingEnabled);
-
     buttonLayout->addWidget(m_createKeyButton);
     buttonLayout->addWidget(m_deleteKeyButton);
 
-    mainlLayout->addWidget(m_signCheckBox);
     mainlLayout->addWidget(m_treeWidget);
     mainlLayout->addLayout(buttonLayout);
     setLayout(mainlLayout);
-
-    setEnabled(m_signingEnabled);
 
     connect(m_createKeyButton, SIGNAL(clicked()),
             this, SLOT(showCreateKeyDialog()));
     connect(m_deleteKeyButton, SIGNAL(clicked()),
             this, SLOT(deleteKey()));
-    connect(m_signCheckBox, SIGNAL(clicked(bool)),
-            this, SLOT(setEnabled(bool)));
+
+    connect(m_noSigningButton, SIGNAL(clicked(bool)), this, SLOT(setEnabled()));
+
+    //disable the delete button when the m_noSigningButton is clicked
+    //we don't want the m_noSigningButton to be deleted ever!
+    connect(m_noSigningButton, SIGNAL(clicked(bool)), m_deleteKeyButton, SLOT(setDisabled(bool)));
+
+
+    m_deleteKeyButton->setDisabled(m_noSigningButton->isChecked());
 }
 
 void SigningWidget::initGpgContext()
@@ -224,16 +228,24 @@ QString SigningWidget::mapKeyToString(const QMap<QString, QVariant> &map,  const
     return result;
 }
 
-void SigningWidget::setEnabled(const bool enabled)
+void SigningWidget::setEnabled()
 {
-    m_signingEnabled = enabled;
+    //Q: Why there is no parameter.
+    //A: Because we enable disable the feature according to
+    //m_noSigningButton's state.
+
+    //this method will be called every time
+    //that the user clicks the m_noSigningButton
+    //so if the button is checked we don't want the signing feature,
+    //otherwise we do.
+    //Also when the button(this is every key that the user
+    //has in his computer) is clicked this slot will be called,
+    //this means that we need the signing feature.
+
+    m_signingEnabled = !m_noSigningButton->isChecked();
+
     KConfigGroup cg(KGlobal::config(), "Signing Options");
     cg.writeEntry("signingEnabled", m_signingEnabled);
-    cg.sync();
-
-    m_treeWidget->setEnabled(m_signingEnabled);
-    //m_createKeyButton->setEnabled(m_signingEnabled);
-    m_deleteKeyButton->setEnabled(m_signingEnabled);
 }
 
 bool SigningWidget::signingEnabled() const
@@ -355,21 +367,49 @@ void SigningWidget::deleteKey()
 void SigningWidget::loadKeys()
 {
     m_treeWidget->clear();
+    QTreeWidgetItem *item = new QTreeWidgetItem(m_treeWidget);
+
+    //add the no singing button
+    QVBoxLayout *l = new QVBoxLayout();
+    l->addWidget(m_noSigningButton);
+
     QList< QMap<QString, QVariant> > entries = gpgEntryList(true);
+
     for (int i = 0; i < entries.count(); ++i) {
         QMap<QString, QVariant> entry = entries.at(i);
-        QTreeWidgetItem *item = new QTreeWidgetItem(m_treeWidget);
         QRadioButton *button = new QRadioButton(mapKeyToString(entry, false), this);
         button->setObjectName(mapKeyToString(entry));
         if (!m_currentKey.isNull() || m_currentKey.isEmpty()) {
-            if (m_currentKey == mapKeyToString(entry))
-                button->setChecked(true);
-        }
-        m_treeWidget->setItemWidget(item, 0, button);
 
-        connect(button, SIGNAL(clicked(bool)),
-                this, SLOT(updateCurrentKey()));
+            //First check if this is the key that we want
+            //and then check if the signing option is enabled.
+            if (m_currentKey == mapKeyToString(entry) && signingEnabled()) {
+                //yes this is the right key and the signing option is enabled
+                //so checkk the right button
+                button->setChecked(true);
+            } else {
+                //either the signing option isn't enabled
+                //or there is no right key, in both cases
+                //we want the m_noSigningButton to be checked
+                m_noSigningButton->setChecked(true);
+            }
+        }
+        l->addWidget(button);
+
+        connect(button, SIGNAL(clicked(bool)), this, SLOT(updateCurrentKey()));
+
+        //enable the signing feature
+        connect(button, SIGNAL(clicked(bool)), this, SLOT(setEnabled()));
+
+        //enable the m_deleteKeyButton
+        //we want the user to be able to delete a key, so enable the m_deleteKeyButton
+        connect(button, SIGNAL(clicked(bool)), m_deleteKeyButton, SLOT(setEnabled(bool)));
     }
+
+    //add the widgets into the treewidget
+    QWidget *tmpWidget = new QWidget();
+    tmpWidget->setLayout(l);
+    m_treeWidget->setItemWidget(item, 0, tmpWidget);
 }
 
 void SigningWidget::updateCurrentKey()

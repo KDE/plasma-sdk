@@ -25,6 +25,7 @@
 
 class QTreeWidget;
 class QPushButton;
+class QRadioButton;
 class QStringList;
 class QCheckBox;
 class QStringList;
@@ -47,7 +48,7 @@ public:
     bool sign(const KUrl &path);
 
 public Q_SLOTS:
-    void setEnabled(const bool enabled);
+    void setEnabled();
     void createKey(const QString &param);
 
 private:
@@ -61,7 +62,7 @@ private:
     QTreeWidget *m_treeWidget;
     QPushButton *m_createKeyButton;
     QPushButton *m_deleteKeyButton;
-    QCheckBox* m_signCheckBox;
+    QRadioButton *m_noSigningButton;
 
     QString m_currentKey;
     GpgME::Context *m_gpgContext;
