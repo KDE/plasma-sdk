@@ -132,7 +132,7 @@ void Publisher::doInstall()
 // Plasmoid specific, for now
 void Publisher::doCMake()
 {
-    if (m_projectType != "Plasma/Applet" && m_projectType != "KWin/WindowSwitcher") {
+    if (m_projectType != "Plasma/Applet" && m_projectType != "KWin/WindowSwitcher" && m_projectType != "KWin/Script") {
         qDebug() << "chaos";
         return;
     }
@@ -141,6 +141,8 @@ void Publisher::doCMake()
     QString templateFile;//
     if (m_projectType == "KWin/WindowSwitcher") {
         templateFile = "cmakelistsWindowSwitcher";
+    } else if (m_projectType == "KWin/Script") {
+        templateFile = "cmakelistsKWinScript";
     } else {
         templateFile = "cmakelists";
     }
@@ -274,6 +276,8 @@ void Publisher::doPlasmaPkg()
         argv.append("plasmoid");
     } else if (m_projectType == "KWin/WindowSwitcher") {
         argv.append("windowswitcher");
+    } else if (m_projectType == "KWin/Script") {
+        argv.append("kwinscript");
     }
 
     // we do a plasmapkg -u in case the package was installed before
