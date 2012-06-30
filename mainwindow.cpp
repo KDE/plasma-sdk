@@ -634,7 +634,6 @@ void MainWindow::loadKConfigXtEditor(const KUrl& target)
     }
 
     m_kconfigXtEditor->setFilename(target);
-    qDebug() << "xmllllllllllllllll" << target.pathOrUrl();
     m_kconfigXtEditor->readFile();
     m_central->switchTo(m_kconfigXtEditor);
 

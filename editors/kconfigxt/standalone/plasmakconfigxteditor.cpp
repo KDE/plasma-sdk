@@ -18,7 +18,7 @@ PlasmaKConfigXtEditor::PlasmaKConfigXtEditor(QWidget* parent)
     m_ui.srcRequester->setFilter("*.xml");
 
     //disable the widgets. The user hasn't give a path yet.
-    disableWidgets();
+    enableWidgets(false);
 
     //we want the source relative ui to be visible.
     m_ui.srcLabel1->setVisible(true);
@@ -35,22 +35,20 @@ void PlasmaKConfigXtEditor::checkProjectPath(const QString& path)
 
     //check if the files is an xml
     if(path.endsWith(".xml")) {
-        m_ui.twKeyValues->setEnabled(true);
-        m_ui.twGroups->setEnabled(true);
-        m_ui.pbAddGroup->setEnabled(true);
-        m_ui.pbAddKey->setEnabled(true);
+        enableWidgets(true);
         setFilename(path);
-
     } else {
-        disableWidgets();
+        enableWidgets(false);
     }
 }
 
-void PlasmaKConfigXtEditor::disableWidgets()
+void PlasmaKConfigXtEditor::enableWidgets(bool enable)
 {
-    m_ui.twKeyValues->setEnabled(false);
-    m_ui.twGroups->setEnabled(false);
-    m_ui.pbAddGroup->setEnabled(false);
-    m_ui.pbAddKey->setEnabled(false);
+    m_ui.twEntries->setEnabled(enable);
+    m_ui.twGroups->setEnabled(enable);
+    m_ui.pbAddGroup->setEnabled(enable);
+    m_ui.pbDeleteGroup->setEnabled(enable);
+    m_ui.pbAddEntry->setEnabled(enable);
+    m_ui.pbDeleteEntry->setEnabled(enable);
 }
 

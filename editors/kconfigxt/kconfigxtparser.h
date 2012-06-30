@@ -21,12 +21,41 @@
 #ifndef KCONFIGXTPARSER_H
 #define KCONFIGXTPARSER_H
 
-#include <QStringList>
-#include <QHash>
+#include <QMultiHash>
 #include <QVariant>
+#include <QList>
+#include <QXmlStreamReader>
+
+class KConfigXtParserItem
+{
+
+public:
+    KConfigXtParserItem(QObject* parent = 0);
+
+    QString groupName() const;
+    void setGroupName(const QString& groupName);
+
+    QString entryName() const;
+    void setEntryName(const QString& entryName);
+
+    QString entryType() const;
+    void setEntryType(const QString& entryType);
+
+    QString entryValue() const;
+    void setEntryValue(const QString& entryValue);
+
+private:
+    QString m_groupName;
+    QString m_entryName;
+    QString m_entryType;
+    QString m_entryValue;
+};
+
 
 class KConfigXtParser : public QObject
 {
+
+    Q_OBJECT
 public:
     KConfigXtParser(QObject *parent = 0);
 
@@ -36,24 +65,22 @@ public:
      * Parses a kcfg file.
      * Should be called after setConfigXmlFile()
      */
-    void parse();
+    bool parse();
 
-    /*
-     * Returns a list of group names from config file.
+    /**
+     * Returns the data from the xml file.
      * Valid only after a successful call to parse()
-     */
-    QHash<QString, QStringList> groups() const;
-
-    /*
-     * Returns a map of keys and values from config file.
-     * Valid only after a successful call to parse()
-     */
-    QHash<QString, QVariant> keysAndValues() const;
+     **/
+    QList<KConfigXtParserItem> dataList() const;
 
 private:
+    void parseGroup(QXmlStreamReader& reader);
+    void parseEntry(QXmlStreamReader& reader);
+    bool m_parseResult;
+
     QString m_filename;
-    QHash<QString, QStringList> m_groups;
-    QHash<QString, QVariant> m_keysAndValues;
+    QList<KConfigXtParserItem> m_dataList;
+    KConfigXtParserItem m_data;
 };
 
 #endif

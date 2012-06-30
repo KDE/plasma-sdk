@@ -44,7 +44,56 @@
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0" colspan="2">
+     <item row="1" column="4">
+      <widget class="KPushButton" name="pbAddEntry">
+       <property name="text">
+        <string>Add Entry</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="6">
+      <widget class="KPushButton" name="pbDeleteEntry">
+       <property name="text">
+        <string>Delete Entry</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="4" colspan="4">
+      <widget class="QTreeWidget" name="twEntries">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>2</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="rootIsDecorated">
+        <bool>false</bool>
+       </property>
+       <column>
+        <property name="text">
+         <string notr="true">Key</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Type</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Value</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="KPushButton" name="pbAddGroup">
+       <property name="text">
+        <string>Add Group</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0" colspan="4">
       <widget class="QTreeWidget" name="twGroups">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -62,42 +111,15 @@
        </column>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="KPushButton" name="pbAddGroup">
-       <property name="text">
-        <string>Add Group</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2" colspan="2">
-      <widget class="QTreeWidget" name="twKeyValues">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>2</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <column>
-        <property name="text">
-         <string notr="true">Key</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Value</string>
-        </property>
-       </column>
-      </widget>
-     </item>
      <item row="1" column="2">
-      <widget class="KPushButton" name="pbAddKey">
+      <widget class="KPushButton" name="pbDeleteGroup">
        <property name="text">
-        <string>Add Key</string>
+        <string>Delete Grop</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
-      <spacer name="horizontalSpacer">
+     <item row="1" column="5">
+      <spacer name="horizontalSpacer_2">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -109,8 +131,8 @@
        </property>
       </spacer>
      </item>
-     <item row="1" column="3">
-      <spacer name="horizontalSpacer_2">
+     <item row="1" column="1">
+      <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -172,19 +194,6 @@
       </widget>
      </item>
     </layout>
-   </item>
-   <item>
-    <spacer name="verticalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
    </item>
   </layout>
  </widget>

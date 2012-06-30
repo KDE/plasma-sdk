@@ -27,6 +27,8 @@
 #include <QWidget>
 #include <KUrl>
 
+class QTreeWidgetItem;
+
 class KConfigXtEditor : public QWidget
 {
     Q_OBJECT
@@ -58,18 +60,58 @@ private slots:
      */
     void createNewGroup();
 
+    /**
+     * Sets up editor widgets for
+     * the groups. This method should be called every time that the
+     * a group is modified/deleted/etc.
+     **/
+    void setupWidgetsForGroups();
+
+    /**
+     * Sets up editor widgets for
+     * the entries. This method should be called every time that the
+     * an entry is modified/deleted/etc.
+     **/
+    void setupWidgetsForEntries(QTreeWidgetItem *item);
+
+    /**
+     * Removes a group from the xml file
+     **/
+    void removeGroup();
+
 protected:
     Ui::KConfigXtEditor m_ui;
 
 private:
+    /**
+     * Sets up editor widgets for an existing file
+     * (e.g. creates a default group etc)
+     */
+    void setupWidgetsForOldFile();
+
     /**
      * Sets up editor widgets for a new file
      * (e.g. creates a default group etc)
      */
     void setupWidgetsForNewFile();
 
+    /**
+     * This method takes the groups from the parser
+     * If group is specified it will also take the
+     * keys,values and types from the parser for the specified group
+     **/
+    void takeDataFromParser(const QString& group = QString());
+
+    //with this method we avoid duplication
+    void addGroupToUi(const QString& group);
+
+    //with this method we can avoid duplication
+    void addEntryToUi(const QString& entryName,
+                                const QString& entryType, const QString& entryValue);
+
     KUrl m_filename;
     QStringList m_groups;
+    KConfigXtParserItem m_keysValuesTypes;
 
     KConfigXtParser m_parser;
 };

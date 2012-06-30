@@ -22,7 +22,7 @@ public Q_SLOTS:
     void checkProjectPath(const QString& path);
 
 private:
-    void disableWidgets();
+    void enableWidgets(bool enable);
 };
 
 #endif // PUBLISHER_H
