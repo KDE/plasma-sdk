@@ -22,6 +22,9 @@
 
 #include <KDebug>
 #include <KIcon>
+#include <KMessageBox>
+#include <KLocalizedString>
+
 #include <QFile>
 #include <QHeaderView>
 #include <QTreeWidgetItem>
@@ -40,6 +43,7 @@ KConfigXtEditor::KConfigXtEditor(QWidget *parent)
     connect(m_ui.twGroups, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
             this, SLOT(setupWidgetsForEntries(QTreeWidgetItem*)));
     connect(m_ui.pbDeleteGroup, SIGNAL(clicked()), this, SLOT(removeGroup()));
+    connect(m_ui.pbDeleteEntry, SIGNAL(clicked()), this, SLOT(removeEntry()));
 
     //hide the source related ui stuff
     m_ui.srcLabel1->setVisible(false);
@@ -176,9 +180,6 @@ void KConfigXtEditor::addGroupToUi(const QString& group)
 
 void KConfigXtEditor::addEntryToUi(const QString& key, const QString& type, const QString& value)
 {
-    qDebug() << "key:" + key;
-    qDebug() << "type:" + type;
-    qDebug() << "value:" + value;
     QTreeWidgetItem *item = new QTreeWidgetItem();
     item->setText(0, key);
     item->setText(1, type);
@@ -190,25 +191,92 @@ void KConfigXtEditor::addEntryToUi(const QString& key, const QString& type, cons
 
 void KConfigXtEditor::removeGroup()
 {
-    QByteArray array;
-    
+    //take the current item of the tree
     QTreeWidgetItem *item = m_ui.twGroups->currentItem();
+    if (removeElement(item->text(0), KConfigXtEditor::Group)) {
+        m_ui.twGroups->removeItemWidget(item, 0);
+    } else {
+        removeError();
+    }
+}
 
-    QString group = "<group name=\"" + item->text(0) + "\">";
+void KConfigXtEditor::removeEntry()
+{
+    //take the current item of the tree
+    QTreeWidgetItem *item = m_ui.twEntries->currentItem();
+    if (removeElement(item->text(0), KConfigXtEditor::Entry)) {
+        m_ui.twEntries->removeItemWidget(item, 0);
+    } else {
+        removeError();
+    }
+}
+
+void KConfigXtEditor::removeError()
+{
+    QString error = i18n("An error has occured during the removal of the item");
+    KMessageBox::error(this, error);
+}
+
+
+bool KConfigXtEditor::removeElement(const QString& elementName, ElementType elementType)
+{
+    if (elementName.isEmpty()) {
+        return false;
+    }
+
+    //take the element that we want
+    QString startElement;
+    if (elementType == KConfigXtEditor::Group) {
+        startElement  = "<group name=\"" + elementName + "\">";
+    } else if (elementType == KConfigXtEditor::Entry) {
+        startElement  = "<entry name=\"" + elementName + "\">";
+    }
 
     QFile xmlFile(m_filename.pathOrUrl());
     if(!xmlFile.open(QIODevice::ReadWrite)) {
-        return;
+        return false;
     }
 
-    QTextStream text(&xmlFile);
+    //Let me exaplain what is going on in this method,
+    //there is no way in Qt to remove the contents of
+    //a file if we don't use QTextEdit. So we can only keep
+    //the content which we don't want to delete then to empty
+    //our file and finally to add the content which we don't
+    //want to delete. So, its like we delete something!
+    QByteArray text;
 
-    while (!text.atEnd()) {
-        QString line = text.readLine();
-        if (line == group) {
-            while (line != "</group>") {
-                array.replace(line,"");
+    while (!xmlFile.atEnd()) {
+        QString line = xmlFile.readLine();
+        //while the element has started and the element
+        //hasn't ended skip those lines.
+        if (line.contains(startElement)) {
+            //choose our flag according to the give type;
+            QString endElement;
+            if (elementType == KConfigXtEditor::Group) {
+                endElement = "</group>";
+            } else if (elementType == KConfigXtEditor::Entry) {
+                endElement = "</entry>";
+            }
+
+            while (!line.contains(endElement)) {
+                line = xmlFile.readLine();
+            }
+
+            //if you are the last element which
+            //you have escaped from the while, skip!
+            if (line.contains(endElement)) {
+                line.clear();
             }
         }
+        text.append(line);
     }
+
+    //empty the xml file
+    xmlFile.resize(0);
+
+    //write our text and close the file
+    xmlFile.write(text);
+    xmlFile.close();
+
+    return true;
 }

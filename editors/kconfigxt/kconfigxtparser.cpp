@@ -26,9 +26,9 @@
 #include <QFile>
 #include <QXmlStreamReader>
 
-#include <QDebug>
 KConfigXtParserItem::KConfigXtParserItem(QObject* parent)
 {
+    Q_UNUSED(parent)
 }
 
 QString KConfigXtParserItem::groupName() const
@@ -54,13 +54,11 @@ QString KConfigXtParserItem::entryValue() const
 void KConfigXtParserItem::setGroupName(const QString& groupName)
 {
     m_groupName = groupName;
-    qDebug() << "groupName:" + groupName;
 }
 
 void KConfigXtParserItem::setEntryName(const QString& entryName)
 {
     m_entryName = entryName;
-    qDebug() << "entryName:" + entryName;
 }
 
 void KConfigXtParserItem::setEntryType(const QString& entryType)
@@ -97,13 +95,11 @@ void KConfigXtParserItem::setEntryType(const QString& entryType)
             m_entryType = type;
         }
     }
-    qDebug() << "entryType:" + entryType;
 }
 
 void KConfigXtParserItem::setEntryValue(const QString& entryValue)
 {
     m_entryValue = entryValue;
-    qDebug() << "m_entryValue:" + m_entryValue;
 }
 
 KConfigXtParser::KConfigXtParser(QObject *parent)
@@ -175,7 +171,6 @@ void KConfigXtParser::parseGroup(QXmlStreamReader& reader)
     if(reader.attributes().hasAttribute("name")) {
     // We'll add it to the hash
     m_data.setGroupName(reader.attributes().value("name").toString());
-    qDebug() << "auto einai to name tou group:" + reader.attributes().value("name").toString();
     }
 
 
@@ -204,15 +199,12 @@ void KConfigXtParser::parseEntry(QXmlStreamReader& reader)
     //check if there is a type attribute
     //if there isn't fail!
     if (reader.attributes().hasAttribute("type")) {
-        qDebug() << "auto einai to attribute  type tou entry:" + reader.attributes().value("type").toString();
         //now we can take the entry's name and type
         m_data.setEntryName(reader.attributes().value("name").toString());
         m_data.setEntryType(reader.attributes().value("type").toString());
 
         m_parseResult = true;
 
-        qDebug() << "entry name:" + reader.name().toString();
-        qDebug() << "entry type:" + reader.attributes().value("type").toString();
     } else {
         //there is no type, fail
         m_parseResult = false;
@@ -230,7 +222,6 @@ void KConfigXtParser::parseEntry(QXmlStreamReader& reader)
 
         //we have a default element
         if (reader.name().toString() == "default") {
-            qDebug() << "mpike!!!";
 
             //go ahead one more!
             reader.readNext();

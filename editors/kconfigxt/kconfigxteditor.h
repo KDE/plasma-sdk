@@ -36,6 +36,11 @@ class KConfigXtEditor : public QWidget
 public:
     KConfigXtEditor(QWidget *parent = 0);
 
+    enum ElementType {
+        Group = 0,
+        Entry
+    };
+
     /**
      * Sets filename to edit
      */
@@ -79,6 +84,11 @@ private slots:
      **/
     void removeGroup();
 
+    /**
+     * Removes an entry from the xml file
+     **/
+    void removeEntry();
+
 protected:
     Ui::KConfigXtEditor m_ui;
 
@@ -108,6 +118,14 @@ private:
     //with this method we can avoid duplication
     void addEntryToUi(const QString& entryName,
                                 const QString& entryType, const QString& entryValue);
+
+    //with this method we can avoid duplication,
+    //this method will delete everything that is between the startsWith
+    //and endsWith
+    bool removeElement(const QString& elementName, ElementType elementType);
+
+    //reduces duplication
+    void removeError();
 
     KUrl m_filename;
     QStringList m_groups;
