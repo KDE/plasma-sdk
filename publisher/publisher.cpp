@@ -1,5 +1,6 @@
 /*
   Copyright 2009 Lim Yuen Hoe <yuenhoe@hotmail.com>
+  Copyright 2012 Giorgos Tsiapaliwkas <terietor@gmail.com>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -9,6 +10,9 @@
 
 #include <QDBusInterface>
 #include <QVBoxLayout>
+#include <QCheckBox>
+#include <QComboBox>
+#include <QScopedPointer>
 
 #include <KConfigGroup>
 #include <KIO/DeleteJob>
@@ -25,6 +29,7 @@
 #include "signingwidget.h"
 #include "../packagemodel.h"
 #include "../projectmanager/projectmanager.h"
+#include "remoteinstaller/remoteinstallerdialog.h"
 
 Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
         : QDialog(parent),
@@ -54,6 +59,7 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     m_ui.installerButton->addItem("");
     m_ui.installerButton->addItem("Use PlasmaPkg");
     m_ui.installerButton->addItem("Use cmake");
+    m_ui.installerButton->addItem("Remote Install");
 
     connect(m_ui.exporterUrl, SIGNAL(urlSelected(const KUrl&)), this, SLOT(addSuffix()));
     connect(m_ui.exporterButton, SIGNAL(clicked()), this, SLOT(doExport()));
@@ -112,6 +118,9 @@ void Publisher::checkInstallButtonState(int comboBoxCurrentIndex)
     } else if (comboBoxCurrentIndex == 2) {
         m_ui.installButton->setEnabled(true);
         m_comboBoxIndex = 2;
+    } else if (comboBoxCurrentIndex == 3) {
+        m_ui.installButton->setEnabled(true);
+        m_comboBoxIndex = 3;
     } else {
         m_ui.installButton->setEnabled(false);
         m_comboBoxIndex = 0;
@@ -126,6 +135,8 @@ void Publisher::doInstall()
         doPlasmaPkg();
     } else if (m_comboBoxIndex == 2) {
         doCMake();
+    } else if (m_comboBoxIndex == 3) {
+        doRemoteInstall();
     }
 }
 
@@ -167,8 +178,7 @@ void Publisher::doCMake()
     cmakeListsSourceFile.close();
 
     //we need the last loaded package which also is the current package.
-    KConfigGroup cg(KGlobal::config(), "PackageModel::package");
-    QString packagePath(cg.readEntry("lastLoadedPackage", QString()));
+    QString packagePath = currentPackagePath();
 
     //create a temporary build dir
     QDir dir(packagePath);
@@ -327,6 +337,19 @@ void Publisher::doPlasmaPkg()
     }
 }
 
+void Publisher::doRemoteInstall()
+{
+    QScopedPointer<RemoteInstallerDialog> dialog(new RemoteInstallerDialog());
+
+    //get the source directory from plasmaterc
+    KConfigGroup c(KGlobal::config(), "PackageModel::package");
+    QString path = currentPackagePath();
+
+    dialog->setPackagePath(path);
+
+    dialog->exec();
+}
+
 const QString Publisher::tempPackagePath()
 {
     QDir d(m_projectPath.pathOrUrl());
@@ -367,4 +390,10 @@ bool Publisher::exportToFile(const KUrl& url)
         return false;
     }
     return ProjectManager::exportPackage(m_projectPath, url); // will overwrite if exists!
+}
+
+QString Publisher::currentPackagePath() const
+{
+    KConfigGroup cg(KGlobal::config(), "PackageModel::package");
+    return cg.readEntry("lastLoadedPackage", QString());
 }
