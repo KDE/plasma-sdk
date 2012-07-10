@@ -55,6 +55,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "packagemodel.h"
 #include "sidebar.h"
 #include "startpage.h"
+#include "konsole/konsolepreviewer.h"
 #include "previewer/plasmoid/plasmoidpreviewer.h"
 #include "previewer/runner/runnerpreviewer.h"
 #include "publisher/publisher.h"
@@ -609,7 +610,6 @@ void MainWindow::updateSideBar()
     m_oldTab = EditTab;
 }
 
-
 void MainWindow::loadImageViewer(const KUrl& target)
 {
     saveEditorData();
@@ -623,6 +623,21 @@ void MainWindow::loadImageViewer(const KUrl& target)
     updateSideBar();
 }
 
+void MainWindow::showKonsolePreviewer()
+{
+    if(m_konsole->isVisible()) {
+        m_konsole->setVisible(false);
+    } else {
+        m_konsole->setVisible(true);
+    }
+}
+
+void MainWindow::reloadKonsolePreviewer()
+{
+    if (m_konsole && m_previewerWidget) {
+        m_konsole->setOutput(m_previewerWidget->takeOutput());
+    }
+}
 
 void MainWindow::loadMetaDataEditor(KUrl target)
 {
@@ -754,6 +769,10 @@ void MainWindow::loadProject(const QString &path)
         refreshNotes();
     }
 
+
+    //initialize the konsole previewer
+    m_konsole = new KonsolePreviewer(i18n("Previewer Output"), this);
+
     // initialize previewer
     delete m_previewerWidget;
     m_previewerWidget = createPreviewerFor(actualType);
@@ -762,6 +781,12 @@ void MainWindow::loadProject(const QString &path)
         addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
         m_previewerWidget->showPreview(packagePath);
         m_previewerWidget->setVisible(showPreview);
+
+        //now do the relative stuff for the konsole
+        m_konsole->setOutput(m_previewerWidget->takeOutput());
+        m_konsole->setObjectName("Previewer Output");
+        connect(m_previewerWidget, SIGNAL(showKonsole()), this, SLOT(showKonsolePreviewer()));
+        addDockWidget(Qt::BottomDockWidgetArea, m_konsole);
     }
 
     restoreState(state, STATE_VERSION);
@@ -877,6 +902,7 @@ Previewer* MainWindow::createPreviewerFor(const QString& projectType)
     if (ret) {
         ret->setObjectName("preview");
         connect(ret, SIGNAL(refreshRequested()), this, SLOT(saveAndRefresh()));
+        connect(ret, SIGNAL(refreshRequested()), this, SLOT(reloadKonsolePreviewer()));
         connect(ret, SIGNAL(visibilityChanged(bool)), this, SLOT(updateActions()));
     }
 

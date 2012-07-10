@@ -30,6 +30,7 @@ public:
     ~RunnerPreviewer();
     void showPreview(const QString &packagePath);
     void refreshPreview();
+    QString takeOutput() const;
 
 public slots:
     void doQuery();

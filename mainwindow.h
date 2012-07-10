@@ -44,6 +44,7 @@ class TimeLine;
 class MetaDataEditor;
 class ImageViewer;
 class TextEditor;
+class KonsolePreviewer;
 
 // our own previewer
 class Previewer;
@@ -107,6 +108,8 @@ private Q_SLOTS:
     void toggleNotes();
     void toggleFileList();
     void installPackage();
+    void showKonsolePreviewer();
+    void reloadKonsolePreviewer();
 
     // refreshes editor, killing all local changes
     void editorDestructiveRefresh();
@@ -156,7 +159,7 @@ private:
     Publisher *m_publisher;
     DocBrowser *m_browser;
     TextEditor *m_textEditor;
-
+    KonsolePreviewer *m_konsole;
 
     QDockWidget *m_filelist;
     EditPage *m_editPage;

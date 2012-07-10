@@ -47,6 +47,7 @@ public slots:
 
 signals:
     void refreshClicked();
+    void showKonsole();
 
 protected slots:
     void refreshAndEmit();

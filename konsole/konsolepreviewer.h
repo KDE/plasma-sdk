@@ -1,6 +1,5 @@
 /*
- * Copyright 2010 Lim Yuen Hoe <yuenhoe@hotmail.com>
- *
+ *   Copyright 2012 Giorgos Tsiapaliwkas <terietor@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -18,27 +17,27 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef PLASMOIDPREVIEWER_H
-#define PLASMOIDPREVIEWER_H
+#ifndef KONSOLEPREVIEWER_H
+#define KONSOLEPREVIEWER_H
 
-#include "../previewer.h"
-#include "plasmoidview.h"
+#include <QDockWidget>
 
-class PlasmoidPreviewer : public Previewer {
+class KTextEdit;
+
+class KonsolePreviewer : public QDockWidget {
 
     Q_OBJECT
 
-signals:
-    void refreshView(); // emitted to signal the containment to refresh
-
 public:
-    PlasmoidPreviewer(const QString & title, QWidget * parent = 0, Qt::WindowFlags flags = 0 );
-    void showPreview(const QString &packagePath);
-    void refreshPreview();
-    QString takeOutput() const;
+    KonsolePreviewer(const QString & title, QWidget *parent = 0);
+
+public Q_SLOTS:
+    void clearOutput();
+    void setOutput(const QString& output);
+    void saveOutput();
 
 private:
-    PlasmoidView* m_view;
+    KTextEdit *m_textEdit;
 };
 
-#endif // PLASMOIDPREVIEWER_H
+#endif // KONSOLEPREVIEWER_H

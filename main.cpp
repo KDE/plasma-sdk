@@ -15,15 +15,46 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <iostream>
+
 #include <KApplication>
 #include <KAboutData>
 #include <KLocale>
 #include <KCmdLineArgs>
 
+#include <QFile>
+#include <QTextStream>
+
 #include "mainwindow.h"
+
+void customMessageHandler(QtMsgType type, const char *msg)
+{
+    QString txt;
+    switch (type) {
+        case QtDebugMsg:
+            txt = QString("Debug: %1").arg(msg);
+            break;
+        case QtWarningMsg:
+            txt = QString("Warning: %1").arg(msg);
+            break;
+        case QtCriticalMsg:
+            txt = QString("Critical: %1").arg(msg);
+            break;
+        case QtFatalMsg:
+            txt = QString("Fatal: %1").arg(msg);
+            abort();
+    }
+    QFile outFile("/var/tmp/plasmatepreviewerlog.txt");
+    outFile.open(QIODevice::WriteOnly | QIODevice::Append);
+    QTextStream ts(&outFile);
+    ts << txt << endl;
+    std::cout << txt.toLocal8Bit().constData() << std::endl;
+}
 
 int main(int argc, char *argv[])
 {
+    qInstallMsgHandler(customMessageHandler);
+
     KAboutData aboutData("plasmate", 0, ki18n("Plasmate"),
                          "0.1alpha3", ki18n("Plasma Add-Ons Creator"),
                          KAboutData::License_GPL,

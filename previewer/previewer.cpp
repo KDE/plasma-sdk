@@ -31,3 +31,8 @@ void Previewer::emitRefreshRequest()
 {
     emit refreshRequested();
 }
+
+void Previewer::emitShowKonsole()
+{
+    emit showKonsole();
+}
