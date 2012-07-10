@@ -130,6 +130,10 @@ set (PlasmaRemoteInstaller_SRC
     publisher/remoteinstaller/standalone/plasmaremoteinstaller.cpp
 )
 
+kde4_add_ui_files (PlasmaRemoteInstaller_SRC
+   publisher/remoteinstaller/remoteinstaller.ui
+)
+
 kde4_add_executable(plasmaremoteinstaller ${PlasmaRemoteInstaller_SRC})
 target_link_libraries(plasmaremoteinstaller
                       ${KDE4_KDEUI_LIBS}
