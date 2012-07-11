@@ -156,7 +156,7 @@ void KConfigXtEditor::takeDataFromParser(const QString& group)
                 m_keysValuesTypes = item;
             } else {
                 //we haven't specified a group.
-                //So we don't want populate the m_ui.twEntries.
+                //So we don't want to populate the m_ui.twEntries.
                 //clear the item.
                 m_keysValuesTypes = KConfigXtParserItem();
             }
@@ -194,7 +194,9 @@ void KConfigXtEditor::removeGroup()
     //take the current item of the tree
     QTreeWidgetItem *item = m_ui.twGroups->currentItem();
     if (removeElement(item->text(0), KConfigXtEditor::Group)) {
-        m_ui.twGroups->removeItemWidget(item, 0);
+        //remote the group from the ui,
+        //we have already deleted it from the xml file
+        delete m_ui.twGroups->currentItem();
     } else {
         removeError();
     }
@@ -205,7 +207,9 @@ void KConfigXtEditor::removeEntry()
     //take the current item of the tree
     QTreeWidgetItem *item = m_ui.twEntries->currentItem();
     if (removeElement(item->text(0), KConfigXtEditor::Entry)) {
-        m_ui.twEntries->removeItemWidget(item, 0);
+        //remote the entry from the ui,
+        //we have already deleted it from the xml file
+        delete m_ui.twEntries->currentItem();
     } else {
         removeError();
     }
