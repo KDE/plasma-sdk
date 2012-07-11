@@ -46,12 +46,8 @@ RemoteInstaller::RemoteInstaller(const QString& username, const QString& hostnam
     m_destinationPath = m_execUrl;
     m_destinationPath.setPath(temporaryDirectory);
 
-    //we need the name of the package and the directory
-    QDir packageDir(source);
-    //NOTE our path isn't a directory it is a metadata.desktop,
-    //that's plasmate's way to validate packages
-    packageDir.cdUp();
-    m_sourcePath = packageDir.path();
+    //we need our source path
+    m_sourcePath = source;
 
     m_plasmaPkgUrl.append("plasmapkg -u " + temporaryDirectory + packageDir.dirName() + '/');
 
