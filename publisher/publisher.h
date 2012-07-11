@@ -41,6 +41,8 @@ private:
     bool cmakeProcessStatus(QProcess::ProcessError error);
     bool exportToFile(const KUrl& url);
     const QString tempPackagePath();
+
+    //avoid duplication
     QString currentPackagePath() const;
 
     SigningWidget* m_signingWidget;

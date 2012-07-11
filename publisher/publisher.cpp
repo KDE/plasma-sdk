@@ -342,9 +342,7 @@ void Publisher::doRemoteInstall()
     QScopedPointer<RemoteInstallerDialog> dialog(new RemoteInstallerDialog());
 
     //get the source directory from plasmaterc
-    KConfigGroup c(KGlobal::config(), "PackageModel::package");
     QString path = currentPackagePath();
-
     dialog->setPackagePath(path);
 
     dialog->exec();
