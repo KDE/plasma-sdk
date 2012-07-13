@@ -89,6 +89,16 @@ private slots:
      **/
     void removeEntry();
 
+    /**
+     * Modifies a group from the xml file
+     **/
+    void modifyGroup(QTreeWidgetItem *item, int column);
+
+    /**
+     * Modifies an entry from the xml file
+     **/
+    void modifyEntry(QTreeWidgetItem *item, int column);
+
 protected:
     Ui::KConfigXtEditor m_ui;
 

@@ -40,8 +40,10 @@ KConfigXtEditor::KConfigXtEditor(QWidget *parent)
     m_ui.lblHintIcon->setPixmap(KIcon("dialog-information").pixmap(16, 16));
 
     connect(m_ui.pbAddGroup, SIGNAL(clicked()), this, SLOT(createNewGroup()));
-    connect(m_ui.twGroups, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
+    connect(m_ui.twGroups, SIGNAL(itemClicked(QTreeWidgetItem*, int)),
             this, SLOT(setupWidgetsForEntries(QTreeWidgetItem*)));
+    connect(m_ui.twGroups, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(modifyGroup(QTreeWidgetItem*, int)));
+    connect(m_ui.twEntries, SIGNAL(itemDoubleClicked(QTreeWidgetItem *, int)), this, SLOT(modifyEntry(QTreeWidgetItem*, int)));
     connect(m_ui.pbDeleteGroup, SIGNAL(clicked()), this, SLOT(removeGroup()));
     connect(m_ui.pbDeleteEntry, SIGNAL(clicked()), this, SLOT(removeEntry()));
 
@@ -182,6 +184,15 @@ void KConfigXtEditor::takeDataFromParser(const QString& group)
             m_keysValuesTypes.append(item);
         }
     }
+}
+
+void KConfigXtEditor::modifyEntry(QTreeWidgetItem* item, int column)
+{
+}
+
+void KConfigXtEditor::modifyGroup(QTreeWidgetItem* item, int column)
+{
+    qDebug() << "the item has been changed!";
 }
 
 void KConfigXtEditor::removeGroup()
