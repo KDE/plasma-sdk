@@ -109,7 +109,11 @@ private:
      * This method takes the groups from the parser
      * If group is specified it will also take the
      * keys,values and types from the parser for the specified group
-     **/
+     *
+     * NOTE: after the call of this method use can use m_groups
+     * and m_keysValuesTypes
+     */
+
     void takeDataFromParser(const QString& group = QString());
 
     //with this method we avoid duplication
@@ -129,7 +133,7 @@ private:
 
     KUrl m_filename;
     QStringList m_groups;
-    KConfigXtParserItem m_keysValuesTypes;
+    QList<KConfigXtParserItem> m_keysValuesTypes;
 
     KConfigXtParser m_parser;
 };

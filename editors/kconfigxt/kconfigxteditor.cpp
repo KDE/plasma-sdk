@@ -70,8 +70,6 @@ void KConfigXtEditor::readFile()
         return;
     } else {
         m_parser.setConfigXmlFile(m_filename.pathOrUrl());
-        //parse the xml
-        m_parser.parse();
         takeDataFromParser();
         setupWidgetsForOldFile();
     }
@@ -131,19 +129,24 @@ void KConfigXtEditor::addGroupToUi(const QString& group)
 
 void KConfigXtEditor::setupWidgetsForEntries(QTreeWidgetItem *item)
 {
+    if (!item) {
+        return;
+    }
+
     //the currectIndex of m_ui.twGroups has changed.
     //this means that we need to load the data for the new
     //group so remove the old items
     m_ui.twEntries->clear();
 
-    if (!item) {
-        return;
-    }
+    //also we will take new keys values and types so clear our list
+    m_keysValuesTypes.clear();
 
     //take keys,values and types for the specified group
     takeDataFromParser(item->text(0));
 
-    addEntryToUi(m_keysValuesTypes.entryName(), m_keysValuesTypes.entryType(), m_keysValuesTypes.entryValue());
+   foreach(const KConfigXtParserItem& item, m_keysValuesTypes) {
+       addEntryToUi(item.entryName(), item.entryType(), item.entryValue());
+    }
 
 }
 
@@ -158,25 +161,25 @@ void KConfigXtEditor::addEntryToUi(const QString& key, const QString& type, cons
 
 void KConfigXtEditor::takeDataFromParser(const QString& group)
 {
+
+    //we need to update the data of our parser first
+    m_parser.parse();
+
     foreach(const KConfigXtParserItem& item, m_parser.dataList()) {
 
-        //take the name of the groups
-        if (!item.groupName().isEmpty()) {
+        //take the name of the groups also due to the fact
+        //that we take data from a parser we have to be careful so
+        //check if the group exists in the list
+        if (!item.groupName().isEmpty() && !m_groups.contains(item.groupName())) {
             m_groups << item.groupName();
         }
 
-        if (!group.isEmpty()) {
-            if (item.groupName() == group) {
-                //we have specified a group
-                //so probably we want to populate the
-                //m_ui.twEntries.
-                m_keysValuesTypes = item;
-            } else {
-                //we haven't specified a group.
-                //So we don't want to populate the m_ui.twEntries.
-                //clear the item.
-                m_keysValuesTypes = KConfigXtParserItem();
-            }
+        if (!group.isEmpty() && item.groupName() == group
+            && !m_keysValuesTypes.contains(item)) {
+            //we have specified a group
+            //so probably we want to populate the
+            //m_ui.twEntries.
+            m_keysValuesTypes.append(item);
         }
     }
 }

@@ -44,6 +44,8 @@ public:
     QString entryValue() const;
     void setEntryValue(const QString& entryValue);
 
+    bool operator==(const KConfigXtParserItem& item);
+
 private:
     QString m_groupName;
     QString m_entryName;

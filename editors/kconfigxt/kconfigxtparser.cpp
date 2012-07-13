@@ -61,6 +61,15 @@ void KConfigXtParserItem::setEntryName(const QString& entryName)
     m_entryName = entryName;
 }
 
+bool KConfigXtParserItem::operator==(const KConfigXtParserItem& item)
+{
+    if (this->entryName() == item.entryName()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 void KConfigXtParserItem::setEntryType(const QString& entryType)
 {
     //those are the possible types
@@ -116,6 +125,11 @@ void KConfigXtParser::setConfigXmlFile(const QString& filename)
 
 bool KConfigXtParser::parse()
 {
+    //we will parse the xml again so clear the list
+    if (!m_dataList.isEmpty()) {
+        m_dataList.clear();
+    }
+
     QFile xmlFile(m_filename);
 
     if (!xmlFile.open(QIODevice::ReadWrite)) {
@@ -151,7 +165,6 @@ bool KConfigXtParser::parse()
         m_parseResult = false;
     }
 
-    m_dataList.append(m_data);
     //the parse was successfull
     m_parseResult = true;
 
@@ -216,7 +229,6 @@ void KConfigXtParser::parseEntry(QXmlStreamReader& reader)
 
     //for as long as we are inside the entry element
     //we need to search for its value
-    int counter = 0;
     while(!(reader.tokenType() == QXmlStreamReader::EndElement &&
         reader.name() == "entry")) {
 
@@ -238,6 +250,8 @@ void KConfigXtParser::parseEntry(QXmlStreamReader& reader)
         }
         reader.readNext();
     }
+    //add the data in our datalist
+    m_dataList.append(m_data);
 }
 
 QList<KConfigXtParserItem> KConfigXtParser::dataList() const
