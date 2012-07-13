@@ -121,6 +121,14 @@ void KConfigXtEditor::setupWidgetsForGroups()
     }
 }
 
+void KConfigXtEditor::addGroupToUi(const QString& group)
+{
+    QTreeWidgetItem *item = new QTreeWidgetItem(m_ui.twGroups);
+    item->setText(0, group);
+    item->setFlags(item->flags() | Qt::ItemIsEditable);
+    //TODO mem leak?
+}
+
 void KConfigXtEditor::setupWidgetsForEntries(QTreeWidgetItem *item)
 {
     //the currectIndex of m_ui.twGroups has changed.
@@ -137,6 +145,15 @@ void KConfigXtEditor::setupWidgetsForEntries(QTreeWidgetItem *item)
 
     addEntryToUi(m_keysValuesTypes.entryName(), m_keysValuesTypes.entryType(), m_keysValuesTypes.entryValue());
 
+}
+
+void KConfigXtEditor::addEntryToUi(const QString& key, const QString& type, const QString& value)
+{
+    QTreeWidgetItem *item = new QTreeWidgetItem(m_ui.twEntries);
+    item->setText(0, key);
+    item->setText(1, type);
+    item->setText(2, value);
+    item->setFlags(item->flags() | Qt::ItemIsEditable);
 }
 
 void KConfigXtEditor::takeDataFromParser(const QString& group)
@@ -162,31 +179,6 @@ void KConfigXtEditor::takeDataFromParser(const QString& group)
             }
         }
     }
-
-}
-
-void KConfigXtEditor::addGroupToUi(const QString& group)
-{
-    QTreeWidgetItem *item = new QTreeWidgetItem();
-    item->setText(0, group);
-    item->setFlags(item->flags() | Qt::ItemIsEditable);
-
-    m_ui.twGroups->addTopLevelItem(item);
-
-    m_ui.twGroups->setCurrentItem(item);
-    m_ui.twGroups->editItem(item);
-    //TODO mem leak?
-}
-
-void KConfigXtEditor::addEntryToUi(const QString& key, const QString& type, const QString& value)
-{
-    QTreeWidgetItem *item = new QTreeWidgetItem();
-    item->setText(0, key);
-    item->setText(1, type);
-    item->setText(2, value);
-    item->setFlags(item->flags() | Qt::ItemIsEditable);
-
-    m_ui.twEntries->addTopLevelItem(item);
 }
 
 void KConfigXtEditor::removeGroup()
