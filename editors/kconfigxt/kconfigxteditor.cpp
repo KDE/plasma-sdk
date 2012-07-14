@@ -223,6 +223,9 @@ void KConfigXtEditor::modifyGroup(QTreeWidgetItem* item, int column)
 
     QByteArray rawData = xmlFile.readAll();
 
+    //replace the data
+    rawData.replace(oldGroupEntry, newGroupEntry.toAscii());
+
     //clear the xml fle
     xmlFile.resize(0);
 
