@@ -40,10 +40,16 @@ KConfigXtEditor::KConfigXtEditor(QWidget *parent)
     m_ui.lblHintIcon->setPixmap(KIcon("dialog-information").pixmap(16, 16));
 
     connect(m_ui.pbAddGroup, SIGNAL(clicked()), this, SLOT(createNewGroup()));
+
     connect(m_ui.twGroups, SIGNAL(itemClicked(QTreeWidgetItem*, int)),
             this, SLOT(setupWidgetsForEntries(QTreeWidgetItem*)));
+
+    connect(m_ui.twGroups, SIGNAL(itemPressed(QTreeWidgetItem*, int)), this, SLOT(setLastGroupItem(QTreeWidgetItem*, int)));
+    connect(m_ui.twEntries, SIGNAL(itemPressed(QTreeWidgetItem*, int)), this, SLOT(setLastEntryItem(QTreeWidgetItem*, int)));
+
     connect(m_ui.twGroups, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(modifyGroup(QTreeWidgetItem*, int)));
-    connect(m_ui.twEntries, SIGNAL(itemDoubleClicked(QTreeWidgetItem *, int)), this, SLOT(modifyEntry(QTreeWidgetItem*, int)));
+    connect(m_ui.twEntries, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(modifyEntry(QTreeWidgetItem*, int)));
+
     connect(m_ui.pbDeleteGroup, SIGNAL(clicked()), this, SLOT(removeGroup()));
     connect(m_ui.pbDeleteEntry, SIGNAL(clicked()), this, SLOT(removeEntry()));
 
@@ -188,11 +194,91 @@ void KConfigXtEditor::takeDataFromParser(const QString& group)
 
 void KConfigXtEditor::modifyEntry(QTreeWidgetItem* item, int column)
 {
+    //check if ptr is evil
+    if (!item ) {
+        return;
+    }
+
 }
 
 void KConfigXtEditor::modifyGroup(QTreeWidgetItem* item, int column)
 {
-    qDebug() << "the item has been changed!";
+    //check if ptr is evil
+    //and if the name of the group has been changed
+    if (!item || item->text(column) == m_lastGroupItem) {
+        return;
+    }
+
+    //take the groups
+    QString oldGroupEntry = stringToGroupEntry(m_lastGroupItem);
+    QString newGroupEntry = stringToGroupEntry(item->text(column));
+
+    //take the xml file
+    QFile xmlFile(m_filename.pathOrUrl());
+
+    if(!xmlFile.open(QIODevice::ReadWrite)) {
+        //the xml file has failed to open
+        return;
+    }
+
+    QByteArray rawData = xmlFile.readAll();
+
+    //clear the xml fle
+    xmlFile.resize(0);
+
+    //write the data
+    xmlFile.write(rawData);
+
+    //close the file
+    xmlFile.close();
+
+}
+
+void KConfigXtEditor::setLastGroupItem(QTreeWidgetItem* item, int column)
+{
+    //check if ptr is evil
+    if (!item) {
+        return;
+    }
+
+    m_lastGroupItem = item->text(column);
+}
+
+QString KConfigXtEditor::stringToGroupEntry(const QString& groupName) const
+{
+    QString tmpString;
+    tmpString.append("<group name=\"");
+    tmpString.append(groupName);
+    tmpString.append("\">");
+
+    return tmpString;
+}
+
+
+void KConfigXtEditor::setLastEntryItem(QTreeWidgetItem* item, int column)
+{
+    //check if ptr is evil
+    if (!item) {
+        return;
+    }
+
+  /* QTreeWidgetItem *i = m_ui.twEntries->headerItem();
+   QString columnName = i->text(column);
+
+   switch (columnName) {
+       case "Key":
+           m_lastEntryItem["name"] = item->text(column);
+           m_lastEntryItem["type"] = "";
+           m_lastEntryItem["value"] = "";
+        case "Type":
+           m_lastEntryItem["type"] = item->text(column);
+           m_lastEntryItem["name"] = "";
+           m_lastEntryItem["value"] = "";
+        case "Value":
+            m_lastEntryItem["value"] = item->text(column);
+            m_lastEntryItem["type"] = "";
+            m_lastEntryItem["name"] = "";
+    }*/
 }
 
 void KConfigXtEditor::removeGroup()

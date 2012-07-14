@@ -99,6 +99,16 @@ private slots:
      **/
     void modifyEntry(QTreeWidgetItem *item, int column);
 
+    /**
+     * sets the last item of the group treewidget
+     **/
+    void setLastGroupItem(QTreeWidgetItem* item, int column);
+
+    /**
+     * sets the last item of the entry treewidget
+     **/
+    void setLastEntryItem(QTreeWidgetItem* item, int column);
+
 protected:
     Ui::KConfigXtEditor m_ui;
 
@@ -146,6 +156,12 @@ private:
     QList<KConfigXtParserItem> m_keysValuesTypes;
 
     KConfigXtParser m_parser;
+
+    QString m_lastGroupItem;
+    //avoid duplication
+    QString stringToGroupEntry(const QString& groupName) const;
+
+    //QHash m_lastEntryItem;
 };
 
 #endif
