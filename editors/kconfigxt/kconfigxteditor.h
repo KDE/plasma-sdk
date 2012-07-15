@@ -107,7 +107,7 @@ private slots:
     /**
      * sets the last item of the entry treewidget
      **/
-    void setLastEntryItem(QTreeWidgetItem* item, int column);
+    void setLastEntryItem(QTreeWidgetItem* item);
 
 protected:
     Ui::KConfigXtEditor m_ui;
@@ -161,7 +161,12 @@ private:
     //avoid duplication
     QString stringToGroupEntry(const QString& groupName) const;
 
-    //QHash m_lastEntryItem;
+    QHash<QString, QString> m_lastEntryItem;
+    //avoid duplication
+    QString stringToEntryAndValue(const QString& entryName, const QString entryType);
+
+    //avoid duplication
+    void replaceItemsInXml(const QString& oldItem, const QString& newItem);
 };
 
 #endif

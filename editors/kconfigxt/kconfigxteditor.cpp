@@ -34,6 +34,9 @@ KConfigXtEditor::KConfigXtEditor(QWidget *parent)
 {
     m_ui.setupUi(this);
 
+    //don't move the columns!!!
+    m_ui.twEntries->header()->setMovable(false);
+
     m_ui.twEntries->header()->setResizeMode(QHeaderView::ResizeToContents);
     m_ui.twGroups->header()->setResizeMode(QHeaderView::ResizeToContents);
 
@@ -45,7 +48,7 @@ KConfigXtEditor::KConfigXtEditor(QWidget *parent)
             this, SLOT(setupWidgetsForEntries(QTreeWidgetItem*)));
 
     connect(m_ui.twGroups, SIGNAL(itemPressed(QTreeWidgetItem*, int)), this, SLOT(setLastGroupItem(QTreeWidgetItem*, int)));
-    connect(m_ui.twEntries, SIGNAL(itemPressed(QTreeWidgetItem*, int)), this, SLOT(setLastEntryItem(QTreeWidgetItem*, int)));
+    connect(m_ui.twEntries, SIGNAL(itemPressed(QTreeWidgetItem*, int)), this, SLOT(setLastEntryItem(QTreeWidgetItem*)));
 
     connect(m_ui.twGroups, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(modifyGroup(QTreeWidgetItem*, int)));
     connect(m_ui.twEntries, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(modifyEntry(QTreeWidgetItem*, int)));
@@ -192,15 +195,6 @@ void KConfigXtEditor::takeDataFromParser(const QString& group)
     }
 }
 
-void KConfigXtEditor::modifyEntry(QTreeWidgetItem* item, int column)
-{
-    //check if ptr is evil
-    if (!item ) {
-        return;
-    }
-
-}
-
 void KConfigXtEditor::modifyGroup(QTreeWidgetItem* item, int column)
 {
     //check if ptr is evil
@@ -210,31 +204,11 @@ void KConfigXtEditor::modifyGroup(QTreeWidgetItem* item, int column)
     }
 
     //take the groups
-    QString oldGroupEntry = stringToGroupEntry(m_lastGroupItem);
-    QString newGroupEntry = stringToGroupEntry(item->text(column));
+    const QString oldGroupEntry = stringToGroupEntry(m_lastGroupItem);
+    const QString newGroupEntry = stringToGroupEntry(item->text(column));
 
-    //take the xml file
-    QFile xmlFile(m_filename.pathOrUrl());
-
-    if(!xmlFile.open(QIODevice::ReadWrite)) {
-        //the xml file has failed to open
-        return;
-    }
-
-    QByteArray rawData = xmlFile.readAll();
-
-    //replace the data
-    rawData.replace(oldGroupEntry, newGroupEntry.toAscii());
-
-    //clear the xml fle
-    xmlFile.resize(0);
-
-    //write the data
-    xmlFile.write(rawData);
-
-    //close the file
-    xmlFile.close();
-
+    //replace the groups in the xml
+    replaceItemsInXml(oldGroupEntry, newGroupEntry);
 }
 
 void KConfigXtEditor::setLastGroupItem(QTreeWidgetItem* item, int column)
@@ -249,39 +223,109 @@ void KConfigXtEditor::setLastGroupItem(QTreeWidgetItem* item, int column)
 
 QString KConfigXtEditor::stringToGroupEntry(const QString& groupName) const
 {
-    QString tmpString;
-    tmpString.append("<group name=\"");
-    tmpString.append(groupName);
-    tmpString.append("\">");
-
-    return tmpString;
+    return QString("<group name=\"%1\">").arg(groupName);
 }
 
+void KConfigXtEditor::modifyEntry(QTreeWidgetItem* item, int column)
+{
+    //check if ptr is evil
+    if (!item ) {
+        return;
+    }
 
-void KConfigXtEditor::setLastEntryItem(QTreeWidgetItem* item, int column)
+    //create the entry
+    const QString oldEntry = stringToEntryAndValue(m_lastEntryItem["name"],
+                                                   m_lastEntryItem["type"]);
+
+    if (column == 0 || column == 1) {
+        //the user has modified either the
+        //key or its type.
+        //TODO maybe it should check if the type is valid
+
+        const QString newEntry = stringToEntryAndValue(item->text(0), item->text(1));
+
+        //replace the entries in the xml
+        replaceItemsInXml(oldEntry, newEntry);
+
+    } else if (column == 2) {
+        QFile xmlFile(m_filename.pathOrUrl());
+
+        if(!xmlFile.open(QIODevice::ReadWrite)) {
+            return;
+        }
+
+       QByteArray text;
+
+       while (!xmlFile.atEnd()) {
+            QString line = xmlFile.readLine();
+            if (line.contains(oldEntry)) {
+                while (!line.contains("</entry>")) {
+                    //we took this from the xml spec
+                    QString startsWith = "<default>";
+                    QString endsWith = "</default>";
+                    if (line.startsWith(startsWith)
+                        && line.endsWith(endsWith)) {
+                            line.replace(oldEntry, startsWith
+                            + item->text(2) + endsWith);
+                    }
+               }
+            }
+            text.append(line);
+       }
+
+       //clear the xml fle
+       xmlFile.resize(0);
+
+       //write the data
+       xmlFile.write(text);
+
+       //close the file
+       xmlFile.close();
+    }
+}
+
+void KConfigXtEditor::setLastEntryItem(QTreeWidgetItem* item)
 {
     //check if ptr is evil
     if (!item) {
         return;
     }
 
-  /* QTreeWidgetItem *i = m_ui.twEntries->headerItem();
-   QString columnName = i->text(column);
+    //our tree has 3 columns and those columns doesn't move
+    m_lastEntryItem["name"] = item->text(0);
+    m_lastEntryItem["type"] = item->text(1);
+    m_lastEntryItem["value"] = item->text(2);
+}
 
-   switch (columnName) {
-       case "Key":
-           m_lastEntryItem["name"] = item->text(column);
-           m_lastEntryItem["type"] = "";
-           m_lastEntryItem["value"] = "";
-        case "Type":
-           m_lastEntryItem["type"] = item->text(column);
-           m_lastEntryItem["name"] = "";
-           m_lastEntryItem["value"] = "";
-        case "Value":
-            m_lastEntryItem["value"] = item->text(column);
-            m_lastEntryItem["type"] = "";
-            m_lastEntryItem["name"] = "";
-    }*/
+QString KConfigXtEditor::stringToEntryAndValue(const QString& entryName, const QString entryType)
+{
+    return QString("<entry name=\"%1\" type=\"%2\">").arg(entryName).arg(entryType);
+}
+
+void KConfigXtEditor::replaceItemsInXml(const QString& oldItem, const QString& newItem)
+{
+    //take the xml file
+    QFile xmlFile(m_filename.pathOrUrl());
+
+    if(!xmlFile.open(QIODevice::ReadWrite)) {
+        //the xml file has failed to open
+        return;
+    }
+
+    QByteArray rawData = xmlFile.readAll();
+
+    //replace the data
+    rawData.replace(oldItem, newItem.toAscii());
+
+    //clear the xml fle
+    xmlFile.resize(0);
+
+    //write the data
+    xmlFile.write(rawData);
+
+    //close the file
+    xmlFile.close();
+
 }
 
 void KConfigXtEditor::removeGroup()
