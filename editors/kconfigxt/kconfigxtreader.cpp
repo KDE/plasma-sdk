@@ -1,6 +1,7 @@
 /*
    This file is part of the KDE project
    Copyright 2009 by Dmitry Suzdalev <dimsuz@gmail.com>
+   Copyright 2012 by Giorgos Tsiapaliwkas <terietor@gmail.com>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -18,7 +19,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "kconfigxtparser.h"
+#include "kconfigxtreader.h"
 
 #include <KMessageBox>
 #include <KLocalizedString>
@@ -26,42 +27,44 @@
 #include <QFile>
 #include <QXmlStreamReader>
 
-KConfigXtParserItem::KConfigXtParserItem(QObject* parent)
+#include <KDebug>
+
+KConfigXtReaderItem::KConfigXtReaderItem(QObject* parent)
 {
     Q_UNUSED(parent)
 }
 
-QString KConfigXtParserItem::groupName() const
+QString KConfigXtReaderItem::groupName() const
 {
     return m_groupName;
 }
 
-QString KConfigXtParserItem::entryName() const
+QString KConfigXtReaderItem::entryName() const
 {
     return m_entryName;
 }
 
-QString KConfigXtParserItem::entryType() const
+QString KConfigXtReaderItem::entryType() const
 {
     return m_entryType;
 }
 
-QString KConfigXtParserItem::entryValue() const
+QString KConfigXtReaderItem::entryValue() const
 {
     return m_entryValue;
 }
 
-void KConfigXtParserItem::setGroupName(const QString& groupName)
+void KConfigXtReaderItem::setGroupName(const QString& groupName)
 {
     m_groupName = groupName;
 }
 
-void KConfigXtParserItem::setEntryName(const QString& entryName)
+void KConfigXtReaderItem::setEntryName(const QString& entryName)
 {
     m_entryName = entryName;
 }
 
-bool KConfigXtParserItem::operator==(const KConfigXtParserItem& item)
+bool KConfigXtReaderItem::operator==(const KConfigXtReaderItem& item)
 {
     if (this->entryName() == item.entryName()) {
         return true;
@@ -70,7 +73,7 @@ bool KConfigXtParserItem::operator==(const KConfigXtParserItem& item)
     }
 }
 
-void KConfigXtParserItem::setEntryType(const QString& entryType)
+void KConfigXtReaderItem::setEntryType(const QString& entryType)
 {
     //those are the possible types
     QStringList types;
@@ -106,24 +109,24 @@ void KConfigXtParserItem::setEntryType(const QString& entryType)
     }
 }
 
-void KConfigXtParserItem::setEntryValue(const QString& entryValue)
+void KConfigXtReaderItem::setEntryValue(const QString& entryValue)
 {
     m_entryValue = entryValue;
 }
 
-KConfigXtParser::KConfigXtParser(QObject *parent)
+KConfigXtReader::KConfigXtReader(QObject *parent)
         : QObject(parent),
         m_parseResult(false)
 {
 
 }
 
-void KConfigXtParser::setConfigXmlFile(const QString& filename)
+void KConfigXtReader::setConfigXmlFile(const QString& filename)
 {
     m_filename = filename;
 }
 
-bool KConfigXtParser::parse()
+bool KConfigXtReader::parse()
 {
     //we will parse the xml again so clear the list
     if (!m_dataList.isEmpty()) {
@@ -158,7 +161,7 @@ bool KConfigXtParser::parse()
     if(reader.hasError()) {
         //an error has occured
         KMessageBox::error(0, i18n("The xml parsing has failed"));
-
+        kDebug() << "parsing error!!!!" << reader.errorString();
         //clear the reader
         reader.clear();
         //the parse has failed
@@ -171,7 +174,7 @@ bool KConfigXtParser::parse()
     return m_parseResult;
 }
 
-void KConfigXtParser::parseGroup(QXmlStreamReader& reader)
+void KConfigXtReader::parseGroup(QXmlStreamReader& reader)
 {
     //verify if we really has a group
     if(reader.tokenType() != QXmlStreamReader::StartElement &&
@@ -202,7 +205,7 @@ void KConfigXtParser::parseGroup(QXmlStreamReader& reader)
     }
 }
 
-void KConfigXtParser::parseEntry(QXmlStreamReader& reader)
+void KConfigXtReader::parseEntry(QXmlStreamReader& reader)
 {
     // Check if we are inside an element like <entry name="interval" type="Int">
     if(reader.tokenType() != QXmlStreamReader::StartElement) {
@@ -254,7 +257,7 @@ void KConfigXtParser::parseEntry(QXmlStreamReader& reader)
     m_dataList.append(m_data);
 }
 
-QList<KConfigXtParserItem> KConfigXtParser::dataList() const
+QList<KConfigXtReaderItem> KConfigXtReader::dataList() const
 {
     return m_dataList;
 }

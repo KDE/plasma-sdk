@@ -32,7 +32,8 @@ set (PlasMate_SRC
     editors/imageviewer/imageviewer.cpp
     editors/text/texteditor.cpp
     editors/kconfigxt/kconfigxteditor.cpp
-    editors/kconfigxt/kconfigxtparser.cpp
+    editors/kconfigxt/kconfigxtreader.cpp
+    editors/kconfigxt/kconfigxtwriter.cpp
     main.cpp
     sidebaritem.cpp
     sidebardelegate.cpp
@@ -145,7 +146,8 @@ install( FILES previewer/windowswitcher/tabboxdelegate.qml DESTINATION ${DATA_IN
 #plasmakconfigxteditor
 set(plasmakconfigxt_SRCS
      editors/kconfigxt/kconfigxteditor.cpp
-     editors/kconfigxt/kconfigxtparser.cpp
+     editors/kconfigxt/kconfigxtreader.cpp
+     editors/kconfigxt/kconfigxtwriter.cpp
      editors/kconfigxt/standalone/plasmakconfigxteditor.cpp
      editors/kconfigxt/standalone/main.cpp
 )

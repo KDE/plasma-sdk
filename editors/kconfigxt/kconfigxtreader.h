@@ -1,6 +1,7 @@
 /*
    This file is part of the KDE project
    Copyright 2009 by Dmitry Suzdalev <dimsuz@gmail.com>
+   Copyright 2012 by Giorgos Tsiapaliwkas <terietor@gmail.com>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -18,19 +19,19 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCONFIGXTPARSER_H
-#define KCONFIGXTPARSER_H
+#ifndef KCONFIGXTREADER_H
+#define KCONFIGXTREADER_H
 
 #include <QMultiHash>
 #include <QVariant>
 #include <QList>
 #include <QXmlStreamReader>
 
-class KConfigXtParserItem
+class KConfigXtReaderItem
 {
 
 public:
-    KConfigXtParserItem(QObject* parent = 0);
+    KConfigXtReaderItem(QObject* parent = 0);
 
     QString groupName() const;
     void setGroupName(const QString& groupName);
@@ -44,7 +45,7 @@ public:
     QString entryValue() const;
     void setEntryValue(const QString& entryValue);
 
-    bool operator==(const KConfigXtParserItem& item);
+    bool operator==(const KConfigXtReaderItem& item);
 
 private:
     QString m_groupName;
@@ -54,12 +55,12 @@ private:
 };
 
 
-class KConfigXtParser : public QObject
+class KConfigXtReader : public QObject
 {
 
     Q_OBJECT
 public:
-    KConfigXtParser(QObject *parent = 0);
+    KConfigXtReader(QObject *parent = 0);
 
     void setConfigXmlFile(const QString& filename);
 
@@ -73,7 +74,7 @@ public:
      * Returns the data from the xml file.
      * Valid only after a successful call to parse()
      **/
-    QList<KConfigXtParserItem> dataList() const;
+    QList<KConfigXtReaderItem> dataList() const;
 
 private:
     void parseGroup(QXmlStreamReader& reader);
@@ -81,8 +82,8 @@ private:
     bool m_parseResult;
 
     QString m_filename;
-    QList<KConfigXtParserItem> m_dataList;
-    KConfigXtParserItem m_data;
+    QList<KConfigXtReaderItem> m_dataList;
+    KConfigXtReaderItem m_data;
 };
 
 #endif

@@ -1,6 +1,7 @@
 /*
    This file is part of the KDE project
    Copyright 2009 by Dmitry Suzdalev <dimsuz@gmail.com>
+   Copyright 2012 by Giorgos Tsiapaliwkas <terietor@gmail.com>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -19,6 +20,7 @@
 */
 
 #include "kconfigxteditor.h"
+#include "kconfigxtwriter.h"
 
 #include <KDebug>
 #include <KIcon>
@@ -28,6 +30,7 @@
 #include <QFile>
 #include <QHeaderView>
 #include <QTreeWidgetItem>
+#include <QXmlStreamWriter>
 
 KConfigXtEditor::KConfigXtEditor(QWidget *parent)
         : QWidget(parent)
@@ -43,6 +46,7 @@ KConfigXtEditor::KConfigXtEditor(QWidget *parent)
     m_ui.lblHintIcon->setPixmap(KIcon("dialog-information").pixmap(16, 16));
 
     connect(m_ui.pbAddGroup, SIGNAL(clicked()), this, SLOT(createNewGroup()));
+    connect(m_ui.pbAddEntry, SIGNAL(clicked()), this, SLOT(createNewEntry()));
 
     connect(m_ui.twGroups, SIGNAL(itemClicked(QTreeWidgetItem*, int)),
             this, SLOT(setupWidgetsForEntries(QTreeWidgetItem*)));
@@ -68,6 +72,11 @@ void KConfigXtEditor::setFilename(const KUrl& filename)
     m_filename = filename;
 }
 
+KUrl KConfigXtEditor::filename()
+{
+    return m_filename;
+}
+
 void KConfigXtEditor::readFile()
 {
     if (m_filename.isEmpty()) {
@@ -84,11 +93,6 @@ void KConfigXtEditor::readFile()
         takeDataFromParser();
         setupWidgetsForOldFile();
     }
-}
-
-void KConfigXtEditor::writeFile()
-{
-    // TODO: writing goes here
 }
 
 void KConfigXtEditor::setupWidgetsForNewFile()
@@ -120,8 +124,48 @@ void KConfigXtEditor::createNewGroup()
     m_groups.append(newGroupName);
 
     addGroupToUi(newGroupName);
+
+    KConfigXtReaderItem newGroupItem;
+    newGroupItem.setGroupName(newGroupName);
+    giveElementsToWriter(newGroupItem);
 }
 
+void KConfigXtEditor::createNewEntry()
+{
+    QTreeWidgetItem *currentGroupItem = m_ui.twGroups->currentItem();
+
+    //check if the ptr is evil!!
+    if (!currentGroupItem) {
+        return;
+    }
+
+    KConfigXtReaderItem newEntryItem;
+    newEntryItem.setGroupName(currentGroupItem->text(0));
+    newEntryItem.setEntryName("TODO");
+    //remember we need a valid type due to the
+    //internal check
+    newEntryItem.setEntryType("String");
+    newEntryItem.setEntryValue("TODO");
+
+    //create the entries for the existing data
+    setupWidgetsForEntries(currentGroupItem);
+
+    //add our new entry into the tree
+    addEntryToUi(newEntryItem.entryName(),
+                 newEntryItem.entryType(), newEntryItem.entryValue());
+
+    giveElementsToWriter(newEntryItem);
+}
+
+void KConfigXtEditor::giveElementsToWriter(KConfigXtReaderItem& newElement)
+{
+    takeDataFromParser();
+    m_keysValuesTypes.append(newElement);
+    KConfigXtWriter writer(filename().pathOrUrl());
+    QList<KConfigXtWriterItem> list = writer.readerItemsToWriterIems(m_groups, m_keysValuesTypes);
+    writer.setData(list);
+    writer.writeXML();
+}
 
 void KConfigXtEditor::setupWidgetsForGroups()
 {
@@ -155,10 +199,9 @@ void KConfigXtEditor::setupWidgetsForEntries(QTreeWidgetItem *item)
     //take keys,values and types for the specified group
     takeDataFromParser(item->text(0));
 
-   foreach(const KConfigXtParserItem& item, m_keysValuesTypes) {
+   foreach(const KConfigXtReaderItem& item, m_keysValuesTypes) {
        addEntryToUi(item.entryName(), item.entryType(), item.entryValue());
     }
-
 }
 
 void KConfigXtEditor::addEntryToUi(const QString& key, const QString& type, const QString& value)
@@ -170,26 +213,22 @@ void KConfigXtEditor::addEntryToUi(const QString& key, const QString& type, cons
     item->setFlags(item->flags() | Qt::ItemIsEditable);
 }
 
-void KConfigXtEditor::takeDataFromParser(const QString& group)
+void KConfigXtEditor::takeDataFromParser()
 {
-
     //we need to update the data of our parser first
     m_parser.parse();
 
-    foreach(const KConfigXtParserItem& item, m_parser.dataList()) {
+    foreach(const KConfigXtReaderItem& item, m_parser.dataList()) {
 
-        //take the name of the groups also due to the fact
+        //take the name of the groups, also due to the fact
         //that we take data from a parser we have to be careful so
         //check if the group exists in the list
         if (!item.groupName().isEmpty() && !m_groups.contains(item.groupName())) {
             m_groups << item.groupName();
         }
 
-        if (!group.isEmpty() && item.groupName() == group
-            && !m_keysValuesTypes.contains(item)) {
-            //we have specified a group
-            //so probably we want to populate the
-            //m_ui.twEntries.
+        if (!m_keysValuesTypes.contains(item)) {
+            //take the entrie
             m_keysValuesTypes.append(item);
         }
     }

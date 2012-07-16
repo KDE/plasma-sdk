@@ -1,6 +1,7 @@
 /*
    This file is part of the KDE project
    Copyright 2009 by Dmitry Suzdalev <dimsuz@gmail.com>
+   Copyright 2012 by Giorgos Tsiapaliwkas <terietor@gmail.com>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -22,7 +23,7 @@
 
 #include "ui_kconfigxteditor.h"
 
-#include "kconfigxtparser.h"
+#include "kconfigxtreader.h"
 
 #include <QWidget>
 #include <KUrl>
@@ -45,6 +46,7 @@ public:
      * Sets filename to edit
      */
     void setFilename(const KUrl& filename);
+    KUrl filename();
 
 public slots:
     /**
@@ -53,17 +55,24 @@ public slots:
      */
     void readFile();
 
-    /**
-     * Writes config values to config file specified with setFilename according
-     * to current editor widgets state
-     */
-    void writeFile();
-
 private slots:
     /**
      * Creates new kconfig group
      */
     void createNewGroup();
+
+    /**
+     * Creates new entry
+     */
+    void createNewEntry();
+
+    /**
+     * Write elements in the xml
+     * When a new group or new entry will be
+     * created, this method will write them
+     * into the xml
+     **/
+    void giveElementsToWriter(KConfigXtReaderItem& newElement);
 
     /**
      * Sets up editor widgets for
@@ -134,7 +143,7 @@ private:
      * and m_keysValuesTypes
      */
 
-    void takeDataFromParser(const QString& group = QString());
+    void takeDataFromParser();
 
     //with this method we avoid duplication
     void addGroupToUi(const QString& group);
@@ -153,9 +162,9 @@ private:
 
     KUrl m_filename;
     QStringList m_groups;
-    QList<KConfigXtParserItem> m_keysValuesTypes;
+    QList<KConfigXtReaderItem> m_keysValuesTypes;
 
-    KConfigXtParser m_parser;
+    KConfigXtReader m_parser;
 
     QString m_lastGroupItem;
     //avoid duplication
