@@ -161,6 +161,7 @@ void KConfigXtEditor::giveElementsToWriter(KConfigXtReaderItem& newElement)
 {
     takeDataFromParser();
     m_keysValuesTypes.append(newElement);
+
     KConfigXtWriter writer(filename().pathOrUrl());
     QList<KConfigXtWriterItem> list = writer.readerItemsToWriterIems(m_groups, m_keysValuesTypes);
     writer.setData(list);
@@ -196,11 +197,14 @@ void KConfigXtEditor::setupWidgetsForEntries(QTreeWidgetItem *item)
     //also we will take new keys values and types so clear our list
     m_keysValuesTypes.clear();
 
-    //take keys,values and types for the specified group
-    takeDataFromParser(item->text(0));
+    //take keys,values,types and groups
+    takeDataFromParser();
 
-   foreach(const KConfigXtReaderItem& item, m_keysValuesTypes) {
-       addEntryToUi(item.entryName(), item.entryType(), item.entryValue());
+   foreach(const KConfigXtReaderItem& entry, m_keysValuesTypes) {
+       //check if this group has an entry
+       if (item->text(0) == entry.groupName()) {
+           addEntryToUi(entry.entryName(), entry.entryType(), entry.entryValue());
+        }
     }
 }
 
@@ -223,13 +227,18 @@ void KConfigXtEditor::takeDataFromParser()
         //take the name of the groups, also due to the fact
         //that we take data from a parser we have to be careful so
         //check if the group exists in the list
-        if (!item.groupName().isEmpty() && !m_groups.contains(item.groupName())) {
-            m_groups << item.groupName();
-        }
+        if (!item.groupName().isEmpty()) {
+            if (!m_groups.contains(item.groupName())) {
+                m_groups << item.groupName();
+            }
 
-        if (!m_keysValuesTypes.contains(item)) {
-            //take the entrie
-            m_keysValuesTypes.append(item);
+            if (!m_keysValuesTypes.contains(item) &&
+                !item.entryName().isEmpty())
+            {
+                //take the entries
+                m_keysValuesTypes.append(item);
+            }
+
         }
     }
 }

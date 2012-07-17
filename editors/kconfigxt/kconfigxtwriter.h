@@ -80,7 +80,8 @@ public:
 
 private:
     QList<KConfigXtWriterItem> m_dataList;
-    QXmlStreamWriter m_writer;
+    QFile m_xmlFile;
+    QXmlStreamWriter *m_writer;
 };
 
 #endif

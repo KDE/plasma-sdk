@@ -55,29 +55,29 @@ void KConfigXtWriterItem::setEntries(QList<KConfigXtReaderItem> entries)
 }
 
 KConfigXtWriter::KConfigXtWriter(QObject *parent)
-        : QObject(parent)
+        : QObject(parent),
+        m_writer(0),
+        m_xmlFile(0)
 {
 }
 
 KConfigXtWriter::KConfigXtWriter(const QString& xmlFilePath, QObject *parent)
-        : QObject(parent)
+        : QObject(parent),
+        m_writer(0),
+        m_xmlFile(0)
 {
     setConfigXmlFile(xmlFilePath);
 }
 
 void KConfigXtWriter::setConfigXmlFile(const QString& filename)
 {
-    QFile xmlFile(filename);
+    m_xmlFile = new QFile(filename, this);
 
-    //clear the file
-    xmlFile.resize(0);
-
-    if (!xmlFile.open(QIODevice::ReadWrite)) {
+    if (!m_xmlFile->open(QIODevice::WriteOnly)) {
         return;
     }
 
-    m_writer.setDevice(&xmlFile);
-
+    m_writer = new QXmlStreamWriter(m_xmlFile);
 }
 
 QList< KConfigXtWriterItem > KConfigXtWriter::data()
@@ -96,14 +96,18 @@ void KConfigXtWriter::writeXML()
         return;
     }
 
-    m_writer.setAutoFormatting(true);
-    m_writer.writeStartDocument();
+    m_writer->setAutoFormatting(true);
+    m_writer->setAutoFormattingIndent(4);
+
+    //start the document
+    m_writer->writeStartDocument();
+
+    //start kcfg element
+    m_writer->writeStartElement("kcfg");
 
     foreach(const KConfigXtWriterItem& writerItem, m_dataList) {
         //start group
-        m_writer.writeStartElement("group");
-        //start kcfg element
-        m_writer.writeStartElement("kcfg");
+        m_writer->writeStartElement("group");
 
         //TODO add the above into the xml
         /*every kconfigxt xml file contains the below data
@@ -117,29 +121,31 @@ void KConfigXtWriter::writeXML()
          *   </kcfg>
          *
          */
-
-        m_writer.writeAttribute("name", writerItem.group());
+        m_writer->writeAttribute("name", writerItem.group());
 
         foreach(const KConfigXtReaderItem& readerItem, writerItem.entries()) {
             //start entry
-            m_writer.writeStartElement("entry");
-            m_writer.writeAttribute("name", readerItem.entryName());
-            m_writer.writeAttribute("type", readerItem.entryType());
+            m_writer->writeStartElement("entry");
+            m_writer->writeAttribute("name", readerItem.entryName());
+            m_writer->writeAttribute("type", readerItem.entryType());
             //start default
-            m_writer.writeStartElement("default");
-            m_writer.writeCharacters(readerItem.entryValue());
+            m_writer->writeStartElement("default");
+            m_writer->writeCharacters(readerItem.entryValue());
             //end default
-            m_writer.writeEndElement();
+            m_writer->writeEndElement();
             //end entry
-            m_writer.writeEndElement();
+            m_writer->writeEndElement();
         }
         //end group
-        m_writer.writeEndElement();
+        m_writer->writeEndElement();
     }
     //end kcfg
-    m_writer.writeEndElement();
+    m_writer->writeEndElement();
     //end the document
-    m_writer.writeEndDocument();
+    m_writer->writeEndDocument();
+
+    //finally close the device and write our data
+    m_writer->device()->close();
 }
 
 QList<KConfigXtWriterItem> KConfigXtWriter::readerItemsToWriterIems(QStringList& groupList,
@@ -159,7 +165,9 @@ QList<KConfigXtWriterItem> KConfigXtWriter::readerItemsToWriterIems(QStringList&
                 tmpEntry.setEntryType(entry.entryType());
                 tmpEntry.setEntryValue(entry.entryValue());
 
-                tmpEntryList.append(tmpEntry);
+                if (!tmpEntryList.contains(tmpEntry)) {
+                    tmpEntryList.append(tmpEntry);
+                }
             }
         }
         tmpItem.setEntries(tmpEntryList);
