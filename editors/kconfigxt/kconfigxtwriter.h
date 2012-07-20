@@ -28,6 +28,8 @@
 
 #include "kconfigxtreader.h"
 
+class QFile;
+
 class KConfigXtWriterItem
 {
 
@@ -80,7 +82,7 @@ public:
 
 private:
     QList<KConfigXtWriterItem> m_dataList;
-    QFile m_xmlFile;
+    QFile *m_xmlFile;
     QXmlStreamWriter *m_writer;
 };
 
