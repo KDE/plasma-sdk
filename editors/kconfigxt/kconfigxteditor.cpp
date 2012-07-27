@@ -391,8 +391,15 @@ void KConfigXtEditor::modifyEntry(QTreeWidgetItem* item, int column)
             //it's a whatsthis
             newDescription = stringToDescription("whatsthis", item->text(4));
         }
-
         //replace the items
+        replaceItemsInXml(oldDescription, newDescription);
+    } else if (column == 4) {
+        const QString oldDescription = stringToDescription(m_lastEntryItem["descriptionType"],
+                                                          m_lastEntryItem["descriptionValue"]);
+
+        QString newDescription = stringToDescription(m_lastEntryItem["descriptionType"],
+                                                    item->text(4));
+
         replaceItemsInXml(oldDescription, newDescription);
     }
 }
