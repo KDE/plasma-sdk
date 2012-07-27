@@ -109,6 +109,11 @@ private slots:
     void modifyEntry(QTreeWidgetItem *item, int column);
 
     /**
+     * Modifies the label description of an entry from the xml file
+     **/
+    void modifyTypeDescription();
+
+    /**
      * sets the last item of the group treewidget
      **/
     void setLastGroupItem(QTreeWidgetItem* item, int column);
@@ -149,8 +154,9 @@ private:
     void addGroupToUi(const QString& group);
 
     //with this method we can avoid duplication
-    void addEntryToUi(const QString& entryName,
-                                const QString& entryType, const QString& entryValue);
+    void addEntryToUi(const QString& entryName, const QString& entryType,
+                      const QString& entryValue ,const QString& descriptionValue,
+                      KConfigXtReaderItem::DescriptionType descriptionType);
 
     //with this method we can avoid duplication,
     //this method will delete everything that is between the startsWith
@@ -172,10 +178,14 @@ private:
 
     QHash<QString, QString> m_lastEntryItem;
     //avoid duplication
-    QString stringToEntryAndValue(const QString& entryName, const QString entryType);
+    QString stringToEntryAndValue(const QString& entryName, const QString entryType) const;
+
+    //avoid duplication
+    QString stringToDescription(const QString& descriptionType, const QString descriptionValue) const;
 
     //avoid duplication
     void replaceItemsInXml(const QString& oldItem, const QString& newItem);
+
 };
 
 #endif

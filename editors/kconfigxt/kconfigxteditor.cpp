@@ -22,6 +22,7 @@
 #include "kconfigxteditor.h"
 #include "kconfigxtwriter.h"
 
+#include <KComboBox>
 #include <KDebug>
 #include <KIcon>
 #include <KMessageBox>
@@ -152,7 +153,8 @@ void KConfigXtEditor::createNewEntry()
 
     //add our new entry into the tree
     addEntryToUi(newEntryItem.entryName(),
-                 newEntryItem.entryType(), newEntryItem.entryValue());
+                 newEntryItem.entryType(), newEntryItem.entryValue(),
+                 newEntryItem.descriptionValue(), newEntryItem.descriptionType());
 
     giveElementsToWriter(newEntryItem);
 }
@@ -180,7 +182,6 @@ void KConfigXtEditor::addGroupToUi(const QString& group)
     QTreeWidgetItem *item = new QTreeWidgetItem(m_ui.twGroups);
     item->setText(0, group);
     item->setFlags(item->flags() | Qt::ItemIsEditable);
-    //TODO mem leak?
 }
 
 void KConfigXtEditor::setupWidgetsForEntries(QTreeWidgetItem *item)
@@ -203,18 +204,43 @@ void KConfigXtEditor::setupWidgetsForEntries(QTreeWidgetItem *item)
    foreach(const KConfigXtReaderItem& entry, m_keysValuesTypes) {
        //check if this group has an entry
        if (item->text(0) == entry.groupName()) {
-           addEntryToUi(entry.entryName(), entry.entryType(), entry.entryValue());
+           addEntryToUi(entry.entryName(), entry.entryType(),
+            entry.entryValue(), entry.descriptionValue(), entry.descriptionType());
         }
     }
 }
 
-void KConfigXtEditor::addEntryToUi(const QString& key, const QString& type, const QString& value)
+void KConfigXtEditor::addEntryToUi(const QString& key, const QString& type,
+                                   const QString& value, const QString& descriptionValue,
+                                   KConfigXtReaderItem::DescriptionType descriptionType)
 {
+    KComboBox *descriptionButton = new KComboBox();
+    descriptionButton->addItem("Label");
+    descriptionButton->addItem("ToolTip");
+    descriptionButton->addItem("WhatsThis");
+
+    connect(descriptionButton, SIGNAL(currentIndexChanged(int)), this, SLOT(modifyTypeDescription()));
+
+    //find the correct index
+    if (descriptionType == KConfigXtReaderItem::Label) {
+        descriptionButton->setCurrentIndex(0);
+        m_lastEntryItem["descriptionType"] = "label";
+    } else if (descriptionType == KConfigXtReaderItem::ToolTip) {
+        descriptionButton->setCurrentIndex(1);
+        m_lastEntryItem["descriptionType"] = "ToolTip";
+    } else if (descriptionType == KConfigXtReaderItem::WhatsThis) {
+        descriptionButton->setCurrentIndex(2);
+        m_lastEntryItem["descriptionType"] = "WhatsThis";
+    }
+
     QTreeWidgetItem *item = new QTreeWidgetItem(m_ui.twEntries);
     item->setText(0, key);
     item->setText(1, type);
     item->setText(2, value);
+    item->setText(4, descriptionValue);
     item->setFlags(item->flags() | Qt::ItemIsEditable);
+
+    m_ui.twEntries->setItemWidget(item, 3, descriptionButton);
 }
 
 void KConfigXtEditor::takeDataFromParser()
@@ -274,13 +300,17 @@ QString KConfigXtEditor::stringToGroupEntry(const QString& groupName) const
     return QString("<group name=\"%1\">").arg(groupName);
 }
 
+void KConfigXtEditor::modifyTypeDescription()
+{
+    modifyEntry(m_ui.twEntries->currentItem(), m_ui.twEntries->currentColumn());
+}
+
 void KConfigXtEditor::modifyEntry(QTreeWidgetItem* item, int column)
 {
     //check if ptr is evil
     if (!item ) {
         return;
     }
-
     //create the entry
     const QString oldEntry = stringToEntryAndValue(m_lastEntryItem["name"],
                                                    m_lastEntryItem["type"]);
@@ -296,6 +326,14 @@ void KConfigXtEditor::modifyEntry(QTreeWidgetItem* item, int column)
         replaceItemsInXml(oldEntry, newEntry);
 
     } else if (column == 2) {
+        //Q: why we don't use the replaceItemsInXml() method?
+
+        //A: because we have something like <default>10</default>
+        //there is a big change to have multiple entries like this,
+        //in different entries, so if we use replaceItemsInXml(),
+        //we will screw everything, so before you replace the items,
+        //check if we in the right entry
+
         QFile xmlFile(m_filename.pathOrUrl());
 
         if(!xmlFile.open(QIODevice::ReadWrite)) {
@@ -329,6 +367,33 @@ void KConfigXtEditor::modifyEntry(QTreeWidgetItem* item, int column)
 
        //close the file
        xmlFile.close();
+    } else if (column == 3) {
+        //take the old description
+        const QString oldDescription = stringToDescription(m_lastEntryItem["descriptionType"],
+                                                           m_lastEntryItem["descriptionValue"]);
+
+        KComboBox *bt = qobject_cast<KComboBox*>(m_ui.twEntries->itemWidget(item, column));
+
+        //check if the ptr is evil
+        if (!bt) {
+            return;
+        }
+
+        QString newDescription;
+
+        if (bt->currentIndex() == 0) {
+            //it's a label
+            newDescription = stringToDescription("label", item->text(4));
+        } else if (bt->currentIndex() == 1) {
+            //it's a tooltip
+            newDescription = stringToDescription("tooltip", item->text(4));
+        } else if (bt->currentIndex() ==2) {
+            //it's a whatsthis
+            newDescription = stringToDescription("whatsthis", item->text(4));
+        }
+
+        //replace the items
+        replaceItemsInXml(oldDescription, newDescription);
     }
 }
 
@@ -338,16 +403,21 @@ void KConfigXtEditor::setLastEntryItem(QTreeWidgetItem* item)
     if (!item) {
         return;
     }
-
-    //our tree has 3 columns and those columns doesn't move
+    //our tree has 4 columns and those columns doesn't move
     m_lastEntryItem["name"] = item->text(0);
     m_lastEntryItem["type"] = item->text(1);
     m_lastEntryItem["value"] = item->text(2);
+    m_lastEntryItem["descriptionValue"] = item->text(4);
 }
 
-QString KConfigXtEditor::stringToEntryAndValue(const QString& entryName, const QString entryType)
+QString KConfigXtEditor::stringToEntryAndValue(const QString& entryName, const QString entryType) const
 {
     return QString("<entry name=\"%1\" type=\"%2\">").arg(entryName).arg(entryType);
+}
+
+QString KConfigXtEditor::stringToDescription(const QString& descriptionType, const QString descriptionValue) const
+{
+    return QString("<%1>%2</%1>").arg(descriptionType).arg(descriptionValue);
 }
 
 void KConfigXtEditor::replaceItemsInXml(const QString& oldItem, const QString& newItem)

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>648</width>
-    <height>574</height>
+    <width>1214</width>
+    <height>756</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -82,6 +82,16 @@
        <column>
         <property name="text">
          <string>Value</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Description Type</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Description Value</string>
         </property>
        </column>
       </widget>
