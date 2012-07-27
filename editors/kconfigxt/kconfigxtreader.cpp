@@ -54,6 +54,26 @@ QString KConfigXtReaderItem::entryValue() const
     return m_entryValue;
 }
 
+QString KConfigXtReaderItem::descriptionValue() const
+{
+    return m_descriptionValue;
+}
+
+void KConfigXtReaderItem::setDescriptionValue(const QString& descriptionValue)
+{
+    m_descriptionValue = descriptionValue;
+}
+
+KConfigXtReaderItem::DescriptionType KConfigXtReaderItem::descriptionType() const
+{
+    return m_descriptionType;
+}
+
+void KConfigXtReaderItem::setDescriptionType(const KConfigXtReaderItem::DescriptionType descriptionType)
+{
+    m_descriptionType = descriptionType;
+}
+
 void KConfigXtReaderItem::setGroupName(const QString& groupName)
 {
     m_groupName = groupName;
@@ -153,8 +173,8 @@ bool KConfigXtReader::parse()
             //we have a new group
             if(reader.name() == "group") {
                 parseGroup(reader);
+            } else if (reader.name()=="entry"){
             }
-
         }
     }
 
@@ -178,7 +198,7 @@ void KConfigXtReader::parseGroup(QXmlStreamReader& reader)
 {
     //verify if we really has a group
     if(reader.tokenType() != QXmlStreamReader::StartElement &&
-        reader.name() == "person") {
+        reader.name() == "group") {
         //fail!
         return;
     }
@@ -207,14 +227,15 @@ void KConfigXtReader::parseGroup(QXmlStreamReader& reader)
 
 void KConfigXtReader::parseEntry(QXmlStreamReader& reader)
 {
-    // Check if we are inside an element like <entry name="interval" type="Int">
+    // Check if we are inside in an element like <entry name="interval" type="Int">
     if(reader.tokenType() != QXmlStreamReader::StartElement) {
         return;
     }
 
     //check if there is a type attribute
     //if there isn't fail!
-    if (reader.attributes().hasAttribute("type")) {
+    if (reader.attributes().hasAttribute("type") &&
+        reader.attributes().hasAttribute("name")) {
         //now we can take the entry's name and type
         m_data.setEntryName(reader.attributes().value("name").toString());
         m_data.setEntryType(reader.attributes().value("type").toString());
@@ -236,26 +257,71 @@ void KConfigXtReader::parseEntry(QXmlStreamReader& reader)
         reader.name() == "entry")) {
 
         //we have a default element
-        if (reader.name().toString() == "default") {
-
-            //go ahead one more!
-            reader.readNext();
-
-            //we need the text of default
-            QString defaultText = reader.text().toString();
-
-            //check if we have characters
-            if(reader.tokenType() != QXmlStreamReader::Characters) {
-                return;
-            }
-            m_data.setEntryValue(reader.text().toString());
-
+        if (reader.name() == "label") {
+            parseDescription(reader);
+            m_data.setDescriptionType(KConfigXtReaderItem::Label);
+        } else if (reader.name() == "tooltip") {
+            parseDescription(reader);
+            m_data.setDescriptionType(KConfigXtReaderItem::ToolTip);
+        } else if (reader.name() == "whatsthis") {
+            parseDescription(reader);
+            m_data.setDescriptionType(KConfigXtReaderItem::WhatsThis);
         }
+
         reader.readNext();
     }
     //add the data in our datalist
     m_dataList.append(m_data);
 }
+
+void KConfigXtReader::parseDescription(QXmlStreamReader& reader)
+{
+    // Check if we are inside in label/tooltip/whatsthis
+    if(reader.tokenType() != QXmlStreamReader::StartElement) {
+        return;
+    }
+
+    //go ahead!
+    reader.readNext();
+
+    if (reader.isCharacters()) {
+        m_data.setDescriptionValue(reader.text().toString());
+    } else {
+        return;
+    }
+
+    reader.readNext();
+
+    while(!(reader.tokenType() == QXmlStreamReader::EndElement &&
+        reader.name() == "default")) {
+        if (reader.name() == "default") {
+            parseValue(reader);
+        }
+        reader.readNext();
+    }
+
+    //add the data in our datalist
+    m_dataList.append(m_data);
+}
+
+void KConfigXtReader::parseValue(QXmlStreamReader& reader)
+{
+    // Check if we are inside in default
+    if(reader.tokenType() != QXmlStreamReader::StartElement) {
+        return;
+    }
+
+    reader.readNext();
+
+    if (reader.isCharacters()) {
+        m_data.setEntryValue(reader.text().toString());
+    } else {
+        return;
+    }
+    //add the data in our datalist
+    m_dataList.append(m_data);
+}
+
 
 QList<KConfigXtReaderItem> KConfigXtReader::dataList() const
 {

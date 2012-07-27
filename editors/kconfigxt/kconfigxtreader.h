@@ -33,6 +33,12 @@ class KConfigXtReaderItem
 public:
     KConfigXtReaderItem(QObject* parent = 0);
 
+    enum DescriptionType {
+        Label = 0,
+        ToolTip,
+        WhatsThis
+    };
+
     QString groupName() const;
     void setGroupName(const QString& groupName);
 
@@ -45,6 +51,12 @@ public:
     QString entryValue() const;
     void setEntryValue(const QString& entryValue);
 
+    DescriptionType descriptionType() const;
+    void setDescriptionType(const KConfigXtReaderItem::DescriptionType descriptionType);
+
+    QString descriptionValue() const;
+    void setDescriptionValue(const QString& descriptionValue);
+
     bool operator==(const KConfigXtReaderItem& item);
 
 private:
@@ -52,6 +64,8 @@ private:
     QString m_entryName;
     QString m_entryType;
     QString m_entryValue;
+    QString m_descriptionValue;
+    DescriptionType m_descriptionType;
 };
 
 
@@ -79,6 +93,8 @@ public:
 private:
     void parseGroup(QXmlStreamReader& reader);
     void parseEntry(QXmlStreamReader& reader);
+    void parseDescription(QXmlStreamReader& reader);
+    void parseValue(QXmlStreamReader& reader);
     bool m_parseResult;
 
     QString m_filename;
