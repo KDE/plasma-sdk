@@ -52,6 +52,9 @@ KConfigXtEditor::KConfigXtEditor(QWidget *parent)
     connect(m_ui.twGroups, SIGNAL(itemClicked(QTreeWidgetItem*, int)),
             this, SLOT(setupWidgetsForEntries(QTreeWidgetItem*)));
 
+    connect(m_ui.twEntries, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
+            this, SLOT(entryItemWidgetState(QTreeWidgetItem*, QTreeWidgetItem*)));
+
     connect(m_ui.twGroups, SIGNAL(itemPressed(QTreeWidgetItem*, int)), this, SLOT(setLastGroupItem(QTreeWidgetItem*, int)));
     connect(m_ui.twEntries, SIGNAL(itemPressed(QTreeWidgetItem*, int)), this, SLOT(setLastEntryItem(QTreeWidgetItem*)));
 
@@ -219,6 +222,10 @@ void KConfigXtEditor::addEntryToUi(const QString& key, const QString& type,
     descriptionButton->addItem("ToolTip");
     descriptionButton->addItem("WhatsThis");
 
+    //we need a valid QTreeWidgetItem in order to enable the button,
+    //so disable it for now, and leave the signal to do the work!
+    descriptionButton->setEnabled(false);
+
     connect(descriptionButton, SIGNAL(currentIndexChanged(int)), this, SLOT(modifyTypeDescription()));
 
     //find the correct index
@@ -241,6 +248,7 @@ void KConfigXtEditor::addEntryToUi(const QString& key, const QString& type,
     item->setFlags(item->flags() | Qt::ItemIsEditable);
 
     m_ui.twEntries->setItemWidget(item, 3, descriptionButton);
+
 }
 
 void KConfigXtEditor::takeDataFromParser()
@@ -259,12 +267,10 @@ void KConfigXtEditor::takeDataFromParser()
             }
 
             if (!m_keysValuesTypes.contains(item) &&
-                !item.entryName().isEmpty())
-            {
+                !item.entryName().isEmpty()) {
                 //take the entries
                 m_keysValuesTypes.append(item);
             }
-
         }
     }
 }
@@ -314,7 +320,6 @@ void KConfigXtEditor::modifyEntry(QTreeWidgetItem* item, int column)
     //create the entry
     const QString oldEntry = stringToEntryAndValue(m_lastEntryItem["name"],
                                                    m_lastEntryItem["type"]);
-
     if (column == 0 || column == 1) {
         //the user has modified either the
         //key or its type.
@@ -340,9 +345,9 @@ void KConfigXtEditor::modifyEntry(QTreeWidgetItem* item, int column)
             return;
         }
 
-       QByteArray text;
+        QByteArray text;
 
-       while (!xmlFile.atEnd()) {
+        while (!xmlFile.atEnd()) {
             QString line = xmlFile.readLine();
             if (line.contains(oldEntry)) {
                 while (!line.contains("</entry>")) {
@@ -384,16 +389,24 @@ void KConfigXtEditor::modifyEntry(QTreeWidgetItem* item, int column)
         if (bt->currentIndex() == 0) {
             //it's a label
             newDescription = stringToDescription("label", item->text(4));
+            //our descriptionType is about to change, so update its value
+            m_lastEntryItem["descriptionType"] = "label";
         } else if (bt->currentIndex() == 1) {
             //it's a tooltip
             newDescription = stringToDescription("tooltip", item->text(4));
+            //our descriptionType is about to change, so update its value
+            m_lastEntryItem["descriptionType"] = "tooltip";
         } else if (bt->currentIndex() ==2) {
             //it's a whatsthis
             newDescription = stringToDescription("whatsthis", item->text(4));
+            //our descriptionType is about to change, so update its value
+            m_lastEntryItem["descriptionType"] = "whatsthis";
         }
+
         //replace the items
         replaceItemsInXml(oldDescription, newDescription);
     } else if (column == 4) {
+
         const QString oldDescription = stringToDescription(m_lastEntryItem["descriptionType"],
                                                           m_lastEntryItem["descriptionValue"]);
 
@@ -402,6 +415,39 @@ void KConfigXtEditor::modifyEntry(QTreeWidgetItem* item, int column)
 
         replaceItemsInXml(oldDescription, newDescription);
     }
+}
+
+void KConfigXtEditor::entryItemWidgetState(QTreeWidgetItem *currentItem, QTreeWidgetItem *previousItem)
+{
+
+    //we need to check every button/item individually because,
+    //the first time that the signal will be emited the previousItem
+    //will be 0, because there is no previousItem at that time, only
+    //the currentItem is valid
+
+    KComboBox *previousBt = 0;
+    KComboBox *currentBt = 0;
+
+    if (previousItem) {
+        previousBt = qobject_cast<KComboBox*>(m_ui.twEntries->itemWidget(previousItem, 3));
+
+        if (previousBt) {
+            if (previousBt->isEnabled()) {
+                previousBt->setEnabled(false);
+            }
+        }
+    }
+
+    if (currentItem) {
+        currentBt = qobject_cast<KComboBox*>(m_ui.twEntries->itemWidget(currentItem, 3));
+
+        if (currentBt) {
+            if (!currentBt->isEnabled()) {
+                currentBt->setEnabled(true);
+            }
+        }
+    }
+
 }
 
 void KConfigXtEditor::setLastEntryItem(QTreeWidgetItem* item)

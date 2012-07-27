@@ -123,6 +123,11 @@ private slots:
      **/
     void setLastEntryItem(QTreeWidgetItem* item);
 
+    /**
+     * It will enable and disable the itemWidget of the entry
+     **/
+    void entryItemWidgetState(QTreeWidgetItem* currentItem, QTreeWidgetItem* previousItem);
+
 protected:
     Ui::KConfigXtEditor m_ui;
 
