@@ -128,11 +128,29 @@ void KConfigXtWriter::writeXML()
             m_writer->writeStartElement("entry");
             m_writer->writeAttribute("name", readerItem.entryName());
             m_writer->writeAttribute("type", readerItem.entryType());
+
+            //start label/tooltip/whatthis
+            //check what if we have label or tooltip or whatthis
+            if (readerItem.descriptionType() == KConfigXtReaderItem::Label) {
+                m_writer->writeStartElement("label");
+            } else if (readerItem.descriptionType() == KConfigXtReaderItem::ToolTip) {
+                m_writer->writeStartElement("tooltip");
+            } else if (readerItem.descriptionType() == KConfigXtReaderItem::WhatsThis) {
+                m_writer->writeStartElement("whatsthis");
+            } else {
+                kDebug() << "There is no descriptionType, probably something is wrong";
+            }
+
+            m_writer->writeCharacters(readerItem.descriptionValue());
+            //end label/tooltip/whatthis
+            m_writer->writeEndElement();
+
             //start default
             m_writer->writeStartElement("default");
             m_writer->writeCharacters(readerItem.entryValue());
             //end default
             m_writer->writeEndElement();
+
             //end entry
             m_writer->writeEndElement();
         }
@@ -160,13 +178,9 @@ QList<KConfigXtWriterItem> KConfigXtWriter::readerItemsToWriterIems(QStringList&
         QList<KConfigXtReaderItem> tmpEntryList;
         foreach (const KConfigXtReaderItem& entry, entriesList) {
             if (group == entry.groupName()) {
-                KConfigXtReaderItem tmpEntry;
-                tmpEntry.setEntryName(entry.entryName());
-                tmpEntry.setEntryType(entry.entryType());
-                tmpEntry.setEntryValue(entry.entryValue());
 
-                if (!tmpEntryList.contains(tmpEntry)) {
-                    tmpEntryList.append(tmpEntry);
+                if (!tmpEntryList.contains(entry)) {
+                    tmpEntryList.append(entry);
                 }
             }
         }

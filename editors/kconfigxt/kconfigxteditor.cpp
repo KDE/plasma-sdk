@@ -150,6 +150,8 @@ void KConfigXtEditor::createNewEntry()
     //internal check
     newEntryItem.setEntryType("String");
     newEntryItem.setEntryValue("TODO");
+    newEntryItem.setDescriptionType(KConfigXtReaderItem::Label);
+    newEntryItem.setDescriptionValue("TODO");
 
     //create the entries for the existing data
     setupWidgetsForEntries(currentGroupItem);
