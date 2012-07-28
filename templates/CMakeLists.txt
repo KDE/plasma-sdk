@@ -10,6 +10,8 @@ install(FILES
   mainKWinScript.js
   cmakelists
   cmakelistsWindowSwitcher
+  cmakelistsKWinDecoration
   DESTINATION ${DATA_INSTALL_DIR}/plasmate/templates)
 
+set(KWIN_NAME "kwin")
 install(DIRECTORY qml DESTINATION ${DATA_INSTALL_DIR}/plasmate/templates)
