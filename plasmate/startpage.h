@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define STARTPAGE_H
 
 #include <QWidget>
+#include <QFile>
 #include <KUrl>
 
 #include "ui_startpage.h"
@@ -77,6 +78,7 @@ private Q_SLOTS:
     void recentProjectSelected(const QModelIndex &);
     void validateProjectType(const QModelIndex &sender);
     void createNewProject();
+    void prepareProjectFile(QFile &sourceFile, QFile &destinationFile, const QString &projectName);
     void checkProjectName(const QString &name);
     void checkLocalProjectPath(const QString &path);
     void checkPackagePath(const QString &path);
@@ -94,7 +96,8 @@ private:
         ThemeRow = 3,
         WindowSwitcherRow = 4,
         KWinScriptRow = 5,
-        KWinEffectRow = 6
+        KWinEffectRow = 6,
+        KWinDecorationRow = 7
     };
 
     void setupWidgets();

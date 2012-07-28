@@ -14,3 +14,5 @@ install(FILES
   cmakelistsKWinScript
   cmakelistsKWinEffect
   DESTINATION ${DATA_INSTALL_DIR}/plasmate/templates)
+
+install(DIRECTORY qml DESTINATION ${DATA_INSTALL_DIR}/plasmate/templates)

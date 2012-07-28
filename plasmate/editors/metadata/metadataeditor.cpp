@@ -128,6 +128,9 @@ void MetaDataEditor::readFile()
     } else if (serviceType == "KWin/Effect") {
         view->type_combo->insertItem(0, i18n("KWin Effect"));
         metadata->setServiceType("KWin/Effect");
+    } else if (serviceType == "KWin/Decoration") {
+        view->type_combo->insertItem(0, i18n("KWin Decoration"));
+        metadata->setServiceType("KWin/Decoration");
     } else {
         view->type_combo->insertItem(0, i18n("Applet"));
         view->type_combo->insertItem(1, i18n("Popup Applet"));
