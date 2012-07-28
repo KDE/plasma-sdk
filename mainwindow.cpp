@@ -680,6 +680,8 @@ void MainWindow::loadProject(const QString &path)
         actualType = "Plasma/Applet";
     } else if (types.contains("KWin/Script")) {
         actualType = "Plasma/Applet";
+    } else if (types.contains("KWin/Decoration")) {
+        actualType = "Plasma/Applet";
     } else if (types.contains("Plasma/Applet")) {
         actualType = "Plasma/Applet";
     } else {
@@ -693,6 +695,8 @@ void MainWindow::loadProject(const QString &path)
         //KWin Scripts doesn't have a previewer but we want the previewer to store their type
         //because we will not use it on MainWindow::createPreviewerFor, so the previewer will be disable
         previewerType = "KWin/Script";
+    } else if (types.contains("KWin/Decoration")) {
+        previewerType = "KWin/Decoration";
     } else {
         previewerType = actualType;
     }
@@ -890,6 +894,8 @@ Previewer* MainWindow::createPreviewerFor(const QString& projectType)
     Previewer* ret = 0;
     if (projectType.contains("KWin/WindowSwitcher")) {
         ret = new TabBoxPreviewer(i18nc("Window Title", "Window Switcher Previewer"), this);
+    } else if (projectType == "KWin/Decoration") {
+        ret = new RunnerPreviewer(i18n("Window Decoration"), this);
     } else if (projectType.contains("Plasma/Applet")) {
         ret = new PlasmoidPreviewer(i18n("Preview"), this);
     } else if (projectType == "Plasma/Runner") {

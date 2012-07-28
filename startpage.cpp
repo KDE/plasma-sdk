@@ -145,6 +145,7 @@ void StartPage::setupWidgets()
     new QListWidgetItem(KIcon("inkscape"), i18n("Theme"), m_ui.contentTypes);
     new QListWidgetItem(KIcon("window-duplicate"), i18n("Window Switcher"), m_ui.contentTypes);
     new QListWidgetItem(KIcon("preferences-system-windows-actions"), i18n("KWin Script"), m_ui.contentTypes);
+    new QListWidgetItem(KIcon("xorg"), i18n("KWin Decoration"), m_ui.contentTypes);
 
 //     connect(m_ui.newProjectButton, SIGNAL(clicked()), this, SLOT(launchNewProjectWizard()));
 }
@@ -205,6 +206,12 @@ void StartPage::validateProjectType(const QModelIndex &sender)
         m_ui.radioButtonRb->setEnabled(false);
         m_ui.radioButtonDe->setEnabled(true);
         m_ui.radioButtonJs->setChecked(true);
+    } else if (sender.row() == KWinDecorationRow) {
+        m_ui.radioButtonJs->setEnabled(false);
+        m_ui.radioButtonPy->setEnabled(false);
+        m_ui.radioButtonRb->setEnabled(false);
+        m_ui.radioButtonDe->setEnabled(true);
+        m_ui.radioButtonDe->setChecked(true);
     }
 
     m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty());
@@ -339,6 +346,9 @@ void StartPage::refreshRecentProjectsList()
         } else if (serviceTypes.contains("KWin/Script")) {
             defaultIconName = "preferences-system-windows-actions";
             tooltip += i18n("Project type: KWin Script");
+        } else if (serviceTypes.contains("KWin/Decoration")) {
+            defaultIconName = "xorg";
+            tooltip += i18n("Project type: KWin Decoration");
         } else {
             kWarning() << "Unknown service type" << serviceTypes;
         }
@@ -400,6 +410,9 @@ void StartPage::createNewProject()
     } else if (m_ui.contentTypes->currentRow() == 5) {
         serviceTypes = "KWin/Script";
         templateFilePath.append("mainKWinScript");
+    } else if (m_ui.contentTypes->currentRow() == 6) {
+        serviceTypes = "KWin/Decoration";
+        templateFilePath.append("qml/aurorae/mainKWinDecoration");
     }
 
     QString projectFolderName;
@@ -445,56 +458,28 @@ void StartPage::createNewProject()
     packageSubDirs.mkpath("contents/code"); //create the necessary subdirs
 
     // Create a QFile object that points to the template we need to copy
-    QFile sourceFile(templateFilePath + projectFileExtension);
-    QFile destinationFile(projectPath + "/contents/code/" + mainScriptName);//our dest
+    QFile sourceFile(templateFilePath + projectFileExtension); //our template file
+    QFile destinationFile(projectPath + "/contents/code/" + mainScriptName); //our destination file
 
-    // Now open these files, and substitute the main class, author, email and date fields
-    sourceFile.open(QIODevice::ReadOnly);
-    destinationFile.open(QIODevice::ReadWrite);
+    if (serviceTypes == "KWin/Decoration") {
+        //QML Aurorae Decoration themes is being shipped with more than one files
+        //so we need to copy them inside our $ProjectName/contents/code
+        QDir subFiles(KStandardDirs::locate("appdata", "templates/qml/aurorae/"));
+        foreach (const QString &fileName, subFiles.entryList(QDir::Files)) {
+            QFile tmpFile(subFiles.path() + "/" + fileName);
 
-    QByteArray rawData = sourceFile.readAll();
+            if (tmpFile.exists() && fileName != mainScriptName) {
+                tmpFile.copy(projectPath + "/contents/code/" +fileName);
 
-    QByteArray replacedString("$PLASMOID_NAME");
-    if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, projectName.toAscii());
-    }
-    replacedString.clear();
-
-    replacedString.append("$DATAENGINE_NAME");
-    if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, projectName.toAscii());
-    }
-    replacedString.clear();
-
-    replacedString.append("$RUNNER_NAME");
-    if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, projectName.toAscii());
-    }
-    replacedString.clear();
-
-    replacedString.append("$AUTHOR");
-    if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, m_ui.authorTextField->text().toAscii());
-    }
-    replacedString.clear();
-
-    replacedString.append("$EMAIL");
-    if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, m_ui.emailTextField->text().toAscii());
-    }
-    replacedString.clear();
-
-    replacedString.append("$DATE");
-    QDate date = QDate::currentDate();
-    QByteArray datetime(date.toString().toUtf8());
-    QTime time = QTime::currentTime();
-    datetime.append(", " + time.toString().toUtf8());
-    if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, datetime);
+                // Create a QFile object that points to the template we need to copy
+                QFile sourceFile(tmpFile.fileName()); //our template file
+                QFile destinationFile(projectPath + "/contents/code/" +fileName); //our destination file
+                prepareProjectFile(sourceFile, destinationFile, projectName);
+            }
+        }
     }
 
-    destinationFile.write(rawData);
-    destinationFile.close();
+    prepareProjectFile(sourceFile, destinationFile, projectName);
 
     // create the metadata.desktop file
     // TODO: missing but possible entries that could be added:
@@ -533,6 +518,58 @@ void StartPage::createNewProject()
     // accessible after project loads.
     m_ui.projectName->clear();
 }
+
+void StartPage::prepareProjectFile(QFile &sourceFile, QFile &destinationFile, const QString &projectName)
+{
+    // Now open these files, and substitute the main class, author, email and date fields
+     sourceFile.open(QIODevice::ReadOnly);
+     destinationFile.open(QIODevice::ReadWrite);
+
+     QByteArray rawData = sourceFile.readAll();
+
+     QByteArray replacedString("$PLASMOID_NAME");
+     if (rawData.contains(replacedString)) {
+         rawData.replace(replacedString, projectName.toAscii());
+     }
+     replacedString.clear();
+
+     replacedString.append("$DATAENGINE_NAME");
+     if (rawData.contains(replacedString)) {
+         rawData.replace(replacedString, projectName.toAscii());
+     }
+     replacedString.clear();
+
+     replacedString.append("$RUNNER_NAME");
+     if (rawData.contains(replacedString)) {
+         rawData.replace(replacedString, projectName.toAscii());
+     }
+     replacedString.clear();
+
+     replacedString.append("$AUTHOR");
+     if (rawData.contains(replacedString)) {
+         rawData.replace(replacedString, m_ui.authorTextField->text().toAscii());
+     }
+     replacedString.clear();
+
+     replacedString.append("$EMAIL");
+     if (rawData.contains(replacedString)) {
+         rawData.replace(replacedString, m_ui.emailTextField->text().toAscii());
+     }
+     replacedString.clear();
+
+     replacedString.append("$DATE");
+     QDate date = QDate::currentDate();
+     QByteArray datetime(date.toString().toUtf8());
+     QTime time = QTime::currentTime();
+     datetime.append(", " + time.toString().toUtf8());
+     if (rawData.contains(replacedString)) {
+         rawData.replace(replacedString, datetime);
+     }
+
+     destinationFile.write(rawData);
+     destinationFile.close();
+}
+
 
 void StartPage::saveNewProjectPreferences(const QString &path)
 {

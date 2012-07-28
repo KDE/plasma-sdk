@@ -11,3 +11,5 @@ install(FILES
   cmakelists
   cmakelistsWindowSwitcher
   DESTINATION ${DATA_INSTALL_DIR}/plasmate/templates)
+
+install(DIRECTORY qml DESTINATION ${DATA_INSTALL_DIR}/plasmate/templates)
