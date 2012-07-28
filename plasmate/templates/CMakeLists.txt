@@ -13,6 +13,8 @@ install(FILES
   cmakelistsWindowSwitcher
   cmakelistsKWinScript
   cmakelistsKWinEffect
+  cmakelistsKWinDecoration
   DESTINATION ${DATA_INSTALL_DIR}/plasmate/templates)
 
+set(KWIN_NAME "kwin")
 install(DIRECTORY qml DESTINATION ${DATA_INSTALL_DIR}/plasmate/templates)
