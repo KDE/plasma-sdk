@@ -53,6 +53,13 @@ set (PlasMate_SRC
     previewer/windowswitcher/windowswitcher.cpp
     previewer/windowswitcher/thumbnailitem.cpp
     previewer/windowswitcher/tabboxpreviewer.cpp
+
+    previewer/aurorae/preview.cpp
+    previewer/aurorae/auroraepreviewer.cpp
+    previewer/aurorae/kwindecoration.cpp
+    previewer/aurorae/decorationmodel.cpp
+    previewer/aurorae/auroraetheme.cpp
+    previewer/aurorae/themeconfig.cpp
     previewer/previewer.cpp
     publisher/signingwidget.cpp
     publisher/signingdialog.cpp
@@ -81,6 +88,10 @@ kde4_add_ui_files (PlasMate_SRC
    startpage.ui
    editors/metadata/metadata.ui
    publisher/publisher.ui
+  # previewer/aurorae/config.ui
+ # previewer/aurorae/buttons.ui
+   previewer/aurorae/decoration.ui
+#   previewer/aurorae/auroraeconfig.ui
 )
 
 include_directories(${KDE4_INCLUDES}
@@ -93,6 +104,7 @@ include_directories(${KDE4_INCLUDES}
 add_subdirectory( editors )
 add_subdirectory( previewer/plasmoid )
 add_subdirectory( templates )
+
 
 kde4_add_executable(plasmate ${PlasMate_SRC})
 target_link_libraries(plasmate
@@ -107,6 +119,8 @@ target_link_libraries(plasmate
                       ${QGPGME_LIBRARIES}
                       ${QT_QTDECLARATIVE_LIBRARIES}
                       ${KDECLARATIVE_LIBRARIES}
+                      ${X11_LIBRARIES}
+                      kdecorations
 )
 
 kde4_add_executable(windowswitcherpreviewer ${WindowSwitcherPreviewer_SRC})
@@ -136,4 +150,5 @@ previewer/windowswitcher/thumbnails/systemsettings.png
 previewer/windowswitcher/thumbnails/dolphin.png
 DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 install( FILES previewer/windowswitcher/tabboxdelegate.qml DESTINATION ${DATA_INSTALL_DIR}/plasmate)
+install(DIRECTORY previewer/aurorae/qml DESTINATION ${DATA_INSTALL_DIR}/plasmate/auroraepreviewer)
 macro_display_feature_log()
