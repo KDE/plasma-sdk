@@ -49,6 +49,12 @@ set (PlasMate_SRC
     previewer/windowswitcher/windowswitcher.cpp
     previewer/windowswitcher/thumbnailitem.cpp
     previewer/windowswitcher/tabboxpreviewer.cpp
+    previewer/aurorae/preview.cpp
+    previewer/aurorae/auroraepreviewer.cpp
+    previewer/aurorae/kwindecoration.cpp
+    previewer/aurorae/decorationmodel.cpp
+    previewer/aurorae/auroraetheme.cpp
+    previewer/aurorae/themeconfig.cpp
     previewer/previewer.cpp
     publisher/signingwidget.cpp
     publisher/signingdialog.cpp
@@ -117,6 +123,7 @@ previewer/windowswitcher/thumbnails/systemsettings.png
 previewer/windowswitcher/thumbnails/dolphin.png
 DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 install( FILES previewer/windowswitcher/tabboxdelegate.qml DESTINATION ${DATA_INSTALL_DIR}/plasmate)
+install(DIRECTORY previewer/aurorae/qml DESTINATION ${DATA_INSTALL_DIR}/plasmate/auroraepreviewer)
 
 ##standalone applications
 #plasmaremoteinstaller

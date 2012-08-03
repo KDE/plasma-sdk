@@ -64,6 +64,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "previewer/plasmoid/plasmoidpreviewer.h"
 #include "previewer/runner/runnerpreviewer.h"
 #include "previewer/windowswitcher/tabboxpreviewer.h"
+#include "previewer/aurorae/auroraepreviewer.h"
 #include "publisher/publisher.h"
 #include "docbrowser/docbrowser.h"
 
@@ -976,7 +977,7 @@ Previewer* MainWindow::createPreviewerFor(const QString& projectType)
     if (projectType.contains("KWin/WindowSwitcher")) {
         ret = new TabBoxPreviewer(i18nc("Window Title", "Window Switcher Previewer"), this);
     } else if (projectType == "KWin/Decoration") {
-        ret = new RunnerPreviewer(i18n("Window Decoration"), this);
+        ret = new AuroraePreviewer(i18n("Window Decoration"), this);
     } else if (projectType.contains("Plasma/Applet")) {
         ret = new PlasmoidPreviewer(i18n("Preview"), this);
     } else if (projectType == "Plasma/Runner") {
