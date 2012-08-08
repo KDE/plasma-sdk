@@ -53,14 +53,10 @@ void KonsolePreviewer::clearOutput()
 void KonsolePreviewer::setOutput(const QString& output)
 {
     m_textEdit->setText(output);
-
 }
 
 void KonsolePreviewer::saveOutput()
 {
-    //m_fileDialog = new KFileDialog(KUrl(), QString(), 0);
-    //m_fileDialog->setOperationMode(KFileDialog::Saving);
-    //m_fileDialog->setCaption("Save Script File");
     KUser user;
     KUrl destination = KFileDialog::getSaveUrl(KUrl(user.homeDir()), ".*", this);
 
