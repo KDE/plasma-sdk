@@ -36,6 +36,10 @@ KonsolePreviewer::KonsolePreviewer(const QString & title, QWidget *parent)
     toolBar->addAction(save);
 
     m_textEdit = new KTextEdit();
+    //don't let the user modify the output
+    m_textEdit->setReadOnly(true);
+    //make the background white
+    m_textEdit->setPalette(Qt::white);
 
     layout->addWidget(toolBar);
     layout->addWidget(m_textEdit);
