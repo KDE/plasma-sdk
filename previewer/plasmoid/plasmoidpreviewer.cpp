@@ -10,8 +10,6 @@
 
 #include "plasmoidpreviewer.h"
 
-#include <QFile>
-
 PlasmoidPreviewer::PlasmoidPreviewer(const QString & title, QWidget * parent, Qt::WindowFlags flags)
         : Previewer(title, parent, flags)
 {
@@ -27,14 +25,4 @@ void PlasmoidPreviewer::showPreview(const QString &packagePath)
 void PlasmoidPreviewer::refreshPreview()
 {
     emit refreshView();
-}
-
-QString PlasmoidPreviewer::takeOutput() const
-{
-    QFile file("/var/tmp/plasmatepreviewerlog.txt");
-    if (file.open(QIODevice::ReadOnly)) {
-        return file.readAll();
-    }
-
-    return QString();
 }

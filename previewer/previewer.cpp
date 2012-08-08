@@ -16,6 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "previewer.h"
+#include <QFile>
 
 Previewer::Previewer(const QString & title, QWidget * parent, Qt::WindowFlags flags)
     : QDockWidget(title, parent, flags)
@@ -35,4 +36,16 @@ void Previewer::emitRefreshRequest()
 void Previewer::emitShowKonsole()
 {
     emit showKonsole();
+}
+
+QString Previewer::takeOutput() const
+{
+    QFile file("/var/tmp/plasmatepreviewerlog.txt");
+    if (file.open(QIODevice::ReadOnly)) {
+        QString content = file.readAll();
+        file.close();
+        return content;
+    }
+
+    return QString();
 }

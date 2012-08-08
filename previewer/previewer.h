@@ -43,7 +43,7 @@ public:
      * Subclasses should override this method with the actual code which
      * will take the output
      **/
-    virtual QString takeOutput() const = 0;
+    QString takeOutput() const;
 
     /**
      * Subclasses should override this method with code that refreshes the preview

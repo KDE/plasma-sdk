@@ -35,7 +35,6 @@ public:
     PlasmoidPreviewer(const QString & title, QWidget * parent = 0, Qt::WindowFlags flags = 0 );
     void showPreview(const QString &packagePath);
     void refreshPreview();
-    QString takeOutput() const;
 
 private:
     PlasmoidView* m_view;
