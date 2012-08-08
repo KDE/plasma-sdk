@@ -104,7 +104,7 @@ void PreviewContainment::setupHeader()
     connect(action3, SIGNAL(triggered()), this, SLOT(refreshAndEmit()));
     refresh->setAction(action3);
 
-    KAction *action4 = new KAction(KIcon("konsole"), "", this);
+    KAction *action4 = new KAction(KIcon("utilities-terminal"), "", this);
     connect(action4, SIGNAL(triggered()), this, SIGNAL(showKonsole()));
     konsole->setAction(action4);
 
