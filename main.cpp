@@ -57,6 +57,7 @@ void customMessageHandler(QtMsgType type, const char *msg)
         outFile.open(QIODevice::WriteOnly | QIODevice::Truncate);
         QTextStream ts(&outFile);
         ts << txt << endl;
+        outFile.close();
     }
 }
 
