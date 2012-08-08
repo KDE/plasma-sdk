@@ -54,7 +54,7 @@ void customMessageHandler(QtMsgType type, const char *msg)
 
         QFile outFile("/var/tmp/plasmatepreviewerlog.txt");
 
-        outFile.open(QIODevice::WriteOnly | QIODevice::Append);
+        outFile.open(QIODevice::WriteOnly | QIODevice::Truncate);
         QTextStream ts(&outFile);
         ts << txt << endl;
     }
