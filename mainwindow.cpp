@@ -635,9 +635,22 @@ void MainWindow::showKonsolePreviewer()
 
 void MainWindow::reloadKonsolePreviewer()
 {
+
     if (m_konsole) {
         m_konsole->setOutput(m_previewerWidget->takeOutput());
     }
+
+    //at the main.cpp we made the plasmatepreviewerlog.txt
+    //file handler to append the data, because customMessageHandler
+    //is called with every q/kDebug what plasmate calls.
+    //but now with have added the data in our widget, and
+    //we don't want the plasmatepreviewerlog.txt to have the same
+    //date multiple times. So clear its data and in the refreshPreview
+    //it will take again the data that it wants, because the previewer
+    //will be recreated and the customMessageHandler event loop will
+    //take place for once more
+    QFile f("/var/tmp/plasmatepreviewerlog.txt");
+    f.resize(0);
 }
 
 void MainWindow::loadMetaDataEditor(KUrl target)
