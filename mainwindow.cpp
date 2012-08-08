@@ -420,6 +420,7 @@ void MainWindow::saveAndRefresh()
     saveEditorData();
     if (m_previewerWidget) {
         m_previewerWidget->refreshPreview();
+        reloadKonsolePreviewer();
     }
 }
 
@@ -634,7 +635,7 @@ void MainWindow::showKonsolePreviewer()
 
 void MainWindow::reloadKonsolePreviewer()
 {
-    if (m_konsole && m_previewerWidget) {
+    if (m_konsole) {
         m_konsole->setOutput(m_previewerWidget->takeOutput());
     }
 }
@@ -902,7 +903,6 @@ Previewer* MainWindow::createPreviewerFor(const QString& projectType)
     if (ret) {
         ret->setObjectName("preview");
         connect(ret, SIGNAL(refreshRequested()), this, SLOT(saveAndRefresh()));
-        connect(ret, SIGNAL(refreshRequested()), this, SLOT(reloadKonsolePreviewer()));
         connect(ret, SIGNAL(visibilityChanged(bool)), this, SLOT(updateActions()));
     }
 
