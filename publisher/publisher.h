@@ -34,12 +34,16 @@ private slots:
     void doPublish();
     void doCMake();
     void doInstall();
+    void doRemoteInstall();
     void checkInstallButtonState(int comboBoxCurrentIndex);
 
 private:
     bool cmakeProcessStatus(QProcess::ProcessError error);
     bool exportToFile(const KUrl& url);
     const QString tempPackagePath();
+
+    //avoid duplication
+    QString currentPackagePath() const;
 
     SigningWidget* m_signingWidget;
 

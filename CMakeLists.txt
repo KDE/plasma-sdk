@@ -57,18 +57,12 @@ set (PlasMate_SRC
     publisher/signingwidget.cpp
     publisher/signingdialog.cpp
     publisher/publisher.cpp
+    publisher/remoteinstaller/remoteinstaller.cpp
+    publisher/remoteinstaller/remoteinstallerdialog.cpp
     docbrowser/docbrowser.cpp
     projectmanager/projectmanager.cpp
-    )
-
-set (WindowSwitcherPreviewer_SRC
-    previewer/windowswitcher/windowswitcher.cpp
-    previewer/windowswitcher/thumbnailitem.cpp
-    previewer/windowswitcher/tabboxpreviewer.cpp
-    previewer/previewer.cpp
-    previewer/windowswitcher/standalone/main.cpp
-    previewer/windowswitcher/standalone/windowswitcherpreviewer.cpp
 )
+
 if (DEBUG_MODEL)
       set (PlasMate_SRC
          ${PlasMate_SRC}
@@ -81,6 +75,7 @@ kde4_add_ui_files (PlasMate_SRC
    startpage.ui
    editors/metadata/metadata.ui
    publisher/publisher.ui
+   publisher/remoteinstaller/remoteinstaller.ui
 )
 
 include_directories(${KDE4_INCLUDES}
@@ -109,21 +104,10 @@ target_link_libraries(plasmate
                       ${KDECLARATIVE_LIBRARIES}
 )
 
-kde4_add_executable(windowswitcherpreviewer ${WindowSwitcherPreviewer_SRC})
-target_link_libraries(windowswitcherpreviewer
-                      ${KDE4_KDEUI_LIBS}
-                      ${KDE4_KIO_LIBRARY}
-                      ${QT_QTDECLARATIVE_LIBRARIES}
-                      ${KDECLARATIVE_LIBRARIES}
-)
-
-
-
 if (DEBUG_MODEL)
    target_link_libraries(plasmate ${QT_QTTEST_LIBRARY})
 endif (DEBUG_MODEL)
 
-install(TARGETS windowswitcherpreviewer ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(TARGETS plasmate ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES plasmate.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES plasmateui.rc  DESTINATION ${DATA_INSTALL_DIR}/plasmate)
@@ -136,4 +120,46 @@ previewer/windowswitcher/thumbnails/systemsettings.png
 previewer/windowswitcher/thumbnails/dolphin.png
 DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 install( FILES previewer/windowswitcher/tabboxdelegate.qml DESTINATION ${DATA_INSTALL_DIR}/plasmate)
+
+##standalone applications
+#plasmaremoteinstaller
+set (PlasmaRemoteInstaller_SRC
+    publisher/remoteinstaller/remoteinstallerdialog.cpp
+    publisher/remoteinstaller/remoteinstaller.cpp
+    publisher/remoteinstaller/standalone/main.cpp
+    publisher/remoteinstaller/standalone/plasmaremoteinstaller.cpp
+)
+
+kde4_add_ui_files (PlasmaRemoteInstaller_SRC
+   publisher/remoteinstaller/remoteinstaller.ui
+)
+
+kde4_add_executable(plasmaremoteinstaller ${PlasmaRemoteInstaller_SRC})
+target_link_libraries(plasmaremoteinstaller
+                      ${KDE4_KDEUI_LIBS}
+                      ${KDE4_KIO_LIBRARY}
+)
+
+install(TARGETS plasmaremoteinstaller ${INSTALL_TARGETS_DEFAULT_ARGS})
+
+#windowswitcherpreviewer
+set (WindowSwitcherPreviewer_SRC
+    previewer/windowswitcher/windowswitcher.cpp
+    previewer/windowswitcher/thumbnailitem.cpp
+    previewer/windowswitcher/tabboxpreviewer.cpp
+    previewer/previewer.cpp
+    previewer/windowswitcher/standalone/main.cpp
+    previewer/windowswitcher/standalone/windowswitcherpreviewer.cpp
+)
+
+kde4_add_executable(windowswitcherpreviewer ${WindowSwitcherPreviewer_SRC})
+target_link_libraries(windowswitcherpreviewer
+                      ${KDE4_KDEUI_LIBS}
+                      ${KDE4_KIO_LIBRARY}
+                      ${QT_QTDECLARATIVE_LIBRARIES}
+                      ${KDECLARATIVE_LIBRARIES}
+)
+
+install(TARGETS windowswitcherpreviewer ${INSTALL_TARGETS_DEFAULT_ARGS})
+
 macro_display_feature_log()
