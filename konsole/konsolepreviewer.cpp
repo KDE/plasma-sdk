@@ -39,7 +39,9 @@ KonsolePreviewer::KonsolePreviewer(const QString & title, QWidget *parent)
     //don't let the user modify the output
     m_textEdit->setReadOnly(true);
     //make the background white
-    m_textEdit->setPalette(Qt::white);
+    QPalette p = m_textEdit->palette();
+    p.setColor(QPalette::Base, Qt::white);
+    m_textEdit->setPalette(p);
 
     layout->addWidget(toolBar);
     layout->addWidget(m_textEdit);
@@ -57,6 +59,12 @@ void KonsolePreviewer::clearOutput()
 void KonsolePreviewer::setOutput(const QString& output)
 {
     m_textEdit->setText(output);
+
+    //move the scrollbar automatically,
+    //in the end of the output
+    QTextCursor c =  m_textEdit->textCursor();
+    c.movePosition(QTextCursor::End);
+    m_textEdit->setTextCursor(c);
 }
 
 void KonsolePreviewer::saveOutput()
