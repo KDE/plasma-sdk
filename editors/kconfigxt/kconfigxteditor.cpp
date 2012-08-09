@@ -154,8 +154,24 @@ void KConfigXtEditor::createNewEntry()
         return;
     }
 
+    QString groupName = currentGroupItem->text(0);
+    QStringList entryNameList;
+
+    foreach(const KConfigXtReaderItem it, m_keysValuesTypes) {
+        if (groupName == it.groupName()) {
+            entryNameList << it.entryName();
+        }
+    }
+
+    if (entryNameList.contains("TODO")) {
+        QString text = i18n("There is already a TODO entry,"
+            " fix it before you continue");
+        KMessageBox::information(this, text);
+        return;
+    }
+
     KConfigXtReaderItem newEntryItem;
-    newEntryItem.setGroupName(currentGroupItem->text(0));
+    newEntryItem.setGroupName(groupName);
     newEntryItem.setEntryName("TODO");
     //remember we need a valid type due to the
     //internal check
