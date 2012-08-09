@@ -160,6 +160,13 @@ bool KConfigXtReader::parse()
         return false;
     }
 
+    //It is possible to give an empty file,
+    //so retun and don't complain for failing to parse
+    //the xml
+    if (xmlFile.readAll().isEmpty()) {
+        return true;
+    }
+
     QXmlStreamReader reader;
     reader.setDevice(&xmlFile);
 
