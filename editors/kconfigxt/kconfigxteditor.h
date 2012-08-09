@@ -189,6 +189,9 @@ private:
     QString stringToDescription(const QString& descriptionType, const QString descriptionValue) const;
 
     //avoid duplication
+    QString stringToDefault(const QString& value) const;
+
+    //avoid duplication
     void replaceItemsInXml(const QString& oldItem, const QString& newItem);
 
 };
