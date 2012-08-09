@@ -49,7 +49,7 @@ KConfigXtEditor::KConfigXtEditor(QWidget *parent)
     connect(m_ui.pbAddGroup, SIGNAL(clicked()), this, SLOT(createNewGroup()));
     connect(m_ui.pbAddEntry, SIGNAL(clicked()), this, SLOT(createNewEntry()));
 
-    connect(m_ui.twGroups, SIGNAL(itemClicked(QTreeWidgetItem*, int)),
+    connect(m_ui.twGroups, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
             this, SLOT(setupWidgetsForEntries(QTreeWidgetItem*)));
 
     connect(m_ui.twEntries, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
@@ -131,6 +131,17 @@ void KConfigXtEditor::createNewGroup()
 
     KConfigXtReaderItem newGroupItem;
     newGroupItem.setGroupName(newGroupName);
+    newGroupItem.setEntryName("TODO");
+    newGroupItem.setEntryType("String");
+    newGroupItem.setDescriptionType(KConfigXtReaderItem::Label);
+    newGroupItem.setDescriptionValue("TODO");
+    newGroupItem.setEntryValue("TODO");
+
+    //add our new entry into the tree
+    addEntryToUi(newGroupItem.entryName(),
+                 newGroupItem.entryType(), newGroupItem.entryValue(),
+                 newGroupItem.descriptionValue(), newGroupItem.descriptionType());
+
     giveElementsToWriter(newGroupItem);
 }
 
@@ -187,6 +198,7 @@ void KConfigXtEditor::addGroupToUi(const QString& group)
     QTreeWidgetItem *item = new QTreeWidgetItem(m_ui.twGroups);
     item->setText(0, group);
     item->setFlags(item->flags() | Qt::ItemIsEditable);
+    m_ui.twGroups->setCurrentItem(item);
 }
 
 void KConfigXtEditor::setupWidgetsForEntries(QTreeWidgetItem *item)
