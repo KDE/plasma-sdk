@@ -353,14 +353,12 @@ void KConfigXtEditor::modifyEntry(QTreeWidgetItem* item, int column)
             QString line = xmlFile.readLine();
             if (line.contains(oldEntry)) {
                 while (!line.contains("</entry>")) {
-                    //we took this from the xml spec
-                    QString startsWith = "<default>";
-                    QString endsWith = "</default>";
-                    if (line.startsWith(startsWith)
-                        && line.endsWith(endsWith)) {
-                            line.replace(oldEntry, startsWith
-                            + item->text(2) + endsWith);
+                    QString oldValue = stringToDefault(m_lastEntryItem["value"]);
+                    if (line.contains(oldValue)) {
+                        line.replace(oldValue, stringToDefault(item->text(2)));
                     }
+                    text.append(line);
+                    line = xmlFile.readLine();
                }
             }
             text.append(line);
@@ -473,6 +471,11 @@ QString KConfigXtEditor::stringToEntryAndValue(const QString& entryName, const Q
 QString KConfigXtEditor::stringToDescription(const QString& descriptionType, const QString descriptionValue) const
 {
     return QString("<%1>%2</%1>").arg(descriptionType).arg(descriptionValue);
+}
+
+QString KConfigXtEditor::stringToDefault(const QString& value) const
+{
+    return QString("<default>%1</default>").arg(value);
 }
 
 void KConfigXtEditor::replaceItemsInXml(const QString& oldItem, const QString& newItem)
