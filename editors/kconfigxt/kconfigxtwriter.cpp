@@ -169,7 +169,7 @@ void KConfigXtWriter::startKcfgElement()
     startKcfg.append("\n");
     startKcfg.append("     xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
     startKcfg.append("\n");
-    startKcfg.append("     xsi:schemaLocation=\"http://www.kde.org/standards/kcfg/1.0\"");
+    startKcfg.append("     xsi:schemaLocation=\"http://www.kde.org/standards/kcfg/1.0");
     startKcfg.append("\n");
     startKcfg.append("     http://www.kde.org/standards/kcfg/1.0/kcfg.xsd\" >");
     startKcfg.append("\n");
