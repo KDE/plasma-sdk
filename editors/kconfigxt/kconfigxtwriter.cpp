@@ -103,24 +103,17 @@ void KConfigXtWriter::writeXML()
     m_writer->writeStartDocument();
 
     //start kcfg element
-    m_writer->writeStartElement("kcfg");
+    startKcfgElement();
+
+    //start kcfgfile element
+    m_writer->writeStartElement("kcfgfile");
+    m_writer->writeAttribute("name", "");
+    m_writer->writeEndElement();
 
     foreach(const KConfigXtWriterItem& writerItem, m_dataList) {
         //start group
         m_writer->writeStartElement("group");
 
-        //TODO add the above into the xml
-        /*every kconfigxt xml file contains the below data
-         * 
-         *   <?xml version="1.0" encoding="UTF-8"?>
-         *   <kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
-         *   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         *   xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
-         *   http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
-         *   <kcfgfile name=""/>
-         *   </kcfg>
-         *
-         */
         m_writer->writeAttribute("name", writerItem.group());
 
         foreach(const KConfigXtReaderItem& readerItem, writerItem.entries()) {
@@ -157,13 +150,38 @@ void KConfigXtWriter::writeXML()
         //end group
         m_writer->writeEndElement();
     }
-    //end kcfg
-    m_writer->writeEndElement();
+    //end kcfg element
+    endKcfgElement();
+
     //end the document
     m_writer->writeEndDocument();
 
     //finally close the device and write our data
     m_writer->device()->close();
+}
+
+void KConfigXtWriter::startKcfgElement()
+{
+    //write the kcfg manually
+    QByteArray startKcfg;
+    startKcfg.append("\n");
+    startKcfg.append("<kcfg xmlns=\"http://www.kde.org/standards/kcfg/1.0\"");
+    startKcfg.append("\n");
+    startKcfg.append("     xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
+    startKcfg.append("\n");
+    startKcfg.append("     xsi:schemaLocation=\"http://www.kde.org/standards/kcfg/1.0\"");
+    startKcfg.append("\n");
+    startKcfg.append("     http://www.kde.org/standards/kcfg/1.0/kcfg.xsd\" >");
+    startKcfg.append("\n");
+    m_writer->device()->write(startKcfg);
+}
+
+void KConfigXtWriter::endKcfgElement()
+{
+    QByteArray endKcfg;
+    endKcfg.append("\n");
+    endKcfg.append("</kcfg>");
+    m_writer->device()->write(endKcfg);
 }
 
 QList<KConfigXtWriterItem> KConfigXtWriter::readerItemsToWriterIems(QStringList& groupList,

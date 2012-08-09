@@ -84,6 +84,11 @@ private:
     QList<KConfigXtWriterItem> m_dataList;
     QFile *m_xmlFile;
     QXmlStreamWriter *m_writer;
+
+    //we have to write the kcfg element manually
+    //because qxmlstreamwriter doesn't support it
+    void startKcfgElement();
+    void endKcfgElement();
 };
 
 #endif
