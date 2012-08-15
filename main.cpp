@@ -15,49 +15,21 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <iostream>
+#include <QPointer>
 
 #include <KApplication>
 #include <KAboutData>
 #include <KLocale>
 #include <KCmdLineArgs>
 
-#include <QFile>
-#include <QTextStream>
-
 #include "mainwindow.h"
+
+QPointer<MainWindow> mainwindow;
 
 void customMessageHandler(QtMsgType type, const char *msg)
 {
-    if (QString(msg).startsWith("plasmate") || //don't include the plasmate specific output
-        QString(msg).startsWith("Object::") || // don't include QObject warnings
-        QString(msg).startsWith("QGraphicsScene::") || //don't include QGraphicsScene warnings
-        QString(msg).startsWith(" X Error")) //don't include silly X errors
-    {
-        std::cout << msg << std::endl;
-    } else {
-        QString txt;
-        switch (type) {
-            case QtDebugMsg:
-                txt = QString("Debug: %1").arg(msg);
-                break;
-            case QtWarningMsg:
-                txt = QString("Warning: %1").arg(msg);
-                break;
-            case QtCriticalMsg:
-                txt = QString("Critical: %1").arg(msg);
-                break;
-            case QtFatalMsg:
-                txt = QString("Fatal: %1").arg(msg);
-                abort();
-        }
-
-        QFile outFile("/var/tmp/plasmatepreviewerlog.txt");
-
-        outFile.open(QIODevice::WriteOnly | QIODevice::Append);
-        QTextStream ts(&outFile);
-        ts << txt << endl;
-        outFile.close();
+    if (mainwindow) {
+        mainwindow->emitSendMessage(type, msg);
     }
 }
 
@@ -90,8 +62,9 @@ int main(int argc, char *argv[])
     KCmdLineArgs::parsedArgs();
     KApplication app;
 
-    MainWindow *w = new MainWindow();
-    w->show();
+    mainwindow = new MainWindow();
+    qInstallMsgHandler(customMessageHandler);
+    mainwindow->show();
 
     return app.exec();
 }

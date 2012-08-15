@@ -68,15 +68,18 @@ public:
     QStringList recentProjects();
     void checkMetafile(const QString &path);
     void updateSideBar();
+    void emitSendMessage(QtMsgType type, const QString& msg);
 
 public Q_SLOTS:
     void quit();
     void loadProject(const QString &name);
     void checkProjectrc();
+    void customMessageHandler(QtMsgType type, const QString& msg);
 
 Q_SIGNALS:
     void newSavePointClicked();
     void refreshRequested();
+    void sendMessage(QtMsgType type, const QString& msg);
 
 protected:
     void closeEvent(QCloseEvent *event);

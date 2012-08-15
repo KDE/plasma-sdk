@@ -62,7 +62,7 @@ public slots:
      * Emits showKonsole(), which will show the konsole. All subclasses should call/connect
      * to this when the user requests a to see the konsole.
      **/
-    virtual void emitShowKonsole();
+    void emitShowKonsole();
 };
 
 #endif // PREVIEWER_H

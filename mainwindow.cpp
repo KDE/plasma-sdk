@@ -15,12 +15,15 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <iostream>
+
 #include <QDir>
 #include <QDockWidget>
 #include <QListWidgetItem>
 #include <QModelIndex>
 #include <QLabel>
 #include <QGridLayout>
+#include <QTextStream>
 
 #include <KTextEdit>
 
@@ -128,7 +131,14 @@ MainWindow::MainWindow(QWidget *parent)
     if (autoSaveConfigGroup().entryMap().isEmpty()) {
         setWindowState(Qt::WindowMaximized);
     }
+    connect(this, SIGNAL(sendMessage(QtMsgType, const QString)), this, SLOT(customMessageHandler(QtMsgType,QString)));
 }
+
+void MainWindow::emitSendMessage(QtMsgType type, const QString& msg)
+{
+    emit sendMessage(type, msg);
+}
+
 
 MainWindow::~MainWindow()
 {
@@ -420,7 +430,6 @@ void MainWindow::saveAndRefresh()
     saveEditorData();
     if (m_previewerWidget) {
         m_previewerWidget->refreshPreview();
-        reloadKonsolePreviewer();
     }
 }
 
@@ -920,4 +929,39 @@ Previewer* MainWindow::createPreviewerFor(const QString& projectType)
     }
 
     return ret;
+}
+
+void MainWindow::customMessageHandler(QtMsgType type, const QString& msg)
+{
+    if (QString(msg).startsWith("plasmate") || //don't include the plasmate specific output
+        QString(msg).startsWith("Object::") || // don't include QObject warnings
+        QString(msg).startsWith("QGraphicsScene::") || //don't include QGraphicsScene warnings
+        QString(msg).startsWith(" X Error")) //don't include silly X errors
+    {
+       std::cout << msg.toLocal8Bit().data() << std::endl;
+    } else {
+        QString txt;
+        switch (type) {
+            case QtDebugMsg:
+                txt = QString("Debug: %1").arg(msg);
+                break;
+            case QtWarningMsg:
+                txt = QString("Warning: %1").arg(msg);
+                break;
+            case QtCriticalMsg:
+                txt = QString("Critical: %1").arg(msg);
+                break;
+            case QtFatalMsg:
+                txt = QString("Fatal: %1").arg(msg);
+                abort();
+        }
+
+        QFile outFile("/var/tmp/plasmatepreviewerlog.txt");
+
+        outFile.open(QIODevice::WriteOnly | QIODevice::Append);
+        QTextStream ts(&outFile);
+        ts << txt << endl;
+        outFile.close();
+        reloadKonsolePreviewer();
+    }
 }
