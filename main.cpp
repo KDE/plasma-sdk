@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QPointer>
 
+#include <KDebug>
 #include <KApplication>
 #include <KAboutData>
 #include <KLocale>
@@ -30,13 +31,16 @@ void customMessageHandler(QtMsgType type, const char *msg)
 {
     if (mainwindow) {
         mainwindow->emitSendMessage(type, msg);
+    } else {
+        kDebug() << "*****************************************************";
+        kDebug() << "Plasmate has fails to set a qInstallMsgHandler!!!!!!!";
+        kDebug() << "*****************************************************";
+        exit(0);
     }
 }
 
 int main(int argc, char *argv[])
 {
-    qInstallMsgHandler(customMessageHandler);
-
     KAboutData aboutData("plasmate", 0, ki18n("Plasmate"),
                          "0.1alpha3", ki18n("Plasma Add-Ons Creator"),
                          KAboutData::License_GPL,
