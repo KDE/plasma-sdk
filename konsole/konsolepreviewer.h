@@ -33,6 +33,7 @@ public:
 
 public Q_SLOTS:
     void clearOutput();
+    void clearTmpFile();
     void setOutput(const QString& output);
     void saveOutput();
 

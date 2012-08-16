@@ -427,6 +427,9 @@ void MainWindow::saveEditorData()
 
 void MainWindow::saveAndRefresh()
 {
+    //in every new save clear the konsole.
+    m_konsole->clearTmpFile();
+
     saveEditorData();
     if (m_previewerWidget) {
         m_previewerWidget->refreshPreview();
@@ -658,8 +661,6 @@ void MainWindow::reloadKonsolePreviewer()
     //it will take again the data that it wants, because the previewer
     //will be recreated and the customMessageHandler event loop will
     //take place for once more
-    QFile f("/var/tmp/plasmatepreviewerlog.txt");
-    f.resize(0);
 }
 
 void MainWindow::loadMetaDataEditor(KUrl target)
@@ -795,6 +796,9 @@ void MainWindow::loadProject(const QString &path)
 
     //initialize the konsole previewer
     m_konsole = new KonsolePreviewer(i18n("Previewer Output"), this);
+
+    //after the init, cleat the tmp file
+    m_konsole->clearTmpFile();
 
     // initialize previewer
     delete m_previewerWidget;

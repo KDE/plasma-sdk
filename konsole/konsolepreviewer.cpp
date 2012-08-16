@@ -56,6 +56,14 @@ void KonsolePreviewer::clearOutput()
     m_textEdit->clear();
 }
 
+void KonsolePreviewer::clearTmpFile()
+{
+    QFile f("/var/tmp/plasmatepreviewerlog.txt");
+    f.resize(0);
+    f.close();
+}
+
+
 void KonsolePreviewer::setOutput(const QString& output)
 {
     m_textEdit->setText(output);
