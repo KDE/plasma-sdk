@@ -53,6 +53,7 @@ KonsolePreviewer::KonsolePreviewer(const QString & title, QWidget *parent)
 
 void KonsolePreviewer::clearOutput()
 {
+    clearTmpFile();
     m_textEdit->clear();
 }
 
