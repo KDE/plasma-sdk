@@ -64,9 +64,10 @@ void KonsolePreviewer::clearTmpFile()
 }
 
 
-void KonsolePreviewer::setOutput(const QString& output)
+void KonsolePreviewer::populateKonsole()
 {
-    m_textEdit->setText(output);
+    m_textEdit->setText(takeOutput());
+
 
     //move the scrollbar automatically,
     //in the end of the output
@@ -74,6 +75,19 @@ void KonsolePreviewer::setOutput(const QString& output)
     c.movePosition(QTextCursor::End);
     m_textEdit->setTextCursor(c);
 }
+
+QString KonsolePreviewer::takeOutput() const
+{
+    QFile file("/var/tmp/plasmatepreviewerlog.txt");
+    if (file.open(QIODevice::ReadOnly)) {
+        QString content = file.readAll();
+        file.close();
+        return content;
+    }
+
+    return QString();
+}
+
 
 void KonsolePreviewer::saveOutput()
 {

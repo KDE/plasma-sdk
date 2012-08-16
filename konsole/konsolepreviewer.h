@@ -34,11 +34,12 @@ public:
 public Q_SLOTS:
     void clearOutput();
     void clearTmpFile();
-    void setOutput(const QString& output);
+    void populateKonsole();
     void saveOutput();
 
 private:
     KTextEdit *m_textEdit;
+    QString takeOutput() const;
 };
 
 #endif // KONSOLEPREVIEWER_H

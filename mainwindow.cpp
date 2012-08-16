@@ -663,24 +663,6 @@ void MainWindow::showKonsolePreviewer()
     }
 }
 
-void MainWindow::reloadKonsolePreviewer()
-{
-
-    if (m_konsole) {
-        m_konsole->setOutput(m_previewerWidget->takeOutput());
-    }
-
-    //at the main.cpp we made the plasmatepreviewerlog.txt
-    //file handler to append the data, because customMessageHandler
-    //is called with every q/kDebug what plasmate calls.
-    //but now with have added the data in our widget, and
-    //we don't want the plasmatepreviewerlog.txt to have the same
-    //date multiple times. So clear its data and in the refreshPreview
-    //it will take again the data that it wants, because the previewer
-    //will be recreated and the customMessageHandler event loop will
-    //take place for once more
-}
-
 void MainWindow::loadMetaDataEditor(KUrl target)
 {
     // save any previous editor content
@@ -828,7 +810,7 @@ void MainWindow::loadProject(const QString &path)
         m_previewerWidget->setVisible(showPreview);
 
         //now do the relative stuff for the konsole
-        m_konsole->setOutput(m_previewerWidget->takeOutput());
+        m_konsole->populateKonsole();
         m_konsole->setObjectName("Previewer Output");
         connect(m_previewerWidget, SIGNAL(showKonsole()), this, SLOT(showKonsolePreviewer()));
         addDockWidget(Qt::BottomDockWidgetArea, m_konsole);
@@ -984,6 +966,10 @@ void MainWindow::customMessageHandler(QtMsgType type, const QString& msg)
         QTextStream ts(&outFile);
         ts << txt << endl;
         outFile.close();
-        reloadKonsolePreviewer();
+
+        //populate the konsole
+        if (m_konsole) {
+            m_konsole->populateKonsole();
+        }
     }
 }

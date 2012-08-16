@@ -112,7 +112,6 @@ private Q_SLOTS:
     void toggleFileList();
     void installPackage();
     void showKonsolePreviewer();
-    void reloadKonsolePreviewer();
 
     // refreshes editor, killing all local changes
     void editorDestructiveRefresh();

@@ -37,15 +37,3 @@ void Previewer::emitShowKonsole()
 {
     emit showKonsole();
 }
-
-QString Previewer::takeOutput() const
-{
-    QFile file("/var/tmp/plasmatepreviewerlog.txt");
-    if (file.open(QIODevice::ReadOnly)) {
-        QString content = file.readAll();
-        file.close();
-        return content;
-    }
-
-    return QString();
-}

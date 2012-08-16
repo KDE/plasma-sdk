@@ -40,12 +40,6 @@ public:
     virtual void showPreview(const QString &packagePath) = 0;
 
     /**
-     * Subclasses should override this method with the actual code which
-     * will take the output
-     **/
-    QString takeOutput() const;
-
-    /**
      * Subclasses should override this method with code that refreshes the preview
      */
     virtual void refreshPreview() = 0;
