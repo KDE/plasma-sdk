@@ -93,7 +93,8 @@ private:
         RunnerRow = 2,
         ThemeRow = 3,
         WindowSwitcherRow = 4,
-        KWinScriptRow = 5
+        KWinScriptRow = 5,
+        KWinEffectRow = 6
     };
 
     void setupWidgets();

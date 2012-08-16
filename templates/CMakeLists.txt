@@ -8,6 +8,7 @@ install(FILES
   mainPlasmoid.rb
   mainTabbox.qml
   mainKWinScript.js
+  mainKWinEffect.js
   cmakelists
   cmakelistsWindowSwitcher
   DESTINATION ${DATA_INSTALL_DIR}/plasmate/templates)

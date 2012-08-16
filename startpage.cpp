@@ -145,6 +145,7 @@ void StartPage::setupWidgets()
     new QListWidgetItem(KIcon("inkscape"), i18n("Theme"), m_ui.contentTypes);
     new QListWidgetItem(KIcon("window-duplicate"), i18n("Window Switcher"), m_ui.contentTypes);
     new QListWidgetItem(KIcon("preferences-system-windows-actions"), i18n("KWin Script"), m_ui.contentTypes);
+    new QListWidgetItem(KIcon("preferences-system-windows-effect"), i18n("KWin Effect"), m_ui.contentTypes);
 
 //     connect(m_ui.newProjectButton, SIGNAL(clicked()), this, SLOT(launchNewProjectWizard()));
 }
@@ -205,7 +206,12 @@ void StartPage::validateProjectType(const QModelIndex &sender)
         m_ui.radioButtonRb->setEnabled(false);
         m_ui.radioButtonDe->setEnabled(true);
         m_ui.radioButtonJs->setChecked(true);
-    }
+    } else if (sender.row() == KWinEffectRow) {
+        m_ui.radioButtonPy->setEnabled(false);
+        m_ui.radioButtonJs->setChecked(true);
+        m_ui.radioButtonRb->setEnabled(false);
+   }
+
 
     m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty());
     m_ui.layoutHackStackedWidget->setCurrentIndex(1);
@@ -339,6 +345,9 @@ void StartPage::refreshRecentProjectsList()
         } else if (serviceTypes.contains("KWin/Script")) {
             defaultIconName = "preferences-system-windows-actions";
             tooltip += i18n("Project type: KWin Script");
+        } else if (serviceTypes.contains("KWin/Effect")) {
+            defaultIconName = "preferences-system-windows-effect";
+            tooltip += i18n("Project type: KWin Script");
         } else {
             kWarning() << "Unknown service type" << serviceTypes;
         }
@@ -400,7 +409,11 @@ void StartPage::createNewProject()
     } else if (m_ui.contentTypes->currentRow() == 5) {
         serviceTypes = "KWin/Script";
         templateFilePath.append("mainKWinScript");
+    } else if (m_ui.contentTypes->currentRow() == 6) {
+        serviceTypes = "KWin/Effect";
+        templateFilePath.append("mainKWinEffect");
     }
+
 
     QString projectFolderName;
     QString mainScriptName;
