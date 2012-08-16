@@ -23,7 +23,7 @@ RemoteInstaller::RemoteInstaller(const QString& username, const QString& hostnam
         m_widget(parent)
 {
     //like fish://username@192.123.23.1
-    m_execUrl.setUrl("fish://" + hostname + ":22");
+    m_execUrl.setUrl("fish://" + hostname);
     m_execUrl.setUserName(username);
 
     //this will be out temp directory
@@ -48,6 +48,9 @@ RemoteInstaller::RemoteInstaller(const QString& username, const QString& hostnam
 
     //we need our source path
     m_sourcePath = source;
+
+    //we will need the dirname of the source
+    QDir packageDir(source);
 
     m_plasmaPkgUrl.append("plasmapkg -u " + temporaryDirectory + packageDir.dirName() + '/');
 
