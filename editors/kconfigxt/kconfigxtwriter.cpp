@@ -56,15 +56,15 @@ void KConfigXtWriterItem::setEntries(QList<KConfigXtReaderItem> entries)
 
 KConfigXtWriter::KConfigXtWriter(QObject *parent)
         : QObject(parent),
-        m_writer(0),
-        m_xmlFile(0)
+        m_xmlFile(0),
+        m_writer(0)
 {
 }
 
 KConfigXtWriter::KConfigXtWriter(const QString& xmlFilePath, QObject *parent)
         : QObject(parent),
-        m_writer(0),
-        m_xmlFile(0)
+        m_xmlFile(0),
+        m_writer(0)
 {
     setConfigXmlFile(xmlFilePath);
 }

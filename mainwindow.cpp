@@ -112,8 +112,8 @@ MainWindow::MainWindow(QWidget *parent)
         m_isPlasmateCreatedPackage(true),
         m_part(0),
         m_notesPart(0),
-        m_kconfigXtEditor(0),
-        m_notesWidget(0)
+        m_notesWidget(0),
+        m_kconfigXtEditor(0)
 {
     setXMLFile("plasmateui.rc");
     setupActions();
