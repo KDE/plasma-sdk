@@ -179,12 +179,16 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
             if (index.row() == 0) {
                 if (!qstrcmp(key, "images")) {
                     return QStringList("[plasmate]/imageDialog");
-                } else {
+                }else {
                     return QStringList("[plasmate]/new");
                 }
             }
             if (!qstrcmp(key, "images")) {
                 return QStringList("[plasmate]/imageViewer");
+            }
+
+            if (!qstrcmp(key, "config")) {
+                return QStringList("[plasmate]/kconfigxteditor");
             }
             return m_package->structure()->mimetypes(key);
         }

@@ -57,6 +57,7 @@ signals:
     void loadEditor(const KService::List offers, KUrl target);
     void loadMetaDataEditor(KUrl target);
     void loadImageViewer(const KUrl &target);
+    void loadKConfigXtEditor(const KUrl &target);
 };
 
 #endif

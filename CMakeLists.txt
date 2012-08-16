@@ -31,6 +31,9 @@ set (PlasMate_SRC
     editors/imageviewer/imageloader.cpp
     editors/imageviewer/imageviewer.cpp
     editors/text/texteditor.cpp
+    editors/kconfigxt/kconfigxteditor.cpp
+    editors/kconfigxt/kconfigxtreader.cpp
+    editors/kconfigxt/kconfigxtwriter.cpp
     main.cpp
     sidebaritem.cpp
     sidebardelegate.cpp
@@ -76,6 +79,7 @@ kde4_add_ui_files (PlasMate_SRC
    editors/metadata/metadata.ui
    publisher/publisher.ui
    publisher/remoteinstaller/remoteinstaller.ui
+   editors/kconfigxt/kconfigxteditor.ui
 )
 
 include_directories(${KDE4_INCLUDES}
@@ -98,6 +102,7 @@ target_link_libraries(plasmate
                       ${KDE4_PLASMA_LIBS}
                       ${KDE4_KNEWSTUFF3_LIBRARY}
                       ${QT_QTWEBKIT_LIBRARY}
+                      ${QT_QTXML_LIBRARY}
                       ${LIBATTICA_LIBRARY_DIRS}
                       ${QGPGME_LIBRARIES}
                       ${QT_QTDECLARATIVE_LIBRARIES}
@@ -161,5 +166,27 @@ target_link_libraries(windowswitcherpreviewer
 )
 
 install(TARGETS windowswitcherpreviewer ${INSTALL_TARGETS_DEFAULT_ARGS})
+
+#plasmakconfigxteditor
+set(plasmakconfigxt_SRCS
+     editors/kconfigxt/kconfigxteditor.cpp
+     editors/kconfigxt/kconfigxtreader.cpp
+     editors/kconfigxt/kconfigxtwriter.cpp
+     editors/kconfigxt/standalone/plasmakconfigxteditor.cpp
+     editors/kconfigxt/standalone/main.cpp
+)
+
+kde4_add_ui_files (plasmakconfigxt_SRCS
+    editors/kconfigxt/kconfigxteditor.ui
+)
+
+kde4_add_executable(plasmakconfigxteditor ${plasmakconfigxt_SRCS})
+target_link_libraries(plasmakconfigxteditor
+                        ${KDE4_KDEUI_LIBS}
+                        ${KDE4_KIO_LIBRARY}
+                        ${QT_QTXML_LIBRARY}
+)
+
+install(TARGETS plasmakconfigxteditor ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 macro_display_feature_log()
