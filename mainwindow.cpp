@@ -15,12 +15,15 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <iostream>
+
 #include <QDir>
 #include <QDockWidget>
 #include <QListWidgetItem>
 #include <QModelIndex>
 #include <QLabel>
 #include <QGridLayout>
+#include <QTextStream>
 
 #include <KTextEdit>
 
@@ -56,6 +59,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "packagemodel.h"
 #include "sidebar.h"
 #include "startpage.h"
+#include "konsole/konsolepreviewer.h"
 #include "previewer/plasmoid/plasmoidpreviewer.h"
 #include "previewer/runner/runnerpreviewer.h"
 #include "previewer/windowswitcher/tabboxpreviewer.h"
@@ -65,6 +69,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "modeltest/modeltest.h"
 
 static const int STATE_VERSION = 0;
+
+MainWindowWrapper::MainWindowWrapper(QObject *parent)
+    : QObject(parent),
+    m_mainWindow(0)
+{
+    m_mainWindow = new MainWindow();
+    m_mainWindow->show();
+}
+
+MainWindowWrapper::~MainWindowWrapper()
+{
+    delete m_mainWindow;
+}
+
+MainWindow* MainWindowWrapper::mainWindow()
+{
+    return m_mainWindow;
+}
 
 MainWindow::CentralContainer::CentralContainer(QWidget* parent)
     : QWidget(parent),
@@ -111,9 +133,11 @@ MainWindow::MainWindow(QWidget *parent)
         m_docksCreated(false),
         m_isPlasmateCreatedPackage(true),
         m_part(0),
-        m_notesPart(0),
         m_notesWidget(0),
-        m_kconfigXtEditor(0)
+        m_kconfigXtEditor(0),
+        m_konsole(0),
+        m_notesPart(0)
+
 {
     setXMLFile("plasmateui.rc");
     setupActions();
@@ -130,7 +154,14 @@ MainWindow::MainWindow(QWidget *parent)
     if (autoSaveConfigGroup().entryMap().isEmpty()) {
         setWindowState(Qt::WindowMaximized);
     }
+    connect(this, SIGNAL(sendMessage(QtMsgType, const QString)), this, SLOT(customMessageHandler(QtMsgType,QString)));
 }
+
+void MainWindow::emitSendMessage(QtMsgType type, const QString& msg)
+{
+    emit sendMessage(type, msg);
+}
+
 
 MainWindow::~MainWindow()
 {
@@ -419,6 +450,9 @@ void MainWindow::saveEditorData()
 
 void MainWindow::saveAndRefresh()
 {
+    //in every new save clear the konsole.
+    m_konsole->clearTmpFile();
+
     saveEditorData();
     if (m_previewerWidget) {
         m_previewerWidget->refreshPreview();
@@ -612,7 +646,6 @@ void MainWindow::updateSideBar()
     m_oldTab = EditTab;
 }
 
-
 void MainWindow::loadImageViewer(const KUrl& target)
 {
     saveEditorData();
@@ -638,6 +671,15 @@ void MainWindow::loadKConfigXtEditor(const KUrl& target)
     m_central->switchTo(m_kconfigXtEditor);
 
     updateSideBar();
+}
+
+void MainWindow::showKonsolePreviewer()
+{
+    if(m_konsole->isVisible()) {
+        m_konsole->setVisible(false);
+    } else {
+        m_konsole->setVisible(true);
+    }
 }
 
 void MainWindow::loadMetaDataEditor(KUrl target)
@@ -794,6 +836,13 @@ void MainWindow::loadProject(const QString &path)
         refreshNotes();
     }
 
+
+    //initialize the konsole previewer
+    m_konsole = new KonsolePreviewer(i18n("Previewer Output"), this);
+
+    //after the init, cleat the tmp file
+    m_konsole->clearTmpFile();
+
     // initialize previewer
     delete m_previewerWidget;
     m_previewerWidget = createPreviewerFor(previewerType);
@@ -802,6 +851,12 @@ void MainWindow::loadProject(const QString &path)
         addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
         m_previewerWidget->showPreview(packagePath);
         m_previewerWidget->setVisible(showPreview);
+
+        //now do the relative stuff for the konsole
+        m_konsole->populateKonsole();
+        m_konsole->setObjectName("Previewer Output");
+        connect(m_previewerWidget, SIGNAL(showKonsole()), this, SLOT(showKonsolePreviewer()));
+        addDockWidget(Qt::BottomDockWidgetArea, m_konsole);
     }
 
     restoreState(state, STATE_VERSION);
@@ -923,4 +978,43 @@ Previewer* MainWindow::createPreviewerFor(const QString& projectType)
     }
 
     return ret;
+}
+
+void MainWindow::customMessageHandler(QtMsgType type, const QString& msg)
+{
+    if (QString(msg).startsWith("plasmate") || //don't include the plasmate specific output
+        QString(msg).startsWith("Object::") || // don't include QObject warnings
+        QString(msg).startsWith("QGraphicsScene::") || //don't include QGraphicsScene warnings
+        QString(msg).startsWith(" X Error")) //don't include silly X errors
+    {
+       std::cout << msg.toLocal8Bit().data() << std::endl;
+    } else {
+        QString txt;
+        switch (type) {
+            case QtDebugMsg:
+                txt = QString("Debug: %1").arg(msg);
+                break;
+            case QtWarningMsg:
+                txt = QString("Warning: %1").arg(msg);
+                break;
+            case QtCriticalMsg:
+                txt = QString("Critical: %1").arg(msg);
+                break;
+            case QtFatalMsg:
+                txt = QString("Fatal: %1").arg(msg);
+                abort();
+        }
+
+        QFile outFile("/var/tmp/plasmatepreviewerlog.txt");
+
+        outFile.open(QIODevice::WriteOnly | QIODevice::Append);
+        QTextStream ts(&outFile);
+        ts << txt << endl;
+        outFile.close();
+
+        //populate the konsole
+        if (m_konsole) {
+            m_konsole->populateKonsole();
+        }
+    }
 }

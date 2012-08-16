@@ -27,6 +27,7 @@
 #include <QGraphicsLayoutItem>
 
 #include <KAction>
+#include <KConfigGroup>
 #include <KIcon>
 #include <KMenu>
 
@@ -84,6 +85,7 @@ void PreviewContainment::setupHeader()
     Plasma::IconWidget *refresh = new Plasma::IconWidget(this);
     Plasma::IconWidget *location = new Plasma::IconWidget(this);
     Plasma::IconWidget *wallpaper = new Plasma::IconWidget(this);
+    Plasma::IconWidget *konsole = new Plasma::IconWidget(this);
 
     // add actions
     KAction *action0 = new KAction(KIcon("user-desktop"), "", this);
@@ -102,11 +104,16 @@ void PreviewContainment::setupHeader()
     connect(action3, SIGNAL(triggered()), this, SLOT(refreshAndEmit()));
     refresh->setAction(action3);
 
+    KAction *action4 = new KAction(KIcon("utilities-terminal"), "", this);
+    connect(action4, SIGNAL(triggered()), this, SIGNAL(showKonsole()));
+    konsole->setAction(action4);
+
     // add the toolboxes
     m_header->addItem(refresh);
     m_header->addItem(form);
     m_header->addItem(location);
     m_header->addItem(wallpaper);
+    m_header->addItem(konsole);
 }
 
 // Fixme(?): Does not currently respect arguments passed in during

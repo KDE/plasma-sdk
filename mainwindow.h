@@ -41,10 +41,11 @@ class PackageModel;
 class StartPage;
 class Sidebar;
 class TimeLine;
-class KConfigXtEditor;
 class MetaDataEditor;
 class ImageViewer;
 class TextEditor;
+class KConfigXtEditor;
+class KonsolePreviewer;
 
 // our own previewer
 class Previewer;
@@ -68,15 +69,18 @@ public:
     QStringList recentProjects();
     void checkMetafile(const QString &path);
     void updateSideBar();
+    void emitSendMessage(QtMsgType type, const QString& msg);
 
 public Q_SLOTS:
     void quit();
     void loadProject(const QString &name);
     void checkProjectrc();
+    void customMessageHandler(QtMsgType type, const QString& msg);
 
 Q_SIGNALS:
     void newSavePointClicked();
     void refreshRequested();
+    void sendMessage(QtMsgType type, const QString& msg);
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -109,6 +113,7 @@ private Q_SLOTS:
     void toggleNotes();
     void toggleFileList();
     void installPackage();
+    void showKonsolePreviewer();
 
     // refreshes editor, killing all local changes
     void editorDestructiveRefresh();
@@ -157,8 +162,10 @@ private:
     MetaDataEditor *m_metaEditor;
     Publisher *m_publisher;
     DocBrowser *m_browser;
+    QDockWidget *m_notesWidget;
     TextEditor *m_textEditor;
     KConfigXtEditor *m_kconfigXtEditor;
+    KonsolePreviewer *m_konsole;
 
     QDockWidget *m_filelist;
     EditPage *m_editPage;
@@ -173,10 +180,24 @@ private:
     KService::Ptr m_partService;
     KParts::ReadOnlyPart *m_part;
     KParts::ReadOnlyPart *m_notesPart;
-    QDockWidget *m_notesWidget;
 
     QSvgWidget *m_svgWidget;
     bool checkImageSize(const QSize& size);
+};
+
+class MainWindowWrapper : public QObject
+{
+    Q_OBJECT
+
+public:
+
+    MainWindowWrapper(QObject *parent = 0);
+    ~MainWindowWrapper();
+
+    MainWindow *mainWindow();
+
+private:
+    MainWindow *m_mainWindow;
 };
 
 #endif // MAINWINDOW_H

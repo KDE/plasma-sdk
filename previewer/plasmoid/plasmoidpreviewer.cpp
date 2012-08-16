@@ -26,4 +26,3 @@ void PlasmoidPreviewer::refreshPreview()
 {
     emit refreshView();
 }
-

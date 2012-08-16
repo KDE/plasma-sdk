@@ -15,12 +15,27 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <KDebug>
 #include <KApplication>
 #include <KAboutData>
 #include <KLocale>
 #include <KCmdLineArgs>
 
 #include "mainwindow.h"
+
+MainWindowWrapper *mainwindow;
+
+void customMessageHandler(QtMsgType type, const char *msg)
+{
+    if (mainwindow) {
+        mainwindow->mainWindow()->emitSendMessage(type, msg);
+    } else {
+        kDebug() << "*****************************************************";
+        kDebug() << "Plasmate has failed to set a custin qInstallMsgHandler!!!!!!!";
+        kDebug() << "*****************************************************";
+        exit(0);
+    }
+}
 
 int main(int argc, char *argv[])
 {
@@ -49,8 +64,8 @@ int main(int argc, char *argv[])
     KCmdLineArgs::parsedArgs();
     KApplication app;
 
-    MainWindow *w = new MainWindow();
-    w->show();
+    mainwindow = new MainWindowWrapper();
+    qInstallMsgHandler(customMessageHandler);
 
     return app.exec();
 }

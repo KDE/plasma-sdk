@@ -29,6 +29,7 @@ class Previewer : public QDockWidget {
 
 signals:
     void refreshRequested();
+    void showKonsole();
 
 public:
     Previewer(const QString & title, QWidget * parent = 0, Qt::WindowFlags flags = 0 );
@@ -37,6 +38,7 @@ public:
      * Subclasses should override this method with actual previewing code
      */
     virtual void showPreview(const QString &packagePath) = 0;
+
     /**
      * Subclasses should override this method with code that refreshes the preview
      */
@@ -50,6 +52,11 @@ public slots:
      */
     void emitRefreshRequest();
 
+    /**
+     * Emits showKonsole(), which will show the konsole. All subclasses should call/connect
+     * to this when the user requests a to see the konsole.
+     **/
+    void emitShowKonsole();
 };
 
 #endif // PREVIEWER_H

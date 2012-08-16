@@ -62,6 +62,7 @@ set (PlasMate_SRC
     publisher/publisher.cpp
     publisher/remoteinstaller/remoteinstaller.cpp
     publisher/remoteinstaller/remoteinstallerdialog.cpp
+    konsole/konsolepreviewer.cpp
     docbrowser/docbrowser.cpp
     projectmanager/projectmanager.cpp
 )

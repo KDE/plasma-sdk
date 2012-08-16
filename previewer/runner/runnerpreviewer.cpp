@@ -78,3 +78,9 @@ void RunnerPreviewer::doQuery()
         m_runner->launchQuery(m_edit->text());
     }
 }
+
+QString RunnerPreviewer::takeOutput() const
+{
+    //TODO add support for a runner previewer
+    return QString();
+}

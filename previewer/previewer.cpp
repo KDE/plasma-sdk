@@ -16,6 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "previewer.h"
+#include <QFile>
 
 Previewer::Previewer(const QString & title, QWidget * parent, Qt::WindowFlags flags)
     : QDockWidget(title, parent, flags)
@@ -30,4 +31,9 @@ Previewer::Previewer(QWidget * parent, Qt::WindowFlags flags)
 void Previewer::emitRefreshRequest()
 {
     emit refreshRequested();
+}
+
+void Previewer::emitShowKonsole()
+{
+    emit showKonsole();
 }
