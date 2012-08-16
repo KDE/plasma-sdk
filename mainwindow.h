@@ -183,4 +183,19 @@ private:
     bool checkImageSize(const QSize& size);
 };
 
+class MainWindowWrapper : public QObject
+{
+    Q_OBJECT
+
+public:
+
+    MainWindowWrapper(QObject *parent = 0);
+    ~MainWindowWrapper();
+
+    MainWindow *mainWindow();
+
+private:
+    MainWindow *m_mainWindow;
+};
+
 #endif // MAINWINDOW_H

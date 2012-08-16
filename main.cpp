@@ -15,8 +15,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <QPointer>
-
 #include <KDebug>
 #include <KApplication>
 #include <KAboutData>
@@ -25,15 +23,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "mainwindow.h"
 
-QPointer<MainWindow> mainwindow;
+MainWindowWrapper *mainwindow;
 
 void customMessageHandler(QtMsgType type, const char *msg)
 {
     if (mainwindow) {
-        mainwindow->emitSendMessage(type, msg);
+        mainwindow->mainWindow()->emitSendMessage(type, msg);
     } else {
         kDebug() << "*****************************************************";
-        kDebug() << "Plasmate has fails to set a qInstallMsgHandler!!!!!!!";
+        kDebug() << "Plasmate has failed to set a custin qInstallMsgHandler!!!!!!!";
         kDebug() << "*****************************************************";
         exit(0);
     }
@@ -66,9 +64,8 @@ int main(int argc, char *argv[])
     KCmdLineArgs::parsedArgs();
     KApplication app;
 
-    mainwindow = new MainWindow();
+    mainwindow = new MainWindowWrapper();
     qInstallMsgHandler(customMessageHandler);
-    mainwindow->show();
 
     return app.exec();
 }

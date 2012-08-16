@@ -68,6 +68,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 static const int STATE_VERSION = 0;
 
+MainWindowWrapper::MainWindowWrapper(QObject *parent)
+    : QObject(parent),
+    m_mainWindow(0)
+{
+    m_mainWindow = new MainWindow();
+    m_mainWindow->show();
+}
+
+MainWindowWrapper::~MainWindowWrapper()
+{
+    delete m_mainWindow;
+}
+
+MainWindow* MainWindowWrapper::mainWindow()
+{
+    return m_mainWindow;
+}
+
 MainWindow::CentralContainer::CentralContainer(QWidget* parent)
     : QWidget(parent),
       m_curMode(Preserve),
