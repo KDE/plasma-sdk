@@ -11,4 +11,5 @@ install(FILES
   mainKWinEffect.js
   cmakelists
   cmakelistsWindowSwitcher
+  cmakelistsKWinScript
   DESTINATION ${DATA_INSTALL_DIR}/plasmate/templates)
