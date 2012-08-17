@@ -12,4 +12,5 @@ install(FILES
   cmakelists
   cmakelistsWindowSwitcher
   cmakelistsKWinScript
+  cmakelistsKWinEffect
   DESTINATION ${DATA_INSTALL_DIR}/plasmate/templates)

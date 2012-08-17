@@ -143,7 +143,7 @@ void Publisher::doInstall()
 // Plasmoid specific, for now
 void Publisher::doCMake()
 {
-    if (m_projectType != "Plasma/Applet" && m_projectType != "KWin/WindowSwitcher" && m_projectType != "KWin/Script") {
+    if (m_projectType != "Plasma/Applet" && m_projectType != "KWin/WindowSwitcher" && m_projectType != "KWin/Script" && m_projectType != "KWin/Effect") {
         qDebug() << "chaos";
         return;
     }
@@ -154,6 +154,8 @@ void Publisher::doCMake()
         templateFile = "cmakelistsWindowSwitcher";
     } else if (m_projectType == "KWin/Script") {
         templateFile = "cmakelistsKWinScript";
+    } else if (m_projectType == "KWin/Effect") {
+        templateFile = "cmakelistsKWinEffect";
     } else {
         templateFile = "cmakelists";
     }
@@ -288,6 +290,8 @@ void Publisher::doPlasmaPkg()
         argv.append("windowswitcher");
     } else if (m_projectType == "KWin/Script") {
         argv.append("kwinscript");
+    } else if (m_projectType == "KWin/Effect") {
+        argv.append("kwineffect");
     }
 
     // we do a plasmapkg -u in case the package was installed before
