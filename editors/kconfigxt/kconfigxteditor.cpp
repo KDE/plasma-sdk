@@ -560,7 +560,7 @@ void KConfigXtEditor::removeEntry()
 
 void KConfigXtEditor::removeError()
 {
-    QString error = i18n("An error has occured during the removal of the item");
+    QString error = i18n("An error has occurred during the removal of the item");
     KMessageBox::error(this, error);
 }
 
