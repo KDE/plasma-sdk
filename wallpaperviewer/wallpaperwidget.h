@@ -39,6 +39,8 @@ public:
     WallpaperWidget(const QString &paper, const QString &mode, QWidget *parent = 0);
     ~WallpaperWidget();
 
+    void configure();
+
 protected:
     void closeEvent(QCloseEvent *event);
     void paintEvent(QPaintEvent *event);
@@ -52,7 +54,6 @@ protected:
 protected Q_SLOTS:
     void quit();
     void updatePaper(const QRectF &exposedRect);
-    void configure();
     void saveConfig();
     void configDone();
     void syncConfig();
