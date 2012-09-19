@@ -135,7 +135,7 @@ MainWindow::MainWindow(QWidget *parent)
         m_part(0),
         m_notesWidget(0),
         m_kconfigXtEditor(0),
-        m_konsole(0),
+        m_konsoleWidget(0),
         m_notesPart(0)
 
 {
@@ -303,6 +303,10 @@ void MainWindow::closeProject()
         m_previewerWidget->hide();
     }
 
+    if (m_konsoleWidget) {
+        m_konsoleWidget->hide();
+    }
+
     if (m_notesWidget) {
         m_notesWidget->hide();
     }
@@ -451,7 +455,7 @@ void MainWindow::saveEditorData()
 void MainWindow::saveAndRefresh()
 {
     //in every new save clear the konsole.
-    m_konsole->clearTmpFile();
+    m_konsoleWidget->clearTmpFile();
 
     saveEditorData();
     if (m_previewerWidget) {
@@ -675,10 +679,10 @@ void MainWindow::loadKConfigXtEditor(const KUrl& target)
 
 void MainWindow::showKonsolePreviewer()
 {
-    if(m_konsole->isVisible()) {
-        m_konsole->setVisible(false);
+    if(m_konsoleWidget->isVisible()) {
+        m_konsoleWidget->setVisible(false);
     } else {
-        m_konsole->setVisible(true);
+        m_konsoleWidget->setVisible(true);
     }
 }
 
@@ -838,10 +842,10 @@ void MainWindow::loadProject(const QString &path)
 
 
     //initialize the konsole previewer
-    m_konsole = new KonsolePreviewer(i18n("Previewer Output"), this);
+    m_konsoleWidget = new KonsolePreviewer(i18n("Previewer Output"), this);
 
     //after the init, cleat the tmp file
-    m_konsole->clearTmpFile();
+    m_konsoleWidget->clearTmpFile();
 
     // initialize previewer
     delete m_previewerWidget;
@@ -853,10 +857,10 @@ void MainWindow::loadProject(const QString &path)
         m_previewerWidget->setVisible(showPreview);
 
         //now do the relative stuff for the konsole
-        m_konsole->populateKonsole();
-        m_konsole->setObjectName("Previewer Output");
+        m_konsoleWidget->populateKonsole();
+        m_konsoleWidget->setObjectName("Previewer Output");
         connect(m_previewerWidget, SIGNAL(showKonsole()), this, SLOT(showKonsolePreviewer()));
-        addDockWidget(Qt::BottomDockWidgetArea, m_konsole);
+        addDockWidget(Qt::BottomDockWidgetArea, m_konsoleWidget);
     }
 
     restoreState(state, STATE_VERSION);
@@ -1013,8 +1017,8 @@ void MainWindow::customMessageHandler(QtMsgType type, const QString& msg)
         outFile.close();
 
         //populate the konsole
-        if (m_konsole) {
-            m_konsole->populateKonsole();
+        if (m_konsoleWidget) {
+            m_konsoleWidget->populateKonsole();
         }
     }
 }

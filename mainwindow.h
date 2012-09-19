@@ -165,7 +165,7 @@ private:
     QDockWidget *m_notesWidget;
     TextEditor *m_textEditor;
     KConfigXtEditor *m_kconfigXtEditor;
-    KonsolePreviewer *m_konsole;
+    KonsolePreviewer *m_konsoleWidget;
 
     QDockWidget *m_filelist;
     EditPage *m_editPage;
