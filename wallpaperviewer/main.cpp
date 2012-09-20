@@ -112,7 +112,7 @@ int main(int argc, char **argv)
     options.add("m");
     options.add("mode <mode name>", ki18n("The mode to put the wallpaper in"), "SingleImage");
     options.add("list", ki18n("List all the known wallpapers and their modes"));
-    options.add("configure", ki18n("Open configuration dialog additionally to showing the wallpaper plugin"));
+    options.add("configure", ki18n("Open configuration dialog additionally to show the wallpaper plugin"));
     KCmdLineArgs::addCmdLineOptions(options);
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
