@@ -489,7 +489,7 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
     }
 
     KService::Ptr service = offers.at(0);
-    if (!m_partService || m_partService->storageId() != service->storageId()) {
+    if (!m_partService || m_partService->storageId() != service->storageId() || !m_part) {
         m_partService = service;
         QString error; // we should show this via debug if we fail
         KParts::ReadOnlyPart *part = dynamic_cast<KParts::ReadOnlyPart*>(
