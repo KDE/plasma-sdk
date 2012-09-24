@@ -901,58 +901,58 @@ void MainWindow::loadProject(const QString &path)
 
 void MainWindow::checkMetafile(const QString &path)
 {
-  KUrl projectPath(path);
-  QDir dir(projectPath.path());
+    KUrl projectPath(path);
+    QDir dir(projectPath.path());
 
-  if (!dir.exists(PROJECTRC)) {
-      kDebug() << dir.filePath(PROJECTRC)+ " file doesn't exist, metadata.desktop cannot be checked";
-      return;
-  }
-  KConfig preferencesPath(dir.path() +'/'+ PROJECTRC);
-  KConfigGroup preferences(&preferencesPath, "ProjectDefaultPreferences");
-  QString api;
-  if (preferences.readEntry("radioButtonJsChecked", false)) {
-      api.append("javascript");
-  } else if (preferences.readEntry("radioButtonPyChecked", false)) {
-      api.append("python");
-  } else if (preferences.readEntry("radioButtonRbChecked", false)) {
-      api.append("ruby-script");
-  } else if (preferences.readEntry("radioButtonDeChecked", true)) {
-      api.append("declarativeappletscript");
-  }
+    if (!dir.exists(PROJECTRC)) {
+        kDebug() << dir.filePath(PROJECTRC)+ " file doesn't exist, metadata.desktop cannot be checked";
+        return;
+    }
+    KConfig preferencesPath(dir.path() +'/'+ PROJECTRC);
+    KConfigGroup preferences(&preferencesPath, "ProjectDefaultPreferences");
+    QString api;
+    if (preferences.readEntry("radioButtonJsChecked", false)) {
+        api.append("javascript");
+    } else if (preferences.readEntry("radioButtonPyChecked", false)) {
+        api.append("python");
+    } else if (preferences.readEntry("radioButtonRbChecked", false)) {
+        api.append("ruby-script");
+    } else if (preferences.readEntry("radioButtonDeChecked", true)) {
+        api.append("declarativeappletscript");
+    }
 
-  KConfig metafile(path + "metadata.desktop");
-  KConfigGroup meta(&metafile, "Desktop Entry");
-  meta.writeEntry("X-Plasma-API", api);
-  meta.sync();
+    KConfig metafile(path + "metadata.desktop");
+    KConfigGroup meta(&metafile, "Desktop Entry");
+    meta.writeEntry("X-Plasma-API", api);
+    meta.sync();
 }
 
 void MainWindow::checkProjectrc()
 {
-  KUrl path(m_metaEditor->filename());
-  path.cd("../..");
-  QDir dir(path.path());
-  qDebug() << path.path();
-  if(!dir.exists(PROJECTRC)) {
-      kDebug() << dir.filePath(PROJECTRC)+ " file doesn't exist," << PROJECTRC <<  "cannot be checked";
-      return;
-  }
-  KConfig preferencesPath(dir.path() +'/'+ PROJECTRC);
-  KConfigGroup preferences(&preferencesPath, "ProjectDefaultPreferences");
-  QString api;
-  KConfig metafile(m_metaEditor->filename());
-  KConfigGroup meta(&metafile, "Desktop Entry");
-  api = meta.readEntry("X-Plasma-API");
-  if (api == QString("javascript")) {
-      preferences.writeEntry("radioButtonJsChecked", true);
-  } else if (api == QString("python")) {
-      preferences.writeEntry("radioButtonPyChecked", true);
-  } else if (api == QString("ruby-script")) {
-      preferences.writeEntry("radioButtonRbChecked", true);
-  } else if (api == QString("declarativeappletscript")) {
-      preferences.writeEntry("radioButtonDeChecked", true);
-  }
-  preferences.sync();
+    KUrl path(m_metaEditor->filename());
+    path.cd("../..");
+    QDir dir(path.path());
+    qDebug() << path.path();
+    if(!dir.exists(PROJECTRC)) {
+        kDebug() << dir.filePath(PROJECTRC)+ " file doesn't exist," << PROJECTRC <<  "cannot be checked";
+        return;
+    }
+    KConfig preferencesPath(dir.path() +'/'+ PROJECTRC);
+    KConfigGroup preferences(&preferencesPath, "ProjectDefaultPreferences");
+    QString api;
+    KConfig metafile(m_metaEditor->filename());
+    KConfigGroup meta(&metafile, "Desktop Entry");
+    api = meta.readEntry("X-Plasma-API");
+    if (api == QString("javascript")) {
+        preferences.writeEntry("radioButtonJsChecked", true);
+    } else if (api == QString("python")) {
+        preferences.writeEntry("radioButtonPyChecked", true);
+    } else if (api == QString("ruby-script")) {
+          preferences.writeEntry("radioButtonRbChecked", true);
+    } else if (api == QString("declarativeappletscript")) {
+          preferences.writeEntry("radioButtonDeChecked", true);
+    }
+    preferences.sync();
 }
 
 
@@ -967,12 +967,28 @@ QStringList MainWindow::recentProjects()
 Previewer* MainWindow::createPreviewerFor(const QString& projectType)
 {
     Previewer* ret = 0;
+    bool showPreviewAction = true;
+
     if (projectType.contains("KWin/WindowSwitcher")) {
         ret = new TabBoxPreviewer(i18nc("Window Title", "Window Switcher Previewer"), this);
     } else if (projectType.contains("Plasma/Applet")) {
         ret = new PlasmoidPreviewer(i18n("Preview"), this);
     } else if (projectType == "Plasma/Runner") {
         ret = new RunnerPreviewer(i18n("Previewer"), this);
+    } else {
+        showPreviewAction = false;
+
+    }
+
+    if (showPreviewAction) {
+        //we have a previewer( ret is valid) so
+        //show the action in the toolbar
+        actionCollection()->action("preview")->setVisible(true);
+    }
+    else {
+        //we don't have a previewer( ret == 0 ) so
+        //hide the action in the toolbar
+        actionCollection()->action("preview")->setVisible(false);
     }
 
     if (ret) {
