@@ -37,6 +37,7 @@
 #include <KCmdLineArgs>
 #include <KLocale>
 #include <KStandardAction>
+#include <kdeclarative.h>
 
 // for --list
 #include <Plasma/Applet>
@@ -161,6 +162,8 @@ int main(int argc, char **argv)
     KApplication app;
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs() ;
+
+    KDeclarative::setupQmlJsDebugger();
 
     if (args->isSet("list")) {
         listPlugins(Plasma::Applet::listAppletInfo());
