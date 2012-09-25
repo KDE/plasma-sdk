@@ -19,19 +19,22 @@
 
 #include "auroraepreviewer.h"
 #include <QVariantList>
+#include <KDebug>
 
 AuroraePreviewer::AuroraePreviewer(const QString & title, QWidget * parent, Qt::WindowFlags flags)
 : Previewer(title, parent, flags)
 {
-    m_view = new KWinDecoration(this);
+    m_view = new KWin::KWinDecorationModule();
 }
 
 void AuroraePreviewer::showPreview(const QString &packagePath)
 {
+    kDebug() << "Asddsadsa";
+    
     //m_view->setLayout(packageMainFile(packagePath));
 }
 
 void AuroraePreviewer::refreshPreview()
 {
-
+    kDebug() << "Asddsadsa";
 }

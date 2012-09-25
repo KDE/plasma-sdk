@@ -18,8 +18,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 
-#ifndef DECORATIONMODEL_H
-#define DECORATIONMODEL_H
+#ifndef KWIN_DECORATIONMODEL_H
+#define KWIN_DECORATIONMODEL_H
 #include <QAbstractListModel>
 #include <QPixmap>
 #include <KConfig>
@@ -29,6 +29,9 @@ class QWidget;
 class KDesktopFile;
 class KDecorationPlugins;
 class KDecorationPreview;
+
+namespace KWin
+{
 
 class DecorationButtons;
 
@@ -54,6 +57,11 @@ public:
     QString qmlPath;
     KDecorationDefines::BorderSize borderSize;
     KDecorationDefines::BorderSize buttonSize;
+    /**
+     * Whether the window gets closed on double clicking the Menu Button.
+     * Only applies for Aurorae and QML Decoration.
+     **/
+    bool closeDblClick;
 
     static bool less(const DecorationModelData& a, const DecorationModelData& b) {
         return a.name < b.name;
@@ -79,7 +87,8 @@ public:
         BorderSizeRole = Qt::UserRole + 11,
         BorderSizesRole = Qt::UserRole + 12,
         ButtonSizeRole = Qt::UserRole + 13,
-        QmlMainScriptRole = Qt::UserRole + 14
+        QmlMainScriptRole = Qt::UserRole + 14,
+        CloseOnDblClickRole = Qt::UserRole + 15
     };
     DecorationModel(KSharedConfigPtr config, QObject* parent = 0);
     ~DecorationModel();
@@ -88,34 +97,8 @@ public:
     virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
     virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
 
-    void reload();
-
-    void regeneratePreview(const QModelIndex& index);
-
-    /**
-    * Changes the button state and regenerates the preview.
-    */
-    void changeButtons(const DecorationButtons *buttons);
-    /**
-    * Changes the button state without regenerating the preview.
-    */
-    void setButtons(bool custom, const QString& left, const QString& right);
-
-    void setBorderSize(const QModelIndex& index, KDecorationDefines::BorderSize size);
-
-    QModelIndex indexOfLibrary(const QString& libraryName) const;
-    QModelIndex indexOfName(const QString& decoName) const;
-    QModelIndex indexOfAuroraeName(const QString& auroraeName, const QString& type) const;
-
-    void regeneratePreviews(int firstIndex = 0);
-    void stopPreviewGeneration();
-public slots:
-    void regeneratePreview(const QModelIndex& index, const QSize& size);
-private slots:
-    void regenerateNextPreview();
 private:
     void findDecorations();
-    void findAuroraeThemes();
     void metaData(DecorationModelData& data, const KDesktopFile& df);
     QList<DecorationModelData> m_decorations;
     KDecorationPlugins* m_plugins;
@@ -130,4 +113,6 @@ private:
     int m_lastUpdateIndex;
 };
 
-#endif // DECORATIONMODEL_H
+} // namespace KWin
+
+#endif // KWIN_DECORATIONMODEL_H

@@ -53,14 +53,11 @@ set (PlasMate_SRC
     previewer/windowswitcher/windowswitcher.cpp
     previewer/windowswitcher/thumbnailitem.cpp
     previewer/windowswitcher/tabboxpreviewer.cpp
-
-    previewer/aurorae/preview.cpp
-    previewer/aurorae/auroraepreviewer.cpp
-    previewer/aurorae/kwindecoration.cpp
-    previewer/aurorae/decorationmodel.cpp
-    previewer/aurorae/auroraetheme.cpp
-    previewer/aurorae/themeconfig.cpp
-    previewer/previewer.cpp
+    #previewer/aurorae/preview.cpp
+    #previewer/aurorae/auroraepreviewer.cpp
+    #previewer/aurorae/kwindecoration.cpp
+    #previewer/aurorae/decorationmodel.cpp
+    ${Window_Decoration_SRC}
     publisher/signingwidget.cpp
     publisher/signingdialog.cpp
     publisher/publisher.cpp
@@ -68,6 +65,18 @@ set (PlasMate_SRC
     projectmanager/projectmanager.cpp
     )
 
+set(AURORAE_SOURCE_DIR previewer/aurorae/src/aurorae/lib)
+
+set(Window_Decoration_SRC
+    previewer/aurorae/kwindecoration.cpp
+    previewer/aurorae/preview.cpp
+    previewer/aurorae/decorationmodel.cpp
+    #previewer/aurorae/auroraepreviewer.cpp
+    ${AURORAE_SOURCE_DIR}/auroraetheme.cpp
+    ${AURORAE_SOURCE_DIR}/themeconfig.cpp
+    previewer/aurorae/src/libkdecorations/kdecoration_plugins_p.h
+    #previewer/aurorae/main.cpp
+)
 set (WindowSwitcherPreviewer_SRC
     previewer/windowswitcher/windowswitcher.cpp
     previewer/windowswitcher/thumbnailitem.cpp
@@ -88,10 +97,8 @@ kde4_add_ui_files (PlasMate_SRC
    startpage.ui
    editors/metadata/metadata.ui
    publisher/publisher.ui
-  # previewer/aurorae/config.ui
- # previewer/aurorae/buttons.ui
    previewer/aurorae/decoration.ui
-#   previewer/aurorae/auroraeconfig.ui
+   previewer/aurorae/auroraeconfig.ui
 )
 
 include_directories(${KDE4_INCLUDES}
@@ -104,6 +111,7 @@ include_directories(${KDE4_INCLUDES}
 add_subdirectory( editors )
 add_subdirectory( previewer/plasmoid )
 add_subdirectory( templates )
+#add_subdirectory(previewer/aurorae)
 
 
 kde4_add_executable(plasmate ${PlasMate_SRC})
@@ -149,6 +157,7 @@ previewer/windowswitcher/thumbnails/kmail.png
 previewer/windowswitcher/thumbnails/systemsettings.png
 previewer/windowswitcher/thumbnails/dolphin.png
 DESTINATION ${DATA_INSTALL_DIR}/plasmate)
+
 install( FILES previewer/windowswitcher/tabboxdelegate.qml DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 install(DIRECTORY templates/qml/plastik/package/contents DESTINATION ${DATA_INSTALL_DIR}/plasmate/auroraepreviewer)
 macro_display_feature_log()

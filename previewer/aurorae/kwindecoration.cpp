@@ -30,7 +30,7 @@
 // own
 #include "kwindecoration.h"
 #include "decorationmodel.h"
-#include "auroraetheme.h"
+#include "src/aurorae/lib/auroraetheme.h"
 // Qt
 #include <QTimer>
 #include <QtDBus/QtDBus>
@@ -41,14 +41,23 @@
 #include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QGraphicsObject>
 #include <QtGui/QScrollBar>
+#include <QUiLoader>
 // KDE
 #include <KAboutData>
 #include <KDialog>
 #include <KLocale>
+#include <KMessageBox>
 #include <KNS3/DownloadDialog>
 #include <KDE/KStandardDirs>
+#include <KDE/KConfigDialogManager>
 #include <KPluginFactory>
+#include <Plasma/ConfigLoader>
 #include <qdeclarative.h>
+#include <KDebug>
+#include <QDebug>
+
+namespace KWin
+{
 
 KWinDecorationForm::KWinDecorationForm(QWidget* parent)
     : QWidget(parent)
@@ -56,31 +65,45 @@ KWinDecorationForm::KWinDecorationForm(QWidget* parent)
     setupUi(this);
 }
 
-KWinDecoration::KWinDecoration(QWidget* parent)
-    : QWidget(parent)
-    , kwinConfig(KSharedConfig::openConfig("kwinrc"))
+
+KWinDecorationModule::KWinDecorationModule(QWidget* parent) :
+      kwinConfig(KSharedConfig::openConfig("kwinrc"))
     , m_showTooltips(false)
     , m_configLoaded(false)
     , m_decorationButtons(new DecorationButtons(this))
     , m_lastPreviewWidth(-1)
     , m_previewUpdateTimer(NULL)
 {
+    const QString mainQmlPath = KStandardDirs::locate("data", "kwin/kwinkoker/main.qml");
+    if (mainQmlPath.isNull()) {
+        // TODO 4.10 i18n this
+        KMessageBox::error(this, "<h1>Installation error</h1>"
+        "The resource<h2>kwin/kcm_kwindecoration/main.qml</h2>could not be located in any application data path."
+        "<h2>Please contact your distribution</h2>"
+        "The application will now abort", "Installation Error");
+        abort();
+    }
     qmlRegisterType<Aurorae::AuroraeTheme>("org.kde.kwin.aurorae", 0, 1, "AuroraeTheme");
     m_ui = new KWinDecorationForm(this);
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->addWidget(m_ui);
 
     KConfigGroup style(kwinConfig, "Style");
+
     // Set up the decoration lists and other UI settings
     m_model = new DecorationModel(kwinConfig, this);
     m_proxyModel = new QSortFilterProxyModel(this);
     m_proxyModel->setSourceModel(m_model);
     m_proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+
+    kDebug() << "adssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss";
     m_ui->decorationList->setResizeMode(QDeclarativeView::SizeRootObjectToView);
     foreach (const QString &importPath, KGlobal::dirs()->findDirs("module", "imports")) {
         m_ui->decorationList->engine()->addImportPath(importPath);
+        kDebug() << "importttttttttttttttttttttttt" << importPath;
     }
     m_ui->decorationList->rootContext()->setContextProperty("decorationModel", m_proxyModel);
+    m_ui->decorationList->rootContext()->setContextProperty("decorationBaseModel", m_model);
     m_ui->decorationList->rootContext()->setContextProperty("options", m_decorationButtons);
     m_ui->decorationList->rootContext()->setContextProperty("highlightColor", m_ui->decorationList->palette().color(QPalette::Highlight));
     m_ui->decorationList->rootContext()->setContextProperty("sliderWidth", m_ui->decorationList->verticalScrollBar()->width());
@@ -89,7 +112,7 @@ KWinDecoration::KWinDecoration(QWidget* parent)
     m_ui->decorationList->rootContext()->setContextProperty("decorationInactiveCaptionColor", KDecoration::options()->color(ColorFont, false));
     m_ui->decorationList->rootContext()->setContextProperty("decorationActiveTitleBarColor", KDecoration::options()->color(ColorTitleBar, true));
     m_ui->decorationList->rootContext()->setContextProperty("decorationInactiveTitleBarColor", KDecoration::options()->color(ColorTitleBar, false));
-    m_ui->decorationList->setSource(KStandardDirs::locate("data", "kwin/kcm_kwindecoration/main.qml"));
+    m_ui->decorationList->setSource(mainQmlPath);
 
     connect(m_ui->decorationList->rootObject(), SIGNAL(widthChanged()), SLOT(updatePreviewWidth()));
     connect(m_ui->searchEdit, SIGNAL(textChanged(QString)), m_proxyModel, SLOT(setFilterFixedString(QString)));
@@ -102,19 +125,72 @@ KWinDecoration::KWinDecoration(QWidget* parent)
     connect(m_ui->decorationList->verticalScrollBar(), SIGNAL(valueChanged(int)), SLOT(updateViewPosition(int)));
 
     m_ui->decorationList->installEventFilter(this);
+    m_ui->decorationList->viewport()->installEventFilter(this);
 }
 
 
-KWinDecoration::~KWinDecoration()
+KWinDecorationModule::~KWinDecorationModule()
 {
 }
 
-int KWinDecoration::itemWidth() const
+int KWinDecorationModule::itemWidth() const
 {
     return m_ui->decorationList->rootObject()->property("width").toInt();
 }
 
-void KWinDecoration::updatePreviews()
+bool KWinDecorationModule::eventFilter(QObject *o, QEvent *e)
+{
+    if (o == m_ui->decorationList) {
+        if (e->type() == QEvent::Resize)
+            updateScrollbarRange();
+        else if (e->type() == QEvent::KeyPress) {
+            int d = 0;
+            const int currentRow = m_ui->decorationList->rootObject()->property("currentIndex").toInt();
+            const int key = static_cast<QKeyEvent*>(e)->key();
+            switch (key) {
+            case Qt::Key_Home:
+                d = -currentRow;
+                break;
+            case Qt::Key_End:
+                d = m_proxyModel->rowCount() - (1 + currentRow);
+                break;
+            case Qt::Key_Up:
+                d = -1;
+                break;
+            case Qt::Key_Down:
+                d = 1;
+                break;
+            case Qt::Key_PageUp:
+            case Qt::Key_PageDown:
+                d = 150;
+                if (QObject *decoItem = m_ui->decorationList->rootObject()->findChild<QObject*>("decorationItem")) {
+                    QVariant v = decoItem->property("height");
+                    if (v.isValid())
+                        d = v.toInt();
+                }
+                if (d > 0)
+                    d = qMax(m_ui->decorationList->height() / d, 1);
+                if (key == Qt::Key_PageUp)
+                    d = -d;
+                break;
+            default:
+                break;
+            }
+            if (d) {
+                d = qMin(qMax(0, currentRow + d), m_proxyModel->rowCount());
+                m_ui->decorationList->rootObject()->setProperty("currentIndex", d);
+                return true;
+            }
+        }
+    } else if (m_ui->decorationList->viewport()) {
+        if (e->type() == QEvent::Wheel) {
+            return static_cast<QWheelEvent*>(e)->orientation() == Qt::Horizontal;
+        }
+    }
+    return false;
+}
+
+void KWinDecorationModule::updatePreviews()
 {
     m_ui->decorationList->rootContext()->setContextProperty("sliderWidth", m_ui->decorationList->verticalScrollBar()->width());
     const int newWidth = m_ui->decorationList->rootObject()->property("width").toInt();
@@ -127,21 +203,19 @@ void KWinDecoration::updatePreviews()
     int row = 0;
     if (h > 0)
         row = qMin(qMax(0, y*m_model->rowCount()/h), m_model->rowCount());
-    m_model->regeneratePreviews(row);
 }
 
-void KWinDecoration::updatePreviewWidth()
+void KWinDecorationModule::updatePreviewWidth()
 {
     if (!m_previewUpdateTimer) {
         m_previewUpdateTimer = new QTimer(this);
         m_previewUpdateTimer->setSingleShot(true);
         connect(m_previewUpdateTimer, SIGNAL(timeout()), this, SLOT(updatePreviews()));
     }
-    m_model->stopPreviewGeneration();
     m_previewUpdateTimer->start(100);
 }
 
-void KWinDecoration::updateScrollbarRange()
+void KWinDecorationModule::updateScrollbarRange()
 {
     m_ui->decorationList->verticalScrollBar()->blockSignals(true);
     const int h = m_ui->decorationList->rootObject()->property("contentHeight").toInt();
@@ -150,7 +224,7 @@ void KWinDecoration::updateScrollbarRange()
     m_ui->decorationList->verticalScrollBar()->blockSignals(false);
 }
 
-void KWinDecoration::updateScrollbarValue()
+void KWinDecorationModule::updateScrollbarValue()
 {
     const int v = m_ui->decorationList->rootObject()->property("contentY").toInt();
     m_ui->decorationList->verticalScrollBar()->blockSignals(true); // skippig this will kill kinetic scrolling but the scrollwidth is too low
@@ -158,7 +232,7 @@ void KWinDecoration::updateScrollbarValue()
     m_ui->decorationList->verticalScrollBar()->blockSignals(false);
 }
 
-void KWinDecoration::updateViewPosition(int v)
+void KWinDecorationModule::updateViewPosition(int v)
 {
     QGraphicsObject *list = m_ui->decorationList->rootObject();
     list->setProperty("contentY", v);
@@ -218,11 +292,6 @@ void DecorationButtons::setRightButtons (const QString &rightButtons)
     emit rightButtonsChanged();
 }
 
-void DecorationButtons::resetToDefaults()
-{
-    setCustomPositions(false);
-    setLeftButtons(KDecorationOptions::defaultTitleButtonsLeft());
-    setRightButtons(KDecorationOptions::defaultTitleButtonsRight());
-}
+} // namespace KWin
 
 #include "kwindecoration.moc"
