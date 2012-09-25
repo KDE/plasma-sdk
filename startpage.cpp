@@ -463,18 +463,23 @@ void StartPage::createNewProject()
 
     if (serviceTypes == "KWin/Decoration") {
         //QML Aurorae Decoration themes is being shipped with more than one files
-        //so we need to copy them inside our $ProjectName/contents/code
-        QDir subFiles(KStandardDirs::locate("appdata", "templates/qml/aurorae/"));
-        foreach (const QString &fileName, subFiles.entryList(QDir::Files)) {
-            QFile tmpFile(subFiles.path() + "/" + fileName);
+        //so we need to copy them inside our $ProjectName/contents/{config,ui}
+        packageSubDirs.mkpath("contents/config");
+        packageSubDirs.mkpath("contents/ui");
+        QDir subDirs(KStandardDirs::locate("data", "plasmate/templates/qml/plastik/package/contents/"));
+        foreach (const QString &dirname, subDirs.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
+            QDir tmpDir(subDirs.path() + "/" + dirname);
+            if (tmpDir.exists()) {
+                foreach (const QString &fileName, tmpDir.entryList(QDir::Files)) {
+                    QFile tmpFile(subDirs.path() + "/" + dirname + "/" + fileName);
+                    tmpFile.copy(projectPath + "/contents/" +  dirname + "/" + fileName);
 
-            if (tmpFile.exists() && fileName != mainScriptName) {
-                tmpFile.copy(projectPath + "/contents/code/" +fileName);
 
-                // Create a QFile object that points to the template we need to copy
-                QFile sourceFile(tmpFile.fileName()); //our template file
-                QFile destinationFile(projectPath + "/contents/code/" +fileName); //our destination file
-                prepareProjectFile(sourceFile, destinationFile, projectName);
+                    //Create a QFile object that points to the template we need to copy
+                    QFile sourceFile(tmpFile.fileName()); //our template file
+                    QFile destinationFile(projectPath + "/contents/" + dirname + "/" + fileName); //our destination file
+                    prepareProjectFile(sourceFile, destinationFile, projectName);
+                }
             }
         }
     }

@@ -150,5 +150,5 @@ previewer/windowswitcher/thumbnails/systemsettings.png
 previewer/windowswitcher/thumbnails/dolphin.png
 DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 install( FILES previewer/windowswitcher/tabboxdelegate.qml DESTINATION ${DATA_INSTALL_DIR}/plasmate)
-install(DIRECTORY previewer/aurorae/qml DESTINATION ${DATA_INSTALL_DIR}/plasmate/auroraepreviewer)
+install(DIRECTORY templates/qml/plastik/package/contents DESTINATION ${DATA_INSTALL_DIR}/plasmate/auroraepreviewer)
 macro_display_feature_log()
