@@ -977,7 +977,7 @@ Previewer* MainWindow::createPreviewerFor(const QString& projectType)
     if (projectType.contains("KWin/WindowSwitcher")) {
         ret = new TabBoxPreviewer(i18nc("Window Title", "Window Switcher Previewer"), this);
     } else if (projectType == "KWin/Decoration") {
-        ret = new AuroraePreviewer(i18n("Window Decoration"), this);
+        ;//ret = new AuroraePreviewer(i18n("Window Decoration"), this);
     } else if (projectType.contains("Plasma/Applet")) {
         ret = new PlasmoidPreviewer(i18n("Preview"), this);
     } else if (projectType == "Plasma/Runner") {

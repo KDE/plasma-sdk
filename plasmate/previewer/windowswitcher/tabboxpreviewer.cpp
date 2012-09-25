@@ -82,3 +82,5 @@ void TabBoxPreviewer::init()
 
     setWidget(w);
 }
+
+#include "moc_tabboxpreviewer.cpp"

@@ -25,9 +25,8 @@
 #include <QMouseEvent>
 #include <QLabel>
 #include <QResizeEvent>
-#include <kdecoration.h>
+#include "src/libkdecorations/kdecoration_plugins_p.h"
 #include <kdecorationbridge.h>
-#include "kdecoration_plugins_p.h"
 
 class QLabel;
 class QTextDocument;
@@ -57,7 +56,6 @@ public:
     void setTempBorderSize(KDecorationPlugins* plugin, KDecorationDefines::BorderSize size);
     void setTempButtons(KDecorationPlugins* plugin, bool customEnabled, const QString &left, const QString &right);
     QPixmap preview(QTextDocument* document, QWidget* widget);
-    void init();
 protected:
     virtual void paintEvent(QPaintEvent*);
     virtual void resizeEvent(QResizeEvent*);

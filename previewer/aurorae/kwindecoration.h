@@ -39,6 +39,8 @@
 #include "ui_decoration.h"
 
 class QSortFilterProxyModel;
+namespace KWin
+{
 
 class DecorationModel;
 
@@ -68,9 +70,6 @@ public:
     void setLeftButtons(const QString &leftButtons);
     void setRightButtons(const QString &rightButtons);
 
-public Q_SLOTS:
-    void resetToDefaults();
-
 Q_SIGNALS:
     void customPositionsChanged();
     void leftButtonsChanged();
@@ -82,15 +81,23 @@ private:
     QString m_rightButtons;
 };
 
-class KWinDecoration : public QWidget, public KDecorationDefines
+class KWinDecorationModule : public QWidget, public KDecorationDefines
 {
     Q_OBJECT
 
 public:
-    KWinDecoration(QWidget* parent = 0);
-    ~KWinDecoration();
+    KWinDecorationModule(QWidget* parent = 0);
+    ~KWinDecorationModule();
 
     int itemWidth() const;
+
+signals:
+    void pluginLoad(const KConfigGroup& conf);
+    void pluginSave(KConfigGroup &conf);
+    void pluginDefaults();
+
+protected:
+    bool eventFilter(QObject *o, QEvent *e);
 
 private slots:
     void updatePreviews();
@@ -112,5 +119,7 @@ private:
     int m_lastPreviewWidth;
     QTimer *m_previewUpdateTimer;
 };
+
+} //namespace
 
 #endif

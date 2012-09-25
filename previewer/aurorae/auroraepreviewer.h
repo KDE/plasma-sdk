@@ -20,11 +20,10 @@
 #ifndef AURORAEPREVIEWER_H
 #define AURORAEPREVIEWER_H
 
-#include "../previewer.h"
-#include "preview.h"
+//#include "../previewer.h"
 #include "kwindecoration.h"
 
-class AuroraePreviewer : public Previewer {
+class AuroraePreviewer : public QWidget {
 
     Q_OBJECT
 
@@ -34,7 +33,7 @@ public:
     void refreshPreview();
 
 private:
-    KWinDecoration *m_view;
+    KWin::KWinDecorationModule *m_view;
 
 };
 

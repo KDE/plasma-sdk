@@ -35,7 +35,7 @@
 #include <X11/extensions/shape.h>
 
 #include <kdecorationfactory.h>
-#include "kdecoration_plugins_p.h"
+#include "src/libkdecorations/kdecoration_plugins_p.h"
 #include <QX11Info>
 #include <kwindowsystem.h>
 #include <QTextDocument>
@@ -59,12 +59,6 @@ KDecorationPreview::KDecorationPreview(QWidget* parent)
     setMinimumSize(100, 100);
     no_preview->resize(size());
 }
-
-void KDecorationPreview::init()
-{
-}
-
-
 
 KDecorationPreview::~KDecorationPreview()
 {
