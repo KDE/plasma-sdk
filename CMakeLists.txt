@@ -15,3 +15,5 @@ add_subdirectory(plasmoidviewer)
 add_subdirectory(remote-widgets-browser)
 add_subdirectory(wallpaperviewer)
 add_subdirectory(plasmate)
+
+install(DIRECTORY templates/qml/plastik/package/contents DESTINATION ${DATA_INSTALL_DIR}/plasmate/auroraepreviewer)
