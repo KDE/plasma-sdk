@@ -100,12 +100,6 @@ signals:
 protected:
     bool eventFilter(QObject *o, QEvent *e);
 
-private slots:
-    void updatePreviews();
-    void updatePreviewWidth();
-    void updateScrollbarRange();
-    void updateScrollbarValue();
-    void updateViewPosition(int v);
 private:
     KSharedConfigPtr kwinConfig;
 

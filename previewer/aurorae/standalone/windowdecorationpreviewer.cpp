@@ -35,10 +35,12 @@ WindowDecorationPreviewer::WindowDecorationPreviewer(QWidget* parent)
 
     m_filePath->setFilter("*.desktop");
     welcome->setText(i18n("Welcome to the Window Decoration Previewer"));
+    correctFile->setText(i18n("Please choose the metadata.desktop file which is inside your package"));
     m_previewer->hide();
 
     tmpLayout->addWidget(welcome);
     tmpLayout->addWidget(m_previewer);
+    tmpLayout->addWidget(correctFile);
     tmpLayout->addWidget(m_filePath);
 
     connect(m_filePath, SIGNAL(textChanged(const QString&)), this, SLOT(loadPreviewer(const QString&)));
@@ -49,8 +51,6 @@ WindowDecorationPreviewer::WindowDecorationPreviewer(QWidget* parent)
 
 void WindowDecorationPreviewer::loadPreviewer(const QString& filePath)
 {
-    //The plasmate is needing a metadata.desktop file in order to work.
-    //
     m_previewer->showPreview(m_filePath->text());
     m_previewer->show();
 }

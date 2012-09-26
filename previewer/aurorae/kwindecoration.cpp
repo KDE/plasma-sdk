@@ -117,16 +117,7 @@ KWinDecorationModule::KWinDecorationModule(QWidget* parent) :
     m_ui->decorationList->rootContext()->setContextProperty("decorationInactiveTitleBarColor", KDecoration::options()->color(ColorTitleBar, false));
     m_ui->decorationList->setSource(mainQmlPath);
     kDebug() << "333333333333333333333333";
-    //connect(m_ui->decorationList->rootObject(), SIGNAL(widthChanged()), SLOT(updatePreviewWidth()));
-    connect(m_ui->searchEdit, SIGNAL(textChanged(QString)), m_proxyModel, SLOT(setFilterFixedString(QString)));
 
-    m_ui->decorationList->disconnect(m_ui->decorationList->verticalScrollBar());
-    m_ui->decorationList->verticalScrollBar()->disconnect(m_ui->decorationList);
-    /*connect(m_ui->decorationList->rootObject(), SIGNAL(contentYChanged()), SLOT(updateScrollbarValue()));
-    connect(m_ui->decorationList->rootObject(), SIGNAL(contentHeightChanged()), SLOT(updateScrollbarRange()));
-    connect(m_ui->decorationList->verticalScrollBar(), SIGNAL(rangeChanged(int, int )), SLOT(updateScrollbarRange()));
-    connect(m_ui->decorationList->verticalScrollBar(), SIGNAL(valueChanged(int)), SLOT(updateViewPosition(int)));*/
-    kDebug() << "444444444444444444";
     m_ui->decorationList->installEventFilter(this);
     m_ui->decorationList->viewport()->installEventFilter(this);
     kDebug() << "555555555555555555";
@@ -148,13 +139,10 @@ void KWinDecorationModule::loadDecoration(const QString &filePath)
     m_model->findDecorations(filePath);
 }
 
-
 bool KWinDecorationModule::eventFilter(QObject *o, QEvent *e)
 {
     if (o == m_ui->decorationList) {
-        if (e->type() == QEvent::Resize)
-            ;//updateScrollbarRange();
-        else if (e->type() == QEvent::KeyPress) {
+        if (e->type() == QEvent::KeyPress) {
             int d = 0;
             const int currentRow = m_ui->decorationList->rootObject()->property("currentIndex").toInt();
             const int key = static_cast<QKeyEvent*>(e)->key();
@@ -199,54 +187,6 @@ bool KWinDecorationModule::eventFilter(QObject *o, QEvent *e)
         }
     }
     return false;
-}
-
-void KWinDecorationModule::updatePreviews()
-{
-    m_ui->decorationList->rootContext()->setContextProperty("sliderWidth", m_ui->decorationList->verticalScrollBar()->width());
-    const int newWidth = m_ui->decorationList->rootObject()->property("width").toInt();
-    if (newWidth == m_lastPreviewWidth)
-        return;
-    m_lastPreviewWidth = newWidth;
-    const int h = m_ui->decorationList->rootObject()->property("contentHeight").toInt();
-    const int y = m_ui->decorationList->rootObject()->property("contentY").toInt();
-    // start at first element in sight
-    int row = 0;
-    if (h > 0)
-        row = qMin(qMax(0, y*m_model->rowCount()/h), m_model->rowCount());
-}
-
-void KWinDecorationModule::updatePreviewWidth()
-{
-    if (!m_previewUpdateTimer) {
-        m_previewUpdateTimer = new QTimer(this);
-        m_previewUpdateTimer->setSingleShot(true);
-        connect(m_previewUpdateTimer, SIGNAL(timeout()), this, SLOT(updatePreviews()));
-    }
-    m_previewUpdateTimer->start(100);
-}
-
-void KWinDecorationModule::updateScrollbarRange()
-{
-    m_ui->decorationList->verticalScrollBar()->blockSignals(true);
-    const int h = m_ui->decorationList->rootObject()->property("contentHeight").toInt();
-    m_ui->decorationList->verticalScrollBar()->setRange(0, h - m_ui->decorationList->height());
-    m_ui->decorationList->verticalScrollBar()->setPageStep(m_ui->decorationList->verticalScrollBar()->maximum()/m_model->rowCount());
-    m_ui->decorationList->verticalScrollBar()->blockSignals(false);
-}
-
-void KWinDecorationModule::updateScrollbarValue()
-{
-    const int v = m_ui->decorationList->rootObject()->property("contentY").toInt();
-    m_ui->decorationList->verticalScrollBar()->blockSignals(true); // skippig this will kill kinetic scrolling but the scrollwidth is too low
-    m_ui->decorationList->verticalScrollBar()->setValue(v);
-    m_ui->decorationList->verticalScrollBar()->blockSignals(false);
-}
-
-void KWinDecorationModule::updateViewPosition(int v)
-{
-    QGraphicsObject *list = m_ui->decorationList->rootObject();
-    list->setProperty("contentY", v);
 }
 
 DecorationButtons::DecorationButtons(QObject *parent)
