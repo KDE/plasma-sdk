@@ -31,3 +31,4 @@ void Previewer::emitRefreshRequest()
 {
     emit refreshRequested();
 }
+#include "moc_previewer.cpp"

@@ -74,7 +74,8 @@ KWinDecorationModule::KWinDecorationModule(QWidget* parent) :
     , m_lastPreviewWidth(-1)
     , m_previewUpdateTimer(NULL)
 {
-    const QString mainQmlPath = KStandardDirs::locate("data", "kwin/kwinkoker/main.qml");
+    const QString mainQmlPath = KStandardDirs::locate("data", "plasmate/auroraepreviewer/qml/main.qml");
+    //TODO koker here we will put the main.qml of the previewer/aurorae/qml
     if (mainQmlPath.isNull()) {
         // TODO 4.10 i18n this
         KMessageBox::error(this, "<h1>Installation error</h1>"
@@ -102,30 +103,33 @@ KWinDecorationModule::KWinDecorationModule(QWidget* parent) :
         m_ui->decorationList->engine()->addImportPath(importPath);
         kDebug() << "importttttttttttttttttttttttt" << importPath;
     }
+    kDebug() << "11111111111111111111111";
     m_ui->decorationList->rootContext()->setContextProperty("decorationModel", m_proxyModel);
     m_ui->decorationList->rootContext()->setContextProperty("decorationBaseModel", m_model);
     m_ui->decorationList->rootContext()->setContextProperty("options", m_decorationButtons);
     m_ui->decorationList->rootContext()->setContextProperty("highlightColor", m_ui->decorationList->palette().color(QPalette::Highlight));
     m_ui->decorationList->rootContext()->setContextProperty("sliderWidth", m_ui->decorationList->verticalScrollBar()->width());
     m_ui->decorationList->rootContext()->setContextProperty("auroraeSource", KStandardDirs::locate("data", "kwin/aurorae/aurorae.qml"));
+    kDebug() << "2222222222222222222222222222";
     m_ui->decorationList->rootContext()->setContextProperty("decorationActiveCaptionColor", KDecoration::options()->color(ColorFont, true));
     m_ui->decorationList->rootContext()->setContextProperty("decorationInactiveCaptionColor", KDecoration::options()->color(ColorFont, false));
     m_ui->decorationList->rootContext()->setContextProperty("decorationActiveTitleBarColor", KDecoration::options()->color(ColorTitleBar, true));
     m_ui->decorationList->rootContext()->setContextProperty("decorationInactiveTitleBarColor", KDecoration::options()->color(ColorTitleBar, false));
     m_ui->decorationList->setSource(mainQmlPath);
-
-    connect(m_ui->decorationList->rootObject(), SIGNAL(widthChanged()), SLOT(updatePreviewWidth()));
+    kDebug() << "333333333333333333333333";
+    //connect(m_ui->decorationList->rootObject(), SIGNAL(widthChanged()), SLOT(updatePreviewWidth()));
     connect(m_ui->searchEdit, SIGNAL(textChanged(QString)), m_proxyModel, SLOT(setFilterFixedString(QString)));
 
     m_ui->decorationList->disconnect(m_ui->decorationList->verticalScrollBar());
     m_ui->decorationList->verticalScrollBar()->disconnect(m_ui->decorationList);
-    connect(m_ui->decorationList->rootObject(), SIGNAL(contentYChanged()), SLOT(updateScrollbarValue()));
+    /*connect(m_ui->decorationList->rootObject(), SIGNAL(contentYChanged()), SLOT(updateScrollbarValue()));
     connect(m_ui->decorationList->rootObject(), SIGNAL(contentHeightChanged()), SLOT(updateScrollbarRange()));
     connect(m_ui->decorationList->verticalScrollBar(), SIGNAL(rangeChanged(int, int )), SLOT(updateScrollbarRange()));
-    connect(m_ui->decorationList->verticalScrollBar(), SIGNAL(valueChanged(int)), SLOT(updateViewPosition(int)));
-
+    connect(m_ui->decorationList->verticalScrollBar(), SIGNAL(valueChanged(int)), SLOT(updateViewPosition(int)));*/
+    kDebug() << "444444444444444444";
     m_ui->decorationList->installEventFilter(this);
     m_ui->decorationList->viewport()->installEventFilter(this);
+    kDebug() << "555555555555555555";
 }
 
 
@@ -138,11 +142,18 @@ int KWinDecorationModule::itemWidth() const
     return m_ui->decorationList->rootObject()->property("width").toInt();
 }
 
+void KWinDecorationModule::loadDecoration(const QString &filePath)
+{
+    kDebug() << "6666666666666666666666";
+    m_model->findDecorations(filePath);
+}
+
+
 bool KWinDecorationModule::eventFilter(QObject *o, QEvent *e)
 {
     if (o == m_ui->decorationList) {
         if (e->type() == QEvent::Resize)
-            updateScrollbarRange();
+            ;//updateScrollbarRange();
         else if (e->type() == QEvent::KeyPress) {
             int d = 0;
             const int currentRow = m_ui->decorationList->rootObject()->property("currentIndex").toInt();

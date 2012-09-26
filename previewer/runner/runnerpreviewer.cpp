@@ -78,3 +78,4 @@ void RunnerPreviewer::doQuery()
         m_runner->launchQuery(m_edit->text());
     }
 }
+#include "moc_runnerpreviewer.cpp"

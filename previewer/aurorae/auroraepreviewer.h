@@ -20,10 +20,10 @@
 #ifndef AURORAEPREVIEWER_H
 #define AURORAEPREVIEWER_H
 
-//#include "../previewer.h"
+#include "../previewer.h"
 #include "kwindecoration.h"
 
-class AuroraePreviewer : public QWidget {
+class AuroraePreviewer : public Previewer {
 
     Q_OBJECT
 

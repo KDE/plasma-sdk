@@ -26,4 +26,4 @@ void PlasmoidPreviewer::refreshPreview()
 {
     emit refreshView();
 }
-
+#include "moc_plasmoidpreviewer.cpp"

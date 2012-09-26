@@ -47,37 +47,29 @@ set (PlasMate_SRC
     mainwindow.cpp
     startpage.cpp
     packagemodel.cpp
+    previewer/previewer.cpp
     previewer/plasmoid/plasmoidpreviewer.cpp
     previewer/plasmoid/plasmoidview.cpp
     previewer/runner/runnerpreviewer.cpp
     previewer/windowswitcher/windowswitcher.cpp
     previewer/windowswitcher/thumbnailitem.cpp
     previewer/windowswitcher/tabboxpreviewer.cpp
-    #previewer/aurorae/preview.cpp
-    #previewer/aurorae/auroraepreviewer.cpp
-    #previewer/aurorae/kwindecoration.cpp
-    #previewer/aurorae/decorationmodel.cpp
-    ${Window_Decoration_SRC}
+    previewer/aurorae/src/libkdecorations/kdecoration_plugins_p.h
+    previewer/aurorae/kwindecoration.cpp
+    previewer/aurorae/preview.cpp
+    previewer/aurorae/decorationmodel.cpp
+    previewer/aurorae/auroraepreviewer.cpp
+    previewer/aurorae/src/aurorae/lib/auroraetheme.cpp
+    previewer/aurorae/src/aurorae/lib/themeconfig.cpp
+    previewer/aurorae/auroraepreviewer.cpp
     publisher/signingwidget.cpp
     publisher/signingdialog.cpp
     publisher/publisher.cpp
     docbrowser/docbrowser.cpp
     projectmanager/projectmanager.cpp
-    )
-
-set(AURORAE_SOURCE_DIR previewer/aurorae/src/aurorae/lib)
-
-set(Window_Decoration_SRC
-    previewer/aurorae/kwindecoration.cpp
-    previewer/aurorae/preview.cpp
-    previewer/aurorae/decorationmodel.cpp
-    #previewer/aurorae/auroraepreviewer.cpp
-    ${AURORAE_SOURCE_DIR}/auroraetheme.cpp
-    ${AURORAE_SOURCE_DIR}/themeconfig.cpp
-    previewer/aurorae/src/libkdecorations/kdecoration_plugins_p.h
-    #previewer/aurorae/main.cpp
 )
-set (WindowSwitcherPreviewer_SRC
+
+set(WindowSwitcherPreviewer_SRC
     previewer/windowswitcher/windowswitcher.cpp
     previewer/windowswitcher/thumbnailitem.cpp
     previewer/windowswitcher/tabboxpreviewer.cpp
@@ -85,6 +77,19 @@ set (WindowSwitcherPreviewer_SRC
     previewer/windowswitcher/standalone/main.cpp
     previewer/windowswitcher/standalone/windowswitcherpreviewer.cpp
 )
+
+set(WindowDecoration_SRC
+    previewer/aurorae/kwindecoration.cpp
+    previewer/aurorae/preview.cpp
+    previewer/previewer.cpp
+    previewer/aurorae/decorationmodel.cpp
+    previewer/aurorae/auroraepreviewer.cpp
+    previewer/aurorae/src/aurorae/lib/auroraetheme.cpp
+    previewer/aurorae/src/aurorae/lib/themeconfig.cpp
+    previewer/aurorae/standalone/main.cpp
+    previewer/aurorae/standalone/windowdecorationpreviewer.cpp
+)
+
 if (DEBUG_MODEL)
       set (PlasMate_SRC
          ${PlasMate_SRC}
@@ -101,6 +106,11 @@ kde4_add_ui_files (PlasMate_SRC
    previewer/aurorae/auroraeconfig.ui
 )
 
+kde4_add_ui_files(WindowDecoration_SRC
+    previewer/aurorae/decoration.ui
+    previewer/aurorae/auroraeconfig.ui
+)
+
 include_directories(${KDE4_INCLUDES}
                     ${QT_QTWEBKIT_INCLUDE_DIR}
                     ${QGPGME_INCLUDE_DIR}
@@ -111,8 +121,6 @@ include_directories(${KDE4_INCLUDES}
 add_subdirectory( editors )
 add_subdirectory( previewer/plasmoid )
 add_subdirectory( templates )
-#add_subdirectory(previewer/aurorae)
-
 
 kde4_add_executable(plasmate ${PlasMate_SRC})
 target_link_libraries(plasmate
@@ -139,6 +147,19 @@ target_link_libraries(windowswitcherpreviewer
                       ${KDECLARATIVE_LIBRARIES}
 )
 
+kde4_add_executable(windowdecoration ${WindowDecoration_SRC})
+
+target_link_libraries(windowdecoration
+                      ${KDE4_KNEWSTUFF3_LIBS}
+                      kdecorations
+                      ${X11_LIBRARIES}
+                      ${KDE4_KIO_LIBRARY}
+                      ${KDE4_KDEUI_LIBS}
+                      ${KDE4_PLASMA_LIBS}
+                      ${QT_QTDECLARATIVE_LIBRARY}
+                      ${QT_QTUITOOLS_LIBRARY}
+                      ${X11_LIBRARIES}
+)
 
 
 if (DEBUG_MODEL)
@@ -146,6 +167,7 @@ if (DEBUG_MODEL)
 endif (DEBUG_MODEL)
 
 install(TARGETS windowswitcherpreviewer ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS windowdecoration ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(TARGETS plasmate ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES plasmate.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES plasmateui.rc  DESTINATION ${DATA_INSTALL_DIR}/plasmate)
@@ -159,5 +181,5 @@ previewer/windowswitcher/thumbnails/dolphin.png
 DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 
 install( FILES previewer/windowswitcher/tabboxdelegate.qml DESTINATION ${DATA_INSTALL_DIR}/plasmate)
-install(DIRECTORY templates/qml/plastik/package/contents DESTINATION ${DATA_INSTALL_DIR}/plasmate/auroraepreviewer)
+install(DIRECTORY previewer/aurorae/qml DESTINATION ${DATA_INSTALL_DIR}/plasmate/auroraepreviewer)
 macro_display_feature_log()

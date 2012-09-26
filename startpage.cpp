@@ -412,7 +412,7 @@ void StartPage::createNewProject()
         templateFilePath.append("mainKWinScript");
     } else if (m_ui.contentTypes->currentRow() == 6) {
         serviceTypes = "KWin/Decoration";
-        templateFilePath.append("qml/aurorae/mainKWinDecoration");
+        templateFilePath.append("qml/plastik/packages/contents/ui/mainWindowDecoration");
     }
 
     QString projectFolderName;
@@ -472,19 +472,26 @@ void StartPage::createNewProject()
             if (tmpDir.exists()) {
                 foreach (const QString &fileName, tmpDir.entryList(QDir::Files)) {
                     QFile tmpFile(subDirs.path() + "/" + dirname + "/" + fileName);
-                    tmpFile.copy(projectPath + "/contents/" +  dirname + "/" + fileName);
-
-
-                    //Create a QFile object that points to the template we need to copy
-                    QFile sourceFile(tmpFile.fileName()); //our template file
-                    QFile destinationFile(projectPath + "/contents/" + dirname + "/" + fileName); //our destination file
-                    prepareProjectFile(sourceFile, destinationFile, projectName);
+                    //We don't want our template file to be shipped with name mainWindowDecoration.qml
+                    //So we are changing its name based on the projectName
+                    if(fileName == "mainWindowDecoration.qml") {
+                        tmpFile.copy(projectPath + "/contents/" +  dirname + "/" + mainScriptName);
+                        QFile sourceFile(tmpFile.fileName()); //our template file
+                        QFile destinationFile(projectPath + "/contents/" + dirname + "/" + mainScriptName); //our destination file
+                        prepareProjectFile(sourceFile, destinationFile, projectName);
+                    } else {
+                        tmpFile.copy(projectPath + "/contents/" +  dirname + "/" + fileName);
+                        //Create a QFile object that points to the template we need to copy
+                        QFile sourceFile(tmpFile.fileName()); //our template file
+                        QFile destinationFile(projectPath + "/contents/" + dirname + "/" + fileName); //our destination file
+                        prepareProjectFile(sourceFile, destinationFile, projectName);
+                    }
                 }
             }
         }
+    } else {
+        prepareProjectFile(sourceFile, destinationFile, projectName);
     }
-
-    prepareProjectFile(sourceFile, destinationFile, projectName);
 
     // create the metadata.desktop file
     // TODO: missing but possible entries that could be added:
@@ -509,7 +516,11 @@ void StartPage::createNewProject()
     metaDataGroup.writeEntry("X-KDE-PluginInfo-License", "GPL");
     metaDataGroup.writeEntry("X-KDE-PluginInfo-Email", m_ui.emailTextField->text());
     metaDataGroup.writeEntry("X-Plasma-API", api);
-    metaDataGroup.writeEntry("X-Plasma-MainScript", "code/" + mainScriptName);
+    if (serviceTypes == "KWin/Decoration") {
+        metaDataGroup.writeEntry("X-Plasma-MainScript", "ui/" + mainScriptName);
+    } else {
+        metaDataGroup.writeEntry("X-Plasma-MainScript", "code/" + mainScriptName);
+    }
     metaDataGroup.writeEntry("X-Plasma-DefaultSize", QSize(200, 100));
     metaFile.sync();
 

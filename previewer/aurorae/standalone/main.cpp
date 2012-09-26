@@ -21,12 +21,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KCmdLineArgs>
 #include <QPointer>
 
-#include "kwindecoration.h"
+#include "windowdecorationpreviewer.h"
 
 int main(int argc, char *argv[])
 {
-    KAboutData aboutData("kwinkoker", 0, ki18n("kwinkoker"),
-                         "0.1alpha3", ki18n("Previewer for Window Switcher"),
+    KAboutData aboutData("windowdecoration", 0, ki18n("windowdecoration"),
+                         "0.1alpha3", ki18n("Previewer for Window Decoration"),
                          KAboutData::License_GPL,
                          ki18n("Copyright 2012 Plasma Development Team"),
                          KLocalizedString(), "", "plasma-devel@kde.org");
@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
     aboutData.addAuthor(ki18n("Antonis Tsiapaliokas"), ki18n("Author"), "kok3rs@gmail.com");
 
 
-    aboutData.setProgramIconName("window-duplicate");
+    aboutData.setProgramIconName("Xorg");
 
     KCmdLineArgs::init(argc, argv, &aboutData);
 
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
     KCmdLineArgs::parsedArgs();
     KApplication app;
 
-    QPointer<KWin::KWinDecorationModule> preview = new KWin::KWinDecorationModule();
+    QPointer<WindowDecorationPreviewer> preview = new WindowDecorationPreviewer;
     preview->show();
 
     return app.exec();
