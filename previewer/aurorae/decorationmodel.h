@@ -96,9 +96,11 @@ public:
     virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
     virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
     virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
+    //Here we are defining where is our package
+    void findDecorations(const QString &filePath = 0);
 
 private:
-    void findDecorations();
+
     void metaData(DecorationModelData& data, const KDesktopFile& df);
     QList<DecorationModelData> m_decorations;
     KDecorationPlugins* m_plugins;

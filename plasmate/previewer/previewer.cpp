@@ -37,3 +37,4 @@ void Previewer::emitShowKonsole()
 {
     emit showKonsole();
 }
+#include "moc_previewer.cpp"

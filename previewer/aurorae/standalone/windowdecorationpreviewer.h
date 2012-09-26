@@ -17,26 +17,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *********************************************************************/
 
-#include "auroraepreviewer.h"
-#include <QVariantList>
-#include <KDebug>
+#ifndef WINDOWDECORATIONPREVIEWER_H
+#define WINDOWDECORATIONPREVIEWER_H
 
-AuroraePreviewer::AuroraePreviewer(const QString & title, QWidget * parent, Qt::WindowFlags flags)
-: Previewer(title, parent, flags)
-{
-    m_view = new KWin::KWinDecorationModule();
-    setWidget(m_view);
-}
+#include "../auroraepreviewer.h"
+#include <KUrlRequester>
+#include <QVBoxLayout>
+#include <KDialog>
 
-void AuroraePreviewer::showPreview(const QString &packagePath)
-{
-    kDebug() << "222222222222222222222222222222222";
-    m_view->loadDecoration(packagePath);;
-    //m_view->setLayout(packageMainFile(packagePath));
-}
+class WindowDecorationPreviewer : public KDialog {
 
-void AuroraePreviewer::refreshPreview()
-{
-    kDebug() << "Asddsadsa";
-}
-#include "moc_auroraepreviewer.cpp"
+    Q_OBJECT
+
+public:
+
+    WindowDecorationPreviewer(QWidget *parent = 0);
+
+public Q_SLOTS:
+
+    void loadPreviewer(const QString& filePath);
+
+private:
+
+    QWidget *tmpWidget;
+    QVBoxLayout *tmpLayout;
+    AuroraePreviewer *m_previewer;
+    KUrlRequester *m_filePath;
+};
+
+#endif // WINDOWDECORATIONPREVIEWER_H

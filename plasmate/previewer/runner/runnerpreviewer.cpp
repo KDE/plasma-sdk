@@ -84,3 +84,4 @@ QString RunnerPreviewer::takeOutput() const
     //TODO add support for a runner previewer
     return QString();
 }
+#include "moc_runnerpreviewer.cpp"

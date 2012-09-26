@@ -74,7 +74,6 @@ DecorationModel::DecorationModel(KSharedConfigPtr config, QObject* parent)
     roleNames[ButtonSizeRole] = "buttonSize";
     setRoleNames(roleNames);
     m_config = KSharedConfig::openConfig("auroraerc");
-    findDecorations();
 }
 
 DecorationModel::~DecorationModel()
@@ -88,25 +87,38 @@ DecorationModel::~DecorationModel()
 
 // Find all theme desktop files in all 'data' dirs owned by kwin.
 // And insert these into a DecorationInfo structure
-void DecorationModel::findDecorations()
+void DecorationModel::findDecorations(const QString &filePath)
 {
     beginResetModel();
-    KService::List offers = KServiceTypeTrader::self()->query("KWin/Decoration");
-    foreach (KService::Ptr service, offers) {
-        DecorationModelData data;
-        data.name = service->name();
-        data.libraryName = "kwin3_aurorae";
-        data.type = DecorationModelData::QmlDecoration;
-        data.auroraeName = service->property("X-KDE-PluginInfo-Name").toString();
-        QString scriptName = service->property("X-Plasma-MainScript").toString();
-        //data.qmlPath = KStandardDirs::locate("data", "kwin/decorations/" + data.auroraeName + "/contents/" + scriptName);
-        QString test = "/home/kokeroulis/.kde/share/apps/plasmate/koker/contents/ui/main.qml";
-        data.qmlPath = test;
-        kDebug() << "qml theme pathhhhhhhh" << data.qmlPath;
-        if (data.qmlPath.isEmpty()) {
-            // not a valid QML theme
-            continue;
-        }
+    QString tmpFile = filePath;
+
+    //This method can be called only either inside from the plasmate or from the windowdecoration previewer
+    //Inside from the plasmate the filePath contains our projectPath
+    //But inside from the windowdecoration previewer the filepath contains our metadata.desktop file.
+    //So we much check if the filaPath is a metadata.desktop file or a directory.
+    if (!KDesktopFile::isDesktopFile(filePath)) {
+        tmpFile.append("metadata.desktop");
+    }
+    KDesktopFile desktopFile(tmpFile);
+
+    DecorationModelData data;
+    data.name = desktopFile.readName();
+    data.libraryName = "kwin3_aurorae";
+    data.type = DecorationModelData::QmlDecoration;
+    data.auroraeName = desktopFile.desktopGroup().readEntry("X-KDE-PluginInfo-Name", QString());
+    QString scriptName = desktopFile.desktopGroup().readEntry("X-Plasma-MainScript", QString());
+    data.qmlPath = KStandardDirs::locateLocal("appdata", data.auroraeName + "/contents/" + scriptName);
+
+    //When we run the windowdecoration previewer, then our application is no more the plasmate
+    //but the windowdecoration. So our locateLocal is targeting to the false directory
+    data.qmlPath.replace("windowdecoration", "plasmate");
+        //TODO koker here we should put the directory of our plasmate package.
+        kDebug() << "pathhhhhhhh" << data.auroraeName + "/contents/" + scriptName;
+        kDebug() <<"qmlPATHHHHHHHHHHHH" << data.qmlPath;
+        //e.x. ~/.kde/share/apps/plasmate/koker/contents/ui/main.qml
+        //QString test = "/home/kokeroulis/.kde/share/apps/plasmate/koker/contents/ui/main.qml";
+        //data.qmlPath = test;
+
     /*TODO Is that code needed?    
         KConfigGroup config(m_config, data.auroraeName);
         data.borderSize = (KDecorationDefines::BorderSize)config.readEntry< int >("BorderSize", KDecorationDefines::BorderNormal);
@@ -121,7 +133,7 @@ void DecorationModel::findDecorations()
         data.website = info.website();
     */
         m_decorations.append(data);
-    }
+    //}
     qSort(m_decorations.begin(), m_decorations.end(), DecorationModelData::less);
     endResetModel();
 }

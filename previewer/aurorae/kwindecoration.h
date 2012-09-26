@@ -90,6 +90,7 @@ public:
     ~KWinDecorationModule();
 
     int itemWidth() const;
+    void loadDecoration(const QString &filePath);
 
 signals:
     void pluginLoad(const KConfigGroup& conf);
