@@ -128,24 +128,20 @@ int main(int argc, char **argv)
     // set wallpaper
     QString pluginName = args->getOption("wallpaper");
     QString mode = args->getOption("mode");
-    WallpaperWidget *w = new WallpaperWidget(pluginName, mode);
+    WallpaperWidget w(pluginName, mode);
 
     bool ok1, ok2 = false;
     // get size
     int width = args->getOption("width").toInt(&ok2);
     int height = args->getOption("height").toInt(&ok1);
     if (ok1 && ok2) {
-        w->resize(width, height);
+        w.resize(width, height);
     }
 
+    w.show();
     if(args->isSet("configure")) {
-        w->configure();
+        w.configure();
     }
-
     args->clear();
-    w->show();
-    int rv = app.exec();
-
-    delete w;
-    return rv;
+    return app.exec();
 }
