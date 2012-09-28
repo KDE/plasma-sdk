@@ -232,6 +232,11 @@ void WallpaperWidget::updatePaper(const QRectF &exposedRect)
 void WallpaperWidget::configure()
 {
     if (m_wallpaper) {
+        if (!m_wallpaper->isInitialized()) {
+            // delayed paper initialization
+            m_wallpaper->restore(configGroup());
+        }
+        
         if (!m_configDialog) {
             m_configDialog = new KDialog(this);
             m_configDialog->setCaption(i18n("Configure %1 Wallpaper", m_wallpaper->name()));
