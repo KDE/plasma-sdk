@@ -360,25 +360,29 @@ bool PackageModel::loadPackage()
         metadata.write(dir.path() + "/metadata.desktop");
     }
 
-    QString contents = structure->contentsPrefix();
+    QStringList contents = structure->contentsPrefixPaths();
 
-    if (!contents.isEmpty()) {
-        dir.mkpath(contents);
-        dir.cd(contents);
+    foreach(const QString& content, contents) {
+        if (!content.isEmpty()) {
+            dir.mkpath(content);
+            dir.cd(content);
+        }
     }
 
     const QList<const char*> dirs = structure->directories();
     foreach (const char *key, dirs) {
-        QString path = structure->path(key);
-        if (!dir.exists(path)) {
-            dir.mkpath(path);
-        }
+        QStringList paths = structure->searchPath(key);
+        foreach(const QString& path, paths){
+            if (!dir.exists(path)) {
+                dir.mkpath(path);
+            }
 
-        m_topEntries.append(key);
+            m_topEntries.append(key);
+        }
     }
 
     QHash<QString, const char *> indexedFiles;
-    foreach (const char *key, structure->files()) {
+    foreach (const char *key, structure->requiredFiles()) {
         QString path = structure->path(key);
         if (!dir.exists(path)) {
             QFileInfo info(dir.path() + '/' + path);
