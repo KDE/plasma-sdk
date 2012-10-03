@@ -25,6 +25,11 @@ if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
    set (DEBUG_MODEL 1)
 endif()
 
+add_subdirectory(engineexplorer)
+add_subdirectory(plasmoidviewer)
+add_subdirectory(remote-widgets-browser)
+add_subdirectory(wallpaperviewer)
+
 set (PlasMate_SRC
     editors/editpage.cpp
     editors/metadata/metadataeditor.cpp
