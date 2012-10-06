@@ -15,25 +15,27 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <QWeakPointer>
 #include <KDebug>
 #include <KApplication>
 #include <KAboutData>
 #include <KLocale>
 #include <KCmdLineArgs>
-
 #include "mainwindow.h"
 
-MainWindowWrapper *mainwindow;
+QWeakPointer<MainWindowWrapper> mainwindow;
 
 void customMessageHandler(QtMsgType type, const char *msg)
 {
     if (mainwindow) {
-        mainwindow->mainWindow()->emitSendMessage(type, msg);
+        if(mainwindow.data()->mainWindow()) {
+            mainwindow.data()->mainWindow()->emitSendMessage(type, msg);
+        }
     } else {
         kDebug() << "*****************************************************";
-        kDebug() << "Plasmate has failed to set a custin qInstallMsgHandler!!!!!!!";
+        kDebug() << "Plasmate has failed to set a custom qInstallMsgHandler!!!!!!!";
         kDebug() << "*****************************************************";
-        exit(0);
+        QApplication::exit(1);
     }
 }
 

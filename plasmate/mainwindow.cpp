@@ -150,7 +150,6 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(m_central);
     m_central->switchTo(m_startPage);
     setDockOptions(QMainWindow::AllowNestedDocks); // why not?
-
     if (autoSaveConfigGroup().entryMap().isEmpty()) {
         setWindowState(Qt::WindowMaximized);
     }
@@ -161,7 +160,6 @@ void MainWindow::emitSendMessage(QtMsgType type, const QString& msg)
 {
     emit sendMessage(type, msg);
 }
-
 
 MainWindow::~MainWindow()
 {
