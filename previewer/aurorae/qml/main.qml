@@ -17,42 +17,58 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 import QtQuick 1.1
 import org.kde.qtextracomponents 0.1 as QtExtra
+import org.kde.plasma.components 0.1 as PlasmaComponents
 
 ListView {
     id: listView
     x: 0
     y: 0
+    signal clicked;
     model: decorationModel
     highlight: Rectangle {
-        width: listView.width - sliderWidth
+        width: listView.width
         height: 150
         color: highlightColor
         opacity: 0.5
     }
     highlightMoveDuration: 250
     boundsBehavior: Flickable.StopAtBounds
-    delegate: Item {
-        objectName: "decorationItem"
-        width: listView.width - sliderWidth
-        height: 150
-        QtExtra.QPixmapItem {
-            pixmap: preview
-            anchors.fill: parent
-            visible: type == 0
-        }
-        Loader {
-            source: type == 1 ? "AuroraePreview.qml" : ""
-            anchors.fill: parent
-        }
-        Loader {
-            source: type == 2 ? "DecorationPreview.qml" : ""
-            anchors.fill: parent
-        }
-        MouseArea {
-            hoverEnabled: false
-            anchors.fill: parent
+    delegate: Column {
+        spacing: -10
+        PlasmaComponents.ToolButton  {
+            id: image
+            iconSource: "view-refresh"
+            smooth: true
+            flat: true
+            anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
-                listView.currentIndex = index;
+                listView.clicked();
+            }
+        }
+        Item {
+            objectName: "decorationItem"
+            width: listView.width
+            height: 150
+            QtExtra.QPixmapItem {
+                pixmap: preview
+                anchors.fill: parent
+                visible: type == 0
+            }
+            Loader {
+                source: type == 1 ? "AuroraePreview.qml" : ""
+                anchors.fill: parent
+            }
+            Loader {
+                source: type == 2 ? "DecorationPreview.qml" : ""
+                anchors.fill: parent
+            }
+            MouseArea {
+                hoverEnabled: false
+                anchors.fill: parent
+                    onClicked: {
+                    console.log("asdsdasdsdaadsdsa")
+                    listView.currentIndex = index;
+                }
             }
         }
     }

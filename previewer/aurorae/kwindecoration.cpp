@@ -98,6 +98,7 @@ KWinDecorationModule::KWinDecorationModule(QWidget* parent) :
     m_proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 
     kDebug() << "adssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss";
+
     m_ui->decorationList->setResizeMode(QDeclarativeView::SizeRootObjectToView);
     foreach (const QString &importPath, KGlobal::dirs()->findDirs("module", "imports")) {
         m_ui->decorationList->engine()->addImportPath(importPath);
@@ -120,17 +121,17 @@ KWinDecorationModule::KWinDecorationModule(QWidget* parent) :
 
     m_ui->decorationList->installEventFilter(this);
     m_ui->decorationList->viewport()->installEventFilter(this);
+
     kDebug() << "555555555555555555";
 }
-
 
 KWinDecorationModule::~KWinDecorationModule()
 {
 }
 
-int KWinDecorationModule::itemWidth() const
+QDeclarativeView* KWinDecorationModule::decorationForm()
 {
-    return m_ui->decorationList->rootObject()->property("width").toInt();
+    return m_ui->decorationList;
 }
 
 void KWinDecorationModule::loadDecoration(const QString &filePath)
@@ -164,6 +165,7 @@ bool KWinDecorationModule::eventFilter(QObject *o, QEvent *e)
                 d = 150;
                 if (QObject *decoItem = m_ui->decorationList->rootObject()->findChild<QObject*>("decorationItem")) {
                     QVariant v = decoItem->property("height");
+                    kDebug() << "heighttttttttttttt" << v;
                     if (v.isValid())
                         d = v.toInt();
                 }

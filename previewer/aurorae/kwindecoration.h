@@ -31,6 +31,7 @@
 #ifndef KWINDECORATION_H
 #define KWINDECORATION_H
 
+#include <QDeclarativeView>
 #include <kcmodule.h>
 #include <kconfig.h>
 
@@ -89,8 +90,10 @@ public:
     KWinDecorationModule(QWidget* parent = 0);
     ~KWinDecorationModule();
 
-    int itemWidth() const;
     void loadDecoration(const QString &filePath);
+    //It returns the current decorationForm. We need to return the decorationForm
+    //in order to complete the signalForward
+    QDeclarativeView* decorationForm();
 
 signals:
     void pluginLoad(const KConfigGroup& conf);

@@ -132,6 +132,10 @@ void DecorationModel::findDecorations(const QString &filePath)
         data.license = info.license();
         data.website = info.website();
     */
+    kDebug() << "testttttttttttttttttt3";
+        //We need to clear our stack in order to show only the current previewer
+        //and not the previous version
+        m_decorations.clear();
         m_decorations.append(data);
     //}
     qSort(m_decorations.begin(), m_decorations.end(), DecorationModelData::less);
