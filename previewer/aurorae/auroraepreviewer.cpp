@@ -19,24 +19,44 @@
 
 #include "auroraepreviewer.h"
 #include <QVariantList>
+#include <QGraphicsObject>
 #include <KDebug>
+#include <QObject>
 
 AuroraePreviewer::AuroraePreviewer(const QString & title, QWidget * parent, Qt::WindowFlags flags)
 : Previewer(title, parent, flags)
 {
     m_view = new KWin::KWinDecorationModule();
+    connect(m_view->decorationForm()->rootObject(), SIGNAL(clicked()), this, SLOT(refreshPreview()));
     setWidget(m_view);
 }
+
+void AuroraePreviewer::init()
+{
+    if(m_view) {
+        m_view = 0;
+        m_view = new KWin::KWinDecorationModule();
+        //we need to create the SIGNAL again because when we initialize our object
+        //the signal was lost
+        connect(m_view->decorationForm()->rootObject(), SIGNAL(clicked()), this, SLOT(refreshPreview()));
+        m_view->loadDecoration(m_packagePath);
+        setWidget(m_view);
+    }
+}
+
 
 void AuroraePreviewer::showPreview(const QString &packagePath)
 {
     kDebug() << "222222222222222222222222222222222";
-    m_view->loadDecoration(packagePath);;
+    m_packagePath = packagePath;
+    m_view->loadDecoration(m_packagePath);
     //m_view->setLayout(packageMainFile(packagePath));
 }
 
 void AuroraePreviewer::refreshPreview()
 {
-    kDebug() << "Asddsadsa";
+    kDebug() << "testtttttttttttttttttttttttttttttttttttT";
+    init();
+
 }
 #include "moc_auroraepreviewer.cpp"
