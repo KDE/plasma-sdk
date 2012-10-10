@@ -112,32 +112,12 @@ void DecorationModel::findDecorations(const QString &filePath)
     //When we run the windowdecoration previewer, then our application is no more the plasmate
     //but the windowdecoration. So our locateLocal is targeting to the false directory
     data.qmlPath.replace("windowdecoration", "plasmate");
-        //TODO koker here we should put the directory of our plasmate package.
-        kDebug() << "pathhhhhhhh" << data.auroraeName + "/contents/" + scriptName;
-        kDebug() <<"qmlPATHHHHHHHHHHHH" << data.qmlPath;
-        //e.x. ~/.kde/share/apps/plasmate/koker/contents/ui/main.qml
-        //QString test = "/home/kokeroulis/.kde/share/apps/plasmate/koker/contents/ui/main.qml";
-        //data.qmlPath = test;
 
-    /*TODO Is that code needed?    
-        KConfigGroup config(m_config, data.auroraeName);
-        data.borderSize = (KDecorationDefines::BorderSize)config.readEntry< int >("BorderSize", KDecorationDefines::BorderNormal);
-        data.buttonSize = (KDecorationDefines::BorderSize)config.readEntry< int >("ButtonSize", KDecorationDefines::BorderNormal);
-        data.closeDblClick = config.readEntry< bool >("CloseOnDoubleClickMenuButton", true);
-        data.comment = service->comment();
-        KPluginInfo info(service);
-        data.author = info.author();
-        data.email= info.email();
-        data.version = info.version();
-        data.license = info.license();
-        data.website = info.website();
-    */
-    kDebug() << "testttttttttttttttttt3";
-        //We need to clear our stack in order to show only the current previewer
-        //and not the previous version
-        m_decorations.clear();
-        m_decorations.append(data);
-    //}
+    //We need to clear our stack in order to show only the current previewer
+    //and not the previous version
+    m_decorations.clear();
+    m_decorations.append(data);
+
     qSort(m_decorations.begin(), m_decorations.end(), DecorationModelData::less);
     endResetModel();
 }

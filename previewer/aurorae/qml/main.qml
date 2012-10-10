@@ -66,7 +66,6 @@ ListView {
                 hoverEnabled: false
                 anchors.fill: parent
                     onClicked: {
-                    console.log("asdsdasdsdaadsdsa")
                     listView.currentIndex = index;
                 }
             }

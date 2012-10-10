@@ -96,33 +96,25 @@ KWinDecorationModule::KWinDecorationModule(QWidget* parent) :
     m_proxyModel = new QSortFilterProxyModel(this);
     m_proxyModel->setSourceModel(m_model);
     m_proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
-
-    kDebug() << "adssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss";
-
     m_ui->decorationList->setResizeMode(QDeclarativeView::SizeRootObjectToView);
     foreach (const QString &importPath, KGlobal::dirs()->findDirs("module", "imports")) {
         m_ui->decorationList->engine()->addImportPath(importPath);
-        kDebug() << "importttttttttttttttttttttttt" << importPath;
     }
-    kDebug() << "11111111111111111111111";
     m_ui->decorationList->rootContext()->setContextProperty("decorationModel", m_proxyModel);
     m_ui->decorationList->rootContext()->setContextProperty("decorationBaseModel", m_model);
     m_ui->decorationList->rootContext()->setContextProperty("options", m_decorationButtons);
     m_ui->decorationList->rootContext()->setContextProperty("highlightColor", m_ui->decorationList->palette().color(QPalette::Highlight));
     m_ui->decorationList->rootContext()->setContextProperty("sliderWidth", m_ui->decorationList->verticalScrollBar()->width());
     m_ui->decorationList->rootContext()->setContextProperty("auroraeSource", KStandardDirs::locate("data", "kwin/aurorae/aurorae.qml"));
-    kDebug() << "2222222222222222222222222222";
     m_ui->decorationList->rootContext()->setContextProperty("decorationActiveCaptionColor", KDecoration::options()->color(ColorFont, true));
-    m_ui->decorationList->rootContext()->setContextProperty("decorationInactiveCaptionColor", KDecoration::options()->color(ColorFont, false));
-    m_ui->decorationList->rootContext()->setContextProperty("decorationActiveTitleBarColor", KDecoration::options()->color(ColorTitleBar, true));
-    m_ui->decorationList->rootContext()->setContextProperty("decorationInactiveTitleBarColor", KDecoration::options()->color(ColorTitleBar, false));
+    //m_ui->decorationList->rootContext()->setContextProperty("decorationInactiveCaptionColor", KDecoration::options()->color(ColorFont, false));
+    //m_ui->decorationList->rootContext()->setContextProperty("decorationActiveTitleBarColor", KDecoration::options()->color(ColorTitleBar, true));
+    //m_ui->decorationList->rootContext()->setContextProperty("decorationInactiveTitleBarColor", KDecoration::options()->color(ColorTitleBar, false));
     m_ui->decorationList->setSource(mainQmlPath);
-    kDebug() << "333333333333333333333333";
 
     m_ui->decorationList->installEventFilter(this);
     m_ui->decorationList->viewport()->installEventFilter(this);
 
-    kDebug() << "555555555555555555";
 }
 
 KWinDecorationModule::~KWinDecorationModule()
@@ -136,7 +128,6 @@ QDeclarativeView* KWinDecorationModule::decorationForm()
 
 void KWinDecorationModule::loadDecoration(const QString &filePath)
 {
-    kDebug() << "6666666666666666666666";
     m_model->findDecorations(filePath);
 }
 
@@ -165,7 +156,6 @@ bool KWinDecorationModule::eventFilter(QObject *o, QEvent *e)
                 d = 150;
                 if (QObject *decoItem = m_ui->decorationList->rootObject()->findChild<QObject*>("decorationItem")) {
                     QVariant v = decoItem->property("height");
-                    kDebug() << "heighttttttttttttt" << v;
                     if (v.isValid())
                         d = v.toInt();
                 }

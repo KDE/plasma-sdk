@@ -47,15 +47,12 @@ void AuroraePreviewer::init()
 
 void AuroraePreviewer::showPreview(const QString &packagePath)
 {
-    kDebug() << "222222222222222222222222222222222";
     m_packagePath = packagePath;
     m_view->loadDecoration(m_packagePath);
-    //m_view->setLayout(packageMainFile(packagePath));
 }
 
 void AuroraePreviewer::refreshPreview()
 {
-    kDebug() << "testtttttttttttttttttttttttttttttttttttT";
     init();
 
 }
