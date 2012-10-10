@@ -1,5 +1,4 @@
 /********************************************************************
- KWin - the KDE window manager
  This file is part of the KDE project.
 
 Copyright (C) 2009 Martin Gräßlin <kde@martin-graesslin.com>

@@ -1,13 +1,8 @@
 /*
-    This is the new kwindecoration kcontrol module
-
     Copyright (c) 2001
         Karol Szwed <gallium@kde.org>
         http://gallium.n3.net/
     Copyright 2009, 2010 Martin Gräßlin <kde@martin-graesslin.com>
-
-    Supports new kwin configuration plugins, and titlebar button position
-    modification via dnd interface.
 
     Based on original "kwintheme" (Window Borders)
     Copyright (C) 2001 Rik Hemsley (rikkus) <rik@kde.org>
