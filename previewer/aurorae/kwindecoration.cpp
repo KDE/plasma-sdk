@@ -56,9 +56,6 @@
 #include <KDebug>
 #include <QDebug>
 
-namespace KWin
-{
-
 KWinDecorationForm::KWinDecorationForm(QWidget* parent)
     : QWidget(parent)
 {
@@ -66,7 +63,7 @@ KWinDecorationForm::KWinDecorationForm(QWidget* parent)
 }
 
 
-KWinDecorationModule::KWinDecorationModule(QWidget* parent) :
+KWinDecoration::KWinDecoration(QWidget* parent) :
       kwinConfig(KSharedConfig::openConfig("kwinrc"))
     , m_showTooltips(false)
     , m_configLoaded(false)
@@ -117,21 +114,21 @@ KWinDecorationModule::KWinDecorationModule(QWidget* parent) :
 
 }
 
-KWinDecorationModule::~KWinDecorationModule()
+KWinDecoration::~KWinDecoration()
 {
 }
 
-QDeclarativeView* KWinDecorationModule::decorationForm()
+QDeclarativeView* KWinDecoration::decorationForm()
 {
     return m_ui->decorationList;
 }
 
-void KWinDecorationModule::loadDecoration(const QString &filePath)
+void KWinDecoration::loadDecoration(const QString &filePath)
 {
     m_model->findDecorations(filePath);
 }
 
-bool KWinDecorationModule::eventFilter(QObject *o, QEvent *e)
+bool KWinDecoration::eventFilter(QObject *o, QEvent *e)
 {
     if (o == m_ui->decorationList) {
         if (e->type() == QEvent::KeyPress) {
@@ -234,7 +231,5 @@ void DecorationButtons::setRightButtons (const QString &rightButtons)
     m_rightButtons = rightButtons;
     emit rightButtonsChanged();
 }
-
-} // namespace KWin
 
 #include "kwindecoration.moc"

@@ -40,8 +40,6 @@
 #include "ui_decoration.h"
 
 class QSortFilterProxyModel;
-namespace KWin
-{
 
 class DecorationModel;
 
@@ -82,13 +80,13 @@ private:
     QString m_rightButtons;
 };
 
-class KWinDecorationModule : public QWidget, public KDecorationDefines
+class KWinDecoration : public QWidget, public KDecorationDefines
 {
     Q_OBJECT
 
 public:
-    KWinDecorationModule(QWidget* parent = 0);
-    ~KWinDecorationModule();
+    KWinDecoration(QWidget* parent = 0);
+    ~KWinDecoration();
 
     void loadDecoration(const QString &filePath);
     //It returns the current decorationForm. We need to return the decorationForm
@@ -117,7 +115,5 @@ private:
     int m_lastPreviewWidth;
     QTimer *m_previewUpdateTimer;
 };
-
-} //namespace
 
 #endif

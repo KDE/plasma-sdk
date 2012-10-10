@@ -40,7 +40,7 @@ public Q_SLOTS:
     void refreshPreview();
 
 private:
-    KWin::KWinDecorationModule *m_view;
+    KWinDecoration *m_view;
     QString m_packagePath;
 
 };
