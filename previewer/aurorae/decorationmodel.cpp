@@ -52,9 +52,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 * (which is invoked on deco deconstruction)
 * WARNING ------------------------------------------------------------------------ */
 
-namespace KWin
-{
-
 DecorationModel::DecorationModel(KSharedConfigPtr config, QObject* parent)
     : QAbstractListModel(parent)
     , m_plugins(new KDecorationPreviewPlugins(config))
@@ -237,5 +234,3 @@ bool DecorationModel::setData(const QModelIndex& index, const QVariant& value, i
     }
     return QAbstractItemModel::setData(index, value, role);
 }
-
-} // namespace KWin

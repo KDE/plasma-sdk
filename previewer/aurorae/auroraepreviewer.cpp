@@ -26,7 +26,7 @@
 AuroraePreviewer::AuroraePreviewer(const QString & title, QWidget * parent, Qt::WindowFlags flags)
 : Previewer(title, parent, flags)
 {
-    m_view = new KWin::KWinDecorationModule();
+    m_view = new KWinDecoration();
     connect(m_view->decorationForm()->rootObject(), SIGNAL(clicked()), this, SLOT(refreshPreview()));
     setWidget(m_view);
 }
@@ -35,7 +35,7 @@ void AuroraePreviewer::init()
 {
     if(m_view) {
         m_view = 0;
-        m_view = new KWin::KWinDecorationModule();
+        m_view = new KWinDecoration();
         //we need to create the SIGNAL again because when we initialize our object
         //the signal was lost
         connect(m_view->decorationForm()->rootObject(), SIGNAL(clicked()), this, SLOT(refreshPreview()));

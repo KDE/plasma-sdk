@@ -30,9 +30,6 @@ class KDesktopFile;
 class KDecorationPlugins;
 class KDecorationPreview;
 
-namespace KWin
-{
-
 class DecorationButtons;
 
 class DecorationModelData
@@ -114,7 +111,5 @@ private:
     int m_firstUpdateIndex;
     int m_lastUpdateIndex;
 };
-
-} // namespace KWin
 
 #endif // KWIN_DECORATIONMODEL_H
