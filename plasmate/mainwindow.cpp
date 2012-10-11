@@ -48,6 +48,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KParts/Part>
 #include <KStandardDirs>
 #include <KMessageBox>
+#include <KXMLGUIFactory>
 
 #include "editors/editpage.h"
 #include "editors/metadata/metadataeditor.h"
@@ -171,6 +172,7 @@ MainWindow::~MainWindow()
     // save its contents
     saveEditorData();
 
+    factory()->removeClient(m_part);
     delete m_part;
     delete m_metaEditor;
     delete m_publisher;
