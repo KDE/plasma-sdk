@@ -49,12 +49,14 @@ set (PlasMate_SRC
     previewer/windowswitcher/windowswitcher.cpp
     previewer/windowswitcher/thumbnailitem.cpp
     previewer/windowswitcher/tabboxpreviewer.cpp
-    previewer/aurorae/preview.cpp
-    previewer/aurorae/auroraepreviewer.cpp
+    previewer/aurorae/src/libkdecorations/kdecoration_plugins_p.h
     previewer/aurorae/kwindecoration.cpp
+    previewer/aurorae/preview.cpp
     previewer/aurorae/decorationmodel.cpp
-    previewer/aurorae/auroraetheme.cpp
-    previewer/aurorae/themeconfig.cpp
+    previewer/aurorae/auroraepreviewer.cpp
+    previewer/aurorae/src/aurorae/lib/auroraetheme.cpp
+    previewer/aurorae/src/aurorae/lib/themeconfig.cpp
+    previewer/aurorae/auroraepreviewer.cpp
     previewer/previewer.cpp
     publisher/signingwidget.cpp
     publisher/signingdialog.cpp
@@ -80,6 +82,8 @@ kde4_add_ui_files (PlasMate_SRC
    publisher/publisher.ui
    publisher/remoteinstaller/remoteinstaller.ui
    editors/kconfigxt/kconfigxteditor.ui
+   previewer/aurorae/decoration.ui
+   previewer/aurorae/auroraeconfig.ui
 )
 
 include_directories(${QT_QTWEBKIT_INCLUDE_DIR}
@@ -105,6 +109,8 @@ target_link_libraries(plasmate
                       ${QGPGME_LIBRARIES}
                       ${QT_QTDECLARATIVE_LIBRARIES}
                       ${KDECLARATIVE_LIBRARIES}
+                      ${X11_LIBRARIES}
+                      kdecorations
 )
 
 if (DEBUG_MODEL)
@@ -187,5 +193,40 @@ target_link_libraries(plasmakconfigxteditor
 )
 
 install(TARGETS plasmakconfigxteditor ${INSTALL_TARGETS_DEFAULT_ARGS})
+
+#windowdecoration
+set(WindowDecoration_SRC
+    previewer/aurorae/kwindecoration.cpp
+    previewer/aurorae/preview.cpp
+    previewer/previewer.cpp
+    previewer/aurorae/decorationmodel.cpp
+    previewer/aurorae/auroraepreviewer.cpp
+    previewer/aurorae/src/aurorae/lib/auroraetheme.cpp
+    previewer/aurorae/src/aurorae/lib/themeconfig.cpp
+    previewer/aurorae/standalone/main.cpp
+    previewer/aurorae/standalone/windowdecorationpreviewer.cpp
+)
+
+kde4_add_ui_files(WindowDecoration_SRC
+    previewer/aurorae/decoration.ui
+    previewer/aurorae/auroraeconfig.ui
+)
+
+kde4_add_executable(windowdecoration ${WindowDecoration_SRC})
+
+target_link_libraries(windowdecoration
+                      ${KDE4_KNEWSTUFF3_LIBS}
+                      kdecorations
+                      ${X11_LIBRARIES}
+                      ${KDE4_KIO_LIBRARY}
+                      ${KDE4_KDEUI_LIBS}
+                      ${KDE4_PLASMA_LIBS}
+                      ${QT_QTDECLARATIVE_LIBRARY}
+                      ${QT_QTUITOOLS_LIBRARY}
+                      ${X11_LIBRARIES}
+)
+
+install(TARGETS windowdecoration ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(DIRECTORY previewer/aurorae/qml DESTINATION ${DATA_INSTALL_DIR}/plasmate/auroraepreviewer)
 
 macro_display_feature_log()
