@@ -67,7 +67,6 @@ KWinDecoration::KWinDecoration(QWidget* parent) :
     , m_previewUpdateTimer(NULL)
 {
     const QString mainQmlPath = KStandardDirs::locate("data", "plasmate/auroraepreviewer/qml/main.qml");
-    //TODO koker here we will put the main.qml of the previewer/aurorae/qml
     if (mainQmlPath.isNull()) {
         // TODO 4.10 i18n this
         KMessageBox::error(this, "<h1>Installation error</h1>"
@@ -99,9 +98,6 @@ KWinDecoration::KWinDecoration(QWidget* parent) :
     m_ui->decorationList->rootContext()->setContextProperty("sliderWidth", m_ui->decorationList->verticalScrollBar()->width());
     m_ui->decorationList->rootContext()->setContextProperty("auroraeSource", KStandardDirs::locate("data", "kwin/aurorae/aurorae.qml"));
     m_ui->decorationList->rootContext()->setContextProperty("decorationActiveCaptionColor", KDecoration::options()->color(ColorFont, true));
-    //m_ui->decorationList->rootContext()->setContextProperty("decorationInactiveCaptionColor", KDecoration::options()->color(ColorFont, false));
-    //m_ui->decorationList->rootContext()->setContextProperty("decorationActiveTitleBarColor", KDecoration::options()->color(ColorTitleBar, true));
-    //m_ui->decorationList->rootContext()->setContextProperty("decorationInactiveTitleBarColor", KDecoration::options()->color(ColorTitleBar, false));
     m_ui->decorationList->setSource(mainQmlPath);
 
     m_ui->decorationList->installEventFilter(this);

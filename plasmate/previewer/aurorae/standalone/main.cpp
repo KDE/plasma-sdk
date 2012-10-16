@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
     KCmdLineArgs::parsedArgs();
     KApplication app;
 
-    QPointer<WindowDecorationPreviewer> preview = new WindowDecorationPreviewer;
+    QPointer<WindowDecorationPreviewer> preview = new WindowDecorationPreviewer();
     preview->show();
 
     return app.exec();
