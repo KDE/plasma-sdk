@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
     aboutData.addAuthor(ki18n("Antonis Tsiapaliokas"), ki18n("Author"), "kok3rs@gmail.com");
 
 
-    aboutData.setProgramIconName("Xorg");
+    aboutData.setProgramIconName("xorg");
 
     KCmdLineArgs::init(argc, argv, &aboutData);
 

@@ -40,6 +40,21 @@ Item {
             bottomMargin: 10
         }
     }
+
+    function changeTheActivityOfDecorations() {
+        if (inactiveDecoration.active == false) {
+            inactiveDecoration.active = true;
+        } else {
+            inactiveDecoration.active = false;
+        }
+
+        if (activeDecoration.active == true) {
+            activeDecoration.active = false;
+        } else {
+            activeDecoration.active = true;
+        }
+    }
+
     Component.onCompleted: {
         inactiveDecoration.source = mainScript;
         activeDecoration.source = mainScript;

@@ -59,6 +59,7 @@ ListView {
                 anchors.fill: parent
             }
             Loader {
+                id: loaderDecoration
                 source: type == 2 ? "DecorationPreview.qml" : ""
                 anchors.fill: parent
             }
@@ -67,6 +68,7 @@ ListView {
                 anchors.fill: parent
                     onClicked: {
                     listView.currentIndex = index;
+                    loaderDecoration.item.changeTheActivityOfDecorations();
                 }
             }
         }
