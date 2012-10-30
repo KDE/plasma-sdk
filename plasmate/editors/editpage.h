@@ -46,6 +46,7 @@ public:
 private:
     KMenu *m_contextMenu;
     MetaDataEditor *m_metaEditor;
+    QString createContentWithSubdir(const QString& packagePath, const QString& contentWithSubdir) const;
     bool hasExtension(const QString &filename);
 
 private Q_SLOTS:

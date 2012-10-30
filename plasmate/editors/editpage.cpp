@@ -35,6 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KMessageBox>
 #include <KInputDialog>
 #include <KIO/CopyJob>
+#include <KIO/DeleteJob>
 #include <KIO/JobClasses>
 #include <KIO/MimetypeJob>
 #include <KIO/Job>
@@ -74,6 +75,18 @@ void EditPage::doDelete(bool)
     int code = KMessageBox::warningContinueCancel(this, dialogText);
     if (code == KMessageBox::Continue) {
         QFile::remove(path);
+
+        QDir dirPath(path);
+        //our path points to a file, so go up one dir
+        dirPath.cdUp();
+        foreach(const QFileInfo& fileInfo, dirPath.entryInfoList(QDir::AllEntries)) {
+            if (fileInfo.isFile()) {
+                //if there is no file the foreach
+                //will end and the directory will be deleted
+                return;
+            }
+        }
+        KIO::del(dirPath.path());
     }
 }
 
@@ -96,8 +109,10 @@ void EditPage::showTreeContextMenu(const QPoint&)
 void EditPage::findEditor(const QModelIndex &index)
 {
     const QStringList mimetypes = index.data(PackageModel::MimeTypeRole).toStringList();
+    const QString packagePath = index.data(PackageModel::PackagePathRole).toString();
+    const QString contentWithSubdir = index.data(PackageModel::ContentsWithSubdirRole).toString();
     foreach (const QString &mimetype, mimetypes) {
-        const QString target = index.data(PackageModel::UrlRole).toUrl().toString();
+        QString target = index.data(PackageModel::UrlRole).toUrl().toString();
         if (mimetype == "[plasmate]/metadata") {
             emit loadMetaDataEditor(target);
             return;
@@ -127,8 +142,28 @@ void EditPage::findEditor(const QModelIndex &index)
             return;
         }
 
+        if (mimetype == "[plasmate]/mainconfigxml/new") {
+            QString path = createContentWithSubdir(packagePath, contentWithSubdir);
+            if (!path.isEmpty()) {
+                if (!path.endsWith('/')) {
+                    path.append('/');
+                }
+                target.append(path + "main.xml");
+            }
+
+            QFile f(target);
+            f.open(QIODevice::ReadWrite); // create the file
+        }
+
         if (mimetype == "[plasmate]/new") {
-            const QString packagePath = index.data(PackageModel::packagePathRole).toString();
+            QString path = createContentWithSubdir(packagePath, contentWithSubdir);
+            if (!path.isEmpty()) {
+                if (!path.endsWith('/')) {
+                    path.append('/');
+                }
+                target.append(path + "main.xml");
+            }
+
             const QString dialogText = i18n("Enter a name for the new file:");
             QString file = KInputDialog::getText(QString(), dialogText);
             if (!file.isEmpty()) {
@@ -184,6 +219,24 @@ void EditPage::findEditor(const QModelIndex &index)
             return;
         }
     }
+}
+
+QString EditPage::createContentWithSubdir(const QString& packagePath, const QString& contentWithSubdir) const
+{
+    QString target;
+    QDir dir(packagePath);
+    if (!dir.exists(contentWithSubdir)) {
+        dir.mkpath(contentWithSubdir);
+        //Q: why we modify by hand the target?
+        //A: because for the current index the contentWithSubdir
+        //doesn't exists, so in the first click it won't create the dir.
+        target = packagePath + contentWithSubdir;
+        if (!target.endsWith('/')) {
+            target.append('/');
+        }
+    }
+
+    return target;
 }
 
 bool EditPage::hasExtension(const QString& filename)

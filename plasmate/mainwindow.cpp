@@ -785,6 +785,7 @@ void MainWindow::loadProject(const QString &path)
         m_editPage->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
     }
 
+    connect(m_model, SIGNAL(reloadModel()), m_editPage, SLOT(expandAll()));
     m_editPage->setModel(m_model);
     m_editPage->expandAll();
 

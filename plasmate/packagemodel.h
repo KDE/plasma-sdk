@@ -62,15 +62,26 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
 
-    enum DataRoles { MimeTypeRole = Qt::UserRole + 1, UrlRole, packagePathRole };
+    enum DataRoles {
+        MimeTypeRole = Qt::UserRole + 1,
+        UrlRole,
+        PackagePathRole,
+        ContentsWithSubdirRole
+    };
+
+Q_SIGNALS:
+    void reloadModel();
 
 private:
-    bool loadPackage();
     KUrl urlForIndex(const QModelIndex &index) const;
+    bool fileExists(const QString& key) const;
 
 private Q_SLOTS:
     void fileAddedOnDisk(const QString &path);
     void fileDeletedOnDisk(const QString &path);
+    void directoryModifiedOnDisk(const QString &path);
+    bool loadPackage();
+    QString contentsWithSubdirRole(int indexRow) const;
 
 private:
     KDirWatch *m_directory;

@@ -34,6 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KDesktopFile>
 #include <KDirWatch>
 #include <KIcon>
+#include <KIO/DeleteJob>
 #include <KMimeType>
 #include <KUser>
 
@@ -117,6 +118,7 @@ int PackageModel::setPackage(const QString &path)
     }
 
     connect(m_directory, SIGNAL(created(QString)), this, SLOT(fileAddedOnDisk(QString)));
+    connect(m_directory, SIGNAL(created(QString)), this, SLOT(loadPackage()));
     connect(m_directory, SIGNAL(deleted(QString)), this, SLOT(fileDeletedOnDisk(QString)));
 
     return 1;
@@ -171,6 +173,8 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
+    QModelIndex parentIndex = parent(index);
+
     const char *key = static_cast<const char *>(index.internalPointer());
     if (key) {
         // we have a child item
@@ -179,10 +183,13 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
             if (index.row() == 0) {
                 if (!qstrcmp(key, "images")) {
                     return QStringList("[plasmate]/imageDialog");
-                }else {
+                } else if (!qstrcmp(key, "config")) {
+                    return QStringList("[plasmate]/mainconfigxml/new");
+                } else {
                     return QStringList("[plasmate]/new");
                 }
             }
+
             if (!qstrcmp(key, "images")) {
                 return QStringList("[plasmate]/imageViewer");
             }
@@ -199,6 +206,10 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         break;
         case Qt::DisplayRole: {
             if (index.row() == 0) {
+                if (!qstrcmp(m_topEntries.at(parentIndex.row()), "config") &&
+                    !fileExists("mainconfigxml")) {
+                    return i18n("New configuration XML file");
+                }
                 return i18n("New...");
             }
 
@@ -216,7 +227,7 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
             }
         }
         break;
-        case packagePathRole: {
+        case PackagePathRole: {
             return m_package ? m_package->path() : QString();
         }
         case Qt::DecorationRole: {
@@ -225,6 +236,10 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
             } else {
                 return KIcon(KMimeType::iconNameForUrl(urlForIndex(index)));
             }
+        }
+        break;
+        case ContentsWithSubdirRole: {
+            return contentsWithSubdirRole(parentIndex.row());
         }
         break;
         }
@@ -258,6 +273,32 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         }
     }
     return QVariant();
+}
+
+QString PackageModel::contentsWithSubdirRole(int indexRow) const
+{
+    if (m_package) {
+        QString path;
+        foreach(const QString& content, m_structure->contentsPrefixPaths()) {
+            path.append(content);
+        }
+
+        //we are in a child item, but
+        //we need the index of the parent, so..
+        path.append(m_topEntries.at(indexRow));
+        return path;
+    }
+
+    return QString();
+}
+
+bool PackageModel::fileExists(const QString& key) const
+{
+    if (QFile::exists(m_package->filePath(key.toLatin1().data()))) {
+        return true;
+    }
+
+    return false;
 }
 
 QModelIndex PackageModel::index(int row, int column, const QModelIndex &parent) const
@@ -342,6 +383,9 @@ bool PackageModel::loadPackage()
         return false;
     }
 
+    //we will carry this object(dir) until the end of the scope
+    //and it will create our directories
+
     QDir dir(m_package->path());
     Plasma::PackageStructure::Ptr structure = m_package->structure();
 
@@ -364,24 +408,35 @@ bool PackageModel::loadPackage()
 
     foreach(const QString& content, contents) {
         if (!content.isEmpty()) {
+            //now create a dir like contents/
             dir.mkpath(content);
             dir.cd(content);
         }
     }
 
-    const QList<const char*> dirs = structure->directories();
+    const QList<const char*> dirs = structure->requiredDirectories();
+    //now create all the required directories
+    //Q: why just the required ones and not all of them?
+    //A: we don't want to spam the project's dir with unnecessary dirs
     foreach (const char *key, dirs) {
         QStringList paths = structure->searchPath(key);
         foreach(const QString& path, paths){
             if (!dir.exists(path)) {
                 dir.mkpath(path);
             }
-
-            m_topEntries.append(key);
         }
     }
 
+    //just add the directories in the ui, we won't create them
+    foreach(const char *key, structure->directories()) {
+        m_topEntries.append(key);
+    }
+
+    //once again we don't want to spam the project's dir
+    //with all the files but we want to add them in the ui
     QHash<QString, const char *> indexedFiles;
+    QHash<QString, const char *> requiredIndexedFiles;
+
     foreach (const char *key, structure->requiredFiles()) {
         QString path = structure->path(key);
         if (!dir.exists(path)) {
@@ -393,10 +448,13 @@ bool PackageModel::loadPackage()
                 f.open(QIODevice::WriteOnly);
             }
         }
-
-        indexedFiles.insert(path, key);
+        requiredIndexedFiles.insert(path, key);
     }
 
+    //from here we will take the data for the ui
+    foreach(const char *key, structure->files()) {
+        indexedFiles.insert(structure->path(key), key);
+    }
 
     foreach (const char *key, structure->directories()) {
         QString path = structure->path(key);
@@ -411,7 +469,12 @@ bool PackageModel::loadPackage()
             QString filePath = path + file;
             if (indexedFiles.contains(filePath)) {
                 namedFiles.append(indexedFiles.value(filePath));
+                //the requiredFiles and files have some common elements,
+                //so if the files contains a filePath the requiredFiles will
+                //definately contain it!
+                //So just remove the filePath from both of them
                 indexedFiles.remove(filePath);
+                requiredIndexedFiles.remove(filePath);
             } else if (!file.endsWith('~')) {
                 userFiles.append(file);
             }
@@ -422,15 +485,20 @@ bool PackageModel::loadPackage()
         m_files.insert(key, userFiles);
     }
 
-    if (!indexedFiles.empty()) {
-        foreach (const char *key, indexedFiles) {
+    if (!requiredIndexedFiles.empty()) {
+        //there are still some requiredFiles which we haven't add
+        //in the ui, so add them as top entries
+        foreach (const char *key, requiredIndexedFiles) {
             m_topEntries.append(key);
         }
-
         //kDebug() << "counts:" << m_topEntries.count() << indexedFiles.count();
     }
 
     endResetModel();
+
+    //reload the model's ui
+    emit reloadModel();
+
     return true;
 }
 
@@ -512,3 +580,16 @@ void PackageModel::fileDeletedOnDisk(const QString &path)
     }
 }
 
+void PackageModel::directoryModifiedOnDisk(const QString& path)
+{
+    QDir dirPath(path);
+    foreach(const QFileInfo& fileInfo, dirPath.entryInfoList(QDir::AllEntries)) {
+        if (fileInfo.isFile()) {
+            //if there is no file the foreach
+            //will end and the directory will be deleted
+            return;
+        }
+    }
+
+    KIO::del(dirPath.path());
+}
