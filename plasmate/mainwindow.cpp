@@ -32,6 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KConfig>
 #include <KConfigGroup>
 #include <KDebug>
+#include <KDesktopFile>
 #include <KMenu>
 #include <KMenuBar>
 #include <KMimeTypeTrader>
@@ -258,6 +259,7 @@ void MainWindow::setupActions()
     refresh->setShortcut(Qt::CTRL + Qt::Key_F5);
     refresh->setText(i18n("Refresh Preview"));
 
+    addAction(i18n("Console"), "utilities-terminal", SLOT(toggleKonsolePreviewer()), "konsole")->setCheckable(true);
     addAction(i18n("Install Project"), "plasmagik", SLOT(installPackage()), "installproject", KShortcut(Qt::META + Qt::Key_I));
     addAction(i18n("Create Save Point"), "document-save", SLOT(selectSavePoint()), "savepoint", KStandardShortcut::save());
     addAction(i18n("Publish"), "krfb", SLOT(selectPublish()),   "publish");
@@ -275,6 +277,20 @@ void MainWindow::updateActions()
     actionCollection()->action("file_list")->setChecked(m_filelist && m_filelist->isVisible());
     actionCollection()->action("timeline")->setChecked(m_timeLine && m_timeLine->isVisible());
     actionCollection()->action("documentation")->setChecked(m_browser && m_browser->isVisible());
+}
+
+void MainWindow::toggleActions()
+{
+    KDesktopFile desktopFile(m_packagePath + "/metadata.desktop");
+    QString projectApi = desktopFile.desktopGroup().readEntry("X-Plasma-API", QString());
+    if (projectApi == "python") {
+        //Python bindings doesn't support kDebug,
+        //so the konsole previewer cannot retrieve any debug output.
+        //Until this issue is being fixed we are hiding the konsole previewer.
+        actionCollection()->action("konsole")->setVisible(false);
+        //we are hiding the konsole previewer UI.
+        m_konsoleWidget->setVisible(false);
+    }
 }
 
 void MainWindow::installPackage()
@@ -677,7 +693,7 @@ void MainWindow::loadKConfigXtEditor(const KUrl& target)
     updateSideBar();
 }
 
-void MainWindow::showKonsolePreviewer()
+void MainWindow::toggleKonsolePreviewer()
 {
     if(m_konsoleWidget->isVisible()) {
         m_konsoleWidget->setVisible(false);
@@ -762,6 +778,11 @@ void MainWindow::loadProject(const QString &path)
         previewerType = actualType;
     }
 
+    //take the previewerType and packagePath, we will need it
+    //for the actions in the toolbar
+    m_packageType = previewerType;
+    m_packagePath = packagePath;
+
     delete m_model;
     m_model = new PackageModel(this);
 #ifdef DEBUG_MODEL
@@ -843,7 +864,7 @@ void MainWindow::loadProject(const QString &path)
 
 
     //initialize the konsole previewer
-    m_konsoleWidget = new KonsolePreviewer(i18n("Previewer Output"), this);
+    m_konsoleWidget = createKonsoleFor(previewerType);
 
     //after the init, cleat the tmp file
     m_konsoleWidget->clearTmpFile();
@@ -859,8 +880,7 @@ void MainWindow::loadProject(const QString &path)
 
         //now do the relative stuff for the konsole
         m_konsoleWidget->populateKonsole();
-        m_konsoleWidget->setObjectName("Previewer Output");
-        connect(m_previewerWidget, SIGNAL(showKonsole()), this, SLOT(showKonsolePreviewer()));
+        connect(m_previewerWidget, SIGNAL(showKonsole()), this, SLOT(toggleKonsolePreviewer()));
         addDockWidget(Qt::BottomDockWidgetArea, m_konsoleWidget);
     }
 
@@ -898,6 +918,7 @@ void MainWindow::loadProject(const QString &path)
     }
 
     updateActions();
+    toggleActions();
 }
 
 void MainWindow::checkMetafile(const QString &path)
@@ -978,7 +999,6 @@ Previewer* MainWindow::createPreviewerFor(const QString& projectType)
         ret = new RunnerPreviewer(i18n("Previewer"), this);
     } else {
         showPreviewAction = false;
-
     }
 
     if (showPreviewAction) {
@@ -999,6 +1019,26 @@ Previewer* MainWindow::createPreviewerFor(const QString& projectType)
     }
 
     return ret;
+}
+
+KonsolePreviewer* MainWindow::createKonsoleFor(const QString& projectType)
+{
+    KonsolePreviewer* konsole = 0;
+    if (projectType.contains("KWin/WindowSwitcher")) {
+        konsole = new KonsolePreviewer(i18nc("Window Title", "Window Switcher Previewer"), this);
+    } else if (projectType.contains("Plasma/Applet")) {
+        konsole = new KonsolePreviewer(i18n("Previewer Output"), this);
+    } else if (projectType == "Plasma/Runner") {
+        konsole = new KonsolePreviewer(i18n("Previewer Output"), this);
+    }
+
+    if (konsole) {
+        konsole->setObjectName("Previewer Output");
+        //after the init, clear the tmp file
+        konsole->clearTmpFile();
+    }
+
+    return konsole;
 }
 
 void MainWindow::customMessageHandler(QtMsgType type, const QString& msg)

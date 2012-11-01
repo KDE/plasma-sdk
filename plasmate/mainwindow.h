@@ -113,7 +113,8 @@ private Q_SLOTS:
     void toggleNotes();
     void toggleFileList();
     void installPackage();
-    void showKonsolePreviewer();
+    void toggleKonsolePreviewer();
+    void toggleActions();
 
     // refreshes editor, killing all local changes
     void editorDestructiveRefresh();
@@ -152,6 +153,7 @@ private:
     void setupTextEditor(KTextEditor::Document *editorPart, KTextEditor::View *view);
     void loadNotesEditor(QDockWidget *container);
     Previewer* createPreviewerFor(const QString& projectType);
+    KonsolePreviewer* createKonsoleFor(const QString& projectType);
 
     KAction *addAction(QString text, const char * icon,const  char *slot, const char *name, const KShortcut &shortcut = KShortcut());
 
@@ -176,7 +178,8 @@ private:
     bool m_isPlasmateCreatedPackage;
     CentralContainer *m_central;
     QString m_currentProject;
-
+    QString m_packageType;
+    QString m_packagePath;
     KService::Ptr m_partService;
     KParts::ReadOnlyPart *m_part;
     KParts::ReadOnlyPart *m_notesPart;

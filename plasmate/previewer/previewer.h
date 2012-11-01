@@ -44,6 +44,11 @@ public:
      */
     virtual void refreshPreview() = 0;
 
+    /**
+     * Subclasses should override this method with code that will show/hide the konsole previewer
+     */
+    virtual void setKonsolePreviewerVisible(bool visible = true);
+
 public slots:
     /**
      * Emits refreshRequested(), which should signal the editor to save its contents

@@ -37,3 +37,7 @@ void Previewer::emitShowKonsole()
 {
     emit showKonsole();
 }
+
+void Previewer::setKonsolePreviewerVisible(bool visible)
+{
+}

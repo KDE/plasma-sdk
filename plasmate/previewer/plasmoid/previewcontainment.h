@@ -26,8 +26,11 @@
 
 #include <QGraphicsView>
 #include <QGraphicsLinearLayout>
-
+#include <QGraphicsLayoutItem>
+#include <QWidget>
 #include <Plasma/Containment>
+#include <Plasma/IconWidget>
+#include <QHash>
 
 class KMenu;
 
@@ -38,6 +41,14 @@ class PreviewContainment : public Plasma::Containment
 public:
     PreviewContainment(QObject *parent, const QVariantList &args = QVariantList());
     ~PreviewContainment();
+
+    void setKonsolePreviewerVisible(bool visible = true);
+
+    /**
+     * Plasma:Package cannot create a valid package for a binding if its runtime depedencies
+     * are missing. So we use the plasmaterc in order to load the API of our plasmoid
+     */
+    QString plasmoidApi();
 
 public slots:
     void changeFormFactor();
@@ -78,6 +89,7 @@ private:
 
     QGraphicsLinearLayout *m_layout;
     QGraphicsLinearLayout *m_header;
+    QHash<QString, Plasma::IconWidget*> m_toolbox;
 
     void initMenu(const QString &title);
     void showMenu();

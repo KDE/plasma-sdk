@@ -25,12 +25,15 @@
 #include "previewcontainment.h"
 
 #include <QGraphicsLayoutItem>
+#include <QWidget>
 
 #include <KAction>
 #include <KConfigGroup>
+#include <KDebug>
+#include <KDesktopFile>
 #include <KIcon>
 #include <KMenu>
-
+#include <KStandardDirs>
 #include <Plasma/IconWidget>
 #include <Plasma/Label>
 #include <Plasma/Package>
@@ -108,6 +111,14 @@ void PreviewContainment::setupHeader()
     connect(action4, SIGNAL(triggered()), this, SIGNAL(showKonsole()));
     konsole->setAction(action4);
 
+    //add the items to the toolboxes
+    //we will need them in order to modify them later.
+    m_toolbox.insert("refresh", refresh);
+    m_toolbox.insert("form", form);
+    m_toolbox.insert("location", location);
+    m_toolbox.insert("wallpaper", wallpaper);
+    m_toolbox.insert("konsole", konsole);
+
     // add the toolboxes
     m_header->addItem(refresh);
     m_header->addItem(form);
@@ -115,6 +126,50 @@ void PreviewContainment::setupHeader()
     m_header->addItem(wallpaper);
     m_header->addItem(konsole);
 }
+
+void PreviewContainment::setKonsolePreviewerVisible(bool visible)
+{
+    int count = 0;
+    QHashIterator<QString, Plasma::IconWidget*> it(m_toolbox);
+    while (it.hasNext()) {
+        it.next();
+        if (it.key() != "konsole") {
+            count ++;
+        }
+    }
+
+    if (visible == true) {
+        m_toolbox["konsole"]->setVisible(true);
+        if (!m_header->itemAt(count)) {
+            m_header->addItem(m_toolbox["konsole"]);
+        }
+    } else {
+        m_toolbox["konsole"]->setVisible(false);
+        if (m_header->itemAt(count)) {
+            m_header->removeItem(m_toolbox["konsole"]);
+        }
+    }
+}
+
+QString PreviewContainment::plasmoidApi()
+{
+    QString plasmaterc = KStandardDirs::locateLocal("config", "plasmaterc");
+    if (plasmaterc.isEmpty()) {
+        return QString();
+    }
+
+    KConfig c(plasmaterc);
+    KConfigGroup projectrcPreferences(&c, "PackageModel::package");
+    QString projectPath = projectrcPreferences.readEntry("lastLoadedPackage", QString());
+    if (projectPath.isEmpty()) {
+        return QString();
+    }
+
+    KDesktopFile desktopFile(projectPath + "/metadata.desktop");
+    QString projectApi = desktopFile.desktopGroup().readEntry("X-Plasma-API", QString());
+    return projectApi;
+}
+
 
 // Fixme(?): Does not currently respect arguments passed in during
 // initialization. Will reload applet without arguments
@@ -260,6 +315,14 @@ void PreviewContainment::onAppletAdded(Plasma::Applet *applet, const QPointF &po
     m_layout->removeItem(m_tmp);
 
     m_layout->addItem(applet);
+    if (plasmoidApi() != "declarativeappletscript") {
+        //python bindings don't support kDebug, so the konsole previewer
+        //cannot return any debug code. So until this is fixed,
+        //we disable the konsolepreviewer support for the python bindings.
+        setKonsolePreviewerVisible(false);
+    } else {
+        setKonsolePreviewerVisible(true);
+    }
 }
 
 void PreviewContainment::onAppletRemoved(Plasma::Applet *applet)
