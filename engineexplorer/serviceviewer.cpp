@@ -62,8 +62,6 @@ ServiceViewer::ServiceViewer(Plasma::DataEngine *engine, const QString &source, 
             serviceName = m_service->name();
             updateOperations();
             connect(m_service, SIGNAL(operationsChanged()), this, SLOT(updateOperations()));
-            connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this,
-                    SLOT(operationResult(Plasma::ServiceJob*)));
             connect(m_engine, SIGNAL(destroyed(QObject*)), this, SLOT(engineDestroyed()));
         } else {
             KMessageBox::sorry(this, i18n("No valid service was returned. Verify that a service is available for this source."));
@@ -134,7 +132,8 @@ void ServiceViewer::startOperation()
     }
 
     updateJobCount(1);
-    m_service->startOperationCall(desc);
+    Plasma::ServiceJob *job = m_service->startOperationCall(desc);
+    connect(job, SIGNAL(finished(KJob*)), this, SLOT(operationResult(KJob*)));
 }
 
 void ServiceViewer::operationSelected(const QString &operation)
@@ -164,9 +163,14 @@ void ServiceViewer::operationSelected(const QString &operation)
     }
 }
 
-void ServiceViewer::operationResult(Plasma::ServiceJob *job)
+void ServiceViewer::operationResult(KJob *j)
 {
     if (!m_service) {
+        return;
+    }
+
+    Plasma::ServiceJob *job = qobject_cast<Plasma::ServiceJob *>(j);
+    if (!job) {
         return;
     }
 

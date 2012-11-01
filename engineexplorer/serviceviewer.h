@@ -23,11 +23,12 @@
 #include <KDialog>
 #include "ui_serviceviewer.h"
 
+class KJob;
+
 namespace Plasma
 {
     class DataEngine;
     class Service;
-    class ServiceJob;
 } // namespace Plasma
 
 class ServiceViewer : public KDialog, public Ui::ServiceViewer
@@ -45,7 +46,7 @@ private slots:
     void updateOperations();
     void startOperation();
     void operationSelected(const QString &operation);
-    void operationResult(Plasma::ServiceJob *job);
+    void operationResult(KJob *job);
     void engineDestroyed();
 
 private:
