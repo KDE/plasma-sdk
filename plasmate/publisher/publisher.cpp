@@ -33,10 +33,10 @@
 
 Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
         : QDialog(parent),
+        m_signingWidget(0),
         m_projectPath(path),
         m_projectType(type),
-        m_comboBoxIndex(0),
-        m_signingWidget(0)
+        m_comboBoxIndex(0)
 {
     QWidget *uiWidget = new QWidget();
     m_ui.setupUi(uiWidget);
