@@ -2,7 +2,15 @@
 [Desktop Entry]
 Terminal=false
 Name=Plasmate
+Name[nl]=Plasmate
+Name[pt]=Plasmate
+Name[pt_BR]=Plasmate
+Name[x-test]=xxPlasmatexx
 GenericName=Plasma Addon Creator
+GenericName[nl]=Plasma maker van addons
+GenericName[pt]=Criador de Extensões do Plasma
+GenericName[pt_BR]=Criador de complementos do Plasma
+GenericName[x-test]=xxPlasma Addon Creatorxx
 Exec=plasmate
 Icon=plasmagik
 Type=Application

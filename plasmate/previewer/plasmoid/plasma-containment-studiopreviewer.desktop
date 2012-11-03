@@ -1,6 +1,14 @@
 [Desktop Entry]
 Name=StudioPreviewer
+Name[nl]=StudioBekijken
+Name[pt]=StudioPreviewer
+Name[pt_BR]=StudioPreviewer
+Name[x-test]=xxStudioPreviewerxx
 Comment=Containment used to preview plasmoids on Plasma Studio
+Comment[nl]=Container gebruikt om plasmoids in Plasma Studio te bekijken
+Comment[pt]=Contentor usado para antever os plasmóides no Plasma Studio
+Comment[pt_BR]=Contêiner usado para a antevisão de plasmoides no Plasma Studio
+Comment[x-test]=xxContainment used to preview plasmoids on Plasma Studioxx
 Icon=user-desktop
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
