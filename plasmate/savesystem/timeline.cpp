@@ -306,7 +306,7 @@ void TimeLine::newSavePoint()
     }
 
     if (!m_gitRunner->hasNewChangesToCommit()) {
-        const QString dialog = i18n("<b>No changes have been made in order to create a savepoint!</b>");
+        const QString dialog = i18n("<b>No changes have been made in order to create a savepoint.</b>");
         KMessageBox::information(this, dialog);
         return;
     }
@@ -339,7 +339,7 @@ void TimeLine::newSavePoint()
 
 void TimeLine::restoreCommit()
 {
-    const QString dialog = (i18n("<b>You are restoring the selected save point.</b> \nWith this operation, all the save points and branches created starting from it, will be deleted.\nContinue anyway?"));
+    const QString dialog = (i18n("<b>You are restoring the selected save point.</b>\nWith this operation, all the save points and branches created starting from it, will be deleted.\nContinue anyway?"));
     const int code = KMessageBox::warningContinueCancel(this, dialog);
     if (code!=KMessageBox::Continue) {
         return;
@@ -370,7 +370,7 @@ void TimeLine::moveToCommit()
     delete newBranch;
 
     if (m_branches.contains(newBranchName)) {
-        dialog = i18n("<b>Cannot rename the section</b>: a section with this name already exists.");
+        dialog = i18n("Cannot rename the section: a section with this name already exists.");
         KMessageBox::information(this, dialog);
         return;
     }
@@ -399,7 +399,7 @@ void TimeLine::mergeBranch()
 {
     // Prompt the user that a new save point will be created; if so,
     // popup a Savepoint dialog.
-    const QString dialog = i18n("<b>You are going to combine two branch.</b>\n With this operation, a new save point will be created; then you should have to manually resolve some conflicts on source code. Continue?");
+    const QString dialog = i18n("<b>You are going to combine two branches.</b>\nWith this operation, a new save point will be created; then you should have to manually resolve some conflicts on source code. Continue?");
     const int code = KMessageBox::warningContinueCancel(this,dialog);
     if (code!=KMessageBox::Continue) {
         return;
@@ -437,7 +437,7 @@ void TimeLine::mergeBranch()
 
 void TimeLine::deleteBranch()
 {
-    const QString dialog = i18n("<b>You are going to remove the selected branch.</b>\n With this operation, you will also delete all save points and branches performed inside it.\nContinue anyway?");
+    const QString dialog = i18n("<b>You are going to remove the selected branch.</b>\nWith this operation, you will also delete all save points and branches performed inside it.\nContinue anyway?");
     const int code = KMessageBox::warningContinueCancel(this,dialog);
     if (code!=KMessageBox::Continue) {
         return;
@@ -490,7 +490,7 @@ void TimeLine::createBranch()
     delete createBranch;
 
 
-    const QString dialog = i18n("<b>Cannot create section: </b>a section with this name already exists.");
+    const QString dialog = i18n("Cannot create section: a section with this name already exists.");
     KMessageBox::information(this, dialog);
     return;
 
