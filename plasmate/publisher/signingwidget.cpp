@@ -34,6 +34,7 @@
 #include <KIcon>
 #include <KLineEdit>
 #include <KPushButton>
+#include <KLocale>
 
 #define _FILE_OFFSET_BITS 64
 
@@ -94,7 +95,7 @@ public:
     }
 
     char * getPassphrase(const char * useridHint, const char * description, bool previousWasBad, bool & canceled) {
-        m_infoLabel->setText("Set Password for:\n" + QString(useridHint));
+        m_infoLabel->setText(i18n("Set password for:\n%1", QString(useridHint)));
         this->exec();
         return strdup(m_pwdLine->text().append("\n").toAscii().data());
     }
@@ -138,17 +139,17 @@ void SigningWidget::initUI()
     QHBoxLayout *buttonLayout = new QHBoxLayout();
 
     m_treeWidget = new QTreeWidget(this);
-    m_treeWidget->setHeaderLabel("Select one key from the list below:");
+    m_treeWidget->setHeaderLabel(i18n("Select one key from the list below:"));
 
-    m_noSigningButton = new QRadioButton("No signing key.", this);
+    m_noSigningButton = new QRadioButton(i18n("No signing key."), this);
 
     m_createKeyButton = new QPushButton(this);
-    m_createKeyButton->setText("Create new Key ...");
+    m_createKeyButton->setText(i18n("Create new Key..."));
     m_createKeyButton->setIcon(KIcon("dialog-password"));
     m_createKeyButton->setEnabled(false);
 
     m_deleteKeyButton = new QPushButton(this);
-    m_deleteKeyButton->setText("Delete selected key");
+    m_deleteKeyButton->setText(i18n("Delete selected key"));
     m_deleteKeyButton->setIcon(KIcon("edit-delete"));
 
     buttonLayout->addWidget(m_createKeyButton);

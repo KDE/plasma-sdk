@@ -300,7 +300,7 @@ void StartPage::refreshRecentProjectsList()
         item->setData(FullPathRole, file);
 
         // set a tooltip for extra info and to help differentiating similar projects
-        QString tooltip = "Project : " + projectName + "\n\n";
+        QString tooltip = i18n("Project: %1", projectName) + "\n\n";
         if (!metadata.comment().isEmpty()) {
             tooltip += "\"" + metadata.comment() + "\"\n---\n";
         }
