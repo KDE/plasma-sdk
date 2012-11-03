@@ -38,6 +38,7 @@
 #include <KLocale>
 #include <KStandardAction>
 #include <kdeclarative.h>
+#include <kdeversion.h>
 
 // for --list
 #include <Plasma/Applet>
@@ -163,7 +164,9 @@ int main(int argc, char **argv)
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs() ;
 
+#if KDE_IS_VERSION(4, 9, 2)
     KDeclarative::setupQmlJsDebugger();
+#endif
 
     if (args->isSet("list")) {
         listPlugins(Plasma::Applet::listAppletInfo());
