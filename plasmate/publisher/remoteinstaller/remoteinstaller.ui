@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>629</width>
+    <width>749</width>
     <height>540</height>
    </rect>
   </property>
@@ -21,7 +21,7 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>611</width>
+     <width>764</width>
      <height>501</height>
     </rect>
    </property>
@@ -56,7 +56,9 @@
     <item>
      <widget class="QLabel" name="srcLabel2">
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Choose the source directory of your package.&lt;/p&gt;&lt;p&gt;Your url must end in a metadata.desktop file&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>Choose the source directory of your package.
+
+Your url must end in a metadata.desktop file.</string>
       </property>
      </widget>
     </item>
@@ -76,7 +78,7 @@
     <item>
      <widget class="QLabel" name="label_3">
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter the username of the target pc.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>Enter the username of the target pc.</string>
       </property>
      </widget>
     </item>
