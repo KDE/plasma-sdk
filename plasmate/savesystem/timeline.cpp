@@ -78,28 +78,25 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
     m_currentBranch = currentBranch();
 
-    QString info;
-
     TimeLineItem *branchItem = new TimeLineItem();
-    info.append(i18n("On branch: %1", m_currentBranch));
-    branchItem->setText(info);
+    branchItem->setText(i18n("On branch: %1", m_currentBranch));
 
-    info.clear();
-    info.append(i18n("You are currently working on branch:\n"));
-    info.append(m_currentBranch);
-    info.append('\n');
-    info.append(i18n("\nAvailable branches are:\n"));
-    info.append(m_branches.join("\n"));
-    info.append(i18n("\nClick here to switch to those branches."));
-    branchItem->setToolTip(info);
+    QString branchToolTip = i18n("You are currently working on branch:\n"
+                                 "%1\n"
+                                 "\n"
+                                 "Available branches are:\n"
+                                 "%2\n"
+                                 "Click here to switch to those branches.",
+                                 m_currentBranch,
+                                 m_branches.join("\n")
+                                 );
+    branchItem->setToolTip(branchToolTip);
 
     branchItem->setIdentifier(TimeLineItem::Branch);
     m_table->addItem(branchItem);
 
     TimeLineItem *saveItem = new TimeLineItem();
-    info.clear();
-    info.append(i18n("New save point"));
-    saveItem->setText(info);
+    saveItem->setText(i18n("New save point"));
 
     saveItem->setIdentifier(TimeLineItem::NotACommit);
     m_table->addItem(saveItem);
@@ -152,7 +149,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
             ++logIndex;
 
             date.remove("Date: ",Qt::CaseSensitive);
-            toolTipText.prepend(i18n("Created on:") + date + "\n");
+            toolTipText.prepend(i18n("Created on: %1", date) + "\n");
 
             QStringList dateList = date.split(" ", QString::SkipEmptyParts);
             // FIXME Localisation?
