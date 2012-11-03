@@ -156,7 +156,7 @@ bool KConfigXtReader::parse()
     QFile xmlFile(m_filename);
 
     if (!xmlFile.open(QIODevice::ReadWrite)) {
-        KMessageBox::error(0, i18n("The xml file isn't writable"));
+        KMessageBox::error(0, i18n("The XML file is not writable"));
         return false;
     }
 
@@ -187,7 +187,7 @@ bool KConfigXtReader::parse()
 
     if(reader.hasError()) {
         //an error has occured
-        KMessageBox::error(0, i18n("The xml parsing has failed"));
+        KMessageBox::error(0, i18n("The XML parsing has failed"));
         kDebug() << "parsing error!!!!" << reader.errorString();
         //clear the reader
         reader.clear();

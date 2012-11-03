@@ -179,8 +179,8 @@ void ServiceViewer::operationResult(KJob *j)
     if (job->error()) {
         KMessageBox::information(this,
                                  i18n("<b>'%1'</b> operation with destination <b>'%2'</b> failed. "
-                                      "<p>The error was: <b>'%3'</b></p>", job->operationName(), job->destination(),
-                                      QString::number(job->error()) + ": " + job->errorString()),
+                                      "<p>The error was: <b>'%3: %4'</b></p>", job->operationName(), job->destination(),
+                                      job->error(), job->errorString()),
                                  i18n("Operation Result"));
     } else {
         QString result = EngineExplorer::convertToString(job->result());
@@ -214,7 +214,7 @@ void ServiceViewer::updateJobCount(int numberOfJobs)
         m_operationCount = 0;
         m_operationStatus->hide();
     } else {
-        m_operationStatus->setText(i18np("One active operation ...", "%1 operations active ...", m_operationCount));
+        m_operationStatus->setText(i18np("One active operation...", "%1 operations active...", m_operationCount));
         m_operationStatus->show();
     }
 }

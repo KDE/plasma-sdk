@@ -35,8 +35,8 @@ RemoteInstaller::RemoteInstaller(const QString& username, const QString& hostnam
     if (!KIO::NetAccess::exists(tmpUrl, KIO::NetAccess::DestinationSide, m_widget)) {
         const bool ok = KIO::NetAccess::mkdir(tmpUrl, m_widget);
         if (!ok) {
-            QString text = i18n("Plasma Remote Installer wasn't able to create a temp dir at"
-                "%1, please check the rights into %1").arg(temporaryDirectory);
+            QString text = i18n("Plasma Remote Installer was not able to create a temporary directory in "
+                "%1, please check the permissions of %1", temporaryDirectory);
             KMessageBox::error(m_widget, text);
             return;
         }
