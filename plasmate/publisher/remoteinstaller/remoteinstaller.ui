@@ -43,7 +43,7 @@
      <property name="text">
       <string>Choose the source directory of your package.
 
-Your url must end in a metadata.desktop file.</string>
+Your URL must end in a metadata.desktop file.</string>
      </property>
     </widget>
    </item>
