@@ -139,8 +139,8 @@ target_link_libraries(plasmaremoteinstaller
 
 install(TARGETS plasmaremoteinstaller ${INSTALL_TARGETS_DEFAULT_ARGS})
 
-#windowswitcherpreviewer
-set (WindowSwitcherPreviewer_SRC
+#kwin-windowswitcherpreviewer
+set (KWin-WindowSwitcherPreviewer_SRC
     previewer/windowswitcher/windowswitcher.cpp
     previewer/windowswitcher/thumbnailitem.cpp
     previewer/windowswitcher/tabboxpreviewer.cpp
@@ -149,15 +149,15 @@ set (WindowSwitcherPreviewer_SRC
     previewer/windowswitcher/standalone/windowswitcherpreviewer.cpp
 )
 
-kde4_add_executable(windowswitcherpreviewer ${WindowSwitcherPreviewer_SRC})
-target_link_libraries(windowswitcherpreviewer
+kde4_add_executable(kwin-windowswitcherpreviewer ${KWin-WindowSwitcherPreviewer_SRC})
+target_link_libraries(kwin-windowswitcherpreviewer
                       ${KDE4_KDEUI_LIBS}
                       ${KDE4_KIO_LIBRARY}
                       ${QT_QTDECLARATIVE_LIBRARIES}
                       ${KDECLARATIVE_LIBRARIES}
 )
 
-install(TARGETS windowswitcherpreviewer ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS kwin-windowswitcherpreviewer ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 #plasmakconfigxteditor
 set(plasmakconfigxt_SRCS

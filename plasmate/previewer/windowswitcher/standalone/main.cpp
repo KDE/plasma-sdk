@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 int main(int argc, char *argv[])
 {
-    KAboutData aboutData("WindowSwitcherPreviewer", 0, ki18n("Window Switcher Previewer"),
+    KAboutData aboutData("KWin-WindowSwitcherPreviewer", 0, ki18n("KWin Window Switcher Previewer"),
                          "0.1alpha3", ki18n("Previewer for Window Switcher"),
                          KAboutData::License_GPL,
                          ki18n("Copyright 2012 Plasma Development Team"),
