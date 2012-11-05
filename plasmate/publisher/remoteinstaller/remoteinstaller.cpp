@@ -13,6 +13,7 @@
 #include <KIO/CopyJob>
 #include <KMessageBox>
 #include <KLocalizedString>
+#include <KStandardDirs>
 
 #include <QWidget>
 #include <QDir>
@@ -27,9 +28,9 @@ RemoteInstaller::RemoteInstaller(const QString& username, const QString& hostnam
     m_execUrl.setUserName(username);
 
     //this will be out temp directory
-    const QString temporaryDirectory("/var/tmp/plasmaremoteinstaller/");
+    const QString temporaryDirectory(KStandardDirs::locate("tmp", "") + "plasmaremoteinstaller/");
     //we need a temporary directory
-    //all users have access into /var/tmp
+    //all users have access into /tmp/kde-$username
     KUrl tmpUrl = m_execUrl;
     tmpUrl.addPath(temporaryDirectory);
     if (!KIO::NetAccess::exists(tmpUrl, KIO::NetAccess::DestinationSide, m_widget)) {
@@ -82,5 +83,4 @@ void RemoteInstaller::doPlasmaPkg(KJob* job)
         KMessageBox::error(m_widget, KIO::NetAccess::lastErrorString());
     }
 }
-
 
