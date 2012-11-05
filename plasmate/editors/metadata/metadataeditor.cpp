@@ -79,12 +79,12 @@ MetaDataEditor::~MetaDataEditor()
 
 void MetaDataEditor::setFilename(const QString &filename)
 {
-    this->m_filename = filename;
+    m_filename = filename;
 }
 
 const QString MetaDataEditor::filename()
 {
-    return this->m_filename;
+    return m_filename;
 }
 
 bool MetaDataEditor::isValidMetaData()
@@ -223,9 +223,9 @@ void MetaDataEditor::serviceTypeChanged()
     view->api_combo->insertItems(0, apiName);
     if (view->api_combo->currentIndex() == -1 || apiName.first().isEmpty()) {
         view->label_16->setVisible(true);
-	view->api_combo->clear();
-	view->api_combo->insertItems(0, apis);
-	view->api_combo->setEnabled(true);
+        view->api_combo->clear();
+        view->api_combo->insertItems(0, apis);
+        view->api_combo->setEnabled(true);
     }
 }
 
@@ -234,29 +234,29 @@ QString MetaDataEditor::formatApi(QString &api,  apiModes apiMode)
     if (apiMode == MetaDataEditor::uiApi) {
         if (api == QString("dashboard")) {
             return QString("Dashboard");
-	} else if (api == QString("javascript")) {
+        } else if (api == QString("javascript")) {
             return QString("Javascript");
-	} else if (api == QString("ruby-script")) {
+        } else if (api == QString("ruby-script")) {
             return QString("Ruby");
-	} else if (api == QString("webkit")) {
+        } else if (api == QString("webkit")) {
             return QString("Webkit");
-	} else if (api == QString("python")) {
+        } else if (api == QString("python")) {
             return QString("Python");
-	} else if (api == QString("declarativeappletscript")) {
+        } else if (api == QString("declarativeappletscript")) {
             return QString("declarativeappletscript");
         }
     } else if (apiMode == MetaDataEditor::coreApi) {
         if (api == QString("Dashboard")) {
             return QString("dashboard");
-	} else if (api == QString("Javascript")) {
+        } else if (api == QString("Javascript")) {
             return QString("javascript");
-	} else if (api == QString("Ruby")) {
+        } else if (api == QString("Ruby")) {
             return QString("ruby-script");
-	} else if (api == QString("Webkit")) {
+        } else if (api == QString("Webkit")) {
             return QString("webkit");
-	} else if (api == QString("Python")) {
-	    return QString("python");
-	} else if (api == QString("declarativeappletscript")) {
+        } else if (api == QString("Python")) {
+            return QString("python");
+        } else if (api == QString("declarativeappletscript")) {
             return QString("declarativeappletscript");
         }
     }
