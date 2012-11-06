@@ -1,5 +1,7 @@
 [Desktop Entry]
 Name=Victory Calendar
+Name[da]=Victory-kalender
+Name[et]=Võidukalender
 Name[hu]=Győzelemnaptár
 Name[nl]=Victory agenda
 Name[pt]=Calendário de Vitórias
@@ -8,6 +10,8 @@ Name[sk]=Kalendár víťazstiev
 Name[uk]=Календар перемог
 Name[x-test]=xxVictory Calendarxx
 Comment=1) Log your daily accomplishments. 2) ??? 3) Profit!
+Comment[da]=1) Log dine daglige bedrifter. 2) ??? 3) Få profit!
+Comment[et]=1) Pane kirja oma igapäevased saavutused. 2) ??? 3) Kasu!
 Comment[hu]=1) Naplózza a napi teljesítményeket. 2) ??? 3) Profit!
 Comment[nl]=1) Log uw dagelijkse verrichtingen. 2) ??? 3) Winst!
 Comment[pt]=1) Registar os seus sucessos diários. 2) ??? 3) Lucro!

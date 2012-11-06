@@ -1,5 +1,7 @@
 [Desktop Entry]
 Name=StudioPreviewer
+Name[da]=StudioForhåndsviser
+Name[et]=Stuudio eelvaatlus
 Name[hu]=StudioPreviewer
 Name[nl]=StudioBekijken
 Name[pt]=StudioPreviewer
@@ -8,6 +10,8 @@ Name[sk]=StudioPreviewer
 Name[uk]=StudioPreviewer
 Name[x-test]=xxStudioPreviewerxx
 Comment=Containment used to preview plasmoids on Plasma Studio
+Comment[da]=Beholder der bruges til at forhåndsvise plasmoids på Plasma Studio
+Comment[et]=Konteiner, mis võimaldab plasmoide eelvaadelda Plasma stuudios
 Comment[hu]=Elszigetelés a plazmoidok előnézetének használatához a Plasma Studioban
 Comment[nl]=Container gebruikt om plasmoids in Plasma Studio te bekijken
 Comment[pt]=Contentor usado para antever os plasmóides no Plasma Studio

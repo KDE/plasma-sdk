@@ -2,6 +2,8 @@
 [Desktop Entry]
 Terminal=false
 Name=Plasmate
+Name[da]=Plasmate
+Name[et]=Plasmate
 Name[hu]=Plasmate
 Name[nl]=Plasmate
 Name[pt]=Plasmate
@@ -10,6 +12,8 @@ Name[sk]=Plasmate
 Name[uk]=Plasmate
 Name[x-test]=xxPlasmatexx
 GenericName=Plasma Addon Creator
+GenericName[da]=Plasma tilføjelsesskaber
+GenericName[et]=Plasma lisandite looja
 GenericName[hu]=Plazma kiegészítő készítő
 GenericName[nl]=Plasma maker van addons
 GenericName[pt]=Criador de Extensões do Plasma
