@@ -24,10 +24,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KAction>
 #include <KDebug>
 #include <KConfig>
+#include <KLocale>
 #include <KMenu>
 #include <KMessageBox>
 #include <Plasma/PackageMetadata>
 
+
+#include <QDateTime>
 #include <QDockWidget>
 #include <QPoint>
 #include <QPointer>
@@ -150,10 +153,14 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
             date.remove("Date: ",Qt::CaseSensitive);
             toolTipText.prepend(i18n("Created on: %1", date) + "\n");
-
+;
+            //Our format date is Tue Nov 6 23:17:56 2012 +0200"
             QStringList dateList = date.split(" ", QString::SkipEmptyParts);
-            // FIXME Localisation?
-            commitItem->setText( dateList.at(2) + "." + dateList.at(1) + "." + dateList.at(4) + " " + dateList.at(3));
+            QDateTime tmpDateTime = QDateTime::fromString(dateList.at(2) + " " + dateList.at(1) + " " + dateList.at(4) +
+                                    " " +  dateList.at(3), "d MMM yyyy hh:mm:ss");
+
+            QString localeTime = KGlobal::locale()->formatDateTime(tmpDateTime, KLocale::LongDate);
+            commitItem->setText(localeTime);
         }
 
         // The rest is Commit log info
