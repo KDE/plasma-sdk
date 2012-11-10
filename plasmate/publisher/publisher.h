@@ -12,6 +12,7 @@
 
 #include <QDialog>
 #include <KUrl>
+#include <KMessageWidget>
 #include <KProcess>
 
 #include "ui_publisher.h"
@@ -36,17 +37,18 @@ private slots:
     void doInstall();
     void doRemoteInstall();
     void checkInstallButtonState(int comboBoxCurrentIndex);
+    void hideCMakeProccess();
 
 private:
-    bool cmakeProcessStatus(QProcess::ProcessError error);
     bool exportToFile(const KUrl& url);
     const QString tempPackagePath();
 
     //avoid duplication
     QString currentPackagePath() const;
 
-    SigningWidget* m_signingWidget;
 
+    SigningWidget* m_signingWidget;
+    KMessageWidget *m_cmakeProccess;
     KUrl m_projectPath;
     QString m_projectType;
     QString m_extension;

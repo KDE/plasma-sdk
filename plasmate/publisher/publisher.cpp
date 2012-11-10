@@ -42,9 +42,12 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     m_ui.setupUi(uiWidget);
     m_signingWidget = new SigningWidget();
 
+    m_cmakeProccess = new KMessageWidget();
+    m_cmakeProccess->setVisible(false);
     //merge the ui file with the SigningWidget
     QVBoxLayout *layout = new QVBoxLayout();
     layout->addWidget(uiWidget);
+    layout->addWidget(m_cmakeProccess);
     layout->addWidget(m_signingWidget);
 
     m_extension = (type == "Plasma/Applet" || type == "Plasma/PopupApplet") ? "plasmoid" : "zip";
@@ -66,7 +69,7 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     connect(m_ui.installerButton, SIGNAL(currentIndexChanged(int)), this, SLOT(checkInstallButtonState(int)));
     connect(m_ui.installButton, SIGNAL(clicked()), this, SLOT(doInstall()));
     connect(m_ui.publisherButton, SIGNAL(clicked()), this, SLOT(doPublish()));
-
+    connect(this, SIGNAL(finished(int)), this, SLOT(hideCMakeProccess()));
     // Publish only works right for Plasmoid now afaik. Disabling for other project types.
     m_ui.publisherButton->setEnabled(type == "Plasma/Applet" || type == "Plasma/PopupApplet");
 
@@ -200,14 +203,21 @@ void Publisher::doCMake()
 
     //the cmake's arguments
     QStringList cmakeArgv;
-   // cmakeArgv.append("-DCMAKE_INSTALL_PREFIX=`kde4-config --prefix`");
-    cmakeArgv.append("-DCMAKE_INSTALL_PREFIX=" + QString(qgetenv("KDEDIRS")));
+    //The include files of kde are always one sub-directory after the
+    //root path. The root path is kde4-config --prefix
+    QDir rootDirectory = KStandardDirs::locate("lib", "");
+    rootDirectory.cd("..");
+    QString rootPath = rootDirectory.path();
+    cmakeArgv.append("-DCMAKE_INSTALL_PREFIX=" + rootPath);
     cmakeArgv.append("..");
 
     //the make install arguments
     QStringList makeInstallArgv("install");
 
+    cmake.setOutputChannelMode(KProcess::SeparateChannels);
     cmake.setProgram("cmake", cmakeArgv);
+
+    makeInstall.setOutputChannelMode(KProcess::SeparateChannels);
     makeInstall.setProgram("make", makeInstallArgv);
 
     //start the processes
@@ -220,53 +230,30 @@ void Publisher::doCMake()
     //make install must finish before the KMessageBox
     makeInstall.waitForFinished();
 
-    bool processStatus = false;
-    processStatus = cmakeProcessStatus(cmake.error());
-    processStatus = cmakeProcessStatus(makeInstall.error());
+    QString cmakeError = cmake.readAllStandardError();
+    bool cmakeProcessCompleted = cmakeError.isEmpty();
 
-    if(processStatus) {
+    QString makeInstallError = makeInstall.readAllStandardError();
+    bool makeInstallProcessCompleted = makeInstallError.isEmpty();
+
+    m_cmakeProccess->setCloseButtonVisible(false);
+    m_cmakeProccess->setVisible(true);
+
+    if (cmakeProcessCompleted && makeInstallProcessCompleted) {
         QDBusInterface dbi("org.kde.kded", "/kbuildsycoca", "org.kde.kbuildsycoca");
         dbi.call(QDBus::NoBlock, "recreate");
-        KMessageBox::information(this, i18n("Project has been installed"));
-    } else {
-        KMessageBox::error(this, i18n("Project has not been installed"));
-        return;
+        m_cmakeProccess->setText(i18n("Project has been installed"));
+        m_cmakeProccess->setMessageType(KMessageWidget::Positive);
+    } else if (!cmakeProcessCompleted){
+        m_cmakeProccess->setText(cmakeError);
+        m_cmakeProccess->setMessageType(KMessageWidget::Error);
+    } else if (!makeInstallProcessCompleted) {
+        m_cmakeProccess->setText(makeInstallError);
+        m_cmakeProccess->setMessageType(KMessageWidget::Error);
     }
 
     //now delete the temporary build directory. We don't need it anymore
     KIO::del(packagePath + "build", KIO::HideProgressInfo);
-}
-
-//we need this method in order to avoid duplication of code.
-bool Publisher::cmakeProcessStatus(QProcess::ProcessError error)
-{
-    switch (error) {
-        case QProcess::FailedToStart: {
-            return true;
-            break;
-        }
-        case QProcess::Crashed: {
-            return true;
-            break;
-        }
-        case QProcess::Timedout: {
-            return true;
-            break;
-        }
-        case QProcess::WriteError: {
-            return true;
-            break;
-        }
-        case QProcess::ReadError: {
-            return true;
-            break;
-        }
-        case QProcess::UnknownError: {
-            return true;
-        }
-    }
-
-    return false;
 }
 
 void Publisher::doPlasmaPkg()
@@ -398,4 +385,9 @@ QString Publisher::currentPackagePath() const
 {
     KConfigGroup cg(KGlobal::config(), "PackageModel::package");
     return cg.readEntry("lastLoadedPackage", QString());
+}
+
+void Publisher::hideCMakeProccess()
+{
+    m_cmakeProccess->setVisible(false);
 }
