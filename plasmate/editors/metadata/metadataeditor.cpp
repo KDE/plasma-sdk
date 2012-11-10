@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KDesktopFile>
 #include <KConfigGroup>
 #include <KDebug>
+#include <KMessageWidget>
 
 #include <plasma/packagemetadata.h>
 #include <plasma/plasma.h>
@@ -41,6 +42,10 @@ MetaDataEditor::MetaDataEditor(QWidget *parent)
 {
     view = new Ui::MetaDataEditor;
     view->setupUi(this);
+
+    view->label_16->setText(i18n("Plasmate cannot detect the correct API. Please choose one from the above list"));
+    view->label_16->setMessageType(KMessageWidget::Error);
+    view->label_16->setCloseButtonVisible(false);
 
     connect(view->type_combo, SIGNAL(currentIndexChanged(int)), SLOT(serviceTypeChanged()));
 

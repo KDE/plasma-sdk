@@ -43,6 +43,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KUrlRequester>
 #include <KUser>
 #include <KMessageBox>
+#include <KMessageWidget>
 #include <knewstuff3/downloaddialog.h>
 
 #include "packagemodel.h"
@@ -588,8 +589,17 @@ void StartPage::cancelNewProject()
 
 void StartPage::checkLocalProjectPath(const QString& name)
 {
+    m_ui.invalidPlasmagikLabelEmpty->setText(i18n("Your Directory is empty"));
+
+    m_ui.invalidPlasmagikLabelEmpty->setMessageType(KMessageWidget::Error);
+    m_ui.invalidPlasmagikLabelNoMetadataDesktop->setMessageType(KMessageWidget::Error);
+
+    m_ui.invalidPlasmagikLabelEmpty->setCloseButtonVisible(false);
+    m_ui.invalidPlasmagikLabelNoMetadataDesktop->setCloseButtonVisible(false);
+
     m_ui.invalidPlasmagikLabelEmpty->setVisible(false);
     m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(false);
+
     QDir dir(KShell::tildeExpand(name));
     QFile metadataDesktop(dir.path() + "/metadata.desktop");
     kDebug() << "checking: " << name << dir.exists();
@@ -601,6 +611,8 @@ void StartPage::checkLocalProjectPath(const QString& name)
     } else if (!metadataDesktop.exists()) {
         m_ui.invalidPlasmagikLabelEmpty->setVisible(false);
         m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(true);
+        m_ui.invalidPlasmagikLabelNoMetadataDesktop->setText("metadata.desktop does not exist under the "
+        + dir.path());
     } else if (!name.isEmpty()) {
         m_ui.invalidPlasmagikLabelEmpty->setVisible(false);
         m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(false);

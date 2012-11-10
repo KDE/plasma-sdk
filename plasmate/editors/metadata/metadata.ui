@@ -11,6 +11,19 @@
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
+   <item row="11" column="0" colspan="2">
+    <widget class="KMessageWidget" name="label_16" native="true"/>
+   </item>
+   <item row="9" column="1">
+    <widget class="KLineEdit" name="pluginname_edit">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>10</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="QLabel" name="label_13">
      <property name="font">
@@ -53,6 +66,19 @@
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
+   </item>
+   <item row="4" column="0">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>104</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
    </item>
    <item row="2" column="1">
     <widget class="KLineEdit" name="comment_edit">
@@ -97,23 +123,20 @@
      </item>
     </layout>
    </item>
-   <item row="4" column="0">
-    <spacer name="horizontalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>104</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
    <item row="5" column="0">
     <widget class="QLabel" name="label_10">
      <property name="text">
       <string>Category:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="16" column="0">
+    <widget class="QLabel" name="label_11">
+     <property name="text">
+      <string>License:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -278,16 +301,6 @@
      </property>
     </widget>
    </item>
-   <item row="9" column="1">
-    <widget class="KLineEdit" name="pluginname_edit">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-       <horstretch>10</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-    </widget>
-   </item>
    <item row="10" column="0">
     <widget class="QLabel" name="label_12">
      <property name="text">
@@ -361,16 +374,6 @@
      </property>
     </widget>
    </item>
-   <item row="16" column="0">
-    <widget class="QLabel" name="label_11">
-     <property name="text">
-      <string>License:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
    <item row="16" column="1">
     <widget class="KLineEdit" name="license_edit">
      <property name="sizePolicy">
@@ -378,19 +381,6 @@
        <horstretch>10</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
-     </property>
-    </widget>
-   </item>
-   <item row="11" column="1">
-    <widget class="QLabel" name="label_16">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="text">
-      <string>&lt;p style=&quot;font-size:11pt; color:#ff0000;&quot;&gt;Plasmate cannot detect the correct API. Please choose one from the above list&lt;/p&gt;</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
@@ -411,6 +401,33 @@
     </widget>
    </item>
   </layout>
+  <zorder>label_16</zorder>
+  <zorder>label_13</zorder>
+  <zorder>label</zorder>
+  <zorder>name_edit</zorder>
+  <zorder>label_2</zorder>
+  <zorder>comment_edit</zorder>
+  <zorder>label_3</zorder>
+  <zorder>label_10</zorder>
+  <zorder>category_combo</zorder>
+  <zorder>label_6</zorder>
+  <zorder>version_edit</zorder>
+  <zorder>label_14</zorder>
+  <zorder>label_4</zorder>
+  <zorder>type_combo</zorder>
+  <zorder>label_5</zorder>
+  <zorder>pluginname_edit</zorder>
+  <zorder>label_12</zorder>
+  <zorder>api_combo</zorder>
+  <zorder>label_8</zorder>
+  <zorder>author_edit</zorder>
+  <zorder>label_9</zorder>
+  <zorder>email_edit</zorder>
+  <zorder>label_7</zorder>
+  <zorder>website_edit</zorder>
+  <zorder>label_11</zorder>
+  <zorder>license_edit</zorder>
+  <zorder>label_15</zorder>
  </widget>
  <customwidgets>
   <customwidget>
@@ -427,6 +444,12 @@
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMessageWidget</class>
+   <extends>QWidget</extends>
+   <header>kmessagewidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
