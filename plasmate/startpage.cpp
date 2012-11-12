@@ -589,7 +589,7 @@ void StartPage::cancelNewProject()
 
 void StartPage::checkLocalProjectPath(const QString& name)
 {
-    m_ui.invalidPlasmagikLabelEmpty->setText(i18n("Your Directory is empty"));
+    m_ui.invalidPlasmagikLabelEmpty->setText(i18n("Your directory is empty"));
 
     m_ui.invalidPlasmagikLabelEmpty->setMessageType(KMessageWidget::Error);
     m_ui.invalidPlasmagikLabelNoMetadataDesktop->setMessageType(KMessageWidget::Error);
@@ -611,8 +611,7 @@ void StartPage::checkLocalProjectPath(const QString& name)
     } else if (!metadataDesktop.exists()) {
         m_ui.invalidPlasmagikLabelEmpty->setVisible(false);
         m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(true);
-        m_ui.invalidPlasmagikLabelNoMetadataDesktop->setText("metadata.desktop does not exist under the "
-        + dir.path());
+        m_ui.invalidPlasmagikLabelNoMetadataDesktop->setText(i18n("metadata.desktop does not exist in %1", dir.path()));
     } else if (!name.isEmpty()) {
         m_ui.invalidPlasmagikLabelEmpty->setVisible(false);
         m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(false);
