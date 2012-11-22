@@ -69,7 +69,6 @@ public:
     QStringList recentProjects();
     void checkMetafile(const QString &path);
     void updateSideBar();
-    void emitSendMessage(QtMsgType type, const QString& msg);
 
 public Q_SLOTS:
     void quit();
@@ -80,7 +79,6 @@ public Q_SLOTS:
 Q_SIGNALS:
     void newSavePointClicked();
     void refreshRequested();
-    void sendMessage(QtMsgType type, const QString& msg);
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -186,21 +184,6 @@ private:
 
     QSvgWidget *m_svgWidget;
     bool checkImageSize(const QSize& size);
-};
-
-class MainWindowWrapper : public QObject
-{
-    Q_OBJECT
-
-public:
-
-    MainWindowWrapper(QObject *parent = 0);
-    ~MainWindowWrapper();
-
-    MainWindow *mainWindow();
-
-private:
-    MainWindow *m_mainWindow;
 };
 
 #endif // MAINWINDOW_H

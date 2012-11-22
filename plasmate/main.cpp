@@ -23,19 +23,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KCmdLineArgs>
 #include "mainwindow.h"
 
-QWeakPointer<MainWindowWrapper> mainwindow;
+QWeakPointer<MainWindow> mainWindow;
 
 void customMessageHandler(QtMsgType type, const char *msg)
 {
-    if (mainwindow) {
-        if(mainwindow.data()->mainWindow()) {
-            mainwindow.data()->mainWindow()->emitSendMessage(type, msg);
-        }
-    } else {
-        kDebug() << "*****************************************************";
-        kDebug() << "Plasmate has failed to set a custom qInstallMsgHandler!!!!!!!";
-        kDebug() << "*****************************************************";
-        QApplication::exit(1);
+    if(mainWindow.data()) {
+        mainWindow.data()->customMessageHandler(type, msg);
     }
 }
 
@@ -44,7 +37,7 @@ int main(int argc, char *argv[])
     KAboutData aboutData("plasmate", 0, ki18n("Plasmate"),
                          "0.1alpha3", ki18n("Plasma Add-Ons Creator"),
                          KAboutData::License_GPL,
-                         ki18n("Copyright 2009-2011 Plasma Development Team"),
+                         ki18n("Copyright 2009-2012 Plasma Development Team"),
                          KLocalizedString(), "", "plasma-devel@kde.org");
 
     aboutData.addAuthor(ki18n("Sebastian Kügler"), ki18n("Author"), "sebas@kde.org");
@@ -66,8 +59,9 @@ int main(int argc, char *argv[])
     KCmdLineArgs::parsedArgs();
     KApplication app;
 
-    mainwindow = new MainWindowWrapper();
+    mainWindow = new MainWindow();
     qInstallMsgHandler(customMessageHandler);
+    mainWindow.data()->show();
 
     return app.exec();
 }
