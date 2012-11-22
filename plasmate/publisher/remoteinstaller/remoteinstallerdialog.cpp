@@ -36,9 +36,9 @@ RemoteInstallerDialog::RemoteInstallerDialog(QWidget* parent)
 
     //we don't want the source relative ui to be visible.
     //We will get this information from plasmate.
-    m_ui.srcLabel1->setVisible(false);
-    m_ui.srcLabel2->setVisible(false);
-    m_ui.srcDirUrl->setVisible(false);
+    m_ui.installPackageLabel->setVisible(false);
+    m_ui.sourceLabel->setVisible(false);
+    m_ui.sourceDirectory->setVisible(false);
     m_ui.srcSeparator->setVisible(false);
 }
 

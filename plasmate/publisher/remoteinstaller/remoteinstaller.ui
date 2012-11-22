@@ -12,7 +12,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="label_4">
+    <widget class="QLabel" name="connectionInformation">
      <property name="text">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Before you use the remote installer please check that:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
@@ -22,14 +22,14 @@
     <widget class="KSeparator" name="kseparator_4"/>
    </item>
    <item>
-    <widget class="QLabel" name="label_9">
+    <widget class="QLabel" name="sshdInformation">
      <property name="text">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;the sshd daemon has started in the target pc&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;the ssh port is opened&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="srcLabel1">
+    <widget class="QLabel" name="sourceTitle">
      <property name="text">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Source&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
@@ -39,19 +39,17 @@
     <widget class="KSeparator" name="srcSeparator"/>
    </item>
    <item>
-    <widget class="QLabel" name="srcLabel2">
+    <widget class="QLabel" name="sourceLabel">
      <property name="text">
-      <string>Choose the source directory of your package.
-
-Your URL must end in a metadata.desktop file.</string>
+      <string>Choose the source directory of your package.</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="KUrlRequester" name="srcDirUrl"/>
+    <widget class="KUrlRequester" name="sourceDirectory"/>
    </item>
    <item>
-    <widget class="QLabel" name="label_5">
+    <widget class="QLabel" name="username">
      <property name="text">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Username&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
@@ -61,7 +59,7 @@ Your URL must end in a metadata.desktop file.</string>
     <widget class="KSeparator" name="kseparator"/>
    </item>
    <item>
-    <widget class="QLabel" name="label_3">
+    <widget class="QLabel" name="usernameTarget">
      <property name="text">
       <string>Enter the username of the target pc.</string>
      </property>
@@ -71,7 +69,7 @@ Your URL must end in a metadata.desktop file.</string>
     <widget class="KLineEdit" name="usernameLineEdit"/>
    </item>
    <item>
-    <widget class="QLabel" name="label_6">
+    <widget class="QLabel" name="hostname">
      <property name="text">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Hostname&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
@@ -81,7 +79,7 @@ Your URL must end in a metadata.desktop file.</string>
     <widget class="KSeparator" name="kseparator_2"/>
    </item>
    <item>
-    <widget class="QLabel" name="label_7">
+    <widget class="QLabel" name="hostnameTarget">
      <property name="text">
       <string>Enter the hostname of the target pc</string>
      </property>
@@ -91,7 +89,7 @@ Your URL must end in a metadata.desktop file.</string>
     <widget class="KLineEdit" name="hostnameLineEdit"/>
    </item>
    <item>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="installPackageLabel">
      <property name="text">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Install Package&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>

@@ -83,4 +83,3 @@ void RemoteInstaller::doPlasmaPkg(KJob* job)
         KMessageBox::error(m_widget, KIO::NetAccess::lastErrorString());
     }
 }
-

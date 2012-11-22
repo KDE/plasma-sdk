@@ -12,7 +12,7 @@
 PlasmaRemoteInstaller::PlasmaRemoteInstaller(QWidget* parent)
         : RemoteInstallerDialog(parent)
 {
-    connect(m_ui.srcDirUrl, SIGNAL(textChanged(QString)), this, SLOT(checkProjectPath(QString)));
+    connect(m_ui.sourceDirectory, SIGNAL(textChanged(QString)), this, SLOT(checkProjectPath(QString)));
 
 
     //disable the buttons. The user hasn't give a path yet.
@@ -20,9 +20,9 @@ PlasmaRemoteInstaller::PlasmaRemoteInstaller(QWidget* parent)
     m_ui.hostnameLineEdit->setEnabled(false);
 
     //we want the source relative ui to be visible.
-    m_ui.srcLabel1->setVisible(true);
-    m_ui.srcLabel2->setVisible(true);
-    m_ui.srcDirUrl->setVisible(true);
+    m_ui.installPackageLabel->setVisible(true);
+    m_ui.sourceLabel->setVisible(true);
+    m_ui.sourceDirectory->setVisible(true);
     m_ui.srcSeparator->setVisible(true);
 }
 
