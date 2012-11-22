@@ -84,6 +84,7 @@ include_directories(${QT_QTWEBKIT_INCLUDE_DIR}
 add_subdirectory( editors )
 add_subdirectory( previewer/plasmoid )
 add_subdirectory( templates )
+add_subdirectory( icons )
 
 kde4_add_executable(plasmate ${PlasMate_SRC})
 target_link_libraries(plasmate
