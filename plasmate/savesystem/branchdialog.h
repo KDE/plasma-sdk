@@ -20,7 +20,7 @@
 #ifndef BRANCHDIALOG_H
 #define BRANCHDIALOG_H
 
-#include <QDialog>
+#include <KDialog>
 #include <QString>
 #include <QLineEdit>
 #include <QLabel>
@@ -34,14 +34,13 @@
   *
   * @author Diego [Po]lentino Casella <polentino911@gmail.com>
   */
-class BranchDialog : public QDialog
+class BranchDialog : public KDialog
 {
 Q_OBJECT
 
 public:
-    BranchDialog();
+    BranchDialog(QWidget *parent = 0);
     QString &text();
-
     QLineEdit *m_branchEdit;
 
 private Q_SLOTS:

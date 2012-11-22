@@ -29,7 +29,8 @@
 #include <klocale.h>
 
 
-CommitDialog::CommitDialog()
+CommitDialog::CommitDialog(QWidget *parent)
+    :KDialog(parent)
 {
     setWindowTitle(i18n("New SavePoint"));
     setModal(true);

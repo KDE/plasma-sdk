@@ -662,7 +662,7 @@ void StartPage::importPackage()
 void StartPage::doGHNSImport()
 {
     KNS3::DownloadDialog *mNewStuffDialog = new KNS3::DownloadDialog("plasmate.knsrc", this);
-    if (mNewStuffDialog->exec() == QDialog::Accepted)
+    if (mNewStuffDialog->exec() == KDialog::Accepted)
     {
         KNS3::Entry::List installed = mNewStuffDialog->installedEntries();
 

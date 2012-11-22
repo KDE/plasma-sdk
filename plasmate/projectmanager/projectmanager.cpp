@@ -39,7 +39,7 @@
 #include "startpage.h"
 
 ProjectManager::ProjectManager(QWidget* parent)
-    : QDialog(parent)
+    : KDialog(parent)
 {
     m_projectList = new QListWidget(this);
     m_projectList->setSelectionMode(QAbstractItemView::ExtendedSelection);
@@ -64,11 +64,11 @@ ProjectManager::ProjectManager(QWidget* parent)
 
     m_removeMenuButton->setDisabled(true);
     hoz->addWidget(m_removeMenuButton);
+    hoz->addWidget(m_projectList);
 
-    QVBoxLayout *lay = new QVBoxLayout();
-    lay->addWidget(m_projectList);
-    lay->addLayout(hoz);
-    setLayout(lay);
+    QWidget *tmpWidget = new QWidget();
+    tmpWidget->setLayout(hoz);
+    setMainWidget(tmpWidget);
 }
 
 
@@ -148,7 +148,7 @@ void ProjectManager::emitProjectSelected()
     QString url = l[0]->data(StartPage::FullPathRole).value<QString>();
 
     emit projectSelected(url);
-    done(QDialog::Accepted);
+    done(KDialog::Accepted);
 }
 
 bool ProjectManager::exportPackage(const KUrl &toExport, const KUrl &targetFile)

@@ -16,7 +16,7 @@
 
 class RemoteInstaller;
 
-class RemoteInstallerDialog : public QDialog
+class RemoteInstallerDialog : public KDialog
 {
     Q_OBJECT;
 public:

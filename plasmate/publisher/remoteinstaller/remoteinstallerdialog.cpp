@@ -18,16 +18,13 @@
 #include <KMessageBox>
 
 RemoteInstallerDialog::RemoteInstallerDialog(QWidget* parent)
-        : QDialog(parent),
+        : KDialog(parent),
         m_installer(0)
 {
     QWidget *widget = new QWidget();
-
+    setButtons(KDialog::None);
     m_ui.setupUi(widget);
-
-    QVBoxLayout *layout = new QVBoxLayout();
-    layout->addWidget(widget);
-    setLayout(layout);
+    setMainWidget(widget);
 
     //we don't want the ok button to be enabled
     //before we get all the necessary informations

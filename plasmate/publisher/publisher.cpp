@@ -32,7 +32,7 @@
 #include "remoteinstaller/remoteinstallerdialog.h"
 
 Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
-        : QDialog(parent),
+        : KDialog(parent),
         m_signingWidget(0),
         m_projectPath(path),
         m_projectType(type),
@@ -49,6 +49,13 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     layout->addWidget(uiWidget);
     layout->addWidget(m_cmakeProccess);
     layout->addWidget(m_signingWidget);
+
+    QWidget *tmpWidget = new QWidget();
+    QHBoxLayout *tmpLayout = new QHBoxLayout();
+    tmpLayout->addLayout(layout);
+    setButtons(KDialog::None);
+    tmpWidget->setLayout(tmpLayout);
+    setMainWidget(tmpWidget);
 
     m_extension = (type == "Plasma/Applet" || type == "Plasma/PopupApplet") ? "plasmoid" : "zip";
 

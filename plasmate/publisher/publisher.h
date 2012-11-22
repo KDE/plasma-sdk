@@ -10,7 +10,7 @@
 #ifndef PUBLISHER_H
 #define PUBLISHER_H
 
-#include <QDialog>
+#include <KDialog>
 #include <KUrl>
 #include <KMessageWidget>
 #include <KProcess>
@@ -19,7 +19,7 @@
 
 class SigningWidget;
 
-class Publisher : public QDialog
+class Publisher : public KDialog
 {
     Q_OBJECT;
 public:

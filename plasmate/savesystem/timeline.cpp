@@ -319,7 +319,7 @@ void TimeLine::newSavePoint()
     }
 
     if (!dialogAlreadyOpen) {
-        if (commitDialog->exec() == QDialog::Rejected) {
+        if (commitDialog->exec() == KDialog::Rejected) {
             return;
         }
         commitMessage = QString(commitDialog->m_commitBriefText->text());
@@ -369,7 +369,7 @@ void TimeLine::moveToCommit()
     }
 
     QPointer<BranchDialog> newBranch = new BranchDialog();
-    if (newBranch->exec() == QDialog::Rejected) {
+    if (newBranch->exec() == KDialog::Rejected) {
         return;
     }
 
@@ -413,7 +413,7 @@ void TimeLine::mergeBranch()
     }
 
     QPointer<CommitDialog> commitDialog = new CommitDialog();
-    if (commitDialog->exec() == QDialog::Rejected) {
+    if (commitDialog->exec() == KDialog::Rejected) {
         delete commitDialog;
         return;
     }
@@ -465,7 +465,7 @@ void TimeLine::renameBranch()
 
     QPointer<BranchDialog> renameBranch = new BranchDialog();
 
-    if (renameBranch->exec() == QDialog::Rejected) {
+    if (renameBranch->exec() == KDialog::Rejected) {
         return;
     }
 
@@ -488,7 +488,7 @@ void TimeLine::createBranch()
 
     QPointer<BranchDialog> createBranch = new BranchDialog();
 
-    if (createBranch->exec() == QDialog::Rejected) {
+    if (createBranch->exec() == KDialog::Rejected) {
         delete createBranch;
         return;
     }

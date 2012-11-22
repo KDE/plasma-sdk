@@ -20,7 +20,7 @@
 #include <KLocale>
 #include <KCmdLineArgs>
 
-#include <QDialog>
+#include <KDialog>
 #include <QVBoxLayout>
 #include <QScopedPointer>
 
@@ -45,13 +45,10 @@ int main(int argc, char *argv[])
     KApplication app;
 
     PlasmaKConfigXtEditor *editor = new PlasmaKConfigXtEditor();
-    QVBoxLayout *l = new QVBoxLayout();
 
-    QScopedPointer<QDialog> dialog(new QDialog());
+    QScopedPointer<KDialog> dialog(new KDialog());
 
-    l->addWidget(editor);
-    dialog->setLayout(l);
-
+    dialog->setMainWidget(editor);
     dialog->exec();
 
     return app.exec();

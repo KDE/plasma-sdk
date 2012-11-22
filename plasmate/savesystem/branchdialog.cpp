@@ -26,7 +26,8 @@
 #include <klocale.h>
 
 
-BranchDialog::BranchDialog()
+BranchDialog::BranchDialog(QWidget *parent)
+    : KDialog(parent)
 {
 
     setWindowTitle(i18n("New Branch"));
@@ -35,7 +36,7 @@ BranchDialog::BranchDialog()
     setMinimumHeight(80);
     setMaximumWidth(300);
     setMaximumHeight(80);
-
+    setButtons(KDialog::None);
     QHBoxLayout *hlayout = new QHBoxLayout();
     m_branchLabel = new QLabel(i18n("New branch name:"), this);
     m_branchEdit  = new QLineEdit(i18n("type here"), this);
