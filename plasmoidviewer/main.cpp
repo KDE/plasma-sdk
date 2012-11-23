@@ -131,7 +131,7 @@ int main(int argc, char **argv)
     options.add("c");
     options.add("containment <name>", ki18n("Name of the containment plugin"), "null");
     options.add("f");
-    options.add("formfactor <name>", ki18nc("Do not translate horizontal, vertical, mediacenter nor planar", "The formfactor to use (horizontal, vertical, mediacenter or planar)"), "planar");
+    options.add("formfactor <name>", ki18nc("Do not translate horizontal, vertical, mediacenter nor planar", "The formfactor to use (horizontal, vertical, mediacenter, planar or application)"), "planar");
     options.add("la");
     options.add("list", ki18n("Displays a list of known applets"));
     options.add("lw");

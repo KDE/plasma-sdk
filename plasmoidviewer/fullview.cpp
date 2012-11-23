@@ -64,6 +64,8 @@ FullView::FullView(const QString &ff, const QString &loc, bool persistent, QWidg
         m_formfactor = Plasma::Horizontal;
     } else if (formfactor == "mediacenter") {
         m_formfactor = Plasma::MediaCenter;
+    } else if (formfactor == "application") {
+        m_formfactor = Plasma::Application;
     }
 
     QString location = loc.toLower();
