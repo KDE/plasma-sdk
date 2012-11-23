@@ -19,12 +19,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TEXTEDITOR_H
 
 #include <QWidget>
-
-#include <KToolBar>
+#include <QDomDocument>
 
 namespace KTextEditor
 {
     class Document;
+    class View;
 } // namespace KTextEditor
 
 class PackageModel;
@@ -33,7 +33,10 @@ class TextEditor : public QWidget
 {
 public:
     TextEditor(KTextEditor::Document *editorPart, PackageModel *model, QWidget *parent = 0);
-    void modifyToolBar(KToolBar *toolbar);
+    void modifyToolBar(KTextEditor::View *view);
+
+private:
+    void removeNamedElementsRecursive(const QStringList &names, QDomNode &parent);
 };
 
 #endif // TEXTEDITOR_H

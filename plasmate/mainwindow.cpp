@@ -506,6 +506,7 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
             if (editorPart) {
                 m_textEditor = new TextEditor(editorPart, m_model, this);
             }
+            //Add the part's GUI
             createGUI(m_part);
         } else {
             // reuse m_part if we can
@@ -531,10 +532,6 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
     QWidget *mainWidget = m_textEditor ? m_textEditor : m_part->widget();
     m_central->switchTo(mainWidget);
     mainWidget->setMinimumWidth(300);
-    //Add the part's GUI
-    if (m_textEditor) {
-        m_textEditor->modifyToolBar(toolBar());
-    }
 
     // We keep only one editor object alive at a time -
     // so we know who to activate when the edit tab is reselected

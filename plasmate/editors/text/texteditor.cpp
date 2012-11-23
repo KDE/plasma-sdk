@@ -39,6 +39,9 @@ TextEditor::TextEditor(KTextEditor::Document *editorPart, PackageModel *model, Q
     if (view) {
         view->setContextMenu(view->defaultContextMenu());
 
+        //modify the toolbar
+        modifyToolBar(view);
+
         KTextEditor::ConfigInterface *config = qobject_cast<KTextEditor::ConfigInterface*>(view);
         if (config) {
             config->setConfigValue("line-numbers", true);
@@ -81,15 +84,42 @@ TextEditor::TextEditor(KTextEditor::Document *editorPart, PackageModel *model, Q
     l->addWidget(centralWidget);
 }
 
-void TextEditor::modifyToolBar(KToolBar* toolbar)
+void TextEditor::modifyToolBar(KTextEditor::View *view)
 {
     //we don't want all the actions to be visible.
     //Q:why?
     //A:because Plasmate doesn't use actions like save and save as, automatically it saves
     //the projects
-    foreach(QAction *action, toolbar->actions()) {
-        if (action->text() == "&Save" || action->text() == "Save &As...") {
-            action->setVisible(false);
+
+    //see this page, http://techbase.kde.org/Development/Architecture/KDE4/XMLGUI_Technology
+
+    QStringList names;
+    names << "file_save" << "file_save_as";
+
+    QDomDocument doc = view->xmlguiBuildDocument();
+    if  (doc.documentElement().isNull()) {
+        doc = view->domDocument();
+    }
+
+    QDomElement e = doc.documentElement();
+    removeNamedElementsRecursive(names, e);
+    view->setXMLGUIBuildDocument(doc);
+
+}
+
+void TextEditor::removeNamedElementsRecursive(const QStringList &names, QDomNode &parent)
+{
+    QDomNode nchild;
+
+    for (QDomNode child = parent.firstChild(); !child.isNull(); child = nchild) {
+        removeNamedElementsRecursive(names, child);
+
+        nchild = child.nextSibling(); // need to fetch next sibling here, as we might remove the child below
+        if (child.isElement()) {
+            QDomElement e = child.toElement();
+            if (names.contains(e.attribute("name"))) {
+                parent.removeChild(child);
+            }
         }
     }
 }
