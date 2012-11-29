@@ -14,3 +14,4 @@ target_link_libraries(plasmoidviewer
 
 install(TARGETS plasmoidviewer ${INSTALL_TARGETS_DEFAULT_ARGS})
 
+kde4_create_manpage(man-plasmoidviewer.1.docbook 1 INSTALL_DESTINATION ${MAN_INSTALL_DIR})
