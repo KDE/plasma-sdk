@@ -42,12 +42,9 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     m_ui.setupUi(uiWidget);
     m_signingWidget = new SigningWidget();
 
-    m_cmakeProccess = new KMessageWidget();
-    m_cmakeProccess->setVisible(false);
     //merge the ui file with the SigningWidget
     QVBoxLayout *layout = new QVBoxLayout();
     layout->addWidget(uiWidget);
-    layout->addWidget(m_cmakeProccess);
     layout->addWidget(m_signingWidget);
 
     QWidget *tmpWidget = new QWidget();
@@ -68,7 +65,6 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     //populate the comboBox
     m_ui.installerButton->addItem("");
     m_ui.installerButton->addItem("Use PlasmaPkg");
-    m_ui.installerButton->addItem("Use cmake");
     m_ui.installerButton->addItem("Remote Install");
 
     connect(m_ui.exporterUrl, SIGNAL(urlSelected(const KUrl&)), this, SLOT(addSuffix()));
@@ -76,7 +72,6 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     connect(m_ui.installerButton, SIGNAL(currentIndexChanged(int)), this, SLOT(checkInstallButtonState(int)));
     connect(m_ui.installButton, SIGNAL(clicked()), this, SLOT(doInstall()));
     connect(m_ui.publisherButton, SIGNAL(clicked()), this, SLOT(doPublish()));
-    connect(this, SIGNAL(finished(int)), this, SLOT(hideCMakeProccess()));
     // Publish only works right for Plasmoid now afaik. Disabling for other project types.
     m_ui.publisherButton->setEnabled(type == "Plasma/Applet" || type == "Plasma/PopupApplet");
 
@@ -144,123 +139,8 @@ void Publisher::doInstall()
     if (m_comboBoxIndex == 1) {
         doPlasmaPkg();
     } else if (m_comboBoxIndex == 2) {
-        doCMake();
-    } else if (m_comboBoxIndex == 3) {
         doRemoteInstall();
     }
-}
-
-// Plasmoid specific, for now
-void Publisher::doCMake()
-{
-    if (m_projectType != "Plasma/Applet" && m_projectType != "KWin/WindowSwitcher" && m_projectType != "KWin/Script" && m_projectType != "KWin/Effect") {
-        qDebug() << "chaos";
-        return;
-    }
-
-    //Here we choose which template file we what to use.
-    QString templateFile;//
-    if (m_projectType == "KWin/WindowSwitcher") {
-        templateFile = "cmakelistsWindowSwitcher";
-    } else if (m_projectType == "KWin/Script") {
-        templateFile = "cmakelistsKWinScript";
-    } else if (m_projectType == "KWin/Effect") {
-        templateFile = "cmakelistsKWinEffect";
-    } else {
-        templateFile = "cmakelists";
-    }
-
-    //this is the CMakeLists.txt from the templates directory
-    QFile cmakeListsSourceFile(KStandardDirs::locate("appdata", "templates/") + templateFile);
-
-    QFile cmakeListsDestinationFile(m_projectPath.pathOrUrl() + "CMakeLists.txt");
-
-    cmakeListsSourceFile.open(QIODevice::ReadOnly);
-    cmakeListsDestinationFile.open(QIODevice::ReadWrite);
-
-    QByteArray cmakeListsData = cmakeListsSourceFile.readAll();
-
-    QByteArray replacedString("${projectPlasmate}");
-    if (cmakeListsData.contains(replacedString)) {
-        cmakeListsData.replace(replacedString, m_projectName.toAscii());
-        cmakeListsDestinationFile.write(cmakeListsData);
-    }
-
-    cmakeListsDestinationFile.close();
-    cmakeListsSourceFile.close();
-
-    //we need the last loaded package which also is the current package.
-    QString packagePath = currentPackagePath();
-
-    //create a temporary build dir
-    QDir dir(packagePath);
-    dir.mkdir("build/");
-
-    //cd build/
-    dir.cd("build/");
-
-    //initilize the processes
-    KProcess cmake;
-    KProcess makeInstall;
-
-    //KProcess isn't aware of the QDir::cd, so we need to
-    //change current directory
-    cmake.setWorkingDirectory(dir.path());
-    makeInstall.setWorkingDirectory(dir.path());
-
-    //the cmake's arguments
-    QStringList cmakeArgv;
-    //The include files of kde are always one sub-directory after the
-    //root path. The root path is kde4-config --prefix
-    QDir rootDirectory = KStandardDirs::locate("lib", "");
-    rootDirectory.cd("..");
-    QString rootPath = rootDirectory.path();
-    cmakeArgv.append("-DCMAKE_INSTALL_PREFIX=" + rootPath);
-    cmakeArgv.append("..");
-
-    //the make install arguments
-    QStringList makeInstallArgv("install");
-
-    cmake.setOutputChannelMode(KProcess::SeparateChannels);
-    cmake.setProgram("cmake", cmakeArgv);
-
-    makeInstall.setOutputChannelMode(KProcess::SeparateChannels);
-    makeInstall.setProgram("make", makeInstallArgv);
-
-    //start the processes
-    cmake.start();
-
-    //cmake must finish before make install
-    cmake.waitForFinished();
-    makeInstall.start();
-
-    //make install must finish before the KMessageBox
-    makeInstall.waitForFinished();
-
-    QString cmakeError = cmake.readAllStandardError();
-    bool cmakeProcessCompleted = cmakeError.isEmpty();
-
-    QString makeInstallError = makeInstall.readAllStandardError();
-    bool makeInstallProcessCompleted = makeInstallError.isEmpty();
-
-    m_cmakeProccess->setCloseButtonVisible(false);
-    m_cmakeProccess->setVisible(true);
-
-    if (cmakeProcessCompleted && makeInstallProcessCompleted) {
-        QDBusInterface dbi("org.kde.kded", "/kbuildsycoca", "org.kde.kbuildsycoca");
-        dbi.call(QDBus::NoBlock, "recreate");
-        m_cmakeProccess->setText(i18n("Project has been installed"));
-        m_cmakeProccess->setMessageType(KMessageWidget::Positive);
-    } else if (!cmakeProcessCompleted){
-        m_cmakeProccess->setText(cmakeError);
-        m_cmakeProccess->setMessageType(KMessageWidget::Error);
-    } else if (!makeInstallProcessCompleted) {
-        m_cmakeProccess->setText(makeInstallError);
-        m_cmakeProccess->setMessageType(KMessageWidget::Error);
-    }
-
-    //now delete the temporary build directory. We don't need it anymore
-    KIO::del(packagePath + "build", KIO::HideProgressInfo);
 }
 
 void Publisher::doPlasmaPkg()
@@ -392,9 +272,4 @@ QString Publisher::currentPackagePath() const
 {
     KConfigGroup cg(KGlobal::config(), "PackageModel::package");
     return cg.readEntry("lastLoadedPackage", QString());
-}
-
-void Publisher::hideCMakeProccess()
-{
-    m_cmakeProccess->setVisible(false);
 }

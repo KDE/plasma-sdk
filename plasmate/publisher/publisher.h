@@ -33,11 +33,9 @@ private slots:
     void doExport();
     void addSuffix();
     void doPublish();
-    void doCMake();
     void doInstall();
     void doRemoteInstall();
     void checkInstallButtonState(int comboBoxCurrentIndex);
-    void hideCMakeProccess();
 
 private:
     bool exportToFile(const KUrl& url);
@@ -48,7 +46,6 @@ private:
 
 
     SigningWidget* m_signingWidget;
-    KMessageWidget *m_cmakeProccess;
     KUrl m_projectPath;
     QString m_projectType;
     QString m_extension;

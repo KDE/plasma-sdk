@@ -9,8 +9,4 @@ install(FILES
   mainTabbox.qml
   mainKWinScript.js
   mainKWinEffect.js
-  cmakelists
-  cmakelistsWindowSwitcher
-  cmakelistsKWinScript
-  cmakelistsKWinEffect
   DESTINATION ${DATA_INSTALL_DIR}/plasmate/templates)
