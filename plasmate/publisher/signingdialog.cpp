@@ -32,7 +32,8 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
-
+#include <kpimutils/emailvalidator.h>
+#include <kpimutils/email.h>
 #include "signingdialog.h"
 
 SigningDialog::SigningDialog(QWidget *parent) :
@@ -130,8 +131,7 @@ SigningDialog::SigningDialog(QWidget *parent) :
 void SigningDialog::validateParams()
 {
     // Check for a valid email address.
-    QRegExp rx("^[a-zA-Z0-9_.]*(@)[a-zA-Z0-9_.]*$");
-    if (!rx.exactMatch(m_emailLine->text())) {
+    if (!KPIMUtils::isValidSimpleAddress(m_emailLine->text())) {
         m_createButton->setEnabled(false);
         return;
     }

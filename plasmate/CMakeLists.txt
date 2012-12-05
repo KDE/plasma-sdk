@@ -7,6 +7,7 @@ macro_log_feature(LIBATTICA_FOUND "libattica" "A library to access Open Collabor
 macro_log_feature(QT_QTWEBKIT_FOUND "QtWebKit" "Opensource web browser engine" "http://trac.webkit.org/wiki/QtWebKit" TRUE "" "Needed to display the online API and documentation.")
 
 find_package(QGpgme REQUIRED) # Maybe check for GPGME_PTHREAD_FOUND ?
+find_package(KdepimLibs REQUIRED)
 
 # Find optional executables
 find_program(GIT_EXECUTABLE_FOUND git)
@@ -100,6 +101,7 @@ target_link_libraries(plasmate
                       ${QGPGME_LIBRARIES}
                       ${QT_QTDECLARATIVE_LIBRARIES}
                       ${KDECLARATIVE_LIBRARIES}
+                      ${KDEPIMLIBS_KPIMUTILS_LIBS}
 )
 
 if (DEBUG_MODEL)
