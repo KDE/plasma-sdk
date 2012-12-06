@@ -24,6 +24,7 @@
 #include "ui_kconfigxteditor.h"
 
 #include "kconfigxtreader.h"
+#include "kconfigxtwriter.h"
 
 #include <QWidget>
 #include <KUrl>
@@ -48,6 +49,8 @@ public:
     void setFilename(const KUrl& filename);
     KUrl filename();
 
+    void clear();
+
 public slots:
     /**
      * Sets up editor widgets according to contents of config file
@@ -56,6 +59,8 @@ public slots:
     void readFile();
 
 private slots:
+
+
     /**
      * Creates new kconfig group
      */
@@ -65,14 +70,6 @@ private slots:
      * Creates new entry
      */
     void createNewEntry();
-
-    /**
-     * Write elements in the xml
-     * When a new group or new entry will be
-     * created, this method will write them
-     * into the xml
-     **/
-    void giveElementsToWriter(KConfigXtReaderItem& newElement);
 
     /**
      * Sets up editor widgets for
@@ -149,7 +146,7 @@ private:
      * If group is specified it will also take the
      * keys,values and types from the parser for the specified group
      *
-     * NOTE: after the call of this method use can use m_groups
+     * NOTE: after the call of this method you can use m_groups
      * and m_keysValuesTypes
      */
 
@@ -173,27 +170,13 @@ private:
 
     KUrl m_filename;
     QStringList m_groups;
-    QList<KConfigXtReaderItem> m_keysValuesTypes;
 
     KConfigXtReader m_parser;
+    KConfigXtWriter m_writer;
 
     QString m_lastGroupItem;
-    //avoid duplication
-    QString stringToGroupEntry(const QString& groupName) const;
 
     QHash<QString, QString> m_lastEntryItem;
-    //avoid duplication
-    QString stringToEntryAndValue(const QString& entryName, const QString entryType) const;
-
-    //avoid duplication
-    QString stringToDescription(const QString& descriptionType, const QString descriptionValue) const;
-
-    //avoid duplication
-    QString stringToDefault(const QString& value) const;
-
-    //avoid duplication
-    void replaceItemsInXml(const QString& oldItem, const QString& newItem);
-
 };
 
 #endif

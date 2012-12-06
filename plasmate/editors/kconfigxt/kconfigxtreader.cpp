@@ -1,7 +1,7 @@
 /*
    This file is part of the KDE project
    Copyright 2009 by Dmitry Suzdalev <dimsuz@gmail.com>
-   Copyright 2012 by Giorgos Tsiapaliwkas <terietor@gmail.com>
+   Copyright 2012 by Giorgos Tsiapaliokas <terietor@gmail.com>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -25,120 +25,36 @@
 #include <KLocalizedString>
 
 #include <QFile>
-#include <QXmlStreamReader>
 
 #include <KDebug>
 
-KConfigXtReaderItem::KConfigXtReaderItem(QObject* parent)
+KConfigXtReaderItem::KConfigXtReaderItem()
 {
-    Q_UNUSED(parent)
 }
 
-QString KConfigXtReaderItem::groupName() const
+void KConfigXtReaderItem::appendGroupNode(const KConfigXtReaderItem::GroupNode& groupNode)
 {
-    return m_groupName;
+    m_groupNodeList.append(groupNode);
 }
 
-QString KConfigXtReaderItem::entryName() const
+void KConfigXtReaderItem::clear()
 {
-    return m_entryName;
+    m_groupNodeList.clear();
 }
 
-QString KConfigXtReaderItem::entryType() const
+QList<KConfigXtReaderItem::GroupNode> KConfigXtReaderItem::groupNodes() const
 {
-    return m_entryType;
+    return m_groupNodeList;
 }
 
-QString KConfigXtReaderItem::entryValue() const
+bool KConfigXtReaderItem::isEmpty()
 {
-    return m_entryValue;
-}
-
-QString KConfigXtReaderItem::descriptionValue() const
-{
-    return m_descriptionValue;
-}
-
-void KConfigXtReaderItem::setDescriptionValue(const QString& descriptionValue)
-{
-    m_descriptionValue = descriptionValue;
-}
-
-KConfigXtReaderItem::DescriptionType KConfigXtReaderItem::descriptionType() const
-{
-    return m_descriptionType;
-}
-
-void KConfigXtReaderItem::setDescriptionType(const KConfigXtReaderItem::DescriptionType descriptionType)
-{
-    m_descriptionType = descriptionType;
-}
-
-void KConfigXtReaderItem::setGroupName(const QString& groupName)
-{
-    m_groupName = groupName;
-}
-
-void KConfigXtReaderItem::setEntryName(const QString& entryName)
-{
-    m_entryName = entryName;
-}
-
-bool KConfigXtReaderItem::operator==(const KConfigXtReaderItem& item)
-{
-    if (this->entryName() == item.entryName()) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-void KConfigXtReaderItem::setEntryType(const QString& entryType)
-{
-    //those are the possible types
-    QStringList types;
-    types << "string"
-    <<"String"
-    <<"StringList"
-    <<"Font"
-    <<"Rect"
-    <<"Size"
-    <<"Color"
-    <<"Point"
-    <<"Int"
-    <<"UInt"
-    <<"Bool"
-    <<"Double"
-    <<"DateTime"
-    <<"LongLong"
-    <<"ULongLong"
-    <<"IntList"
-    <<"Enum"
-    <<"Path"
-    <<"PathList"
-    <<"Password"
-    <<"Url"
-    <<"UrlList";
-
-    //check if the entryType is valid
-    foreach(const QString& type, types) {
-        if (type == entryType) {
-            //its a type
-            m_entryType = type;
-        }
-    }
-}
-
-void KConfigXtReaderItem::setEntryValue(const QString& entryValue)
-{
-    m_entryValue = entryValue;
+    return m_groupNodeList.isEmpty();
 }
 
 KConfigXtReader::KConfigXtReader(QObject *parent)
-        : QObject(parent),
-        m_parseResult(false)
+        : QObject(parent)
 {
-
 }
 
 void KConfigXtReader::setConfigXmlFile(const QString& filename)
@@ -148,190 +64,130 @@ void KConfigXtReader::setConfigXmlFile(const QString& filename)
 
 bool KConfigXtReader::parse()
 {
-    //we will parse the xml again so clear the list
-    if (!m_dataList.isEmpty()) {
-        m_dataList.clear();
+    m_data.clear();
+
+    bool parseResult = true;
+    QString parseError;
+
+    QFile f(m_filename);
+    if (!f.open(QIODevice::ReadOnly)) {
+        parseResult = false;
+        parseError = i18n("The xml file isn't writable");
     }
 
-    QFile xmlFile(m_filename);
+    if (parseResult) {
+        QDomDocument document;
+        document.setContent(&f);
 
-    if (!xmlFile.open(QIODevice::ReadWrite)) {
-        KMessageBox::error(0, i18n("The XML file is not writable"));
-        return false;
-    }
+        //iterate inside it
 
-    //It is possible to give an empty file,
-    //so retun and don't complain for failing to parse
-    //the xml
-    if (xmlFile.readAll().isEmpty()) {
-        return true;
-    }
+        //this is the root element
+        QDomElement docElem = document.documentElement();
 
-    QXmlStreamReader reader;
-    reader.setDevice(&xmlFile);
+        //this is the first child
+        QDomNode it = docElem.firstChild();
 
-   //we will parse the file unti its end or until an error occurs
-    while (!reader.atEnd() && !reader.hasError()) {
-        //we need the token in order to check what is the element
-        QXmlStreamReader::TokenType token = reader.readNext();
+        while(!it.isNull() && parseResult) {
+            if (it.nodeName() == "group") {
+                //continue, its a group
+                const QString groupName = attributeValue(it, "name");
+                if (groupName.isEmpty()) {
+                    parseError = i18n("The group element doesn't have a name");
+                    break;
+                }
 
-        //we have an element
-        if(token == QXmlStreamReader::StartElement) {
-            //we have a new group
-            if(reader.name() == "group") {
-                parseGroup(reader);
-            } else if (reader.name()=="entry"){
+                KConfigXtReaderItem::GroupNode groupNode;
+                groupNode.groupName = groupName;
+
+                QDomNodeList childList = it.childNodes();
+                //check if the node has children
+                if (!childList.isEmpty()) {
+                    for(uint i = 0; i < childList.length(); i++) {
+
+                        const QDomNode child = childList.at(i);
+                        if (child.nodeName() == "entry") {
+                            KConfigXtReaderItem::EntryNode entryNode;
+                            entryNode.groupName = groupName;
+
+                            //we have an entry element
+                            const QString entryName = attributeValue(child, "name");
+                            const QString entryType = attributeValue(child, "type");
+                            if (entryName.isEmpty()) {
+                                parseError = i18n("The entry element doesn't have a name");
+                                break;
+                            }
+
+                            entryNode.entryName = entryName;
+
+                            if (entryType.isEmpty()) {
+                                parseError = i18n("The entry element doesn't have a type");
+                                break;
+                            }
+
+                            entryNode.entryType = entryType;
+
+                            //until now we have a valid group and a valid entry
+                            //so lets take those data, if we have more we will
+                            //take them later
+
+                           //now check if the child has more children
+                            QDomNodeList childList2 = child.childNodes();
+                            if (!childList2.isEmpty()) {
+                                for(uint j = 0; j < childList2.length(); j++) {
+                                    const QDomNode child2 = childList2.at(j);
+
+                                    bool descriptionExists = true;
+
+                                    if (child2.nodeName() == "label") {
+                                        entryNode.entryDescriptionType = KConfigXtReaderItem::Label;
+                                    } else if (child2.nodeName() == "tooltip") {
+                                        entryNode.entryDescriptionType = KConfigXtReaderItem::ToolTip;
+                                    } else if (child2.nodeName() == "whatsthis") {
+                                        entryNode.entryDescriptionType = KConfigXtReaderItem::WhatsThis;
+                                    } else if (child2.nodeName() == "default") {
+                                        entryNode.entryValue = child2.toElement().text();
+                                        descriptionExists = false;
+                                    } else {
+                                        descriptionExists = false;
+                                    }
+                                    if (descriptionExists) {
+                                        entryNode.entryDescriptionValue = child2.toElement().text();
+                                    }
+                                }
+                            }
+                            groupNode.entryNodeList.append(entryNode);
+                        }
+                    }
+
+                }
+                m_data.appendGroupNode(groupNode);
+                //we have parsed all the element so go to the next one
+                it = it.nextSibling();
+            } else {
+                //its not a group element, so go to the next one
+                it = it.nextSibling();
             }
         }
     }
 
-    if(reader.hasError()) {
-        //an error has occured
-        KMessageBox::error(0, i18n("The XML parsing has failed"));
-        kDebug() << "parsing error!!!!" << reader.errorString();
-        //clear the reader
-        reader.clear();
-        //the parse has failed
-        m_parseResult = false;
+    if (!parseResult) {
+        KMessageBox::error(0, parseError);
     }
 
-    //the parse was successfull
-    m_parseResult = true;
-
-    return m_parseResult;
+    return parseResult;
 }
 
-void KConfigXtReader::parseGroup(QXmlStreamReader& reader)
+
+QString KConfigXtReader::attributeValue(const QDomNode element, const QString& attributeName) const
 {
-    //verify if we really has a group
-    if(reader.tokenType() != QXmlStreamReader::StartElement &&
-        reader.name() == "group") {
-        //fail!
-        return;
+    QDomElement e = element.toElement();
+    if (e.hasAttribute(attributeName)) {
+        return e.attribute(attributeName);
     }
-
-    //check if <group name="something"> exists
-    if(reader.attributes().hasAttribute("name")) {
-    // We'll add it to the hash
-    m_data.setGroupName(reader.attributes().value("name").toString());
-    }
-
-
-    //we are still in the group element so let's go the next element
-    reader.readNext();
-    //we will loop over the group element until its end
-    while(!(reader.tokenType() == QXmlStreamReader::EndElement &&
-        reader.name() == "group")) {
-        if(reader.tokenType() == QXmlStreamReader::StartElement) {
-            //check if this is an entry element
-            if(reader.name() == "entry") {
-                parseEntry(reader);
-            }
-        }
-        reader.readNext();
-    }
+    return QString();
 }
 
-void KConfigXtReader::parseEntry(QXmlStreamReader& reader)
+KConfigXtReaderItem KConfigXtReader::data() const
 {
-    // Check if we are inside in an element like <entry name="interval" type="Int">
-    if(reader.tokenType() != QXmlStreamReader::StartElement) {
-        return;
-    }
-
-    //check if there is a type attribute
-    //if there isn't fail!
-    if (reader.attributes().hasAttribute("type") &&
-        reader.attributes().hasAttribute("name")) {
-        //now we can take the entry's name and type
-        m_data.setEntryName(reader.attributes().value("name").toString());
-        m_data.setEntryType(reader.attributes().value("type").toString());
-
-        m_parseResult = true;
-
-    } else {
-        //there is no type, fail
-        m_parseResult = false;
-        return;
-    }
-
-    //go ahead!
-    reader.readNext();
-
-    //for as long as we are inside the entry element
-    //we need to search for its value
-    while(!(reader.tokenType() == QXmlStreamReader::EndElement &&
-        reader.name() == "entry")) {
-
-        //we have a default element
-        if (reader.name() == "label") {
-            parseDescription(reader);
-            m_data.setDescriptionType(KConfigXtReaderItem::Label);
-        } else if (reader.name() == "tooltip") {
-            parseDescription(reader);
-            m_data.setDescriptionType(KConfigXtReaderItem::ToolTip);
-        } else if (reader.name() == "whatsthis") {
-            parseDescription(reader);
-            m_data.setDescriptionType(KConfigXtReaderItem::WhatsThis);
-        }
-
-        reader.readNext();
-    }
-    //add the data in our datalist
-    m_dataList.append(m_data);
+    return m_data;
 }
-
-void KConfigXtReader::parseDescription(QXmlStreamReader& reader)
-{
-    // Check if we are inside in label/tooltip/whatsthis
-    if(reader.tokenType() != QXmlStreamReader::StartElement) {
-        return;
-    }
-
-    //go ahead!
-    reader.readNext();
-
-    if (reader.isCharacters()) {
-        m_data.setDescriptionValue(reader.text().toString());
-    } else {
-        return;
-    }
-
-    reader.readNext();
-
-    while(!(reader.tokenType() == QXmlStreamReader::EndElement &&
-        reader.name() == "default")) {
-        if (reader.name() == "default") {
-            parseValue(reader);
-        }
-        reader.readNext();
-    }
-
-    //add the data in our datalist
-    m_dataList.append(m_data);
-}
-
-void KConfigXtReader::parseValue(QXmlStreamReader& reader)
-{
-    // Check if we are inside in default
-    if(reader.tokenType() != QXmlStreamReader::StartElement) {
-        return;
-    }
-
-    reader.readNext();
-
-    if (reader.isCharacters()) {
-        m_data.setEntryValue(reader.text().toString());
-    } else {
-        return;
-    }
-    //add the data in our datalist
-    m_dataList.append(m_data);
-}
-
-
-QList<KConfigXtReaderItem> KConfigXtReader::dataList() const
-{
-    return m_dataList;
-}
-

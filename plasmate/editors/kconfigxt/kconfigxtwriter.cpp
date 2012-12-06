@@ -25,187 +25,252 @@
 
 #include <QFile>
 #include <QXmlStreamWriter>
-
 #include <KDebug>
 
-KConfigXtWriterItem::KConfigXtWriterItem(QObject* parent)
-{
-    Q_UNUSED(parent)
-}
-
-QString KConfigXtWriterItem::group() const
-{
-    return m_group;
-}
-
-
-void KConfigXtWriterItem::setGroup(const QString& group)
-{
-    m_group = group;
-}
-
-QList< KConfigXtReaderItem > KConfigXtWriterItem::entries() const
-{
-    return m_entries;
-}
-
-void KConfigXtWriterItem::setEntries(QList<KConfigXtReaderItem> entries)
-{
-    m_entries = entries;
-}
-
 KConfigXtWriter::KConfigXtWriter(QObject *parent)
-        : QObject(parent),
-        m_xmlFile(0),
-        m_writer(0)
+        : QObject(parent)
 {
 }
 
 KConfigXtWriter::KConfigXtWriter(const QString& xmlFilePath, QObject *parent)
-        : QObject(parent),
-        m_xmlFile(0),
-        m_writer(0)
+        : QObject(parent)
 {
     setConfigXmlFile(xmlFilePath);
 }
 
+KConfigXtWriter::~KConfigXtWriter()
+{
+}
+
 void KConfigXtWriter::setConfigXmlFile(const QString& filename)
 {
-    m_xmlFile = new QFile(filename, this);
+    m_xmlFile = filename;
+}
 
-    if (!m_xmlFile->open(QIODevice::WriteOnly)) {
+void KConfigXtWriter::editEntry(const QString& groupName, const QString& entryName,
+                                         const QString elementName, const QString& newValue)
+{
+    KConfigXtReaderItem::EntryNode n = entryNode(groupName, entryName);
+    if (elementName == "name") {
+        n.entryName = newValue;
+    } else if (elementName == "type") {
+        n.entryType = newValue;
+    } else if (elementName == "default") {
+        n.entryValue = newValue;
+    } else if (elementName == "label") {
+        n.entryDescriptionType = KConfigXtReaderItem::Label;
+    } else if (elementName == "whatthis") {
+        n.entryDescriptionType = KConfigXtReaderItem::WhatsThis;
+    } else if (elementName == "tooltip") {
+        n.entryDescriptionType = KConfigXtReaderItem::ToolTip;
+    } else {
+        n.entryDescriptionValue = newValue;
+    }
+
+    KConfigXtReaderItem::GroupNode n2 = groupNode(groupName);
+    int index = n2.entryNodeList.indexOf(entryNode(groupName, entryName));
+    n2.entryNodeList.replace(index, n);
+
+    int index2 = m_data.indexOf(groupNode(groupName));
+    m_data.replace(index2, n2);
+    writeXML(m_data);
+}
+
+void KConfigXtWriter::editGroupName(const QString& groupName, const QString& newValue)
+{
+    KConfigXtReaderItem::GroupNode n = groupNode(groupName);
+    n.groupName = newValue;
+    int index = m_data.indexOf(groupNode(groupName));
+    //TODO show kmessagebox
+
+    if (index == -1) {
         return;
     }
 
-    m_writer = new QXmlStreamWriter(m_xmlFile);
+    m_data.replace(index, n);
+    writeXML(m_data);
 }
 
-QList< KConfigXtWriterItem > KConfigXtWriter::data()
+bool KConfigXtWriter::removeGroup(const QString& groupName)
 {
-    return m_dataList;
+    int count = m_data.removeAll(groupNode(groupName));
+
+    bool ok = false;
+    if (count > 0) {
+        ok = true;
+        writeXML();
+    }
+
+    return ok;
 }
 
-void KConfigXtWriter::setData(QList< KConfigXtWriterItem > dataList)
+bool KConfigXtWriter::removeEntry(const QString& groupName, const QString& entryName)
 {
-    m_dataList = dataList;
+    KConfigXtReaderItem::GroupNode n = groupNode(groupName);
+    int count = n.entryNodeList.removeAll(entryNode(groupName, entryName));
+
+    int index = m_data.indexOf(groupNode(groupName));
+    m_data.replace(index, n);
+
+    bool ok = false;
+    if (count > 0) {
+        ok = true;
+        writeXML();
+    }
+
+    return ok;
+}
+
+void KConfigXtWriter::addNewEntry(const KConfigXtReaderItem::EntryNode newEntry)
+{
+    KConfigXtReaderItem::GroupNode n = groupNode(newEntry.groupName);
+    n.entryNodeList.append(newEntry);
+    int index = m_data.indexOf(n);
+
+    m_data.replace(index, n);
+    writeXML(m_data);
+}
+
+void KConfigXtWriter::addNewGroup(const QString& groupName)
+{
+    KConfigXtReaderItem::GroupNode n;
+    n.groupName = groupName;
+
+    m_data.append(n);
+
+    writeXML();
+}
+
+KConfigXtReaderItem::EntryNode KConfigXtWriter::entryNode(const QString& groupName, const QString& entryName) const
+{
+    KConfigXtReaderItem::GroupNode n = groupNode(groupName);
+    for (int i = 0; i < n.entryNodeList.length(); i++) {
+        KConfigXtReaderItem::EntryNode n2 = n.entryNodeList.at(i);
+        if (n2.groupName == groupName && n2.entryName == entryName) {
+            return n2;
+        }
+    }
+
+    KConfigXtReaderItem::EntryNode e;
+    return e;
+}
+
+KConfigXtReaderItem::GroupNode KConfigXtWriter::groupNode(const QString& groupName) const
+{
+    for (int i = 0; i < m_data.length(); i++) {
+        KConfigXtReaderItem::GroupNode n = m_data.at(i);
+        if (n.groupName == groupName) {
+            return n;
+        }
+    }
+
+    KConfigXtReaderItem::GroupNode g;
+    return g;
+}
+
+void KConfigXtWriter::setData(const QList<KConfigXtReaderItem::GroupNode>& data)
+{
+    m_data = data;
+}
+
+QList<KConfigXtReaderItem::GroupNode> KConfigXtWriter::data() const
+{
+    return m_data;
 }
 
 void KConfigXtWriter::writeXML()
 {
-    if (m_dataList.isEmpty()) {
+    writeXML(m_data);
+}
+
+void KConfigXtWriter::writeXML(const QList<KConfigXtReaderItem::GroupNode>& data)
+{
+    QFile f (m_xmlFile);
+    if (!f.open(QFile::WriteOnly)) {
+        KMessageBox::error(0, i18n("This xml file isn't writable"));
+    }
+
+    QXmlStreamWriter writer(&f);
+
+    if (data.isEmpty()) {
         return;
     }
 
-    m_writer->setAutoFormatting(true);
-    m_writer->setAutoFormattingIndent(4);
-
+    writer.setAutoFormatting(true);
+    writer.setAutoFormattingIndent(4);
     //start the document
-    m_writer->writeStartDocument();
+  writer.writeStartDocument();
+
 
     //start kcfg element
-    startKcfgElement();
+    writer.writeStartElement("kcfg");
+    QString ns;
+    ns.append("http://www.kde.org/standards/kcfg/1.0\"");
+    ns.append("\n");
+    ns.append("     xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ");
+    ns.append("\n");
+    ns.append("     xsi:schemaLocation=\"http://www.kde.org/standards/kcfg/1.0");
+    ns.append("\n");
+    ns.append("     http://www.kde.org/standards/kcfg/1.0/kcfg.xsd");
+
+    writer.writeDefaultNamespace(ns);
 
     //start kcfgfile element
-    m_writer->writeStartElement("kcfgfile");
-    m_writer->writeAttribute("name", "");
-    m_writer->writeEndElement();
+    writer.writeStartElement("kcfgfile");
+    writer.writeAttribute("name", "");
+    writer.writeEndElement();
 
-    foreach(const KConfigXtWriterItem& writerItem, m_dataList) {
+    for (int i = 0; i < data.length(); i++) {
+        KConfigXtReaderItem::GroupNode groupIt = data.at(i);
+
         //start group
-        m_writer->writeStartElement("group");
+        writer.writeStartElement("group");
 
-        m_writer->writeAttribute("name", writerItem.group());
+        writer.writeAttribute("name", groupIt.groupName);
 
-        foreach(const KConfigXtReaderItem& readerItem, writerItem.entries()) {
+        for (int j = 0; j < groupIt.entryNodeList.length(); j++) {
+            KConfigXtReaderItem::EntryNode entryIt = groupIt.entryNodeList.at(j);
+
             //start entry
-            m_writer->writeStartElement("entry");
-            m_writer->writeAttribute("name", readerItem.entryName());
-            m_writer->writeAttribute("type", readerItem.entryType());
+            writer.writeStartElement("entry");
+            writer.writeAttribute("name", entryIt.entryName);
+            writer.writeAttribute("type", entryIt.entryType);
 
             //start label/tooltip/whatthis
             //check what if we have label or tooltip or whatthis
-            if (readerItem.descriptionType() == KConfigXtReaderItem::Label) {
-                m_writer->writeStartElement("label");
-            } else if (readerItem.descriptionType() == KConfigXtReaderItem::ToolTip) {
-                m_writer->writeStartElement("tooltip");
-            } else if (readerItem.descriptionType() == KConfigXtReaderItem::WhatsThis) {
-                m_writer->writeStartElement("whatsthis");
+            if (entryIt.entryDescriptionType == KConfigXtReaderItem::Label) {
+                writer.writeStartElement("label");
+            } else if (entryIt.entryDescriptionType == KConfigXtReaderItem::ToolTip) {
+                writer.writeStartElement("tooltip");
+            } else if (entryIt.entryDescriptionType == KConfigXtReaderItem::WhatsThis) {
+                writer.writeStartElement("whatsthis");
             } else {
                 kDebug() << "There is no descriptionType, probably something is wrong";
             }
 
-            m_writer->writeCharacters(readerItem.descriptionValue());
+            writer.writeCharacters(entryIt.entryDescriptionValue);
             //end label/tooltip/whatthis
-            m_writer->writeEndElement();
+            writer.writeEndElement();
 
             //start default
-            m_writer->writeStartElement("default");
-            m_writer->writeCharacters(readerItem.entryValue());
+            writer.writeStartElement("default");
+            writer.writeCharacters(entryIt.entryValue);
             //end default
-            m_writer->writeEndElement();
+            writer.writeEndElement();
 
             //end entry
-            m_writer->writeEndElement();
+            writer.writeEndElement();
         }
         //end group
-        m_writer->writeEndElement();
+        writer.writeEndElement();
     }
     //end kcfg element
-    endKcfgElement();
+    writer.writeEndElement();
 
     //end the document
-    m_writer->writeEndDocument();
+    writer.writeEndDocument();
 
     //finally close the device and write our data
-    m_writer->device()->close();
-}
-
-void KConfigXtWriter::startKcfgElement()
-{
-    //write the kcfg manually
-    QByteArray startKcfg;
-    startKcfg.append("\n");
-    startKcfg.append("<kcfg xmlns=\"http://www.kde.org/standards/kcfg/1.0\"");
-    startKcfg.append("\n");
-    startKcfg.append("     xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
-    startKcfg.append("\n");
-    startKcfg.append("     xsi:schemaLocation=\"http://www.kde.org/standards/kcfg/1.0");
-    startKcfg.append("\n");
-    startKcfg.append("     http://www.kde.org/standards/kcfg/1.0/kcfg.xsd\" >");
-    startKcfg.append("\n");
-    m_writer->device()->write(startKcfg);
-}
-
-void KConfigXtWriter::endKcfgElement()
-{
-    QByteArray endKcfg;
-    endKcfg.append("\n");
-    endKcfg.append("</kcfg>");
-    m_writer->device()->write(endKcfg);
-}
-
-QList<KConfigXtWriterItem> KConfigXtWriter::readerItemsToWriterIems(QStringList& groupList,
-                                            QList<KConfigXtReaderItem> entriesList) const
-{
-
-    QList<KConfigXtWriterItem> list;
-
-    foreach(const QString& group, groupList) {
-        KConfigXtWriterItem tmpItem;
-        tmpItem.setGroup(group);
-        QList<KConfigXtReaderItem> tmpEntryList;
-        foreach (const KConfigXtReaderItem& entry, entriesList) {
-            if (group == entry.groupName()) {
-
-                if (!tmpEntryList.contains(entry)) {
-                    tmpEntryList.append(entry);
-                }
-            }
-        }
-        tmpItem.setEntries(tmpEntryList);
-        list.append(tmpItem);
-    }
-
-    return list;
+    writer.device()->close();
 }
 

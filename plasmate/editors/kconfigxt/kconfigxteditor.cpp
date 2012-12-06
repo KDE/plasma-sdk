@@ -1,7 +1,7 @@
 /*
    This file is part of the KDE project
    Copyright 2009 by Dmitry Suzdalev <dimsuz@gmail.com>
-   Copyright 2012 by Giorgos Tsiapaliwkas <terietor@gmail.com>
+   Copyright 2012 by Giorgos Tsiapaliokas <terietor@gmail.com>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -20,8 +20,6 @@
 */
 
 #include "kconfigxteditor.h"
-#include "kconfigxtwriter.h"
-
 #include <KComboBox>
 #include <KDebug>
 #include <KIcon>
@@ -31,7 +29,6 @@
 #include <QFile>
 #include <QHeaderView>
 #include <QTreeWidgetItem>
-#include <QXmlStreamWriter>
 
 KConfigXtEditor::KConfigXtEditor(QWidget *parent)
         : QWidget(parent)
@@ -69,20 +66,26 @@ KConfigXtEditor::KConfigXtEditor(QWidget *parent)
     m_ui.srcLabel2->setVisible(false);
     m_ui.srcRequester->setVisible(false);
     m_ui.srcSeparator->setVisible(false);
+
+
 }
 
 void KConfigXtEditor::setFilename(const KUrl& filename)
 {
     m_filename = filename;
+    //load the xml file
 }
 
 KUrl KConfigXtEditor::filename()
 {
     return m_filename;
+
 }
 
 void KConfigXtEditor::readFile()
 {
+    m_writer.setConfigXmlFile(filename().pathOrUrl());
+
     if (m_filename.isEmpty()) {
         kDebug() << "Empty filename given!";
         return;
@@ -99,6 +102,12 @@ void KConfigXtEditor::readFile()
     }
 }
 
+void KConfigXtEditor::clear()
+{
+    m_ui.twEntries->clear();
+    m_ui.twGroups->clear();
+}
+
 void KConfigXtEditor::setupWidgetsForNewFile()
 {
     // Add default group
@@ -113,6 +122,9 @@ void KConfigXtEditor::setupWidgetsForOldFile()
 void KConfigXtEditor::createNewGroup()
 {
     m_ui.twEntries->clear();
+
+    takeDataFromParser();
+
     QString newGroupName;
     if (m_groups.isEmpty()) {
         newGroupName = "General";
@@ -129,20 +141,24 @@ void KConfigXtEditor::createNewGroup()
 
     addGroupToUi(newGroupName);
 
-    KConfigXtReaderItem newGroupItem;
-    newGroupItem.setGroupName(newGroupName);
-    newGroupItem.setEntryName("TODO");
-    newGroupItem.setEntryType("String");
-    newGroupItem.setDescriptionType(KConfigXtReaderItem::Label);
-    newGroupItem.setDescriptionValue("TODO");
-    newGroupItem.setEntryValue("TODO");
+    KConfigXtReaderItem::GroupNode groupNode;
+    groupNode.groupName = newGroupName;
+
+    KConfigXtReaderItem::EntryNode newEntryItem;
+    newEntryItem.groupName = newGroupName;
+    newEntryItem.entryName = "TODO";
+    newEntryItem.entryType = "string";
+    newEntryItem.entryDescriptionType = KConfigXtReaderItem::Label;
+    newEntryItem.entryDescriptionValue = "TODO";
+    newEntryItem.entryValue = "TODO";
+
+    m_writer.addNewGroup(newGroupName);
+    m_writer.addNewEntry(newEntryItem);
 
     //add our new entry into the tree
-    addEntryToUi(newGroupItem.entryName(),
-                 newGroupItem.entryType(), newGroupItem.entryValue(),
-                 newGroupItem.descriptionValue(), newGroupItem.descriptionType());
-
-    giveElementsToWriter(newGroupItem);
+    addEntryToUi(newEntryItem.entryName,
+                 newEntryItem.entryType, newEntryItem.entryValue,
+                 newEntryItem.entryDescriptionValue, newEntryItem.entryDescriptionType);
 }
 
 void KConfigXtEditor::createNewEntry()
@@ -154,12 +170,19 @@ void KConfigXtEditor::createNewEntry()
         return;
     }
 
+    takeDataFromParser();
+
     QString groupName = currentGroupItem->text(0);
     QStringList entryNameList;
 
-    foreach(const KConfigXtReaderItem it, m_keysValuesTypes) {
-        if (groupName == it.groupName()) {
-            entryNameList << it.entryName();
+
+    for(int i = 0; i < m_parser.data().groupNodes().length(); i++) {
+        KConfigXtReaderItem::GroupNode it = m_parser.data().groupNodes().at(i);
+        if (groupName == it.groupName) {
+            for (int j = 0; j < it.entryNodeList.length(); j++) {
+                KConfigXtReaderItem::EntryNode it2 = it.entryNodeList.at(j);
+                entryNameList << it2.entryName;
+            }
         }
     }
 
@@ -170,40 +193,25 @@ void KConfigXtEditor::createNewEntry()
         return;
     }
 
-    KConfigXtReaderItem newEntryItem;
-    newEntryItem.setGroupName(groupName);
-    newEntryItem.setEntryName("TODO");
-    //remember we need a valid type due to the
-    //internal check
-    newEntryItem.setEntryType("String");
-    newEntryItem.setEntryValue("TODO");
-    newEntryItem.setDescriptionType(KConfigXtReaderItem::Label);
-    newEntryItem.setDescriptionValue("TODO");
-
-    //create the entries for the existing data
-    setupWidgetsForEntries(currentGroupItem);
+    KConfigXtReaderItem::EntryNode newEntryItem;
+    newEntryItem.groupName = groupName;
+    newEntryItem.entryName = "TODO";
+    newEntryItem.entryValue = "TODO";
+    newEntryItem.entryType = "string";
+    newEntryItem.entryDescriptionType = KConfigXtReaderItem::Label;
+    newEntryItem.entryDescriptionValue = "TODO";
 
     //add our new entry into the tree
-    addEntryToUi(newEntryItem.entryName(),
-                 newEntryItem.entryType(), newEntryItem.entryValue(),
-                 newEntryItem.descriptionValue(), newEntryItem.descriptionType());
+    addEntryToUi(newEntryItem.entryName, newEntryItem.entryType, newEntryItem.entryValue,
+                 newEntryItem.entryDescriptionValue, newEntryItem.entryDescriptionType);
 
-    giveElementsToWriter(newEntryItem);
-}
-
-void KConfigXtEditor::giveElementsToWriter(KConfigXtReaderItem& newElement)
-{
-    takeDataFromParser();
-    m_keysValuesTypes.append(newElement);
-
-    KConfigXtWriter writer(filename().pathOrUrl());
-    QList<KConfigXtWriterItem> list = writer.readerItemsToWriterIems(m_groups, m_keysValuesTypes);
-    writer.setData(list);
-    writer.writeXML();
+    m_writer.addNewEntry(newEntryItem);
 }
 
 void KConfigXtEditor::setupWidgetsForGroups()
 {
+    takeDataFromParser();
+
     foreach(const QString& group, m_groups) {
         addGroupToUi(group);
     }
@@ -215,6 +223,8 @@ void KConfigXtEditor::addGroupToUi(const QString& group)
     item->setText(0, group);
     item->setFlags(item->flags() | Qt::ItemIsEditable);
     m_ui.twGroups->setCurrentItem(item);
+
+    m_lastGroupItem = group;
 }
 
 void KConfigXtEditor::setupWidgetsForEntries(QTreeWidgetItem *item)
@@ -222,23 +232,21 @@ void KConfigXtEditor::setupWidgetsForEntries(QTreeWidgetItem *item)
     if (!item) {
         return;
     }
-
     //the currectIndex of m_ui.twGroups has changed.
     //this means that we need to load the data for the new
     //group so remove the old items
     m_ui.twEntries->clear();
 
-    //also we will take new keys values and types so clear our list
-    m_keysValuesTypes.clear();
-
-    //take keys,values,types and groups
     takeDataFromParser();
-
-   foreach(const KConfigXtReaderItem& entry, m_keysValuesTypes) {
-       //check if this group has an entry
-       if (item->text(0) == entry.groupName()) {
-           addEntryToUi(entry.entryName(), entry.entryType(),
-            entry.entryValue(), entry.descriptionValue(), entry.descriptionType());
+    for (int i = 0; i < m_parser.data().groupNodes().length(); i++) {
+        KConfigXtReaderItem::GroupNode it = m_parser.data().groupNodes().at(i);
+        //check if this group has an entry
+        if (item->text(0) == it.groupName) {
+            for(int j = 0; j < it.entryNodeList.length(); j++) {
+                KConfigXtReaderItem::EntryNode entryNode = it.entryNodeList.at(j);
+                addEntryToUi(entryNode.entryName, entryNode.entryType,
+                entryNode.entryValue, entryNode.entryDescriptionValue, entryNode.entryDescriptionType);
+            }
         }
     }
 }
@@ -281,44 +289,20 @@ void KConfigXtEditor::addEntryToUi(const QString& key, const QString& type,
 
 }
 
-void KConfigXtEditor::takeDataFromParser()
-{
-    //we need to update the data of our parser first
-    m_parser.parse();
-
-    foreach(const KConfigXtReaderItem& item, m_parser.dataList()) {
-
-        //take the name of the groups, also due to the fact
-        //that we take data from a parser we have to be careful so
-        //check if the group exists in the list
-        if (!item.groupName().isEmpty()) {
-            if (!m_groups.contains(item.groupName())) {
-                m_groups << item.groupName();
-            }
-
-            if (!m_keysValuesTypes.contains(item) &&
-                !item.entryName().isEmpty()) {
-                //take the entries
-                m_keysValuesTypes.append(item);
-            }
-        }
-    }
-}
-
 void KConfigXtEditor::modifyGroup(QTreeWidgetItem* item, int column)
 {
     //check if ptr is evil
     //and if the name of the group has been changed
-    if (!item || item->text(column) == m_lastGroupItem) {
+    if (!item ||
+        !item->isSelected()) {
         return;
     }
 
     //take the groups
-    const QString oldGroupEntry = stringToGroupEntry(m_lastGroupItem);
-    const QString newGroupEntry = stringToGroupEntry(item->text(column));
+    const QString oldGroupName = m_lastGroupItem;
+    const QString newGroupName = item->text(column);
 
-    //replace the groups in the xml
-    replaceItemsInXml(oldGroupEntry, newGroupEntry);
+    m_writer.editGroupName(oldGroupName, newGroupName);
 }
 
 void KConfigXtEditor::setLastGroupItem(QTreeWidgetItem* item, int column)
@@ -327,13 +311,7 @@ void KConfigXtEditor::setLastGroupItem(QTreeWidgetItem* item, int column)
     if (!item) {
         return;
     }
-
     m_lastGroupItem = item->text(column);
-}
-
-QString KConfigXtEditor::stringToGroupEntry(const QString& groupName) const
-{
-    return QString("<group name=\"%1\">").arg(groupName);
 }
 
 void KConfigXtEditor::modifyTypeDescription()
@@ -343,68 +321,31 @@ void KConfigXtEditor::modifyTypeDescription()
 
 void KConfigXtEditor::modifyEntry(QTreeWidgetItem* item, int column)
 {
-    //check if ptr is evil
-    if (!item ) {
+    //* check if ptr is evil
+    //* make sure that this method will be called
+    //only when we modify an item. When do we modify an item?
+    //When we click on it. The itemChanged signal is also called
+    //on the creation of a new entry.
+    if (!item || !item->isSelected()) {
         return;
     }
+
+    takeDataFromParser();
+
     //create the entry
-    const QString oldEntry = stringToEntryAndValue(m_lastEntryItem["name"],
-                                                   m_lastEntryItem["type"]);
-    if (column == 0 || column == 1) {
-        //the user has modified either the
-        //key or its type.
-        //TODO maybe it should check if the type is valid
-
-        const QString newEntry = stringToEntryAndValue(item->text(0), item->text(1));
-
-        //replace the entries in the xml
-        replaceItemsInXml(oldEntry, newEntry);
-
+    const QString oldEntryName = m_lastEntryItem["name"];
+    if (column == 0) {
+        const QString newEntryName = item->text(0);
+        m_writer.editEntry(m_lastGroupItem, oldEntryName, "name", newEntryName);
+    } else if (column == 1) {
+        const QString oldEntryType = m_lastEntryItem["type"];
+        const QString newEntryType = item->text(1);
+        m_writer.editEntry(m_lastGroupItem, oldEntryName, "type", newEntryType);
     } else if (column == 2) {
-        //Q: why we don't use the replaceItemsInXml() method?
-
-        //A: because we have something like <default>10</default>
-        //there is a big change to have multiple entries like this,
-        //in different entries, so if we use replaceItemsInXml(),
-        //we will screw everything, so before you replace the items,
-        //check if we in the right entry
-
-        QFile xmlFile(m_filename.pathOrUrl());
-
-        if(!xmlFile.open(QIODevice::ReadWrite)) {
-            return;
-        }
-
-        QByteArray text;
-
-        while (!xmlFile.atEnd()) {
-            QString line = xmlFile.readLine();
-            if (line.contains(oldEntry)) {
-                while (!line.contains("</entry>")) {
-                    QString oldValue = stringToDefault(m_lastEntryItem["value"]);
-                    if (line.contains(oldValue)) {
-                        line.replace(oldValue, stringToDefault(item->text(2)));
-                    }
-                    text.append(line);
-                    line = xmlFile.readLine();
-               }
-            }
-            text.append(line);
-       }
-
-       //clear the xml fle
-       xmlFile.resize(0);
-
-       //write the data
-       xmlFile.write(text);
-
-       //close the file
-       xmlFile.close();
+        const QString oldEntryValue = m_lastEntryItem["value"];
+        const QString newEntryValue = item->text(2);
+        m_writer.editEntry(m_lastGroupItem, oldEntryName, "default", newEntryValue);
     } else if (column == 3) {
-        //take the old description
-        const QString oldDescription = stringToDescription(m_lastEntryItem["descriptionType"],
-                                                           m_lastEntryItem["descriptionValue"]);
-
         KComboBox *bt = qobject_cast<KComboBox*>(m_ui.twEntries->itemWidget(item, column));
 
         //check if the ptr is evil
@@ -412,36 +353,29 @@ void KConfigXtEditor::modifyEntry(QTreeWidgetItem* item, int column)
             return;
         }
 
-        QString newDescription;
-
+        const QString oldDescriptionType = m_lastEntryItem["descriptionType"];
         if (bt->currentIndex() == 0) {
             //it's a label
-            newDescription = stringToDescription("label", item->text(4));
+            m_writer.editEntry(m_lastGroupItem, oldEntryName, "label", "label");
             //our descriptionType is about to change, so update its value
             m_lastEntryItem["descriptionType"] = "label";
         } else if (bt->currentIndex() == 1) {
             //it's a tooltip
-            newDescription = stringToDescription("tooltip", item->text(4));
+            m_writer.editEntry(m_lastGroupItem, oldEntryName, "tooltip", "tooltip");
             //our descriptionType is about to change, so update its value
             m_lastEntryItem["descriptionType"] = "tooltip";
-        } else if (bt->currentIndex() ==2) {
+        } else if (bt->currentIndex() == 2) {
             //it's a whatsthis
-            newDescription = stringToDescription("whatsthis", item->text(4));
+            m_writer.editEntry(m_lastGroupItem, oldEntryName, "whatsthis", "whatsthis");
             //our descriptionType is about to change, so update its value
             m_lastEntryItem["descriptionType"] = "whatsthis";
         }
-
-        //replace the items
-        replaceItemsInXml(oldDescription, newDescription);
     } else if (column == 4) {
+        const QString newDescriptionValue = item->text(4);
 
-        const QString oldDescription = stringToDescription(m_lastEntryItem["descriptionType"],
-                                                          m_lastEntryItem["descriptionValue"]);
+        //m_writer.editEntry(m_lastGroupItem, oldEntryName, m_lastEntryItem["descriptionType"], newDescriptionValue);
 
-        QString newDescription = stringToDescription(m_lastEntryItem["descriptionType"],
-                                                    item->text(4));
-
-        replaceItemsInXml(oldDescription, newDescription);
+        m_writer.editEntry(m_lastGroupItem, oldEntryName, QString(), newDescriptionValue);
     }
 }
 
@@ -491,55 +425,22 @@ void KConfigXtEditor::setLastEntryItem(QTreeWidgetItem* item)
     m_lastEntryItem["descriptionValue"] = item->text(4);
 }
 
-QString KConfigXtEditor::stringToEntryAndValue(const QString& entryName, const QString entryType) const
-{
-    return QString("<entry name=\"%1\" type=\"%2\">").arg(entryName).arg(entryType);
-}
-
-QString KConfigXtEditor::stringToDescription(const QString& descriptionType, const QString descriptionValue) const
-{
-    return QString("<%1>%2</%1>").arg(descriptionType).arg(descriptionValue);
-}
-
-QString KConfigXtEditor::stringToDefault(const QString& value) const
-{
-    return QString("<default>%1</default>").arg(value);
-}
-
-void KConfigXtEditor::replaceItemsInXml(const QString& oldItem, const QString& newItem)
-{
-    //take the xml file
-    QFile xmlFile(m_filename.pathOrUrl());
-
-    if(!xmlFile.open(QIODevice::ReadWrite)) {
-        //the xml file has failed to open
-        return;
-    }
-
-    QByteArray rawData = xmlFile.readAll();
-
-    //replace the data
-    rawData.replace(oldItem, newItem.toAscii());
-
-    //clear the xml fle
-    xmlFile.resize(0);
-
-    //write the data
-    xmlFile.write(rawData);
-
-    //close the file
-    xmlFile.close();
-
-}
-
 void KConfigXtEditor::removeGroup()
 {
     //take the current item of the tree
     QTreeWidgetItem *item = m_ui.twGroups->currentItem();
-    if (removeElement(item->text(0), KConfigXtEditor::Group)) {
+
+    if (!item) {
+        return;
+    }
+
+    if (m_writer.removeGroup(item->text(0))) {
         //remote the group from the ui,
         //we have already deleted it from the xml file
         delete m_ui.twGroups->currentItem();
+
+        //clear the tree of the entries
+        m_ui.twEntries->clear();
     } else {
         removeError();
     }
@@ -549,7 +450,12 @@ void KConfigXtEditor::removeEntry()
 {
     //take the current item of the tree
     QTreeWidgetItem *item = m_ui.twEntries->currentItem();
-    if (removeElement(item->text(0), KConfigXtEditor::Entry)) {
+
+    if (!item) {
+        return;
+    }
+
+    if (m_writer.removeEntry(m_lastGroupItem, item->text(0))) {
         //remote the entry from the ui,
         //we have already deleted it from the xml file
         delete m_ui.twEntries->currentItem();
@@ -565,65 +471,16 @@ void KConfigXtEditor::removeError()
 }
 
 
-bool KConfigXtEditor::removeElement(const QString& elementName, ElementType elementType)
+void KConfigXtEditor::takeDataFromParser()
 {
-    if (elementName.isEmpty()) {
-        return false;
+    m_parser.parse();
+    m_writer.setData(m_parser.data().groupNodes());
+
+    QList<KConfigXtReaderItem::GroupNode> dataList = m_parser.data().groupNodes();
+
+    m_groups.clear();
+
+    for (int i = 0; i < dataList.length(); i++) {
+        m_groups << dataList.at(i).groupName;
     }
-
-    //take the element that we want
-    QString startElement;
-    if (elementType == KConfigXtEditor::Group) {
-        startElement  = "<group name=\"" + elementName + "\">";
-    } else if (elementType == KConfigXtEditor::Entry) {
-        startElement  = "<entry name=\"" + elementName + "\">";
-    }
-
-    QFile xmlFile(m_filename.pathOrUrl());
-    if(!xmlFile.open(QIODevice::ReadWrite)) {
-        return false;
-    }
-
-    //Let me exaplain what is going on in this method,
-    //there is no way in Qt to remove the contents of
-    //a file if we don't use QTextEdit. So we can only keep
-    //the content which we don't want to delete then to empty
-    //our file and finally to add the content which we don't
-    //want to delete. So, its like we delete something!
-    QByteArray text;
-
-    while (!xmlFile.atEnd()) {
-        QString line = xmlFile.readLine();
-        //while the element has started and the element
-        //hasn't ended skip those lines.
-        if (line.contains(startElement)) {
-            //choose our flag according to the give type;
-            QString endElement;
-            if (elementType == KConfigXtEditor::Group) {
-                endElement = "</group>";
-            } else if (elementType == KConfigXtEditor::Entry) {
-                endElement = "</entry>";
-            }
-
-            while (!line.contains(endElement)) {
-                line = xmlFile.readLine();
-            }
-
-            //if you are the last element which
-            //you have escaped from the while, skip!
-            if (line.contains(endElement)) {
-                line.clear();
-            }
-        }
-        text.append(line);
-    }
-
-    //empty the xml file
-    xmlFile.resize(0);
-
-    //write our text and close the file
-    xmlFile.write(text);
-    xmlFile.close();
-
-    return true;
 }

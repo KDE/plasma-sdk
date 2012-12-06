@@ -1,7 +1,7 @@
 /*
    This file is part of the KDE project
    Copyright 2009 by Dmitry Suzdalev <dimsuz@gmail.com>
-   Copyright 2012 by Giorgos Tsiapaliwkas <terietor@gmail.com>
+   Copyright 2012 by Giorgos Tsiapaliokas <terietor@gmail.com>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -22,16 +22,15 @@
 #ifndef KCONFIGXTREADER_H
 #define KCONFIGXTREADER_H
 
-#include <QMultiHash>
-#include <QVariant>
+#include <QDomDocument>
 #include <QList>
-#include <QXmlStreamReader>
+#include <QObject>
 
 class KConfigXtReaderItem
 {
 
 public:
-    KConfigXtReaderItem(QObject* parent = 0);
+    KConfigXtReaderItem();
 
     enum DescriptionType {
         Label = 0,
@@ -39,35 +38,43 @@ public:
         WhatsThis
     };
 
-    QString groupName() const;
-    void setGroupName(const QString& groupName);
+    struct EntryNode {
+        QString groupName;
+        QString entryName;
+        QString entryType;
+        QString entryValue;
+        QString entryDescriptionValue;
+        KConfigXtReaderItem::DescriptionType entryDescriptionType;
+        inline bool operator==(const KConfigXtReaderItem::EntryNode& e)
+        {
+            return (e.groupName == this->groupName &&
+            e.entryName == this->entryName &&
+            e.entryType == this->entryType &&
+            e.entryValue == this->entryValue &&
+            e.entryDescriptionValue == this->entryDescriptionValue &&
+            e.entryDescriptionType == this->entryDescriptionType);
+        };
+    };
 
-    QString entryName() const;
-    void setEntryName(const QString& entryName);
+    struct GroupNode {
+        QString groupName;
+        QList<KConfigXtReaderItem::EntryNode> entryNodeList;
+        inline bool operator==(const KConfigXtReaderItem::GroupNode& g)
+        {
+            return g.groupName == this->groupName;
+        };
+    };
 
-    QString entryType() const;
-    void setEntryType(const QString& entryType);
+    QList<KConfigXtReaderItem::GroupNode> groupNodes() const;
 
-    QString entryValue() const;
-    void setEntryValue(const QString& entryValue);
+    void appendGroupNode(const KConfigXtReaderItem::GroupNode& groupNode);
 
-    DescriptionType descriptionType() const;
-    void setDescriptionType(const KConfigXtReaderItem::DescriptionType descriptionType);
-
-    QString descriptionValue() const;
-    void setDescriptionValue(const QString& descriptionValue);
-
-    bool operator==(const KConfigXtReaderItem& item);
+    void clear();
+    bool isEmpty();
 
 private:
-    QString m_groupName;
-    QString m_entryName;
-    QString m_entryType;
-    QString m_entryValue;
-    QString m_descriptionValue;
-    DescriptionType m_descriptionType;
+    QList<GroupNode> m_groupNodeList;
 };
-
 
 class KConfigXtReader : public QObject
 {
@@ -88,17 +95,11 @@ public:
      * Returns the data from the xml file.
      * Valid only after a successful call to parse()
      **/
-    QList<KConfigXtReaderItem> dataList() const;
+    KConfigXtReaderItem data() const;
 
 private:
-    void parseGroup(QXmlStreamReader& reader);
-    void parseEntry(QXmlStreamReader& reader);
-    void parseDescription(QXmlStreamReader& reader);
-    void parseValue(QXmlStreamReader& reader);
-    bool m_parseResult;
-
+    QString attributeValue(const QDomNode element, const QString& attributeName) const;
     QString m_filename;
-    QList<KConfigXtReaderItem> m_dataList;
     KConfigXtReaderItem m_data;
 };
 

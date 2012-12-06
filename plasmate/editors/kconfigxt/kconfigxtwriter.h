@@ -1,6 +1,6 @@
 /*
    This file is part of the KDE project
-   Copyright 2012 by Giorgos Tsiapaliwkas <terietor@gmail.com>
+   Copyright 2012 by Giorgos Tsiapaliokas <terietor@gmail.com>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -21,40 +21,17 @@
 #ifndef KCONFIGXTWRITER_H
 #define KCONFIGXTWRITER_H
 
-#include <QMultiHash>
-#include <QVariant>
-#include <QList>
-#include <QXmlStreamReader>
-
 #include "kconfigxtreader.h"
 
-class QFile;
-
-class KConfigXtWriterItem
-{
-
-public:
-    KConfigXtWriterItem(QObject* parent = 0);
-
-    QString group() const;
-    void setGroup(const QString& groupName);
-
-    QList<KConfigXtReaderItem> entries() const;
-    void setEntries(QList<KConfigXtReaderItem> entries);
-
-private:
-    QString m_group;
-    QList<KConfigXtReaderItem> m_entries;
-};
-
+#include <QObject>
 
 class KConfigXtWriter : public QObject
 {
-
     Q_OBJECT
 public:
     KConfigXtWriter(QObject *parent = 0);
     KConfigXtWriter( const QString& xmlFilePath, QObject *parent = 0);
+    ~KConfigXtWriter();
 
     /**
      * This is the xml in which the data will be
@@ -62,33 +39,33 @@ public:
      **/
     void setConfigXmlFile(const QString& filename);
 
-    /**
-     * Returns the data that will be writen in the xml
-     **/
-    QList<KConfigXtWriterItem> data();
+    void setData(const QList<KConfigXtReaderItem::GroupNode>& data);
+    QList<KConfigXtReaderItem::GroupNode> data() const;
 
-    /**
-     * Sets the data that will be writen in the xml
-     **/
-    void setData(QList<KConfigXtWriterItem> dataList);
+    void addNewEntry(const KConfigXtReaderItem::EntryNode newEntry);
 
+    void addNewGroup(const QString& groupName);
+
+    void editGroupName(const QString& groupName, const QString& newValue);
+
+    void editEntry(const QString& groupName, const QString& entryName, const QString elementName, const QString& newValue);
+
+    bool removeEntry(const QString& groupName, const QString& entryName);
+
+    bool removeGroup(const QString& groupName);
+
+private:
     /**
      * writes the data in the xml
      **/
+    void writeXML(const QList<KConfigXtReaderItem::GroupNode> &data);
+
     void writeXML();
 
-    QList<KConfigXtWriterItem> readerItemsToWriterIems(QStringList& groupList,
-                                                       QList<KConfigXtReaderItem> entriesList) const;
-
-private:
-    QList<KConfigXtWriterItem> m_dataList;
-    QFile *m_xmlFile;
-    QXmlStreamWriter *m_writer;
-
-    //we have to write the kcfg element manually
-    //because qxmlstreamwriter doesn't support it
-    void startKcfgElement();
-    void endKcfgElement();
+    QList<KConfigXtReaderItem::GroupNode> m_data;
+    QString m_xmlFile;
+    KConfigXtReaderItem::EntryNode entryNode(const QString& groupName, const QString& entryName) const;
+    KConfigXtReaderItem::GroupNode groupNode(const QString& groupName) const;
 };
 
 #endif

@@ -659,6 +659,7 @@ void MainWindow::loadKConfigXtEditor(const KUrl& target)
         m_kconfigXtEditor = new KConfigXtEditor(this);
     }
 
+    m_kconfigXtEditor->clear();
     m_kconfigXtEditor->setFilename(target);
     m_kconfigXtEditor->readFile();
     m_central->switchTo(m_kconfigXtEditor);
