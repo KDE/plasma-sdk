@@ -109,7 +109,7 @@ if (DEBUG_MODEL)
 endif (DEBUG_MODEL)
 
 install(TARGETS plasmate ${INSTALL_TARGETS_DEFAULT_ARGS})
-install(FILES plasmate.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(PROGRAMS plasmate.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES plasmateui.rc  DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 install(FILES plasmate.knsrc DESTINATION ${CONFIG_INSTALL_DIR})
 
