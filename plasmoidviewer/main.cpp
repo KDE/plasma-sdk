@@ -152,6 +152,8 @@ int main(int argc, char **argv)
     options.add("t");
     options.add("theme <name>", ki18n("Desktop SVG theme to use"));
     options.add("w");
+    options.add("size <width>x<height>", ki18n("Initial size"));
+    options.add("z");
     options.add("wallpaper <name>", ki18n("Name of the wallpaper plugin. Requires a containment plugin to be specified."), QByteArray());
     options.add("+applet", ki18n("Name of applet to view; may refer to the plugin name or be a path "
                                 "(absolute or relative) to a package. If not provided, then an "

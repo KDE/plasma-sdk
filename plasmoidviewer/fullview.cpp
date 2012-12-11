@@ -177,6 +177,15 @@ void FullView::addApplet(const QString &name, const QString &containment,
     kDebug() << "connecting ----------------";
 
     checkShotTimer();
+
+    KCmdLineArgs *cliArgs = KCmdLineArgs::parsedArgs() ;
+    if (cliArgs->isSet("size")) {
+        const QStringList dimensions = cliArgs->getOption("size").split("x");
+        if (dimensions.size() == 2) {
+            resize(dimensions.at(0).toInt(), dimensions.at(1).toInt());
+        }
+    }
+
 }
 
 bool FullView::checkShotTimer()
