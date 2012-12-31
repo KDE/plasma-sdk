@@ -91,6 +91,8 @@ private:
     Plasma::PackageStructure::Ptr m_structure;
     Plasma::Package *m_package;
 
+    QHash<QString, QStringList>  m_dialogOptions;
+
     static const int MAX_COLUMN = 0;
 };
 

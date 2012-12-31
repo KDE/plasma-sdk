@@ -29,6 +29,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
+#include <QHash>
+#include <QHashIterator>
 
 #include <KConfigGroup>
 #include <KDesktopFile>
@@ -47,6 +49,16 @@ PackageModel::PackageModel(QObject *parent)
         m_structure(0),
         m_package(0)
 {
+    m_dialogOptions["widgets"] = QStringList("[plasmate]/themeImageDialog/widgets");
+    m_dialogOptions["animations"] = QStringList("[plasmate]/themeImageDialog/animations");
+    m_dialogOptions["dialogs"] = QStringList("[plasmate]/themeImageDialog/dialogs");
+    m_dialogOptions["locolor/dialogs"] = QStringList("[plasmate]/themeImageDialog/locolor/dialogs");
+    m_dialogOptions["locolor/widgets"] = QStringList("[plasmate]/themeImageDialog/locolor/widgets");
+    m_dialogOptions["opaque/dialogs"] = QStringList("[plasmate]/themeImageDialog/opaque/dialogs");
+    m_dialogOptions["opaque/widgets"] = QStringList("[plasmate]/themeImageDialog/opaque/widgets");
+    m_dialogOptions["wallpapers"] = QStringList("[plasmate]/themeImageDialog/wallpapers");
+    m_dialogOptions["config"] = QStringList("[plasmate]/mainconfigxml/new");
+    m_dialogOptions["images"] = QStringList("[plasmate]/imageDialog");
 }
 
 PackageModel::~PackageModel()
@@ -181,16 +193,18 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         switch (role) {
         case MimeTypeRole: {
             if (index.row() == 0) {
-                if (!qstrcmp(key, "images")) {
-                    return QStringList("[plasmate]/imageDialog");
-                } else if (!qstrcmp(key, "config")) {
-                    return QStringList("[plasmate]/mainconfigxml/new");
-                } else {
+                if(!qstrcmp(key, "animations") && packageType() != "Plasma/Theme") {
+                    //add an exception. the plasmoid package also contains the key animations,
+                    //so if this isn't a theme package return the right mimetype
                     return QStringList("[plasmate]/new");
+                } else if (m_dialogOptions.contains(key)) {
+                    return m_dialogOptions.value(key);
                 }
+                return QStringList("[plasmate]/new");
             }
 
-            if (!qstrcmp(key, "images")) {
+            const char *imagePrefix = "[plasmate]/themeImageDialog/";
+            if (!qstrcmp(key, "images") || !qstrncmp(key, imagePrefix, qstrlen(imagePrefix))) {
                 return QStringList("[plasmate]/imageViewer");
             }
 
@@ -241,7 +255,6 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         case ContentsWithSubdirRole: {
             return contentsWithSubdirRole(parentIndex.row());
         }
-        break;
         }
     } else {
         // it's a top level item
@@ -254,12 +267,25 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
 
             return m_structure->name(m_topEntries.at(index.row()));
         }
+
         break;
         case MimeTypeRole: {
+            if (index.row() + 1  == m_topEntries.count()) {
+               if (packageType() == "Plasma/Theme") {
+                    //kcolorscheme will share the same index for creating and read/write
+                    if (!fileExists("colors")) {
+                        return QStringList("[plasmate]/kcolorscheme");
+                    } else {
+                        return m_package->structure()->mimetypes("colors");
+                    }
+                } else if (packageType() == "Plasma/Applet") {
+                    if (!fileExists("mainconfigui")) {
+                        return QStringList("[plasmate]/mainconfigui");
+                    }
+                }
+            }
+
             if (index.row() == m_topEntries.count()) {
-                // not sure if this is good, but will do for now
-                // use special wildcard to indicate stuff that
-                // plasmate should handle in it's own way
                 return QStringList("[plasmate]/metadata");
             }
         }
@@ -268,8 +294,23 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
             if (index.row() == m_topEntries.count()) {
                 return m_package->path() + "metadata.desktop";
             }
+
+            if (index.row() + 1  == m_topEntries.count()) {
+                if (m_package) {
+                    return m_package->path() + contentsWithSubdirRole(index.row());
+                }
+            }
+
+            return QString();
         }
         break;
+        case PackagePathRole: {
+            return m_package ? m_package->path() : QString();
+        }
+        break;
+        case ContentsWithSubdirRole: {
+            return contentsWithSubdirRole(index.row());
+        }
         }
     }
     return QVariant();
@@ -279,13 +320,22 @@ QString PackageModel::contentsWithSubdirRole(int indexRow) const
 {
     if (m_package) {
         QString path;
+
         foreach(const QString& content, m_structure->contentsPrefixPaths()) {
             path.append(content);
+            path = path.endsWith('/') ? path : path.append('/');
         }
 
-        //we are in a child item, but
-        //we need the index of the parent, so..
-        path.append(m_topEntries.at(indexRow));
+        const  char* topEntry = m_topEntries.at(indexRow);
+        if (m_structure->directories().contains(topEntry)) {
+            path.append(topEntry);
+        }
+
+        if (m_structure->files().contains(topEntry)) {
+            QStringList l = m_structure->path(topEntry).split('/');
+            path.append(l.at(0));
+        }
+
         return path;
     }
 
@@ -419,7 +469,7 @@ bool PackageModel::loadPackage()
     //Q: why just the required ones and not all of them?
     //A: we don't want to spam the project's dir with unnecessary dirs
     foreach (const char *key, dirs) {
-        QStringList paths = structure->searchPath(key);
+        const QStringList paths = structure->searchPath(key);
         foreach(const QString& path, paths){
             if (!dir.exists(path)) {
                 dir.mkpath(path);
@@ -434,7 +484,7 @@ bool PackageModel::loadPackage()
 
     //once again we don't want to spam the project's dir
     //with all the files but we want to add them in the ui
-    QHash<QString, const char *> indexedFiles;
+    QHash<QString, const char *> nonRequiredIndexedFiles;
     QHash<QString, const char *> requiredIndexedFiles;
 
     foreach (const char *key, structure->requiredFiles()) {
@@ -452,8 +502,16 @@ bool PackageModel::loadPackage()
     }
 
     //from here we will take the data for the ui
-    foreach(const char *key, structure->files()) {
-        indexedFiles.insert(structure->path(key), key);
+    foreach (const char *key, structure->files()) {
+        const QStringList tmpPaths = structure->searchPath(key);
+        foreach (const QString& path, tmpPaths) {
+            if (qstrcmp(key, "mainscript")) {
+                //if the key is mainscript then we have the main scripting
+                //file, we don't want to add it into the nonRequiredIndexedFiles because
+                //we want to see its name and not "code/main"
+                nonRequiredIndexedFiles.insert(path, key);
+            }
+        }
     }
 
     foreach (const char *key, structure->directories()) {
@@ -467,13 +525,13 @@ bool PackageModel::loadPackage()
         QStringList userFiles;
         foreach (const QString &file, files) {
             QString filePath = path + file;
-            if (indexedFiles.contains(filePath)) {
-                namedFiles.append(indexedFiles.value(filePath));
+            if (nonRequiredIndexedFiles.contains(filePath)) {
+                namedFiles.append(nonRequiredIndexedFiles.value(filePath));
                 //the requiredFiles and files have some common elements,
                 //so if the files contains a filePath the requiredFiles will
                 //definately contain it!
                 //So just remove the filePath from both of them
-                indexedFiles.remove(filePath);
+                nonRequiredIndexedFiles.remove(filePath);
                 requiredIndexedFiles.remove(filePath);
             } else if (!file.endsWith('~')) {
                 userFiles.append(file);
@@ -482,16 +540,31 @@ bool PackageModel::loadPackage()
 
         //kDebug() << "results for" << m_topEntries.indexOf(key) << key << "are:" << namedFiles.count() << userFiles.count();
         m_namedFiles.insert(key, namedFiles);
+
         m_files.insert(key, userFiles);
     }
 
-    if (!requiredIndexedFiles.empty()) {
-        //there are still some requiredFiles which we haven't add
-        //in the ui, so add them as top entries
-        foreach (const char *key, requiredIndexedFiles) {
+    //until now we have add all the files into the ui
+    //except from the ones which
+    //* doesn't exist
+    //* are not required
+    // but the are some packages which have files like
+    //those and those files are important.
+    //So add in the ui every file that has a single key.
+    //Q: what is a simple key?
+    //A: A key which is only one word like and its not its not
+    //inside in a directory, like colors.
+    foreach(const char* key, structure->files()) {
+        const QString k(key);
+        const QStringList l = k.split('/');
+
+        if (l.size() == 1 &&
+            //we handle the above different in the ui
+            qstrcmp(key, "defaultconfig") &&
+            qstrcmp(key, "mainconfigxml") &&
+            qstrcmp(key,"mainscript" )) {
             m_topEntries.append(key);
         }
-        //kDebug() << "counts:" << m_topEntries.count() << indexedFiles.count();
     }
 
     endResetModel();
@@ -511,14 +584,20 @@ void PackageModel::fileAddedOnDisk(const QString &path)
     }
 
     const KUrl toAdd(path);
-    const QString toAddDir = toAdd.directory();
+    KUrl toAddDir(toAdd.directory());
+
     const int parentCount = rowCount(QModelIndex());
 
     for (int i = 0; i < parentCount - 1; ++i) {
         const char *key = m_topEntries.at(i);
         QList<const char *> named = m_namedFiles.value(key);
         KUrl target(m_package->filePath(key));
-        if (target.equals(toAddDir)) {
+        //make sure that our paths ends with a '/'
+        //in order to avoid a compare failure due to a '/'
+        target.adjustPath(KUrl::AddTrailingSlash);
+        toAddDir.adjustPath(KUrl::AddTrailingSlash);
+
+        if (target.pathOrUrl() == toAddDir.pathOrUrl()) {
             QModelIndex parent = index(i, 0, QModelIndex());
             int ind = rowCount(parent);
             for (int ii = 0; ii < ind; ++ii) {

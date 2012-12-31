@@ -29,6 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QFile>
 #include <QList>
 #include <QPixmap>
+#include <QStringList>
 #include <KConfigGroup>
 #include <kfiledialog.h>
 #include <KIcon>
@@ -43,7 +44,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <kmimetypetrader.h>
 
 #include "packagemodel.h"
-#include <QStringList>
+
 #include <qvarlengtharray.h>
 
 EditPage::EditPage(QWidget *parent)
@@ -111,6 +112,7 @@ void EditPage::findEditor(const QModelIndex &index)
     const QStringList mimetypes = index.data(PackageModel::MimeTypeRole).toStringList();
     const QString packagePath = index.data(PackageModel::PackagePathRole).toString();
     const QString contentWithSubdir = index.data(PackageModel::ContentsWithSubdirRole).toString();
+
     foreach (const QString &mimetype, mimetypes) {
         QString target = index.data(PackageModel::UrlRole).toUrl().toString();
         if (mimetype == "[plasmate]/metadata") {
@@ -119,16 +121,16 @@ void EditPage::findEditor(const QModelIndex &index)
         }
 
         if (mimetype == "[plasmate]/imageDialog") {
-            KUser user;
-            KUrl homeDir = user.homeDir();
-            const QList<KUrl> srcDir = KFileDialog::getOpenUrls(homeDir, "*.png *.gif *.svg *.jpeg *.svgz", this);
-            KConfigGroup cg(KGlobal::config(), "PackageModel::package");
-            const KUrl destinationDir(cg.readEntry("lastLoadedPackage", QString()) + "contents/images/");
-            if (!srcDir.isEmpty()) {
-                foreach(const KUrl source, srcDir) {
-                    KIO::copy(source, destinationDir, KIO::HideProgressInfo);
-                }
-            }
+            imageDialog("*.png *.gif *.svg *.jpeg *.svgz", "contents/images/");
+            return;
+        }
+
+        QString commonFilter = "*.svg *.svgz";
+
+        const QString themeType = "[plasmate]/themeImageDialog/";
+        if (mimetype.startsWith(themeType)) {
+            const QString opts = "contents/" + mimetype.right(mimetype.size() - themeType.length());
+            imageDialog(commonFilter, opts);
             return;
         }
 
@@ -142,27 +144,42 @@ void EditPage::findEditor(const QModelIndex &index)
             return;
         }
 
+        bool createNewFile = false;
+        QString nameOfNewFile;
         if (mimetype == "[plasmate]/mainconfigxml/new") {
+            createNewFile = true;
+            nameOfNewFile = "main.xml";
+        }
+
+        if (mimetype == "[plasmate]/mainconfigui") {
+            createNewFile = true;
+            nameOfNewFile = "config.ui";
+        }
+
+        if (createNewFile) {
             QString path = createContentWithSubdir(packagePath, contentWithSubdir);
             if (!path.isEmpty()) {
                 if (!path.endsWith('/')) {
                     path.append('/');
                 }
-                target.append(path + "main.xml");
+
+                target.clear();
+                target.append(path + nameOfNewFile);
             }
 
             QFile f(target);
             f.open(QIODevice::ReadWrite); // create the file
+            return;
+        }
+
+        if (mimetype == "[plasmate]/kcolorscheme") {
+            QFile f(target);
+            f.open(QIODevice::ReadWrite); // create the file
+            return;
         }
 
         if (mimetype == "[plasmate]/new") {
-            QString path = createContentWithSubdir(packagePath, contentWithSubdir);
-            if (!path.isEmpty()) {
-                if (!path.endsWith('/')) {
-                    path.append('/');
-                }
-                target.append(path + "main.xml");
-            }
+            target = createContentWithSubdir(packagePath, contentWithSubdir);
 
             const QString dialogText = i18n("Enter a name for the new file:");
             QString file = KInputDialog::getText(QString(), dialogText);
@@ -194,7 +211,9 @@ void EditPage::findEditor(const QModelIndex &index)
                         }
                     }
 
+
                     file = target + file;
+
                     QFile fl(file);
                     fl.open(QIODevice::ReadWrite); // create the file
                     fl.close();
@@ -220,16 +239,35 @@ void EditPage::findEditor(const QModelIndex &index)
         }
     }
 }
+void EditPage::imageDialog(const QString& filter, const QString& destinationPath)
+{
+    KUser user;
+    KUrl homeDir = user.homeDir();
+    const QList<KUrl> srcDir = KFileDialog::getOpenUrls(homeDir, filter, this);
+    KConfigGroup cg(KGlobal::config(), "PackageModel::package");
+    const KUrl destinationDir(cg.readEntry("lastLoadedPackage", QString()) + destinationPath);
+    QDir destPath(destinationDir.pathOrUrl());
+    if (!destPath.exists()) {
+        destPath.mkpath(destinationDir.pathOrUrl());
+    }
+
+    if (!srcDir.isEmpty()) {
+        foreach(const KUrl source, srcDir) {
+            KIO::copy(source, destinationDir, KIO::HideProgressInfo);
+        }
+    }
+}
 
 QString EditPage::createContentWithSubdir(const QString& packagePath, const QString& contentWithSubdir) const
 {
+    //now create the content and the subdir directory.
+    //Q: why now and not in the Packagemodel?
+    //A: Because now the user want to create the subdir,
+    //in the PackageModel he just clicked on the entry.
     QString target;
     QDir dir(packagePath);
     if (!dir.exists(contentWithSubdir)) {
         dir.mkpath(contentWithSubdir);
-        //Q: why we modify by hand the target?
-        //A: because for the current index the contentWithSubdir
-        //doesn't exists, so in the first click it won't create the dir.
         target = packagePath + contentWithSubdir;
         if (!target.endsWith('/')) {
             target.append('/');

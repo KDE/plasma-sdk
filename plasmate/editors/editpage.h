@@ -27,10 +27,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QWidget>
 #include <QModelIndex>
+#include <QTreeView>
 #include <kparts/part.h>
 #include <kservice.h>
 #include <KMenu>
-#include <QTreeView>
+
 #include "editors/metadata/metadataeditor.h"
 
 class QWidget;
@@ -43,22 +44,23 @@ public:
     explicit EditPage(QWidget *parent = 0);
     void loadFile(const KUrl &path, const QString &mimetype = QString());
 
-private:
-    KMenu *m_contextMenu;
-    MetaDataEditor *m_metaEditor;
-    QString createContentWithSubdir(const QString& packagePath, const QString& contentWithSubdir) const;
-    bool hasExtension(const QString &filename);
+Q_SIGNALS:
+    void loadEditor(const KService::List offers, KUrl target);
+    void loadMetaDataEditor(KUrl target);
+    void loadImageViewer(const KUrl &target);
+    void loadKConfigXtEditor(const KUrl &target);
 
 private Q_SLOTS:
     void findEditor(const QModelIndex &index);
     void showTreeContextMenu(const QPoint&);
     void doDelete(bool);
 
-signals:
-    void loadEditor(const KService::List offers, KUrl target);
-    void loadMetaDataEditor(KUrl target);
-    void loadImageViewer(const KUrl &target);
-    void loadKConfigXtEditor(const KUrl &target);
+private:
+    KMenu *m_contextMenu;
+    MetaDataEditor *m_metaEditor;
+    bool hasExtension(const QString &filename);
+    void imageDialog(const QString &filter, const QString& destinationPath);
+    QString createContentWithSubdir(const QString& packagePath, const QString& contentWithSubdir) const;
 };
 
 #endif
