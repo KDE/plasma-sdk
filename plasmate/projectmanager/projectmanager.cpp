@@ -41,6 +41,7 @@
 ProjectManager::ProjectManager(QWidget* parent)
     : KDialog(parent)
 {
+    setButtons(KDialog::None);
     m_projectList = new QListWidget(this);
     m_projectList->setSelectionMode(QAbstractItemView::ExtendedSelection);
     connect(m_projectList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(emitProjectSelected()));
@@ -57,17 +58,17 @@ ProjectManager::ProjectManager(QWidget* parent)
     m_removeMenu->addAction(i18n("From List"), this, SLOT(confirmRemoveFromList()));
     m_removeMenu->addAction(i18n("From Disk"), this, SLOT(confirmRemoveFromDisk()));
 
-    QHBoxLayout *hoz = new QHBoxLayout();
+    QVBoxLayout *l = new QVBoxLayout();
 
     m_loadButton->setDisabled(true);
-    hoz->addWidget(m_loadButton);
 
     m_removeMenuButton->setDisabled(true);
-    hoz->addWidget(m_removeMenuButton);
-    hoz->addWidget(m_projectList);
+    l->addWidget(m_projectList);
+    l->addWidget(m_loadButton);
+    l->addWidget(m_removeMenuButton);
 
     QWidget *tmpWidget = new QWidget();
-    tmpWidget->setLayout(hoz);
+    tmpWidget->setLayout(l);
     setMainWidget(tmpWidget);
 }
 
@@ -221,7 +222,5 @@ void ProjectManager::setRecentProjects(const QStringList &paths)
 void ProjectManager::deleteProject(const KUrl &projectLocation)
 {
     KUrl project = projectLocation;
-    project.cd("..");
-    project.addPath("/");
     KIO::del(project);
 }
