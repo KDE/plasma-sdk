@@ -2,6 +2,7 @@
 Name=StudioPreviewer
 Name[da]=StudioForhåndsviser
 Name[el]=StudioPreviewer
+Name[es]=StudioPreviewer
 Name[et]=Stuudio eelvaatlus
 Name[fr]=StudioPreviewer
 Name[ga]=StudioPreviewer
@@ -21,6 +22,7 @@ Name[x-test]=xxStudioPreviewerxx
 Comment=Containment used to preview plasmoids on Plasma Studio
 Comment[da]=Beholder der bruges til at forhåndsvise plasmoids på Plasma Studio
 Comment[el]=Συγκεντρωτική προεπισκόπηση πλασμοειδών στο Plasma Studio
+Comment[es]=Contenedor usado para previsualizar plasmoides en Plasma Studio
 Comment[et]=Konteiner, mis võimaldab plasmoide eelvaadelda Plasma stuudios
 Comment[fr]=Conteneur utilisé pour afficher un aperçu des composants graphiques dans Plasma Studio
 Comment[gl]=Contedor para previsualizar plasmoides no estudio de Plasma.
