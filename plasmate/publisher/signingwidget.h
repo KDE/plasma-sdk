@@ -34,7 +34,6 @@ class Kurl;
 namespace GpgME
 {
 class Context;
-class PasswordAsker;
 }
 
 class SigningWidget : public QWidget
@@ -66,7 +65,6 @@ private:
 
     QString m_currentKey;
     GpgME::Context *m_gpgContext;
-    GpgME::PasswordAsker *m_pwdAsker;
 
     bool m_signingEnabled;
     bool m_contextInitialized;

@@ -54,62 +54,6 @@
 #include "signingwidget.h"
 #include "signingdialog.h"
 
-namespace GpgME
-{
-class PasswordAsker : public PassphraseProvider, QDialog
-{
-public:
-    PasswordAsker(QWidget *parent = 0)
-            : QDialog(parent) {
-        setModal(true);
-        QVBoxLayout *main = new QVBoxLayout(this);
-        QHBoxLayout *child = new QHBoxLayout(this);
-
-        m_infoLabel = new QLabel(this);
-        main->addWidget(m_infoLabel);
-
-        m_pwdLine = new KLineEdit(this);
-        main->addWidget(m_pwdLine);
-
-        m_submitButton = new KPushButton("Submit", this);
-        m_cancelButton = new KPushButton("Cancel", this);
-        child->addWidget(m_submitButton);
-        child->addWidget(m_cancelButton);
-
-        m_pwdLine->setEchoMode(QLineEdit::Password);
-        m_submitButton->setIcon(KIcon("dialog-ok"));
-        m_cancelButton->setIcon(KIcon("dialog-cancel"));
-
-        main->addLayout(child);
-
-        this->hide();
-
-        connect(m_submitButton, SIGNAL(clicked()),
-                this, SLOT(close()));
-        connect(m_cancelButton, SIGNAL(clicked()),
-                this, SLOT(close()));
-    }
-
-    void clear() {
-        m_pwdLine->clear();
-    }
-
-    char * getPassphrase(const char * useridHint, const char * description, bool previousWasBad, bool & canceled) {
-        m_infoLabel->setText(i18n("Set password for:\n%1", QString(useridHint)));
-        this->exec();
-        return strdup(m_pwdLine->text().append("\n").toAscii().data());
-    }
-
-private:
-    QLabel *m_infoLabel;
-    KLineEdit *m_pwdLine;
-    KPushButton *m_submitButton;
-    KPushButton *m_cancelButton;
-};
-}
-
-
-
 SigningWidget::SigningWidget(QWidget* parent)
         : QWidget(parent),
         m_treeWidget(0),
@@ -188,11 +132,6 @@ void SigningWidget::initGpgContext()
     if (!m_gpgContext) {
         m_contextInitialized = true;
     }
-
-    m_pwdAsker = new GpgME::PasswordAsker(this);
-    m_gpgContext->setKeyListMode(GPGME_KEYLIST_MODE_LOCAL | GPGME_KEYLIST_MODE_SIGS);
-    m_gpgContext->setPassphraseProvider(m_pwdAsker);
-    m_gpgContext->setArmor(true);
 }
 
 QList< QMap<QString, QVariant> > SigningWidget::gpgEntryList(const bool privateKeysOnly) const
@@ -297,7 +236,6 @@ bool SigningWidget::sign(const KUrl &path)
     error = m_gpgContext->startSigning(plasmoidata, signature, GpgME::Detached);
     kDebug() <<"Signing result: " << m_gpgContext->signingResult().createdSignature(0).fingerprint();
 
-    m_pwdAsker->clear();
     fclose(fp1);
     fclose(fp);
 
