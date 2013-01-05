@@ -33,8 +33,10 @@
 #include <KDebug>
 #include <KIcon>
 #include <KLineEdit>
-#include <KPushButton>
 #include <KLocale>
+#include <KMessageBox>
+#include <KPushButton>
+
 
 #define _FILE_OFFSET_BITS 64
 
@@ -113,7 +115,7 @@ void SigningWidget::initUI()
     //disable the delete button when the m_noSigningButton is clicked
     //we don't want the m_noSigningButton to be deleted ever!
     connect(m_noSigningButton, SIGNAL(clicked(bool)), m_deleteKeyButton, SLOT(setDisabled(bool)));
-
+    connect(m_noSigningButton, SIGNAL(clicked(bool)), m_createKeyButton, SLOT(setEnabled(bool)));
 
     m_deleteKeyButton->setDisabled(m_noSigningButton->isChecked());
 }
@@ -267,6 +269,12 @@ void SigningWidget::createKey(const QString &param)
     GpgME::Error er  = m_gpgContext->startKeyGeneration(param.toUtf8().data(), *data);
     kDebug() << "Error:" << e.error().source() << "::" << e.error().asString();
     kDebug() << "Error:" << er.source() << "::" << er.asString();
+    QString error(er.asString());
+
+    //There is been an error with the generation of the key
+    if (!error.isEmpty()) {
+        KMessageBox::error(0, i18n("Your key has not been create because of the following error: %1", error));
+    }
 }
 
 void SigningWidget::deleteKey()
