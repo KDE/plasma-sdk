@@ -37,12 +37,13 @@ class CommitDialog : public KDialog
 {
 public:
     CommitDialog(QWidget *parent = 0);
-    QLineEdit      *m_commitBriefText;
-    QPlainTextEdit *m_commitFullText;
+
+    QString briefText() const;
+    QString fullText() const;
 
 private:
-    QLabel *m_commitBriefLabel;
-    QLabel *m_commitFullLabel;
+    QLineEdit      *m_commitBriefText;
+    QPlainTextEdit *m_commitFullText;
 };
 
 #endif // COMMITDIALOG_H

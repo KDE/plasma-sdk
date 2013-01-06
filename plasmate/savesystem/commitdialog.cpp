@@ -23,47 +23,48 @@
 
 #include "commitdialog.h"
 
-#include <QDialogButtonBox>
+#include <QFormLayout>
 #include <QPushButton>
 
 #include <klocale.h>
 
 
 CommitDialog::CommitDialog(QWidget *parent)
-    :KDialog(parent)
+    : KDialog(parent)
 {
-    setWindowTitle(i18n("New SavePoint"));
-    setModal(true);
-    setMinimumWidth(300);
-    setMinimumHeight(300);
-    setMaximumWidth(300);
-    setMaximumHeight(300);
+    setWindowTitle(i18n("New Save Point"));
 
-    m_commitBriefLabel = new QLabel(i18n("Brief comment (required):"), this);
-    m_commitBriefLabel->setGeometry(QRect(10, 0, 280, 40));
+    QWidget *mainWidget = new QWidget(this);
+    QFormLayout *layout = new QFormLayout(mainWidget);
 
-    m_commitBriefText = new QLineEdit(i18n("Type here a brief description"), this);
-    m_commitBriefText->setGeometry(QRect(10, 30, 280, 30));
+    QLabel *commitBriefLabel = new QLabel(i18n("Brief comment (required):"), mainWidget);
+    m_commitBriefText = new QLineEdit(i18n("Type here a brief description"), mainWidget);
+    layout->addRow(commitBriefLabel, m_commitBriefText);
 
-    m_commitFullLabel = new QLabel(i18n("Detailed comment:"), this);
-    m_commitFullLabel->setGeometry(QRect(10, 70, 280, 40));
+    QLabel *commitFullLabel = new QLabel(i18n("Detailed comment:"), mainWidget);
+    m_commitFullText = new QPlainTextEdit(mainWidget);
+    layout->addRow(commitFullLabel, m_commitFullText);
 
-    m_commitFullText = new QPlainTextEdit(this);
-    m_commitFullText->setGeometry(QRect(10, 100, 280, 150));
+    setMainWidget(mainWidget);
+    setButtons(KDialog::Ok | KDialog::Cancel);
+    setButtonText(KDialog::Ok, i18n("Create Save Point"));
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
-    buttonBox->setGeometry(QRect(10, 260, 280, 40));
-    QPushButton *buttonCancel = buttonBox->addButton(QDialogButtonBox::Cancel);
-    QPushButton *buttonApply = buttonBox->addButton(QDialogButtonBox::Apply);
-    buttonBox->setCenterButtons(true);
-
+    m_commitBriefText->setFocus();
     m_commitBriefText->selectAll();
 
     connect(m_commitBriefText, SIGNAL(returnPressed()),
             this, SLOT(accept()));
-    connect(buttonApply, SIGNAL(clicked()),
-            this, SLOT(accept()));
-    connect(buttonCancel, SIGNAL(clicked()),
-            this, SLOT(reject()));
-
 }
+
+QString CommitDialog::briefText() const
+{
+    return m_commitBriefText->text();
+}
+
+QString CommitDialog::fullText() const
+{
+    return m_commitFullText->toPlainText();
+}
+
+#include "commitdialog.moc"
+

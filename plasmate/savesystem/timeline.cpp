@@ -177,7 +177,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
         m_table->addItem(commitItem);
     }
 
-    // The las Item is maked as such.
+    // The last Item is maked as such.
     commitItem->setText(i18n("First save point"));
 
     parentWidget()->show();
@@ -292,8 +292,11 @@ void TimeLine::showContextMenu(QTableWidgetItem *item)
 
 void TimeLine::newSavePoint()
 {
-    QPointer<CommitDialog> commitDialog = new CommitDialog();
     QString commitMessage;
+    CommitDialog *commitDialog = new CommitDialog();
+    commitDialog->setModal(true);
+    connect(commitDialog, SIGNAL(finished()), commitDialog, SLOT(deleteLater()));
+
     bool dialogAlreadyOpen = false;
     if (!m_gitRunner->isValidDirectory()) {
         dialogAlreadyOpen = true;
@@ -322,14 +325,16 @@ void TimeLine::newSavePoint()
         if (commitDialog->exec() == KDialog::Rejected) {
             return;
         }
-        commitMessage = QString(commitDialog->m_commitBriefText->text());
-    }
-    // Ensure the required comment is not empty
-    if (commitMessage.isEmpty())
-        return;
 
-    QString optionalComment = QString(commitDialog->m_commitFullText->toPlainText());
-    delete commitDialog;
+        commitMessage = commitDialog->briefText();
+    }
+
+    // Ensure the required comment is not empty
+    if (commitMessage.isEmpty()) {
+        return;
+    }
+
+    QString optionalComment = commitDialog->fullText();
 
     if (!optionalComment.isEmpty() != 0) {
         commitMessage.append("\n\n");
@@ -412,15 +417,15 @@ void TimeLine::mergeBranch()
         return;
     }
 
-    QPointer<CommitDialog> commitDialog = new CommitDialog();
+    CommitDialog *commitDialog = new CommitDialog();
+    connect(commitDialog, SIGNAL(finished()), commitDialog, SLOT(deleteLater()));
+    commitDialog->setModal(true);
     if (commitDialog->exec() == KDialog::Rejected) {
-        delete commitDialog;
         return;
     }
 
-    QString commit = QString(commitDialog->m_commitBriefText->text());
-    QString optionalComment = QString(commitDialog->m_commitFullText->toPlainText());
-    delete commitDialog;
+    QString commit = commitDialog->briefText();
+    QString optionalComment = commitDialog->fullText();
 
     if (!optionalComment.isEmpty()) {
         commit.append("\n\n");
