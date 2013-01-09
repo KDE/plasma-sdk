@@ -223,6 +223,7 @@ int main(int argc, char **argv)
     QString location = args->getOption("location");
     kDebug() << "setting Location to" << args->getOption("location");
 
+    bool resizeToApplet = true;
     QString containment = args->getOption("containment");
     if (args->isSet("containment")) {
 
@@ -235,6 +236,7 @@ int main(int argc, char **argv)
 
             if (info.pluginName() == containment) {
                 containmentFound = true;
+                resizeToApplet = false;
                 break;
             }
         }
@@ -302,6 +304,7 @@ int main(int argc, char **argv)
     }
 
     FullView view(formfactor, location, persistentConfig);
+    view.setResizeToApplet(resizeToApplet);
 
     if (args->isSet("list-remote")) {
         kDebug() << "list remote...";

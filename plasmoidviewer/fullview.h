@@ -50,6 +50,7 @@ public:
     void addApplet(const QString &name, const QString& containment,
                    const QString& wallpaper, const QVariantList &args = QVariantList());
     void screenshotAll();
+    void setResizeToApplet(bool resize);
 
 protected:
     void showEvent(QShowEvent *event);
@@ -80,6 +81,7 @@ private:
     // passed through cli by default, config files
     // are non-persistent in plasmoidviewer.
     bool m_persistentConfig;
+    bool m_resizeToApplet;
 };
 
 #endif

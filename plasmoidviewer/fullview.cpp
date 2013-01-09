@@ -52,7 +52,8 @@ FullView::FullView(const QString &ff, const QString &loc, bool persistent, QWidg
       m_containment(0),
       m_applet(0),
       m_appletShotTimer(0),
-      m_persistentConfig(persistent)
+      m_persistentConfig(persistent),
+      m_resizeToApplet(true)
 {
     setFrameStyle(QFrame::NoFrame);
     QString formfactor = ff.toLower();
@@ -148,8 +149,10 @@ void FullView::addApplet(const QString &name, const QString &containment,
         m_applet = Applet::loadPlasmoid(info.absoluteFilePath());
     }
 
-    if (m_applet) {
+    if (m_applet && m_resizeToApplet) {
         m_containment->addApplet(m_applet, QPointF(-1, -1), false);
+    } else if (m_applet && !m_resizeToApplet) {
+        m_containment->addApplet(m_applet, QPointF(48, 48), false);
     } else if (name.isEmpty()) {
         return;
     } else {
@@ -168,13 +171,23 @@ void FullView::addApplet(const QString &name, const QString &containment,
         m_applet->configChanged();
     }
 
-    setSceneRect(m_applet->sceneBoundingRect());
+    if (m_resizeToApplet) {
+        setSceneRect(m_applet->sceneBoundingRect());
+        setWindowTitle(m_applet->name());
+        setWindowIcon(SmallIcon(m_applet->icon()));
+    } else {
+        setSceneRect(geometry());
+        setWindowTitle(m_applet->name() + ": " + m_containment->name());
+        setWindowIcon(SmallIcon(m_containment->icon()));
+    }
+
     m_applet->setFlag(QGraphicsItem::ItemIsMovable, false);
-    setWindowTitle(m_applet->name());
-    setWindowIcon(SmallIcon(m_applet->icon()));
-    resize(m_applet->size().toSize());
-    connect(m_applet, SIGNAL(appletTransformedItself()), this, SLOT(appletTransformedItself()));
-    kDebug() << "connecting ----------------";
+
+    if (m_resizeToApplet) {
+        resize(m_applet->size().toSize());
+        connect(m_applet, SIGNAL(appletTransformedItself()), this, SLOT(appletTransformedItself()));
+        kDebug() << "connecting ----------------";
+    }
 
     checkShotTimer();
 
@@ -184,7 +197,9 @@ void FullView::addApplet(const QString &name, const QString &containment,
         if (dimensions.size() == 2) {
             QSize s(dimensions.at(0).toInt(), dimensions.at(1).toInt());
             m_applet->resize(s);
-            resize(s);
+            if (m_resizeToApplet) {
+                resize(s);
+            }
         }
     }
 
@@ -274,11 +289,17 @@ void FullView::plasmoidAccessFinished(Plasma::AccessAppletJob *job)
     kDebug() << "!!!! PLASMOID ACCESS FINISHED!";
     if (!job->error() && job->applet()) {
         m_applet = job->applet();
-        m_containment->addApplet(m_applet, QPointF(-1, -1), false);
-        m_applet->setFlag(QGraphicsItem::ItemIsMovable, false);
-        setSceneRect(m_applet->sceneBoundingRect());
-        setWindowTitle(m_applet->name());
-        setWindowIcon(SmallIcon(m_applet->icon()));
+        if (m_resizeToApplet) {
+            m_containment->addApplet(m_applet, QPointF(-1, -1), false);
+            m_applet->setFlag(QGraphicsItem::ItemIsMovable, false);
+            setSceneRect(m_applet->sceneBoundingRect());
+            setWindowTitle(m_applet->name());
+            setWindowIcon(SmallIcon(m_applet->icon()));
+        } else {
+            m_containment->addApplet(m_applet, QPointF(48, 48), false);
+            setWindowTitle(m_applet->name() + ": " + m_containment->name());
+            setWindowIcon(SmallIcon(m_containment->icon()));
+        }
     } else {
         //TODO: some nice userfriendly error.
         kDebug() << "plasmoid access failed: " << job->errorString();
@@ -300,6 +321,11 @@ void FullView::showEvent(QShowEvent *)
     if (size().width() < 10 && size().height() < 10) {
         resize(400, 500);
     }
+}
+
+void FullView::setResizeToApplet(bool resize)
+{
+    m_resizeToApplet = resize;
 }
 
 void FullView::resizeEvent(QResizeEvent *event)
@@ -326,28 +352,23 @@ void FullView::resizeEvent(QResizeEvent *event)
     qreal newWidth = 0;
     qreal newHeight = 0;
 
-    if (false && m_applet->aspectRatioMode() == Plasma::KeepAspectRatio) {
-        // The applet always keeps its aspect ratio, so let's respect it.
-        qreal ratio = m_applet->size().width() / m_applet->size().height();
-        qreal widthForCurrentHeight = (qreal)size().height() * ratio;
-        if (widthForCurrentHeight > size().width()) {
-            newHeight = size().width() / ratio;
-            newWidth = newHeight * ratio;
-        } else {
-            newWidth = widthForCurrentHeight;
-            newHeight = newWidth / ratio;
-        }
-    } else {
+    if (m_resizeToApplet) {
         newWidth = size().width();
         newHeight = size().height();
+    } else {
+        newWidth = m_applet->size().width();
+        newHeight = m_applet->size().height();
     }
     QSizeF newSize(newWidth, newHeight);
 
     // check if the rect is valid, or else it seems to try to allocate
     // up to infinity memory in exponential increments
+    //m_applet->setGeometry(QRectF(40, 40, geometry().width(), geometry().height()));
     if (newSize.isValid()) {
         m_applet->resize(QSizeF(newWidth, newHeight));
-        setSceneRect(m_applet->sceneBoundingRect());
+        if (m_resizeToApplet) {
+            setSceneRect(m_applet->sceneBoundingRect());
+        }
     }
 }
 
@@ -360,14 +381,16 @@ void FullView::closeEvent(QCloseEvent *event)
 void FullView::appletTransformedItself()
 {
     resize(m_applet->size().toSize());
-    setSceneRect(m_applet->sceneBoundingRect());
+    if (m_resizeToApplet) {
+        setSceneRect(m_applet->sceneBoundingRect());
+    }
 }
 
 void FullView::sceneRectChanged(const QRectF &rect)
 {
     Q_UNUSED(rect)
-    if (m_applet) {
-        setSceneRect(m_applet->sceneBoundingRect());
+    if (m_applet && m_resizeToApplet) {
+        setSceneRect(QRectF(QPointF(0, 0), geometry().size()));
     }
 }
 
