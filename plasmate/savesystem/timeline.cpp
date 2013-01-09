@@ -104,6 +104,14 @@ void TimeLine::loadTimeLine(const KUrl &dir)
     saveItem->setIdentifier(TimeLineItem::NotACommit);
     m_table->addItem(saveItem);
 
+    identifyCommits(m_table);
+
+    parentWidget()->show();
+}
+
+void TimeLine::identifyCommits(TableWidget *widget)
+{
+
     // Log gets the full git commit list
     if (m_gitRunner->log() != DvcsJob::JobSucceeded) {
         // handle error
@@ -153,7 +161,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
             date.remove("Date: ",Qt::CaseSensitive);
             toolTipText.prepend(i18n("Created on: %1", date) + "\n");
-;
+
             //Our format date is Tue Nov 6 23:17:56 2012 +0200"
             QStringList dateList = date.split(" ", QString::SkipEmptyParts);
             QDateTime tmpDateTime = QDateTime::fromString(dateList.at(2) + " " + dateList.at(1) + " " + dateList.at(4) +
@@ -174,13 +182,15 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
         commitItem->setToolTip(toolTipText);
 
-        m_table->addItem(commitItem);
+
+        //check if this is the last item
+        if (logIndex + 1  < commitLog.size()) {
+            // The last Item is maked as such.
+            commitItem->setText(i18n("First save point"));
+        }
+
+        widget->addItem(commitItem);
     }
-
-    // The last Item is maked as such.
-    commitItem->setText(i18n("First save point"));
-
-    parentWidget()->show();
 }
 
 QStringList TimeLine::listBranches() const
