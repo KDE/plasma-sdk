@@ -30,7 +30,7 @@ ImageLoader::ImageLoader(const KUrl& image, const QSize &size, QObject *parent)
 
 void ImageLoader::run()
 {
-    QImage image(m_image.path(), "PNG JPG GIF JPEG");
+    QImage image(m_image.path(), "PNG JPG GIF JPEG SVG SVGZ");
     QSize newSize = image.size();
 
     if (newSize.width() > m_size.width()) {
