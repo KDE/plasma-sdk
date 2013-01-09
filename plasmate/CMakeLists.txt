@@ -35,7 +35,6 @@ set (PlasMate_SRC
     sidebar.cpp
     savesystem/dvcsjob.cpp
     savesystem/gitrunner.cpp
-    savesystem/branchdialog.cpp
     savesystem/commitdialog.cpp
     savesystem/timelineitem.cpp
     savesystem/tabledelegate.cpp

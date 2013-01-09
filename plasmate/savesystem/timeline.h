@@ -173,6 +173,8 @@ private:
       */
     void resizeEvent(QResizeEvent * event);
 
+    QString branchDialog(bool *ok);
+
     KUrl        m_workingDir;
     GitRunner   *m_gitRunner;
     QString     m_currentBranch;

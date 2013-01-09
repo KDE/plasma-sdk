@@ -27,6 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KLocale>
 #include <KMenu>
 #include <KMessageBox>
+#include <KInputDialog>
 #include <Plasma/PackageMetadata>
 
 
@@ -45,7 +46,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "timelineitem.h"
 #include "dvcsjob.h"
 #include "gitrunner.h"
-#include "branchdialog.h"
 #include "commitdialog.h"
 
 TimeLine::TimeLine(QWidget *parent,
@@ -373,13 +373,12 @@ void TimeLine::moveToCommit()
         return;
     }
 
-    QPointer<BranchDialog> newBranch = new BranchDialog();
-    if (newBranch->exec() == KDialog::Rejected) {
+    bool ok;
+    const QString newBranchName = branchDialog(&ok);
+
+    if (!ok) {
         return;
     }
-
-    QString newBranchName = QString(newBranch->m_branchEdit->text());
-    delete newBranch;
 
     if (m_branches.contains(newBranchName)) {
         dialog = i18n("Cannot rename the section: a section with this name already exists.");
@@ -468,14 +467,13 @@ void TimeLine::renameBranch()
     QString branch = sender->text();
     branch.remove('&');
 
-    QPointer<BranchDialog> renameBranch = new BranchDialog();
 
-    if (renameBranch->exec() == KDialog::Rejected) {
+    bool ok;
+    const QString newBranchName = branchDialog(&ok);
+
+    if (!ok) {
         return;
     }
-
-    QString newBranchName = QString(renameBranch->m_branchEdit->text());
-    delete renameBranch;
 
     QString dialog = i18n("Cannot rename the section: a section with this name already exists.");
     KMessageBox::information(this, dialog);
@@ -491,16 +489,12 @@ void TimeLine::createBranch()
     QString branch = sender->text();
     branch.remove('&');
 
-    QPointer<BranchDialog> createBranch = new BranchDialog();
+    bool ok;
+    const QString newBranchName = branchDialog(&ok);
 
-    if (createBranch->exec() == KDialog::Rejected) {
-        delete createBranch;
+    if (!ok) {
         return;
     }
-
-    const QString newBranchName = QString(createBranch->m_branchEdit->text());
-    delete createBranch;
-
 
     const QString dialog = i18n("Cannot create section: a section with this name already exists.");
     KMessageBox::information(this, dialog);
@@ -583,6 +577,13 @@ void TimeLine::resizeEvent (QResizeEvent * event)
             }
         }
     }
+}
+
+QString TimeLine::branchDialog(bool *ok)
+{
+    QValidator *validator = new QRegExpValidator(QRegExp("[a-zA-Z0-9_.]*"));
+
+    return KInputDialog::getText(i18n("New Branch"), i18n("New branch name:"), "type here", ok, this, validator);
 }
 
 #include "moc_timeline.cpp"
