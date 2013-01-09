@@ -318,7 +318,7 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
 
 QString PackageModel::contentsWithSubdirRole(int indexRow) const
 {
-    if (m_package) {
+    if (m_package && m_topEntries.size() > indexRow) {
         QString path;
 
         foreach(const QString& content, m_structure->contentsPrefixPaths()) {

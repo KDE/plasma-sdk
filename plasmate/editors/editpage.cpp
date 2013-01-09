@@ -98,9 +98,13 @@ void EditPage::showTreeContextMenu(const QPoint&)
         return;
     }
 
-    const char *key = static_cast<const char *>(items.at(0).internalPointer());
-    // no key means its a top level item; an index of 0 means its the "New" entry
-    if (!key || items.at(0).row() == 0) {
+    const QStringList mimeTypeList = items.at(0).data(PackageModel::MimeTypeRole).toStringList();
+    const QStringList pathList = items.at(0).data(PackageModel::UrlRole).toStringList();
+
+    if (mimeTypeList.isEmpty() ||
+        pathList.isEmpty() ||
+        mimeTypeList.at(0).startsWith("[plasmate]/") ||
+        !QFile::exists(pathList.at(0))) {
         return;
     }
 
