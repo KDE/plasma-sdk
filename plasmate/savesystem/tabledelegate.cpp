@@ -49,8 +49,8 @@ void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
         foreColor = option.palette.color(QPalette::Disabled, QPalette::Text);
         disabled = true;
 
-        // Since the TimeLine doesnt allow selectable items, because you dont actually "are" on a given savepoint,
-        // we dont actually need this chek.
+        // Since the TimeLine doesn't allow selectable items, because you don't actually "are" on a given savepoint,
+        // we don't actually need this check.
     /*} else if (option.state & (QStyle::State_HasFocus | QStyle::State_Selected)) {
         backBrush = option.palette.brush(QPalette::Highlight);
         foreColor = option.palette.color(QPalette::HighlightedText);*/

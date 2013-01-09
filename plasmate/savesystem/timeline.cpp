@@ -561,7 +561,7 @@ void TimeLine::resizeEvent (QResizeEvent * event)
     QSize newSize = event->size();
     //qDebug() << "New size: " << newSize;
     //qDebug() << "m_table size:" << m_table->size();
-    //qDebug() << "m_table total lenght" << m_table->totalLenght();
+    //qDebug() << "m_table total length" << m_table->totalLenght();
 
     bool vertical = ((m_table->location() == Qt::RightDockWidgetArea) ||
                      (m_table->location() == Qt::LeftDockWidgetArea));

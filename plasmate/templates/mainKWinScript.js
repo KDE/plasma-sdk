@@ -18,7 +18,7 @@
 */
 
 /*
- * For more informations about the KWin Scripting please take a look at the below lines
+ * For more information about the KWin Scripting please take a look at the below lines
  * Tutorial: http://techbase.kde.org/Development/Tutorials/KWin/Scripting
  * Api: http://techbase.kde.org/Development/Tutorials/KWin/Scripting/API_4.9
 */

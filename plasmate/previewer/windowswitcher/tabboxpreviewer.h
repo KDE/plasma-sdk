@@ -35,7 +35,7 @@ public:
     /**
      * KWin::TabBox::LayoutPreview requires the fullpath of our main QML file in order to load the previewer
      * so here we retrieve the fullpath inside from the projectpath. For that task we will use the relative
-     * path from our mail QML file, which is located inside the metadata.dekstop file.
+     * path from our mail QML file, which is located inside the metadata.desktop file.
      **/
     QString packageMainFile(const QString &projectpath);
 

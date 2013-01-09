@@ -70,14 +70,14 @@ void RemoteInstaller::doInstall()
 void RemoteInstaller::doPlasmaPkg(KJob* job)
 {
     if (job->error() != 0) {
-        //an error has occured from the previous job.
+        //an error has occurred from the previous job.
         //show the error to the user.
         KMessageBox::error(m_widget, job->errorText());
     }
 
     KIO::NetAccess::fish_execute(m_execUrl, m_plasmaPkgUrl, m_widget);
 
-    //an error has occured.
+    //an error has occurred.
     if (KIO::NetAccess::lastError()) {
         //show the error
         KMessageBox::error(m_widget, KIO::NetAccess::lastErrorString());

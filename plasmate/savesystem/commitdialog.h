@@ -29,7 +29,7 @@
   * Simple class used to display a dialog window where the user will write comments
   * about the commit he wants to perform.
   * The widget is composed of a QLineEdit, used to insert a bried ( and required )
-  * comment, and a QPlainTexEdit field, used to give more detailed informations.
+  * comment, and a QPlainTexEdit field, used to give more detailed information.
   *
   * @author Diego [Po]lentino Casella <polentino911@gmail.com>
   */

@@ -383,7 +383,7 @@ void KConfigXtEditor::entryItemWidgetState(QTreeWidgetItem *currentItem, QTreeWi
 {
 
     //we need to check every button/item individually because,
-    //the first time that the signal will be emited the previousItem
+    //the first time that the signal will be emitted the previousItem
     //will be 0, because there is no previousItem at that time, only
     //the currentItem is valid
 

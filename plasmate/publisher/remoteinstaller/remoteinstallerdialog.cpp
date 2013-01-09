@@ -27,7 +27,7 @@ RemoteInstallerDialog::RemoteInstallerDialog(QWidget* parent)
     setMainWidget(widget);
 
     //we don't want the ok button to be enabled
-    //before we get all the necessary informations
+    //before we get all the necessary information
     m_ui.installButton->setEnabled(false);
 
     connect(m_ui.usernameLineEdit, SIGNAL(textChanged(QString)), this, SLOT(checkInformations()));
