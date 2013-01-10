@@ -273,7 +273,7 @@ void SigningWidget::createKey(const QString &param)
 
     //There is been an error with the generation of the key
     if (!error.isEmpty()) {
-        KMessageBox::error(0, i18n("Your key has not been create because of the following error: %1", error));
+        KMessageBox::error(0, i18n("Your key has not been created because of the following error: %1", error));
     }
 }
 
