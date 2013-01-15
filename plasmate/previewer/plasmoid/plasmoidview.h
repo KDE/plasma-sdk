@@ -39,7 +39,7 @@ public:
     PlasmoidView(QWidget *parent = 0);
     ~PlasmoidView();
 
-    void addApplet(const QString &name, const QVariantList &args = QVariantList());
+    void addApplet(const QString &name, const QString &containment =  QString(), const QVariantList &args = QVariantList());
     void clearApplets();
 
 private slots:

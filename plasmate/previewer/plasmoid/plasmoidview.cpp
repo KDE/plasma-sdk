@@ -26,7 +26,7 @@
 
 #include <QFileInfo>
 #include <QDir>
-
+#include <KServiceTypeTrader>
 #include <Plasma/Containment>
 
 PlasmoidView::PlasmoidView(QWidget *parent)
@@ -118,8 +118,16 @@ KConfigGroup PlasmoidView::containmentStorageGroup() const
     return KConfigGroup(&stored, m_currentPath);
 }
 
-void PlasmoidView::addApplet(const QString &name, const QVariantList &args)
+void PlasmoidView::addApplet(const QString &name, const QString &containment, const QVariantList &args)
 {
+    if (!containment.isEmpty()) {
+        KService::List offers = KServiceTypeTrader::self()->query("Plasma/Containment", "[X-KDE-PluginInfo-Name] == '" + containment + "'");
+        if (offers.count() > 0) {
+            m_containment = m_corona.addContainment(containment);
+            setScene(m_containment->scene());
+        }
+    }
+
     if (m_applet) {
         if (m_applet->pluginName() == name) {
             return;

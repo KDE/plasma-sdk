@@ -114,12 +114,14 @@ int main(int argc, char **argv)
     QString pluginName = args->arg(0);
 
     QVariantList appletArgs;
+
+    const QString containment = args->getOption("containment");
     for (int i = 1; i < args->count(); ++i) {
         appletArgs << args->arg(i);
     }
 
     PlasmoidView preview;
-    preview.addApplet(pluginName, appletArgs);
+    preview.addApplet(pluginName, containment, appletArgs);
     preview.show();
 
     QAction *action = KStandardAction::quit(&app, SLOT(quit()), &preview);
