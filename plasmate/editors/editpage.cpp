@@ -294,38 +294,50 @@ bool EditPage::hasExtension(const QString& filename)
 }
 
 
-void EditPage::loadFile(const KUrl &path, const QString &mimetype)
+void EditPage::loadFile(const KUrl &path)
 {
-    kDebug() << "Loading file: " << path << mimetype;
-    // mimetype?
-    QString _mimetype;
+    m_path = path;
 
-    if (mimetype.isEmpty()) {
-        KIO::JobFlags flags = KIO::HideProgressInfo;
-        KIO::MimetypeJob *mjob = KIO::mimetype(path, flags);
-        mjob->exec();
+    kDebug() << "Loading file: " << path;
 
-        if (mjob->error()) {
-            kWarning() << "Error retrieving mimetype from:" << path << ": " << mjob->errorText();
-            return;
-        }
-        _mimetype = mjob->mimetype();
-        kDebug() << "loaded mimetype:" << _mimetype;
-    } else {
-        _mimetype = mimetype;
+    KIO::JobFlags flags = KIO::HideProgressInfo;
+    KIO::MimetypeJob *mjob = KIO::mimetype(path, flags);
+
+    connect(mjob, SIGNAL(finished(KJob*)), this, SLOT(mimetypeJobFinished(KJob*)));
+}
+
+void EditPage::mimetypeJobFinished(KJob *job)
+{
+    KIO::MimetypeJob *mjob = qobject_cast<KIO::MimetypeJob *>(job);
+
+    if (!job) {
+        return;
     }
 
-    KService::List offers = KMimeTypeTrader::self()->query(_mimetype, "KParts/ReadWritePart");
-    kDebug() << _mimetype;
+    if (mjob->error()) {
+        return;
+    }
+
+    m_mimetype = mjob->mimetype();
+
+    if (m_mimetype.isEmpty()) {
+        kDebug() << "Could not detect the file's mimetype";
+        return;
+    }
+
+    kDebug() << "loaded mimetype: " << m_mimetype;
+
+    KService::List offers = KMimeTypeTrader::self()->query(m_mimetype, "KParts/ReadWritePart");
     if (offers.isEmpty()) {
-        offers = KMimeTypeTrader::self()->query(_mimetype, "KParts/ReadOnlyPart");
+        offers = KMimeTypeTrader::self()->query(m_mimetype, "KParts/ReadOnlyPart");
     }
+
     if (!offers.isEmpty()) {
         //create the part using offers.at(0)
         //kDebug() << offers.at(0);
         //offers.at(0)->createInstance(parentWidget);
-        emit loadEditor(offers, path);
+        emit loadEditor(offers, m_path);
         return;
     }
-    kDebug() << "loading" << path;
+    kDebug() << "loading" << m_path;
 }
