@@ -453,8 +453,8 @@ int EngineExplorer::showData(QStandardItem* parent, Plasma::DataEngine::Data dat
     while (it.hasNext()) {
         it.next();
         parent->setChild(rowCount, 1, new QStandardItem(it.key()));
-        if (it.value().canConvert(QVariant::List)) {
-            foreach(const QVariant &var, it.value().toList()) {
+        if (it.value().canConvert(QVariant::List) && ! it.value().type() == QVariant::StringList) {
+            foreach (const QVariant &var, it.value().toList()) {
                 QStandardItem *item = new QStandardItem(convertToString(var));
                 item->setToolTip(item->text());
                 parent->setChild(rowCount, 2, item);
