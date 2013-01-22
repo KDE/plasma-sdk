@@ -452,12 +452,18 @@ int EngineExplorer::showData(QStandardItem* parent, Plasma::DataEngine::Data dat
     while (it.hasNext()) {
         it.next();
         parent->setChild(rowCount, 1, new QStandardItem(it.key()));
-        if (it.value().canConvert(QVariant::List) && ! it.value().type() == QVariant::StringList) {
+        if (it.value().canConvert(QVariant::List) /* && ! it.value().type() == QVariant::StringList
+                                                     */) {
+            bool first = true;
             foreach (const QVariant &var, it.value().toList()) {
                 QStandardItem *item = new QStandardItem(convertToString(var));
+                if (!first) {
+                    parent->setChild(rowCount, 1, new QStandardItem(QString()));
+                }
                 item->setToolTip(item->text());
                 parent->setChild(rowCount, 2, item);
                 parent->setChild(rowCount, 3, new QStandardItem(var.typeName()));
+                first = false;
                 ++rowCount;
             }
         } else {
