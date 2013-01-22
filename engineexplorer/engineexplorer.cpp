@@ -209,7 +209,7 @@ void EngineExplorer::showEngine(const QString& name)
 
 void EngineExplorer::addSource(const QString& source)
 {
-    kDebug() << "adding" << source;
+    //kDebug() << "adding" << source;
     QList<QStandardItem*> items = m_dataModel->findItems(source, 0);
     if (!items.isEmpty()) {
         kDebug() << "er... already there?";
@@ -219,10 +219,9 @@ void EngineExplorer::addSource(const QString& source)
     QStandardItem* parent = new QStandardItem(source);
     m_dataModel->appendRow(parent);
 
-    kDebug() << "getting data for source " << source;
-
+    //kDebug() << "getting data for source " << source;
     if (!m_requestingSource || m_sourceRequester->text() != source) {
-        kDebug() << "connecting up now";
+        //kDebug() << "connecting up now";
         m_engine->connectSource(source, this);
     }
 
