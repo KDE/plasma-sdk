@@ -91,10 +91,17 @@ void StartPage::setupWidgets()
     m_ui.authorTextField->setText(userName);
     m_ui.emailTextField->setText(userEmail);
 
-    m_ui.radioButtonJs->setChecked(cg.readEntry("radioButtonJsChecked", false));
-    m_ui.radioButtonPy->setChecked(cg.readEntry("radioButtonPyChecked", false));
-    m_ui.radioButtonRb->setChecked(cg.readEntry("radioButtonRbChecked", false));
-    m_ui.radioButtonDe->setChecked(cg.readEntry("radioButtonDeChecked", true));
+    const QString radioButtonChecked = cg.readEntry("radioButtonChecked");
+
+    if (radioButtonChecked == "Js") {
+        m_ui.radioButtonJs->setChecked(true);
+    } else if (radioButtonChecked == "Py") {
+        m_ui.radioButtonPy->setChecked(true);
+    } else if (radioButtonChecked == "Rb") {
+        m_ui.radioButtonRb->setChecked(true);
+    } else if (radioButtonChecked == "De") {
+        m_ui.radioButtonDe->setChecked(true);
+    }
 
     m_ui.cancelNewProjectButton->setIcon(KIcon("draw-arrow-back"));
     m_ui.newProjectButton->setIcon(KIcon("dialog-ok"));
@@ -556,20 +563,26 @@ void StartPage::saveNewProjectPreferences(const QString &path)
     preferences.writeEntry("Username", userName());
     preferences.writeEntry("Email", userEmail());
 
-    preferences.writeEntry("radioButtonJsChecked", selectedJsRadioButton());
-    preferences.writeEntry("radioButtonPyChecked", selectedPyRadioButton());
-    preferences.writeEntry("radioButtonRbChecked", selectedRbRadioButton());
-    preferences.writeEntry("radioButtonDeChecked", selectedDeRadioButton());
+    QString radioButtonChecked;
+    if (selectedJsRadioButton()) {
+        radioButtonChecked = "Js";
+    } else if (selectedPyRadioButton()) {
+        radioButtonChecked = "Py";
+    } else if (selectedRbRadioButton()) {
+        radioButtonChecked = "Rb";
+    } else if (selectedDeRadioButton()) {
+        radioButtonChecked = "De";
+    }
+
+
+    preferences.writeEntry("radioButtonChecked", radioButtonChecked);
     preferences.sync();
 
     KConfig c(path+ '/' + PROJECTRC);
     KConfigGroup projectrcPreferences(&c, "ProjectDefaultPreferences");
     projectrcPreferences.writeEntry("Username", userName());
     projectrcPreferences.writeEntry("Email", userEmail());
-    projectrcPreferences.writeEntry("radioButtonJsChecked", selectedJsRadioButton());
-    projectrcPreferences.writeEntry("radioButtonPyChecked", selectedPyRadioButton());
-    projectrcPreferences.writeEntry("radioButtonRbChecked", selectedRbRadioButton());
-    projectrcPreferences.writeEntry("radioButtonDeChecked", selectedDeRadioButton());
+    projectrcPreferences.writeEntry("radioButtonChecked", radioButtonChecked);
     projectrcPreferences.sync();
 }
 void StartPage::ensureProjectrcFileExists(const QString& projectPath)

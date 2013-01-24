@@ -907,13 +907,14 @@ void MainWindow::checkMetafile(const QString &path)
     KConfig preferencesPath(dir.path() +'/'+ PROJECTRC);
     KConfigGroup preferences(&preferencesPath, "ProjectDefaultPreferences");
     QString api;
-    if (preferences.readEntry("radioButtonJsChecked", false)) {
+    const QString radioButtonChecked = preferences.readEntry("radioButtonChecked", "De");
+    if (radioButtonChecked == "Js") {
         api.append("javascript");
-    } else if (preferences.readEntry("radioButtonPyChecked", false)) {
+    } else if (radioButtonChecked == "Py") {
         api.append("python");
-    } else if (preferences.readEntry("radioButtonRbChecked", false)) {
+    } else if (radioButtonChecked == "Rb") {
         api.append("ruby-script");
-    } else if (preferences.readEntry("radioButtonDeChecked", true)) {
+    } else if (radioButtonChecked == "De") {
         api.append("declarativeappletscript");
     }
 
@@ -940,13 +941,13 @@ void MainWindow::checkProjectrc()
     KConfigGroup meta(&metafile, "Desktop Entry");
     api = meta.readEntry("X-Plasma-API");
     if (api == QString("javascript")) {
-        preferences.writeEntry("radioButtonJsChecked", true);
+        preferences.writeEntry("radioButtonChecked", "Js");
     } else if (api == QString("python")) {
-        preferences.writeEntry("radioButtonPyChecked", true);
+        preferences.writeEntry("radioButtonChecked", "Py");
     } else if (api == QString("ruby-script")) {
-          preferences.writeEntry("radioButtonRbChecked", true);
+          preferences.writeEntry("radioButtonChecked", "Rb");
     } else if (api == QString("declarativeappletscript")) {
-          preferences.writeEntry("radioButtonDeChecked", true);
+          preferences.writeEntry("radioButtonChecked", "De");
     }
     preferences.sync();
 }
