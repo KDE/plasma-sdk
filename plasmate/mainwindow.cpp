@@ -1041,7 +1041,7 @@ void MainWindow::customMessageHandler(QtMsgType type, const QString& msg)
                 abort();
         }
 
-        QFile outFile(KStandardDirs::locate("tmp","") + "plasmatepreviewerlog.txt");
+        QFile outFile(KStandardDirs::locateLocal("tmp","") + "plasmatepreviewerlog.txt");
 
         outFile.open(QIODevice::WriteOnly | QIODevice::Append);
         QTextStream ts(&outFile);

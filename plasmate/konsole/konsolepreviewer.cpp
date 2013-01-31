@@ -60,7 +60,7 @@ void KonsolePreviewer::clearOutput()
 
 void KonsolePreviewer::clearTmpFile()
 {
-    QFile f(KStandardDirs::locate("tmp", "") + "/plasmatepreviewerlog.txt");
+    QFile f(KStandardDirs::locateLocal("tmp", "") + "/plasmatepreviewerlog.txt");
     f.resize(0);
     f.close();
 }
@@ -80,7 +80,7 @@ void KonsolePreviewer::populateKonsole()
 
 QString KonsolePreviewer::takeOutput() const
 {
-    QFile file(KStandardDirs::locate("tmp", "") + "/plasmatepreviewerlog.txt");
+    QFile file(KStandardDirs::locateLocal("tmp", "") + "/plasmatepreviewerlog.txt");
     if (file.open(QIODevice::ReadOnly)) {
         QString content = file.readAll();
         file.close();
@@ -100,6 +100,6 @@ void KonsolePreviewer::saveOutput()
         return;
     }
 
-    KIO::copy(KUrl(KStandardDirs::locate("tmp", "") + "/plasmatepreviewerlog.txt"), destination, KIO::Overwrite);
+    KIO::copy(KUrl(KStandardDirs::locateLocal("tmp", "") + "/plasmatepreviewerlog.txt"), destination, KIO::Overwrite);
 }
 
