@@ -27,10 +27,16 @@ RemoteInstaller::RemoteInstaller(const QString& username, const QString& hostnam
     m_execUrl.setUrl("fish://" + hostname);
     m_execUrl.setUserName(username);
 
-    //this will be out temp directory
-    const QString temporaryDirectory(KStandardDirs::locate("tmp", "") + "plasmaremoteinstaller/");
-    //we need a temporary directory
-    //all users have access into /tmp/kde-$username
+    //this will be out temp directory. First we need to create a temporary file, and then find its
+    //absolute path.
+    //Q: Why don't we use the something like
+    //const QString temporaryDirectory(KStandardDirs::locate("tmp", "") + "plasmaremoteinstaller/");
+    //A: The following code is running in our system. That means that the temporary directory will be something
+    //like /tmp/kde-$username. If my user is named foo and the other user is named bar
+    //then there is no user foo on the other system. So the /tmp/kde-foo doesn't exist.
+    QString temporaryDirectory = QDir::tempPath();
+    temporaryDirectory.append("/plasmaremoteinstaller");
+
     KUrl tmpUrl = m_execUrl;
     tmpUrl.addPath(temporaryDirectory);
     if (!KIO::NetAccess::exists(tmpUrl, KIO::NetAccess::DestinationSide, m_widget)) {
