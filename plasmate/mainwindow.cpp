@@ -259,8 +259,8 @@ void MainWindow::toggleActions()
 {
     KDesktopFile desktopFile(m_packagePath + "/metadata.desktop");
     QString projectApi = desktopFile.desktopGroup().readEntry("X-Plasma-API", QString());
-    if (projectApi == "python") {
-        //Python bindings doesn't support kDebug,
+    if (projectApi == "python" || projectApi == "ruby-script") {
+        //Python and ruby bindings doesn't support kDebug,
         //so the konsole previewer cannot retrieve any debug output.
         //Until this issue is being fixed we are hiding the konsole previewer.
         actionCollection()->action("konsole")->setVisible(false);
