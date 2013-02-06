@@ -725,6 +725,14 @@ void MainWindow::loadProject(const QString &path)
     KService service(packagePath + "metadata.desktop");
     QStringList types = service.serviceTypes();
 
+    if (types.isEmpty()) {
+        const QString errorText = i18n("Your metadata.desktop file doesn't contain a X-KDE-ServiceTypes entry,"
+                                " your package is invalid");
+
+        KMessageBox::error(this, errorText);
+        return;
+    }
+
     // Workaround for Plasma::PackageStructure not recognizing Plasma/PopupApplet as a valid type
     QString actualType;
     if (types.contains("KWin/WindowSwitcher")) {
