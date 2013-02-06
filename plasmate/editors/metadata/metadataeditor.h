@@ -39,9 +39,13 @@ public:
     MetaDataEditor(QWidget *parent = 0);
     ~MetaDataEditor();
 
+    enum apiModes {
+        coreApi,
+        uiApi
+    };
+
     void setFilename(const QString &filename);
-    enum apiModes{ coreApi, uiApi };
-    QString formatApi(QString &api, apiModes apiMode);
+    QString formatApi(const QString &api, apiModes apiMode);
     const QString filename();
     const QString api();
     bool isValidMetaData();
@@ -55,11 +59,13 @@ private slots:
     void serviceTypeChanged();
 
 private:
-    Ui::MetaDataEditor *view;
+    Ui::MetaDataEditor *m_view;
     QString m_filename;
-    Plasma::PackageMetadata *metadata;
-    QStringList apis;
-    QStringList categories;
+    Plasma::PackageMetadata *m_metadata;
+    QStringList m_apis;
+    QStringList m_categories;
+
+    void initCatergories(const QString& serviceType);
 };
 
 #endif // METADATAEDITOR__H
