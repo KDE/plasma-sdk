@@ -112,7 +112,6 @@ install(PROGRAMS plasmate.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES plasmateui.rc  DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 install(FILES plasmate.knsrc DESTINATION ${CONFIG_INSTALL_DIR})
 
-install( FILES previewer/windowswitcher/tabboxpreviewer.h DESTINATION ${INCLUDE_INSTALL_DIR})
 install( FILES previewer/windowswitcher/thumbnails/konqueror.png
 previewer/windowswitcher/thumbnails/kmail.png
 previewer/windowswitcher/thumbnails/systemsettings.png
