@@ -74,7 +74,6 @@ public Q_SLOTS:
     void quit();
     void loadProject(const QString &name);
     void checkProjectrc();
-    void customMessageHandler(QtMsgType type, const QString& msg);
 
 Q_SIGNALS:
     void newSavePointClicked();

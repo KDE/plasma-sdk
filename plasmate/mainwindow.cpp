@@ -174,6 +174,11 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     saveProjectState();
     KParts::MainWindow::closeEvent(event);
+    //This is the last widget which will close before plasmate
+    //exits. Even when we go back to the startpage, we just change
+    //the mainwidget (check the method MainWindow::CentralContaineri::switchTo)
+    //so its safe now to exit the application
+    qApp->exit();
 }
 
 void MainWindow::toggleDocumentation()
@@ -447,7 +452,7 @@ void MainWindow::saveEditorData()
 void MainWindow::saveAndRefresh()
 {
     //in every new save clear the konsole.
-    m_konsoleWidget->clearTmpFile();
+    m_konsoleWidget->clearOutput();
 
     saveEditorData();
     if (m_previewerWidget) {
@@ -669,6 +674,10 @@ void MainWindow::loadKConfigXtEditor(const KUrl& target)
 
 void MainWindow::toggleKonsolePreviewer()
 {
+    if (!m_konsoleWidget) {
+        return;
+    }
+
     if(m_konsoleWidget->isVisible()) {
         m_konsoleWidget->setVisible(false);
     } else {
@@ -847,9 +856,8 @@ void MainWindow::loadProject(const QString &path)
 
     //initialize the konsole previewer
     m_konsoleWidget = createKonsoleFor(previewerType);
-
-    //after the init, cleat the tmp file
-    m_konsoleWidget->clearTmpFile();
+    //after the init, cleat the Output
+    m_konsoleWidget->clearOutput();
 
     // initialize previewer
     delete m_previewerWidget;
@@ -859,9 +867,7 @@ void MainWindow::loadProject(const QString &path)
         addDockWidget(Qt::LeftDockWidgetArea, m_previewerWidget);
         m_previewerWidget->showPreview(packagePath);
         m_previewerWidget->setVisible(showPreview);
-
         //now do the relative stuff for the konsole
-        m_konsoleWidget->populateKonsole();
         connect(m_previewerWidget, SIGNAL(showKonsole()), this, SLOT(toggleKonsolePreviewer()));
         addDockWidget(Qt::BottomDockWidgetArea, m_konsoleWidget);
     }
@@ -1006,59 +1012,20 @@ Previewer* MainWindow::createPreviewerFor(const QString& projectType)
 
 KonsolePreviewer* MainWindow::createKonsoleFor(const QString& projectType)
 {
-    KonsolePreviewer* konsole = 0;
+    KonsolePreviewer *konsole = 0;
     if (projectType.contains("KWin/WindowSwitcher")) {
-        konsole = new KonsolePreviewer(i18nc("Window Title", "Window Switcher Previewer"), this);
+        konsole = new KonsolePreviewer(i18nc("Window Title", "Window Switcher Previewer"));
     } else if (projectType.contains("Plasma/Applet")) {
-        konsole = new KonsolePreviewer(i18n("Previewer Output"), this);
+        konsole = new KonsolePreviewer(i18n("Previewer Output"));
     } else if (projectType == "Plasma/Runner") {
-        konsole = new KonsolePreviewer(i18n("Previewer Output"), this);
+        konsole = new KonsolePreviewer(i18n("Previewer Output"));
     }
 
     if (konsole) {
+        konsole->setParent(this);
         konsole->setObjectName("Previewer Output");
-        //after the init, clear the tmp file
-        konsole->clearTmpFile();
     }
 
     return konsole;
 }
 
-void MainWindow::customMessageHandler(QtMsgType type, const QString& msg)
-{
-    if (QString(msg).startsWith("plasmate") || //don't include the plasmate specific output
-        QString(msg).startsWith("Object::") || // don't include QObject warnings
-        QString(msg).startsWith("QGraphicsScene::") || //don't include QGraphicsScene warnings
-        QString(msg).startsWith(" X Error")) //don't include silly X errors
-    {
-       std::cout << msg.toLocal8Bit().data() << std::endl;
-    } else {
-        QString txt;
-        switch (type) {
-            case QtDebugMsg:
-                txt = QString("Debug: %1").arg(msg);
-                break;
-            case QtWarningMsg:
-                txt = QString("Warning: %1").arg(msg);
-                break;
-            case QtCriticalMsg:
-                txt = QString("Critical: %1").arg(msg);
-                break;
-            case QtFatalMsg:
-                txt = QString("Fatal: %1").arg(msg);
-                abort();
-        }
-
-        QFile outFile(KStandardDirs::locateLocal("tmp","") + "plasmatepreviewerlog.txt");
-
-        outFile.open(QIODevice::WriteOnly | QIODevice::Append);
-        QTextStream ts(&outFile);
-        ts << txt << endl;
-        outFile.close();
-
-        //populate the konsole
-        if (m_konsoleWidget) {
-            m_konsoleWidget->populateKonsole();
-        }
-    }
-}

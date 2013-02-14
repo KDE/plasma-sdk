@@ -15,22 +15,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <QWeakPointer>
 #include <KDebug>
 #include <KApplication>
 #include <KAboutData>
 #include <KLocale>
 #include <KCmdLineArgs>
 #include "mainwindow.h"
-
-QWeakPointer<MainWindow> mainWindow;
-
-void customMessageHandler(QtMsgType type, const char *msg)
-{
-    if(mainWindow.data()) {
-        mainWindow.data()->customMessageHandler(type, msg);
-    }
-}
+#include "konsole/konsolepreviewer.h"
 
 int main(int argc, char *argv[])
 {
@@ -59,10 +50,9 @@ int main(int argc, char *argv[])
     KCmdLineArgs::parsedArgs();
     KApplication app;
 
-    mainWindow = new MainWindow();
-    qInstallMsgHandler(customMessageHandler);
-    mainWindow.data()->show();
-
+    qInstallMsgHandler(KonsolePreviewer::customMessageHandler);
+    MainWindow *mainWindow = new MainWindow();
+    mainWindow->show();
     return app.exec();
 }
 

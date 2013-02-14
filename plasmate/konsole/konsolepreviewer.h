@@ -1,5 +1,5 @@
 /*
- *   Copyright 2012 Giorgos Tsiapaliwkas <terietor@gmail.com>
+ *   Copyright 2012 Giorgos Tsiapaliokas <terietor@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -21,6 +21,8 @@
 #define KONSOLEPREVIEWER_H
 
 #include <QDockWidget>
+#include <QEvent>
+#include <QWeakPointer>
 
 class KTextEdit;
 
@@ -30,16 +32,32 @@ class KonsolePreviewer : public QDockWidget {
 
 public:
     KonsolePreviewer(const QString & title, QWidget *parent = 0);
+    ~KonsolePreviewer();
 
+    enum EventType {
+        MessageEventType = QEvent::User + 1
+    };
+
+    static void customMessageHandler(QtMsgType type, const char *msg);
+    static QWeakPointer<KonsolePreviewer> msgHandler;
+
+    void debugMessage(QtMsgType type, const char *msg);
+
+protected:
+    virtual void customEvent(QEvent *event);
 public Q_SLOTS:
     void clearOutput();
-    void clearTmpFile();
-    void populateKonsole();
     void saveOutput();
 
 private:
     KTextEdit *m_textEdit;
-    QString takeOutput() const;
 };
 
+class KonsolePreviewerDebugEvent: public QEvent
+{
+public:
+    KonsolePreviewerDebugEvent(const QString& debugOutput);
+    ~KonsolePreviewerDebugEvent();
+    QString debugOutput;
+};
 #endif // KONSOLEPREVIEWER_H

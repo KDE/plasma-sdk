@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Giorgos Tsiapaliwkas <terietor@gmail.com>
+ * Copyright 2012 Giorgos Tsiapaliokas <terietor@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,6 +12,9 @@
 
 #include <QVBoxLayout>
 #include <QFile>
+#include <QCoreApplication>
+#include <QMutexLocker>
+
 #include <KAction>
 #include <KFileDialog>
 #include <KMessageBox>
@@ -21,7 +24,10 @@
 #include <KToolBar>
 #include <KUrl>
 #include <KUser>
-#include <KIO/CopyJob>
+
+#include <iostream>
+
+QWeakPointer<KonsolePreviewer> KonsolePreviewer::msgHandler;
 
 KonsolePreviewer::KonsolePreviewer(const QString & title, QWidget *parent)
         : QDockWidget(title, parent),
@@ -36,7 +42,7 @@ KonsolePreviewer::KonsolePreviewer(const QString & title, QWidget *parent)
     toolBar->addAction(clear);
     toolBar->addAction(save);
 
-    m_textEdit = new KTextEdit();
+    m_textEdit = new KTextEdit(this);
     //don't let the user modify the output
     m_textEdit->setReadOnly(true);
     //make the background white
@@ -50,46 +56,18 @@ KonsolePreviewer::KonsolePreviewer(const QString & title, QWidget *parent)
     QWidget *tmpWidget = new QWidget(this);
     tmpWidget->setLayout(layout);
     setWidget(tmpWidget);
+
+    KonsolePreviewer::msgHandler = this;
+}
+
+KonsolePreviewer::~KonsolePreviewer()
+{
 }
 
 void KonsolePreviewer::clearOutput()
 {
-    clearTmpFile();
     m_textEdit->clear();
 }
-
-void KonsolePreviewer::clearTmpFile()
-{
-    QFile f(KStandardDirs::locateLocal("tmp", "") + "/plasmatepreviewerlog.txt");
-    f.resize(0);
-    f.close();
-}
-
-
-void KonsolePreviewer::populateKonsole()
-{
-    m_textEdit->setText(takeOutput());
-
-
-    //move the scrollbar automatically,
-    //in the end of the output
-    QTextCursor c =  m_textEdit->textCursor();
-    c.movePosition(QTextCursor::End);
-    m_textEdit->setTextCursor(c);
-}
-
-QString KonsolePreviewer::takeOutput() const
-{
-    QFile file(KStandardDirs::locateLocal("tmp", "") + "/plasmatepreviewerlog.txt");
-    if (file.open(QIODevice::ReadOnly)) {
-        QString content = file.readAll();
-        file.close();
-        return content;
-    }
-
-    return QString();
-}
-
 
 void KonsolePreviewer::saveOutput()
 {
@@ -100,6 +78,70 @@ void KonsolePreviewer::saveOutput()
         return;
     }
 
-    KIO::copy(KUrl(KStandardDirs::locateLocal("tmp", "") + "/plasmatepreviewerlog.txt"), destination, KIO::Overwrite);
+    m_textEdit->toPlainText();
+    QFile f(destination.pathOrUrl());
+    f.open(QIODevice::ReadWrite);
+    f.write(m_textEdit->toPlainText().toAscii());
 }
 
+void KonsolePreviewer::customMessageHandler(QtMsgType type, const char* msg)
+{
+    static QMutex mutex;
+    QMutexLocker locker(&mutex);
+
+    if (KonsolePreviewer::msgHandler) {
+        KonsolePreviewer::msgHandler.data()->debugMessage(type, msg);
+    }
+}
+
+void KonsolePreviewer::debugMessage(QtMsgType type, const char *msg)
+{
+    QString txt;
+
+    if (QString(msg).startsWith("plasmate") || //don't include the plasmate specific output
+        QString(msg).startsWith("Object::") || // don't include QObject warnings
+        QString(msg).startsWith("QGraphicsScene::") || //don't include QGraphicsScene warnings
+        QString(msg).startsWith(" X Error")) //don't include silly X errors
+    {
+       std::cout << msg << std::endl;
+    } else {
+        switch (type) {
+            case QtDebugMsg:
+                txt = QString("Debug: %1").arg(msg);
+                break;
+            case QtWarningMsg:
+                txt = QString("Warning: %1").arg(msg);
+                break;
+            case QtCriticalMsg:
+                txt = QString("Critical: %1").arg(msg);
+                break;
+            case QtFatalMsg:
+                txt = QString("Fatal: %1").arg(msg);
+                abort();
+        }
+    }
+    if (KonsolePreviewer::msgHandler) {
+        KonsolePreviewerDebugEvent *e = new KonsolePreviewerDebugEvent(txt);
+        QCoreApplication::postEvent(this, e);
+    }
+}
+
+void KonsolePreviewer::customEvent(QEvent *event)
+{
+    if (static_cast<KonsolePreviewer::EventType>(event->type()) == KonsolePreviewer::MessageEventType) {
+        if (!m_textEdit) {
+            return;
+        }
+        m_textEdit->append(dynamic_cast<KonsolePreviewerDebugEvent *>(event)->debugOutput);
+    }
+}
+
+KonsolePreviewerDebugEvent::KonsolePreviewerDebugEvent(const QString& debugOutput)
+        :QEvent(static_cast<QEvent::Type>(KonsolePreviewer::MessageEventType))
+{
+    this->debugOutput = debugOutput;
+}
+
+KonsolePreviewerDebugEvent::~KonsolePreviewerDebugEvent()
+{
+}
