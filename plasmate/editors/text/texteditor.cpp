@@ -28,6 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 #include <KTextEditor/View>
 
 #include <QAction>
+#include <KActionCollection>
 
 TextEditor::TextEditor(KTextEditor::Document *editorPart, PackageModel *model, QWidget *parent)
         : QWidget(parent)
@@ -91,6 +92,16 @@ void TextEditor::modifyToolBar(KTextEditor::View *view)
     //A:because Plasmate doesn't use actions like save and save as, automatically it saves
     //the projects
 
+
+    QStringList names;
+    names << "file_save" << "file_save_as";
+    foreach(const QString& actionName, names) {
+        view->actionCollection()->takeAction(view->action(actionName.toLocal8Bit().data()));
+    }
+    //in case of API changes or whatever keep the previous solution
+    //with the new solution look above we also hide the actions from the configure shortcuts
+    //check BUG: 316281
+    /*
     //see this page, http://techbase.kde.org/Development/Architecture/KDE4/XMLGUI_Technology
 
     QStringList names;
@@ -121,6 +132,6 @@ void TextEditor::removeNamedElementsRecursive(const QStringList &names, QDomNode
                 parent.removeChild(child);
             }
         }
-    }
+    }*/
 }
 
