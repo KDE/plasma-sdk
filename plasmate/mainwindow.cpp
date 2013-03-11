@@ -856,8 +856,6 @@ void MainWindow::loadProject(const QString &path)
 
     //initialize the konsole previewer
     m_konsoleWidget = createKonsoleFor(previewerType);
-    //after the init, cleat the Output
-    m_konsoleWidget->clearOutput();
 
     // initialize previewer
     delete m_previewerWidget;
@@ -1024,6 +1022,9 @@ KonsolePreviewer* MainWindow::createKonsoleFor(const QString& projectType)
     if (konsole) {
         konsole->setParent(this);
         konsole->setObjectName("Previewer Output");
+
+        //after the init, cleat the Output
+        konsole->clearOutput();
     }
 
     return konsole;
