@@ -291,6 +291,8 @@ private:
       */
     QString startJob(DvcsJob &job, DvcsJob::JobStatus *status = 0);
 
+    QStringList m_branchesWithAsterisk;
+
     KUrl                        *m_lastRepoRoot;
     KProcess::OutputChannelMode m_commMode;
     volatile bool               m_isRunning;

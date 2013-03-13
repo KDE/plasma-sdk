@@ -55,7 +55,11 @@ QString GitRunner::startJob(DvcsJob &job, DvcsJob::JobStatus *status)
     m_isRunning = true;
     job.start();
     m_isRunning = false;
-    *status = job.status();         // Save job status
+
+    if (status) {
+        *status = job.status();    // Save job status
+    }
+
     job.cancel();                  // Kill the job
     delete &job;
 
@@ -193,7 +197,14 @@ QString GitRunner::status(DvcsJob::JobStatus *status)
     initJob(*job);
     *job << "status";
 
-    return startJob(*job, status);
+    QString result;
+    if (status) {
+        result = startJob(*job, status);
+    } else {
+        result = startJob(*job);
+    }
+
+    return result;
 }
 
 
@@ -280,8 +291,12 @@ DvcsJob::JobStatus GitRunner::log(DvcsJob::JobStatus *status)
     initJob(*job);
     *job << "log";
 
-    startJob(*job, status);
-    return *status;
+
+    if (status) {
+        startJob(*job, status);
+        return *status;
+    }
+    return DvcsJob::JobUnknown;
 }
 
 DvcsJob::JobStatus GitRunner::switchBranch(const QString &newBranch)
@@ -327,15 +342,19 @@ DvcsJob::JobStatus GitRunner::deleteBranch(const QString &branch)
 
 QString GitRunner::currentBranch(DvcsJob::JobStatus *status)
 {
-    QStringList result = branches(status);
+    if(status) {
+        branches(status);
 
-    if (*status != DvcsJob::JobSucceeded) {
-        return QString();
+        if (*status != DvcsJob::JobSucceeded) {
+            return QString();
+        }
+    } else {
+        branches();
     }
 
-    QString tmp = result.takeFirst();
+    QString tmp = m_branchesWithAsterisk.takeFirst();
     while (!tmp.contains('*', Qt::CaseInsensitive)) {
-        tmp = result.takeFirst();
+        tmp = m_branchesWithAsterisk.takeFirst();
     }
 
     tmp.remove(0, 2);
@@ -352,7 +371,18 @@ QStringList GitRunner::branches(DvcsJob::JobStatus *status)
 
     // Every branch is listed in one line. so first split by lines,
     // then look for the branch marked with a "*".
-    QStringList list = result.split('\n');
+    m_branchesWithAsterisk.clear();
+    m_branchesWithAsterisk = result.split('\n');
+
+    QStringList list;
+
+    foreach(QString branch, m_branchesWithAsterisk) {
+        if (branch.contains('*')) {
+            branch.remove(0, 2);
+        }
+        list << branch;
+    }
+
     return list;
 }
 

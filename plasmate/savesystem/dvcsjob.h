@@ -78,7 +78,8 @@ public:
         JobSucceeded = 1    /**< The job succeeded */,
         JobCancelled = 2    /**< The job was cancelled */,
         JobFailed = 3       /**< The job failed */,
-        JobNotStarted = 4   /**< The job is not yet started */
+        JobNotStarted = 4   /**< The job is not yet started */,
+        JobUnknown = 5
     };
 
     /**
