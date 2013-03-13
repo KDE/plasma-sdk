@@ -158,7 +158,7 @@ public:
       * Checks the status of the git index tree, useful to look for uncommitted cnahges.
       * @return The status of the performed operation.
       */
-    DvcsJob::JobStatus status();
+    QString status(DvcsJob::JobStatus *status = 0);
 
     /**
       * Commits the files previously added, and stores also a message containing some infos about it.
@@ -191,7 +191,7 @@ public:
       * Logs all git-related event, such as commits, merges and so on.
       * @return The status of the performed operation.
       */
-    DvcsJob::JobStatus log();
+    DvcsJob::JobStatus log(DvcsJob::JobStatus *status = 0);
 
     /**
       * Init a new git repository tree in the given directory.
@@ -252,14 +252,14 @@ public:
       * Retrieve the current branch in use.
       * @return The status of the performed operation.
       */
-    DvcsJob::JobStatus currentBranch();
+    QString currentBranch(DvcsJob::JobStatus *status = 0);
 
     /**
       * Retrieves all the branches available in the current git repo.
       * @return The status of the performed operation.
       * @note The current branch is marked with a '*'.
       */
-    DvcsJob::JobStatus branches();
+    QStringList branches(DvcsJob::JobStatus *status = 0);
 
     /**
       * Utility function: sets the author name, so it will be displayed when
@@ -277,11 +277,6 @@ public:
       */
     DvcsJob::JobStatus setEmail(const QString &email);
 
-    /**
-      * @return The string containing the result of the last action performed.
-      */
-    QString& getResult();
-
 private:
 
     /**
@@ -294,11 +289,9 @@ private:
       * Private function that start the job.
       * @param The job that must be started.
       */
-    void startJob(DvcsJob &job);
+    QString startJob(DvcsJob &job, DvcsJob::JobStatus *status = 0);
 
-    QString                     m_result;
     KUrl                        *m_lastRepoRoot;
-    DvcsJob::JobStatus          m_jobStatus;
     KProcess::OutputChannelMode m_commMode;
     volatile bool               m_isRunning;
 };

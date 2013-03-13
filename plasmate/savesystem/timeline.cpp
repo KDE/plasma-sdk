@@ -111,7 +111,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
 void TimeLine::identifyCommits(TableWidget *widget)
 {
-
+/*
     // Log gets the full git commit list
     if (m_gitRunner->log() != DvcsJob::JobSucceeded) {
         // handle error
@@ -190,12 +190,12 @@ void TimeLine::identifyCommits(TableWidget *widget)
         }
 
         widget->addItem(commitItem);
-    }
+    }*/
 }
 
 QStringList TimeLine::listBranches() const
 {
-    QStringList branchList;
+   /* QStringList branchList;
     if (m_gitRunner->branches() != DvcsJob::JobSucceeded) {
         // handle error
         return branchList;
@@ -207,15 +207,17 @@ QStringList TimeLine::listBranches() const
         branch.remove(0, 2); // Clean the string form *
         branchList.append(branch);
     }
-    return branchList;
+    return branchList;*/
+    return QStringList();
 }
 
 QString TimeLine::currentBranch() const
 {
-    if (m_gitRunner->currentBranch() != DvcsJob::JobSucceeded) {
+   /* if (m_gitRunner->currentBranch() != DvcsJob::JobSucceeded) {
         return QString();
     }
-    return m_gitRunner->getResult();
+    return m_gitRunner->getResult();*/
+    return QString();
 }
 
 Qt::DockWidgetArea TimeLine::location() const

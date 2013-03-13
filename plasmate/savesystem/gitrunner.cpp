@@ -33,10 +33,7 @@ GitRunner::GitRunner()
     //m_job = new DvcsJob();
     m_commMode = KProcess::SeparateChannels;
     m_lastRepoRoot = new KUrl();
-    m_result = QString();
     m_isRunning = false;
-    m_jobStatus = DvcsJob::JobNotStarted;
-
 }
 
 GitRunner::~GitRunner()
@@ -53,16 +50,16 @@ void GitRunner::initJob(DvcsJob &job)
     job << "git";
 }
 
-void GitRunner::startJob(DvcsJob &job)
+QString GitRunner::startJob(DvcsJob &job, DvcsJob::JobStatus *status)
 {
-    m_result.clear();
     m_isRunning = true;
     job.start();
-    m_result.append(job.output());      // Save the result
     m_isRunning = false;
-    m_jobStatus = job.status();         // Save job status
-    job.cancel();                       // Kill the job
+    *status = job.status();         // Save job status
+    job.cancel();                  // Kill the job
     delete &job;
+
+    return job.output(); //Return the result
 }
 
 void GitRunner::setCommunicationMode(KProcess::OutputChannelMode comm)
@@ -94,7 +91,7 @@ bool GitRunner::isValidDirectory()
     initJob(*job);
     *job << "rev-parse";
     *job << "--is-inside-work-tree";
-    startJob(*job);
+    QString result = startJob(*job);
 
     QFileInfo finfo(initialPath);
     QDir dir;
@@ -105,26 +102,24 @@ bool GitRunner::isValidDirectory()
         dir.makeAbsolute();
     }
 
-    return (dir.exists(gitDir) && m_result.compare("true")) ? true : false;
+    return (dir.exists(gitDir) && result.compare("true")) ? true : false;
 }
 
 bool GitRunner::hasNewChangesToCommit()
 {
-    if(status() != DvcsJob::JobSucceeded)
+    DvcsJob::JobStatus stat;
+    QString result = status(&stat);
+    if (stat != DvcsJob::JobSucceeded) {
         return false;
+    }
 
-    if(m_result.contains("nothing to commit (working directory clean)",
-                         Qt::CaseSensitive))
+    if (result.contains("nothing to commit (working directory clean)",
+    Qt::CaseSensitive)) {
         return false;
+    }
 
     return true;
 }
-
-QString& GitRunner::getResult()
-{
-    return  m_result;
-}
-
 
 DvcsJob::JobStatus GitRunner::init(const KUrl &directory)
 {
@@ -133,9 +128,10 @@ DvcsJob::JobStatus GitRunner::init(const KUrl &directory)
     DvcsJob *job = new DvcsJob();
     initJob(*job);
 
+    DvcsJob::JobStatus status;
     *job << "init";
-    startJob(*job);
-    return m_jobStatus;
+    startJob(*job, &status);
+    return status;
 }
 
 void GitRunner::addIgnoredFileExtension(const QString ignoredFileExtension)
@@ -163,14 +159,17 @@ DvcsJob::JobStatus GitRunner::createWorkingCopy(const KUrl &repoOrigin,
 
     *job << "clone";
     *job << repoOrigin.pathOrUrl();
-    startJob(*job);
-    return m_jobStatus;
+
+    DvcsJob::JobStatus status;
+    startJob(*job, &status);
+    return status;
 }
 
 DvcsJob::JobStatus GitRunner::add(const KUrl::List &localLocations)
 {
-    if (localLocations.empty())
-        return m_jobStatus = DvcsJob::JobCancelled;
+    if (localLocations.empty()) {
+        return DvcsJob::JobCancelled;
+    }
 
     DvcsJob *job = new DvcsJob();
     initJob(*job);
@@ -182,26 +181,28 @@ DvcsJob::JobStatus GitRunner::add(const KUrl::List &localLocations)
         *job <<  m_lastRepoRoot->pathOrUrl() + '/' + stringFiles.takeAt(0);
     }
 
-    startJob(*job);
-    return m_jobStatus;
+    DvcsJob::JobStatus status;
+    startJob(*job, &status);
+
+    return status;
 }
 
-DvcsJob::JobStatus GitRunner::status()
+QString GitRunner::status(DvcsJob::JobStatus *status)
 {
     DvcsJob *job = new DvcsJob();
     initJob(*job);
     *job << "status";
 
-    startJob(*job);
-    return m_jobStatus;
+    return startJob(*job, status);
 }
 
 
 DvcsJob::JobStatus GitRunner::commit(const QString &message)
 {
     // NOTE: git doesn't allow empty commit !
-    if (message.isEmpty())
-        return m_jobStatus = DvcsJob::JobCancelled;
+    if (message.isEmpty()) {
+        return DvcsJob::JobCancelled;
+    }
 
     DvcsJob *job = new DvcsJob();
     initJob(*job);
@@ -210,8 +211,9 @@ DvcsJob::JobStatus GitRunner::commit(const QString &message)
     //Note: the message is quoted somewhere else
     *job << message;
 
-    startJob(*job);
-    return m_jobStatus;
+    DvcsJob::JobStatus status;
+    startJob(*job, &status);
+    return status;
 }
 
 DvcsJob::JobStatus GitRunner::moveToCommit(const QString &sha1hash,
@@ -222,9 +224,12 @@ DvcsJob::JobStatus GitRunner::moveToCommit(const QString &sha1hash,
     *job << "checkout";
     *job << sha1hash;
 
-    startJob(*job);
-    if (m_jobStatus != DvcsJob::JobSucceeded)
-        return m_jobStatus;
+    DvcsJob::JobStatus status;
+
+    startJob(*job, &status);
+    if (status != DvcsJob::JobSucceeded) {
+        return status;
+    }
 
     job = new DvcsJob();
     initJob(*job);
@@ -232,8 +237,8 @@ DvcsJob::JobStatus GitRunner::moveToCommit(const QString &sha1hash,
     *job << "-b";
     *job << newBranch;
 
-    startJob(*job);
-    return m_jobStatus;
+    startJob(*job, &status);
+    return status;
 }
 
 DvcsJob::JobStatus GitRunner::deleteCommit(const QString &sha1hash)
@@ -244,14 +249,16 @@ DvcsJob::JobStatus GitRunner::deleteCommit(const QString &sha1hash)
     *job << "--hard";
     *job << sha1hash;
 
-    startJob(*job);
-    return m_jobStatus;
+    DvcsJob::JobStatus status;
+    startJob(*job, &status);
+    return status;
 }
 
 DvcsJob::JobStatus GitRunner::remove(const KUrl::List &files)
 {
-    if (files.empty())
-        return m_jobStatus = DvcsJob::JobCancelled;
+    if (files.empty()) {
+        return DvcsJob::JobCancelled;
+    }
 
     DvcsJob *job = new DvcsJob();
     initJob(*job);
@@ -261,19 +268,20 @@ DvcsJob::JobStatus GitRunner::remove(const KUrl::List &files)
         *job <<  m_lastRepoRoot->pathOrUrl() + '/' + stringFiles.takeAt(0);
     }
 
-    startJob(*job);
-    return m_jobStatus;
+    DvcsJob::JobStatus status;
+    startJob(*job, &status);
+    return status;
 }
 
 
-DvcsJob::JobStatus GitRunner::log()
+DvcsJob::JobStatus GitRunner::log(DvcsJob::JobStatus *status)
 {
     DvcsJob *job = new DvcsJob();
     initJob(*job);
     *job << "log";
 
-    startJob(*job);
-    return m_jobStatus;
+    startJob(*job, status);
+    return *status;
 }
 
 DvcsJob::JobStatus GitRunner::switchBranch(const QString &newBranch)
@@ -283,8 +291,9 @@ DvcsJob::JobStatus GitRunner::switchBranch(const QString &newBranch)
     *job << "checkout";
     *job << newBranch;
 
-    startJob(*job);
-    return m_jobStatus;
+    DvcsJob::JobStatus status;
+    startJob(*job, &status);
+    return status;
 }
 
 DvcsJob::JobStatus GitRunner::mergeBranch(const QString &branchName,
@@ -298,8 +307,9 @@ DvcsJob::JobStatus GitRunner::mergeBranch(const QString &branchName,
     *job << message;
     *job << branchName;
 
-    startJob(*job);
-    return m_jobStatus;
+    DvcsJob::JobStatus status;
+    startJob(*job, &status);
+    return status;
 }
 
 DvcsJob::JobStatus GitRunner::deleteBranch(const QString &branch)
@@ -310,35 +320,40 @@ DvcsJob::JobStatus GitRunner::deleteBranch(const QString &branch)
     *job << "-D";
     *job << branch;
 
-    startJob(*job);
-    return m_jobStatus;
-}
-
-DvcsJob::JobStatus GitRunner::currentBranch()
-{
-    DvcsJob::JobStatus status = branches();
-    if (status != DvcsJob::JobSucceeded)
-        return status;
-    // Every branch is listed in one line. so first split by lines,
-    // then look for the branch marked with a "*".
-    QStringList list = m_result.split('\n');
-    QString tmp = list.takeFirst();
-    while (!tmp.contains('*', Qt::CaseInsensitive))
-        tmp = list.takeFirst();
-
-    tmp.remove(0, 2);
-    m_result = tmp;
+    DvcsJob::JobStatus status;
+    startJob(*job, &status);
     return status;
 }
 
-DvcsJob::JobStatus GitRunner::branches()
+QString GitRunner::currentBranch(DvcsJob::JobStatus *status)
+{
+    QStringList result = branches(status);
+
+    if (*status != DvcsJob::JobSucceeded) {
+        return QString();
+    }
+
+    QString tmp = result.takeFirst();
+    while (!tmp.contains('*', Qt::CaseInsensitive)) {
+        tmp = result.takeFirst();
+    }
+
+    tmp.remove(0, 2);
+    return tmp;
+}
+
+QStringList GitRunner::branches(DvcsJob::JobStatus *status)
 {
     DvcsJob *job = new DvcsJob();
     initJob(*job);
     *job << "branch";
 
-    startJob(*job);
-    return m_jobStatus;
+    QString result = startJob(*job, status);
+
+    // Every branch is listed in one line. so first split by lines,
+    // then look for the branch marked with a "*".
+    QStringList list = result.split('\n');
+    return list;
 }
 
 DvcsJob::JobStatus GitRunner::newBranch(const QString &newBranch)
@@ -348,8 +363,9 @@ DvcsJob::JobStatus GitRunner::newBranch(const QString &newBranch)
     *job << "branch";
     *job << newBranch;
 
-    startJob(*job);
-    return m_jobStatus;
+    DvcsJob::JobStatus status;
+    startJob(*job, &status);
+    return status;
 }
 
 DvcsJob::JobStatus GitRunner::renameBranch(const QString &newBranch)
@@ -360,8 +376,9 @@ DvcsJob::JobStatus GitRunner::renameBranch(const QString &newBranch)
     *job << "-m";
     *job << newBranch;
 
-    startJob(*job);
-    return m_jobStatus;
+    DvcsJob::JobStatus status;
+    startJob(*job, &status);
+    return status;
 }
 
 DvcsJob::JobStatus GitRunner::setAuthor(const QString &username)
@@ -372,8 +389,9 @@ DvcsJob::JobStatus GitRunner::setAuthor(const QString &username)
     *job << "user.name";
     *job << username;
 
-    startJob(*job);
-    return m_jobStatus;
+    DvcsJob::JobStatus status;
+    startJob(*job, &status);
+    return status;
 }
 
 DvcsJob::JobStatus GitRunner::setEmail(const QString &email)
@@ -384,6 +402,8 @@ DvcsJob::JobStatus GitRunner::setEmail(const QString &email)
     *job << "user.email";
     *job << email;
 
-    startJob(*job);
-    return m_jobStatus;
+    DvcsJob::JobStatus status;
+    startJob(*job, &status);
+    return status;
 }
+
