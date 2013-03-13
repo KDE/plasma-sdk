@@ -195,29 +195,26 @@ void TimeLine::identifyCommits(TableWidget *widget)
 
 QStringList TimeLine::listBranches() const
 {
-   /* QStringList branchList;
-    if (m_gitRunner->branches() != DvcsJob::JobSucceeded) {
-        // handle error
-        return branchList;
-    }
-    // Scan available branches,and save them
-    const QString branches = m_gitRunner->getResult();
+    QStringList branchList;
+    DvcsJob::JobStatus status;
+    QStringList l = m_gitRunner->branches(&status);
 
-    foreach (QString branch, branches.split('\n', QString::SkipEmptyParts)) {
-        branch.remove(0, 2); // Clean the string form *
-        branchList.append(branch);
+    if (status != DvcsJob::JobSucceeded) {
+        // handle error
+        return QStringList();
     }
-    return branchList;*/
-    return QStringList();
+    return l;
 }
 
 QString TimeLine::currentBranch() const
 {
-   /* if (m_gitRunner->currentBranch() != DvcsJob::JobSucceeded) {
+    DvcsJob::JobStatus status;
+    const QString branch = m_gitRunner->currentBranch(&status);
+    if (status != DvcsJob::JobSucceeded) {
         return QString();
     }
-    return m_gitRunner->getResult();*/
-    return QString();
+
+    return branch;
 }
 
 Qt::DockWidgetArea TimeLine::location() const
