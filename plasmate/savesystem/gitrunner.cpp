@@ -54,6 +54,7 @@ QString GitRunner::startJob(DvcsJob &job, DvcsJob::JobStatus *status)
 {
     m_isRunning = true;
     job.start();
+    QString output = job.output(); //Return the result
     m_isRunning = false;
 
     if (status) {
@@ -63,7 +64,7 @@ QString GitRunner::startJob(DvcsJob &job, DvcsJob::JobStatus *status)
     job.cancel();                  // Kill the job
     delete &job;
 
-    return job.output(); //Return the result
+    return output;
 }
 
 void GitRunner::setCommunicationMode(KProcess::OutputChannelMode comm)
@@ -285,18 +286,43 @@ DvcsJob::JobStatus GitRunner::remove(const KUrl::List &files)
 }
 
 
-DvcsJob::JobStatus GitRunner::log(DvcsJob::JobStatus *status)
+QList<QHash<QString, QString> > GitRunner::log(DvcsJob::JobStatus *status)
 {
+    QList<QHash<QString, QString> > data;
+    QHash<QString, QString> temp;
+
     DvcsJob *job = new DvcsJob();
     initJob(*job);
     *job << "log";
+    //we will use $ in the format in order to
+    //split the string author, date, subject
+    //and we will use ^^ in order to identify every commit
+    *job << "--pretty=format:%an$%s$%ad$%H^^";
 
-
+    QString result;
     if (status) {
-        startJob(*job, status);
-        return *status;
+        result = startJob(*job, status);
+    } else {
+        result = startJob(*job);
     }
-    return DvcsJob::JobUnknown;
+
+    QStringList commitList = result.split("^^", QString::SkipEmptyParts);
+    foreach(QString commit, commitList) {
+        QStringList l = commit.split('$', QString::SkipEmptyParts);
+        temp["author"] = removeNewLines(l.at(0));
+        temp["subject"] = removeNewLines(l.at(1));
+        temp["date"] = removeNewLines(l.at(2));
+        temp["sha1hash"] = removeNewLines(l.at(3));
+        data.append(temp);
+    }
+
+    return data;
+}
+
+QString GitRunner::removeNewLines(const QString &string)
+{
+    QString tmp = string;
+    return tmp.replace("\n", "");
 }
 
 DvcsJob::JobStatus GitRunner::switchBranch(const QString &newBranch)

@@ -191,7 +191,7 @@ public:
       * Logs all git-related event, such as commits, merges and so on.
       * @return The status of the performed operation.
       */
-    DvcsJob::JobStatus log(DvcsJob::JobStatus *status = 0);
+    QList<QHash<QString, QString> > log(DvcsJob::JobStatus *status = 0);
 
     /**
       * Init a new git repository tree in the given directory.
@@ -293,6 +293,7 @@ private:
 
     QStringList m_branchesWithAsterisk;
 
+    QString removeNewLines(const QString &string);
     KUrl                        *m_lastRepoRoot;
     KProcess::OutputChannelMode m_commMode;
     volatile bool               m_isRunning;

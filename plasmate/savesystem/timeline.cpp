@@ -111,86 +111,37 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
 void TimeLine::identifyCommits(TableWidget *widget)
 {
-/*
-    // Log gets the full git commit list
-    if (m_gitRunner->log() != DvcsJob::JobSucceeded) {
-        // handle error
-        return;
-    }
+    DvcsJob::JobStatus status;
+    QList<QHash<QString, QString> > dataList = m_gitRunner->log(&status);
+    QListIterator <QHash<QString, QString> > it(dataList);
+    while(it.hasNext()) {
+        QHash<QString, QString> data = it.next();
 
-    const QString rawCommits = m_gitRunner->getResult();
-    const QStringList commitLog = rawCommits.split('\n',QString::SkipEmptyParts);
+        TimeLineItem *commitItem = new TimeLineItem();
 
-    // Regexp to match the sha1hash from the git commits.
-    const QString regExp("(commit\\s[0-9a-f]{40})");
-    const QRegExp rx(regExp);
+        QString subject = data["subject"];
+        if (subject.contains("Merge", Qt::CaseSensitive)) {
+            commitItem->setIdentifier(TimeLineItem::Merge);
+        } else {
+            commitItem->setIdentifier(TimeLineItem::Commit);
+        }
 
-    TimeLineItem *commitItem = NULL;
-    int logIndex = 0;
+        commitItem->setHash(data["sha1hash"]);
 
-    // Iterate every commit log line. the newest commits are on the top of the log
-    while ( logIndex < commitLog.size()) {
         QString toolTipText;
-
-        // here we got a sha1hash, hence a new commit beginns
-        if (commitLog.at(logIndex).contains(rx)) {
-
-            commitItem = new TimeLineItem();
-
-            // set the git hash
-            commitItem->setHash(commitLog.at(logIndex).right(40)); // FIXME: As long as the hash has 40 chars it works.
-            ++logIndex;
-
-            if (commitLog.at(logIndex).contains("Merge: ", Qt::CaseSensitive)) {
-                commitItem->setIdentifier(TimeLineItem::Merge);
-                ++logIndex;
-            } else {
-                commitItem->setIdentifier(TimeLineItem::Commit);
-            }
-
-            // The next line is the author
-            toolTipText = commitLog.at(logIndex) + "\n\n";
-            ++logIndex;
-
-            toolTipText.replace("Author", i18n("Author"),
-                                Qt::CaseSensitive);
-
-            // Then comes the date
-            QString date = commitLog.at(logIndex);
-            ++logIndex;
-
-            date.remove("Date: ",Qt::CaseSensitive);
-            toolTipText.prepend(i18n("Created on: %1", date) + "\n");
-
-            //Our format date is Tue Nov 6 23:17:56 2012 +0200"
-            QStringList dateList = date.split(" ", QString::SkipEmptyParts);
-            QDateTime tmpDateTime = QDateTime::fromString(dateList.at(2) + " " + dateList.at(1) + " " + dateList.at(4) +
-                                    " " +  dateList.at(3), "d MMM yyyy hh:mm:ss");
-
-            QString localeTime = KGlobal::locale()->formatDateTime(tmpDateTime, KLocale::LongDate);
-            commitItem->setText(localeTime);
-        }
-
-        // The rest is Commit log info
-        while (logIndex < commitLog.size()) {
-            if (commitLog.at(logIndex).contains(rx)) {
-                break;
-            }
-            toolTipText.append(commitLog.at(logIndex) + "\n");
-            ++logIndex;
-        }
-
+        toolTipText.append(i18n("Author: %1 \n", data["author"]));
+        toolTipText.append(i18n("Date: %1 \n\n", data["date"]));
+        toolTipText.append(i18n("Commid ID: %1 \n", data["sha1hash"]));
         commitItem->setToolTip(toolTipText);
 
-
-        //check if this is the last item
-        if (logIndex + 1  < commitLog.size()) {
-            // The last Item is maked as such.
-            commitItem->setText(i18n("First save point"));
+        if (data == dataList.last()) {
+            commitItem->setText(i18n("First Save Point"));
+        } else {
+            commitItem->setText(subject);
         }
 
         widget->addItem(commitItem);
-    }*/
+    }
 }
 
 QStringList TimeLine::listBranches() const
@@ -201,6 +152,7 @@ QStringList TimeLine::listBranches() const
 
     if (status != DvcsJob::JobSucceeded) {
         // handle error
+        kDebug() << "failed with error job" << status;
         return QStringList();
     }
     return l;
