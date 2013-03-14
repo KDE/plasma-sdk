@@ -372,7 +372,7 @@ QStringList GitRunner::branches(DvcsJob::JobStatus *status)
     // Every branch is listed in one line. so first split by lines,
     // then look for the branch marked with a "*".
     m_branchesWithAsterisk.clear();
-    m_branchesWithAsterisk = result.split('\n');
+    m_branchesWithAsterisk = result.split('\n', QString::SkipEmptyParts);
 
     QStringList list;
 
