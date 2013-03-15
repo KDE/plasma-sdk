@@ -180,6 +180,7 @@ void DvcsJob::slotProcessError(QProcess::ProcessError error)
     }
     kDebug() << "oops, found an error while running" << dvcsCommand() << ":" << errorValue
     << "Exit code is:" << m_process->exitCode();
+    kDebug() << "output of " << dvcsCommand() << "is:" << output();
     jobIsReady();
 }
 

@@ -358,9 +358,12 @@ void TimeLine::moveToCommit()
 
 void TimeLine::switchBranch()
 {
-    QAction *sender = qobject_cast<QAction*>(this->sender());
-    QString branch = sender->text();
-    branch.remove('&');
+    if (m_gitRunner->hasNewChangesToCommit()) {
+        QString text = i18n("You have uncommited changes, you must commit them in order to change a branch");
+        KMessageBox::information(this, text);
+        return;
+    }
+    QString branch = senderToString();
     m_gitRunner->switchBranch(branch);
     loadTimeLine(m_workingDir);
 
@@ -393,9 +396,7 @@ void TimeLine::mergeBranch()
     }
 
     QString branchToMerge = m_currentBranch;
-    QAction *sender = qobject_cast<QAction*>(this->sender());
-    QString branch = sender->text();
-    branch.remove('&');
+    QString branch = senderToString();
 
     // To merge current branch into the selected one, first whe have to
     // move to the selected branch and then call merge function !
@@ -415,19 +416,14 @@ void TimeLine::deleteBranch()
         return;
     }
 
-    QAction *sender = qobject_cast<QAction*>(this->sender());
-    QString branch = sender->text();
-    branch.remove('&');
+    QString branch = senderToString();
     m_gitRunner->deleteBranch(branch);
     loadTimeLine(m_workingDir);
 }
 
 void TimeLine::renameBranch()
 {
-    QAction *sender = qobject_cast<QAction*>(this->sender());
-    QString branch = sender->text();
-    branch.remove('&');
-
+    QString branch = senderToString();
 
     bool ok;
     const QString newBranchName = branchDialog(&ok);
@@ -446,20 +442,19 @@ void TimeLine::renameBranch()
 
 void TimeLine::createBranch()
 {
-    QAction *sender = qobject_cast<QAction*>(this->sender());
-    QString branch = sender->text();
-    branch.remove('&');
+    QString branch = senderToString();
 
     bool ok;
     const QString newBranchName = branchDialog(&ok);
-
     if (!ok) {
         return;
     }
 
-    const QString dialog = i18n("Cannot create section: a section with this name already exists.");
-    KMessageBox::information(this, dialog);
-    return;
+    if (listBranches().contains(newBranchName)) {
+        const QString dialog = i18n("Cannot create section: a section with this name already exists.");
+        KMessageBox::information(this, dialog);
+        return;
+    }
 
     m_gitRunner->newBranch(newBranchName);
     loadTimeLine(m_workingDir);
@@ -545,6 +540,16 @@ QString TimeLine::branchDialog(bool *ok)
     QValidator *validator = new QRegExpValidator(QRegExp("[a-zA-Z0-9_.]*"));
 
     return KInputDialog::getText(i18n("New Branch"), i18n("New branch name:"), "type here", ok, this, validator);
+}
+
+QString TimeLine::senderToString() const
+{
+    QAction *sender = qobject_cast<QAction*>(this->sender());
+    QString branch = sender->text();
+    branch.remove('&');
+    branch.replace(" ", "");
+
+    return branch;
 }
 
 #include "moc_timeline.cpp"

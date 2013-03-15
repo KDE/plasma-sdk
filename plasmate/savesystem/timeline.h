@@ -178,6 +178,8 @@ private:
     //from here we will take the TimeLineItems for the timeline
     void identifyCommits(TableWidget *widget);
 
+    QString senderToString() const;
+
     KUrl        m_workingDir;
     GitRunner   *m_gitRunner;
     QString     m_currentBranch;

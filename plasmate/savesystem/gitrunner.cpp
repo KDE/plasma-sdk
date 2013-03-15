@@ -406,6 +406,7 @@ QStringList GitRunner::branches(DvcsJob::JobStatus *status)
         if (branch.contains('*')) {
             branch.remove(0, 2);
         }
+        branch.replace(" ", "");
         list << branch;
     }
 
