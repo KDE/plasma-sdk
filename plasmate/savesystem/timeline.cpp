@@ -114,7 +114,7 @@ void TimeLine::identifyCommits(TableWidget *widget)
     DvcsJob::JobStatus status;
     QList<QHash<QString, QString> > dataList = m_gitRunner->log(&status);
     QListIterator <QHash<QString, QString> > it(dataList);
-    while(it.hasNext()) {
+    while (it.hasNext()) {
         QHash<QString, QString> data = it.next();
 
         TimeLineItem *commitItem = new TimeLineItem();
@@ -395,8 +395,8 @@ void TimeLine::mergeBranch()
         commit.append(optionalComment);
     }
 
-    QString branchToMerge = m_currentBranch;
-    QString branch = senderToString();
+    const QString branchToMerge = m_currentBranch;
+    const QString branch = senderToString();
 
     // To merge current branch into the selected one, first whe have to
     // move to the selected branch and then call merge function !
@@ -416,14 +416,14 @@ void TimeLine::deleteBranch()
         return;
     }
 
-    QString branch = senderToString();
+    const QString branch = senderToString();
     m_gitRunner->deleteBranch(branch);
     loadTimeLine(m_workingDir);
 }
 
 void TimeLine::renameBranch()
 {
-    QString branch = senderToString();
+    const QString branch = senderToString();
 
     bool ok;
     const QString newBranchName = branchDialog(&ok);
@@ -545,6 +545,11 @@ QString TimeLine::branchDialog(bool *ok)
 QString TimeLine::senderToString() const
 {
     QAction *sender = qobject_cast<QAction*>(this->sender());
+
+    if (!sender) {
+        return QString();
+    }
+
     QString branch = sender->text();
     branch.remove('&');
     branch.replace(" ", "");
