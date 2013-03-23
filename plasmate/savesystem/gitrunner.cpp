@@ -96,7 +96,7 @@ bool GitRunner::isValidDirectory()
     initJob(*job);
     *job << "rev-parse";
     *job << "--is-inside-work-tree";
-    QString result = startJob(*job);
+    const QString result = startJob(*job);
 
     QFileInfo finfo(initialPath);
     QDir dir;
@@ -402,8 +402,8 @@ QStringList GitRunner::branches(DvcsJob::JobStatus *status)
 
     QStringList list;
 
-    foreach(QString branch, m_branchesWithAsterisk) {
-        if (branch.contains('*')) {
+    foreach (QString branch, m_branchesWithAsterisk) {
+        if (branch.startsWith('*', Qt::CaseInsensitive)) {
             branch.remove(0, 2);
         }
         branch.replace(" ", "");
