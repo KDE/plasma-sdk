@@ -921,7 +921,11 @@ void MainWindow::checkMetafile(const QString &path)
     KConfig preferencesPath(dir.path() +'/'+ PROJECTRC);
     KConfigGroup preferences(&preferencesPath, "ProjectDefaultPreferences");
     QString api;
-    const QString radioButtonChecked = preferences.readEntry("radioButtonChecked", "De");
+    const QString radioButtonChecked = preferences.readEntry("radioButtonChecked");
+    if (radioButtonChecked.isEmpty()) {
+        kDebug() << dir.filePath(PROJECTRC) + "isn't valid, metadata.desktop cannot be checked";
+        return;
+    }
     if (radioButtonChecked == "Js") {
         api.append("javascript");
     } else if (radioButtonChecked == "Py") {
