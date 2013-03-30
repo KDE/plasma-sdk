@@ -12,7 +12,6 @@
 
 #include <KDialog>
 #include <KUrl>
-#include <KMessageWidget>
 #include <KProcess>
 
 #include "ui_publisher.h"
