@@ -148,7 +148,7 @@ void StartPage::setupWidgets()
     connect(m_projectManager, SIGNAL(requestRefresh()), this, SLOT(refreshRecentProjectsList()));
 
     new QListWidgetItem(KIcon("application-x-plasma"), i18n("Plasma Widget"), m_ui.contentTypes);
-    new QListWidgetItem(KIcon("kexi"), i18n("Data Engine"), m_ui.contentTypes);
+    new QListWidgetItem(KIcon("server-database"), i18n("Data Engine"), m_ui.contentTypes);
     new QListWidgetItem(KIcon("system-run"), i18n("Runner"), m_ui.contentTypes);
     new QListWidgetItem(KIcon("inkscape"), i18n("Theme"), m_ui.contentTypes);
     new QListWidgetItem(KIcon("window-duplicate"), i18n("Window Switcher"), m_ui.contentTypes);
