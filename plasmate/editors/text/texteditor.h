@@ -34,9 +34,7 @@ class TextEditor : public QWidget
 public:
     TextEditor(KTextEditor::Document *editorPart, PackageModel *model, QWidget *parent = 0);
     void modifyToolBar(KTextEditor::View *view);
-
-private:
-    void removeNamedElementsRecursive(const QStringList &names, QDomNode &parent);
 };
 
 #endif // TEXTEDITOR_H
+
