@@ -40,6 +40,8 @@ int main(int argc, char *argv[])
     aboutData.addAuthor(ki18n("Frerich Raabe"), ki18n("Author"), "raabe@kde.org");
     aboutData.addAuthor(ki18n("Aaron Seigo"), ki18n("Author"), "aseigo@kde.org");
     aboutData.addAuthor(ki18n("Riccardo Iaconelli"), ki18n("Author"), "riccardo@kde.org");
+    aboutData.addAuthor(ki18n("Giorgos Tsiapaliokas"), ki18n("Author"), "terietor@gmail.com");
+    aboutData.addAuthor(ki18n("Antonis Tsiapaliokas"), ki18n("Author"), "kok3rs@gmail.com");
 
     aboutData.setProgramIconName("plasmagik");
 
