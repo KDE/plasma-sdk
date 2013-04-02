@@ -139,6 +139,7 @@ private Q_SLOTS:
       */
     void deleteBranch();
 
+    void reloadTimeLine();
 
 private:
     /**

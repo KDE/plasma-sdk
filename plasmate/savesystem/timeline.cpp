@@ -111,8 +111,7 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
 void TimeLine::identifyCommits(TableWidget *widget)
 {
-    DvcsJob::JobStatus status;
-    QList<QHash<QString, QString> > dataList = m_gitRunner->log(&status);
+    QList<QHash<QString, QString> > dataList = m_gitRunner->log();
     QListIterator <QHash<QString, QString> > it(dataList);
     while (it.hasNext()) {
         QHash<QString, QString> data = it.next();
@@ -146,27 +145,12 @@ void TimeLine::identifyCommits(TableWidget *widget)
 
 QStringList TimeLine::listBranches() const
 {
-    QStringList branchList;
-    DvcsJob::JobStatus status;
-    QStringList l = m_gitRunner->branches(&status);
-
-    if (status != DvcsJob::JobSucceeded) {
-        // handle error
-        kDebug() << "failed with error job" << status;
-        return QStringList();
-    }
-    return l;
+    return m_gitRunner->branches();
 }
 
 QString TimeLine::currentBranch() const
 {
-    DvcsJob::JobStatus status;
-    const QString branch = m_gitRunner->currentBranch(&status);
-    if (status != DvcsJob::JobSucceeded) {
-        return QString();
-    }
-
-    return branch;
+    return m_gitRunner->currentBranch();
 }
 
 Qt::DockWidgetArea TimeLine::location() const
@@ -276,6 +260,7 @@ void TimeLine::newSavePoint()
         m_gitRunner->addIgnoredFileExtension("NOTES");
     }
 
+    //TODO !!!!!!
     if (!m_gitRunner->hasNewChangesToCommit()) {
         const QString dialog = i18n("<b>No changes have been made in order to create a savepoint.</b>");
         KMessageBox::information(this, dialog);
@@ -314,15 +299,16 @@ void TimeLine::restoreCommit()
 {
     const QString dialog = (i18n("<b>You are restoring the selected save point.</b>\nWith this operation, all the save points and branches created starting from it, will be deleted.\nContinue anyway?"));
     const int code = KMessageBox::warningContinueCancel(this, dialog);
-    if (code!=KMessageBox::Continue) {
+    if (code != KMessageBox::Continue) {
         return;
     }
 
     QAction *sender = qobject_cast<QAction*>(this->sender());
     QVariant data = sender->data();
     m_gitRunner->deleteCommit(data.toString());
-    loadTimeLine(m_workingDir);
+    //loadTimeLine(m_workingDir);
 
+    connect(m_gitRunner, SIGNAL(deleteCommitFinished()), this, SLOT(reloadTimeLine()));
     emit sourceDirectoryChanged();
 }
 
@@ -351,8 +337,9 @@ void TimeLine::moveToCommit()
     QAction *sender = qobject_cast<QAction*>(this->sender());
     QVariant data = sender->data();
     m_gitRunner->moveToCommit(data.toString(), newBranchName);
-    loadTimeLine(m_workingDir);
+    //loadTimeLine(m_workingDir);
 
+    connect(m_gitRunner, SIGNAL(moveToCommitFinished()), this, SLOT(reloadTimeLine()));
     emit sourceDirectoryChanged();
 }
 
@@ -365,8 +352,9 @@ void TimeLine::switchBranch()
     }
     QString branch = senderToString();
     m_gitRunner->switchBranch(branch);
-    loadTimeLine(m_workingDir);
+    //loadTimeLine(m_workingDir);
 
+    connect(m_gitRunner, SIGNAL(switchBranchFinished()), this, SLOT(reloadTimeLine()));
     emit sourceDirectoryChanged();
 }
 
@@ -376,7 +364,7 @@ void TimeLine::mergeBranch()
     // popup a Savepoint dialog.
     const QString dialog = i18n("<b>You are going to combine two branches.</b>\nWith this operation, a new save point will be created; then you should have to manually resolve some conflicts on source code. Continue?");
     const int code = KMessageBox::warningContinueCancel(this,dialog);
-    if (code!=KMessageBox::Continue) {
+    if (code != KMessageBox::Continue) {
         return;
     }
 
@@ -403,7 +391,9 @@ void TimeLine::mergeBranch()
     m_gitRunner->switchBranch(branch);
     m_gitRunner->mergeBranch(branchToMerge, commit);
 
-    loadTimeLine(m_workingDir);
+    //TODO!!!!!!
+
+    //loadTimeLine(m_workingDir);
 
     emit sourceDirectoryChanged();
 }
@@ -418,7 +408,8 @@ void TimeLine::deleteBranch()
 
     const QString branch = senderToString();
     m_gitRunner->deleteBranch(branch);
-    loadTimeLine(m_workingDir);
+    connect(m_gitRunner, SIGNAL(deleteBranchFinished()), this, SLOT(reloadTimeLine()));
+    //loadTimeLine(m_workingDir);
 }
 
 void TimeLine::renameBranch()
@@ -437,7 +428,9 @@ void TimeLine::renameBranch()
     return;
 
     m_gitRunner->renameBranch(newBranchName);
-    loadTimeLine(m_workingDir);
+
+    connect(m_gitRunner, SIGNAL(renameBranchFinished()), this, SLOT(reloadTimeLine()));
+//    loadTimeLine(m_workingDir);
 }
 
 void TimeLine::createBranch()
@@ -457,7 +450,8 @@ void TimeLine::createBranch()
     }
 
     m_gitRunner->newBranch(newBranchName);
-    loadTimeLine(m_workingDir);
+    connect(m_gitRunner, SIGNAL(newBranchFinished()), this, SLOT(reloadTimeLine()));
+    //loadTimeLine(m_workingDir);
 }
 
 bool TimeLine::setWorkingDir(const KUrl &dir)
@@ -555,6 +549,11 @@ QString TimeLine::senderToString() const
     branch.replace(" ", "");
 
     return branch;
+}
+
+void TimeLine::reloadTimeLine()
+{
+    loadTimeLine(m_workingDir);
 }
 
 #include "moc_timeline.cpp"

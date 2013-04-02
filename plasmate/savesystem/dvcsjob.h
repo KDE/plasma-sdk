@@ -1,5 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2009 by Diego '[Po]lentino' Casella <polentino911@gmail.com> *
+ * Copyright (C) 2013 by Giorgos Tsiapaliokas <terietor@gmail.com>            *
  *                                                                            *
  *    This program is free software; you can redistribute it and/or modify    *
  *    it under the terms of the GNU General Public License as published by    *
@@ -37,33 +38,10 @@
   * want to retrieve a string or binary data.
   * To use it at its most, some setup is required; here it is an example:
   * @code
-  *     DvcsJob *job = new DvcsJob();
-  *     job->setCommunicationMode(KProcess::SeparateChannels);
-  *     job->setDirectory(QDir("a/directory"));
-  *
-  *     job << "git" << "init";
+  *     KJob *job = new DvcsJob(command, workingDirectory);
+  *     connect(job, SIGNAL(result(KJob*)), this, SLOT(handleResult(KJob*)));
   *     job->start();
-  *
-  *     QString result;
-  *     QString error;
-  *     if(job->status() == DvcsJob::JobSucceeded) {
-  *         // Save job result as a string
-  *         result = job->output();
-  *         // Process the output
-  *
-  *     } else if(job->status() == DvcsJob::JobFailed) {
-  *         error = job->output();
-  *         // Process the error
-  *     }
-  *
-  *     job->cancel();
   * @endcode
-  *
-  * @author Diego [Po]lentino Casella <polentino911@gmail.com>
-  *
-  * @note There is no need to cycle until the process has finished, since the main
-  * thread is blocked until start() has finished. For particular implementations,
-  * consider putting the job in a separate KThread and query isRunning().
   */
 class DvcsJob : public KJob
 {
@@ -73,18 +51,19 @@ public:
     /**
       * Used to identify the current status of the class.
       */
-    enum JobStatus {
-        JobRunning = 0      /**< The job is running */,
-        JobSucceeded = 1    /**< The job succeeded */,
-        JobCancelled = 2    /**< The job was cancelled */,
-        JobFailed = 3       /**< The job failed */,
-        JobNotStarted = 4   /**< The job is not yet started */
+    enum {
+        JobFailedToStart = UserDefinedError,
+        JobCrashed,
+        JobTimedout,
+        JobWriteError,
+        JobReadError,
+        JobUnknownError
     };
 
     /**
       * Simple ctor
       */
-    DvcsJob();
+    DvcsJob(const QStringList& command, const QString& workingDirectory, QObject *parent = 0);
     ~DvcsJob();
 
     /**
@@ -93,54 +72,14 @@ public:
     void start();
 
     /**
-      * Call this method to clean the job, for example before setting a new one.
-      */
-    void clear();
-
-    /**
-      * @return The status of the last process executed.
-      */
-    JobStatus status() const;
-
-    /**
-      * Sets the command arguments.
-      * @param Args contains one string argument per element.
-      */
-    void setCommandArguments(const QStringList &args);
-
-    /**
-      * Sets the communication mode.
-      * @param comm Accepts one of the KProcess:OutputChannelMode modes.
-      */
-    void setCommunicationMode(KProcess::OutputChannelMode comm);
-
-    /**
-      * Sets the process working directory.
-      * @param directory Should contain only absolute path; relative or "" paths are
-      * deprecated and will make the job fail.
-      */
-    void setDirectory(const QDir &directory);
-
-    /**
-      * Sets a file used to write the output in.
-      * @param fileName The name of the file.
-      */
-    void setStandardInputFile(const QString &fileName);
-
-    /**
-      *@return The string containing the current commads into a single string.
-      */
-    QString dvcsCommand() const;
-
-    /**
       * @return The handle to the current process reference.
       */
-    KProcess *getChildproc();
+    KProcess *childproc();
 
     /**
       * @return The current working directory.
       */
-    QDir const & getDirectory() const;
+    QString workingDirectory() const;
 
     /**
       * @return The result of the last process executed as binary data
@@ -154,33 +93,20 @@ public:
     QString output() const;
 
     /**
-      * Append a new command to the existing command list.
-      * @param arg The string representing the command argument.
-      */
-    DvcsJob& operator<<(const QString &arg);
+     * @return The command that we executed
+     */
+    QString dvcsCommand() const;
+protected:
 
     /**
-      * Append a new command to the existing command list.
-      * @param arg The char string representing the command argument.
+      * Kills the current process.
       */
-    DvcsJob& operator<<(const char *arg);
-
-    /**
-      * Append a new list of commands to the existing command list.
-      * @param arg The stringlist representing the command arguments.
-      */
-    DvcsJob& operator<<(const QStringList &args);
-
-    /**
-      * Cancels the current process.
-      */
-    void cancel();
+    bool doKill();
 
 private Q_SLOTS:
 
     /**
-      * Helper function, prints to the standard error if something goes wrong and
-      * reset the DvcsJob status to ready.
+      * Helper function, prints to the standard error if something goes wrong
       * @param error The QProcess::ProcessError error identifier.
       */
     void slotProcessError(QProcess::ProcessError error);
@@ -202,24 +128,15 @@ private Q_SLOTS:
       */
     void slotReceivedStderr();
 
+    void doWork();
+
 private:
-
-    /**
-      * @return whehter the job is running or not.
-      */
-    bool isRunning() const;
-
     KProcess   *m_process;
-    QStringList m_command;
-    QVariant    m_results;
-    QDir        m_directory;
-    bool        m_isRunning;
-    bool        m_wasStarted;
-    bool        m_failed;
+    QString     m_directory;
     QByteArray  m_output;
-    KProcess::OutputChannelMode m_comm;
 
-    void jobIsReady();
+    //we will use m_dvcsCommand just for debugging purposes
+    QStringList m_dvcsCommand;
 };
 
 #endif // DVCSJOB_H
