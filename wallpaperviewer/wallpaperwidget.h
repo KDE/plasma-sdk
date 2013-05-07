@@ -39,6 +39,7 @@ public:
     WallpaperWidget(const QString &paper, const QString &mode, QWidget *parent = 0);
     ~WallpaperWidget();
 
+public Q_SLOTS:
     void configure();
 
 protected:
