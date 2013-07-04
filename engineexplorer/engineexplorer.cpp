@@ -23,14 +23,17 @@
 #include <QStandardItemModel>
 #include <QBitmap>
 #include <QBitArray>
+#include <QMenu>
+#include <QUrl>
 
 #include <KIconLoader>
 #include <KIconTheme>
-#include <KMenu>
 #include <KStandardAction>
 #include <KStringHandler>
 #include <KAction>
 #include <KDateTime>
+
+#include <Plasma/PluginLoader>
 
 #ifdef FOUND_SOPRANO
 #include <Soprano/Node>
@@ -95,7 +98,7 @@ EngineExplorer::~EngineExplorer()
 void EngineExplorer::cleanUp()
 {
     if (!m_engineName.isEmpty()) {
-        m_engineManager->unloadEngine(m_engineName);
+        //m_engineManager->unloadEngine(m_engineName);
     }
 }
 
@@ -171,7 +174,7 @@ void EngineExplorer::showEngine(const QString& name)
     m_sourceCount = 0;
 
     if (!m_engineName.isEmpty()) {
-        m_engineManager->unloadEngine(m_engineName);
+        //m_engineManager->unloadEngine(m_engineName);
     }
 
     m_engineName = name;
@@ -180,7 +183,7 @@ void EngineExplorer::showEngine(const QString& name)
         return;
     }
 
-    m_engine = m_engineManager->loadEngine(m_engineName);
+    m_engine = m_engineManager->loadDataEngine(m_engineName);
     if (!m_engine) {
         m_engineName.clear();
         updateTitle();
@@ -283,8 +286,8 @@ void EngineExplorer::showDataContextMenu(const QPoint &point)
         }
 
         const QString source = index.data().toString();
-        KMenu menu;
-        menu.addTitle(source);
+        QMenu menu;
+        menu.addSection(source);
         QAction *service = menu.addAction(i18n("Get associated service"));
         QAction *update = menu.addAction(i18n("Update source now"));
         QAction *remove = menu.addAction(i18n("Remove source"));
@@ -295,7 +298,7 @@ void EngineExplorer::showDataContextMenu(const QPoint &point)
             viewer->show();
         } else if (activated == update) {
             m_engine->connectSource(source, this);
-            Plasma::DataEngine::Data data = m_engine->query(source);
+            //Plasma::DataEngine::Data data = m_engine->query(source);
         } else if (activated == remove) {
             removeSource(source);
         }
@@ -419,7 +422,7 @@ QString EngineExplorer::convertToString(const QVariant &value)
             Plasma::DataEngine::Data data = value.value<Plasma::DataEngine::Data>();
             if (!data.isEmpty()) {
                 QStringList result;
-                QHashIterator<QString, QVariant> it(data);
+                QMapIterator<QString, QVariant> it(data);
 
                 while (it.hasNext()) {
                     it.next();
@@ -492,7 +495,7 @@ void EngineExplorer::updateTitle()
 
     m_title->setText(ki18ncp("The name of the engine followed by the number of data sources",
                              "%1 Engine - 1 data source", "%1 Engine - %2 data sources")
-                              .subs(KStringHandler::capwords(m_engine->name()))
+                              .subs(KStringHandler::capwords(m_engine->pluginInfo().name()))
                               .subs(m_sourceCount).toString());
 
     if (m_engine->icon().isEmpty()) {
