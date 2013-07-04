@@ -57,7 +57,7 @@ EngineExplorer::EngineExplorer(QWidget* parent)
 
     m_engineManager = Plasma::PluginLoader::self();
     m_dataModel = new QStandardItemModel(this);
-    KIcon pix("plasma");
+    QIcon pix = QIcon::fromTheme("plasma");
     int size = IconSize(KIconLoader::Dialog);
     m_title->setPixmap(pix.pixmap(size, size));
     connect(m_engines, SIGNAL(activated(QString)), this, SLOT(showEngine(QString)));
@@ -148,7 +148,7 @@ void EngineExplorer::listEngines()
     qSort(engines);
 
     foreach (const KPluginInfo engine, engines) {
-        m_engines->addItem(KIcon(engine.icon()), engine.pluginName());
+        m_engines->addItem(QIcon::fromTheme(engine.icon()), engine.pluginName());
     }
 
     m_engines->setCurrentIndex(-1);
@@ -485,7 +485,7 @@ int EngineExplorer::showData(QStandardItem* parent, Plasma::DataEngine::Data dat
 void EngineExplorer::updateTitle()
 {
     if (!m_engine) {
-        m_title->setPixmap(KIcon("plasma").pixmap(IconSize(KIconLoader::Dialog)));
+        m_title->setPixmap(QIcon::fromTheme("plasma").pixmap(IconSize(KIconLoader::Dialog)));
         m_title->setText(i18n("Plasma DataEngine Explorer"));
         return;
     }
@@ -496,10 +496,10 @@ void EngineExplorer::updateTitle()
                               .subs(m_sourceCount).toString());
 
     if (m_engine->icon().isEmpty()) {
-        m_title->setPixmap(KIcon("plasma").pixmap(IconSize(KIconLoader::Dialog)));
+        m_title->setPixmap(QIcon::fromTheme("plasma").pixmap(IconSize(KIconLoader::Dialog)));
     } else {
         //m_title->setPixmap(KIcon("alarmclock").pixmap(IconSize(KIconLoader::Dialog)));
-        m_title->setPixmap(KIcon(m_engine->icon()).pixmap(IconSize(KIconLoader::Dialog)));
+        m_title->setPixmap(QIcon::fromTheme(m_engine->icon()).pixmap(IconSize(KIconLoader::Dialog)));
     }
 }
 
