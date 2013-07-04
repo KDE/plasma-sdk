@@ -25,16 +25,16 @@
 #include <QtCore/QTimer>
 #include <QtWidgets/QApplication>
 #include <QtGui/QContextMenuEvent>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QMenu>
-#include <QtGui/QToolButton>
-#include <QtGui/QTreeView>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QMenu>
+#include <QtWidgets/QToolButton>
+#include <QtWidgets/QTreeView>
 
 #include <kdebug.h>
 #include <kiconloader.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <ktoolbar.h>
 #include <kvbox.h>
 
