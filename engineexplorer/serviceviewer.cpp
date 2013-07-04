@@ -54,7 +54,7 @@ ServiceViewer::ServiceViewer(Plasma::DataEngine *engine, const QString &source, 
     QString serviceName = i18nc("Plasma service with unknown name", "Unknown");
 
     if (m_engine) {
-        engineName = KStringHandler::capwords(m_engine->name());
+        engineName = KStringHandler::capwords(m_engine->pluginInfo().name());
         kDebug() << "########### CALLING SERVICE FOR SOURCE: " << m_source;
         m_service = m_engine->serviceForSource(m_source);
 
@@ -117,7 +117,7 @@ void ServiceViewer::startOperation()
     }
 
     QString operation = m_operations->currentText();
-    KConfigGroup desc = m_service->operationDescription(operation);
+    QVariantMap desc = m_service->operationDescription(operation);
     for (int i = 0; i < m_operationDescription->rowCount(); ++i) {
         QTableWidgetItem *item = m_operationDescription->item(i, 1);
         QString value = item->text();
@@ -128,7 +128,7 @@ void ServiceViewer::startOperation()
 
         item = m_operationDescription->item(i, 0);
         QString key = item->text();
-        desc.writeEntry(key, value);
+        desc[key] = value;
     }
 
     updateJobCount(1);
@@ -147,16 +147,16 @@ void ServiceViewer::operationSelected(const QString &operation)
     headers << i18n("Key") << i18n("Value");
     m_operationDescription->setHorizontalHeaderLabels(headers);
 
-    KConfigGroup desc = m_service->operationDescription(operation);
+    QVariantMap desc = m_service->operationDescription(operation);
     int i = 0;
-    const QStringList keys = desc.keyList();
+    const QStringList keys = desc.keys();
     m_operationDescription->setRowCount(keys.count());
     foreach (const QString &key, keys) {
         QTableWidgetItem *item = new QTableWidgetItem(key);
         item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
         m_operationDescription->setItem(i, 0, item);
 
-        item = new QTableWidgetItem(desc.readEntry(key, QString()));
+        item = new QTableWidgetItem(desc[key].toString());
         m_operationDescription->setItem(i, 1, item);
 
         ++i;
