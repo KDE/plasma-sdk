@@ -38,8 +38,6 @@ Q_DECLARE_METATYPE(Soprano::Node)
 #endif // FOUND_SOPRANO
 Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 
-#include <Plasma/DataEngineManager>
-
 #include "serviceviewer.h"
 #include "titlecombobox.h"
 
@@ -57,7 +55,7 @@ EngineExplorer::EngineExplorer(QWidget* parent)
     setMainWidget(mainWidget);
     setupUi(mainWidget);
 
-    m_engineManager = Plasma::DataEngineManager::self();
+    m_engineManager = Plasma::PluginLoader::self();
     m_dataModel = new QStandardItemModel(this);
     KIcon pix("plasma");
     int size = IconSize(KIconLoader::Dialog);
@@ -146,7 +144,7 @@ void EngineExplorer::dataUpdated(const QString& source, const Plasma::DataEngine
 void EngineExplorer::listEngines()
 {
     m_engines->clear();
-    KPluginInfo::List engines = m_engineManager->listEngineInfo(m_app);
+    KPluginInfo::List engines = m_engineManager->listDataEngineInfo(m_app);
     qSort(engines);
 
     foreach (const KPluginInfo engine, engines) {
