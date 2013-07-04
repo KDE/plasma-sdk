@@ -24,7 +24,7 @@
 #include <KCmdLineArgs>
 #include <KLocale>
 
-#include <Plasma/DataEngineManager>
+#include <Plasma/PluginLoader>
 
 #include "engineexplorer.h"
 
@@ -35,7 +35,7 @@ void listEngines()
 {
     int maxLen = 0;
     QMap<QString, QString> engines;
-    foreach (const KPluginInfo &info, Plasma::DataEngineManager::listEngineInfo()) {
+    foreach (const KPluginInfo &info, Plasma::PluginLoader::listEngineInfo()) {
         if (info.property("NoDisplay").toBool()) {
             continue;
         }
@@ -65,15 +65,18 @@ void listEngines()
 
 int main(int argc, char **argv)
 {
-    KAboutData aboutData("plasmaengineexplorer", 0, ki18n("Plasma Engine Explorer"),
-                         version, ki18n(description), KAboutData::License_GPL,
-                         ki18n("(c) 2006, The KDE Team"));
-    aboutData.addAuthor(ki18n("Aaron J. Seigo"),
-                        ki18n( "Author and maintainer" ),
+    KAboutData aboutData("plasmaengineexplorer", 0, i18n("Plasma Engine Explorer"),
+                         version, i18n(description), KAboutData::License_GPL,
+                         i18n("(c) 2006, The KDE Team"));
+    aboutData.addAuthor(i18n("Aaron J. Seigo"),
+                        i18n( "Author and maintainer" ),
                         "aseigo@kde.org");
     aboutData.setProgramIconName("plasma");
 
-    KCmdLineArgs::init(argc, argv, &aboutData);
+    KCmdLineArgs::init(argc, argv,
+                       "plasmaengineexplorer", "",
+                       ki18n("Plasma Engine Explore"),
+                       version);
 
     KCmdLineOptions options;
     options.add("list", ki18n("Displays a list of known engines and their descriptions"));
