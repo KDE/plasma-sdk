@@ -200,7 +200,7 @@ class KTreeViewSearchLine : public KLineEdit
     virtual void updateSearch( QTreeView *treeView );
 
     /**
-     * Connects signals of this listview to the appropriate slots of the search
+     * Connects signals of this listview to the appropriate Q_SLOTS of the search
      * line.
      */
     virtual void connectTreeView( QTreeView* );

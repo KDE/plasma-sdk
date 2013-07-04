@@ -23,7 +23,7 @@
 
 #include <QtCore/QList>
 #include <QtCore/QTimer>
-#include <QtGui/QApplication>
+#include <QtWidgets/QApplication>
 #include <QtGui/QContextMenuEvent>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>

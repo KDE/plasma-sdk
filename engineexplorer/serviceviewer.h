@@ -42,7 +42,7 @@ public:
 private:
     void updateJobCount(int numberOfJobs);
 
-private slots:
+private Q_SLOTS:
     void updateOperations();
     void startOperation();
     void operationSelected(const QString &operation);

@@ -48,10 +48,10 @@ class EngineExplorer : public KDialog, public Ui::EngineExplorer
 
         static QString convertToString(const QVariant &value);
 
-    public slots:
+    public Q_SLOTS:
         void dataUpdated(const QString& source, const Plasma::DataEngine::Data& data);
 
-    private slots:
+    private Q_SLOTS:
         void showEngine(const QString& engine);
         void addSource(const QString& source);
         void removeSource(const QString& source);
