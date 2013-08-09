@@ -19,7 +19,7 @@
 
 #include "serviceviewer.h"
 
-#include <KDebug>
+#include <QDebug>
 #include <KMessageBox>
 #include <KStringHandler>
 
@@ -55,7 +55,7 @@ ServiceViewer::ServiceViewer(Plasma::DataEngine *engine, const QString &source, 
 
     if (m_engine) {
         engineName = KStringHandler::capwords(m_engine->pluginInfo().name());
-        kDebug() << "########### CALLING SERVICE FOR SOURCE: " << m_source;
+        qDebug() << "########### CALLING SERVICE FOR SOURCE: " << m_source;
         m_service = m_engine->serviceForSource(m_source);
 
         if (m_service != 0) {
@@ -195,7 +195,7 @@ void ServiceViewer::operationResult(KJob *j)
                                  i18n("Operation Result"));
     }
 
-    kDebug() << "operation results are in!";
+    qDebug() << "operation results are in!";
 }
 
 void ServiceViewer::engineDestroyed()

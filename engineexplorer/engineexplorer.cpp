@@ -116,7 +116,7 @@ void EngineExplorer::setEngine(const QString &engine)
     //find the engine in the combo box
     int index = m_engines->findText(engine);
     if (index != -1) {
-        kDebug() << QString("Engine %1 found!").arg(engine);
+        qDebug() << QString("Engine %1 found!").arg(engine);
         m_engines->setCurrentIndex(index);
         showEngine(engine);
     }
@@ -190,12 +190,12 @@ void EngineExplorer::showEngine(const QString& name)
         return;
     }
 
-    //kDebug() << "showing engine " << m_engine->objectName();
-    //kDebug() << "we have " << sources.count() << " data sources";
+    //qDebug() << "showing engine " << m_engine->objectName();
+    //qDebug() << "we have " << sources.count() << " data sources";
     connect(m_engine, SIGNAL(sourceAdded(QString)), this, SLOT(addSource(QString)));
     connect(m_engine, SIGNAL(sourceRemoved(QString)), this, SLOT(removeSource(QString)));
     foreach (const QString& source, m_engine->sources()) {
-        //kDebug() << "adding " << source;
+        //qDebug() << "adding " << source;
         addSource(source);
     }
 
@@ -210,19 +210,19 @@ void EngineExplorer::showEngine(const QString& name)
 
 void EngineExplorer::addSource(const QString& source)
 {
-    //kDebug() << "adding" << source;
+    //qDebug() << "adding" << source;
     QList<QStandardItem*> items = m_dataModel->findItems(source, 0);
     if (!items.isEmpty()) {
-        kDebug() << "er... already there?";
+        qDebug() << "er... already there?";
         return;
     }
 
     QStandardItem* parent = new QStandardItem(source);
     m_dataModel->appendRow(parent);
 
-    //kDebug() << "getting data for source " << source;
+    //qDebug() << "getting data for source " << source;
     if (!m_requestingSource || m_sourceRequester->text() != source) {
-        //kDebug() << "connecting up now";
+        //qDebug() << "connecting up now";
         m_engine->connectSource(source, this);
     }
 
@@ -267,7 +267,7 @@ void EngineExplorer::requestSource(const QString &source)
         return;
     }
 
-    kDebug() << "request source" << source;
+    qDebug() << "request source" << source;
     m_requestingSource = true;
     m_engine->connectSource(source, this, (uint)m_updateInterval->value());
     m_requestingSource = false;

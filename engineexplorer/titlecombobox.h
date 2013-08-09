@@ -23,7 +23,7 @@
 #include <QComboBox>
 #include <QPainter>
 
-#include <KDebug>
+#include <QDebug>
 #include <KLocale>
 
 class TitleComboBox : public QComboBox
