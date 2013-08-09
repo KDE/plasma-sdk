@@ -78,6 +78,14 @@ find_package(KDELibs4 REQUIRED NO_MODULE)
 find_package(KDE4Support REQUIRED NO_MODULE)
 
 
+find_package(LibAttica NO_MODULE)
+set_package_properties(LibAttica PROPERTIES DESCRIPTION "Support for Get Hot New Stuff related stuff"
+                       URL "https://projects.kde.org/attica"
+                       TYPE REQUIRED
+                      )
+
+
+
 #########################################################################
 
 #add_definitions(${KDE4_DEFINITIONS})

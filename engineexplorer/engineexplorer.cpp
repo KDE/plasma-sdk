@@ -498,11 +498,11 @@ void EngineExplorer::updateTitle()
                               .subs(KStringHandler::capwords(m_engine->pluginInfo().name()))
                               .subs(m_sourceCount).toString());
 
-    if (m_engine->icon().isEmpty()) {
+    if (m_engine->pluginInfo().icon().isEmpty()) {
         m_title->setPixmap(QIcon::fromTheme("plasma").pixmap(IconSize(KIconLoader::Dialog)));
     } else {
         //m_title->setPixmap(KIcon("alarmclock").pixmap(IconSize(KIconLoader::Dialog)));
-        m_title->setPixmap(QIcon::fromTheme(m_engine->icon()).pixmap(IconSize(KIconLoader::Dialog)));
+        m_title->setPixmap(QIcon::fromTheme(m_engine->pluginInfo().icon()).pixmap(IconSize(KIconLoader::Dialog)));
     }
 }
 
