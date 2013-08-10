@@ -6,9 +6,9 @@ set(plasmaengineexplorer_SRCS
 )
 
 kde4_add_ui_files(plasmaengineexplorer_SRCS engineexplorer.ui serviceviewer.ui)
+
 add_executable(plasmaengineexplorer ${plasmaengineexplorer_SRCS})
 
-# target_link_libraries(plasmaengineexplorer ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS})
 target_link_libraries(plasmaengineexplorer
     ${KDE4_KDECORE_LIBS}
     ${Plasma_LIBRARIES}
@@ -18,4 +18,5 @@ target_link_libraries(plasmaengineexplorer
 
 install(TARGETS plasmaengineexplorer ${INSTALL_TARGETS_DEFAULT_ARGS})
 
+# FIXME: needs replacement
 #kde4_create_manpage(man-plasmaengineexplorer.1.docbook 1 INSTALL_DESTINATION ${MAN_INSTALL_DIR})
