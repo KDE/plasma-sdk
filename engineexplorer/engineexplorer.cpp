@@ -23,6 +23,7 @@
 #include <QStandardItemModel>
 #include <QBitmap>
 #include <QBitArray>
+#include <QDialogButtonBox>
 #include <QMenu>
 #include <QUrl>
 
@@ -45,17 +46,31 @@ Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 #include "titlecombobox.h"
 
 EngineExplorer::EngineExplorer(QWidget* parent)
-    : KDialog(parent),
+    : QDialog(parent),
       m_engine(0),
       m_sourceCount(0),
-      m_requestingSource(false)
+      m_requestingSource(false),
+      m_expandButton(new QPushButton(i18n("Collapse All"), this)),
+      m_collapseButton(new QPushButton(i18n("Expand All"), this))
 {
 #ifdef FOUND_SOPRANO
     (void) qRegisterMetaType<Soprano::Node>();
 #endif
     setWindowTitle(i18n("Plasma Engine Explorer"));
     QWidget* mainWidget = new QWidget(this);
-    setMainWidget(mainWidget);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
+    buttonBox->addButton(m_expandButton, QDialogButtonBox::ActionRole);
+    buttonBox->addButton(m_collapseButton, QDialogButtonBox::ActionRole);
+    buttonBox->addButton(QDialogButtonBox::Close);
+
+    QVBoxLayout *layout = new QVBoxLayout(this);
+    layout->addWidget(mainWidget);
+    layout->addWidget(buttonBox);
+    setLayout(layout);
+
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+
     setupUi(mainWidget);
 
     m_engineManager = Plasma::PluginLoader::self();
@@ -75,13 +90,9 @@ EngineExplorer::EngineExplorer(QWidget* parent)
     listEngines();
     m_engines->setFocus();
 
-    setButtons(KDialog::Close | KDialog::User1 | KDialog::User2);
-    setButtonText(KDialog::User1, i18n("Collapse All"));
-    setButtonText(KDialog::User2, i18n("Expand All"));
-    connect(this, SIGNAL(user1Clicked()), m_data, SLOT(collapseAll()));
-    connect(this, SIGNAL(user2Clicked()), m_data, SLOT(expandAll()));
-    enableButton(KDialog::User1, false);
-    enableButton(KDialog::User2, false);
+    connect(m_collapseButton, SIGNAL(clicked()), m_data, SLOT(collapseAll()));
+    connect(m_expandButton, SIGNAL(clicked()), m_data, SLOT(expandAll()));
+    enableButtons(false);
 
     addAction(KStandardAction::quit(qApp, SLOT(quit()), this));
 
@@ -163,8 +174,7 @@ void EngineExplorer::showEngine(const QString& name)
     m_sourceRequesterButton->setEnabled(false);
     m_serviceRequester->setEnabled(false);
     m_serviceRequesterButton->setEnabled(false);
-    enableButton(KDialog::User1, false);
-    enableButton(KDialog::User2, false);
+    enableButtons(false);
     m_dataModel->clear();
     m_dataModel->setColumnCount(4);
     QStringList headers;
@@ -229,8 +239,7 @@ void EngineExplorer::addSource(const QString& source)
     ++m_sourceCount;
     updateTitle();
 
-    enableButton(KDialog::User1, true);
-    enableButton(KDialog::User2, true);
+    enableButtons(true);
 }
 
 void EngineExplorer::removeSource(const QString& source)
@@ -503,6 +512,17 @@ void EngineExplorer::updateTitle()
     } else {
         //m_title->setPixmap(KIcon("alarmclock").pixmap(IconSize(KIconLoader::Dialog)));
         m_title->setPixmap(QIcon::fromTheme(m_engine->pluginInfo().icon()).pixmap(IconSize(KIconLoader::Dialog)));
+    }
+}
+
+void EngineExplorer::enableButtons(bool enable)
+{
+    if (m_expandButton) {
+        m_expandButton->setEnabled(enable);
+    }
+
+    if (m_collapseButton) {
+        m_collapseButton->setEnabled(enable);
     }
 }
 

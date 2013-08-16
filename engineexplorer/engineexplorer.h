@@ -24,7 +24,7 @@ class QStandardItemModel;
 class QStandardItem;
 
 #include <Plasma/DataEngine>
-#include <KDialog>
+#include <QDialog>
 
 #include "ui_engineexplorer.h"
 
@@ -35,7 +35,9 @@ namespace Plasma
     class PluginLoader;
 } // namespace Plasma
 
-class EngineExplorer : public KDialog, public Ui::EngineExplorer
+class QPushButton;
+
+class EngineExplorer : public QDialog, public Ui::EngineExplorer
 {
     Q_OBJECT
 
@@ -66,6 +68,7 @@ class EngineExplorer : public KDialog, public Ui::EngineExplorer
         void listEngines();
         int showData(QStandardItem* parent, Plasma::DataEngine::Data data);
         void updateTitle();
+        void enableButtons(bool enable);
 
         Plasma::PluginLoader* m_engineManager;
         QStandardItemModel* m_dataModel;
@@ -74,6 +77,8 @@ class EngineExplorer : public KDialog, public Ui::EngineExplorer
         Plasma::DataEngine* m_engine;
         int m_sourceCount;
         bool m_requestingSource;
+        QPushButton *m_expandButton;
+        QPushButton *m_collapseButton;
 };
 
 #endif // multiple inclusion guard
