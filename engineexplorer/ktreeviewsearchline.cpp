@@ -36,8 +36,6 @@
 #include <kiconloader.h>
 #include <klocalizedstring.h>
 #include <ktoolbar.h>
-#include <kvbox.h>
-
 
 class KTreeViewSearchLinePrivate
 {
