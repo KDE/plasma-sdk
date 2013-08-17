@@ -85,7 +85,7 @@ EngineExplorer::EngineExplorer(QWidget* parent)
     m_data->setWordWrap(true);
 
     m_searchLine->setTreeView(m_data);
-    m_searchLine->setClickMessage(i18n("Search"));
+    m_searchLine->setPlaceholderText(i18n("Search"));
 
     listEngines();
     m_engines->setFocus();
