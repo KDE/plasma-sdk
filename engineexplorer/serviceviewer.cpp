@@ -20,6 +20,7 @@
 #include "serviceviewer.h"
 
 #include <QDebug>
+#include <QDialogButtonBox>
 #include <KMessageBox>
 #include <KStringHandler>
 
@@ -30,22 +31,32 @@
 #include "engineexplorer.h"
 
 ServiceViewer::ServiceViewer(Plasma::DataEngine *engine, const QString &source, QWidget *parent)
-    : KDialog(parent),
+    : QDialog(parent),
       m_engine(engine),
       m_service(0),
       m_source(source),
-      m_operationCount(0)
+      m_operationCount(0),
+      m_operationButton(new QPushButton(i18n("Start Operation"), this))
 {
     setAttribute(Qt::WA_DeleteOnClose);
     QWidget* mainWidget = new QWidget(this);
-    setMainWidget(mainWidget);
+    QVBoxLayout *layout = new QVBoxLayout();
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
+    buttonBox->addButton(m_operationButton, QDialogButtonBox::ActionRole);
+    buttonBox->addButton(QDialogButtonBox::Close);
+
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+
+    layout->addWidget(mainWidget);
+    layout->addWidget(buttonBox);
+    setLayout(layout);
+
     setupUi(mainWidget);
     m_operationStatus->hide();
 
-    setButtons(KDialog::Close | KDialog::User1);
-    setButtonText(KDialog::User1, i18n("Start Operation"));
-    connect(this, SIGNAL(user1Clicked()), this, SLOT(startOperation()));
-    enableButton(KDialog::User1, false);
+    connect(m_operationButton, SIGNAL(clicked()), this, SLOT(startOperation()));
+    m_operationButton->setEnabled(false);
 
     connect(m_operations, SIGNAL(currentIndexChanged(QString)),
             this, SLOT(operationSelected(QString)));
@@ -142,7 +153,7 @@ void ServiceViewer::operationSelected(const QString &operation)
         return;
     }
 
-    enableButton(KDialog::User1, true);
+    m_operationButton->setEnabled(true);
     QStringList headers;
     headers << i18n("Key") << i18n("Value");
     m_operationDescription->setHorizontalHeaderLabels(headers);
