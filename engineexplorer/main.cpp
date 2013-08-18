@@ -19,12 +19,13 @@
 
 #include <iostream>
 
-#include <KApplication>
+#include <QApplication>
 #include <KAboutData>
-#include <KCmdLineArgs>
 #include <KLocale>
 
 #include <Plasma/PluginLoader>
+#include <qcommandlineparser.h>
+#include <qcommandlineoption.h>
 
 #include "engineexplorer.h"
 
@@ -73,71 +74,68 @@ int main(int argc, char **argv)
                         "aseigo@kde.org");
     aboutData.setProgramIconName("plasma");
 
-    KCmdLineArgs::init(argc, argv,
-                       "plasmaengineexplorer", "",
-                       ki18n("Plasma Engine Explore"),
-                       version);
+    QApplication app(argc, argv);
 
-    KCmdLineOptions options;
-    options.add("list", ki18n("Displays a list of known engines and their descriptions"));
-    options.add("height <pixels>", ki18n("The desired height in pixels"));
-    options.add("width <pixels>", ki18n("The desired width in pixels"));
-    options.add("x <pixels>", ki18n("The desired x position in pixels"));
-    options.add("y <pixels>", ki18n("The desired y position in pixels"));
-    options.add("engine <data engine>", ki18n("The data engine to use"));
-    options.add("source <data engine>", ki18n("The source to request"));
-    options.add("interval <ms>", ki18n("Update interval in milliseconds"));
-    options.add("app <application>", ki18n("Only show engines associated with the parent application; "
-                                           "maps to the X-KDE-ParentApp entry in the DataEngine's .desktop file."));
+    QCommandLineParser *parser = new QCommandLineParser;
+    app.setApplicationVersion(version);
+    parser->addVersionOption();
+    parser->addHelpOption(description);
+    parser->addOption(QCommandLineOption(QStringList() << "list", i18n("Displays a list of known engines and their descriptions")));
+    parser->addOption(QCommandLineOption(QStringList() << "height", i18n("The desired height in pixels"), "pixels"));
+    parser->addOption(QCommandLineOption(QStringList() << "width", i18n("The desired width in pixels"), "pixels"));
+    parser->addOption(QCommandLineOption(QStringList() << "x", i18n("The desired x position in pixels"), "pixels"));
+    parser->addOption(QCommandLineOption(QStringList() << "y", i18n("The desired y position in pixels"), "pixels"));
+    parser->addOption(QCommandLineOption(QStringList() << "engine", i18n("The data engine to use"), "data engine"));
+    parser->addOption(QCommandLineOption(QStringList() << "source", i18n("The source to request"), "data engine"));
+    parser->addOption(QCommandLineOption(QStringList() << "interval", i18n("Update interval in milliseconds"), "ms"));
+    parser->addOption(QCommandLineOption(QStringList() << "app", i18n("Only show engines associated with the parent application; "
+                                           "maps to the X-KDE-ParentApp entry in the DataEngine's .desktop file."), "application"));
 
-    KCmdLineArgs::addCmdLineOptions(options);
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
-    if (args->isSet("list")) {
+    parser->process(app);
+
+    if (parser->isSet("list")) {
         listEngines();
         return 0;
     }
 
-    KApplication app;
     EngineExplorer* w = new EngineExplorer;
 
     bool ok1, ok2 = false;
     //get size
-    int x = args->getOption("height").toInt(&ok1);
-    int y = args->getOption("width").toInt(&ok2);
+    int x = parser->value("height").toInt(&ok1);
+    int y = parser->value("width").toInt(&ok2);
     if (ok1 && ok2) {
         w->resize(x,y);
     }
 
     //get pos if available
-    x = args->getOption("x").toInt(&ok1);
-    y = args->getOption("y").toInt(&ok2);
+    x = parser->value("x").toInt(&ok1);
+    y = parser->value("y").toInt(&ok2);
     if (ok1 && ok2) {
         w->move(x,y);
     }
 
     //set interval
-    int interval = args->getOption("interval").toInt(&ok1);
+    int interval = parser->value("interval").toInt(&ok1);
     if (ok1) {
         w->setInterval(interval);
     }
 
     //set engine
-    QString engine = args->getOption("engine");
+    QString engine = parser->value("engine");
     if (!engine.isEmpty()) {
         w->setEngine(engine);
 
-        QString source = args->getOption("source");
+        QString source = parser->value("source");
         if (!source.isEmpty()) {
             w->requestSource(source);
         }
     }
 
-    if (args->isSet("app")) {
-        w->setApp(args->getOption("app"));
+    if (parser->isSet("app")) {
+        w->setApp(parser->value("app"));
     }
-
-    args->clear();
 
     w->show();
     return app.exec();

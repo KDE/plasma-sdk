@@ -14,6 +14,7 @@ target_link_libraries(plasmaengineexplorer
     ${Plasma_LIBRARIES}
     ${KDE4Attic_LIBRARIES}
     ${KDE4Support_LIBRARIES}
+    kdeqt5staging
 )
 
 install(TARGETS plasmaengineexplorer ${INSTALL_TARGETS_DEFAULT_ARGS})
