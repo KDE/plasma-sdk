@@ -23,8 +23,9 @@
 class QStandardItemModel;
 class QStandardItem;
 
-#include <Plasma/DataEngine>
 #include <QDialog>
+
+#include <Plasma/DataEngine>
 
 #include "ui_engineexplorer.h"
 
