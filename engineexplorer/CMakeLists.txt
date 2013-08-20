@@ -10,10 +10,11 @@ kde4_add_ui_files(plasmaengineexplorer_SRCS engineexplorer.ui serviceviewer.ui)
 add_executable(plasmaengineexplorer ${plasmaengineexplorer_SRCS})
 
 target_link_libraries(plasmaengineexplorer
-    ${KDE4_KDECORE_LIBS}
+    KF5::KIconThemes
+    KF5::KI18n
+    KF5::KService
     ${Plasma_LIBRARIES}
     ${KDE4Attic_LIBRARIES}
-    ${KDE4Support_LIBRARIES}
     kdeqt5staging
 )
 
