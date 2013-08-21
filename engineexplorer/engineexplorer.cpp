@@ -75,8 +75,8 @@ EngineExplorer::EngineExplorer(QWidget* parent)
 
     m_engineManager = Plasma::PluginLoader::self();
     m_dataModel = new QStandardItemModel(this);
-    QIcon pix = QIcon::fromTheme("plasma");
-    int size = IconSize(KIconLoader::Dialog);
+    const QIcon pix = QIcon::fromTheme("plasma");
+    const int size = IconSize(KIconLoader::Dialog);
     m_title->setPixmap(pix.pixmap(size, size));
     connect(m_engines, SIGNAL(activated(QString)), this, SLOT(showEngine(QString)));
     connect(m_sourceRequesterButton, SIGNAL(clicked(bool)), this, SLOT(requestSource()));
@@ -125,7 +125,7 @@ void EngineExplorer::setApp(const QString &app)
 void EngineExplorer::setEngine(const QString &engine)
 {
     //find the engine in the combo box
-    int index = m_engines->findText(engine);
+    const int index = m_engines->findText(engine);
     if (index != -1) {
         qDebug() << QString("Engine %1 found!").arg(engine);
         m_engines->setCurrentIndex(index);
