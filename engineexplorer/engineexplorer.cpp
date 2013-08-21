@@ -50,8 +50,8 @@ EngineExplorer::EngineExplorer(QWidget* parent)
       m_engine(0),
       m_sourceCount(0),
       m_requestingSource(false),
-      m_expandButton(new QPushButton(i18n("Collapse All"), this)),
-      m_collapseButton(new QPushButton(i18n("Expand All"), this))
+      m_expandButton(new QPushButton(i18n("Expand All"), this)),
+      m_collapseButton(new QPushButton(i18n("Collapse All"), this))
 {
 #ifdef FOUND_SOPRANO
     (void) qRegisterMetaType<Soprano::Node>();
