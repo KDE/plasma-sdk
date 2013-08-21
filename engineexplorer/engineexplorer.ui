@@ -24,7 +24,7 @@
    <item>
     <layout class="QHBoxLayout">
      <item>
-      <widget class="KLineEdit" name="m_sourceRequester">
+      <widget class="QLineEdit" name="m_sourceRequester">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -34,7 +34,7 @@
          <height>0</height>
         </size>
        </property>
-       <property name="clickMessage">
+       <property name="placeholderText">
         <string>Source name</string>
        </property>
        <property name="showClearButton" stdset="0">
@@ -94,7 +94,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="KLineEdit" name="m_serviceRequester">
+      <widget class="QLineEdit" name="m_serviceRequester">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -104,7 +104,7 @@
          <height>0</height>
         </size>
        </property>
-       <property name="clickMessage">
+       <property name="placeholderText">
         <string>Service for source</string>
        </property>
        <property name="showClearButton" stdset="0">
@@ -140,11 +140,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
-  </customwidget>
   <customwidget>
    <class>KTitleWidget</class>
    <extends>QWidget</extends>
