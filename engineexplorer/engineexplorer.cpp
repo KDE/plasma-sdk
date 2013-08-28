@@ -223,7 +223,7 @@ void EngineExplorer::addSource(const QString& source)
     //qDebug() << "adding" << source;
     QList<QStandardItem*> items = m_dataModel->findItems(source, 0);
     if (!items.isEmpty()) {
-        qDebug() << "er... already there?";
+        //qDebug() << "er... already there?";
         return;
     }
 

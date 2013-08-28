@@ -79,7 +79,7 @@ int main(int argc, char **argv)
     QCommandLineParser parser;
     app.setApplicationVersion(version);
     parser.addVersionOption();
-    parser.addHelpOption(description);
+    parser.addHelpOption();
     parser.addOption(QCommandLineOption(QStringList() << "list", i18n("Displays a list of known engines and their descriptions")));
     parser.addOption(QCommandLineOption(QStringList() << "height", i18n("The desired height in pixels"), "pixels"));
     parser.addOption(QCommandLineOption(QStringList() << "width", i18n("The desired width in pixels"), "pixels"));
