@@ -70,6 +70,7 @@ find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
     KIO KUnitConversion KDE4Attic KBookmarks)
 
 find_package(Plasma REQUIRED NO_MODULE)
+find_package(PlasmaQuick REQUIRED NO_MODULE)
 find_package(kdeclarative REQUIRED NO_MODULE)
 
 # needed for set_package_properties macro
@@ -107,7 +108,7 @@ include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_
 
 
 add_subdirectory(engineexplorer)
-#add_subdirectory(plasmoidviewer)
+add_subdirectory(plasmoidviewer)
 #add_subdirectory(remote-widgets-browser)
 #add_subdirectory(wallpaperviewer)
 #add_subdirectory(plasmate)

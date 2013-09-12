@@ -24,6 +24,8 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
+/*
 #include "fullview.h"
 
 #include <iostream>
@@ -114,18 +116,37 @@ void listPlugins(const KPluginInfo::List & plugins)
         std::cout << applet.toLocal8Bit().data() << std::endl;
     }
 }
+*/
+#include <QApplication>
+#include <KAboutData>
+#include <KLocalizedString>
+
+#include <qcommandlineparser.h>
+#include <qcommandlineoption.h>
+
+static const char version[] = "2.0";
+static const char description[] = I18N_NOOP("Run Plasma widgets in their own window");
 
 int main(int argc, char **argv)
 {
-    KAboutData aboutData("plasmoidviewer", 0, ki18n("Plasma Widget Viewer"),
-                         "1.0", ki18n(description), KAboutData::License_BSD,
-                         ki18n("2007-2008, Frerich Raabe"));
+    KAboutData aboutData("plasmoidviewer", 0, i18n("Plasma Widget Viewer"),
+                         version, i18n(description), KAboutData::License_BSD,
+                         i18n("2007-2008, Frerich Raabe"));
     aboutData.setProgramIconName("plasma");
-    aboutData.addAuthor(ki18n("Frerich Raabe"),
-                         ki18n("Original author"),
+    aboutData.addAuthor(i18n("Frerich Raabe"),
+                         i18n("Original author"),
                         "raabe@kde.org");
 
-    KCmdLineArgs::init(argc, argv, &aboutData);
+    QApplication app(argc, argv);
+
+    QCommandLineParser parser;
+    app.setApplicationVersion(version);
+
+
+    parser.process(app);
+    return app.exec();
+
+/*    KCmdLineArgs::init(argc, argv, &aboutData);
 
     KCmdLineOptions options;
     options.add("c");
@@ -308,12 +329,10 @@ int main(int argc, char **argv)
 
     if (args->isSet("list-remote")) {
         kDebug() << "list remote...";
-        /**
         QList<KUrl> list = AccessManager::self()->remotePlasmoids();
         foreach (const KUrl &url, list) {
             std::cout << url.prettyUrl().toLocal8Bit().data() << std::endl;
         }
-        */
         new RemotePlasmoidWatcher(AccessManager::self());
     } else if (args->isSet("screenshot-all")) {
         view.show();
@@ -329,6 +348,7 @@ int main(int argc, char **argv)
     view.addAction(action);
 
     return app.exec();
+    */
 }
 
 #include "main.moc"
