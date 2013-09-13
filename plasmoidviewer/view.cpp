@@ -16,15 +16,30 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include <QDebug>
+
 #include "view.h"
 
-View::View(Plasma::Corona *corona, QWindow *parent)
-    : PlasmaQuickView(corona, parent)
+View::View(Plasma::Corona *cor, QWindow *parent)
+    : PlasmaQuickView(cor, parent)
 {
+    Plasma::Containment *c = corona()->createContainment("org.kde.desktopcontainment");
+    if (!c) {
+        qCritical("CONTAINMENT DOESN'T EXIST!!!");
+    }
+    setContainment(c);
 }
 
 View::~View()
 {
+}
+
+void View::addApplet(const QString &applet)
+{
+    Plasma::Applet *a = containment()->createApplet("org.kde.analogclock");//(applet)
+    if (!a) {
+        qWarning() << "Applet doesn't exist!!";
+    }
 }
 
 #include "moc_view.cpp"

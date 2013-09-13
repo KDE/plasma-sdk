@@ -28,6 +28,7 @@ class View : public PlasmaQuickView
 
 public:
     View(Plasma::Corona *corona, QWindow *parent = 0);
+    void addApplet(const QString &applet);
     ~View();
 };
 
