@@ -124,6 +124,8 @@ void listPlugins(const KPluginInfo::List & plugins)
 #include <qcommandlineparser.h>
 #include <qcommandlineoption.h>
 
+#include "view.h"
+
 static const char version[] = "2.0";
 static const char description[] = I18N_NOOP("Run Plasma widgets in their own window");
 
@@ -142,6 +144,9 @@ int main(int argc, char **argv)
     QCommandLineParser parser;
     app.setApplicationVersion(version);
 
+    Plasma::Corona *cor = new Plasma::Corona();
+    View *v = new View(cor);
+    v->show();
 
     parser.process(app);
     return app.exec();
