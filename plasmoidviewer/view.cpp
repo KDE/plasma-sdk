@@ -30,7 +30,7 @@ View::View(Plasma::Corona *cor, QWindow *parent)
 {
     engine()->rootContext()->setContextProperty("desktop", this);
     setSource(QUrl::fromLocalFile(cor->package().filePath("views", "Desktop.qml")));
-    Plasma::Containment *c = corona()->createContainment("org.kde.plasmoidviewercontainer");
+    Plasma::Containment *c = corona()->createContainment("org.kde.plasmoidviewercontainment");
     if (!c) {
         qCritical("CONTAINMENT DOESN'T EXIST!!!");
     }
