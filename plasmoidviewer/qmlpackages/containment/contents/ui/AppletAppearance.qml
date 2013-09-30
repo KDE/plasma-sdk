@@ -62,12 +62,6 @@ Item {
 
     visible: false
 
-    onHeightChanged: {
-        if (appletHandle.source != "" && appletHandle.visible) {
-            appletHandle.item.updateHeight();
-        }
-    }
-
     //FIXME: this delay is because backgroundHints gets updated only after a while in qml applets
     Timer {
         id: appletTimer
@@ -99,8 +93,6 @@ Item {
         //print("Backgroundhints changed: " + appletItem.imagePath);
     }
 
-    Rectangle { color: Qt.rgba(0,0,0,0); border.width: 3; border.color: "white"; opacity: 0.5; visible: debug; anchors.fill: parent; }
-
     QtExtras.MouseEventListener {
         id: mouseListener
 
@@ -131,14 +123,6 @@ Item {
                 showAppletHandle = false;
             }
         }
-
-        Timer {
-            id: hoverTracker
-            repeat: false
-            interval: handleDelay
-            onTriggered: showAppletHandle = true;
-        }
-        Rectangle { color: Qt.rgba(0,0,0,0); border.width: 3; border.color: "red"; opacity: 0.5; visible: debug; anchors.fill: parent; }
 
         PlasmaCore.FrameSvgItem {
             id: plasmoidBackground
@@ -181,53 +165,6 @@ Item {
             }
         }
 
-        MouseArea {
-            id: dragMouseArea
-
-            anchors.fill: parent
-            z: appletContainer.z - 2
-
-            property int lastX
-            property int lastY
-            property int zoffset: 1000
-
-            onPressed: {
-                appletItem.z = appletItem.z + zoffset;
-                animationsEnabled = false
-                mouse.accepted = true
-                var x = Math.round(appletItem.x/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
-                var y = Math.round(appletItem.y/LayoutManager.cellSize.height)*LayoutManager.cellSize.height
-                LayoutManager.setSpaceAvailable(x, y, appletItem.width, appletItem.height, true)
-
-                var globalMousePos = mapToItem(root, mouse.x, mouse.y)
-                lastX = globalMousePos.x
-                lastY = globalMousePos.y
-
-                placeHolder.syncWithItem(appletItem)
-                placeHolderPaint.opacity = root.haloOpacity;
-            }
-            onPositionChanged: {
-                placeHolder.syncWithItem(appletItem)
-
-                var globalPos = mapToItem(root, x, y)
-
-                var globalMousePos = mapToItem(root, mouse.x, mouse.y)
-                appletItem.x += (globalMousePos.x - lastX)
-                appletItem.y += (globalMousePos.y - lastY)
-
-                lastX = globalMousePos.x
-                lastY = globalMousePos.y
-            }
-            onReleased: {
-                appletItem.z = appletItem.z - zoffset;
-                repositionTimer.running = false
-                placeHolderPaint.opacity = 0
-                animationsEnabled = true
-                LayoutManager.positionItem(appletItem)
-                LayoutManager.save()
-            }
-        }
-
         Item {
             id: appletContainer
             anchors {
@@ -241,37 +178,9 @@ Item {
 
             property QtObject applet
 
-            function appletDestroyed() {
-                print("Applet DESTROYED.");
-                LayoutManager.setSpaceAvailable(appletItem.x, appletItem.y, appletItem.width, appletItem.height, true)
-                applet.action("remove").trigger();
-                appletItem.destroy()
-            }
-
             onAppletChanged: {
                 if (applet) {
                     appletTimer.running = true;
-                }
-            }
-            Connections {
-                target: appletHandle.item
-                onRemoveApplet: {
-                    killAnim.running = true;
-                }
-            }
-            Behavior on opacity {
-                NumberAnimation {
-                    duration: 250
-                    easing.type: Easing.InOutQuad
-                }
-            }
-            SequentialAnimation {
-                id: killAnim
-                PlasmaExtras.DisappearAnimation {
-                    targetItem: appletItem
-                }
-                ScriptAction {
-                    script: appletContainer.appletDestroyed()
                 }
             }
             Loader {
@@ -279,116 +188,9 @@ Item {
                 anchors.centerIn: parent
                 z: appletContainer.z + 1
             }
-            Rectangle { color: "green"; opacity: 0.3; visible: debug; anchors.fill: parent; }
             Component.onCompleted: PlasmaExtras.AppearAnimation {
                 targetItem: appletItem
             }
-        }
-
-        Loader {
-            id: appletHandle
-            z: appletContainer.z + 1
-            anchors {
-                //verticalCenter: handleMerged ? undefined : parent.verticalCenter
-                top: parent.top
-                bottom: parent.bottom
-                right: plasmoidBackground.right
-                rightMargin: appletItem.margins.right
-            }
-            Connections {
-                target: appletItem
-                onShowAppletHandleChanged: {
-                    if (appletItem.showAppletHandle && appletHandle.source == "") {
-                        //print("Loading applethandle ");
-                        appletHandle.source = "AppletHandle.qml";
-                    }
-                }
-                onHandleMergedChanged: {
-                    print("handlemerged changed, correcting anchors" + appletItem.handleMerged)
-                    return
-                    if (appletHandle.item != null) {
-                        appletHandle.item.anchors.verticalCenter = appletItem.handleMerged ? undefined : appletItem.verticalCenter
-                        appletHandle.item.anchors.top = appletItem.handleMerged ? appletItem.top : undefined
-                        appletHandle.item.anchors.bottom = appletItem.handleMerged ? appletItem.bottom : undefined
-                        print("anchors corrected");
-                    }
-                }
-            }
-
-        }
-
-        MouseArea {
-            id: resizeHandle
-
-            visible: !plasmoid.immutable
-            width:  handleWidth+appletItem.margins.right
-            height: width
-            z: appletHandle.z+10
-            anchors {
-                top: appletHandle.top
-                right: parent.right
-            }
-
-            property int startX
-            property int startY
-
-            onPressed: {
-                mouse.accepted = true
-                animationsEnabled = false;
-                startX = mouse.x;
-                startY = mouse.y;
-                LayoutManager.setSpaceAvailable(appletItem.x, appletItem.y, appletItem.width, appletItem.height, true)
-            }
-            onPositionChanged: {
-                appletItem.width = Math.max(appletItem.minimumWidth, appletItem.width + mouse.x-startX)
-                appletItem.y = appletItem.y + (mouse.y-startY);
-                appletItem.height = Math.max(appletItem.minimumHeight, appletItem.height + startY-mouse.y)
-            }
-            onReleased: {
-                animationsEnabled = true
-                LayoutManager.positionItem(appletItem)
-                LayoutManager.save()
-                LayoutManager.setSpaceAvailable(appletItem.x, appletItem.y, widthAnimation.to, heightAnimation.to, false)
-            }
-            Rectangle { color: "blue"; opacity: 0.4; visible: debug; anchors.fill: parent; }
-        }
-
-        Rectangle { color: "orange"; opacity: 0.1; visible: debug; anchors.fill: parent; }
-    }
-    Behavior on controlsOpacity {
-        NumberAnimation {
-            duration: 250
-            easing.type: Easing.InOutQuad
-        }
-    }
-    Behavior on x {
-        enabled: animationsEnabled
-        NumberAnimation {
-            duration: 250
-            easing.type: Easing.InOutQuad
-        }
-    }
-    Behavior on y {
-        enabled: animationsEnabled
-        NumberAnimation {
-            duration: 250
-            easing.type: Easing.InOutQuad
-        }
-    }
-    Behavior on width {
-        enabled: animationsEnabled
-        NumberAnimation {
-            id: widthAnimation
-            duration: 250
-            easing.type: Easing.InOutQuad
-        }
-    }
-    Behavior on height {
-        enabled: animationsEnabled
-        NumberAnimation {
-            id: heightAnimation
-            duration: 250
-            easing.type: Easing.InOutQuad
         }
     }
 
