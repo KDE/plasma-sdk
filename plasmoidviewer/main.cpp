@@ -144,8 +144,7 @@ int main(int argc, char **argv)
     QCommandLineParser parser;
     app.setApplicationVersion(version);
 
-    Plasma::Corona *cor = new Plasma::Corona();
-    View *v = new View(cor);
+    View *v = new View(View::s_createCorona());
     v->show();
 
     parser.process(app);
