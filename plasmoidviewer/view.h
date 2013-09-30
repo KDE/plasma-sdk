@@ -30,6 +30,8 @@ public:
     View(Plasma::Corona *corona, QWindow *parent = 0);
     void addApplet(const QString &applet);
     ~View();
+
+    static Plasma::Corona *s_createCorona();
 };
 
 #endif // PLASMAQUICKVIEW_H
