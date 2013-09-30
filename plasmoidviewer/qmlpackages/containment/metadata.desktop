@@ -1,0 +1,27 @@
+[Desktop Entry]
+Name=PlasmoidViewer Containment
+Comment=A clean and simple containment
+Encoding=UTF-8
+
+Type=Service
+Icon=user-desktop
+X-KDE-ParentApp=
+X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
+
+X-KDE-PluginInfo-Author=Sebastian Kügler
+X-KDE-PluginInfo-Email=sebas@kde.org
+X-KDE-PluginInfo-Name=org.kde.plasmoidviewercontainment
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Containments
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+X-KDE-PluginInfo-Version=0.1
+
+X-Plasma-API=declarativeappletscript
+X-Plasma-DefaultSize=1024,768
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-RemoteLocation=
+X-Plasma-RequiredExtensions=LaunchApp,http,localio,networkio
+X-Plasma-ContainmentCategories=desktop
