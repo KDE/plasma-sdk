@@ -30,12 +30,6 @@ View::View(Plasma::Corona *cor, QWindow *parent)
 {
     engine()->rootContext()->setContextProperty("desktop", this);
     setSource(QUrl::fromLocalFile(cor->package().filePath("views", "Desktop.qml")));
-    Plasma::Containment *c = corona()->createContainment("org.kde.plasmoidviewercontainment");
-    if (!c) {
-        qCritical("CONTAINMENT DOESN'T EXIST!!!");
-    }
-    setContainment(c);
-    addApplet("foo");
 }
 
 View::~View()
@@ -44,10 +38,20 @@ View::~View()
 
 void View::addApplet(const QString &applet)
 {
-    Plasma::Applet *a = containment()->createApplet("org.kde.windowlist");//"org.kde.analogclock");//(applet)
+    Plasma::Applet *a = containment()->createApplet(applet);//"org.kde.windowlist");//(applet)
     if (!a) {
         qWarning() << "Applet doesn't exist!!";
     }
+}
+
+void View::addContainment(const QString &containment)
+{
+    Plasma::Containment *c = corona()->createContainment(containment);
+
+    if (!c) {
+        qCritical("CONTAINMENT DOESN'T EXIST!!!");
+    }
+    setContainment(c);
 }
 
 Plasma::Corona *View::s_createCorona()

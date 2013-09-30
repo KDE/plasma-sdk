@@ -144,10 +144,26 @@ int main(int argc, char **argv)
     QCommandLineParser parser;
     app.setApplicationVersion(version);
 
-    View *v = new View(View::s_createCorona());
-    v->show();
+    parser.addVersionOption();
+
+    parser.addOption(QCommandLineOption(QStringList() << "c" << "containment", i18n("The name of the containment plugin [null]"), "containment"));
+    parser.addOption(QCommandLineOption(QStringList() << "a" << "applet", i18n("The name of the applet plugin [null]"), "applet"));
+
 
     parser.process(app);
+
+    View *v = new View(View::s_createCorona());
+
+    if (parser.isSet("containment")) {
+        v->addContainment(parser.value("containment"));
+    } else {
+        v->addContainment("org.kde.plasmoidviewercontainment");
+    }
+
+    v->addApplet(parser.value("applet"));
+
+    v->show();
+
     return app.exec();
 
 /*    KCmdLineArgs::init(argc, argv, &aboutData);
