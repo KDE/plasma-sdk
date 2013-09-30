@@ -1,19 +1,19 @@
 [Desktop]
-Containment=org.kde.desktopcontainment
-ToolBox=org.kde.desktoptoolbox
+Containment=org.kde.plasmoidviewercontainment
+ToolBox=
 RuntimePlatform=
 
 [Desktop][ContainmentActions]
-RightButton;NoModifier=org.kde.contextmenu
-MidButton;NoModifier=org.kde.paste
-wheel:Vertical;NoModifier=org.kde.switchdesktop
- 
+RightButton;NoModifier=
+MidButton;NoModifier=
+wheel:Vertical;NoModifier=
+
 [Panel]
-Containment=org.kde.panel
-ToolBox=org.kde.paneltoolbox
+Containment=
+ToolBox=
 [Panel][ContainmentActions]
-RightButton;NoModifier=org.kde.contextmenu
-MidButton;NoModifier=org.kde.paste
+RightButton;NoModifier=
+MidButton;NoModifier=
 
 [Theme]
 Theme=default
