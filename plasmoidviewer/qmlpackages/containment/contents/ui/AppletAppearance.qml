@@ -193,11 +193,4 @@ Item {
             }
         }
     }
-
-    Component.onCompleted: {
-        layoutTimer.running = true
-        layoutTimer.restart()
-        visible = false
-        // restore rotation
-    }
 }
