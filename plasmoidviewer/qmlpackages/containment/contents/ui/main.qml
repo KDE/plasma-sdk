@@ -30,6 +30,7 @@ import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 Item {
     id: root
     property int iconSize: 16
+    property var container
 
     Column {
         id: root2
@@ -54,6 +55,9 @@ Item {
             height:root.height/4
         }
 
+        onImplicitWidthChanged: container.width = root.width/4;
+        onImplicitHeightChanged: container.height = root.height/4;
+
         Connections {
             target: plasmoid
 
@@ -64,7 +68,7 @@ Item {
                     print("Error loading AppletAppearance.qml: " + component.errorString());
                 }
 
-                var container = component.createObject(appletContainter)
+                container = component.createObject(appletContainter)
                 console.log(appletContainter.x)
                 console.log(appletContainter.y)
                 applet.parent = container;
