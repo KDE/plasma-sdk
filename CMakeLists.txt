@@ -67,11 +67,10 @@ find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
     KIdleTime ItemModels KWidgetsAddons KWindowSystem KCodecs KArchive KCoreAddons Solid ThreadWeaver
     KConfig KAuth KJS KWallet KDBusAddons Sonnet
     KI18n KGuiAddons KService KConfigWidgets ItemViews KNotifications KIconThemes KStyle KCompletion KJobWidgets KTextWidgets XmlGui KCrash
-    KIO KUnitConversion KDE4Attic KBookmarks)
+    KBookmarks KIO KUnitConversion KDE4Attic)
 
 find_package(Plasma REQUIRED NO_MODULE)
 find_package(PlasmaQuick REQUIRED NO_MODULE)
-find_package(kdeclarative REQUIRED NO_MODULE)
 
 # needed for set_package_properties macro
 find_package(KDELibs4 REQUIRED NO_MODULE)
@@ -100,6 +99,7 @@ remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FR
 include_directories( ${kdeqt5staging_INCLUDE_DIRS}
                      ${kdeqt5staging_INCLUDE_DIR}
                      ${KDE4_INCLUDES}
+                     KF5::KDeclarative
                      ${KF5_INCLUDE_DIRS}  # since e-c-m 0.0.7
                    )
 
