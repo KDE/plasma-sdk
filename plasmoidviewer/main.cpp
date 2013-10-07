@@ -148,7 +148,8 @@ int main(int argc, char **argv)
 
     parser.addOption(QCommandLineOption(QStringList() << "c" << "containment", i18n("The name of the containment plugin [null]"), "containment"));
     parser.addOption(QCommandLineOption(QStringList() << "a" << "applet", i18n("The name of the applet plugin [null]"), "applet"));
-
+    parser.addOption(QCommandLineOption(QStringList() << "f" << "formfactor",
+                i18n("The formfactor to use (horizontal, vertical, mediacenter, planar or application) [planar]"), "formfactor"));
 
     parser.process(app);
 
@@ -160,6 +161,7 @@ int main(int argc, char **argv)
         v->addContainment("org.kde.plasmoidviewercontainment");
     }
 
+    v->addFormFactor(parser.value("formfactor"));
     v->addApplet(parser.value("applet"));
 
     v->show();

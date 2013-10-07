@@ -54,6 +54,33 @@ void View::addContainment(const QString &containment)
     setContainment(c);
 }
 
+void View::addFormFactor(const QString &formFactor) {
+    Plasma::Types::FormFactor formFactorType = Plasma::Types::Planar;
+    const QString ff = formFactor.toLower();
+
+    if (ff.isEmpty() || ff == "planar") {
+        formFactorType = Plasma::Types::Planar;
+    } else if (ff == "vertical") {
+        formFactorType = Plasma::Types::Vertical;
+    } else if (ff == "horizontal") {
+        formFactorType = Plasma::Types::Vertical;
+    } else if (ff == "mediacenter") {
+        formFactorType = Plasma::Types::Vertical;
+    } else if (ff == "application") {
+        formFactorType = Plasma::Types::Vertical;
+    } else {
+        qWarning() << "FormFactor " << ff << "doesn't exist. Planar formFactor has been used!!";
+    }
+
+    Plasma::Containment *c = containment();
+
+    if (!c) {
+        qCritical("CONTAINMENT DOESN'T EXIST!!!");
+    }
+
+    c->setFormFactor(formFactorType);
+}
+
 Plasma::Corona *View::s_createCorona()
 {
     Plasma::Package package = Plasma::PluginLoader::self()->loadPackage("Plasma/Shell");

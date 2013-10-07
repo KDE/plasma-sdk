@@ -30,6 +30,7 @@ public:
     View(Plasma::Corona *corona, QWindow *parent = 0);
     void addApplet(const QString &applet);
     void addContainment(const QString &containment);
+    void addFormFactor(const QString &formFactor = "planar");
     ~View();
 
     static Plasma::Corona *s_createCorona();
