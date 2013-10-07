@@ -1,7 +1,15 @@
 # Find needed packages
 set(LIBATTICA_MIN_VERSION "0.1.4")
-find_package(LibAttica REQUIRED)
-macro_log_feature(LIBATTICA_FOUND "libattica" "A library to access Open Collaboration Service providers" "http://websvn.kde.org/trunk/kdesupport/attica/" TRUE "${LIBATTICA_MIN_VERSION}" "Required uploading and downloading plasmoids using Get Hot New Stuff.")
+#find_package(LibAttica REQUIRED)
+
+find_package(LibAttica NO_MODULE)
+set_package_properties(LibAttica PROPERTIES DESCRIPTION "Support for Get Hot New Stuff related stuff"
+	                        URL "https://projects.kde.org/attica"
+                                 TYPE REQUIRED
+                         )
+
+
+#macro_log_feature(LIBATTICA_FOUND "libattica" "A library to access Open Collaboration Service providers" "http://websvn.kde.org/trunk/kdesupport/attica/" TRUE "${LIBATTICA_MIN_VERSION}" "Required uploading and downloading plasmoids using Get Hot New Stuff.")
 
 # No need to find(Qt4), since QT4_FOUND it's already set by finding kde4
 macro_log_feature(QT_QTWEBKIT_FOUND "QtWebKit" "Opensource web browser engine" "http://trac.webkit.org/wiki/QtWebKit" TRUE "" "Needed to display the online API and documentation.")
@@ -91,7 +99,7 @@ target_link_libraries(plasmate
                       ${KDE4_KDEUI_LIBS}
                       ${KDE4_KTEXTEDITOR_LIBS}
                       ${KDE4_KPARTS_LIBS}
-                      ${KDE4_KIO_LIBRARY}
+		      #${KDE4_KIO_LIBRARY}
                       ${KDE4_PLASMA_LIBS}
                       ${KDE4_KNEWSTUFF3_LIBRARY}
                       ${QT_QTWEBKIT_LIBRARY}
@@ -99,7 +107,7 @@ target_link_libraries(plasmate
                       ${LIBATTICA_LIBRARY_DIRS}
                       ${QGPGME_LIBRARIES}
                       ${QT_QTDECLARATIVE_LIBRARIES}
-                      ${KDECLARATIVE_LIBRARIES}
+		      KF5::KDeclarative
                       ${KDEPIMLIBS_KPIMUTILS_LIBS}
 )
 

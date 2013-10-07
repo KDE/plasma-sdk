@@ -1,20 +1,5 @@
 project(plasma-sdk)
 
-
-
-#
-# find_package(KDE4 REQUIRED)
-# find_package(KDeclarative REQUIRED)
-#
-# include(MacroLibrary)
-# include(KDE4Defaults)
-#
-# include_directories(${KDE4_INCLUDES}
-#                     ${KDECLARATIVE_INCLUDE_DIR}
-# )
-
-
-
 cmake_minimum_required(VERSION 2.8.10.1)
 
 project(plasma)
@@ -22,9 +7,8 @@ project(plasma)
 ################# Disallow in-source build #################
 
 if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
-   message(FATAL_ERROR "plasma requires an out of source build. Please create a separate build directory and run 'cmake path_to_plasma [options]' there.")
+   message(FATAL_ERROR "plasmate requires an out of source build. Please create a separate build directory and run 'cmake path_to_plasmate [options]' there.")
 endif()
-
 
 # Make CPack available to easy generate binary packages
 include(CPack)
@@ -67,14 +51,15 @@ find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
     KIdleTime ItemModels KWidgetsAddons KWindowSystem KCodecs KArchive KCoreAddons Solid ThreadWeaver
     KConfig KAuth KJS KWallet KDBusAddons Sonnet
     KI18n KGuiAddons KService KConfigWidgets ItemViews KNotifications KIconThemes KStyle KCompletion KJobWidgets KTextWidgets XmlGui KCrash
-    KIO KUnitConversion KDE4Attic KBookmarks)
+    KUnitConversion KDE4Attic KBookmarks Kross)
 
 find_package(Plasma REQUIRED NO_MODULE)
-find_package(kdeclarative REQUIRED NO_MODULE)
+find_package(KDeclarative REQUIRED NO_MODULE)
+find_package(KIO REQUIRED NO_MODULE)
 
 # needed for set_package_properties macro
 find_package(KDELibs4 REQUIRED NO_MODULE)
-find_package(KDE4Support REQUIRED NO_MODULE)
+#find_package(KDE4Support REQUIRED NO_MODULE)
 
 
 find_package(LibAttica NO_MODULE)
@@ -83,11 +68,8 @@ set_package_properties(LibAttica PROPERTIES DESCRIPTION "Support for Get Hot New
                        TYPE REQUIRED
                       )
 
-
-
 #########################################################################
 
-#add_definitions(${KDE4_DEFINITIONS})
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 
