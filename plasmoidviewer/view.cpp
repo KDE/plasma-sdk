@@ -54,7 +54,8 @@ void View::addContainment(const QString &containment)
     setContainment(c);
 }
 
-void View::addFormFactor(const QString &formFactor) {
+void View::addFormFactor(const QString &formFactor)
+{
     Plasma::Types::FormFactor formFactorType = Plasma::Types::Planar;
     const QString ff = formFactor.toLower();
 
@@ -79,6 +80,33 @@ void View::addFormFactor(const QString &formFactor) {
     }
 
     c->setFormFactor(formFactorType);
+}
+
+void View::addLocation(const QString &location)
+{
+    Plasma::Types::Location locationType = Plasma::Types::Floating;
+
+    const QString l = location.toLower();
+
+    if (l.isEmpty() || l == "floating") {
+        locationType = Plasma::Types::Floating;
+    } else if (l == "desktop") {
+        locationType = Plasma::Types::Desktop;
+    } else if (l == "fullscreen") {
+        locationType = Plasma::Types::FullScreen;
+    } else if (l == "topedge") {
+        locationType = Plasma::Types::TopEdge;
+    } else if (l == "bottomedge") {
+        locationType = Plasma::Types::BottomEdge;
+    } else if (l == "rightedge") {
+        locationType = Plasma::Types::RightEdge;
+    } else if (l == "leftedge") {
+        locationType = Plasma::Types::LeftEdge;
+    } else {
+        qWarning() << "Location " << l << "doesn't exist. Floating location has been used!!";
+    }
+
+    setLocation(locationType);
 }
 
 Plasma::Corona *View::s_createCorona()

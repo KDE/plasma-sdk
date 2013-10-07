@@ -31,6 +31,7 @@ public:
     void addApplet(const QString &applet);
     void addContainment(const QString &containment);
     void addFormFactor(const QString &formFactor = "planar");
+    void addLocation(const QString &location = "floating");
     ~View();
 
     static Plasma::Corona *s_createCorona();

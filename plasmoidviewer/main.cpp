@@ -150,6 +150,9 @@ int main(int argc, char **argv)
     parser.addOption(QCommandLineOption(QStringList() << "a" << "applet", i18n("The name of the applet plugin [null]"), "applet"));
     parser.addOption(QCommandLineOption(QStringList() << "f" << "formfactor",
                 i18n("The formfactor to use (horizontal, vertical, mediacenter, planar or application) [planar]"), "formfactor"));
+    parser.addOption(QCommandLineOption(QStringList() << "l" << "location",
+                i18n("The location constraint to start the Containment with (floating, desktop, fullscreen, top, bottom, left, right) [floating]"), "location"));
+
 
     parser.process(app);
 
@@ -163,6 +166,7 @@ int main(int argc, char **argv)
 
     v->addFormFactor(parser.value("formfactor"));
     v->addApplet(parser.value("applet"));
+    v->addLocation(parser.value("location"));
 
     v->show();
 
