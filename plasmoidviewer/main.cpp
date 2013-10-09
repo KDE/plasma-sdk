@@ -153,7 +153,8 @@ int main(int argc, char **argv)
     parser.addOption(QCommandLineOption(QStringList() << "l" << "location",
                 i18n("The location constraint to start the Containment with (floating, desktop, fullscreen, top, bottom, left, right) [floating]"), "location"));
 
-
+    parser.addHelpOption();
+    parser.addVersionOption();
     parser.process(app);
 
     View *v = new View(View::s_createCorona());
