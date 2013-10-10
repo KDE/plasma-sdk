@@ -67,15 +67,16 @@ find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
     KIdleTime ItemModels KWidgetsAddons KWindowSystem KCodecs KArchive KCoreAddons Solid ThreadWeaver
     KConfig KAuth KJS KWallet KDBusAddons Sonnet
     KI18n KGuiAddons KService KConfigWidgets ItemViews KNotifications KIconThemes KStyle KCompletion KJobWidgets KTextWidgets XmlGui KCrash
-    KBookmarks KIO KUnitConversion KDE4Attic)
+    KUnitConversion KDE4Attic KBookmarks Kross)
 
 find_package(Plasma REQUIRED NO_MODULE)
 find_package(PlasmaQuick REQUIRED NO_MODULE)
+find_package(KDeclarative REQUIRED NO_MODULE)
+find_package(KIO REQUIRED NO_MODULE)
 
 # needed for set_package_properties macro
 find_package(KDELibs4 REQUIRED NO_MODULE)
 find_package(KDE4Support REQUIRED NO_MODULE)
-
 
 find_package(LibAttica NO_MODULE)
 set_package_properties(LibAttica PROPERTIES DESCRIPTION "Support for Get Hot New Stuff related stuff"
