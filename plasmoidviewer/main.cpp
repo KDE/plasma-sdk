@@ -162,7 +162,7 @@ int main(int argc, char **argv)
     if (parser.isSet("containment")) {
         v->addContainment(parser.value("containment"));
     } else {
-        v->addContainment("org.kde.plasmoidviewercontainment");
+        v->addContainment("org.kde.desktopcontainment");
     }
 
     v->addFormFactor(parser.value("formfactor"));
