@@ -270,7 +270,9 @@ void MainWindow::toggleActions()
         //Until this issue is being fixed we are hiding the konsole previewer.
         actionCollection()->action("konsole")->setVisible(false);
         //we are hiding the konsole previewer UI.
-        m_konsoleWidget->setVisible(false);
+        if (m_konsoleWidget) {
+            m_konsoleWidget->setVisible(false);
+        }
     }
 }
 
@@ -452,7 +454,9 @@ void MainWindow::saveEditorData()
 void MainWindow::saveAndRefresh()
 {
     //in every new save clear the konsole.
-    m_konsoleWidget->clearOutput();
+    if (m_konsoleWidget) {
+        m_konsoleWidget->clearOutput();
+    }
 
     saveEditorData();
     if (m_previewerWidget) {
