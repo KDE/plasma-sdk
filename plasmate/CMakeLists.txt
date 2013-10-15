@@ -100,7 +100,7 @@ target_link_libraries(plasmate
                       ${KDE4_KTEXTEDITOR_LIBS}
                       ${KDE4_KPARTS_LIBS}
 		      #${KDE4_KIO_LIBRARY}
-                      ${KDE4_PLASMA_LIBS}
+                      KF5::Plasma
                       ${KDE4_KNEWSTUFF3_LIBRARY}
                       ${QT_QTWEBKIT_LIBRARY}
                       ${QT_QTXML_LIBRARY}

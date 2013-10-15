@@ -14,7 +14,7 @@ add_definitions(${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 include_directories(${KDE4_INCLUDES} ../..)
 
 kde4_add_plugin(plasmate_svg_viewer ${svg_viewer_SRCS})
-target_link_libraries(plasmate_svg_viewer ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS})
+target_link_libraries(plasmate_svg_viewer KF5::Plasma KF5::KIOCore KF5::KIOWidgets)
 
 set( testsvg_SRCS tests/test_svg.cpp
      		       svgviewer.cpp
@@ -25,4 +25,4 @@ set( testsvg_SRCS tests/test_svg.cpp
 #)
 
 kde4_add_executable( testsvg TEST ${testsvg_SRCS})
-target_link_libraries( testsvg ${KDE4_KDEUI_LIBS} ${KDE4_PLASMA_LIBS} )
+target_link_libraries( testsvg ${KDE4_KDEUI_LIBS} KF5::Plasma )
