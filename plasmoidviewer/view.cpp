@@ -50,8 +50,8 @@ void View::addContainment(const QString &containment)
 
     if (!c) {
         qCritical("Containment doesn't exist");
+        setContainment(c);
     }
-    setContainment(c);
 }
 
 void View::addFormFactor(const QString &formFactor)
@@ -59,15 +59,15 @@ void View::addFormFactor(const QString &formFactor)
     Plasma::Types::FormFactor formFactorType = Plasma::Types::Planar;
     const QString ff = formFactor.toLower();
 
-    if (ff.isEmpty() || ff == "planar") {
+    if (ff.isEmpty() || ff == QStringLiteral("planar")) {
         formFactorType = Plasma::Types::Planar;
-    } else if (ff == "vertical") {
+    } else if (ff == QStringLiteral("vertical")) {
         formFactorType = Plasma::Types::Vertical;
-    } else if (ff == "horizontal") {
+    } else if (ff == QStringLiteral("horizontal")) {
         formFactorType = Plasma::Types::Vertical;
-    } else if (ff == "mediacenter") {
+    } else if (ff == QStringLiteral("mediacenter")) {
         formFactorType = Plasma::Types::Vertical;
-    } else if (ff == "application") {
+    } else if (ff == QStringLiteral("application")) {
         formFactorType = Plasma::Types::Vertical;
     } else {
         qWarning() << "FormFactor " << ff << "doesn't exist. Planar formFactor has been used!!";
@@ -76,10 +76,9 @@ void View::addFormFactor(const QString &formFactor)
     Plasma::Containment *c = containment();
 
     if (!c) {
-        qCritical("CONTAINMENT DOESN'T EXIST!!!");
+        qCritical("Containment doesn't exist!");
+        c->setFormFactor(formFactorType);
     }
-
-    c->setFormFactor(formFactorType);
 }
 
 void View::addLocation(const QString &location)
@@ -88,19 +87,19 @@ void View::addLocation(const QString &location)
 
     const QString l = location.toLower();
 
-    if (l.isEmpty() || l == "floating") {
+    if (l.isEmpty() || l == QStringLiteral("floating")) {
         locationType = Plasma::Types::Floating;
-    } else if (l == "desktop") {
+    } else if (l == QStringLiteral("desktop")) {
         locationType = Plasma::Types::Desktop;
-    } else if (l == "fullscreen") {
+    } else if (l == QStringLiteral("fullscreen")) {
         locationType = Plasma::Types::FullScreen;
-    } else if (l == "topedge") {
+    } else if (l == QStringLiteral("topedge")) {
         locationType = Plasma::Types::TopEdge;
-    } else if (l == "bottomedge") {
+    } else if (l == QStringLiteral("bottomedge")) {
         locationType = Plasma::Types::BottomEdge;
-    } else if (l == "rightedge") {
+    } else if (l == QStringLiteral("rightedge")) {
         locationType = Plasma::Types::RightEdge;
-    } else if (l == "leftedge") {
+    } else if (l == QStringLiteral("leftedge")) {
         locationType = Plasma::Types::LeftEdge;
     } else {
         qWarning() << "Location " << l << "doesn't exist. Floating location has been used!!";
