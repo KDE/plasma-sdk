@@ -59,7 +59,7 @@ int main(int argc, char **argv)
     parser.addVersionOption();
     parser.process(app);
 
-    View *v = new View(View::s_createCorona());
+    View *v = new View(View::createCorona());
 
     if (parser.isSet("containment")) {
         v->addContainment(parser.value("containment"));

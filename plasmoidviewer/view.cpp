@@ -38,7 +38,7 @@ View::~View()
 
 void View::addApplet(const QString &applet)
 {
-    Plasma::Applet *a = containment()->createApplet(applet);//"org.kde.windowlist");//(applet)
+    Plasma::Applet *a = containment()->createApplet(applet);
     if (!a) {
         qWarning() << "Applet doesn't exist!!";
     }
@@ -109,7 +109,7 @@ void View::addLocation(const QString &location)
     setLocation(locationType);
 }
 
-Plasma::Corona *View::s_createCorona()
+Plasma::Corona *View::createCorona()
 {
     Plasma::Package package = Plasma::PluginLoader::self()->loadPackage("Plasma/Shell");
     package.setPath("org.kde.plasmoidviewershell");

@@ -34,7 +34,7 @@ public:
     void addLocation(const QString &location = "floating");
     ~View();
 
-    static Plasma::Corona *s_createCorona();
+    static Plasma::Corona *createCorona();
 };
 
 #endif // PLASMAQUICKVIEW_H
