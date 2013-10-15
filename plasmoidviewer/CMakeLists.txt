@@ -7,7 +7,7 @@ set(plasmoidviewer_SRCS
 add_executable(plasmoidviewer ${plasmoidviewer_SRCS})
 
 target_link_libraries(plasmoidviewer
-    KF5::Plasma
+    KF5::plasma
     ${PlasmaQuick_LIBRARIES}
     ${Qt5Quick_LIBRARIES}
     KF5::KI18n

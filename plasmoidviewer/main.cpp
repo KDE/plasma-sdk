@@ -45,12 +45,15 @@ int main(int argc, char **argv)
 
     parser.addVersionOption();
 
-    parser.addOption(QCommandLineOption(QStringList() << "c" << "containment", i18n("The name of the containment plugin [null]"), "containment"));
-    parser.addOption(QCommandLineOption(QStringList() << "a" << "applet", i18n("The name of the applet plugin [null]"), "applet"));
-    parser.addOption(QCommandLineOption(QStringList() << "f" << "formfactor",
-                i18n("The formfactor to use (horizontal, vertical, mediacenter, planar or application) [planar]"), "formfactor"));
-    parser.addOption(QCommandLineOption(QStringList() << "l" << "location",
-                i18n("The location constraint to start the Containment with (floating, desktop, fullscreen, top, bottom, left, right) [floating]"), "location"));
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("c") << QStringLiteral("containment"),
+                i18n("The name of the containment plugin [null]"), QStringLiteral("containment")));
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("a") << QStringLiteral("applet"),
+                i18n("The name of the applet plugin [null]"), QStringLiteral("applet")));
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("f") << QStringLiteral("formfactor"),
+                i18n("The formfactor to use (horizontal, vertical, mediacenter, planar or application) [planar]"), QStringLiteral("formfactor")));
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("l") << QStringLiteral("location"),
+                i18n("The location constraint to start the Containment with (floating, desktop, fullscreen, top, bottom, left, right) [floating]"),
+                QStringLiteral("location")));
 
     parser.addHelpOption();
     parser.addVersionOption();
