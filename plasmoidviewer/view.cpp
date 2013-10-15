@@ -40,7 +40,7 @@ void View::addApplet(const QString &applet)
 {
     Plasma::Applet *a = containment()->createApplet(applet);
     if (!a) {
-        qWarning() << "Applet doesn't exist!!";
+        qCritical("Applet doesn't exist!");
     }
 }
 
@@ -49,7 +49,7 @@ void View::addContainment(const QString &containment)
     Plasma::Containment *c = corona()->createContainment(containment);
 
     if (!c) {
-        qCritical("CONTAINMENT DOESN'T EXIST!!!");
+        qCritical("Containment doesn't exist");
     }
     setContainment(c);
 }
