@@ -7,11 +7,11 @@ set(plasmoidviewer_SRCS
 add_executable(plasmoidviewer ${plasmoidviewer_SRCS})
 
 target_link_libraries(plasmoidviewer
-    KF5::plasma
-    ${PlasmaQuick_LIBRARIES}
-    ${Qt5Quick_LIBRARIES}
+    Qt5::Quick
+    KF5::Plasma
+    KF5::PlasmaQuick
     KF5::KI18n
-    ${KDE4Attic_LIBRARIES}
+    KF5::KDE4Attic
 )
 
 install(TARGETS plasmoidviewer ${INSTALL_TARGETS_DEFAULT_ARGS})
