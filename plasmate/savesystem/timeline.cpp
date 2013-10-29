@@ -313,7 +313,6 @@ void TimeLine::restoreCommit()
     m_gitRunner->deleteCommit(data.toString());
 
     connect(m_gitRunner, SIGNAL(deleteCommitFinished()), this, SLOT(reloadTimeLine()));
-    emit sourceDirectoryChanged();
 }
 
 void TimeLine::moveToCommit()
@@ -343,7 +342,6 @@ void TimeLine::moveToCommit()
     m_gitRunner->moveToCommit(data.toString(), newBranchName);
 
     connect(m_gitRunner, SIGNAL(moveToCommitFinished()), this, SLOT(reloadTimeLine()));
-    emit sourceDirectoryChanged();
 }
 
 void TimeLine::switchBranch()
@@ -357,7 +355,6 @@ void TimeLine::switchBranch()
     m_gitRunner->switchBranch(branch);
 
     connect(m_gitRunner, SIGNAL(switchBranchFinished()), this, SLOT(reloadTimeLine()));
-    emit sourceDirectoryChanged();
 }
 
 void TimeLine::mergeBranch()
@@ -548,7 +545,12 @@ QString TimeLine::senderToString() const
 
 void TimeLine::reloadTimeLine()
 {
+
     loadTimeLine(m_workingDir);
+
+    // all the git reloaded jobs has finished.
+    // so emit the signal
+    emit sourceDirectoryChanged();
 }
 
 #include "moc_timeline.cpp"
