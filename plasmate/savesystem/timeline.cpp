@@ -319,7 +319,7 @@ void TimeLine::moveToCommit()
 {
     QString dialog = i18n("<b>You are going to move to the selected save point.</b>\nTo perform this, a new branch will be created and your current work may be lost if you do not have saved it as a Savepoint.\nContinue?");
     const int code = KMessageBox::warningContinueCancel(this,dialog);
-    if (code!=KMessageBox::Continue) {
+    if (code != KMessageBox::Continue) {
         return;
     }
 
@@ -423,9 +423,11 @@ void TimeLine::renameBranch()
         return;
     }
 
-    QString dialog = i18n("Cannot rename the section: a section with this name already exists.");
-    KMessageBox::information(this, dialog);
-    return;
+    if (m_branches.contains(newBranchName)) {
+        QString dialog = i18n("Cannot rename the section: a section with this name already exists.");
+        KMessageBox::information(this, dialog);
+        return;
+    }
 
     m_gitRunner->renameBranch(newBranchName);
 
