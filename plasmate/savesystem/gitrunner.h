@@ -160,9 +160,9 @@ public:
 
     /**
       * Init a new git repository tree in the given directory.
-      * @param directory The directory we want being revision-controlled.
+      * @see setDirectory
       */
-    void init(const KUrl &directory);
+    void init();
 
     /**
       * It adds a new line inside the .gitignore file (if any, will be created too)

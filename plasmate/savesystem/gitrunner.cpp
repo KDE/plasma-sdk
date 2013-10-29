@@ -123,11 +123,8 @@ bool GitRunner::hasNewChangesToCommit()
 }
 
 //TODO the parameter isn't needed
-void GitRunner::init(const KUrl &directory)
+void GitRunner::init()
 {
-    // We need to tell the runner to change dir!
-    m_lastRepoRoot->setDirectory(directory.pathOrUrl());
-
     QStringList command;
     command << "init";
     KJob *job = initJob(command);

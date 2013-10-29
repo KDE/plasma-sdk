@@ -258,7 +258,7 @@ void TimeLine::newSavePoint()
         m_gitRunner->addIgnoredFileExtension("NOTES");
 
         // create the new repo
-        m_gitRunner->init(m_workingDir.pathOrUrl());
+        m_gitRunner->init();
         connect(m_gitRunner, SIGNAL(initFinished()), this, SLOT(reloadTimeLine()));
 
         // return and wait until the signal gets emitted.We don't want to make
