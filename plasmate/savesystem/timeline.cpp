@@ -359,6 +359,12 @@ void TimeLine::switchBranch()
 
 void TimeLine::mergeBranch()
 {
+    if (m_gitRunner->hasNewChangesToCommit()) {
+        QString text = i18n("You have uncommited changes, you must commit them in order to merge a branch");
+        KMessageBox::information(this, text);
+        return;
+    }
+
     // Prompt the user that a new save point will be created; if so,
     // popup a Savepoint dialog.
     const QString dialog = i18n("<b>You are going to combine two branches.</b>\nWith this operation, a new save point will be created; then you should have to manually resolve some conflicts on source code. Continue?");

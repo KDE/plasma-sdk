@@ -298,7 +298,7 @@ void GitRunner::mergeBranch(const QString &branchName,
                                           const QString &message)
 {
     QStringList command;
-    command << "merge --no-ff -m" + message + branchName;
+    command << "merge" << "--no-ff" << "-m" << message << branchName;
     execSynchronously(command);
 }
 
