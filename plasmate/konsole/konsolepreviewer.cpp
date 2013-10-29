@@ -14,13 +14,13 @@
 #include <QFile>
 #include <QCoreApplication>
 #include <QMutexLocker>
+#include <QTextEdit>
 
 #include <KAction>
 #include <KFileDialog>
 #include <KMessageBox>
 #include <KStandardAction>
 #include <KStandardDirs>
-#include <KTextEdit>
 #include <KToolBar>
 #include <KUrl>
 #include <KUser>
@@ -42,13 +42,9 @@ KonsolePreviewer::KonsolePreviewer(const QString & title, QWidget *parent)
     toolBar->addAction(clear);
     toolBar->addAction(save);
 
-    m_textEdit = new KTextEdit(this);
+    m_textEdit = new QTextEdit(this);
     //don't let the user modify the output
     m_textEdit->setReadOnly(true);
-    //make the background white
-    QPalette p = m_textEdit->palette();
-    p.setColor(QPalette::Base, Qt::white);
-    m_textEdit->setPalette(p);
 
     layout->addWidget(toolBar);
     layout->addWidget(m_textEdit);

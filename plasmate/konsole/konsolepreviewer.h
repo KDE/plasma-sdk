@@ -24,7 +24,7 @@
 #include <QEvent>
 #include <QWeakPointer>
 
-class KTextEdit;
+class QTextEdit;
 
 class KonsolePreviewer : public QDockWidget {
 
@@ -50,7 +50,7 @@ public Q_SLOTS:
     void saveOutput();
 
 private:
-    KTextEdit *m_textEdit;
+    QTextEdit *m_textEdit;
 };
 
 class KonsolePreviewerDebugEvent: public QEvent
