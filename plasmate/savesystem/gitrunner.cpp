@@ -111,18 +111,12 @@ bool GitRunner::isValidDirectory()
 bool GitRunner::hasNewChangesToCommit()
 {
     QStringList command;
-    command << "status";
+    command << "diff";
     const QString result = execSynchronously(command);
 
-    if (result.indexOf("nothing to commit (working directory clean)",
-    Qt::CaseInsensitive) != 0) {
-        return false;
-    }
-
-    return true;
+    return !result.simplified().isEmpty();
 }
 
-//TODO the parameter isn't needed
 void GitRunner::init()
 {
     QStringList command;
@@ -348,7 +342,6 @@ QStringList GitRunner::branches()
     QStringList list;
 
     foreach (QString branch, m_branchesWithAsterisk) {
-        kDebug() << "@@@@@@@@@@@@@@@@@@" << branch;
         if (branch.startsWith('*', Qt::CaseInsensitive)) {
             branch.remove(0, 2);
         }
