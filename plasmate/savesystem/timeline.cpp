@@ -55,7 +55,6 @@ TimeLine::TimeLine(QWidget *parent,
 {
     m_gitRunner = new GitRunner();
     initUI(parent, location);
-
     setWorkingDir(dir);
 }
 
@@ -111,82 +110,32 @@ void TimeLine::loadTimeLine(const KUrl &dir)
 
 void TimeLine::identifyCommits(TableWidget *widget)
 {
+    QList<QHash<QString, QString> > dataList = m_gitRunner->log();
+    QListIterator <QHash<QString, QString> > it(dataList);
+    while (it.hasNext()) {
+        QHash<QString, QString> data = it.next();
 
-    // Log gets the full git commit list
-    if (m_gitRunner->log() != DvcsJob::JobSucceeded) {
-        // handle error
-        return;
-    }
+        TimeLineItem *commitItem = new TimeLineItem();
 
-    const QString rawCommits = m_gitRunner->getResult();
-    const QStringList commitLog = rawCommits.split('\n',QString::SkipEmptyParts);
+        QString subject = data["subject"];
+        if (subject.contains("Merge", Qt::CaseSensitive)) {
+            commitItem->setIdentifier(TimeLineItem::Merge);
+        } else {
+            commitItem->setIdentifier(TimeLineItem::Commit);
+        }
 
-    // Regexp to match the sha1hash from the git commits.
-    const QString regExp("(commit\\s[0-9a-f]{40})");
-    const QRegExp rx(regExp);
+        commitItem->setHash(data["sha1hash"]);
 
-    TimeLineItem *commitItem = NULL;
-    int logIndex = 0;
-
-    // Iterate every commit log line. the newest commits are on the top of the log
-    while ( logIndex < commitLog.size()) {
         QString toolTipText;
-
-        // here we got a sha1hash, hence a new commit beginns
-        if (commitLog.at(logIndex).contains(rx)) {
-
-            commitItem = new TimeLineItem();
-
-            // set the git hash
-            commitItem->setHash(commitLog.at(logIndex).right(40)); // FIXME: As long as the hash has 40 chars it works.
-            ++logIndex;
-
-            if (commitLog.at(logIndex).contains("Merge: ", Qt::CaseSensitive)) {
-                commitItem->setIdentifier(TimeLineItem::Merge);
-                ++logIndex;
-            } else {
-                commitItem->setIdentifier(TimeLineItem::Commit);
-            }
-
-            // The next line is the author
-            toolTipText = commitLog.at(logIndex) + "\n\n";
-            ++logIndex;
-
-            toolTipText.replace("Author", i18n("Author"),
-                                Qt::CaseSensitive);
-
-            // Then comes the date
-            QString date = commitLog.at(logIndex);
-            ++logIndex;
-
-            date.remove("Date: ",Qt::CaseSensitive);
-            toolTipText.prepend(i18n("Created on: %1", date) + "\n");
-
-            //Our format date is Tue Nov 6 23:17:56 2012 +0200"
-            QStringList dateList = date.split(" ", QString::SkipEmptyParts);
-            QDateTime tmpDateTime = QDateTime::fromString(dateList.at(2) + " " + dateList.at(1) + " " + dateList.at(4) +
-                                    " " +  dateList.at(3), "d MMM yyyy hh:mm:ss");
-
-            QString localeTime = KGlobal::locale()->formatDateTime(tmpDateTime, KLocale::LongDate);
-            commitItem->setText(localeTime);
-        }
-
-        // The rest is Commit log info
-        while (logIndex < commitLog.size()) {
-            if (commitLog.at(logIndex).contains(rx)) {
-                break;
-            }
-            toolTipText.append(commitLog.at(logIndex) + "\n");
-            ++logIndex;
-        }
-
+        toolTipText.append(i18n("Author: %1 \n", data["author"]));
+        toolTipText.append(i18n("Date: %1 \n\n", data["date"]));
+        toolTipText.append(i18n("Commid ID: %1 \n", data["sha1hash"]));
         commitItem->setToolTip(toolTipText);
 
-
-        //check if this is the last item
-        if (logIndex + 1  < commitLog.size()) {
-            // The last Item is maked as such.
-            commitItem->setText(i18n("First save point"));
+        if (data == dataList.last()) {
+            commitItem->setText(i18n("First Save Point"));
+        } else {
+            commitItem->setText(subject);
         }
 
         widget->addItem(commitItem);
@@ -195,27 +144,12 @@ void TimeLine::identifyCommits(TableWidget *widget)
 
 QStringList TimeLine::listBranches() const
 {
-    QStringList branchList;
-    if (m_gitRunner->branches() != DvcsJob::JobSucceeded) {
-        // handle error
-        return branchList;
-    }
-    // Scan available branches,and save them
-    const QString branches = m_gitRunner->getResult();
-
-    foreach (QString branch, branches.split('\n', QString::SkipEmptyParts)) {
-        branch.remove(0, 2); // Clean the string form *
-        branchList.append(branch);
-    }
-    return branchList;
+    return m_gitRunner->branches();
 }
 
 QString TimeLine::currentBranch() const
 {
-    if (m_gitRunner->currentBranch() != DvcsJob::JobSucceeded) {
-        return QString();
-    }
-    return m_gitRunner->getResult();
+    return m_gitRunner->currentBranch();
 }
 
 Qt::DockWidgetArea TimeLine::location() const
@@ -313,7 +247,6 @@ void TimeLine::newSavePoint()
 
         commitMessage = i18n("Initial Commit");
 
-        m_gitRunner->init(m_workingDir);
         // Retrieve Name and Email, and set git global parameters
         Plasma::PackageMetadata metadata(m_workingDir.pathOrUrl() + "metadata.desktop");
         m_gitRunner->setAuthor(metadata.author());
@@ -323,6 +256,14 @@ void TimeLine::newSavePoint()
         m_gitRunner->addIgnoredFileExtension("*.*~");
         m_gitRunner->addIgnoredFileExtension("*.*bak");
         m_gitRunner->addIgnoredFileExtension("NOTES");
+
+        // create the new repo
+        m_gitRunner->init();
+        connect(m_gitRunner, SIGNAL(initFinished()), this, SLOT(reloadTimeLine()));
+
+        // return and wait until the signal gets emitted.We don't want to make
+        // any actions before that
+        return;
     }
 
     if (!m_gitRunner->hasNewChangesToCommit()) {
@@ -363,23 +304,22 @@ void TimeLine::restoreCommit()
 {
     const QString dialog = (i18n("<b>You are restoring the selected save point.</b>\nWith this operation, all the save points and branches created starting from it, will be deleted.\nContinue anyway?"));
     const int code = KMessageBox::warningContinueCancel(this, dialog);
-    if (code!=KMessageBox::Continue) {
+    if (code != KMessageBox::Continue) {
         return;
     }
 
     QAction *sender = qobject_cast<QAction*>(this->sender());
     QVariant data = sender->data();
     m_gitRunner->deleteCommit(data.toString());
-    loadTimeLine(m_workingDir);
 
-    emit sourceDirectoryChanged();
+    connect(m_gitRunner, SIGNAL(deleteCommitFinished()), this, SLOT(reloadTimeLine()));
 }
 
 void TimeLine::moveToCommit()
 {
     QString dialog = i18n("<b>You are going to move to the selected save point.</b>\nTo perform this, a new branch will be created and your current work may be lost if you do not have saved it as a Savepoint.\nContinue?");
     const int code = KMessageBox::warningContinueCancel(this,dialog);
-    if (code!=KMessageBox::Continue) {
+    if (code != KMessageBox::Continue) {
         return;
     }
 
@@ -400,29 +340,36 @@ void TimeLine::moveToCommit()
     QAction *sender = qobject_cast<QAction*>(this->sender());
     QVariant data = sender->data();
     m_gitRunner->moveToCommit(data.toString(), newBranchName);
-    loadTimeLine(m_workingDir);
 
-    emit sourceDirectoryChanged();
+    connect(m_gitRunner, SIGNAL(moveToCommitFinished()), this, SLOT(reloadTimeLine()));
 }
 
 void TimeLine::switchBranch()
 {
-    QAction *sender = qobject_cast<QAction*>(this->sender());
-    QString branch = sender->text();
-    branch.remove('&');
+    if (m_gitRunner->hasNewChangesToCommit()) {
+        QString text = i18n("You have uncommited changes, you must commit them in order to change a branch");
+        KMessageBox::information(this, text);
+        return;
+    }
+    QString branch = senderToString();
     m_gitRunner->switchBranch(branch);
-    loadTimeLine(m_workingDir);
 
-    emit sourceDirectoryChanged();
+    connect(m_gitRunner, SIGNAL(switchBranchFinished()), this, SLOT(reloadTimeLine()));
 }
 
 void TimeLine::mergeBranch()
 {
+    if (m_gitRunner->hasNewChangesToCommit()) {
+        QString text = i18n("You have uncommited changes, you must commit them in order to merge a branch");
+        KMessageBox::information(this, text);
+        return;
+    }
+
     // Prompt the user that a new save point will be created; if so,
     // popup a Savepoint dialog.
     const QString dialog = i18n("<b>You are going to combine two branches.</b>\nWith this operation, a new save point will be created; then you should have to manually resolve some conflicts on source code. Continue?");
     const int code = KMessageBox::warningContinueCancel(this,dialog);
-    if (code!=KMessageBox::Continue) {
+    if (code != KMessageBox::Continue) {
         return;
     }
 
@@ -441,17 +388,13 @@ void TimeLine::mergeBranch()
         commit.append(optionalComment);
     }
 
-    QString branchToMerge = m_currentBranch;
-    QAction *sender = qobject_cast<QAction*>(this->sender());
-    QString branch = sender->text();
-    branch.remove('&');
+    const QString branchToMerge = m_currentBranch;
+    const QString branch = senderToString();
 
     // To merge current branch into the selected one, first whe have to
     // move to the selected branch and then call merge function !
     m_gitRunner->switchBranch(branch);
     m_gitRunner->mergeBranch(branchToMerge, commit);
-
-    loadTimeLine(m_workingDir);
 
     emit sourceDirectoryChanged();
 }
@@ -464,19 +407,14 @@ void TimeLine::deleteBranch()
         return;
     }
 
-    QAction *sender = qobject_cast<QAction*>(this->sender());
-    QString branch = sender->text();
-    branch.remove('&');
+    const QString branch = senderToString();
     m_gitRunner->deleteBranch(branch);
-    loadTimeLine(m_workingDir);
+    connect(m_gitRunner, SIGNAL(deleteBranchFinished()), this, SLOT(reloadTimeLine()));
 }
 
 void TimeLine::renameBranch()
 {
-    QAction *sender = qobject_cast<QAction*>(this->sender());
-    QString branch = sender->text();
-    branch.remove('&');
-
+    const QString branch = senderToString();
 
     bool ok;
     const QString newBranchName = branchDialog(&ok);
@@ -485,33 +423,35 @@ void TimeLine::renameBranch()
         return;
     }
 
-    QString dialog = i18n("Cannot rename the section: a section with this name already exists.");
-    KMessageBox::information(this, dialog);
-    return;
+    if (m_branches.contains(newBranchName)) {
+        QString dialog = i18n("Cannot rename the section: a section with this name already exists.");
+        KMessageBox::information(this, dialog);
+        return;
+    }
 
     m_gitRunner->renameBranch(newBranchName);
-    loadTimeLine(m_workingDir);
+
+    connect(m_gitRunner, SIGNAL(renameBranchFinished()), this, SLOT(reloadTimeLine()));
 }
 
 void TimeLine::createBranch()
 {
-    QAction *sender = qobject_cast<QAction*>(this->sender());
-    QString branch = sender->text();
-    branch.remove('&');
+    QString branch = senderToString();
 
     bool ok;
     const QString newBranchName = branchDialog(&ok);
-
     if (!ok) {
         return;
     }
 
-    const QString dialog = i18n("Cannot create section: a section with this name already exists.");
-    KMessageBox::information(this, dialog);
-    return;
+    if (listBranches().contains(newBranchName)) {
+        const QString dialog = i18n("Cannot create section: a section with this name already exists.");
+        KMessageBox::information(this, dialog);
+        return;
+    }
 
     m_gitRunner->newBranch(newBranchName);
-    loadTimeLine(m_workingDir);
+    connect(m_gitRunner, SIGNAL(newBranchFinished()), this, SLOT(reloadTimeLine()));
 }
 
 bool TimeLine::setWorkingDir(const KUrl &dir)
@@ -594,6 +534,31 @@ QString TimeLine::branchDialog(bool *ok)
     QValidator *validator = new QRegExpValidator(QRegExp("[a-zA-Z0-9_.]*"));
 
     return KInputDialog::getText(i18n("New Branch"), i18n("New branch name:"), "type here", ok, this, validator);
+}
+
+QString TimeLine::senderToString() const
+{
+    QAction *sender = qobject_cast<QAction*>(this->sender());
+
+    if (!sender) {
+        return QString();
+    }
+
+    QString branch = sender->text();
+    branch.remove('&');
+    branch.replace(" ", "");
+
+    return branch;
+}
+
+void TimeLine::reloadTimeLine()
+{
+
+    loadTimeLine(m_workingDir);
+
+    // all the git reloaded jobs has finished.
+    // so emit the signal
+    emit sourceDirectoryChanged();
 }
 
 #include "moc_timeline.cpp"

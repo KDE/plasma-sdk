@@ -1,5 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2009 by Diego '[Po]lentino' Casella <polentino911@gmail.com> *
+ * Copyright (C) 2013 by Giorgos Tsiapaliokas <terietor@gmail.com>            *
  *                                                                            *
  *    This program is free software; you can redistribute it and/or modify    *
  *    it under the terms of the GNU General Public License as published by    *
@@ -28,56 +29,56 @@
 #include <KProcess>
 
 
-GitRunner::GitRunner()
+GitRunner::GitRunner(QObject *parent)
+        :QObject(parent)
 {
-    //m_job = new DvcsJob();
-    m_commMode = KProcess::SeparateChannels;
-    m_lastRepoRoot = new KUrl();
-    m_result = QString();
-    m_isRunning = false;
-    m_jobStatus = DvcsJob::JobNotStarted;
 
+    m_lastRepoRoot = new KUrl();
+
+    //signals
+    connect(this, SIGNAL(isValidDirectory()), this, SLOT(handleIsValidDirectory()));
 }
 
 GitRunner::~GitRunner()
 {
-    /*if( m_job )
-        delete m_job;*/
     delete m_lastRepoRoot;
 }
 
-void GitRunner::initJob(DvcsJob &job)
+KJob *GitRunner::initJob(const QStringList& command) const
+
 {
-    job.setCommunicationMode(m_commMode);
-    job.setDirectory(QDir(m_lastRepoRoot->pathOrUrl()));
-    job << "git";
+    QStringList comm;
+    comm << "git";
+    foreach(const QString&c, command) {
+        comm << c;
+    }
+    KJob *job = new DvcsJob(comm, m_lastRepoRoot->pathOrUrl());
+    kDebug() << m_lastRepoRoot->pathOrUrl();
+    return job;
 }
 
-void GitRunner::startJob(DvcsJob &job)
+QString GitRunner::execSynchronously(const QStringList& command)
 {
-    m_result.clear();
-    m_isRunning = true;
-    job.start();
-    m_result.append(job.output());      // Save the result
-    m_isRunning = false;
-    m_jobStatus = job.status();         // Save job status
-    job.cancel();                       // Kill the job
-    delete &job;
-}
+    KJob *job = initJob(command);
 
-void GitRunner::setCommunicationMode(KProcess::OutputChannelMode comm)
-{
-    m_commMode = comm;
+    QString result;
+
+    if (!job->exec()) {
+        handleError(job);
+        return QString();
+    } else {
+        DvcsJob *j = qobject_cast<DvcsJob*>(job);
+        if (!j) {
+            return QString();
+        }
+        result = j->output();
+    }
+    return result;
 }
 
 void GitRunner::setDirectory(const KUrl &dir)
 {
     m_lastRepoRoot->setDirectory(dir.pathOrUrl());
-}
-
-bool GitRunner::isRunning()
-{
-    return m_isRunning;
 }
 
 bool GitRunner::isValidDirectory()
@@ -90,11 +91,10 @@ bool GitRunner::isValidDirectory()
 
     // Also, git rev-parse --is-inside-work-tree returns "true" if we are
     // inside any subdirectory of the git tree.
-    DvcsJob *job = new DvcsJob();
-    initJob(*job);
-    *job << "rev-parse";
-    *job << "--is-inside-work-tree";
-    startJob(*job);
+    QStringList command;
+    command << "rev-parse";
+    command << "--is-inside-work-tree";
+    const QString result= execSynchronously(command);
 
     QFileInfo finfo(initialPath);
     QDir dir;
@@ -105,37 +105,26 @@ bool GitRunner::isValidDirectory()
         dir.makeAbsolute();
     }
 
-    return (dir.exists(gitDir) && m_result.compare("true")) ? true : false;
+    return (dir.exists(gitDir) && result.compare("true")) ? true : false;
 }
 
 bool GitRunner::hasNewChangesToCommit()
 {
-    if(status() != DvcsJob::JobSucceeded)
-        return false;
+    QStringList command;
+    command << "diff";
+    const QString result = execSynchronously(command);
 
-    if(m_result.contains("nothing to commit (working directory clean)",
-                         Qt::CaseSensitive))
-        return false;
-
-    return true;
+    return !result.simplified().isEmpty();
 }
 
-QString& GitRunner::getResult()
+void GitRunner::init()
 {
-    return  m_result;
-}
+    QStringList command;
+    command << "init";
+    KJob *job = initJob(command);
 
-
-DvcsJob::JobStatus GitRunner::init(const KUrl &directory)
-{
-    // We need to tell the runner to change dir!
-    m_lastRepoRoot->setDirectory(directory.pathOrUrl());
-    DvcsJob *job = new DvcsJob();
-    initJob(*job);
-
-    *job << "init";
-    startJob(*job);
-    return m_jobStatus;
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(handleInit(KJob*)));
+    job->start();
 }
 
 void GitRunner::addIgnoredFileExtension(const QString ignoredFileExtension)
@@ -152,238 +141,393 @@ void GitRunner::addIgnoredFileExtension(const QString ignoredFileExtension)
     gitIgnoreFile.close();
 }
 
-DvcsJob::JobStatus GitRunner::createWorkingCopy(const KUrl &repoOrigin,
+void GitRunner::createWorkingCopy(const KUrl &repoOrigin,
                                                 const KUrl &repoDestination)
 {
     // TODO: now supports only cloning a local repo(not very useful, I know =P),
     // so extend the method to be used over the Internet.
     m_lastRepoRoot->setDirectory(repoDestination.pathOrUrl());
-    DvcsJob *job = new DvcsJob();
-    initJob(*job);
 
-    *job << "clone";
-    *job << repoOrigin.pathOrUrl();
-    startJob(*job);
-    return m_jobStatus;
+    QStringList command;
+    command << "clone " + repoOrigin.pathOrUrl();
+    KJob *job = initJob(command);
+
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(handleCreateWorkingCopy(KJob*)));
+
+    job->start();
 }
 
-DvcsJob::JobStatus GitRunner::add(const KUrl::List &localLocations)
+void GitRunner::add(const KUrl::List &localLocations)
 {
-    if (localLocations.empty())
-        return m_jobStatus = DvcsJob::JobCancelled;
+    if (localLocations.empty()) {
+        return;
+    }
 
-    DvcsJob *job = new DvcsJob();
-    initJob(*job);
-    *job << "add";
+    QStringList command;
+    command << "add";
 
     // Adding files to the runner.
     QStringList stringFiles = localLocations.toStringList();
     while (!stringFiles.isEmpty()) {
-        *job <<  m_lastRepoRoot->pathOrUrl() + '/' + stringFiles.takeAt(0);
+        command.append(m_lastRepoRoot->pathOrUrl() + '/' + stringFiles.takeAt(0));
     }
 
-    startJob(*job);
-    return m_jobStatus;
+    execSynchronously(command);
 }
 
-DvcsJob::JobStatus GitRunner::status()
+QString GitRunner::status()
 {
-    DvcsJob *job = new DvcsJob();
-    initJob(*job);
-    *job << "status";
-
-    startJob(*job);
-    return m_jobStatus;
+    QStringList command;
+    command << "status";
+    return execSynchronously(command);
 }
 
 
-DvcsJob::JobStatus GitRunner::commit(const QString &message)
+void GitRunner::commit(const QString &message)
 {
     // NOTE: git doesn't allow empty commit !
-    if (message.isEmpty())
-        return m_jobStatus = DvcsJob::JobCancelled;
-
-    DvcsJob *job = new DvcsJob();
-    initJob(*job);
-    *job << "commit";
-    *job << "-m";
-    //Note: the message is quoted somewhere else
-    *job << message;
-
-    startJob(*job);
-    return m_jobStatus;
-}
-
-DvcsJob::JobStatus GitRunner::moveToCommit(const QString &sha1hash,
-                                           const QString &newBranch)
-{
-    DvcsJob *job = new DvcsJob();
-    initJob(*job);
-    *job << "checkout";
-    *job << sha1hash;
-
-    startJob(*job);
-    if (m_jobStatus != DvcsJob::JobSucceeded)
-        return m_jobStatus;
-
-    job = new DvcsJob();
-    initJob(*job);
-    *job << "checkout";
-    *job << "-b";
-    *job << newBranch;
-
-    startJob(*job);
-    return m_jobStatus;
-}
-
-DvcsJob::JobStatus GitRunner::deleteCommit(const QString &sha1hash)
-{
-    DvcsJob *job = new DvcsJob();
-    initJob(*job);
-    *job << "reset";
-    *job << "--hard";
-    *job << sha1hash;
-
-    startJob(*job);
-    return m_jobStatus;
-}
-
-DvcsJob::JobStatus GitRunner::remove(const KUrl::List &files)
-{
-    if (files.empty())
-        return m_jobStatus = DvcsJob::JobCancelled;
-
-    DvcsJob *job = new DvcsJob();
-    initJob(*job);
-    *job << "rm";
-    QStringList stringFiles = files.toStringList();
-    while (!stringFiles.isEmpty()) {
-        *job <<  m_lastRepoRoot->pathOrUrl() + '/' + stringFiles.takeAt(0);
+    if (message.isEmpty()) {
+        return;
     }
 
-    startJob(*job);
-    return m_jobStatus;
+    QStringList command;
+    command << "commit";
+    command << "-m";
+    //Note: the message is quoted somewhere else
+    command << message;
+
+    KJob *job = initJob(command);
+
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(handleCommit(KJob*)));
+
+    job->start();
 }
 
-
-DvcsJob::JobStatus GitRunner::log()
+void GitRunner::moveToCommit(const QString &sha1hash,
+                                           const QString &newBranch)
 {
-    DvcsJob *job = new DvcsJob();
-    initJob(*job);
-    *job << "log";
+    QStringList command;
+    command << "branch" << newBranch << sha1hash;
+    execSynchronously(command);
 
-    startJob(*job);
-    return m_jobStatus;
+    command.clear();
+    command << "checkout" << newBranch;
+    KJob *job = initJob(command);
+
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(handleMoveToCommit(KJob*)));
+
+    job->start();
 }
 
-DvcsJob::JobStatus GitRunner::switchBranch(const QString &newBranch)
+void GitRunner::deleteCommit(const QString &sha1hash)
 {
-    DvcsJob *job = new DvcsJob();
-    initJob(*job);
-    *job << "checkout";
-    *job << newBranch;
+    QStringList command;
+    command << "reset" << "--hard" << sha1hash;
+    KJob *job = initJob(command);
 
-    startJob(*job);
-    return m_jobStatus;
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(handleDeleteCommit(KJob*)));
+
+    job->start();
 }
 
-DvcsJob::JobStatus GitRunner::mergeBranch(const QString &branchName,
+void GitRunner::remove(const KUrl::List &files)
+{
+    if (files.empty()) {
+        return;
+    }
+
+    QStringList command;
+    command << "rm ";
+    QStringList stringFiles = files.toStringList();
+    while (!stringFiles.isEmpty()) {
+        command.append(m_lastRepoRoot->pathOrUrl() + '/' + stringFiles.takeAt(0));
+    }
+
+    KJob *job = initJob(command);
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(handleRemove(KJob*)));
+
+    job->start();
+}
+
+
+QList<QHash<QString, QString> > GitRunner::log()
+{
+    QList<QHash<QString, QString> > data;
+    QHash<QString, QString> temp;
+
+    QStringList command;
+    command << "log";
+    //we will use $ in the format in order to
+    //split the string author, date, subject
+    //and we will use ^^ in order to identify every commit
+    command << "--pretty=format:%an$%s$%ad$%H^^";
+
+    QString result = execSynchronously(command);
+
+    QStringList commitList = result.split("^^", QString::SkipEmptyParts);
+    foreach(QString commit, commitList) {
+        QStringList l = commit.split('$', QString::SkipEmptyParts);
+        temp["author"] = removeNewLines(l.at(0));
+        temp["subject"] = removeNewLines(l.at(1));
+        temp["date"] = removeNewLines(l.at(2));
+        temp["sha1hash"] = removeNewLines(l.at(3));
+        data.append(temp);
+    }
+
+    return data;
+}
+
+QString GitRunner::removeNewLines(const QString &string)
+{
+    QString tmp = string;
+    return tmp.replace("\n", "");
+}
+
+void GitRunner::switchBranch(const QString &newBranch)
+{
+    QStringList command;
+    command << "checkout";
+    command << newBranch;
+    KJob *job = initJob(command);
+
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(handleSwitchBranch(KJob*)));
+
+    job->start();
+}
+
+void GitRunner::mergeBranch(const QString &branchName,
                                           const QString &message)
 {
-    DvcsJob *job = new DvcsJob();
-    initJob(*job);
-    *job << "merge";
-    *job << "--no-ff";
-    *job << "-m";
-    *job << message;
-    *job << branchName;
-
-    startJob(*job);
-    return m_jobStatus;
+    QStringList command;
+    command << "merge" << "--no-ff" << "-m" << message << branchName;
+    execSynchronously(command);
 }
 
-DvcsJob::JobStatus GitRunner::deleteBranch(const QString &branch)
+void GitRunner::deleteBranch(const QString &branch)
 {
-    DvcsJob *job = new DvcsJob();
-    initJob(*job);
-    *job << "branch";
-    *job << "-D";
-    *job << branch;
+    QStringList command;
+    command << "branch" << "-D" <<  branch;
+    KJob *job = initJob(command);
 
-    startJob(*job);
-    return m_jobStatus;
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(handleDeleteBranch(KJob*)));
+    job->start();
 }
 
-DvcsJob::JobStatus GitRunner::currentBranch()
+QString GitRunner::currentBranch()
 {
-    DvcsJob::JobStatus status = branches();
-    if (status != DvcsJob::JobSucceeded)
-        return status;
-    // Every branch is listed in one line. so first split by lines,
-    // then look for the branch marked with a "*".
-    QStringList list = m_result.split('\n');
-    QString tmp = list.takeFirst();
-    while (!tmp.contains('*', Qt::CaseInsensitive))
-        tmp = list.takeFirst();
+    branches();
+
+    if (m_branchesWithAsterisk.isEmpty()) {
+        return QString();
+    }
+
+    QString tmp = m_branchesWithAsterisk.takeFirst();
+    while (!tmp.contains('*', Qt::CaseInsensitive)) {
+        tmp = m_branchesWithAsterisk.takeFirst();
+    }
 
     tmp.remove(0, 2);
-    m_result = tmp;
-    return status;
+    return tmp;
 }
 
-DvcsJob::JobStatus GitRunner::branches()
+QStringList GitRunner::branches()
 {
-    DvcsJob *job = new DvcsJob();
-    initJob(*job);
-    *job << "branch";
+    QStringList command;
+    command << "branch";
+    const QString result = execSynchronously(command);
+    // Every branch is listed in one line. so first split by lines,
+    // then look for the branch marked with a "*".
+    m_branchesWithAsterisk.clear();
+    m_branchesWithAsterisk = result.split('\n', QString::SkipEmptyParts);
 
-    startJob(*job);
-    return m_jobStatus;
+    QStringList list;
+
+    foreach (QString branch, m_branchesWithAsterisk) {
+        if (branch.startsWith('*', Qt::CaseInsensitive)) {
+            branch.remove(0, 2);
+        }
+        branch.replace(" ", "");
+        list << branch;
+    }
+    return list;
 }
 
-DvcsJob::JobStatus GitRunner::newBranch(const QString &newBranch)
+void GitRunner::newBranch(const QString &newBranch)
 {
-    DvcsJob *job = new DvcsJob();
-    initJob(*job);
-    *job << "branch";
-    *job << newBranch;
+    QStringList command;
+    command << "branch" <<  newBranch;
+    KJob *job = initJob(command);
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(handleNewBranch(KJob*)));
 
-    startJob(*job);
-    return m_jobStatus;
+    job->start();
 }
 
-DvcsJob::JobStatus GitRunner::renameBranch(const QString &newBranch)
+void GitRunner::renameBranch(const QString &newBranch)
 {
-    DvcsJob *job = new DvcsJob();
-    initJob(*job);
-    *job << "branch";
-    *job << "-m";
-    *job << newBranch;
+    QStringList command;
+    command << "branch" << "-m" << newBranch;
+    KJob *job = initJob(command);
 
-    startJob(*job);
-    return m_jobStatus;
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(handleRenameBranch(KJob*)));
+    job->start();
 }
 
-DvcsJob::JobStatus GitRunner::setAuthor(const QString &username)
+void GitRunner::setAuthor(const QString &username)
 {
-    DvcsJob *job = new DvcsJob();
-    initJob(*job);
-    *job << "config";
-    *job << "user.name";
-    *job << username;
-
-    startJob(*job);
-    return m_jobStatus;
+    QStringList command;
+    command << "config user.name " + username;
+    execSynchronously(command);
 }
 
-DvcsJob::JobStatus GitRunner::setEmail(const QString &email)
+void GitRunner::setEmail(const QString &email)
 {
-    DvcsJob *job = new DvcsJob();
-    initJob(*job);
-    *job << "config";
-    *job << "user.email";
-    *job << email;
-
-    startJob(*job);
-    return m_jobStatus;
+    QStringList command;
+    command << "config user.email " + email;
+    execSynchronously(command);
 }
+
+void GitRunner::handleRenameBranch(KJob *job)
+{
+    if (!job) {
+        return;
+    }
+
+    if (job->error()) {
+        handleError(job);
+    }
+
+    emit renameBranchFinished();
+}
+
+void GitRunner::handleDeleteBranch(KJob *job)
+{
+    if (!job) {
+        return;
+    }
+
+    if (job->error()) {
+        handleError(job);
+    }
+
+    emit deleteBranchFinished();
+}
+
+void GitRunner::handleMoveToCommit(KJob *job)
+{
+    if (!job) {
+        return;
+    }
+
+    if (job->error()) {
+        handleError(job);
+    }
+
+    emit moveToCommitFinished();
+}
+
+void GitRunner::handleNewBranch(KJob *job)
+{
+    if (!job) {
+        return;
+    }
+
+    if (job->error()) {
+        handleError(job);
+    }
+
+    emit newBranchFinished();
+}
+
+void GitRunner::handleRemove(KJob *job)
+{
+    if (!job) {
+        return;
+    }
+
+    if (job->error()) {
+        handleError(job);
+    }
+
+    emit removeFinished();
+}
+
+void GitRunner::handleSwitchBranch(KJob *job)
+{
+    if (!job) {
+        return;
+    }
+
+    if (job->error()) {
+        handleError(job);
+    }
+
+    emit switchBranchFinished();
+}
+
+void GitRunner::handleInit(KJob *job)
+{
+    if (!job) {
+        return;
+    }
+
+    if (job->error()) {
+        handleError(job);
+    } else {
+        QDir workingDir(m_lastRepoRoot->pathOrUrl());
+        add(workingDir.entryList(QDir::NoDotAndDotDot | QDir::Files | QDir::Dirs));
+        commit(QLatin1String("Initial commit from Plasmate. Add the default files"));
+    }
+    emit initFinished();
+}
+
+void GitRunner::handleCreateWorkingCopy(KJob *job)
+{
+    if (!job) {
+        return;
+    }
+
+    if (job->error()) {
+        handleError(job);
+    }
+
+    emit createWorkingCopyFinished();
+}
+
+void GitRunner::handleDeleteCommit(KJob *job)
+{
+    if (!job) {
+        return;
+    }
+
+    if (job->error()) {
+        handleError(job);
+    }
+
+    emit deleteCommitFinished();
+}
+
+void GitRunner::handleCommit(KJob *job)
+{
+    if (!job) {
+        return;
+    }
+
+    if (job->error()) {
+        handleError(job);
+    }
+
+    emit commitFinished();
+}
+
+void GitRunner::handleError(KJob *job)
+{
+    DvcsJob *j = qobject_cast<DvcsJob*>(job);
+    if (!j) {
+        return;
+    }
+
+    kDebug() << "oops, found an error while running" << j->dvcsCommand() << ":" << j->error()
+    << j->errorText();
+    kDebug() << "output of " << j->dvcsCommand() << "is:" << j->output();
+}
+

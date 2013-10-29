@@ -1,5 +1,6 @@
 /******************************************************************************
  * Copyright (C) 2009 by Diego '[Po]lentino' Casella <polentino911@gmail.com> *
+ * Copyright (C) 2013 by Giorgos Tsiapaliokas <terietor@gmail.com>            *
  *                                                                            *
  *    This program is free software; you can redistribute it and/or modify    *
  *    it under the terms of the GNU General Public License as published by    *
@@ -20,75 +21,41 @@
 #ifndef GITRUNNER_H
 #define GITRUNNER_H
 
-#include "dvcsjob.h"
-
 #include <QStringList>
-#include <QDir>
 #include <QObject>
 
 #include <KUrl>
-#include <KProcess>
+
+class KJob;
 
 /**
   * This class executes the majority of Git commands.
-  * Its usage is very simple: after setting the communication mode and the working directory,
-  * you simply have to call the desired method, check the return value to ensure the process
-  * has correctly done its duty, and check/process the saved result.
-  *
-  * @note <b>Always remember to check the result</b> of a git command, before performing an other one,
-  * because every command call ovverrides the previous stored result.
-  *
-  * Example of usage:
+  * This class contains two kind of methods.
+  * The first ones are synchronous, example of usage
   * @code
-  *     GitRunner *git = new GitRunner();
-  *     git->setDirectory(KUrl("/home/user/foo/"));
-  *     git->setCommunicationMode(KProcess::SeparateChannels);
-  *     if(git->isValidDirectory()) {
-  *         // We are now sure to be in a valid git <b>root</b> tree
-  *
-  *         // Now suppose to create some files named foo.h foo.cpp under "foo/":
-  *         // we add it to the git index by doing this
-  *         QStringList *list = new QStringList();
-  *         *list << "foo.h" << "foo.cpp";
-  *
-  *         // Note: sometimes is more easy to pass a list with only an argument: '.',
-  *         // so git will automatically add all new/changed files under the working
-  *         // directory and its subdirectories =)
-  *
-  *         if(git->add(KUrl::List(*list)) == DvcsJob::JobSucceeded) {
-  *             // Here we are sure the files are added correctly to git index;
-  *             // so now we can commit.
-  *
-  *             if(git->commit("My first commit") != DvcsJob::JobSucceeded) {
-  *                 // Deal with errors
-  *             }
-  *         } else {
-  *             // Deal with a unsuccessful git-add command
-  *     }
-  *
-  *     // Now retrieve the available branches
-  *     if(git->branches() != DvcsJob::JobSucceeded) {
-  *         // Deal with errors
-  *     }
-  *     QString branches = git->getResult();
-  *
-  *     // Now let suppose you find an oldBranch branch, and you want to delete it
-  *     if(git->deleteBranch(oldBranch) != DvcsJob::JobSucceeded) {
-  *         //Do something
-  *     }
+  *     GitRunner *gitrunner = new GitRunner();
+  *     gitrunner->currentBranch();
   * @endcode
   *
-  * @author Diego [Po]lentino Casella <polentino911@gmail.com>
+  * the second ones are async, example of usage
+  * @code
+  *     GitRunner *gitrunner = new GitRunner();
+  *     connect(gitrunner, SIGNAL(deleteBranchFinished()), this, SLOT(foo()));
+  *     gitrunner->deleteBranch("foo");
+  * @endcode
   */
-class GitRunner
+class GitRunner : public QObject
 {
+
+Q_OBJECT
+
 public:
     /**
       * Simple constructor; it initializes the class with some default parameters.
       * @see setDirectory()
       * @see setCommunicationMode()
       */
-    GitRunner();
+    GitRunner(QObject *parent = 0);
     ~GitRunner();
 
     /**
@@ -119,187 +86,199 @@ public:
     void setDirectory(const KUrl &dir);
 
     /**
-      * Sets the communication mode.
-      * @param comm Accepts one of the KProcess:OutputChannelMode modes.
-      */
-    void setCommunicationMode(KProcess::OutputChannelMode comm);
-
-    /**
       * Adds a list of files in the git index, so they are ready to be committed later.
       * @param localLocations A list of KUrl containing the <b>absolute<path> of the files
       * that will be added.
-      * @return The status of the performed operation.
       * @note Sometimes is more easy using a KUrl::List with a single element, '.' ; by
       * doing this, git will automatically include recursively all the modified/new
       * files in the working directory.
       */
-    DvcsJob::JobStatus add(const KUrl::List &localLocations);
+    void add(const KUrl::List &localLocations);
 
     /**
       * Clones an existing git repository to an other one.
       * @note Now is supported only a local cloning operation; soon there will be
       * a more general cloning support over the internet.
+      * This opearation is async.
+      * @see createWorkingCopy()
       * @param repoOrigin The absolute path of the directory containing the git repo.
       * @param repoDestination The destination where cloning the source to.
-      * @return The status of the performed operation.
       */
-    DvcsJob::JobStatus createWorkingCopy(const KUrl &repoOrigin,
+    void createWorkingCopy(const KUrl &repoOrigin,
                                          const KUrl &repoDestination);
 
     /**
       * Removes the listed files from the directory and the git repo.
+      * This opearation is async.
+      * @see removeFinished()
       * @param files A List of KUrl files to be removed.
-      * @return The status of the performed operation.
       */
-    DvcsJob::JobStatus remove(const KUrl::List &files);
-
+    void remove(const KUrl::List &files);
 
     /**
       * Checks the status of the git index tree, useful to look for uncommitted cnahges.
       * @return The status of the performed operation.
       */
-    DvcsJob::JobStatus status();
+    QString status();
 
     /**
       * Commits the files previously added, and stores also a message containing some infos about it.
+      * This opearation is async.
+      * @see commitFinished()
       * @param message The string containing the message to be included in the commit.
-      * @return The status of the performed operation.
       */
-    DvcsJob::JobStatus commit(const QString &message);
+    void commit(const QString &message);
 
     /**
       * Move HEAD from the current stage, to the commit pointed by its sha1hash, and then
       * create a new branch so new changes won't affect the original branch history.
+      * This opearation is async.
+      * @see moveToCommitFinished()
       * @param sha1hash The sha1 hash string representing the commit we want to point to.
       * @param newBranch The string representing the new branch.
-      * @return The status of the performed operation.
       */
-    DvcsJob::JobStatus moveToCommit(const QString &sha1hash,
+    void moveToCommit(const QString &sha1hash,
                                     const QString &newBranch);
 
     /**
       * Delete the commit pointed by its sha1hash.
+      * This opearation is async.
+      * @see deleteCommitFinished()
       * @param sha1hash The sha1 has string representing the commit we want to delete.
-      * @return The status of the performed operation.
+      * @return /he status of the performed operation.
       * @note This command will also delete <b>all</b> the commits directly derived from
       * this one, so pay attention when using it.
       * @see moveToCommit()
       */
-    DvcsJob::JobStatus deleteCommit(const QString &sha1hash);
+    void deleteCommit(const QString &sha1hash);
 
     /**
       * Logs all git-related event, such as commits, merges and so on.
       * @return The status of the performed operation.
       */
-    DvcsJob::JobStatus log();
+    QList<QHash<QString, QString> > log();
 
     /**
       * Init a new git repository tree in the given directory.
-      * @param directory The directory we want being revision-controlled.
-      * @return The status of the performed operation.
+      * @see setDirectory
       */
-    DvcsJob::JobStatus init(const KUrl &directory);
+    void init();
 
     /**
       * It adds a new line inside the .gitignore file (if any, will be created too)
+      * This opearation is async.
+      * @see initFinished()
       * @param file extension to be ignored from git
       */
     void addIgnoredFileExtension(const QString ignoredFileExtension);
 
     /**
       * Create a new branch with the given name.
+      * This opearation is async.
+      * @see newBranchFinished()
       * @param newBranch The string containing the new branch name.
-      * @return The status of the performed operation.
       */
-    DvcsJob::JobStatus newBranch(const QString &newBranch);
+    void newBranch(const QString &newBranch);
 
     /**
       * Renames the current branch with the new name supplied.
+      * This opearation is async.
+      * @see renameBranchFinished()
       * @param newBranch The string containing the new name for the current branch.
-      * @return The status of the performed operation.
       */
-    DvcsJob::JobStatus renameBranch(const QString &newBranch);
+    void renameBranch(const QString &newBranch);
 
     /**
       * Switch to the supplied branch.
+      * This opearation is async.
+      * @see switchBranchFinished()
       * @param newBranch The string containing the name of the branch we want to move into.
-      * @return The status of the performed operation.
       */
-    DvcsJob::JobStatus switchBranch(const QString &newBranch);
+    void switchBranch(const QString &newBranch);
 
     /**
       * Merges the current branch with the branch supplied, creating a new commit and
       * setting a message.
       * @param branchName The string containing the branch name we want to merge with.
       * @param message The string used to store the merge commit.
-      * @return The status of the performed operation.
       * @note Always commit before performing a merge, otherwise you'll lose all your
       * uncommitted work.
       */
-    DvcsJob::JobStatus mergeBranch(const QString &branchName,
+    void mergeBranch(const QString &branchName,
                                    const QString &message);
 
     /**
       * Deletes the branch passed.
       * @param The string containing the branch you no longer need and want to remove.
-      * @return The status of the performed operation.
       * @note It deletes also the commit directly derived from it, so ensure they're no
       * longer needed.
       */
-    DvcsJob::JobStatus deleteBranch(const QString &branch);
+    void deleteBranch(const QString &branch);
 
     /**
       * Retrieve the current branch in use.
       * @return The status of the performed operation.
       */
-    DvcsJob::JobStatus currentBranch();
+    QString currentBranch();
 
     /**
       * Retrieves all the branches available in the current git repo.
       * @return The status of the performed operation.
       * @note The current branch is marked with a '*'.
       */
-    DvcsJob::JobStatus branches();
+    QStringList branches();
 
     /**
       * Utility function: sets the author name, so it will be displayed when
       * calling git-log or querying a particular commit.
       * @param The string representing the author name.
-      * @return The status of the performed operation.
       */
-    DvcsJob::JobStatus setAuthor(const QString &username);
+    void setAuthor(const QString &username);
 
     /**
       * Utility function: sets the author email, so it will be displayed when
       * calling git-log or querying a particular commit.
       * @param The string representing the author email.
-      * @return The status of the performed operation.
       */
-    DvcsJob::JobStatus setEmail(const QString &email);
+    void setEmail(const QString &email);
 
-    /**
-      * @return The string containing the result of the last action performed.
-      */
-    QString& getResult();
+Q_SIGNALS:
+    void renameBranchFinished();
+    void deleteBranchFinished();
+    void deleteCommitFinished();
+    void moveToCommitFinished();
+    void newBranchFinished();
+    void removeFinished();
+    void switchBranchFinished();
+    void initFinished();
+    void createWorkingCopyFinished();
+    void commitFinished();
+
+private Q_SLOTS:
+    void handleRenameBranch(KJob *job);
+    void handleDeleteBranch(KJob *job);
+    void handleMoveToCommit(KJob *job);
+    void handleNewBranch(KJob *job);
+    void handleRemove(KJob *job);
+    void handleSwitchBranch(KJob *job);
+    void handleInit(KJob *job);
+    void handleCreateWorkingCopy(KJob *job);
+    void handleDeleteCommit(KJob *job);
+    void handleCommit(KJob *job);
 
 private:
-
     /**
       * Private function that initialize the job.
-      * @param The job that must be initialized.
+      * @param The command that must be executed.
       */
-    void initJob(DvcsJob &job);
+    KJob *initJob(const QStringList& command) const;
+    QString execSynchronously(const QStringList& command);
 
-    /**
-      * Private function that start the job.
-      * @param The job that must be started.
-      */
-    void startJob(DvcsJob &job);
+    void handleError(KJob *job);
+    QStringList m_branchesWithAsterisk;
 
-    QString                     m_result;
+    QString removeNewLines(const QString &string);
     KUrl                        *m_lastRepoRoot;
-    DvcsJob::JobStatus          m_jobStatus;
-    KProcess::OutputChannelMode m_commMode;
     volatile bool               m_isRunning;
 };
 
