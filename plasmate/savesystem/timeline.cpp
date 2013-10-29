@@ -311,7 +311,6 @@ void TimeLine::restoreCommit()
     QAction *sender = qobject_cast<QAction*>(this->sender());
     QVariant data = sender->data();
     m_gitRunner->deleteCommit(data.toString());
-    //loadTimeLine(m_workingDir);
 
     connect(m_gitRunner, SIGNAL(deleteCommitFinished()), this, SLOT(reloadTimeLine()));
     emit sourceDirectoryChanged();
@@ -342,7 +341,6 @@ void TimeLine::moveToCommit()
     QAction *sender = qobject_cast<QAction*>(this->sender());
     QVariant data = sender->data();
     m_gitRunner->moveToCommit(data.toString(), newBranchName);
-    //loadTimeLine(m_workingDir);
 
     connect(m_gitRunner, SIGNAL(moveToCommitFinished()), this, SLOT(reloadTimeLine()));
     emit sourceDirectoryChanged();
@@ -357,7 +355,6 @@ void TimeLine::switchBranch()
     }
     QString branch = senderToString();
     m_gitRunner->switchBranch(branch);
-    //loadTimeLine(m_workingDir);
 
     connect(m_gitRunner, SIGNAL(switchBranchFinished()), this, SLOT(reloadTimeLine()));
     emit sourceDirectoryChanged();
@@ -396,8 +393,6 @@ void TimeLine::mergeBranch()
     m_gitRunner->switchBranch(branch);
     m_gitRunner->mergeBranch(branchToMerge, commit);
 
-    //loadTimeLine(m_workingDir);
-
     emit sourceDirectoryChanged();
 }
 
@@ -412,7 +407,6 @@ void TimeLine::deleteBranch()
     const QString branch = senderToString();
     m_gitRunner->deleteBranch(branch);
     connect(m_gitRunner, SIGNAL(deleteBranchFinished()), this, SLOT(reloadTimeLine()));
-    //loadTimeLine(m_workingDir);
 }
 
 void TimeLine::renameBranch()
@@ -433,7 +427,6 @@ void TimeLine::renameBranch()
     m_gitRunner->renameBranch(newBranchName);
 
     connect(m_gitRunner, SIGNAL(renameBranchFinished()), this, SLOT(reloadTimeLine()));
-//    loadTimeLine(m_workingDir);
 }
 
 void TimeLine::createBranch()
@@ -454,7 +447,6 @@ void TimeLine::createBranch()
 
     m_gitRunner->newBranch(newBranchName);
     connect(m_gitRunner, SIGNAL(newBranchFinished()), this, SLOT(reloadTimeLine()));
-    //loadTimeLine(m_workingDir);
 }
 
 bool TimeLine::setWorkingDir(const KUrl &dir)
