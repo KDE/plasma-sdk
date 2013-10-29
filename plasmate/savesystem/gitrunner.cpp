@@ -305,10 +305,10 @@ void GitRunner::mergeBranch(const QString &branchName,
 void GitRunner::deleteBranch(const QString &branch)
 {
     QStringList command;
-    command << "branch -D" + branch;
+    command << "branch" << "-D" <<  branch;
     KJob *job = initJob(command);
 
-    connect(job, SIGNAL(result(Kjob*)), this, SLOT(handleDeleteBranch(Kjob*)));
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(handleDeleteBranch(KJob*)));
     job->start();
 }
 
