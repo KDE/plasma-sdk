@@ -111,7 +111,6 @@ MainWindow::MainWindow(QWidget *parent)
         m_notesWidget(0),
         m_textEditor(0),
         m_kconfigXtEditor(0),
-        m_konsoleWidget(0),
         m_filelist(0),
         m_editPage(0),
         m_imageViewer(0),
@@ -271,7 +270,7 @@ void MainWindow::toggleActions()
         actionCollection()->action("konsole")->setVisible(false);
         //we are hiding the konsole previewer UI.
         if (m_konsoleWidget) {
-            m_konsoleWidget->setVisible(false);
+            m_konsoleWidget.data()->setVisible(false);
         }
     }
 }
@@ -303,7 +302,7 @@ void MainWindow::closeProject()
     }
 
     if (m_konsoleWidget) {
-        m_konsoleWidget->hide();
+        m_konsoleWidget.data()->hide();
     }
 
     if (m_notesWidget) {
@@ -455,7 +454,7 @@ void MainWindow::saveAndRefresh()
 {
     //in every new save clear the konsole.
     if (m_konsoleWidget) {
-        m_konsoleWidget->clearOutput();
+        m_konsoleWidget.data()->clearOutput();
     }
 
     saveEditorData();
@@ -682,10 +681,10 @@ void MainWindow::toggleKonsolePreviewer()
         return;
     }
 
-    if(m_konsoleWidget->isVisible()) {
-        m_konsoleWidget->setVisible(false);
+    if (m_konsoleWidget.data()->isVisible()) {
+        m_konsoleWidget.data()->setVisible(false);
     } else {
-        m_konsoleWidget->setVisible(true);
+        m_konsoleWidget.data()->setVisible(true);
     }
 }
 
@@ -857,9 +856,8 @@ void MainWindow::loadProject(const QString &path)
         refreshNotes();
     }
 
-
     //initialize the konsole previewer
-    m_konsoleWidget = createKonsoleFor(previewerType);
+    m_konsoleWidget.reset(createKonsoleFor(previewerType));
 
     // initialize previewer
     delete m_previewerWidget;
@@ -871,7 +869,7 @@ void MainWindow::loadProject(const QString &path)
         m_previewerWidget->setVisible(showPreview);
         //now do the relative stuff for the konsole
         connect(m_previewerWidget, SIGNAL(showKonsole()), this, SLOT(toggleKonsolePreviewer()));
-        addDockWidget(Qt::BottomDockWidgetArea, m_konsoleWidget);
+        addDockWidget(Qt::BottomDockWidgetArea, m_konsoleWidget.data());
     }
 
     restoreState(state, STATE_VERSION);
