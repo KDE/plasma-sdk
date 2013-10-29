@@ -354,7 +354,7 @@ QStringList GitRunner::branches()
 void GitRunner::newBranch(const QString &newBranch)
 {
     QStringList command;
-    command << "branch " + newBranch;
+    command << "branch" <<  newBranch;
     KJob *job = initJob(command);
     connect(job, SIGNAL(result(KJob*)), this, SLOT(handleNewBranch(KJob*)));
 
