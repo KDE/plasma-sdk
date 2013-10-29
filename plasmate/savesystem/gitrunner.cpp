@@ -206,11 +206,12 @@ void GitRunner::commit(const QString &message)
 void GitRunner::moveToCommit(const QString &sha1hash,
                                            const QString &newBranch)
 {
-    QStringList com;
-    com << "checkout " + sha1hash;
-    execSynchronously(com);
     QStringList command;
-    command << "checkout -b " + newBranch;
+    command << "branch" << newBranch << sha1hash;
+    execSynchronously(command);
+
+    command.clear();
+    command << "checkout" << newBranch;
     KJob *job = initJob(command);
 
     connect(job, SIGNAL(result(KJob*)), this, SLOT(handleMoveToCommit(KJob*)));
@@ -221,7 +222,7 @@ void GitRunner::moveToCommit(const QString &sha1hash,
 void GitRunner::deleteCommit(const QString &sha1hash)
 {
     QStringList command;
-    command << "reset --hard " + sha1hash;
+    command << "reset" << "--hard" << sha1hash;
     KJob *job = initJob(command);
 
     connect(job, SIGNAL(result(KJob*)), this, SLOT(handleDeleteCommit(KJob*)));
@@ -364,7 +365,7 @@ void GitRunner::newBranch(const QString &newBranch)
 void GitRunner::renameBranch(const QString &newBranch)
 {
     QStringList command;
-    command << "branch -m " + newBranch;
+    command << "branch" << "-m" << newBranch;
     KJob *job = initJob(command);
 
     connect(job, SIGNAL(result(KJob*)), this, SLOT(handleRenameBranch(KJob*)));
