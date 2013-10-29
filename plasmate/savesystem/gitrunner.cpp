@@ -122,6 +122,7 @@ bool GitRunner::hasNewChangesToCommit()
     return true;
 }
 
+//TODO the parameter isn't needed
 void GitRunner::init(const KUrl &directory)
 {
     // We need to tell the runner to change dir!
@@ -350,6 +351,7 @@ QStringList GitRunner::branches()
     QStringList list;
 
     foreach (QString branch, m_branchesWithAsterisk) {
+        kDebug() << "@@@@@@@@@@@@@@@@@@" << branch;
         if (branch.startsWith('*', Qt::CaseInsensitive)) {
             branch.remove(0, 2);
         }
@@ -382,14 +384,14 @@ void GitRunner::renameBranch(const QString &newBranch)
 void GitRunner::setAuthor(const QString &username)
 {
     QStringList command;
-    command << "config user.name" + username;
+    command << "config user.name " + username;
     execSynchronously(command);
 }
 
 void GitRunner::setEmail(const QString &email)
 {
     QStringList command;
-    command << "config user.email" + email;
+    command << "config user.email " + email;
     execSynchronously(command);
 }
 
@@ -479,8 +481,11 @@ void GitRunner::handleInit(KJob *job)
 
     if (job->error()) {
         handleError(job);
+    } else {
+        QDir workingDir(m_lastRepoRoot->pathOrUrl());
+        add(workingDir.entryList(QDir::NoDotAndDotDot | QDir::Files | QDir::Dirs));
+        commit(QLatin1String("Initial commit from Plasmate. Add the default files"));
     }
-
     emit initFinished();
 }
 

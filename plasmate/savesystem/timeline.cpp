@@ -55,7 +55,6 @@ TimeLine::TimeLine(QWidget *parent,
 {
     m_gitRunner = new GitRunner();
     initUI(parent, location);
-
     setWorkingDir(dir);
 }
 
@@ -248,7 +247,6 @@ void TimeLine::newSavePoint()
 
         commitMessage = i18n("Initial Commit");
 
-        m_gitRunner->init(m_workingDir);
         // Retrieve Name and Email, and set git global parameters
         Plasma::PackageMetadata metadata(m_workingDir.pathOrUrl() + "metadata.desktop");
         m_gitRunner->setAuthor(metadata.author());
@@ -258,9 +256,16 @@ void TimeLine::newSavePoint()
         m_gitRunner->addIgnoredFileExtension("*.*~");
         m_gitRunner->addIgnoredFileExtension("*.*bak");
         m_gitRunner->addIgnoredFileExtension("NOTES");
+
+        // create the new repo
+        m_gitRunner->init(m_workingDir.pathOrUrl());
+        connect(m_gitRunner, SIGNAL(initFinished()), this, SLOT(reloadTimeLine()));
+
+        // return and wait until the signal gets emitted.We don't want to make
+        // any actions before that
+        return;
     }
 
-    //TODO !!!!!!
     if (!m_gitRunner->hasNewChangesToCommit()) {
         const QString dialog = i18n("<b>No changes have been made in order to create a savepoint.</b>");
         KMessageBox::information(this, dialog);
@@ -390,8 +395,6 @@ void TimeLine::mergeBranch()
     // move to the selected branch and then call merge function !
     m_gitRunner->switchBranch(branch);
     m_gitRunner->mergeBranch(branchToMerge, commit);
-
-    //TODO!!!!!!
 
     //loadTimeLine(m_workingDir);
 
