@@ -129,7 +129,7 @@ void TimeLine::identifyCommits(TableWidget *widget)
         QString toolTipText;
         toolTipText.append(i18n("Author: %1 \n", data["author"]));
         toolTipText.append(i18n("Date: %1 \n\n", data["date"]));
-        toolTipText.append(i18n("Commid ID: %1 \n", data["sha1hash"]));
+        toolTipText.append(i18n("Commit ID: %1 \n", data["sha1hash"]));
         commitItem->setToolTip(toolTipText);
 
         if (data == dataList.last()) {
@@ -347,7 +347,7 @@ void TimeLine::moveToCommit()
 void TimeLine::switchBranch()
 {
     if (m_gitRunner->hasNewChangesToCommit()) {
-        QString text = i18n("You have uncommited changes, you must commit them in order to change a branch");
+        QString text = i18n("You have uncommitted changes, you must commit them in order to change a branch");
         KMessageBox::information(this, text);
         return;
     }
@@ -360,7 +360,7 @@ void TimeLine::switchBranch()
 void TimeLine::mergeBranch()
 {
     if (m_gitRunner->hasNewChangesToCommit()) {
-        QString text = i18n("You have uncommited changes, you must commit them in order to merge a branch");
+        QString text = i18n("You have uncommitted changes, you must commit them in order to merge a branch");
         KMessageBox::information(this, text);
         return;
     }
