@@ -28,6 +28,7 @@ Name[x-test]=xxStudioPreviewerxx
 Name[zh_TW]=StudioPreviewer
 Comment=Containment used to preview plasmoids on Plasma Studio
 Comment[da]=Beholder der bruges til at forhåndsvise plasmoids på Plasma Studio
+Comment[de]=„Containment“ für die Vorschau von Plasmoiden in Plasma Studio
 Comment[el]=Συγκεντρωτική προεπισκόπηση πλασμοειδών στο Plasma Studio
 Comment[es]=Contenedor usado para previsualizar plasmoides en Plasma Studio
 Comment[et]=Konteiner, mis võimaldab plasmoide eelvaadelda Plasma stuudios

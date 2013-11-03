@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Victory Calendar
 Name[da]=Victory-kalender
+Name[de]=Victory-Kalender
 Name[el]=Ημερολόγιο Victory
 Name[es]=Calendario victoriano
 Name[et]=Võidukalender
@@ -27,6 +28,7 @@ Name[x-test]=xxVictory Calendarxx
 Name[zh_TW]=勝利行事曆
 Comment=1) Log your daily accomplishments. 2) ??? 3) Profit!
 Comment[da]=1) Log dine daglige bedrifter. 2) ??? 3) Få profit!
+Comment[de]=1) Protokollieren Sie Ihre täglichen Leistungen. 2) ??? 3) Profit
 Comment[el]=1) Καταγράψτε τα καθημερινά σας επιτεύγματα. 2) ;;; 3) Κέρδος!
 Comment[es]=1) Registre sus logros diarios. 2) ??? 3) Obtenga beneficios
 Comment[et]=1) Pane kirja oma igapäevased saavutused. 2) ??? 3) Kasu!
