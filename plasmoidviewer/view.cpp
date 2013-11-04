@@ -50,8 +50,9 @@ void View::addContainment(const QString &containment)
 
     if (!c) {
         qCritical("Containment doesn't exist");
-        setContainment(c);
+        return;
     }
+    setContainment(c);
 }
 
 void View::addFormFactor(const QString &formFactor)
@@ -77,8 +78,9 @@ void View::addFormFactor(const QString &formFactor)
 
     if (!c) {
         qCritical("Containment doesn't exist!");
-        c->setFormFactor(formFactorType);
+        return;
     }
+    c->setFormFactor(formFactorType);
 }
 
 void View::addLocation(const QString &location)
