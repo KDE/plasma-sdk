@@ -25,7 +25,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_D
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings)
-
 find_package(Qt5Core REQUIRED NO_MODULE)
 
 find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Quick X11Extras Svg Test PrintSupport)
@@ -56,13 +55,13 @@ find_package(KF5 CONFIG REQUIRED COMPONENTS
     KUnitConversion KBookmarks Kross KParts)
 
 find_package(Plasma REQUIRED NO_MODULE)
+find_package(PlasmaQuick REQUIRED NO_MODULE)
 find_package(KDeclarative REQUIRED NO_MODULE)
 find_package(KIO REQUIRED NO_MODULE)
 
 # needed for set_package_properties macro
 find_package(KDE4Support REQUIRED NO_MODULE)
 find_package(KDELibs4 REQUIRED NO_MODULE)
-
 
 find_package(LibAttica NO_MODULE)
 set_package_properties(LibAttica PROPERTIES DESCRIPTION "Support for Get Hot New Stuff related stuff"
@@ -83,6 +82,7 @@ remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FR
 include_directories( ${kdeqt5staging_INCLUDE_DIRS}
                      ${kdeqt5staging_INCLUDE_DIR}
                      ${KDE4_INCLUDES}
+                     KF5::KDeclarative
                      ${KF5_INCLUDE_DIRS}  # since e-c-m 0.0.7
                    )
 
@@ -91,7 +91,7 @@ include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_
 
 
 add_subdirectory(engineexplorer)
-#add_subdirectory(plasmoidviewer)
+add_subdirectory(plasmoidviewer)
 #add_subdirectory(remote-widgets-browser)
 #add_subdirectory(wallpaperviewer)
 #add_subdirectory(plasmate)

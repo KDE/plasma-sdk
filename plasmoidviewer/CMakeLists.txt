@@ -1,17 +1,23 @@
 set(plasmoidviewer_SRCS
-    fullview.cpp
+    #    fullview.cpp
     main.cpp
+    view.cpp
 )
 
-kde4_add_executable(plasmoidviewer ${plasmoidviewer_SRCS})
+add_executable(plasmoidviewer ${plasmoidviewer_SRCS})
 
 target_link_libraries(plasmoidviewer
-    ${KDE4_KDEUI_LIBS}
-    ${KDE4_PLASMA_LIBS}
-    ${KDECLARATIVE_LIBRARIES}
-    ${QT_QTDECLARATIVE_LIBRARY}
+    Qt5::Quick
+    KF5::Plasma
+    KF5::PlasmaQuick
+    KF5::KI18n
 )
 
 install(TARGETS plasmoidviewer ${INSTALL_TARGETS_DEFAULT_ARGS})
 
-kde4_create_manpage(man-plasmoidviewer.1.docbook 1 INSTALL_DESTINATION ${MAN_INSTALL_DIR})
+#FIXME
+#kde4_create_manpage(man-plasmoidviewer.1.docbook 1 INSTALL_DESTINATION ${MAN_INSTALL_DIR})
+
+#qml
+plasma_install_package(qmlpackages/shell org.kde.plasmoidviewershell plasma/shells shell)
+plasma_install_package(qmlpackages/containment org.kde.plasmoidviewercontainment plasma/plasmoids containment)
