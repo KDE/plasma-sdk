@@ -11,7 +11,6 @@ target_link_libraries(plasmoidviewer
     KF5::Plasma
     KF5::PlasmaQuick
     KF5::KI18n
-    KF5::KDE4Attic
 )
 
 install(TARGETS plasmoidviewer ${INSTALL_TARGETS_DEFAULT_ARGS})

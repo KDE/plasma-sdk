@@ -20,13 +20,14 @@ include(FeatureSummary)
 find_package(ECM 0.0.8 REQUIRED NO_MODULE)
 
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings)
 find_package(Qt5Core REQUIRED NO_MODULE)
 
-find_package(Qt5Transitional MODULE)
-find_package(Qt5Quick REQUIRED NO_MODULE)
-find_package(Qt5X11Extras REQUIRED NO_MODULE)
+find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Quick X11Extras Svg Test PrintSupport)
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0)
 
@@ -47,11 +48,11 @@ set (QT_MIN_VERSION "5.2.0")
 
 
 # Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
-find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
+find_package(KF5 CONFIG REQUIRED COMPONENTS
     KIdleTime ItemModels KWidgetsAddons KWindowSystem KCodecs KArchive KCoreAddons Solid ThreadWeaver
     KConfig KAuth KJS KWallet KDBusAddons Sonnet
     KI18n KGuiAddons KService KConfigWidgets ItemViews KNotifications KIconThemes KStyle KCompletion KJobWidgets KTextWidgets XmlGui KCrash
-    KUnitConversion KDE4Attic KBookmarks Kross)
+    KUnitConversion KBookmarks Kross KParts)
 
 find_package(Plasma REQUIRED NO_MODULE)
 find_package(PlasmaQuick REQUIRED NO_MODULE)
@@ -59,8 +60,8 @@ find_package(KDeclarative REQUIRED NO_MODULE)
 find_package(KIO REQUIRED NO_MODULE)
 
 # needed for set_package_properties macro
+find_package(KDE4Support REQUIRED NO_MODULE)
 find_package(KDELibs4 REQUIRED NO_MODULE)
-#find_package(KDE4Support REQUIRED NO_MODULE)
 
 find_package(LibAttica NO_MODULE)
 set_package_properties(LibAttica PROPERTIES DESCRIPTION "Support for Get Hot New Stuff related stuff"

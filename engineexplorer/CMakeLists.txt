@@ -13,8 +13,9 @@ target_link_libraries(plasmaengineexplorer
     KF5::KIconThemes
     KF5::KI18n
     KF5::KService
+    KF5::KDE4Support
+    KF5::KCompletion
     KF5::Plasma
-    KF5::KDE4Attic
 )
 
 install(TARGETS plasmaengineexplorer ${INSTALL_TARGETS_DEFAULT_ARGS})
