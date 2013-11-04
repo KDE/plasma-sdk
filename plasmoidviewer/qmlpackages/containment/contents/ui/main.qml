@@ -33,7 +33,6 @@ Item {
     property var container
 
     Column {
-        id: root2
         spacing:0
         anchors.centerIn: parent
 
@@ -49,14 +48,23 @@ Item {
 
 
         Item {
-            id: appletContainter
+            id: appletContainer
             anchors.horizontalCenter: parent.horizontalCenter
             width: root.width/4
             height:root.height/4
         }
 
-        onImplicitWidthChanged: container.width = root.width/4;
-        onImplicitHeightChanged: container.height = root.height/4;
+        onImplicitWidthChanged: {
+            if (typeof container != 'undefined') {
+                container.width = root.width/4;
+            }
+        }
+
+        onImplicitHeightChanged: {
+            if (typeof container != 'undefined') {
+                container.height = root.height/4;
+            }
+        }
 
         Connections {
             target: plasmoid
@@ -68,14 +76,14 @@ Item {
                     print("Error loading AppletAppearance.qml: " + component.errorString());
                 }
 
-                container = component.createObject(appletContainter)
-                console.log(appletContainter.x)
-                console.log(appletContainter.y)
+                container = component.createObject(appletContainer)
+                console.log(appletContainer.x)
+                console.log(appletContainer.y)
                 applet.parent = container;
                 applet.visible = true;
                 container.applet = applet;
-                container.width = appletContainter.width;
-                container.height = appletContainter.height;
+                container.width = appletContainer.width;
+                container.height = appletContainer.height;
             }
 
             onAppletRemoved: {
