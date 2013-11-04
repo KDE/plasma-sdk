@@ -38,8 +38,15 @@ View::~View()
 
 void View::addApplet(const QString &applet)
 {
+    Plasma::Containment *c = containment();
+
+    if (!c) {
+        qCritical("Containment doesn't exist");
+        return;
+    }
+
     Plasma::Applet *a = containment()->createApplet(applet);
-    if (!a) {
+    if (!a->pluginInfo().isValid()) {
         qCritical("Applet doesn't exist!");
     }
 }
@@ -48,10 +55,11 @@ void View::addContainment(const QString &containment)
 {
     Plasma::Containment *c = corona()->createContainment(containment);
 
-    if (!c) {
+    if (!c->pluginInfo().isValid()) {
         qCritical("Containment doesn't exist");
         return;
     }
+
     setContainment(c);
 }
 
@@ -75,11 +83,11 @@ void View::addFormFactor(const QString &formFactor)
     }
 
     Plasma::Containment *c = containment();
-
     if (!c) {
         qCritical("Containment doesn't exist!");
         return;
     }
+
     c->setFormFactor(formFactorType);
 }
 
@@ -105,6 +113,12 @@ void View::addLocation(const QString &location)
         locationType = Plasma::Types::LeftEdge;
     } else {
         qWarning() << "Location " << l << "doesn't exist. Floating location has been used!!";
+    }
+
+    Plasma::Containment *c = containment();
+    if (!c) {
+        qCritical("Containment doesn't exist!");
+        return;
     }
 
     setLocation(locationType);
