@@ -28,8 +28,7 @@ include(KDECompilerSettings)
 
 find_package(Qt5Core REQUIRED NO_MODULE)
 
-find_package(Qt5Quick REQUIRED NO_MODULE)
-find_package(Qt5X11Extras REQUIRED NO_MODULE)
+find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Quick X11Extras Svg Test PrintSupport)
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0)
 
@@ -54,7 +53,7 @@ find_package(KF5 CONFIG REQUIRED COMPONENTS
     KIdleTime ItemModels KWidgetsAddons KWindowSystem KCodecs KArchive KCoreAddons Solid ThreadWeaver
     KConfig KAuth KJS KWallet KDBusAddons Sonnet
     KI18n KGuiAddons KService KConfigWidgets ItemViews KNotifications KIconThemes KStyle KCompletion KJobWidgets KTextWidgets XmlGui KCrash
-    KUnitConversion KBookmarks Kross)
+    KUnitConversion KBookmarks Kross KParts)
 
 find_package(Plasma REQUIRED NO_MODULE)
 find_package(KDeclarative REQUIRED NO_MODULE)
