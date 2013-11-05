@@ -30,11 +30,53 @@ Rectangle {
 
     property Item containment
 
+    SdkButtons {
+        id: buttons
+        z: +1
+        anchors {
+            fill: backgroundButtons
+            leftMargin: backgroundButtons.margins.left
+            rightMargin: backgroundBUttons.margins.right - 8
+            topMargin: backgroundButtons.margins.top
+            bottomMargin: backgroundButtons.margins.bottom
+        }
+    }
+
+    Background {
+        id: backgroundButtons
+        width: root.width/2
+        height: root.height/6
+        anchors.horizontalCenter: root.horizontalCenter
+    }
+
+    Konsole {
+        id: konsolePreviewer
+        z: +1
+        anchors {
+            fill: backgroundKonsole
+            leftMargin: backgroundKonsole.margins.left
+            rightMargin: backgroundKonsole.margins.right
+            topMargin: backgroundKonsole.margins.top
+            bottomMargin: backgroundKonsole.margins.bottom
+        }
+        width: root.width/2
+        height: root.height/4
+    }
+
+    Background {
+        id: backgroundKonsole
+        width: root.width/2
+        height: root.height/4
+        anchors.horizontalCenter: root.horizontalCenter
+        anchors.bottom: root.bottom
+    }
+
+
     onContainmentChanged: {
         print("New Containment: " + containment)
         //containment.parent = root
         containment.visible = true
-        containment.anchors.fill = root
+        containment.anchors.top = buttons.bottom
     }
 
     Component.onCompleted: {
