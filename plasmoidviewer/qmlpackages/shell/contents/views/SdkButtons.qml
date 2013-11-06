@@ -25,6 +25,7 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
     id: root
+    signal formFactor(int FormFactorType)
 
     RowLayout {
         id: buttonRow
@@ -49,18 +50,23 @@ Item {
             id: formFactorMenu
             PlasmaComponents.MenuItem {
                 text: i18n("Planar")
+                onClicked: formFactor(PlasmaCore.Types.Planar)
             }
             PlasmaComponents.MenuItem {
                 text: i18n("Vertical")
+                onClicked: formFactor(PlasmaCore.Types.Vertical)
             }
             PlasmaComponents.MenuItem {
                 text: i18n("Horizontal")
+                onClicked: formFactor(PlasmaCore.Types.Horizontal)
             }
             PlasmaComponents.MenuItem {
                 text: i18n("Mediacenter")
+                onClicked: formFactor(PlasmaCore.Types.MediaCenter)
             }
             PlasmaComponents.MenuItem {
                 text: i18n("Application")
+                onClicked: formFactor(PlasmaCore.Types.Application)
             }
         }
 

@@ -91,6 +91,30 @@ void View::addFormFactor(const QString &formFactor)
     c->setFormFactor(formFactorType);
 }
 
+void View::changeFormFactor(int formFactor)
+{
+    QString formFactorType = "planar";
+    switch (formFactor) {
+        case Plasma::Types::Planar:
+            formFactorType = "planar";
+            break;
+        case Plasma::Types::Vertical:
+            formFactorType = "vertical";
+            break;
+        case Plasma::Types::Horizontal:
+            formFactorType = "horizontal";
+            break;
+        case Plasma::Types::MediaCenter:
+            formFactorType = "mediacenter";
+            break;
+        case Plasma::Types::Application:
+            formFactorType = "application";
+            break;
+    }
+
+    addFormFactor(formFactorType);
+}
+
 void View::addLocation(const QString &location)
 {
     Plasma::Types::Location locationType = Plasma::Types::Floating;

@@ -36,9 +36,13 @@ Rectangle {
         anchors {
             fill: backgroundButtons
             leftMargin: backgroundButtons.margins.left
-            rightMargin: backgroundBUttons.margins.right - 8
+            rightMargin: backgroundButtons.margins.right - 8
             topMargin: backgroundButtons.margins.top
             bottomMargin: backgroundButtons.margins.bottom
+        }
+
+        onFormFactor: {
+            desktop.changeFormFactor(FormFactorType)
         }
     }
 

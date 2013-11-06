@@ -33,6 +33,7 @@ public:
     void addLocation(const QString &location = "floating");
     ~View();
 
+    Q_INVOKABLE void changeFormFactor(int formFactor);
     static Plasma::Corona *createCorona();
 };
 
