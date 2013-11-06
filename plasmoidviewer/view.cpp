@@ -73,11 +73,11 @@ void View::addFormFactor(const QString &formFactor)
     } else if (ff == QStringLiteral("vertical")) {
         formFactorType = Plasma::Types::Vertical;
     } else if (ff == QStringLiteral("horizontal")) {
-        formFactorType = Plasma::Types::Vertical;
+        formFactorType = Plasma::Types::Horizontal;
     } else if (ff == QStringLiteral("mediacenter")) {
-        formFactorType = Plasma::Types::Vertical;
+        formFactorType = Plasma::Types::MediaCenter;
     } else if (ff == QStringLiteral("application")) {
-        formFactorType = Plasma::Types::Vertical;
+        formFactorType = Plasma::Types::Application;
     } else {
         qWarning() << "FormFactor " << ff << "doesn't exist. Planar formFactor has been used!!";
     }
