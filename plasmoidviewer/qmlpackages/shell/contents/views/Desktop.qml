@@ -44,6 +44,9 @@ Rectangle {
         onFormFactor: {
             desktop.changeFormFactor(FormFactorType)
         }
+        onLocation: {
+            desktop.changeLocation(LocationType)
+        }
     }
 
     Background {

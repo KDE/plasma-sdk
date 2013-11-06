@@ -26,6 +26,7 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 Item {
     id: root
     signal formFactor(int FormFactorType)
+    signal location(int LocationType)
 
     RowLayout {
         id: buttonRow
@@ -80,24 +81,31 @@ Item {
             id: locationMenu
             PlasmaComponents.MenuItem {
                 text: i18n("Floating")
+                onClicked: location(PlasmaCore.Types.Floating)
             }
             PlasmaComponents.MenuItem {
                 text: i18n("Desktop")
+                onClicked: location(PlasmaCore.Types.Desktop)
             }
             PlasmaComponents.MenuItem {
                 text: i18n("Fullscreen")
+                onClicked: location(PlasmaCore.Types.FullScreen)
             }
             PlasmaComponents.MenuItem {
                 text: i18n("Topedge")
+                onClicked: location(PlasmaCore.Types.TopEdge)
             }
             PlasmaComponents.MenuItem {
-                text: i18n("Bottomedget")
+                text: i18n("Bottomedge")
+                onClicked: location(PlasmaCore.Types.Bottomedge)
             }
             PlasmaComponents.MenuItem {
-                text: i18n("Leftedget")
+                text: i18n("Leftedge")
+                onClicked: location(PlasmaCore.Types.LeftEdge)
             }
             PlasmaComponents.MenuItem {
                 text: i18n("Rightedget")
+                onClicked: location(PlasmaCore.Types.RightEdge)
             }
         }
     }

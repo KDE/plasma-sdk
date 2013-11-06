@@ -34,6 +34,8 @@ public:
     ~View();
 
     Q_INVOKABLE void changeFormFactor(int formFactor);
+    Q_INVOKABLE void changeLocation(int location);
+
     static Plasma::Corona *createCorona();
 };
 

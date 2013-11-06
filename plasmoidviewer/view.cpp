@@ -148,6 +148,36 @@ void View::addLocation(const QString &location)
     setLocation(locationType);
 }
 
+void View::changeLocation(int location)
+{
+    QString locationType = "floating";
+    switch (location) {
+        case Plasma::Types::Floating:
+            locationType = "floating";
+            break;
+        case Plasma::Types::Desktop:
+            locationType = "desktop";
+            break;
+        case Plasma::Types::FullScreen:
+            locationType = "fullscreen";
+            break;
+        case Plasma::Types::TopEdge:
+            locationType = "topedge";
+            break;
+        case Plasma::Types::BottomEdge:
+            locationType = "bottomedge";
+            break;
+        case Plasma::Types::RightEdge:
+            locationType = "rightedge";
+            break;
+        case Plasma::Types::LeftEdge:
+            locationType = "leftedge";
+            break;
+    }
+
+    addLocation(locationType);
+}
+
 Plasma::Corona *View::createCorona()
 {
     Plasma::Package package = Plasma::PluginLoader::self()->loadPackage("Plasma/Shell");
