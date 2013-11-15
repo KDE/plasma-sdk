@@ -51,8 +51,8 @@ Rectangle {
 
     Background {
         id: backgroundButtons
-        width: root.width/2
-        height: root.height/6
+        width: buttons.backgroundWidth
+        height: buttons.backgroundHeight
         anchors.horizontalCenter: root.horizontalCenter
     }
 
