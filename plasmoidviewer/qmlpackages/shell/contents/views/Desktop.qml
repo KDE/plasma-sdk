@@ -61,19 +61,19 @@ Rectangle {
         z: +1
         anchors {
             fill: backgroundKonsole
-            leftMargin: backgroundKonsole.margins.left
-            rightMargin: backgroundKonsole.margins.right
+            leftMargin: backgroundKonsole.margins.left + 8
+            rightMargin: backgroundKonsole.margins.right + 8
             topMargin: backgroundKonsole.margins.top
-            bottomMargin: backgroundKonsole.margins.bottom
+            bottomMargin: backgroundKonsole.margins.bottom + 8
         }
-        width: root.width/2
-        height: root.height/4
+        width: backgroundKonsole.width/2
+        height: backgroundKonsole.height/4
     }
 
     Background {
         id: backgroundKonsole
         width: root.width/2
-        height: root.height/4
+        height: root.height/3
         anchors.horizontalCenter: root.horizontalCenter
         anchors.bottom: root.bottom
     }

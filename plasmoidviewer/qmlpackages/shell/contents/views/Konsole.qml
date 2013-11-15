@@ -31,7 +31,6 @@ Item {
         spacing: 0
         anchors{
             top: parent.top
-            bottom: outputArea.top
         }
 
         PlasmaComponents.Button {
@@ -47,8 +46,10 @@ Item {
 
     PlasmaComponents.TextArea {
         id: outputArea
-        width: root.width
-        height: root.height/2
+        width: parent.width
+        height: parent.height/2
         anchors.bottom: parent.bottom
+        anchors.top: buttonRow.bottom
+        anchors.topMargin: 10
     }
 }
