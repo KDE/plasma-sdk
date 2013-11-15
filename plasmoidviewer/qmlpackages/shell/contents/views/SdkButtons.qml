@@ -27,11 +27,14 @@ Item {
     id: root
     signal formFactor(int FormFactorType)
     signal location(int LocationType)
+    property int  backgroundHeight: refreshButton.implicitHeight + konsoleButton.implicitHeight +
+                                    formFactorMenuButton.implicitHeight + locationMenuButton.implicitHeight
+    property int backgroundWidth: (refreshButton.implicitWidth + konsoleButton.implicitWidth +
+                                  formFactorMenuButton.implicitWidth + locationMenuButton.implicitWidth) * 2
 
     RowLayout {
         id: buttonRow
         anchors.fill: parent
-        spacing: 0
 
         PlasmaComponents.Button {
             id: refreshButton
@@ -42,13 +45,14 @@ Item {
             iconSource: "utilities-terminal"
         }
         PlasmaComponents.Button {
-            id: contextMenuButton
+            id: formFactorMenuButton
             text: i18n("FormFactors")
             onClicked: formFactorMenu.open()
         }
 
         PlasmaComponents.ContextMenu {
             id: formFactorMenu
+            visualParent: formFactorMenuButton
             PlasmaComponents.MenuItem {
                 text: i18n("Planar")
                 onClicked: formFactor(PlasmaCore.Types.Planar)
@@ -79,6 +83,7 @@ Item {
 
         PlasmaComponents.ContextMenu {
             id: locationMenu
+            visualParent: locationMenuButton
             PlasmaComponents.MenuItem {
                 text: i18n("Floating")
                 onClicked: location(PlasmaCore.Types.Floating)
