@@ -37,6 +37,8 @@ public:
     Q_INVOKABLE void changeLocation(int location);
 
     static Plasma::Corona *createCorona();
+private:
+    QString m_lastAppletName;
 };
 
 #endif // PLASMAQUICKVIEW_H

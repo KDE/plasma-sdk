@@ -39,6 +39,15 @@ Item {
         PlasmaComponents.Button {
             id: refreshButton
             iconSource: "view-refresh"
+            onClicked: {
+                var applet = containment.applets[0];
+                if (applet) {
+                    var action = applet.action('remove');
+                    if (action) {
+                        action.trigger();
+                    }
+                }
+            }
         }
         PlasmaComponents.Button {
             id: konsoleButton
