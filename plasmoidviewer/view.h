@@ -35,10 +35,11 @@ public:
 
     Q_INVOKABLE void changeFormFactor(int formFactor);
     Q_INVOKABLE void changeLocation(int location);
+    Q_INVOKABLE QString takeScreenShot();
 
     static Plasma::Corona *createCorona();
 private:
     QString m_lastAppletName;
 };
 
-#endif // PLASMAQUICKVIEW_H
+#endif // VIEW_H

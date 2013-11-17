@@ -17,7 +17,10 @@
  */
 
 #include <QQmlEngine>
+#include <QQuickItem>
 #include <QQmlContext>
+#include <QDBusInterface>
+#include <QDBusReply>
 #include <QDebug>
 
 #include <Plasma/Package>
@@ -197,5 +200,19 @@ Plasma::Corona *View::createCorona()
     return cor;
 }
 
+QString View::takeScreenShot()
+{
+    QDBusInterface interface(QStringLiteral("org.kde.kwin"), QStringLiteral("/Screenshot"),
+                             QStringLiteral("org.kde.kwin.Screenshot"));
+
+    QDBusReply<QString> reply = interface.call(QStringLiteral("screenshotArea"), x(), y(), width(), height());
+
+    if (!reply.isValid()) {
+        qDebug() << "The screenshot has failed, the reply is invalid with error" << reply.error().message();
+        return QString();
+    }
+
+    return reply.value();
+}
 
 #include "moc_view.cpp"

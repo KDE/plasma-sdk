@@ -42,10 +42,13 @@ Rectangle {
         }
 
         onFormFactor: {
-            desktop.changeFormFactor(FormFactorType)
+            desktop.changeFormFactor(FormFactorType);
         }
         onLocation: {
-            desktop.changeLocation(LocationType)
+            desktop.changeLocation(LocationType);
+        }
+        onRequestScreenshot: {
+            desktop.takeScreenShot();
         }
     }
 

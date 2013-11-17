@@ -27,6 +27,7 @@ Item {
     id: root
     signal formFactor(int FormFactorType)
     signal location(int LocationType)
+    signal requestScreenshot()
     property int  backgroundHeight: refreshButton.implicitHeight + konsoleButton.implicitHeight +
                                     formFactorMenuButton.implicitHeight + locationMenuButton.implicitHeight
     property int backgroundWidth: (refreshButton.implicitWidth + konsoleButton.implicitWidth +
@@ -88,6 +89,12 @@ Item {
             id: locationMenuButton
             text: i18n("Location")
             onClicked: locationMenu.open()
+        }
+
+        PlasmaComponents.Button {
+            id: screenshotButton
+            iconSource: "ksnapshot"
+            onClicked: requestScreenshot()
         }
 
         PlasmaComponents.ContextMenu {
