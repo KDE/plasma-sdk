@@ -86,7 +86,7 @@ Rectangle {
         print("New Containment: " + containment)
         //containment.parent = root
         containment.visible = true
-        containment.anchors.top = buttons.bottom
+        containment.anchors.fill = root
     }
 
     Component.onCompleted: {
