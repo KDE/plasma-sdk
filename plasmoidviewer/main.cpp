@@ -27,6 +27,7 @@
 #include <QApplication>
 #include <QtQml/QQmlDebuggingEnabler>
 
+#include <QPixmapCache>
 #include <KAboutData>
 #include <KLocalizedString>
 
@@ -68,7 +69,9 @@ int main(int argc, char **argv)
     parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("s") << QStringLiteral("size"),
                 i18n("Set the x position of the plasmoidviewer on the plasma desktop"),
                 QStringLiteral("widthXheight")));
-
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("p") << QStringLiteral("pixmapcache"),
+                i18n("The size in kB to set the pixmap cache to"),
+                QStringLiteral("size")));
 
     parser.addHelpOption();
     parser.addVersionOption();
@@ -80,6 +83,7 @@ int main(int argc, char **argv)
     v->addFormFactor(parser.value("formfactor"));
     v->addApplet(parser.value("applet"));
     v->addLocation(parser.value("location"));
+
     if (parser.isSet("size")) {
         QStringList realSize = parser.value("size").split(QChar('x'));
         int realWidth = realSize.at(0).toInt();
@@ -89,11 +93,17 @@ int main(int argc, char **argv)
             v->setHeight(realHeight);
         }
     }
+
     if (parser.isSet("xPosition")) {
         v->setX(parser.value("xPosition").toInt());
     }
+
     if (parser.isSet("yPosition")) {
         v->setY(parser.value("yPosition").toInt());
+    }
+
+    if (parser.isSet("pixmapcache")) {
+        QPixmapCache::setCacheLimit(parser.value("pixmapcache").toInt());
     }
 
     v->show();
