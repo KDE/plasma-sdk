@@ -59,6 +59,17 @@ int main(int argc, char **argv)
                 i18n("The location constraint to start the Containment with (floating, desktop, fullscreen, top, bottom, left, right)"),
                 QStringLiteral("location"), QStringLiteral("floating")));
 
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("x") << QStringLiteral("xPosition"),
+                i18n("Set the x position of the plasmoidviewer on the plasma desktop"),
+                QStringLiteral("xPosition")));
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("y") << QStringLiteral("yPosition"),
+                i18n("Set the y position of the plasmoidviewer on the plasma desktop"),
+                QStringLiteral("yPosition")));
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("s") << QStringLiteral("size"),
+                i18n("Set the x position of the plasmoidviewer on the plasma desktop"),
+                QStringLiteral("widthXheight")));
+
+
     parser.addHelpOption();
     parser.addVersionOption();
     parser.process(app);
@@ -69,6 +80,21 @@ int main(int argc, char **argv)
     v->addFormFactor(parser.value("formfactor"));
     v->addApplet(parser.value("applet"));
     v->addLocation(parser.value("location"));
+    if (parser.isSet("size")) {
+        QStringList realSize = parser.value("size").split(QChar('x'));
+        int realWidth = realSize.at(0).toInt();
+        int realHeight = realSize.at(1).toInt();
+        if (realWidth != 0 && realHeight != 0) {
+            v->setWidth(realWidth);
+            v->setHeight(realHeight);
+        }
+    }
+    if (parser.isSet("xPosition")) {
+        v->setX(parser.value("xPosition").toInt());
+    }
+    if (parser.isSet("yPosition")) {
+        v->setY(parser.value("yPosition").toInt());
+    }
 
     v->show();
 
