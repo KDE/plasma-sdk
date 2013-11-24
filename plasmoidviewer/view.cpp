@@ -16,12 +16,15 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include <QFileDialog>
 #include <QQmlEngine>
 #include <QQuickItem>
 #include <QQmlContext>
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QDebug>
+
+#include <KLocalizedString>
 
 #include <Plasma/Package>
 #include <Plasma/PluginLoader>
@@ -200,19 +203,38 @@ Plasma::Corona *View::createCorona()
     return cor;
 }
 
-QString View::takeScreenShot()
+void View::takeScreenShot()
 {
     QDBusInterface interface(QStringLiteral("org.kde.kwin"), QStringLiteral("/Screenshot"),
                              QStringLiteral("org.kde.kwin.Screenshot"));
 
-    QDBusReply<QString> reply = interface.call(QStringLiteral("screenshotArea"), x(), y(), width(), height());
+    QDBusPendingCall async = interface.asyncCall(QStringLiteral("screenshotArea"), x(), y(),
+                                                 width(), height());
 
-    if (!reply.isValid()) {
-        qDebug() << "The screenshot has failed, the reply is invalid with error" << reply.error().message();
-        return QString();
-    }
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
 
-    return reply.value();
+    connect(watcher,&QDBusPendingCallWatcher::finished, [](QDBusPendingCallWatcher *call) {
+        QDBusPendingReply<QString> reply = *call;
+        call->deleteLater();
+
+        if (!reply.isValid()) {
+            qDebug() << "The screenshot has failed, the reply is invalid with error" << reply.error().message();
+            return;
+        }
+
+        QString dest = QFileDialog::getSaveFileName(0,i18n("Save Screenshot"),
+                                                    QDir::homePath(), QStringLiteral("Images (.*png)"));
+
+        if (dest.isEmpty()) {
+            return;
+        }
+
+        if (!dest.endsWith(QStringLiteral(".png"))) {
+            dest.append(QStringLiteral(".png"));
+        }
+
+        QFile f(reply.value());
+        f.rename(dest);
+    });
 }
-
 #include "moc_view.cpp"

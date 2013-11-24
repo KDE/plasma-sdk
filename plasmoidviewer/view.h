@@ -35,7 +35,7 @@ public:
 
     Q_INVOKABLE void changeFormFactor(int formFactor);
     Q_INVOKABLE void changeLocation(int location);
-    Q_INVOKABLE QString takeScreenShot();
+    Q_INVOKABLE void takeScreenShot();
 
     static Plasma::Corona *createCorona();
 private:
