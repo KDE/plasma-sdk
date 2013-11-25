@@ -34,6 +34,7 @@
 View::View(Plasma::Corona *cor, QWindow *parent)
     : PlasmaQuick::View(cor, parent)
 {
+    m_konsoleVisible = konsoleVisible;
     engine()->rootContext()->setContextProperty("desktop", this);
     setSource(QUrl::fromLocalFile(cor->package().filePath("views", "Desktop.qml")));
 }
@@ -160,6 +161,11 @@ void View::addLocation(const QString &location)
     }
 
     setLocation(locationType);
+}
+
+bool View::konsoleVisible()
+{
+    return m_konsoleVisible;
 }
 
 void View::changeLocation(int location)

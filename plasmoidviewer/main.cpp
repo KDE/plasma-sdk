@@ -77,7 +77,7 @@ int main(int argc, char **argv)
     parser.addVersionOption();
     parser.process(app);
 
-    View *v = new View(View::createCorona());
+    View *v = new View(View::createCorona(), false);
 
     v->addContainment(parser.value("containment"));
     v->addFormFactor(parser.value("formfactor"));

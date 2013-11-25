@@ -62,6 +62,7 @@ Rectangle {
     Konsole {
         id: konsolePreviewer
         z: +1
+        visible: desktop.konsoleVisible
         anchors {
             fill: backgroundKonsole
             leftMargin: backgroundKonsole.margins.left + 8
@@ -75,6 +76,7 @@ Rectangle {
 
     Background {
         id: backgroundKonsole
+        visible: konsolePreviewer.visible
         width: root.width/2
         height: root.height/3
         anchors.horizontalCenter: root.horizontalCenter

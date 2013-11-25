@@ -24,13 +24,15 @@
 class View : public PlasmaQuick::View
 {
     Q_OBJECT
+    Q_PROPERTY(bool konsoleVisible READ konsoleVisible CONSTANT);
 
 public:
-    View(Plasma::Corona *corona, QWindow *parent = 0);
+    View(Plasma::Corona *corona, bool konsoleVisible, QWindow *parent = 0);
     void addApplet(const QString &applet);
     void addContainment(const QString &containment);
     void addFormFactor(const QString &formFactor = "planar");
     void addLocation(const QString &location = "floating");
+    bool konsoleVisible();
     ~View();
 
     Q_INVOKABLE void changeFormFactor(int formFactor);
@@ -40,6 +42,7 @@ public:
     static Plasma::Corona *createCorona();
 private:
     QString m_lastAppletName;
+    bool m_konsoleVisible;
 };
 
 #endif // VIEW_H
