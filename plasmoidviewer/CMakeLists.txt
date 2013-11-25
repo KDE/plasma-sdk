@@ -1,5 +1,4 @@
 set(plasmoidviewer_SRCS
-    #    fullview.cpp
     main.cpp
     view.cpp
 )
@@ -20,4 +19,3 @@ install(TARGETS plasmoidviewer ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 #qml
 plasma_install_package(qmlpackages/shell org.kde.plasmoidviewershell plasma/shells shell)
-plasma_install_package(qmlpackages/containment org.kde.plasmoidviewercontainment plasma/plasmoids containment)
