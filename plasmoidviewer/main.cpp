@@ -36,6 +36,8 @@
 
 #include "view.h"
 
+#include <Plasma/Theme>
+
 static const char version[] = "2.0";
 
 int main(int argc, char **argv)
@@ -72,10 +74,20 @@ int main(int argc, char **argv)
     parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("p") << QStringLiteral("pixmapcache"),
                 i18n("The size in kB to set the pixmap cache to"),
                 QStringLiteral("size")));
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("t") << QStringLiteral("theme"),
+                i18n("The name of the theme which the shell will use"),
+                QStringLiteral("themeName")));
+
 
     parser.addHelpOption();
     parser.addVersionOption();
     parser.process(app);
+
+    Plasma::Theme theme;
+    if (parser.isSet("theme")) {
+        theme.setThemeName(parser.value("theme"));
+        theme.setUseGlobalSettings(false);
+    }
 
     View *v = new View(View::createCorona(), false);
 

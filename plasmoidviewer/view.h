@@ -28,12 +28,13 @@ class View : public PlasmaQuick::View
 
 public:
     View(Plasma::Corona *corona, bool konsoleVisible, QWindow *parent = 0);
+    ~View();
+
     void addApplet(const QString &applet);
     void addContainment(const QString &containment);
     void addFormFactor(const QString &formFactor = "planar");
     void addLocation(const QString &location = "floating");
     bool konsoleVisible();
-    ~View();
 
     Q_INVOKABLE void changeFormFactor(int formFactor);
     Q_INVOKABLE void changeLocation(int location);
