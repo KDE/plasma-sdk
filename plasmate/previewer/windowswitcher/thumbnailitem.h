@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef THUMBNAILITEM_H
 #define THUMBNAILITEM_H
 
-#include <QtDeclarative/QDeclarativeItem>
+#include <QDeclarativeItem>
 
 class ThumbnailItem : public QDeclarativeItem
 {

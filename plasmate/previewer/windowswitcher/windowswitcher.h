@@ -20,9 +20,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef WINDOWSWITCHER
 #define WINDOWSWITCHER
 
-#include <QtCore/QAbstractListModel>
-#include <QtDeclarative/QDeclarativeView>
-#include <QtDeclarative/QDeclarativeImageProvider>
+#include <QAbstractListModel>
+#include <QDeclarativeView>
+#include <QDeclarativeImageProvider>
 
 class WindowSwitcher : public QDeclarativeView
 {

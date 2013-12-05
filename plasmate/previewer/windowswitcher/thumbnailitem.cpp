@@ -20,12 +20,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "thumbnailitem.h"
 // Qt
-#include <QtDeclarative/QDeclarativeContext>
-#include <QtDeclarative/QDeclarativeEngine>
-#include <QtDeclarative/QDeclarativeView>
+#include <QDeclarativeContext>
+#include <QDeclarativeEngine>
+#include <QDeclarativeView>
 // KDE
-#include <KDE/KDebug>
-#include <KDE/KStandardDirs>
+#include <KDebug>
+#include <KStandardDirs>
 
 ThumbnailItem::ThumbnailItem(QDeclarativeItem* parent)
     : QDeclarativeItem(parent)
