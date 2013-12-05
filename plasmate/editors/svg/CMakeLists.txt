@@ -1,7 +1,7 @@
 project( plasmate-svg-editor )
 
-find_package(KDE4 REQUIRED)
-include(KDE4Defaults)
+#find_package(KDE4 REQUIRED)
+#include(KDE4Defaults)
 
 set(svg_viewer_SRCS
     svgviewer.cpp)
@@ -24,5 +24,5 @@ set( testsvg_SRCS tests/test_svg.cpp
 #   svg.ui
 #)
 
-add_executable( testsvg TEST ${testsvg_SRCS})
+add_executable( testsvg ${testsvg_SRCS})
 target_link_libraries( testsvg ${KDE4_KDEUI_LIBS} KF5::Plasma )

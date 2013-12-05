@@ -1,7 +1,7 @@
 project( plasmate-metadata-editor )
 
-find_package(KDE4 REQUIRED)
-include(KDE4Defaults)
+#find_package(KDE4 REQUIRED)
+#include(KDE4Defaults)
 
 set(metadata_editor_SRCS
     metadataeditor.cpp)
@@ -24,5 +24,5 @@ kde4_add_ui_files (testmetadata_SRCS
    metadata.ui
 )
 
-add_executable( testmetadata TEST ${testmetadata_SRCS})
-target_link_libraries( testmetadata KF5::KIOCore KF5::KIOWidgets KF5::Plasma )
+add_executable( testmetadata ${testmetadata_SRCS})
+target_link_libraries( testmetadata KF5::KIOCore KF5::KIOWidgets KF5::Plasma KF5::KDE4Support )

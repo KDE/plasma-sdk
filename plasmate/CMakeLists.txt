@@ -98,18 +98,24 @@ add_subdirectory( icons )
 
 add_executable(plasmate ${PlasMate_SRC})
 target_link_libraries(plasmate
-                      ${KDE4_KDEUI_LIBS}
                       KF5::KTextEditor
-                      ${KDE4_KPARTS_LIBS}
-		      #${KDE4_KIO_LIBRARY}
                       KF5::Plasma
                       KF5::KNewStuff
-                      ${QT_QTWEBKIT_LIBRARY}
                       Qt5::Xml
-                      ${LIBATTICA_LIBRARY_DIRS}
                       #${QGPGME_LIBRARIES}
-                      ${QT_QTDECLARATIVE_LIBRARIES}
-		      KF5::KDeclarative
+                      KF5::KDeclarative
+                      Qt5::Quick
+                      KF5::PlasmaQuick
+                      KF5::Attica
+                      Qt5::Webkit
+                      KF5::KIo
+                      KF5::ItemViews
+                      KF5::KConfigCore
+                      KF5::KIconThemes
+                      KF5::KI18n
+                      KF5::KIOWidgets
+                      KF5::KService
+                      KF5::KDE4Support
                       #${KDEPIMLIBS_KPIMUTILS_LIBS}
 )
 
@@ -162,10 +168,9 @@ set (KWin-WindowSwitcherPreviewer_SRC
 
 add_executable(kwin-windowswitcherpreviewer ${KWin-WindowSwitcherPreviewer_SRC})
 target_link_libraries(kwin-windowswitcherpreviewer
-                      ${KDE4_KDEUI_LIBS}
-                      ${KDE4_KIO_LIBRARY}
-                      ${QT_QTDECLARATIVE_LIBRARIES}
-                      ${KDECLARATIVE_LIBRARIES}
+                      KF5::KDeclarative
+                      Qt5::Quick
+                      Qt5::KIO
 )
 
 install(TARGETS kwin-windowswitcherpreviewer ${INSTALL_TARGETS_DEFAULT_ARGS})
@@ -192,4 +197,4 @@ target_link_libraries(plasmakconfigxteditor
 
 install(TARGETS plasmakconfigxteditor ${INSTALL_TARGETS_DEFAULT_ARGS})
 
-macro_display_feature_log()
+feature_summary(WHAT ALL   FATAL_ON_MISSING_REQUIRED_PACKAGES)
