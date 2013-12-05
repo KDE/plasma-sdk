@@ -12,14 +12,16 @@ set_package_properties(LibAttica PROPERTIES DESCRIPTION "Support for Get Hot New
 #macro_log_feature(LIBATTICA_FOUND "libattica" "A library to access Open Collaboration Service providers" "http://websvn.kde.org/trunk/kdesupport/attica/" TRUE "${LIBATTICA_MIN_VERSION}" "Required uploading and downloading plasmoids using Get Hot New Stuff.")
 
 # No need to find(Qt4), since QT4_FOUND it's already set by finding kde4
-macro_log_feature(QT_QTWEBKIT_FOUND "QtWebKit" "Opensource web browser engine" "http://trac.webkit.org/wiki/QtWebKit" TRUE "" "Needed to display the online API and documentation.")
+add_feature_info(QT_QTWEBKIT_FOUND "QtWebKit" "Opensource web browser engine" "http://trac.webkit.org/wiki/QtWebKit" TRUE "" "Needed to display the online API and documentation.")
 
-find_package(QGpgme REQUIRED) # Maybe check for GPGME_PTHREAD_FOUND ?
-find_package(KdepimLibs REQUIRED)
+#TODO this dependency is inside from the KdepimLibs which has not
+#been ported yet. So we are disabling it.
+#find_package(QGpgme REQUIRED) # Maybe check for GPGME_PTHREAD_FOUND ?
+#find_package(KdepimLibs REQUIRED)
 
 # Find optional executables
 find_program(GIT_EXECUTABLE_FOUND git)
-macro_log_feature(GIT_EXECUTABLE_FOUND "Git" "Distributed Revision Control System" "http://git-scm.com/" FALSE "" "Runtime dependency needed to use the TimeLine feature.")
+add_feature_info(GIT_EXECUTABLE_FOUND "Git" "Distributed Revision Control System" "http://git-scm.com/" FALSE "" "Runtime dependency needed to use the TimeLine feature.")
 
 string(TOLOWER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE_TOLOWER)
 if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
@@ -58,8 +60,8 @@ set (PlasMate_SRC
     previewer/windowswitcher/thumbnailitem.cpp
     previewer/windowswitcher/tabboxpreviewer.cpp
     previewer/previewer.cpp
-    publisher/signingwidget.cpp
-    publisher/signingdialog.cpp
+    # publisher/signingwidget.cpp
+    #publisher/signingdialog.cpp
     publisher/publisher.cpp
     publisher/remoteinstaller/remoteinstaller.cpp
     publisher/remoteinstaller/remoteinstallerdialog.cpp
@@ -85,8 +87,8 @@ kde4_add_ui_files (PlasMate_SRC
 )
 
 include_directories(${QT_QTWEBKIT_INCLUDE_DIR}
-                    ${QGPGME_INCLUDE_DIR}
-                    ${GPGME_INCLUDES}
+                    #${QGPGME_INCLUDE_DIR}
+                    #${GPGME_INCLUDES}
 )
 
 add_subdirectory( editors )
@@ -105,10 +107,10 @@ target_link_libraries(plasmate
                       ${QT_QTWEBKIT_LIBRARY}
                       ${QT_QTXML_LIBRARY}
                       ${LIBATTICA_LIBRARY_DIRS}
-                      ${QGPGME_LIBRARIES}
+                      #${QGPGME_LIBRARIES}
                       ${QT_QTDECLARATIVE_LIBRARIES}
 		      KF5::KDeclarative
-                      ${KDEPIMLIBS_KPIMUTILS_LIBS}
+                      #${KDEPIMLIBS_KPIMUTILS_LIBS}
 )
 
 if (DEBUG_MODEL)
