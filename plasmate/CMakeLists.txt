@@ -96,16 +96,16 @@ add_subdirectory( previewer/plasmoid )
 add_subdirectory( templates )
 add_subdirectory( icons )
 
-kde4_add_executable(plasmate ${PlasMate_SRC})
+add_executable(plasmate ${PlasMate_SRC})
 target_link_libraries(plasmate
                       ${KDE4_KDEUI_LIBS}
-                      ${KDE4_KTEXTEDITOR_LIBS}
+                      KF5::KTextEditor
                       ${KDE4_KPARTS_LIBS}
 		      #${KDE4_KIO_LIBRARY}
                       KF5::Plasma
-                      ${KDE4_KNEWSTUFF3_LIBRARY}
+                      KF5::KNewStuff
                       ${QT_QTWEBKIT_LIBRARY}
-                      ${QT_QTXML_LIBRARY}
+                      Qt5::Xml
                       ${LIBATTICA_LIBRARY_DIRS}
                       #${QGPGME_LIBRARIES}
                       ${QT_QTDECLARATIVE_LIBRARIES}
@@ -114,7 +114,7 @@ target_link_libraries(plasmate
 )
 
 if (DEBUG_MODEL)
-   target_link_libraries(plasmate ${QT_QTTEST_LIBRARY})
+   target_link_libraries(plasmate Qt5::Test)
 endif (DEBUG_MODEL)
 
 install(TARGETS plasmate ${INSTALL_TARGETS_DEFAULT_ARGS})
@@ -142,7 +142,7 @@ kde4_add_ui_files (PlasmaRemoteInstaller_SRC
    publisher/remoteinstaller/remoteinstaller.ui
 )
 
-kde4_add_executable(plasmaremoteinstaller ${PlasmaRemoteInstaller_SRC})
+add_executable(plasmaremoteinstaller ${PlasmaRemoteInstaller_SRC})
 target_link_libraries(plasmaremoteinstaller
                       ${KDE4_KDEUI_LIBS}
                       ${KDE4_KIO_LIBRARY}
@@ -160,7 +160,7 @@ set (KWin-WindowSwitcherPreviewer_SRC
     previewer/windowswitcher/standalone/windowswitcherpreviewer.cpp
 )
 
-kde4_add_executable(kwin-windowswitcherpreviewer ${KWin-WindowSwitcherPreviewer_SRC})
+add_executable(kwin-windowswitcherpreviewer ${KWin-WindowSwitcherPreviewer_SRC})
 target_link_libraries(kwin-windowswitcherpreviewer
                       ${KDE4_KDEUI_LIBS}
                       ${KDE4_KIO_LIBRARY}
@@ -183,11 +183,11 @@ kde4_add_ui_files (plasmakconfigxt_SRCS
     editors/kconfigxt/kconfigxteditor.ui
 )
 
-kde4_add_executable(plasmakconfigxteditor ${plasmakconfigxt_SRCS})
+add_executable(plasmakconfigxteditor ${plasmakconfigxt_SRCS})
 target_link_libraries(plasmakconfigxteditor
                         ${KDE4_KDEUI_LIBS}
                         ${KDE4_KIO_LIBRARY}
-                        ${QT_QTXML_LIBRARY}
+                        Qt5::Xml
 )
 
 install(TARGETS plasmakconfigxteditor ${INSTALL_TARGETS_DEFAULT_ARGS})

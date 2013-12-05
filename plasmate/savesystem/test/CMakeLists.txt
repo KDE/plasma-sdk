@@ -20,7 +20,7 @@ set (gitrunner_test_SRC
 include_directories (${KDE4_INCLUDES})
 
 
-kde4_add_executable (timeline_test ${gitrunner_test_SRC})
+add_executable (timeline_test ${gitrunner_test_SRC})
 
 # Check for unused/redundant link libraries =P
 target_link_libraries (timeline_test ${KDE4_KDEUI_LIBS}
