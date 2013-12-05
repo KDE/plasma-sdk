@@ -30,7 +30,7 @@
 #include <KGlobal>
 #include <KConfig>
 #include <KConfigGroup>
-#include <KDebug>
+#include <QDebug>
 #include <KIcon>
 #include <KLineEdit>
 #include <KLocale>
@@ -125,7 +125,7 @@ void SigningWidget::initGpgContext()
     GpgME::initializeLibrary();
     GpgME::Error error = GpgME::checkEngine(GpgME::OpenPGP);
     if (error) {
-        kDebug() << "OpenPGP not supported!";
+        qDebug() << "OpenPGP not supported!";
         m_contextInitialized = false;
         return;
     }
@@ -153,7 +153,7 @@ QList< QMap<QString, QVariant> > SigningWidget::gpgEntryList(const bool privateK
     }
     GpgME::KeyListResult lRes = m_gpgContext->endKeyListing();
     if (lRes.error()) {
-        kDebug() << "Error while ending the keyListing operation: " << lRes.error().asString();
+        qDebug() << "Error while ending the keyListing operation: " << lRes.error().asString();
     }
     return result;
 }
@@ -215,13 +215,13 @@ bool SigningWidget::sign(const KUrl &path)
         QString fingerprint(k.subkey(0).fingerprint());
         if (fingerprint.contains(hash)) {
             m_gpgContext->addSigningKey(k);
-            kDebug() << "Added signer: " << k.subkey(0).fingerprint();
+            qDebug() << "Added signer: " << k.subkey(0).fingerprint();
             break;
         }
     }
     GpgME::KeyListResult lRes = m_gpgContext->endKeyListing();
     if (lRes.error()) {
-        kDebug() << "Error while ending the keyListing operation: " << lRes.error().asString();
+        qDebug() << "Error while ending the keyListing operation: " << lRes.error().asString();
     }
 
 
@@ -232,11 +232,11 @@ bool SigningWidget::sign(const KUrl &path)
     GpgME::Data plasmoidata(fp);
     GpgME::Data signature(fp1);
 
-    kDebug() << "Ready to sign: " << path.pathOrUrl();
+    qDebug() << "Ready to sign: " << path.pathOrUrl();
 
     GpgME::SigningResult sRes = m_gpgContext->sign(plasmoidata, signature, GpgME::Detached);
     error = m_gpgContext->startSigning(plasmoidata, signature, GpgME::Detached);
-    kDebug() <<"Signing result: " << m_gpgContext->signingResult().createdSignature(0).fingerprint();
+    qDebug() <<"Signing result: " << m_gpgContext->signingResult().createdSignature(0).fingerprint();
 
     fclose(fp1);
     fclose(fp);
@@ -257,18 +257,18 @@ void SigningWidget::showCreateKeyDialog()
 
 void SigningWidget::createKey(const QString &param)
 {
-    kDebug() << "READY TO CREATE:" << param;
+    qDebug() << "READY TO CREATE:" << param;
     GpgME::Data *data = new GpgME::Data();
 //    GpgME::KeyGenerationResult result = m_gpgContext->generateKey(param.toAscii().data(), data);
 //    if(result.primaryKeyGenerated() && result.subkeyGenerated()) {
-//        kDebug() << "Generated new key with fingerprint: " << result.fingerprint();
+//        qDebug() << "Generated new key with fingerprint: " << result.fingerprint();
 //    }
-//    kDebug() << "Generated new key with fingerprint: " << result.fingerprint();
+//    qDebug() << "Generated new key with fingerprint: " << result.fingerprint();
 
     GpgME::KeyGenerationResult e  = m_gpgContext->generateKey(param.toUtf8().data(), *data);
     GpgME::Error er  = m_gpgContext->startKeyGeneration(param.toUtf8().data(), *data);
-    kDebug() << "Error:" << e.error().source() << "::" << e.error().asString();
-    kDebug() << "Error:" << er.source() << "::" << er.asString();
+    qDebug() << "Error:" << e.error().source() << "::" << e.error().asString();
+    qDebug() << "Error:" << er.source() << "::" << er.asString();
     QString error(er.asString());
 
     //There is been an error with the generation of the key
@@ -299,14 +299,14 @@ void SigningWidget::deleteKey()
             }
             GpgME::KeyListResult lRes = m_gpgContext->endKeyListing();
             if (lRes.error()) {
-                kDebug() << "Error while ending the keyListing operation: " << lRes.error().asString();
+                qDebug() << "Error while ending the keyListing operation: " << lRes.error().asString();
             }
             return;
         }
     }
     GpgME::KeyListResult lRes = m_gpgContext->endKeyListing();
     if (lRes.error()) {
-        kDebug() << "Error while ending the keyListing operation: " << lRes.error().asString();
+        qDebug() << "Error while ending the keyListing operation: " << lRes.error().asString();
     }
     return;
 }
@@ -364,7 +364,7 @@ void SigningWidget::updateCurrentKey()
     QRadioButton *sender = static_cast<QRadioButton *>(QObject::sender());
 
     m_currentKey = sender->objectName();
-    kDebug() << m_currentKey;
+    qDebug() << m_currentKey;
     KConfigGroup cg(KGlobal::config(), "Signing Options");
     cg.writeEntry("currentSignerKey", m_currentKey);
     cg.sync();

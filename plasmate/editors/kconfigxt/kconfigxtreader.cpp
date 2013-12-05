@@ -26,7 +26,7 @@
 
 #include <QFile>
 
-#include <KDebug>
+#include <QDebug>
 
 KConfigXtReaderItem::KConfigXtReaderItem()
 {

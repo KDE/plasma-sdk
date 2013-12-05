@@ -24,7 +24,7 @@
 #include <QDir>
 #include <QProcess>
 
-#include <KDebug>
+#include <QDebug>
 #include <KProcess>
 
 

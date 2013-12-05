@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QQmlEngine>
 #include <QQuickView>
 // KDE
-#include <KDebug>
+#include <QDebug>
 #include <KStandardDirs>
 
 ThumbnailItem::ThumbnailItem(QQuickItem* parent)

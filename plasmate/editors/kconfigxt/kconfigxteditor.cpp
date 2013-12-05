@@ -21,7 +21,7 @@
 
 #include "kconfigxteditor.h"
 #include <KComboBox>
-#include <KDebug>
+#include <QDebug>
 #include <KIcon>
 #include <KMessageBox>
 #include <KLocalizedString>
@@ -87,7 +87,7 @@ void KConfigXtEditor::readFile()
     m_writer.setConfigXmlFile(filename().pathOrUrl());
 
     if (m_filename.isEmpty()) {
-        kDebug() << "Empty filename given!";
+        qDebug() << "Empty filename given!";
         return;
     }
 

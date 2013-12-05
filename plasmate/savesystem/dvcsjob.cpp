@@ -178,7 +178,7 @@ void DvcsJob::slotProcessError(QProcess::ProcessError error)
         errorValue = "UnknownError";
         break;
     }
-    kDebug() << "oops, found an error while running" << dvcsCommand() << ":" << errorValue
+    qDebug() << "oops, found an error while running" << dvcsCommand() << ":" << errorValue
     << "Exit code is:" << m_process->exitCode();
     jobIsReady();
 }
@@ -193,7 +193,7 @@ void DvcsJob::slotProcessExited(int exitCode, QProcess::ExitStatus exitStatus)
     if (exitStatus != QProcess::NormalExit || exitCode != 0)
         slotProcessError(QProcess::UnknownError);
 
-    kDebug() << "process has finished with no errors";
+    qDebug() << "process has finished with no errors";
     jobIsReady();
 }
 

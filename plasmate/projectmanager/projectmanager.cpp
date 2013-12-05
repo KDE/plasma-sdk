@@ -23,7 +23,7 @@
 #include <QVBoxLayout>
 #include <QDir>
 
-#include <KDebug>
+#include <QDebug>
 #include <KConfig>
 #include <KIO/DeleteJob>
 #include <KConfigGroup>
@@ -175,13 +175,13 @@ bool ProjectManager::exportPackage(const KUrl &toExport, const KUrl &targetFile)
 
     // Reopen for writing
     if (zip.open(QIODevice::ReadWrite)) {
-        kDebug() << "zip file opened successfully";
+        qDebug() << "zip file opened successfully";
         zip.addLocalDirectory(toExport.pathOrUrl(), ".");
         zip.close();
         return true;
     }
 
-    kDebug() << "Cant open zip file" ;
+    qDebug() << "Cant open zip file" ;
     return false;
 }
 
@@ -190,7 +190,7 @@ bool ProjectManager::importPackage(const KUrl &toImport, const KUrl &targetLocat
     bool ret = true;
     KZip plasmoid(toImport.path());
     if (!plasmoid.open(QIODevice::ReadOnly)) {
-        kDebug() << "ProjectManager::importPackage can't open the plasmoid archive";
+        qDebug() << "ProjectManager::importPackage can't open the plasmoid archive";
         return false;
     }
     plasmoid.directory()->copyTo(targetLocation.path());
@@ -203,7 +203,7 @@ void ProjectManager::addRecentProject(const QString &path)
     QStringList recent = m_mainWindow->recentProjects();
     recent.removeAll(path);
     recent.prepend(path);
-    //kDebug() << "Writing the following recent files to the config:" << recent;
+    //qDebug() << "Writing the following recent files to the config:" << recent;
 
     KConfigGroup cg(KGlobal::config(), "General");
     cg.writeEntry("recentProjects", recent);

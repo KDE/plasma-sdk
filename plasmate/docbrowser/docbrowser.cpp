@@ -118,7 +118,7 @@ void DocBrowser::showApi()
 
     if (m_package) {
         //TODO: API specific to each kind of package!
-        //kDebug() << m_package->implementationApi() << m_package->packageType();
+        //qDebug() << m_package->implementationApi() << m_package->packageType();
         if (m_package->packageType() == "Plasma/Applet") {
             if (m_package->implementationApi().toLower() == "javascript") {
                 url = QUrl("http://techbase.kde.org/Development/Tutorials/Plasma/JavaScript/API");
@@ -126,7 +126,7 @@ void DocBrowser::showApi()
         }
     }
 
-    kDebug() << "loading" << url;
+    qDebug() << "loading" << url;
     m_view->load(url);
 }
 

@@ -26,7 +26,7 @@
 #include <QStringList>
 #include <QVariant>
 
-#include <KDebug>
+#include <QDebug>
 #include <KJob>
 #include <klocalizedstring.h>
 #include <KProcess>

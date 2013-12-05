@@ -188,7 +188,7 @@ void EditPage::findEditor(const QModelIndex &index)
             const QString dialogText = i18n("Enter a name for the new file:");
             QString file = KInputDialog::getText(QString(), dialogText);
             if (!file.isEmpty()) {
-                kDebug() << target;
+                qDebug() << target;
                 if (!m_metaEditor) {
                     m_metaEditor = new MetaDataEditor(this);
                     m_metaEditor->setFilename(packagePath + "/metadata.desktop");
@@ -229,14 +229,14 @@ void EditPage::findEditor(const QModelIndex &index)
         }
 
         KService::List offers = KMimeTypeTrader::self()->query(mimetype, "KParts/ReadWritePart");
-        //kDebug() << mimetype;
+        //qDebug() << mimetype;
         if (offers.isEmpty()) {
             offers = KMimeTypeTrader::self()->query(mimetype, "KParts/ReadOnlyPart");
         }
 
         if (!offers.isEmpty()) {
             //create the part using offers.at(0)
-            //kDebug() << offers.at(0);
+            //qDebug() << offers.at(0);
             //offers.at(0)->createInstance(parentWidget);
             emit loadEditor(offers, KUrl(target));
             return;
@@ -298,7 +298,7 @@ void EditPage::loadFile(const KUrl &path)
 {
     m_path = path;
 
-    kDebug() << "Loading file: " << path;
+    qDebug() << "Loading file: " << path;
 
     KIO::JobFlags flags = KIO::HideProgressInfo;
     KIO::MimetypeJob *mjob = KIO::mimetype(path, flags);
@@ -321,11 +321,11 @@ void EditPage::mimetypeJobFinished(KJob *job)
     m_mimetype = mjob->mimetype();
 
     if (m_mimetype.isEmpty()) {
-        kDebug() << "Could not detect the file's mimetype";
+        qDebug() << "Could not detect the file's mimetype";
         return;
     }
 
-    kDebug() << "loaded mimetype: " << m_mimetype;
+    qDebug() << "loaded mimetype: " << m_mimetype;
 
     KService::List offers = KMimeTypeTrader::self()->query(m_mimetype, "KParts/ReadWritePart");
     if (offers.isEmpty()) {
@@ -334,10 +334,10 @@ void EditPage::mimetypeJobFinished(KJob *job)
 
     if (!offers.isEmpty()) {
         //create the part using offers.at(0)
-        //kDebug() << offers.at(0);
+        //qDebug() << offers.at(0);
         //offers.at(0)->createInstance(parentWidget);
         emit loadEditor(offers, m_path);
         return;
     }
-    kDebug() << "loading" << m_path;
+    qDebug() << "loading" << m_path;
 }

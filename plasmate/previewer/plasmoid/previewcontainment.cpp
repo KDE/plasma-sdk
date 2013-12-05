@@ -29,7 +29,7 @@
 
 #include <KAction>
 #include <KConfigGroup>
-#include <KDebug>
+#include <QDebug>
 #include <KDesktopFile>
 #include <KIcon>
 #include <KMenu>

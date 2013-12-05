@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <KAction>
-#include <KDebug>
+#include <QDebug>
 #include <KConfig>
 #include <KLocale>
 #include <KMenu>

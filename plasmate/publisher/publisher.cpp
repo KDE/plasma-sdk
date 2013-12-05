@@ -238,9 +238,9 @@ const QString Publisher::tempPackagePath()
 void Publisher::doPublish()
 {
     // TODO: make sure this works with non-plasmoids too?
-    kDebug() << "projectPath:" << m_projectPath.path();
+    qDebug() << "projectPath:" << m_projectPath.path();
 
-    kDebug() << "Exportando no tmp: file://" + tempPackagePath();
+    qDebug() << "Exportando no tmp: file://" + tempPackagePath();
     KUrl url(tempPackagePath());
 
     bool ok = exportToFile(url);

@@ -108,7 +108,7 @@ QString PackageModel::implementationApi() const
 int PackageModel::setPackage(const QString &path)
 {
     if (!m_structure) {
-        kDebug() << "Must set the package type FIRST!";
+        qDebug() << "Must set the package type FIRST!";
         return 0;
     }
 
@@ -230,13 +230,13 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
             QList<const char *> named = m_namedFiles.value(key);
             int row = index.row() - 1;
             if (row < named.count()) {
-                //kDebug() << m_package->structure()->name(named.at(row));
+                //qDebug() << m_package->structure()->name(named.at(row));
                 return m_package->structure()->name(named.at(row));
             }
             row -= named.count();
             QStringList l = m_files.value(key);
             if (row < l.count()) {
-                //kDebug() << "got" << l.at(index.row() - 1);
+                //qDebug() << "got" << l.at(index.row() - 1);
                 return l.at(row);
             }
         }
@@ -258,7 +258,7 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         }
     } else {
         // it's a top level item
-        //kDebug() << "data for top level item" << index.row() << m_topEntries.count() << role << Qt::DisplayRole;
+        //qDebug() << "data for top level item" << index.row() << m_topEntries.count() << role << Qt::DisplayRole;
         switch (role) {
         case Qt::DisplayRole: {
             if (index.row() == m_topEntries.count()) {
@@ -355,17 +355,17 @@ QModelIndex PackageModel::index(int row, int column, const QModelIndex &parent) 
 {
     if (parent.isValid()) {
         if (parent.row() >= m_topEntries.count() || parent.parent().isValid()) {
-            //kDebug() << "FAIL" << row << column;
+            //qDebug() << "FAIL" << row << column;
             return QModelIndex();
         }
 
         const char *key = m_topEntries.at(parent.row());
 
         if (row <= m_files[key].count() + m_namedFiles[key].count()) {
-            //kDebug() << "going to return" << row << column << key;
+            //qDebug() << "going to return" << row << column << key;
             return createIndex(row, column, (void*)key);
         } else {
-            //kDebug() << "FAIL";
+            //qDebug() << "FAIL";
             return QModelIndex();
         }
     }
@@ -410,7 +410,7 @@ int PackageModel::rowCount(const QModelIndex &parent) const
                 return 0;
             }
 
-            //kDebug() << "looking for" << key << m_files[key].count() << m_namedFiles[key]<<key<<parent.parent();
+            //qDebug() << "looking for" << key << m_files[key].count() << m_namedFiles[key]<<key<<parent.parent();
             return m_files.contains(key) ? m_files[key].count() + m_namedFiles[key].count() + 1 : 0;
         } else {
             return 0;
@@ -429,7 +429,7 @@ bool PackageModel::loadPackage()
     m_namedFiles.clear();
 
     if (!m_package) {
-        kDebug() << "No package to load.";
+        qDebug() << "No package to load.";
         return false;
     }
 
@@ -440,7 +440,7 @@ bool PackageModel::loadPackage()
     Plasma::PackageStructure::Ptr structure = m_package->structure();
 
     if (!dir.exists(structure->contentsPrefix())) {
-        kDebug() << "This is not a valid package.";
+        qDebug() << "This is not a valid package.";
         return false;
     }
 
@@ -538,7 +538,7 @@ bool PackageModel::loadPackage()
             }
         }
 
-        //kDebug() << "results for" << m_topEntries.indexOf(key) << key << "are:" << namedFiles.count() << userFiles.count();
+        //qDebug() << "results for" << m_topEntries.indexOf(key) << key << "are:" << namedFiles.count() << userFiles.count();
         m_namedFiles.insert(key, namedFiles);
 
         m_files.insert(key, userFiles);
