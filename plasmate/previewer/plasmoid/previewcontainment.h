@@ -74,8 +74,8 @@ protected slots:
 protected:
     void setupHeader();
     void destroyHeader();
-    void hoverEnterEvent(QGraphicsSceneHoverEvent* event);
-    void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
+    void hoverEnterEvent(QHoverEvent* event);
+    void hoverLeaveEvent(QHoverEvent* event);
 
 private:
     Plasma::Applet *m_applet;
@@ -84,8 +84,8 @@ private:
     // Little dirty hack to make previewer
     // look more beautiful when there is no applet.
     // XXX: Improve this ?
-    QGraphicsWidget *m_tmp;
-    QGraphicsWidget *m_controls;
+    QQuickItem *m_tmp;
+    QQuickItem *m_controls;
 
     QGraphicsLinearLayout *m_layout;
     QGraphicsLinearLayout *m_header;

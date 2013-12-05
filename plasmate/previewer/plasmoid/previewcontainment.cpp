@@ -61,7 +61,7 @@ PreviewContainment::PreviewContainment(QObject *parent, const QVariantList &args
     m_header->setSpacing(0);
     m_header->setContentsMargins(0, 4, 0, 0);
 
-    m_controls = new QGraphicsWidget(this);
+    m_controls = new QQuickItem(this);
     m_controls->setLayout(m_header);
     m_controls->setZValue(99);
     m_controls->resize(100, 32);
@@ -69,7 +69,7 @@ PreviewContainment::PreviewContainment(QObject *parent, const QVariantList &args
     m_layout->addItem(m_controls);
     setupHeader();
 
-    m_tmp = new QGraphicsWidget(this);
+    m_tmp = new QQuickItem(this);
     m_layout->addItem(m_tmp);
 
     setLayout(m_layout);
@@ -332,12 +332,12 @@ void PreviewContainment::onAppletRemoved(Plasma::Applet *applet)
     m_layout->addItem(m_tmp);
 }
 
-void PreviewContainment::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
+void PreviewContainment::hoverEnterEvent(QHoverEvent* event)
 {
     Containment::hoverEnterEvent(event);
 }
 
-void PreviewContainment::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
+void PreviewContainment::hoverLeaveEvent(QHoverEvent* event)
 {
     Containment::hoverLeaveEvent(event);
 }
