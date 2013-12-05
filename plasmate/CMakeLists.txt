@@ -53,19 +53,19 @@ set (PlasMate_SRC
     mainwindow.cpp
     startpage.cpp
     packagemodel.cpp
-    previewer/plasmoid/plasmoidpreviewer.cpp
-    previewer/plasmoid/plasmoidview.cpp
-    previewer/runner/runnerpreviewer.cpp
-    previewer/windowswitcher/windowswitcher.cpp
-    previewer/windowswitcher/thumbnailitem.cpp
-    previewer/windowswitcher/tabboxpreviewer.cpp
-    previewer/previewer.cpp
+    #previewer/plasmoid/plasmoidpreviewer.cpp
+    #previewer/plasmoid/plasmoidview.cpp
+    #previewer/runner/runnerpreviewer.cpp
+    #previewer/windowswitcher/windowswitcher.cpp
+    #previewer/windowswitcher/thumbnailitem.cpp
+    #previewer/windowswitcher/tabboxpreviewer.cpp
+    #previewer/previewer.cpp
     # publisher/signingwidget.cpp
     #publisher/signingdialog.cpp
     publisher/publisher.cpp
     publisher/remoteinstaller/remoteinstaller.cpp
     publisher/remoteinstaller/remoteinstallerdialog.cpp
-    konsole/konsolepreviewer.cpp
+    #konsole/konsolepreviewer.cpp
     docbrowser/docbrowser.cpp
     projectmanager/projectmanager.cpp
 )
@@ -92,7 +92,7 @@ include_directories(${QT_QTWEBKIT_INCLUDE_DIR}
 )
 
 add_subdirectory( editors )
-add_subdirectory( previewer/plasmoid )
+#add_subdirectory( previewer/plasmoid )
 add_subdirectory( templates )
 add_subdirectory( icons )
 
@@ -157,23 +157,23 @@ target_link_libraries(plasmaremoteinstaller
 install(TARGETS plasmaremoteinstaller ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 #kwin-windowswitcherpreviewer
-set (KWin-WindowSwitcherPreviewer_SRC
-    previewer/windowswitcher/windowswitcher.cpp
-    previewer/windowswitcher/thumbnailitem.cpp
-    previewer/windowswitcher/tabboxpreviewer.cpp
-    previewer/previewer.cpp
-    previewer/windowswitcher/standalone/main.cpp
-    previewer/windowswitcher/standalone/windowswitcherpreviewer.cpp
-)
+#set (KWin-WindowSwitcherPreviewer_SRC
+#    previewer/windowswitcher/windowswitcher.cpp
+#    previewer/windowswitcher/thumbnailitem.cpp
+#    previewer/windowswitcher/tabboxpreviewer.cpp
+#    previewer/previewer.cpp
+#    previewer/windowswitcher/standalone/main.cpp
+#    previewer/windowswitcher/standalone/windowswitcherpreviewer.cpp
+#)
 
-add_executable(kwin-windowswitcherpreviewer ${KWin-WindowSwitcherPreviewer_SRC})
-target_link_libraries(kwin-windowswitcherpreviewer
-                      KF5::KDeclarative
-                      Qt5::Quick
-                      Qt5::KIO
-)
+#add_executable(kwin-windowswitcherpreviewer ${KWin-WindowSwitcherPreviewer_SRC})
+#target_link_libraries(kwin-windowswitcherpreviewer
+#                      KF5::KDeclarative
+#                      Qt5::Quick
+#                      Qt5::KIO
+#)
 
-install(TARGETS kwin-windowswitcherpreviewer ${INSTALL_TARGETS_DEFAULT_ARGS})
+#install(TARGETS kwin-windowswitcherpreviewer ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 #plasmakconfigxteditor
 set(plasmakconfigxt_SRCS
@@ -190,8 +190,11 @@ kde4_add_ui_files (plasmakconfigxt_SRCS
 
 add_executable(plasmakconfigxteditor ${plasmakconfigxt_SRCS})
 target_link_libraries(plasmakconfigxteditor
-                        ${KDE4_KDEUI_LIBS}
-                        ${KDE4_KIO_LIBRARY}
+                        KF5::KDE4Support
+                        Qt5::Widgets
+                        KF5::KCoreAddons
+                        KF5::KConfigCore
+                        KF5::KIO
                         Qt5::Xml
 )
 

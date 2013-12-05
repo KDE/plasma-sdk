@@ -14,7 +14,7 @@ add_definitions(${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 include_directories(${KDE4_INCLUDES} ../..)
 
 add_library(plasmate_metadata_editor MODULE ${metadata_editor_SRCS})
-target_link_libraries(plasmate_metadata_editor KF5::Plasma KF5::KIOCore KF5::KIOWidgets)
+target_link_libraries(plasmate_metadata_editor KF5::Plasma KF5::KIOCore KF5::KIOWidgets KF5::KDE4Support)
 
 set( testmetadata_SRCS tests/test_metadata.cpp
      		       metadataeditor.cpp
