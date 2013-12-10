@@ -21,11 +21,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QPushButton>
+#include <QUrl>
 
-#include <KPushButton>
 #include <KLineEdit>
 #include <KLocalizedString>
-#include <QUrl>
 
 #include "packagemodel.h"
 
@@ -40,15 +40,15 @@ DocBrowser::DocBrowser(const PackageModel *package, QWidget *parent)
     QHBoxLayout *topbar = new QHBoxLayout();
     QHBoxLayout *btmbar = new QHBoxLayout();
 
-    KPushButton *linkButton = new KPushButton(KIcon("favorites"), i18n("Tutorials"), this);
+    QPushButton *linkButton = new QPushButton(KIcon("favorites"), i18n("Tutorials"), this);
     connect(linkButton, SIGNAL(clicked()), this, SLOT(showTutorial()));
     topbar->addWidget(linkButton);
 
-    linkButton = new KPushButton(KIcon("favorites"), i18n("API Reference"), this);
+    linkButton = new QPushButton(KIcon("favorites"), i18n("API Reference"), this);
     connect(linkButton, SIGNAL(clicked()), this, SLOT(showApi()));
     topbar->addWidget(linkButton);
 
-    linkButton = new KPushButton(KIcon("plasmagik"), i18n("Plasmate"), this);
+    linkButton = new QPushButton(KIcon("plasmagik"), i18n("Plasmate"), this);
     connect(linkButton, SIGNAL(clicked()), this, SLOT(showHelp()));
     topbar->addWidget(linkButton);
 
@@ -62,7 +62,7 @@ DocBrowser::DocBrowser(const PackageModel *package, QWidget *parent)
     connect(m_searchField, SIGNAL(returnPressed()), this, SLOT(findNext()));
     btmbar->addWidget(m_searchField);
 
-    KPushButton *searchButton = new KPushButton(i18n("Next"), this);
+    QPushButton *searchButton = new QPushButton(i18n("Next"), this);
     connect(searchButton, SIGNAL(clicked()), this, SLOT(findNext()));
     btmbar->addWidget(searchButton);
 

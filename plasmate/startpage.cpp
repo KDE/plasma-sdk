@@ -35,7 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KLineEdit>
 #include <KMimeType>
 #include <KPluginInfo>
-#include <KPushButton>
+#include <QPushButton>
 #include <KSeparator>
 #include <KShell>
 #include <KStandardAction>

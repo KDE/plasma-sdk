@@ -28,7 +28,7 @@ class QComboBox;
 class QListWidget;
 class QVBoxLayout;
 class QModelIndex;
-class KPushButton;
+class QPushButton;
 class KLineEdit;
 class MainWindow;
 class ProjectManager;

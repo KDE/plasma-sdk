@@ -461,14 +461,14 @@ p, li { white-space: pre-wrap; }
             </spacer>
            </item>
            <item>
-            <widget class="KPushButton" name="cancelNewProjectButton">
+            <widget class="QPushButton" name="cancelNewProjectButton">
              <property name="text">
               <string>Back</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="KPushButton" name="newProjectButton">
+            <widget class="QPushButton" name="newProjectButton">
              <property name="enabled">
               <bool>false</bool>
              </property>
@@ -568,9 +568,9 @@ p, li { white-space: pre-wrap; }
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KPushButton</class>
+   <class>QPushButton</class>
    <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
+   <header>qpushbutton.h</header>
   </customwidget>
   <customwidget>
    <class>KListWidget</class>

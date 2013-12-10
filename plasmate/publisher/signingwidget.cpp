@@ -26,17 +26,15 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QDebug>
 
 #include <KGlobal>
 #include <KConfig>
 #include <KConfigGroup>
-#include <QDebug>
 #include <KIcon>
 #include <KLineEdit>
 #include <KLocale>
 #include <KMessageBox>
-#include <KPushButton>
-
 
 #define _FILE_OFFSET_BITS 64
 

@@ -28,7 +28,7 @@ class QListWidget;
 class QListWidgetItem;
 
 class QUrl;
-class KPushButton;
+class QPushButton;
 class KMenu;
 
 namespace Ui
@@ -72,8 +72,8 @@ private:
 //      project multi-export,
 //      project multi-import.
     QListWidget *m_projectList;
-    KPushButton *m_loadButton;
-    KPushButton *m_removeMenuButton;
+    QPushButton *m_loadButton;
+    QPushButton *m_removeMenuButton;
     KMenu *m_removeMenu;
     bool m_destroyFlag;
     MainWindow* m_mainWindow;

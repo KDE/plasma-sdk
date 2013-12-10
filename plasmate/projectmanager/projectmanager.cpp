@@ -22,17 +22,17 @@
 #include <QListWidget>
 #include <QVBoxLayout>
 #include <QDir>
-
+#include <QPushButton>
+#include <QUrl>
 #include <QDebug>
+
 #include <KConfig>
 #include <KIO/DeleteJob>
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <KMenu>
 #include <KMessageBox>
-#include <KPushButton>
 #include <KStandardDirs>
-#include <QUrl>
 #include <KZip>
 
 #include "projectmanager.h"
@@ -47,10 +47,10 @@ ProjectManager::ProjectManager(QWidget* parent)
     connect(m_projectList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(emitProjectSelected()));
     connect(m_projectList,SIGNAL(itemSelectionChanged()), this, SLOT(checkButtonState()));
 
-    m_loadButton = new KPushButton(i18n("Load Project"), this);
+    m_loadButton = new QPushButton(i18n("Load Project"), this);
     connect(m_loadButton, SIGNAL(clicked()), this, SLOT(emitProjectSelected()));
 
-    m_removeMenuButton = new KPushButton(i18n("Remove Project"), this);
+    m_removeMenuButton = new QPushButton(i18n("Remove Project"), this);
 
     m_removeMenu = new KMenu(i18n("Remove Project"), this);
 
