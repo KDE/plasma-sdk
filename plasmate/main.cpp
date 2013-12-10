@@ -16,7 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <QDebug>
-#include <KApplication>
+#include <QApplication>
 #include <KAboutData>
 #include <KLocale>
 #include <KCmdLineArgs>
@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
     KCmdLineOptions options;
     KCmdLineArgs::addCmdLineOptions(options);
     KCmdLineArgs::parsedArgs();
-    KApplication app;
+    QApplication app;
 
     qInstallMsgHandler(KonsolePreviewer::customMessageHandler);
     MainWindow *mainWindow = new MainWindow();

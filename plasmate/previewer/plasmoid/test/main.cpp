@@ -28,7 +28,7 @@
 
 #include <QPixmapCache>
 
-#include <KApplication>
+#include <QApplication>
 #include <KAboutData>
 #include <KAction>
 #include <KCmdLineArgs>
@@ -71,7 +71,7 @@ int main(int argc, char **argv)
     options.add("+[args]", ki18n("Optional arguments for the applet to add"));
     KCmdLineArgs::addCmdLineOptions(options);
 
-    KApplication app;
+    QApplication app;
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs() ;
 

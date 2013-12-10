@@ -2,7 +2,7 @@
   Simple test app for the GitRunner class.
 */
 
-#include <KApplication>
+#include <QApplication>
 #include <KAboutData>
 #include <KIcon>
 #include <KLocale>
@@ -170,7 +170,7 @@ int main(int argc, char *argv[])
 
     KCmdLineArgs::init(argc, argv, &aboutData);
 
-    KApplication app;
+    QApplication app;
     appDir = app.applicationDirPath();
     rootDir = appDir + "/root/";
 
