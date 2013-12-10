@@ -47,8 +47,10 @@ int main(int argc, char *argv[])
     PlasmaKConfigXtEditor *editor = new PlasmaKConfigXtEditor();
 
     QScopedPointer<QDialog> dialog(new QDialog());
+    QVBoxLayout layout;
 
-    dialog->setMainWidget(editor);
+    layout.addWidget(editor);
+    dialog->setLayout(&layout);
     dialog->exec();
 
     return app.exec();
