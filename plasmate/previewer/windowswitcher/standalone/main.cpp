@@ -16,32 +16,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <QApplication>
-#include <KAboutData>
 #include <KLocale>
-#include <KCmdLineArgs>
 #include <QPointer>
+
+#include <qcommandlineparser.h>
+#include <qcommandlineoption.h>
 
 #include "windowswitcherpreviewer.h"
 
+static const char version[] = "2.0";
+
 int main(int argc, char *argv[])
 {
-    KAboutData aboutData("KWin-WindowSwitcherPreviewer", 0, ki18n("KWin Window Switcher Previewer"),
-                         "0.1alpha3", ki18n("Previewer for Window Switcher"),
-                         KAboutData::License_GPL,
-                         ki18n("Copyright 2012 Plasma Development Team"),
-                         KLocalizedString(), "", "plasma-devel@kde.org");
+    QApplication app(argc, argv);
+    QCommandLineParser parser;
 
-    aboutData.addAuthor(ki18n("Antonis Tsiapaliokas"), ki18n("Author"), "kok3rs@gmail.com");
-
-
-    aboutData.setProgramIconName("window-duplicate");
-
-    KCmdLineArgs::init(argc, argv, &aboutData);
-
-    KCmdLineOptions options;
-    KCmdLineArgs::addCmdLineOptions(options);
-    KCmdLineArgs::parsedArgs();
-    QApplication app;
+    app.setApplicationVersion(version);
+    parser.addVersionOption();
+    parser.addHelpOption();
+    parser.addVersionOption();
+    parser.process(app);
 
     QPointer<WindowSwitcherPreviewer> preview = new WindowSwitcherPreviewer();
     preview->show();

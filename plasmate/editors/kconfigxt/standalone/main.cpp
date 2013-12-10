@@ -16,33 +16,28 @@
  */
 
 #include <QApplication>
-#include <KAboutData>
 #include <KLocale>
-#include <KCmdLineArgs>
 
 #include <QDialog>
 #include <QVBoxLayout>
 #include <QScopedPointer>
 
 #include "plasmakconfigxteditor.h"
+#include <qcommandlineparser.h>
+#include <qcommandlineoption.h>
+
+static const char version[] = "2.0";
 
 int main(int argc, char *argv[])
 {
-    KAboutData aboutData("plasmakconfigxteditor", 0, ki18n("Plasma KConfigXt Editor"),
-                         "0.1alpha3", ki18n("Plasma KConfigXt Editor"),
-                         KAboutData::License_GPL,
-                         ki18n("Copyright 2012 Plasma Development Team"),
-                         KLocalizedString(), "", "plasma-devel@kde.org");
+    QApplication app(argc, argv);
+    QCommandLineParser parser;
 
-    aboutData.addAuthor(ki18n("Giorgos Tsiapaliwkas"), ki18n("Author"), "terietor@gmail.com");
-    aboutData.setProgramIconName("plasmagik");
-
-    KCmdLineArgs::init(argc, argv, &aboutData);
-
-    KCmdLineOptions options;
-    KCmdLineArgs::addCmdLineOptions(options);
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-    QApplication app;
+    app.setApplicationVersion(version);
+    parser.addVersionOption();
+    parser.addHelpOption();
+    parser.addVersionOption();
+    parser.process(app);
 
     PlasmaKConfigXtEditor *editor = new PlasmaKConfigXtEditor();
 
