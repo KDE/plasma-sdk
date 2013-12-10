@@ -315,7 +315,7 @@ void TimeLine::newSavePoint()
 
         m_gitRunner->init(m_workingDir);
         // Retrieve Name and Email, and set git global parameters
-        Plasma::PackageMetadata metadata(m_workingDir.pathOrUrl() + "metadata.desktop");
+        Plasma::PackageMetadata metadata(m_workingDir.path() + "metadata.desktop");
         m_gitRunner->setAuthor(metadata.author());
         m_gitRunner->setEmail(metadata.email());
 

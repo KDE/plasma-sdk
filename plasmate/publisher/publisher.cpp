@@ -146,8 +146,8 @@ void Publisher::doInstall()
 void Publisher::doPlasmaPkg()
 {
     const QUrl tempPackage(tempPackagePath());
-    qDebug() << "tempPackagePath" << tempPackage.pathOrUrl();
-    qDebug() << "m_projectPath" << m_projectPath.pathOrUrl();
+    qDebug() << "tempPackagePath" << tempPackage.path();
+    qDebug() << "m_projectPath" << m_projectPath.path();
     ProjectManager::exportPackage(m_projectPath, tempPackage); // create temporary package
 
     QStringList argv("plasmapkg");
@@ -188,7 +188,7 @@ void Publisher::doPlasmaPkg()
         QString signatureDestPath = KStandardDirs::locateLocal("data", "plasma/plasmoids/");
         signatureDestPath.append(m_projectName).append(".plasmoid.asc");
 
-        QString signatureOrigPath(tempPackage.pathOrUrl().append(".asc"));
+        QString signatureOrigPath(tempPackage.path().append(".asc"));
 
         QFile signatureDest(signatureDestPath);
         if(signatureDest.open(QIODevice::ReadWrite)) {
@@ -228,7 +228,7 @@ void Publisher::doRemoteInstall()
 
 const QString Publisher::tempPackagePath()
 {
-    QDir d(m_projectPath.pathOrUrl());
+    QDir d(m_projectPath.path());
     if (d.cdUp()) {
         return d.path() + "/" + m_projectName + "." + m_extension;
     }

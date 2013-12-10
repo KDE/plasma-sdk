@@ -84,7 +84,7 @@ QUrl KConfigXtEditor::filename()
 
 void KConfigXtEditor::readFile()
 {
-    m_writer.setConfigXmlFile(filename().pathOrUrl());
+    m_writer.setConfigXmlFile(filename().path());
 
     if (m_filename.isEmpty()) {
         qDebug() << "Empty filename given!";
@@ -92,11 +92,11 @@ void KConfigXtEditor::readFile()
     }
 
     //check if the xml exists
-    if (!QFile::exists(m_filename.pathOrUrl())) {
+    if (!QFile::exists(m_filename.path())) {
         setupWidgetsForNewFile();
         return;
     } else {
-        m_parser.setConfigXmlFile(m_filename.pathOrUrl());
+        m_parser.setConfigXmlFile(m_filename.path());
         takeDataFromParser();
         setupWidgetsForOldFile();
     }

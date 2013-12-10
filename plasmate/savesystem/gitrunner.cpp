@@ -49,7 +49,7 @@ GitRunner::~GitRunner()
 void GitRunner::initJob(DvcsJob &job)
 {
     job.setCommunicationMode(m_commMode);
-    job.setDirectory(QDir(m_lastRepoRoot->pathOrUrl()));
+    job.setDirectory(QDir(m_lastRepoRoot->path()));
     job << "git";
 }
 
@@ -72,7 +72,7 @@ void GitRunner::setCommunicationMode(KProcess::OutputChannelMode comm)
 
 void GitRunner::setDirectory(const QUrl &dir)
 {
-    m_lastRepoRoot->setDirectory(dir.pathOrUrl());
+    m_lastRepoRoot->setDirectory(dir.path());
 }
 
 bool GitRunner::isRunning()
@@ -129,7 +129,7 @@ QString& GitRunner::getResult()
 DvcsJob::JobStatus GitRunner::init(const QUrl &directory)
 {
     // We need to tell the runner to change dir!
-    m_lastRepoRoot->setDirectory(directory.pathOrUrl());
+    m_lastRepoRoot->setDirectory(directory.path());
     DvcsJob *job = new DvcsJob();
     initJob(*job);
 
@@ -157,12 +157,12 @@ DvcsJob::JobStatus GitRunner::createWorkingCopy(const QUrl &repoOrigin,
 {
     // TODO: now supports only cloning a local repo(not very useful, I know =P),
     // so extend the method to be used over the Internet.
-    m_lastRepoRoot->setDirectory(repoDestination.pathOrUrl());
+    m_lastRepoRoot->setDirectory(repoDestination.path());
     DvcsJob *job = new DvcsJob();
     initJob(*job);
 
     *job << "clone";
-    *job << repoOrigin.pathOrUrl();
+    *job << repoOrigin.path();
     startJob(*job);
     return m_jobStatus;
 }
@@ -179,7 +179,7 @@ DvcsJob::JobStatus GitRunner::add(const QUrl::List &localLocations)
     // Adding files to the runner.
     QStringList stringFiles = localLocations.toStringList();
     while (!stringFiles.isEmpty()) {
-        *job <<  m_lastRepoRoot->pathOrUrl() + '/' + stringFiles.takeAt(0);
+        *job <<  m_lastRepoRoot->path() + '/' + stringFiles.takeAt(0);
     }
 
     startJob(*job);
@@ -258,7 +258,7 @@ DvcsJob::JobStatus GitRunner::remove(const QUrl::List &files)
     *job << "rm";
     QStringList stringFiles = files.toStringList();
     while (!stringFiles.isEmpty()) {
-        *job <<  m_lastRepoRoot->pathOrUrl() + '/' + stringFiles.takeAt(0);
+        *job <<  m_lastRepoRoot->path() + '/' + stringFiles.takeAt(0);
     }
 
     startJob(*job);

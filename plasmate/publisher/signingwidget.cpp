@@ -226,13 +226,13 @@ bool SigningWidget::sign(const QUrl &path)
 
 
     FILE *fp;
-    fp = fopen(QFile::encodeName(path.pathOrUrl()).data(), "r");
+    fp = fopen(QFile::encodeName(path.path()).data(), "r");
     FILE *fp1;
-    fp1 = fopen(QFile::encodeName(path.pathOrUrl().append(".asc")).data(), "w");
+    fp1 = fopen(QFile::encodeName(path.path().append(".asc")).data(), "w");
     GpgME::Data plasmoidata(fp);
     GpgME::Data signature(fp1);
 
-    qDebug() << "Ready to sign: " << path.pathOrUrl();
+    qDebug() << "Ready to sign: " << path.path();
 
     GpgME::SigningResult sRes = m_gpgContext->sign(plasmoidata, signature, GpgME::Detached);
     error = m_gpgContext->startSigning(plasmoidata, signature, GpgME::Detached);

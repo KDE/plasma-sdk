@@ -215,7 +215,7 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
         }
         break;
         case UrlRole: {
-            return urlForIndex(index).pathOrUrl();
+            return urlForIndex(index).path();
         }
         break;
         case Qt::DisplayRole: {
@@ -597,7 +597,7 @@ void PackageModel::fileAddedOnDisk(const QString &path)
         target.adjustPath(QUrl::AddTrailingSlash);
         toAddDir.adjustPath(QUrl::AddTrailingSlash);
 
-        if (target.pathOrUrl() == toAddDir.pathOrUrl()) {
+        if (target.path() == toAddDir.path()) {
             QModelIndex parent = index(i, 0, QModelIndex());
             int ind = rowCount(parent);
             for (int ii = 0; ii < ind; ++ii) {

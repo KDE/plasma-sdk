@@ -79,7 +79,7 @@ void KonsolePreviewer::saveOutput()
     }
 
     m_textEdit->toPlainText();
-    QFile f(destination.pathOrUrl());
+    QFile f(destination.path());
     f.open(QIODevice::ReadWrite);
     f.write(m_textEdit->toPlainText().toAscii());
 }

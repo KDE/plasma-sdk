@@ -250,9 +250,9 @@ void EditPage::imageDialog(const QString& filter, const QString& destinationPath
     const QList<QUrl> srcDir = KFileDialog::getOpenUrls(homeDir, filter, this);
     KConfigGroup cg(KGlobal::config(), "PackageModel::package");
     const QUrl destinationDir(cg.readEntry("lastLoadedPackage", QString()) + destinationPath);
-    QDir destPath(destinationDir.pathOrUrl());
+    QDir destPath(destinationDir.path());
     if (!destPath.exists()) {
-        destPath.mkpath(destinationDir.pathOrUrl());
+        destPath.mkpath(destinationDir.path());
     }
 
     if (!srcDir.isEmpty()) {

@@ -158,7 +158,7 @@ bool ProjectManager::exportPackage(const QUrl &toExport, const QUrl &targetFile)
     // and you create the *.zip file INSIDE that folder WHILE copying the files,
     // guess what happens??
     // This also means: always try at least once, before committing changes.
-    if (targetFile.pathOrUrl().contains(toExport.pathOrUrl())) {
+    if (targetFile.path().contains(toExport.path())) {
         // Sounds like we are attempting to create the package from inside the package folder, noooooo :)
         return false;
     }
@@ -169,14 +169,14 @@ bool ProjectManager::exportPackage(const QUrl &toExport, const QUrl &targetFile)
     }
 
     // Create an empty zip file
-    KZip zip(targetFile.pathOrUrl());
+    KZip zip(targetFile.path());
     zip.open(QIODevice::ReadWrite);
     zip.close();
 
     // Reopen for writing
     if (zip.open(QIODevice::ReadWrite)) {
         qDebug() << "zip file opened successfully";
-        zip.addLocalDirectory(toExport.pathOrUrl(), ".");
+        zip.addLocalDirectory(toExport.path(), ".");
         zip.close();
         return true;
     }
