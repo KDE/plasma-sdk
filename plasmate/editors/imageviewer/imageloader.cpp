@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "imageloader.h"
 
-ImageLoader::ImageLoader(const KUrl& image, const QSize &size, QObject *parent)
+ImageLoader::ImageLoader(const QUrl& image, const QSize &size, QObject *parent)
      : QObject(parent),
        m_image(image),
        m_size(size)

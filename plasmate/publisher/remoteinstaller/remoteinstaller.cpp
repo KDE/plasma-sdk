@@ -37,7 +37,7 @@ RemoteInstaller::RemoteInstaller(const QString& username, const QString& hostnam
     QString temporaryDirectory = QDir::tempPath();
     temporaryDirectory.append("/plasmaremoteinstaller");
 
-    KUrl tmpUrl = m_execUrl;
+    QUrl tmpUrl = m_execUrl;
     tmpUrl.addPath(temporaryDirectory);
     if (!KIO::NetAccess::exists(tmpUrl, KIO::NetAccess::DestinationSide, m_widget)) {
         const bool ok = KIO::NetAccess::mkdir(tmpUrl, m_widget);

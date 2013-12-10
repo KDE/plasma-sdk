@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KPushButton>
 #include <KLineEdit>
 #include <KLocalizedString>
-#include <KUrl>
+#include <QUrl>
 
 #include "packagemodel.h"
 
@@ -89,12 +89,12 @@ void DocBrowser::findNext()
     m_view->findText(m_searchField->text(), QWebPage::FindWrapsAroundDocument);
 }
 
-KUrl DocBrowser::currentPage() const
+QUrl DocBrowser::currentPage() const
 {
-    return KUrl(m_view->url());
+    return QUrl(m_view->url());
 }
 
-void DocBrowser::load(KUrl page)
+void DocBrowser::load(QUrl page)
 {
     m_view->load(page);
 }

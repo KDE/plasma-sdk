@@ -27,7 +27,7 @@
 class QListWidget;
 class QListWidgetItem;
 
-class KUrl;
+class QUrl;
 class KPushButton;
 class KMenu;
 
@@ -45,8 +45,8 @@ public:
     void addProject(QListWidgetItem *item);
     void clearProjects();
 
-    static bool exportPackage(const KUrl &toExport, const KUrl &targetFile);
-    static bool importPackage(const KUrl &toImport, const KUrl &targetLocation);
+    static bool exportPackage(const QUrl &toExport, const QUrl &targetFile);
+    static bool importPackage(const QUrl &toImport, const QUrl &targetLocation);
 
 public Q_SLOTS:
     void addRecentProject(const QString &path);
@@ -57,7 +57,7 @@ signals:
     void requestRefresh();
 
 private:
-    void deleteProject(const KUrl &projectLocation);
+    void deleteProject(const QUrl &projectLocation);
 
 private Q_SLOTS:
    void emitProjectSelected();

@@ -11,7 +11,7 @@
 #define PUBLISHER_H
 
 #include <KDialog>
-#include <KUrl>
+#include <QUrl>
 #include <KProcess>
 
 #include "ui_publisher.h"
@@ -22,7 +22,7 @@ class Publisher : public KDialog
 {
     Q_OBJECT;
 public:
-    Publisher(QWidget* parent, const KUrl &path, const QString& type);
+    Publisher(QWidget* parent, const QUrl &path, const QString& type);
     void setProjectName(const QString &name);
 
 public slots:
@@ -37,7 +37,7 @@ private slots:
     void checkInstallButtonState(int comboBoxCurrentIndex);
 
 private:
-    bool exportToFile(const KUrl& url);
+    bool exportToFile(const QUrl& url);
     const QString tempPackagePath();
 
     //avoid duplication
@@ -45,7 +45,7 @@ private:
 
 
     SigningWidget* m_signingWidget;
-    KUrl m_projectPath;
+    QUrl m_projectPath;
     QString m_projectType;
     QString m_extension;
     QString m_projectName;

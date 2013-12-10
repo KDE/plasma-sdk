@@ -28,7 +28,7 @@ WindowSwitcherPreviewer::WindowSwitcherPreviewer(QWidget* parent)
     tmpWidget = new QWidget();
     tmpLayout = new QVBoxLayout();
     m_previewer = new TabBoxPreviewer(i18nc("Window Title", "Window Switcher Previewer"));
-    m_filePath = new KUrlRequester(tmpWidget);
+    m_filePath = new QUrlRequester(tmpWidget);
     QLabel *welcome = new QLabel(tmpWidget);
 
     m_filePath->setFilter("*.qml");

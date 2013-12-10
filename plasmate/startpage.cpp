@@ -40,7 +40,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KShell>
 #include <KStandardAction>
 #include <KStandardDirs>
-#include <KUrlRequester>
+#include <QUrlRequester>
 #include <KUser>
 #include <KMessageBox>
 #include <KMessageWidget>
@@ -668,7 +668,7 @@ void StartPage::checkPackagePath(const QString& name)
 
 void StartPage::importPackage()
 {
-    const KUrl target = m_ui.importPackage->url();
+    const QUrl target = m_ui.importPackage->url();
     selectProject(target);
 }
 
@@ -687,7 +687,7 @@ void StartPage::doGHNSImport()
             if (!installedFiles.empty())
             {
                 QString file = installedFiles.at(0);
-                KUrl target(file);
+                QUrl target(file);
 
                 selectProject(target);
             }
@@ -695,7 +695,7 @@ void StartPage::doGHNSImport()
     }
 }
 
-void StartPage::selectProject(const KUrl &target)
+void StartPage::selectProject(const QUrl &target)
 {
     if (!target.isLocalFile() || !QFile::exists(target.path()) || QDir(target.path()).exists()) {
         KMessageBox::error(this, i18n("The file you entered is invalid."));

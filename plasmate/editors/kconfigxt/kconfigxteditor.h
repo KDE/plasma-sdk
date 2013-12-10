@@ -27,7 +27,7 @@
 #include "kconfigxtwriter.h"
 
 #include <QWidget>
-#include <KUrl>
+#include <QUrl>
 
 class QTreeWidgetItem;
 
@@ -46,8 +46,8 @@ public:
     /**
      * Sets filename to edit
      */
-    void setFilename(const KUrl& filename);
-    KUrl filename();
+    void setFilename(const QUrl& filename);
+    QUrl filename();
 
     void clear();
 
@@ -168,7 +168,7 @@ private:
     //reduces duplication
     void removeError();
 
-    KUrl m_filename;
+    QUrl m_filename;
     QStringList m_groups;
 
     KConfigXtReader m_parser;

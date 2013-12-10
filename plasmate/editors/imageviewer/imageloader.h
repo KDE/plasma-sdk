@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef IMAGELOADER_H
 #define IMAGELOADER_H
 
-#include <KUrl>
+#include <QUrl>
 #include <QRunnable>
 #include <QObject>
 #include <QImage>
@@ -32,15 +32,15 @@ public:
      * You just have to create an instance of the object.
      * Don't do anything else.
      **/
-    ImageLoader(const KUrl& image, const QSize &size, QObject *parent = 0);
+    ImageLoader(const QUrl& image, const QSize &size, QObject *parent = 0);
 
     void run();
 
 Q_SIGNALS:
-    void loadImage(const KUrl &url, const QSize &size, const QImage& image);
+    void loadImage(const QUrl &url, const QSize &size, const QImage& image);
 
 private:
-    KUrl m_image;
+    QUrl m_image;
     QSize m_size;
 };
 

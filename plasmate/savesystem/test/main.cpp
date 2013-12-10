@@ -7,7 +7,7 @@
 #include <KIcon>
 #include <KLocale>
 #include <KCmdLineArgs>
-#include <KUrl>
+#include <QUrl>
 
 #include <QDialog>
 #include <QDir>
@@ -41,11 +41,11 @@ void testGitRunner() {
     GitRunner *git = new GitRunner();
 
     // Set the repo directory
-    git->setDirectory(KUrl(rootDir));
+    git->setDirectory(QUrl(rootDir));
 
     // Perform a check on the folder to confirm we have a valid git repo
     if (!git->isValidDirectory())
-        git->init(KUrl(rootDir));                                             // Init an empty repo
+        git->init(QUrl(rootDir));                                             // Init an empty repo
 
     // Note: in the following GitRunner call, I'll skip testing the JobStatus value returned,
     // in order to focus the reader on how the runner works; in a real application, always
@@ -53,7 +53,7 @@ void testGitRunner() {
 
     // Ok, now let's add and commit one file
     QStringList *list = new QStringList("main.cpp");
-    git->add(KUrl::List(*list))   ;                                           // Add the element in the git index
+    git->add(QUrl::List(*list))   ;                                           // Add the element in the git index
     git->commit(QString("This is a comment: committed main."));               // Commit it
 
     // Now create some other files
@@ -72,7 +72,7 @@ void testGitRunner() {
     *list << "src1.cpp";
     *list << "src2.cpp";
     *list << "src3.cpp";
-    git->add(KUrl::List(*list));
+    git->add(QUrl::List(*list));
     git->commit("Multiline comment.\n\nThe first line briefly explains the commits purpose,\nwhile the remaining lines add more details.");
 
     // Now lets create a new branch
@@ -89,7 +89,7 @@ void testGitRunner() {
     // Lets perform an other add/commit action
     list->clear();
     list->append("h1.h");
-    git->add(KUrl::List(*list));
+    git->add(QUrl::List(*list));
     git->commit("Added h1.h in branch \"devel\".");
 
 
@@ -131,13 +131,13 @@ void testTimeLine() {
     QMainWindow *w = new QMainWindow(0, Qt::Window);
     //QDockWidget *dockTimeLine = new QDockWidget(i18n("TimeLine"), w);
     TimeLine *timeline = new TimeLine(w,
-                                      KUrl(rootDir),
+                                      QUrl(rootDir),
                                       Qt::RightDockWidgetArea);
 
     // Setting some relationships between widgets
     //dockTimeLine->setWidget(timeline);
     w->addDockWidget(Qt::LeftDockWidgetArea, timeline);
-    timeline->loadTimeLine(KUrl(rootDir));
+    timeline->loadTimeLine(QUrl(rootDir));
 
     // Some policy
     //dockTimeLine->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);

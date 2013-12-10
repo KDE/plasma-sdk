@@ -32,7 +32,7 @@ GitRunner::GitRunner()
 {
     //m_job = new DvcsJob();
     m_commMode = KProcess::SeparateChannels;
-    m_lastRepoRoot = new KUrl();
+    m_lastRepoRoot = new QUrl();
     m_result = QString();
     m_isRunning = false;
     m_jobStatus = DvcsJob::JobNotStarted;
@@ -70,7 +70,7 @@ void GitRunner::setCommunicationMode(KProcess::OutputChannelMode comm)
     m_commMode = comm;
 }
 
-void GitRunner::setDirectory(const KUrl &dir)
+void GitRunner::setDirectory(const QUrl &dir)
 {
     m_lastRepoRoot->setDirectory(dir.pathOrUrl());
 }
@@ -82,7 +82,7 @@ bool GitRunner::isRunning()
 
 bool GitRunner::isValidDirectory()
 {
-    const QString initialPath(m_lastRepoRoot->toLocalFile(KUrl::RemoveTrailingSlash));
+    const QString initialPath(m_lastRepoRoot->toLocalFile(QUrl::RemoveTrailingSlash));
     setDirectory(*m_lastRepoRoot);
 
     // A possible git repo has a .git subdicerctory
@@ -126,7 +126,7 @@ QString& GitRunner::getResult()
 }
 
 
-DvcsJob::JobStatus GitRunner::init(const KUrl &directory)
+DvcsJob::JobStatus GitRunner::init(const QUrl &directory)
 {
     // We need to tell the runner to change dir!
     m_lastRepoRoot->setDirectory(directory.pathOrUrl());
@@ -152,8 +152,8 @@ void GitRunner::addIgnoredFileExtension(const QString ignoredFileExtension)
     gitIgnoreFile.close();
 }
 
-DvcsJob::JobStatus GitRunner::createWorkingCopy(const KUrl &repoOrigin,
-                                                const KUrl &repoDestination)
+DvcsJob::JobStatus GitRunner::createWorkingCopy(const QUrl &repoOrigin,
+                                                const QUrl &repoDestination)
 {
     // TODO: now supports only cloning a local repo(not very useful, I know =P),
     // so extend the method to be used over the Internet.
@@ -167,7 +167,7 @@ DvcsJob::JobStatus GitRunner::createWorkingCopy(const KUrl &repoOrigin,
     return m_jobStatus;
 }
 
-DvcsJob::JobStatus GitRunner::add(const KUrl::List &localLocations)
+DvcsJob::JobStatus GitRunner::add(const QUrl::List &localLocations)
 {
     if (localLocations.empty())
         return m_jobStatus = DvcsJob::JobCancelled;
@@ -248,7 +248,7 @@ DvcsJob::JobStatus GitRunner::deleteCommit(const QString &sha1hash)
     return m_jobStatus;
 }
 
-DvcsJob::JobStatus GitRunner::remove(const KUrl::List &files)
+DvcsJob::JobStatus GitRunner::remove(const QUrl::List &files)
 {
     if (files.empty())
         return m_jobStatus = DvcsJob::JobCancelled;

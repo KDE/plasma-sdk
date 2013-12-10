@@ -49,7 +49,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "commitdialog.h"
 
 TimeLine::TimeLine(QWidget *parent,
-                   const KUrl &dir,
+                   const QUrl &dir,
                    Qt::DockWidgetArea location)
         :QDockWidget(i18n("TimeLine"))
 {
@@ -66,7 +66,7 @@ TimeLine::~TimeLine()
 }
 
 
-void TimeLine::loadTimeLine(const KUrl &dir)
+void TimeLine::loadTimeLine(const QUrl &dir)
 {
     m_table->clear();
 
@@ -351,7 +351,7 @@ void TimeLine::newSavePoint()
         commitMessage.append(optionalComment);
     }
 
-    m_gitRunner->add(KUrl::List(QString('.')));
+    m_gitRunner->add(QUrl::List(QString('.')));
     m_gitRunner->commit(commitMessage);
     loadTimeLine(m_workingDir);
     if (isHidden()) {
@@ -514,7 +514,7 @@ void TimeLine::createBranch()
     loadTimeLine(m_workingDir);
 }
 
-bool TimeLine::setWorkingDir(const KUrl &dir)
+bool TimeLine::setWorkingDir(const QUrl &dir)
 {
     if (dir.isValid()) {
         m_gitRunner->setDirectory(dir);

@@ -73,7 +73,7 @@ Q_SIGNALS:
     void reloadModel();
 
 private:
-    KUrl urlForIndex(const QModelIndex &index) const;
+    QUrl urlForIndex(const QModelIndex &index) const;
     bool fileExists(const QString& key) const;
 
 private Q_SLOTS:

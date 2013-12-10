@@ -195,7 +195,7 @@ bool SigningWidget::signingEnabled() const
     return m_signingEnabled;
 }
 
-bool SigningWidget::sign(const KUrl &path)
+bool SigningWidget::sign(const QUrl &path)
 {
     // Ensure we have a key set
     if (m_currentKey.isEmpty() ||  m_currentKey.isNull())

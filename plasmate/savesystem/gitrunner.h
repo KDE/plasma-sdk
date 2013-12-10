@@ -26,7 +26,7 @@
 #include <QDir>
 #include <QObject>
 
-#include <KUrl>
+#include <QUrl>
 #include <KProcess>
 
 /**
@@ -41,7 +41,7 @@
   * Example of usage:
   * @code
   *     GitRunner *git = new GitRunner();
-  *     git->setDirectory(KUrl("/home/user/foo/"));
+  *     git->setDirectory(QUrl("/home/user/foo/"));
   *     git->setCommunicationMode(KProcess::SeparateChannels);
   *     if(git->isValidDirectory()) {
   *         // We are now sure to be in a valid git <b>root</b> tree
@@ -55,7 +55,7 @@
   *         // so git will automatically add all new/changed files under the working
   *         // directory and its subdirectories =)
   *
-  *         if(git->add(KUrl::List(*list)) == DvcsJob::JobSucceeded) {
+  *         if(git->add(QUrl::List(*list)) == DvcsJob::JobSucceeded) {
   *             // Here we are sure the files are added correctly to git index;
   *             // so now we can commit.
   *
@@ -114,9 +114,9 @@ public:
 
     /**
       * Sets the working directory for our class.
-      * @param dir A KUrl with the <b>absolute</b> path of the working directory.
+      * @param dir A QUrl with the <b>absolute</b> path of the working directory.
       */
-    void setDirectory(const KUrl &dir);
+    void setDirectory(const QUrl &dir);
 
     /**
       * Sets the communication mode.
@@ -126,14 +126,14 @@ public:
 
     /**
       * Adds a list of files in the git index, so they are ready to be committed later.
-      * @param localLocations A list of KUrl containing the <b>absolute<path> of the files
+      * @param localLocations A list of QUrl containing the <b>absolute<path> of the files
       * that will be added.
       * @return The status of the performed operation.
-      * @note Sometimes is more easy using a KUrl::List with a single element, '.' ; by
+      * @note Sometimes is more easy using a QUrl::List with a single element, '.' ; by
       * doing this, git will automatically include recursively all the modified/new
       * files in the working directory.
       */
-    DvcsJob::JobStatus add(const KUrl::List &localLocations);
+    DvcsJob::JobStatus add(const QUrl::List &localLocations);
 
     /**
       * Clones an existing git repository to an other one.
@@ -143,15 +143,15 @@ public:
       * @param repoDestination The destination where cloning the source to.
       * @return The status of the performed operation.
       */
-    DvcsJob::JobStatus createWorkingCopy(const KUrl &repoOrigin,
-                                         const KUrl &repoDestination);
+    DvcsJob::JobStatus createWorkingCopy(const QUrl &repoOrigin,
+                                         const QUrl &repoDestination);
 
     /**
       * Removes the listed files from the directory and the git repo.
-      * @param files A List of KUrl files to be removed.
+      * @param files A List of QUrl files to be removed.
       * @return The status of the performed operation.
       */
-    DvcsJob::JobStatus remove(const KUrl::List &files);
+    DvcsJob::JobStatus remove(const QUrl::List &files);
 
 
     /**
@@ -198,7 +198,7 @@ public:
       * @param directory The directory we want being revision-controlled.
       * @return The status of the performed operation.
       */
-    DvcsJob::JobStatus init(const KUrl &directory);
+    DvcsJob::JobStatus init(const QUrl &directory);
 
     /**
       * It adds a new line inside the .gitignore file (if any, will be created too)
@@ -297,7 +297,7 @@ private:
     void startJob(DvcsJob &job);
 
     QString                     m_result;
-    KUrl                        *m_lastRepoRoot;
+    QUrl                        *m_lastRepoRoot;
     DvcsJob::JobStatus          m_jobStatus;
     KProcess::OutputChannelMode m_commMode;
     volatile bool               m_isRunning;

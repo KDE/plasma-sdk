@@ -148,7 +148,7 @@ QString PackageModel::package() const
     return QString();
 }
 
-KUrl PackageModel::urlForIndex(const QModelIndex &index) const
+QUrl PackageModel::urlForIndex(const QModelIndex &index) const
 {
     const char *key = static_cast<const char *>(index.internalPointer());
     QList<const char *> named = m_namedFiles.value(key);
@@ -583,26 +583,26 @@ void PackageModel::fileAddedOnDisk(const QString &path)
         return;
     }
 
-    const KUrl toAdd(path);
-    KUrl toAddDir(toAdd.directory());
+    const QUrl toAdd(path);
+    QUrl toAddDir(toAdd.directory());
 
     const int parentCount = rowCount(QModelIndex());
 
     for (int i = 0; i < parentCount - 1; ++i) {
         const char *key = m_topEntries.at(i);
         QList<const char *> named = m_namedFiles.value(key);
-        KUrl target(m_package->filePath(key));
+        QUrl target(m_package->filePath(key));
         //make sure that our paths ends with a '/'
         //in order to avoid a compare failure due to a '/'
-        target.adjustPath(KUrl::AddTrailingSlash);
-        toAddDir.adjustPath(KUrl::AddTrailingSlash);
+        target.adjustPath(QUrl::AddTrailingSlash);
+        toAddDir.adjustPath(QUrl::AddTrailingSlash);
 
         if (target.pathOrUrl() == toAddDir.pathOrUrl()) {
             QModelIndex parent = index(i, 0, QModelIndex());
             int ind = rowCount(parent);
             for (int ii = 0; ii < ind; ++ii) {
                 QModelIndex child = index(ii, 0, parent);
-                KUrl childPath(child.data(PackageModel::UrlRole).toString());
+                QUrl childPath(child.data(PackageModel::UrlRole).toString());
                 if (childPath.equals(toAdd)) {
                     // let's not double-add
                     return;
@@ -626,7 +626,7 @@ void PackageModel::fileDeletedOnDisk(const QString &path)
 
     // Probably not the most efficient way to do it but
     // it works :)
-    const KUrl toDelete(path);
+    const QUrl toDelete(path);
 
     // Iterate through every tree element and check if it matches
     // the deleted file
@@ -636,7 +636,7 @@ void PackageModel::fileDeletedOnDisk(const QString &path)
         int childCount = rowCount(parent);
         for (int ii = 1; ii < childCount; ++ii) {
             QModelIndex child = index(ii, 0, parent);
-            KUrl childPath(child.data(PackageModel::UrlRole).toString());
+            QUrl childPath(child.data(PackageModel::UrlRole).toString());
             if (childPath.equals(toDelete)) {
                 // match!! remove it!
                 beginRemoveRows(parent, ii, ii);

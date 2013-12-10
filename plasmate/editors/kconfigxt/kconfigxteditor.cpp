@@ -70,13 +70,13 @@ KConfigXtEditor::KConfigXtEditor(QWidget *parent)
 
 }
 
-void KConfigXtEditor::setFilename(const KUrl& filename)
+void KConfigXtEditor::setFilename(const QUrl& filename)
 {
     m_filename = filename;
     //load the xml file
 }
 
-KUrl KConfigXtEditor::filename()
+QUrl KConfigXtEditor::filename()
 {
     return m_filename;
 

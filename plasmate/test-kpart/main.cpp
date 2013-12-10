@@ -1,7 +1,7 @@
 #include <KApplication>
 #include <KAboutData>
 #include <KCmdLineArgs>
-#include <KUrl>
+#include <QUrl>
 
 #include "mainwindow.h"
 

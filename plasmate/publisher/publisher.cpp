@@ -17,7 +17,7 @@
 #include <KConfigGroup>
 #include <KIO/DeleteJob>
 #include <KSharedConfig>
-#include <KUrlRequester>
+#include <QUrlRequester>
 #include <KLocalizedString>
 #include <KService>
 #include <KServiceTypeTrader>
@@ -31,7 +31,7 @@
 #include "../projectmanager/projectmanager.h"
 #include "remoteinstaller/remoteinstallerdialog.h"
 
-Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
+Publisher::Publisher(QWidget *parent, const QUrl &path, const QString& type)
         : KDialog(parent),
         m_signingWidget(0),
         m_projectPath(path),
@@ -67,7 +67,7 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     m_ui.installerButton->addItem("Use PlasmaPkg");
     m_ui.installerButton->addItem("Remote Install");
 
-    connect(m_ui.exporterUrl, SIGNAL(urlSelected(const KUrl&)), this, SLOT(addSuffix()));
+    connect(m_ui.exporterUrl, SIGNAL(urlSelected(const QUrl&)), this, SLOT(addSuffix()));
     connect(m_ui.exporterButton, SIGNAL(clicked()), this, SLOT(doExport()));
     connect(m_ui.installerButton, SIGNAL(currentIndexChanged(int)), this, SLOT(checkInstallButtonState(int)));
     connect(m_ui.installButton, SIGNAL(clicked()), this, SLOT(doInstall()));
@@ -145,7 +145,7 @@ void Publisher::doInstall()
 
 void Publisher::doPlasmaPkg()
 {
-    const KUrl tempPackage(tempPackagePath());
+    const QUrl tempPackage(tempPackagePath());
     qDebug() << "tempPackagePath" << tempPackage.pathOrUrl();
     qDebug() << "m_projectPath" << m_projectPath.pathOrUrl();
     ProjectManager::exportPackage(m_projectPath, tempPackage); // create temporary package
@@ -232,7 +232,7 @@ const QString Publisher::tempPackagePath()
     if (d.cdUp()) {
         return d.path() + "/" + m_projectName + "." + m_extension;
     }
-    return m_projectPath.path(KUrl::AddTrailingSlash) + m_projectName + "." + m_extension;
+    return m_projectPath.path(QUrl::AddTrailingSlash) + m_projectName + "." + m_extension;
 }
 
 void Publisher::doPublish()
@@ -241,7 +241,7 @@ void Publisher::doPublish()
     qDebug() << "projectPath:" << m_projectPath.path();
 
     qDebug() << "Exportando no tmp: file://" + tempPackagePath();
-    KUrl url(tempPackagePath());
+    QUrl url(tempPackagePath());
 
     bool ok = exportToFile(url);
     if (m_signingWidget->signingEnabled()) {
@@ -258,7 +258,7 @@ void Publisher::doPublish()
     }
 }
 
-bool Publisher::exportToFile(const KUrl& url)
+bool Publisher::exportToFile(const QUrl& url)
 {
     if (!url.isLocalFile() ||
             QDir(url.path()).exists()) {

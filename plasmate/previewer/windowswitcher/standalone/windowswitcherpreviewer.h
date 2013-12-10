@@ -21,7 +21,7 @@
 #define WINDOWSWITCHERPREVIEWER_H
 
 #include "../tabboxpreviewer.h"
-#include <KUrlRequester>
+#include <QUrlRequester>
 #include <QVBoxLayout>
 #include <KDialog>
 
@@ -42,7 +42,7 @@ private:
     QWidget *tmpWidget;
     QVBoxLayout *tmpLayout;
     TabBoxPreviewer *m_previewer;
-    KUrlRequester *m_filePath;
+    QUrlRequester *m_filePath;
 };
 
 #endif // WINDOWSWITCHERPREVIEWER_H

@@ -238,7 +238,7 @@ void EditPage::findEditor(const QModelIndex &index)
             //create the part using offers.at(0)
             //qDebug() << offers.at(0);
             //offers.at(0)->createInstance(parentWidget);
-            emit loadEditor(offers, KUrl(target));
+            emit loadEditor(offers, QUrl(target));
             return;
         }
     }
@@ -246,17 +246,17 @@ void EditPage::findEditor(const QModelIndex &index)
 void EditPage::imageDialog(const QString& filter, const QString& destinationPath)
 {
     KUser user;
-    KUrl homeDir = user.homeDir();
-    const QList<KUrl> srcDir = KFileDialog::getOpenUrls(homeDir, filter, this);
+    QUrl homeDir = user.homeDir();
+    const QList<QUrl> srcDir = KFileDialog::getOpenUrls(homeDir, filter, this);
     KConfigGroup cg(KGlobal::config(), "PackageModel::package");
-    const KUrl destinationDir(cg.readEntry("lastLoadedPackage", QString()) + destinationPath);
+    const QUrl destinationDir(cg.readEntry("lastLoadedPackage", QString()) + destinationPath);
     QDir destPath(destinationDir.pathOrUrl());
     if (!destPath.exists()) {
         destPath.mkpath(destinationDir.pathOrUrl());
     }
 
     if (!srcDir.isEmpty()) {
-        foreach(const KUrl source, srcDir) {
+        foreach(const QUrl source, srcDir) {
             KIO::copy(source, destinationDir, KIO::HideProgressInfo);
         }
     }
@@ -294,7 +294,7 @@ bool EditPage::hasExtension(const QString& filename)
 }
 
 
-void EditPage::loadFile(const KUrl &path)
+void EditPage::loadFile(const QUrl &path)
 {
     m_path = path;
 

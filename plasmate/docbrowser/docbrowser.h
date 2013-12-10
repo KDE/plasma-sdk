@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class QDockWidget;
 class QWebView;
-class KUrl;
+class QUrl;
 class KLineEdit;
 class QLabel;
 
@@ -38,8 +38,8 @@ class DocBrowser : public QDockWidget
     Q_OBJECT;
 public:
     DocBrowser(const PackageModel *package, QWidget* parent);
-    KUrl currentPage() const;
-    void load(KUrl page);
+    QUrl currentPage() const;
+    void load(QUrl page);
 
     void setPackage(const PackageModel *package);
     const PackageModel *package() const;

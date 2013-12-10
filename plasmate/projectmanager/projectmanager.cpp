@@ -32,7 +32,7 @@
 #include <KMessageBox>
 #include <KPushButton>
 #include <KStandardDirs>
-#include <KUrl>
+#include <QUrl>
 #include <KZip>
 
 #include "projectmanager.h"
@@ -152,7 +152,7 @@ void ProjectManager::emitProjectSelected()
     done(KDialog::Accepted);
 }
 
-bool ProjectManager::exportPackage(const KUrl &toExport, const KUrl &targetFile)
+bool ProjectManager::exportPackage(const QUrl &toExport, const QUrl &targetFile)
 {
     // Think ONE minute before committing nonsense: if you want to zip a folder,
     // and you create the *.zip file INSIDE that folder WHILE copying the files,
@@ -185,7 +185,7 @@ bool ProjectManager::exportPackage(const KUrl &toExport, const KUrl &targetFile)
     return false;
 }
 
-bool ProjectManager::importPackage(const KUrl &toImport, const KUrl &targetLocation)
+bool ProjectManager::importPackage(const QUrl &toImport, const QUrl &targetLocation)
 {
     bool ret = true;
     KZip plasmoid(toImport.path());
@@ -219,8 +219,8 @@ void ProjectManager::setRecentProjects(const QStringList &paths)
     emit requestRefresh();
 }
 
-void ProjectManager::deleteProject(const KUrl &projectLocation)
+void ProjectManager::deleteProject(const QUrl &projectLocation)
 {
-    KUrl project = projectLocation;
+    QUrl project = projectLocation;
     KIO::del(project);
 }
