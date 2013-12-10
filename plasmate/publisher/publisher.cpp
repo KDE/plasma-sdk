@@ -32,7 +32,7 @@
 #include "remoteinstaller/remoteinstallerdialog.h"
 
 Publisher::Publisher(QWidget *parent, const QUrl &path, const QString& type)
-        : KDialog(parent),
+        : QDialog(parent),
         m_signingWidget(0),
         m_projectPath(path),
         m_projectType(type),
@@ -50,7 +50,7 @@ Publisher::Publisher(QWidget *parent, const QUrl &path, const QString& type)
     QWidget *tmpWidget = new QWidget();
     QHBoxLayout *tmpLayout = new QHBoxLayout();
     tmpLayout->addLayout(layout);
-    setButtons(KDialog::None);
+    setButtons(QDialog::None);
     tmpWidget->setLayout(tmpLayout);
     setMainWidget(tmpWidget);
 

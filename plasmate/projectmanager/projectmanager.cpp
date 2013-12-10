@@ -39,9 +39,9 @@
 #include "startpage.h"
 
 ProjectManager::ProjectManager(QWidget* parent)
-    : KDialog(parent)
+    : QDialog(parent)
 {
-    setButtons(KDialog::None);
+    setButtons(QDialog::None);
     m_projectList = new QListWidget(this);
     m_projectList->setSelectionMode(QAbstractItemView::ExtendedSelection);
     connect(m_projectList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(emitProjectSelected()));
@@ -149,7 +149,7 @@ void ProjectManager::emitProjectSelected()
     QString url = l[0]->data(StartPage::FullPathRole).value<QString>();
 
     emit projectSelected(url);
-    done(KDialog::Accepted);
+    done(QDialog::Accepted);
 }
 
 bool ProjectManager::exportPackage(const QUrl &toExport, const QUrl &targetFile)

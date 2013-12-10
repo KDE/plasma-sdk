@@ -332,7 +332,7 @@ void TimeLine::newSavePoint()
     }
 
     if (!dialogAlreadyOpen) {
-        if (commitDialog->exec() == KDialog::Rejected) {
+        if (commitDialog->exec() == QDialog::Rejected) {
             return;
         }
 
@@ -429,7 +429,7 @@ void TimeLine::mergeBranch()
     CommitDialog *commitDialog = new CommitDialog();
     connect(commitDialog, SIGNAL(finished()), commitDialog, SLOT(deleteLater()));
     commitDialog->setModal(true);
-    if (commitDialog->exec() == KDialog::Rejected) {
+    if (commitDialog->exec() == QDialog::Rejected) {
         return;
     }
 

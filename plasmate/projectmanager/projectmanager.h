@@ -20,7 +20,7 @@
 #ifndef PROJECTMANAGER_H
 #define PROJECTMANAGER_H
 
-#include <KDialog>
+#include <QDialog>
 
 #include <mainwindow.h>
 
@@ -36,7 +36,7 @@ namespace Ui
 class ProjectManager;
 }
 
-class ProjectManager : public KDialog
+class ProjectManager : public QDialog
 {
     Q_OBJECT
 public:

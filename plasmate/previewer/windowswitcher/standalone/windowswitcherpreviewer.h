@@ -23,9 +23,9 @@
 #include "../tabboxpreviewer.h"
 #include <QUrlRequester>
 #include <QVBoxLayout>
-#include <KDialog>
+#include <QDialog>
 
-class WindowSwitcherPreviewer : public KDialog {
+class WindowSwitcherPreviewer : public QDialog {
 
     Q_OBJECT
 

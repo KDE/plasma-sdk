@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 WindowSwitcherPreviewer::WindowSwitcherPreviewer(QWidget* parent)
-        : KDialog(parent)
+        : QDialog(parent)
 {
     setMinimumSize(400,370);
     tmpWidget = new QWidget();

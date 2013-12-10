@@ -30,7 +30,7 @@
 
 
 CommitDialog::CommitDialog(QWidget *parent)
-    : KDialog(parent)
+    : QDialog(parent)
 {
     setWindowTitle(i18n("New Save Point"));
 
@@ -46,8 +46,8 @@ CommitDialog::CommitDialog(QWidget *parent)
     layout->addRow(commitFullLabel, m_commitFullText);
 
     setMainWidget(mainWidget);
-    setButtons(KDialog::Ok | KDialog::Cancel);
-    setButtonText(KDialog::Ok, i18n("Create Save Point"));
+    setButtons(QDialog::Ok | QDialog::Cancel);
+    setButtonText(QDialog::Ok, i18n("Create Save Point"));
 
     m_commitBriefText->setFocus();
     m_commitBriefText->selectAll();
