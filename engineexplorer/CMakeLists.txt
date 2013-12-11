@@ -10,11 +10,11 @@ kde4_add_ui_files(plasmaengineexplorer_SRCS engineexplorer.ui serviceviewer.ui)
 add_executable(plasmaengineexplorer ${plasmaengineexplorer_SRCS})
 
 target_link_libraries(plasmaengineexplorer
-    KF5::KIconThemes
-    KF5::KI18n
-    KF5::KService
+    KF5::IconThemes
+    KF5::I18n
+    KF5::Service
     KF5::KDE4Support
-    KF5::KCompletion
+    KF5::Completion
     KF5::Plasma
 )
 

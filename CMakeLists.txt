@@ -49,18 +49,18 @@ set (QT_MIN_VERSION "5.2.0")
 
 # Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
 find_package(KF5 CONFIG REQUIRED COMPONENTS
-    KIdleTime ItemModels KWidgetsAddons KWindowSystem KCodecs KArchive KCoreAddons Solid ThreadWeaver
-    KConfig KAuth KJS KWallet KDBusAddons Sonnet
-    KI18n KGuiAddons KService KConfigWidgets ItemViews KNotifications KIconThemes KStyle KCompletion KJobWidgets KTextWidgets XmlGui KCrash
-    KUnitConversion KBookmarks KParts Kross)
+    IdleTime ItemModels WidgetsAddons WindowSystem Codecs Archive CoreAddons Solid ThreadWeaver
+    Config Auth JS Wallet DBusAddons Sonnet
+    I18n GuiAddons Service ConfigWidgets ItemViews Notifications IconThemes Style Completion JobWidgets TextWidgets XmlGui Crash
+    UnitConversion Bookmarks Parts Kross)
 
-find_package(Plasma REQUIRED NO_MODULE)
-find_package(PlasmaQuick REQUIRED NO_MODULE)
-find_package(KDeclarative REQUIRED NO_MODULE)
-find_package(KIO REQUIRED NO_MODULE)
+find_package(KF5Plasma REQUIRED NO_MODULE)
+find_package(KF5PlasmaQuick REQUIRED NO_MODULE)
+find_package(KF5Declarative REQUIRED NO_MODULE)
+find_package(KF5KIO REQUIRED NO_MODULE)
 
 # needed for set_package_properties macro
-find_package(KDE4Support REQUIRED NO_MODULE)
+find_package(KF5KDE4Support REQUIRED NO_MODULE)
 
 find_package(LibAttica NO_MODULE)
 set_package_properties(LibAttica PROPERTIES DESCRIPTION "Support for Get Hot New Stuff related stuff"
@@ -81,7 +81,7 @@ remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FR
 include_directories( ${kdeqt5staging_INCLUDE_DIRS}
                      ${kdeqt5staging_INCLUDE_DIR}
                      ${KDE4_INCLUDES}
-                     KF5::KDeclarative
+                     KF5::Declarative
                      ${KF5_INCLUDE_DIRS}  # since e-c-m 0.0.7
                    )
 

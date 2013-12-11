@@ -10,7 +10,7 @@ target_link_libraries(plasmoidviewer
     Qt5::Quick
     KF5::Plasma
     KF5::PlasmaQuick
-    KF5::KI18n
+    KF5::I18n
 )
 
 install(TARGETS plasmoidviewer ${INSTALL_TARGETS_DEFAULT_ARGS})
