@@ -25,9 +25,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_D
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings)
-find_package(Qt5Core REQUIRED NO_MODULE)
 
-find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Quick X11Extras Svg Test PrintSupport)
+find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Quick X11Extras Svg Test PrintSupport)
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0)
 
@@ -86,7 +85,10 @@ include_directories( ${kdeqt5staging_INCLUDE_DIRS}
                    )
 
 # for including config.h and for includes like <kparts/foo.h>
-include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/src ${CMAKE_SOURCE_DIR}/interfaces ${CMAKE_SOURCE_DIR}/src/plasma/includes)
+include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/src
+                     ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/src
+                     ${CMAKE_SOURCE_DIR}/interfaces
+                     ${CMAKE_SOURCE_DIR}/src/plasma/includes)
 
 
 add_subdirectory(engineexplorer)

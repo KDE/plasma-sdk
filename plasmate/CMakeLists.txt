@@ -32,8 +32,8 @@ endif()
 set (PlasMate_SRC
     #editors/editpage.cpp
     #editors/metadata/metadataeditor.cpp
-    #editors/imageviewer/imageloader.cpp
-    #editors/imageviewer/imageviewer.cpp
+    editors/imageviewer/imageloader.cpp
+    editors/imageviewer/imageviewer.cpp
     #editors/text/texteditor.cpp
     editors/kconfigxt/kconfigxteditor.cpp
     editors/kconfigxt/kconfigxtreader.cpp
@@ -105,6 +105,7 @@ target_link_libraries(plasmate
                       #${QGPGME_LIBRARIES}
                       KF5::Declarative
                       Qt5::Quick
+                      Qt5::Svg
                       KF5::PlasmaQuick
                       ${LibAttica_LIBRARIES}
                       #Qt5::WebKitWidgets
