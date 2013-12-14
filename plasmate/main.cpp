@@ -38,9 +38,9 @@ int main(int argc, char *argv[])
     parser.addVersionOption();
     parser.process(app);
 
-    qInstallMsgHandler(KonsolePreviewer::customMessageHandler);
-    MainWindow *mainWindow = new MainWindow();
-    mainWindow->show();
+    //qInstallMsgHandler(KonsolePreviewer::customMessageHandler);
+    //MainWindow *mainWindow = new MainWindow();
+    //mainWindow->show();
     return app.exec();
 }
 

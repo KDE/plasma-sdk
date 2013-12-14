@@ -30,29 +30,29 @@ if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
 endif()
 
 set (PlasMate_SRC
-    editors/editpage.cpp
-    editors/metadata/metadataeditor.cpp
-    editors/imageviewer/imageloader.cpp
-    editors/imageviewer/imageviewer.cpp
-    editors/text/texteditor.cpp
+    #editors/editpage.cpp
+    #editors/metadata/metadataeditor.cpp
+    #editors/imageviewer/imageloader.cpp
+    #editors/imageviewer/imageviewer.cpp
+    #editors/text/texteditor.cpp
     editors/kconfigxt/kconfigxteditor.cpp
     editors/kconfigxt/kconfigxtreader.cpp
     editors/kconfigxt/kconfigxtwriter.cpp
     main.cpp
-    sidebaritem.cpp
-    sidebardelegate.cpp
-    sidebartablewidget.cpp
-    sidebar.cpp
-    savesystem/dvcsjob.cpp
-    savesystem/gitrunner.cpp
-    savesystem/commitdialog.cpp
-    savesystem/timelineitem.cpp
-    savesystem/tabledelegate.cpp
-    savesystem/tablewidget.cpp
-    savesystem/timeline.cpp
-    mainwindow.cpp
-    startpage.cpp
-    packagemodel.cpp
+    #sidebaritem.cpp
+    #sidebardelegate.cpp
+    #sidebartablewidget.cpp
+    #sidebar.cpp
+    #savesystem/dvcsjob.cpp
+    #savesystem/gitrunner.cpp
+    #savesystem/commitdialog.cpp
+    #savesystem/timelineitem.cpp
+    #savesystem/tabledelegate.cpp
+    #savesystem/tablewidget.cpp
+    #savesystem/timeline.cpp
+    #mainwindow.cpp
+    #startpage.cpp
+    #packagemodel.cpp
     #previewer/plasmoid/plasmoidpreviewer.cpp
     #previewer/plasmoid/plasmoidview.cpp
     #previewer/runner/runnerpreviewer.cpp
@@ -62,99 +62,99 @@ set (PlasMate_SRC
     #previewer/previewer.cpp
     # publisher/signingwidget.cpp
     #publisher/signingdialog.cpp
-    publisher/publisher.cpp
-    publisher/remoteinstaller/remoteinstaller.cpp
-    publisher/remoteinstaller/remoteinstallerdialog.cpp
+    #publisher/publisher.cpp
+    #publisher/remoteinstaller/remoteinstaller.cpp
+    #publisher/remoteinstaller/remoteinstallerdialog.cpp
     #konsole/konsolepreviewer.cpp
-    docbrowser/docbrowser.cpp
-    projectmanager/projectmanager.cpp
+    #docbrowser/docbrowser.cpp
+    #projectmanager/projectmanager.cpp
 )
 
-if (DEBUG_MODEL)
-      set (PlasMate_SRC
-         ${PlasMate_SRC}
-         modeltest/dynamictreemodel.cpp
-         modeltest/modeltest.cpp
-         )
-endif (DEBUG_MODEL)
+#if (DEBUG_MODEL)
+#      set (PlasMate_SRC
+#         ${PlasMate_SRC}
+#         modeltest/dynamictreemodel.cpp
+#         modeltest/modeltest.cpp
+#         )
+#endif (DEBUG_MODEL)
 
-kde4_add_ui_files (PlasMate_SRC
-   startpage.ui
-   editors/metadata/metadata.ui
-   publisher/publisher.ui
-   publisher/remoteinstaller/remoteinstaller.ui
-   editors/kconfigxt/kconfigxteditor.ui
-)
+#kde4_add_ui_files (PlasMate_SRC
+    #startpage.ui
+   #editors/metadata/metadata.ui
+   #publisher/publisher.ui
+   #publisher/remoteinstaller/remoteinstaller.ui
+   #editors/kconfigxt/kconfigxteditor.ui
+   #)
 
 include_directories(${QT_QTWEBKIT_INCLUDE_DIR}
                     #${QGPGME_INCLUDE_DIR}
                     #${GPGME_INCLUDES}
 )
 
-add_subdirectory( editors )
+#add_subdirectory( editors )
 #add_subdirectory( previewer/plasmoid )
-add_subdirectory( templates )
-add_subdirectory( icons )
+#add_subdirectory( templates )
+#add_subdirectory( icons )
 
 add_executable(plasmate ${PlasMate_SRC})
 target_link_libraries(plasmate
-                      KF5::KTextEditor
+                      #KF5::KTextEditor
                       KF5::Plasma
-                      KF5::KNewStuff
+                      KF5::NewStuff
                       Qt5::Xml
                       #${QGPGME_LIBRARIES}
-                      KF5::KDeclarative
+                      KF5::Declarative
                       Qt5::Quick
                       KF5::PlasmaQuick
-                      KF5::Attica
-                      Qt5::Webkit
-                      KF5::KIo
+                      ${LibAttica_LIBRARIES}
+                      #Qt5::WebKitWidgets
+                      KF5::KIOCore
                       KF5::ItemViews
-                      KF5::KConfigCore
-                      KF5::KIconThemes
-                      KF5::KI18n
+                      KF5::ConfigCore
+                      KF5::IconThemes
+                      KF5::I18n
                       KF5::KIOWidgets
-                      KF5::KService
+                      KF5::Service
                       KF5::KDE4Support
                       #${KDEPIMLIBS_KPIMUTILS_LIBS}
 )
 
-if (DEBUG_MODEL)
-   target_link_libraries(plasmate Qt5::Test)
-endif (DEBUG_MODEL)
+#if (DEBUG_MODEL)
+#   target_link_libraries(plasmate Qt5::Test)
+#endif (DEBUG_MODEL)
 
 install(TARGETS plasmate ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS plasmate.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES plasmateui.rc  DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 install(FILES plasmate.knsrc DESTINATION ${CONFIG_INSTALL_DIR})
 
-install( FILES previewer/windowswitcher/thumbnails/konqueror.png
-previewer/windowswitcher/thumbnails/kmail.png
-previewer/windowswitcher/thumbnails/systemsettings.png
-previewer/windowswitcher/thumbnails/dolphin.png
-DESTINATION ${DATA_INSTALL_DIR}/plasmate)
-install( FILES previewer/windowswitcher/tabboxdelegate.qml DESTINATION ${DATA_INSTALL_DIR}/plasmate)
+#install( FILES previewer/windowswitcher/thumbnails/konqueror.png
+#previewer/windowswitcher/thumbnails/kmail.png
+#previewer/windowswitcher/thumbnails/systemsettings.png
+#previewer/windowswitcher/thumbnails/dolphin.png
+#DESTINATION ${DATA_INSTALL_DIR}/plasmate)
+#install( FILES previewer/windowswitcher/tabboxdelegate.qml DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 
 ##standalone applications
 #plasmaremoteinstaller
-set (PlasmaRemoteInstaller_SRC
-    publisher/remoteinstaller/remoteinstallerdialog.cpp
-    publisher/remoteinstaller/remoteinstaller.cpp
-    publisher/remoteinstaller/standalone/main.cpp
-    publisher/remoteinstaller/standalone/plasmaremoteinstaller.cpp
-)
+#set (PlasmaRemoteInstaller_SRC
+#    publisher/remoteinstaller/remoteinstallerdialog.cpp
+#    publisher/remoteinstaller/remoteinstaller.cpp
+#    publisher/remoteinstaller/standalone/main.cpp
+#    publisher/remoteinstaller/standalone/plasmaremoteinstaller.cpp
+#)
 
-kde4_add_ui_files (PlasmaRemoteInstaller_SRC
-   publisher/remoteinstaller/remoteinstaller.ui
-)
+#kde4_add_ui_files (PlasmaRemoteInstaller_SRC
+#   publisher/remoteinstaller/remoteinstaller.ui
+#)
 
-add_executable(plasmaremoteinstaller ${PlasmaRemoteInstaller_SRC})
-target_link_libraries(plasmaremoteinstaller
-                      ${KDE4_KDEUI_LIBS}
-                      ${KDE4_KIO_LIBRARY}
-)
+#add_executable(plasmaremoteinstaller ${PlasmaRemoteInstaller_SRC})
+#target_link_libraries(plasmaremoteinstaller
+#                      ${KDE4_KDEUI_LIBS}
+#                      ${KDE4_KIO_LIBRARY}
+#)
 
-install(TARGETS plasmaremoteinstaller ${INSTALL_TARGETS_DEFAULT_ARGS})
+#install(TARGETS plasmaremoteinstaller ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 #kwin-windowswitcherpreviewer
 #set (KWin-WindowSwitcherPreviewer_SRC
@@ -192,9 +192,9 @@ add_executable(plasmakconfigxteditor ${plasmakconfigxt_SRCS})
 target_link_libraries(plasmakconfigxteditor
                         KF5::KDE4Support
                         Qt5::Widgets
-                        KF5::KCoreAddons
-                        KF5::KConfigCore
-                        KF5::KIO
+                        KF5::CoreAddons
+                        KF5::ConfigCore
+                        KF5::KIOCore
                         Qt5::Xml
 )
 
