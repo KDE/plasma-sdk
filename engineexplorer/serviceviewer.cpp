@@ -230,5 +230,3 @@ void ServiceViewer::updateJobCount(int numberOfJobs)
     }
 }
 
-#include "serviceviewer.moc"
-
