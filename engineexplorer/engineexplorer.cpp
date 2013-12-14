@@ -526,5 +526,3 @@ void EngineExplorer::enableButtons(bool enable)
     }
 }
 
-#include "engineexplorer.moc"
-
