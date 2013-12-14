@@ -62,7 +62,7 @@ set (PlasMate_SRC
     #previewer/previewer.cpp
     # publisher/signingwidget.cpp
     #publisher/signingdialog.cpp
-    #publisher/publisher.cpp
+    publisher/publisher.cpp
     #publisher/remoteinstaller/remoteinstaller.cpp
     #publisher/remoteinstaller/remoteinstallerdialog.cpp
     #konsole/konsolepreviewer.cpp

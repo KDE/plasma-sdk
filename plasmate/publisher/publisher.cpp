@@ -17,7 +17,7 @@
 #include <KConfigGroup>
 #include <KIO/DeleteJob>
 #include <KSharedConfig>
-#include <QUrlRequester>
+#include <KUrlRequester>
 #include <KLocalizedString>
 #include <KService>
 #include <KServiceTypeTrader>
@@ -26,33 +26,30 @@
 #include <KStandardDirs>
 
 #include "publisher.h"
-#include "signingwidget.h"
-#include "../packagemodel.h"
+//#include "signingwidget.h"
 #include "../projectmanager/projectmanager.h"
 #include "remoteinstaller/remoteinstallerdialog.h"
 
 Publisher::Publisher(QWidget *parent, const QUrl &path, const QString& type)
         : QDialog(parent),
-        m_signingWidget(0),
+        // TODO
+        //m_signingWidget(0),
         m_projectPath(path),
         m_projectType(type),
         m_comboBoxIndex(0)
 {
     QWidget *uiWidget = new QWidget();
     m_ui.setupUi(uiWidget);
-    m_signingWidget = new SigningWidget();
+    // TODO
+    //m_signingWidget = new SigningWidget();
 
     //merge the ui file with the SigningWidget
     QVBoxLayout *layout = new QVBoxLayout();
     layout->addWidget(uiWidget);
-    layout->addWidget(m_signingWidget);
+    //TODO
+    //layout->addWidget(m_signingWidget);
 
-    QWidget *tmpWidget = new QWidget();
-    QHBoxLayout *tmpLayout = new QHBoxLayout();
-    tmpLayout->addLayout(layout);
-    setButtons(QDialog::None);
-    tmpWidget->setLayout(tmpLayout);
-    setMainWidget(tmpWidget);
+    setLayout(layout);
 
     m_extension = (type == "Plasma/Applet" || type == "Plasma/PopupApplet") ? "plasmoid" : "zip";
 
@@ -83,7 +80,7 @@ void Publisher::addSuffix()
     QString selected = m_ui.exporterUrl->url().path();
     QString suffix = QFileInfo(selected).suffix();
     if (suffix != m_extension && suffix != "zip") {
-        m_ui.exporterUrl->setUrl(selected + "." + m_extension);
+        m_ui.exporterUrl->setUrl(QUrl::fromLocalFile(selected + QLatin1Char('.') + m_extension));
     }
 }
 
@@ -102,10 +99,11 @@ void Publisher::doExport()
     }
     bool ok = exportToFile(m_ui.exporterUrl->url());
 
+    // TODO
     // If signing is enabled, lets do that!
-    if (m_signingWidget->signingEnabled()) {
-        ok = ok && m_signingWidget->sign(m_ui.exporterUrl->url());
-    }
+    //if (m_signingWidget->signingEnabled()) {
+    //    ok = ok && m_signingWidget->sign(m_ui.exporterUrl->url());
+    //}
     if (QFile::exists(m_ui.exporterUrl->url().path()) && ok) {
         KMessageBox::information(this, i18n("Project has been exported to %1.", m_ui.exporterUrl->url().path()));
     } else {
@@ -139,7 +137,8 @@ void Publisher::doInstall()
     if (m_comboBoxIndex == 1) {
         doPlasmaPkg();
     } else if (m_comboBoxIndex == 2) {
-        doRemoteInstall();
+        // TODO
+        //doRemoteInstall();
     }
 }
 
@@ -148,7 +147,9 @@ void Publisher::doPlasmaPkg()
     const QUrl tempPackage(tempPackagePath());
     qDebug() << "tempPackagePath" << tempPackage.path();
     qDebug() << "m_projectPath" << m_projectPath.path();
-    ProjectManager::exportPackage(m_projectPath, tempPackage); // create temporary package
+
+    //TODO
+    //ProjectManager::exportPackage(m_projectPath, tempPackage); // create temporary package
 
     QStringList argv("plasmapkg");
     argv.append("-t");
@@ -182,7 +183,8 @@ void Publisher::doPlasmaPkg()
         return;
     }
 
-    if (m_signingWidget->signingEnabled()) {
+    // TODO
+   /* if (m_signingWidget->signingEnabled()) {
         ok = ok && m_signingWidget->sign(tempPackage);
 
         QString signatureDestPath = KStandardDirs::locateLocal("data", "plasma/plasmoids/");
@@ -203,7 +205,7 @@ void Publisher::doPlasmaPkg()
             ok = false;
         }
 
-    }
+    }*/
 
     QFile::remove(tempPackage.path()); // delete temporary package
     // TODO: probably check for errors and stuff instead of announcing
@@ -215,7 +217,7 @@ void Publisher::doPlasmaPkg()
     }
 }
 
-void Publisher::doRemoteInstall()
+/*void Publisher::doRemoteInstall()
 {
     QScopedPointer<RemoteInstallerDialog> dialog(new RemoteInstallerDialog());
 
@@ -224,15 +226,17 @@ void Publisher::doRemoteInstall()
     dialog->setPackagePath(path);
 
     dialog->exec();
-}
+}*/
 
 const QString Publisher::tempPackagePath()
 {
     QDir d(m_projectPath.path());
     if (d.cdUp()) {
-        return d.path() + "/" + m_projectName + "." + m_extension;
+        return d.path() + QLatin1Char('/') + m_projectName + QLatin1Char('/') + m_extension;
     }
-    return m_projectPath.path(QUrl::AddTrailingSlash) + m_projectName + "." + m_extension;
+    QString path = m_projectPath.path();
+    path = path.endsWith(QLatin1Char('/')) ? path : path + QLatin1Char('/');
+    return path +  m_projectName + "." + m_extension;
 }
 
 void Publisher::doPublish()
@@ -244,9 +248,10 @@ void Publisher::doPublish()
     QUrl url(tempPackagePath());
 
     bool ok = exportToFile(url);
-    if (m_signingWidget->signingEnabled()) {
-        ok = ok && m_signingWidget->sign(url);
-    }
+    // TODO
+   // if (m_signingWidget->signingEnabled()) {
+   //     ok = ok && m_signingWidget->sign(url);
+   // }
     if (ok) {
         KNS3::UploadDialog *mNewStuffDialog = new KNS3::UploadDialog("plasmate.knsrc", this);
         mNewStuffDialog->setUploadFile(url);
@@ -265,7 +270,9 @@ bool Publisher::exportToFile(const QUrl& url)
         KMessageBox::error(this, i18n("The file you entered is invalid."));
         return false;
     }
-    return ProjectManager::exportPackage(m_projectPath, url); // will overwrite if exists!
+    //TODO
+    return false;
+    //return ProjectManager::exportPackage(m_projectPath, url); // will overwrite if exists!
 }
 
 QString Publisher::currentPackagePath() const

@@ -16,7 +16,8 @@
 
 #include "ui_publisher.h"
 
-class SigningWidget;
+// TODO
+//class SigningWidget;
 
 class Publisher : public QDialog
 {
@@ -33,7 +34,8 @@ private slots:
     void addSuffix();
     void doPublish();
     void doInstall();
-    void doRemoteInstall();
+    //TODO
+    //void doRemoteInstall();
     void checkInstallButtonState(int comboBoxCurrentIndex);
 
 private:
@@ -43,8 +45,8 @@ private:
     //avoid duplication
     QString currentPackagePath() const;
 
-
-    SigningWidget* m_signingWidget;
+    //TODO
+    //SigningWidget* m_signingWidget;
     QUrl m_projectPath;
     QString m_projectType;
     QString m_extension;
