@@ -17,7 +17,7 @@
 #include <KConfigGroup>
 #include <KIO/DeleteJob>
 #include <KSharedConfig>
-#include <KUrlRequester>
+#include <QUrlRequester>
 #include <KLocalizedString>
 #include <KService>
 #include <KServiceTypeTrader>
@@ -31,8 +31,8 @@
 #include "../projectmanager/projectmanager.h"
 #include "remoteinstaller/remoteinstallerdialog.h"
 
-Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
-        : KDialog(parent),
+Publisher::Publisher(QWidget *parent, const QUrl &path, const QString& type)
+        : QDialog(parent),
         m_signingWidget(0),
         m_projectPath(path),
         m_projectType(type),
@@ -50,7 +50,7 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     QWidget *tmpWidget = new QWidget();
     QHBoxLayout *tmpLayout = new QHBoxLayout();
     tmpLayout->addLayout(layout);
-    setButtons(KDialog::None);
+    setButtons(QDialog::None);
     tmpWidget->setLayout(tmpLayout);
     setMainWidget(tmpWidget);
 
@@ -67,7 +67,7 @@ Publisher::Publisher(QWidget *parent, const KUrl &path, const QString& type)
     m_ui.installerButton->addItem("Use PlasmaPkg");
     m_ui.installerButton->addItem("Remote Install");
 
-    connect(m_ui.exporterUrl, SIGNAL(urlSelected(const KUrl&)), this, SLOT(addSuffix()));
+    connect(m_ui.exporterUrl, SIGNAL(urlSelected(const QUrl&)), this, SLOT(addSuffix()));
     connect(m_ui.exporterButton, SIGNAL(clicked()), this, SLOT(doExport()));
     connect(m_ui.installerButton, SIGNAL(currentIndexChanged(int)), this, SLOT(checkInstallButtonState(int)));
     connect(m_ui.installButton, SIGNAL(clicked()), this, SLOT(doInstall()));
@@ -145,9 +145,9 @@ void Publisher::doInstall()
 
 void Publisher::doPlasmaPkg()
 {
-    const KUrl tempPackage(tempPackagePath());
-    qDebug() << "tempPackagePath" << tempPackage.pathOrUrl();
-    qDebug() << "m_projectPath" << m_projectPath.pathOrUrl();
+    const QUrl tempPackage(tempPackagePath());
+    qDebug() << "tempPackagePath" << tempPackage.path();
+    qDebug() << "m_projectPath" << m_projectPath.path();
     ProjectManager::exportPackage(m_projectPath, tempPackage); // create temporary package
 
     QStringList argv("plasmapkg");
@@ -188,7 +188,7 @@ void Publisher::doPlasmaPkg()
         QString signatureDestPath = KStandardDirs::locateLocal("data", "plasma/plasmoids/");
         signatureDestPath.append(m_projectName).append(".plasmoid.asc");
 
-        QString signatureOrigPath(tempPackage.pathOrUrl().append(".asc"));
+        QString signatureOrigPath(tempPackage.path().append(".asc"));
 
         QFile signatureDest(signatureDestPath);
         if(signatureDest.open(QIODevice::ReadWrite)) {
@@ -228,20 +228,20 @@ void Publisher::doRemoteInstall()
 
 const QString Publisher::tempPackagePath()
 {
-    QDir d(m_projectPath.pathOrUrl());
+    QDir d(m_projectPath.path());
     if (d.cdUp()) {
         return d.path() + "/" + m_projectName + "." + m_extension;
     }
-    return m_projectPath.path(KUrl::AddTrailingSlash) + m_projectName + "." + m_extension;
+    return m_projectPath.path(QUrl::AddTrailingSlash) + m_projectName + "." + m_extension;
 }
 
 void Publisher::doPublish()
 {
     // TODO: make sure this works with non-plasmoids too?
-    kDebug() << "projectPath:" << m_projectPath.path();
+    qDebug() << "projectPath:" << m_projectPath.path();
 
-    kDebug() << "Exportando no tmp: file://" + tempPackagePath();
-    KUrl url(tempPackagePath());
+    qDebug() << "Exportando no tmp: file://" + tempPackagePath();
+    QUrl url(tempPackagePath());
 
     bool ok = exportToFile(url);
     if (m_signingWidget->signingEnabled()) {
@@ -258,7 +258,7 @@ void Publisher::doPublish()
     }
 }
 
-bool Publisher::exportToFile(const KUrl& url)
+bool Publisher::exportToFile(const QUrl& url)
 {
     if (!url.isLocalFile() ||
             QDir(url.path()).exists()) {

@@ -8,7 +8,7 @@ set(kparttut1_SRCS
    mainwindow.cpp
  )
  
-kde4_add_executable(kparttut1 ${kparttut1_SRCS})
+add_executable(kparttut1 ${kparttut1_SRCS})
  
 target_link_libraries(kparttut1 ${KDE4_KDEUI_LIBS} ${KDE4_KPARTS_LIBS})
  

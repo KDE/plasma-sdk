@@ -3,6 +3,6 @@ set(previewer_SRCS
     main.cpp
 )
 
-kde4_add_executable(plasma-previewer ${previewer_SRCS})
+add_executable(plasma-previewer ${previewer_SRCS})
 target_link_libraries(plasma-previewer ${KDE4_KDEUI_LIBS} KF5::Plasma)
 #install(TARGETS plasma-previewer ${INSTALL_TARGETS_DEFAULT_ARGS})

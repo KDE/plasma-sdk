@@ -25,7 +25,7 @@
 
 #include <QFile>
 #include <QXmlStreamWriter>
-#include <KDebug>
+#include <QDebug>
 
 KConfigXtWriter::KConfigXtWriter(QObject *parent)
         : QObject(parent)
@@ -245,7 +245,7 @@ void KConfigXtWriter::writeXML(const QList<KConfigXtReaderItem::GroupNode>& data
             } else if (entryIt.entryDescriptionType == KConfigXtReaderItem::WhatsThis) {
                 writer.writeStartElement("whatsthis");
             } else {
-                kDebug() << "There is no descriptionType, probably something is wrong";
+                qDebug() << "There is no descriptionType, probably something is wrong";
             }
 
             writer.writeCharacters(entryIt.entryDescriptionValue);

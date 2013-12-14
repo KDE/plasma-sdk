@@ -31,7 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KActionCollection>
 #include <KConfig>
 #include <KConfigGroup>
-#include <KDebug>
+#include <QDebug>
 #include <KDesktopFile>
 #include <KMenu>
 #include <KMenuBar>
@@ -44,7 +44,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KTextEditor/CommandInterface>
 #include <KToolBar>
 #include <KStandardAction>
-#include <KUrl>
+#include <QUrl>
 #include <KActionCollection>
 #include <KParts/Part>
 #include <KStandardDirs>
@@ -347,7 +347,7 @@ void MainWindow::initTimeLine()
         addDockWidget(location, m_timeLine);
     }
 
-    KUrl directory = m_model->package();
+    QUrl directory = m_model->package();
     if (QDir(directory.path() + "/contents").exists()) {
             m_timeLine->loadTimeLine(directory);
     }
@@ -475,13 +475,13 @@ void MainWindow::editorDestructiveRefresh()
     }
 }
 
-void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
+void MainWindow::loadRequiredEditor(const KService::List offers, QUrl target)
 {
     // save any previous editor content
     saveEditorData();
 
     if (offers.isEmpty()) {
-        kDebug() << "No offers for editor, can not load.";
+        qDebug() << "No offers for editor, can not load.";
         return;
     }
 
@@ -563,7 +563,7 @@ void MainWindow::loadNotesEditor(QDockWidget *container)
                               this, args, &error));
 
         if (!m_notesPart) {
-            kDebug() << "Failed to load notes editor:" << error;
+            qDebug() << "Failed to load notes editor:" << error;
         }
 
         // use same backup file format as above so that it is gitignored
@@ -594,7 +594,7 @@ void MainWindow::refreshNotes()
         notes.open(QIODevice::WriteOnly);
         notes.close();
     }
-    m_notesPart->openUrl(KUrl("file://" + notesFile));
+    m_notesPart->openUrl(QUrl("file://" + notesFile));
 }
 
 QString MainWindow::projectFilePath(const QString &filename)
@@ -613,7 +613,7 @@ QString MainWindow::projectFilePath(const QString &filename)
 
 void MainWindow::saveProjectState()
 {
-    kDebug() << m_model << saveState(STATE_VERSION);
+    qDebug() << m_model << saveState(STATE_VERSION);
     if (!m_model) {
         return;
     }
@@ -644,7 +644,7 @@ void MainWindow::updateSideBar()
     m_oldTab = EditTab;
 }
 
-void MainWindow::loadImageViewer(const KUrl& target)
+void MainWindow::loadImageViewer(const QUrl& target)
 {
     saveEditorData();
 
@@ -657,7 +657,7 @@ void MainWindow::loadImageViewer(const KUrl& target)
     updateSideBar();
 }
 
-void MainWindow::loadKConfigXtEditor(const KUrl& target)
+void MainWindow::loadKConfigXtEditor(const QUrl& target)
 {
     saveEditorData();
     if (!m_kconfigXtEditor) {
@@ -685,7 +685,7 @@ void MainWindow::toggleKonsolePreviewer()
     }
 }
 
-void MainWindow::loadMetaDataEditor(KUrl target)
+void MainWindow::loadMetaDataEditor(QUrl target)
 {
     // save any previous editor content
     saveEditorData();
@@ -704,7 +704,7 @@ void MainWindow::loadMetaDataEditor(KUrl target)
 void MainWindow::loadProject(const QString &path)
 {
     if (path.isEmpty()) {
-        kDebug() << "path is empty?!";
+        qDebug() << "path is empty?!";
         return;
     }
 
@@ -722,7 +722,7 @@ void MainWindow::loadProject(const QString &path)
 
     QDir dir(packagePath);
     if (!dir.exists("metadata.desktop")) {
-        kDebug() << "no metadata.desktop?!";
+        qDebug() << "no metadata.desktop?!";
         return;
     }
 
@@ -730,7 +730,7 @@ void MainWindow::loadProject(const QString &path)
     // otherwise, we assume it was created by plasmate and the project files are up one dir
     m_isPlasmateCreatedPackage = !QFile::exists(packagePath + PROJECTRC);
     m_currentProject = path;
-    kDebug() << "Loading project from" << packagePath;
+    qDebug() << "Loading project from" << packagePath;
     KService service(packagePath + "metadata.desktop");
     QStringList types = service.serviceTypes();
 
@@ -779,9 +779,9 @@ void MainWindow::loadProject(const QString &path)
 #ifdef DEBUG_MODEL
     new ModelTest(m_model, this);
 #endif
-    kDebug() << "Setting project type to:" << actualType;
+    qDebug() << "Setting project type to:" << actualType;
     m_model->setPackageType(actualType);
-    kDebug() << "Setting model package to:" << packagePath;
+    qDebug() << "Setting model package to:" << packagePath;
 
     if (!m_model->setPackage(packagePath)) {
         KMessageBox::error(this, i18n("Invalid Plasma package."));
@@ -790,10 +790,10 @@ void MainWindow::loadProject(const QString &path)
 
     if (!m_editPage) {
         m_editPage = new EditPage();
-        connect(m_editPage, SIGNAL(loadEditor(KService::List, KUrl)), this, SLOT(loadRequiredEditor(const KService::List, KUrl)));
-        connect(m_editPage, SIGNAL(loadMetaDataEditor(KUrl)), this, SLOT(loadMetaDataEditor(KUrl)));
-        connect(m_editPage, SIGNAL(loadImageViewer(KUrl)), this, SLOT(loadImageViewer(KUrl)));
-        connect(m_editPage, SIGNAL(loadKConfigXtEditor(KUrl)), this, SLOT(loadKConfigXtEditor(KUrl)));
+        connect(m_editPage, SIGNAL(loadEditor(KService::List, QUrl)), this, SLOT(loadRequiredEditor(const KService::List, QUrl)));
+        connect(m_editPage, SIGNAL(loadMetaDataEditor(QUrl)), this, SLOT(loadMetaDataEditor(QUrl)));
+        connect(m_editPage, SIGNAL(loadImageViewer(QUrl)), this, SLOT(loadImageViewer(QUrl)));
+        connect(m_editPage, SIGNAL(loadKConfigXtEditor(QUrl)), this, SLOT(loadKConfigXtEditor(QUrl)));
         m_editPage->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
     }
 
@@ -818,7 +818,7 @@ void MainWindow::loadProject(const QString &path)
     QByteArray state = saveState(STATE_VERSION);
     const QString projectrc = projectFilePath(PROJECTRC);
     bool showPreview = true;
-    kDebug() << "******** checking for" << projectrc;
+    qDebug() << "******** checking for" << projectrc;
     if (QFile::exists(projectrc)) {
         KConfig c(projectrc);
         KConfigGroup configDocks(&c, "DocksPosition");
@@ -877,20 +877,20 @@ void MainWindow::loadProject(const QString &path)
     // and setting the current working directory.
 
     //connect(m_metaEditor, SIGNAL(apiChanged()), SLOT(checkProjectrc()));
-    kDebug() << "loading metadata:" << packagePath + "metadata.desktop";
+    qDebug() << "loading metadata:" << packagePath + "metadata.desktop";
     checkMetafile(packagePath);
     KConfig metafile(packagePath + "metadata.desktop");
     KConfigGroup meta(&metafile, "Desktop Entry");
     m_currentProject = meta.readEntry("Name", path);
     setCaption(m_currentProject);
-    kDebug() << "Content prefix: " << m_model->contentsPrefix() ;
+    qDebug() << "Content prefix: " << m_model->contentsPrefix() ;
     QDir::setCurrent(m_model->package() + m_model->contentsPrefix());
 
     // load mainscript
     QString mainScript = meta.readEntry("X-Plasma-MainScript", QString());
-    kDebug() << "read mainScript" << mainScript;
+    qDebug() << "read mainScript" << mainScript;
     if (!mainScript.isEmpty()) {
-        KUrl url = KUrl(packagePath + "contents/" + mainScript);
+        QUrl url = QUrl(packagePath + "contents/" + mainScript);
         m_editPage->loadFile(url);
     }
     // After we loaded the project, init the TimeLine and Previewer component
@@ -909,11 +909,11 @@ void MainWindow::loadProject(const QString &path)
 
 void MainWindow::checkMetafile(const QString &path)
 {
-    KUrl projectPath(path);
+    QUrl projectPath(path);
     QDir dir(projectPath.path());
 
     if (!dir.exists(PROJECTRC)) {
-        kDebug() << dir.filePath(PROJECTRC)+ " file doesn't exist, metadata.desktop cannot be checked";
+        qDebug() << dir.filePath(PROJECTRC)+ " file doesn't exist, metadata.desktop cannot be checked";
         return;
     }
     KConfig preferencesPath(dir.path() +'/'+ PROJECTRC);
@@ -921,7 +921,7 @@ void MainWindow::checkMetafile(const QString &path)
     QString api;
     const QString radioButtonChecked = preferences.readEntry("radioButtonChecked");
     if (radioButtonChecked.isEmpty()) {
-        kDebug() << dir.filePath(PROJECTRC) + "isn't valid, metadata.desktop cannot be checked";
+        qDebug() << dir.filePath(PROJECTRC) + "isn't valid, metadata.desktop cannot be checked";
         return;
     }
     if (radioButtonChecked == "Js") {
@@ -942,12 +942,12 @@ void MainWindow::checkMetafile(const QString &path)
 
 void MainWindow::checkProjectrc()
 {
-    KUrl path(m_metaEditor->filename());
+    QUrl path(m_metaEditor->filename());
     path.cd("../..");
     QDir dir(path.path());
     qDebug() << path.path();
     if(!dir.exists(PROJECTRC)) {
-        kDebug() << dir.filePath(PROJECTRC)+ " file doesn't exist," << PROJECTRC <<  "cannot be checked";
+        qDebug() << dir.filePath(PROJECTRC)+ " file doesn't exist," << PROJECTRC <<  "cannot be checked";
         return;
     }
     KConfig preferencesPath(dir.path() +'/'+ PROJECTRC);
@@ -972,7 +972,7 @@ void MainWindow::checkProjectrc()
 QStringList MainWindow::recentProjects()
 {
     KConfigGroup cg(KGlobal::config(), "General");
-//     kDebug() << l.toStringList();
+//     qDebug() << l.toStringList();
 
     return cg.readEntry("recentProjects", QStringList());
 }

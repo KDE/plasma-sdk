@@ -18,11 +18,11 @@
 #include <KMessageBox>
 
 RemoteInstallerDialog::RemoteInstallerDialog(QWidget* parent)
-        : KDialog(parent),
+        : QDialog(parent),
         m_installer(0)
 {
     QWidget *widget = new QWidget();
-    setButtons(KDialog::None);
+    setButtons(QDialog::None);
     m_ui.setupUi(widget);
     setMainWidget(widget);
 

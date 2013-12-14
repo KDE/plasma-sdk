@@ -45,14 +45,14 @@
    <item>
     <layout class="QGridLayout" name="gridLayout">
      <item row="1" column="4">
-      <widget class="KPushButton" name="pbAddEntry">
+      <widget class="QPushButton" name="pbAddEntry">
        <property name="text">
         <string>Add Entry</string>
        </property>
       </widget>
      </item>
      <item row="1" column="6">
-      <widget class="KPushButton" name="pbDeleteEntry">
+      <widget class="QPushButton" name="pbDeleteEntry">
        <property name="text">
         <string>Delete Entry</string>
        </property>
@@ -97,7 +97,7 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="KPushButton" name="pbAddGroup">
+      <widget class="QPushButton" name="pbAddGroup">
        <property name="text">
         <string>Add Group</string>
        </property>
@@ -122,7 +122,7 @@
       </widget>
      </item>
      <item row="1" column="2">
-      <widget class="KPushButton" name="pbDeleteGroup">
+      <widget class="QPushButton" name="pbDeleteGroup">
        <property name="text">
         <string>Delete Group</string>
        </property>
@@ -214,9 +214,9 @@
    <header>kseparator.h</header>
   </customwidget>
   <customwidget>
-   <class>KPushButton</class>
+   <class>QPushButton</class>
    <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
+   <header>qpushbutton.h</header>
   </customwidget>
   <customwidget>
    <class>KUrlRequester</class>

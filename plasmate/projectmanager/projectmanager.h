@@ -20,15 +20,15 @@
 #ifndef PROJECTMANAGER_H
 #define PROJECTMANAGER_H
 
-#include <KDialog>
+#include <QDialog>
 
 #include <mainwindow.h>
 
 class QListWidget;
 class QListWidgetItem;
 
-class KUrl;
-class KPushButton;
+class QUrl;
+class QPushButton;
 class KMenu;
 
 namespace Ui
@@ -36,7 +36,7 @@ namespace Ui
 class ProjectManager;
 }
 
-class ProjectManager : public KDialog
+class ProjectManager : public QDialog
 {
     Q_OBJECT
 public:
@@ -45,8 +45,8 @@ public:
     void addProject(QListWidgetItem *item);
     void clearProjects();
 
-    static bool exportPackage(const KUrl &toExport, const KUrl &targetFile);
-    static bool importPackage(const KUrl &toImport, const KUrl &targetLocation);
+    static bool exportPackage(const QUrl &toExport, const QUrl &targetFile);
+    static bool importPackage(const QUrl &toImport, const QUrl &targetLocation);
 
 public Q_SLOTS:
     void addRecentProject(const QString &path);
@@ -57,7 +57,7 @@ signals:
     void requestRefresh();
 
 private:
-    void deleteProject(const KUrl &projectLocation);
+    void deleteProject(const QUrl &projectLocation);
 
 private Q_SLOTS:
    void emitProjectSelected();
@@ -72,8 +72,8 @@ private:
 //      project multi-export,
 //      project multi-import.
     QListWidget *m_projectList;
-    KPushButton *m_loadButton;
-    KPushButton *m_removeMenuButton;
+    QPushButton *m_loadButton;
+    QPushButton *m_removeMenuButton;
     KMenu *m_removeMenu;
     bool m_destroyFlag;
     MainWindow* m_mainWindow;

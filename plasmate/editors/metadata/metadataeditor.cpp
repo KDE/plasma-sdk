@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QRegExpValidator>
 #include <KDesktopFile>
 #include <KConfigGroup>
-#include <KDebug>
+#include <QDebug>
 #include <KMessageWidget>
 
 #include <plasma/packagemetadata.h>
@@ -67,7 +67,7 @@ const QString MetaDataEditor::filename()
 
 bool MetaDataEditor::isValidMetaData()
 {
-    kDebug() << "readFile file" << m_filename;
+    qDebug() << "readFile file" << m_filename;
 
     delete m_metadata;
     m_metadata = new Plasma::PackageMetadata(m_filename);
@@ -79,7 +79,7 @@ bool MetaDataEditor::isValidMetaData()
 void MetaDataEditor::readFile()
 {
     if (!this->isValidMetaData()) {
-      kWarning() << "MetaData cannot read the file because the filename:" + m_filename + "is not valid.";
+      qWarning() << "MetaData cannot read the file because the filename:" + m_filename + "is not valid.";
       return;
     }
 
@@ -135,7 +135,7 @@ void MetaDataEditor::readFile()
     if (idx != -1) {
         m_view->category_combo->setCurrentIndex(idx);
     } else {
-        kWarning() << "Unknown category detected " << m_metadata->category() << "using miscellaneous instead";
+        qWarning() << "Unknown category detected " << m_metadata->category() << "using miscellaneous instead";
         m_view->category_combo->setCurrentIndex(m_view->category_combo->count() - 1); // misc is last
     }
 
@@ -180,7 +180,7 @@ void MetaDataEditor::serviceTypeChanged()
         currentType = Plasma::RunnerComponent;
         break;*/
     default:
-        kWarning() << "Unknown service type" << currentType;
+        qWarning() << "Unknown service type" << currentType;
         return;
     }
 
@@ -189,7 +189,7 @@ void MetaDataEditor::serviceTypeChanged()
     m_apis = Plasma::knownLanguages(currentType);
     m_apis.append(QString());   // Add empty string for native
 
-    kDebug() << "Got m_apis " << m_apis;
+    qDebug() << "Got m_apis " << m_apis;
     // Map to friendly names (TODO: fix in library)
 
     //add  api from the metadata.desktop inside the api
@@ -240,7 +240,7 @@ QString MetaDataEditor::formatApi(const QString &api,  apiModes apiMode)
             return QString("declarativeappletscript");
         }
     }
-    kWarning() << "Unknown API " << api << apiMode;
+    qWarning() << "Unknown API " << api << apiMode;
     return QString(api);
 }
 

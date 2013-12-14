@@ -23,7 +23,7 @@
 #include <KConfig>
 #include <QVBoxLayout>
 #include <QWidget>
-#include <QGraphicsWidget>
+#include <QQuickItem>
 
 TabBoxPreviewer::TabBoxPreviewer(const QString & title, QWidget * parent, Qt::WindowFlags flags)
     : Previewer(title, parent, flags)

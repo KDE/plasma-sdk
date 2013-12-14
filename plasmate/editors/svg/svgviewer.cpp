@@ -16,7 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <QPainter>
-#include <KDebug>
+#include <QDebug>
 
 #include <plasma/framesvg.h>
 
@@ -52,7 +52,7 @@ void SvgViewer::readFile()
     m_renderer = new Plasma::FrameSvg(this);
     m_renderer->setImagePath(m_filename);
     if (!m_renderer->isValid()) {
-        kWarning() << "The svg file " << m_filename << "was invalid";
+        qWarning() << "The svg file " << m_filename << "was invalid";
     }
     m_mode = detectMode();
     m_renderer->resize(size());
@@ -61,7 +61,7 @@ void SvgViewer::readFile()
 SvgViewer::Mode SvgViewer::detectMode()
 {
     if (!m_renderer) {
-        kWarning() << "We can't detect the mode when there's no renderer";
+        qWarning() << "We can't detect the mode when there's no renderer";
         return SvgViewer::ModeSvg;
     }
 

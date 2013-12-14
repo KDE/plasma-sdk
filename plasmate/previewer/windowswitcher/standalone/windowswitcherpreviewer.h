@@ -21,11 +21,11 @@
 #define WINDOWSWITCHERPREVIEWER_H
 
 #include "../tabboxpreviewer.h"
-#include <KUrlRequester>
+#include <QUrlRequester>
 #include <QVBoxLayout>
-#include <KDialog>
+#include <QDialog>
 
-class WindowSwitcherPreviewer : public KDialog {
+class WindowSwitcherPreviewer : public QDialog {
 
     Q_OBJECT
 
@@ -42,7 +42,7 @@ private:
     QWidget *tmpWidget;
     QVBoxLayout *tmpLayout;
     TabBoxPreviewer *m_previewer;
-    KUrlRequester *m_filePath;
+    QUrlRequester *m_filePath;
 };
 
 #endif // WINDOWSWITCHERPREVIEWER_H

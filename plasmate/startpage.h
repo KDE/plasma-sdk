@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define STARTPAGE_H
 
 #include <QWidget>
-#include <KUrl>
+#include <QUrl>
 
 #include "ui_startpage.h"
 
@@ -28,7 +28,7 @@ class QComboBox;
 class QListWidget;
 class QVBoxLayout;
 class QModelIndex;
-class KPushButton;
+class QPushButton;
 class KLineEdit;
 class MainWindow;
 class ProjectManager;
@@ -100,7 +100,7 @@ private:
     void setupWidgets();
     static QString camelToSnakeCase(const QString& name);
     const QString generateProjectFolderName(const QString& suggestion);
-    void selectProject(const KUrl &target);
+    void selectProject(const QUrl &target);
     void ensureProjectrcFileExists(const QString& projectPath);
 
     Ui::StartPage m_ui;

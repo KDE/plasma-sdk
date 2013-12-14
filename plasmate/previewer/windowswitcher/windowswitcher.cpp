@@ -21,28 +21,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "windowswitcher.h"
 #include "thumbnailitem.h"
 #include <QtDeclarative/qdeclarative.h>
-#include <QtDeclarative/QDeclarativeContext>
-#include <QtDeclarative/QDeclarativeEngine>
-#include <QtGui/QGraphicsObject>
+#include <QQmlContext>
+#include <QQmlEngine>
+#include <QQuickItem>
 #include <kdeclarative.h>
-#include <KDE/KConfigGroup>
-#include <KDE/KDesktopFile>
-#include <KDE/KGlobal>
-#include <KDE/KIcon>
-#include <KDE/KIconEffect>
-#include <KDE/KIconLoader>
-#include <KDE/KService>
-#include <KDE/KStandardDirs>
+#include <KConfigGroup>
+#include <KDesktopFile>
+#include <KGlobal>
+#include <KIcon>
+#include <KIconEffect>
+#include <KIconLoader>
+#include <KService>
+#include <KStandardDirs>
 
 WindowSwitcher::WindowSwitcher(QWidget* parent)
-    : QDeclarativeView(parent)
+    : QQuickView(parent)
 {
     setAttribute(Qt::WA_TranslucentBackground);
     setAutoFillBackground(false);
     QPalette pal = palette();
     pal.setColor(backgroundRole(), Qt::transparent);
     setPalette(pal);
-    setResizeMode(QDeclarativeView::SizeRootObjectToView);
+    setResizeMode(QQuickView::SizeRootObjectToView);
     foreach (const QString &importPath, KGlobal::dirs()->findDirs("module", "imports")) {
         engine()->addImportPath(importPath);
     }
@@ -74,7 +74,7 @@ void WindowSwitcher::setLayout(const QString &path, const QString &name)
 }
 
 TabBoxImageProvider::TabBoxImageProvider(QAbstractListModel* model)
-    : QDeclarativeImageProvider(QDeclarativeImageProvider::Pixmap)
+    : QQuickImageProvider(QQuickImageProvider::Pixmap)
     , m_model(model)
 {
 }
@@ -85,7 +85,7 @@ QPixmap TabBoxImageProvider::requestPixmap(const QString &id, QSize *size, const
     QStringList parts = id.split('/');
     const int index = parts.first().toInt(&ok);
     if (!ok) {
-        return QDeclarativeImageProvider::requestPixmap(id, size, requestedSize);
+        return QQuickImageProvider::requestPixmap(id, size, requestedSize);
     }
     QSize s(32, 32);
     if (requestedSize.isValid()) {

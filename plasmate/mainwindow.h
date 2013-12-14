@@ -99,10 +99,10 @@ private Q_SLOTS:
     void setNotesVisible(const bool visible);
     void setFileListVisible(const bool visible);
 
-    void loadRequiredEditor(const KService::List offers, KUrl target);
-    void loadMetaDataEditor(KUrl target);
-    void loadImageViewer(const KUrl& target);
-    void loadKConfigXtEditor(const KUrl& target);
+    void loadRequiredEditor(const KService::List offers, QUrl target);
+    void loadMetaDataEditor(QUrl target);
+    void loadImageViewer(const QUrl& target);
+    void loadKConfigXtEditor(const QUrl& target);
     void updateActions();
     void toggleDocumentation();
     void toggleTimeLine();

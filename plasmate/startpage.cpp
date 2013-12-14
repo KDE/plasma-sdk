@@ -30,17 +30,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <KUser>
 // #include <KLocalizedString>
-#include <KDebug>
+#include <QDebug>
 #include <KDesktopFile>
 #include <KLineEdit>
 #include <KMimeType>
 #include <KPluginInfo>
-#include <KPushButton>
+#include <QPushButton>
 #include <KSeparator>
 #include <KShell>
 #include <KStandardAction>
 #include <KStandardDirs>
-#include <KUrlRequester>
+#include <QUrlRequester>
 #include <KUser>
 #include <KMessageBox>
 #include <KMessageWidget>
@@ -258,7 +258,7 @@ bool StartPage::selectedDeRadioButton()
 
 void StartPage::resetStatus()
 {
-    kDebug() << "Reset status!";
+    qDebug() << "Reset status!";
     m_ui.layoutHackStackedWidget->setCurrentIndex(0);
     refreshRecentProjectsList();
 }
@@ -281,9 +281,9 @@ void StartPage::refreshRecentProjectsList()
         // as being the metadata file.
         QDir pDir(file);
         QString pPath =  file + "/metadata.desktop";
-        kDebug() << "RECENT FILE::: " << file;
+        qDebug() << "RECENT FILE::: " << file;
         if (pDir.isRelative()) {
-            kDebug() << "NOT LOCAL";
+            qDebug() << "NOT LOCAL";
             pPath = KStandardDirs::locateLocal("appdata", file + "/metadata.desktop");
         }
 
@@ -299,7 +299,7 @@ void StartPage::refreshRecentProjectsList()
         // sets in the metadata editor, will ever be visible in the UI.
         const QString projectName = metadata.name();
 
-        kDebug() << "adding" << projectName << "to the list of recent projects...";
+        qDebug() << "adding" << projectName << "to the list of recent projects...";
         QListWidgetItem *item = new QListWidgetItem(projectName); // show the user-set plasmoid name in the UI
         counter++;
         // the loading code uses this to find the project to load.
@@ -357,7 +357,7 @@ void StartPage::refreshRecentProjectsList()
             defaultIconName = "preferences-system-windows-effect";
             tooltip += i18n("Project type: KWin Script");
         } else {
-            kWarning() << "Unknown service type" << serviceTypes;
+            qWarning() << "Unknown service type" << serviceTypes;
         }
 
         if (metadata.icon().isEmpty()) {
@@ -392,7 +392,7 @@ void StartPage::createNewProject()
         return;
     }
 
-    kDebug() << "Creating simple folder structure for the project " << projectName;
+    qDebug() << "Creating simple folder structure for the project " << projectName;
     const QString projectNameLowerCase = projectName.toLower();
     QString projectFileExtension;
 
@@ -615,7 +615,7 @@ void StartPage::checkLocalProjectPath(const QString& name)
 
     QDir dir(KShell::tildeExpand(name));
     QFile metadataDesktop(dir.path() + "/metadata.desktop");
-    kDebug() << "checking: " << name << dir.exists();
+    qDebug() << "checking: " << name << dir.exists();
     m_ui.loadLocalProject->setEnabled(metadataDesktop.exists());
 
     if (name.isEmpty()) {
@@ -634,7 +634,7 @@ void StartPage::checkLocalProjectPath(const QString& name)
 void StartPage::loadLocalProject()
 {
     const QString path = KShell::tildeExpand(m_ui.localProject->text());
-    kDebug() << "loading local project from" << path;
+    qDebug() << "loading local project from" << path;
     if (!QFile::exists(path)) {
         return;
     }
@@ -652,7 +652,7 @@ void StartPage::recentProjectSelected(const QModelIndex &index)
         m_projectManager->exec();
         return;
     }
-    kDebug() << "Loading project file:" << m->data(index, FullPathRole);
+    qDebug() << "Loading project file:" << m->data(index, FullPathRole);
 
     emit projectSelected(url);
 }
@@ -668,14 +668,14 @@ void StartPage::checkPackagePath(const QString& name)
 
 void StartPage::importPackage()
 {
-    const KUrl target = m_ui.importPackage->url();
+    const QUrl target = m_ui.importPackage->url();
     selectProject(target);
 }
 
 void StartPage::doGHNSImport()
 {
     KNS3::DownloadDialog *mNewStuffDialog = new KNS3::DownloadDialog("plasmate.knsrc", this);
-    if (mNewStuffDialog->exec() == KDialog::Accepted)
+    if (mNewStuffDialog->exec() == QDialog::Accepted)
     {
         KNS3::Entry::List installed = mNewStuffDialog->installedEntries();
 
@@ -687,7 +687,7 @@ void StartPage::doGHNSImport()
             if (!installedFiles.empty())
             {
                 QString file = installedFiles.at(0);
-                KUrl target(file);
+                QUrl target(file);
 
                 selectProject(target);
             }
@@ -695,7 +695,7 @@ void StartPage::doGHNSImport()
     }
 }
 
-void StartPage::selectProject(const KUrl &target)
+void StartPage::selectProject(const QUrl &target)
 {
     if (!target.isLocalFile() || !QFile::exists(target.path()) || QDir(target.path()).exists()) {
         KMessageBox::error(this, i18n("The file you entered is invalid."));

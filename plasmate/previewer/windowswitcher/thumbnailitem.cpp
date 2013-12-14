@@ -20,15 +20,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "thumbnailitem.h"
 // Qt
-#include <QtDeclarative/QDeclarativeContext>
-#include <QtDeclarative/QDeclarativeEngine>
-#include <QtDeclarative/QDeclarativeView>
+#include <QQmlContext>
+#include <QQmlEngine>
+#include <QQuickView>
 // KDE
-#include <KDE/KDebug>
-#include <KDE/KStandardDirs>
+#include <QDebug>
+#include <KStandardDirs>
 
-ThumbnailItem::ThumbnailItem(QDeclarativeItem* parent)
-    : QDeclarativeItem(parent)
+ThumbnailItem::ThumbnailItem(QQuickItem* parent)
+    : QQuickItem(parent)
     , m_wId(0)
     , m_image()
 {
@@ -77,7 +77,7 @@ void ThumbnailItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 {
     if (m_image.isNull()) {
         // no image: default behavior
-        QDeclarativeItem::paint(painter, option, widget);
+        QQuickItem::paint(painter, option, widget);
     }
     QSizeF difference(boundingRect().width() - m_image.width(), boundingRect().height() - m_image.height());
     const QRectF drawRect(boundingRect().x() + difference.width()/2.0, boundingRect().y(), m_image.width(), m_image.height());

@@ -7,7 +7,7 @@
   (at your option) any later version.
 */
 
-#include <KApplication>
+#include <QApplication>
 #include <KAboutData>
 #include <KCmdLineArgs>
 #include <KLocale>
@@ -20,7 +20,7 @@
 int main(int argc, char **argv)
 {
 //    KCmdLineArgs::init(argc, argv);
-//    KApplication app;
+//    QApplication app;
 
     QApplication app(argc, argv);
 

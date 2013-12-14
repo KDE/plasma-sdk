@@ -6,7 +6,7 @@ set(containment_SRCS
 
 add_subdirectory(test)
 
-kde4_add_plugin(plasma_containment_studiopreviewer ${containment_SRCS})
+add_library(plasma_containment_studiopreviewer MODULE ${containment_SRCS})
 target_link_libraries(plasma_containment_studiopreviewer ${KDE4_KDEUI_LIBS} KF5::Plasma)
 
 install(TARGETS plasma_containment_studiopreviewer DESTINATION ${PLUGIN_INSTALL_DIR})

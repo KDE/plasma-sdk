@@ -1,7 +1,7 @@
-#include <KApplication>
+#include <QApplication>
 #include <KAboutData>
 #include <KCmdLineArgs>
-#include <KUrl>
+#include <QUrl>
 
 #include "mainwindow.h"
 
@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     options.add("+[file]", ki18n("Document to open"));
     KCmdLineArgs::addCmdLineOptions(options);
 
-    KApplication app;
+    QApplication app;
 
     MainWindow* window = new MainWindow();
     window->show();

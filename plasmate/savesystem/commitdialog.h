@@ -20,7 +20,7 @@
 #ifndef COMMITDIALOG_H
 #define COMMITDIALOG_H
 
-#include <KDialog>
+#include <QDialog>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPlainTextEdit>
@@ -33,7 +33,7 @@
   *
   * @author Diego [Po]lentino Casella <polentino911@gmail.com>
   */
-class CommitDialog : public KDialog
+class CommitDialog : public QDialog
 {
 public:
     CommitDialog(QWidget *parent = 0);

@@ -42,13 +42,13 @@ class EditPage : public QTreeView
 
 public:
     explicit EditPage(QWidget *parent = 0);
-    void loadFile(const KUrl &path);
+    void loadFile(const QUrl &path);
 
 Q_SIGNALS:
-    void loadEditor(const KService::List offers, KUrl target);
-    void loadMetaDataEditor(KUrl target);
-    void loadImageViewer(const KUrl &target);
-    void loadKConfigXtEditor(const KUrl &target);
+    void loadEditor(const KService::List offers, QUrl target);
+    void loadMetaDataEditor(QUrl target);
+    void loadImageViewer(const QUrl &target);
+    void loadKConfigXtEditor(const QUrl &target);
 
 private Q_SLOTS:
     void findEditor(const QModelIndex &index);
@@ -59,7 +59,7 @@ private Q_SLOTS:
 private:
     KMenu *m_contextMenu;
     MetaDataEditor *m_metaEditor;
-    KUrl m_path;
+    QUrl m_path;
     QString m_mimetype;
     bool hasExtension(const QString &filename);
     void imageDialog(const QString &filter, const QString& destinationPath);

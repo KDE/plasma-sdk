@@ -1,7 +1,7 @@
 project( plasmate-svg-editor )
 
-find_package(KDE4 REQUIRED)
-include(KDE4Defaults)
+#find_package(KDE4 REQUIRED)
+#include(KDE4Defaults)
 
 set(svg_viewer_SRCS
     svgviewer.cpp)
@@ -13,7 +13,7 @@ set(svg_viewer_SRCS
 add_definitions(${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 include_directories(${KDE4_INCLUDES} ../..)
 
-kde4_add_plugin(plasmate_svg_viewer ${svg_viewer_SRCS})
+add_library(plasmate_svg_viewer MODULE ${svg_viewer_SRCS})
 target_link_libraries(plasmate_svg_viewer KF5::Plasma KF5::KIOCore KF5::KIOWidgets)
 
 set( testsvg_SRCS tests/test_svg.cpp
@@ -24,5 +24,5 @@ set( testsvg_SRCS tests/test_svg.cpp
 #   svg.ui
 #)
 
-kde4_add_executable( testsvg TEST ${testsvg_SRCS})
+add_executable( testsvg ${testsvg_SRCS})
 target_link_libraries( testsvg ${KDE4_KDEUI_LIBS} KF5::Plasma )

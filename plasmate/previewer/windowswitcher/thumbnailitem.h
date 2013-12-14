@@ -21,14 +21,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef THUMBNAILITEM_H
 #define THUMBNAILITEM_H
 
-#include <QtDeclarative/QDeclarativeItem>
+#include <QQuickItem>
 
-class ThumbnailItem : public QDeclarativeItem
+class ThumbnailItem : public QQuickItem
 {
     Q_OBJECT
     Q_PROPERTY(qulonglong wId READ wId WRITE setWId NOTIFY wIdChanged SCRIPTABLE true)
 public:
-    ThumbnailItem(QDeclarativeItem *parent = 0);
+    ThumbnailItem(QQuickItem *parent = 0);
     virtual ~ThumbnailItem();
 
     qulonglong wId() const {

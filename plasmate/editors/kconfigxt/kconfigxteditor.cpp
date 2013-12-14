@@ -21,7 +21,7 @@
 
 #include "kconfigxteditor.h"
 #include <KComboBox>
-#include <KDebug>
+#include <QDebug>
 #include <KIcon>
 #include <KMessageBox>
 #include <KLocalizedString>
@@ -70,13 +70,13 @@ KConfigXtEditor::KConfigXtEditor(QWidget *parent)
 
 }
 
-void KConfigXtEditor::setFilename(const KUrl& filename)
+void KConfigXtEditor::setFilename(const QUrl& filename)
 {
     m_filename = filename;
     //load the xml file
 }
 
-KUrl KConfigXtEditor::filename()
+QUrl KConfigXtEditor::filename()
 {
     return m_filename;
 
@@ -84,19 +84,19 @@ KUrl KConfigXtEditor::filename()
 
 void KConfigXtEditor::readFile()
 {
-    m_writer.setConfigXmlFile(filename().pathOrUrl());
+    m_writer.setConfigXmlFile(filename().path());
 
     if (m_filename.isEmpty()) {
-        kDebug() << "Empty filename given!";
+        qDebug() << "Empty filename given!";
         return;
     }
 
     //check if the xml exists
-    if (!QFile::exists(m_filename.pathOrUrl())) {
+    if (!QFile::exists(m_filename.path())) {
         setupWidgetsForNewFile();
         return;
     } else {
-        m_parser.setConfigXmlFile(m_filename.pathOrUrl());
+        m_parser.setConfigXmlFile(m_filename.path());
         takeDataFromParser();
         setupWidgetsForOldFile();
     }

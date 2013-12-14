@@ -24,7 +24,7 @@
 #include <QDir>
 #include <QProcess>
 
-#include <KDebug>
+#include <QDebug>
 #include <KProcess>
 
 
@@ -32,7 +32,7 @@ GitRunner::GitRunner()
 {
     //m_job = new DvcsJob();
     m_commMode = KProcess::SeparateChannels;
-    m_lastRepoRoot = new KUrl();
+    m_lastRepoRoot = new QUrl();
     m_result = QString();
     m_isRunning = false;
     m_jobStatus = DvcsJob::JobNotStarted;
@@ -49,7 +49,7 @@ GitRunner::~GitRunner()
 void GitRunner::initJob(DvcsJob &job)
 {
     job.setCommunicationMode(m_commMode);
-    job.setDirectory(QDir(m_lastRepoRoot->pathOrUrl()));
+    job.setDirectory(QDir(m_lastRepoRoot->path()));
     job << "git";
 }
 
@@ -70,9 +70,9 @@ void GitRunner::setCommunicationMode(KProcess::OutputChannelMode comm)
     m_commMode = comm;
 }
 
-void GitRunner::setDirectory(const KUrl &dir)
+void GitRunner::setDirectory(const QUrl &dir)
 {
-    m_lastRepoRoot->setDirectory(dir.pathOrUrl());
+    m_lastRepoRoot->setDirectory(dir.path());
 }
 
 bool GitRunner::isRunning()
@@ -82,7 +82,7 @@ bool GitRunner::isRunning()
 
 bool GitRunner::isValidDirectory()
 {
-    const QString initialPath(m_lastRepoRoot->toLocalFile(KUrl::RemoveTrailingSlash));
+    const QString initialPath(m_lastRepoRoot->toLocalFile(QUrl::RemoveTrailingSlash));
     setDirectory(*m_lastRepoRoot);
 
     // A possible git repo has a .git subdicerctory
@@ -126,10 +126,10 @@ QString& GitRunner::getResult()
 }
 
 
-DvcsJob::JobStatus GitRunner::init(const KUrl &directory)
+DvcsJob::JobStatus GitRunner::init(const QUrl &directory)
 {
     // We need to tell the runner to change dir!
-    m_lastRepoRoot->setDirectory(directory.pathOrUrl());
+    m_lastRepoRoot->setDirectory(directory.path());
     DvcsJob *job = new DvcsJob();
     initJob(*job);
 
@@ -152,22 +152,22 @@ void GitRunner::addIgnoredFileExtension(const QString ignoredFileExtension)
     gitIgnoreFile.close();
 }
 
-DvcsJob::JobStatus GitRunner::createWorkingCopy(const KUrl &repoOrigin,
-                                                const KUrl &repoDestination)
+DvcsJob::JobStatus GitRunner::createWorkingCopy(const QUrl &repoOrigin,
+                                                const QUrl &repoDestination)
 {
     // TODO: now supports only cloning a local repo(not very useful, I know =P),
     // so extend the method to be used over the Internet.
-    m_lastRepoRoot->setDirectory(repoDestination.pathOrUrl());
+    m_lastRepoRoot->setDirectory(repoDestination.path());
     DvcsJob *job = new DvcsJob();
     initJob(*job);
 
     *job << "clone";
-    *job << repoOrigin.pathOrUrl();
+    *job << repoOrigin.path();
     startJob(*job);
     return m_jobStatus;
 }
 
-DvcsJob::JobStatus GitRunner::add(const KUrl::List &localLocations)
+DvcsJob::JobStatus GitRunner::add(const QUrl::List &localLocations)
 {
     if (localLocations.empty())
         return m_jobStatus = DvcsJob::JobCancelled;
@@ -179,7 +179,7 @@ DvcsJob::JobStatus GitRunner::add(const KUrl::List &localLocations)
     // Adding files to the runner.
     QStringList stringFiles = localLocations.toStringList();
     while (!stringFiles.isEmpty()) {
-        *job <<  m_lastRepoRoot->pathOrUrl() + '/' + stringFiles.takeAt(0);
+        *job <<  m_lastRepoRoot->path() + '/' + stringFiles.takeAt(0);
     }
 
     startJob(*job);
@@ -248,7 +248,7 @@ DvcsJob::JobStatus GitRunner::deleteCommit(const QString &sha1hash)
     return m_jobStatus;
 }
 
-DvcsJob::JobStatus GitRunner::remove(const KUrl::List &files)
+DvcsJob::JobStatus GitRunner::remove(const QUrl::List &files)
 {
     if (files.empty())
         return m_jobStatus = DvcsJob::JobCancelled;
@@ -258,7 +258,7 @@ DvcsJob::JobStatus GitRunner::remove(const KUrl::List &files)
     *job << "rm";
     QStringList stringFiles = files.toStringList();
     while (!stringFiles.isEmpty()) {
-        *job <<  m_lastRepoRoot->pathOrUrl() + '/' + stringFiles.takeAt(0);
+        *job <<  m_lastRepoRoot->path() + '/' + stringFiles.takeAt(0);
     }
 
     startJob(*job);

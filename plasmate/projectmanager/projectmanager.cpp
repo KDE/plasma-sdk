@@ -22,35 +22,35 @@
 #include <QListWidget>
 #include <QVBoxLayout>
 #include <QDir>
+#include <QPushButton>
+#include <QUrl>
+#include <QDebug>
 
-#include <KDebug>
 #include <KConfig>
 #include <KIO/DeleteJob>
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <KMenu>
 #include <KMessageBox>
-#include <KPushButton>
 #include <KStandardDirs>
-#include <KUrl>
 #include <KZip>
 
 #include "projectmanager.h"
 #include "startpage.h"
 
 ProjectManager::ProjectManager(QWidget* parent)
-    : KDialog(parent)
+    : QDialog(parent)
 {
-    setButtons(KDialog::None);
+    setButtons(QDialog::None);
     m_projectList = new QListWidget(this);
     m_projectList->setSelectionMode(QAbstractItemView::ExtendedSelection);
     connect(m_projectList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(emitProjectSelected()));
     connect(m_projectList,SIGNAL(itemSelectionChanged()), this, SLOT(checkButtonState()));
 
-    m_loadButton = new KPushButton(i18n("Load Project"), this);
+    m_loadButton = new QPushButton(i18n("Load Project"), this);
     connect(m_loadButton, SIGNAL(clicked()), this, SLOT(emitProjectSelected()));
 
-    m_removeMenuButton = new KPushButton(i18n("Remove Project"), this);
+    m_removeMenuButton = new QPushButton(i18n("Remove Project"), this);
 
     m_removeMenu = new KMenu(i18n("Remove Project"), this);
 
@@ -149,16 +149,16 @@ void ProjectManager::emitProjectSelected()
     QString url = l[0]->data(StartPage::FullPathRole).value<QString>();
 
     emit projectSelected(url);
-    done(KDialog::Accepted);
+    done(QDialog::Accepted);
 }
 
-bool ProjectManager::exportPackage(const KUrl &toExport, const KUrl &targetFile)
+bool ProjectManager::exportPackage(const QUrl &toExport, const QUrl &targetFile)
 {
     // Think ONE minute before committing nonsense: if you want to zip a folder,
     // and you create the *.zip file INSIDE that folder WHILE copying the files,
     // guess what happens??
     // This also means: always try at least once, before committing changes.
-    if (targetFile.pathOrUrl().contains(toExport.pathOrUrl())) {
+    if (targetFile.path().contains(toExport.path())) {
         // Sounds like we are attempting to create the package from inside the package folder, noooooo :)
         return false;
     }
@@ -169,28 +169,28 @@ bool ProjectManager::exportPackage(const KUrl &toExport, const KUrl &targetFile)
     }
 
     // Create an empty zip file
-    KZip zip(targetFile.pathOrUrl());
+    KZip zip(targetFile.path());
     zip.open(QIODevice::ReadWrite);
     zip.close();
 
     // Reopen for writing
     if (zip.open(QIODevice::ReadWrite)) {
-        kDebug() << "zip file opened successfully";
-        zip.addLocalDirectory(toExport.pathOrUrl(), ".");
+        qDebug() << "zip file opened successfully";
+        zip.addLocalDirectory(toExport.path(), ".");
         zip.close();
         return true;
     }
 
-    kDebug() << "Cant open zip file" ;
+    qDebug() << "Cant open zip file" ;
     return false;
 }
 
-bool ProjectManager::importPackage(const KUrl &toImport, const KUrl &targetLocation)
+bool ProjectManager::importPackage(const QUrl &toImport, const QUrl &targetLocation)
 {
     bool ret = true;
     KZip plasmoid(toImport.path());
     if (!plasmoid.open(QIODevice::ReadOnly)) {
-        kDebug() << "ProjectManager::importPackage can't open the plasmoid archive";
+        qDebug() << "ProjectManager::importPackage can't open the plasmoid archive";
         return false;
     }
     plasmoid.directory()->copyTo(targetLocation.path());
@@ -203,7 +203,7 @@ void ProjectManager::addRecentProject(const QString &path)
     QStringList recent = m_mainWindow->recentProjects();
     recent.removeAll(path);
     recent.prepend(path);
-    //kDebug() << "Writing the following recent files to the config:" << recent;
+    //qDebug() << "Writing the following recent files to the config:" << recent;
 
     KConfigGroup cg(KGlobal::config(), "General");
     cg.writeEntry("recentProjects", recent);
@@ -219,8 +219,8 @@ void ProjectManager::setRecentProjects(const QStringList &paths)
     emit requestRefresh();
 }
 
-void ProjectManager::deleteProject(const KUrl &projectLocation)
+void ProjectManager::deleteProject(const QUrl &projectLocation)
 {
-    KUrl project = projectLocation;
+    QUrl project = projectLocation;
     KIO::del(project);
 }

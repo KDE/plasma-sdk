@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <KAction>
-#include <KDebug>
+#include <QDebug>
 #include <KConfig>
 #include <KLocale>
 #include <KMenu>
@@ -49,7 +49,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "commitdialog.h"
 
 TimeLine::TimeLine(QWidget *parent,
-                   const KUrl &dir,
+                   const QUrl &dir,
                    Qt::DockWidgetArea location)
         :QDockWidget(i18n("TimeLine"))
 {
@@ -66,7 +66,7 @@ TimeLine::~TimeLine()
 }
 
 
-void TimeLine::loadTimeLine(const KUrl &dir)
+void TimeLine::loadTimeLine(const QUrl &dir)
 {
     m_table->clear();
 
@@ -315,7 +315,7 @@ void TimeLine::newSavePoint()
 
         m_gitRunner->init(m_workingDir);
         // Retrieve Name and Email, and set git global parameters
-        Plasma::PackageMetadata metadata(m_workingDir.pathOrUrl() + "metadata.desktop");
+        Plasma::PackageMetadata metadata(m_workingDir.path() + "metadata.desktop");
         m_gitRunner->setAuthor(metadata.author());
         m_gitRunner->setEmail(metadata.email());
 
@@ -332,7 +332,7 @@ void TimeLine::newSavePoint()
     }
 
     if (!dialogAlreadyOpen) {
-        if (commitDialog->exec() == KDialog::Rejected) {
+        if (commitDialog->exec() == QDialog::Rejected) {
             return;
         }
 
@@ -351,7 +351,7 @@ void TimeLine::newSavePoint()
         commitMessage.append(optionalComment);
     }
 
-    m_gitRunner->add(KUrl::List(QString('.')));
+    m_gitRunner->add(QUrl::List(QString('.')));
     m_gitRunner->commit(commitMessage);
     loadTimeLine(m_workingDir);
     if (isHidden()) {
@@ -429,7 +429,7 @@ void TimeLine::mergeBranch()
     CommitDialog *commitDialog = new CommitDialog();
     connect(commitDialog, SIGNAL(finished()), commitDialog, SLOT(deleteLater()));
     commitDialog->setModal(true);
-    if (commitDialog->exec() == KDialog::Rejected) {
+    if (commitDialog->exec() == QDialog::Rejected) {
         return;
     }
 
@@ -514,7 +514,7 @@ void TimeLine::createBranch()
     loadTimeLine(m_workingDir);
 }
 
-bool TimeLine::setWorkingDir(const KUrl &dir)
+bool TimeLine::setWorkingDir(const QUrl &dir)
 {
     if (dir.isValid()) {
         m_gitRunner->setDirectory(dir);

@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef TIMELINE_H
 #define TIMELINE_H
 
-#include <KUrl>
+#include <QUrl>
 #include <QDockWidget>
 
 class GitRunner;
@@ -48,7 +48,7 @@ class TimeLine : public QDockWidget
       */
 public:
     TimeLine(QWidget *parent,
-             const KUrl &dir,
+             const QUrl &dir,
              Qt::DockWidgetArea location = Qt::BottomDockWidgetArea);
     virtual ~TimeLine();
 
@@ -57,13 +57,13 @@ public:
       * @param dir The path of the new working directory.
       * @return returns true if the directory is a valid one.
       */
-    bool setWorkingDir(const KUrl &dir);
+    bool setWorkingDir(const QUrl &dir);
 
     /**
       * Parses the supplied path and initialize the TimeLine object.
       * @param dir The path of the new working directory.
       */
-    void loadTimeLine(const KUrl &dir);
+    void loadTimeLine(const QUrl &dir);
 
     /**
       * Returns the location of the dockwidget.
@@ -178,7 +178,7 @@ private:
     //from here we will take the TimeLineItems for the timeline
     void identifyCommits(TableWidget *widget);
 
-    KUrl        m_workingDir;
+    QUrl        m_workingDir;
     GitRunner   *m_gitRunner;
     QString     m_currentBranch;
     QStringList m_branches;

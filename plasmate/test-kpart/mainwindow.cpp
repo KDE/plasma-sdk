@@ -10,7 +10,7 @@
 #include <kmessagebox.h>
 #include <kstandardaction.h>
 #include <kstatusbar.h>
-#include <kurl.h>
+#include <QUrl>
 
 #include <QApplication>
 
@@ -54,7 +54,7 @@ MainWindow::~MainWindow()
 {
 }
 
-void MainWindow::load(const KUrl& url)
+void MainWindow::load(const QUrl& url)
 {
     m_part->openUrl(url);
 }

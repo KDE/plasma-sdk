@@ -28,7 +28,7 @@ public:
     /**
      * Use this method to load whatever file/URL you have
      */
-    void load(const KUrl& url);
+    void load(const QUrl& url);
 
     /**
      * Use this method to display an openUrl dialog and
