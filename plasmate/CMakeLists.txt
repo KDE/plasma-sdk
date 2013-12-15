@@ -39,10 +39,10 @@ set (PlasMate_SRC
     editors/kconfigxt/kconfigxtreader.cpp
     editors/kconfigxt/kconfigxtwriter.cpp
     main.cpp
-    #sidebaritem.cpp
-    #sidebardelegate.cpp
-    #sidebartablewidget.cpp
-    #sidebar.cpp
+    sidebaritem.cpp
+    sidebardelegate.cpp
+    sidebartablewidget.cpp
+    sidebar.cpp
     #savesystem/dvcsjob.cpp
     #savesystem/gitrunner.cpp
     #savesystem/commitdialog.cpp

@@ -222,7 +222,7 @@ void SidebarTableWidget::updateSize(SidebarItem *item)
 {
     // Now compute the correct row and column size for the current item
     QFontMetrics font(item->font());
-    QSize rect(ITEM_MARGIN_LEFT + qMax(iconSize().width(), font.width(item->text() + 2*ITEM_PADDING)) + ITEM_MARGIN_RIGHT,
+    QSize rect(ITEM_MARGIN_LEFT + qMax(iconSize().width(), font.width(item->text().length() + 2*ITEM_PADDING)) + ITEM_MARGIN_RIGHT,
                ITEM_MARGIN_TOP + iconSize().height() + ITEM_PADDING +
                font.boundingRect(item->text()).height() + 2*ITEM_MARGIN_BOTTOM );
 
