@@ -25,12 +25,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "editpage.h"
 
+#include <QDebug>
 #include <QHBoxLayout>
 #include <QFile>
 #include <QList>
 #include <QPixmap>
 #include <QStringList>
 #include <KConfigGroup>
+#include <KGlobal>
 #include <kfiledialog.h>
 #include <KIcon>
 #include <KMessageBox>
@@ -87,7 +89,7 @@ void EditPage::doDelete(bool)
                 return;
             }
         }
-        KIO::del(dirPath.path());
+        KIO::del(QUrl::fromLocalFile(dirPath.path()));
     }
 }
 
@@ -120,7 +122,7 @@ void EditPage::findEditor(const QModelIndex &index)
     foreach (const QString &mimetype, mimetypes) {
         QString target = index.data(PackageModel::UrlRole).toUrl().toString();
         if (mimetype == "[plasmate]/metadata") {
-            emit loadMetaDataEditor(target);
+            emit loadMetaDataEditor(QUrl::fromLocalFile(target));
             return;
         }
 
@@ -139,12 +141,12 @@ void EditPage::findEditor(const QModelIndex &index)
         }
 
         if (mimetype == "[plasmate]/imageViewer") {
-            emit loadImageViewer(target);
+            emit loadImageViewer(QUrl::fromLocalFile(target));
             return;
         }
 
         if (mimetype == "[plasmate]/kconfigxteditor") {
-            emit loadKConfigXtEditor(target);
+            emit loadKConfigXtEditor(QUrl::fromLocalFile(target));
             return;
         }
 
@@ -246,7 +248,7 @@ void EditPage::findEditor(const QModelIndex &index)
 void EditPage::imageDialog(const QString& filter, const QString& destinationPath)
 {
     KUser user;
-    QUrl homeDir = user.homeDir();
+    QUrl homeDir(user.homeDir());
     const QList<QUrl> srcDir = KFileDialog::getOpenUrls(homeDir, filter, this);
     KConfigGroup cg(KGlobal::config(), "PackageModel::package");
     const QUrl destinationDir(cg.readEntry("lastLoadedPackage", QString()) + destinationPath);
