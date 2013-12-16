@@ -28,7 +28,7 @@
 #include "publisher.h"
 //#include "signingwidget.h"
 #include "../projectmanager/projectmanager.h"
-#include "remoteinstaller/remoteinstallerdialog.h"
+//#include "remoteinstaller/remoteinstallerdialog.h"
 
 Publisher::Publisher(QWidget *parent, const QUrl &path, const QString& type)
         : QDialog(parent),

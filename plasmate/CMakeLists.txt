@@ -78,13 +78,13 @@ set (PlasMate_SRC
 #         )
 #endif (DEBUG_MODEL)
 
-#kde4_add_ui_files (PlasMate_SRC
+kde4_add_ui_files (PlasMate_SRC
     #startpage.ui
    #editors/metadata/metadata.ui
-   #publisher/publisher.ui
+   publisher/publisher.ui
    #publisher/remoteinstaller/remoteinstaller.ui
    #editors/kconfigxt/kconfigxteditor.ui
-   #)
+)
 
 include_directories(${QT_QTWEBKIT_INCLUDE_DIR}
                     #${QGPGME_INCLUDE_DIR}
