@@ -73,11 +73,6 @@ Item {
             height: applet && applet.implicitHeight > 0 ? applet.implicitHeight : theme.mSize(theme.defaultFont).height * 25
         }
 
-        onActiveWindowChanged: {
-            if (!activeWindow) {
-               // plasmoid.expanded = false
-            }
-        }
         onVisibleChanged: {
             if (!visible) {
                 plasmoid.expanded = false
