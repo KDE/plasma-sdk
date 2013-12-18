@@ -93,7 +93,6 @@ include_directories(${QT_QTWEBKIT_INCLUDE_DIR}
 
 #add_subdirectory( editors )
 #add_subdirectory( previewer/plasmoid )
-#add_subdirectory( templates )
 #add_subdirectory( icons )
 
 add_executable(plasmate ${PlasMate_SRC})
@@ -200,5 +199,9 @@ target_link_libraries(plasmakconfigxteditor
 )
 
 install(TARGETS plasmakconfigxteditor ${INSTALL_TARGETS_DEFAULT_ARGS})
+
+install(DIRECTORY templates DESTINATION ${DATA_INSTALL_DIR}/plasmate)
+
+add_subdirectory(tests)
 
 feature_summary(WHAT ALL   FATAL_ON_MISSING_REQUIRED_PACKAGES)
