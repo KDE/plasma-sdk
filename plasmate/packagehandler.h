@@ -55,6 +55,7 @@ public:
 
 Q_SIGNALS:
     void error(const QString &errorMessage);
+    void packageChanged(const QList<PackageHandler::Node> &info);
 
 private:
     KDirWatch *m_directory;

@@ -35,6 +35,18 @@ PackageHandler::PackageHandler(QObject *parent)
         : QObject(parent),
           m_directory(0)
 {
+    m_directory = new KDirWatch(this);
+
+    connect(m_directory, &KDirWatch::created, [=](const QString &path) {
+        Q_UNUSED(path)
+        emit packageChanged(loadPackageInfo());
+    });
+
+    connect(m_directory, &KDirWatch::deleted, [=](const QString &path) {
+        Q_UNUSED(path)
+        emit packageChanged(loadPackageInfo());
+    });
+
     m_fileDefinitions[QStringLiteral("mainscript")] = QStringLiteral("main.qml");
     m_fileDefinitions[QStringLiteral("mainconfigxml")] = QStringLiteral("main.xml");
     m_fileDefinitions[QStringLiteral("configmodel")] = QStringLiteral("config.qml");
@@ -58,7 +70,11 @@ void PackageHandler::setPackageType(const QString &type)
 
 QString PackageHandler::contentsPrefix() const
 {
-    return m_package.contentsPrefixPaths().at(0);
+    QString contentsPrefixPaths = m_package.contentsPrefixPaths().at(0);
+    if (!contentsPrefixPaths.endsWith(QLatin1Char('/'))) {
+        contentsPrefixPaths += QLatin1Char('/');
+    }
+    return contentsPrefixPaths;
 }
 
 void PackageHandler::setPackagePath(const QString &path)
@@ -68,9 +84,16 @@ void PackageHandler::setPackagePath(const QString &path)
     if (packagePath.isEmpty()) {
         //FIXME missing metadata
         createPackage(path);
+    } else {
+        if (!m_projectPath.isEmpty()) {
+            m_directory->removeDir(m_projectPath);
+        }
+        setProjectPath(packagePath);
     }
+
+    m_directory->addDir(m_projectPath + contentsPrefix(), KDirWatch::WatchSubDirs | KDirWatch::WatchFiles);
+
     m_package.setPath(path);
-    qDebug() << m_package.files() << m_package.directories() << m_package.name("images");
 }
 
 void PackageHandler::createPackage(const QString &path)
