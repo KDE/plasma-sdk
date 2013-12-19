@@ -58,6 +58,23 @@ void PackageHandlerTest::checkDirectories()
     Q_ASSERT(mainFile.exists());
 }
 
+void PackageHandlerTest::checkLoadPackageInfo()
+{
+    QList<PackageHandler::Node> nodes = m_packageHandler.loadPackageInfo();
+    QStringList directories;
+    directories.append(QStringLiteral("images"));
+    directories.append(QStringLiteral("scripts"));
+    directories.append(QStringLiteral("data"));
+    directories.append(QStringLiteral("ui"));
+    directories.append(QStringLiteral("theme"));
+    directories.append(QStringLiteral("config"));
+    directories.append(QStringLiteral("translations"));
+    for (const auto &it : nodes) {
+        Q_ASSERT_X(directories.contains(it.name),
+                   "checking Directories node", it.name.toLocal8Bit().data());
+    }
+}
+
 void PackageHandlerTest::cleanupTestCase()
 {
 }

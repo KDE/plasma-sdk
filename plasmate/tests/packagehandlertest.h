@@ -35,6 +35,7 @@ public:
 
 private Q_SLOTS:
     void checkDirectories();
+    void checkLoadPackageInfo();
     void initTestCase();
     void cleanupTestCase();
 private:

@@ -36,6 +36,12 @@ public:
     explicit PackageHandler(QObject *parent = 0);
     ~PackageHandler();
 
+    struct Node {
+        QString name;
+        QString description;
+        QList<Node> children;
+    };
+
     void setPackageType(const QString &type);
 
     void setPackagePath(const QString &path);
@@ -44,6 +50,8 @@ public:
     QString projectPath() const;
 
     QString contentsPrefix() const;
+
+    QList<PackageHandler::Node> loadPackageInfo();
 
 Q_SIGNALS:
     void error(const QString &errorMessage);
@@ -54,7 +62,9 @@ private:
     QString m_packagePath;
     QString m_projectPath;
     QHash<QString, QString> m_fileDefinitions;
-    QVariantHash m_directoryDefinitions;
+    QMultiHash<QString, QString> m_directoryDefinitions;
+    QList<PackageHandler::Node> m_nodes;
+
 
     void setProjectPath(const QString &path);
     void createPackage(const QString &path);

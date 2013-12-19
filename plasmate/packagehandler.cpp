@@ -37,15 +37,13 @@ PackageHandler::PackageHandler(QObject *parent)
 {
     m_fileDefinitions[QStringLiteral("mainscript")] = QStringLiteral("main.qml");
     m_fileDefinitions[QStringLiteral("mainconfigxml")] = QStringLiteral("main.xml");
+    m_fileDefinitions[QStringLiteral("configmodel")] = QStringLiteral("config.qml");
 
     // plasmoid qml
-    QStringList plasmoidQmlList;
-    plasmoidQmlList << QStringLiteral("mainscript");
-    m_directoryDefinitions[QStringLiteral("ui")] = plasmoidQmlList;
-    plasmoidQmlList.clear();
+    m_directoryDefinitions.insert(QStringLiteral("ui"), QStringLiteral("mainscript"));
+    m_directoryDefinitions.insert(QStringLiteral("config"), QStringLiteral("mainconfigxml"));
+    m_directoryDefinitions.insert(QStringLiteral("config"), QStringLiteral("configmodel"));
 
-    plasmoidQmlList << QStringLiteral("mainconfigxml");
-    m_directoryDefinitions[QStringLiteral("config")] = plasmoidQmlList;
 }
 
 PackageHandler::~PackageHandler()
@@ -72,6 +70,7 @@ void PackageHandler::setPackagePath(const QString &path)
         createPackage(path);
     }
     m_package.setPath(path);
+    qDebug() << m_package.files() << m_package.directories() << m_package.name("images");
 }
 
 void PackageHandler::createPackage(const QString &path)
@@ -113,7 +112,7 @@ QString PackageHandler::projectPath() const
 void PackageHandler::createRequiredDirectories()
 {
     QDir projectDir(m_projectPath);
-    for (auto it : m_package.requiredDirectories()) {
+    for (const auto &it : m_package.requiredDirectories()) {
         projectDir.mkpath(it);
         if (m_directoryDefinitions.contains(it)) {
 
@@ -125,11 +124,9 @@ void PackageHandler::createRequiredFiles()
 {
     // a package may require a file like ui/main.qml
     // but the ui dir may not be required, so lets check for them
-    for (auto it : m_package.requiredFiles()) {
+    for (const auto &it : m_package.requiredFiles()) {
         if (m_directoryDefinitions.values().contains(it)) {
-            QStringList l;
-            l << it;
-            const QString dirName(m_directoryDefinitions.keys(l).at(0));
+            const QString dirName(m_directoryDefinitions.key(it));
             QDir dir(m_projectPath);
             dir.mkpath(dirName);
             dir.cd(dirName);
@@ -152,3 +149,34 @@ void PackageHandler::createRequiredFiles()
     }
 }
 
+QList<PackageHandler::Node> PackageHandler::loadPackageInfo()
+{
+    m_nodes.clear();
+    QStringList indexedFiles;
+
+    for(const auto &it : m_package.directories()) {
+        PackageHandler::Node node;
+        node.name = it;
+        node.description = m_package.name(it);
+        if (m_directoryDefinitions.contains(it)) {
+            for(const auto &fileIt : m_directoryDefinitions.values()) {
+                indexedFiles.append(fileIt.toLocal8Bit().data());
+                PackageHandler::Node childNode;
+                childNode.name = fileIt;
+                childNode.description = m_package.name(fileIt.toLocal8Bit().data());
+                node.children.append(childNode);
+            }
+        }
+        m_nodes.append(node);
+    }
+
+    for(const auto &it : m_package.files()) {
+        if (!indexedFiles.contains(it)) {
+            PackageHandler::Node node;
+            node.name = it;
+            node.description = m_package.name(it);
+            m_nodes.append(node);
+        }
+    }
+    return m_nodes;
+}
