@@ -93,7 +93,7 @@ void PackageHandler::setPackagePath(const QString &path)
 
     m_directory->addDir(m_projectPath + contentsPrefix(), KDirWatch::WatchSubDirs | KDirWatch::WatchFiles);
 
-    m_package.setPath(path);
+    m_package.setPath(projectPath());
 }
 
 void PackageHandler::createPackage(const QString &path)
@@ -136,10 +136,7 @@ void PackageHandler::createRequiredDirectories()
 {
     QDir projectDir(m_projectPath);
     for (const auto &it : m_package.requiredDirectories()) {
-        projectDir.mkpath(it);
-        if (m_directoryDefinitions.contains(it)) {
-
-        }
+        projectDir.mkpath(contentsPrefix() + it);
     }
 }
 
@@ -150,7 +147,7 @@ void PackageHandler::createRequiredFiles()
     for (const auto &it : m_package.requiredFiles()) {
         if (m_directoryDefinitions.values().contains(it)) {
             const QString dirName(m_directoryDefinitions.key(it));
-            QDir dir(m_projectPath);
+            QDir dir(m_projectPath + contentsPrefix());
             dir.mkpath(dirName);
             dir.cd(dirName);
 
@@ -176,23 +173,47 @@ QList<PackageHandler::Node> PackageHandler::loadPackageInfo()
 {
     m_nodes.clear();
     QStringList indexedFiles;
+    const QString projectPathWithContentsPrefix = m_projectPath + contentsPrefix();
+
+    // TODO it doesn't support unnamed directories like "common"
+    // and it doesn't support unnamed directories under
+    // named directories like "ui/menu"
+
 
     for(const auto &it : m_package.directories()) {
         PackageHandler::Node node;
         node.name = it;
         node.description = m_package.name(it);
+
+        // check for named files like "main.qml" which
+        // exist under a named directory like "ui/main.qml"
         if (m_directoryDefinitions.contains(it)) {
             for(const auto &fileIt : m_directoryDefinitions.values()) {
                 indexedFiles.append(fileIt.toLocal8Bit().data());
                 PackageHandler::Node childNode;
                 childNode.name = fileIt;
                 childNode.description = m_package.name(fileIt.toLocal8Bit().data());
+                indexedFiles.append(childNode.description);
+                node.children.append(childNode);
+            }
+        }
+
+        // check for unnamed files
+        for (const auto &fileInfo : QDir(projectPathWithContentsPrefix + it).
+                                    entryInfoList(QDir::NoDotAndDotDot | QDir::Files)) {
+            const QString fileName = fileInfo.fileName();
+            if (!indexedFiles.contains(fileName)){
+                PackageHandler::Node childNode;
+                childNode.name = fileName;
+                childNode.description = fileName;
                 node.children.append(childNode);
             }
         }
         m_nodes.append(node);
     }
 
+    // check for named files which doesn't
+    // exist under a named directory
     for(const auto &it : m_package.files()) {
         if (!indexedFiles.contains(it)) {
             PackageHandler::Node node;
@@ -201,5 +222,24 @@ QList<PackageHandler::Node> PackageHandler::loadPackageInfo()
             m_nodes.append(node);
         }
     }
+
+    // there is only one category of files which
+    // we might haven't checked. Those are the
+    // top level unnamed files like "contents/bar.qml"
+    for (const auto &fileInfo : QDir(projectPathWithContentsPrefix).entryInfoList(QDir::NoDotAndDotDot | QDir::Files)) {
+        const QString fileName = fileInfo.fileName();
+        if (!indexedFiles.contains(fileName)){
+            PackageHandler::Node childNode;
+            childNode.name = fileName;
+            childNode.description = fileName;
+            m_nodes.append(childNode);
+        }
+    }
+
+    PackageHandler::Node node;
+    node.name = QStringLiteral("metadata.desktop");
+    node.description = QStringLiteral("metadata.desktop");
+    m_nodes.append(node);
+
     return m_nodes;
 }

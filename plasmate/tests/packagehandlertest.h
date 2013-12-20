@@ -34,9 +34,9 @@ public:
     ~PackageHandlerTest();
 
 private Q_SLOTS:
+    void initTestCase();
     void checkDirectories();
     void checkLoadPackageInfo();
-    void initTestCase();
     void cleanupTestCase();
 private:
     PackageHandler m_packageHandler;
