@@ -42,6 +42,7 @@ Q_DECLARE_METATYPE(Soprano::Node)
 #endif // FOUND_SOPRANO
 Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 
+#include "modelviewer.h"
 #include "serviceviewer.h"
 #include "titlecombobox.h"
 
@@ -298,12 +299,16 @@ void EngineExplorer::showDataContextMenu(const QPoint &point)
         QMenu menu;
         menu.addSection(source);
         QAction *service = menu.addAction(i18n("Get associated service"));
+        QAction *model = menu.addAction(i18n("Get associated model"));
         QAction *update = menu.addAction(i18n("Update source now"));
         QAction *remove = menu.addAction(i18n("Remove source"));
 
         QAction *activated = menu.exec(m_data->viewport()->mapToGlobal(point));
         if (activated == service) {
             ServiceViewer *viewer = new ServiceViewer(m_engine, source);
+            viewer->show();
+        } else if (activated == model) {
+            ModelViewer *viewer = new ModelViewer(m_engine, source);
             viewer->show();
         } else if (activated == update) {
             m_engine->connectSource(source, this);

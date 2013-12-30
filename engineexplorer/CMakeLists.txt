@@ -3,6 +3,7 @@ set(plasmaengineexplorer_SRCS
     ktreeviewsearchline.cpp
     main.cpp
     serviceviewer.cpp
+    modelviewer.cpp
 )
 
 kde4_add_ui_files(plasmaengineexplorer_SRCS engineexplorer.ui serviceviewer.ui)
