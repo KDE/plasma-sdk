@@ -45,13 +45,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KUser>
 #include <kmimetypetrader.h>
 
-#include "packagemodel.h"
+#include "../packagemodel.h"
 
 #include <qvarlengtharray.h>
 
 EditPage::EditPage(QWidget *parent)
-        : QTreeView(parent),
-        m_metaEditor(0)
+        : QTreeView(parent)//,
+        // FIXME
+        // m_metaEditor(0)
 {
     setHeaderHidden(true);
     m_contextMenu = new KMenu(this);
@@ -191,17 +192,22 @@ void EditPage::findEditor(const QModelIndex &index)
             QString file = KInputDialog::getText(QString(), dialogText);
             if (!file.isEmpty()) {
                 qDebug() << target;
-                if (!m_metaEditor) {
+                /*if (!m_metaEditor) {
                     m_metaEditor = new MetaDataEditor(this);
                     m_metaEditor->setFilename(packagePath + "/metadata.desktop");
-                }
+                }*/
 
-                if (m_metaEditor->isValidMetaData()) {
-                    const QString api = m_metaEditor->api();
+                // FIXME
+                // if (m_metaEditor->isValidMetaData()) {
+                if (true) {
+                    // FIXME
+                    // const QString api = m_metaEditor->api();
+                    const QString api = QStringLiteral("declarativeappletscript");
 
-                    //we don't need the m_metaEditor anymore
-                    delete m_metaEditor;
-                    m_metaEditor = 0;
+                    // FIXME
+                    // we don't need the m_metaEditor anymore
+                    // delete m_metaEditor;
+                    // m_metaEditor = 0;
 
                     if (!api.isEmpty()) {
                         if (!hasExtension(file)) {

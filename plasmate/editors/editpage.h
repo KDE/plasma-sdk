@@ -32,7 +32,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <kservice.h>
 #include <KMenu>
 
-#include "editors/metadata/metadataeditor.h"
+// FIXME
+//#include "editors/metadata/metadataeditor.h"
 
 class QWidget;
 
@@ -58,7 +59,8 @@ private Q_SLOTS:
 
 private:
     KMenu *m_contextMenu;
-    MetaDataEditor *m_metaEditor;
+    // FIXME
+    // MetaDataEditor *m_metaEditor;
     QUrl m_path;
     QString m_mimetype;
     bool hasExtension(const QString &filename);
