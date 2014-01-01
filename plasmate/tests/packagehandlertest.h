@@ -1,6 +1,6 @@
 /*
 
-   Copyright 2013 Giorgos Tsiapaliokas <terietor@gmail.com>
+Copyright 2013 Giorgos Tsiapaliokas <terietor@gmail.com>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
@@ -35,9 +35,12 @@ public:
 
 private Q_SLOTS:
     void initTestCase();
-    void checkDirectories();
-    void checkLoadPackageInfo();
-    void cleanupTestCase();
+    void initPlasmoid();
+    void createNewPlasmoid();
+    void loadPlasmoidTestData();
+    void checkPlasmoidMimeTypes();
+    void checkNodes();
+    void checkPlasmoidNodes();
 private:
     PackageHandler m_packageHandler;
 };
