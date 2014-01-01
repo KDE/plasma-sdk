@@ -36,10 +36,28 @@ public:
     explicit PackageHandler(QObject *parent = 0);
     ~PackageHandler();
 
-    struct Node {
-        QString name;
-        QString description;
-        QList<Node> children;
+    class Node {
+        public:
+            Node(const QString &name, const QString &description,
+                 const QStringList &mimetypes = QStringList(),
+                 PackageHandler::Node *parent = 0);
+            ~Node();
+            QString name() const;
+            QString description() const;
+            QStringList mimeTypes() const;
+            bool isFile() const;
+            bool needsNewFileNode() const;
+            QList<PackageHandler::Node*> childNodes() const;
+            PackageHandler::Node* parent() const;
+            PackageHandler::Node* child(int row) const;
+            int row();
+            void addChild(Node *child);
+        private:
+            QString m_name;
+            QString m_description;
+            QList<PackageHandler::Node*> m_childNodes;
+            PackageHandler::Node *m_parent;
+            QStringList m_mimeTypes;
     };
 
     void setPackageType(const QString &type);
@@ -47,15 +65,14 @@ public:
     void setPackagePath(const QString &path);
 
     QString packagePath() const;
-    QString projectPath() const;
 
     QString contentsPrefix() const;
 
-    QList<PackageHandler::Node> loadPackageInfo();
+    PackageHandler::Node* loadPackageInfo();
 
 Q_SIGNALS:
     void error(const QString &errorMessage);
-    void packageChanged(const QList<PackageHandler::Node> &info);
+    void packageChanged(PackageHandler::Node* info);
 
 private:
     KDirWatch *m_directory;
@@ -64,10 +81,9 @@ private:
     QString m_projectPath;
     QHash<QString, QString> m_fileDefinitions;
     QMultiHash<QString, QString> m_directoryDefinitions;
-    QList<PackageHandler::Node> m_nodes;
+    PackageHandler::Node* m_topNode;
 
 
-    void setProjectPath(const QString &path);
     void createPackage(const QString &path);
     void createRequiredDirectories();
     void createRequiredFiles();
