@@ -31,6 +31,57 @@
 
 #include "engineexplorer.h"
 
+Delegate::Delegate(QObject *parent)
+    : QAbstractItemDelegate(parent)
+{
+    
+}
+
+Delegate::~Delegate()
+{
+}
+
+void Delegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
+           const QModelIndex &index) const
+{
+    if (!index.model()) {
+        return;
+    }
+
+    QFontMetrics fm(option.font);
+    int maxWidth = 0;
+    foreach (int role, index.model()->roleNames().keys()) {
+        maxWidth = qMax(maxWidth, fm.width(index.model()->roleNames().value(role) + ": "));
+    }
+
+    int i = 2;
+    foreach (int role, index.model()->roleNames().keys()) {
+        painter->drawText(option.rect.x() + maxWidth - fm.width(index.model()->roleNames().value(role) + ": "), option.rect.y() + i*fm.height(), index.model()->roleNames().value(role) + ": ");
+
+        if (index.data(role).canConvert<QIcon>()) {
+            index.data(role).value<QIcon>().paint(painter, option.rect.x() + maxWidth, option.rect.y() + (i-1)*fm.height(), 16, 16);
+        } else if (!index.data(role).isValid()) {
+            painter->drawText(option.rect.x() + maxWidth, option.rect.y() + i*fm.height(), "null");
+        } else {
+            painter->drawText(option.rect.x() + maxWidth, option.rect.y() + i*fm.height(), index.data(role).toString());
+        }
+        ++i;
+    }
+}
+
+
+QSize Delegate::sizeHint(const QStyleOptionViewItem &option,
+               const QModelIndex &index) const
+{
+    if (!index.model()) {
+        return QSize();
+    }
+
+    QFontMetrics fm(option.font);
+    return QSize(fm.width("M") * 50, fm.height() * (index.model()->roleNames().count()+2));
+}
+
+
 ModelViewer::ModelViewer(Plasma::DataEngine *engine, const QString &source, QWidget *parent)
     : QDialog(parent),
       m_engine(engine),
@@ -38,6 +89,7 @@ ModelViewer::ModelViewer(Plasma::DataEngine *engine, const QString &source, QWid
 {
     setAttribute(Qt::WA_DeleteOnClose);
     m_view = new QTreeView(this);
+    m_view->setItemDelegate(new Delegate(m_view));
     QVBoxLayout *layout = new QVBoxLayout();
     layout->addWidget(m_view);
     setLayout(layout);

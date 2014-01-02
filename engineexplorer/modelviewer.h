@@ -13,7 +13,7 @@
  *   GNU General Public License for more details
  *
  *   You should have received a copy of the GNU Library General Public
- *   License along with this program; if not, write to the
+#include < *   License along with this program; if not, write to the
  *   Free Software Foundation, Inc.,
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
@@ -22,6 +22,8 @@
 #define MODELVIEWER
 
 #include <QDialog>
+#include <QAbstractItemDelegate>
+#include <QStyleOptionViewItem>
 
 class QAbstractItemModel;
 class QTreeView;
@@ -30,6 +32,22 @@ namespace Plasma
 {
     class DataEngine;
 } // namespace Plasma
+
+class Delegate : public QAbstractItemDelegate
+{
+    Q_OBJECT
+
+public:
+    Delegate(QObject *parent = 0);
+    virtual ~Delegate();
+
+    virtual void paint(QPainter *painter, const QStyleOptionViewItem &option,
+                       const QModelIndex &index) const;
+
+protected:
+    virtual QSize sizeHint(const QStyleOptionViewItem &option,
+                           const QModelIndex &index) const;
+};
 
 class ModelViewer : public QDialog
 {
