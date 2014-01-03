@@ -120,8 +120,11 @@ void PackageHandlerTest::checkNodes()
         if (!it->isFile()) {
             const QString firstNodeDescription = it->childNodes().at(0)->description();
             QCOMPARE(firstNodeDescription, QStringLiteral("New.."));
+        } else {
+            Q_ASSERT(m_packageHandler.urlForNode(it).isValid());
         }
     }
+    Q_ASSERT(m_packageHandler.urlForNode(topNode).isValid());
 }
 
 void PackageHandlerTest::checkPlasmoidNodes()
@@ -131,7 +134,7 @@ void PackageHandlerTest::checkPlasmoidNodes()
     QStringList topNodeNames;
     QStringList childNodeNames;
 
-    auto populateChildNodeNamesList = [=](PackageHandler::Node *node) mutable {
+    auto populateChildNodeNamesList = [&](PackageHandler::Node *node) {
         childNodeNames.clear();
         for (const auto it : node->childNodes()) {
             childNodeNames.append(it->name());
@@ -141,16 +144,15 @@ void PackageHandlerTest::checkPlasmoidNodes()
     Q_ASSERT_X(topNode->childNodes().size() == 9, "Check node list size", QString(node->childNodes().size()).toLocal8Bit().data());
 
     for (const auto it : topNode->childNodes()) {
-        childNodeNames.clear();
-
         if (it->description() == QStringLiteral("User Interface")) {
             populateChildNodeNamesList(it);
-            Q_ASSERT(childNodeNames.size() == 2);
+            QCOMPARE(childNodeNames.size(), 3);
             Q_ASSERT(childNodeNames.contains(QStringLiteral("New..")));
             Q_ASSERT(childNodeNames.contains(QStringLiteral("Main Script File")));
+            Q_ASSERT(childNodeNames.contains(QStringLiteral("foo.qml")));
         } else if (it->description() == QStringLiteral("Configuration Definitions")) {
             populateChildNodeNamesList(it);
-            Q_ASSERT(childNodeNames.size() == 3);
+            QCOMPARE(childNodeNames.size(), 3);
             Q_ASSERT(childNodeNames.contains(QStringLiteral("New..")));
             Q_ASSERT(childNodeNames.contains(QStringLiteral("Configuration UI Pages Model")));
             Q_ASSERT(childNodeNames.contains("Configuration XML file"));
@@ -160,13 +162,13 @@ void PackageHandlerTest::checkPlasmoidNodes()
                    it->description() == QStringLiteral("Translations") ||
                    it->description() == QStringLiteral("Themed Images")) {
             populateChildNodeNamesList(it);
-            Q_ASSERT(childNodeNames.size() == 1);
+            QCOMPARE(childNodeNames.size(), 1);
             Q_ASSERT(childNodeNames.contains(QStringLiteral("New..")));
         } else if (it->description() == QStringLiteral("metadata.desktop")) {
-            Q_ASSERT(childNodeNames.size() == 0);
+            QCOMPARE(childNodeNames.size(), 0);
         } else if (it->description() == QStringLiteral("bar.qml")) {
             populateChildNodeNamesList(it);
-            Q_ASSERT(childNodeNames.size() == 0);
+            QCOMPARE(childNodeNames.size(), 0);
         } else {
             const QString errorMessage = QString(QStringLiteral("Unrecognized name %1")).arg(it->name());
             QFAIL(errorMessage.toLocal8Bit().data());

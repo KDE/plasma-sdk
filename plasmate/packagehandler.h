@@ -69,13 +69,13 @@ public:
     QString contentsPrefix() const;
 
     PackageHandler::Node* loadPackageInfo();
+    QUrl urlForNode(PackageHandler::Node *node) const;
 
 Q_SIGNALS:
     void error(const QString &errorMessage);
     void packageChanged(PackageHandler::Node* info);
 
 private:
-    KDirWatch *m_directory;
     Plasma::Package m_package;
     QString m_packagePath;
     QString m_projectPath;

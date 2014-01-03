@@ -29,6 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDir>
 #include <QDebug>
 #include <QFile>
+#include <QUrl>
 #include <QStandardPaths>
 #include <QMimeDatabase>
 
@@ -98,21 +99,8 @@ int PackageHandler::Node::row()
 
 PackageHandler::PackageHandler(QObject *parent)
         : QObject(parent),
-          m_directory(0),
           m_topNode(0)
 {
-    m_directory = new KDirWatch(this);
-
-    connect(m_directory, &KDirWatch::created, [=](const QString &path) {
-        Q_UNUSED(path)
-        emit packageChanged(loadPackageInfo());
-    });
-
-    connect(m_directory, &KDirWatch::deleted, [=](const QString &path) {
-        Q_UNUSED(path)
-        emit packageChanged(loadPackageInfo());
-    });
-
     m_fileDefinitions[QStringLiteral("mainscript")] = QStringLiteral("main.qml");
     m_fileDefinitions[QStringLiteral("mainconfigxml")] = QStringLiteral("main.xml");
     m_fileDefinitions[QStringLiteral("configmodel")] = QStringLiteral("config.qml");
@@ -126,7 +114,6 @@ PackageHandler::PackageHandler(QObject *parent)
 
 PackageHandler::~PackageHandler()
 {
-    delete m_directory;
 }
 
 void PackageHandler::setPackageType(const QString &type)
@@ -154,15 +141,31 @@ void PackageHandler::setPackagePath(const QString &path)
     if (!QDir(m_packagePath).exists()) {
         //FIXME missing metadata
         createPackage(path);
-    } else {
-        if (!m_packagePath.isEmpty()) {
-            m_directory->removeDir(m_packagePath);
-        }
     }
 
-    m_directory->addDir(m_packagePath + contentsPrefix(), KDirWatch::WatchSubDirs | KDirWatch::WatchFiles);
-
     m_package.setPath(m_packagePath);
+}
+
+QUrl PackageHandler::urlForNode(PackageHandler::Node *node) const
+{
+    if (!node) {
+        return QUrl();
+    }
+
+    QString path = m_projectPath + contentsPrefix();
+
+    if (node->parent()) {
+        path += node->parent()->name();
+    }
+
+    if (!path.endsWith(QLatin1Char('/'))) {
+        path += QLatin1Char('/');
+    }
+
+    if (node->isFile() && node->name() != QStringLiteral("New..")) {
+        path += node->name();
+    }
+    return QUrl::fromLocalFile(path);
 }
 
 QString PackageHandler::packagePath() const
@@ -224,7 +227,7 @@ void PackageHandler::createRequiredFiles()
 
 PackageHandler::Node* PackageHandler::loadPackageInfo()
 {
-    auto mimeTypesForUnnamedFile = [](const QString &fileName) {
+    auto mimeTypesForFile = [](const QString &fileName) {
         QMimeDatabase db;
         QMimeType mime = db.mimeTypeForFile(fileName);
         QStringList mimetypes;
@@ -258,20 +261,25 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
         // exist under a named directory like "ui/main.qml"
         if (m_directoryDefinitions.contains(it)) {
             for(const auto &fileIt : m_directoryDefinitions.values(it)) {
-                const QString name = fileIt.toLocal8Bit().data();
+                const QString name = m_fileDefinitions.value(fileIt);
+
+                if (name.isEmpty()) {
+                    qWarning("Something is wrong with the file definitions");
+                }
+
                 const QString description = m_package.name(fileIt.toLocal8Bit().data());
                 QStringList mimeTypes;
 
                 if (fileIt == QStringLiteral("mainconfigxml")) {
                     mimeTypes.append(QStringLiteral("[plasmate]/kconfigxteditor/"));
                 } else {
-                    mimeTypes = m_package.mimeTypes(fileIt.toLocal8Bit().data());
+                    mimeTypes = mimeTypesForFile(name);
                 }
                 PackageHandler::Node *childNode = new PackageHandler::Node(fileIt,
                                                   m_package.name(fileIt.toLocal8Bit().data()),
                                                   mimeTypes, node);
 
-                indexedFiles << name << description;
+                indexedFiles << fileIt << description;
                 node->addChild(childNode);
             }
         }
@@ -280,9 +288,9 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
         for (const auto &fileInfo : QDir(packagePathWithContentsPrefix + it).
                                     entryInfoList(QDir::NoDotAndDotDot | QDir::Files)) {
             const QString fileName = fileInfo.fileName();
-            if (!indexedFiles.contains(fileName)){
+            if (!indexedFiles.contains(fileName) && m_fileDefinitions.values().contains(fileName)) {
                 PackageHandler::Node *childNode = new PackageHandler::Node(fileName, fileName,
-                                                  mimeTypesForUnnamedFile(fileName), node);
+                                                  mimeTypesForFile(fileName), node);
                 node->addChild(childNode);
             }
         }
@@ -306,7 +314,7 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
     for (const auto &fileInfo : QDir(packagePathWithContentsPrefix).entryInfoList(QDir::NoDotAndDotDot | QDir::Files)) {
         const QString fileName = fileInfo.fileName();
         if (!indexedFiles.contains(fileName)){
-            PackageHandler::Node *node = new PackageHandler::Node(fileName, fileName, mimeTypesForUnnamedFile(fileName), m_topNode);
+            PackageHandler::Node *node = new PackageHandler::Node(fileName, fileName, mimeTypesForFile(fileName), m_topNode);
             m_topNode->addChild(node);
         }
     }

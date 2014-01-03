@@ -52,7 +52,7 @@ PackageModel::PackageModel(PackageHandler *packageHandler, QObject *parent)
 
     m_topNode = m_packageHandler->loadPackageInfo();
 
-    m_watchDirectory->addDir(m_packageHandler->packagePath() + contentsPrefix(),
+    m_watchDirectory->addDir(m_packageHandler->packagePath() + m_packageHandler->contentsPrefix(),
                              KDirWatch::WatchSubDirs | KDirWatch::WatchFiles);
 
     connect(m_watchDirectory, &KDirWatch::created, [=](const QString &path) {
