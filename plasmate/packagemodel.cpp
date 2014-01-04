@@ -145,9 +145,6 @@ QVariant PackageModel::data(const QModelIndex &index, int role) const
 
     switch(role) {
     case MimeTypeRole: {
-        if (index.row() == 1) {
-            return "[plasmate]/new";
-        }
         return node->mimeTypes();
     }
     break;
