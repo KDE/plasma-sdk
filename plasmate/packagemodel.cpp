@@ -56,11 +56,17 @@ PackageModel::PackageModel(PackageHandler *packageHandler, QObject *parent)
                              KDirWatch::WatchSubDirs | KDirWatch::WatchFiles);
 
     connect(m_watchDirectory, &KDirWatch::created, [=](const QString &path) {
-       // FIXME
+        Q_UNUSED(path);
+        beginResetModel();
+        m_topNode = m_packageHandler->loadPackageInfo();
+        endResetModel();
     });
 
     connect(m_watchDirectory, &KDirWatch::deleted, [=](const QString &path) {
-        //FIXME
+        Q_UNUSED(path);
+        beginResetModel();
+        m_topNode = m_packageHandler->loadPackageInfo();
+        endResetModel();
     });
 }
 
