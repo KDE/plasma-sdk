@@ -69,6 +69,7 @@ public:
     QString contentsPrefix() const;
 
     PackageHandler::Node* loadPackageInfo();
+
     QUrl urlForNode(PackageHandler::Node *node) const;
 
 Q_SIGNALS:
@@ -84,7 +85,7 @@ private:
     PackageHandler::Node* m_topNode;
 
 
-    void createPackage(const QString &path);
+    void createPackage();
     void createRequiredDirectories();
     void createRequiredFiles();
 };

@@ -140,7 +140,7 @@ void PackageHandler::setPackagePath(const QString &path)
 
     if (!QDir(m_packagePath).exists()) {
         //FIXME missing metadata
-        createPackage(path);
+        createPackage();
     }
 
     m_package.setPath(m_packagePath);
@@ -173,11 +173,11 @@ QString PackageHandler::packagePath() const
     return m_packagePath;
 }
 
-void PackageHandler::createPackage(const QString &path)
+void PackageHandler::createPackage()
 {
-    QDir dir(QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0));
-    dir.mkpath(path);
-    dir.cd(path);
+    QDir dir;
+    dir.mkpath(m_packagePath);
+    dir.cd(m_packagePath);
 
     const QString metadataFilePath = m_packagePath + QStringLiteral("metadata.desktop");
     QFile f(metadataFilePath);
@@ -279,16 +279,15 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
                                                   m_package.name(fileIt.toLocal8Bit().data()),
                                                   mimeTypes, node);
 
-                indexedFiles << fileIt << description;
+                indexedFiles << fileIt << description << name;
                 node->addChild(childNode);
             }
         }
-
         // check for unnamed files
         for (const auto &fileInfo : QDir(packagePathWithContentsPrefix + it).
                                     entryInfoList(QDir::NoDotAndDotDot | QDir::Files)) {
             const QString fileName = fileInfo.fileName();
-            if (!indexedFiles.contains(fileName) && m_fileDefinitions.values().contains(fileName)) {
+            if (!indexedFiles.contains(fileName)) {
                 PackageHandler::Node *childNode = new PackageHandler::Node(fileName, fileName,
                                                   mimeTypesForFile(fileName), node);
                 node->addChild(childNode);
@@ -328,3 +327,4 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
     emit packageChanged(m_topNode);
     return m_topNode;
 }
+
