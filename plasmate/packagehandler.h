@@ -79,7 +79,6 @@ Q_SIGNALS:
 private:
     Plasma::Package m_package;
     QString m_packagePath;
-    QString m_projectPath;
     QHash<QString, QString> m_fileDefinitions;
     QMultiHash<QString, QString> m_directoryDefinitions;
     PackageHandler::Node* m_topNode;
