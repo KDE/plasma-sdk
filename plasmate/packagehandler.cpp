@@ -67,6 +67,15 @@ bool PackageHandler::Node::isFile() const
     return !m_mimeTypes.isEmpty();
 }
 
+bool PackageHandler::Node::needsNewFileNode() const
+{
+    if (name() == QStringLiteral("config")) {
+        return false;
+    }
+
+    return true;
+}
+
 QList<PackageHandler::Node*> PackageHandler::Node::childNodes() const
 {
     return m_childNodes;
@@ -152,7 +161,7 @@ QUrl PackageHandler::urlForNode(PackageHandler::Node *node) const
         return QUrl();
     }
 
-    QString path = m_projectPath + contentsPrefix();
+    QString path = m_packagePath + contentsPrefix();
 
     if (node->parent()) {
         path += node->parent()->name();
@@ -162,9 +171,19 @@ QUrl PackageHandler::urlForNode(PackageHandler::Node *node) const
         path += QLatin1Char('/');
     }
 
+    QDir dir(path);
+    if (!dir.exists()) {
+        qDebug() << dir.mkpath(path);
+    }
+
     if (node->isFile() && node->name() != QStringLiteral("New..")) {
         path += node->name();
+        QFile f(path);
+        if (!f.exists()) {
+            f.open(QIODevice::ReadWrite);
+        }
     }
+
     return QUrl::fromLocalFile(path);
 }
 
@@ -252,11 +271,15 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
     for(const auto &it : m_package.directories()) {
         PackageHandler::Node *node = new PackageHandler::Node(it, m_package.name(it),
                                      QStringList(), m_topNode);
-        QStringList newMimeType;
-        newMimeType << "[plasmate]/new";
-        PackageHandler::Node *newNode = new PackageHandler::Node(QStringLiteral("New.."),
-                                        QStringLiteral("New.."), newMimeType, node);
-        node->addChild(newNode);
+
+        if (node->needsNewFileNode()) {
+            QStringList newMimeType;
+            newMimeType << "[plasmate]/new";
+            PackageHandler::Node *newNode = new PackageHandler::Node(QStringLiteral("New.."),
+                                            QStringLiteral("New.."), newMimeType, node);
+            node->addChild(newNode);
+        }
+
         // check for named files like "main.qml" which
         // exist under a named directory like "ui/main.qml"
         if (m_directoryDefinitions.contains(it)) {
