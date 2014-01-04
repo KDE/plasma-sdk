@@ -69,7 +69,7 @@ bool PackageHandler::Node::isFile() const
 
 bool PackageHandler::Node::needsNewFileNode() const
 {
-    if (name() == QStringLiteral("config")) {
+    if (name() == QStringLiteral("config") || isFile()) {
         return false;
     }
 

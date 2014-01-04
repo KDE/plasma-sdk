@@ -117,11 +117,12 @@ void PackageHandlerTest::checkNodes()
         QCOMPARE(topNode, it->parent());
         Q_ASSERT(!it->name().isEmpty());
         Q_ASSERT(!it->description().isEmpty());
-        if (!it->isFile()) {
+        if (!it->isFile() && it->needsNewFileNode()) {
             const QString firstNodeDescription = it->childNodes().at(0)->description();
             QCOMPARE(firstNodeDescription, QStringLiteral("New.."));
         } else {
             Q_ASSERT(m_packageHandler.urlForNode(it).isValid());
+            QCOMPARE(it->needsNewFileNode(), false);
         }
     }
     Q_ASSERT(m_packageHandler.urlForNode(topNode).isValid());
@@ -152,7 +153,7 @@ void PackageHandlerTest::checkPlasmoidNodes()
             Q_ASSERT(childNodeNames.contains(QStringLiteral("foo.qml")));
         } else if (it->description() == QStringLiteral("Configuration Definitions")) {
             populateChildNodeNamesList(it);
-            QCOMPARE(childNodeNames.size(), 3);
+            QCOMPARE(childNodeNames.size(), 2);
             Q_ASSERT(childNodeNames.contains(QStringLiteral("New..")));
             Q_ASSERT(childNodeNames.contains(QStringLiteral("Configuration UI Pages Model")));
             Q_ASSERT(childNodeNames.contains("Configuration XML file"));
