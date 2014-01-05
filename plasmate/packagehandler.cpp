@@ -274,7 +274,12 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
 
         if (node->needsNewFileNode()) {
             QStringList newMimeType;
-            newMimeType << "[plasmate]/new";
+            if (it == QStringLiteral("images") || it == QStringLiteral("theme")) {
+                newMimeType.append(QStringLiteral("[plasmate]/imageDialog"));
+            } else {
+                newMimeType.append(QStringLiteral("[plasmate]/new"));
+            }
+
             PackageHandler::Node *newNode = new PackageHandler::Node(QStringLiteral("New.."),
                                             QStringLiteral("New.."), newMimeType, node);
             node->addChild(newNode);
@@ -295,9 +300,12 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
 
                 if (fileIt == QStringLiteral("mainconfigxml")) {
                     mimeTypes.append(QStringLiteral("[plasmate]/kconfigxteditor/"));
+                } else if (it == QStringLiteral("images") || it == QStringLiteral("theme")) {
+                    mimeTypes.append(QStringLiteral("[plasmate]/imageViewer"));
                 } else {
                     mimeTypes = mimeTypesForFile(name);
                 }
+
                 PackageHandler::Node *childNode = new PackageHandler::Node(fileIt,
                                                   m_package.name(fileIt.toLocal8Bit().data()),
                                                   mimeTypes, node);

@@ -96,13 +96,17 @@ void PackageHandlerTest::checkPlasmoidMimeTypes()
             }
         }
     }
+
     Q_ASSERT_X(mimeTypes.contains(QStringLiteral("[plasmate]/kconfigxteditor/")),
                "Checking mimetypes","[plasmate]/kconfigxteditor/ doesn't exist");
     Q_ASSERT_X(mimeTypes.contains(QStringLiteral("text/x-qml")), "Checking mimetypes",
               "text/x-qml doesn't exist");
     Q_ASSERT_X(mimeTypes.contains(QStringLiteral("[plasmate]/new")), "Checking mimetypes",
-              "text/x-qml doesn't exist");
-
+              "[plasmate]/new doesn't exist");
+    Q_ASSERT_X(mimeTypes.contains(QStringLiteral("[plasmate]/imageViewer")), "Checking mimetypes",
+              "[plasmate]/imageViewer doesn't exist");
+    Q_ASSERT_X(mimeTypes.contains(QStringLiteral("[plasmate]/imageDialog")), "Checking mimetypes",
+              "[plasmate]/imageDialog doesn't exist");
 }
 
 void PackageHandlerTest::checkNodes()
@@ -159,12 +163,16 @@ void PackageHandlerTest::checkPlasmoidNodes()
             Q_ASSERT(childNodeNames.contains("Configuration XML file"));
         } else if (it->description() == QStringLiteral("Data Files") ||
                    it->description() == QStringLiteral("Executable Scripts") ||
-                   it->description() == QStringLiteral("Images") ||
                    it->description() == QStringLiteral("Translations") ||
                    it->description() == QStringLiteral("Themed Images")) {
             populateChildNodeNamesList(it);
             QCOMPARE(childNodeNames.size(), 1);
             Q_ASSERT(childNodeNames.contains(QStringLiteral("New..")));
+        } else if(it->description() == QStringLiteral("Images")) {
+            populateChildNodeNamesList(it);
+            QCOMPARE(childNodeNames.size(), 2);
+            Q_ASSERT(childNodeNames.contains(QStringLiteral("New..")));
+            Q_ASSERT(childNodeNames.contains(QStringLiteral("plasmagik.png")));
         } else if (it->description() == QStringLiteral("metadata.desktop")) {
             QCOMPARE(childNodeNames.size(), 0);
         } else if (it->description() == QStringLiteral("bar.qml")) {
