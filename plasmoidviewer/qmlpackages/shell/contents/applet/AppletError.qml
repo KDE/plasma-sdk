@@ -30,7 +30,7 @@ Row {
 
     PlasmaCore.IconItem {
         id: icon
-        anchors.verticalCenter: parent
+        anchors.verticalCenter: parent.verticalCenter
         width: theme.hugeIconSize
         height: width
         source: "dialog-error"
@@ -38,7 +38,7 @@ Row {
 
     PlasmaComponents.Label {
         id: messageText
-        anchors.verticalCenter: parent
+        anchors.verticalCenter: parent.verticalCenter
         width: parent.width - icon.width
         wrapMode: Text.Wrap
     }
