@@ -103,13 +103,13 @@ void View::addLocation(const QString &location)
         locationType = Plasma::Types::Desktop;
     } else if (l == QStringLiteral("fullscreen")) {
         locationType = Plasma::Types::FullScreen;
-    } else if (l == QStringLiteral("topedge")) {
+    } else if (l == QStringLiteral("top")) {
         locationType = Plasma::Types::TopEdge;
-    } else if (l == QStringLiteral("bottomedge")) {
+    } else if (l == QStringLiteral("bottom")) {
         locationType = Plasma::Types::BottomEdge;
-    } else if (l == QStringLiteral("rightedge")) {
+    } else if (l == QStringLiteral("right")) {
         locationType = Plasma::Types::RightEdge;
-    } else if (l == QStringLiteral("leftedge")) {
+    } else if (l == QStringLiteral("left")) {
         locationType = Plasma::Types::LeftEdge;
     } else {
         qWarning() << "Location " << l << "doesn't exist. Floating location has been used!!";
