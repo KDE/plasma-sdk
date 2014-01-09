@@ -25,6 +25,8 @@
  */
 
 #include <QApplication>
+#include <QtQml/QQmlDebuggingEnabler>
+
 #include <KAboutData>
 #include <KLocalizedString>
 
@@ -37,6 +39,8 @@ static const char version[] = "2.0";
 
 int main(int argc, char **argv)
 {
+    QQmlDebuggingEnabler debugEnabler;
+
     QApplication app(argc, argv);
     app.setApplicationVersion(version);
 
