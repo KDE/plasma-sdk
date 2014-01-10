@@ -68,10 +68,10 @@ void PackageHandlerTest::createNewPlasmoid()
     m_packageHandler.setPackagePath(newPlasmoidLocation);
     QDir dir(newPlasmoidLocation);
     Q_ASSERT(dir.exists());
+    Q_ASSERT(dir.exists(QStringLiteral("metadata.desktop")));
     Q_ASSERT(dir.exists(QStringLiteral("contents")));
     Q_ASSERT(dir.cd(QStringLiteral("contents")));
     Q_ASSERT(dir.exists(QStringLiteral("ui")));
-    Q_ASSERT(dir.exists(QStringLiteral("metadata.desktop")));
     Q_ASSERT(dir.cd(QStringLiteral("ui")));
     Q_ASSERT(dir.exists(QStringLiteral("main.qml")));
 }
@@ -136,18 +136,16 @@ void PackageHandlerTest::checkPlasmoidNodes()
 {
     PackageHandler::Node *topNode = m_packageHandler.loadPackageInfo();
 
-    QStringList topNodeNames;
     QStringList childNodeNames;
 
     auto populateChildNodeNamesList = [&](PackageHandler::Node *node) {
         childNodeNames.clear();
         for (const auto it : node->childNodes()) {
-            childNodeNames.append(it->name());
+            childNodeNames.append(it->description());
         }
     };
 
-    Q_ASSERT_X(topNode->childNodes().size() == 9, "Check node list size", QString(node->childNodes().size()).toLocal8Bit().data());
-
+    QCOMPARE(topNode->childNodes().size(), 9);
     for (const auto it : topNode->childNodes()) {
         if (it->description() == QStringLiteral("User Interface")) {
             populateChildNodeNamesList(it);
@@ -158,8 +156,7 @@ void PackageHandlerTest::checkPlasmoidNodes()
         } else if (it->description() == QStringLiteral("Configuration Definitions")) {
             populateChildNodeNamesList(it);
             QCOMPARE(childNodeNames.size(), 2);
-            Q_ASSERT(childNodeNames.contains(QStringLiteral("New..")));
-            Q_ASSERT(childNodeNames.contains(QStringLiteral("Configuration UI Pages Model")));
+            Q_ASSERT(childNodeNames.contains(QStringLiteral("Configuration UI pages model")));
             Q_ASSERT(childNodeNames.contains("Configuration XML file"));
         } else if (it->description() == QStringLiteral("Data Files") ||
                    it->description() == QStringLiteral("Executable Scripts") ||
@@ -183,17 +180,6 @@ void PackageHandlerTest::checkPlasmoidNodes()
             QFAIL(errorMessage.toLocal8Bit().data());
         }
     }
-
-    QStringList expectedTopLevelNodeNames;
-    expectedTopLevelNodeNames.append(QStringLiteral("User Interface"));
-    expectedTopLevelNodeNames.append(QStringLiteral("Configuration Definitions"));
-    expectedTopLevelNodeNames.append(QStringLiteral("Data Files"));
-    expectedTopLevelNodeNames.append(QStringLiteral("Executable Scripts"));
-    expectedTopLevelNodeNames.append(QStringLiteral("Images"));
-    expectedTopLevelNodeNames.append(QStringLiteral("Translations"));
-    expectedTopLevelNodeNames.append(QStringLiteral("Themed Images"));
-    expectedTopLevelNodeNames.append(QStringLiteral("metadata.desktop"));
-    Q_ASSERT(topNodeNames == expectedTopLevelNodeNames);
 }
 
 

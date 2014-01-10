@@ -322,7 +322,6 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
                                     entryInfoList(QDir::NoDotAndDotDot | QDir::Files)) {
             const QString fileName = fileInfo.fileName();
             if (!indexedFiles.contains(fileName)) {
-                PackageHandler::Node *childNode = 0;
                 QStringList childMimeTypes;
 
                 if (it == QStringLiteral("images") || it == QStringLiteral("theme")) {
@@ -331,7 +330,7 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
                     childMimeTypes = mimeTypesForFile(fileName);
                 }
 
-                childNode = new PackageHandler::Node(fileName, fileName, childMimeTypes);
+                PackageHandler::Node *childNode = new PackageHandler::Node(fileName, fileName, childMimeTypes, node);
                 node->addChild(childNode);
             }
         }
