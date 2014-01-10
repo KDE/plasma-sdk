@@ -261,6 +261,11 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
     m_topNode = new PackageHandler::Node(QString(), QString(), QStringList(), m_topNode);
 
     QStringList indexedFiles;
+
+    // metadata.desktop is a special file we will handle it manually.
+    // check in the end of the method
+    indexedFiles.append(QStringLiteral("metadata.desktop"));
+
     const QString packagePathWithContentsPrefix = m_packagePath + contentsPrefix();
 
     // TODO it doesn't support unnamed directories like "common"
@@ -300,8 +305,6 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
 
                 if (fileIt == QStringLiteral("mainconfigxml")) {
                     mimeTypes.append(QStringLiteral("[plasmate]/kconfigxteditor/"));
-                } else if (it == QStringLiteral("images") || it == QStringLiteral("theme")) {
-                    mimeTypes.append(QStringLiteral("[plasmate]/imageViewer"));
                 } else {
                     mimeTypes = mimeTypesForFile(name);
                 }
@@ -319,8 +322,16 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
                                     entryInfoList(QDir::NoDotAndDotDot | QDir::Files)) {
             const QString fileName = fileInfo.fileName();
             if (!indexedFiles.contains(fileName)) {
-                PackageHandler::Node *childNode = new PackageHandler::Node(fileName, fileName,
-                                                  mimeTypesForFile(fileName), node);
+                PackageHandler::Node *childNode = 0;
+                QStringList childMimeTypes;
+
+                if (it == QStringLiteral("images") || it == QStringLiteral("theme")) {
+                    childMimeTypes.append(QStringLiteral("[plasmate]/imageViewer"));
+                } else {
+                    childMimeTypes = mimeTypesForFile(fileName);
+                }
+
+                childNode = new PackageHandler::Node(fileName, fileName, childMimeTypes);
                 node->addChild(childNode);
             }
         }
@@ -343,7 +354,7 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
     // top level unnamed files like "contents/bar.qml"
     for (const auto &fileInfo : QDir(packagePathWithContentsPrefix).entryInfoList(QDir::NoDotAndDotDot | QDir::Files)) {
         const QString fileName = fileInfo.fileName();
-        if (!indexedFiles.contains(fileName)){
+        if (!indexedFiles.contains(fileName)) {
             PackageHandler::Node *node = new PackageHandler::Node(fileName, fileName, mimeTypesForFile(fileName), m_topNode);
             m_topNode->addChild(node);
         }
