@@ -304,7 +304,7 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
                 QStringList mimeTypes;
 
                 if (fileIt == QStringLiteral("mainconfigxml")) {
-                    mimeTypes.append(QStringLiteral("[plasmate]/kconfigxteditor/"));
+                    mimeTypes.append(QStringLiteral("[plasmate]/kconfigxteditor"));
                 } else {
                     mimeTypes = mimeTypesForFile(name);
                 }
