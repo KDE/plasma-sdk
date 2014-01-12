@@ -1,0 +1,4 @@
+# ignore testdata
+plasmate/tests/testdata/org.kde.tests.packagehandlertest/contents/config/
+plasmate/tests/testdata/org.kde.tests.packagehandlertest/contents/ui/testKDirWatch.qml
+
