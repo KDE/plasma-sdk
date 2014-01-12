@@ -30,7 +30,7 @@ if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
 endif()
 
 set (PlasMate_SRC
-    #editors/editpage.cpp
+    editors/editpage.cpp
     #editors/metadata/metadataeditor.cpp
     editors/imageviewer/imageloader.cpp
     editors/imageviewer/imageviewer.cpp
@@ -83,7 +83,7 @@ kde4_add_ui_files (PlasMate_SRC
    #editors/metadata/metadata.ui
    publisher/publisher.ui
    #publisher/remoteinstaller/remoteinstaller.ui
-   #editors/kconfigxt/kconfigxteditor.ui
+   editors/kconfigxt/kconfigxteditor.ui
 )
 
 include_directories(${QT_QTWEBKIT_INCLUDE_DIR}

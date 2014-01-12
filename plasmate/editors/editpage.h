@@ -36,6 +36,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#include "editors/metadata/metadataeditor.h"
 
 class QWidget;
+class ImageViewer;
+class KConfigXtEditor;
 
 class EditPage : public QTreeView
 {
@@ -48,8 +50,7 @@ public:
 Q_SIGNALS:
     void loadEditor(const KService::List offers, QUrl target);
     void loadMetaDataEditor(QUrl target);
-    void loadImageViewer(const QUrl &target);
-    void loadKConfigXtEditor(const QUrl &target);
+    void loadRequiredEditor(QWidget *editor);
 
 private Q_SLOTS:
     void findEditor(const QModelIndex &index);
@@ -66,6 +67,9 @@ private:
     bool hasExtension(const QString &filename);
     void imageDialog(const QString &filter, const QString& destinationPath);
     QString createContentWithSubdir(const QString& packagePath, const QString& contentWithSubdir) const;
+
+    ImageViewer *m_imageViewer;
+    KConfigXtEditor *m_kconfigXtEditor;
 };
 
 #endif
