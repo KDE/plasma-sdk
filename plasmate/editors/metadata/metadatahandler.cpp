@@ -50,6 +50,7 @@ void MetadataHandler::writeFile()
 {
     m_metadataConfig.writeEntry("X-KDE-PluginInfo-EnabledByDefault", true);
     m_metadataConfig.writeEntry("Type", QStringLiteral("Service"));
+    m_metadataConfig.writeEntry("X-Plasma-MainScript", QStringLiteral("ui/main.qml"));
     m_metadataConfig.sync();
 }
 

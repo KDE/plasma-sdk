@@ -106,6 +106,7 @@ void MetadataHandlerTest::write()
 
     QCOMPARE(cg.readEntry("X-KDE-PluginInfo-EnabledByDefault", QString()), QStringLiteral("true"));
     QCOMPARE(cg.readEntry("Type", QString()), QStringLiteral("Service"));
+    QCOMPARE(cg.readEntry("X-Plasma-MainScript"), QStringLiteral("ui/main.qml"));
 }
 
 QTEST_GUILESS_MAIN(MetadataHandlerTest)
