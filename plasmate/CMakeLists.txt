@@ -23,12 +23,6 @@ add_feature_info(QT_QTWEBKIT_FOUND "QtWebKit" "Opensource web browser engine" "h
 find_program(GIT_EXECUTABLE_FOUND git)
 add_feature_info(GIT_EXECUTABLE_FOUND "Git" "Distributed Revision Control System" "http://git-scm.com/" FALSE "" "Runtime dependency needed to use the TimeLine feature.")
 
-string(TOLOWER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE_TOLOWER)
-if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
-   add_definitions(-DDEBUG_MODEL)
-   set (DEBUG_MODEL 1)
-endif()
-
 set (PlasMate_SRC
     #editors/editpage.cpp
     #editors/metadata/metadataeditor.cpp

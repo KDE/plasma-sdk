@@ -776,9 +776,6 @@ void MainWindow::loadProject(const QString &path)
 
     delete m_model;
     m_model = new PackageModel(this);
-#ifdef DEBUG_MODEL
-    new ModelTest(m_model, this);
-#endif
     qDebug() << "Setting project type to:" << actualType;
     m_model->setPackageType(actualType);
     qDebug() << "Setting model package to:" << packagePath;
