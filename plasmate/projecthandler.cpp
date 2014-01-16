@@ -125,3 +125,9 @@ void ProjectHandler::removeProject(const QString &projectPath)
     loadProjectsList();
 }
 
+bool ProjectHandler::removeProjectFromDisk(const QString &projectPath)
+{
+    QDir projectDir(projectPath);
+    removeProject(projectPath);
+    return projectDir.removeRecursively();
+}

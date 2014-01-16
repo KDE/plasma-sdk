@@ -38,6 +38,7 @@ public:
     const QStringList &loadProjectsList();
     void addProject(const QString &projectPath);
     void removeProject(const QString &projectPath);
+    bool removeProjectFromDisk(const QString &projectPath);
     PackageHandler *packageHandler();
 private:
     QStringList m_projectsList;

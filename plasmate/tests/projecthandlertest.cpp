@@ -97,10 +97,14 @@ void ProjectHandlerTest::projectsList()
     Q_ASSERT(list.contains(newTestPackage));
 
     m_projectHandler.removeProject(QDir::tempPath() + "/externaltestpackage");
+    const QDir newTestPackageDir(newTestPackage);
+    m_projectHandler.removeProjectFromDisk(newTestPackage);
+
     list = m_projectHandler.loadProjectsList();
     Q_ASSERT(list.length() > 0);
-    Q_ASSERT(list.count() == 2);
+    Q_ASSERT(list.count() == 1);
     Q_ASSERT(list.contains(testPackagePath));
+    Q_ASSERT(!newTestPackageDir.exists());
 }
 
 QTEST_GUILESS_MAIN(ProjectHandlerTest)
