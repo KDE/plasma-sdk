@@ -57,6 +57,7 @@ ProjectManager::ProjectManager(QWidget* parent)
     m_removeMenuButton->setMenu(m_removeMenu);
     m_removeMenu->addAction(i18n("From List"), this, SLOT(confirmRemoveFromList()));
     m_removeMenu->addAction(i18n("From Disk"), this, SLOT(confirmRemoveFromDisk()));
+    m_removeMenu->addAction(i18n("Cache"), this, SLOT(confirmRemoveProjectCache()));
 
     QVBoxLayout *l = new QVBoxLayout();
 
@@ -94,6 +95,21 @@ void ProjectManager::confirmRemoveFromDisk()
     const int code = KMessageBox::warningContinueCancel(this, dialogText);
     if (code == KMessageBox::Continue) {
         removeSelectedProjects(true);
+    }
+}
+
+void ProjectManager::confirmRemoveProjectCache()
+{
+    const QList<QListWidgetItem *> items = m_projectList->selectedItems();
+    foreach (const QListWidgetItem *item, items) {
+        QString path = item->data(StartPage::FullPathRole).value<QString>();
+        if (!path.endsWith(QLatin1Char('/'))) {
+            path += QLatin1Char('/');
+        }
+        path += PROJECTRC;
+        if (!QFile::remove(path)) {
+            KMessageBox::error(this, QLatin1String("Plasmate was unable to remove the project's cache"));
+        }
     }
 }
 

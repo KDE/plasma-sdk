@@ -64,6 +64,7 @@ private Q_SLOTS:
    void removeSelectedProjects(bool deleteFromDisk);
    void confirmRemoveFromDisk();
    void confirmRemoveFromList();
+   void confirmRemoveProjectCache();
    void checkButtonState();
 
 private:
