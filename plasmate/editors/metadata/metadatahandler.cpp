@@ -144,3 +144,13 @@ void MetadataHandler::setLicense(const QString &license)
     m_metadataConfig.writeEntry("X-KDE-PluginInfo-License", license);
 }
 
+QStringList MetadataHandler::serviceTypes() const
+{
+    return m_metadataConfig.readEntry("X-KDE-ServiceTypes", QStringList());
+}
+
+void MetadataHandler::setServiceTypes(const QStringList &serviceTypes)
+{
+    m_metadataConfig.writeEntry("X-KDE-ServiceTypes", serviceTypes);
+}
+

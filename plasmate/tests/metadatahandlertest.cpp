@@ -55,6 +55,11 @@ void MetadataHandlerTest::read()
     QCOMPARE(m_metadataHandler.email(), QStringLiteral("sebas@kde.org, kde@privat.broulik.de"));
     QCOMPARE(m_metadataHandler.license(), QStringLiteral("GPL"));
     QCOMPARE(m_metadataHandler.website(), QStringLiteral("http://vizZzion.org"));
+
+    QStringList servicesList;
+    servicesList.append("Plasma/Applet");
+    servicesList.append("Plasma/PopupApplet");
+    QCOMPARE(m_metadataHandler.serviceTypes(), servicesList);
 }
 
 void MetadataHandlerTest::write()
@@ -89,6 +94,10 @@ void MetadataHandlerTest::write()
     m_metadataHandler.setLicense(license);
     m_metadataHandler.setWebsite(website);
 
+    QStringList serviceList;
+    serviceList.append("Plasma/Applet");
+    m_metadataHandler.setServiceTypes(serviceList);
+
     m_metadataHandler.writeFile();
 
     QCOMPARE(m_metadataHandler.name(), name);
@@ -99,7 +108,7 @@ void MetadataHandlerTest::write()
     QCOMPARE(m_metadataHandler.email(), email);
     QCOMPARE(m_metadataHandler.license(), license);
     QCOMPARE(m_metadataHandler.website(), website);
-
+    QCOMPARE(m_metadataHandler.serviceTypes(), serviceList);
 
     KConfigGroup cg = KConfigGroup(KSharedConfig::openConfig(path),
                                    QStringLiteral("Desktop Entry"));

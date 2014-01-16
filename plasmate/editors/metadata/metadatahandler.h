@@ -67,6 +67,9 @@ public:
     QString license() const;
     void setLicense(const QString &license);
 
+    QStringList serviceTypes() const;
+    void setServiceTypes(const QStringList &serviceTypes);
+
 private:
     KConfigGroup m_metadataConfig;
     QString m_filePath;
