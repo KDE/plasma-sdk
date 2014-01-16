@@ -118,14 +118,13 @@ MainWindow::MainWindow(QWidget *parent)
         m_oldTab(0), // we start from startPage
         m_docksCreated(false),
         m_isPlasmateCreatedPackage(true),
-        m_part(new KParts::ReadOnlyPart(this)),
+        m_part(0),
         m_notesPart(0)
 
 {
     setXMLFile("plasmateui.rc");
     setupActions();
     createMenus();
-    createGUI(m_part);
     toolBar()->hide();
     menuBar()->hide();
     m_startPage = new StartPage(this);
@@ -516,6 +515,8 @@ void MainWindow::loadRequiredEditor(const KService::List offers, KUrl target)
             if (editorPart) {
                 m_textEditor = new TextEditor(editorPart, m_model, this);
             }
+            //Add the part's GUI
+            createGUI(m_part);
         } else {
             // reuse m_part if we can
             delete part;
@@ -873,7 +874,6 @@ void MainWindow::loadProject(const QString &path)
     }
 
     restoreState(state, STATE_VERSION);
-    toolBar()->show();
 
     // Now, setup some useful properties such as the project name in the title bar
     // and setting the current working directory.
