@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MAINWINDOW_H
 
 #include <KParts/MainWindow>
+#include <KParts/ReadOnlyPart>
 #include <KLibLoader>
 #include <KAction>
 #include <KService>
