@@ -51,7 +51,7 @@ find_package(KF5 CONFIG REQUIRED COMPONENTS
     IdleTime ItemModels WidgetsAddons WindowSystem Codecs Archive CoreAddons Solid ThreadWeaver
     Config Auth JS Wallet DBusAddons Sonnet
     I18n GuiAddons Service ConfigWidgets ItemViews Notifications IconThemes Style Completion JobWidgets TextWidgets
-    GlobalAccel XmlGui Crash UnitConversion Bookmarks Parts Kross NewStuff)
+    GlobalAccel XmlGui Crash UnitConversion Bookmarks Parts Kross NewStuff Attica)
 
 find_package(KF5Plasma REQUIRED NO_MODULE)
 find_package(KF5PlasmaQuick REQUIRED NO_MODULE)
@@ -60,12 +60,6 @@ find_package(KF5KIO REQUIRED NO_MODULE)
 
 # needed for set_package_properties macro
 find_package(KF5KDE4Support REQUIRED NO_MODULE)
-
-find_package(LibAttica NO_MODULE)
-set_package_properties(LibAttica PROPERTIES DESCRIPTION "Support for Get Hot New Stuff related stuff"
-                       URL "https://projects.kde.org/attica"
-                       TYPE REQUIRED
-                      )
 
 #########################################################################
 
