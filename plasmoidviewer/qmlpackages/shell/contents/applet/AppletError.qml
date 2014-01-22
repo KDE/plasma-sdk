@@ -31,7 +31,7 @@ Row {
     PlasmaCore.IconItem {
         id: icon
         anchors.verticalCenter: parent.verticalCenter
-        width: theme.hugeIconSize
+        width: units.iconSizes.huge
         height: width
         source: "dialog-error"
     }
