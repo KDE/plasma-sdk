@@ -40,7 +40,7 @@ static const char version[] = "0.1";
 
 int main(int argc, char **argv)
 {
-    KAboutData aboutData("plasma-remote-widgets-browser", 0, ki18n("Plasma Remote Widgets Browser"),
+    KAboutData aboutData("plasma-remote-widgets-browser", "remote-widgets-browser", ki18n("Plasma Remote Widgets Browser"),
                          version, ki18n(description), KAboutData::License_GPL,
                          ki18n("(c) 2011 The KDE Team"));
     aboutData.addAuthor(ki18n("Kevin Ottens"),
