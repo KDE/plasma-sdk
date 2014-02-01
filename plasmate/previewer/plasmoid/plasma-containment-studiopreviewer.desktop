@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=StudioPreviewer
+Name[bs]=StudioPreviewer
 Name[da]=StudioForhåndsviser
 Name[de]=Studiovorschau
 Name[el]=StudioPreviewer
@@ -27,6 +28,7 @@ Name[uk]=StudioPreviewer
 Name[x-test]=xxStudioPreviewerxx
 Name[zh_TW]=StudioPreviewer
 Comment=Containment used to preview plasmoids on Plasma Studio
+Comment[bs]=Sadržaj korišten za pregled plazmoida u Plasma Studio
 Comment[da]=Beholder der bruges til at forhåndsvise plasmoids på Plasma Studio
 Comment[de]=„Containment“ für die Vorschau von Plasmoiden in Plasma Studio
 Comment[el]=Συγκεντρωτική προεπισκόπηση πλασμοειδών στο Plasma Studio
