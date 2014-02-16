@@ -50,7 +50,7 @@ set (QT_MIN_VERSION "5.2.0")
 find_package(KF5 CONFIG REQUIRED COMPONENTS
     IdleTime ItemModels WidgetsAddons WindowSystem Codecs Archive CoreAddons Solid ThreadWeaver
     Config Auth JS Wallet DBusAddons Sonnet
-    I18n GuiAddons Service ConfigWidgets ItemViews Notifications IconThemes FrameworkIntegration Completion JobWidgets TextWidgets
+    I18n GuiAddons Service ConfigWidgets ItemViews Notifications IconThemes Completion JobWidgets TextWidgets
     GlobalAccel XmlGui Crash UnitConversion Bookmarks Parts Kross NewStuff Attica)
 
 find_package(KF5Plasma REQUIRED NO_MODULE)
