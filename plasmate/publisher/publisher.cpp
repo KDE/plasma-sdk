@@ -13,6 +13,7 @@
 #include <QCheckBox>
 #include <QComboBox>
 #include <QScopedPointer>
+#include <QDebug>
 
 #include <KConfigGroup>
 #include <KIO/DeleteJob>
@@ -277,6 +278,7 @@ bool Publisher::exportToFile(const QUrl& url)
 
 QString Publisher::currentPackagePath() const
 {
-    KConfigGroup cg(KGlobal::config(), "PackageModel::package");
+    KConfigGroup cg(KSharedConfig::openConfig(qApp->applicationDisplayName()), "PackageModel::package");
     return cg.readEntry("lastLoadedPackage", QString());
 }
+

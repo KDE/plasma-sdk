@@ -28,6 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QWidget>
 #include <QModelIndex>
 #include <QTreeView>
+#include <QUrl>
 #include <kparts/part.h>
 #include <kservice.h>
 #include <KMenu>
@@ -38,6 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 class QWidget;
 class ImageViewer;
 class KConfigXtEditor;
+class KJob;
 
 class EditPage : public QTreeView
 {
