@@ -25,6 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QAbstractItemModel>
 #include <QValidator>
 #include <QFile>
+#include <QStandardPaths>
 #include <QTextStream>
 #include <QDateTime>
 
@@ -723,7 +724,7 @@ const QString StartPage::generateProjectFolderName(const QString& suggestion)
 {
     QString projectFolder = suggestion;
     int suffix = 1;
-    while (!KStandardDirs::locate("appdata", projectFolder + '/').isEmpty()) {
+    while (!QStandardPaths::locateAll(QStandardPaths::DataLocation, projectFolder).isEmpty()) {
         projectFolder = suggestion + QString::number(suffix);
         suffix++;
     }

@@ -32,4 +32,12 @@ plasmate_ui_test(editpagetest "${editpagetest_UI}"
                               "${editpagetest_SRCS}"
                               "${editpagetest_LIBS}"
 )
+set(startPage_SRCS startpagetest.cpp
+                   ../../startpage.cpp
+)
+
+qt5_wrap_ui(startPage_SRCS ../../startpage.ui)
+add_executable(startpagetest ${startPage_SRCS})
+
+target_link_libraries(startpagetest Qt5::Widgets Qt5::Test)
 
