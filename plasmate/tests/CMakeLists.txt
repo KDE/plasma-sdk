@@ -1,55 +1,68 @@
-set(packageHandler_SRCS packagehandlertest.cpp
-                        ../packagehandler.cpp
+include(ECMMarkAsTest)
+
+macro(PLASMATE_UNIT_TEST testname srcs libraries)
+    set(testname_SRCS ${testname}.cpp
+                      ${srcs}
+    )
+
+    add_executable(${testname} ${testname_SRCS})
+
+    # plasmate_unit_test is also being called
+    # by plasmate_ui_test, so we will check if we
+    # have extra arguments. If we have then we don't
+    # want to add them as tests because `make test` will
+    # freeze.
+
+    set(extra_macro_args ${ARGN})
+    list(LENGTH extra_macro_args num_extra_args)
+
+    if (${num_extra_args} EQUAL 0)
+        add_test(plasmate-${testname} ${testname})
+    endif()
+
+    ecm_mark_as_test(${testname})
+
+    target_link_libraries(${testname} ${libraries} Qt5::Test Qt5::Core)
+endmacro()
+
+# packageHandertest
+set(packagehandler_SRCS ../packagehandler.cpp)
+set(packagehandler_LIBS KF5::Plasma)
+
+PLASMATE_UNIT_TEST(packagehandlertest "${packagehandler_SRCS}"
+                                      "${packagehandler_LIBS}"
 )
 
-add_executable(packagehandlertest ${packageHandler_SRCS})
-
-target_link_libraries(packagehandlertest Qt5::Core Qt5::Test KF5::Plasma)
-
-set(packagemodelTest_SRCS modeltest.cpp
-                          packagemodeltest.cpp
+# packagemodeltest
+set(packagemodeltest_SRCS modeltest.cpp
                           ../packagemodel.cpp
-                          ../packagehandler.cpp
+                          ${packagehandler_SRCS}
 )
 
-add_executable(packagemodeltest ${packagemodelTest_SRCS})
+set(packagemodeltest_LIBS ${packagehandler_LIBS})
 
-target_link_libraries(packagemodeltest Qt5::Core Qt5::Test KF5::Plasma)
-
-set(editpageTest_SRCS ui/editpagetest.cpp
-                      ../packagemodel.cpp
-                      ../packagehandler.cpp
-                      ../editors/editpage.cpp
-                      ../editors/imageviewer/imageloader.cpp
-                      ../editors/imageviewer/imageviewer.cpp
-                      ../editors/kconfigxt/kconfigxteditor.cpp
-                      ../editors/kconfigxt/kconfigxtreader.cpp
-                      ../editors/kconfigxt/kconfigxtwriter.cpp
+plasmate_unit_test(packagemodeltest "${packagemodeltest_SRCS}"
+                                    "${packagemodeltest_LIBS}"
 )
 
-#kde4_add_ui_files(editpageTest_SRCS ../editors/kconfigxt/kconfigxteditor.ui
-#)
+# metadatahandlertest
+set(metadatahandlertest_SRCS ../editors/metadata/metadatahandler.cpp)
+set(metadatahandlertest_LIBS KF5::ConfigCore)
 
-#add_executable(editpagetest ${editpageTest_SRCS})
-
-#target_link_libraries(editpagetest Qt5::Core Qt5::Widgets Qt5::Test
-#                      Qt5::Svg KF5::Plasma KF5::I18n KF5::Service
-#                      KF5::KIOCore KF5::KDE4Support)
-
-set(metadatahandler_SRCS metadatahandlertest.cpp
-                         ../editors/metadata/metadatahandler.cpp
+plasmate_unit_test(metadatahandlertest "${metadatahandlertest_SRCS}"
+                                       "${metadatahandlertest_LIBS}"
 )
 
-add_executable(metadatahandlertest ${metadatahandler_SRCS})
-
-target_link_libraries(metadatahandlertest Qt5::Core Qt5::Test KF5::ConfigCore)
-
-set(projecthandlerTest_SRCS
-                          projecthandlertest.cpp
-                          ../projecthandler.cpp
-                          ../packagehandler.cpp
+# projecthandlertest
+set(projecthandlertest_SRCS ../projecthandler.cpp
+                            ../packagehandler.cpp
 )
 
-add_executable(projecthandlertest ${projecthandlerTest_SRCS})
+set(projecthandlertest_LIBS KF5::Plasma)
 
-target_link_libraries(projecthandlertest Qt5::Core Qt5::Test KF5::Plasma)
+plasmate_unit_test(projecthandlertest "${projecthandlertest_SRCS}"
+                                      "${projecthandlertest_LIBS}"
+)
+
+add_subdirectory(ui)
+
