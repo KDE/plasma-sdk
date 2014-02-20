@@ -26,7 +26,7 @@
 #include "view.h"
 
 View::View(Plasma::Corona *cor, QWindow *parent)
-    : PlasmaQuickView(cor, parent)
+    : PlasmaQuick::View(cor, parent)
 {
     engine()->rootContext()->setContextProperty("desktop", this);
     setSource(QUrl::fromLocalFile(cor->package().filePath("views", "Desktop.qml")));

@@ -19,10 +19,9 @@
 #ifndef VIEW_H
 #define VIEW_H
 
-#include <PlasmaQuick/PlasmaQuickView>
+#include "privateheaders/view.h"
 
-
-class View : public PlasmaQuickView
+class View : public PlasmaQuick::View
 {
     Q_OBJECT
 
