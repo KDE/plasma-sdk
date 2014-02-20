@@ -113,19 +113,19 @@ Item {
                 onClicked: location(PlasmaCore.Types.FullScreen)
             }
             PlasmaComponents.MenuItem {
-                text: i18n("Topedge")
+                text: i18n("Top Edge")
                 onClicked: location(PlasmaCore.Types.TopEdge)
             }
             PlasmaComponents.MenuItem {
-                text: i18n("Bottomedge")
+                text: i18n("Bottom Edge")
                 onClicked: location(PlasmaCore.Types.Bottomedge)
             }
             PlasmaComponents.MenuItem {
-                text: i18n("Leftedge")
+                text: i18n("Left Edge")
                 onClicked: location(PlasmaCore.Types.LeftEdge)
             }
             PlasmaComponents.MenuItem {
-                text: i18n("Rightedget")
+                text: i18n("Right Edget")
                 onClicked: location(PlasmaCore.Types.RightEdge)
             }
         }
