@@ -69,7 +69,7 @@ int main(int argc, char **argv)
                 i18n("Set the y position of the plasmoidviewer on the plasma desktop"),
                 QStringLiteral("yPosition")));
     parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("s") << QStringLiteral("size"),
-                i18n("Set the x position of the plasmoidviewer on the plasma desktop"),
+                i18n("Set the window size of the plasmoidview"),
                 QStringLiteral("widthXheight")));
     parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("p") << QStringLiteral("pixmapcache"),
                 i18n("The size in kB to set the pixmap cache to"),
@@ -97,9 +97,9 @@ int main(int argc, char **argv)
     v->addLocation(parser.value("location"));
 
     if (parser.isSet("size")) {
-        QStringList realSize = parser.value("size").split(QChar('x'));
-        int realWidth = realSize.at(0).toInt();
-        int realHeight = realSize.at(1).toInt();
+        const QStringList realSize = parser.value("size").split(QChar('x'));
+        const int realWidth = realSize.at(0).toInt();
+        const int realHeight = realSize.at(1).toInt();
         if (realWidth != 0 && realHeight != 0) {
             v->setWidth(realWidth);
             v->setHeight(realHeight);
