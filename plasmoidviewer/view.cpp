@@ -31,7 +31,7 @@
 
 #include "view.h"
 
-View::View(Plasma::Corona *cor, QWindow *parent)
+View::View(Plasma::Corona *cor, bool konsoleVisible, QWindow *parent)
     : PlasmaQuick::View(cor, parent)
 {
     m_konsoleVisible = konsoleVisible;
