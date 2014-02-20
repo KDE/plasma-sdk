@@ -54,7 +54,7 @@ void View::addApplet(const QString &applet)
 
     Plasma::Applet *a = containment()->createApplet(applet);
     if (!a->pluginInfo().isValid()) {
-        qCritical("Applet doesn't exist!");
+        qCritical("Applet %s doesn't exist!", qPrintable(applet));
         return;
     }
     m_lastAppletName = applet;
@@ -65,14 +65,14 @@ void View::addContainment(const QString &cont)
     Plasma::Containment *c = corona()->createContainment(cont);
 
     if (!c->pluginInfo().isValid()) {
-        qCritical("Containment doesn't exist");
+        qCritical("Containment %s doesn't exist", qPrintable(cont));
         return;
     }
 
     setContainment(c);
 
     connect(containment(), &Plasma::Containment::appletRemoved, [=](Plasma::Applet *applet) {
-        if (applet) {
+        if (applet && applet->pluginInfo().isValid()) {
             addApplet(applet->pluginInfo().pluginName());
         }
     });
