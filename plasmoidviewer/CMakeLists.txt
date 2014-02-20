@@ -18,4 +18,4 @@ install(TARGETS plasmoidviewer ${INSTALL_TARGETS_DEFAULT_ARGS})
 #kde4_create_manpage(man-plasmoidviewer.1.docbook 1 INSTALL_DESTINATION ${MAN_INSTALL_DIR})
 
 #qml
-plasma_install_package(qmlpackages/shell org.kde.plasmoidviewershell plasma/shells shell)
+plasma_install_package(qmlpackages/shell org.plasma.plasmoidviewershell plasma/shells shell)
