@@ -118,14 +118,14 @@ Item {
             }
             PlasmaComponents.MenuItem {
                 text: i18n("Bottom Edge")
-                onClicked: location(PlasmaCore.Types.Bottomedge)
+                onClicked: location(PlasmaCore.Types.BottomEdge)
             }
             PlasmaComponents.MenuItem {
                 text: i18n("Left Edge")
                 onClicked: location(PlasmaCore.Types.LeftEdge)
             }
             PlasmaComponents.MenuItem {
-                text: i18n("Right Edget")
+                text: i18n("Right Edge")
                 onClicked: location(PlasmaCore.Types.RightEdge)
             }
         }
