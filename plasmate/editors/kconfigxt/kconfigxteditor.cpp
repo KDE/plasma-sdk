@@ -22,7 +22,7 @@
 #include "kconfigxteditor.h"
 #include <KComboBox>
 #include <QDebug>
-#include <KIcon>
+#include <QIcon>
 #include <KMessageBox>
 #include <KLocalizedString>
 
@@ -41,7 +41,7 @@ KConfigXtEditor::KConfigXtEditor(QWidget *parent)
     m_ui.twEntries->header()->setResizeMode(QHeaderView::ResizeToContents);
     m_ui.twGroups->header()->setResizeMode(QHeaderView::ResizeToContents);
 
-    m_ui.lblHintIcon->setPixmap(KIcon("dialog-information").pixmap(16, 16));
+    m_ui.lblHintIcon->setPixmap(QIcon::fromTheme("dialog-information").pixmap(16, 16));
 
     connect(m_ui.pbAddGroup, SIGNAL(clicked()), this, SLOT(createNewGroup()));
     connect(m_ui.pbAddEntry, SIGNAL(clicked()), this, SLOT(createNewEntry()));

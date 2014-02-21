@@ -99,7 +99,6 @@ target_link_libraries(plasmate
                       KF5::I18n
                       KF5::KIOWidgets
                       KF5::Service
-                      KF5::KDE4Support
                       #${KDEPIMLIBS_KPIMUTILS_LIBS}
 )
 

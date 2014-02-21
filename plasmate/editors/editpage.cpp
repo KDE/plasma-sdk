@@ -36,11 +36,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QPixmap>
 #include <QStringList>
 #include <KConfigGroup>
-#include <KGlobal>
-#include <kfiledialog.h>
-#include <KIcon>
+#include <QFileDialog>
+#include <QIcon>
 #include <KMessageBox>
 #include <QInputDialog>
+#include <KLocalizedString>
 #include <KIO/CopyJob>
 #include <KIO/DeleteJob>
 #include <KIO/JobClasses>
@@ -62,7 +62,7 @@ EditPage::EditPage(QWidget *parent)
 {
     setHeaderHidden(true);
     m_contextMenu = new QMenu(this);
-    QAction *del = m_contextMenu->addAction(KIcon("window-close"), i18n("Delete"));
+    QAction *del = m_contextMenu->addAction(QIcon::fromTheme("window-close"), i18n("Delete"));
     connect(del, SIGNAL(triggered(bool)), this, SLOT(doDelete(bool)));
 
     setContextMenuPolicy(Qt::CustomContextMenu);
@@ -243,7 +243,7 @@ void EditPage::imageDialog(const QString& filter, const QString& destinationPath
 {
     KUser user;
     QUrl homeDir(user.homeDir());
-    const QList<QUrl> srcDir = KFileDialog::getOpenUrls(homeDir, filter, this);
+    const QList<QUrl> srcDir = QFileDialog::getOpenFileUrls(this, filter, homeDir);
     KConfigGroup cg(KSharedConfig::openConfig(), "PackageModel::package");
     const QUrl destinationDir(cg.readEntry("lastLoadedPackage", QString()) + destinationPath);
     QDir destPath(destinationDir.path());
