@@ -20,7 +20,7 @@ set(editpagetest_SRCS ../../packagemodel.cpp
 set(editpagetest_UI ../../editors/kconfigxt/kconfigxteditor.ui)
 
 set(editpagetest_LIBS Qt5::Svg KF5::Plasma KF5::I18n KF5::Service
-                      KF5::KIOCore KF5::KDE4Support
+                      KF5::KIOCore KF5::KIOWidgets
 )
 
 plasmate_ui_test(editpagetest "${editpagetest_UI}"
