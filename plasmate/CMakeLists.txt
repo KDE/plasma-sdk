@@ -99,6 +99,8 @@ target_link_libraries(plasmate
                       KF5::I18n
                       KF5::KIOWidgets
                       KF5::Service
+                      KF5::Completion
+                      KF5::WidgetsAddons
                       #${KDEPIMLIBS_KPIMUTILS_LIBS}
 )
 
@@ -173,12 +175,15 @@ kde4_add_ui_files (plasmakconfigxt_SRCS
 
 add_executable(plasmakconfigxteditor ${plasmakconfigxt_SRCS})
 target_link_libraries(plasmakconfigxteditor
-                        KF5::KDE4Support
                         Qt5::Widgets
                         KF5::CoreAddons
                         KF5::ConfigCore
                         KF5::KIOCore
+                        KF5::I18n
                         Qt5::Xml
+                        KF5::Completion
+                        KF5::WidgetsAddons
+                        KF5::KIOWidgets
 )
 
 install(TARGETS plasmakconfigxteditor ${INSTALL_TARGETS_DEFAULT_ARGS})
