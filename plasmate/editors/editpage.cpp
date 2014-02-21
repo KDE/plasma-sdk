@@ -32,6 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QHBoxLayout>
 #include <QFile>
 #include <QList>
+#include <QMenu>
 #include <QPixmap>
 #include <QStringList>
 #include <KConfigGroup>
@@ -39,7 +40,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <kfiledialog.h>
 #include <KIcon>
 #include <KMessageBox>
-#include <KInputDialog>
+#include <QInputDialog>
 #include <KIO/CopyJob>
 #include <KIO/DeleteJob>
 #include <KIO/JobClasses>
@@ -60,7 +61,7 @@ EditPage::EditPage(QWidget *parent)
         // m_metaEditor(0)
 {
     setHeaderHidden(true);
-    m_contextMenu = new KMenu(this);
+    m_contextMenu = new QMenu(this);
     QAction *del = m_contextMenu->addAction(KIcon("window-close"), i18n("Delete"));
     connect(del, SIGNAL(triggered(bool)), this, SLOT(doDelete(bool)));
 
@@ -177,7 +178,8 @@ void EditPage::findEditor(const QModelIndex &index)
 
         if (mimetype == "[plasmate]/new") {
             const QString dialogText = i18n("Enter a name for the new file:");
-            QString file = KInputDialog::getText(QString(), dialogText);
+            QString file = QInputDialog::getText(this, i18n("Choose a filename"),
+                                                 i18n("Enter a name for the new file:"));
             if (!file.isEmpty()) {
                 /*if (!m_metaEditor) {
                     m_metaEditor = new MetaDataEditor(this);

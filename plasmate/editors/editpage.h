@@ -31,12 +31,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QUrl>
 #include <kparts/part.h>
 #include <kservice.h>
-#include <KMenu>
 
 // FIXME
 //#include "editors/metadata/metadataeditor.h"
 
 class QWidget;
+class QMenu;
 class ImageViewer;
 class KConfigXtEditor;
 class KJob;
@@ -61,7 +61,7 @@ private Q_SLOTS:
     void mimetypeJobFinished(KJob *job);
 
 private:
-    KMenu *m_contextMenu;
+    QMenu *m_contextMenu;
     // FIXME
     // MetaDataEditor *m_metaEditor;
     QUrl m_path;
