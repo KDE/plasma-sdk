@@ -16,7 +16,6 @@
  */
 
 #include <QApplication>
-#include <KLocale>
 
 #include <QDialog>
 #include <QVBoxLayout>
