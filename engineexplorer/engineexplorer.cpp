@@ -31,7 +31,8 @@
 #include <KIconTheme>
 #include <KStandardAction>
 #include <KStringHandler>
-#include <KAction>
+#include <KLocalizedString>
+#include <QAction>
 #include <QDateTime>
 
 #include <Plasma/PluginLoader>

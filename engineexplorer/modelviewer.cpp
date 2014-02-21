@@ -24,6 +24,7 @@
 #include <QDialogButtonBox>
 #include <KMessageBox>
 #include <KStringHandler>
+#include <KLocalizedString>
 
 #include <Plasma/DataEngine>
 #include <Plasma/Service>
@@ -34,7 +35,7 @@
 Delegate::Delegate(QObject *parent)
     : QAbstractItemDelegate(parent)
 {
-    
+
 }
 
 Delegate::~Delegate()

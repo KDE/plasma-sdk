@@ -21,7 +21,7 @@
 
 #include <QApplication>
 #include <KAboutData>
-#include <KLocale>
+#include <KLocalizedString>
 
 #include <Plasma/PluginLoader>
 #include <qcommandlineparser.h>

@@ -16,6 +16,8 @@ target_link_libraries(plasmaengineexplorer
     KF5::Service
     KF5::Completion
     KF5::Plasma
+    KF5::XmlGui
+    KF5::I18n
 )
 
 install(TARGETS plasmaengineexplorer ${INSTALL_TARGETS_DEFAULT_ARGS})
