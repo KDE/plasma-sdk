@@ -32,7 +32,7 @@
 #include <KStandardAction>
 #include <KStringHandler>
 #include <KAction>
-#include <KDateTime>
+#include <QDateTime>
 
 #include <Plasma/PluginLoader>
 
@@ -429,8 +429,8 @@ QString EngineExplorer::convertToString(const QVariant &value)
                 }
             }
 #endif
-            if (QLatin1String(value.typeName()) == "KDateTime") {
-                return QString("%1").arg(value.value<KDateTime>().toString());
+            if (QLatin1String(value.typeName()) == "QDateTime") {
+                return QString("%1").arg(value.value<QDateTime>().toString());
             }
 
             Plasma::DataEngine::Data data = value.value<Plasma::DataEngine::Data>();
