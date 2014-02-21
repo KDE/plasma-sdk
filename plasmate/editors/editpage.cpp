@@ -244,7 +244,7 @@ void EditPage::imageDialog(const QString& filter, const QString& destinationPath
     KUser user;
     QUrl homeDir(user.homeDir());
     const QList<QUrl> srcDir = KFileDialog::getOpenUrls(homeDir, filter, this);
-    KConfigGroup cg(KGlobal::config(), "PackageModel::package");
+    KConfigGroup cg(KSharedConfig::openConfig(), "PackageModel::package");
     const QUrl destinationDir(cg.readEntry("lastLoadedPackage", QString()) + destinationPath);
     QDir destPath(destinationDir.path());
     if (!destPath.exists()) {
