@@ -29,14 +29,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QAbstractItemModel>
 
-#include <Plasma/PackageStructure>
+#include "packagehandler.h"
 
 class KDirWatch;
-
-namespace Plasma
-{
-class Package;
-} // namespace Plasma
+class PackageHandler;
 
 class PackageModel : public QAbstractItemModel
 {
@@ -44,23 +40,14 @@ class PackageModel : public QAbstractItemModel
 
 public:
 
-    explicit PackageModel(QObject *parent = 0);
+    explicit PackageModel(PackageHandler *packageHandler, QObject *parent = 0);
     ~PackageModel();
 
-    void setPackageType(const QString &type);
-    QString packageType() const;
-
-    QString implementationApi() const;
-
-    int setPackage(const QString &path);
-    QString package() const;
-    QString contentsPrefix() const;
-
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
-    QModelIndex parent(const QModelIndex &index) const;
-    int columnCount(const QModelIndex &parent = QModelIndex()) const;
-    int rowCount(const QModelIndex & parent = QModelIndex()) const;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
+    QModelIndex parent(const QModelIndex &index) const override;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+    int rowCount(const QModelIndex & parent = QModelIndex()) const override;
 
     enum DataRoles {
         MimeTypeRole = Qt::UserRole + 1,
@@ -71,28 +58,11 @@ public:
 
 Q_SIGNALS:
     void reloadModel();
-
 private:
-    QUrl urlForIndex(const QModelIndex &index) const;
-    bool fileExists(const QString& key) const;
-
-private Q_SLOTS:
-    void fileAddedOnDisk(const QString &path);
-    void fileDeletedOnDisk(const QString &path);
-    void directoryModifiedOnDisk(const QString &path);
-    bool loadPackage();
-    QString contentsWithSubdirRole(int indexRow) const;
-
-private:
-    KDirWatch *m_directory;
-    QVector<const char *> m_topEntries;
-    QHash<const char *, QStringList> m_files;
-    QHash<const char *, QList<const char *> > m_namedFiles;
-    Plasma::PackageStructure::Ptr m_structure;
-    Plasma::Package *m_package;
-
     QHash<QString, QStringList>  m_dialogOptions;
-
+    PackageHandler *m_packageHandler;
+    PackageHandler::Node* m_topNode;
+    KDirWatch *m_watchDirectory;
     static const int MAX_COLUMN = 0;
 };
 

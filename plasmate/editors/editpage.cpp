@@ -23,7 +23,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 #include "editpage.h"
+#include "imageviewer/imageviewer.h"
+#include "kconfigxt/kconfigxteditor.h"
 
 #include <QDebug>
 #include <QHBoxLayout>
@@ -45,13 +48,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KUser>
 #include <kmimetypetrader.h>
 
-#include "packagemodel.h"
+#include "../packagemodel.h"
 
 #include <qvarlengtharray.h>
 
 EditPage::EditPage(QWidget *parent)
         : QTreeView(parent),
-        m_metaEditor(0)
+          m_imageViewer(0),
+          m_kconfigXtEditor(0)
+        // FIXME
+        // m_metaEditor(0)
 {
     setHeaderHidden(true);
     m_contextMenu = new KMenu(this);
@@ -120,7 +126,8 @@ void EditPage::findEditor(const QModelIndex &index)
     const QString contentWithSubdir = index.data(PackageModel::ContentsWithSubdirRole).toString();
 
     foreach (const QString &mimetype, mimetypes) {
-        QString target = index.data(PackageModel::UrlRole).toUrl().toString();
+        QString target = index.data(PackageModel::UrlRole).toUrl().toLocalFile();
+        qDebug() << "mimetype" << mimetype;
         if (mimetype == "[plasmate]/metadata") {
             emit loadMetaDataEditor(QUrl::fromLocalFile(target));
             return;
@@ -141,40 +148,24 @@ void EditPage::findEditor(const QModelIndex &index)
         }
 
         if (mimetype == "[plasmate]/imageViewer") {
-            emit loadImageViewer(QUrl::fromLocalFile(target));
+            if (!m_imageViewer) {
+                m_imageViewer = new ImageViewer(this);
+            }
+
+            m_imageViewer->loadImage(QUrl::fromLocalFile(target));
+            emit loadRequiredEditor(m_imageViewer);
             return;
         }
 
         if (mimetype == "[plasmate]/kconfigxteditor") {
-            emit loadKConfigXtEditor(QUrl::fromLocalFile(target));
-            return;
-        }
-
-        bool createNewFile = false;
-        QString nameOfNewFile;
-        if (mimetype == "[plasmate]/mainconfigxml/new") {
-            createNewFile = true;
-            nameOfNewFile = "main.xml";
-        }
-
-        if (mimetype == "[plasmate]/mainconfigui") {
-            createNewFile = true;
-            nameOfNewFile = "config.ui";
-        }
-
-        if (createNewFile) {
-            QString path = createContentWithSubdir(packagePath, contentWithSubdir);
-            if (!path.isEmpty()) {
-                if (!path.endsWith('/')) {
-                    path.append('/');
-                }
-
-                target.clear();
-                target.append(path + nameOfNewFile);
+            if (!m_kconfigXtEditor) {
+                m_kconfigXtEditor = new KConfigXtEditor(this);
             }
 
-            QFile f(target);
-            f.open(QIODevice::ReadWrite); // create the file
+            m_kconfigXtEditor->setFilename(QUrl::fromLocalFile(target));
+            m_kconfigXtEditor->readFile();
+
+            emit loadRequiredEditor(m_kconfigXtEditor);
             return;
         }
 
@@ -185,23 +176,25 @@ void EditPage::findEditor(const QModelIndex &index)
         }
 
         if (mimetype == "[plasmate]/new") {
-            target = createContentWithSubdir(packagePath, contentWithSubdir);
-
             const QString dialogText = i18n("Enter a name for the new file:");
             QString file = KInputDialog::getText(QString(), dialogText);
             if (!file.isEmpty()) {
-                qDebug() << target;
-                if (!m_metaEditor) {
+                /*if (!m_metaEditor) {
                     m_metaEditor = new MetaDataEditor(this);
                     m_metaEditor->setFilename(packagePath + "/metadata.desktop");
-                }
+                }*/
 
-                if (m_metaEditor->isValidMetaData()) {
-                    const QString api = m_metaEditor->api();
+                // FIXME
+                // if (m_metaEditor->isValidMetaData()) {
+                if (true) {
+                    // FIXME
+                    // const QString api = m_metaEditor->api();
+                    const QString api = QStringLiteral("declarativeappletscript");
 
-                    //we don't need the m_metaEditor anymore
-                    delete m_metaEditor;
-                    m_metaEditor = 0;
+                    // FIXME
+                    // we don't need the m_metaEditor anymore
+                    // delete m_metaEditor;
+                    // m_metaEditor = 0;
 
                     if (!api.isEmpty()) {
                         if (!hasExtension(file)) {
@@ -219,7 +212,6 @@ void EditPage::findEditor(const QModelIndex &index)
 
 
                     file = target + file;
-
                     QFile fl(file);
                     fl.open(QIODevice::ReadWrite); // create the file
                     fl.close();
@@ -262,25 +254,6 @@ void EditPage::imageDialog(const QString& filter, const QString& destinationPath
             KIO::copy(source, destinationDir, KIO::HideProgressInfo);
         }
     }
-}
-
-QString EditPage::createContentWithSubdir(const QString& packagePath, const QString& contentWithSubdir) const
-{
-    //now create the content and the subdir directory.
-    //Q: why now and not in the Packagemodel?
-    //A: Because now the user want to create the subdir,
-    //in the PackageModel he just clicked on the entry.
-    QString target;
-    QDir dir(packagePath);
-    if (!dir.exists(contentWithSubdir)) {
-        dir.mkpath(contentWithSubdir);
-        target = packagePath + contentWithSubdir;
-        if (!target.endsWith('/')) {
-            target.append('/');
-        }
-    }
-
-    return target;
 }
 
 bool EditPage::hasExtension(const QString& filename)
@@ -343,3 +316,4 @@ void EditPage::mimetypeJobFinished(KJob *job)
     }
     qDebug() << "loading" << m_path;
 }
+

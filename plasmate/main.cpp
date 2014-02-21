@@ -22,7 +22,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <qcommandlineparser.h>
 #include <qcommandlineoption.h>
 
-#include "mainwindow.h"
+#pragma message("TODO: enable once mainwindow gets ported")
+//#include "mainwindow.h"
 #include "konsole/konsolepreviewer.h"
 
 static const char version[] = "2.0";

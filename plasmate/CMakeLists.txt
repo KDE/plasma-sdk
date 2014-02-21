@@ -13,7 +13,7 @@ find_program(GIT_EXECUTABLE_FOUND git)
 add_feature_info(GIT_EXECUTABLE_FOUND "Git" "Distributed Revision Control System" "http://git-scm.com/" FALSE "" "Runtime dependency needed to use the TimeLine feature.")
 
 set (PlasMate_SRC
-    #editors/editpage.cpp
+    editors/editpage.cpp
     #editors/metadata/metadataeditor.cpp
     editors/imageviewer/imageloader.cpp
     editors/imageviewer/imageviewer.cpp
@@ -21,6 +21,7 @@ set (PlasMate_SRC
     editors/kconfigxt/kconfigxteditor.cpp
     editors/kconfigxt/kconfigxtreader.cpp
     editors/kconfigxt/kconfigxtwriter.cpp
+    editors/metadata/metadatahandler.cpp
     main.cpp
     sidebaritem.cpp
     sidebardelegate.cpp
@@ -66,7 +67,7 @@ kde4_add_ui_files (PlasMate_SRC
    #editors/metadata/metadata.ui
    publisher/publisher.ui
    #publisher/remoteinstaller/remoteinstaller.ui
-   #editors/kconfigxt/kconfigxteditor.ui
+   editors/kconfigxt/kconfigxteditor.ui
 )
 
 include_directories(${QT_QTWEBKIT_INCLUDE_DIR}
@@ -76,7 +77,6 @@ include_directories(${QT_QTWEBKIT_INCLUDE_DIR}
 
 #add_subdirectory( editors )
 #add_subdirectory( previewer/plasmoid )
-#add_subdirectory( templates )
 #add_subdirectory( icons )
 
 add_executable(plasmate ${PlasMate_SRC})
@@ -183,5 +183,9 @@ target_link_libraries(plasmakconfigxteditor
 )
 
 install(TARGETS plasmakconfigxteditor ${INSTALL_TARGETS_DEFAULT_ARGS})
+
+install(DIRECTORY templates DESTINATION ${DATA_INSTALL_DIR}/plasmate)
+
+add_subdirectory(tests)
 
 feature_summary(WHAT ALL   FATAL_ON_MISSING_REQUIRED_PACKAGES)

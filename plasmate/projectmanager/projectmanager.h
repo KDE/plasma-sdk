@@ -22,7 +22,8 @@
 
 #include <QDialog>
 
-#include <mainwindow.h>
+#pragma message("TODO: enable once mainwindow gets ported")
+//#include <mainwindow.h>
 
 class QListWidget;
 class QListWidgetItem;
@@ -76,7 +77,8 @@ private:
     QPushButton *m_removeMenuButton;
     KMenu *m_removeMenu;
     bool m_destroyFlag;
-    MainWindow* m_mainWindow;
+    #pragma message("TODO: enable once mainwindow gets ported")
+    //MainWindow* m_mainWindow;
 };
 
 #endif // PROJECTMANAGER_H
