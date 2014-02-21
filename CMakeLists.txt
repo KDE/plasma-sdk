@@ -58,9 +58,6 @@ find_package(KF5PlasmaQuick REQUIRED NO_MODULE)
 find_package(KF5Declarative REQUIRED NO_MODULE)
 find_package(KF5KIO REQUIRED NO_MODULE)
 
-# needed for set_package_properties macro
-find_package(KF5KDE4Support REQUIRED NO_MODULE)
-
 #########################################################################
 
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
