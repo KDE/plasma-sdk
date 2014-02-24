@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <iostream>
 
+#include <QAction>
 #include <QDir>
 #include <QDockWidget>
 #include <QListWidgetItem>
@@ -27,14 +28,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <KTextEdit>
 
-#include <KAction>
 #include <KActionCollection>
 #include <KConfig>
 #include <KConfigGroup>
 #include <QDebug>
 #include <KDesktopFile>
-#include <KMenu>
-#include <KMenuBar>
+#include <QMenu>
+#include <QMenuBar>
 #include <KMimeTypeTrader>
 #include <KStandardAction>
 #include <KTextEditor/ConfigInterface>
@@ -44,10 +44,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KTextEditor/CommandInterface>
 #include <KToolBar>
 #include <KStandardAction>
+#include <KLocalizedString>
 #include <QUrl>
-#include <KActionCollection>
 #include <KParts/Part>
-#include <KStandardDirs>
 #include <KMessageBox>
 #include <KXMLGUIFactory>
 
@@ -60,16 +59,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "mainwindow.h"
 #include "packagemodel.h"
 #include "sidebar.h"
-#include "startpage.h"
-#include "konsole/konsolepreviewer.h"
-#include "previewer/plasmoid/plasmoidpreviewer.h"
-#include "previewer/runner/runnerpreviewer.h"
-#include "previewer/windowswitcher/tabboxpreviewer.h"
-#include "publisher/publisher.h"
-#include "docbrowser/docbrowser.h"
 
-#include "modeltest/modeltest.h"
+#pragma message("TODO: enable once they get ported")
+#if 0
+    #include "startpage.h"
+    #include "konsole/konsolepreviewer.h"
+    #include "previewer/plasmoid/plasmoidpreviewer.h"
+    #include "previewer/runner/runnerpreviewer.h"
+    #include "previewer/windowswitcher/tabboxpreviewer.h"
+    #include "publisher/publisher.h"
+    #include "docbrowser/docbrowser.h"
+    #include "modeltest/modeltest.h"
+#endif
 
+#if 1
+static const QString PROJECTRC(".plasmateprojectrc");
+#endif
+#pragma message("TODO: remove it once startpage gets ported")
 static const int STATE_VERSION = 0;
 
 MainWindow::CentralContainer::CentralContainer(QWidget* parent)
@@ -100,14 +106,17 @@ void MainWindow::CentralContainer::switchTo(QWidget* newWidget, SwitchMode mode)
     m_curWidget->show();
 }
 
+#pragma message("TODO: enable once its gets ported")
 MainWindow::MainWindow(QWidget *parent)
       : KParts::MainWindow(parent, Qt::Widget),
         m_sidebar(0),
+        #if 0
         m_timeLine(0),
         m_previewerWidget(0),
         m_metaEditor(0),
         m_publisher(0),
         m_browser(0),
+        #endif
         m_notesWidget(0),
         m_textEditor(0),
         m_kconfigXtEditor(0),
@@ -128,11 +137,20 @@ MainWindow::MainWindow(QWidget *parent)
     createMenus();
     toolBar()->hide();
     menuBar()->hide();
+    #if 0
     m_startPage = new StartPage(this);
     connect(m_startPage, SIGNAL(projectSelected(QString)), this, SLOT(loadProject(QString)));
+    #endif
     m_central = new CentralContainer(this);
     setCentralWidget(m_central);
+    #if 0
     m_central->switchTo(m_startPage);
+    #endif
+    #pragma message("TODO: enable once it gets ported")
+    #pragma message("TODO: we must start from the startpage")
+    #if 0
+    m_central->switchTo(m_startPage);
+    #endif
     setDockOptions(QMainWindow::AllowNestedDocks); // why not?
     if (autoSaveConfigGroup().entryMap().isEmpty()) {
         setWindowState(Qt::WindowMaximized);
@@ -142,7 +160,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     // Saving layout position
-    KConfigGroup configDock(KGlobal::config(), "DocksPosition");
+    KConfigGroup configDock(KSharedConfig::openConfig(), "DocksPosition");
     configDock.writeEntry("MainWindowLayout", saveState(STATE_VERSION));
 
     // if the user closes the application with an editor open, should
@@ -151,23 +169,33 @@ MainWindow::~MainWindow()
 
     factory()->removeClient(m_part);
     delete m_part;
+    #pragma message("FIXME")
+    #if 0
     delete m_metaEditor;
     delete m_publisher;
     delete m_editPage;
     delete m_filelist;
-
+    #endif
+    #if 0
     if (m_previewerWidget) {
         configDock.writeEntry("PreviewerHeight", m_previewerWidget->height());
         configDock.writeEntry("PreviewerWidth", m_previewerWidget->width());
         delete m_previewerWidget;
     }
+    #endif
+    #pragma message("Enable once it gets ported")
 
+    #if 0
     if (m_timeLine) {
         configDock.writeEntry("TimeLineLocation", QVariant(m_timeLine->location()));
         delete m_timeLine;
     }
+    #endif
 
+    #pragma message("FIXME")
+    #if 0
     KGlobal::config()->sync();
+    #endif
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -183,11 +211,14 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::toggleDocumentation()
 {
+    #if 0
     showDocumentation(!m_browser || m_browser->isHidden());
+    #endif
 }
 
 void MainWindow::showDocumentation(bool show)
 {
+#if 0
     if (!m_browser) {
         if (!show) {
             return;
@@ -204,6 +235,8 @@ void MainWindow::showDocumentation(bool show)
     if (show) {
         m_browser->focusSearchField();
     }
+#endif
+#pragma message("TODO: enable once it gets ported")
 }
 
 void MainWindow::createMenus()
@@ -217,12 +250,14 @@ void MainWindow::quit()
     qApp->closeAllWindows();
 }
 
-KAction *MainWindow::addAction(QString text, const char * icon, const  char *slot, const char *name, const KShortcut &shortcut)
+QAction *MainWindow::addAction(QString text, const char * icon, const  char *slot, const char *name, QShortcut *shortcut)
 {
-    KAction *action = new KAction(this);
+    QAction *action = new QAction(this);
     action->setText(text);
-    action->setIcon(KIcon(icon));
-    action->setShortcut(shortcut);
+    action->setIcon(QIcon::fromTheme(icon));
+    if (shortcut) {
+        action->setShortcut(shortcut->key());
+    }
     connect(action, SIGNAL(triggered(bool)), this, slot);
     actionCollection()->addAction(name, action);
     return action;
@@ -230,19 +265,22 @@ KAction *MainWindow::addAction(QString text, const char * icon, const  char *slo
 
 void MainWindow::setupActions()
 {
-    KAction *close = KStandardAction::close(this, SLOT(closeProject()), actionCollection());
+    QAction *close = KStandardAction::close(this, SLOT(closeProject()), actionCollection());
     close->setText(i18n("Close Project"));
 
-    KAction *quitAction = KStandardAction::quit(this, SLOT(quit()), actionCollection());
+    QAction *quitAction = KStandardAction::quit(this, SLOT(quit()), actionCollection());
     QWidget::addAction(quitAction);
 
-    KAction *refresh = KStandardAction::redisplay(this, SLOT(saveAndRefresh()), actionCollection());
+    QAction *refresh = KStandardAction::redisplay(this, SLOT(saveAndRefresh()), actionCollection());
     refresh->setShortcut(Qt::CTRL + Qt::Key_F5);
     refresh->setText(i18n("Refresh Preview"));
 
     addAction(i18n("Console"), "utilities-terminal", SLOT(toggleKonsolePreviewer()), "konsole")->setCheckable(true);
+    #pragma message("FIXME")
+    #if 0
     addAction(i18n("Install Project"), "plasmagik", SLOT(installPackage()), "installproject", KShortcut(Qt::META + Qt::Key_I));
     addAction(i18n("Create Save Point"), "document-save", SLOT(selectSavePoint()), "savepoint", KStandardShortcut::save());
+    #endif
     addAction(i18n("Publish"), "krfb", SLOT(selectPublish()),   "publish");
     addAction(i18n("Preview"), "user-desktop", SLOT(togglePreview()), "preview")->setCheckable(true);
     addAction(i18n("Notes"), "accessories-text-editor", SLOT(toggleNotes()), "notes")->setCheckable(true);
@@ -253,11 +291,18 @@ void MainWindow::setupActions()
 
 void MainWindow::updateActions()
 {
-    actionCollection()->action("preview")->setChecked(m_previewerWidget && m_previewerWidget->isVisible());
+    #if 0
+        actionCollection()->action("preview")->setChecked(m_previewerWidget && m_previewerWidget->isVisible());
+    #endif
+    #pragma message("TODO: enable once it gets ported")
+
     actionCollection()->action("notes")->setChecked(m_notesWidget && m_notesWidget->isVisible());
     actionCollection()->action("file_list")->setChecked(m_filelist && m_filelist->isVisible());
+    #if 0
     actionCollection()->action("timeline")->setChecked(m_timeLine && m_timeLine->isVisible());
     actionCollection()->action("documentation")->setChecked(m_browser && m_browser->isVisible());
+    #endif
+    #pragma message("TODO: enable once it gets ported")
 }
 
 void MainWindow::toggleActions()
@@ -270,20 +315,27 @@ void MainWindow::toggleActions()
         //Until this issue is being fixed we are hiding the konsole previewer.
         actionCollection()->action("konsole")->setVisible(false);
         //we are hiding the konsole previewer UI.
-        m_konsoleWidget->setVisible(false);
+        #if 0
+            m_konsoleWidget->setVisible(false);
+        #endif
+        #pragma message("TODO: enable once it gets ported")
     }
 }
 
 void MainWindow::installPackage()
 {
+    #if 0
     if (!m_publisher) {
         m_publisher = new Publisher(this, m_model->package(), m_model->packageType());
     }
-
+    #endif
     saveEditorData();
 
+    #if 0
     m_publisher->setProjectName(m_currentProject);
     m_publisher->doPlasmaPkg();
+    #endif
+    #pragma message("TODO: enable when it gets ported")
 }
 
 void MainWindow::closeProject()
@@ -292,17 +344,25 @@ void MainWindow::closeProject()
     saveProjectState();
     toolBar()->hide();
     menuBar()->hide();
+
+    #pragma message("FIXME")
+    #if 0
     if (m_timeLine) {
         m_timeLine->hide();
     }
+    #endif
 
-    if (m_previewerWidget) {
-        m_previewerWidget->hide();
-    }
+    #pragma message("FIXME")
+    #if 0
+        if (m_previewerWidget) {
+            m_previewerWidget->hide();
+        }
+
 
     if (m_konsoleWidget) {
         m_konsoleWidget->hide();
     }
+    #endif
 
     if (m_notesWidget) {
         m_notesWidget->hide();
@@ -312,33 +372,49 @@ void MainWindow::closeProject()
         m_filelist->hide();
     }
 
+    #if 0
      if (m_browser) {
         m_browser->hide();
     }
+    #endif
+    #pragma message("TODO: enable once it gets ported")
 
-    setCentralWidget(m_central);
+     setCentralWidget(m_central);
 
-    m_central->switchTo(m_startPage);
+    #pragma message("TODO: enable once it gets ported")
+    #if 0
+        m_central->switchTo(m_startPage);
+    #endif
     setDockOptions(QMainWindow::AllowNestedDocks);
-    m_startPage->cancelNewProject();
+    #if 0
+        m_startPage->cancelNewProject();
+    #endif
 }
 
 void MainWindow::toggleTimeLine()
 {
+    #pragma message("FIXME")
+    #if 0
     if (!m_timeLine) {
         initTimeLine();
     } else {
         m_timeLine->setVisible(!m_timeLine->isVisible());
     }
+    #endif
 }
 
 void MainWindow::initTimeLine()
 {
+    #pragma message("FIXME")
+    #if 0
     if (!m_timeLine) {
         //FIXME: should come from project specific save data if it exists
-        KConfigGroup configDock(KGlobal::config(), "DocksPosition");
+        KConfigGroup configDock(KSharedConfig::openConfig(), "DocksPosition");
         Qt::DockWidgetArea location = (Qt::DockWidgetArea)configDock.readEntry("TimeLineLocation", (int)Qt::BottomDockWidgetArea);
+        #pragma message("FIXME")
+        #if 0
         m_timeLine = new TimeLine(this, m_model->package(), location);
+        #endif
         m_timeLine->setObjectName("timeline");
         connect(m_timeLine, SIGNAL(sourceDirectoryChanged()), this, SLOT(editorDestructiveRefresh()));
         connect(m_timeLine, SIGNAL(savePointClicked()), this, SLOT(saveEditorData()));
@@ -348,9 +424,11 @@ void MainWindow::initTimeLine()
     }
 
     QUrl directory = m_model->package();
+    QUrl directory;
     if (QDir(directory.path() + "/contents").exists()) {
             m_timeLine->loadTimeLine(directory);
     }
+    #endif
 }
 
 void MainWindow::toggleFileList()
@@ -366,12 +444,14 @@ void MainWindow::setFileListVisible(const bool visible)
         m_filelist->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         m_filelist->setWidget(m_editPage);
 
+        #if 0
         if (m_previewerWidget) {
             splitDockWidget(m_previewerWidget, m_filelist, Qt::Vertical);
         } else {
             addDockWidget(Qt::LeftDockWidgetArea, m_filelist);
         }
-
+        #endif
+        #pragma message("TODO: enable once it gets ported")
         connect(m_filelist, SIGNAL(visibilityChanged(bool)), this, SLOT(updateActions()));
     }
 
@@ -402,9 +482,12 @@ void MainWindow::setNotesVisible(const bool visible)
 
 void MainWindow::selectSavePoint()
 {
+    #pragma message("FIXME")
+    #if 0
     if (!m_timeLine) {
         initTimeLine();
     }
+    #endif
 
     saveEditorData();
     emit newSavePointClicked();
@@ -412,24 +495,32 @@ void MainWindow::selectSavePoint()
 
 void MainWindow::selectPublish()
 {
+    #if 0
     if (!m_publisher) {
         m_publisher = new Publisher(this, m_model->package(), m_model->packageType());
     }
+    #endif
 
     saveEditorData();
 
+    #if 0
     m_publisher->setProjectName(m_currentProject);
     m_publisher->exec();
+    #endif
+    #pragma message("TODO: enable once it gets ported")
 }
 
 void MainWindow::togglePreview()
 {
+    #if 0
     if (m_previewerWidget) {
         m_previewerWidget->setVisible(!m_previewerWidget->isVisible());
         if (m_previewerWidget->isVisible()) {
             m_previewerWidget->refreshPreview();
         }
     }
+    #endif
+    #pragma message("TODO: enable once it gets ported")
 }
 
 void MainWindow::saveEditorData()
@@ -442,22 +533,30 @@ void MainWindow::saveEditorData()
         static_cast<KParts::ReadWritePart*>(m_notesPart)->save();
     }
 
+    #pragma message("FIXME")
+    #if 0
     if (m_metaEditor) {
         m_metaEditor->writeFile();
         connect(m_metaEditor, SIGNAL(apiChanged()), SLOT(checkProjectrc()));
-
     }
+    #endif
 }
 
 void MainWindow::saveAndRefresh()
 {
     //in every new save clear the konsole.
+    #if 0
     m_konsoleWidget->clearOutput();
+    #endif
+    #pragma message("TODO: enable once it gets ported")
 
     saveEditorData();
-    if (m_previewerWidget) {
-        m_previewerWidget->refreshPreview();
-    }
+    #if 0
+        if (m_previewerWidget) {
+            m_previewerWidget->refreshPreview();
+        }
+    #endif
+    #pragma message("TODO: enable once it gets ported")
 }
 
 void MainWindow::editorDestructiveRefresh()
@@ -466,9 +565,12 @@ void MainWindow::editorDestructiveRefresh()
         static_cast<KParts::ReadOnlyPart*>(m_part)->openUrl(
             static_cast<KParts::ReadOnlyPart*>(m_part)->url());
     }
+    #if 0
     if (m_metaEditor) {
         m_metaEditor->readFile();
     }
+    #endif
+    #pragma message("TODO: enable once it gets ported")
     if (qobject_cast<KParts::ReadOnlyPart*>(m_notesPart)) {
         static_cast<KParts::ReadOnlyPart*>(m_notesPart)->openUrl(
             static_cast<KParts::ReadOnlyPart*>(m_notesPart)->url());
@@ -519,20 +621,27 @@ void MainWindow::loadRequiredEditor(const KService::List offers, QUrl target)
         }
 
         if (!m_part) {
+            #pragma message("FIXME")
+            #if 0
             KMessageBox::error(this, i18n("Failed to load editor for %1:\n\n%2", target.prettyUrl(), error), i18n("Loading Failure"));
+            #endif
             return;
         }
     }
 
     if (!m_part) {
+        #if 0
         KMessageBox::error(this, i18n("Failed to load editor for %1", target.prettyUrl()), i18n("Loading Failure"));
+        #endif
         return;
     }
 
     // open the target for editting/viewing if it isn't already viewing that file
+    #if 0
     if (!target.equals(m_part->url())) {
         m_part->openUrl(target);
     }
+    #endif
 
     QWidget *mainWidget = m_textEditor ? m_textEditor : m_part->widget();
     m_central->switchTo(mainWidget);
@@ -540,8 +649,11 @@ void MainWindow::loadRequiredEditor(const KService::List offers, QUrl target)
 
     // We keep only one editor object alive at a time -
     // so we know who to activate when the edit tab is reselected
+    #pragma message("fixme")
+    #if 0
     delete m_metaEditor;
     m_metaEditor = 0;
+    #endif
     m_oldTab = EditTab;
 }
 
@@ -603,7 +715,12 @@ QString MainWindow::projectFilePath(const QString &filename)
         return QString();
     }
 
+    #if 0
     QDir packageDir(m_model->package());
+    #endif
+    #pragma message("TODO: enable once it gets ported")
+    QDir packageDir;
+
     if (m_isPlasmateCreatedPackage) {
         packageDir.cdUp();
     }
@@ -622,11 +739,18 @@ void MainWindow::saveProjectState()
     KConfig c(projectrc);
     KConfigGroup configDocks(&c, "DocksPosition");
     configDocks.writeEntry("MainWindowLayout", saveState(STATE_VERSION));
+    #if 0
     configDocks.writeEntry("Timeline", m_timeLine && m_timeLine->isVisible());
     configDocks.writeEntry("Documentation", m_browser && m_browser->isVisible());
+    #endif
+    #pragma message("TODO: enable once it gets ported")
     configDocks.writeEntry("FileList", m_filelist && m_filelist->isVisible());
     configDocks.writeEntry("Notes", m_notesWidget && m_notesWidget->isVisible());
+    #if 0
     configDocks.writeEntry("Previewer", m_previewerWidget && m_previewerWidget->isVisible());
+    #endif
+    #pragma message("TODO: enable once it gets ported")
+
     c.sync();
 
     /* TODO: implement browser state loading
@@ -674,6 +798,7 @@ void MainWindow::loadKConfigXtEditor(const QUrl& target)
 
 void MainWindow::toggleKonsolePreviewer()
 {
+    #if 0
     if (!m_konsoleWidget) {
         return;
     }
@@ -683,6 +808,8 @@ void MainWindow::toggleKonsolePreviewer()
     } else {
         m_konsoleWidget->setVisible(true);
     }
+    #endif
+    #pragma message("TODO: enable when konsolepreviewer gets ported")
 }
 
 void MainWindow::loadMetaDataEditor(QUrl target)
@@ -690,6 +817,7 @@ void MainWindow::loadMetaDataEditor(QUrl target)
     // save any previous editor content
     saveEditorData();
 
+    #if 0
     if (!m_metaEditor) {
         m_metaEditor = new MetaDataEditor(this);
     }
@@ -697,6 +825,8 @@ void MainWindow::loadMetaDataEditor(QUrl target)
     m_metaEditor->setFilename(target.path());
     m_metaEditor->readFile();
     m_central->switchTo(m_metaEditor);
+    #endif
+    #pragma message("TODO: enable once it gets ported")
 
     updateSideBar();
 }
@@ -711,7 +841,10 @@ void MainWindow::loadProject(const QString &path)
     QString packagePath;
     QDir pDir(path);
     if (pDir.isRelative()) {
+        #pragma message("FIXME")
+        #if 0
         packagePath = KStandardDirs::locateLocal("appdata", path + '/');
+        #endif
     } else {
         packagePath = path;
     }
@@ -775,7 +908,11 @@ void MainWindow::loadProject(const QString &path)
     m_packagePath = packagePath;
 
     delete m_model;
+    #if 0
     m_model = new PackageModel(this);
+    m_model = new PackageModel();
+    m_model = 0;
+    #pragma message("FIXME")
     qDebug() << "Setting project type to:" << actualType;
     m_model->setPackageType(actualType);
     qDebug() << "Setting model package to:" << packagePath;
@@ -784,6 +921,7 @@ void MainWindow::loadProject(const QString &path)
         KMessageBox::error(this, i18n("Invalid Plasma package."));
         return;
     }
+    #endif
 
     if (!m_editPage) {
         m_editPage = new EditPage();
@@ -803,9 +941,12 @@ void MainWindow::loadProject(const QString &path)
     delete m_part;
     m_part = 0;
 
+    #if 0
     // delete old publisher
     delete m_publisher;
     m_publisher = 0;
+    #endif
+    #pragma message("TODO: enable once it gets ported")
 
     QLabel *l = new QLabel(i18n("Select a file to edit."), this);
     m_central->switchTo(l);
@@ -821,19 +962,24 @@ void MainWindow::loadProject(const QString &path)
         KConfigGroup configDocks(&c, "DocksPosition");
         state = configDocks.readEntry("MainWindowLayout", state);
 
+        #if 0
         if (configDocks.readEntry("Timeline", false)) {
             initTimeLine();
         } else {
             delete m_timeLine;
             m_timeLine = 0;
         }
+        #endif
 
+        #if 0
         if (configDocks.readEntry("Documentation", false)) {
             showDocumentation(true);
         } else {
             delete m_browser;
             m_browser = 0;
         }
+        #endif
+        #pragma message("TODO: enable once it gets ported")
 
         setFileListVisible(configDocks.readEntry("FileList", true));
         setNotesVisible(configDocks.readEntry("Notes", false));
@@ -842,15 +988,18 @@ void MainWindow::loadProject(const QString &path)
         setFileListVisible(true);
     }
 
+    #if 0
     if (m_browser) {
         m_browser->setPackage(m_model);
     }
+    #endif
+    #pragma message("TODO: enable once it gets ported")
 
     if (m_notesPart) {
         refreshNotes();
     }
 
-
+    #if 0
     //initialize the konsole previewer
     m_konsoleWidget = createKonsoleFor(previewerType);
 
@@ -866,6 +1015,8 @@ void MainWindow::loadProject(const QString &path)
         connect(m_previewerWidget, SIGNAL(showKonsole()), this, SLOT(toggleKonsolePreviewer()));
         addDockWidget(Qt::BottomDockWidgetArea, m_konsoleWidget);
     }
+    #endif
+    #pragma message("TODO: enable once they get ported")
 
     restoreState(state, STATE_VERSION);
     toolBar()->show();
@@ -880,8 +1031,12 @@ void MainWindow::loadProject(const QString &path)
     KConfigGroup meta(&metafile, "Desktop Entry");
     m_currentProject = meta.readEntry("Name", path);
     setCaption(m_currentProject);
+
+    #if 0
     qDebug() << "Content prefix: " << m_model->contentsPrefix() ;
     QDir::setCurrent(m_model->package() + m_model->contentsPrefix());
+    #endif
+    #pragma message("TODO: enable once it gets ported")
 
     // load mainscript
     QString mainScript = meta.readEntry("X-Plasma-MainScript", QString());
@@ -892,9 +1047,11 @@ void MainWindow::loadProject(const QString &path)
     }
     // After we loaded the project, init the TimeLine and Previewer component
     menuBar()->show();
+    #if 0
     if (m_timeLine) {
         m_timeLine->loadTimeLine(m_model->package());
     }
+    #endif
 
     if (m_filelist) {
         m_filelist->show();
@@ -939,8 +1096,13 @@ void MainWindow::checkMetafile(const QString &path)
 
 void MainWindow::checkProjectrc()
 {
+    #pragma message("FIXME")
+    #if 0
     QUrl path(m_metaEditor->filename());
+    #pragma message("FIXME")
     path.cd("../..");
+    #endif
+    QUrl path;
     QDir dir(path.path());
     qDebug() << path.path();
     if(!dir.exists(PROJECTRC)) {
@@ -950,8 +1112,12 @@ void MainWindow::checkProjectrc()
     KConfig preferencesPath(dir.path() +'/'+ PROJECTRC);
     KConfigGroup preferences(&preferencesPath, "ProjectDefaultPreferences");
     QString api;
+    #if 0
     KConfig metafile(m_metaEditor->filename());
-    KConfigGroup meta(&metafile, "Desktop Entry");
+    #endif
+    #pragma message("TODO: fix it once it gets ported")
+
+    KConfigGroup meta(KSharedConfig::openConfig(QString()), "Desktop Entry");
     api = meta.readEntry("X-Plasma-API");
     if (api == QString("javascript")) {
         preferences.writeEntry("radioButtonChecked", "Js");
@@ -968,15 +1134,17 @@ void MainWindow::checkProjectrc()
 
 QStringList MainWindow::recentProjects()
 {
-    KConfigGroup cg(KGlobal::config(), "General");
+    KConfigGroup cg(KSharedConfig::openConfig(), "General");
 //     qDebug() << l.toStringList();
 
     return cg.readEntry("recentProjects", QStringList());
 }
 
+#if 0
 Previewer* MainWindow::createPreviewerFor(const QString& projectType)
 {
     Previewer* ret = 0;
+
     bool showPreviewAction = true;
 
     if (projectType.contains("KWin/WindowSwitcher")) {
@@ -988,7 +1156,6 @@ Previewer* MainWindow::createPreviewerFor(const QString& projectType)
     } else {
         showPreviewAction = false;
     }
-
     if (showPreviewAction) {
         //we have a previewer( ret is valid) so
         //show the action in the toolbar
@@ -1029,5 +1196,8 @@ KonsolePreviewer* MainWindow::createKonsoleFor(const QString& projectType)
     }
 
     return konsole;
+    return 0;
 }
+#endif
+#pragma message("TODO: enable once konsole gets ported")
 

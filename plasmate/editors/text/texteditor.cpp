@@ -55,7 +55,12 @@ TextEditor::TextEditor(KTextEditor::Document *editorPart, PackageModel *model, Q
         }
 
         // set nice defaults for katepart
+
+        #pragma message("TODO: fixme once it gets ported")
+        #if 0
         KTextEditor::CommandInterface *command = dynamic_cast<KTextEditor::CommandInterface *>(editorPart->editor());
+        #endif
+        KTextEditor::CommandInterface * command = 0;
         QString ret;
         if (command) { //generic
             command->queryCommand("set-indent-mode")->exec(view, "set-indent-mode normal", ret); // more friendly
@@ -64,6 +69,8 @@ TextEditor::TextEditor(KTextEditor::Document *editorPart, PackageModel *model, Q
         }
 
         //we should be setting the specific editing indentation, highlighting based on the type of document
+        #pragma message("TODO: enable once it gets ported")
+        #if 0
         if (model->implementationApi() == "declarativeappletscript" || model->implementationApi() == "javascript") {
             editorPart->setHighlightingMode("JavaScript");
         } else if (model->implementationApi() == "ruby-script") {
@@ -72,6 +79,7 @@ TextEditor::TextEditor(KTextEditor::Document *editorPart, PackageModel *model, Q
                 command->queryCommand("set-indent-width")->exec(view, "set-indent-width 2", ret);// 2 spaces recommended for ruby
             }
         }
+        #endif
         //there is no need for one more control. But we keep the code because it is easier to understand.
         //so keep the generic format.
         /*} else if (editorPart->setHighlightingMode() == "python") {

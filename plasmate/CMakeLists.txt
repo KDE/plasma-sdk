@@ -17,7 +17,7 @@ set (PlasMate_SRC
     #editors/metadata/metadataeditor.cpp
     editors/imageviewer/imageloader.cpp
     editors/imageviewer/imageviewer.cpp
-    #editors/text/texteditor.cpp
+    editors/text/texteditor.cpp
     editors/kconfigxt/kconfigxteditor.cpp
     editors/kconfigxt/kconfigxtreader.cpp
     editors/kconfigxt/kconfigxtwriter.cpp
@@ -34,7 +34,7 @@ set (PlasMate_SRC
     #savesystem/tabledelegate.cpp
     #savesystem/tablewidget.cpp
     #savesystem/timeline.cpp
-    #mainwindow.cpp
+    mainwindow.cpp
     #startpage.cpp
     #packagemodel.cpp
     #previewer/plasmoid/plasmoidpreviewer.cpp

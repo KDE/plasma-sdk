@@ -20,10 +20,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <KParts/MainWindow>
 #include <KParts/ReadOnlyPart>
-#include <KLibLoader>
-#include <KAction>
+#include <QAction>
 #include <KService>
-#include <KShortcut>
+#include <QShortcut>
 #include <QSize>
 
 class QSvgWidget;
@@ -39,7 +38,10 @@ class QStringList;
 
 class EditPage;
 class PackageModel;
+#if 0
 class StartPage;
+#endif
+#pragma message("TODO: enable once it gets ported")
 class Sidebar;
 class TimeLine;
 class MetaDataEditor;
@@ -49,9 +51,12 @@ class KConfigXtEditor;
 class KonsolePreviewer;
 
 // our own previewer
-class Previewer;
-class DocBrowser;
-class Publisher;
+#if 0
+    class Previewer;
+    class DocBrowser;
+    class Publisher;
+#endif
+#pragma message("TODO: enable once it gets ported")
 
 namespace KTextEditor
 {
@@ -150,18 +155,28 @@ private:
     void createMenus();
     void setupTextEditor(KTextEditor::Document *editorPart, KTextEditor::View *view);
     void loadNotesEditor(QDockWidget *container);
+
+    #if 0
     Previewer* createPreviewerFor(const QString& projectType);
     KonsolePreviewer* createKonsoleFor(const QString& projectType);
+    #endif
+    #pragma message("TODO enable once it gets ported")
 
-    KAction *addAction(QString text, const char * icon,const  char *slot, const char *name, const KShortcut &shortcut = KShortcut());
+    QAction *addAction(QString text, const char * icon,const  char *slot, const char *name, QShortcut *shortcut = nullptr);
 
-    StartPage *m_startPage;
+    #pragma message("TODO: enable once it gets ported")
+    #if 0
+        StartPage *m_startPage;
+    #endif
     Sidebar *m_sidebar;
     TimeLine    *m_timeLine;
+    #if 0
     Previewer *m_previewerWidget;
     MetaDataEditor *m_metaEditor;
     Publisher *m_publisher;
     DocBrowser *m_browser;
+    #endif
+    #pragma message("TODO: enable once it gets ported")
     QDockWidget *m_notesWidget;
     TextEditor *m_textEditor;
     KConfigXtEditor *m_kconfigXtEditor;
