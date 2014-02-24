@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "metadatahandler.h"
 
 #include <KConfig>
+#include <KSharedConfig>
 
 #include <QDebug>
 MetadataHandler::MetadataHandler(QObject *parent)
