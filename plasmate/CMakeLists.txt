@@ -62,7 +62,7 @@ set (PlasMate_SRC
 #         )
 #endif (DEBUG_MODEL)
 
-kde4_add_ui_files (PlasMate_SRC
+qt5_wrap_ui(PlasMate_SRC
     #startpage.ui
    #editors/metadata/metadata.ui
    publisher/publisher.ui
@@ -81,7 +81,8 @@ include_directories(${QT_QTWEBKIT_INCLUDE_DIR}
 
 add_executable(plasmate ${PlasMate_SRC})
 target_link_libraries(plasmate
-                      #KF5::KTextEditor
+                      KF5::TextEditor
+                      KF5::Parts
                       KF5::Plasma
                       KF5::NewStuff
                       Qt5::Xml
@@ -129,7 +130,7 @@ install(FILES plasmate.knsrc DESTINATION ${CONFIG_INSTALL_DIR})
 #    publisher/remoteinstaller/standalone/plasmaremoteinstaller.cpp
 #)
 
-#kde4_add_ui_files (PlasmaRemoteInstaller_SRC
+#qt5_wrap_ui (PlasmaRemoteInstaller_SRC
 #   publisher/remoteinstaller/remoteinstaller.ui
 #)
 
@@ -169,7 +170,7 @@ set(plasmakconfigxt_SRCS
      editors/kconfigxt/standalone/main.cpp
 )
 
-kde4_add_ui_files (plasmakconfigxt_SRCS
+qt5_wrap_ui (plasmakconfigxt_SRCS
     editors/kconfigxt/kconfigxteditor.ui
 )
 
