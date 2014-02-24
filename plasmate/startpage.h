@@ -30,7 +30,7 @@ class QVBoxLayout;
 class QModelIndex;
 class QPushButton;
 class KLineEdit;
-class MainWindow;
+//class MainWindow;
 class ProjectManager;
 
 static const QString PROJECTRC(".plasmateprojectrc");
@@ -46,7 +46,8 @@ class StartPage : public QWidget
     friend class ProjectManager;
 
 public:
-    StartPage(MainWindow *parent);
+    //StartPage(MainWindow *parent = 0);
+    StartPage(QWidget *parent = 0);
     ~StartPage();
 
     QString userName();
@@ -104,8 +105,9 @@ private:
     void ensureProjectrcFileExists(const QString& projectPath);
 
     Ui::StartPage m_ui;
-    MainWindow *m_parent;
-
+    //MainWindow *m_parent;
+    #pragma message("TODO: restore MainWindow when it gets ported")
+    QWidget *m_parent;
     ProjectManager *m_projectManager;
 };
 

@@ -19,6 +19,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "common.h"
+#include "../../startpage.h"
 #include "startpagetest.h"
 
 #include <QDebug>
@@ -27,8 +29,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QTest>
 
 StartPageTest::StartPageTest(QWidget *parent)
-        : QWidget(parent)
+        : QWidget(parent),
+          m_startPage(0)
 {
+    m_startPage = new StartPage();
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->addWidget(m_startPage);
     setLayout(layout);
@@ -38,10 +42,5 @@ StartPageTest::~StartPageTest()
 {
 }
 
-void StartPageTest::initTestCase()
-{
-    QStandardPaths::enableTestMode(true);
-}
-
-PLASMATE_MAIN(StartPageTest)
+PLASMATE_TEST_MAIN(StartPageTest)
 

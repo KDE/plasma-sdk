@@ -32,12 +32,15 @@ plasmate_ui_test(editpagetest "${editpagetest_UI}"
                               "${editpagetest_SRCS}"
                               "${editpagetest_LIBS}"
 )
-set(startPage_SRCS startpagetest.cpp
+set(startpagetest_SRCS startpagetest.cpp
                    ../../startpage.cpp
 )
 
-qt5_wrap_ui(startPage_SRCS ../../startpage.ui)
-add_executable(startpagetest ${startPage_SRCS})
+set(startpagetest_UI ../../startpage.ui)
 
-target_link_libraries(startpagetest Qt5::Widgets Qt5::Test)
+set(startpagetest_LIBS KF5::Plasma KF5::I18n KF5::KIOCore KF5::KIOWidgets)
 
+plasmate_ui_test(startpagetest "${startpagetest_UI}"
+                              "${startpagetest_SRCS}"
+                              "${startpagetest_LIBS}"
+)

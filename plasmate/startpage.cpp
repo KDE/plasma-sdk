@@ -30,29 +30,34 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDateTime>
 
 #include <KUser>
-// #include <KLocalizedString>
+#include <KLocalizedString>
 #include <QDebug>
 #include <KDesktopFile>
+#include <KIcon>
 #include <KLineEdit>
 #include <KMimeType>
 #include <KPluginInfo>
 #include <QPushButton>
 #include <KSeparator>
+#include <KConfigGroup>
+#include <KSharedConfig>
 #include <KShell>
 #include <KStandardAction>
 #include <KStandardDirs>
-#include <QUrlRequester>
+#include <KUrlRequester>
 #include <KUser>
 #include <KMessageBox>
 #include <KMessageWidget>
-#include <knewstuff3/downloaddialog.h>
+#include <KNS3/DownloadDialog>
 
 #include "packagemodel.h"
 #include "startpage.h"
-#include "mainwindow.h"
+//#include "mainwindow.h"
 #include "projectmanager/projectmanager.h"
 
-StartPage::StartPage(MainWindow *parent) // TODO set a palette so it will look identical with any color scheme.
+
+#pragma message("TODO: restore MainWindow when it gets ported")
+StartPage::StartPage(QWidget *parent/*MainWindow *parent*/) // TODO set a palette so it will look identical with any color scheme.
         : QWidget(parent),
         m_parent(parent)
 {
@@ -73,12 +78,12 @@ void StartPage::setupWidgets()
     m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(false);
 
     // Set some default parameters, like username/email and preferred scripting language
-    KConfigGroup cg(KGlobal::config(), ("NewProjectDefaultPreferences"));
+    KConfigGroup cg(KSharedConfig::openConfig(), "NewProjectDefaultPreferences");
     KUser user = KUser(KUser::UseRealUserID);
 
     QString userName = cg.readEntry("Username", user.loginName());
-    QString userEmail = cg.readEntry("Email", userName+"@none.org");
-
+    QString userEmail = cg.readEntry("Email", userName);
+    userEmail.append(QStringLiteral("@none.org"));
     // If username or email are empty string, i.e. in the previous project the
     // developer deleted it, restore the default values
     if (userName.isEmpty()) {
@@ -268,6 +273,9 @@ void StartPage::refreshRecentProjectsList()
 {
     m_ui.recentProjects->clear();
     m_projectManager->clearProjects();
+    #pragma message("TODO: Refresh project list when mainwindow will be ported")
+    QStringList recentProjects;
+    #if 0
     const QStringList recentProjects = m_parent->recentProjects();
 
     if (recentProjects.isEmpty()) {
@@ -275,7 +283,7 @@ void StartPage::refreshRecentProjectsList()
         m_ui.recentProjects->hide();
         return;
     }
-
+    #endif
     int counter = 0;
     foreach (const QString &file, recentProjects) {
         // Specify path + filename as well to avoid mistaking .gitignore
@@ -528,6 +536,7 @@ void StartPage::createNewProject()
     // * X-KDE-ParentApp
     KDesktopFile metaFile(projectPath + "/metadata.desktop");
     KConfigGroup metaDataGroup = metaFile.desktopGroup();
+    const QString mainScriptPath = QStringLiteral("size") + mainScriptName;
     metaDataGroup.writeEntry("Name", projectName);
     //FIXME: the plugin name needs to be globally unique, so should use more than just the project
     //       name
@@ -541,7 +550,7 @@ void StartPage::createNewProject()
     metaDataGroup.writeEntry("X-KDE-PluginInfo-License", "GPL");
     metaDataGroup.writeEntry("X-KDE-PluginInfo-Email", m_ui.emailTextField->text());
     metaDataGroup.writeEntry("X-Plasma-API", api);
-    metaDataGroup.writeEntry("X-Plasma-MainScript", "code/" + mainScriptName);
+    metaDataGroup.writeEntry("X-Plasma-MainScript", mainScriptPath);
     metaDataGroup.writeEntry("X-Plasma-DefaultSize", QSize(200, 100));
     metaFile.sync();
 
@@ -559,7 +568,7 @@ void StartPage::createNewProject()
 void StartPage::saveNewProjectPreferences(const QString &path)
 {
     // Saving NewProject preferences
-    KConfigGroup preferences(KGlobal::config(), "NewProjectDefaultPreferences");
+    KConfigGroup preferences(KSharedConfig::openConfig(), "NewProjectDefaultPreferences");
 
     preferences.writeEntry("Username", userName());
     preferences.writeEntry("Email", userEmail());
@@ -660,11 +669,14 @@ void StartPage::recentProjectSelected(const QModelIndex &index)
 
 void StartPage::checkPackagePath(const QString& name)
 {
+    #pragma message("TODO: FIXME")
+    #if 0
     const QString fullName = KShell::tildeExpand(name);
     bool valid = QFile::exists(fullName) &&
                  KMimeType::findByUrl(fullName)->is("application/x-plasma");
 
     m_ui.importPackageButton->setEnabled(valid);
+    #endif
 }
 
 void StartPage::importPackage()
@@ -710,8 +722,9 @@ void StartPage::selectProject(const QUrl &target)
     QString projectFolder = generateProjectFolderName(suggested);
 
     QString projectPath = KStandardDirs::locateLocal("appdata", projectFolder + '/');
+    const QUrl projectUrl(projectPath);
 
-    if (!ProjectManager::importPackage(target, projectPath)) {
+    if (!ProjectManager::importPackage(target, projectUrl)) {
         KMessageBox::information(this, i18n("A problem has occurred during import."));
     }
     emit projectSelected(projectFolder);

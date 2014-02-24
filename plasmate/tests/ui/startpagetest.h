@@ -22,7 +22,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef STARTPAGETEST_H
 #define STARTPAGETEST_H
 
-#include "../../startpage.h"
+#include <QWidget>
+
+class StartPage;
 
 class StartPageTest : public QWidget
 {
@@ -30,16 +32,11 @@ class StartPageTest : public QWidget
 
 public:
 
-    explicit StartpageTest(QWidget *parent = 0);
+    explicit StartPageTest(QWidget *parent = 0);
     ~StartPageTest();
 
-private Q_SLOTS:
-    void initTestCase();
-    void createTestProject();
-    void projectsList();
-
 private:
-    StartPage m_startPage;
+    StartPage *m_startPage;
 };
 
 #endif
