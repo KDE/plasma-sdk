@@ -43,7 +43,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KLocalizedString>
 #include <KIO/CopyJob>
 #include <KIO/DeleteJob>
-#include <KIO/JobClasses>
 #include <KIO/MimetypeJob>
 #include <KIO/Job>
 #include <KUser>

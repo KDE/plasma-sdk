@@ -16,7 +16,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <KConfig>
-#include <KIcon>
 #include <KLocalizedString>
 
 #include <QDockWidget>
