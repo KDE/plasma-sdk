@@ -17,7 +17,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QDebug>
 #include <QApplication>
-#include <KLocale>
 
 #include <qcommandlineparser.h>
 #include <qcommandlineoption.h>
