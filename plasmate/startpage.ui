@@ -41,7 +41,7 @@
         </widget>
        </item>
        <item>
-        <widget class="KListWidget" name="contentTypes">
+        <widget class="QListWidget" name="contentTypes">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -104,7 +104,7 @@
         </widget>
        </item>
        <item>
-        <widget class="KListWidget" name="recentProjects">
+        <widget class="QListWidget" name="recentProjects">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -571,11 +571,6 @@ p, li { white-space: pre-wrap; }
    <class>QPushButton</class>
    <extends>QPushButton</extends>
    <header>qpushbutton.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KListWidget</class>
-   <extends>QListWidget</extends>
-   <header>klistwidget.h</header>
   </customwidget>
   <customwidget>
    <class>KUrlRequester</class>

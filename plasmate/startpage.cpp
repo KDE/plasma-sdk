@@ -33,9 +33,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KLocalizedString>
 #include <QDebug>
 #include <KDesktopFile>
-#include <KIcon>
+#include <QIcon>
 #include <KLineEdit>
-#include <KMimeType>
+//#include <KMimeType>
 #include <KPluginInfo>
 #include <QPushButton>
 #include <KSeparator>
@@ -43,12 +43,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KSharedConfig>
 #include <KShell>
 #include <KStandardAction>
-#include <KStandardDirs>
 #include <KUrlRequester>
 #include <KUser>
 #include <KMessageBox>
 #include <KMessageWidget>
-#include <KNS3/DownloadDialog>
+//#include <KNS3/DownloadDialog>
 
 #include "packagemodel.h"
 #include "startpage.h"
@@ -109,8 +108,8 @@ void StartPage::setupWidgets()
         m_ui.radioButtonDe->setChecked(true);
     }
 
-    m_ui.cancelNewProjectButton->setIcon(KIcon("draw-arrow-back"));
-    m_ui.newProjectButton->setIcon(KIcon("dialog-ok"));
+    m_ui.cancelNewProjectButton->setIcon(QIcon("draw-arrow-back"));
+    m_ui.newProjectButton->setIcon(QIcon("dialog-ok"));
     m_ui.loadLocalProject->setEnabled(false);
     m_ui.importPackageButton->setEnabled(false);
 
@@ -153,13 +152,13 @@ void StartPage::setupWidgets()
     connect(m_projectManager, SIGNAL(projectSelected(QString)), this, SIGNAL(projectSelected(QString)));
     connect(m_projectManager, SIGNAL(requestRefresh()), this, SLOT(refreshRecentProjectsList()));
 
-    new QListWidgetItem(KIcon("application-x-plasma"), i18n("Plasma Widget"), m_ui.contentTypes);
-    new QListWidgetItem(KIcon("server-database"), i18n("Data Engine"), m_ui.contentTypes);
-    new QListWidgetItem(KIcon("system-run"), i18n("Runner"), m_ui.contentTypes);
-    new QListWidgetItem(KIcon("inkscape"), i18n("Theme"), m_ui.contentTypes);
-    new QListWidgetItem(KIcon("window-duplicate"), i18n("Window Switcher"), m_ui.contentTypes);
-    new QListWidgetItem(KIcon("preferences-system-windows-actions"), i18n("KWin Script"), m_ui.contentTypes);
-    new QListWidgetItem(KIcon("preferences-system-windows-effect"), i18n("KWin Effect"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon("application-x-plasma"), i18n("Plasma Widget"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon("server-database"), i18n("Data Engine"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon("system-run"), i18n("Runner"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon("inkscape"), i18n("Theme"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon("window-duplicate"), i18n("Window Switcher"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon("preferences-system-windows-actions"), i18n("KWin Script"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon("preferences-system-windows-effect"), i18n("KWin Effect"), m_ui.contentTypes);
 
 //     connect(m_ui.newProjectButton, SIGNAL(clicked()), this, SLOT(launchNewProjectWizard()));
 }
@@ -293,7 +292,7 @@ void StartPage::refreshRecentProjectsList()
         qDebug() << "RECENT FILE::: " << file;
         if (pDir.isRelative()) {
             qDebug() << "NOT LOCAL";
-            pPath = KStandardDirs::locateLocal("appdata", file + "/metadata.desktop");
+            pPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0) + file + QStringLiteral("/metadata.desktop");
         }
 
         if (!QFile::exists(pPath)) {
@@ -370,9 +369,9 @@ void StartPage::refreshRecentProjectsList()
         }
 
         if (metadata.icon().isEmpty()) {
-            item->setIcon(KIcon(defaultIconName));
+            item->setIcon(QIcon(defaultIconName));
         } else {
-            item->setIcon(KIcon(metadata.icon()));
+            item->setIcon(QIcon(metadata.icon()));
         }
 
         m_projectManager->addProject(item);
@@ -389,7 +388,7 @@ void StartPage::refreshRecentProjectsList()
     } else {
         more = new QListWidgetItem(i18n("More projects..."));
     }
-    more->setIcon(KIcon("window-new"));
+    more->setIcon(QIcon("window-new"));
     m_ui.recentProjects->addItem(more);
 }
 
@@ -405,7 +404,7 @@ void StartPage::createNewProject()
     const QString projectNameLowerCase = projectName.toLower();
     QString projectFileExtension;
 
-    QString templateFilePath = KStandardDirs::locate("appdata", "templates/");
+    QString templateFilePath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0) + QStringLiteral("templates/");
 
     // type -> serviceTypes
     QString serviceTypes;
@@ -469,7 +468,8 @@ void StartPage::createNewProject()
     //                               .gitignore
     //                               contents/...
 
-    QString projectPath = KStandardDirs::locateLocal("appdata", projectFolderName);
+    #pragma message("Replace KStandardDirs with QStandardPaths")
+    QString projectPath;// = KStandardDirs::locateLocal("appdata", projectFolderName);
 
     QDir packageSubDirs(projectPath);
     packageSubDirs.mkpath("contents/code"); //create the necessary subdirs
@@ -687,7 +687,7 @@ void StartPage::importPackage()
 
 void StartPage::doGHNSImport()
 {
-    KNS3::DownloadDialog *mNewStuffDialog = new KNS3::DownloadDialog("plasmate.knsrc", this);
+    /*KNS3::DownloadDialog *mNewStuffDialog = new KNS3::DownloadDialog("plasmate.knsrc", this);
     if (mNewStuffDialog->exec() == QDialog::Accepted)
     {
         KNS3::Entry::List installed = mNewStuffDialog->installedEntries();
@@ -705,7 +705,7 @@ void StartPage::doGHNSImport()
                 selectProject(target);
             }
         }
-    }
+    }*/
 }
 
 void StartPage::selectProject(const QUrl &target)
@@ -721,7 +721,7 @@ void StartPage::selectProject(const QUrl &target)
     QString suggested = QFileInfo(target.path()).completeBaseName();
     QString projectFolder = generateProjectFolderName(suggested);
 
-    QString projectPath = KStandardDirs::locateLocal("appdata", projectFolder + '/');
+    QString projectPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0) + projectFolder + QStringLiteral("/");
     const QUrl projectUrl(projectPath);
 
     if (!ProjectManager::importPackage(target, projectUrl)) {
