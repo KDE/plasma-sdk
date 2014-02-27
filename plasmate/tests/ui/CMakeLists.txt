@@ -34,13 +34,16 @@ plasmate_ui_test(editpagetest "${editpagetest_UI}"
 )
 set(startpagetest_SRCS startpagetest.cpp
                    ../../startpage.cpp
+                   ../../projectmanager/projectmanager.cpp
+                   ../../projecthandler.cpp
+                   ../../packagehandler.cpp
 )
 
 set(startpagetest_UI ../../startpage.ui)
 
-set(startpagetest_LIBS KF5::Plasma KF5::I18n KF5::KIOCore KF5::KIOWidgets)
+set(startpagetest_LIBS KF5::Archive KF5::Plasma KF5::I18n KF5::KIOCore KF5::KIOWidgets)
 
 plasmate_ui_test(startpagetest "${startpagetest_UI}"
-                              "${startpagetest_SRCS}"
-                              "${startpagetest_LIBS}"
+                               "${startpagetest_SRCS}"
+                               "${startpagetest_LIBS}"
 )

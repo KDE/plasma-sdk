@@ -25,23 +25,22 @@
 #include <QPushButton>
 #include <QUrl>
 #include <QDebug>
+#include <QMenu>
+#include <QStandardPaths>
 
 #include <KConfig>
 #include <KIO/DeleteJob>
 #include <KConfigGroup>
 #include <KLocalizedString>
-#include <KMenu>
 #include <KMessageBox>
-#include <KStandardDirs>
 #include <KZip>
 
 #include "projectmanager.h"
-#include "startpage.h"
 
-ProjectManager::ProjectManager(QWidget* parent)
-    : QDialog(parent)
+ProjectManager::ProjectManager(ProjectHandler *projectHandler, QWidget* parent)
+    : QDialog(parent),
+      m_projectHandler(projectHandler)
 {
-    setButtons(QDialog::None);
     m_projectList = new QListWidget(this);
     m_projectList->setSelectionMode(QAbstractItemView::ExtendedSelection);
     connect(m_projectList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(emitProjectSelected()));
@@ -52,7 +51,7 @@ ProjectManager::ProjectManager(QWidget* parent)
 
     m_removeMenuButton = new QPushButton(i18n("Remove Project"), this);
 
-    m_removeMenu = new KMenu(i18n("Remove Project"), this);
+    m_removeMenu = new QMenu(i18n("Remove Project"), this);
 
     m_removeMenuButton->setMenu(m_removeMenu);
     m_removeMenu->addAction(i18n("From List"), this, SLOT(confirmRemoveFromList()));
@@ -67,11 +66,17 @@ ProjectManager::ProjectManager(QWidget* parent)
     l->addWidget(m_loadButton);
     l->addWidget(m_removeMenuButton);
 
-    QWidget *tmpWidget = new QWidget();
-    tmpWidget->setLayout(l);
-    setMainWidget(tmpWidget);
+    setLayout(l);
 }
 
+void ProjectManager::populateList() {
+    m_items.clear();
+    m_projectList->clear();
+
+    for (const auto it : m_projectHandler->loadProjectsList()) {
+        m_items[new QListWidgetItem((it), m_projectList)] = it;
+    }
+}
 
 void ProjectManager::confirmRemoveFromList()
 {
@@ -99,26 +104,19 @@ void ProjectManager::confirmRemoveFromDisk()
 
 void ProjectManager::removeSelectedProjects(bool deleteFromDisk)
 {
-    const QList<QListWidgetItem *> items = m_projectList->selectedItems();
-    bool checkSuccess = false;
-    QStringList recentList = m_mainWindow->recentProjects();
+    QList<QListWidgetItem *> items = m_projectList->selectedItems();
 
-    foreach (const QListWidgetItem *item, items) {
-        QString recentProject = item->data(StartPage::FullPathRole).value<QString>();
-        recentProject.append("/");
-        if (recentProject.contains(KStandardDirs::locateLocal("appdata",""))
-            && !recentProject.isEmpty() && deleteFromDisk) {
-            deleteProject(recentProject);
-        } else if (recentProject.endsWith("package/")) {
-            deleteProject(recentProject);
+    for (QListWidgetItem *item : items) {
+        if (deleteFromDisk) {
+            m_projectHandler->removeProjectFromDisk(m_items[item]);
+            m_items.remove(item);
+            delete item;
+        } else  {
+            m_projectHandler->removeProject(m_items[item]);
+            m_items.remove(item);
+            delete item;
         }
 
-        if (recentList.removeAll(item->data(StartPage::FullPathRole).value<QString>()) > 0) {
-            checkSuccess = true;
-        }
-    }
-    if (checkSuccess) {
-        setRecentProjects(recentList);
     }
 }
 
@@ -131,12 +129,8 @@ void ProjectManager::checkButtonState()
 
 void ProjectManager::addProject(QListWidgetItem *item)
 {
-    m_projectList->addItem(item);
-}
-
-void ProjectManager::clearProjects()
-{
-    m_projectList->clear();
+    m_projectHandler->addProject(item->text());
+    m_items[item] = item->text();
 }
 
 void ProjectManager::emitProjectSelected()
@@ -146,7 +140,7 @@ void ProjectManager::emitProjectSelected()
         return;
     }
 
-    QString url = l[0]->data(StartPage::FullPathRole).value<QString>();
+    QString url = m_items[l.at(0)];
 
     emit projectSelected(url);
     done(QDialog::Accepted);
@@ -198,29 +192,3 @@ bool ProjectManager::importPackage(const QUrl &toImport, const QUrl &targetLocat
     return ret;
 }
 
-void ProjectManager::addRecentProject(const QString &path)
-{
-    QStringList recent = m_mainWindow->recentProjects();
-    recent.removeAll(path);
-    recent.prepend(path);
-    //qDebug() << "Writing the following recent files to the config:" << recent;
-
-    KConfigGroup cg(KGlobal::config(), "General");
-    cg.writeEntry("recentProjects", recent);
-    KGlobal::config()->sync();
-    emit requestRefresh();
-}
-
-void ProjectManager::setRecentProjects(const QStringList &paths)
-{
-    KConfigGroup cg(KGlobal::config(), "General");
-    cg.writeEntry("recentProjects", paths);
-    KGlobal::config()->sync();
-    emit requestRefresh();
-}
-
-void ProjectManager::deleteProject(const QUrl &projectLocation)
-{
-    QUrl project = projectLocation;
-    KIO::del(project);
-}

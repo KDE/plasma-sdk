@@ -21,16 +21,18 @@
 #define PROJECTMANAGER_H
 
 #include <QDialog>
+#include <QHash>
 
 #pragma message("TODO: enable once mainwindow gets ported")
 //#include <mainwindow.h>
+#include "../projecthandler.h"
 
 class QListWidget;
 class QListWidgetItem;
 
 class QUrl;
 class QPushButton;
-class KMenu;
+class QMenu;
 
 namespace Ui
 {
@@ -41,24 +43,16 @@ class ProjectManager : public QDialog
 {
     Q_OBJECT
 public:
-    ProjectManager(QWidget *parent);
+    ProjectManager(ProjectHandler *projectHandler, QWidget *parent);
 
     void addProject(QListWidgetItem *item);
-    void clearProjects();
 
     static bool exportPackage(const QUrl &toExport, const QUrl &targetFile);
     static bool importPackage(const QUrl &toImport, const QUrl &targetLocation);
 
-public Q_SLOTS:
-    void addRecentProject(const QString &path);
-    void setRecentProjects(const QStringList &paths);
-
 signals:
     void projectSelected(const QString &name);
     void requestRefresh();
-
-private:
-    void deleteProject(const QUrl &projectLocation);
 
 private Q_SLOTS:
    void emitProjectSelected();
@@ -68,6 +62,10 @@ private Q_SLOTS:
    void checkButtonState();
 
 private:
+    void populateList();
+    void deleteProject(const QUrl &projectLocation);
+
+
 //TODO: Implement:
 //      search/filterbar,
 //      project multi-export,
@@ -75,8 +73,10 @@ private:
     QListWidget *m_projectList;
     QPushButton *m_loadButton;
     QPushButton *m_removeMenuButton;
-    KMenu *m_removeMenu;
+    QMenu *m_removeMenu;
     bool m_destroyFlag;
+    ProjectHandler *m_projectHandler;
+    QHash<QListWidgetItem*, QString> m_items;
     #pragma message("TODO: enable once mainwindow gets ported")
     //MainWindow* m_mainWindow;
 };

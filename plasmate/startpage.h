@@ -32,6 +32,7 @@ class QPushButton;
 class KLineEdit;
 //class MainWindow;
 class ProjectManager;
+class ProjectHandler;
 
 static const QString PROJECTRC(".plasmateprojectrc");
 
@@ -109,6 +110,7 @@ private:
     #pragma message("TODO: restore MainWindow when it gets ported")
     QWidget *m_parent;
     ProjectManager *m_projectManager;
+    ProjectHandler *m_projectHandler;
 };
 
 #endif // STARTPAGE_H

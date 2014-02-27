@@ -53,12 +53,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "startpage.h"
 //#include "mainwindow.h"
 #include "projectmanager/projectmanager.h"
+#include "projecthandler.h"
 
 
 #pragma message("TODO: restore MainWindow when it gets ported")
 StartPage::StartPage(QWidget *parent/*MainWindow *parent*/) // TODO set a palette so it will look identical with any color scheme.
         : QWidget(parent),
-        m_parent(parent)
+        m_parent(parent),
+        m_projectHandler(new ProjectHandler())
 {
     setupWidgets();
     refreshRecentProjectsList();
@@ -70,7 +72,7 @@ StartPage::~StartPage()
 
 void StartPage::setupWidgets()
 {
-    m_projectManager = new ProjectManager(this);
+    m_projectManager = new ProjectManager(m_projectHandler, this);
     m_ui.setupUi(this);
 
     m_ui.invalidPlasmagikLabelEmpty->setVisible(false);
@@ -271,7 +273,6 @@ void StartPage::resetStatus()
 void StartPage::refreshRecentProjectsList()
 {
     m_ui.recentProjects->clear();
-    m_projectManager->clearProjects();
     #pragma message("TODO: Refresh project list when mainwindow will be ported")
     QStringList recentProjects;
     #if 0
