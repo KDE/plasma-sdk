@@ -201,7 +201,7 @@ void View::changeLocation(int location)
 Plasma::Corona *View::createCorona()
 {
     Plasma::Package package = Plasma::PluginLoader::self()->loadPackage("Plasma/Shell");
-    package.setPath("org.kde.plasmoidviewershell");
+    package.setPath("org.kde.plasma.plasmoidviewershell");
 
     Plasma::Corona *cor = new Plasma::Corona();
     cor->setPackage(package);
