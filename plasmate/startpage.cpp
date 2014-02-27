@@ -110,8 +110,8 @@ void StartPage::setupWidgets()
         m_ui.radioButtonDe->setChecked(true);
     }
 
-    m_ui.cancelNewProjectButton->setIcon(QIcon("draw-arrow-back"));
-    m_ui.newProjectButton->setIcon(QIcon("dialog-ok"));
+    m_ui.cancelNewProjectButton->setIcon(QIcon::fromTheme("draw-arrow-back"));
+    m_ui.newProjectButton->setIcon(QIcon::fromTheme("dialog-ok"));
     m_ui.loadLocalProject->setEnabled(false);
     m_ui.importPackageButton->setEnabled(false);
 
@@ -154,13 +154,13 @@ void StartPage::setupWidgets()
     connect(m_projectManager, SIGNAL(projectSelected(QString)), this, SIGNAL(projectSelected(QString)));
     connect(m_projectManager, SIGNAL(requestRefresh()), this, SLOT(refreshRecentProjectsList()));
 
-    new QListWidgetItem(QIcon("application-x-plasma"), i18n("Plasma Widget"), m_ui.contentTypes);
-    new QListWidgetItem(QIcon("server-database"), i18n("Data Engine"), m_ui.contentTypes);
-    new QListWidgetItem(QIcon("system-run"), i18n("Runner"), m_ui.contentTypes);
-    new QListWidgetItem(QIcon("inkscape"), i18n("Theme"), m_ui.contentTypes);
-    new QListWidgetItem(QIcon("window-duplicate"), i18n("Window Switcher"), m_ui.contentTypes);
-    new QListWidgetItem(QIcon("preferences-system-windows-actions"), i18n("KWin Script"), m_ui.contentTypes);
-    new QListWidgetItem(QIcon("preferences-system-windows-effect"), i18n("KWin Effect"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon::fromTheme("application-x-plasma"), i18n("Plasma Widget"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon::fromTheme("server-database"), i18n("Data Engine"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon::fromTheme("system-run"), i18n("Runner"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon::fromTheme("inkscape"), i18n("Theme"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon::fromTheme("window-duplicate"), i18n("Window Switcher"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon::fromTheme("preferences-system-windows-actions"), i18n("KWin Script"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon::fromTheme("preferences-system-windows-effect"), i18n("KWin Effect"), m_ui.contentTypes);
 
 //     connect(m_ui.newProjectButton, SIGNAL(clicked()), this, SLOT(launchNewProjectWizard()));
 }
@@ -370,9 +370,9 @@ void StartPage::refreshRecentProjectsList()
         }
 
         if (metadata.icon().isEmpty()) {
-            item->setIcon(QIcon(defaultIconName));
+            item->setIcon(QIcon::fromTheme(defaultIconName));
         } else {
-            item->setIcon(QIcon(metadata.icon()));
+            item->setIcon(QIcon::fromTheme(metadata.icon()));
         }
 
         m_projectManager->addProject(item);
@@ -389,7 +389,7 @@ void StartPage::refreshRecentProjectsList()
     } else {
         more = new QListWidgetItem(i18n("More projects..."));
     }
-    more->setIcon(QIcon("window-new"));
+    more->setIcon(QIcon::fromTheme("window-new"));
     m_ui.recentProjects->addItem(more);
 }
 
