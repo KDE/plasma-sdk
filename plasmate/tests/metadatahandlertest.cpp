@@ -55,6 +55,7 @@ void MetadataHandlerTest::read()
     QCOMPARE(m_metadataHandler.email(), QStringLiteral("sebas@kde.org, kde@privat.broulik.de"));
     QCOMPARE(m_metadataHandler.license(), QStringLiteral("GPL"));
     QCOMPARE(m_metadataHandler.website(), QStringLiteral("http://vizZzion.org"));
+    QCOMPARE(m_metadataHandler.pluginName(), QStringLiteral("org.kde.plasma.battery"));
 
     QStringList servicesList;
     servicesList.append("Plasma/Applet");
@@ -83,6 +84,7 @@ void MetadataHandlerTest::write()
     const QString email(QStringLiteral("plasma@kde.org"));
     const QString license(QStringLiteral("GPL"));
     const QString website(QStringLiteral("http://kde.org"));
+    const QString pluginName(QStringLiteral("org.kde.plasmate.dummyTest"));
 
 
     m_metadataHandler.setName(name);
@@ -93,6 +95,7 @@ void MetadataHandlerTest::write()
     m_metadataHandler.setEmail(email);
     m_metadataHandler.setLicense(license);
     m_metadataHandler.setWebsite(website);
+    m_metadataHandler.setPluginName(pluginName);
 
     QStringList serviceList;
     serviceList.append("Plasma/Applet");
@@ -109,6 +112,7 @@ void MetadataHandlerTest::write()
     QCOMPARE(m_metadataHandler.license(), license);
     QCOMPARE(m_metadataHandler.website(), website);
     QCOMPARE(m_metadataHandler.serviceTypes(), serviceList);
+    QCOMPARE(m_metadataHandler.pluginName(), pluginName);
 
     KConfigGroup cg = KConfigGroup(KSharedConfig::openConfig(path),
                                    QStringLiteral("Desktop Entry"));

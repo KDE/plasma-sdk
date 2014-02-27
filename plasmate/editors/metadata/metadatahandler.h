@@ -70,6 +70,9 @@ public:
     QStringList serviceTypes() const;
     void setServiceTypes(const QStringList &serviceTypes);
 
+    QString pluginName() const;
+    void setPluginName(const QString &pluginName);
+
 private:
     KConfigGroup m_metadataConfig;
     QString m_filePath;

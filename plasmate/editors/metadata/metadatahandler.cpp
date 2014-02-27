@@ -155,3 +155,13 @@ void MetadataHandler::setServiceTypes(const QStringList &serviceTypes)
     m_metadataConfig.writeEntry("X-KDE-ServiceTypes", serviceTypes);
 }
 
+QString MetadataHandler::pluginName() const
+{
+    return m_metadataConfig.readEntry("X-KDE-PluginInfo-Name", QString());
+}
+
+void MetadataHandler::setPluginName(const QString &pluginName)
+{
+    return m_metadataConfig.writeEntry("X-KDE-PluginInfo-Name", pluginName);
+}
+
