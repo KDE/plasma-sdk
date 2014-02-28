@@ -32,6 +32,8 @@ StartPageTest::StartPageTest(QWidget *parent)
         : QWidget(parent),
           m_startPage(0)
 {
+    createTestData();
+
     m_startPage = new StartPage();
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->addWidget(m_startPage);
@@ -40,6 +42,25 @@ StartPageTest::StartPageTest(QWidget *parent)
 
 StartPageTest::~StartPageTest()
 {
+}
+
+void StartPageTest::createTestData()
+{
+    QString newPlasmoidLocation = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0);
+
+    QDir templatesDir(newPlasmoidLocation);
+    templatesDir.mkpath(QStringLiteral("templates"));
+    templatesDir.cd(QStringLiteral("templates"));
+
+    if (!newPlasmoidLocation.endsWith(QLatin1Char('/'))) {
+        newPlasmoidLocation += QLatin1Char('/') + QStringLiteral("org.kde.packagehandlertest.newPlasmoid");
+    }
+
+    const QString mainPlasmoidFile = QFINDTESTDATA("/home/kokeroulis/sources/kde5/plasmate-linuxteam/plasmate/tests/testdata/mainPlasmoid.qml");
+    Q_ASSERT(!mainPlasmoidFile.isEmpty());
+
+    QFile f(mainPlasmoidFile);
+    f.copy(templatesDir.path() + QLatin1Char('/') + QStringLiteral("mainPlasmoid.qml"));
 }
 
 PLASMATE_TEST_MAIN(StartPageTest)

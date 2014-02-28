@@ -36,6 +36,8 @@ public:
     ~StartPageTest();
 
 private:
+    void createTestData();
+
     StartPage *m_startPage;
 };
 

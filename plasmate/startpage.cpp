@@ -481,6 +481,7 @@ void StartPage::createNewProject()
 
     QString projectPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0) + QLatin1Char('/') + projectFolderName + QLatin1Char('/');
 
+    m_packageHandler->setPackageType(QStringLiteral("Plasma/Applet"));
     m_packageHandler->setPackagePath(projectPath);
 
     // Create a QFile object that points to the template we need to copy
