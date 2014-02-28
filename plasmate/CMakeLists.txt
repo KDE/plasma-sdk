@@ -37,13 +37,14 @@ set (PlasMate_SRC
     #mainwindow.cpp
     #startpage.cpp
     #packagemodel.cpp
-    #previewer/plasmoid/plasmoidpreviewer.cpp
+    previewer/plasmoid/plasmoidpreviewer.cpp
+    ../plasmoidviewer/view.cpp
     #previewer/plasmoid/plasmoidview.cpp
     #previewer/runner/runnerpreviewer.cpp
     #previewer/windowswitcher/windowswitcher.cpp
     #previewer/windowswitcher/thumbnailitem.cpp
     #previewer/windowswitcher/tabboxpreviewer.cpp
-    #previewer/previewer.cpp
+    previewer/previewer.cpp
     # publisher/signingwidget.cpp
     #publisher/signingdialog.cpp
     #publisher/publisher.cpp

@@ -1,6 +1,6 @@
 /*
- * Copyright 2010 Lim Yuen Hoe <yuenhoe@hotmail.com>
- *
+ *   Copyright 2010 Lim Yuen Hoe <yuenhoe@hotmail.com>
+ *   Copyright 2014 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -22,22 +22,28 @@
 #define PLASMOIDPREVIEWER_H
 
 #include "../previewer.h"
-#include "plasmoidview.h"
+
+#include <QScopedPointer>
+
+class View;
 
 class PlasmoidPreviewer : public Previewer {
 
     Q_OBJECT
 
-signals:
-    void refreshView(); // emitted to signal the containment to refresh
-
 public:
-    PlasmoidPreviewer(const QString & title, QWidget * parent = 0, Qt::WindowFlags flags = 0 );
+    PlasmoidPreviewer(const QString &title, QWidget *parent = 0, Qt::WindowFlags flags = 0 );
+    ~PlasmoidPreviewer();
+
     void showPreview(const QString &packagePath);
     void refreshPreview();
 
+Q_SIGNALS:
+    void refreshView();
+
 private:
-    PlasmoidView* m_view;
+    QScopedPointer<View> m_view;
 };
 
 #endif // PLASMOIDPREVIEWER_H
+
