@@ -67,6 +67,7 @@ ProjectManager::ProjectManager(ProjectHandler *projectHandler, QWidget* parent)
     l->addWidget(m_removeMenuButton);
 
     setLayout(l);
+    populateList();
 }
 
 void ProjectManager::populateList() {
@@ -74,7 +75,11 @@ void ProjectManager::populateList() {
     m_projectList->clear();
 
     for (const auto it : m_projectHandler->loadProjectsList()) {
-        m_items[new QListWidgetItem((it), m_projectList)] = it;
+        const QString projectPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0);
+        QString tmpIt = it;
+
+        const QString projectName = tmpIt.replace(projectPath + QLatin1Char('/'), "");
+        m_items[new QListWidgetItem((projectName), m_projectList)] = it;
     }
 }
 

@@ -25,6 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QAbstractItemModel>
 #include <QValidator>
 #include <QFile>
+#include <QScopedPointer>
 #include <QStandardPaths>
 #include <QTextStream>
 #include <QDateTime>
@@ -52,6 +53,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "packagemodel.h"
 #include "startpage.h"
 //#include "mainwindow.h"
+#include "packagehandler.h"
 #include "projectmanager/projectmanager.h"
 #include "projecthandler.h"
 
@@ -60,7 +62,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 StartPage::StartPage(QWidget *parent/*MainWindow *parent*/) // TODO set a palette so it will look identical with any color scheme.
         : QWidget(parent),
         m_parent(parent),
-        m_projectHandler(new ProjectHandler())
+        m_projectHandler(new ProjectHandler()),
+        m_packageHandler(new PackageHandler())
 {
     setupWidgets();
     refreshRecentProjectsList();
@@ -72,7 +75,6 @@ StartPage::~StartPage()
 
 void StartPage::setupWidgets()
 {
-    m_projectManager = new ProjectManager(m_projectHandler, this);
     m_ui.setupUi(this);
 
     m_ui.invalidPlasmagikLabelEmpty->setVisible(false);
@@ -84,7 +86,7 @@ void StartPage::setupWidgets()
 
     QString userName = cg.readEntry("Username", user.loginName());
     QString userEmail = cg.readEntry("Email", userName);
-    userEmail.append(QStringLiteral("@none.org"));
+
     // If username or email are empty string, i.e. in the previous project the
     // developer deleted it, restore the default values
     if (userName.isEmpty()) {
@@ -93,6 +95,10 @@ void StartPage::setupWidgets()
 
     if (userEmail.isEmpty()) {
         userEmail.append(user.loginName()+"@none.org");
+    } else if (userEmail == userName) {
+        //the first time that we run plasmate, if our config doesn't exists
+        //then the userEmail==userName, so se append the correct email prefix
+        userEmail.append(QStringLiteral("@none.org"));
     }
 
     m_ui.authorTextField->setText(userName);
@@ -118,9 +124,6 @@ void StartPage::setupWidgets()
     // Enforce the security restriction from package.cpp in the input field
     connect(m_ui.projectName, SIGNAL(textEdited(const QString&)),
             this, SLOT(checkProjectName(const QString&)));
-
-    connect(m_ui.recentProjects, SIGNAL(clicked(const QModelIndex)),
-            this, SLOT(recentProjectSelected(const QModelIndex)));
 
     // Enforce the security restriction from package.cpp in the input field
     connect(m_ui.localProject, SIGNAL(textChanged(const QString&)),
@@ -149,11 +152,6 @@ void StartPage::setupWidgets()
     connect(m_ui.importGHNSButton, SIGNAL(clicked()),
             this, SLOT(doGHNSImport()));
 
-    // connect up the project manager to our signals and slots
-    connect(this, SIGNAL(projectSelected(QString)), m_projectManager, SLOT(addRecentProject(QString)));
-    connect(m_projectManager, SIGNAL(projectSelected(QString)), this, SIGNAL(projectSelected(QString)));
-    connect(m_projectManager, SIGNAL(requestRefresh()), this, SLOT(refreshRecentProjectsList()));
-
     new QListWidgetItem(QIcon::fromTheme("application-x-plasma"), i18n("Plasma Widget"), m_ui.contentTypes);
     new QListWidgetItem(QIcon::fromTheme("server-database"), i18n("Data Engine"), m_ui.contentTypes);
     new QListWidgetItem(QIcon::fromTheme("system-run"), i18n("Runner"), m_ui.contentTypes);
@@ -163,6 +161,19 @@ void StartPage::setupWidgets()
     new QListWidgetItem(QIcon::fromTheme("preferences-system-windows-effect"), i18n("KWin Effect"), m_ui.contentTypes);
 
 //     connect(m_ui.newProjectButton, SIGNAL(clicked()), this, SLOT(launchNewProjectWizard()));
+
+    connect(m_ui.recentProjects, &QListWidget::clicked, [&](const QModelIndex &index) {
+        QAbstractItemModel *m = m_ui.recentProjects->model();
+        QString url = m->data(index, FullPathRole).value<QString>();
+        if (url.isEmpty()) {
+            QScopedPointer<ProjectManager> projectManager(new ProjectManager(m_projectHandler, this));
+            projectManager->exec();
+            return;
+        }
+        qDebug() << "Loading project file:" << m->data(index, FullPathRole);
+
+        emit projectSelected(url);
+    });
 }
 
 // Convert FooBar to foo_bar
@@ -285,7 +296,7 @@ void StartPage::refreshRecentProjectsList()
     }
     #endif
     int counter = 0;
-    foreach (const QString &file, recentProjects) {
+    for (const QString &file : m_projectHandler->loadProjectsList()) {
         // Specify path + filename as well to avoid mistaking .gitignore
         // as being the metadata file.
         QDir pDir(file);
@@ -375,7 +386,6 @@ void StartPage::refreshRecentProjectsList()
             item->setIcon(QIcon::fromTheme(metadata.icon()));
         }
 
-        m_projectManager->addProject(item);
         // limit to 5 projects to display up front
         if (m_ui.recentProjects->count() < 5) {
             m_ui.recentProjects->addItem(new QListWidgetItem(*item));
@@ -405,7 +415,7 @@ void StartPage::createNewProject()
     const QString projectNameLowerCase = projectName.toLower();
     QString projectFileExtension;
 
-    QString templateFilePath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0) + QStringLiteral("templates/");
+    QString templateFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).at(0) + QStringLiteral("/plasmate/templates/");
 
     // type -> serviceTypes
     QString serviceTypes;
@@ -469,11 +479,9 @@ void StartPage::createNewProject()
     //                               .gitignore
     //                               contents/...
 
-    #pragma message("Replace KStandardDirs with QStandardPaths")
-    QString projectPath;// = KStandardDirs::locateLocal("appdata", projectFolderName);
+    QString projectPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0) + QLatin1Char('/') + projectFolderName + QLatin1Char('/');
 
-    QDir packageSubDirs(projectPath);
-    packageSubDirs.mkpath("contents/code"); //create the necessary subdirs
+    m_packageHandler->setPackagePath(projectPath);
 
     // Create a QFile object that points to the template we need to copy
     QFile sourceFile(templateFilePath + projectFileExtension);
@@ -653,19 +661,6 @@ void StartPage::loadLocalProject()
     ensureProjectrcFileExists(path);
 
     emit projectSelected(path);
-}
-
-void StartPage::recentProjectSelected(const QModelIndex &index)
-{
-    QAbstractItemModel *m = m_ui.recentProjects->model();
-    QString url = m->data(index, FullPathRole).value<QString>();
-    if (url.isEmpty()) {
-        m_projectManager->exec();
-        return;
-    }
-    qDebug() << "Loading project file:" << m->data(index, FullPathRole);
-
-    emit projectSelected(url);
 }
 
 void StartPage::checkPackagePath(const QString& name)

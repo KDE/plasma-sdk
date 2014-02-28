@@ -33,6 +33,7 @@ class KLineEdit;
 //class MainWindow;
 class ProjectManager;
 class ProjectHandler;
+class PackageHandler;
 
 static const QString PROJECTRC(".plasmateprojectrc");
 
@@ -76,7 +77,6 @@ public Q_SLOTS:
     void cancelNewProject();
 
 private Q_SLOTS:
-    void recentProjectSelected(const QModelIndex &);
     void validateProjectType(const QModelIndex &sender);
     void createNewProject();
     void checkProjectName(const QString &name);
@@ -111,6 +111,7 @@ private:
     QWidget *m_parent;
     ProjectManager *m_projectManager;
     ProjectHandler *m_projectHandler;
+    PackageHandler *m_packageHandler;
 };
 
 #endif // STARTPAGE_H
