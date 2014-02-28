@@ -28,16 +28,7 @@ Previewer::Previewer(QWidget * parent, Qt::WindowFlags flags)
 {
 }
 
-void Previewer::emitRefreshRequest()
+Previewer::~Previewer()
 {
-    emit refreshRequested();
 }
 
-void Previewer::emitShowKonsole()
-{
-    emit showKonsole();
-}
-
-void Previewer::setKonsolePreviewerVisible(bool visible)
-{
-}
