@@ -63,23 +63,8 @@ find_package(KF5KIO REQUIRED NO_MODULE)
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 
-remove_definitions(-DQT3_SUPPORT_WARNINGS -DQT3_SUPPORT)
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FROM_BYTEARRAY -DQT_NO_KEYWORDS)
 
-
-################# setup the include directories #################
-include_directories( ${kdeqt5staging_INCLUDE_DIRS}
-                     ${kdeqt5staging_INCLUDE_DIR}
-                     ${KDE4_INCLUDES}
-                     KF5::Declarative
-                     ${KF5_INCLUDE_DIRS}  # since e-c-m 0.0.7
-                   )
-
-# for including config.h and for includes like <kparts/foo.h>
-include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/src
-                     ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/src
-                     ${CMAKE_SOURCE_DIR}/interfaces
-                     ${CMAKE_SOURCE_DIR}/src/plasma/includes)
 
 
 add_subdirectory(engineexplorer)
