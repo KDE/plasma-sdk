@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef EDITPAGE_H
 #define EDITPAGE_H
 
-#include <QWidget>
+#include <QDockWidget>
 #include <QModelIndex>
 #include <QTreeView>
 #include <QUrl>
@@ -65,7 +65,6 @@ private:
     // FIXME
     // MetaDataEditor *m_metaEditor;
     QUrl m_path;
-    QString m_mimetype;
     bool hasExtension(const QString &filename);
     void imageDialog(const QString &filter, const QString& destinationPath);
     QString createContentWithSubdir(const QString& packagePath, const QString& contentWithSubdir) const;
@@ -73,6 +72,24 @@ private:
     ImageViewer *m_imageViewer;
     KConfigXtEditor *m_kconfigXtEditor;
 };
+
+
+
+
+class FileList : public QDockWidget
+{
+    Q_OBJECT
+
+public:
+
+    FileList(QWidget *parent = 0);
+
+    EditPage *editPage() const;
+
+private:
+    EditPage *m_editPage;
+};
+
 
 #endif
 

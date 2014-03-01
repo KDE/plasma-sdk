@@ -52,6 +52,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <qvarlengtharray.h>
 
+FileList::FileList(QWidget *parent)
+        : QDockWidget(parent),
+          m_editPage(new EditPage(this))
+{
+    setWidget(m_editPage);
+}
+
+EditPage* FileList::editPage() const
+{
+    return m_editPage;
+}
+
+
+
 EditPage::EditPage(QWidget *parent)
         : QTreeView(parent),
           m_imageViewer(0),
@@ -294,18 +308,18 @@ void EditPage::mimetypeJobFinished(KJob *job)
         return;
     }
 
-    m_mimetype = mjob->mimetype();
+    const QString mimetype = mjob->mimetype();
 
-    if (m_mimetype.isEmpty()) {
+    if (mimetype.isEmpty()) {
         qDebug() << "Could not detect the file's mimetype";
         return;
     }
 
-    qDebug() << "loaded mimetype: " << m_mimetype;
+    qDebug() << "loaded mimetype: " << mimetype;
 
-    KService::List offers = KMimeTypeTrader::self()->query(m_mimetype, "KParts/ReadWritePart");
+    KService::List offers = KMimeTypeTrader::self()->query(mimetype, "KParts/ReadWritePart");
     if (offers.isEmpty()) {
-        offers = KMimeTypeTrader::self()->query(m_mimetype, "KParts/ReadOnlyPart");
+        offers = KMimeTypeTrader::self()->query(mimetype, "KParts/ReadOnlyPart");
     }
 
     if (!offers.isEmpty()) {
