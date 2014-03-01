@@ -89,7 +89,13 @@ EditPageTest::EditPageTest(QWidget *parent)
     setCentralWidget(container);
 
     connect(m_loadButton, &QPushButton::pressed, [=]() {
-        QDir dir(m_urlRequester->url().toLocalFile());
+        const QString path = m_urlRequester->url().toLocalFile();
+
+        if (path.isEmpty()) {
+            return;
+        }
+
+        QDir dir(path);
         dir.cdUp();
 
         m_packageHandler->setPackagePath(dir.path());
