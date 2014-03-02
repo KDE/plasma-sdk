@@ -41,7 +41,11 @@ public:
     bool removeProjectFromDisk(const QString &projectPath);
     PackageHandler *packageHandler();
 private:
+    void blacklistProject(const QString &projectPath);
+    void whitelistProject(const QString &projectPath);
+
     QStringList m_projectsList;
+    QStringList m_blacklistProjects;
     PackageHandler *m_packageHandler;
 };
 
