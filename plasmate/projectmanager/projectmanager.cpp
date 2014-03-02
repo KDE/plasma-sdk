@@ -70,7 +70,8 @@ ProjectManager::ProjectManager(ProjectHandler *projectHandler, QWidget* parent)
     populateList();
 }
 
-void ProjectManager::populateList() {
+void ProjectManager::populateList()
+{
     m_items.clear();
     m_projectList->clear();
 
@@ -123,6 +124,8 @@ void ProjectManager::removeSelectedProjects(bool deleteFromDisk)
         }
 
     }
+
+    done(QDialog::Accepted);
 }
 
 void ProjectManager::checkButtonState()

@@ -167,7 +167,11 @@ void StartPage::setupWidgets()
         QString url = m->data(index, FullPathRole).value<QString>();
         if (url.isEmpty()) {
             QScopedPointer<ProjectManager> projectManager(new ProjectManager(m_projectHandler, this));
-            projectManager->exec();
+            if (projectManager->exec() == QDialog::Accepted) {
+                refreshRecentProjectsList();
+            }
+
+
             return;
         }
         qDebug() << "Loading project file:" << m->data(index, FullPathRole);
