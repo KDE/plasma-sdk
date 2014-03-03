@@ -122,45 +122,113 @@ void StartPage::setupWidgets()
     m_ui.importPackageButton->setEnabled(false);
 
     // Enforce the security restriction from package.cpp in the input field
-    connect(m_ui.projectName, SIGNAL(textEdited(const QString&)),
-            this, SLOT(checkProjectName(const QString&)));
+    connect(m_ui.projectName, &KLineEdit::textEdited, [&](const QString &name) {
+        QRegExp validatePluginName("[a-zA-Z0-9_.]*");
+        if (!validatePluginName.exactMatch(name)) {
+            int pos = 0;
+            for (int i = 0; i < name.size(); i++) {
+                if (validatePluginName.indexIn(name, pos, QRegExp::CaretAtZero) == -1)
+                    break;
+                pos += validatePluginName.matchedLength();
+            }
+            m_ui.projectName->setText(QString(name).remove(pos, 1));
+        }
+
+        m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty());
+    });
 
     // Enforce the security restriction from package.cpp in the input field
-    connect(m_ui.localProject, SIGNAL(textChanged(const QString&)),
-            this, SLOT(checkLocalProjectPath(const QString&)));
+    connect(m_ui.localProject, &KUrlRequester::textChanged, this, &StartPage::checkLocalProjectPath);
 
-    connect(m_ui.loadLocalProject, SIGNAL(clicked()),
-            this, SLOT(loadLocalProject()));
+    connect(m_ui.loadLocalProject, &QPushButton::clicked, [&]() {
+        const QString path = KShell::tildeExpand(m_ui.localProject->text());
+        qDebug() << "loading local project from" << path;
+        if (!QFile::exists(path)) {
+            return;
+        }
 
-    connect(m_ui.importPackage, SIGNAL(textChanged(const QString&)),
-            this, SLOT(checkPackagePath(const QString&)));
-    connect(m_ui.importPackageButton, SIGNAL(clicked()),
-            this, SLOT(importPackage()));
+        ensureProjectrcFileExists(path);
 
-    // When there will be a good API for js and rb dataengines and runners, remove the
-    // first connect() statement and uncomment the one below :)
-    connect(m_ui.contentTypes, SIGNAL(clicked(const QModelIndex)),
-            this, SLOT(validateProjectType(const QModelIndex)));
-    /*connect(m_ui.contentTypes, SIGNAL(clicked(const QModelIndex)),
-            m_ui.projectName, SLOT(setFocus()));*/
+        emit projectSelected(path);
+    });
 
+    connect(m_ui.importPackageButton, &QPushButton::clicked, [&]() {
+            const QUrl target = m_ui.importPackage->url();
+            selectProject(target);
+    });
 
-    connect(m_ui.newProjectButton, SIGNAL(clicked()),
-            this, SLOT(createNewProject()));
-    connect(m_ui.cancelNewProjectButton, SIGNAL(clicked()),
-            this, SLOT(cancelNewProject()));
-    connect(m_ui.importGHNSButton, SIGNAL(clicked()),
-            this, SLOT(doGHNSImport()));
+    connect(m_ui.contentTypes, &QListWidget::clicked, [&](const QModelIndex &sender) {
+        m_ui.languageLabel->show();
+        m_ui.frame->show();
+        m_ui.radioButtonJs->setEnabled(true);
+        m_ui.radioButtonPy->setEnabled(true);
 
-    new QListWidgetItem(QIcon::fromTheme("application-x-plasma"), i18n("Plasma Widget"), m_ui.contentTypes);
-    new QListWidgetItem(QIcon::fromTheme("server-database"), i18n("Data Engine"), m_ui.contentTypes);
-    new QListWidgetItem(QIcon::fromTheme("system-run"), i18n("Runner"), m_ui.contentTypes);
-    new QListWidgetItem(QIcon::fromTheme("inkscape"), i18n("Theme"), m_ui.contentTypes);
-    new QListWidgetItem(QIcon::fromTheme("window-duplicate"), i18n("Window Switcher"), m_ui.contentTypes);
-    new QListWidgetItem(QIcon::fromTheme("preferences-system-windows-actions"), i18n("KWin Script"), m_ui.contentTypes);
-    new QListWidgetItem(QIcon::fromTheme("preferences-system-windows-effect"), i18n("KWin Effect"), m_ui.contentTypes);
+        if (sender.row() == DataEngineRow) {
+            m_ui.radioButtonDe->setEnabled(false);
+            m_ui.radioButtonJs->setChecked(true);
+            m_ui.radioButtonRb->setEnabled(true);
+        } else if (sender.row() == RunnerRow) {
+            m_ui.radioButtonDe->setEnabled(false);
+            m_ui.radioButtonJs->setChecked(true);
+            m_ui.radioButtonRb->setEnabled(false);
+        } else if (sender.row() == ThemeRow) {
+            m_ui.languageLabel->hide();
+            m_ui.frame->hide();
+        } else if (sender.row() == PlasmoidRow) {
+            m_ui.radioButtonDe->setEnabled(true);
+            m_ui.radioButtonDe->setChecked(true);
+            m_ui.radioButtonRb->setEnabled(true);
+        } else if (sender.row() == WindowSwitcherRow) {
+            m_ui.radioButtonDe->setEnabled(true);
+            m_ui.radioButtonRb->setEnabled(false);
+            m_ui.radioButtonJs->setEnabled(false);
+            m_ui.radioButtonPy->setEnabled(false);
+            m_ui.radioButtonDe->setChecked(true);
+        } else if (sender.row() == KWinScriptRow) {
+            m_ui.radioButtonPy->setEnabled(false);
+            m_ui.radioButtonRb->setEnabled(false);
+            m_ui.radioButtonDe->setEnabled(true);
+            m_ui.radioButtonJs->setChecked(true);
+        } else if (sender.row() == KWinEffectRow) {
+            m_ui.radioButtonPy->setEnabled(false);
+            m_ui.radioButtonJs->setChecked(true);
+            m_ui.radioButtonRb->setEnabled(false);
+        }
 
-//     connect(m_ui.newProjectButton, SIGNAL(clicked()), this, SLOT(launchNewProjectWizard()));
+        m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty());
+        m_ui.layoutHackStackedWidget->setCurrentIndex(1);
+        m_ui.projectName->setFocus();
+    });
+
+    connect(m_ui.newProjectButton, &QPushButton::clicked, this, &StartPage::createNewProject);
+
+    connect(m_ui.cancelNewProjectButton, &QPushButton::clicked, [&]() {
+        m_ui.projectName->clear();
+        resetStatus();
+    });
+
+    connect(m_ui.importGHNSButton, &QPushButton::clicked, [&]() {
+        /*KNS3::DownloadDialog *mNewStuffDialog = new KNS3::DownloadDialog("plasmate.knsrc", this);
+        if (mNewStuffDialog->exec() == QDialog::Accepted)
+        {
+            KNS3::Entry::List installed = mNewStuffDialog->installedEntries();
+
+            if (!installed.empty())
+            {
+                KNS3::Entry entry = installed.at(0);
+                QStringList installedFiles = entry.installedFiles();
+
+                if (!installedFiles.empty())
+                {
+                    QString file = installedFiles.at(0);
+                    QUrl target(file);
+
+                    selectProject(target);
+                }
+            }
+        }*/
+    });
+
 
     connect(m_ui.recentProjects, &QListWidget::clicked, [&](const QModelIndex &index) {
         QAbstractItemModel *m = m_ui.recentProjects->model();
@@ -178,6 +246,14 @@ void StartPage::setupWidgets()
 
         emit projectSelected(url);
     });
+
+    new QListWidgetItem(QIcon::fromTheme("application-x-plasma"), i18n("Plasma Widget"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon::fromTheme("server-database"), i18n("Data Engine"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon::fromTheme("system-run"), i18n("Runner"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon::fromTheme("inkscape"), i18n("Theme"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon::fromTheme("window-duplicate"), i18n("Window Switcher"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon::fromTheme("preferences-system-windows-actions"), i18n("KWin Script"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon::fromTheme("preferences-system-windows-effect"), i18n("KWin Effect"), m_ui.contentTypes);
 }
 
 // Convert FooBar to foo_bar
@@ -185,67 +261,6 @@ QString StartPage::camelToSnakeCase(const QString& name)
 {
     QString result(name);
     return result.replace(QRegExp("([A-Z])"), "_\\1").toLower().replace(QRegExp("^_"), "");
-}
-
-void StartPage::checkProjectName(const QString& name)
-{
-    QRegExp validatePluginName("[a-zA-Z0-9_.]*");
-    if (!validatePluginName.exactMatch(name)) {
-        int pos = 0;
-        for (int i = 0; i < name.size(); i++) {
-            if (validatePluginName.indexIn(name, pos, QRegExp::CaretAtZero) == -1)
-                break;
-            pos += validatePluginName.matchedLength();
-        }
-        m_ui.projectName->setText(QString(name).remove(pos, 1));
-    }
-
-    m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty());
-}
-
-void StartPage::validateProjectType(const QModelIndex &sender)
-{
-    m_ui.languageLabel->show();
-    m_ui.frame->show();
-    m_ui.radioButtonJs->setEnabled(true);
-    m_ui.radioButtonPy->setEnabled(true);
-
-    if (sender.row() == DataEngineRow) {
-        m_ui.radioButtonDe->setEnabled(false);
-        m_ui.radioButtonJs->setChecked(true);
-        m_ui.radioButtonRb->setEnabled(true);
-    } else if (sender.row() == RunnerRow) {
-        m_ui.radioButtonDe->setEnabled(false);
-        m_ui.radioButtonJs->setChecked(true);
-        m_ui.radioButtonRb->setEnabled(false);
-    } else if (sender.row() == ThemeRow) {
-        m_ui.languageLabel->hide();
-        m_ui.frame->hide();
-    } else if (sender.row() == PlasmoidRow) {
-      m_ui.radioButtonDe->setEnabled(true);
-        m_ui.radioButtonDe->setChecked(true);
-        m_ui.radioButtonRb->setEnabled(true);
-    } else if (sender.row() == WindowSwitcherRow) {
-        m_ui.radioButtonDe->setEnabled(true);
-        m_ui.radioButtonRb->setEnabled(false);
-        m_ui.radioButtonJs->setEnabled(false);
-        m_ui.radioButtonPy->setEnabled(false);
-        m_ui.radioButtonDe->setChecked(true);
-    } else if (sender.row() == KWinScriptRow) {
-        m_ui.radioButtonPy->setEnabled(false);
-        m_ui.radioButtonRb->setEnabled(false);
-        m_ui.radioButtonDe->setEnabled(true);
-        m_ui.radioButtonJs->setChecked(true);
-    } else if (sender.row() == KWinEffectRow) {
-        m_ui.radioButtonPy->setEnabled(false);
-        m_ui.radioButtonJs->setChecked(true);
-        m_ui.radioButtonRb->setEnabled(false);
-   }
-
-
-    m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty());
-    m_ui.layoutHackStackedWidget->setCurrentIndex(1);
-    m_ui.projectName->setFocus();
 }
 
 QString StartPage::userName()
@@ -618,12 +633,6 @@ void StartPage::ensureProjectrcFileExists(const QString& projectPath)
     }
 }
 
-void StartPage::cancelNewProject()
-{
-    m_ui.projectName->clear();
-    resetStatus();
-}
-
 void StartPage::checkLocalProjectPath(const QString& name)
 {
     m_ui.invalidPlasmagikLabelEmpty->setText(i18n("Your directory is empty"));
@@ -653,60 +662,6 @@ void StartPage::checkLocalProjectPath(const QString& name)
         m_ui.invalidPlasmagikLabelEmpty->setVisible(false);
         m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(false);
     }
-}
-
-void StartPage::loadLocalProject()
-{
-    const QString path = KShell::tildeExpand(m_ui.localProject->text());
-    qDebug() << "loading local project from" << path;
-    if (!QFile::exists(path)) {
-        return;
-    }
-
-    ensureProjectrcFileExists(path);
-
-    emit projectSelected(path);
-}
-
-void StartPage::checkPackagePath(const QString& name)
-{
-    #pragma message("TODO: FIXME")
-    #if 0
-    const QString fullName = KShell::tildeExpand(name);
-    bool valid = QFile::exists(fullName) &&
-                 KMimeType::findByUrl(fullName)->is("application/x-plasma");
-
-    m_ui.importPackageButton->setEnabled(valid);
-    #endif
-}
-
-void StartPage::importPackage()
-{
-    const QUrl target = m_ui.importPackage->url();
-    selectProject(target);
-}
-
-void StartPage::doGHNSImport()
-{
-    /*KNS3::DownloadDialog *mNewStuffDialog = new KNS3::DownloadDialog("plasmate.knsrc", this);
-    if (mNewStuffDialog->exec() == QDialog::Accepted)
-    {
-        KNS3::Entry::List installed = mNewStuffDialog->installedEntries();
-
-        if (!installed.empty())
-        {
-            KNS3::Entry entry = installed.at(0);
-            QStringList installedFiles = entry.installedFiles();
-
-            if (!installedFiles.empty())
-            {
-                QString file = installedFiles.at(0);
-                QUrl target(file);
-
-                selectProject(target);
-            }
-        }
-    }*/
 }
 
 void StartPage::selectProject(const QUrl &target)
