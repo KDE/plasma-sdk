@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <qcommandlineoption.h>
 
 #pragma message("TODO: enable once mainwindow gets ported")
-//#include "mainwindow.h"
+#include "mainwindow.h"
 #include "konsole/konsolepreviewer.h"
 
 static const char version[] = "2.0";
@@ -39,8 +39,8 @@ int main(int argc, char *argv[])
     parser.process(app);
 
     //qInstallMsgHandler(KonsolePreviewer::customMessageHandler);
-    //MainWindow *mainWindow = new MainWindow();
-    //mainWindow->show();
+    MainWindow *mainWindow = new MainWindow();
+    mainWindow->show();
     return app.exec();
 }
 

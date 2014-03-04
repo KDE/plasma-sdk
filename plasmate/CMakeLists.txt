@@ -34,9 +34,11 @@ set (PlasMate_SRC
     #savesystem/tabledelegate.cpp
     #savesystem/tablewidget.cpp
     #savesystem/timeline.cpp
-    #mainwindow.cpp
+    mainwindow.cpp
+    dockwidgetshandler.cpp
     #startpage.cpp
-    #packagemodel.cpp
+    packagemodel.cpp
+    packagehandler.cpp
     previewer/plasmoid/plasmoidpreviewer.cpp
     ../plasmoidviewer/view.cpp
     #previewer/plasmoid/plasmoidview.cpp
@@ -53,6 +55,7 @@ set (PlasMate_SRC
     #konsole/konsolepreviewer.cpp
     #docbrowser/docbrowser.cpp
     #projectmanager/projectmanager.cpp
+    noteseditor/noteseditor.cpp
 )
 
 #if (DEBUG_MODEL)
