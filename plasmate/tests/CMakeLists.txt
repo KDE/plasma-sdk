@@ -64,5 +64,7 @@ plasmate_unit_test(projecthandlertest "${projecthandlertest_SRCS}"
                                       "${projecthandlertest_LIBS}"
 )
 
+set(TEST_DATA_DIR ${CMAKE_CURRENT_SOURCE_DIR}/testdata/)
+
 add_subdirectory(ui)
 
