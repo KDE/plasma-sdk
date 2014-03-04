@@ -18,13 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "previewer.h"
 #include <QFile>
 
-Previewer::Previewer(const QString & title, QWidget * parent, Qt::WindowFlags flags)
-    : QDockWidget(title, parent, flags)
-{
-}
+#include <KLocalizedString>
 
 Previewer::Previewer(QWidget * parent, Qt::WindowFlags flags)
-    : QDockWidget(parent, flags)
+    : QDockWidget(i18n("Previewer"), parent, flags)
 {
 }
 

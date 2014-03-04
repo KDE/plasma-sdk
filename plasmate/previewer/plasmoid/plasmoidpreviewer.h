@@ -32,7 +32,7 @@ class PlasmoidPreviewer : public Previewer {
     Q_OBJECT
 
 public:
-    PlasmoidPreviewer(const QString &title, QWidget *parent = 0, Qt::WindowFlags flags = 0 );
+    PlasmoidPreviewer(QWidget *parent = 0, Qt::WindowFlags flags = 0 );
     ~PlasmoidPreviewer();
 
     void showPreview(const QString &packagePath);

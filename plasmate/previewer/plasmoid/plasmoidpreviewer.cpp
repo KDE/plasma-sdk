@@ -15,8 +15,8 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 
-PlasmoidPreviewer::PlasmoidPreviewer(const QString &title, QWidget *parent, Qt::WindowFlags flags)
-        : Previewer(title, parent, flags),
+PlasmoidPreviewer::PlasmoidPreviewer(QWidget *parent, Qt::WindowFlags flags)
+        : Previewer(parent, flags),
           m_view(new View(View::createCorona(), false))
 {
     m_view->addContainment(QStringLiteral("org.kde.desktopcontainment"));
