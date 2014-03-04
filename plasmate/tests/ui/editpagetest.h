@@ -43,7 +43,6 @@ public:
 private:
     EditPage *m_editPage;
     PackageHandler *m_packageHandler;
-    PackageModel *m_packageModel;
     KUrlRequester *m_urlRequester;
     QPushButton *m_loadButton;
     QWidget *m_currentWidget;
