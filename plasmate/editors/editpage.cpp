@@ -52,10 +52,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <qvarlengtharray.h>
 
-FileList::FileList(QWidget *parent)
-        : QDockWidget(parent),
-          m_editPage(new EditPage(this))
+FileList::FileList(PackageHandler *packageHandler, QWidget *parent)
+        : QDockWidget(i18n("Files"), parent),
+          m_editPage(0)
 {
+    m_editPage = new EditPage(packageHandler, this);
     setWidget(m_editPage);
 }
 
@@ -66,10 +67,12 @@ EditPage* FileList::editPage() const
 
 
 
-EditPage::EditPage(QWidget *parent)
+EditPage::EditPage(PackageHandler *packageHandler, QWidget *parent)
         : QTreeView(parent),
           m_imageViewer(0),
-          m_kconfigXtEditor(0)
+          m_kconfigXtEditor(0),
+          m_packageModel(0),
+          m_packageHandler(packageHandler)
         // FIXME
         // m_metaEditor(0)
 {
@@ -83,6 +86,9 @@ EditPage::EditPage(QWidget *parent)
     connect(this, SIGNAL(activated(const QModelIndex &)), this, SLOT(findEditor(const QModelIndex &)));
     connect(this, SIGNAL(customContextMenuRequested(const QPoint&)),
         this, SLOT(showTreeContextMenu(const QPoint&)));
+
+    m_packageModel = new PackageModel(m_packageHandler, this);
+    setModel(m_packageModel);
 }
 
 void EditPage::doDelete(bool)
@@ -281,54 +287,5 @@ bool EditPage::hasExtension(const QString& filename)
         }
     }
     return false;
-}
-
-
-void EditPage::loadFile(const QUrl &path)
-{
-    m_path = path;
-
-    qDebug() << "Loading file: " << path;
-
-    KIO::JobFlags flags = KIO::HideProgressInfo;
-    KIO::MimetypeJob *mjob = KIO::mimetype(path, flags);
-
-    connect(mjob, SIGNAL(finished(KJob*)), this, SLOT(mimetypeJobFinished(KJob*)));
-}
-
-void EditPage::mimetypeJobFinished(KJob *job)
-{
-    KIO::MimetypeJob *mjob = qobject_cast<KIO::MimetypeJob *>(job);
-
-    if (!job) {
-        return;
-    }
-
-    if (mjob->error()) {
-        return;
-    }
-
-    const QString mimetype = mjob->mimetype();
-
-    if (mimetype.isEmpty()) {
-        qDebug() << "Could not detect the file's mimetype";
-        return;
-    }
-
-    qDebug() << "loaded mimetype: " << mimetype;
-
-    KService::List offers = KMimeTypeTrader::self()->query(mimetype, "KParts/ReadWritePart");
-    if (offers.isEmpty()) {
-        offers = KMimeTypeTrader::self()->query(mimetype, "KParts/ReadOnlyPart");
-    }
-
-    if (!offers.isEmpty()) {
-        //create the part using offers.at(0)
-        //qDebug() << offers.at(0);
-        //offers.at(0)->createInstance(parentWidget);
-        emit loadEditor(offers, m_path);
-        return;
-    }
-    qDebug() << "loading" << m_path;
 }
 

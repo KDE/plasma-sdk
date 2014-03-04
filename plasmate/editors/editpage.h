@@ -40,14 +40,15 @@ class QMenu;
 class ImageViewer;
 class KConfigXtEditor;
 class KJob;
+class PackageModel;
+class PackageHandler;
 
 class EditPage : public QTreeView
 {
     Q_OBJECT
 
 public:
-    explicit EditPage(QWidget *parent = 0);
-    void loadFile(const QUrl &path);
+    explicit EditPage(PackageHandler *packageHandler, QWidget *parent = 0);
 
 Q_SIGNALS:
     void loadEditor(const KService::List offers, QUrl target);
@@ -58,7 +59,6 @@ private Q_SLOTS:
     void findEditor(const QModelIndex &index);
     void showTreeContextMenu(const QPoint&);
     void doDelete(bool);
-    void mimetypeJobFinished(KJob *job);
 
 private:
     QMenu *m_contextMenu;
@@ -71,6 +71,8 @@ private:
 
     ImageViewer *m_imageViewer;
     KConfigXtEditor *m_kconfigXtEditor;
+    PackageModel *m_packageModel;
+    PackageHandler *m_packageHandler;
 };
 
 
@@ -82,7 +84,7 @@ class FileList : public QDockWidget
 
 public:
 
-    FileList(QWidget *parent = 0);
+    FileList(PackageHandler *packageHandlder, QWidget *parent = 0);
 
     EditPage *editPage() const;
 
