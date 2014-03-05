@@ -149,12 +149,17 @@ void StartPage::setupWidgets()
 
         ensureProjectrcFileExists(path);
 
+        m_projectHandler->addProject(path);
+        refreshRecentProjectsList();
         emit projectSelected(path);
     });
 
     connect(m_ui.importPackageButton, &QPushButton::clicked, [&]() {
             const QUrl target = m_ui.importPackage->url();
             selectProject(target);
+
+            m_projectHandler->addProject(target.toLocalFile());
+            refreshRecentProjectsList();
     });
 
     connect(m_ui.contentTypes, &QListWidget::clicked, [&](const QModelIndex &sender) {
