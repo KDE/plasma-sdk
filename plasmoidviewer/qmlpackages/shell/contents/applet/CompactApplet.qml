@@ -31,8 +31,10 @@ PlasmaCore.ToolTipArea {
     mainText: plasmoid.toolTipMainText
     subText: plasmoid.toolTipSubText
     location: plasmoid.location
+    active: !plasmoid.expanded
     property Item fullRepresentation
     property Item compactRepresentation
+    property Item expandedFeedback: expandedItem
 
     onCompactRepresentationChanged: {
         compactRepresentation.parent = root;
@@ -68,6 +70,38 @@ PlasmaCore.ToolTipArea {
         fullRepresentation.anchors.fill = fullRepresentation.parent;
     }
 
+    PlasmaCore.FrameSvgItem {
+        id: expandedItem
+        anchors.fill: parent
+        imagePath: "widgets/tabbar"
+        prefix: {
+            var prefix;
+            switch (plasmoid.location) {
+                case PlasmaCore.Types.LeftEdge:
+                    prefix = "west-active-tab";
+                    break;
+                case PlasmaCore.Types.TopEdge:
+                    prefix = "north-active-tab";
+                    break;
+                case PlasmaCore.Types.RightEdge:
+                    prefix = "east-active-tab";
+                    break;
+                default:
+                    prefix = "south-active-tab";
+                }
+                if (!hasElementPrefix(prefix)) {
+                    prefix = "active-tab";
+                }
+                return prefix;
+            }
+        opacity: plasmoid.expanded ? 1 : 0
+        Behavior on opacity {
+            NumberAnimation {
+                duration: theme.shortDuration
+                easing: Easing.InOutQuad
+            }
+        }
+    }
  
     PlasmaCore.Dialog {
         id: popupWindow
