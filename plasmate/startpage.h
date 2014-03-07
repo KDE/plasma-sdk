@@ -67,8 +67,6 @@ public:
         Runner          = 8
     };
 
-    Q_DECLARE_FLAGS(ProjectType, ProjectTypes)
-
 signals:
     void projectSelected(const QString &name);
 
