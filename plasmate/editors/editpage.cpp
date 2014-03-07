@@ -199,11 +199,7 @@ void EditPage::findEditor(const QModelIndex &index)
 
                     if (!api.isEmpty()) {
                         if (!hasExtension(file)) {
-                            if (api =="Ruby" && !file.endsWith(".rb")) {
-                                file.append(".rb");
-                            } else if (api =="Python" && !file.endsWith(".py")) {
-                                file.append(".py");
-                            } else if (api =="Javascript" && !file.endsWith(".js")) {
+                            if (api =="Javascript" && !file.endsWith(".js")) {
                                 file.append(".js");
                             } else if (api =="declarativeappletscript" && !file.endsWith(".qml")) {
                                 file.append(".qml");
@@ -260,7 +256,7 @@ void EditPage::imageDialog(const QString& filter, const QString& destinationPath
 bool EditPage::hasExtension(const QString& filename)
 {
     QStringList list;
-    list << ".rb" << ".js" << ".qml" << ".py" << ".xml";
+    list  << ".js" << ".qml" << ".xml";
     foreach (const QString &str, list) {
         if (filename.endsWith(str)) {
             return true;

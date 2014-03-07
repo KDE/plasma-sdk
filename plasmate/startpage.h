@@ -54,9 +54,7 @@ public:
     QString userEmail();
 
     bool selectedJsRadioButton();
-    bool selectedRbRadioButton();
     bool selectedDeRadioButton();
-    bool selectedPyRadioButton();
 
     void resetStatus();
 

@@ -109,10 +109,6 @@ void StartPage::setupWidgets()
 
     if (radioButtonChecked == "Js") {
         m_ui.radioButtonJs->setChecked(true);
-    } else if (radioButtonChecked == "Py") {
-        m_ui.radioButtonPy->setChecked(true);
-    } else if (radioButtonChecked == "Rb") {
-        m_ui.radioButtonRb->setChecked(true);
     } else if (radioButtonChecked == "De") {
         m_ui.radioButtonDe->setChecked(true);
     }
@@ -167,30 +163,20 @@ void StartPage::setupWidgets()
         m_ui.languageLabel->show();
         m_ui.frame->show();
         m_ui.radioButtonJs->setEnabled(true);
-        m_ui.radioButtonPy->setEnabled(true);
 
         if (sender.row() == ThemeRow) {
             m_ui.languageLabel->hide();
             m_ui.frame->hide();
         } else if (sender.row() == PlasmoidRow) {
             m_ui.radioButtonDe->setEnabled(true);
-            m_ui.radioButtonDe->setChecked(true);
-            m_ui.radioButtonRb->setEnabled(true);
         } else if (sender.row() == WindowSwitcherRow) {
             m_ui.radioButtonDe->setEnabled(true);
-            m_ui.radioButtonRb->setEnabled(false);
             m_ui.radioButtonJs->setEnabled(false);
-            m_ui.radioButtonPy->setEnabled(false);
-            m_ui.radioButtonDe->setChecked(true);
         } else if (sender.row() == KWinScriptRow) {
-            m_ui.radioButtonPy->setEnabled(false);
-            m_ui.radioButtonRb->setEnabled(false);
             m_ui.radioButtonDe->setEnabled(true);
             m_ui.radioButtonJs->setChecked(true);
         } else if (sender.row() == KWinEffectRow) {
-            m_ui.radioButtonPy->setEnabled(false);
             m_ui.radioButtonJs->setChecked(true);
-            m_ui.radioButtonRb->setEnabled(false);
         }
 
         m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty());
@@ -272,16 +258,6 @@ QString StartPage::userEmail()
 bool StartPage::selectedJsRadioButton()
 {
     return m_ui.radioButtonJs->isChecked();
-}
-
-bool StartPage::selectedRbRadioButton()
-{
-    return m_ui.radioButtonRb->isChecked();
-}
-
-bool StartPage::selectedPyRadioButton()
-{
-    return m_ui.radioButtonPy->isChecked();
 }
 
 bool StartPage::selectedDeRadioButton()
@@ -450,18 +426,7 @@ void StartPage::createNewProject()
     QString api;
 
     // Append the desired extension
-    if (m_ui.radioButtonPy->isChecked()) {
-        api = "python";
-        projectFolderName = generateProjectFolderName(projectNameLowerCase);
-        projectFileExtension = ".py";
-        mainScriptName = projectNameLowerCase + projectFileExtension;
-    } else if (m_ui.radioButtonRb->isChecked()) {
-        const QString projectNameSnakeCase = camelToSnakeCase(projectName);
-        api = "ruby-script";
-        projectFolderName = generateProjectFolderName(projectNameSnakeCase);
-        projectFileExtension = ".rb";
-        mainScriptName = QString("main_") + projectNameSnakeCase + projectFileExtension;
-    } else if (m_ui.radioButtonDe->isChecked()) {
+    if (m_ui.radioButtonDe->isChecked()) {
         api = "declarativeappletscript";
         projectFolderName = generateProjectFolderName(projectNameLowerCase);
         projectFileExtension = ".qml";
@@ -569,10 +534,6 @@ void StartPage::saveNewProjectPreferences(const QString &path)
     QString radioButtonChecked;
     if (selectedJsRadioButton()) {
         radioButtonChecked = "Js";
-    } else if (selectedPyRadioButton()) {
-        radioButtonChecked = "Py";
-    } else if (selectedRbRadioButton()) {
-        radioButtonChecked = "Rb";
     } else if (selectedDeRadioButton()) {
         radioButtonChecked = "De";
     }

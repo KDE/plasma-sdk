@@ -29,7 +29,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="stackedWidgetPageOne">
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -406,26 +406,6 @@ p, li { white-space: pre-wrap; }
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="QRadioButton" name="radioButtonPy">
-              <property name="text">
-               <string>Python</string>
-              </property>
-              <property name="checked">
-               <bool>false</bool>
-              </property>
-              <property name="autoRepeat">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="radioButtonRb">
-              <property name="text">
-               <string>Ruby</string>
-              </property>
-             </widget>
-            </item>
            </layout>
           </widget>
          </item>
@@ -568,11 +548,6 @@ p, li { white-space: pre-wrap; }
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>QPushButton</class>
-   <extends>QPushButton</extends>
-   <header>qpushbutton.h</header>
-  </customwidget>
-  <customwidget>
    <class>KUrlRequester</class>
    <extends>QFrame</extends>
    <header>kurlrequester.h</header>
@@ -589,8 +564,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>authorTextField</tabstop>
   <tabstop>emailTextField</tabstop>
   <tabstop>radioButtonJs</tabstop>
-  <tabstop>radioButtonPy</tabstop>
-  <tabstop>radioButtonRb</tabstop>
   <tabstop>newProjectButton</tabstop>
   <tabstop>cancelNewProjectButton</tabstop>
   <tabstop>importPackage</tabstop>
