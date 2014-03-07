@@ -46,6 +46,8 @@ StartPageTest::~StartPageTest()
 
 void StartPageTest::createTestData()
 {
+    #pragma message("We disable this test, until we find a way to make it able to work without hardcoded paths.")
+    #if 0
     QString newPlasmoidLocation = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0);
 
     QDir templatesDir(newPlasmoidLocation);
@@ -61,6 +63,7 @@ void StartPageTest::createTestData()
 
     QFile f(mainPlasmoidFile);
     f.copy(templatesDir.path() + QLatin1Char('/') + QStringLiteral("mainPlasmoid.qml"));
+    #endif
 }
 
 PLASMATE_TEST_MAIN(StartPageTest)
