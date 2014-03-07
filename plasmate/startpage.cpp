@@ -50,6 +50,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KMessageWidget>
 //#include <KNS3/DownloadDialog>
 
+#include "editors/metadata/metadatahandler.h"
 #include "packagemodel.h"
 #include "startpage.h"
 //#include "mainwindow.h"
@@ -568,25 +569,17 @@ void StartPage::createNewProject()
     // * X-KDE-PluginInfo-Website
     // * X-KDE-PluginInfo-Category
     // * X-KDE-ParentApp
-    KDesktopFile metaFile(projectPath + "/metadata.desktop");
-    KConfigGroup metaDataGroup = metaFile.desktopGroup();
-    const QString mainScriptPath = QStringLiteral("size") + mainScriptName;
-    metaDataGroup.writeEntry("Name", projectName);
-    //FIXME: the plugin name needs to be globally unique, so should use more than just the project
-    //       name
-    metaDataGroup.writeEntry("Type", "Service");
-    metaDataGroup.writeEntry("X-KDE-PluginInfo-Name", projectNameLowerCase);
-    metaDataGroup.writeEntry("X-KDE-ServiceTypes", serviceTypes);
-    metaDataGroup.writeEntry("X-KDE-PluginInfo-Version", 1);
-    metaDataGroup.writeEntry("X-KDE-PluginInfo-Author", m_ui.authorTextField->text());
-    metaDataGroup.writeEntry("X-KDE-PluginInfo-Email", m_ui.emailTextField->text());
-    //FIXME: this must be selectable at creation
-    metaDataGroup.writeEntry("X-KDE-PluginInfo-License", "GPL");
-    metaDataGroup.writeEntry("X-KDE-PluginInfo-Email", m_ui.emailTextField->text());
-    metaDataGroup.writeEntry("X-Plasma-API", api);
-    metaDataGroup.writeEntry("X-Plasma-MainScript", mainScriptPath);
-    metaDataGroup.writeEntry("X-Plasma-DefaultSize", QSize(200, 100));
-    metaFile.sync();
+    MetadataHandler metadataHandler;
+    metadataHandler.setFilePath(projectPath + QStringLiteral("metadata.desktop"));
+    metadataHandler.setName(projectNameLowerCase);
+    metadataHandler.setServiceTypes(QStringList() << serviceTypes);
+    metadataHandler.setVersion(QChar(1));
+    metadataHandler.setAuthor(m_ui.authorTextField->text());
+    metadataHandler.setEmail(m_ui.emailTextField->text());
+    metadataHandler.setLicense(QStringLiteral("GPL"));
+    metadataHandler.setPluginApi(api);
+    metadataHandler.setMainScript(QStringLiteral("/ui/") + mainScriptName);
+    metadataHandler.writeFile();
 
     ensureProjectrcFileExists(projectPath);//create the plasmateProjectrc file
 

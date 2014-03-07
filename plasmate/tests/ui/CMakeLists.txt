@@ -37,6 +37,7 @@ set(startpagetest_SRCS startpagetest.cpp
                    ../../projectmanager/projectmanager.cpp
                    ../../projecthandler.cpp
                    ../../packagehandler.cpp
+                   ../../editors/metadata/metadatahandler.cpp
 )
 
 set(startpagetest_UI ../../startpage.ui)
