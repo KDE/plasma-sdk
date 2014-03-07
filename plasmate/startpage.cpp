@@ -169,15 +169,7 @@ void StartPage::setupWidgets()
         m_ui.radioButtonJs->setEnabled(true);
         m_ui.radioButtonPy->setEnabled(true);
 
-        if (sender.row() == DataEngineRow) {
-            m_ui.radioButtonDe->setEnabled(false);
-            m_ui.radioButtonJs->setChecked(true);
-            m_ui.radioButtonRb->setEnabled(true);
-        } else if (sender.row() == RunnerRow) {
-            m_ui.radioButtonDe->setEnabled(false);
-            m_ui.radioButtonJs->setChecked(true);
-            m_ui.radioButtonRb->setEnabled(false);
-        } else if (sender.row() == ThemeRow) {
+        if (sender.row() == ThemeRow) {
             m_ui.languageLabel->hide();
             m_ui.frame->hide();
         } else if (sender.row() == PlasmoidRow) {
@@ -254,8 +246,6 @@ void StartPage::setupWidgets()
     });
 
     new QListWidgetItem(QIcon::fromTheme("application-x-plasma"), i18n("Plasma Widget"), m_ui.contentTypes);
-    new QListWidgetItem(QIcon::fromTheme("server-database"), i18n("Data Engine"), m_ui.contentTypes);
-    new QListWidgetItem(QIcon::fromTheme("system-run"), i18n("Runner"), m_ui.contentTypes);
     new QListWidgetItem(QIcon::fromTheme("inkscape"), i18n("Theme"), m_ui.contentTypes);
     new QListWidgetItem(QIcon::fromTheme("window-duplicate"), i18n("Window Switcher"), m_ui.contentTypes);
     new QListWidgetItem(QIcon::fromTheme("preferences-system-windows-actions"), i18n("KWin Script"), m_ui.contentTypes);
@@ -383,18 +373,12 @@ void StartPage::refreshRecentProjectsList()
        if (serviceTypes.contains("KWin/WindowSwitcher")) {
             defaultIconName = "window-duplicate";
             tooltip += i18n("Project Type: Window Switcher");
-       } else if (serviceTypes.contains("Plasma/Applet")) {
+        } else if (serviceTypes.contains("Plasma/Applet")) {
             defaultIconName = "plasma";
             tooltip += i18n("Project type: Plasmoid");
-        } else if (serviceTypes.contains("Plasma/DataEngine")) {
-            defaultIconName = "server-database";
-            tooltip += i18n("Project type: Data Engine");
         } else if (serviceTypes.contains("Plasma/Theme")) {
             defaultIconName = "preferences-desktop-theme";
             tooltip += i18n("Project type: Theme");
-        } else if (serviceTypes.contains("Plasma/Runner")) {
-            defaultIconName = "system-run";
-            tooltip += i18n("Project type: Runner");
         } else if (serviceTypes.contains("KWin/Script")) {
             defaultIconName = "preferences-system-windows-actions";
             tooltip += i18n("Project type: KWin Script");
@@ -448,20 +432,14 @@ void StartPage::createNewProject()
         serviceTypes = "Plasma/Applet";
         templateFilePath.append("mainPlasmoid");
     } else if (m_ui.contentTypes->currentRow() == 1) {
-        serviceTypes = "Plasma/DataEngine";
-        templateFilePath.append("mainDataEngine");
-    } else if (m_ui.contentTypes->currentRow() == 2) {
-        serviceTypes = "Plasma/Runner";
-        templateFilePath.append("mainRunner");
-    } else if (m_ui.contentTypes->currentRow() == 3) {
         serviceTypes = "Plasma/Theme";
-    } else if (m_ui.contentTypes->currentRow() == 4) {
+    } else if (m_ui.contentTypes->currentRow() == 2) {
         serviceTypes = "KWin/WindowSwitcher";
         templateFilePath.append("mainTabbox");
-    } else if (m_ui.contentTypes->currentRow() == 5) {
+    } else if (m_ui.contentTypes->currentRow() == 3) {
         serviceTypes = "KWin/Script";
         templateFilePath.append("mainKWinScript");
-    } else if (m_ui.contentTypes->currentRow() == 6) {
+    } else if (m_ui.contentTypes->currentRow() == 4) {
         serviceTypes = "KWin/Effect";
         templateFilePath.append("mainKWinEffect");
     }
@@ -520,18 +498,6 @@ void StartPage::createNewProject()
     QByteArray rawData = sourceFile.readAll();
 
     QByteArray replacedString("$PLASMOID_NAME");
-    if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, projectName.toAscii());
-    }
-    replacedString.clear();
-
-    replacedString.append("$DATAENGINE_NAME");
-    if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, projectName.toAscii());
-    }
-    replacedString.clear();
-
-    replacedString.append("$RUNNER_NAME");
     if (rawData.contains(replacedString)) {
         rawData.replace(replacedString, projectName.toAscii());
     }

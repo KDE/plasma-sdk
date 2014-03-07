@@ -62,9 +62,7 @@ public:
 
     enum ProjectTypes {
         Theme           = 1,
-        Plasmoid        = 2,
-        DataEngine      = 4,
-        Runner          = 8
+        Plasmoid        = 2
     };
 
 signals:
@@ -79,12 +77,10 @@ private Q_SLOTS:
 private:
     enum NewProjectRows {
         PlasmoidRow = 0,
-        DataEngineRow = 1,
-        RunnerRow = 2,
-        ThemeRow = 3,
-        WindowSwitcherRow = 4,
-        KWinScriptRow = 5,
-        KWinEffectRow = 6
+        ThemeRow = 1,
+        WindowSwitcherRow = 2,
+        KWinScriptRow = 3,
+        KWinEffectRow = 4
     };
 
     void setupWidgets();
