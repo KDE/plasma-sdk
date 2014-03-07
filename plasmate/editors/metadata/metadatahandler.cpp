@@ -51,7 +51,8 @@ void MetadataHandler::writeFile()
 {
     m_metadataConfig.writeEntry("X-KDE-PluginInfo-EnabledByDefault", true);
     m_metadataConfig.writeEntry("Type", QStringLiteral("Service"));
-    m_metadataConfig.writeEntry("X-Plasma-MainScript", QStringLiteral("ui/main.qml"));
+    m_metadataConfig.writeEntry("X-Plasma-MainScript", mainScript());
+    m_metadataConfig.writeEntry("X-Plasma-DefaultSize", QSize(200, 100));
     m_metadataConfig.sync();
 }
 
@@ -163,5 +164,25 @@ QString MetadataHandler::pluginName() const
 void MetadataHandler::setPluginName(const QString &pluginName)
 {
     return m_metadataConfig.writeEntry("X-KDE-PluginInfo-Name", pluginName);
+}
+
+QString MetadataHandler::pluginApi() const
+{
+    return m_metadataConfig.readEntry("X-Plasma-API", QString());
+}
+
+void MetadataHandler::setPluginApi(const QString &pluginApi)
+{
+    m_metadataConfig.writeEntry("X-Plasma-API", pluginApi);
+}
+
+QString MetadataHandler::mainScript() const
+{
+    return m_metadataConfig.readEntry("X-Plasma-MainScript", QString());
+}
+
+void MetadataHandler::setMainScript(const QString &mainScriptName)
+{
+    return m_metadataConfig.writeEntry("X-Plasma-MainScript", mainScriptName);
 }
 

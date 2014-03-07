@@ -73,6 +73,12 @@ public:
     QString pluginName() const;
     void setPluginName(const QString &pluginName);
 
+    QString pluginApi() const;
+    void setPluginApi(const QString &pluginApi);
+
+    QString mainScript() const;
+    void setMainScript(const QString &mainScriptName);
+
 private:
     KConfigGroup m_metadataConfig;
     QString m_filePath;
