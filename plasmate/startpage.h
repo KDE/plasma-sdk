@@ -45,8 +45,6 @@ class StartPage : public QWidget
         FullPathRole = Qt::UserRole + 1
     };
 
-    friend class ProjectManager;
-
 public:
     //StartPage(MainWindow *parent = 0);
     StartPage(QWidget *parent = 0);
