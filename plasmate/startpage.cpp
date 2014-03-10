@@ -390,7 +390,7 @@ void StartPage::createNewProject()
     const QString projectNameLowerCase = projectName.toLower();
     QString projectFileExtension;
 
-    QString templateFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).at(0) + QStringLiteral("/plasmate/templates/");
+    QString templateFilePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("/plasmate/templates/"), QStandardPaths::LocateDirectory);
 
     // type -> serviceTypes
     QString serviceTypes;
@@ -409,7 +409,6 @@ void StartPage::createNewProject()
         serviceTypes = "KWin/Effect";
         templateFilePath.append("mainKWinEffect");
     }
-
 
     QString projectFolderName;
     QString mainScriptName;
@@ -439,12 +438,12 @@ void StartPage::createNewProject()
 
     QString projectPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0) + QLatin1Char('/') + projectFolderName + QLatin1Char('/');
 
-    m_packageHandler->setPackageType(QStringLiteral("Plasma/Applet"));
+    m_packageHandler->setPackageType(serviceTypes);
     m_packageHandler->setPackagePath(projectPath);
 
     // Create a QFile object that points to the template we need to copy
     QFile sourceFile(templateFilePath + projectFileExtension);
-    QFile destinationFile(projectPath + "/contents/code/" + mainScriptName);//our dest
+    QFile destinationFile(projectPath + "/contents/ui/" + mainScriptName);//our dest
 
     // Now open these files, and substitute the main class, author, email and date fields
     sourceFile.open(QIODevice::ReadOnly);
