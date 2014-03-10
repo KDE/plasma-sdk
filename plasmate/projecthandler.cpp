@@ -52,6 +52,7 @@ const QStringList &ProjectHandler::loadProjectsList()
 
 
     KConfigGroup projectsConfig(KSharedConfig::openConfig(qApp->applicationDisplayName()), QStringLiteral("ProjectHandler"));
+    const QString recentProjects = projectsConfig.readEntry(QStringLiteral("RecentProjects"),QStringLiteral(""));
     m_blacklistProjects = projectsConfig.readEntry("blacklistProject", "").split(',');
 
     // load the projects which are inside on our homedir like ~/.local5
@@ -59,7 +60,7 @@ const QStringList &ProjectHandler::loadProjectsList()
     for (const auto &it : projectDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
         // TODO find a way to check if the package is valid
         QDir currentProject(projectPath + '/' + it);
-        if (currentProject.exists(QStringLiteral("metadata.desktop")) && !currentProject.path().isEmpty() && !m_blacklistProjects.contains(currentProject.path())) {
+        if (currentProject.exists(QStringLiteral("metadata.desktop")) && !currentProject.path().isEmpty() && !m_blacklistProjects.contains(currentProject.path()) && !m_projectsList.contains(currentProject.path()) && !recentProjects.contains(currentProject.path())) {
             m_projectsList << currentProject.path();
         }
     }
@@ -75,6 +76,10 @@ const QStringList &ProjectHandler::loadProjectsList()
         }
     }
 
+    QString tmpProjectsList = m_projectsList.join(QLatin1Char(','));
+    tmpProjectsList.prepend(recentProjects);
+    m_projectsList = tmpProjectsList.split(QLatin1Char(','));
+
     return m_projectsList;
 }
 
@@ -84,6 +89,7 @@ void ProjectHandler::addProject(const QString &projectPath)
 
     if (!projectDir.exists()) {
         // If our package doesn't exist we are creating it.
+
         m_packageHandler->setPackagePath(projectDir.absolutePath());
     } else  if (!projectDir.exists(QStringLiteral("metadata.desktop"))) {
         qWarning() << "the project " << projectPath << "is not valid. metadata.desktop cannot be found";
@@ -166,5 +172,28 @@ void ProjectHandler::whitelistProject(const QString &projectPath)
     projectConfig.writeEntry("blacklistProject", whitelist);
     projectConfig.sync();
 
-    m_blacklistProjects = whitelist.split(',');
+    m_blacklistProjects = whitelist.split(QLatin1Char(','));
 }
+
+void ProjectHandler::recentProject(const QString &projectPath)
+{
+    KConfigGroup projectConfig(KSharedConfig::openConfig(qApp->applicationDisplayName()), QStringLiteral("ProjectHandler"));
+    QString recentProjects = projectConfig.readEntry(QStringLiteral("RecentProjects"), "");
+
+    if (recentProjects.isEmpty()) {
+        const QString project =  projectPath + QLatin1Char(',');
+        projectConfig.writeEntry(QStringLiteral("RecentProjects"), project);
+    } else {
+        if (recentProjects.contains(projectPath)) {
+            recentProjects.replace(projectPath, QStringLiteral(""));
+        }
+
+        QString project = projectPath + QLatin1Char(',');
+        recentProjects.prepend(project);
+
+        projectConfig.writeEntry(QStringLiteral("RecentProjects"), recentProjects);
+    }
+
+    projectConfig.sync();
+}
+

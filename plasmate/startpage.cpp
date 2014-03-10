@@ -136,7 +136,7 @@ void StartPage::setupWidgets()
             return;
         }
 
-        m_projectHandler->addProject(path);
+        m_projectHandler->recentProject(path);
         resetStatus();
         emit projectSelected(path);
     });
@@ -145,7 +145,7 @@ void StartPage::setupWidgets()
             const QUrl target = m_ui.importPackage->url();
             selectProject(target);
 
-            m_projectHandler->addProject(target.toLocalFile());
+            m_projectHandler->recentProject(target.toLocalFile());
             resetStatus();
     });
 
@@ -280,7 +280,6 @@ void StartPage::refreshRecentProjectsList()
         }
 
         KPluginInfo metadata(pPath);
-
         // Do not expose the idea of a 'folder name' to the user -
         // we keep the folder hidden and name it whatever we want as
         // long as it's unique. Only the plasmoid name, which the user
@@ -423,8 +422,7 @@ void StartPage::createNewProject()
     //                               .gitignore
     //                               contents/...
 
-    const QString projectPath = QStandardPaths::locate((QStandardPaths::DataLocation), projectFolderName, QStandardPaths::LocateDirectory);
-
+    const QString projectPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0) + QLatin1Char('/') + projectFolderName;
     m_packageHandler->setPackageType(serviceTypes);
     m_packageHandler->setPackagePath(projectPath);
 
@@ -477,7 +475,7 @@ void StartPage::createNewProject()
     // * X-KDE-PluginInfo-Category
     // * X-KDE-ParentApp
     MetadataHandler metadataHandler;
-    metadataHandler.setFilePath(projectPath + QStringLiteral("metadata.desktop"));
+    metadataHandler.setFilePath(projectPath + QLatin1Char('/') + QStringLiteral("metadata.desktop"));
     metadataHandler.setName(projectNameLowerCase);
     metadataHandler.setServiceTypes(QStringList() << serviceTypes);
     metadataHandler.setVersion(QChar(1));

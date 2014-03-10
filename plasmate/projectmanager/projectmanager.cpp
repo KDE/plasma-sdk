@@ -150,6 +150,7 @@ void ProjectManager::emitProjectSelected()
 
     QString url = m_items[l.at(0)];
 
+    m_projectHandler->recentProject(url);
     emit projectSelected(url);
     done(QDialog::Accepted);
 }
