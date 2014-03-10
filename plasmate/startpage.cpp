@@ -137,7 +137,7 @@ void StartPage::setupWidgets()
         }
 
         m_projectHandler->addProject(path);
-        refreshRecentProjectsList();
+        resetStatus();
         emit projectSelected(path);
     });
 
@@ -146,7 +146,7 @@ void StartPage::setupWidgets()
             selectProject(target);
 
             m_projectHandler->addProject(target.toLocalFile());
-            refreshRecentProjectsList();
+            resetStatus();
     });
 
     connect(m_ui.contentTypes, &QListWidget::clicked, [&](const QModelIndex &sender) {
@@ -212,7 +212,7 @@ void StartPage::setupWidgets()
         if (url.isEmpty()) {
             QScopedPointer<ProjectManager> projectManager(new ProjectManager(m_projectHandler, this));
             if (projectManager->exec() == QDialog::Accepted) {
-                refreshRecentProjectsList();
+                resetStatus();
             }
 
 
@@ -250,8 +250,17 @@ QString StartPage::userEmail()
 void StartPage::resetStatus()
 {
     qDebug() << "Reset status!";
+    updateProjectPreferences();
     m_ui.layoutHackStackedWidget->setCurrentIndex(0);
     refreshRecentProjectsList();
+}
+
+void StartPage::updateProjectPreferences()
+{
+    KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("ProjectDefaultPreferences"));
+    cg.writeEntry(QStringLiteral("Username"), userName());
+    cg.writeEntry(QStringLiteral("EMail"), userEmail());
+    cg.sync();
 }
 
 void StartPage::refreshRecentProjectsList()
@@ -484,6 +493,7 @@ void StartPage::createNewProject()
     // need to clear the project name field here too because startpage is still
     // accessible after project loads.
     m_ui.projectName->clear();
+    resetStatus();
 }
 
 void StartPage::checkLocalProjectPath(const QString& name)
