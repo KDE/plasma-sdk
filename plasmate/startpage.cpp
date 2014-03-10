@@ -62,9 +62,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma message("TODO: restore MainWindow when it gets ported")
 StartPage::StartPage(QWidget *parent/*MainWindow *parent*/) // TODO set a palette so it will look identical with any color scheme.
         : QWidget(parent),
-        m_parent(parent),
-        m_projectHandler(new ProjectHandler()),
-        m_packageHandler(new PackageHandler())
+         m_parent(parent),
+         m_projectHandler(new ProjectHandler()),
+         m_packageHandler(new PackageHandler())
 {
     setupWidgets();
     refreshRecentProjectsList();
@@ -82,7 +82,7 @@ void StartPage::setupWidgets()
     m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(false);
 
     // Set some default parameters, like username/email and preferred scripting language
-    KConfigGroup cg(KSharedConfig::openConfig(), "NewProjectDefaultPreferences");
+    KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("ProjectDefaultPreferences"));
     KUser user = KUser(KUser::UseRealUserID);
 
     QString userName = cg.readEntry("Username", user.loginName());
@@ -104,14 +104,6 @@ void StartPage::setupWidgets()
 
     m_ui.authorTextField->setText(userName);
     m_ui.emailTextField->setText(userEmail);
-
-    const QString radioButtonChecked = cg.readEntry("radioButtonChecked");
-
-    if (radioButtonChecked == "Js") {
-        m_ui.radioButtonJs->setChecked(true);
-    } else if (radioButtonChecked == "De") {
-        m_ui.radioButtonDe->setChecked(true);
-    }
 
     m_ui.cancelNewProjectButton->setIcon(QIcon::fromTheme("draw-arrow-back"));
     m_ui.newProjectButton->setIcon(QIcon::fromTheme("dialog-ok"));
@@ -253,16 +245,6 @@ QString StartPage::userEmail()
     return m_ui.emailTextField->text();
 }
 
-bool StartPage::selectedJsRadioButton()
-{
-    return m_ui.radioButtonJs->isChecked();
-}
-
-bool StartPage::selectedDeRadioButton()
-{
-    return m_ui.radioButtonDe->isChecked();
-}
-
 void StartPage::resetStatus()
 {
     qDebug() << "Reset status!";
@@ -281,10 +263,6 @@ void StartPage::refreshRecentProjectsList()
         QDir pDir(file);
         QString pPath =  file + "/metadata.desktop";
         qDebug() << "RECENT FILE::: " << file;
-        if (pDir.isRelative()) {
-            qDebug() << "NOT LOCAL";
-            pPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0) + file + QStringLiteral("/metadata.desktop");
-        }
 
         if (!QFile::exists(pPath)) {
             continue;
@@ -434,7 +412,7 @@ void StartPage::createNewProject()
     //                               .gitignore
     //                               contents/...
 
-    QString projectPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0) + QLatin1Char('/') + projectFolderName + QLatin1Char('/');
+    const QString projectPath = QStandardPaths::locate((QStandardPaths::DataLocation), projectFolderName, QStandardPaths::LocateDirectory);
 
     m_packageHandler->setPackageType(serviceTypes);
     m_packageHandler->setPackagePath(projectPath);
@@ -572,3 +550,4 @@ const QString StartPage::generateProjectFolderName(const QString& suggestion)
     }
     return projectFolder;
 }
+
