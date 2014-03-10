@@ -275,17 +275,7 @@ void StartPage::resetStatus()
 void StartPage::refreshRecentProjectsList()
 {
     m_ui.recentProjects->clear();
-    #pragma message("TODO: Refresh project list when mainwindow will be ported")
-    QStringList recentProjects;
-    #if 0
-    const QStringList recentProjects = m_parent->recentProjects();
 
-    if (recentProjects.isEmpty()) {
-        m_ui.recentProjectsLabel->hide();
-        m_ui.recentProjects->hide();
-        return;
-    }
-    #endif
     int counter = 0;
     for (const QString &file : m_projectHandler->loadProjectsList()) {
         // Specify path + filename as well to avoid mistaking .gitignore
