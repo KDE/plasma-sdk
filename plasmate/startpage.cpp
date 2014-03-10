@@ -153,20 +153,22 @@ void StartPage::setupWidgets()
         m_ui.languageLabel->show();
         m_ui.frame->show();
         m_ui.radioButtonJs->setEnabled(true);
+        m_ui.radioButtonDe->setEnabled(true);
+        m_ui.radioButtonJs->hide();
+        m_ui.radioButtonDe->hide();
 
         if (sender.row() == ThemeRow) {
             m_ui.languageLabel->hide();
             m_ui.frame->hide();
         } else if (sender.row() == PlasmoidRow) {
-            m_ui.radioButtonDe->setEnabled(true);
+            m_ui.radioButtonDe->setVisible(true);
         } else if (sender.row() == WindowSwitcherRow) {
-            m_ui.radioButtonDe->setEnabled(true);
-            m_ui.radioButtonJs->setEnabled(false);
+            m_ui.radioButtonDe->setVisible(true);
+            m_ui.radioButtonJs->setVisible(true);
         } else if (sender.row() == KWinScriptRow) {
-            m_ui.radioButtonDe->setEnabled(true);
-            m_ui.radioButtonJs->setChecked(true);
+            m_ui.radioButtonJs->setVisible(true);
         } else if (sender.row() == KWinEffectRow) {
-            m_ui.radioButtonJs->setChecked(true);
+            m_ui.radioButtonJs->setVisible(true);
         }
 
         m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty());
