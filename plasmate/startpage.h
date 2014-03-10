@@ -70,7 +70,6 @@ private Q_SLOTS:
     void createNewProject();
     void checkLocalProjectPath(const QString &path);
     void refreshRecentProjectsList();
-    void saveNewProjectPreferences(const QString &path);
 
 private:
     enum NewProjectRows {
@@ -85,7 +84,6 @@ private:
     static QString camelToSnakeCase(const QString& name);
     const QString generateProjectFolderName(const QString& suggestion);
     void selectProject(const QUrl &target);
-    void ensureProjectrcFileExists(const QString& projectPath);
 
     Ui::StartPage m_ui;
     //MainWindow *m_parent;

@@ -144,8 +144,6 @@ void StartPage::setupWidgets()
             return;
         }
 
-        ensureProjectrcFileExists(path);
-
         m_projectHandler->addProject(path);
         refreshRecentProjectsList();
         emit projectSelected(path);
@@ -501,50 +499,11 @@ void StartPage::createNewProject()
     metadataHandler.setMainScript(QStringLiteral("/ui/") + mainScriptName);
     metadataHandler.writeFile();
 
-    ensureProjectrcFileExists(projectPath);//create the plasmateProjectrc file
-
-    saveNewProjectPreferences(projectPath);
-
     emit projectSelected(projectPath);
 
     // need to clear the project name field here too because startpage is still
     // accessible after project loads.
     m_ui.projectName->clear();
-}
-
-void StartPage::saveNewProjectPreferences(const QString &path)
-{
-    // Saving NewProject preferences
-    KConfigGroup preferences(KSharedConfig::openConfig(), "NewProjectDefaultPreferences");
-
-    preferences.writeEntry("Username", userName());
-    preferences.writeEntry("Email", userEmail());
-
-    QString radioButtonChecked;
-    if (selectedJsRadioButton()) {
-        radioButtonChecked = "Js";
-    } else if (selectedDeRadioButton()) {
-        radioButtonChecked = "De";
-    }
-
-
-    preferences.writeEntry("radioButtonChecked", radioButtonChecked);
-    preferences.sync();
-
-    KConfig c(path+ '/' + PROJECTRC);
-    KConfigGroup projectrcPreferences(&c, "ProjectDefaultPreferences");
-    projectrcPreferences.writeEntry("Username", userName());
-    projectrcPreferences.writeEntry("Email", userEmail());
-    projectrcPreferences.writeEntry("radioButtonChecked", radioButtonChecked);
-    projectrcPreferences.sync();
-}
-void StartPage::ensureProjectrcFileExists(const QString& projectPath)
-{
-    if (!QFile::exists(projectPath + '/' + PROJECTRC)) {
-        QFile rcfile(projectPath + '/' + PROJECTRC);
-        rcfile.open(QIODevice::ReadWrite);
-        rcfile.close();
-    }
 }
 
 void StartPage::checkLocalProjectPath(const QString& name)
