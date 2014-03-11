@@ -15,37 +15,27 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <QLabel>
-#include <QComboBox>
 #include <QListWidget>
 #include <QListWidgetItem>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
 #include <QModelIndex>
 #include <QAbstractItemModel>
 #include <QValidator>
 #include <QFile>
 #include <QScopedPointer>
 #include <QStandardPaths>
-#include <QTextStream>
-#include <QDateTime>
 
 #include <KUser>
 #include <KLocalizedString>
 #include <QDebug>
-#include <KDesktopFile>
 #include <QIcon>
 #include <KLineEdit>
 //#include <KMimeType>
 #include <KPluginInfo>
 #include <QPushButton>
-#include <KSeparator>
 #include <KConfigGroup>
 #include <KSharedConfig>
 #include <KShell>
-#include <KStandardAction>
 #include <KUrlRequester>
-#include <KUser>
 #include <KMessageBox>
 #include <KMessageWidget>
 #include <KNS3/DownloadDialog>
