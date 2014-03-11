@@ -28,14 +28,35 @@ set(editpagetest_SRCS ../../packagemodel.cpp
 
 set(editpagetest_UI ../../editors/kconfigxt/kconfigxteditor.ui)
 
-set(editpagetest_LIBS Qt5::Svg KF5::Plasma KF5::I18n KF5::Service
-                      KF5::KIOCore KF5::KIOWidgets
+set(editpagetest_LIBS Qt5::Svg
+                      KF5::Plasma
+                      KF5::I18n
+                      KF5::Service
+                      KF5::KIOCore
+                      KF5::KIOWidgets
+                      KF5::Parts
 )
 
 plasmate_ui_test(editpagetest "${editpagetest_UI}"
                               "${editpagetest_SRCS}"
                               "${editpagetest_LIBS}"
 )
+set(startpagetest_SRCS startpagetest.cpp
+                   ../../startpage.cpp
+                   ../../projectmanager/projectmanager.cpp
+                   ../../projecthandler.cpp
+                   ../../packagehandler.cpp
+                   ../../editors/metadata/metadatahandler.cpp
+)
+
+set(startpagetest_LIBS KF5::Archive KF5::Plasma KF5::I18n KF5::KIOCore KF5::KIOWidgets KF5::NewStuff)
+
+plasmate_ui_test(startpagetest "${startpagetest_UI}"
+                               "${startpagetest_SRCS}"
+                               "${startpagetest_LIBS}"
+)
+
+set(startpagetest_UI ../../startpage.ui)
 
 set(noteseditortest_SRCS ../../noteseditor/noteseditor.cpp)
 

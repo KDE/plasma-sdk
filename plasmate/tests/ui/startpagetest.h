@@ -19,35 +19,26 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PROJECTHANDLER_H
-#define PROJECTHANDLER_H
+#ifndef STARTPAGETEST_H
+#define STARTPAGETEST_H
 
-#include <QObject>
-#include <QStringList>
+#include <QWidget>
 
-class PackageHandler;
+class StartPage;
 
-class ProjectHandler : public QObject
+class StartPageTest : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit ProjectHandler(QObject *parent = 0);
-    ~ProjectHandler();
 
-    const QStringList &loadProjectsList();
-    void addProject(const QString &projectPath);
-    void recentProject(const QString &projectPath);
-    void removeProject(const QString &projectPath);
-    bool removeProjectFromDisk(const QString &projectPath);
-    PackageHandler *packageHandler();
+    explicit StartPageTest(QWidget *parent = 0);
+    ~StartPageTest();
+
 private:
-    void blacklistProject(const QString &projectPath);
-    void whitelistProject(const QString &projectPath);
+    void createTestData();
 
-    QStringList m_projectsList;
-    QStringList m_blacklistProjects;
-    PackageHandler *m_packageHandler;
+    StartPage *m_startPage;
 };
 
 #endif
