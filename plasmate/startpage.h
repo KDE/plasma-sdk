@@ -49,11 +49,6 @@ public:
 
     void resetStatus();
 
-    enum ProjectTypes {
-        Theme           = 1,
-        Plasmoid        = 2
-    };
-
 signals:
     void projectSelected(const QString &name);
 
