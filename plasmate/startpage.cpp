@@ -48,7 +48,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KUser>
 #include <KMessageBox>
 #include <KMessageWidget>
-//#include <KNS3/DownloadDialog>
+#include <KNS3/DownloadDialog>
 
 #include "editors/metadata/metadatahandler.h"
 #include "packagemodel.h"
@@ -184,7 +184,7 @@ void StartPage::setupWidgets()
     });
 
     connect(m_ui.importGHNSButton, &QPushButton::clicked, [&]() {
-        /*KNS3::DownloadDialog *mNewStuffDialog = new KNS3::DownloadDialog("plasmate.knsrc", this);
+        KNS3::DownloadDialog *mNewStuffDialog = new KNS3::DownloadDialog("plasmate.knsrc", this);
         if (mNewStuffDialog->exec() == QDialog::Accepted)
         {
             KNS3::Entry::List installed = mNewStuffDialog->installedEntries();
@@ -202,7 +202,7 @@ void StartPage::setupWidgets()
                     selectProject(target);
                 }
             }
-        }*/
+        }
     });
 
 

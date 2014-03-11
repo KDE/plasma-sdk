@@ -42,7 +42,7 @@ set(startpagetest_SRCS startpagetest.cpp
 
 set(startpagetest_UI ../../startpage.ui)
 
-set(startpagetest_LIBS KF5::Archive KF5::Plasma KF5::I18n KF5::KIOCore KF5::KIOWidgets)
+set(startpagetest_LIBS KF5::Archive KF5::Plasma KF5::I18n KF5::KIOCore KF5::KIOWidgets KF5::NewStuff)
 
 plasmate_ui_test(startpagetest "${startpagetest_UI}"
                                "${startpagetest_SRCS}"
