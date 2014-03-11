@@ -6,19 +6,7 @@ macro(PLASMATE_UNIT_TEST testname srcs libraries)
     )
 
     add_executable(${testname} ${testname_SRCS})
-
-    # plasmate_unit_test is also being called
-    # by plasmate_ui_test, so we will check if we
-    # have extra arguments. If we have then we don't
-    # want to add them as tests because `make test` will
-    # freeze.
-
-    set(extra_macro_args ${ARGN})
-    list(LENGTH extra_macro_args num_extra_args)
-
-    if (${num_extra_args} EQUAL 0)
-        add_test(plasmate-${testname} ${testname})
-    endif()
+    add_test(plasmate-${testname} ${testname})
 
     ecm_mark_as_test(${testname})
 
@@ -63,8 +51,4 @@ set(projecthandlertest_LIBS KF5::Plasma)
 plasmate_unit_test(projecthandlertest "${projecthandlertest_SRCS}"
                                       "${projecthandlertest_LIBS}"
 )
-
-set(TEST_DATA_DIR ${CMAKE_CURRENT_SOURCE_DIR}/testdata/)
-
-add_subdirectory(ui)
 
