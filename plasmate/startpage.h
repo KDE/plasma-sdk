@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "ui_startpage.h"
 
 class QModelIndex;
-//class MainWindow;
+class MainWindow;
 class ProjectManager;
 class ProjectHandler;
 class PackageHandler;
@@ -37,8 +37,7 @@ class StartPage : public QWidget
     };
 
 public:
-    //StartPage(MainWindow *parent = 0);
-    StartPage(QWidget *parent = 0);
+    StartPage(PackageHandler *packageHandler, MainWindow *parent = 0);
     ~StartPage();
 
     QString userName();
@@ -73,8 +72,7 @@ private:
     void updateProjectPreferences();
 
     Ui::StartPage m_ui;
-    //MainWindow *m_parent;
-    #pragma message("TODO: restore MainWindow when it gets ported")
+    MainWindow *m_mainWindow;
     QWidget *m_parent;
     ProjectManager *m_projectManager;
     ProjectHandler *m_projectHandler;

@@ -36,9 +36,11 @@ set (PlasMate_SRC
     #savesystem/timeline.cpp
     mainwindow.cpp
     dockwidgetshandler.cpp
-    #startpage.cpp
+    startpage.cpp
     packagemodel.cpp
     packagehandler.cpp
+    projecthandler.cpp
+    projectmanager/projectmanager.cpp
     previewer/plasmoid/plasmoidpreviewer.cpp
     ../plasmoidviewer/view.cpp
     #previewer/plasmoid/plasmoidview.cpp
@@ -72,6 +74,7 @@ qt5_wrap_ui(PlasMate_SRC
    publisher/publisher.ui
    #publisher/remoteinstaller/remoteinstaller.ui
    editors/kconfigxt/kconfigxteditor.ui
+   startpage.ui
 )
 
 include_directories(${QT_QTWEBKIT_INCLUDE_DIR}
@@ -106,6 +109,7 @@ target_link_libraries(plasmate
                       KF5::Service
                       KF5::Completion
                       KF5::WidgetsAddons
+                      KF5::Archive
                       #${KDEPIMLIBS_KPIMUTILS_LIBS}
 )
 

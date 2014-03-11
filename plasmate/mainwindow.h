@@ -35,6 +35,7 @@ namespace KTextEditor {
 
 class DockWidgetsHandler;
 class PackageHandler;
+class StartPage;
 
 class MainWindow : public KParts::MainWindow
 {
@@ -68,6 +69,7 @@ private:
 
     DockWidgetsHandler *m_dockWidgetsHandler;
     PackageHandler *m_packageHandler;
+    StartPage *m_startPage;
 };
 
 

@@ -23,8 +23,7 @@
 #include <QDialog>
 #include <QHash>
 
-#pragma message("TODO: enable once mainwindow gets ported")
-//#include <mainwindow.h>
+#include <mainwindow.h>
 #include "../projecthandler.h"
 
 class QListWidget;
@@ -77,8 +76,7 @@ private:
     bool m_destroyFlag;
     ProjectHandler *m_projectHandler;
     QHash<QListWidgetItem*, QString> m_items;
-    #pragma message("TODO: enable once mainwindow gets ported")
-    //MainWindow* m_mainWindow;
+    MainWindow* m_mainWindow;
 };
 
 #endif // PROJECTMANAGER_H

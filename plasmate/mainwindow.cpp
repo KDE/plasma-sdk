@@ -35,6 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "mainwindow.h"
 #include "dockwidgetshandler.h"
 #include "packagehandler.h"
+#include "startpage.h"
 
 static const int STATE_VERSION = 0;
 
@@ -44,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent)
         m_doc(0),
         m_view(0),
         m_dockWidgetsHandler(0),
-        m_packageHandler(new PackageHandler(this))
+        m_packageHandler(new PackageHandler())
 {
     m_dockWidgetsHandler = new DockWidgetsHandler(m_packageHandler, this);
 
@@ -126,8 +127,10 @@ void MainWindow::slotNewToolbarConfig()
 
 void MainWindow::setupStartPage()
 {
-    // TODO: create the startpage
-    // Pass the packagehandler to startpage
+    m_startPage = new StartPage(m_packageHandler, this);
+    setCentralWidget(m_startPage);
+    toolBar()->hide();
+    menuBar()->hide();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -156,5 +159,12 @@ void MainWindow::loadProject(const QUrl &path)
     KConfigGroup configDocks(KSharedConfig::openConfig(projectrc), "DocksPosition");
     const QString state = configDocks.readEntry("MainWindowLayout", QString());
     restoreState(state.toLocal8Bit(), STATE_VERSION);
+}
+
+void MainWindow::loadProject(const QString &projectPath)
+{
+    toolBar()->show();
+    menuBar()->show();
+    setCentralWidget(m_view);
 }
 

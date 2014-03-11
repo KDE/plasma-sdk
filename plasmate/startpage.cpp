@@ -42,19 +42,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "editors/metadata/metadatahandler.h"
 #include "packagemodel.h"
 #include "startpage.h"
-//#include "mainwindow.h"
+#include "mainwindow.h"
 #include "packagehandler.h"
 #include "projectmanager/projectmanager.h"
 #include "projecthandler.h"
 
 
-#pragma message("TODO: restore MainWindow when it gets ported")
-StartPage::StartPage(QWidget *parent/*MainWindow *parent*/) // TODO set a palette so it will look identical with any color scheme.
+StartPage::StartPage(PackageHandler *packageHandler, MainWindow *parent) // TODO set a palette so it will look identical with any color scheme.
         : QWidget(parent),
          m_parent(parent),
          m_projectHandler(new ProjectHandler()),
-         m_packageHandler(new PackageHandler())
+         m_packageHandler(packageHandler)
 {
+    m_mainWindow = parent;
     setupWidgets();
     refreshRecentProjectsList();
 }
@@ -194,7 +194,6 @@ void StartPage::setupWidgets()
         }
     });
 
-
     connect(m_ui.recentProjects, &QListWidget::clicked, [&](const QModelIndex &index) {
         QAbstractItemModel *m = m_ui.recentProjects->model();
         QString url = m->data(index, FullPathRole).value<QString>();
@@ -204,9 +203,11 @@ void StartPage::setupWidgets()
                 resetStatus();
             }
 
-
             return;
+        } else {
+            m_mainWindow->loadProject(url);
         }
+
         qDebug() << "Loading project file:" << m->data(index, FullPathRole);
 
         emit projectSelected(url);
