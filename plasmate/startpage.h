@@ -18,18 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef STARTPAGE_H
 #define STARTPAGE_H
 
-#include <QWidget>
 #include <QUrl>
 
 #include "ui_startpage.h"
 
-class QLabel;
-class QComboBox;
-class QListWidget;
-class QVBoxLayout;
 class QModelIndex;
-class QPushButton;
-class KLineEdit;
 //class MainWindow;
 class ProjectManager;
 class ProjectHandler;
