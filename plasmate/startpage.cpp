@@ -29,7 +29,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDebug>
 #include <QIcon>
 #include <KLineEdit>
-//#include <KMimeType>
 #include <KPluginInfo>
 #include <QPushButton>
 #include <KConfigGroup>
