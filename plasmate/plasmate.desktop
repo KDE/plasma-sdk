@@ -3,6 +3,7 @@
 Terminal=false
 Name=Plasmate
 Name[bs]=Plasmate
+Name[ca]=Plasmate
 Name[cs]=Plasmate
 Name[da]=Plasmate
 Name[de]=Plasmate
@@ -32,6 +33,7 @@ Name[x-test]=xxPlasmatexx
 Name[zh_TW]=Plasmate
 GenericName=Plasma Addon Creator
 GenericName[bs]=Kreator Plasma dodataka
+GenericName[ca]=Creador de complements pel Plasma
 GenericName[da]=Plasma tilføjelsesskaber
 GenericName[de]=Plasma Creator für Erweiterungen
 GenericName[el]=Παραγωγός προσθέτων Plasma

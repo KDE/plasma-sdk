@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=Access hidden applications minimized in the system tray
 Comment[bs]=Pristup skrivenim programima minimizovanim u sistemsku kasetu
+Comment[ca]=Accés a les aplicacions minimitzades ocultes a la safata del sistema
 Comment[cs]=Přístup ke skrytým aplikacím, které jsou minimalizované v systémové oblasti
 Comment[da]=Tilgå skjulte programmer der er minimeret i statusområdet
 Comment[de]=Ermöglicht den Zugriff auf Programme, die im Systemabschnitt der Kontrollleiste laufen.
@@ -33,6 +34,7 @@ Comment[zh_TW]=存取最小化在系統匣內的隱藏應用程式
 Encoding=UTF-8
 Name=System Tray
 Name[bs]=sistemska kaseta
+Name[ca]=Safata del sistema
 Name[cs]=Systémová část panelu
 Name[da]=Statusområde
 Name[de]=Systemabschnitt der Kontrollleiste
