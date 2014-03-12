@@ -60,7 +60,6 @@ private:
     void setupActions();
     void setupStartPage();
     void saveProjectState();
-    void loadProject(const QUrl &path);
 
     KParts::ReadWritePart *m_part;
 

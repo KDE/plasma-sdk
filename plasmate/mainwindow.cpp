@@ -41,10 +41,10 @@ static const int STATE_VERSION = 0;
 
 MainWindow::MainWindow(QWidget *parent)
       : KParts::MainWindow(parent, Qt::Widget),
-        m_part(0),
-        m_doc(0),
-        m_view(0),
-        m_dockWidgetsHandler(0),
+        m_part(nullptr),
+        m_doc(nullptr),
+        m_view(nullptr),
+        m_dockWidgetsHandler(nullptr),
         m_packageHandler(new PackageHandler(this)),
         m_startPage(nullptr)
 
@@ -53,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     KTextEditor::Editor::instance()->readConfig();
 
-    m_doc = KTextEditor::Editor::instance()->createDocument(0);
+    m_doc = KTextEditor::Editor::instance()->createDocument(nullptr);
 
     m_view = m_doc->createView(this);
     setupActions();
@@ -153,19 +153,17 @@ void MainWindow::saveProjectState()
     m_view->document()->documentSave();
 }
 
-void MainWindow::loadProject(const QUrl &path)
-{
-    m_view->document()->openUrl(path);
-    const QString projectrc = m_packageHandler->packagePath() + QStringLiteral(".plasmateprojectrc");
-    KConfigGroup configDocks(KSharedConfig::openConfig(projectrc), "DocksPosition");
-    const QString state = configDocks.readEntry("MainWindowLayout", QString());
-    restoreState(state.toLocal8Bit(), STATE_VERSION);
-}
-
 void MainWindow::loadProject(const QString &projectPath)
 {
     toolBar()->show();
     menuBar()->show();
+
+    const QString projectrc = m_packageHandler->packagePath() + QStringLiteral(".plasmateprojectrc");
+    KConfigGroup configDocks(KSharedConfig::openConfig(projectrc), "DocksPosition");
+    const QString state = configDocks.readEntry("MainWindowLayout", QString());
+    restoreState(state.toLocal8Bit(), STATE_VERSION);
+
+    m_view->document()->openUrl(QUrl::fromLocalFile(projectPath));
     setCentralWidget(m_view);
 }
 

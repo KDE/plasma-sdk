@@ -205,7 +205,7 @@ void StartPage::setupWidgets()
 
             return;
         } else {
-            m_mainWindow->loadProject(url);
+            m_mainWindow->loadProject(findMainScript(url));
         }
 
         qDebug() << "Loading project file:" << m->data(index, FullPathRole);
@@ -549,5 +549,15 @@ const QString StartPage::generateProjectFolderName(const QString& suggestion)
         suffix++;
     }
     return projectFolder;
+}
+
+QString StartPage::findMainScript(const QString &projectPath) const
+{
+    QString mainScriptPath(projectPath);
+
+    MetadataHandler metadataHandler;
+    metadataHandler.setFilePath(mainScriptPath + QLatin1Char('/') + QStringLiteral("metadata.desktop"));
+    mainScriptPath += QStringLiteral("/contents/") + metadataHandler.mainScript();
+    return mainScriptPath;
 }
 

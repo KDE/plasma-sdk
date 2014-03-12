@@ -70,6 +70,7 @@ private:
     const QString generateProjectFolderName(const QString& suggestion);
     void selectProject(const QUrl &target);
     void updateProjectPreferences();
+    QString findMainScript(const QString &projectPath) const;
 
     Ui::StartPage m_ui;
     MainWindow *m_mainWindow;
