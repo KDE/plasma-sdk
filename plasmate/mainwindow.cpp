@@ -131,6 +131,7 @@ void MainWindow::setupStartPage()
     m_startPage = new StartPage(m_packageHandler, this);
     toolBar()->hide();
     menuBar()->hide();
+    m_view->hide();
     setCentralWidget(m_startPage);
 }
 
@@ -157,6 +158,7 @@ void MainWindow::loadProject(const QString &projectPath)
 {
     toolBar()->show();
     menuBar()->show();
+    m_view->show();
 
     const QString projectrc = m_packageHandler->packagePath() + QStringLiteral(".plasmateprojectrc");
     KConfigGroup configDocks(KSharedConfig::openConfig(projectrc), "DocksPosition");
