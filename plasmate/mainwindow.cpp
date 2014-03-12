@@ -45,7 +45,9 @@ MainWindow::MainWindow(QWidget *parent)
         m_doc(0),
         m_view(0),
         m_dockWidgetsHandler(0),
-        m_packageHandler(new PackageHandler())
+        m_packageHandler(new PackageHandler(this)),
+        m_startPage(nullptr)
+
 {
     m_dockWidgetsHandler = new DockWidgetsHandler(m_packageHandler, this);
 
@@ -54,7 +56,6 @@ MainWindow::MainWindow(QWidget *parent)
     m_doc = KTextEditor::Editor::instance()->createDocument(0);
 
     m_view = m_doc->createView(this);
-    setCentralWidget(m_view);
     setupActions();
     m_view->setStatusBarEnabled(true);
 
@@ -128,9 +129,9 @@ void MainWindow::slotNewToolbarConfig()
 void MainWindow::setupStartPage()
 {
     m_startPage = new StartPage(m_packageHandler, this);
-    setCentralWidget(m_startPage);
     toolBar()->hide();
     menuBar()->hide();
+    setCentralWidget(m_startPage);
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)

@@ -32,6 +32,7 @@ class QListWidgetItem;
 class QUrl;
 class QPushButton;
 class QMenu;
+class MainWindow;
 
 namespace Ui
 {
@@ -42,7 +43,7 @@ class ProjectManager : public QDialog
 {
     Q_OBJECT
 public:
-    ProjectManager(ProjectHandler *projectHandler, QWidget *parent);
+    ProjectManager(ProjectHandler *projectHandler, MainWindow *parent);
 
     void addProject(QListWidgetItem *item);
 
@@ -76,7 +77,7 @@ private:
     bool m_destroyFlag;
     ProjectHandler *m_projectHandler;
     QHash<QListWidgetItem*, QString> m_items;
-    MainWindow* m_mainWindow;
+    MainWindow *m_mainWindow;
 };
 
 #endif // PROJECTMANAGER_H

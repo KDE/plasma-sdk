@@ -194,11 +194,11 @@ void StartPage::setupWidgets()
         }
     });
 
-    connect(m_ui.recentProjects, &QListWidget::clicked, [&](const QModelIndex &index) {
+    connect(m_ui.recentProjects, &QListWidget::clicked, [=](const QModelIndex &index) {
         QAbstractItemModel *m = m_ui.recentProjects->model();
         QString url = m->data(index, FullPathRole).value<QString>();
         if (url.isEmpty()) {
-            QScopedPointer<ProjectManager> projectManager(new ProjectManager(m_projectHandler, this));
+            QScopedPointer<ProjectManager> projectManager(new ProjectManager(m_projectHandler, m_mainWindow));
             if (projectManager->exec() == QDialog::Accepted) {
                 resetStatus();
             }

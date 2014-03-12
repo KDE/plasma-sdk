@@ -37,11 +37,12 @@
 
 #include "projectmanager.h"
 
-ProjectManager::ProjectManager(ProjectHandler *projectHandler, QWidget* parent)
+ProjectManager::ProjectManager(ProjectHandler *projectHandler, MainWindow *parent)
     : QDialog(parent),
       m_projectHandler(projectHandler)
 {
     m_projectList = new QListWidget(this);
+    m_mainWindow = parent;
     m_projectList->setSelectionMode(QAbstractItemView::ExtendedSelection);
     connect(m_projectList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(emitProjectSelected()));
     connect(m_projectList,SIGNAL(itemSelectionChanged()), this, SLOT(checkButtonState()));
@@ -152,6 +153,7 @@ void ProjectManager::emitProjectSelected()
 
     m_projectHandler->recentProject(url);
     emit projectSelected(url);
+    m_mainWindow->loadProject(url);
     done(QDialog::Accepted);
 }
 
