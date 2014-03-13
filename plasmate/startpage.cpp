@@ -205,6 +205,11 @@ void StartPage::setupWidgets()
 
             return;
         } else {
+            MetadataHandler metadataHandler;
+            metadataHandler.setFilePath(url + QLatin1Char('/') + QStringLiteral("metadata.desktop"));
+
+            QString serviceType = metadataHandler.serviceTypes().at(0);
+            m_packageHandler->setPackageType(serviceType);
             m_mainWindow->loadProject(findMainScript(url));
         }
 
