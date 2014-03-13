@@ -36,7 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 PackageModel::PackageModel(PackageHandler *packageHandler, QObject *parent)
     : QAbstractItemModel(parent),
       m_packageHandler(packageHandler),
-      m_topNode(0),
+      m_topNode(nullptr),
       m_watchDirectory(new KDirWatch(this))
 {
     m_dialogOptions["widgets"] = QStringList("[plasmate]/themeImageDialog/widgets");
