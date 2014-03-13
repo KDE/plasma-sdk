@@ -31,6 +31,7 @@ NotesEditor::NotesEditor(const QString &projectPath, QWidget *parent)
       m_notesPart(0),
       m_projectPath(projectPath)
 {
+    setObjectName(QStringLiteral("Project Notes"));
     init();
 }
 

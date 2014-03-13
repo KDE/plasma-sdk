@@ -56,6 +56,7 @@ FileList::FileList(PackageHandler *packageHandler, QWidget *parent)
         : QDockWidget(i18n("Files"), parent),
           m_editPage(0)
 {
+    setObjectName(QStringLiteral("Files"));
     m_editPage = new EditPage(packageHandler, this);
     setWidget(m_editPage);
 }
