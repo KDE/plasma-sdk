@@ -28,6 +28,7 @@ namespace KParts {
     class MainWindow;
 }
 
+class DocBrowser;
 class FileList;
 class NotesEditor;
 class Previewer;
@@ -60,6 +61,7 @@ private:
     QScopedPointer<NotesEditor> m_notesWidget;
     QScopedPointer<Previewer> m_previewerWidget;
     QScopedPointer<FileList> m_fileListWidget;
+    QScopedPointer<DocBrowser> m_docBrowserWidget;
 };
 
 #endif

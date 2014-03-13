@@ -25,6 +25,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "dockwidgetshandler.h"
 #include "packagehandler.h"
+
+#include "docbrowser/docbrowser.h"
 #include "noteseditor/noteseditor.h"
 #include "previewer/plasmoid/plasmoidpreviewer.h"
 #include "editors/editpage.h"
@@ -76,7 +78,15 @@ void DockWidgetsHandler::togglePreviewer()
 
 void DockWidgetsHandler::toggleDocumentation()
 {
-    // TODO
+    if (!m_docBrowserWidget) {
+        m_docBrowserWidget.reset(new DocBrowser());
+        m_mainWindow->addDockWidget(Qt::LeftDockWidgetArea, m_docBrowserWidget.data());
+        return;
+    }
+
+    m_mainWindow->removeDockWidget(m_docBrowserWidget.data());
+    m_docBrowserWidget.reset();
+
 }
 
 void DockWidgetsHandler::toggleTimeLine()
@@ -101,7 +111,8 @@ void DockWidgetsHandler::removeAllDockWidgets()
     QList<QDockWidget*> l;
     l << m_notesWidget.take()
       << m_previewerWidget.take()
-      << m_fileListWidget.take();
+      << m_fileListWidget.take()
+      << m_docBrowserWidget.take();
 
     for (auto it : l) {
         m_mainWindow->removeDockWidget(it);
@@ -117,6 +128,7 @@ void DockWidgetsHandler::saveDockWidgetsState()
     configDocks.writeEntry("FileList", !m_fileListWidget.isNull());
     configDocks.writeEntry("Notes", !m_notesWidget.isNull());
     configDocks.writeEntry("Previewer", !m_previewerWidget.isNull());
+    configDocks.writeEntry("DocBrowser", !m_docBrowserWidget.isNull());
 
     configDocks.sync();
 }

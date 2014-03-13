@@ -55,7 +55,7 @@ set (PlasMate_SRC
     #publisher/remoteinstaller/remoteinstaller.cpp
     #publisher/remoteinstaller/remoteinstallerdialog.cpp
     #konsole/konsolepreviewer.cpp
-    #docbrowser/docbrowser.cpp
+    docbrowser/docbrowser.cpp
     #projectmanager/projectmanager.cpp
     noteseditor/noteseditor.cpp
 )
@@ -97,9 +97,9 @@ target_link_libraries(plasmate
                       KF5::Declarative
                       Qt5::Quick
                       Qt5::Svg
+                      Qt5::WebKitWidgets
                       KF5::PlasmaQuick
                       ${LibAttica_LIBRARIES}
-                      #Qt5::WebKitWidgets
                       KF5::KIOCore
                       KF5::ItemViews
                       KF5::ConfigCore
