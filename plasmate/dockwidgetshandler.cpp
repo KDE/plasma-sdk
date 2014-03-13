@@ -47,7 +47,7 @@ DockWidgetsHandler::~DockWidgetsHandler()
 void DockWidgetsHandler::toggleNotes()
 {
     if (!m_notesWidget) {
-        m_notesWidget.reset(new NotesEditor(QString()));
+        m_notesWidget.reset(new NotesEditor(m_packageHandler->packagePath()));
         m_mainWindow->addDockWidget(Qt::BottomDockWidgetArea, m_notesWidget.data());
         return;
     }
