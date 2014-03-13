@@ -43,7 +43,7 @@ plasmate_unit_test(metadatahandlertest "${metadatahandlertest_SRCS}"
 
 # projecthandlertest
 set(projecthandlertest_SRCS ../projecthandler.cpp
-                            ../packagehandler.cpp
+                            ${packagehandler_SRCS}
 )
 
 set(projecthandlertest_LIBS KF5::Plasma)
