@@ -210,6 +210,7 @@ void StartPage::setupWidgets()
 
             QString serviceType = metadataHandler.serviceTypes().at(0);
             m_packageHandler->setPackageType(serviceType);
+            m_packageHandler->setPackagePath(url);
             m_mainWindow->loadProject(findMainScript(url));
         }
 
