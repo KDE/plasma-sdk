@@ -44,7 +44,6 @@ void PackageHandlerTest::initTestCase()
 
 void PackageHandlerTest::initPlasmoid()
 {
-    m_packageHandler.setPackageType(QStringLiteral("Plasma/Applet"));
 }
 
 void PackageHandlerTest::createNewPlasmoid()
@@ -66,6 +65,9 @@ void PackageHandlerTest::createNewPlasmoid()
     f.copy(templatesDir.path() + QLatin1Char('/') + QStringLiteral("mainPlasmoid.qml"));
 
     m_packageHandler.setPackagePath(newPlasmoidLocation);
+    m_packageHandler.createPackage(QStringLiteral("author"), QStringLiteral("email"), QStringLiteral("Plasma/Applet"), QStringLiteral("newPlasmoid"), QStringLiteral("main.qml"), QStringLiteral("declarative"), QStringLiteral(".qml"));
+    m_packageHandler.loadPackage();
+
     QDir dir(newPlasmoidLocation);
     Q_ASSERT(dir.exists());
     Q_ASSERT(dir.exists(QStringLiteral("metadata.desktop")));
@@ -97,7 +99,7 @@ void PackageHandlerTest::checkPlasmoidMimeTypes()
         }
     }
 
-    Q_ASSERT_X(mimeTypes.contains(QStringLiteral("[plasmate]/kconfigxteditor/")),
+    Q_ASSERT_X(mimeTypes.contains(QStringLiteral("[plasmate]/kconfigxteditor")),
                "Checking mimetypes","[plasmate]/kconfigxteditor/ doesn't exist");
     Q_ASSERT_X(mimeTypes.contains(QStringLiteral("text/x-qml")), "Checking mimetypes",
               "text/x-qml doesn't exist");

@@ -14,7 +14,7 @@ macro(PLASMATE_UNIT_TEST testname srcs libraries)
 endmacro()
 
 # packageHandertest
-set(packagehandler_SRCS ../packagehandler.cpp)
+set(packagehandler_SRCS ../packagehandler.cpp ../editors/metadata/metadatahandler.cpp)
 set(packagehandler_LIBS KF5::Plasma)
 
 PLASMATE_UNIT_TEST(packagehandlertest "${packagehandler_SRCS}"
@@ -24,6 +24,7 @@ PLASMATE_UNIT_TEST(packagehandlertest "${packagehandler_SRCS}"
 # packagemodeltest
 set(packagemodeltest_SRCS modeltest.cpp
                           ../packagemodel.cpp
+                          ../editors/metadata/metadatahandler.cpp
                           ${packagehandler_SRCS}
 )
 
@@ -44,6 +45,8 @@ plasmate_unit_test(metadatahandlertest "${metadatahandlertest_SRCS}"
 # projecthandlertest
 set(projecthandlertest_SRCS ../projecthandler.cpp
                             ${packagehandler_SRCS}
+                            ../packagehandler.cpp
+                            ../editors/metadata/metadatahandler.cpp
 )
 
 set(projecthandlertest_LIBS KF5::Plasma)

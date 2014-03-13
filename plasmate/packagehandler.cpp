@@ -20,8 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 
-#include "packagehandler.h"
-
 #include <Plasma/PluginLoader>
 
 #include <KDirWatch>
@@ -32,6 +30,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QUrl>
 #include <QStandardPaths>
 #include <QMimeDatabase>
+
+#include "packagehandler.h"
+#include "editors/metadata/metadatahandler.h"
 
 PackageHandler::Node::Node(const QString &name, const QString &description,
                            const QStringList &mimeTypes, PackageHandler::Node *parent)
@@ -125,11 +126,6 @@ PackageHandler::~PackageHandler()
 {
 }
 
-void PackageHandler::setPackageType(const QString &type)
-{
-    m_package = Plasma::PluginLoader::self()->loadPackage(type);
-}
-
 QString PackageHandler::contentsPrefix() const
 {
     QString contentsPrefixPaths = m_package.contentsPrefixPaths().at(0);
@@ -146,12 +142,15 @@ void PackageHandler::setPackagePath(const QString &path)
     } else {
         m_packagePath = path;
     }
+}
 
-    if (!QDir(m_packagePath).exists()) {
-        //FIXME missing metadata
-        createPackage();
-    }
+void PackageHandler::loadPackage()
+{
+    MetadataHandler metadataHandler;
+    metadataHandler.setFilePath(m_packagePath + QLatin1Char('/') + QStringLiteral("metadata.desktop"));
+    metadataHandler.serviceTypes().at(0);
 
+    m_package = Plasma::PluginLoader::self()->loadPackage(metadataHandler.serviceTypes().at(0));;
     m_package.setPath(m_packagePath);
 }
 
@@ -192,7 +191,9 @@ QString PackageHandler::packagePath() const
     return m_packagePath;
 }
 
-void PackageHandler::createPackage()
+void PackageHandler::createPackage(const QString &userName, const QString &userEmail,
+                                   const QString &serviceType, const QString &pluginName,
+                                   const QString &mainScriptName, const QString &api, const QString &fileExtension)
 {
     QDir dir;
     dir.mkpath(m_packagePath);
@@ -201,10 +202,29 @@ void PackageHandler::createPackage()
     const QString metadataFilePath = m_packagePath + QStringLiteral("metadata.desktop");
     QFile f(metadataFilePath);
     f.open(QIODevice::ReadWrite);
-    // FIXME write the metadata now
 
+    MetadataHandler metadataHandler;
+    metadataHandler.setFilePath(metadataFilePath);
+    metadataHandler.setName(pluginName);
+    metadataHandler.setServiceTypes(QStringList() << serviceType);
+    metadataHandler.setVersion(QChar(1));
+    metadataHandler.setAuthor(userName);
+    metadataHandler.setEmail(userEmail);
+    metadataHandler.setLicense(QStringLiteral("GPL"));
+    metadataHandler.setPluginApi(api);
+    metadataHandler.setMainScript(QStringLiteral("/ui/") + mainScriptName);
+    metadataHandler.writeFile();
+
+    QString mainScript = metadataHandler.mainScript();
+    mainScript = mainScript.split(QLatin1Char('/')).last();
+    if (mainScript != m_fileDefinitions[QStringLiteral("mainscript")]) {
+        m_fileDefinitions[QStringLiteral("mainscript")] = mainScript;
+    }
+
+    m_package = Plasma::PluginLoader::self()->loadPackage(metadataHandler.serviceTypes().at(0));;
+    m_package.setPath(m_packagePath);
     createRequiredDirectories();
-    createRequiredFiles();
+    createRequiredFiles(serviceType, pluginName, userName, userEmail, fileExtension);
 }
 
 void PackageHandler::createRequiredDirectories()
@@ -215,7 +235,8 @@ void PackageHandler::createRequiredDirectories()
     }
 }
 
-void PackageHandler::createRequiredFiles()
+void PackageHandler::createRequiredFiles(const QString &serviceType, const QString &pluginName,
+                                         const QString &userName, const QString &userEmail, const QString &fileExtension)
 {
     // a package may require a file like ui/main.qml
     // but the ui dir may not be required, so lets check for them
@@ -229,17 +250,68 @@ void PackageHandler::createRequiredFiles()
             QFile f;
             const QString filePath = dir.path() + QLatin1Char('/') +
                                      m_fileDefinitions[it];
+            QString templateFilePath;
 
             if (it == QLatin1String("mainscript")) {
+                if (serviceType == "Plasma/Applet") {
+                    templateFilePath.append("mainPlasmoid");
+                } else if (serviceType == "KWin/WindowSwitcher") {
+                    templateFilePath.append("mainTabbox");
+                } else if (serviceType == "KWin/Script") {
+                    templateFilePath.append("mainKWinScript");
+                } else if (serviceType == "KWin/Effect") {
+                    templateFilePath.append("mainKWinEffect");
+                }
+
                 f.setFileName(QStandardPaths::locate(QStandardPaths::DataLocation,
-                                    QStringLiteral("templates/mainPlasmoid.qml")));
+                                    QStringLiteral("templates/") + templateFilePath + fileExtension));
                 const bool ok = f.copy(filePath);
                 if (!ok) {
                     emit error(QStringLiteral("The mainscript file hasn't been created"));
                 }
+
+                f.setFileName(filePath);
+                f.open(QIODevice::ReadWrite);
+
+                // Now open these files, and substitute the main class, author, email and date fields
+                QByteArray tmpPluginName(pluginName.toLocal8Bit());
+                QByteArray tmpAuthor(userName.toLocal8Bit());
+                QByteArray tmpEmail(userEmail.toLocal8Bit());
+                QByteArray rawData = f.readAll();
+                f.close();
+                f.open(QIODevice::WriteOnly);
+
+                QByteArray replacedString("$PLASMOID_NAME");
+                if (rawData.contains(replacedString)) {
+                    rawData.replace(replacedString, tmpPluginName);
+                }
+                replacedString.clear();
+
+                replacedString.append("$AUTHOR");
+                if (rawData.contains(replacedString)) {
+                    rawData.replace(replacedString, tmpAuthor);
+                }
+                replacedString.clear();
+
+                replacedString.append("$EMAIL");
+                if (rawData.contains(replacedString)) {
+                    rawData.replace(replacedString, tmpEmail);
+                }
+                replacedString.clear();
+
+                replacedString.append("$DATE");
+                QDate date = QDate::currentDate();
+                QByteArray datetime(date.toString().toUtf8());
+                QTime time = QTime::currentTime();
+                datetime.append(", " + time.toString().toUtf8());
+                if (rawData.contains(replacedString)) {
+                    rawData.replace(replacedString, datetime);
+                }
+
+                f.write(rawData);
+                f.close();
             }
 
-            f.open(QIODevice::ReadWrite);
         }
     }
 }

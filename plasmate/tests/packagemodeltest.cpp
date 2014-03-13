@@ -43,11 +43,12 @@ void PackageModelTest::initTestCase()
 void PackageModelTest::testPlasmoidModel()
 {
     PackageHandler *packageHandler = new PackageHandler(this);
-    packageHandler->setPackageType(QStringLiteral("Plasma/Applet"));
     const QString testDataPlasmoid = QFINDTESTDATA(QStringLiteral("testdata/org.kde.tests.packagehandlertest"));
     Q_ASSERT(!testDataPlasmoid.isEmpty());
 
     packageHandler->setPackagePath(testDataPlasmoid);
+    packageHandler->createPackage(QStringLiteral("author"), QStringLiteral("email"), QStringLiteral("Plasma/Applet"), QStringLiteral("newPlasmoid"), QStringLiteral("main.qml"), QStringLiteral("declarative"), QStringLiteral(".qml"));
+    packageHandler->loadPackage();
 
     PackageModel *model = new PackageModel(packageHandler, this);
     packageHandler->loadPackageInfo();

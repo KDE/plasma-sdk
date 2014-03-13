@@ -36,10 +36,9 @@
 #include <KZip>
 
 #include "projectmanager.h"
-#include "../editors/metadata/metadatahandler.h"
 #include "../projecthandler.h"
 #include "../packagehandler.h"
-
+#include "../editors/metadata/metadatahandler.h"
 
 ProjectManager::ProjectManager(ProjectHandler *projectHandler, PackageHandler *packageHandler, MainWindow *parent)
     : QDialog(parent),
@@ -156,10 +155,8 @@ void ProjectManager::emitProjectSelected()
 
     QString url = m_items[l.at(0)];
     if (!url.isEmpty()) {
-        MetadataHandler metadataHandler;
-        metadataHandler.setFilePath(url + QLatin1Char('/') + QStringLiteral("metadata.desktop"));
-        QString serviceType = metadataHandler.serviceTypes().at(0);
-        m_packageHandler->setPackageType(serviceType);
+        m_packageHandler->setPackagePath(url);
+        m_packageHandler->loadPackage();
         m_mainWindow->loadProject(findMainScript(url));
 
         m_projectHandler->recentProject(url);

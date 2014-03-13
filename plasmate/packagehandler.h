@@ -60,9 +60,13 @@ public:
             QStringList m_mimeTypes;
     };
 
-    void setPackageType(const QString &type);
+    void createPackage(const QString &userName, const QString &userEmail,
+                       const QString &serviceType, const QString &pluginName,
+                       const QString &mainScriptName, const QString &api, const QString &fileExtension);
 
     void setPackagePath(const QString &path);
+
+    void loadPackage();
 
     QString packagePath() const;
 
@@ -84,9 +88,9 @@ private:
     PackageHandler::Node* m_topNode;
 
 
-    void createPackage();
     void createRequiredDirectories();
-    void createRequiredFiles();
+    void createRequiredFiles(const QString &serviceType, const QString &pluginName,
+                             const QString &userName, const QString &userEmail, const QString &fileExtension);
 };
 
 #endif

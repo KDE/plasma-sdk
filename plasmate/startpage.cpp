@@ -205,12 +205,8 @@ void StartPage::setupWidgets()
 
             return;
         } else {
-            MetadataHandler metadataHandler;
-            metadataHandler.setFilePath(url + QLatin1Char('/') + QStringLiteral("metadata.desktop"));
-
-            QString serviceType = metadataHandler.serviceTypes().at(0);
-            m_packageHandler->setPackageType(serviceType);
             m_packageHandler->setPackagePath(url);
+            m_packageHandler->loadPackage();
             m_mainWindow->loadProject(findMainScript(url));
         }
 
@@ -372,24 +368,18 @@ void StartPage::createNewProject()
     const QString projectNameLowerCase = projectName.toLower();
     QString projectFileExtension;
 
-    QString templateFilePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("/plasmate/templates/"), QStandardPaths::LocateDirectory);
-
     // type -> serviceTypes
     QString serviceTypes;
     if (m_ui.contentTypes->currentRow() == 0) {
         serviceTypes = "Plasma/Applet";
-        templateFilePath.append("mainPlasmoid");
     } else if (m_ui.contentTypes->currentRow() == 1) {
         serviceTypes = "Plasma/Theme";
     } else if (m_ui.contentTypes->currentRow() == 2) {
         serviceTypes = "KWin/WindowSwitcher";
-        templateFilePath.append("mainTabbox");
     } else if (m_ui.contentTypes->currentRow() == 3) {
         serviceTypes = "KWin/Script";
-        templateFilePath.append("mainKWinScript");
     } else if (m_ui.contentTypes->currentRow() == 4) {
         serviceTypes = "KWin/Effect";
-        templateFilePath.append("mainKWinEffect");
     }
 
     QString projectFolderName;
@@ -419,48 +409,9 @@ void StartPage::createNewProject()
     //                               contents/...
 
     const QString projectPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0) + QLatin1Char('/') + projectFolderName;
-    m_packageHandler->setPackageType(serviceTypes);
     m_packageHandler->setPackagePath(projectPath);
-
-    // Create a QFile object that points to the template we need to copy
-    QFile sourceFile(templateFilePath + projectFileExtension);
-    QFile destinationFile(projectPath + "/contents/ui/" + mainScriptName);//our dest
-
-    // Now open these files, and substitute the main class, author, email and date fields
-    sourceFile.open(QIODevice::ReadOnly);
-    destinationFile.open(QIODevice::ReadWrite);
-
-    QByteArray rawData = sourceFile.readAll();
-
-    QByteArray replacedString("$PLASMOID_NAME");
-    if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, projectName.toAscii());
-    }
-    replacedString.clear();
-
-    replacedString.append("$AUTHOR");
-    if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, m_ui.authorTextField->text().toAscii());
-    }
-    replacedString.clear();
-
-    replacedString.append("$EMAIL");
-    if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, m_ui.emailTextField->text().toAscii());
-    }
-    replacedString.clear();
-
-    replacedString.append("$DATE");
-    QDate date = QDate::currentDate();
-    QByteArray datetime(date.toString().toUtf8());
-    QTime time = QTime::currentTime();
-    datetime.append(", " + time.toString().toUtf8());
-    if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, datetime);
-    }
-
-    destinationFile.write(rawData);
-    destinationFile.close();
+    m_packageHandler->createPackage(m_ui.authorTextField->text(), m_ui.emailTextField->text(), serviceTypes, projectNameLowerCase, mainScriptName, api, projectFileExtension);
+    m_packageHandler->loadPackage();
 
     // create the metadata.desktop file
     // TODO: missing but possible entries that could be added:
@@ -470,17 +421,6 @@ void StartPage::createNewProject()
     // * X-KDE-PluginInfo-Website
     // * X-KDE-PluginInfo-Category
     // * X-KDE-ParentApp
-    MetadataHandler metadataHandler;
-    metadataHandler.setFilePath(projectPath + QLatin1Char('/') + QStringLiteral("metadata.desktop"));
-    metadataHandler.setName(projectNameLowerCase);
-    metadataHandler.setServiceTypes(QStringList() << serviceTypes);
-    metadataHandler.setVersion(QChar(1));
-    metadataHandler.setAuthor(m_ui.authorTextField->text());
-    metadataHandler.setEmail(m_ui.emailTextField->text());
-    metadataHandler.setLicense(QStringLiteral("GPL"));
-    metadataHandler.setPluginApi(api);
-    metadataHandler.setMainScript(QStringLiteral("/ui/") + mainScriptName);
-    metadataHandler.writeFile();
 
     emit projectSelected(projectPath);
 
