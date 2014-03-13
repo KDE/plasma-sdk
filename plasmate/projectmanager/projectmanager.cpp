@@ -36,10 +36,15 @@
 #include <KZip>
 
 #include "projectmanager.h"
+#include "../editors/metadata/metadatahandler.h"
+#include "../projecthandler.h"
+#include "../packagehandler.h"
 
-ProjectManager::ProjectManager(ProjectHandler *projectHandler, MainWindow *parent)
+
+ProjectManager::ProjectManager(ProjectHandler *projectHandler, PackageHandler *packageHandler, MainWindow *parent)
     : QDialog(parent),
-      m_projectHandler(projectHandler)
+      m_projectHandler(projectHandler),
+      m_packageHandler(packageHandler)
 {
     m_projectList = new QListWidget(this);
     m_mainWindow = parent;
@@ -150,11 +155,17 @@ void ProjectManager::emitProjectSelected()
     }
 
     QString url = m_items[l.at(0)];
+    if (!url.isEmpty()) {
+        MetadataHandler metadataHandler;
+        metadataHandler.setFilePath(url + QLatin1Char('/') + QStringLiteral("metadata.desktop"));
+        QString serviceType = metadataHandler.serviceTypes().at(0);
+        m_packageHandler->setPackageType(serviceType);
+        m_mainWindow->loadProject(findMainScript(url));
 
-    m_projectHandler->recentProject(url);
-    emit projectSelected(url);
-    m_mainWindow->loadProject(url);
-    done(QDialog::Accepted);
+        m_projectHandler->recentProject(url);
+        emit projectSelected(url);
+        done(QDialog::Accepted);
+    }
 }
 
 bool ProjectManager::exportPackage(const QUrl &toExport, const QUrl &targetFile)
@@ -201,5 +212,15 @@ bool ProjectManager::importPackage(const QUrl &toImport, const QUrl &targetLocat
     plasmoid.directory()->copyTo(targetLocation.path());
     plasmoid.close();
     return ret;
+}
+
+QString ProjectManager::findMainScript(const QString &projectPath) const
+{
+    QString mainScriptPath(projectPath);
+
+    MetadataHandler metadataHandler;
+    metadataHandler.setFilePath(mainScriptPath + QLatin1Char('/') + QStringLiteral("metadata.desktop"));
+    mainScriptPath += QStringLiteral("/contents/") + metadataHandler.mainScript();
+    return mainScriptPath;
 }
 

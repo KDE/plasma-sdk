@@ -198,7 +198,7 @@ void StartPage::setupWidgets()
         QAbstractItemModel *m = m_ui.recentProjects->model();
         QString url = m->data(index, FullPathRole).value<QString>();
         if (url.isEmpty()) {
-            QScopedPointer<ProjectManager> projectManager(new ProjectManager(m_projectHandler, m_mainWindow));
+            QScopedPointer<ProjectManager> projectManager(new ProjectManager(m_projectHandler, m_packageHandler, m_mainWindow));
             if (projectManager->exec() == QDialog::Accepted) {
                 resetStatus();
             }

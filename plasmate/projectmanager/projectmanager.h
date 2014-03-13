@@ -24,7 +24,6 @@
 #include <QHash>
 
 #include <mainwindow.h>
-#include "../projecthandler.h"
 
 class QListWidget;
 class QListWidgetItem;
@@ -33,6 +32,8 @@ class QUrl;
 class QPushButton;
 class QMenu;
 class MainWindow;
+class PackageHandler;
+class ProjectHandler;
 
 namespace Ui
 {
@@ -43,7 +44,7 @@ class ProjectManager : public QDialog
 {
     Q_OBJECT
 public:
-    ProjectManager(ProjectHandler *projectHandler, MainWindow *parent);
+    ProjectManager(ProjectHandler *projectHandler, PackageHandler *packageHandler, MainWindow *parent);
 
     void addProject(QListWidgetItem *item);
 
@@ -64,6 +65,7 @@ private Q_SLOTS:
 private:
     void populateList();
     void deleteProject(const QUrl &projectLocation);
+    QString findMainScript(const QString &projectPath) const;
 
 
 //TODO: Implement:
@@ -76,6 +78,7 @@ private:
     QMenu *m_removeMenu;
     bool m_destroyFlag;
     ProjectHandler *m_projectHandler;
+    PackageHandler *m_packageHandler;
     QHash<QListWidgetItem*, QString> m_items;
     MainWindow *m_mainWindow;
 };
