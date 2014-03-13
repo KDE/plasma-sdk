@@ -487,6 +487,9 @@ void StartPage::createNewProject()
     // accessible after project loads.
     m_ui.projectName->clear();
     resetStatus();
+
+    //load our new project
+    m_mainWindow->loadProject(findMainScript(projectPath));
 }
 
 void StartPage::checkLocalProjectPath(const QString& name)
