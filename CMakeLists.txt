@@ -57,6 +57,7 @@ find_package(KF5Plasma REQUIRED NO_MODULE)
 find_package(KF5PlasmaQuick REQUIRED NO_MODULE)
 find_package(KF5Declarative REQUIRED NO_MODULE)
 find_package(KF5KIO REQUIRED NO_MODULE)
+find_package(KF5KDE4Support REQUIRED NO_MODULE)
 
 #########################################################################
 

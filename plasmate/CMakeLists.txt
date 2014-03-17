@@ -123,22 +123,23 @@ install(FILES plasmate.knsrc DESTINATION ${CONFIG_INSTALL_DIR})
 
 ##standalone applications
 #plasmaremoteinstaller
-#set (PlasmaRemoteInstaller_SRC
-#    publisher/remoteinstaller/remoteinstallerdialog.cpp
-#    publisher/remoteinstaller/remoteinstaller.cpp
-#    publisher/remoteinstaller/standalone/main.cpp
-#    publisher/remoteinstaller/standalone/plasmaremoteinstaller.cpp
-#)
+set (PlasmaRemoteInstaller_SRC
+    publisher/remoteinstaller/remoteinstallerdialog.cpp
+    publisher/remoteinstaller/remoteinstaller.cpp
+    publisher/remoteinstaller/standalone/main.cpp
+    publisher/remoteinstaller/standalone/plasmaremoteinstaller.cpp
+)
 
-#qt5_wrap_ui (PlasmaRemoteInstaller_SRC
-#   publisher/remoteinstaller/remoteinstaller.ui
-#)
+qt5_wrap_ui (PlasmaRemoteInstaller_SRC
+   publisher/remoteinstaller/remoteinstaller.ui
+)
 
-#add_executable(plasmaremoteinstaller ${PlasmaRemoteInstaller_SRC})
-#target_link_libraries(plasmaremoteinstaller
-#                      ${KDE4_KDEUI_LIBS}
-#                      ${KDE4_KIO_LIBRARY}
-#)
+add_executable(plasmaremoteinstaller ${PlasmaRemoteInstaller_SRC})
+target_link_libraries(plasmaremoteinstaller
+                      KF5::KIOCore
+                      KF5::KIOWidgets
+                      KF5::KDE4Support
+)
 
 #install(TARGETS plasmaremoteinstaller ${INSTALL_TARGETS_DEFAULT_ARGS})
 
