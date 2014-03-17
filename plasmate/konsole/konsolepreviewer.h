@@ -31,7 +31,8 @@ class KonsolePreviewer : public QDockWidget {
     Q_OBJECT
 
 public:
-    KonsolePreviewer(const QString & title, QWidget *parent = 0);
+    KonsolePreviewer(const QString & title, QWidget *parent = 0, const QString &projectType = "Plasma/Applet",
+                     const QString &packagePath = 0);
     ~KonsolePreviewer();
 
     enum EventType {
@@ -48,9 +49,13 @@ protected:
 public Q_SLOTS:
     void clearOutput();
     void saveOutput();
+    void executeKWinScript();
 
 private:
     QTextEdit *m_textEdit;
+    QString packageMainFile(const QString& packagePath);
+    QString m_projectType;
+    QString m_packagePath;
 };
 
 class KonsolePreviewerDebugEvent: public QEvent

@@ -12,6 +12,8 @@
 
 #include <QVBoxLayout>
 #include <QFile>
+#include <QDBusMessage>
+#include <QDBusConnection>
 #include <QCoreApplication>
 #include <QMutexLocker>
 #include <QTextEdit>
@@ -24,21 +26,36 @@
 #include <KToolBar>
 #include <KUrl>
 #include <KUser>
+#include <klocalizedstring.h>
 
 #include <iostream>
 
 QWeakPointer<KonsolePreviewer> KonsolePreviewer::msgHandler;
 
-KonsolePreviewer::KonsolePreviewer(const QString & title, QWidget *parent)
+KonsolePreviewer::KonsolePreviewer(const QString & title, QWidget *parent, const QString& projectType,
+                                   const QString& packagePath)
         : QDockWidget(title, parent),
-        m_textEdit(0)
+        m_textEdit(0),
+        m_projectType(projectType),
+        m_packagePath(packagePath)
 {
     QVBoxLayout *layout = new QVBoxLayout();
     KToolBar *toolBar = new KToolBar(this, true, true);
-    toolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 
     KAction *clear = KStandardAction::clear(this, SLOT(clearOutput()), this);
     KAction *save = KStandardAction::save(this, SLOT(saveOutput()), this);
+
+    //we want those only for the kwin scripts
+    if (m_projectType == "KWin/Script") {
+        KAction *execute = new KAction(this);
+        execute->setText("Execute");
+        execute->setIcon(KIcon("system-run"));
+        connect(execute, SIGNAL(triggered(bool)), this, SLOT(executeKWinScript()));
+
+        //add it to toolbar
+        toolBar->addAction(execute);
+    }
+
     toolBar->addAction(clear);
     toolBar->addAction(save);
 
@@ -58,6 +75,50 @@ KonsolePreviewer::KonsolePreviewer(const QString & title, QWidget *parent)
 
 KonsolePreviewer::~KonsolePreviewer()
 {
+}
+
+QString KonsolePreviewer::packageMainFile(const QString& packagePath)
+{
+    KConfig c(packagePath  + '/' + "metadata.desktop");
+    KConfigGroup projectInformation(&c, "Desktop Entry");
+    const QString relativeFilenamePath = projectInformation.readEntry("X-Plasma-MainScript");
+    QString fullFilenamePath = KStandardDirs::locate("data", packagePath + "/contents" + '/' + relativeFilenamePath);
+    return fullFilenamePath;
+}
+
+void KonsolePreviewer::executeKWinScript()
+{
+    QString KWinScriptOutput;
+    const QString mainFileName = packageMainFile(m_packagePath);
+    QFile mainFile(mainFileName);
+    if (!mainFile.exists()) {
+        KWinScriptOutput.append(i18n("The main source file doesn't exist."));
+        KMessageBox::error(0, i18n("There is a problem with your package."
+        "Please check your metada.desktop file,"
+        "and verify that the %1 exists.").arg(mainFileName));
+        m_textEdit->append(KWinScriptOutput);
+        return;
+    } else {
+        QDBusMessage message = QDBusMessage::createMethodCall("org.kde.kwin", "/Scripting", "org.kde.kwin.Scripting", "loadScript");
+        QList<QVariant> arguments;
+        arguments << QVariant(mainFileName);
+        message.setArguments(arguments);
+        QDBusMessage reply = QDBusConnection::sessionBus().call(message);
+        if (reply.type() == QDBusMessage::ErrorMessage) {
+            KWinScriptOutput.append(reply.errorMessage());
+        } else {
+            message = QDBusMessage::createMethodCall("org.kde.kwin", "/Scripting", "org.kde.kwin.Scripting", "start");
+            reply = QDBusConnection::sessionBus().call(message);
+            if (reply.type() == QDBusMessage::ErrorMessage) {
+                KWinScriptOutput.append(reply.errorMessage());
+            } else {
+                //successful message must been put here
+                KWinScriptOutput.append(i18n("The KWin Script has been executed successfully"));
+            }
+        }
+    }
+
+    m_textEdit->append(KWinScriptOutput);
 }
 
 void KonsolePreviewer::clearOutput()

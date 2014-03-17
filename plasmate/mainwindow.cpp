@@ -26,7 +26,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QTextStream>
 
 #include <KTextEdit>
-
 #include <KAction>
 #include <KActionCollection>
 #include <KConfig>
@@ -273,6 +272,14 @@ void MainWindow::toggleActions()
         if (m_konsoleWidget) {
             m_konsoleWidget.data()->setVisible(false);
         }
+    } else if (m_packageType == "KWin/Script") {
+        //On KWin Scripts we don't have a previewer.
+        //So we are hiding it from the toolbar.
+        actionCollection()->action("preview")->setVisible(false);
+        //We want only the KWin scripts to have the ability to
+        //show or hide the konsole previewer from the toolbar.
+        //The rest packages can do that inside from the previewer.
+        //The Konsole is visible by default
     }
 }
 
@@ -858,7 +865,7 @@ void MainWindow::loadProject(const QString &path)
     }
 
     //initialize the konsole previewer
-    m_konsoleWidget.reset(createKonsoleFor(previewerType));
+    m_konsoleWidget.reset(createKonsoleFor(previewerType, packagePath));
 
     // initialize previewer
     delete m_previewerWidget;
@@ -1014,7 +1021,7 @@ Previewer* MainWindow::createPreviewerFor(const QString& projectType)
     return ret;
 }
 
-KonsolePreviewer* MainWindow::createKonsoleFor(const QString& projectType)
+KonsolePreviewer* MainWindow::createKonsoleFor(const QString& projectType, const QString &packagePath)
 {
     KonsolePreviewer *konsole = 0;
     if (projectType.contains("KWin/WindowSwitcher")) {
@@ -1023,6 +1030,9 @@ KonsolePreviewer* MainWindow::createKonsoleFor(const QString& projectType)
         konsole = new KonsolePreviewer(i18n("Previewer Output"));
     } else if (projectType == "Plasma/Runner") {
         konsole = new KonsolePreviewer(i18n("Previewer Output"));
+    } else if (projectType == "KWin/Script") {
+        //we need to specify the serviceType and path of our package
+        konsole = new KonsolePreviewer(i18nc("Window Title", "KWin Scripting Konsole"), this, projectType, packagePath);
     }
 
     if (konsole) {

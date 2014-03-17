@@ -150,7 +150,7 @@ private:
     void setupTextEditor(KTextEditor::Document *editorPart, KTextEditor::View *view);
     void loadNotesEditor(QDockWidget *container);
     Previewer* createPreviewerFor(const QString& projectType);
-    KonsolePreviewer* createKonsoleFor(const QString& projectType);
+    KonsolePreviewer* createKonsoleFor(const QString& projectType, const QString &projectPath = 0);
 
     KAction *addAction(QString text, const char * icon,const  char *slot, const char *name, const KShortcut &shortcut = KShortcut());
 
