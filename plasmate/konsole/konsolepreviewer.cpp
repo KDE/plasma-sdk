@@ -93,8 +93,8 @@ void KonsolePreviewer::executeKWinScript()
     QFile mainFile(mainFileName);
     if (!mainFile.exists()) {
         KWinScriptOutput.append(i18n("The main source file doesn't exist."));
-        KMessageBox::error(0, i18n("There is a problem with your package."
-        "Please check your metada.desktop file,"
+        KMessageBox::error(0, i18n("There is a problem with your package. "
+        "Please check your metadata.desktop file, "
         "and verify that the %1 exists.").arg(mainFileName));
         m_textEdit->append(KWinScriptOutput);
         return;
