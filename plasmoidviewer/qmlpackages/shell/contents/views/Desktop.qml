@@ -56,7 +56,10 @@ Rectangle {
         id: backgroundButtons
         width: buttons.backgroundWidth
         height: buttons.backgroundHeight
-        anchors.horizontalCenter: root.horizontalCenter
+        anchors {
+            horizontalCenter: root.horizontalCenter
+            bottom: root.bottom
+        }
     }
 
     Konsole {
