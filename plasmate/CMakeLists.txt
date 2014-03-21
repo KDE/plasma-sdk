@@ -14,7 +14,7 @@ add_feature_info(GIT_EXECUTABLE_FOUND "Git" "Distributed Revision Control System
 
 set (PlasMate_SRC
     editors/editpage.cpp
-    #editors/metadata/metadataeditor.cpp
+    editors/metadata/metadataeditor.cpp
     editors/imageviewer/imageloader.cpp
     editors/imageviewer/imageviewer.cpp
     #editors/text/texteditor.cpp
@@ -68,8 +68,7 @@ set (PlasMate_SRC
 #endif (DEBUG_MODEL)
 
 qt5_wrap_ui(PlasMate_SRC
-    #startpage.ui
-   #editors/metadata/metadata.ui
+   editors/metadata/metadata.ui
    publisher/publisher.ui
    #publisher/remoteinstaller/remoteinstaller.ui
    editors/kconfigxt/kconfigxteditor.ui
