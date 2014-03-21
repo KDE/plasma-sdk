@@ -26,12 +26,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <KConfigGroup>
 
-class MetadataHandler : public QObject
+class MetadataHandler
 {
-    Q_OBJECT
 
 public:
-    MetadataHandler(QObject *parent = 0);
+    MetadataHandler();
 
     ~MetadataHandler();
 

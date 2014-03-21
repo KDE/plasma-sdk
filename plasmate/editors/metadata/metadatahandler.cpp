@@ -26,8 +26,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KSharedConfig>
 
 #include <QDebug>
-MetadataHandler::MetadataHandler(QObject *parent)
-        : QObject(parent)
+
+MetadataHandler::MetadataHandler()
 {
 }
 

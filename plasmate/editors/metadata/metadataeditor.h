@@ -56,7 +56,7 @@ private slots:
 private:
     Ui::MetaDataEditor *m_view;
     QString m_filename;
-    MetadataHandler *m_metadata;
+    MetadataHandler m_metadata;
     QStringList m_categories;
 
     void initCatergories(const QString& serviceType);
