@@ -49,6 +49,7 @@ public:
 private Q_SLOTS:
     void editToolbars();
     void slotNewToolbarConfig();
+    void closeProject();
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -68,7 +69,7 @@ private:
 
     DockWidgetsHandler *m_dockWidgetsHandler;
     PackageHandler *m_packageHandler;
-    StartPage *m_startPage;
+    QWeakPointer<StartPage> m_startPage;
 };
 
 

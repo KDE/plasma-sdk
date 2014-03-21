@@ -45,13 +45,12 @@ MainWindow::MainWindow(QWidget *parent)
         m_doc(nullptr),
         m_view(nullptr),
         m_dockWidgetsHandler(nullptr),
-        m_packageHandler(new PackageHandler(this)),
-        m_startPage(nullptr)
-
+        m_packageHandler(new PackageHandler(this))
 {
     m_dockWidgetsHandler = new DockWidgetsHandler(m_packageHandler, this);
 
-    KTextEditor::Editor::instance()->readConfig();
+    // TODO
+    // KTextEditor::Editor::instance()->readConfig();
 
     m_doc = KTextEditor::Editor::instance()->createDocument(nullptr);
 
@@ -89,7 +88,7 @@ void MainWindow::setupActions()
     QAction *close = KStandardAction::close(this, SLOT(closeProject()), actionCollection());
     close->setText(i18n("Close Project"));
 
-    QAction *quitAction = KStandardAction::quit(this, SLOT(quit()), actionCollection());
+    QAction *quitAction = KStandardAction::quit(this, SLOT(close()), actionCollection());
     QWidget::addAction(quitAction);
 
     QAction *refresh = KStandardAction::redisplay(this, SLOT(saveAndRefresh()), actionCollection());
@@ -126,13 +125,25 @@ void MainWindow::slotNewToolbarConfig()
     applyMainWindowSettings(KSharedConfig::openConfig()->group("MainWindow"));
 }
 
+void MainWindow::closeProject()
+{
+    takeCentralWidget();
+    setupStartPage();
+}
+
 void MainWindow::setupStartPage()
 {
-    m_startPage = new StartPage(m_packageHandler, this);
+    if (!m_startPage) {
+        m_startPage = new StartPage(m_packageHandler, this);
+    }
+
     toolBar()->hide();
     menuBar()->hide();
     m_view->hide();
-    setCentralWidget(m_startPage);
+
+    if (m_startPage) {
+        setCentralWidget(m_startPage.data());
+    }
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
