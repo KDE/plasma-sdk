@@ -28,7 +28,7 @@ Item {
     signal formFactor(int FormFactorType)
     signal location(int LocationType)
     signal requestScreenshot()
-    property int backgroundHeight: refreshButton.implicitHeight * 2
+    property int backgroundHeight: refreshButton.implicitHeight * 4
     property int backgroundWidth: (refreshButton.implicitWidth + konsoleButton.implicitWidth +
                                   formFactorMenuButton.implicitWidth + locationMenuButton.implicitWidth) * 2
 
