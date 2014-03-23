@@ -99,6 +99,23 @@ void DockWidgetsHandler::toggleFileList()
     if (!m_fileListWidget) {
         m_fileListWidget.reset(new FileList(m_packageHandler));
         m_mainWindow->addDockWidget(Qt::LeftDockWidgetArea, m_fileListWidget.data());
+
+        connect(m_fileListWidget->editPage(), &EditPage::loadRequiredEditor, [=](QWidget *editor) {
+            QWidget *tmpWidget = m_mainWindow->centralWidget();
+
+            // if the widget is the texteditor don't delete it
+            // Q: how does the widgets gets deleted?
+            // A: QMainWindow::setCentralWidget takes the ownership of
+            // the widget and deletes it in the appropriate time.
+            // So we use QMainWindow::takeCentralWidget in order to take the ownership
+            // back.
+
+            if (qstrcmp(tmpWidget->metaObject()->className(), "KTextEditor::ViewPrivate") == 0) {
+                m_mainWindow->takeCentralWidget();
+            }
+            m_mainWindow->setCentralWidget(editor);
+        });
+
         return;
     }
 
