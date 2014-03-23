@@ -90,6 +90,7 @@ EditPage::EditPage(PackageHandler *packageHandler, QWidget *parent)
 
     m_packageModel = new PackageModel(m_packageHandler, this);
     setModel(m_packageModel);
+    expandAll();
 }
 
 void EditPage::doDelete(bool)
