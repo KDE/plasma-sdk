@@ -37,8 +37,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "packagehandler.h"
 #include "startpage.h"
 
-static const int STATE_VERSION = 0;
-
 MainWindow::MainWindow(QWidget *parent)
       : KParts::MainWindow(parent, Qt::Widget),
         m_part(nullptr),
@@ -158,11 +156,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::saveProjectState()
 {
-    const QString projectrc = m_packageHandler->packagePath() + QStringLiteral(".plasmateprojectrc");
-    KConfigGroup configDocks(KSharedConfig::openConfig(projectrc), "DocksPosition");
-    configDocks.writeEntry("MainWindowLayout", saveState(STATE_VERSION));
-    configDocks.sync();
-
     m_dockWidgetsHandler->saveDockWidgetsState();
     m_view->document()->documentSave();
 }
@@ -172,11 +165,6 @@ void MainWindow::loadProject(const QString &projectPath)
     toolBar()->show();
     menuBar()->show();
     m_view->show();
-
-    const QString projectrc = m_packageHandler->packagePath() + QStringLiteral(".plasmateprojectrc");
-    KConfigGroup configDocks(KSharedConfig::openConfig(projectrc), "DocksPosition");
-    const QString state = configDocks.readEntry("MainWindowLayout", QString());
-    restoreState(state.toLocal8Bit(), STATE_VERSION);
 
     loadTextEditor(QUrl::fromLocalFile(projectPath));
 }
