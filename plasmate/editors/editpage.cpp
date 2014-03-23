@@ -71,11 +71,8 @@ EditPage* FileList::editPage() const
 
 EditPage::EditPage(PackageHandler *packageHandler, QWidget *parent)
         : QTreeView(parent),
-          m_imageViewer(nullptr),
-          m_kconfigXtEditor(nullptr),
           m_packageModel(nullptr),
-          m_packageHandler(packageHandler),
-          m_metaEditor(nullptr)
+          m_packageHandler(packageHandler)
 {
     setHeaderHidden(true);
     m_contextMenu = new QMenu(this);
@@ -154,8 +151,8 @@ void EditPage::findEditor(const QModelIndex &index)
             if (!m_metaEditor) {
                 m_metaEditor = new MetaDataEditor(this);
             }
-            m_metaEditor->setFilename(target);
-            emit loadRequiredEditor(m_metaEditor);
+            m_metaEditor.data()->setFilename(target);
+            emit loadRequiredEditor(m_metaEditor.data());
             return;
         }
 
@@ -178,8 +175,8 @@ void EditPage::findEditor(const QModelIndex &index)
                 m_imageViewer = new ImageViewer(this);
             }
 
-            m_imageViewer->loadImage(QUrl::fromLocalFile(target));
-            emit loadRequiredEditor(m_imageViewer);
+            m_imageViewer.data()->loadImage(QUrl::fromLocalFile(target));
+            emit loadRequiredEditor(m_imageViewer.data());
             return;
         }
 
@@ -188,10 +185,10 @@ void EditPage::findEditor(const QModelIndex &index)
                 m_kconfigXtEditor = new KConfigXtEditor(this);
             }
 
-            m_kconfigXtEditor->setFilename(QUrl::fromLocalFile(target));
-            m_kconfigXtEditor->readFile();
+            m_kconfigXtEditor.data()->setFilename(QUrl::fromLocalFile(target));
+            m_kconfigXtEditor.data()->readFile();
 
-            emit loadRequiredEditor(m_kconfigXtEditor);
+            emit loadRequiredEditor(m_kconfigXtEditor.data());
             return;
         }
 
@@ -260,6 +257,7 @@ void EditPage::findEditor(const QModelIndex &index)
         }
     }
 }
+
 void EditPage::imageDialog(const QString& filter, const QString& destinationPath)
 {
     KUser user;

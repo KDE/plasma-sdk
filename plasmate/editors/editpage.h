@@ -65,11 +65,11 @@ private:
     void imageDialog(const QString &filter, const QString& destinationPath);
     QString createContentWithSubdir(const QString& packagePath, const QString& contentWithSubdir) const;
 
-    ImageViewer *m_imageViewer;
-    KConfigXtEditor *m_kconfigXtEditor;
+    QWeakPointer<ImageViewer> m_imageViewer;
+    QWeakPointer<KConfigXtEditor> m_kconfigXtEditor;
+    QWeakPointer <MetaDataEditor> m_metaEditor;
     PackageModel *m_packageModel;
     PackageHandler *m_packageHandler;
-    MetaDataEditor *m_metaEditor;
 };
 
 
