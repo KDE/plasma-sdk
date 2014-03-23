@@ -32,13 +32,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <kparts/part.h>
 #include <kservice.h>
 
-// FIXME
-//#include "editors/metadata/metadataeditor.h"
-
 class QWidget;
 class QMenu;
 class ImageViewer;
 class KConfigXtEditor;
+class MetaDataEditor;
 class KJob;
 class PackageModel;
 class PackageHandler;
@@ -62,8 +60,6 @@ private Q_SLOTS:
 
 private:
     QMenu *m_contextMenu;
-    // FIXME
-    // MetaDataEditor *m_metaEditor;
     QUrl m_path;
     bool hasExtension(const QString &filename);
     void imageDialog(const QString &filter, const QString& destinationPath);
@@ -73,6 +69,7 @@ private:
     KConfigXtEditor *m_kconfigXtEditor;
     PackageModel *m_packageModel;
     PackageHandler *m_packageHandler;
+    MetaDataEditor *m_metaEditor;
 };
 
 

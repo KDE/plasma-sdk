@@ -27,6 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "editpage.h"
 #include "imageviewer/imageviewer.h"
 #include "kconfigxt/kconfigxteditor.h"
+#include "metadata/metadataeditor.h"
 
 #include <QDebug>
 #include <QHBoxLayout>
@@ -70,12 +71,11 @@ EditPage* FileList::editPage() const
 
 EditPage::EditPage(PackageHandler *packageHandler, QWidget *parent)
         : QTreeView(parent),
-          m_imageViewer(0),
-          m_kconfigXtEditor(0),
-          m_packageModel(0),
-          m_packageHandler(packageHandler)
-        // FIXME
-        // m_metaEditor(0)
+          m_imageViewer(nullptr),
+          m_kconfigXtEditor(nullptr),
+          m_packageModel(nullptr),
+          m_packageHandler(packageHandler),
+          m_metaEditor(nullptr)
 {
     setHeaderHidden(true);
     m_contextMenu = new QMenu(this);
@@ -151,7 +151,11 @@ void EditPage::findEditor(const QModelIndex &index)
         QString target = index.data(PackageModel::UrlRole).toUrl().toLocalFile();
         qDebug() << "mimetype" << mimetype;
         if (mimetype == "[plasmate]/metadata") {
-            emit loadMetaDataEditor(QUrl::fromLocalFile(target));
+            if (!m_metaEditor) {
+                m_metaEditor = new MetaDataEditor(this);
+            }
+            m_metaEditor->setFilename(target);
+            emit loadRequiredEditor(m_metaEditor);
             return;
         }
 
