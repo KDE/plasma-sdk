@@ -24,10 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QObject>
 
-namespace KParts {
-    class MainWindow;
-}
-
+class MainWindow;
 class DocBrowser;
 class FileList;
 class NotesEditor;
@@ -40,7 +37,7 @@ class DockWidgetsHandler : public QObject
     Q_OBJECT
 
 public:
-    explicit DockWidgetsHandler(PackageHandler *packageHandler, KParts::MainWindow *parent);
+    explicit DockWidgetsHandler(PackageHandler *packageHandler, MainWindow *parent);
     ~DockWidgetsHandler();
 
     void removeAllDockWidgets();
@@ -55,7 +52,7 @@ public Q_SLOTS:
 
 private:
     PackageHandler *m_packageHandler;
-    KParts::MainWindow *m_mainWindow;
+    MainWindow *m_mainWindow;
     QString m_projectType;
 
     QScopedPointer<NotesEditor> m_notesWidget;

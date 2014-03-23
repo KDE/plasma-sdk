@@ -51,9 +51,9 @@ public:
     explicit EditPage(PackageHandler *packageHandler, QWidget *parent = 0);
 
 Q_SIGNALS:
-    void loadEditor(const KService::List offers, QUrl target);
     void loadMetaDataEditor(QUrl target);
     void loadRequiredEditor(QWidget *editor);
+    void loadTextEditor(const QUrl &filePath);
 
 private Q_SLOTS:
     void findEditor(const QModelIndex &index);

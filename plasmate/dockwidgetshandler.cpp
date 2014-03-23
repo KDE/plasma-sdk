@@ -20,9 +20,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 
-#include <KParts/MainWindow>
 #include <KLocalizedString>
 
+#include "mainwindow.h"
 #include "dockwidgetshandler.h"
 #include "packagehandler.h"
 
@@ -31,7 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "previewer/plasmoid/plasmoidpreviewer.h"
 #include "editors/editpage.h"
 
-DockWidgetsHandler::DockWidgetsHandler(PackageHandler *packageHandler, KParts::MainWindow *parent)
+DockWidgetsHandler::DockWidgetsHandler(PackageHandler *packageHandler, MainWindow *parent)
     : QObject(parent),
       m_packageHandler(packageHandler),
       m_mainWindow(parent)
@@ -115,6 +115,8 @@ void DockWidgetsHandler::toggleFileList()
             }
             m_mainWindow->setCentralWidget(editor);
         });
+
+        connect(m_fileListWidget->editPage(), &EditPage::loadTextEditor, m_mainWindow, &MainWindow::loadTextEditor);
 
         return;
     }

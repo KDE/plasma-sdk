@@ -250,7 +250,7 @@ void EditPage::findEditor(const QModelIndex &index)
             //create the part using offers.at(0)
             //qDebug() << offers.at(0);
             //offers.at(0)->createInstance(parentWidget);
-            emit loadEditor(offers, QUrl(target));
+            emit loadTextEditor(QUrl::fromLocalFile(target));
             return;
         }
     }
