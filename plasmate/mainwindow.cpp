@@ -178,7 +178,12 @@ void MainWindow::loadProject(const QString &projectPath)
     const QString state = configDocks.readEntry("MainWindowLayout", QString());
     restoreState(state.toLocal8Bit(), STATE_VERSION);
 
-    m_view->document()->openUrl(QUrl::fromLocalFile(projectPath));
+    loadTextEditor(QUrl::fromLocalFile(projectPath));
+}
+
+void MainWindow::loadTextEditor(const QUrl &filePath)
+{
+    m_view->document()->openUrl(filePath);
     setCentralWidget(m_view);
 }
 

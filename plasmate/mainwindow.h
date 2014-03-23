@@ -41,10 +41,13 @@ class MainWindow : public KParts::MainWindow
 {
     Q_OBJECT
 public:
-        MainWindow(QWidget *parent = 0);
-        ~MainWindow();
+    MainWindow(QWidget *parent = 0);
+    ~MainWindow();
 
-        void loadProject(const QString &projectPath);
+    void loadProject(const QString &projectPath);
+
+public Q_SLOTS:
+    void loadTextEditor(const QUrl &filePath);
 
 private Q_SLOTS:
     void editToolbars();
