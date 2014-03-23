@@ -128,6 +128,8 @@ void MainWindow::slotNewToolbarConfig()
 void MainWindow::closeProject()
 {
     takeCentralWidget();
+    // we don't need the dockwidgets anymore
+    m_dockWidgetsHandler->removeAllDockWidgets();
     setupStartPage();
 }
 
