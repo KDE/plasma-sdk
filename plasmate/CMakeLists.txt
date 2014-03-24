@@ -96,6 +96,7 @@ target_link_libraries(plasmate
                       KF5::KIOCore
                       KF5::ItemViews
                       KF5::ConfigCore
+                      KF5::ConfigWidgets
                       KF5::IconThemes
                       KF5::I18n
                       KF5::KIOWidgets
