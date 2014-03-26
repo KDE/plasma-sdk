@@ -7,6 +7,7 @@ add_executable(plasmoidviewer ${plasmoidviewer_SRCS})
 
 target_link_libraries(plasmoidviewer
     Qt5::Quick
+    Qt5::DBus
     KF5::Plasma
     KF5::PlasmaQuick
     KF5::I18n
