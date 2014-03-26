@@ -42,10 +42,6 @@ void PackageHandlerTest::initTestCase()
     });
 }
 
-void PackageHandlerTest::initPlasmoid()
-{
-}
-
 void PackageHandlerTest::createNewPlasmoid()
 {
     QString newPlasmoidLocation = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0);
@@ -66,7 +62,6 @@ void PackageHandlerTest::createNewPlasmoid()
 
     m_packageHandler.setPackagePath(newPlasmoidLocation);
     m_packageHandler.createPackage(QStringLiteral("author"), QStringLiteral("email"), QStringLiteral("Plasma/Applet"), QStringLiteral("newPlasmoid"), QStringLiteral("main.qml"), QStringLiteral("declarative"), QStringLiteral(".qml"));
-    m_packageHandler.loadPackage();
 
     QDir dir(newPlasmoidLocation);
     Q_ASSERT(dir.exists());
@@ -184,6 +179,11 @@ void PackageHandlerTest::checkPlasmoidNodes()
     }
 }
 
+void PackageHandlerTest::cleanupTestCase()
+{
+    QDir testdata(QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0));
+    testdata.removeRecursively();
+}
 
 QTEST_GUILESS_MAIN(PackageHandlerTest)
 

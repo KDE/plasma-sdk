@@ -35,12 +35,12 @@ public:
 
 private Q_SLOTS:
     void initTestCase();
-    void initPlasmoid();
     void createNewPlasmoid();
     void loadPlasmoidTestData();
     void checkPlasmoidMimeTypes();
     void checkNodes();
     void checkPlasmoidNodes();
+    void cleanupTestCase();
 private:
     PackageHandler m_packageHandler;
 };
