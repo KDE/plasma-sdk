@@ -157,7 +157,11 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::saveProjectState()
 {
     m_dockWidgetsHandler->saveDockWidgetsState();
-    m_view->document()->documentSave();
+
+    // do we really have a file which needs to be saved?
+    if (!m_view->document()->url().isEmpty()) {
+        m_view->document()->documentSave();
+    }
 }
 
 void MainWindow::loadProject(const QString &projectPath)
