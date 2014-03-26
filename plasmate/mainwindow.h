@@ -53,13 +53,16 @@ private Q_SLOTS:
     void editToolbars();
     void slotNewToolbarConfig();
     void closeProject();
+    void togglePublisher();
 
 protected:
     void closeEvent(QCloseEvent *event);
 
 private:
-    QAction *addAction(QString text, const char * icon,
+    QAction *addAction(const QString &text, const char *icon,
                        const  char *slot, const char *name);
+    QAction *createAction(QString text, const char * icon,
+                          const char *name);
 
     void setupActions();
     void setupStartPage();

@@ -36,6 +36,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "dockwidgetshandler.h"
 #include "packagehandler.h"
 #include "startpage.h"
+#include "publisher/publisher.h"
+#include "editors/metadata/metadatahandler.h"
 
 MainWindow::MainWindow(QWidget *parent)
       : KParts::MainWindow(parent, Qt::Widget),
@@ -73,12 +75,18 @@ MainWindow::~MainWindow()
     delete m_doc;
 }
 
-QAction *MainWindow::addAction(QString text, const char * icon, const  char *slot, const char *name)
+QAction *MainWindow::addAction(const QString &text, const char *icon, const  char *slot, const char *name)
+{
+    QAction *action = createAction(text, icon, name);
+    connect(action, SIGNAL(triggered(bool)), m_dockWidgetsHandler, slot);
+    return action;
+}
+
+QAction *MainWindow::createAction(QString text, const char * icon, const char *name)
 {
     QAction *action = new QAction(this);
     action->setText(text);
     action->setIcon(QIcon::fromTheme(icon));
-    connect(action, SIGNAL(triggered(bool)), m_dockWidgetsHandler, slot);
     actionCollection()->addAction(name, action);
     return action;
 }
@@ -99,8 +107,10 @@ void MainWindow::setupActions()
     QAction *installProjectAction = addAction(i18n("Install Project"), "plasmagik", SLOT(installPackage()), "installproject");
     installProjectAction->setShortcut(Qt::META + Qt::Key_F5);
 
+    QAction *publisherAction = createAction(i18n("Publish"), "krfb", "publish");
+    connect(publisherAction, SIGNAL(triggered(bool)), this, SLOT(togglePublisher()));
+
     addAction(i18n("Create Save Point"), "document-save", SLOT(selectSavePoint()), "savepoint");
-    addAction(i18n("Publish"), "krfb", SLOT(togglePublisher()),   "publish");
     addAction(i18n("Preview"), "user-desktop", SLOT(togglePreviewer()), "preview")->setCheckable(true);
     addAction(i18n("Notes"), "accessories-text-editor", SLOT(toggleNotes()), "notes")->setCheckable(true);
     addAction(i18n("Files"), "system-file-manager", SLOT(toggleFileList()), "file_list")->setCheckable(true);
@@ -179,5 +189,18 @@ void MainWindow::loadTextEditor(const QUrl &filePath)
 {
     m_view->document()->openUrl(filePath);
     setCentralWidget(m_view);
+}
+
+void MainWindow::togglePublisher()
+{
+    QScopedPointer<Publisher> publisherWidget;
+    MetadataHandler metadataHandler;
+    const QString projectName = m_packageHandler->packagePath().split(QLatin1Char('/'), QString::SkipEmptyParts).last();
+    metadataHandler.setFilePath(m_packageHandler->packagePath() + QStringLiteral("metadata.desktop"));
+    publisherWidget.reset(new Publisher(this, QUrl(m_packageHandler->packagePath()), metadataHandler.serviceTypes().at(0)));
+    publisherWidget->setProjectName(projectName);
+
+    //open the dialog
+    publisherWidget->exec();
 }
 

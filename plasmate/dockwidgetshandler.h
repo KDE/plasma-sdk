@@ -50,7 +50,6 @@ public Q_SLOTS:
     void toggleDocumentation();
     void toggleTimeLine();
     void toggleFileList();
-    void togglePublisher();
 
 private:
     PackageHandler *m_packageHandler;
@@ -61,7 +60,6 @@ private:
     QScopedPointer<Previewer> m_previewerWidget;
     QScopedPointer<FileList> m_fileListWidget;
     QScopedPointer<DocBrowser> m_docBrowserWidget;
-    QScopedPointer<Publisher> m_publisherWidget;
 };
 
 #endif
