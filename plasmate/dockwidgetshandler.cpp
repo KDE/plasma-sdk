@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KLocalizedString>
 
 #include "mainwindow.h"
+#include "editors/metadata/metadatahandler.h"
 #include "dockwidgetshandler.h"
 #include "packagehandler.h"
 
@@ -30,6 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "noteseditor/noteseditor.h"
 #include "previewer/plasmoid/plasmoidpreviewer.h"
 #include "editors/editpage.h"
+#include "publisher/publisher.h"
 
 DockWidgetsHandler::DockWidgetsHandler(PackageHandler *packageHandler, MainWindow *parent)
     : QObject(parent),
@@ -123,6 +125,15 @@ void DockWidgetsHandler::toggleFileList()
 
     m_mainWindow->removeDockWidget(m_fileListWidget.data());
     m_fileListWidget.reset();
+}
+
+void DockWidgetsHandler::togglePublisher()
+{
+    m_publisherWidget.reset();
+    MetadataHandler metadataHandler;
+    metadataHandler.setFilePath(m_packageHandler->packagePath() + QStringLiteral("metadata.desktop"));
+    m_publisherWidget.reset(new Publisher(m_mainWindow, QUrl(m_packageHandler->packagePath()), metadataHandler.serviceTypes().at(0)));
+    m_publisherWidget->exec();
 }
 
 void DockWidgetsHandler::removeAllDockWidgets()

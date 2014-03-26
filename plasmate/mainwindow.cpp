@@ -100,7 +100,7 @@ void MainWindow::setupActions()
     installProjectAction->setShortcut(Qt::META + Qt::Key_F5);
 
     addAction(i18n("Create Save Point"), "document-save", SLOT(selectSavePoint()), "savepoint");
-    addAction(i18n("Publish"), "krfb", SLOT(selectPublish()),   "publish");
+    addAction(i18n("Publish"), "krfb", SLOT(togglePublisher()),   "publish");
     addAction(i18n("Preview"), "user-desktop", SLOT(togglePreviewer()), "preview")->setCheckable(true);
     addAction(i18n("Notes"), "accessories-text-editor", SLOT(toggleNotes()), "notes")->setCheckable(true);
     addAction(i18n("Files"), "system-file-manager", SLOT(toggleFileList()), "file_list")->setCheckable(true);
