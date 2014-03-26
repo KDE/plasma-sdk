@@ -50,7 +50,7 @@ MainWindow::MainWindow(QWidget *parent)
     // TODO
     // KTextEditor::Editor::instance()->readConfig();
 
-    m_doc = KTextEditor::Editor::instance()->createDocument(nullptr);
+    m_doc = KTextEditor::Editor::instance()->createDocument(this);
 
     m_view = m_doc->createView(this);
     setupActions();
@@ -69,6 +69,8 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     guiFactory()->removeClient(m_view);
+    delete m_view;
+    delete m_doc;
 }
 
 QAction *MainWindow::addAction(QString text, const char * icon, const  char *slot, const char *name)
