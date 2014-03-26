@@ -151,7 +151,12 @@ void PackageHandler::loadPackage()
     metadataHandler.serviceTypes().at(0);
 
     m_package = Plasma::PluginLoader::self()->loadPackage(metadataHandler.serviceTypes().at(0));;
-    m_package.setPath(m_packagePath);
+
+    QString mainScript = metadataHandler.mainScript();
+    mainScript = mainScript.split(QLatin1Char('/')).last();
+    if (mainScript != m_fileDefinitions[QStringLiteral("mainscript")]) {
+        m_fileDefinitions[QStringLiteral("mainscript")] = mainScript;
+    }
 }
 
 QUrl PackageHandler::urlForNode(PackageHandler::Node *node) const
@@ -174,9 +179,15 @@ QUrl PackageHandler::urlForNode(PackageHandler::Node *node) const
     if (!dir.exists()) {
         qDebug() << dir.mkpath(path);
     }
-
     if (node->isFile() && node->name() != QStringLiteral("New..")) {
-        path += node->name();
+
+        // is it a special file like mainscript?
+        if (m_fileDefinitions.contains(node->name())) {
+            path += m_fileDefinitions.value(node->name());
+        } else {
+            path += node->name();
+        }
+
         QFile f(path);
         if (!f.exists()) {
             f.open(QIODevice::ReadWrite);
@@ -215,14 +226,7 @@ void PackageHandler::createPackage(const QString &userName, const QString &userE
     metadataHandler.setMainScript(QStringLiteral("/ui/") + mainScriptName);
     metadataHandler.writeFile();
 
-    QString mainScript = metadataHandler.mainScript();
-    mainScript = mainScript.split(QLatin1Char('/')).last();
-    if (mainScript != m_fileDefinitions[QStringLiteral("mainscript")]) {
-        m_fileDefinitions[QStringLiteral("mainscript")] = mainScript;
-    }
-
-    m_package = Plasma::PluginLoader::self()->loadPackage(metadataHandler.serviceTypes().at(0));;
-    m_package.setPath(m_packagePath);
+    loadPackage();
     createRequiredDirectories();
     createRequiredFiles(serviceType, pluginName, userName, userEmail, fileExtension);
 }
@@ -262,7 +266,6 @@ void PackageHandler::createRequiredFiles(const QString &serviceType, const QStri
                 } else if (serviceType == "KWin/Effect") {
                     templateFilePath.append("mainKWinEffect");
                 }
-
                 f.setFileName(QStandardPaths::locate(QStandardPaths::DataLocation,
                                     QStringLiteral("templates/") + templateFilePath + fileExtension));
                 const bool ok = f.copy(filePath);
@@ -318,6 +321,9 @@ void PackageHandler::createRequiredFiles(const QString &serviceType, const QStri
 
 PackageHandler::Node* PackageHandler::loadPackageInfo()
 {
+
+    m_package.setPath(m_packagePath);
+
     auto mimeTypesForFile = [](const QString &fileName) {
         QMimeDatabase db;
         QMimeType mime = db.mimeTypeForFile(fileName);
@@ -367,7 +373,6 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
         if (m_directoryDefinitions.contains(it)) {
             for(const auto &fileIt : m_directoryDefinitions.values(it)) {
                 const QString name = m_fileDefinitions.value(fileIt);
-
                 if (name.isEmpty()) {
                     qWarning("Something is wrong with the file definitions");
                 }

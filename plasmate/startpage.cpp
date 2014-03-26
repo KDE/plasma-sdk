@@ -418,7 +418,6 @@ void StartPage::createNewProject()
     const QString projectPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0) + QLatin1Char('/') + projectFolderName;
     m_packageHandler->setPackagePath(projectPath);
     m_packageHandler->createPackage(m_ui.authorTextField->text(), m_ui.emailTextField->text(), serviceTypes, projectNameLowerCase, mainScriptName, api, projectFileExtension);
-    m_packageHandler->loadPackage();
 
     // create the metadata.desktop file
     // TODO: missing but possible entries that could be added:
