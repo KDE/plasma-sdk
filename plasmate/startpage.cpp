@@ -127,6 +127,13 @@ void StartPage::setupWidgets()
 
         m_projectHandler->recentProject(path);
         resetStatus();
+
+        //load our project
+        QString metadataDesktop = path;
+        const QString projectPath = metadataDesktop.replace(QStringLiteral("metadata.desktop"), "");
+        m_packageHandler->setPackagePath(projectPath);
+        m_packageHandler->loadPackage();
+        m_mainWindow->loadProject(findMainScript(projectPath));
         emit projectSelected(path);
     });
 
@@ -446,18 +453,17 @@ void StartPage::checkLocalProjectPath(const QString& name)
     m_ui.invalidPlasmagikLabelEmpty->setVisible(false);
     m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(false);
 
-    QDir dir(KShell::tildeExpand(name));
-    QFile metadataDesktop(dir.path() + "/metadata.desktop");
-    qDebug() << "checking: " << name << dir.exists();
+    QFile metadataDesktop(name);
+    qDebug() << "checking: " << name;
     m_ui.loadLocalProject->setEnabled(metadataDesktop.exists());
 
     if (name.isEmpty()) {
         m_ui.invalidPlasmagikLabelEmpty->setVisible(true);
         m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(false);
-    } else if (!metadataDesktop.exists()) {
+    } else if (!metadataDesktop.exists() && !metadataDesktop.fileName().endsWith(QStringLiteral("metadata.desktop"))) {
         m_ui.invalidPlasmagikLabelEmpty->setVisible(false);
         m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(true);
-        m_ui.invalidPlasmagikLabelNoMetadataDesktop->setText(i18n("metadata.desktop does not exist in %1", dir.path()));
+        m_ui.invalidPlasmagikLabelNoMetadataDesktop->setText(i18n("metadata.desktop does not exist in %1", name));
     } else if (!name.isEmpty()) {
         m_ui.invalidPlasmagikLabelEmpty->setVisible(false);
         m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(false);
