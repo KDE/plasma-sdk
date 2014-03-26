@@ -53,7 +53,19 @@ Publisher::Publisher(QWidget *parent, const QUrl &path, const QString& type)
 
     setLayout(layout);
 
-    m_extension = (type == "Plasma/Applet" || type == "Plasma/PopupApplet") ? "plasmoid" : "zip";
+    if (type == QStringLiteral("Plasma/Applet")) {
+        m_extension = QStringLiteral("plasmoid");
+    } else if (type == QStringLiteral("Plasma/PopupApplet")) {
+        m_extension = QStringLiteral("plasmoid");
+    } else if (type == QStringLiteral("KWin/WindowSwitcher")) {
+        m_extension = QStringLiteral("plasmoid");
+    } else if (type == QStringLiteral("KWin/Effect")) {
+        m_extension = QStringLiteral("plasmoid");
+    } else if (type == QStringLiteral("KWin/Script")) {
+        m_extension = QStringLiteral("plasmoid");
+    } else if (m_extension.isEmpty()) {
+        m_extension = QStringLiteral("zip");
+    }
 
     //we want the installButton to be enabled only when the comboBox's current index is valid.
     m_ui.installButton->setEnabled(false);
@@ -67,23 +79,15 @@ Publisher::Publisher(QWidget *parent, const QUrl &path, const QString& type)
         const QString exportDestination = QFileDialog::getSaveFileName(this, i18n("Save"), QString(), i18n("Plasmoid (*.plasmoid)"));
         m_ui.exporterUrl->setText(exportDestination);
     });
-    connect(m_ui.exporterButton, SIGNAL(clicked()), this, SLOT(doExport()));
+    connect(m_ui.exporterButton, &QPushButton::clicked, this, &Publisher::doExport);
+//    connect(m_ui.installerButton, &QComboBox::currentIndexChanged, this, &Publisher::checkInstallButtonState);
     connect(m_ui.installerButton, SIGNAL(currentIndexChanged(int)), this, SLOT(checkInstallButtonState(int)));
-    connect(m_ui.installButton, SIGNAL(clicked()), this, SLOT(doInstall()));
-    connect(m_ui.publisherButton, SIGNAL(clicked()), this, SLOT(doPublish()));
-    // Publish only works right for Plasmoid now afaik. Disabling for other project types.
-    m_ui.publisherButton->setEnabled(type == "Plasma/Applet" || type == "Plasma/PopupApplet");
+    connect(m_ui.installButton, &QPushButton::clicked, this, &Publisher::doInstall);
+    connect(m_ui.publisherButton, &QPushButton::clicked, this, &Publisher::doPublish);
+
+    m_ui.publisherButton->setEnabled(m_extension == QStringLiteral("plasmoid") || m_extension == QStringLiteral("zip"));
 
     setLayout(layout);
-}
-
-void Publisher::addSuffix()
-{
-  /*  QString selected = m_ui.exporterUrl->url().path();
-    QString suffix = QFileInfo(selected).suffix();
-    if (suffix != m_extension && suffix != "zip") {
-        m_ui.exporterUrl->setUrl(QUrl::fromLocalFile(selected + QLatin1Char('.') + m_extension));
-    }*/
 }
 
 void Publisher::setProjectName(const QString &name)
