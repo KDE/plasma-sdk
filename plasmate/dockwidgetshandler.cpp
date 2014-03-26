@@ -131,8 +131,12 @@ void DockWidgetsHandler::togglePublisher()
 {
     m_publisherWidget.reset();
     MetadataHandler metadataHandler;
+    const QString projectName = m_packageHandler->packagePath().split(QLatin1Char('/'), QString::SkipEmptyParts).last();
     metadataHandler.setFilePath(m_packageHandler->packagePath() + QStringLiteral("metadata.desktop"));
     m_publisherWidget.reset(new Publisher(m_mainWindow, QUrl(m_packageHandler->packagePath()), metadataHandler.serviceTypes().at(0)));
+    m_publisherWidget->setProjectName(projectName);
+
+    //open the dialog
     m_publisherWidget->exec();
 }
 

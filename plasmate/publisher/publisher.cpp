@@ -234,8 +234,9 @@ const QString Publisher::tempPackagePath()
 {
     QDir d(m_projectPath.path());
     if (d.cdUp()) {
-        return d.path() + QLatin1Char('/') + m_projectName + QLatin1Char('/') + m_extension;
+        return d.path() + QLatin1Char('/') + m_projectName + QLatin1Char('.') + m_extension;
     }
+
     QString path = m_projectPath.path();
     path = path.endsWith(QLatin1Char('/')) ? path : path + QLatin1Char('/');
     return path +  m_projectName + "." + m_extension;
