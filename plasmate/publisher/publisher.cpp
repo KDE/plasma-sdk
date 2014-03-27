@@ -53,15 +53,11 @@ Publisher::Publisher(QWidget *parent, const QUrl &path, const QString& type)
 
     setLayout(layout);
 
-    if (type == QStringLiteral("Plasma/Applet")) {
-        m_extension = QStringLiteral("plasmoid");
-    } else if (type == QStringLiteral("Plasma/PopupApplet")) {
-        m_extension = QStringLiteral("plasmoid");
-    } else if (type == QStringLiteral("KWin/WindowSwitcher")) {
-        m_extension = QStringLiteral("plasmoid");
-    } else if (type == QStringLiteral("KWin/Effect")) {
-        m_extension = QStringLiteral("plasmoid");
-    } else if (type == QStringLiteral("KWin/Script")) {
+    if (type == QStringLiteral("Plasma/Applet") ||
+    type == QStringLiteral("Plasma/PopupApplet") ||
+    type == QStringLiteral("KWin/WindowSwitcher") ||
+    type == QStringLiteral("KWin/Effect") ||
+    type == QStringLiteral("KWin/Script") {
         m_extension = QStringLiteral("plasmoid");
     } else if (m_extension.isEmpty()) {
         m_extension = QStringLiteral("zip");
