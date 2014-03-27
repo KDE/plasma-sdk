@@ -155,16 +155,11 @@ void Publisher::doPlasmaPkg()
     qDebug() << "tempPackagePath" << tempPackage.path();
     qDebug() << "m_projectPath" << m_projectPath.path();
 
-    //TODO
-    //ProjectManager::exportPackage(m_projectPath, tempPackage); // create temporary package
+    ProjectManager::exportPackage(m_projectPath, tempPackage); // create temporary package
 
-    QStringList argv("plasmapkg");
+    QStringList argv("plasmapkg2");
     argv.append("-t");
-    if (m_projectType == "Plasma/Runner") {
-        argv.append("runner");
-    } else if (m_projectType == "Plasma/DataEngine") {
-        argv.append("dataengine");
-    } else if (m_projectType == "Plasma/Theme") {
+    if (m_projectType == "Plasma/Theme") {
         argv.append("theme");
     } else if (m_projectType == "Plasma/Applet") {
         argv.append("plasmoid");
