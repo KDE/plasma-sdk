@@ -237,14 +237,11 @@ void Publisher::doPlasmaPkg()
 
 const QString Publisher::tempPackagePath()
 {
-    QDir d(m_projectPath.path());
-    if (d.cdUp()) {
-        return d.path() + QLatin1Char('/') + m_projectName + QLatin1Char('.') + m_extension;
-    }
+    QString tempPath = QStandardPaths::standardLocations(QStandardPaths::TempLocation).first();
+    //does it end with '/'? if not append it.
+    tempPath = tempPath.endsWith(QLatin1Char('/')) ? tempPath : tempPath + QLatin1Char('/');
 
-    QString path = m_projectPath.path();
-    path = path.endsWith(QLatin1Char('/')) ? path : path + QLatin1Char('/');
-    return path +  m_projectName + "." + m_extension;
+    return tempPath + m_projectName + QLatin1Char('.') + m_extension;
 }
 
 void Publisher::doPublish()
