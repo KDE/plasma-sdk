@@ -57,7 +57,7 @@ Publisher::Publisher(QWidget *parent, const QUrl &path, const QString& type)
     type == QStringLiteral("Plasma/PopupApplet") ||
     type == QStringLiteral("KWin/WindowSwitcher") ||
     type == QStringLiteral("KWin/Effect") ||
-    type == QStringLiteral("KWin/Script") {
+    type == QStringLiteral("KWin/Script")) {
         m_extension = QStringLiteral("plasmoid");
     } else if (m_extension.isEmpty()) {
         m_extension = QStringLiteral("zip");
