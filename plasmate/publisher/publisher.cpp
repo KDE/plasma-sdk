@@ -80,7 +80,8 @@ Publisher::Publisher(QWidget *parent, const QUrl &path, const QString& type)
         m_ui.exporterUrl->setText(exportDestination);
     });
     connect(m_ui.exporterButton, &QPushButton::clicked, this, &Publisher::doExport);
-//    connect(m_ui.installerButton, &QComboBox::currentIndexChanged, this, &Publisher::checkInstallButtonState);
+    //the new signal and slot syntax doesn't work with overloaded functions.
+    //so we are using the old syntax for the time being.
     connect(m_ui.installerButton, SIGNAL(currentIndexChanged(int)), this, SLOT(checkInstallButtonState(int)));
     connect(m_ui.installButton, &QPushButton::clicked, this, &Publisher::doInstall);
     connect(m_ui.publisherButton, &QPushButton::clicked, this, &Publisher::doPublish);
