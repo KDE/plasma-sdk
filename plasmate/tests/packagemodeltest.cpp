@@ -48,7 +48,6 @@ void PackageModelTest::testPlasmoidModel()
 
     packageHandler->setPackagePath(testDataPlasmoid);
     packageHandler->createPackage(QStringLiteral("author"), QStringLiteral("email"), QStringLiteral("Plasma/Applet"), QStringLiteral("newPlasmoid"), QStringLiteral("main.qml"), QStringLiteral("declarative"), QStringLiteral(".qml"));
-    packageHandler->loadPackage();
 
     PackageModel *model = new PackageModel(packageHandler, this);
     packageHandler->loadPackageInfo();

@@ -142,10 +142,7 @@ void PackageHandler::setPackagePath(const QString &path)
     } else {
         m_packagePath = path;
     }
-}
 
-void PackageHandler::loadPackage()
-{
     MetadataHandler metadataHandler;
     metadataHandler.setFilePath(m_packagePath + QLatin1Char('/') + QStringLiteral("metadata.desktop"));
     metadataHandler.serviceTypes().at(0);
@@ -226,7 +223,6 @@ void PackageHandler::createPackage(const QString &userName, const QString &userE
     metadataHandler.setMainScript(QStringLiteral("/ui/") + mainScriptName);
     metadataHandler.writeFile();
 
-    loadPackage();
     createRequiredDirectories();
     createRequiredFiles(serviceType, pluginName, userName, userEmail, fileExtension);
 }

@@ -156,7 +156,6 @@ void ProjectManager::emitProjectSelected()
     QString url = m_items[l.at(0)];
     if (!url.isEmpty()) {
         m_packageHandler->setPackagePath(url);
-        m_packageHandler->loadPackage();
         m_mainWindow->loadProject(findMainScript(url));
 
         m_projectHandler->recentProject(url);

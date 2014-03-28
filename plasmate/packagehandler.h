@@ -60,16 +60,11 @@ public:
             QStringList m_mimeTypes;
     };
 
-    /*
-     * @note it calls loadPackage
-     */
     void createPackage(const QString &userName, const QString &userEmail,
                        const QString &serviceType, const QString &pluginName,
                        const QString &mainScriptName, const QString &api, const QString &fileExtension);
 
     void setPackagePath(const QString &path);
-
-    void loadPackage();
 
     QString packagePath() const;
 

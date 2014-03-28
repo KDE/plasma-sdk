@@ -132,7 +132,6 @@ void StartPage::setupWidgets()
         QString metadataDesktop = path;
         const QString projectPath = metadataDesktop.replace(QStringLiteral("metadata.desktop"), "");
         m_packageHandler->setPackagePath(projectPath);
-        m_packageHandler->loadPackage();
         m_mainWindow->loadProject(findMainScript(projectPath));
         emit projectSelected(path);
     });
@@ -213,7 +212,6 @@ void StartPage::setupWidgets()
             return;
         } else {
             m_packageHandler->setPackagePath(url);
-            m_packageHandler->loadPackage();
             m_mainWindow->loadProject(findMainScript(url));
         }
 
