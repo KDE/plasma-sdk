@@ -24,6 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "modeltest.h"
 
 
+#include <QStandardPaths>
 #include <QTest>
 
 PackageModelTest::PackageModelTest(QObject *parent)

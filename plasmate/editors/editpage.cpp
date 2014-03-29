@@ -36,6 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QPixmap>
 #include <QStringList>
 #include <KConfigGroup>
+#include <KSharedConfig>
 #include <QFileDialog>
 #include <QIcon>
 #include <KMessageBox>

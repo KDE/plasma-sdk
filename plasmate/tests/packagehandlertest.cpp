@@ -24,6 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDir>
 #include <QTest>
 #include <QString>
+#include <QStandardPaths>
 
 PackageHandlerTest::PackageHandlerTest(QObject *parent)
         : QObject(parent)
