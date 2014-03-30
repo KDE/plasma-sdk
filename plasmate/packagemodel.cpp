@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "packagemodel.h"
-#include "packagehandler.h"
+#include "packagehandler/packagehandler.h"
 
 #include <QIcon>
 #include <QUrl>
