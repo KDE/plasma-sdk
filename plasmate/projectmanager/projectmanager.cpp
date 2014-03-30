@@ -37,7 +37,7 @@
 
 #include "projectmanager.h"
 #include "../projecthandler.h"
-#include "../packagehandler.h"
+#include "../packagehandler/packagehandler.h"
 #include "../editors/metadata/metadatahandler.h"
 
 ProjectManager::ProjectManager(ProjectHandler *projectHandler, PackageHandler *packageHandler, MainWindow *parent)
@@ -155,8 +155,7 @@ void ProjectManager::emitProjectSelected()
 
     QString url = m_items[l.at(0)];
     if (!url.isEmpty()) {
-        m_packageHandler->setPackagePath(url);
-        m_mainWindow->loadProject(findMainScript(url));
+        m_mainWindow->setPackageHandler(m_packageHandler);
 
         m_projectHandler->recentProject(url);
         emit projectSelected(url);
@@ -208,15 +207,5 @@ bool ProjectManager::importPackage(const QUrl &toImport, const QUrl &targetLocat
     plasmoid.directory()->copyTo(targetLocation.path());
     plasmoid.close();
     return ret;
-}
-
-QString ProjectManager::findMainScript(const QString &projectPath) const
-{
-    QString mainScriptPath(projectPath);
-
-    MetadataHandler metadataHandler;
-    metadataHandler.setFilePath(mainScriptPath + QLatin1Char('/') + QStringLiteral("metadata.desktop"));
-    mainScriptPath += QStringLiteral("/contents/") + metadataHandler.mainScript();
-    return mainScriptPath;
 }
 

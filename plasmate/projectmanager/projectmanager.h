@@ -65,8 +65,6 @@ private Q_SLOTS:
 private:
     void populateList();
     void deleteProject(const QUrl &projectLocation);
-    QString findMainScript(const QString &projectPath) const;
-
 
 //TODO: Implement:
 //      search/filterbar,
