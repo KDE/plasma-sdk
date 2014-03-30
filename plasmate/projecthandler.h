@@ -25,8 +25,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QObject>
 #include <QStringList>
 
-class PackageHandler;
-
 class ProjectHandler : public QObject
 {
     Q_OBJECT
@@ -47,7 +45,6 @@ private:
 
     QStringList m_projectsList;
     QStringList m_blacklistProjects;
-    PackageHandler *m_packageHandler;
 };
 
 #endif

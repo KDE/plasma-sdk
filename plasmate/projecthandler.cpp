@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "projecthandler.h"
-#include "packagehandler.h"
+
 #include <QApplication>
 #include <QDir>
 #include <QDebug>
@@ -31,18 +31,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KSharedConfig>
 
 ProjectHandler::ProjectHandler(QObject *parent)
-    : QObject(parent),
-      m_packageHandler(new PackageHandler(this))
+    : QObject(parent)
 {
 }
 
 ProjectHandler::~ProjectHandler()
 {
-}
-
-PackageHandler *ProjectHandler::packageHandler()
-{
-    return m_packageHandler;
 }
 
 const QStringList &ProjectHandler::loadProjectsList()
@@ -87,11 +81,7 @@ void ProjectHandler::addProject(const QString &projectPath)
 {
     QDir projectDir(projectPath);
 
-    if (!projectDir.exists()) {
-        // If our package doesn't exist we are creating it.
-
-        m_packageHandler->setPackagePath(projectDir.absolutePath());
-    } else  if (!projectDir.exists(QStringLiteral("metadata.desktop"))) {
+    if (!projectDir.exists(QStringLiteral("metadata.desktop"))) {
         qWarning() << "the project " << projectPath << "is not valid. metadata.desktop cannot be found";
         return;
     }
