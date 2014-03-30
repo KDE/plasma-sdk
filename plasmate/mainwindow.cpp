@@ -34,7 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "mainwindow.h"
 #include "dockwidgetshandler.h"
-#include "packagehandler.h"
+#include "packagehandler/packagehandler.h"
 #include "startpage.h"
 #include "publisher/publisher.h"
 #include "editors/metadata/metadatahandler.h"
@@ -44,11 +44,9 @@ MainWindow::MainWindow(QWidget *parent)
         m_part(nullptr),
         m_doc(nullptr),
         m_view(nullptr),
-        m_dockWidgetsHandler(nullptr),
-        m_packageHandler(new PackageHandler(this))
+        m_dockWidgetsHandler(new DockWidgetsHandler(this)),
+        m_packageHandler(nullptr)
 {
-    m_dockWidgetsHandler = new DockWidgetsHandler(m_packageHandler, this);
-
     // TODO
     // KTextEditor::Editor::instance()->readConfig();
 
@@ -56,6 +54,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_view = m_doc->createView(this);
     setupActions();
+
     m_view->setStatusBarEnabled(true);
 
     setXMLFile(QStringLiteral("plasmateui.rc"));
@@ -146,7 +145,7 @@ void MainWindow::closeProject()
 void MainWindow::setupStartPage()
 {
     if (!m_startPage) {
-        m_startPage = new StartPage(m_packageHandler, this);
+        m_startPage = new StartPage(this);
     }
 
     toolBar()->hide();
@@ -202,5 +201,18 @@ void MainWindow::togglePublisher()
 
     //open the dialog
     publisherWidget->exec();
+}
+
+void MainWindow::setPackageHandler(PackageHandler *packageHandler)
+{
+    m_packageHandler = packageHandler;
+    m_dockWidgetsHandler->setPackageHandler(m_packageHandler);
+
+    QString mainScriptPath(m_packageHandler->packagePath());
+
+    MetadataHandler metadataHandler;
+    metadataHandler.setFilePath(mainScriptPath + QStringLiteral("metadata.desktop"));
+    mainScriptPath += m_packageHandler->contentsPrefix() +  metadataHandler.mainScript();
+    loadProject(mainScriptPath);
 }
 

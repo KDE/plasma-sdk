@@ -44,7 +44,7 @@ public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void loadProject(const QString &projectPath);
+    void setPackageHandler(PackageHandler *packageHandler);
 
 public Q_SLOTS:
     void loadTextEditor(const QUrl &filePath);
@@ -64,6 +64,7 @@ private:
     QAction *createAction(QString text, const char * icon,
                           const char *name);
 
+    void loadProject(const QString &projectPath);
     void setupActions();
     void setupStartPage();
     void saveProjectState();
