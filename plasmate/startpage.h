@@ -37,7 +37,7 @@ class StartPage : public QWidget
     };
 
 public:
-    StartPage(PackageHandler *packageHandler, MainWindow *parent = 0);
+    StartPage(MainWindow *parent = 0);
     ~StartPage();
 
     QString userName();
@@ -71,6 +71,7 @@ private:
     void selectProject(const QUrl &target);
     void updateProjectPreferences();
     QString findMainScript(const QString &projectPath) const;
+    void initHandlers(const QString &projectPath);
 
     Ui::StartPage m_ui;
     MainWindow *m_mainWindow;

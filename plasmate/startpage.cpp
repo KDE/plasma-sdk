@@ -43,16 +43,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "packagemodel.h"
 #include "startpage.h"
 #include "mainwindow.h"
-#include "packagehandler.h"
+#include "packagehandler/packagehandler.h"
+#include "packagehandler/plasmoidhandler.h"
 #include "projectmanager/projectmanager.h"
 #include "projecthandler.h"
 
 
-StartPage::StartPage(PackageHandler *packageHandler, MainWindow *parent) // TODO set a palette so it will look identical with any color scheme.
+StartPage::StartPage(MainWindow *parent) // TODO set a palette so it will look identical with any color scheme.
         : QWidget(parent),
          m_parent(parent),
-         m_projectHandler(new ProjectHandler()),
-         m_packageHandler(packageHandler)
+         m_projectHandler(new ProjectHandler(this)),
+         m_packageHandler(nullptr)
 {
     m_mainWindow = parent;
     setupWidgets();
@@ -131,8 +132,8 @@ void StartPage::setupWidgets()
         //load our project
         QString metadataDesktop = path;
         const QString projectPath = metadataDesktop.replace(QStringLiteral("metadata.desktop"), "");
-        m_packageHandler->setPackagePath(projectPath);
-        m_mainWindow->loadProject(findMainScript(projectPath));
+        initHandlers(projectPath);
+        m_mainWindow->setPackageHandler(m_packageHandler);
         emit projectSelected(path);
     });
 
@@ -203,6 +204,8 @@ void StartPage::setupWidgets()
     connect(m_ui.recentProjects, &QListWidget::clicked, [=](const QModelIndex &index) {
         QAbstractItemModel *m = m_ui.recentProjects->model();
         QString url = m->data(index, FullPathRole).value<QString>();
+        initHandlers(url);
+
         if (url.isEmpty()) {
             QScopedPointer<ProjectManager> projectManager(new ProjectManager(m_projectHandler, m_packageHandler, m_mainWindow));
             if (projectManager->exec() == QDialog::Accepted) {
@@ -211,8 +214,7 @@ void StartPage::setupWidgets()
 
             return;
         } else {
-            m_packageHandler->setPackagePath(url);
-            m_mainWindow->loadProject(findMainScript(url));
+            m_mainWindow->setPackageHandler(m_packageHandler);
         }
 
         qDebug() << "Loading project file:" << m->data(index, FullPathRole);
@@ -414,8 +416,8 @@ void StartPage::createNewProject()
     //                               contents/...
 
     const QString projectPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0) + QLatin1Char('/') + projectFolderName;
-    m_packageHandler->setPackagePath(projectPath);
-    m_packageHandler->createPackage(m_ui.authorTextField->text(), m_ui.emailTextField->text(), serviceTypes, projectNameLowerCase, mainScriptName, api, projectFileExtension);
+    initHandlers(projectPath);
+    m_packageHandler->createPackage(m_ui.authorTextField->text(), m_ui.emailTextField->text(), serviceTypes, projectNameLowerCase);
 
     // create the metadata.desktop file
     // TODO: missing but possible entries that could be added:
@@ -434,7 +436,7 @@ void StartPage::createNewProject()
     resetStatus();
 
     //load our new project
-    m_mainWindow->loadProject(findMainScript(projectPath));
+    m_mainWindow->setPackageHandler(m_packageHandler);
 }
 
 void StartPage::checkLocalProjectPath(const QString& name)
@@ -503,13 +505,24 @@ const QString StartPage::generateProjectFolderName(const QString& suggestion)
     return projectFolder;
 }
 
-QString StartPage::findMainScript(const QString &projectPath) const
+void StartPage::initHandlers(const QString &projectPath)
 {
-    QString mainScriptPath(projectPath);
+    MetadataHandler metadata;
+    metadata.setFilePath(projectPath + QStringLiteral("/metadata.desktop"));
+    const QString pluginApi = metadata.pluginApi();
+    if (pluginApi == QStringLiteral("declarativeappletscript")) {
+        if (m_packageHandler) {
+            delete m_packageHandler;
+            m_packageHandler = 0;
+        }
+        m_packageHandler = new PlasmoidHandler();
+        m_packageHandler->setPackagePath(projectPath);
+    }
 
-    MetadataHandler metadataHandler;
-    metadataHandler.setFilePath(mainScriptPath + QLatin1Char('/') + QStringLiteral("metadata.desktop"));
-    mainScriptPath += QStringLiteral("/contents/") + metadataHandler.mainScript();
-    return mainScriptPath;
+    if (m_projectHandler) {
+        delete m_projectHandler;
+        m_projectHandler = 0;
+    }
+    m_projectHandler = new ProjectHandler(m_packageHandler);
 }
 
