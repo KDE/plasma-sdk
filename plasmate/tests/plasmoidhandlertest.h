@@ -1,6 +1,8 @@
 /*
 
-Copyright 2013 Giorgos Tsiapaliokas <terietor@gmail.com>
+Copyright 2013 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@kde.org>
+Copyright 2014 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@kde.org>
+
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
@@ -19,19 +21,21 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PACKAGEHANDLERTEST_H
-#define PACKAGEHANDLERTEST_H
+#ifndef PLASMOIDHANDLERTEST_H
+#define PLASMOIDHANDLERTEST_H
 
-#include "../packagehandler.h"
+#include <QObject>
 
-class PackageHandlerTest : public QObject
+class PackageHandler;
+
+class PlasmoidHandlerTest : public QObject
 {
     Q_OBJECT
 
 public:
 
-    explicit PackageHandlerTest(QObject *parent = 0);
-    ~PackageHandlerTest();
+    explicit PlasmoidHandlerTest(QObject *parent = 0);
+    ~PlasmoidHandlerTest();
 
 private Q_SLOTS:
     void initTestCase();
@@ -42,7 +46,7 @@ private Q_SLOTS:
     void checkPlasmoidNodes();
     void cleanupTestCase();
 private:
-    PackageHandler m_packageHandler;
+    PackageHandler *m_packageHandler;
 };
 
 #endif
