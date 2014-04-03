@@ -38,7 +38,7 @@ public:
     void recentProject(const QString &projectPath);
     void removeProject(const QString &projectPath);
     bool removeProjectFromDisk(const QString &projectPath);
-    PackageHandler *packageHandler();
+
 private:
     void blacklistProject(const QString &projectPath);
     void whitelistProject(const QString &projectPath);
