@@ -58,6 +58,7 @@ private:
 
     void createRequiredFiles(const QString &serviceType, const QString &pluginName,
                              const QString &userName, const QString &userEmail, const QString &fileExtension);
+    void findMainScript();
 };
 
 #endif
