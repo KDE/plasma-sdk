@@ -104,7 +104,11 @@ QUrl PlasmoidHandler::urlForNode(PackageHandler::Node *node)
         return QUrl();
     }
 
-    QString path = packagePath() + contentsPrefix();
+    QString path = packagePath();
+
+    if (node->name() != QStringLiteral("metadata.desktop")) {
+        path += contentsPrefix();
+    }
 
     if (node->parent()) {
         path += node->parent()->name();
