@@ -122,22 +122,29 @@ void PackageHandler::setPackagePath(const QString &path)
         m_packagePath = path;
     }
 
-    MetadataHandler metadataHandler;
-    metadataHandler.setFilePath(m_packagePath + QLatin1Char('/') + QStringLiteral("metadata.desktop"));
+    // create the dir if it doesn't exist
+    if (!QDir(m_packagePath).exists()) {
+        QDir dir;
+        dir.mkpath(m_packagePath);
+    }
 
-    m_package = Plasma::PluginLoader::self()->loadPackage(metadataHandler.serviceTypes().at(0));;
+    if (QFile(m_packagePath + QStringLiteral("metadata.desktop")).exists()) {
+        loadPackage();
+    }
+}
+
+void PackageHandler::loadPackage()
+{
+    MetadataHandler metadataHandler;
+    metadataHandler.setFilePath(m_packagePath + QStringLiteral("metadata.desktop"));
+
+    m_package = Plasma::PluginLoader::self()->loadPackage(metadataHandler.serviceTypes().at(0));
 }
 
 void PackageHandler::createPackage(const QString &userName, const QString &userEmail,
                                    const QString &serviceType, const QString &pluginName)
 {
-    QDir dir;
-    dir.mkpath(m_packagePath);
-    dir.cd(m_packagePath);
-
     const QString metadataFilePath = m_packagePath + QStringLiteral("metadata.desktop");
-    QFile f(metadataFilePath);
-    f.open(QIODevice::ReadWrite);
 
     MetadataHandler metadataHandler;
     metadataHandler.setFilePath(metadataFilePath);
@@ -148,6 +155,8 @@ void PackageHandler::createPackage(const QString &userName, const QString &userE
     metadataHandler.setEmail(userEmail);
     metadataHandler.setLicense(QStringLiteral("GPL"));
     metadataHandler.writeFile();
+
+    loadPackage();
 
     createRequiredDirectories();
 }
