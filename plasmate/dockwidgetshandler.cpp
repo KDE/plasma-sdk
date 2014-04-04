@@ -24,16 +24,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "mainwindow.h"
 #include "dockwidgetshandler.h"
-#include "packagehandler.h"
+#include "packagehandler/packagehandler.h"
 
 #include "docbrowser/docbrowser.h"
 #include "noteseditor/noteseditor.h"
 #include "previewer/plasmoid/plasmoidpreviewer.h"
 #include "editors/editpage.h"
 
-DockWidgetsHandler::DockWidgetsHandler(PackageHandler *packageHandler, MainWindow *parent)
+DockWidgetsHandler::DockWidgetsHandler(MainWindow *parent)
     : QObject(parent),
-      m_packageHandler(packageHandler),
+      m_packageHandler(nullptr),
       m_mainWindow(parent)
 {
     // TODO
@@ -42,6 +42,11 @@ DockWidgetsHandler::DockWidgetsHandler(PackageHandler *packageHandler, MainWindo
 
 DockWidgetsHandler::~DockWidgetsHandler()
 {
+}
+
+void DockWidgetsHandler::setPackageHandler(PackageHandler *packageHandler)
+{
+    m_packageHandler = packageHandler;
 }
 
 void DockWidgetsHandler::toggleNotes()
@@ -86,7 +91,6 @@ void DockWidgetsHandler::toggleDocumentation()
 
     m_mainWindow->removeDockWidget(m_docBrowserWidget.data());
     m_docBrowserWidget.reset();
-
 }
 
 void DockWidgetsHandler::toggleTimeLine()
@@ -130,7 +134,7 @@ void DockWidgetsHandler::removeAllDockWidgets()
     QList<QDockWidget*> l;
     l << m_notesWidget.take()
       << m_previewerWidget.take()
-      << m_fileListWidget.take()
+      << m_fileListWidget.take();
       << m_docBrowserWidget.take();
 
     for (auto it : l) {

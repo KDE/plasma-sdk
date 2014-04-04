@@ -38,11 +38,12 @@ class DockWidgetsHandler : public QObject
     Q_OBJECT
 
 public:
-    explicit DockWidgetsHandler(PackageHandler *packageHandler, MainWindow *parent);
+    explicit DockWidgetsHandler(MainWindow *parent);
     ~DockWidgetsHandler();
 
     void removeAllDockWidgets();
     void saveDockWidgetsState();
+    void setPackageHandler(PackageHandler *packageHandler);
 
 public Q_SLOTS:
     void toggleNotes();
