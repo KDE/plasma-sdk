@@ -47,23 +47,27 @@ const QStringList &ProjectHandler::loadProjectsList()
 
     KConfigGroup projectsConfig(KSharedConfig::openConfig(qApp->applicationDisplayName()), QStringLiteral("ProjectHandler"));
     const QString recentProjects = projectsConfig.readEntry(QStringLiteral("RecentProjects"),QStringLiteral(""));
-    m_blacklistProjects = projectsConfig.readEntry("blacklistProject", "").split(',');
+    m_blacklistProjects = projectsConfig.readEntry("blacklistProject", QStringList());
 
     // load the projects which are inside on our homedir like ~/.local5
     QDir projectDir(projectPath);
     for (const auto &it : projectDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
         // TODO find a way to check if the package is valid
         QDir currentProject(projectPath + '/' + it);
-        if (currentProject.exists(QStringLiteral("metadata.desktop")) && !currentProject.path().isEmpty() && !m_blacklistProjects.contains(currentProject.path()) && !m_projectsList.contains(currentProject.path()) && !recentProjects.contains(currentProject.path())) {
+        if (currentProject.exists(QStringLiteral("metadata.desktop")) &&
+            !currentProject.path().isEmpty() &&
+            !m_blacklistProjects.contains(currentProject.path()) &&
+            !m_projectsList.contains(currentProject.path()) &&
+            !recentProjects.contains(currentProject.path())) {
             m_projectsList << currentProject.path();
         }
     }
 
     // load the external projects
-    QString externalProjects = projectsConfig.readEntry("externalProjects", "");
+    QStringList externalProjects = projectsConfig.readEntry("externalProjects", QStringList());
 
     if (!externalProjects.isEmpty()) {
-        for (const auto it : externalProjects.split(',')) {
+        for (const auto it : externalProjects) {
             if (!it.isEmpty() && !m_blacklistProjects.contains(it)) {
                 m_projectsList << it;
             }
