@@ -38,7 +38,8 @@ set (PlasMate_SRC
     dockwidgetshandler.cpp
     startpage.cpp
     packagemodel.cpp
-    packagehandler.cpp
+    packagehandler/packagehandler.cpp
+    packagehandler/plasmoidhandler.cpp
     projecthandler.cpp
     projectmanager/projectmanager.cpp
     previewer/plasmoid/plasmoidpreviewer.cpp
@@ -199,4 +200,4 @@ install(DIRECTORY templates DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 
 add_subdirectory(tests)
 
-feature_summary(WHAT ALL   FATAL_ON_MISSING_REQUIRED_PACKAGES)
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
