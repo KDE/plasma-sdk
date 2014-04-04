@@ -28,7 +28,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QTest>
 #include <QStandardPaths>
 
-
 static const QString testPackage(QStringLiteral("testPackage"));
 static const QString externalTestPackage(QStringLiteral("external") + testPackage);
 
@@ -71,6 +70,7 @@ void ProjectHandlerTest::createTestProject()
                                   QStringLiteral("Plasma/Applet"), externalTestPackage);
 
     m_projectHandler.addProject(m_externalTestPackagePath);
+    m_projectHandler.addProject(m_testPackagePath);
 }
 
 void ProjectHandlerTest::projectsList()

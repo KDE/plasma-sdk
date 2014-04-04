@@ -65,7 +65,6 @@ const QStringList &ProjectHandler::loadProjectsList()
 
     // load the external projects
     QStringList externalProjects = projectsConfig.readEntry("externalProjects", QStringList());
-
     if (!externalProjects.isEmpty()) {
         for (const auto it : externalProjects) {
             if (!it.isEmpty() && !m_blacklistProjects.contains(it)) {
@@ -74,10 +73,7 @@ const QStringList &ProjectHandler::loadProjectsList()
         }
     }
 
-    QString tmpProjectsList = m_projectsList.join(QLatin1Char(','));
-    tmpProjectsList.prepend(recentProjects);
-    m_projectsList = tmpProjectsList.split(QLatin1Char(','));
-
+    m_projectsList.insert(0, recentProjects);
     return m_projectsList;
 }
 
@@ -95,12 +91,11 @@ void ProjectHandler::addProject(const QString &projectPath)
 
     // We load the current config and if the external project
     // doesn't exist. Then we are adding it.
-    const QString currentConfig = projectConfig.readEntry("externalProjects", "");
+    QStringList currentConfig = projectConfig.readEntry("externalProjects", QStringList());
     if (!currentConfig.contains(projectPath)) {
-
-        const QChar extraSeperator = currentConfig.isEmpty() ? QChar() : QLatin1Char(',');
-        const QString updatedConfig = currentConfig + extraSeperator + projectPath;
-        projectConfig.writeEntry("externalProjects", updatedConfig);
+        //Here we add our new project inside to our config
+        currentConfig << projectPath;
+        projectConfig.writeEntry("externalProjects", currentConfig);
         projectConfig.sync();
     }
 
@@ -118,17 +113,17 @@ void ProjectHandler::removeProject(const QString &projectPath)
     KConfigGroup projectConfig(KSharedConfig::openConfig(qApp->applicationDisplayName()), QStringLiteral("ProjectHandler"));
     const QString localProjectPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0);
 
-    QString currentConfig = projectConfig.readEntry("externalProjects", "");
+    const QStringList currentConfig = projectConfig.readEntry("externalProjects", QStringList());
     if (!currentConfig.contains(projectPath) && !projectPath.startsWith(localProjectPath)) {
         qWarning() << "The " << projectPath << " doesn't exist. We cannot remove it";
         return;
     }
 
-    // In order to remove the project we are replacing the project path
-    // and the ',' which appends before it.
+    //Here we are removing our project from the config
+    const int projectPos = currentConfig.indexOf(projectPath);
+    QStringList newConfig = currentConfig;
+    newConfig.removeAt(projectPos);
 
-    const QChar extraSeperator = currentConfig.isEmpty() ? QChar() : QLatin1Char(',');
-    const QString newConfig = currentConfig.replace(extraSeperator + projectPath, "");
     projectConfig.writeEntry("externalProjects", newConfig);
     projectConfig.sync();
 
@@ -147,44 +142,51 @@ bool ProjectHandler::removeProjectFromDisk(const QString &projectPath)
 void ProjectHandler::blacklistProject(const QString &projectPath)
 {
     KConfigGroup projectConfig(KSharedConfig::openConfig(qApp->applicationDisplayName()), QStringLiteral("ProjectHandler"));
-    QString blacklist = projectConfig.readEntry("blacklistProject", "");
-    const QChar extraSeperator = blacklist.isEmpty() ? QChar() : QLatin1Char(',');
-    blacklist.append(extraSeperator + projectPath);
+    QStringList blacklist = projectConfig.readEntry("blacklistProject", QStringList());
 
+    blacklist << projectPath;
     projectConfig.writeEntry("blacklistProject", blacklist);
     projectConfig.sync();
-    m_blacklistProjects = blacklist.split(',');
+    m_blacklistProjects = blacklist;
 }
 
 void ProjectHandler::whitelistProject(const QString &projectPath)
 {
     KConfigGroup projectConfig(KSharedConfig::openConfig(qApp->applicationDisplayName()), QStringLiteral("ProjectHandler"));
-    QString blacklist = projectConfig.readEntry("blacklistProject", "");
-    const QChar extraSeperator = blacklist.isEmpty() ? QChar() : QLatin1Char(',');
+    QStringList blacklist = projectConfig.readEntry("blacklistProject", QStringList());
 
-    const QString whitelist = blacklist.replace(extraSeperator + projectPath, "");
-    projectConfig.writeEntry("blacklistProject", whitelist);
+    const int projectPos = blacklist.indexOf(projectPath);
+    if (projectPos == -1) {
+        qWarning() << "The " << projectPath << " is not blacklisted, we cannot whitelist it";
+        return;
+    }
+
+    blacklist.removeAt(projectPos);
+    projectConfig.writeEntry("blacklistProject", blacklist);
     projectConfig.sync();
 
-    m_blacklistProjects = whitelist.split(QLatin1Char(','));
+    m_blacklistProjects = blacklist;
 }
 
 void ProjectHandler::recentProject(const QString &projectPath)
 {
     KConfigGroup projectConfig(KSharedConfig::openConfig(qApp->applicationDisplayName()), QStringLiteral("ProjectHandler"));
-    QString recentProjects = projectConfig.readEntry(QStringLiteral("RecentProjects"), "");
+    QStringList recentProjects = projectConfig.readEntry(QStringLiteral("RecentProjects"), QStringList());
 
     if (recentProjects.isEmpty()) {
-        const QString project =  projectPath + QLatin1Char(',');
-        projectConfig.writeEntry(QStringLiteral("RecentProjects"), project);
+        projectConfig.writeEntry(QStringLiteral("RecentProjects"), QStringList() << projectPath);
     } else {
         if (recentProjects.contains(projectPath)) {
-            recentProjects.replace(projectPath, QStringLiteral(""));
+            const int projectPos = recentProjects.indexOf(projectPath);
+            if (projectPos == -1) {
+                qWarning() << "There is something wrong with our project.";
+                return;
+            }
+
+            recentProjects.removeAt(projectPos);
         }
 
-        QString project = projectPath + QLatin1Char(',');
-        recentProjects.prepend(project);
-
+        recentProjects.insert(0, projectPath);
         projectConfig.writeEntry(QStringLiteral("RecentProjects"), recentProjects);
     }
 
