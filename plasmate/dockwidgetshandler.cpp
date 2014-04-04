@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #include <KLocalizedString>
+#include <KSharedConfig>
 
 #include "mainwindow.h"
 #include "dockwidgetshandler.h"
@@ -134,7 +135,7 @@ void DockWidgetsHandler::removeAllDockWidgets()
     QList<QDockWidget*> l;
     l << m_notesWidget.take()
       << m_previewerWidget.take()
-      << m_fileListWidget.take();
+      << m_fileListWidget.take()
       << m_docBrowserWidget.take();
 
     for (auto it : l) {

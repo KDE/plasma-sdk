@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KLocalizedString>
 #include <KStandardAction>
 #include <KServiceTypeTrader>
+#include <KSharedConfig>
 #include <KToolBar>
 #include <KTextEditor/Document>
 #include <KTextEditor/Editor>
