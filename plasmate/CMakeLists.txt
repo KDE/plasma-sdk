@@ -40,6 +40,7 @@ set (PlasMate_SRC
     packagemodel.cpp
     packagehandler/packagehandler.cpp
     packagehandler/plasmoidhandler.cpp
+    packagehandler/themehandler.cpp
     projecthandler.cpp
     projectmanager/projectmanager.cpp
     previewer/plasmoid/plasmoidpreviewer.cpp

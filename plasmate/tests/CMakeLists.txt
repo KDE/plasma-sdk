@@ -13,16 +13,28 @@ macro(PLASMATE_UNIT_TEST testname srcs libraries)
     target_link_libraries(${testname} ${libraries} Qt5::Test Qt5::Core)
 endmacro()
 
-# packageHandertest
+# plasmoidhandertest
 set(plasmoidhandler_SRCS ../packagehandler/packagehandler.cpp
-                        ../packagehandler/plasmoidhandler.cpp
-                        ../editors/metadata/metadatahandler.cpp
+                         ../packagehandler/plasmoidhandler.cpp
+                         ../editors/metadata/metadatahandler.cpp
 )
 
 set(plasmoidhandler_LIBS KF5::Plasma)
 
 PLASMATE_UNIT_TEST(plasmoidhandlertest "${plasmoidhandler_SRCS}"
                                        "${plasmoidhandler_LIBS}"
+)
+
+# themehandlertest
+set(themehandler_SRCS  ../packagehandler/packagehandler.cpp
+                       ../packagehandler/themehandler.cpp
+                       ../editors/metadata/metadatahandler.cpp
+)
+
+set(themehandler_LIBS KF5::Plasma)
+
+PLASMATE_UNIT_TEST(themehandlertest "${themehandler_SRCS}"
+                                    "${themehandler_LIBS}"
 )
 
 # packagemodeltest
