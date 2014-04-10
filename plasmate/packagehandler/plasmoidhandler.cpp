@@ -254,7 +254,7 @@ PlasmoidHandler::Node* PlasmoidHandler::loadPackageInfo()
         m_topNode = 0;
     }
 
-    m_topNode = new PackageHandler::Node(QString(), QString(), QStringList(), m_topNode);
+    m_topNode = new PackageHandler::Node(QString(), QString(), QStringList());
 
     QStringList indexedFiles;
 
