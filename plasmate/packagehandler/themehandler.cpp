@@ -107,13 +107,21 @@ QUrl ThemeHandler::urlForNode(PackageHandler::Node *node)
 
     if (node->parent()) {
         path += node->parent()->name();
+    } else {
+        path += node->name();
     }
 
     if (!path.endsWith(QLatin1Char('/'))) {
         path += QLatin1Char('/');
     }
 
-    path += node->name();
+    if (QFile(path + QStringLiteral(".svg")).exists()) {
+        path += QStringLiteral(".svg");
+    } else if (QFile(path + QStringLiteral(".svgz")).exists()) {
+        path += QStringLiteral(".svgz");
+    } else {
+        return QUrl();
+    }
 
     return QUrl::fromLocalFile(path);
 }
@@ -136,9 +144,26 @@ PackageHandler::Node* ThemeHandler::loadPackageInfo()
         return package().name(qPrintable(description));
     };
 
-    QStringList mimeTypes;
-    // TODO its wrong
-    mimeTypes << QStringLiteral("image/svg+xml");
+    auto findMimetype = [=](const QString &parentName, const QString &childName) {
+        QString filePath = packagePath() + contentsPrefix() + parentName;
+
+        if (!filePath.endsWith(QLatin1Char('/'))) {
+            filePath += QLatin1Char('/');
+        }
+
+        filePath += childName;
+
+        if (QFile(filePath + QStringLiteral("svg")).exists() ||
+            QFile(filePath + QStringLiteral("svgz")).exists()) {
+            return QStringList() << QStringLiteral("[plasmate]/imageViewer");
+        } else {
+            QString mimeType = QStringLiteral("[plasmate]/themeImageDialog/");
+            mimeType += parentName;
+            return QStringList() << mimeType;
+        }
+
+        return QStringList();
+    };
 
     m_rootNode = new PackageHandler::Node(QString(), QString(), QStringList());
 
@@ -151,6 +176,7 @@ PackageHandler::Node* ThemeHandler::loadPackageInfo()
         for (const auto &childName : m_entries.values(rootName)) {
             const QString name = rootName + QLatin1Char('/') + childName;
             const QString description = nodeDesciption(name + QStringLiteral(".svg"));
+            const QStringList mimeTypes = findMimetype(rootName, name);
             PackageHandler::Node *childNode = new PackageHandler::Node(name, description, mimeTypes, topNode);
             topNode->addChild(childNode);
         }

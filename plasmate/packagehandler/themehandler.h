@@ -37,8 +37,7 @@ public:
     class ThemeNode : public PackageHandler::Node {
         public:
             ThemeNode(const QString &name, const QString &description,
-                      const QStringList &mimetypes = QStringList(),
-                      ThemeHandler::Node *parent = 0);
+                      const QStringList &mimeTypes, ThemeHandler::Node *parent = 0);
             ~ThemeNode();
     };
 
