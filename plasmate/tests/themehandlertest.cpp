@@ -64,8 +64,23 @@ void ThemeHandlerTest::createNewTheme()
     QDir d(newThemeLocation);
 
     Q_ASSERT(d.exists());
-    Q_ASSERT(dir.exists(QStringLiteral("metadata.desktop")));
-    Q_ASSERT(dir.exists(QStringLiteral("contents")));
+    Q_ASSERT(d.exists(QStringLiteral("metadata.desktop")));
+    Q_ASSERT(d.exists(m_packageHandler->contentsPrefix()));
+
+    d.cd(m_packageHandler->contentsPrefix());
+
+    const QString dirName = QStringLiteral("dialogs");
+    d.mkpath(dirName);
+    d.cd(dirName);
+
+    QStringList files;
+    files << QStringLiteral("/background.svg")
+          << QStringLiteral("/shutdowndialog.svg");
+
+    for (const auto &it : files) {
+        QFile f(d.path() + it);
+        f.open(QIODevice::ReadWrite);
+    }
 }
 
 void ThemeHandlerTest::checkNodes()
@@ -93,6 +108,20 @@ void ThemeHandlerTest::checkNodes()
         }
     };
 
+    auto checkUrl = [=](const QString &nodePath, PackageHandler::Node *node, bool hasContentsPath) {
+        QString path = m_packageHandler->packagePath();
+
+        if (hasContentsPath) {
+            path += m_packageHandler->contentsPrefix();
+        }
+
+        path += nodePath;
+
+        const QUrl url = QUrl::fromLocalFile(path);
+        const QUrl urlForNode = m_packageHandler->urlForNode(node);
+        QCOMPARE(urlForNode, url);
+    };
+
     QCOMPARE(topNode->childNodes().size(), 8);
     for (const auto it : topNode->childNodes()) {
         populateChildNodeNamesList(it);
@@ -105,6 +134,12 @@ void ThemeHandlerTest::checkNodes()
 
             Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/background")));
             Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/shutdowndialog")));
+
+            if (it->name() == QStringLiteral("dialogs")) {
+                for (const auto &child : it->childNodes()) {
+                    checkUrl(child->name() + QStringLiteral(".svg"), child, true);
+                }
+            }
         } else if (it->name() == QStringLiteral("widgets") ||
                    it->name() == QStringLiteral("locolor/widgets")) {
 
@@ -115,6 +150,8 @@ void ThemeHandlerTest::checkNodes()
             Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/panel-background")));
             Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/plot-background")));
             Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/tooltip")));
+
+            checkUrl(it->name(), it, true);
         } else if (it->name() == QStringLiteral("opaque/widgets")) {
             QCOMPARE(childNodeNames.size(), 2);
 
@@ -122,8 +159,12 @@ void ThemeHandlerTest::checkNodes()
             Q_ASSERT(childNodeNames->contents(it->name() + QStringLiteral("/tooltip")));
         } else if (it->name() == QStringLiteral("colors")) {
             QCOMPARE(childNodeNames.size(), 0);
+
+            checkUrl(it->name(), it, true);
         } else if (it->name() == QStringLiteral("metadata.desktop")) {
             QCOMPARE(childNodeNames.size(), 0);
+
+            checkUrl(it->name(), it, false);
         } else {
             const QString errorMessage = QString(QStringLiteral("Unrecognized name %1")).arg(it->name());
             QFAIL(errorMessage.toLocal8Bit().data());
