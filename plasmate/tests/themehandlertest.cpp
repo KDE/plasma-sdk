@@ -89,7 +89,7 @@ void ThemeHandlerTest::checkNodes()
     auto populateChildNodeNamesList = [&](PackageHandler::Node *node) {
         childNodeNames.clear();
         for (const auto it : node->childNodes()) {
-            childNodeNames.append(it->description());
+            childNodeNames.append(it->name());
         }
     };
 
@@ -103,19 +103,23 @@ void ThemeHandlerTest::checkNodes()
 
             QCOMPARE(childNodeNames.size(), 2);
 
-            Q_ASSERT(childNodeNames.contains(QStringLiteral("Generic dialog background")));
-            Q_ASSERT(childNodeNames.contains(QStringLiteral("Theme for the logout dialog")));
+            Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/background")));
+            Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/shutdowndialog")));
         } else if (it->name() == QStringLiteral("widgets") ||
-                   it->name() == QStringLiteral("opaque/widgets") ||
                    it->name() == QStringLiteral("locolor/widgets")) {
 
-            QCOMPARE(childNodeNames.size(), 6);
+            QCOMPARE(childNodeNames.size(), 5);
 
-            Q_ASSERT(childNodeNames.contains(QStringLiteral("Background image for widgets")));
-            Q_ASSERT(childNodeNames.contains(QStringLiteral("Analog clock face")));
-            Q_ASSERT(childNodeNames.contains(QStringLiteral("Background image for panels")));
-            Q_ASSERT(childNodeNames.contains(QStringLiteral("Background for graphing widgets")));
-            Q_ASSERT(childNodeNames.contains(QStringLiteral("Background image for tooltips")));
+            Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/background")));
+            Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/clock")));
+            Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/panel-background")));
+            Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/plot-background")));
+            Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/tooltip")));
+        } else if (it->name() == QStringLiteral("opaque/widgets")) {
+            QCOMPARE(childNodeNames.size(), 2);
+
+            Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/panel-background")));
+            Q_ASSERT(childNodeNames->contents(it->name() + QStringLiteral("/tooltip")));
         } else if (it->name() == QStringLiteral("colors")) {
             QCOMPARE(childNodeNames.size(), 0);
         } else if (it->name() == QStringLiteral("metadata.desktop")) {
