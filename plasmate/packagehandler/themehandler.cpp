@@ -71,14 +71,19 @@ ThemeHandler::ThemeHandler(QObject *parent)
     populateHash();
 
     dirs << QStringLiteral("widgets")
-         << QStringLiteral("opaque/widgets")
          << QStringLiteral("locolor/widgets");
 
     files << QStringLiteral("background")
           << QStringLiteral("clock")
-          << QStringLiteral("face")
-          << QStringLiteral("panel-background")
           << QStringLiteral("plot-background")
+          << QStringLiteral("panel-background")
+          << QStringLiteral("tooltip");
+
+    populateHash();
+
+    dirs << QStringLiteral("opaque/widgets");
+
+    files << QStringLiteral("panel-background")
           << QStringLiteral("tooltip");
 
     populateHash();
@@ -140,10 +145,6 @@ PackageHandler::Node* ThemeHandler::loadPackageInfo()
 {
     package().setPath(packagePath());
 
-    auto nodeDesciption = [=](const QString &description) {
-        return package().name(qPrintable(description));
-    };
-
     auto findMimetype = [=](const QString &parentName, const QString &childName) {
         QString filePath = packagePath() + contentsPrefix() + parentName;
 
@@ -168,14 +169,14 @@ PackageHandler::Node* ThemeHandler::loadPackageInfo()
     m_rootNode = new PackageHandler::Node(QString(), QString(), QStringList());
 
     for (const auto &rootName : m_entries.uniqueKeys()) {
-        const QString description = nodeDesciption(rootName);
+        const QString description = package().name(qPrintable(rootName));
         PackageHandler::Node *topNode = new PackageHandler::Node(rootName, description,
                                                                  QStringList(), m_rootNode);
         m_rootNode->addChild(topNode);
 
         for (const auto &childName : m_entries.values(rootName)) {
             const QString name = rootName + QLatin1Char('/') + childName;
-            const QString description = nodeDesciption(name + QStringLiteral(".svg"));
+            const QString description = package().name(qPrintable(name));
             const QStringList mimeTypes = findMimetype(rootName, name);
             PackageHandler::Node *childNode = new PackageHandler::Node(name, description, mimeTypes, topNode);
             topNode->addChild(childNode);
