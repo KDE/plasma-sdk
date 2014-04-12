@@ -144,6 +144,8 @@ void PackageHandler::loadPackage()
 void PackageHandler::createPackage(const QString &userName, const QString &userEmail,
                                    const QString &serviceType, const QString &pluginName)
 {
+    QDir().mkpath(packagePath() + contentsPrefix());
+
     const QString metadataFilePath = m_packagePath + QStringLiteral("metadata.desktop");
 
     MetadataHandler metadataHandler;
