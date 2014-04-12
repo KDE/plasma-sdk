@@ -110,22 +110,19 @@ QUrl ThemeHandler::urlForNode(PackageHandler::Node *node)
         path += contentsPrefix();
     }
 
-    if (node->parent()) {
-        path += node->parent()->name();
-    } else {
+    if (node->parent()->name().isEmpty()) {
         path += node->name();
+        return QUrl::fromLocalFile(path);
     }
 
-    if (!path.endsWith(QLatin1Char('/'))) {
-        path += QLatin1Char('/');
-    }
+    QString p = path + node->name();
 
-    if (QFile(path + QStringLiteral(".svg")).exists()) {
-        path += QStringLiteral(".svg");
+    if (QFile(p + QStringLiteral(".svg")).exists()) {
+        p += QStringLiteral(".svg");
+        path = p;
     } else if (QFile(path + QStringLiteral(".svgz")).exists()) {
-        path += QStringLiteral(".svgz");
-    } else {
-        return QUrl();
+        p += QStringLiteral(".svgz");
+        path = p;
     }
 
     return QUrl::fromLocalFile(path);
