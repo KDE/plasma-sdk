@@ -58,7 +58,6 @@ public:
 Q_SIGNALS:
     void reloadModel();
 private:
-    QHash<QString, QStringList>  m_dialogOptions;
     PackageHandler *m_packageHandler;
     PackageHandler::Node* m_topNode;
     KDirWatch *m_watchDirectory;
