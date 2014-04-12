@@ -45,6 +45,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "mainwindow.h"
 #include "packagehandler/packagehandler.h"
 #include "packagehandler/plasmoidhandler.h"
+#include "packagehandler/themehandler.h"
 #include "projectmanager/projectmanager.h"
 #include "projecthandler.h"
 
@@ -516,8 +517,11 @@ void StartPage::initHandlers(const QString &projectPath)
             m_packageHandler = 0;
         }
         m_packageHandler = new PlasmoidHandler();
-        m_packageHandler->setPackagePath(projectPath);
+    } else {
+        m_packageHandler = new ThemeHandler();
     }
+
+    m_packageHandler->setPackagePath(projectPath);
 
     if (m_projectHandler) {
         delete m_projectHandler;
