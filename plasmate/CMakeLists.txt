@@ -17,6 +17,7 @@ set (PlasMate_SRC
     editors/metadata/metadataeditor.cpp
     editors/imageviewer/imageloader.cpp
     editors/imageviewer/imageviewer.cpp
+    editors/imageviewer/imageviewerpart.cpp
     #editors/text/texteditor.cpp
     editors/kconfigxt/kconfigxteditor.cpp
     editors/kconfigxt/kconfigxtreader.cpp
