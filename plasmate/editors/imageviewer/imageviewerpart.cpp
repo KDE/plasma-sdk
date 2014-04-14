@@ -35,6 +35,7 @@ ImageViewerPart::~ImageViewerPart()
 bool ImageViewerPart::openUrl(const QUrl &url)
 {
     m_imageViewer->loadImage(url);
+    setUrl(url);
     return true;
 }
 

@@ -27,9 +27,6 @@ class ImageViewerPart : public KParts::ReadOnlyPart
     Q_OBJECT
 
 public:
-    /**
-     * A simple ctor.Nothing special.
-     **/
     explicit ImageViewerPart(QObject *parent = 0);
    ~ImageViewerPart();
 
