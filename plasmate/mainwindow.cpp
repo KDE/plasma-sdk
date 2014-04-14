@@ -157,6 +157,10 @@ void MainWindow::saveProjectState()
 
 void MainWindow::loadProject()
 {
+
+    QWidget *startPage = takeCentralWidget();
+    startPage->deleteLater();
+
     toolBar()->show();
     menuBar()->show();
 
