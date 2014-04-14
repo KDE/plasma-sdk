@@ -28,20 +28,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDockWidget>
 #include <QModelIndex>
 #include <QTreeView>
-#include <QUrl>
-#include <kservice.h>
 #include <KParts/ReadOnlyPart>
 
 namespace KTextEditor {
     class View;
 };
 
-class QWidget;
-class QMenu;
 class ImageViewer;
 class KConfigXtEditor;
 class MetaDataEditor;
-class KJob;
 class PackageModel;
 class PackageHandler;
 
@@ -65,7 +60,6 @@ private:
     QUrl m_path;
     bool hasExtension(const QString &filename);
     void imageDialog(const QString &filter, const QString& destinationPath);
-    QString createContentWithSubdir(const QString& packagePath, const QString& contentWithSubdir) const;
 
     QWeakPointer<ImageViewer> m_imageViewer;
     QWeakPointer<KConfigXtEditor> m_kconfigXtEditor;

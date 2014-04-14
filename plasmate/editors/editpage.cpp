@@ -28,35 +28,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "imageviewer/imageviewer.h"
 #include "kconfigxt/kconfigxteditor.h"
 #include "metadata/metadataeditor.h"
+#include "../packagemodel.h"
 
 #include <QDebug>
-#include <QHBoxLayout>
-#include <QFile>
-#include <QList>
 #include <QMenu>
-#include <QPixmap>
-#include <QStringList>
-#include <KConfigGroup>
 #include <KSharedConfig>
 #include <QFileDialog>
-#include <QIcon>
 #include <KMessageBox>
 #include <QInputDialog>
 #include <KLocalizedString>
 #include <KIO/CopyJob>
 #include <KIO/DeleteJob>
-#include <KIO/MimetypeJob>
-#include <KIO/Job>
 #include <KUser>
-#include <kmimetypetrader.h>
 
 #include <KTextEditor/Document>
 #include <KTextEditor/Editor>
 #include <KTextEditor/View>
-
-#include "../packagemodel.h"
-
-#include <qvarlengtharray.h>
 
 FileList::FileList(PackageHandler *packageHandler, QWidget *parent)
         : QDockWidget(i18n("Files"), parent),
