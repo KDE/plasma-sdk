@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "editpage.h"
 #include "imageviewer/imageviewerpart.h"
 #include "kconfigxt/kconfigxteditorpart.h"
-#include "metadata/metadataeditor.h"
+#include "metadata/metadataeditorpart.h"
 #include "../packagemodel.h"
 
 #include <QDebug>
@@ -141,10 +141,11 @@ void EditPage::findEditor(const QModelIndex &index)
         qDebug() << "mimetype" << mimetype;
         if (mimetype == "[plasmate]/metadata") {
             if (!m_metaEditor) {
-                m_metaEditor = new MetaDataEditor(this);
+                m_metaEditor = new MetaDataEditorPart();
             }
-            m_metaEditor.data()->setFilename(target);
-          //  emit loadRequiredEditor(m_metaEditor.data());
+
+            m_metaEditor.data()->openUrl(QUrl::fromLocalFile(target));
+            emit loadRequiredEditor(m_metaEditor.data());
             return;
         }
 

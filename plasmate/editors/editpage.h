@@ -36,7 +36,7 @@ namespace KTextEditor {
 
 class ImageViewerPart;
 class KConfigXtEditorPart;
-class MetaDataEditor;
+class MetaDataEditorPart;
 class PackageModel;
 class PackageHandler;
 
@@ -63,7 +63,7 @@ private:
 
     QWeakPointer<ImageViewerPart> m_imageViewer;
     QWeakPointer<KConfigXtEditorPart> m_kconfigXtEditor;
-    QWeakPointer<MetaDataEditor> m_metaEditor;
+    QWeakPointer<MetaDataEditorPart> m_metaEditor;
     QWeakPointer<KTextEditor::View> m_textEditor;
 
     PackageModel *m_packageModel;
