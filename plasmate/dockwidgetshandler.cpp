@@ -19,6 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <KParts/ReadWritePart>
+#include <KXMLGUIFactory>
+#include <KTextEditor/View>
 
 #include <KLocalizedString>
 #include <KSharedConfig>
@@ -105,23 +108,52 @@ void DockWidgetsHandler::toggleFileList()
         m_fileListWidget.reset(new FileList(m_packageHandler));
         m_mainWindow->addDockWidget(Qt::LeftDockWidgetArea, m_fileListWidget.data());
 
-        connect(m_fileListWidget->editPage(), &EditPage::loadRequiredEditor, [=](QWidget *editor) {
+        connect(m_fileListWidget->editPage(), &EditPage::loadRequiredEditor, [=](KParts::ReadOnlyPart *editor){
             QWidget *tmpWidget = m_mainWindow->centralWidget();
+            if (tmpWidget) {
+                // there was another part in the mainwindow
+                // find out what it is.
+                //
+                // It could be either a KTextEditor::View or
+                // a KParts::ReadWritePart if they are their document
+                // needs to be saved otherwise if its a KParts::ReadOnlyPart
+                // we don't have something to do. ReadOnlyPart doesn't need
+                // to save the document since its read-only
 
-            // if the widget is the texteditor don't delete it
-            // Q: how does the widgets gets deleted?
-            // A: QMainWindow::setCentralWidget takes the ownership of
-            // the widget and deletes it in the appropriate time.
-            // So we use QMainWindow::takeCentralWidget in order to take the ownership
-            // back.
+                KXMLGUIClient *client = nullptr;
+                if (qobject_cast<KTextEditor::View*>(tmpWidget)) {
+                    qobject_cast<KTextEditor::View*>(tmpWidget)->document()->documentSave();
+                    client = dynamic_cast<KXMLGUIClient*>(tmpWidget);
+                } else if (qobject_cast<KParts::ReadWritePart*>(tmpWidget)) {
+                    qobject_cast<KParts::ReadWritePart*>(tmpWidget)->save();
+                    client = dynamic_cast<KXMLGUIClient*>(tmpWidget);
+                } else {
+                    client = dynamic_cast<KXMLGUIClient*>(tmpWidget);
+                }
 
-            if (qstrcmp(tmpWidget->metaObject()->className(), "KTextEditor::ViewPrivate") == 0) {
-                m_mainWindow->takeCentralWidget();
+                if (client) {
+                    m_mainWindow->factory()->removeClient(client);
+
+                    // we don't have to delete the centralWidget,
+                    // MainWindow still has its ownership so it will
+                    // delete it in the appropriate time
+                }
             }
-            m_mainWindow->setCentralWidget(editor);
-        });
 
-        connect(m_fileListWidget->editPage(), &EditPage::loadTextEditor, m_mainWindow, &MainWindow::loadTextEditor);
+            KTextEditor::Document *document = qobject_cast<KTextEditor::Document*>(editor);
+            if (document) {
+                KTextEditor::View *view = document->views().at(0);
+                m_mainWindow->factory()->addClient(view);
+                m_mainWindow->setCentralWidget(view);
+                return;
+            }
+
+            KParts::ReadOnlyPart *part = qobject_cast<KParts::ReadOnlyPart*>(editor);
+            if (part) {
+                m_mainWindow->factory()->addClient(part);
+                m_mainWindow->setCentralWidget(part->widget());
+            }
+        });
 
         return;
     }

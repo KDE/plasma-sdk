@@ -29,8 +29,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QModelIndex>
 #include <QTreeView>
 #include <QUrl>
-#include <kparts/part.h>
 #include <kservice.h>
+#include <KParts/ReadOnlyPart>
+
+namespace KTextEditor {
+    class View;
+};
 
 class QWidget;
 class QMenu;
@@ -49,9 +53,7 @@ public:
     explicit EditPage(PackageHandler *packageHandler, QWidget *parent = 0);
 
 Q_SIGNALS:
-    void loadMetaDataEditor(QUrl target);
-    void loadRequiredEditor(QWidget *editor);
-    void loadTextEditor(const QUrl &filePath);
+    void loadRequiredEditor(KParts::ReadOnlyPart *editor);
 
 private Q_SLOTS:
     void findEditor(const QModelIndex &index);
@@ -67,7 +69,9 @@ private:
 
     QWeakPointer<ImageViewer> m_imageViewer;
     QWeakPointer<KConfigXtEditor> m_kconfigXtEditor;
-    QWeakPointer <MetaDataEditor> m_metaEditor;
+    QWeakPointer<MetaDataEditor> m_metaEditor;
+    QWeakPointer<KTextEditor::View> m_textEditor;
+
     PackageModel *m_packageModel;
     PackageHandler *m_packageHandler;
 };

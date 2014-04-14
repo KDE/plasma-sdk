@@ -42,25 +42,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 MainWindow::MainWindow(QWidget *parent)
       : KParts::MainWindow(parent, Qt::Widget),
-        m_part(nullptr),
-        m_doc(nullptr),
-        m_view(nullptr),
         m_dockWidgetsHandler(new DockWidgetsHandler(this)),
         m_packageHandler(nullptr)
 {
-    // TODO
-    // KTextEditor::Editor::instance()->readConfig();
-
-    m_doc = KTextEditor::Editor::instance()->createDocument(this);
-
-    m_view = m_doc->createView(this);
     setupActions();
-
-    m_view->setStatusBarEnabled(true);
 
     setXMLFile(QStringLiteral("plasmateui.rc"));
     createShellGUI(true);
-    guiFactory()->addClient(m_view);
     setAutoSaveSettings();
 
     menuBar()->addMenu(helpMenu());
@@ -70,9 +58,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    guiFactory()->removeClient(m_view);
-    delete m_view;
-    delete m_doc;
 }
 
 QAction *MainWindow::addAction(const QString &text, const char *icon, const  char *slot, const char *name)
@@ -151,7 +136,6 @@ void MainWindow::setupStartPage()
 
     toolBar()->hide();
     menuBar()->hide();
-    m_view->hide();
 
     if (m_startPage) {
         setCentralWidget(m_startPage.data());
@@ -169,26 +153,14 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::saveProjectState()
 {
     m_dockWidgetsHandler->saveDockWidgetsState();
-
-    // do we really have a file which needs to be saved?
-    if (!m_view->document()->url().isEmpty()) {
-        m_view->document()->documentSave();
-    }
 }
 
-void MainWindow::loadProject(const QString &projectPath)
+void MainWindow::loadProject()
 {
     toolBar()->show();
     menuBar()->show();
-    m_view->show();
 
-    loadTextEditor(QUrl::fromLocalFile(projectPath));
-}
-
-void MainWindow::loadTextEditor(const QUrl &filePath)
-{
-    m_view->document()->openUrl(filePath);
-    setCentralWidget(m_view);
+    m_dockWidgetsHandler->toggleFileList();
 }
 
 void MainWindow::togglePublisher()
@@ -214,6 +186,6 @@ void MainWindow::setPackageHandler(PackageHandler *packageHandler)
     MetadataHandler metadataHandler;
     metadataHandler.setFilePath(mainScriptPath + QStringLiteral("metadata.desktop"));
     mainScriptPath += m_packageHandler->contentsPrefix() +  metadataHandler.mainScript();
-    loadProject(mainScriptPath);
+    loadProject();
 }
 

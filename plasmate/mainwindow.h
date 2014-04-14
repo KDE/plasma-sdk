@@ -21,17 +21,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KParts/MainWindow>
 
 class QAction;
-class QShortcut;
-
-namespace KParts {
-    class ReadWritePart;
-};
-
-namespace KTextEditor {
-    class Document;
-    class View;
-};
-
 
 class DockWidgetsHandler;
 class PackageHandler;
@@ -45,9 +34,6 @@ public:
     ~MainWindow();
 
     void setPackageHandler(PackageHandler *packageHandler);
-
-public Q_SLOTS:
-    void loadTextEditor(const QUrl &filePath);
 
 private Q_SLOTS:
     void editToolbars();
@@ -64,15 +50,10 @@ private:
     QAction *createAction(QString text, const char * icon,
                           const char *name);
 
-    void loadProject(const QString &projectPath);
+    void loadProject();
     void setupActions();
     void setupStartPage();
     void saveProjectState();
-
-    KParts::ReadWritePart *m_part;
-
-    KTextEditor::Document *m_doc;
-    KTextEditor::View *m_view;
 
     DockWidgetsHandler *m_dockWidgetsHandler;
     PackageHandler *m_packageHandler;

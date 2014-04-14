@@ -50,6 +50,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KUser>
 #include <kmimetypetrader.h>
 
+#include <KTextEditor/Document>
+#include <KTextEditor/Editor>
+#include <KTextEditor/View>
+
 #include "../packagemodel.h"
 
 #include <qvarlengtharray.h>
@@ -153,7 +157,7 @@ void EditPage::findEditor(const QModelIndex &index)
                 m_metaEditor = new MetaDataEditor(this);
             }
             m_metaEditor.data()->setFilename(target);
-            emit loadRequiredEditor(m_metaEditor.data());
+          //  emit loadRequiredEditor(m_metaEditor.data());
             return;
         }
 
@@ -173,11 +177,11 @@ void EditPage::findEditor(const QModelIndex &index)
 
         if (mimetype == "[plasmate]/imageViewer") {
             if (!m_imageViewer) {
-                m_imageViewer = new ImageViewer(this);
+                m_imageViewer = new ImageViewer();
             }
 
             m_imageViewer.data()->loadImage(QUrl::fromLocalFile(target));
-            emit loadRequiredEditor(m_imageViewer.data());
+//            emit loadRequiredEditor(m_imageViewer.data());
             return;
         }
 
@@ -189,7 +193,7 @@ void EditPage::findEditor(const QModelIndex &index)
             m_kconfigXtEditor.data()->setFilename(QUrl::fromLocalFile(target));
             m_kconfigXtEditor.data()->readFile();
 
-            emit loadRequiredEditor(m_kconfigXtEditor.data());
+            //emit loadRequiredEditor(m_kconfigXtEditor.data());
             return;
         }
 
@@ -243,19 +247,17 @@ void EditPage::findEditor(const QModelIndex &index)
             return;
         }
 
-        KService::List offers = KMimeTypeTrader::self()->query(mimetype, "KParts/ReadWritePart");
-        //qDebug() << mimetype;
-        if (offers.isEmpty()) {
-            offers = KMimeTypeTrader::self()->query(mimetype, "KParts/ReadOnlyPart");
+        if (!m_textEditor) {
+            KTextEditor::Document *document = KTextEditor::Editor::instance()->createDocument(nullptr);
+            m_textEditor = document->createView(nullptr);
+            m_textEditor.data()->setStatusBarEnabled(true);
         }
 
-        if (!offers.isEmpty()) {
-            //create the part using offers.at(0)
-            //qDebug() << offers.at(0);
-            //offers.at(0)->createInstance(parentWidget);
-            emit loadTextEditor(QUrl::fromLocalFile(target));
-            return;
-        }
+        m_textEditor.data()->document()->openUrl(QUrl::fromLocalFile(target));
+        emit loadRequiredEditor(m_textEditor.data()->document());
+
+        //emit loadRequiredEditor(m_textEditor.data());
+        return;
     }
 }
 
