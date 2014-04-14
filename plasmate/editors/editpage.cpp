@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "editpage.h"
-#include "imageviewer/imageviewer.h"
+#include "imageviewer/imageviewerpart.h"
 #include "kconfigxt/kconfigxteditor.h"
 #include "metadata/metadataeditor.h"
 #include "../packagemodel.h"
@@ -164,11 +164,11 @@ void EditPage::findEditor(const QModelIndex &index)
 
         if (mimetype == "[plasmate]/imageViewer") {
             if (!m_imageViewer) {
-                m_imageViewer = new ImageViewer();
+                m_imageViewer = new ImageViewerPart();
             }
 
-            m_imageViewer.data()->loadImage(QUrl::fromLocalFile(target));
-//            emit loadRequiredEditor(m_imageViewer.data());
+            m_imageViewer.data()->openUrl(QUrl::fromLocalFile(target));
+            emit loadRequiredEditor(m_imageViewer.data());
             return;
         }
 
