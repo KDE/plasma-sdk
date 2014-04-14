@@ -22,6 +22,7 @@ set (PlasMate_SRC
     editors/kconfigxt/kconfigxteditor.cpp
     editors/kconfigxt/kconfigxtreader.cpp
     editors/kconfigxt/kconfigxtwriter.cpp
+    editors/kconfigxt/kconfigxteditorpart.cpp
     editors/metadata/metadatahandler.cpp
     main.cpp
     sidebaritem.cpp
