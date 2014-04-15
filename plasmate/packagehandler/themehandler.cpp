@@ -98,6 +98,11 @@ void ThemeHandler::setPackagePath(const QString &path)
     PackageHandler::setPackagePath(path);
 }
 
+QString ThemeHandler::packageType() const
+{
+    return QStringLiteral("Plasma/Theme");
+}
+
 QUrl ThemeHandler::urlForNode(PackageHandler::Node *node)
 {
     if (!node) {

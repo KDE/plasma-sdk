@@ -49,6 +49,10 @@ public:
     PackageHandler::Node* loadPackageInfo() override;
 
     QUrl urlForNode(PackageHandler::Node *node) override;
+
+protected:
+    QString packageType() const override;
+
 private:
     PackageHandler::Node* m_rootNode;
     QMultiHash<QString, QString> m_entries;

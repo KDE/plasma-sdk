@@ -50,6 +50,9 @@ public:
 
     QUrl urlForNode(PackageHandler::Node *node) override;
 
+protected:
+    QString packageType() const override;
+
 private:
     QHash<QString, QString> m_fileDefinitions;
     QMultiHash<QString, QString> m_directoryDefinitions;

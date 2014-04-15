@@ -138,7 +138,7 @@ void PackageHandler::loadPackage()
     MetadataHandler metadataHandler;
     metadataHandler.setFilePath(m_packagePath + QStringLiteral("metadata.desktop"));
 
-    m_package = Plasma::PluginLoader::self()->loadPackage(metadataHandler.serviceTypes().at(0));
+    m_package = Plasma::PluginLoader::self()->loadPackage(packageType());
 }
 
 void PackageHandler::createPackage(const QString &userName, const QString &userEmail,

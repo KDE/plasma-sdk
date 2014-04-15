@@ -237,6 +237,11 @@ void PlasmoidHandler::createRequiredFiles(const QString &serviceType, const QStr
     }
 }
 
+QString PlasmoidHandler::packageType() const
+{
+    return QStringLiteral("Plasma/Applet");
+}
+
 PlasmoidHandler::Node* PlasmoidHandler::loadPackageInfo()
 {
 

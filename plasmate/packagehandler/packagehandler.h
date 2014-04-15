@@ -78,6 +78,7 @@ Q_SIGNALS:
 protected:
     Plasma::Package package() const;
     void loadPackage();
+    virtual QString packageType() const = 0;
 
 private:
     QString m_packagePath;
