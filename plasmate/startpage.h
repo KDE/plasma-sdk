@@ -71,7 +71,7 @@ private:
     void selectProject(const QUrl &target);
     void updateProjectPreferences();
     QString findMainScript(const QString &projectPath) const;
-    void initHandlers(const QString &projectPath);
+    void initHandlers(const QString &projectPath, const QString &serviceType = QString());
 
     Ui::StartPage m_ui;
     MainWindow *m_mainWindow;

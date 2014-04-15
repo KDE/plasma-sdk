@@ -417,7 +417,7 @@ void StartPage::createNewProject()
     //                               contents/...
 
     const QString projectPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0) + QLatin1Char('/') + projectFolderName;
-    initHandlers(projectPath);
+    initHandlers(projectPath, serviceTypes);
     m_packageHandler->createPackage(m_ui.authorTextField->text(), m_ui.emailTextField->text(), serviceTypes, projectNameLowerCase);
 
     // create the metadata.desktop file
@@ -506,26 +506,41 @@ const QString StartPage::generateProjectFolderName(const QString& suggestion)
     return projectFolder;
 }
 
-void StartPage::initHandlers(const QString &projectPath)
+void StartPage::initHandlers(const QString &projectPath, const QString &serviceType)
 {
-    MetadataHandler metadata;
-    metadata.setFilePath(projectPath + QStringLiteral("/metadata.desktop"));
-    const QString pluginApi = metadata.pluginApi();
-    if (pluginApi == QStringLiteral("declarativeappletscript")) {
-        if (m_packageHandler) {
-            delete m_packageHandler;
-            m_packageHandler = 0;
+    if (m_packageHandler) {
+        delete m_packageHandler;
+        m_packageHandler = nullptr;
+    }
+
+    if (!serviceType.isEmpty()) {
+        //If our package has not been created yet, we don't have a
+        //metadata.desktop, so we are using the informations which
+        //they have been provided by the plasmate's UI.
+        if (serviceType == QStringLiteral("Plasma/Theme")) {
+            m_packageHandler = new ThemeHandler();
+        } else {
+            m_packageHandler = new PlasmoidHandler();
         }
-        m_packageHandler = new PlasmoidHandler();
     } else {
-        m_packageHandler = new ThemeHandler();
+        //our package exists, so we are loading the information
+        //inside from our metadata.desktop
+        MetadataHandler metadata;
+        metadata.setFilePath(projectPath + QStringLiteral("/metadata.desktop"));
+        const QString pluginApi = metadata.pluginApi();
+        if (pluginApi == QStringLiteral("declarativeappletscript")) {
+            m_packageHandler = new PlasmoidHandler();
+        } else {
+            m_packageHandler = new ThemeHandler();
+        }
     }
 
     m_packageHandler->setPackagePath(projectPath);
 
+
     if (m_projectHandler) {
         delete m_projectHandler;
-        m_projectHandler = 0;
+        m_projectHandler = nullptr;
     }
     m_projectHandler = new ProjectHandler(m_packageHandler);
 }
