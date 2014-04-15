@@ -156,7 +156,7 @@ void ThemeHandlerTest::checkNodes()
             QCOMPARE(childNodeNames.size(), 2);
 
             Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/panel-background")));
-            Q_ASSERT(childNodeNames->contents(it->name() + QStringLiteral("/tooltip")));
+            Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/tooltip")));
         } else if (it->name() == QStringLiteral("colors")) {
             QCOMPARE(childNodeNames.size(), 0);
 
