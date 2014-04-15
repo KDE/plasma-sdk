@@ -122,9 +122,21 @@ void MainWindow::slotNewToolbarConfig()
 
 void MainWindow::closeProject()
 {
-    takeCentralWidget();
+    QWidget *centralWidget = takeCentralWidget();
+
+    if (centralWidget) {
+        KXMLGUIClient *client = dynamic_cast<KXMLGUIClient*>(centralWidget);
+
+        if (client) {
+            factory()->removeClient(client);
+        }
+
+        centralWidget->deleteLater();
+    }
+
     // we don't need the dockwidgets anymore
     m_dockWidgetsHandler->removeAllDockWidgets();
+
     setupStartPage();
 }
 
