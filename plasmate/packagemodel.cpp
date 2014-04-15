@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "packagemodel.h"
-#include "packagehandler.h"
+#include "packagehandler/packagehandler.h"
 
 #include <QIcon>
 #include <QUrl>
@@ -36,20 +36,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 PackageModel::PackageModel(PackageHandler *packageHandler, QObject *parent)
     : QAbstractItemModel(parent),
       m_packageHandler(packageHandler),
-      m_topNode(0),
+      m_topNode(nullptr),
       m_watchDirectory(new KDirWatch(this))
 {
-    m_dialogOptions["widgets"] = QStringList("[plasmate]/themeImageDialog/widgets");
-    m_dialogOptions["animations"] = QStringList("[plasmate]/themeImageDialog/animations");
-    m_dialogOptions["dialogs"] = QStringList("[plasmate]/themeImageDialog/dialogs");
-    m_dialogOptions["locolor/dialogs"] = QStringList("[plasmate]/themeImageDialog/locolor/dialogs");
-    m_dialogOptions["locolor/widgets"] = QStringList("[plasmate]/themeImageDialog/locolor/widgets");
-    m_dialogOptions["opaque/dialogs"] = QStringList("[plasmate]/themeImageDialog/opaque/dialogs");
-    m_dialogOptions["opaque/widgets"] = QStringList("[plasmate]/themeImageDialog/opaque/widgets");
-    m_dialogOptions["wallpapers"] = QStringList("[plasmate]/themeImageDialog/wallpapers");
-    m_dialogOptions["config"] = QStringList("[plasmate]/mainconfigxml/new");
-    m_dialogOptions["images"] = QStringList("[plasmate]/imageDialog");
-
     m_topNode = m_packageHandler->loadPackageInfo();
 
     m_watchDirectory->addDir(m_packageHandler->packagePath() + m_packageHandler->contentsPrefix(),

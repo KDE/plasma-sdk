@@ -12,19 +12,19 @@
 #include <QVBoxLayout>
 #include <QCheckBox>
 #include <QComboBox>
+#include <QFileDialog>
 #include <QScopedPointer>
+#include <QStandardPaths>
 #include <QDebug>
 
 #include <KConfigGroup>
 #include <KIO/DeleteJob>
 #include <KSharedConfig>
-#include <KUrlRequester>
 #include <KLocalizedString>
 #include <KService>
 #include <KServiceTypeTrader>
 #include <KMessageBox>
-#include <knewstuff3/uploaddialog.h>
-#include <KStandardDirs>
+#include <KNS3/UploadDialog>
 
 #include "publisher.h"
 //#include "signingwidget.h"
@@ -41,6 +41,7 @@ Publisher::Publisher(QWidget *parent, const QUrl &path, const QString& type)
 {
     QWidget *uiWidget = new QWidget();
     m_ui.setupUi(uiWidget);
+    m_ui.exporterUrl->setReadOnly(true);
     // TODO
     //m_signingWidget = new SigningWidget();
 
@@ -52,10 +53,15 @@ Publisher::Publisher(QWidget *parent, const QUrl &path, const QString& type)
 
     setLayout(layout);
 
-    m_extension = (type == "Plasma/Applet" || type == "Plasma/PopupApplet") ? "plasmoid" : "zip";
-
-    m_ui.exporterUrl->setFilter(QString("*.") + m_extension);
-    m_ui.exporterUrl->setMode(KFile::File | KFile::LocalOnly);
+    if (type == QStringLiteral("Plasma/Applet") ||
+    type == QStringLiteral("Plasma/PopupApplet") ||
+    type == QStringLiteral("KWin/WindowSwitcher") ||
+    type == QStringLiteral("KWin/Effect") ||
+    type == QStringLiteral("KWin/Script")) {
+        m_extension = QStringLiteral("plasmoid");
+    } else if (m_extension.isEmpty()) {
+        m_extension = QStringLiteral("zip");
+    }
 
     //we want the installButton to be enabled only when the comboBox's current index is valid.
     m_ui.installButton->setEnabled(false);
@@ -65,24 +71,20 @@ Publisher::Publisher(QWidget *parent, const QUrl &path, const QString& type)
     m_ui.installerButton->addItem("Use PlasmaPkg");
     m_ui.installerButton->addItem("Remote Install");
 
-    connect(m_ui.exporterUrl, SIGNAL(urlSelected(const QUrl&)), this, SLOT(addSuffix()));
-    connect(m_ui.exporterButton, SIGNAL(clicked()), this, SLOT(doExport()));
+    connect(m_ui.exporterDialogButton, &QPushButton::clicked, [&]() {
+        const QString exportDestination = QFileDialog::getSaveFileName(this, i18n("Save"), QString(), i18n("Plasmoid (*.plasmoid)"));
+        m_ui.exporterUrl->setText(exportDestination);
+    });
+    connect(m_ui.exporterButton, &QPushButton::clicked, this, &Publisher::doExport);
+    //the new signal and slot syntax doesn't work with overloaded functions.
+    //so we are using the old syntax for the time being.
     connect(m_ui.installerButton, SIGNAL(currentIndexChanged(int)), this, SLOT(checkInstallButtonState(int)));
-    connect(m_ui.installButton, SIGNAL(clicked()), this, SLOT(doInstall()));
-    connect(m_ui.publisherButton, SIGNAL(clicked()), this, SLOT(doPublish()));
-    // Publish only works right for Plasmoid now afaik. Disabling for other project types.
-    m_ui.publisherButton->setEnabled(type == "Plasma/Applet" || type == "Plasma/PopupApplet");
+    connect(m_ui.installButton, &QPushButton::clicked, this, &Publisher::doInstall);
+    connect(m_ui.publisherButton, &QPushButton::clicked, this, &Publisher::doPublish);
+
+    m_ui.publisherButton->setEnabled(m_extension == QStringLiteral("plasmoid") || m_extension == QStringLiteral("zip"));
 
     setLayout(layout);
-}
-
-void Publisher::addSuffix()
-{
-    QString selected = m_ui.exporterUrl->url().path();
-    QString suffix = QFileInfo(selected).suffix();
-    if (suffix != m_extension && suffix != "zip") {
-        m_ui.exporterUrl->setUrl(QUrl::fromLocalFile(selected + QLatin1Char('.') + m_extension));
-    }
 }
 
 void Publisher::setProjectName(const QString &name)
@@ -92,21 +94,21 @@ void Publisher::setProjectName(const QString &name)
 
 void Publisher::doExport()
 {
-    if (QFile(m_ui.exporterUrl->url().path()).exists()) {
+    if (QFile(m_ui.exporterUrl->text()).exists()) {
         QString dialogText = i18n("A file already exists at %1. Do you want to overwrite it?",
-                                  m_ui.exporterUrl->url().path());
+                                  m_ui.exporterUrl->text());
         int code = KMessageBox::warningYesNo(0,dialogText);
         if (code != KMessageBox::Yes) return;
     }
-    bool ok = exportToFile(m_ui.exporterUrl->url());
+    bool ok = exportToFile(QUrl(m_ui.exporterUrl->text()));
 
     // TODO
     // If signing is enabled, lets do that!
     //if (m_signingWidget->signingEnabled()) {
     //    ok = ok && m_signingWidget->sign(m_ui.exporterUrl->url());
     //}
-    if (QFile::exists(m_ui.exporterUrl->url().path()) && ok) {
-        KMessageBox::information(this, i18n("Project has been exported to %1.", m_ui.exporterUrl->url().path()));
+    if (QFile::exists(m_ui.exporterUrl->text()) && ok) {
+        KMessageBox::information(this, i18n("Project has been exported to %1.", m_ui.exporterUrl->text()));
     } else {
         KMessageBox::error(this, i18n("An error has occurred during the export. Please check the write permissions "
         "in the target directory."));
@@ -149,16 +151,11 @@ void Publisher::doPlasmaPkg()
     qDebug() << "tempPackagePath" << tempPackage.path();
     qDebug() << "m_projectPath" << m_projectPath.path();
 
-    //TODO
-    //ProjectManager::exportPackage(m_projectPath, tempPackage); // create temporary package
+    ProjectManager::exportPackage(m_projectPath, tempPackage); // create temporary package
 
-    QStringList argv("plasmapkg");
+    QStringList argv("plasmapkg2");
     argv.append("-t");
-    if (m_projectType == "Plasma/Runner") {
-        argv.append("runner");
-    } else if (m_projectType == "Plasma/DataEngine") {
-        argv.append("dataengine");
-    } else if (m_projectType == "Plasma/Theme") {
+    if (m_projectType == "Plasma/Theme") {
         argv.append("theme");
     } else if (m_projectType == "Plasma/Applet") {
         argv.append("plasmoid");
@@ -231,13 +228,11 @@ void Publisher::doPlasmaPkg()
 
 const QString Publisher::tempPackagePath()
 {
-    QDir d(m_projectPath.path());
-    if (d.cdUp()) {
-        return d.path() + QLatin1Char('/') + m_projectName + QLatin1Char('/') + m_extension;
-    }
-    QString path = m_projectPath.path();
-    path = path.endsWith(QLatin1Char('/')) ? path : path + QLatin1Char('/');
-    return path +  m_projectName + "." + m_extension;
+    QString tempPath = QStandardPaths::standardLocations(QStandardPaths::TempLocation).first();
+    //does it end with '/'? if not append it.
+    tempPath = tempPath.endsWith(QLatin1Char('/')) ? tempPath : tempPath + QLatin1Char('/');
+
+    return tempPath + m_projectName + QLatin1Char('.') + m_extension;
 }
 
 void Publisher::doPublish()
@@ -266,14 +261,12 @@ void Publisher::doPublish()
 
 bool Publisher::exportToFile(const QUrl& url)
 {
-    if (!url.isLocalFile() ||
-            QDir(url.path()).exists()) {
+    if (!url.isValid()) {
         KMessageBox::error(this, i18n("The file you entered is invalid."));
         return false;
     }
-    //TODO
-    return false;
-    //return ProjectManager::exportPackage(m_projectPath, url); // will overwrite if exists!
+
+    return ProjectManager::exportPackage(m_projectPath, url); // will overwrite if exists!
 }
 
 QString Publisher::currentPackagePath() const

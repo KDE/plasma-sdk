@@ -20,31 +20,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QDockWidget>
 
-class QDockWidget;
 class QWebView;
-class QUrl;
 class KLineEdit;
 class QLabel;
-
-namespace Ui
-{
-    class DocBrowser;
-}
-
-class PackageModel;
 
 class DocBrowser : public QDockWidget
 {
     Q_OBJECT;
 public:
-    DocBrowser(const PackageModel *package, QWidget* parent);
-    QUrl currentPage() const;
-    void load(QUrl page);
+    DocBrowser(QWidget* parent = 0);
 
-    void setPackage(const PackageModel *package);
-    const PackageModel *package() const;
-
-public slots:
+public Q_SLOTS:
     void showTutorial();
     void showApi();
     void showHelp();
@@ -56,7 +42,6 @@ private:
     QWebView *m_view;
     KLineEdit *m_searchField;
     QLabel *m_searchLabel;
-    const PackageModel *m_package;
 };
 
 #endif // DOCBROWSER_H

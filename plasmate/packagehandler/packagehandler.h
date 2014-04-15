@@ -1,6 +1,7 @@
 /*
 
-Copyright 2013 Giorgos Tsiapaliokas <terietor@gmail.com>
+Copyright 2013 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@kde.org>
+Copyright 2014 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@kde.org>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
@@ -26,8 +27,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <Plasma/Package>
 
-class KDirWatch;
-
 class PackageHandler : public QObject
 {
     Q_OBJECT
@@ -41,12 +40,11 @@ public:
             Node(const QString &name, const QString &description,
                  const QStringList &mimetypes = QStringList(),
                  PackageHandler::Node *parent = 0);
-            ~Node();
+            virtual ~Node();
             QString name() const;
             QString description() const;
             QStringList mimeTypes() const;
             bool isFile() const;
-            bool needsNewFileNode() const;
             QList<PackageHandler::Node*> childNodes() const;
             PackageHandler::Node* parent() const;
             PackageHandler::Node* child(int row) const;
@@ -60,33 +58,33 @@ public:
             QStringList m_mimeTypes;
     };
 
-    void setPackageType(const QString &type);
-
-    void setPackagePath(const QString &path);
+    virtual void setPackagePath(const QString &path);
 
     QString packagePath() const;
 
     QString contentsPrefix() const;
 
-    PackageHandler::Node* loadPackageInfo();
+    virtual PackageHandler::Node* loadPackageInfo() = 0;
 
-    QUrl urlForNode(PackageHandler::Node *node) const;
+    virtual QUrl urlForNode(PackageHandler::Node *node) = 0;
+
+    virtual void createPackage(const QString &userName, const QString &userEmail,
+                               const QString &serviceType, const QString &pluginName);
 
 Q_SIGNALS:
     void error(const QString &errorMessage);
     void packageChanged(PackageHandler::Node* info);
 
+protected:
+    Plasma::Package package() const;
+    void loadPackage();
+    virtual QString packageType() const = 0;
+
 private:
-    Plasma::Package m_package;
     QString m_packagePath;
-    QHash<QString, QString> m_fileDefinitions;
-    QMultiHash<QString, QString> m_directoryDefinitions;
-    PackageHandler::Node* m_topNode;
 
-
-    void createPackage();
+    Plasma::Package m_package;
     void createRequiredDirectories();
-    void createRequiredFiles();
 };
 
 #endif

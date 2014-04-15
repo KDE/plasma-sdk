@@ -29,10 +29,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QAbstractItemModel>
 
-#include "packagehandler.h"
+#include "packagehandler/plasmoidhandler.h"
 
 class KDirWatch;
-class PackageHandler;
 
 class PackageModel : public QAbstractItemModel
 {
@@ -59,7 +58,6 @@ public:
 Q_SIGNALS:
     void reloadModel();
 private:
-    QHash<QString, QStringList>  m_dialogOptions;
     PackageHandler *m_packageHandler;
     PackageHandler::Node* m_topNode;
     KDirWatch *m_watchDirectory;

@@ -25,40 +25,47 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "editpage.h"
-#include "imageviewer/imageviewer.h"
-#include "kconfigxt/kconfigxteditor.h"
+#include "imageviewer/imageviewerpart.h"
+#include "kconfigxt/kconfigxteditorpart.h"
+#include "metadata/metadataeditorpart.h"
+#include "../packagemodel.h"
 
 #include <QDebug>
-#include <QHBoxLayout>
-#include <QFile>
-#include <QList>
 #include <QMenu>
-#include <QPixmap>
-#include <QStringList>
-#include <KConfigGroup>
+
 #include <KSharedConfig>
 #include <QFileDialog>
-#include <QIcon>
 #include <KMessageBox>
 #include <QInputDialog>
 #include <KLocalizedString>
 #include <KIO/CopyJob>
 #include <KIO/DeleteJob>
-#include <KIO/MimetypeJob>
-#include <KIO/Job>
 #include <KUser>
-#include <kmimetypetrader.h>
 
-#include "../packagemodel.h"
+#include <KTextEditor/Document>
+#include <KTextEditor/Editor>
+#include <KTextEditor/View>
 
-#include <qvarlengtharray.h>
+FileList::FileList(PackageHandler *packageHandler, QWidget *parent)
+        : QDockWidget(i18n("Files"), parent),
+          m_editPage(0)
+{
+    setObjectName(QStringLiteral("Files"));
+    m_editPage = new EditPage(packageHandler, this);
+    setWidget(m_editPage);
+}
 
-EditPage::EditPage(QWidget *parent)
+EditPage* FileList::editPage() const
+{
+    return m_editPage;
+}
+
+
+
+EditPage::EditPage(PackageHandler *packageHandler, QWidget *parent)
         : QTreeView(parent),
-          m_imageViewer(0),
-          m_kconfigXtEditor(0)
-        // FIXME
-        // m_metaEditor(0)
+          m_packageModel(nullptr),
+          m_packageHandler(packageHandler)
 {
     setHeaderHidden(true);
     m_contextMenu = new QMenu(this);
@@ -70,6 +77,10 @@ EditPage::EditPage(QWidget *parent)
     connect(this, SIGNAL(activated(const QModelIndex &)), this, SLOT(findEditor(const QModelIndex &)));
     connect(this, SIGNAL(customContextMenuRequested(const QPoint&)),
         this, SLOT(showTreeContextMenu(const QPoint&)));
+
+    m_packageModel = new PackageModel(m_packageHandler, this);
+    setModel(m_packageModel);
+    expandAll();
 }
 
 void EditPage::doDelete(bool)
@@ -130,7 +141,12 @@ void EditPage::findEditor(const QModelIndex &index)
         QString target = index.data(PackageModel::UrlRole).toUrl().toLocalFile();
         qDebug() << "mimetype" << mimetype;
         if (mimetype == "[plasmate]/metadata") {
-            emit loadMetaDataEditor(QUrl::fromLocalFile(target));
+            if (!m_metaEditor) {
+                m_metaEditor = new MetaDataEditorPart();
+            }
+
+            m_metaEditor.data()->openUrl(QUrl::fromLocalFile(target));
+            emit loadRequiredEditor(m_metaEditor.data());
             return;
         }
 
@@ -150,23 +166,22 @@ void EditPage::findEditor(const QModelIndex &index)
 
         if (mimetype == "[plasmate]/imageViewer") {
             if (!m_imageViewer) {
-                m_imageViewer = new ImageViewer(this);
+                m_imageViewer = new ImageViewerPart();
             }
 
-            m_imageViewer->loadImage(QUrl::fromLocalFile(target));
-            emit loadRequiredEditor(m_imageViewer);
+            m_imageViewer.data()->openUrl(QUrl::fromLocalFile(target));
+            emit loadRequiredEditor(m_imageViewer.data());
             return;
         }
 
         if (mimetype == "[plasmate]/kconfigxteditor") {
             if (!m_kconfigXtEditor) {
-                m_kconfigXtEditor = new KConfigXtEditor(this);
+                m_kconfigXtEditor = new KConfigXtEditorPart();
             }
 
-            m_kconfigXtEditor->setFilename(QUrl::fromLocalFile(target));
-            m_kconfigXtEditor->readFile();
+            m_kconfigXtEditor.data()->openUrl(QUrl::fromLocalFile(target));
 
-            emit loadRequiredEditor(m_kconfigXtEditor);
+            emit loadRequiredEditor(m_kconfigXtEditor.data());
             return;
         }
 
@@ -200,11 +215,7 @@ void EditPage::findEditor(const QModelIndex &index)
 
                     if (!api.isEmpty()) {
                         if (!hasExtension(file)) {
-                            if (api =="Ruby" && !file.endsWith(".rb")) {
-                                file.append(".rb");
-                            } else if (api =="Python" && !file.endsWith(".py")) {
-                                file.append(".py");
-                            } else if (api =="Javascript" && !file.endsWith(".js")) {
+                            if (api =="Javascript" && !file.endsWith(".js")) {
                                 file.append(".js");
                             } else if (api =="declarativeappletscript" && !file.endsWith(".qml")) {
                                 file.append(".qml");
@@ -224,21 +235,20 @@ void EditPage::findEditor(const QModelIndex &index)
             return;
         }
 
-        KService::List offers = KMimeTypeTrader::self()->query(mimetype, "KParts/ReadWritePart");
-        //qDebug() << mimetype;
-        if (offers.isEmpty()) {
-            offers = KMimeTypeTrader::self()->query(mimetype, "KParts/ReadOnlyPart");
+        if (!m_textEditor) {
+            KTextEditor::Document *document = KTextEditor::Editor::instance()->createDocument(nullptr);
+            m_textEditor = document->createView(nullptr);
+            m_textEditor.data()->setStatusBarEnabled(true);
         }
 
-        if (!offers.isEmpty()) {
-            //create the part using offers.at(0)
-            //qDebug() << offers.at(0);
-            //offers.at(0)->createInstance(parentWidget);
-            emit loadEditor(offers, QUrl(target));
-            return;
-        }
+        m_textEditor.data()->document()->openUrl(QUrl::fromLocalFile(target));
+        emit loadRequiredEditor(m_textEditor.data()->document());
+
+        //emit loadRequiredEditor(m_textEditor.data());
+        return;
     }
 }
+
 void EditPage::imageDialog(const QString& filter, const QString& destinationPath)
 {
     KUser user;
@@ -261,61 +271,12 @@ void EditPage::imageDialog(const QString& filter, const QString& destinationPath
 bool EditPage::hasExtension(const QString& filename)
 {
     QStringList list;
-    list << ".rb" << ".js" << ".qml" << ".py" << ".xml";
+    list  << ".js" << ".qml" << ".xml";
     foreach (const QString &str, list) {
         if (filename.endsWith(str)) {
             return true;
         }
     }
     return false;
-}
-
-
-void EditPage::loadFile(const QUrl &path)
-{
-    m_path = path;
-
-    qDebug() << "Loading file: " << path;
-
-    KIO::JobFlags flags = KIO::HideProgressInfo;
-    KIO::MimetypeJob *mjob = KIO::mimetype(path, flags);
-
-    connect(mjob, SIGNAL(finished(KJob*)), this, SLOT(mimetypeJobFinished(KJob*)));
-}
-
-void EditPage::mimetypeJobFinished(KJob *job)
-{
-    KIO::MimetypeJob *mjob = qobject_cast<KIO::MimetypeJob *>(job);
-
-    if (!job) {
-        return;
-    }
-
-    if (mjob->error()) {
-        return;
-    }
-
-    m_mimetype = mjob->mimetype();
-
-    if (m_mimetype.isEmpty()) {
-        qDebug() << "Could not detect the file's mimetype";
-        return;
-    }
-
-    qDebug() << "loaded mimetype: " << m_mimetype;
-
-    KService::List offers = KMimeTypeTrader::self()->query(m_mimetype, "KParts/ReadWritePart");
-    if (offers.isEmpty()) {
-        offers = KMimeTypeTrader::self()->query(m_mimetype, "KParts/ReadOnlyPart");
-    }
-
-    if (!offers.isEmpty()) {
-        //create the part using offers.at(0)
-        //qDebug() << offers.at(0);
-        //offers.at(0)->createInstance(parentWidget);
-        emit loadEditor(offers, m_path);
-        return;
-    }
-    qDebug() << "loading" << m_path;
 }
 

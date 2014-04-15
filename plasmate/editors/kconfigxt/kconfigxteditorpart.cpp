@@ -1,6 +1,5 @@
 /*
-
-Copyright 2013 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@Kde.org>
+Copyright 2014 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@kde.org>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
@@ -19,36 +18,31 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EDITPAGETEST_H
-#define EDITPAGETEST_H
+#include "kconfigxteditorpart.h"
+#include "kconfigxteditor.h"
 
-#include "../../editors/editpage.h"
-
-#include <QMainWindow>
-
-class PackageHandler;
-class PackageModel;
-class KUrlRequester;
-class QPushButton;
-
-class EditPageTest : public QMainWindow
+KConfigXtEditorPart::KConfigXtEditorPart(QObject* parent)
+        : KParts::ReadWritePart(parent),
+          m_kconfigXtEditor(new KConfigXtEditor())
 {
-    Q_OBJECT
+    setWidget(m_kconfigXtEditor);
+}
 
-public:
+KConfigXtEditorPart::~KConfigXtEditorPart()
+{
+}
 
-    explicit EditPageTest(QWidget *parent = 0);
-    ~EditPageTest();
+bool KConfigXtEditorPart::openUrl(const QUrl &url)
+{
+    m_kconfigXtEditor->setFilename(url);
+    m_kconfigXtEditor->readFile();
 
-private:
-    EditPage *m_editPage;
-    PackageHandler *m_packageHandler;
-    PackageModel *m_packageModel;
-    KUrlRequester *m_urlRequester;
-    QPushButton *m_loadButton;
-    QWidget *m_currentWidget;
-    QString m_destinationPath;
-};
+    setUrl(url);
+    return true;
+}
 
-#endif
+bool KConfigXtEditorPart::saveFile()
+{
+    return false;
+}
 

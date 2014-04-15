@@ -20,13 +20,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "projecthandlertest.h"
-#include "../packagehandler.h"
+#include "../packagehandler/plasmoidhandler.h"
 
 #include <QDir>
 #include <QDebug>
 #include <QFile>
 #include <QTest>
 #include <QStandardPaths>
+
+static const QString testPackage(QStringLiteral("testPackage"));
+static const QString externalTestPackage(QStringLiteral("external") + testPackage);
 
 ProjectHandlerTest::ProjectHandlerTest(QObject *parent)
         : QObject(parent)
@@ -40,71 +43,61 @@ ProjectHandlerTest::~ProjectHandlerTest()
 void ProjectHandlerTest::initTestCase()
 {
     QStandardPaths::enableTestMode(true);
+
+    QString projectTestPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0);
+    Q_ASSERT(!projectTestPath.isEmpty());
+
+    if (!projectTestPath.endsWith(QLatin1Char('/'))) {
+        projectTestPath += QLatin1Char('/');
+    }
+
+    const QString tempPath = QStandardPaths::standardLocations(QStandardPaths::TempLocation).at(0) + QLatin1Char('/');
+
+    m_testPackagePath = projectTestPath + testPackage;
+    m_externalTestPackagePath = tempPath + externalTestPackage;
 }
 
 void ProjectHandlerTest::createTestProject()
 {
-    // Here we create a test package in case it
-    // doesn't exist.
-    const QString projectTestPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0);
+    PackageHandler *packageHandler = new PlasmoidHandler(this);
 
-    Q_ASSERT(!projectTestPath.isEmpty());
-    PackageHandler packageHandler;
+    packageHandler->setPackagePath(m_testPackagePath);
+    packageHandler->createPackage(QStringLiteral("author"), QStringLiteral("email"),
+                                  QStringLiteral("Plasma/Applet"), testPackage);
 
-    // If our project package exists, then we are removing it.
-    // In order to ensure that it has been created properly
-    QDir invalidTestPackageDir(projectTestPath + "/invalidtestpackage");
-    if (invalidTestPackageDir.exists()) {
-        invalidTestPackageDir.removeRecursively();
-    }
+    packageHandler->setPackagePath(m_externalTestPackagePath);
+    packageHandler->createPackage(QStringLiteral("author"), QStringLiteral("email"),
+                                  QStringLiteral("Plasma/Applet"), externalTestPackage);
 
-    QDir externalInvalidTestPackageDir(QDir::tempPath() + "/invalidtestpackageexternal");
-    if (externalInvalidTestPackageDir.exists()) {
-        externalInvalidTestPackageDir.removeRecursively();
-    }
-
-    packageHandler.setPackagePath(projectTestPath + "/testpackage");
-    packageHandler.setPackagePath(invalidTestPackageDir.path());
-
-    // Extrenal project
-    packageHandler.setPackagePath(QDir::tempPath() + "/externaltestpackage");
-    packageHandler.setPackagePath(externalInvalidTestPackageDir.path());
-
-    // Our external package is valid so we must make it invalid.
-    QFile invalidPackageExternalMetadata(externalInvalidTestPackageDir.path() + "/metadata.desktop");
-    Q_ASSERT(invalidPackageExternalMetadata.remove());
-
-    // Our package is valid so we must make it invalid.
-    QFile invalidPackageMetadata(invalidTestPackageDir.path() + "/metadata.desktop");
-    Q_ASSERT(invalidPackageMetadata.remove());
-
-    m_projectHandler.addProject(QDir::tempPath() + "/externaltestpackage");
-    m_projectHandler.addProject(QDir::tempPath() + "/newtestpackage");
+    m_projectHandler.addProject(m_externalTestPackagePath);
+    m_projectHandler.addProject(m_testPackagePath);
 }
 
 void ProjectHandlerTest::projectsList()
 {
     QStringList list = m_projectHandler.loadProjectsList();
-    const QString projectTestPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0);
-    const QString testPackagePath = projectTestPath + "/testpackage";
-    const QString externalTestPackagePath = QDir::tempPath() + "/externaltestpackage";
-    const QString newTestPackage = QDir::tempPath() + "/newtestpackage";
 
-    Q_ASSERT(list.length() > 0);
-    Q_ASSERT(list.count() == 3);
-    Q_ASSERT(list.contains(testPackagePath));
-    Q_ASSERT(list.contains(externalTestPackagePath));
-    Q_ASSERT(list.contains(newTestPackage));
+    QCOMPARE(list.count(),  2);
 
-    m_projectHandler.removeProject(QDir::tempPath() + "/externaltestpackage");
-    const QDir newTestPackageDir(newTestPackage);
-    m_projectHandler.removeProjectFromDisk(newTestPackage);
+    Q_ASSERT(list.contains(m_testPackagePath));
+    Q_ASSERT(list.contains(m_externalTestPackagePath));
+
+    m_projectHandler.removeProject(m_testPackagePath);
+    m_projectHandler.removeProjectFromDisk(m_externalTestPackagePath);
 
     list = m_projectHandler.loadProjectsList();
-    Q_ASSERT(list.length() > 0);
-    Q_ASSERT(list.count() == 1);
-    Q_ASSERT(list.contains(testPackagePath));
-    Q_ASSERT(!newTestPackageDir.exists());
+    QCOMPARE(list.count(), 0);
+
+    Q_ASSERT(!list.contains(m_testPackagePath));
+    Q_ASSERT(!list.contains(m_externalTestPackagePath));
+
+    Q_ASSERT(!QDir(m_externalTestPackagePath).exists());
+    Q_ASSERT(QDir(m_testPackagePath).exists());
+}
+
+void ProjectHandlerTest::cleanupTestCase()
+{
+    QDir(m_testPackagePath).removeRecursively();
 }
 
 QTEST_GUILESS_MAIN(ProjectHandlerTest)

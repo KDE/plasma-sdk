@@ -15,46 +15,48 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <QLabel>
-#include <QComboBox>
 #include <QListWidget>
 #include <QListWidgetItem>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
 #include <QModelIndex>
 #include <QAbstractItemModel>
 #include <QValidator>
 #include <QFile>
-#include <QTextStream>
-#include <QDateTime>
+#include <QScopedPointer>
+#include <QStandardPaths>
 
 #include <KUser>
-// #include <KLocalizedString>
+#include <KLocalizedString>
 #include <QDebug>
-#include <KDesktopFile>
+#include <QIcon>
 #include <KLineEdit>
-#include <KMimeType>
 #include <KPluginInfo>
 #include <QPushButton>
-#include <KSeparator>
+#include <KConfigGroup>
+#include <KSharedConfig>
 #include <KShell>
-#include <KStandardAction>
-#include <KStandardDirs>
-#include <QUrlRequester>
-#include <KUser>
+#include <KUrlRequester>
 #include <KMessageBox>
 #include <KMessageWidget>
-#include <knewstuff3/downloaddialog.h>
+#include <KNS3/DownloadDialog>
 
+#include "editors/metadata/metadatahandler.h"
 #include "packagemodel.h"
 #include "startpage.h"
 #include "mainwindow.h"
+#include "packagehandler/packagehandler.h"
+#include "packagehandler/plasmoidhandler.h"
+#include "packagehandler/themehandler.h"
 #include "projectmanager/projectmanager.h"
+#include "projecthandler.h"
+
 
 StartPage::StartPage(MainWindow *parent) // TODO set a palette so it will look identical with any color scheme.
         : QWidget(parent),
-        m_parent(parent)
+         m_parent(parent),
+         m_projectHandler(new ProjectHandler(this)),
+         m_packageHandler(nullptr)
 {
+    m_mainWindow = parent;
     setupWidgets();
     refreshRecentProjectsList();
 }
@@ -65,18 +67,17 @@ StartPage::~StartPage()
 
 void StartPage::setupWidgets()
 {
-    m_projectManager = new ProjectManager(this);
     m_ui.setupUi(this);
 
     m_ui.invalidPlasmagikLabelEmpty->setVisible(false);
     m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(false);
 
     // Set some default parameters, like username/email and preferred scripting language
-    KConfigGroup cg(KGlobal::config(), ("NewProjectDefaultPreferences"));
+    KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("ProjectDefaultPreferences"));
     KUser user = KUser(KUser::UseRealUserID);
 
     QString userName = cg.readEntry("Username", user.loginName());
-    QString userEmail = cg.readEntry("Email", userName+"@none.org");
+    QString userEmail = cg.readEntry("Email", userName);
 
     // If username or email are empty string, i.e. in the previous project the
     // developer deleted it, restore the default values
@@ -86,76 +87,147 @@ void StartPage::setupWidgets()
 
     if (userEmail.isEmpty()) {
         userEmail.append(user.loginName()+"@none.org");
+    } else if (userEmail == userName) {
+        //the first time that we run plasmate, if our config doesn't exists
+        //then the userEmail==userName, so se append the correct email prefix
+        userEmail.append(QStringLiteral("@none.org"));
     }
 
     m_ui.authorTextField->setText(userName);
     m_ui.emailTextField->setText(userEmail);
 
-    const QString radioButtonChecked = cg.readEntry("radioButtonChecked");
-
-    if (radioButtonChecked == "Js") {
-        m_ui.radioButtonJs->setChecked(true);
-    } else if (radioButtonChecked == "Py") {
-        m_ui.radioButtonPy->setChecked(true);
-    } else if (radioButtonChecked == "Rb") {
-        m_ui.radioButtonRb->setChecked(true);
-    } else if (radioButtonChecked == "De") {
-        m_ui.radioButtonDe->setChecked(true);
-    }
-
-    m_ui.cancelNewProjectButton->setIcon(KIcon("draw-arrow-back"));
-    m_ui.newProjectButton->setIcon(KIcon("dialog-ok"));
+    m_ui.cancelNewProjectButton->setIcon(QIcon::fromTheme("draw-arrow-back"));
+    m_ui.newProjectButton->setIcon(QIcon::fromTheme("dialog-ok"));
     m_ui.loadLocalProject->setEnabled(false);
     m_ui.importPackageButton->setEnabled(false);
 
     // Enforce the security restriction from package.cpp in the input field
-    connect(m_ui.projectName, SIGNAL(textEdited(const QString&)),
-            this, SLOT(checkProjectName(const QString&)));
+    connect(m_ui.projectName, &KLineEdit::textEdited, [&](const QString &name) {
+        QRegExp validatePluginName("[a-zA-Z0-9_.]*");
+        if (!validatePluginName.exactMatch(name)) {
+            int pos = 0;
+            for (int i = 0; i < name.size(); i++) {
+                if (validatePluginName.indexIn(name, pos, QRegExp::CaretAtZero) == -1)
+                    break;
+                pos += validatePluginName.matchedLength();
+            }
+            m_ui.projectName->setText(QString(name).remove(pos, 1));
+        }
 
-    connect(m_ui.recentProjects, SIGNAL(clicked(const QModelIndex)),
-            this, SLOT(recentProjectSelected(const QModelIndex)));
+        m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty());
+    });
 
     // Enforce the security restriction from package.cpp in the input field
-    connect(m_ui.localProject, SIGNAL(textChanged(const QString&)),
-            this, SLOT(checkLocalProjectPath(const QString&)));
+    connect(m_ui.localProject, &KUrlRequester::textChanged, this, &StartPage::checkLocalProjectPath);
 
-    connect(m_ui.loadLocalProject, SIGNAL(clicked()),
-            this, SLOT(loadLocalProject()));
+    connect(m_ui.loadLocalProject, &QPushButton::clicked, [&]() {
+        const QString path = KShell::tildeExpand(m_ui.localProject->text());
+        qDebug() << "loading local project from" << path;
+        if (!QFile::exists(path)) {
+            return;
+        }
 
-    connect(m_ui.importPackage, SIGNAL(textChanged(const QString&)),
-            this, SLOT(checkPackagePath(const QString&)));
-    connect(m_ui.importPackageButton, SIGNAL(clicked()),
-            this, SLOT(importPackage()));
+        m_projectHandler->recentProject(path);
+        resetStatus();
 
-    // When there will be a good API for js and rb dataengines and runners, remove the
-    // first connect() statement and uncomment the one below :)
-    connect(m_ui.contentTypes, SIGNAL(clicked(const QModelIndex)),
-            this, SLOT(validateProjectType(const QModelIndex)));
-    /*connect(m_ui.contentTypes, SIGNAL(clicked(const QModelIndex)),
-            m_ui.projectName, SLOT(setFocus()));*/
+        //load our project
+        QString metadataDesktop = path;
+        const QString projectPath = metadataDesktop.replace(QStringLiteral("metadata.desktop"), "");
+        initHandlers(projectPath);
+        m_mainWindow->setPackageHandler(m_packageHandler);
+        emit projectSelected(path);
+    });
 
+    connect(m_ui.importPackageButton, &QPushButton::clicked, [&]() {
+            const QUrl target = m_ui.importPackage->url();
+            selectProject(target);
 
-    connect(m_ui.newProjectButton, SIGNAL(clicked()),
-            this, SLOT(createNewProject()));
-    connect(m_ui.cancelNewProjectButton, SIGNAL(clicked()),
-            this, SLOT(cancelNewProject()));
-    connect(m_ui.importGHNSButton, SIGNAL(clicked()),
-            this, SLOT(doGHNSImport()));
+            m_projectHandler->recentProject(target.toLocalFile());
+            resetStatus();
+    });
 
-    // connect up the project manager to our signals and slots
-    connect(this, SIGNAL(projectSelected(QString)), m_projectManager, SLOT(addRecentProject(QString)));
-    connect(m_projectManager, SIGNAL(projectSelected(QString)), this, SIGNAL(projectSelected(QString)));
-    connect(m_projectManager, SIGNAL(requestRefresh()), this, SLOT(refreshRecentProjectsList()));
+    connect(m_ui.contentTypes, &QListWidget::clicked, [&](const QModelIndex &sender) {
+        m_ui.languageLabel->show();
+        m_ui.frame->show();
+        m_ui.radioButtonJs->setEnabled(true);
+        m_ui.radioButtonDe->setEnabled(true);
+        m_ui.radioButtonJs->hide();
+        m_ui.radioButtonDe->hide();
 
-    new QListWidgetItem(KIcon("application-x-plasma"), i18n("Plasma Widget"), m_ui.contentTypes);
-    new QListWidgetItem(KIcon("server-database"), i18n("Data Engine"), m_ui.contentTypes);
-    new QListWidgetItem(KIcon("system-run"), i18n("Runner"), m_ui.contentTypes);
-    new QListWidgetItem(KIcon("inkscape"), i18n("Theme"), m_ui.contentTypes);
-    new QListWidgetItem(KIcon("window-duplicate"), i18n("Window Switcher"), m_ui.contentTypes);
-    new QListWidgetItem(KIcon("preferences-system-windows-actions"), i18n("KWin Script"), m_ui.contentTypes);
-    new QListWidgetItem(KIcon("preferences-system-windows-effect"), i18n("KWin Effect"), m_ui.contentTypes);
+        if (sender.row() == ThemeRow) {
+            m_ui.languageLabel->hide();
+            m_ui.frame->hide();
+        } else if (sender.row() == PlasmoidRow) {
+            m_ui.radioButtonDe->setVisible(true);
+        } else if (sender.row() == WindowSwitcherRow) {
+            m_ui.radioButtonDe->setVisible(true);
+            m_ui.radioButtonJs->setVisible(true);
+        } else if (sender.row() == KWinScriptRow) {
+            m_ui.radioButtonJs->setVisible(true);
+        } else if (sender.row() == KWinEffectRow) {
+            m_ui.radioButtonJs->setVisible(true);
+        }
 
-//     connect(m_ui.newProjectButton, SIGNAL(clicked()), this, SLOT(launchNewProjectWizard()));
+        m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty());
+        m_ui.layoutHackStackedWidget->setCurrentIndex(1);
+        m_ui.projectName->setFocus();
+    });
+
+    connect(m_ui.newProjectButton, &QPushButton::clicked, this, &StartPage::createNewProject);
+
+    connect(m_ui.cancelNewProjectButton, &QPushButton::clicked, [&]() {
+        m_ui.projectName->clear();
+        resetStatus();
+    });
+
+    connect(m_ui.importGHNSButton, &QPushButton::clicked, [&]() {
+        KNS3::DownloadDialog *mNewStuffDialog = new KNS3::DownloadDialog("plasmate.knsrc", this);
+        if (mNewStuffDialog->exec() == QDialog::Accepted)
+        {
+            KNS3::Entry::List installed = mNewStuffDialog->installedEntries();
+
+            if (!installed.empty())
+            {
+                KNS3::Entry entry = installed.at(0);
+                QStringList installedFiles = entry.installedFiles();
+
+                if (!installedFiles.empty())
+                {
+                    QString file = installedFiles.at(0);
+                    QUrl target(file);
+
+                    selectProject(target);
+                }
+            }
+        }
+    });
+
+    connect(m_ui.recentProjects, &QListWidget::clicked, [=](const QModelIndex &index) {
+        QAbstractItemModel *m = m_ui.recentProjects->model();
+        QString url = m->data(index, FullPathRole).value<QString>();
+        initHandlers(url);
+
+        if (url.isEmpty()) {
+            QScopedPointer<ProjectManager> projectManager(new ProjectManager(m_projectHandler, m_packageHandler, m_mainWindow));
+            if (projectManager->exec() == QDialog::Accepted) {
+                resetStatus();
+            }
+
+            return;
+        } else {
+            m_mainWindow->setPackageHandler(m_packageHandler);
+        }
+
+        qDebug() << "Loading project file:" << m->data(index, FullPathRole);
+
+        emit projectSelected(url);
+    });
+
+    new QListWidgetItem(QIcon::fromTheme("application-x-plasma"), i18n("Plasma Widget"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon::fromTheme("inkscape"), i18n("Theme"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon::fromTheme("window-duplicate"), i18n("Window Switcher"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon::fromTheme("preferences-system-windows-actions"), i18n("KWin Script"), m_ui.contentTypes);
+    new QListWidgetItem(QIcon::fromTheme("preferences-system-windows-effect"), i18n("KWin Effect"), m_ui.contentTypes);
 }
 
 // Convert FooBar to foo_bar
@@ -163,67 +235,6 @@ QString StartPage::camelToSnakeCase(const QString& name)
 {
     QString result(name);
     return result.replace(QRegExp("([A-Z])"), "_\\1").toLower().replace(QRegExp("^_"), "");
-}
-
-void StartPage::checkProjectName(const QString& name)
-{
-    QRegExp validatePluginName("[a-zA-Z0-9_.]*");
-    if (!validatePluginName.exactMatch(name)) {
-        int pos = 0;
-        for (int i = 0; i < name.size(); i++) {
-            if (validatePluginName.indexIn(name, pos, QRegExp::CaretAtZero) == -1)
-                break;
-            pos += validatePluginName.matchedLength();
-        }
-        m_ui.projectName->setText(QString(name).remove(pos, 1));
-    }
-
-    m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty());
-}
-
-void StartPage::validateProjectType(const QModelIndex &sender)
-{
-    m_ui.languageLabel->show();
-    m_ui.frame->show();
-    m_ui.radioButtonJs->setEnabled(true);
-    m_ui.radioButtonPy->setEnabled(true);
-
-    if (sender.row() == DataEngineRow) {
-        m_ui.radioButtonDe->setEnabled(false);
-        m_ui.radioButtonJs->setChecked(true);
-        m_ui.radioButtonRb->setEnabled(true);
-    } else if (sender.row() == RunnerRow) {
-        m_ui.radioButtonDe->setEnabled(false);
-        m_ui.radioButtonJs->setChecked(true);
-        m_ui.radioButtonRb->setEnabled(false);
-    } else if (sender.row() == ThemeRow) {
-        m_ui.languageLabel->hide();
-        m_ui.frame->hide();
-    } else if (sender.row() == PlasmoidRow) {
-      m_ui.radioButtonDe->setEnabled(true);
-        m_ui.radioButtonDe->setChecked(true);
-        m_ui.radioButtonRb->setEnabled(true);
-    } else if (sender.row() == WindowSwitcherRow) {
-        m_ui.radioButtonDe->setEnabled(true);
-        m_ui.radioButtonRb->setEnabled(false);
-        m_ui.radioButtonJs->setEnabled(false);
-        m_ui.radioButtonPy->setEnabled(false);
-        m_ui.radioButtonDe->setChecked(true);
-    } else if (sender.row() == KWinScriptRow) {
-        m_ui.radioButtonPy->setEnabled(false);
-        m_ui.radioButtonRb->setEnabled(false);
-        m_ui.radioButtonDe->setEnabled(true);
-        m_ui.radioButtonJs->setChecked(true);
-    } else if (sender.row() == KWinEffectRow) {
-        m_ui.radioButtonPy->setEnabled(false);
-        m_ui.radioButtonJs->setChecked(true);
-        m_ui.radioButtonRb->setEnabled(false);
-   }
-
-
-    m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty());
-    m_ui.layoutHackStackedWidget->setCurrentIndex(1);
-    m_ui.projectName->setFocus();
 }
 
 QString StartPage::userName()
@@ -236,63 +247,39 @@ QString StartPage::userEmail()
     return m_ui.emailTextField->text();
 }
 
-bool StartPage::selectedJsRadioButton()
-{
-    return m_ui.radioButtonJs->isChecked();
-}
-
-bool StartPage::selectedRbRadioButton()
-{
-    return m_ui.radioButtonRb->isChecked();
-}
-
-bool StartPage::selectedPyRadioButton()
-{
-    return m_ui.radioButtonPy->isChecked();
-}
-
-bool StartPage::selectedDeRadioButton()
-{
-    return m_ui.radioButtonDe->isChecked();
-}
-
 void StartPage::resetStatus()
 {
     qDebug() << "Reset status!";
+    updateProjectPreferences();
     m_ui.layoutHackStackedWidget->setCurrentIndex(0);
     refreshRecentProjectsList();
+}
+
+void StartPage::updateProjectPreferences()
+{
+    KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("ProjectDefaultPreferences"));
+    cg.writeEntry(QStringLiteral("Username"), userName());
+    cg.writeEntry(QStringLiteral("EMail"), userEmail());
+    cg.sync();
 }
 
 void StartPage::refreshRecentProjectsList()
 {
     m_ui.recentProjects->clear();
-    m_projectManager->clearProjects();
-    const QStringList recentProjects = m_parent->recentProjects();
-
-    if (recentProjects.isEmpty()) {
-        m_ui.recentProjectsLabel->hide();
-        m_ui.recentProjects->hide();
-        return;
-    }
 
     int counter = 0;
-    foreach (const QString &file, recentProjects) {
+    for (const QString &file : m_projectHandler->loadProjectsList()) {
         // Specify path + filename as well to avoid mistaking .gitignore
         // as being the metadata file.
         QDir pDir(file);
         QString pPath =  file + "/metadata.desktop";
         qDebug() << "RECENT FILE::: " << file;
-        if (pDir.isRelative()) {
-            qDebug() << "NOT LOCAL";
-            pPath = KStandardDirs::locateLocal("appdata", file + "/metadata.desktop");
-        }
 
         if (!QFile::exists(pPath)) {
             continue;
         }
 
         KPluginInfo metadata(pPath);
-
         // Do not expose the idea of a 'folder name' to the user -
         // we keep the folder hidden and name it whatever we want as
         // long as it's unique. Only the plasmoid name, which the user
@@ -338,18 +325,12 @@ void StartPage::refreshRecentProjectsList()
        if (serviceTypes.contains("KWin/WindowSwitcher")) {
             defaultIconName = "window-duplicate";
             tooltip += i18n("Project Type: Window Switcher");
-       } else if (serviceTypes.contains("Plasma/Applet")) {
+        } else if (serviceTypes.contains("Plasma/Applet")) {
             defaultIconName = "plasma";
             tooltip += i18n("Project type: Plasmoid");
-        } else if (serviceTypes.contains("Plasma/DataEngine")) {
-            defaultIconName = "server-database";
-            tooltip += i18n("Project type: Data Engine");
         } else if (serviceTypes.contains("Plasma/Theme")) {
             defaultIconName = "preferences-desktop-theme";
             tooltip += i18n("Project type: Theme");
-        } else if (serviceTypes.contains("Plasma/Runner")) {
-            defaultIconName = "system-run";
-            tooltip += i18n("Project type: Runner");
         } else if (serviceTypes.contains("KWin/Script")) {
             defaultIconName = "preferences-system-windows-actions";
             tooltip += i18n("Project type: KWin Script");
@@ -361,12 +342,11 @@ void StartPage::refreshRecentProjectsList()
         }
 
         if (metadata.icon().isEmpty()) {
-            item->setIcon(KIcon(defaultIconName));
+            item->setIcon(QIcon::fromTheme(defaultIconName));
         } else {
-            item->setIcon(KIcon(metadata.icon()));
+            item->setIcon(QIcon::fromTheme(metadata.icon()));
         }
 
-        m_projectManager->addProject(item);
         // limit to 5 projects to display up front
         if (m_ui.recentProjects->count() < 5) {
             m_ui.recentProjects->addItem(new QListWidgetItem(*item));
@@ -380,7 +360,7 @@ void StartPage::refreshRecentProjectsList()
     } else {
         more = new QListWidgetItem(i18n("More projects..."));
     }
-    more->setIcon(KIcon("window-new"));
+    more->setIcon(QIcon::fromTheme("window-new"));
     m_ui.recentProjects->addItem(more);
 }
 
@@ -396,50 +376,26 @@ void StartPage::createNewProject()
     const QString projectNameLowerCase = projectName.toLower();
     QString projectFileExtension;
 
-    QString templateFilePath = KStandardDirs::locate("appdata", "templates/");
-
     // type -> serviceTypes
     QString serviceTypes;
     if (m_ui.contentTypes->currentRow() == 0) {
         serviceTypes = "Plasma/Applet";
-        templateFilePath.append("mainPlasmoid");
     } else if (m_ui.contentTypes->currentRow() == 1) {
-        serviceTypes = "Plasma/DataEngine";
-        templateFilePath.append("mainDataEngine");
-    } else if (m_ui.contentTypes->currentRow() == 2) {
-        serviceTypes = "Plasma/Runner";
-        templateFilePath.append("mainRunner");
-    } else if (m_ui.contentTypes->currentRow() == 3) {
         serviceTypes = "Plasma/Theme";
-    } else if (m_ui.contentTypes->currentRow() == 4) {
+    } else if (m_ui.contentTypes->currentRow() == 2) {
         serviceTypes = "KWin/WindowSwitcher";
-        templateFilePath.append("mainTabbox");
-    } else if (m_ui.contentTypes->currentRow() == 5) {
+    } else if (m_ui.contentTypes->currentRow() == 3) {
         serviceTypes = "KWin/Script";
-        templateFilePath.append("mainKWinScript");
-    } else if (m_ui.contentTypes->currentRow() == 6) {
+    } else if (m_ui.contentTypes->currentRow() == 4) {
         serviceTypes = "KWin/Effect";
-        templateFilePath.append("mainKWinEffect");
     }
-
 
     QString projectFolderName;
     QString mainScriptName;
     QString api;
 
     // Append the desired extension
-    if (m_ui.radioButtonPy->isChecked()) {
-        api = "python";
-        projectFolderName = generateProjectFolderName(projectNameLowerCase);
-        projectFileExtension = ".py";
-        mainScriptName = projectNameLowerCase + projectFileExtension;
-    } else if (m_ui.radioButtonRb->isChecked()) {
-        const QString projectNameSnakeCase = camelToSnakeCase(projectName);
-        api = "ruby-script";
-        projectFolderName = generateProjectFolderName(projectNameSnakeCase);
-        projectFileExtension = ".rb";
-        mainScriptName = QString("main_") + projectNameSnakeCase + projectFileExtension;
-    } else if (m_ui.radioButtonDe->isChecked()) {
+    if (m_ui.radioButtonDe->isChecked()) {
         api = "declarativeappletscript";
         projectFolderName = generateProjectFolderName(projectNameLowerCase);
         projectFileExtension = ".qml";
@@ -460,62 +416,9 @@ void StartPage::createNewProject()
     //                               .gitignore
     //                               contents/...
 
-    QString projectPath = KStandardDirs::locateLocal("appdata", projectFolderName);
-
-    QDir packageSubDirs(projectPath);
-    packageSubDirs.mkpath("contents/code"); //create the necessary subdirs
-
-    // Create a QFile object that points to the template we need to copy
-    QFile sourceFile(templateFilePath + projectFileExtension);
-    QFile destinationFile(projectPath + "/contents/code/" + mainScriptName);//our dest
-
-    // Now open these files, and substitute the main class, author, email and date fields
-    sourceFile.open(QIODevice::ReadOnly);
-    destinationFile.open(QIODevice::ReadWrite);
-
-    QByteArray rawData = sourceFile.readAll();
-
-    QByteArray replacedString("$PLASMOID_NAME");
-    if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, projectName.toAscii());
-    }
-    replacedString.clear();
-
-    replacedString.append("$DATAENGINE_NAME");
-    if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, projectName.toAscii());
-    }
-    replacedString.clear();
-
-    replacedString.append("$RUNNER_NAME");
-    if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, projectName.toAscii());
-    }
-    replacedString.clear();
-
-    replacedString.append("$AUTHOR");
-    if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, m_ui.authorTextField->text().toAscii());
-    }
-    replacedString.clear();
-
-    replacedString.append("$EMAIL");
-    if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, m_ui.emailTextField->text().toAscii());
-    }
-    replacedString.clear();
-
-    replacedString.append("$DATE");
-    QDate date = QDate::currentDate();
-    QByteArray datetime(date.toString().toUtf8());
-    QTime time = QTime::currentTime();
-    datetime.append(", " + time.toString().toUtf8());
-    if (rawData.contains(replacedString)) {
-        rawData.replace(replacedString, datetime);
-    }
-
-    destinationFile.write(rawData);
-    destinationFile.close();
+    const QString projectPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0) + QLatin1Char('/') + projectFolderName;
+    initHandlers(projectPath, serviceTypes);
+    m_packageHandler->createPackage(m_ui.authorTextField->text(), m_ui.emailTextField->text(), serviceTypes, projectNameLowerCase);
 
     // create the metadata.desktop file
     // TODO: missing but possible entries that could be added:
@@ -525,79 +428,16 @@ void StartPage::createNewProject()
     // * X-KDE-PluginInfo-Website
     // * X-KDE-PluginInfo-Category
     // * X-KDE-ParentApp
-    KDesktopFile metaFile(projectPath + "/metadata.desktop");
-    KConfigGroup metaDataGroup = metaFile.desktopGroup();
-    metaDataGroup.writeEntry("Name", projectName);
-    //FIXME: the plugin name needs to be globally unique, so should use more than just the project
-    //       name
-    metaDataGroup.writeEntry("Type", "Service");
-    metaDataGroup.writeEntry("X-KDE-PluginInfo-Name", projectNameLowerCase);
-    metaDataGroup.writeEntry("X-KDE-ServiceTypes", serviceTypes);
-    metaDataGroup.writeEntry("X-KDE-PluginInfo-Version", 1);
-    metaDataGroup.writeEntry("X-KDE-PluginInfo-Author", m_ui.authorTextField->text());
-    metaDataGroup.writeEntry("X-KDE-PluginInfo-Email", m_ui.emailTextField->text());
-    //FIXME: this must be selectable at creation
-    metaDataGroup.writeEntry("X-KDE-PluginInfo-License", "GPL");
-    metaDataGroup.writeEntry("X-KDE-PluginInfo-Email", m_ui.emailTextField->text());
-    metaDataGroup.writeEntry("X-Plasma-API", api);
-    metaDataGroup.writeEntry("X-Plasma-MainScript", "code/" + mainScriptName);
-    metaDataGroup.writeEntry("X-Plasma-DefaultSize", QSize(200, 100));
-    metaFile.sync();
-
-    ensureProjectrcFileExists(projectPath);//create the plasmateProjectrc file
-
-    saveNewProjectPreferences(projectPath);
 
     emit projectSelected(projectPath);
 
     // need to clear the project name field here too because startpage is still
     // accessible after project loads.
     m_ui.projectName->clear();
-}
-
-void StartPage::saveNewProjectPreferences(const QString &path)
-{
-    // Saving NewProject preferences
-    KConfigGroup preferences(KGlobal::config(), "NewProjectDefaultPreferences");
-
-    preferences.writeEntry("Username", userName());
-    preferences.writeEntry("Email", userEmail());
-
-    QString radioButtonChecked;
-    if (selectedJsRadioButton()) {
-        radioButtonChecked = "Js";
-    } else if (selectedPyRadioButton()) {
-        radioButtonChecked = "Py";
-    } else if (selectedRbRadioButton()) {
-        radioButtonChecked = "Rb";
-    } else if (selectedDeRadioButton()) {
-        radioButtonChecked = "De";
-    }
-
-
-    preferences.writeEntry("radioButtonChecked", radioButtonChecked);
-    preferences.sync();
-
-    KConfig c(path+ '/' + PROJECTRC);
-    KConfigGroup projectrcPreferences(&c, "ProjectDefaultPreferences");
-    projectrcPreferences.writeEntry("Username", userName());
-    projectrcPreferences.writeEntry("Email", userEmail());
-    projectrcPreferences.writeEntry("radioButtonChecked", radioButtonChecked);
-    projectrcPreferences.sync();
-}
-void StartPage::ensureProjectrcFileExists(const QString& projectPath)
-{
-    if (!QFile::exists(projectPath + '/' + PROJECTRC)) {
-        QFile rcfile(projectPath + '/' + PROJECTRC);
-        rcfile.open(QIODevice::ReadWrite);
-        rcfile.close();
-    }
-}
-
-void StartPage::cancelNewProject()
-{
-    m_ui.projectName->clear();
     resetStatus();
+
+    //load our new project
+    m_mainWindow->setPackageHandler(m_packageHandler);
 }
 
 void StartPage::checkLocalProjectPath(const QString& name)
@@ -613,85 +453,20 @@ void StartPage::checkLocalProjectPath(const QString& name)
     m_ui.invalidPlasmagikLabelEmpty->setVisible(false);
     m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(false);
 
-    QDir dir(KShell::tildeExpand(name));
-    QFile metadataDesktop(dir.path() + "/metadata.desktop");
-    qDebug() << "checking: " << name << dir.exists();
+    QFile metadataDesktop(name);
+    qDebug() << "checking: " << name;
     m_ui.loadLocalProject->setEnabled(metadataDesktop.exists());
 
     if (name.isEmpty()) {
         m_ui.invalidPlasmagikLabelEmpty->setVisible(true);
         m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(false);
-    } else if (!metadataDesktop.exists()) {
+    } else if (!metadataDesktop.exists() && !metadataDesktop.fileName().endsWith(QStringLiteral("metadata.desktop"))) {
         m_ui.invalidPlasmagikLabelEmpty->setVisible(false);
         m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(true);
-        m_ui.invalidPlasmagikLabelNoMetadataDesktop->setText(i18n("metadata.desktop does not exist in %1", dir.path()));
+        m_ui.invalidPlasmagikLabelNoMetadataDesktop->setText(i18n("metadata.desktop does not exist in %1", name));
     } else if (!name.isEmpty()) {
         m_ui.invalidPlasmagikLabelEmpty->setVisible(false);
         m_ui.invalidPlasmagikLabelNoMetadataDesktop->setVisible(false);
-    }
-}
-
-void StartPage::loadLocalProject()
-{
-    const QString path = KShell::tildeExpand(m_ui.localProject->text());
-    qDebug() << "loading local project from" << path;
-    if (!QFile::exists(path)) {
-        return;
-    }
-
-    ensureProjectrcFileExists(path);
-
-    emit projectSelected(path);
-}
-
-void StartPage::recentProjectSelected(const QModelIndex &index)
-{
-    QAbstractItemModel *m = m_ui.recentProjects->model();
-    QString url = m->data(index, FullPathRole).value<QString>();
-    if (url.isEmpty()) {
-        m_projectManager->exec();
-        return;
-    }
-    qDebug() << "Loading project file:" << m->data(index, FullPathRole);
-
-    emit projectSelected(url);
-}
-
-void StartPage::checkPackagePath(const QString& name)
-{
-    const QString fullName = KShell::tildeExpand(name);
-    bool valid = QFile::exists(fullName) &&
-                 KMimeType::findByUrl(fullName)->is("application/x-plasma");
-
-    m_ui.importPackageButton->setEnabled(valid);
-}
-
-void StartPage::importPackage()
-{
-    const QUrl target = m_ui.importPackage->url();
-    selectProject(target);
-}
-
-void StartPage::doGHNSImport()
-{
-    KNS3::DownloadDialog *mNewStuffDialog = new KNS3::DownloadDialog("plasmate.knsrc", this);
-    if (mNewStuffDialog->exec() == QDialog::Accepted)
-    {
-        KNS3::Entry::List installed = mNewStuffDialog->installedEntries();
-
-        if (!installed.empty())
-        {
-            KNS3::Entry entry = installed.at(0);
-            QStringList installedFiles = entry.installedFiles();
-
-            if (!installedFiles.empty())
-            {
-                QString file = installedFiles.at(0);
-                QUrl target(file);
-
-                selectProject(target);
-            }
-        }
     }
 }
 
@@ -708,9 +483,10 @@ void StartPage::selectProject(const QUrl &target)
     QString suggested = QFileInfo(target.path()).completeBaseName();
     QString projectFolder = generateProjectFolderName(suggested);
 
-    QString projectPath = KStandardDirs::locateLocal("appdata", projectFolder + '/');
+    QString projectPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0) + projectFolder + QStringLiteral("/");
+    const QUrl projectUrl(projectPath);
 
-    if (!ProjectManager::importPackage(target, projectPath)) {
+    if (!ProjectManager::importPackage(target, projectUrl)) {
         KMessageBox::information(this, i18n("A problem has occurred during import."));
     }
     emit projectSelected(projectFolder);
@@ -723,9 +499,49 @@ const QString StartPage::generateProjectFolderName(const QString& suggestion)
 {
     QString projectFolder = suggestion;
     int suffix = 1;
-    while (!KStandardDirs::locate("appdata", projectFolder + '/').isEmpty()) {
+    while (!QStandardPaths::locateAll(QStandardPaths::DataLocation, projectFolder).isEmpty()) {
         projectFolder = suggestion + QString::number(suffix);
         suffix++;
     }
     return projectFolder;
 }
+
+void StartPage::initHandlers(const QString &projectPath, const QString &serviceType)
+{
+    if (m_packageHandler) {
+        delete m_packageHandler;
+        m_packageHandler = nullptr;
+    }
+
+    if (!serviceType.isEmpty()) {
+        //If our package has not been created yet, we don't have a
+        //metadata.desktop, so we are using the informations which
+        //they have been provided by the plasmate's UI.
+        if (serviceType == QStringLiteral("Plasma/Theme")) {
+            m_packageHandler = new ThemeHandler();
+        } else {
+            m_packageHandler = new PlasmoidHandler();
+        }
+    } else {
+        //our package exists, so we are loading the information
+        //inside from our metadata.desktop
+        MetadataHandler metadata;
+        metadata.setFilePath(projectPath + QStringLiteral("/metadata.desktop"));
+        const QString pluginApi = metadata.pluginApi();
+        if (pluginApi == QStringLiteral("declarativeappletscript")) {
+            m_packageHandler = new PlasmoidHandler();
+        } else {
+            m_packageHandler = new ThemeHandler();
+        }
+    }
+
+    m_packageHandler->setPackagePath(projectPath);
+
+
+    if (m_projectHandler) {
+        delete m_projectHandler;
+        m_projectHandler = nullptr;
+    }
+    m_projectHandler = new ProjectHandler(m_packageHandler);
+}
+

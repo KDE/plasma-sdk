@@ -18,22 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef STARTPAGE_H
 #define STARTPAGE_H
 
-#include <QWidget>
 #include <QUrl>
 
 #include "ui_startpage.h"
 
-class QLabel;
-class QComboBox;
-class QListWidget;
-class QVBoxLayout;
 class QModelIndex;
-class QPushButton;
-class KLineEdit;
 class MainWindow;
 class ProjectManager;
-
-static const QString PROJECTRC(".plasmateprojectrc");
+class ProjectHandler;
+class PackageHandler;
 
 class StartPage : public QWidget
 {
@@ -43,70 +36,49 @@ class StartPage : public QWidget
         FullPathRole = Qt::UserRole + 1
     };
 
-    friend class ProjectManager;
-
 public:
-    StartPage(MainWindow *parent);
+    StartPage(MainWindow *parent = 0);
     ~StartPage();
 
     QString userName();
     QString userEmail();
 
     bool selectedJsRadioButton();
-    bool selectedRbRadioButton();
     bool selectedDeRadioButton();
-    bool selectedPyRadioButton();
 
     void resetStatus();
 
-    enum ProjectTypes {
-        Theme           = 1,
-        Plasmoid        = 2,
-        DataEngine      = 4,
-        Runner          = 8
-    };
-
-    Q_DECLARE_FLAGS(ProjectType, ProjectTypes)
-
 signals:
     void projectSelected(const QString &name);
-public Q_SLOTS:
-    void cancelNewProject();
 
 private Q_SLOTS:
-    void recentProjectSelected(const QModelIndex &);
-    void validateProjectType(const QModelIndex &sender);
     void createNewProject();
-    void checkProjectName(const QString &name);
     void checkLocalProjectPath(const QString &path);
-    void checkPackagePath(const QString &path);
-    void importPackage();
-    void doGHNSImport();
     void refreshRecentProjectsList();
-    void loadLocalProject();
-    void saveNewProjectPreferences(const QString &path);
 
 private:
     enum NewProjectRows {
         PlasmoidRow = 0,
-        DataEngineRow = 1,
-        RunnerRow = 2,
-        ThemeRow = 3,
-        WindowSwitcherRow = 4,
-        KWinScriptRow = 5,
-        KWinEffectRow = 6
+        ThemeRow = 1,
+        WindowSwitcherRow = 2,
+        KWinScriptRow = 3,
+        KWinEffectRow = 4
     };
 
     void setupWidgets();
     static QString camelToSnakeCase(const QString& name);
     const QString generateProjectFolderName(const QString& suggestion);
     void selectProject(const QUrl &target);
-    void ensureProjectrcFileExists(const QString& projectPath);
+    void updateProjectPreferences();
+    QString findMainScript(const QString &projectPath) const;
+    void initHandlers(const QString &projectPath, const QString &serviceType = QString());
 
     Ui::StartPage m_ui;
-    MainWindow *m_parent;
-
+    MainWindow *m_mainWindow;
+    QWidget *m_parent;
     ProjectManager *m_projectManager;
+    ProjectHandler *m_projectHandler;
+    PackageHandler *m_packageHandler;
 };
 
 #endif // STARTPAGE_H

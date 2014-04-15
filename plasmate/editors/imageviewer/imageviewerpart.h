@@ -1,5 +1,5 @@
 /*
-Copyright 2011 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@kde.org>
+Copyright 2014 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@kde.org>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
@@ -15,33 +15,25 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef IMAGELOADER_H
-#define IMAGELOADER_H
+#ifndef IMAGEVIEWERPART_H
+#define IMAGEVIEWERPART_H
 
-#include <QUrl>
-#include <QRunnable>
-#include <QObject>
-#include <QImage>
+#include <KParts/ReadOnlyPart>
 
-class ImageLoader : public QObject, public QRunnable
+class ImageViewer;
+
+class ImageViewerPart : public KParts::ReadOnlyPart
 {
     Q_OBJECT
 
 public:
-    /**
-     * You just have to create an instance of the object.
-     * Don't do anything else.
-     **/
-    ImageLoader(const QUrl& image, const QSize &size, QObject *parent = 0);
+    explicit ImageViewerPart(QObject *parent = 0);
+   ~ImageViewerPart();
 
-    void run();
-
-Q_SIGNALS:
-    void loadImage(const QUrl &url, const QSize &size, const QImage& image);
+    bool openUrl(const QUrl &url) override;
 
 private:
-    QUrl m_image;
-    QSize m_size;
+    ImageViewer *m_imageViewer;
 };
 
-#endif // IMAGELOADER_H
+#endif // IMAGEVIEWERPART_H

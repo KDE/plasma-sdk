@@ -26,12 +26,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <KConfigGroup>
 
-class MetadataHandler : public QObject
+class MetadataHandler
 {
-    Q_OBJECT
 
 public:
-    MetadataHandler(QObject *parent = 0);
+    MetadataHandler();
 
     ~MetadataHandler();
 
@@ -72,6 +71,12 @@ public:
 
     QString pluginName() const;
     void setPluginName(const QString &pluginName);
+
+    QString pluginApi() const;
+    void setPluginApi(const QString &pluginApi);
+
+    QString mainScript() const;
+    void setMainScript(const QString &mainScriptName);
 
 private:
     KConfigGroup m_metadataConfig;

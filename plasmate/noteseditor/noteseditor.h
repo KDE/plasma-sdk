@@ -1,5 +1,5 @@
 /*
-Copyright 2011 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@kde.org>
+  Copyright 2014 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@kde.org>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
@@ -15,33 +15,29 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef IMAGELOADER_H
-#define IMAGELOADER_H
+#ifndef NOTESEDITOR_H
+#define NOTESEDITOR_H
 
-#include <QUrl>
-#include <QRunnable>
-#include <QObject>
-#include <QImage>
+#include <QDockWidget>
 
-class ImageLoader : public QObject, public QRunnable
-{
-    Q_OBJECT
-
-public:
-    /**
-     * You just have to create an instance of the object.
-     * Don't do anything else.
-     **/
-    ImageLoader(const QUrl& image, const QSize &size, QObject *parent = 0);
-
-    void run();
-
-Q_SIGNALS:
-    void loadImage(const QUrl &url, const QSize &size, const QImage& image);
-
-private:
-    QUrl m_image;
-    QSize m_size;
+namespace KParts {
+    class ReadOnlyPart;
 };
 
-#endif // IMAGELOADER_H
+class NotesEditor : public QDockWidget
+{
+    Q_OBJECT;
+public:
+    NotesEditor(const QString &projectPath, QWidget* parent = 0);
+    ~NotesEditor();
+
+    void refreshNotes();
+
+private:
+    void init();
+
+    KParts::ReadOnlyPart *m_notesPart;
+    QString m_projectPath;
+};
+
+#endif // NOTESEDITOR_H

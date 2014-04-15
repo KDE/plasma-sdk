@@ -25,54 +25,68 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef EDITPAGE_H
 #define EDITPAGE_H
 
-#include <QWidget>
+#include <QDockWidget>
 #include <QModelIndex>
 #include <QTreeView>
-#include <QUrl>
-#include <kparts/part.h>
-#include <kservice.h>
+#include <KParts/ReadOnlyPart>
 
-// FIXME
-//#include "editors/metadata/metadataeditor.h"
+namespace KTextEditor {
+    class View;
+};
 
-class QWidget;
-class QMenu;
-class ImageViewer;
-class KConfigXtEditor;
-class KJob;
+class ImageViewerPart;
+class KConfigXtEditorPart;
+class MetaDataEditorPart;
+class PackageModel;
+class PackageHandler;
 
 class EditPage : public QTreeView
 {
     Q_OBJECT
 
 public:
-    explicit EditPage(QWidget *parent = 0);
-    void loadFile(const QUrl &path);
+    explicit EditPage(PackageHandler *packageHandler, QWidget *parent = 0);
 
 Q_SIGNALS:
-    void loadEditor(const KService::List offers, QUrl target);
-    void loadMetaDataEditor(QUrl target);
-    void loadRequiredEditor(QWidget *editor);
+    void loadRequiredEditor(KParts::ReadOnlyPart *editor);
 
 private Q_SLOTS:
     void findEditor(const QModelIndex &index);
     void showTreeContextMenu(const QPoint&);
     void doDelete(bool);
-    void mimetypeJobFinished(KJob *job);
 
 private:
     QMenu *m_contextMenu;
-    // FIXME
-    // MetaDataEditor *m_metaEditor;
     QUrl m_path;
-    QString m_mimetype;
     bool hasExtension(const QString &filename);
     void imageDialog(const QString &filter, const QString& destinationPath);
-    QString createContentWithSubdir(const QString& packagePath, const QString& contentWithSubdir) const;
 
-    ImageViewer *m_imageViewer;
-    KConfigXtEditor *m_kconfigXtEditor;
+    QWeakPointer<ImageViewerPart> m_imageViewer;
+    QWeakPointer<KConfigXtEditorPart> m_kconfigXtEditor;
+    QWeakPointer<MetaDataEditorPart> m_metaEditor;
+    QWeakPointer<KTextEditor::View> m_textEditor;
+
+    PackageModel *m_packageModel;
+    PackageHandler *m_packageHandler;
 };
+
+
+
+
+class FileList : public QDockWidget
+{
+    Q_OBJECT
+
+public:
+
+    FileList(PackageHandler *packageHandlder, QWidget *parent = 0);
+
+    EditPage *editPage() const;
+
+private:
+    EditPage *m_editPage;
+};
+
 
 #endif
 

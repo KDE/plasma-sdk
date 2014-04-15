@@ -1,6 +1,5 @@
 /*
-
-Copyright 2013 Giorgos Tsiapaliokas <terietor@gmail.com>
+Copyright 2014 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@kde.org>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
@@ -19,31 +18,32 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PACKAGEHANDLERTEST_H
-#define PACKAGEHANDLERTEST_H
+#include "metadataeditorpart.h"
+#include "metadataeditor.h"
 
-#include "../packagehandler.h"
-
-class PackageHandlerTest : public QObject
+MetaDataEditorPart::MetaDataEditorPart(QObject* parent)
+        : KParts::ReadWritePart(parent),
+          m_metadataEditor(new MetaDataEditor())
 {
-    Q_OBJECT
+    setWidget(m_metadataEditor);
+}
 
-public:
+MetaDataEditorPart::~MetaDataEditorPart()
+{
+}
 
-    explicit PackageHandlerTest(QObject *parent = 0);
-    ~PackageHandlerTest();
+bool MetaDataEditorPart::openUrl(const QUrl &url)
+{
+    m_metadataEditor->setFilename(url.toLocalFile());
+    m_metadataEditor->readFile();
 
-private Q_SLOTS:
-    void initTestCase();
-    void initPlasmoid();
-    void createNewPlasmoid();
-    void loadPlasmoidTestData();
-    void checkPlasmoidMimeTypes();
-    void checkNodes();
-    void checkPlasmoidNodes();
-private:
-    PackageHandler m_packageHandler;
-};
+    setUrl(url);
+    return true;
+}
 
-#endif
+bool MetaDataEditorPart::saveFile()
+{
+    m_metadataEditor->writeFile();
+    return true;
+}
 

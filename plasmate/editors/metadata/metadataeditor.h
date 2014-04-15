@@ -21,6 +21,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QWidget>
 #include <QStringList>
 
+#include "metadatahandler.h"
+
 namespace Ui
 {
 class MetaDataEditor;
@@ -39,16 +41,9 @@ public:
     MetaDataEditor(QWidget *parent = 0);
     ~MetaDataEditor();
 
-    enum apiModes {
-        coreApi,
-        uiApi
-    };
-
-    void setFilename(const QString &filename);
-    QString formatApi(const QString &api, apiModes apiMode);
+    void setFilename(const QString &filePath);
     const QString filename();
     const QString api();
-    bool isValidMetaData();
 public slots:
     void readFile();
     void writeFile();
@@ -61,8 +56,7 @@ private slots:
 private:
     Ui::MetaDataEditor *m_view;
     QString m_filename;
-    Plasma::PackageMetadata *m_metadata;
-    QStringList m_apis;
+    MetadataHandler m_metadata;
     QStringList m_categories;
 
     void initCatergories(const QString& serviceType);

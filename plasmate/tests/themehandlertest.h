@@ -1,5 +1,6 @@
 /*
-Copyright 2011 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@kde.org>
+
+Copyright 2014 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@kde.org>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
@@ -18,35 +19,30 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "imageloader.h"
+#ifndef THEMEHANDLERTEST_H
+#define THEMEHANDLERTEST_H
 
-ImageLoader::ImageLoader(const QUrl& image, const QSize &size, QObject *parent)
-     : QObject(parent),
-       m_image(image),
-       m_size(size)
+#include <QObject>
+
+class PackageHandler;
+
+class ThemeHandlerTest : public QObject
 {
-    setAutoDelete(true);
-}
+    Q_OBJECT
 
-void ImageLoader::run()
-{
-    QImage image(m_image.path(), "PNG JPG GIF JPEG SVG SVGZ");
-    QSize newSize = image.size();
+public:
 
-    if (newSize.width() > m_size.width()) {
-        newSize.setWidth(m_size.width());
-    }
+    explicit ThemeHandlerTest(QObject *parent = 0);
+    ~ThemeHandlerTest();
 
-    if (newSize.height() > m_size.height()) {
-        newSize.setHeight(m_size.height());
-    }
+private Q_SLOTS:
+    void initTestCase();
+    void createNewTheme();
+    void checkNodes();
+    void cleanupTestCase();
+private:
+    PackageHandler *m_packageHandler;
+};
 
-    if (newSize != image.size()) {
-        image = image.scaled(newSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    }
-
-    emit loadImage(m_image, m_size, image);
-}
-
-#include "imageloader.moc"
+#endif
 

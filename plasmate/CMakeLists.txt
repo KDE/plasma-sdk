@@ -14,14 +14,17 @@ add_feature_info(GIT_EXECUTABLE_FOUND "Git" "Distributed Revision Control System
 
 set (PlasMate_SRC
     editors/editpage.cpp
-    #editors/metadata/metadataeditor.cpp
+    editors/metadata/metadataeditor.cpp
     editors/imageviewer/imageloader.cpp
     editors/imageviewer/imageviewer.cpp
+    editors/imageviewer/imageviewerpart.cpp
     #editors/text/texteditor.cpp
     editors/kconfigxt/kconfigxteditor.cpp
     editors/kconfigxt/kconfigxtreader.cpp
     editors/kconfigxt/kconfigxtwriter.cpp
+    editors/kconfigxt/kconfigxteditorpart.cpp
     editors/metadata/metadatahandler.cpp
+    editors/metadata/metadataeditorpart.cpp
     main.cpp
     sidebaritem.cpp
     sidebardelegate.cpp
@@ -34,24 +37,31 @@ set (PlasMate_SRC
     #savesystem/tabledelegate.cpp
     #savesystem/tablewidget.cpp
     #savesystem/timeline.cpp
-    #mainwindow.cpp
-    #startpage.cpp
-    #packagemodel.cpp
-    #previewer/plasmoid/plasmoidpreviewer.cpp
+    mainwindow.cpp
+    dockwidgetshandler.cpp
+    startpage.cpp
+    packagemodel.cpp
+    packagehandler/packagehandler.cpp
+    packagehandler/plasmoidhandler.cpp
+    packagehandler/themehandler.cpp
+    projecthandler.cpp
+    projectmanager/projectmanager.cpp
+    previewer/plasmoid/plasmoidpreviewer.cpp
+    ../plasmoidviewer/view.cpp
     #previewer/plasmoid/plasmoidview.cpp
     #previewer/runner/runnerpreviewer.cpp
     #previewer/windowswitcher/windowswitcher.cpp
     #previewer/windowswitcher/thumbnailitem.cpp
     #previewer/windowswitcher/tabboxpreviewer.cpp
-    #previewer/previewer.cpp
+    previewer/previewer.cpp
     # publisher/signingwidget.cpp
     #publisher/signingdialog.cpp
-    #publisher/publisher.cpp
+    publisher/publisher.cpp
     #publisher/remoteinstaller/remoteinstaller.cpp
     #publisher/remoteinstaller/remoteinstallerdialog.cpp
     #konsole/konsolepreviewer.cpp
-    #docbrowser/docbrowser.cpp
-    #projectmanager/projectmanager.cpp
+    docbrowser/docbrowser.cpp
+    noteseditor/noteseditor.cpp
 )
 
 #if (DEBUG_MODEL)
@@ -63,11 +73,11 @@ set (PlasMate_SRC
 #endif (DEBUG_MODEL)
 
 qt5_wrap_ui(PlasMate_SRC
-    #startpage.ui
-   #editors/metadata/metadata.ui
+   editors/metadata/metadata.ui
    publisher/publisher.ui
    #publisher/remoteinstaller/remoteinstaller.ui
    editors/kconfigxt/kconfigxteditor.ui
+   startpage.ui
 )
 
 include_directories(${QT_QTWEBKIT_INCLUDE_DIR}
@@ -90,9 +100,9 @@ target_link_libraries(plasmate
                       KF5::Declarative
                       Qt5::Quick
                       Qt5::Svg
+                      Qt5::WebKitWidgets
                       KF5::PlasmaQuick
                       ${LibAttica_LIBRARIES}
-                      #Qt5::WebKitWidgets
                       KF5::KIOCore
                       KF5::ItemViews
                       KF5::ConfigCore
@@ -103,6 +113,7 @@ target_link_libraries(plasmate
                       KF5::Service
                       KF5::Completion
                       KF5::WidgetsAddons
+                      KF5::Archive
                       #${KDEPIMLIBS_KPIMUTILS_LIBS}
 )
 
@@ -195,4 +206,4 @@ install(DIRECTORY templates DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 
 add_subdirectory(tests)
 
-feature_summary(WHAT ALL   FATAL_ON_MISSING_REQUIRED_PACKAGES)
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

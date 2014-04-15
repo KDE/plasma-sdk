@@ -25,8 +25,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QObject>
 #include <QStringList>
 
-class PackageHandler;
-
 class ProjectHandler : public QObject
 {
     Q_OBJECT
@@ -37,12 +35,16 @@ public:
 
     const QStringList &loadProjectsList();
     void addProject(const QString &projectPath);
+    void recentProject(const QString &projectPath);
     void removeProject(const QString &projectPath);
     bool removeProjectFromDisk(const QString &projectPath);
-    PackageHandler *packageHandler();
+
 private:
+    void blacklistProject(const QString &projectPath);
+    void whitelistProject(const QString &projectPath);
+
     QStringList m_projectsList;
-    PackageHandler *m_packageHandler;
+    QStringList m_blacklistProjects;
 };
 
 #endif

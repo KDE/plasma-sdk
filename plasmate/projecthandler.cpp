@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "projecthandler.h"
-#include "packagehandler.h"
+
 #include <QApplication>
 #include <QDir>
 #include <QDebug>
@@ -31,8 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KSharedConfig>
 
 ProjectHandler::ProjectHandler(QObject *parent)
-    : QObject(parent),
-      m_packageHandler(new PackageHandler(this))
+    : QObject(parent)
 {
 }
 
@@ -40,39 +39,41 @@ ProjectHandler::~ProjectHandler()
 {
 }
 
-PackageHandler *ProjectHandler::packageHandler()
-{
-    return m_packageHandler;
-}
-
 const QStringList &ProjectHandler::loadProjectsList()
 {
     m_projectsList.clear();
     const QString projectPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0);
+
+
+    KConfigGroup projectsConfig(KSharedConfig::openConfig(qApp->applicationDisplayName()), QStringLiteral("ProjectHandler"));
+    const QString recentProjects = projectsConfig.readEntry(QStringLiteral("RecentProjects"),QStringLiteral(""));
+    m_blacklistProjects = projectsConfig.readEntry("blacklistProject", QStringList());
 
     // load the projects which are inside on our homedir like ~/.local5
     QDir projectDir(projectPath);
     for (const auto &it : projectDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
         // TODO find a way to check if the package is valid
         QDir currentProject(projectPath + '/' + it);
-        if (currentProject.exists(QStringLiteral("metadata.desktop")) && !currentProject.path().isEmpty()) {
+        if (currentProject.exists(QStringLiteral("metadata.desktop")) &&
+            !currentProject.path().isEmpty() &&
+            !m_blacklistProjects.contains(currentProject.path()) &&
+            !m_projectsList.contains(currentProject.path()) &&
+            !recentProjects.contains(currentProject.path())) {
             m_projectsList << currentProject.path();
         }
     }
 
     // load the external projects
-    KConfigGroup externalProjectsConfig(KSharedConfig::openConfig(qApp->applicationDisplayName()), QStringLiteral("ProjectHandler"));
-
-    QString externalProjects = externalProjectsConfig.readEntry("externalProjects", "");
-
+    QStringList externalProjects = projectsConfig.readEntry("externalProjects", QStringList());
     if (!externalProjects.isEmpty()) {
-        for (const auto it : externalProjects.split(',')) {
-            if (!it.isEmpty()) {
+        for (const auto it : externalProjects) {
+            if (!it.isEmpty() && !m_blacklistProjects.contains(it)) {
                 m_projectsList << it;
             }
         }
     }
 
+    m_projectsList.insert(0, recentProjects);
     return m_projectsList;
 }
 
@@ -80,10 +81,7 @@ void ProjectHandler::addProject(const QString &projectPath)
 {
     QDir projectDir(projectPath);
 
-    if (!projectDir.exists()) {
-        // If our package doesn't exist we are creating it.
-        m_packageHandler->setPackagePath(projectDir.absolutePath());
-    } else  if (!projectDir.exists(QStringLiteral("metadata.desktop"))) {
+    if (!projectDir.exists(QStringLiteral("metadata.desktop"))) {
         qWarning() << "the project " << projectPath << "is not valid. metadata.desktop cannot be found";
         return;
     }
@@ -93,11 +91,16 @@ void ProjectHandler::addProject(const QString &projectPath)
 
     // We load the current config and if the external project
     // doesn't exist. Then we are adding it.
-    const QString currentConfig = projectConfig.readEntry("externalProjects", "");
+    QStringList currentConfig = projectConfig.readEntry("externalProjects", QStringList());
     if (!currentConfig.contains(projectPath)) {
-        const QString updatedConfig = currentConfig + ',' + projectPath;
-        projectConfig.writeEntry("externalProjects", updatedConfig);
+        //Here we add our new project inside to our config
+        currentConfig << projectPath;
+        projectConfig.writeEntry("externalProjects", currentConfig);
         projectConfig.sync();
+    }
+
+    if (m_blacklistProjects.contains(projectPath)) {
+        whitelistProject(projectPath);
     }
 
     // Now we are updating the list of projects.
@@ -108,19 +111,23 @@ void ProjectHandler::removeProject(const QString &projectPath)
 {
     // In order for our tests to run. We use qApp->applicationDisplayName()
     KConfigGroup projectConfig(KSharedConfig::openConfig(qApp->applicationDisplayName()), QStringLiteral("ProjectHandler"));
+    const QString localProjectPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0);
 
-    QString currentConfig = projectConfig.readEntry("externalProjects", "");
-    if (!currentConfig.contains(projectPath)) {
+    const QStringList currentConfig = projectConfig.readEntry("externalProjects", QStringList());
+    if (!currentConfig.contains(projectPath) && !projectPath.startsWith(localProjectPath)) {
         qWarning() << "The " << projectPath << " doesn't exist. We cannot remove it";
         return;
     }
 
-    // In order to remove the project we are replacing the project path
-    // and the ',' which appends before it.
-    const QString newConfig = currentConfig.replace(',' + projectPath, "");
+    //Here we are removing our project from the config
+    const int projectPos = currentConfig.indexOf(projectPath);
+    QStringList newConfig = currentConfig;
+    newConfig.removeAt(projectPos);
+
     projectConfig.writeEntry("externalProjects", newConfig);
     projectConfig.sync();
 
+    blacklistProject(projectPath);
     // Now we are updating the list of our projects.
     loadProjectsList();
 }
@@ -131,3 +138,58 @@ bool ProjectHandler::removeProjectFromDisk(const QString &projectPath)
     removeProject(projectPath);
     return projectDir.removeRecursively();
 }
+
+void ProjectHandler::blacklistProject(const QString &projectPath)
+{
+    KConfigGroup projectConfig(KSharedConfig::openConfig(qApp->applicationDisplayName()), QStringLiteral("ProjectHandler"));
+    QStringList blacklist = projectConfig.readEntry("blacklistProject", QStringList());
+
+    blacklist << projectPath;
+    projectConfig.writeEntry("blacklistProject", blacklist);
+    projectConfig.sync();
+    m_blacklistProjects = blacklist;
+}
+
+void ProjectHandler::whitelistProject(const QString &projectPath)
+{
+    KConfigGroup projectConfig(KSharedConfig::openConfig(qApp->applicationDisplayName()), QStringLiteral("ProjectHandler"));
+    QStringList blacklist = projectConfig.readEntry("blacklistProject", QStringList());
+
+    const int projectPos = blacklist.indexOf(projectPath);
+    if (projectPos == -1) {
+        qWarning() << "The " << projectPath << " is not blacklisted, we cannot whitelist it";
+        return;
+    }
+
+    blacklist.removeAt(projectPos);
+    projectConfig.writeEntry("blacklistProject", blacklist);
+    projectConfig.sync();
+
+    m_blacklistProjects = blacklist;
+}
+
+void ProjectHandler::recentProject(const QString &projectPath)
+{
+    KConfigGroup projectConfig(KSharedConfig::openConfig(qApp->applicationDisplayName()), QStringLiteral("ProjectHandler"));
+    QStringList recentProjects = projectConfig.readEntry(QStringLiteral("RecentProjects"), QStringList());
+
+    if (recentProjects.isEmpty()) {
+        projectConfig.writeEntry(QStringLiteral("RecentProjects"), QStringList() << projectPath);
+    } else {
+        if (recentProjects.contains(projectPath)) {
+            const int projectPos = recentProjects.indexOf(projectPath);
+            if (projectPos == -1) {
+                qWarning() << "There is something wrong with our project.";
+                return;
+            }
+
+            recentProjects.removeAt(projectPos);
+        }
+
+        recentProjects.insert(0, projectPath);
+        projectConfig.writeEntry(QStringLiteral("RecentProjects"), recentProjects);
+    }
+
+    projectConfig.sync();
+}
+

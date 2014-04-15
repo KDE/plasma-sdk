@@ -6,40 +6,45 @@ macro(PLASMATE_UNIT_TEST testname srcs libraries)
     )
 
     add_executable(${testname} ${testname_SRCS})
-
-    # plasmate_unit_test is also being called
-    # by plasmate_ui_test, so we will check if we
-    # have extra arguments. If we have then we don't
-    # want to add them as tests because `make test` will
-    # freeze.
-
-    set(extra_macro_args ${ARGN})
-    list(LENGTH extra_macro_args num_extra_args)
-
-    if (${num_extra_args} EQUAL 0)
-        add_test(plasmate-${testname} ${testname})
-    endif()
+    add_test(plasmate-${testname} ${testname})
 
     ecm_mark_as_test(${testname})
 
     target_link_libraries(${testname} ${libraries} Qt5::Test Qt5::Core)
 endmacro()
 
-# packageHandertest
-set(packagehandler_SRCS ../packagehandler.cpp)
-set(packagehandler_LIBS KF5::Plasma)
+# plasmoidhandertest
+set(plasmoidhandler_SRCS ../packagehandler/packagehandler.cpp
+                         ../packagehandler/plasmoidhandler.cpp
+                         ../editors/metadata/metadatahandler.cpp
+)
 
-PLASMATE_UNIT_TEST(packagehandlertest "${packagehandler_SRCS}"
-                                      "${packagehandler_LIBS}"
+set(plasmoidhandler_LIBS KF5::Plasma)
+
+PLASMATE_UNIT_TEST(plasmoidhandlertest "${plasmoidhandler_SRCS}"
+                                       "${plasmoidhandler_LIBS}"
+)
+
+# themehandlertest
+set(themehandler_SRCS  ../packagehandler/packagehandler.cpp
+                       ../packagehandler/themehandler.cpp
+                       ../editors/metadata/metadatahandler.cpp
+)
+
+set(themehandler_LIBS KF5::Plasma)
+
+PLASMATE_UNIT_TEST(themehandlertest "${themehandler_SRCS}"
+                                    "${themehandler_LIBS}"
 )
 
 # packagemodeltest
 set(packagemodeltest_SRCS modeltest.cpp
                           ../packagemodel.cpp
-                          ${packagehandler_SRCS}
+                          ../editors/metadata/metadatahandler.cpp
+                          ${plasmoidhandler_SRCS}
 )
 
-set(packagemodeltest_LIBS ${packagehandler_LIBS})
+set(packagemodeltest_LIBS ${plasmoidhandler_LIBS})
 
 plasmate_unit_test(packagemodeltest "${packagemodeltest_SRCS}"
                                     "${packagemodeltest_LIBS}"
@@ -55,7 +60,8 @@ plasmate_unit_test(metadatahandlertest "${metadatahandlertest_SRCS}"
 
 # projecthandlertest
 set(projecthandlertest_SRCS ../projecthandler.cpp
-                            ../packagehandler.cpp
+                            ${plasmoidhandler_SRCS}
+                            ../editors/metadata/metadatahandler.cpp
 )
 
 set(projecthandlertest_LIBS KF5::Plasma)
@@ -63,6 +69,4 @@ set(projecthandlertest_LIBS KF5::Plasma)
 plasmate_unit_test(projecthandlertest "${projecthandlertest_SRCS}"
                                       "${projecthandlertest_LIBS}"
 )
-
-add_subdirectory(ui)
 

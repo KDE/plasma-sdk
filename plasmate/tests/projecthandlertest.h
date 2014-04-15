@@ -37,9 +37,12 @@ private Q_SLOTS:
     void initTestCase();
     void createTestProject();
     void projectsList();
+    void cleanupTestCase();
 
 private:
     ProjectHandler m_projectHandler;
+    QString m_testPackagePath;
+    QString m_externalTestPackagePath;
 };
 
 #endif

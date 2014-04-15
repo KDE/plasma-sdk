@@ -1,6 +1,6 @@
 /*
 
-Copyright 2013 Giorgos Tsiapaliokas <terietor@gmail.com>
+Copyright 2014 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@kde.org>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
@@ -20,8 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 
-#include "packagehandler.h"
-
 #include <Plasma/PluginLoader>
 
 #include <KDirWatch>
@@ -33,41 +31,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QStandardPaths>
 #include <QMimeDatabase>
 
-PackageHandler::Node::Node(const QString &name, const QString &description,
-                           const QStringList &mimeTypes, PackageHandler::Node *parent)
-    : m_name(name),
-      m_description(description),
-      m_parent(parent),
-      m_mimeTypes(mimeTypes)
+#include "packagehandler.h"
+#include "plasmoidhandler.h"
+
+#include "../editors/metadata/metadatahandler.h"
+
+PlasmoidHandler::PlasmoidNode::PlasmoidNode(const QString &name, const QString &description,
+                                            const QStringList &mimeTypes, PlasmoidHandler::Node *parent)
+    : PackageHandler::Node(name, description, mimeTypes, parent)
 {
 }
 
-PackageHandler::Node::~Node()
+PlasmoidHandler::PlasmoidNode::~PlasmoidNode()
 {
-    qDeleteAll(m_childNodes);
+   // qDeleteAll(m_childNodes);
 }
 
-QString PackageHandler::Node::name() const
-{
-    return m_name;
-}
-
-QString PackageHandler::Node::description() const
-{
-    return m_description;
-}
-
-QStringList PackageHandler::Node::mimeTypes() const
-{
-    return m_mimeTypes;
-}
-
-bool PackageHandler::Node::isFile() const
-{
-    return !m_mimeTypes.isEmpty();
-}
-
-bool PackageHandler::Node::needsNewFileNode() const
+bool PlasmoidHandler::PlasmoidNode::needsNewFileNode() const
 {
     if (name() == QStringLiteral("config") || isFile()) {
         return false;
@@ -76,38 +56,9 @@ bool PackageHandler::Node::needsNewFileNode() const
     return true;
 }
 
-QList<PackageHandler::Node*> PackageHandler::Node::childNodes() const
-{
-    return m_childNodes;
-}
 
-PackageHandler::Node *PackageHandler::Node::parent() const
-{
-    return m_parent;
-}
-
-PackageHandler::Node *PackageHandler::Node::child(int row) const
-{
-    return m_childNodes.value(row);
-}
-
-void PackageHandler::Node::addChild(PackageHandler::Node *child)
-{
-    m_childNodes.append(child);
-}
-
-int PackageHandler::Node::row()
-{
-    if (m_parent) {
-        return m_parent->childNodes().indexOf(static_cast<PackageHandler::Node*>(this));
-    }
-    return 0;
-}
-
-
-
-PackageHandler::PackageHandler(QObject *parent)
-        : QObject(parent),
+PlasmoidHandler::PlasmoidHandler(QObject *parent)
+        : PackageHandler(parent),
           m_topNode(0)
 {
     m_fileDefinitions[QStringLiteral("mainscript")] = QStringLiteral("main.qml");
@@ -121,47 +72,43 @@ PackageHandler::PackageHandler(QObject *parent)
 
 }
 
-PackageHandler::~PackageHandler()
+PlasmoidHandler::~PlasmoidHandler()
 {
 }
 
-void PackageHandler::setPackageType(const QString &type)
+void PlasmoidHandler::setPackagePath(const QString &path)
 {
-    m_package = Plasma::PluginLoader::self()->loadPackage(type);
-}
+    PackageHandler::setPackagePath(path);
 
-QString PackageHandler::contentsPrefix() const
-{
-    QString contentsPrefixPaths = m_package.contentsPrefixPaths().at(0);
-    if (!contentsPrefixPaths.endsWith(QLatin1Char('/'))) {
-        contentsPrefixPaths += QLatin1Char('/');
+    if (QFile(packagePath() + QStringLiteral("metadata.desktop")).exists()) {
+        findMainScript();
     }
-    return contentsPrefixPaths;
 }
 
-void PackageHandler::setPackagePath(const QString &path)
+void PlasmoidHandler::findMainScript()
 {
-    if (!path.endsWith(QLatin1Char('/'))) {
-        m_packagePath = path + QLatin1Char('/');
-    } else {
-        m_packagePath = path;
-    }
+    MetadataHandler metadataHandler;
+    metadataHandler.setFilePath(packagePath() + QStringLiteral("metadata.desktop"));
 
-    if (!QDir(m_packagePath).exists()) {
-        //FIXME missing metadata
-        createPackage();
-    }
+    QString mainScript = metadataHandler.mainScript();
+    mainScript = mainScript.split(QLatin1Char('/')).last();
 
-    m_package.setPath(m_packagePath);
+    if (mainScript != m_fileDefinitions[QStringLiteral("mainscript")]) {
+        m_fileDefinitions[QStringLiteral("mainscript")] = mainScript;
+    }
 }
 
-QUrl PackageHandler::urlForNode(PackageHandler::Node *node) const
+QUrl PlasmoidHandler::urlForNode(PackageHandler::Node *node)
 {
     if (!node) {
         return QUrl();
     }
 
-    QString path = m_packagePath + contentsPrefix();
+    QString path = packagePath();
+
+    if (node->name() != QStringLiteral("metadata.desktop")) {
+        path += contentsPrefix();
+    }
 
     if (node->parent()) {
         path += node->parent()->name();
@@ -171,13 +118,15 @@ QUrl PackageHandler::urlForNode(PackageHandler::Node *node) const
         path += QLatin1Char('/');
     }
 
-    QDir dir(path);
-    if (!dir.exists()) {
-        qDebug() << dir.mkpath(path);
-    }
-
     if (node->isFile() && node->name() != QStringLiteral("New..")) {
-        path += node->name();
+
+        // is it a special file like mainscript?
+        if (m_fileDefinitions.contains(node->name())) {
+            path += m_fileDefinitions.value(node->name());
+        } else {
+            path += node->name();
+        }
+
         QFile f(path);
         if (!f.exists()) {
             f.open(QIODevice::ReadWrite);
@@ -187,65 +136,117 @@ QUrl PackageHandler::urlForNode(PackageHandler::Node *node) const
     return QUrl::fromLocalFile(path);
 }
 
-QString PackageHandler::packagePath() const
+void PlasmoidHandler::createPackage(const QString &userName, const QString &userEmail,
+                                   const QString &serviceType, const QString &pluginName)
 {
-    return m_packagePath;
-}
-
-void PackageHandler::createPackage()
-{
-    QDir dir;
-    dir.mkpath(m_packagePath);
-    dir.cd(m_packagePath);
-
-    const QString metadataFilePath = m_packagePath + QStringLiteral("metadata.desktop");
+    const QString metadataFilePath = packagePath() + QStringLiteral("metadata.desktop");
     QFile f(metadataFilePath);
     f.open(QIODevice::ReadWrite);
-    // FIXME write the metadata now
 
-    createRequiredDirectories();
-    createRequiredFiles();
+    MetadataHandler metadataHandler;
+    metadataHandler.setFilePath(metadataFilePath);
+    metadataHandler.setPluginApi(QStringLiteral("declarativeappletscript"));
+    metadataHandler.setMainScript(QStringLiteral("/ui/main.qml"));
+    metadataHandler.writeFile();
+
+    findMainScript();
+
+    PackageHandler::createPackage(userName, userEmail, serviceType, pluginName);
+
+    createRequiredFiles(serviceType, pluginName, userName, userEmail, QStringLiteral(".qml"));
 }
 
-void PackageHandler::createRequiredDirectories()
-{
-    QDir projectDir(m_packagePath);
-    for (const auto &it : m_package.requiredDirectories()) {
-        projectDir.mkpath(contentsPrefix() + it);
-    }
-}
-
-void PackageHandler::createRequiredFiles()
+void PlasmoidHandler::createRequiredFiles(const QString &serviceType, const QString &pluginName,
+                                         const QString &userName, const QString &userEmail, const QString &fileExtension)
 {
     // a package may require a file like ui/main.qml
     // but the ui dir may not be required, so lets check for them
-    for (const auto &it : m_package.requiredFiles()) {
+    for (const auto &it : package().requiredFiles()) {
         if (m_directoryDefinitions.values().contains(it)) {
             const QString dirName(m_directoryDefinitions.key(it));
-            QDir dir(m_packagePath + contentsPrefix());
+            QDir dir(packagePath() + contentsPrefix());
             dir.mkpath(dirName);
             dir.cd(dirName);
 
             QFile f;
             const QString filePath = dir.path() + QLatin1Char('/') +
                                      m_fileDefinitions[it];
+            QString templateFilePath;
 
             if (it == QLatin1String("mainscript")) {
+                if (serviceType == "Plasma/Applet") {
+                    templateFilePath.append("mainPlasmoid");
+                } else if (serviceType == "KWin/WindowSwitcher") {
+                    templateFilePath.append("mainTabbox");
+                } else if (serviceType == "KWin/Script") {
+                    templateFilePath.append("mainKWinScript");
+                } else if (serviceType == "KWin/Effect") {
+                    templateFilePath.append("mainKWinEffect");
+                }
                 f.setFileName(QStandardPaths::locate(QStandardPaths::DataLocation,
-                                    QStringLiteral("templates/mainPlasmoid.qml")));
+                                                     QStringLiteral("templates/") + templateFilePath + fileExtension));
+
                 const bool ok = f.copy(filePath);
                 if (!ok) {
                     emit error(QStringLiteral("The mainscript file hasn't been created"));
                 }
+
+                f.setFileName(filePath);
+                f.open(QIODevice::ReadWrite);
+
+                // Now open these files, and substitute the main class, author, email and date fields
+                QByteArray tmpPluginName(pluginName.toLocal8Bit());
+                QByteArray tmpAuthor(userName.toLocal8Bit());
+                QByteArray tmpEmail(userEmail.toLocal8Bit());
+                QByteArray rawData = f.readAll();
+                f.close();
+                f.open(QIODevice::WriteOnly);
+
+                QByteArray replacedString("$PLASMOID_NAME");
+                if (rawData.contains(replacedString)) {
+                    rawData.replace(replacedString, tmpPluginName);
+                }
+                replacedString.clear();
+
+                replacedString.append("$AUTHOR");
+                if (rawData.contains(replacedString)) {
+                    rawData.replace(replacedString, tmpAuthor);
+                }
+                replacedString.clear();
+
+                replacedString.append("$EMAIL");
+                if (rawData.contains(replacedString)) {
+                    rawData.replace(replacedString, tmpEmail);
+                }
+                replacedString.clear();
+
+                replacedString.append("$DATE");
+                QDate date = QDate::currentDate();
+                QByteArray datetime(date.toString().toUtf8());
+                QTime time = QTime::currentTime();
+                datetime.append(", " + time.toString().toUtf8());
+                if (rawData.contains(replacedString)) {
+                    rawData.replace(replacedString, datetime);
+                }
+
+                f.write(rawData);
+                f.close();
             }
 
-            f.open(QIODevice::ReadWrite);
         }
     }
 }
 
-PackageHandler::Node* PackageHandler::loadPackageInfo()
+QString PlasmoidHandler::packageType() const
 {
+    return QStringLiteral("Plasma/Applet");
+}
+
+PlasmoidHandler::Node* PlasmoidHandler::loadPackageInfo()
+{
+
+    package().setPath(packagePath());
+
     auto mimeTypesForFile = [](const QString &fileName) {
         QMimeDatabase db;
         QMimeType mime = db.mimeTypeForFile(fileName);
@@ -258,7 +259,7 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
         m_topNode = 0;
     }
 
-    m_topNode = new PackageHandler::Node(QString(), QString(), QStringList(), m_topNode);
+    m_topNode = new PackageHandler::Node(QString(), QString(), QStringList());
 
     QStringList indexedFiles;
 
@@ -266,16 +267,16 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
     // check in the end of the method
     indexedFiles.append(QStringLiteral("metadata.desktop"));
 
-    const QString packagePathWithContentsPrefix = m_packagePath + contentsPrefix();
+    const QString packagePathWithContentsPrefix = packagePath() + contentsPrefix();
 
     // TODO it doesn't support unnamed directories like "common"
     // and it doesn't support unnamed directories under
     // named directories like "ui/menu"
 
 
-    for(const auto &it : m_package.directories()) {
-        PackageHandler::Node *node = new PackageHandler::Node(it, m_package.name(it),
-                                     QStringList(), m_topNode);
+    for(const auto &it : package().directories()) {
+        PlasmoidHandler::PlasmoidNode *node = new PlasmoidHandler::PlasmoidNode(it, package().name(it),
+                                                                                QStringList(), m_topNode);
 
         if (node->needsNewFileNode()) {
             QStringList newMimeType;
@@ -285,7 +286,7 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
                 newMimeType.append(QStringLiteral("[plasmate]/new"));
             }
 
-            PackageHandler::Node *newNode = new PackageHandler::Node(QStringLiteral("New.."),
+            PlasmoidHandler::Node *newNode = new PlasmoidHandler::Node(QStringLiteral("New.."),
                                             QStringLiteral("New.."), newMimeType, node);
             node->addChild(newNode);
         }
@@ -300,7 +301,7 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
                     qWarning("Something is wrong with the file definitions");
                 }
 
-                const QString description = m_package.name(fileIt.toLocal8Bit().data());
+                const QString description = package().name(fileIt.toLocal8Bit().data());
                 QStringList mimeTypes;
 
                 if (fileIt == QStringLiteral("mainconfigxml")) {
@@ -309,8 +310,8 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
                     mimeTypes = mimeTypesForFile(name);
                 }
 
-                PackageHandler::Node *childNode = new PackageHandler::Node(fileIt,
-                                                  m_package.name(fileIt.toLocal8Bit().data()),
+                PlasmoidHandler::Node *childNode = new PlasmoidHandler::Node(fileIt,
+                                                  package().name(fileIt.toLocal8Bit().data()),
                                                   mimeTypes, node);
 
                 indexedFiles << fileIt << description << name;
@@ -330,7 +331,7 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
                     childMimeTypes = mimeTypesForFile(fileName);
                 }
 
-                PackageHandler::Node *childNode = new PackageHandler::Node(fileName, fileName, childMimeTypes, node);
+                PlasmoidHandler::Node *childNode = new PlasmoidHandler::Node(fileName, fileName, childMimeTypes, node);
                 node->addChild(childNode);
             }
         }
@@ -339,11 +340,11 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
 
     // check for named files which doesn't
     // exist under a named directory
-    for(const auto &it : m_package.files()) {
+    for(const auto &it : package().files()) {
         if (!indexedFiles.contains(it)) {
             QStringList mimeTypes;
-            mimeTypes = m_package.mimeTypes(it);
-            PackageHandler::Node *node = new PackageHandler::Node(it, m_package.name(it), mimeTypes, m_topNode);
+            mimeTypes = package().mimeTypes(it);
+            PlasmoidHandler::Node *node = new PlasmoidHandler::Node(it, package().name(it), mimeTypes, m_topNode);
             m_topNode->addChild(node);
         }
     }
@@ -354,14 +355,14 @@ PackageHandler::Node* PackageHandler::loadPackageInfo()
     for (const auto &fileInfo : QDir(packagePathWithContentsPrefix).entryInfoList(QDir::NoDotAndDotDot | QDir::Files)) {
         const QString fileName = fileInfo.fileName();
         if (!indexedFiles.contains(fileName)) {
-            PackageHandler::Node *node = new PackageHandler::Node(fileName, fileName, mimeTypesForFile(fileName), m_topNode);
+            PlasmoidHandler::Node *node = new PlasmoidHandler::Node(fileName, fileName, mimeTypesForFile(fileName), m_topNode);
             m_topNode->addChild(node);
         }
     }
 
     QStringList metadataMimeTypes;
     metadataMimeTypes << QStringLiteral("[plasmate]/metadata");
-    PackageHandler::Node *node = new PackageHandler::Node(QStringLiteral("metadata.desktop"),
+    PlasmoidHandler::Node *node = new PlasmoidHandler::Node(QStringLiteral("metadata.desktop"),
                                  QStringLiteral("metadata.desktop"), metadataMimeTypes, m_topNode);
     m_topNode->addChild(node);
 

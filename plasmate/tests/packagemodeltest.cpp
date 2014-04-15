@@ -23,9 +23,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "../packagemodel.h"
 #include "modeltest.h"
 
-
-#include <QStandardPaths>
 #include <QTest>
+#include <QStandardPaths>
 
 PackageModelTest::PackageModelTest(QObject *parent)
         : QObject(parent)
@@ -43,12 +42,12 @@ void PackageModelTest::initTestCase()
 
 void PackageModelTest::testPlasmoidModel()
 {
-    PackageHandler *packageHandler = new PackageHandler(this);
-    packageHandler->setPackageType(QStringLiteral("Plasma/Applet"));
+    PackageHandler *packageHandler = new PlasmoidHandler(this);
     const QString testDataPlasmoid = QFINDTESTDATA(QStringLiteral("testdata/org.kde.tests.packagehandlertest"));
     Q_ASSERT(!testDataPlasmoid.isEmpty());
 
     packageHandler->setPackagePath(testDataPlasmoid);
+    packageHandler->createPackage(QStringLiteral("author"), QStringLiteral("email"), QStringLiteral("Plasma/Applet"), QStringLiteral("newPlasmoid"));
 
     PackageModel *model = new PackageModel(packageHandler, this);
     packageHandler->loadPackageInfo();

@@ -19,36 +19,33 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "packagehandlertest.h"
+#include "plasmoidhandlertest.h"
+#include "../packagehandler/plasmoidhandler.h"
 
 #include <QDir>
 #include <QTest>
 #include <QString>
 #include <QStandardPaths>
 
-PackageHandlerTest::PackageHandlerTest(QObject *parent)
-        : QObject(parent)
+PlasmoidHandlerTest::PlasmoidHandlerTest(QObject *parent)
+        : QObject(parent),
+          m_packageHandler(new PlasmoidHandler())
 {
 }
 
-PackageHandlerTest::~PackageHandlerTest()
+PlasmoidHandlerTest::~PlasmoidHandlerTest()
 {
 }
 
-void PackageHandlerTest::initTestCase()
+void PlasmoidHandlerTest::initTestCase()
 {
     QStandardPaths::enableTestMode(true);
-    connect(&m_packageHandler, &PackageHandler::error, [=](const QString &error) {
+    connect(m_packageHandler, &PackageHandler::error, [=](const QString &error) {
         QFAIL(error.toLocal8Bit().data());
     });
 }
 
-void PackageHandlerTest::initPlasmoid()
-{
-    m_packageHandler.setPackageType(QStringLiteral("Plasma/Applet"));
-}
-
-void PackageHandlerTest::createNewPlasmoid()
+void PlasmoidHandlerTest::createNewPlasmoid()
 {
     QString newPlasmoidLocation = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0);
 
@@ -66,7 +63,9 @@ void PackageHandlerTest::createNewPlasmoid()
     QFile f(mainPlasmoidFile);
     f.copy(templatesDir.path() + QLatin1Char('/') + QStringLiteral("mainPlasmoid.qml"));
 
-    m_packageHandler.setPackagePath(newPlasmoidLocation);
+    m_packageHandler->setPackagePath(newPlasmoidLocation);
+    m_packageHandler->createPackage(QStringLiteral("author"), QStringLiteral("email"), QStringLiteral("Plasma/Applet"), QStringLiteral("newPlasmoid"));
+
     QDir dir(newPlasmoidLocation);
     Q_ASSERT(dir.exists());
     Q_ASSERT(dir.exists(QStringLiteral("metadata.desktop")));
@@ -77,18 +76,18 @@ void PackageHandlerTest::createNewPlasmoid()
     Q_ASSERT(dir.exists(QStringLiteral("main.qml")));
 }
 
-void PackageHandlerTest::loadPlasmoidTestData()
+void PlasmoidHandlerTest::loadPlasmoidTestData()
 {
     const QString packagePath = QFINDTESTDATA("testdata/org.kde.tests.packagehandlertest");
     Q_ASSERT(!packagePath.isEmpty());
 
-    m_packageHandler.setPackagePath(packagePath);
+    m_packageHandler->setPackagePath(packagePath);
 }
 
-void PackageHandlerTest::checkPlasmoidMimeTypes()
+void PlasmoidHandlerTest::checkPlasmoidMimeTypes()
 {
     QStringList mimeTypes;
-    PackageHandler::Node* node = m_packageHandler.loadPackageInfo();
+    PackageHandler::Node* node = m_packageHandler->loadPackageInfo();
     for (auto it : node->childNodes()) {
         mimeTypes.append(it->mimeTypes());
         if (!it->childNodes().isEmpty()) {
@@ -98,7 +97,7 @@ void PackageHandlerTest::checkPlasmoidMimeTypes()
         }
     }
 
-    Q_ASSERT_X(mimeTypes.contains(QStringLiteral("[plasmate]/kconfigxteditor/")),
+    Q_ASSERT_X(mimeTypes.contains(QStringLiteral("[plasmate]/kconfigxteditor")),
                "Checking mimetypes","[plasmate]/kconfigxteditor/ doesn't exist");
     Q_ASSERT_X(mimeTypes.contains(QStringLiteral("text/x-qml")), "Checking mimetypes",
               "text/x-qml doesn't exist");
@@ -110,9 +109,9 @@ void PackageHandlerTest::checkPlasmoidMimeTypes()
               "[plasmate]/imageDialog doesn't exist");
 }
 
-void PackageHandlerTest::checkNodes()
+void PlasmoidHandlerTest::checkNodes()
 {
-    PackageHandler::Node *topNode = m_packageHandler.loadPackageInfo();
+    PackageHandler::Node *topNode = m_packageHandler->loadPackageInfo();
     Q_ASSERT(topNode->name().isEmpty());
     Q_ASSERT(topNode->description().isEmpty());
     Q_ASSERT(topNode->mimeTypes().isEmpty());
@@ -122,20 +121,21 @@ void PackageHandlerTest::checkNodes()
         QCOMPARE(topNode, it->parent());
         Q_ASSERT(!it->name().isEmpty());
         Q_ASSERT(!it->description().isEmpty());
-        if (!it->isFile() && it->needsNewFileNode()) {
+        PlasmoidHandler::PlasmoidNode *plasmoidNode = static_cast<PlasmoidHandler::PlasmoidNode*>(it);
+        if (!it->isFile() && plasmoidNode->needsNewFileNode()) {
             const QString firstNodeDescription = it->childNodes().at(0)->description();
             QCOMPARE(firstNodeDescription, QStringLiteral("New.."));
         } else {
-            Q_ASSERT(m_packageHandler.urlForNode(it).isValid());
-            QCOMPARE(it->needsNewFileNode(), false);
+            Q_ASSERT(m_packageHandler->urlForNode(it).isValid());
+            QCOMPARE(plasmoidNode->needsNewFileNode(), false);
         }
     }
-    Q_ASSERT(m_packageHandler.urlForNode(topNode).isValid());
+    Q_ASSERT(m_packageHandler->urlForNode(topNode).isValid());
 }
 
-void PackageHandlerTest::checkPlasmoidNodes()
+void PlasmoidHandlerTest::checkPlasmoidNodes()
 {
-    PackageHandler::Node *topNode = m_packageHandler.loadPackageInfo();
+    PackageHandler::Node *topNode = m_packageHandler->loadPackageInfo();
 
     QStringList childNodeNames;
 
@@ -183,6 +183,11 @@ void PackageHandlerTest::checkPlasmoidNodes()
     }
 }
 
+void PlasmoidHandlerTest::cleanupTestCase()
+{
+    QDir testdata(QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0));
+    testdata.removeRecursively();
+}
 
-QTEST_GUILESS_MAIN(PackageHandlerTest)
+QTEST_GUILESS_MAIN(PlasmoidHandlerTest)
 

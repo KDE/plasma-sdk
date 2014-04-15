@@ -1,5 +1,5 @@
 /*
-Copyright 2011 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@kde.org>
+Copyright 2014 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@kde.org>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
@@ -15,33 +15,30 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef IMAGELOADER_H
-#define IMAGELOADER_H
+#ifndef KCONFIGXTEDITORPART_H
+#define KCONFIGXTEDITORPART_H
 
-#include <QUrl>
-#include <QRunnable>
-#include <QObject>
-#include <QImage>
+#include <KParts/ReadWritePart>
 
-class ImageLoader : public QObject, public QRunnable
+class KConfigXtEditor;
+
+class KConfigXtEditorPart : public KParts::ReadWritePart
 {
     Q_OBJECT
 
 public:
-    /**
-     * You just have to create an instance of the object.
-     * Don't do anything else.
-     **/
-    ImageLoader(const QUrl& image, const QSize &size, QObject *parent = 0);
+    explicit KConfigXtEditorPart(QObject *parent = 0);
+   ~KConfigXtEditorPart();
 
-    void run();
+    bool openUrl(const QUrl &url) override;
 
-Q_SIGNALS:
-    void loadImage(const QUrl &url, const QSize &size, const QImage& image);
+protected:
+    // HACK KConfigXtEditor is saving the xml file
+    // without asking us. This has to be changed
+    bool saveFile() override;
 
 private:
-    QUrl m_image;
-    QSize m_size;
+    KConfigXtEditor *m_kconfigXtEditor;
 };
 
-#endif // IMAGELOADER_H
+#endif // KCONFIGXTEDITORPART_H
