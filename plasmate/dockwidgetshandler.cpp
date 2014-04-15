@@ -35,6 +35,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "previewer/plasmoid/plasmoidpreviewer.h"
 #include "editors/editpage.h"
 
+static const QString PROJECTRC= QStringLiteral(".plasmateprojectrc");
+
 DockWidgetsHandler::DockWidgetsHandler(MainWindow *parent)
     : QObject(parent),
       m_packageHandler(nullptr),
@@ -178,8 +180,11 @@ void DockWidgetsHandler::removeAllDockWidgets()
 
 void DockWidgetsHandler::saveDockWidgetsState()
 {
-    // TODO
-    const QString projectrc = m_packageHandler->packagePath() + QStringLiteral(".plasmateprojectrc");
+    if (!m_packageHandler) {
+        return;
+    }
+
+    const QString projectrc = m_packageHandler->packagePath() + PROJECTRC;
     KConfigGroup configDocks(KSharedConfig::openConfig(projectrc), "DocksPosition");
     configDocks.writeEntry("FileList", !m_fileListWidget.isNull());
     configDocks.writeEntry("Notes", !m_notesWidget.isNull());
