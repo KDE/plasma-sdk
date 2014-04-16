@@ -28,6 +28,7 @@
 #include <QtQml/QQmlDebuggingEnabler>
 
 #include <QPixmapCache>
+#include <QDebug>
 #include <KAboutData>
 #include <KLocalizedString>
 
@@ -97,12 +98,19 @@ int main(int argc, char **argv)
     v->addLocation(parser.value("location"));
 
     if (parser.isSet("size")) {
-        const QStringList realSize = parser.value("size").split(QChar('x'));
-        const int realWidth = realSize.at(0).toInt();
-        const int realHeight = realSize.at(1).toInt();
-        if (realWidth != 0 && realHeight != 0) {
-            v->setWidth(realWidth);
-            v->setHeight(realHeight);
+        // The size could be 800X640 or 800x640, so always do toLower.
+        const QStringList realSize = parser.value("size").toLower().split(QChar('x'));
+
+        // check if the parameter is valid.
+        if (!parser.value("size").toLower().contains(QChar('x'))) {
+            qWarning() << "The size " + parser.value("size") + " is not valid, the size parameter will be ignored.";
+        } else {
+            const int realWidth = realSize.at(0).toInt();
+            const int realHeight = realSize.at(1).toInt();
+            if (realWidth != 0 && realHeight != 0) {
+                v->setWidth(realWidth);
+                v->setHeight(realHeight);
+            }
         }
     }
 
