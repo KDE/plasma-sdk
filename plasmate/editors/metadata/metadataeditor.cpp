@@ -25,10 +25,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KMessageWidget>
 #include <klocalizedstring.h>
 
-#include <plasma/packagemetadata.h>
-#include <plasma/plasma.h>
-#include <plasma/scripting/scriptengine.h>
-
 #include "ui_metadata.h"
 #include "metadataeditor.h"
 #include "../../packagemodel.h"
