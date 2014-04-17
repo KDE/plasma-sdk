@@ -65,6 +65,7 @@ private Q_SLOTS:
 private:
     void populateList();
     void deleteProject(const QUrl &projectLocation);
+    const QString removeListItem(const QList<QListWidgetItem*> &items);
 
 //TODO: Implement:
 //      search/filterbar,

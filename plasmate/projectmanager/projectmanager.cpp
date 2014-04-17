@@ -92,9 +92,9 @@ void ProjectManager::populateList()
 void ProjectManager::confirmRemoveFromList()
 {
     const int count = m_projectList->selectedItems().count();
-    QString dialogText = i18np("Are you sure you want to remove the selected project from the project list?",
-                               "Are you sure you want to remove the selected projects from the project list?",
-                               count);
+    QString dialogText = i18np("Are you sure you want to remove the selected project from the project list? %2 \nNumber of project %1",
+                               "Are you sure you want to remove the selected projects from the project list? %2 \nNumber of projects %1",
+                               count, removeListItem(m_projectList->selectedItems()));
     const int code = KMessageBox::warningContinueCancel(this, dialogText);
     if (code == KMessageBox::Continue) {
         removeSelectedProjects(false);
@@ -104,9 +104,9 @@ void ProjectManager::confirmRemoveFromList()
 void ProjectManager::confirmRemoveFromDisk()
 {
     const int count = m_projectList->selectedItems().count();
-    QString dialogText = i18np("Are you sure you want to remove the selected project from disk? This cannot be undone",
-                               "Are you sure you want to remove the selected projects from disk? This cannot be undone",
-                               count);
+    QString dialogText = i18np("Are you sure you want to remove the selected project from disk? This cannot be undone %2 \nNumber of project %1",
+                               "Are you sure you want to remove the selected projects from disk? This cannot be undone %2 \nNumber of projects  %1",
+                               count, removeListItem(m_projectList->selectedItems()));
     const int code = KMessageBox::warningContinueCancel(this, dialogText);
     if (code == KMessageBox::Continue) {
         removeSelectedProjects(true);
@@ -131,6 +131,16 @@ void ProjectManager::removeSelectedProjects(bool deleteFromDisk)
     }
 
     done(QDialog::Accepted);
+}
+
+const QString ProjectManager::removeListItem(const QList<QListWidgetItem*> &items)
+{
+    QString itemList;
+    for (QListWidgetItem *item : items) {
+        itemList.append(QChar('\n') + m_items[item]);
+    }
+
+    return itemList;
 }
 
 void ProjectManager::checkButtonState()
