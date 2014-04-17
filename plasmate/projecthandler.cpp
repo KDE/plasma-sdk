@@ -46,8 +46,9 @@ const QStringList &ProjectHandler::loadProjectsList()
 
 
     KConfigGroup projectsConfig(KSharedConfig::openConfig(qApp->applicationDisplayName()), QStringLiteral("ProjectHandler"));
-    const QString recentProjects = projectsConfig.readEntry(QStringLiteral("RecentProjects"),QStringLiteral(""));
+    const QStringList recentProjects = projectsConfig.readEntry(QStringLiteral("RecentProjects"), QStringList());
     m_blacklistProjects = projectsConfig.readEntry("blacklistProject", QStringList());
+    m_projectsList << recentProjects;
 
     // load the projects which are inside on our homedir like ~/.local5
     QDir projectDir(projectPath);
@@ -73,7 +74,6 @@ const QStringList &ProjectHandler::loadProjectsList()
         }
     }
 
-    m_projectsList.insert(0, recentProjects);
     return m_projectsList;
 }
 
