@@ -122,9 +122,8 @@ void MainWindow::slotNewToolbarConfig()
 
 void MainWindow::closeProject()
 {
-    QWidget *centralWidget = takeCentralWidget();
-
-    if (centralWidget) {
+    if (centralWidget()) {
+        QWidget *centralWidget = takeCentralWidget();
         KXMLGUIClient *client = dynamic_cast<KXMLGUIClient*>(centralWidget);
 
         if (client) {
