@@ -536,12 +536,6 @@ void StartPage::initHandlers(const QString &projectPath, const QString &serviceT
     }
 
     m_packageHandler->setPackagePath(projectPath);
-
-
-    if (m_projectHandler) {
-        delete m_projectHandler;
-        m_projectHandler = nullptr;
-    }
-    m_projectHandler = new ProjectHandler(m_packageHandler);
+    m_projectHandler = new ProjectHandler(this);
 }
 
