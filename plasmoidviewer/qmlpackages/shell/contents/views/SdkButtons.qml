@@ -52,6 +52,8 @@ Item {
         PlasmaComponents.Button {
             id: konsoleButton
             iconSource: "utilities-terminal"
+            visible: desktop.konsoleVisible
+            onClicked: konsolePreviewer.visible = !konsolePreviewer.visible
         }
         PlasmaComponents.Button {
             id: formFactorMenuButton
