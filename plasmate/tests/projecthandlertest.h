@@ -40,6 +40,9 @@ private Q_SLOTS:
     void cleanupTestCase();
 
 private:
+    void removeConfig();
+
+
     ProjectHandler m_projectHandler;
     QString m_testPackagePath;
     QString m_externalTestPackagePath;

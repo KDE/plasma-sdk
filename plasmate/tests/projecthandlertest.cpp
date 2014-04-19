@@ -55,6 +55,8 @@ void ProjectHandlerTest::initTestCase()
 
     m_testPackagePath = projectTestPath + testPackage;
     m_externalTestPackagePath = tempPath + externalTestPackage;
+
+    removeConfig();
 }
 
 void ProjectHandlerTest::createTestProject()
@@ -125,6 +127,16 @@ void ProjectHandlerTest::projectsList()
 void ProjectHandlerTest::cleanupTestCase()
 {
     QDir(m_testPackagePath).removeRecursively();
+    removeConfig();
+}
+
+void ProjectHandlerTest::removeConfig()
+{
+    //Because our test depends on configuration files,
+    //we are removing it in order to be sure that everything is ok with our configuration files.
+    const QString projectHandlerConfig = QStandardPaths::standardLocations(QStandardPaths::ConfigLocation).at(0);
+    QDir projectHandlerConfigDir(projectHandlerConfig);
+    projectHandlerConfigDir.remove(QStringLiteral("projecthandlertest"));
 }
 
 QTEST_GUILESS_MAIN(ProjectHandlerTest)
