@@ -115,7 +115,7 @@ QUrl ThemeHandler::urlForNode(PackageHandler::Node *node)
         path += contentsPrefix();
     }
 
-    if (node->parent()->name().isEmpty()) {
+    if (!node->parent() || node->parent()->name().isEmpty()) {
         path += node->name();
         return QUrl::fromLocalFile(path);
     }
