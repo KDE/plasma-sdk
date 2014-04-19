@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "metadatahandlertest.h"
 
+#include <QDebug>
 #include <QFile>
 #include <QTest>
 
@@ -85,7 +86,7 @@ void MetadataHandlerTest::write()
     const QString license(QStringLiteral("GPL"));
     const QString website(QStringLiteral("http://kde.org"));
     const QString pluginName(QStringLiteral("org.kde.plasmate.dummyTest"));
-
+    const QString mainScript(QStringLiteral("ui/main.qml"));
 
     m_metadataHandler.setName(name);
     m_metadataHandler.setDescription(description);
@@ -96,6 +97,7 @@ void MetadataHandlerTest::write()
     m_metadataHandler.setLicense(license);
     m_metadataHandler.setWebsite(website);
     m_metadataHandler.setPluginName(pluginName);
+    m_metadataHandler.setMainScript(mainScript);
 
     QStringList serviceList;
     serviceList.append("Plasma/Applet");
@@ -119,7 +121,7 @@ void MetadataHandlerTest::write()
 
     QCOMPARE(cg.readEntry("X-KDE-PluginInfo-EnabledByDefault", QString()), QStringLiteral("true"));
     QCOMPARE(cg.readEntry("Type", QString()), QStringLiteral("Service"));
-    QCOMPARE(cg.readEntry("X-Plasma-MainScript"), QStringLiteral("ui/main.qml"));
+    QCOMPARE(cg.readEntry("X-Plasma-MainScript", QString()), QStringLiteral("ui/main.qml"));
 }
 
 QTEST_GUILESS_MAIN(MetadataHandlerTest)
