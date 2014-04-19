@@ -62,6 +62,7 @@ plasmate_unit_test(metadatahandlertest "${metadatahandlertest_SRCS}"
 set(projecthandlertest_SRCS ../projecthandler.cpp
                             ${plasmoidhandler_SRCS}
                             ../editors/metadata/metadatahandler.cpp
+                            ../packagehandler/themehandler.cpp
 )
 
 set(projecthandlertest_LIBS KF5::Plasma)

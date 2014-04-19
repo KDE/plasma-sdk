@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "projecthandlertest.h"
-#include "../packagehandler/plasmoidhandler.h"
+#include "../packagehandler/themehandler.h"
 
 #include <QDir>
 #include <QDebug>
@@ -59,15 +59,42 @@ void ProjectHandlerTest::initTestCase()
 
 void ProjectHandlerTest::createTestProject()
 {
-    PackageHandler *packageHandler = new PlasmoidHandler(this);
+    PackageHandler *packageHandler = new ThemeHandler(this);
+    const QString dummyAuthor = QStringLiteral("dummyThemeAuthor");
+    const QString dummyEmail = QStringLiteral("dummyThemeEmail");
+    const QString packageName = QStringLiteral("dummyTheme");
 
     packageHandler->setPackagePath(m_testPackagePath);
-    packageHandler->createPackage(QStringLiteral("author"), QStringLiteral("email"),
-                                  QStringLiteral("Plasma/Applet"), testPackage);
+    packageHandler->createPackage(dummyAuthor, dummyEmail, "", testPackage);
 
     packageHandler->setPackagePath(m_externalTestPackagePath);
-    packageHandler->createPackage(QStringLiteral("author"), QStringLiteral("email"),
-                                  QStringLiteral("Plasma/Applet"), externalTestPackage);
+    packageHandler->createPackage(dummyAuthor, dummyEmail, "", externalTestPackage);
+
+
+    QStringList packagesLocation;
+    packagesLocation << m_testPackagePath << m_externalTestPackagePath;
+    for (const auto &packagePath : packagesLocation) {
+
+        QDir d(packagePath);
+        Q_ASSERT(d.exists());
+        Q_ASSERT(d.exists(QStringLiteral("metadata.desktop")));
+        Q_ASSERT(d.exists(packageHandler->contentsPrefix()));
+
+        d.cd(packageHandler->contentsPrefix());
+
+        const QString dirName = QStringLiteral("dialogs");
+        d.mkpath(dirName);
+        d.cd(dirName);
+
+        QStringList files;
+        files << QStringLiteral("/background.svg")
+              << QStringLiteral("/shutdowndialog.svg");
+
+        for (const auto &it : files) {
+            QFile f(d.path() + it);
+            f.open(QIODevice::ReadWrite);
+      }
+    }
 
     m_projectHandler.addProject(m_externalTestPackagePath);
     m_projectHandler.addProject(m_testPackagePath);

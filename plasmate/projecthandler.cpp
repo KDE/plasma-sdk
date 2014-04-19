@@ -88,11 +88,14 @@ void ProjectHandler::addProject(const QString &projectPath)
 
     // In order our tests to run. We use qApp->applicationDisplayName()
     KConfigGroup projectConfig(KSharedConfig::openConfig(qApp->applicationDisplayName()), QStringLiteral("ProjectHandler"));
+    const QString applicationDataPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0);
 
     // We load the current config and if the external project
     // doesn't exist. Then we are adding it.
+    // Also if our project is inside our application data location (usually ~/.local5/plasmate/)
+    // we must not add it as an external project.
     QStringList currentConfig = projectConfig.readEntry("externalProjects", QStringList());
-    if (!currentConfig.contains(projectPath)) {
+    if (!currentConfig.contains(projectPath) && !projectPath.contains(applicationDataPath)) {
         //Here we add our new project inside to our config
         currentConfig << projectPath;
         projectConfig.writeEntry("externalProjects", currentConfig);
