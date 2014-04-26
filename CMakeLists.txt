@@ -47,7 +47,7 @@ set (QT_MIN_VERSION "5.2.0")
 
 
 # Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
-find_package(KF5 CONFIG REQUIRED COMPONENTS
+find_package(KF5 REQUIRED COMPONENTS
     IdleTime ItemModels WidgetsAddons WindowSystem Codecs Archive CoreAddons Solid ThreadWeaver
     Config Auth JS Wallet DBusAddons Sonnet
     I18n GuiAddons Service ConfigWidgets ItemViews Notifications IconThemes Completion JobWidgets TextWidgets
