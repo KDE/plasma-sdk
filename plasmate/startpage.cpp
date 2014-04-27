@@ -50,13 +50,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "projecthandler.h"
 
 
-StartPage::StartPage(MainWindow *parent) // TODO set a palette so it will look identical with any color scheme.
+StartPage::StartPage(QWidget *parent) // TODO set a palette so it will look identical with any color scheme.
         : QWidget(parent),
          m_parent(parent),
          m_projectHandler(new ProjectHandler(this)),
          m_packageHandler(nullptr)
 {
-    m_mainWindow = parent;
+    m_mainWindow = nullptr;//parent;
     setupWidgets();
     refreshRecentProjectsList();
 }
@@ -131,19 +131,16 @@ void StartPage::setupWidgets()
         resetStatus();
 
         //load our project
-        QString metadataDesktop = path;
-        const QString projectPath = metadataDesktop.replace(QStringLiteral("metadata.desktop"), "");
-        initHandlers(projectPath);
-        m_mainWindow->setPackageHandler(m_packageHandler);
-        emit projectSelected(path);
+        const QString metadataDesktop = path + QStringLiteral("/metadata.desktop");
+        emit projectSelected(QUrl::fromLocalFile(metadataDesktop));
     });
 
     connect(m_ui.importPackageButton, &QPushButton::clicked, [&]() {
-            const QUrl target = m_ui.importPackage->url();
-            selectProject(target);
+        const QUrl target = m_ui.importPackage->url();
+        selectProject(target);
 
-            m_projectHandler->recentProject(target.toLocalFile());
-            resetStatus();
+        m_projectHandler->recentProject(target.toLocalFile());
+        resetStatus();
     });
 
     connect(m_ui.contentTypes, &QListWidget::clicked, [&](const QModelIndex &sender) {
@@ -171,6 +168,7 @@ void StartPage::setupWidgets()
         m_ui.newProjectButton->setEnabled(!m_ui.projectName->text().isEmpty());
         m_ui.layoutHackStackedWidget->setCurrentIndex(1);
         m_ui.projectName->setFocus();
+
     });
 
     connect(m_ui.newProjectButton, &QPushButton::clicked, this, &StartPage::createNewProject);
@@ -215,12 +213,12 @@ void StartPage::setupWidgets()
 
             return;
         } else {
-            m_mainWindow->setPackageHandler(m_packageHandler);
+           // m_mainWindow->setPackageHandler(m_packageHandler);
         }
 
         qDebug() << "Loading project file:" << m->data(index, FullPathRole);
 
-        emit projectSelected(url);
+        emit projectSelected(QUrl::fromLocalFile(url + QStringLiteral("/metadata.desktop")));
     });
 
     new QListWidgetItem(QIcon::fromTheme("application-x-plasma"), i18n("Plasma Widget"), m_ui.contentTypes);
@@ -429,7 +427,7 @@ void StartPage::createNewProject()
     // * X-KDE-PluginInfo-Category
     // * X-KDE-ParentApp
 
-    emit projectSelected(projectPath);
+    emit projectSelected(QUrl::fromLocalFile(projectPath + QStringLiteral("/metadata.desktop")));
 
     // need to clear the project name field here too because startpage is still
     // accessible after project loads.
@@ -437,7 +435,7 @@ void StartPage::createNewProject()
     resetStatus();
 
     //load our new project
-    m_mainWindow->setPackageHandler(m_packageHandler);
+    //m_mainWindow->setPackageHandler(m_packageHandler);
 }
 
 void StartPage::checkLocalProjectPath(const QString& name)
@@ -489,7 +487,7 @@ void StartPage::selectProject(const QUrl &target)
     if (!ProjectManager::importPackage(target, projectUrl)) {
         KMessageBox::information(this, i18n("A problem has occurred during import."));
     }
-    emit projectSelected(projectFolder);
+    emit projectSelected(QUrl::fromLocalFile(projectFolder + QStringLiteral("metadata.desktop")));
 }
 
 /**

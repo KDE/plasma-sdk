@@ -1,0 +1,34 @@
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<kpartgui version="9" name="plasmate" >
+<MenuBar>
+
+    <Menu name="edit">
+    <text context="@title:menu">&amp;Edit</text>
+    <DefineGroup append="edit_undo_merge" name="edit_undo_merge"/>
+    <DefineGroup append="edit_paste_merge" name="edit_paste_merge"/>
+    <DefineGroup append="edit_select_merge" name="edit_select_merge"/>
+    <DefineGroup append="edit_find_merge" name="edit_find_merge"/>
+    <DefineGroup name="edit_formatting"/>
+    <Separator/>
+    <Merge/>
+  </Menu>
+
+  <Merge />
+
+  <Menu name="settings">
+    <text context="@title:menu">Settings</text>
+    <DefineGroup append="show_toolbar_merge" name="show_toolbar_merge"/>
+    <DefineGroup append="show_merge" name="show_merge" />
+    <Action name="show_editorconfig" append="configure_merge" />
+    <DefineGroup append="configure_merge" name="configure_merge" />
+  </Menu>
+
+  <Menu name="help">
+    <Action name="loaded_plugins" append="about_merge" />
+    <Action name="about_platform" append="about_merge" />
+  </Menu>
+
+</MenuBar>
+
+
+</kpartgui>
