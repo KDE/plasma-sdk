@@ -37,7 +37,7 @@ class StartPage : public QWidget
     };
 
 public:
-    StartPage(MainWindow *parent = 0);
+    StartPage(QWidget *parent = 0);
     ~StartPage();
 
     QString userName();
@@ -49,7 +49,7 @@ public:
     void resetStatus();
 
 signals:
-    void projectSelected(const QString &name);
+    void projectSelected(const QUrl &projectPath);
 
 private Q_SLOTS:
     void createNewProject();

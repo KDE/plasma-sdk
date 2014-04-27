@@ -12,6 +12,18 @@ add_feature_info(QT_QTWEBKIT_FOUND "QtWebKit" "Opensource web browser engine" "h
 find_program(GIT_EXECUTABLE_FOUND git)
 add_feature_info(GIT_EXECUTABLE_FOUND "Git" "Distributed Revision Control System" "http://git-scm.com/" FALSE "" "Runtime dependency needed to use the TimeLine feature.")
 
+set( KDEVELOP_VERSION_MAJOR 4 )
+set( KDEVELOP_VERSION_MINOR 90 )
+set( KDEVELOP_VERSION_PATCH 60 )
+# KDevplatform dependency version
+set( KDEVPLATFORM_VERSION "1.${KDEVELOP_VERSION_MINOR}.${KDEVELOP_VERSION_PATCH}" )
+
+find_package(KDevPlatform ${KDEVPLATFORM_VERSION} REQUIRED)
+
+set(KDevPlasmate_SRCS app/plasmateextention.cpp
+                      app/plasmateapp.cpp
+)
+
 set (PlasMate_SRC
     editors/editpage.cpp
     editors/metadata/metadataeditor.cpp
@@ -25,7 +37,7 @@ set (PlasMate_SRC
     editors/kconfigxt/kconfigxteditorpart.cpp
     editors/metadata/metadatahandler.cpp
     editors/metadata/metadataeditorpart.cpp
-    main.cpp
+    app/main.cpp
     sidebaritem.cpp
     sidebardelegate.cpp
     sidebartablewidget.cpp
@@ -62,6 +74,7 @@ set (PlasMate_SRC
     #konsole/konsolepreviewer.cpp
     docbrowser/docbrowser.cpp
     noteseditor/noteseditor.cpp
+    ${KDevPlasmate_SRCS}
 )
 
 #if (DEBUG_MODEL)
@@ -117,6 +130,8 @@ target_link_libraries(plasmate
                       KF5::WidgetsAddons
                       KF5::Archive
                       #${KDEPIMLIBS_KPIMUTILS_LIBS}
+                    ${KDEVPLATFORM_INTERFACES_LIBRARIES}
+                    ${KDEVPLATFORM_SHELL_LIBRARIES}
 )
 
 #if (DEBUG_MODEL)
@@ -125,7 +140,7 @@ target_link_libraries(plasmate
 
 install(TARGETS plasmate ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS plasmate.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
-install(FILES plasmateui.rc  DESTINATION ${DATA_INSTALL_DIR}/plasmate)
+install(FILES app/plasmateui.rc  DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 install(FILES plasmate.knsrc DESTINATION ${CONFIG_INSTALL_DIR})
 
 #install( FILES previewer/windowswitcher/thumbnails/konqueror.png
