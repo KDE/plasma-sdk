@@ -86,8 +86,8 @@ int main(int argc, char **argv)
 
     Plasma::Theme theme;
     if (parser.isSet("theme")) {
-        theme.setThemeName(parser.value("theme"));
         theme.setUseGlobalSettings(false);
+        theme.setThemeName(parser.value("theme"));
     }
 
     View *v = new View(View::createCorona(), false);
