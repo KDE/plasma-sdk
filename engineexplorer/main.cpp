@@ -66,8 +66,8 @@ void listEngines()
 
 int main(int argc, char **argv)
 {
-    KAboutData aboutData("plasmaengineexplorer", 0, i18n("Plasma Engine Explorer"),
-                         version, i18n(description), KAboutData::License_GPL,
+    KAboutData aboutData("plasmaengineexplorer", i18n("Plasma Engine Explorer"),
+                         version, i18n(description), KAboutLicense::GPL,
                          i18n("(c) 2006, The KDE Team"));
     aboutData.addAuthor(i18n("Aaron J. Seigo"),
                         i18n( "Author and maintainer" ),
