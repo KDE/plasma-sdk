@@ -99,6 +99,8 @@ target_link_libraries(plasmate
                       #${QGPGME_LIBRARIES}
                       KF5::Declarative
                       Qt5::Quick
+                      Qt5::Gui
+		      Qt5::Widgets
                       Qt5::Svg
                       Qt5::WebKitWidgets
                       KF5::PlasmaQuick

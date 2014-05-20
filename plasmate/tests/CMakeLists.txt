@@ -44,7 +44,7 @@ set(packagemodeltest_SRCS modeltest.cpp
                           ${plasmoidhandler_SRCS}
 )
 
-set(packagemodeltest_LIBS ${plasmoidhandler_LIBS})
+set(packagemodeltest_LIBS ${plasmoidhandler_LIBS} Qt5::Gui)
 
 plasmate_unit_test(packagemodeltest "${packagemodeltest_SRCS}"
                                     "${packagemodeltest_LIBS}"
@@ -65,7 +65,7 @@ set(projecthandlertest_SRCS ../projecthandler.cpp
                             ../packagehandler/themehandler.cpp
 )
 
-set(projecthandlertest_LIBS KF5::Plasma)
+set(projecthandlertest_LIBS Qt5::Widgets KF5::Plasma)
 
 plasmate_unit_test(projecthandlertest "${projecthandlertest_SRCS}"
                                       "${projecthandlertest_LIBS}"
