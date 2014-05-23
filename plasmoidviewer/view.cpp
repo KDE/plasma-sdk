@@ -25,6 +25,7 @@
 #include <QDebug>
 
 #include <KLocalizedString>
+#include <KDesktopFile>
 
 #include <Plasma/Package>
 #include <Plasma/PluginLoader>
@@ -43,8 +44,30 @@ View::~View()
 {
 }
 
+QString View::pluginFromPath(const QString &path) const
+{
+    QDir dir(path);
+    if (!dir.exists()) {
+        return QString();
+    }
+
+    if (!QFile(dir.absoluteFilePath("metadata.desktop")).exists()) {
+        return QString();
+    }
+
+    KDesktopFile desk(dir.absoluteFilePath("metadata.desktop"));
+    KService service(&desk);
+
+    return service.property("X-KDE-PluginInfo-Name").toString();
+}
+
 void View::addApplet(const QString &applet)
 {
+    QString actualApplet = pluginFromPath(applet);
+    if (actualApplet.isEmpty()) {
+        actualApplet = applet;
+    }
+
     Plasma::Containment *c = containment();
 
     if (!c) {
@@ -52,20 +75,25 @@ void View::addApplet(const QString &applet)
         return;
     }
 
-    Plasma::Applet *a = containment()->createApplet(applet);
+    Plasma::Applet *a = containment()->createApplet(actualApplet);
     if (!a->pluginInfo().isValid()) {
-        qCritical() << i18n("Applet %0 doesn't exist!").arg(applet);
+        qCritical() << i18n("Applet %0 doesn't exist!").arg(actualApplet);
         return;
     }
-    m_lastAppletName = applet;
+    m_lastAppletName = actualApplet;
 }
 
 void View::addContainment(const QString &cont)
 {
-    Plasma::Containment *c = corona()->createContainment(cont);
+    QString actualCont = pluginFromPath(cont);
+    if (actualCont.isEmpty()) {
+        actualCont = cont;
+    }
+
+    Plasma::Containment *c = corona()->createContainment(actualCont);
 
     if (!c->pluginInfo().isValid()) {
-        qCritical() << i18n("Containment %0 doesn't exist").arg(cont);
+        qCritical() << i18n("Containment %0 doesn't exist").arg(actualCont);
         return;
     }
 

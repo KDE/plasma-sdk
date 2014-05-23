@@ -41,6 +41,10 @@ public:
     Q_INVOKABLE void takeScreenShot();
 
     static Plasma::Corona *createCorona();
+
+protected:
+    QString pluginFromPath(const QString &path) const;
+
 private:
     QString m_lastAppletName;
     bool m_konsoleVisible;
