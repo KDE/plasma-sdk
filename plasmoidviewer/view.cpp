@@ -51,22 +51,17 @@ QString View::pluginFromPath(const QString &path) const
         return QString();
     }
 
-    if (!QFile(dir.absoluteFilePath("metadata.desktop")).exists()) {
+    QString metadataPath = dir.absoluteFilePath("metadata.desktop");
+    if (!QFile(metadataPath).exists()) {
         return QString();
+    } else {
+        return metadataPath;
     }
-
-    KDesktopFile desk(dir.absoluteFilePath("metadata.desktop"));
-    KService service(&desk);
-
-    return service.property("X-KDE-PluginInfo-Name").toString();
 }
 
 void View::addApplet(const QString &applet)
 {
-    QString actualApplet = pluginFromPath(applet);
-    if (actualApplet.isEmpty()) {
-        actualApplet = applet;
-    }
+    QString metadataPath = pluginFromPath(applet);
 
     Plasma::Containment *c = containment();
 
@@ -75,12 +70,19 @@ void View::addApplet(const QString &applet)
         return;
     }
 
-    Plasma::Applet *a = containment()->createApplet(actualApplet);
+    Plasma::Applet *a = 0;
+    if (metadataPath.isEmpty()) {
+        a = containment()->createApplet(applet);
+    } else {
+        a = new Plasma::Applet(0, metadataPath);
+        containment()->addApplet(a);
+    }
+
     if (!a->pluginInfo().isValid()) {
-        qCritical() << i18n("Applet %0 doesn't exist!").arg(actualApplet);
+        qCritical() << i18n("Applet %0 doesn't exist!").arg(applet);
         return;
     }
-    m_lastAppletName = actualApplet;
+    m_lastAppletName = applet;
 }
 
 void View::addContainment(const QString &cont)
