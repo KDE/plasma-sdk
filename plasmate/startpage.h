@@ -23,7 +23,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "ui_startpage.h"
 
 class QModelIndex;
-class MainWindow;
 class ProjectManager;
 class ProjectHandler;
 class PackageHandler;
@@ -74,7 +73,6 @@ private:
     void initHandlers(const QString &projectPath, const QString &serviceType = QString());
 
     Ui::StartPage m_ui;
-    MainWindow *m_mainWindow;
     QWidget *m_parent;
     ProjectManager *m_projectManager;
     ProjectHandler *m_projectHandler;

@@ -23,8 +23,6 @@
 #include <QDialog>
 #include <QHash>
 
-#include <mainwindow.h>
-
 class QListWidget;
 class QListWidgetItem;
 
@@ -44,7 +42,8 @@ class ProjectManager : public QDialog
 {
     Q_OBJECT
 public:
-    ProjectManager(ProjectHandler *projectHandler, PackageHandler *packageHandler, MainWindow *parent);
+    ProjectManager(ProjectHandler *projectHandler,
+                   PackageHandler *packageHandler, QWidget *parent = 0);
 
     void addProject(QListWidgetItem *item);
 
@@ -79,7 +78,6 @@ private:
     ProjectHandler *m_projectHandler;
     PackageHandler *m_packageHandler;
     QHash<QListWidgetItem*, QString> m_items;
-    MainWindow *m_mainWindow;
 };
 
 #endif // PROJECTMANAGER_H

@@ -27,9 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "ui_metadata.h"
 #include "metadataeditor.h"
-#include "../../packagemodel.h"
 
-//
 // TODO: Now we know what this does it needs rewriting to use the metadata object
 // as its main store. And to handle updates in a clean per-change way rather than
 // the hacks that are there right now.

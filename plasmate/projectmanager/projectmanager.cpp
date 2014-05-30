@@ -40,13 +40,13 @@
 #include "../packagehandler/packagehandler.h"
 #include "../editors/metadata/metadatahandler.h"
 
-ProjectManager::ProjectManager(ProjectHandler *projectHandler, PackageHandler *packageHandler, MainWindow *parent)
+ProjectManager::ProjectManager(ProjectHandler *projectHandler,
+                               PackageHandler *packageHandler, QWidget *parent)
     : QDialog(parent),
       m_projectHandler(projectHandler),
       m_packageHandler(packageHandler)
 {
     m_projectList = new QListWidget(this);
-    m_mainWindow = parent;
     m_projectList->setSelectionMode(QAbstractItemView::ExtendedSelection);
     connect(m_projectList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(emitProjectSelected()));
     connect(m_projectList,SIGNAL(itemSelectionChanged()), this, SLOT(checkButtonState()));
@@ -165,8 +165,6 @@ void ProjectManager::emitProjectSelected()
 
     QString url = m_items[l.at(0)];
     if (!url.isEmpty()) {
-        m_mainWindow->setPackageHandler(m_packageHandler);
-
         m_projectHandler->recentProject(url);
         emit projectSelected(url);
         done(QDialog::Accepted);
