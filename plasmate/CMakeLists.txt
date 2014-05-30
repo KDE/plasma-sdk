@@ -25,12 +25,10 @@ set(KDevPlasmate_SRCS app/plasmateextention.cpp
 )
 
 set (PlasMate_SRC
-    editors/editpage.cpp
     editors/metadata/metadataeditor.cpp
     editors/imageviewer/imageloader.cpp
     editors/imageviewer/imageviewer.cpp
     editors/imageviewer/imageviewerpart.cpp
-    #editors/text/texteditor.cpp
     editors/kconfigxt/kconfigxteditor.cpp
     editors/kconfigxt/kconfigxtreader.cpp
     editors/kconfigxt/kconfigxtwriter.cpp
@@ -38,10 +36,6 @@ set (PlasMate_SRC
     editors/metadata/metadatahandler.cpp
     editors/metadata/metadataeditorpart.cpp
     app/main.cpp
-    sidebaritem.cpp
-    sidebardelegate.cpp
-    sidebartablewidget.cpp
-    sidebar.cpp
     #savesystem/dvcsjob.cpp
     #savesystem/gitrunner.cpp
     #savesystem/commitdialog.cpp
@@ -49,10 +43,7 @@ set (PlasMate_SRC
     #savesystem/tabledelegate.cpp
     #savesystem/tablewidget.cpp
     #savesystem/timeline.cpp
-    mainwindow.cpp
-    dockwidgetshandler.cpp
     startpage.cpp
-    packagemodel.cpp
     packagehandler/packagehandler.cpp
     packagehandler/plasmoidhandler.cpp
     packagehandler/themehandler.cpp
@@ -77,14 +68,6 @@ set (PlasMate_SRC
     ${KDevPlasmate_SRCS}
 )
 
-#if (DEBUG_MODEL)
-#      set (PlasMate_SRC
-#         ${PlasMate_SRC}
-#         modeltest/dynamictreemodel.cpp
-#         modeltest/modeltest.cpp
-#         )
-#endif (DEBUG_MODEL)
-
 qt5_wrap_ui(PlasMate_SRC
    editors/metadata/metadata.ui
    publisher/publisher.ui
@@ -98,8 +81,6 @@ include_directories(${QT_QTWEBKIT_INCLUDE_DIR}
                     #${GPGME_INCLUDES}
 )
 
-#add_subdirectory( editors )
-#add_subdirectory( previewer/plasmoid )
 #add_subdirectory( icons )
 
 add_executable(plasmate ${PlasMate_SRC})
@@ -112,7 +93,7 @@ target_link_libraries(plasmate
                       #${QGPGME_LIBRARIES}
                       Qt5::Quick
                       Qt5::Gui
-		      Qt5::Widgets
+                      Qt5::Widgets
                       Qt5::Svg
                       Qt5::WebKitWidgets
                       KF5::PlasmaQuick
@@ -129,13 +110,9 @@ target_link_libraries(plasmate
                       KF5::WidgetsAddons
                       KF5::Archive
                       #${KDEPIMLIBS_KPIMUTILS_LIBS}
-                    ${KDEVPLATFORM_INTERFACES_LIBRARIES}
-                    ${KDEVPLATFORM_SHELL_LIBRARIES}
+                      ${KDEVPLATFORM_INTERFACES_LIBRARIES}
+                      ${KDEVPLATFORM_SHELL_LIBRARIES}
 )
-
-#if (DEBUG_MODEL)
-#   target_link_libraries(plasmate Qt5::Test)
-#endif (DEBUG_MODEL)
 
 install(TARGETS plasmate ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS plasmate.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})

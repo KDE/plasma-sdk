@@ -40,9 +40,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KNS3/DownloadDialog>
 
 #include "editors/metadata/metadatahandler.h"
-#include "packagemodel.h"
 #include "startpage.h"
-#include "mainwindow.h"
 #include "packagehandler/packagehandler.h"
 #include "packagehandler/plasmoidhandler.h"
 #include "packagehandler/themehandler.h"
@@ -55,7 +53,6 @@ StartPage::StartPage(QWidget *parent) // TODO set a palette so it will look iden
          m_projectHandler(new ProjectHandler(this)),
          m_packageHandler(nullptr)
 {
-    m_mainWindow = nullptr;//parent;
     setupWidgets();
     refreshRecentProjectsList();
 }
@@ -204,14 +201,12 @@ void StartPage::setupWidgets()
         initHandlers(url);
 
         if (url.isEmpty()) {
-            QScopedPointer<ProjectManager> projectManager(new ProjectManager(m_projectHandler, m_packageHandler, m_mainWindow));
+            QScopedPointer<ProjectManager> projectManager(new ProjectManager(m_projectHandler, m_packageHandler, this));
             if (projectManager->exec() == QDialog::Accepted) {
                 resetStatus();
             }
 
             return;
-        } else {
-           // m_mainWindow->setPackageHandler(m_packageHandler);
         }
 
         qDebug() << "Loading project file:" << m->data(index, FullPathRole);
@@ -422,9 +417,6 @@ void StartPage::createNewProject()
     // accessible after project loads.
     m_ui.projectName->clear();
     resetStatus();
-
-    //load our new project
-    //m_mainWindow->setPackageHandler(m_packageHandler);
 }
 
 void StartPage::checkLocalProjectPath(const QString& name)

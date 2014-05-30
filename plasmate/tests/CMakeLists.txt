@@ -37,19 +37,6 @@ PLASMATE_UNIT_TEST(themehandlertest "${themehandler_SRCS}"
                                     "${themehandler_LIBS}"
 )
 
-# packagemodeltest
-set(packagemodeltest_SRCS modeltest.cpp
-                          ../packagemodel.cpp
-                          ../editors/metadata/metadatahandler.cpp
-                          ${plasmoidhandler_SRCS}
-)
-
-set(packagemodeltest_LIBS ${plasmoidhandler_LIBS} Qt5::Gui)
-
-plasmate_unit_test(packagemodeltest "${packagemodeltest_SRCS}"
-                                    "${packagemodeltest_LIBS}"
-)
-
 # metadatahandlertest
 set(metadatahandlertest_SRCS ../editors/metadata/metadatahandler.cpp)
 set(metadatahandlertest_LIBS KF5::ConfigCore)
