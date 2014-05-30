@@ -66,21 +66,22 @@ void PlasmateApp::init()
 
     KDevelop::Core::initialize(splash, KDevelop::Core::Default, session);
 
+    m_core = KDevelop::Core::self();
+    m_uiControllerInternal = m_core->uiControllerInternal();
+    m_projectController = m_core->projectController();
+    m_documentController = m_core->documentController();
 
-    connect(KDevelop::Core::self()->documentController(),
-            SIGNAL(documentClosed(KDevelop::IDocument*)),
+    connect(m_documentController, SIGNAL(documentClosed(KDevelop::IDocument*)),
             this, SLOT(checkStartPage()));
 
-    connect(KDevelop::Core::self()->projectController(),
-            SIGNAL(projectClosed(KDevelop::IProject*)),
+    connect(m_projectController, SIGNAL(projectClosed(KDevelop::IProject*)),
             this, SLOT(checkStartPage()));
 }
 
 void PlasmateApp::checkStartPage()
 {
-    KDevelop::Core *core = KDevelop::Core::self();
-    if (core->documentController()->openDocuments().isEmpty() &&
-        core->projectController()->projects().isEmpty()) {
+    if (m_documentController->openDocuments().isEmpty() &&
+        m_projectController->projects().isEmpty()) {
         // we don't have any project and documents so we don't
         // have to close anything :)
         setupStartPage(false);
@@ -89,8 +90,7 @@ void PlasmateApp::checkStartPage()
 
 void PlasmateApp::setupStartPage(bool closeProjectsAndDocuments)
 {
-    KDevelop::UiController *uiControllerInternal = KDevelop::Core::self()->uiControllerInternal();
-    if (!uiControllerInternal->activeSublimeWindow()) {
+    if (!m_uiControllerInternal->activeSublimeWindow()) {
         return;
     }
 
@@ -99,11 +99,11 @@ void PlasmateApp::setupStartPage(bool closeProjectsAndDocuments)
         // to have any opened documents and projects so lets close them if there are any
 
         // close all documents
-        KDevelop::Core::self()->documentController()->closeAllDocuments();
+        m_documentController->closeAllDocuments();
 
         //close all projects
-        for (auto project : KDevelop::Core::self()->projectController()->projects()) {
-            KDevelop::Core::self()->projectController()->closeProject(project);
+        for (auto project : m_projectController->projects()) {
+            m_projectController->closeProject(project);
         }
     }
 
@@ -113,9 +113,9 @@ void PlasmateApp::setupStartPage(bool closeProjectsAndDocuments)
         loadMainWindow(projectFile);
     });
 
-    uiControllerInternal->activeSublimeWindow()->setBackgroundCentralWidget(startPage);
+    m_uiControllerInternal->activeSublimeWindow()->setBackgroundCentralWidget(startPage);
 
-    QList<QToolBar*> toolBars = uiControllerInternal->activeSublimeWindow()->findChildren<QToolBar*>();
+    QList<QToolBar*> toolBars = m_uiControllerInternal->activeSublimeWindow()->findChildren<QToolBar*>();
 
     if (!m_toolbarActions.isEmpty()) {
         m_toolbarActions.clear();
@@ -134,7 +134,7 @@ void PlasmateApp::loadMainWindow(const QUrl &projectPath)
 
     if (!QFile(metadataFilePath).exists()) {
         const char *error = "Your package is invalid";
-        KMessageBox::error(KDevelop::ICore::self()->uiController()->activeMainWindow(), i18n(error));
+        KMessageBox::error(m_uiControllerInternal->activeMainWindow(), i18n(error));
         return;
     }
 
@@ -151,15 +151,13 @@ void PlasmateApp::loadMainWindow(const QUrl &projectPath)
 
     showKDevUi(true);
 
-    KDevelop::ICore::self()->documentController()->openDocument(metadataFilePath);
-    KDevelop::ICore::self()->projectController()->openProject(QUrl::fromLocalFile(projectPlasmateFile));
+    m_documentController->openDocument(metadataFilePath);
+    m_projectController->openProject(QUrl::fromLocalFile(projectPlasmateFile));
 }
 
 void PlasmateApp::showKDevUi(bool visible)
 {
-    KDevelop::UiController *uiControllerInternal = KDevelop::Core::self()->uiControllerInternal();
-
-    uiControllerInternal->activeMainWindow()->menuBar()->setVisible(visible);
+    m_uiControllerInternal->activeMainWindow()->menuBar()->setVisible(visible);
 
     for (auto action : m_toolbarActions) {
         action->setVisible(visible);
@@ -168,7 +166,7 @@ void PlasmateApp::showKDevUi(bool visible)
         }
     }
 
-    for (auto obj : uiControllerInternal->activeSublimeWindow()->children()) {
+    for (auto obj : m_uiControllerInternal->activeSublimeWindow()->children()) {
         QDockWidget *dockWidget = qobject_cast<QDockWidget *>(obj);
         if (dockWidget && dockWidget->isVisible()) {
             dockWidget->close();
