@@ -89,6 +89,11 @@ void PlasmateApp::checkStartPage()
 
 void PlasmateApp::setupStartPage(bool closeProjectsAndDocuments)
 {
+    KDevelop::UiController *uiControllerInternal = KDevelop::Core::self()->uiControllerInternal();
+    if (!uiControllerInternal->activeSublimeWindow()) {
+        return;
+    }
+
     if (closeProjectsAndDocuments) {
         // when plasmate is about to go to the StartPage  we *don't* want
         // to have any opened documents and projects so lets close them if there are any
@@ -108,7 +113,6 @@ void PlasmateApp::setupStartPage(bool closeProjectsAndDocuments)
         loadMainWindow(projectFile);
     });
 
-    KDevelop::UiController *uiControllerInternal = KDevelop::Core::self()->uiControllerInternal();
     uiControllerInternal->activeSublimeWindow()->setBackgroundCentralWidget(startPage);
 
     QList<QToolBar*> toolBars = uiControllerInternal->activeSublimeWindow()->findChildren<QToolBar*>();
