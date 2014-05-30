@@ -38,6 +38,9 @@
 #include <QDockWidget>
 
 
+#include <KLocalizedString>
+#include <KMessageBox>
+#include <KConfigGroup>
 #include <KSplashScreen>
 #include <KToolBar>
 
@@ -108,7 +111,12 @@ void PlasmateApp::setupStartPage(bool closeProjectsAndDocuments)
     KDevelop::UiController *uiControllerInternal = KDevelop::Core::self()->uiControllerInternal();
     uiControllerInternal->activeSublimeWindow()->setBackgroundCentralWidget(startPage);
 
-    QList<QToolBar *> toolBars = uiControllerInternal->activeSublimeWindow()->findChildren<QToolBar *>();
+    QList<QToolBar*> toolBars = uiControllerInternal->activeSublimeWindow()->findChildren<QToolBar*>();
+
+    if (!m_toolbarActions.isEmpty()) {
+        m_toolbarActions.clear();
+    }
+
     for (auto toolBar : toolBars) {
         m_toolbarActions.append(toolBar->actions());
     }
@@ -116,11 +124,31 @@ void PlasmateApp::setupStartPage(bool closeProjectsAndDocuments)
     showKDevUi(false);
 }
 
-void PlasmateApp::loadMainWindow(const QUrl &projectFile)
+void PlasmateApp::loadMainWindow(const QUrl &projectPath)
 {
+    const QString metadataFilePath = projectPath.path() + QStringLiteral("/metadata.desktop");
+
+    if (!QFile(metadataFilePath).exists()) {
+        const char *error = "Your package is invalid";
+        KMessageBox::error(KDevelop::ICore::self()->uiController()->activeMainWindow(), i18n(error));
+        return;
+    }
+
+    const QString projectName = QDir(projectPath.path()).dirName();
+    const QString projectPlasmateFile = projectPath.path() + QLatin1Char('/') + projectName + QLatin1Char('.') +
+                                        PlasmateExtension::getInstance()->projectFileExtension();
+
+    if (!QFile(projectPlasmateFile).exists()) {
+        KConfigGroup configPlasmate(KSharedConfig::openConfig(projectPlasmateFile), QStringLiteral("Project"));
+        configPlasmate.writeEntry("Name", projectName);
+        configPlasmate.writeEntry("Manager", "KDevGenericManager");
+        configPlasmate.sync();
+    }
+
     showKDevUi(true);
 
-    KDevelop::ICore::self()->documentController()->openDocument(projectFile);
+    KDevelop::ICore::self()->documentController()->openDocument(metadataFilePath);
+    KDevelop::ICore::self()->projectController()->openProject(QUrl::fromLocalFile(projectPlasmateFile));
 }
 
 void PlasmateApp::showKDevUi(bool visible)
