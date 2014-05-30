@@ -49,7 +49,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "projectmanager/projectmanager.h"
 #include "projecthandler.h"
 
-
 StartPage::StartPage(QWidget *parent) // TODO set a palette so it will look identical with any color scheme.
         : QWidget(parent),
          m_parent(parent),
@@ -131,8 +130,7 @@ void StartPage::setupWidgets()
         resetStatus();
 
         //load our project
-        const QString metadataDesktop = path + QStringLiteral("/metadata.desktop");
-        emit projectSelected(QUrl::fromLocalFile(metadataDesktop));
+        emit projectSelected(QUrl::fromLocalFile(path));
     });
 
     connect(m_ui.importPackageButton, &QPushButton::clicked, [&]() {
@@ -218,7 +216,7 @@ void StartPage::setupWidgets()
 
         qDebug() << "Loading project file:" << m->data(index, FullPathRole);
 
-        emit projectSelected(QUrl::fromLocalFile(url + QStringLiteral("/metadata.desktop")));
+        emit projectSelected(QUrl::fromLocalFile(url));
     });
 
     new QListWidgetItem(QIcon::fromTheme("application-x-plasma"), i18n("Plasma Widget"), m_ui.contentTypes);
@@ -418,16 +416,7 @@ void StartPage::createNewProject()
     initHandlers(projectPath, serviceTypes);
     m_packageHandler->createPackage(m_ui.authorTextField->text(), m_ui.emailTextField->text(), serviceTypes, projectNameLowerCase);
 
-    // create the metadata.desktop file
-    // TODO: missing but possible entries that could be added:
-    // * Icon
-    // * Comment
-    // * Keywords
-    // * X-KDE-PluginInfo-Website
-    // * X-KDE-PluginInfo-Category
-    // * X-KDE-ParentApp
-
-    emit projectSelected(QUrl::fromLocalFile(projectPath + QStringLiteral("/metadata.desktop")));
+    emit projectSelected(QUrl::fromLocalFile(projectPath));
 
     // need to clear the project name field here too because startpage is still
     // accessible after project loads.
@@ -487,7 +476,7 @@ void StartPage::selectProject(const QUrl &target)
     if (!ProjectManager::importPackage(target, projectUrl)) {
         KMessageBox::information(this, i18n("A problem has occurred during import."));
     }
-    emit projectSelected(QUrl::fromLocalFile(projectFolder + QStringLiteral("metadata.desktop")));
+    emit projectSelected(QUrl::fromLocalFile(projectFolder));
 }
 
 /**

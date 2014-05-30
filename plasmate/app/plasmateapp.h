@@ -34,7 +34,7 @@ public:
     ~PlasmateApp();
 
 private Q_SLOTS:
-    void loadMainWindow(const QUrl &projectFile);
+    void loadMainWindow(const QUrl &projectPath);
     void checkStartPage();
 
 private:
