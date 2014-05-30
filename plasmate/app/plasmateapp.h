@@ -21,9 +21,16 @@
 #define PLASMAAPP_H
 
 #include <QObject>
-#include <QHash>
+#include <QPointer>
 
 class QAction;
+
+namespace KDevelop {
+    class Core;
+    class UiController;
+    class IDocumentController;
+    class IProjectController;
+}; //end namespace
 
 class PlasmateApp : public QObject {
 
@@ -43,6 +50,11 @@ private:
 
     void showKDevUi(bool visible);
     QList<QAction*> m_toolbarActions;
+
+    QPointer<KDevelop::Core> m_core;
+    QPointer<KDevelop::UiController> m_uiControllerInternal;
+    QPointer<KDevelop::IProjectController> m_projectController;
+    QPointer<KDevelop::IDocumentController> m_documentController;
 };
 
 #endif
