@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "projecthandlertest.h"
-#include "../packagehandler/themehandler.h"
+#include "packagehandler/themehandler.h"
 
 #include <QDir>
 #include <QDebug>

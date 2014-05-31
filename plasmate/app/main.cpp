@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KAboutData>
 #include <KLocalizedString>
 
-#include "app/plasmateapp.h"
+#include "plasmateapp.h"
 
 
 // TODO

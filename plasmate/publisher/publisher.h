@@ -39,6 +39,8 @@ private slots:
 
 private:
     bool exportToFile(const QUrl& url);
+    bool exportPackage(const QUrl &toExport, const QUrl &targetFile);
+
     const QString tempPackagePath();
 
     //avoid duplication

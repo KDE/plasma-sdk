@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef PROJECTHANDLERTEST_H
 #define PROJECTHANDLERTEST_H
 
-#include "../projecthandler.h"
+#include "startpage/projecthandler.h"
 
 class ProjectHandlerTest : public QObject
 {

@@ -19,7 +19,7 @@
 
 #include "plasmateapp.h"
 #include "plasmateextention.h"
-#include "../startpage.h"
+#include "startpage/startpage.h"
 
 
 #include <shell/core.h>

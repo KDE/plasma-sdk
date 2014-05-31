@@ -44,7 +44,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "packagehandler/packagehandler.h"
 #include "packagehandler/plasmoidhandler.h"
 #include "packagehandler/themehandler.h"
-#include "projectmanager/projectmanager.h"
+#include "projectmanager.h"
 #include "projecthandler.h"
 
 StartPage::StartPage(QWidget *parent) // TODO set a palette so it will look identical with any color scheme.
