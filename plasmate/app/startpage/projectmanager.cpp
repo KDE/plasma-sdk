@@ -36,9 +36,9 @@
 #include <KZip>
 
 #include "projectmanager.h"
-#include "../projecthandler.h"
-#include "../packagehandler/packagehandler.h"
-#include "../editors/metadata/metadatahandler.h"
+#include "projecthandler.h"
+#include "../../packagehandler/packagehandler.h"
+#include "../../editors/metadata/metadatahandler.h"
 
 ProjectManager::ProjectManager(ProjectHandler *projectHandler,
                                PackageHandler *packageHandler, QWidget *parent)
@@ -169,39 +169,6 @@ void ProjectManager::emitProjectSelected()
         emit projectSelected(url);
         done(QDialog::Accepted);
     }
-}
-
-bool ProjectManager::exportPackage(const QUrl &toExport, const QUrl &targetFile)
-{
-    // Think ONE minute before committing nonsense: if you want to zip a folder,
-    // and you create the *.zip file INSIDE that folder WHILE copying the files,
-    // guess what happens??
-    // This also means: always try at least once, before committing changes.
-    if (targetFile.path().contains(toExport.path())) {
-        // Sounds like we are attempting to create the package from inside the package folder, noooooo :)
-        return false;
-    }
-
-    if (QFile::exists(targetFile.path())) {
-        //TODO: Make sure this succeeds
-        QFile::remove(targetFile.path()); // overwrite!
-    }
-
-    // Create an empty zip file
-    KZip zip(targetFile.path());
-    zip.open(QIODevice::ReadWrite);
-    zip.close();
-
-    // Reopen for writing
-    if (zip.open(QIODevice::ReadWrite)) {
-        qDebug() << "zip file opened successfully";
-        zip.addLocalDirectory(toExport.path(), ".");
-        zip.close();
-        return true;
-    }
-
-    qDebug() << "Cant open zip file" ;
-    return false;
 }
 
 bool ProjectManager::importPackage(const QUrl &toImport, const QUrl &targetLocation)

@@ -1,6 +1,5 @@
 # Find needed packages
 
-# No need to find(Qt4), since QT4_FOUND it's already set by finding kde4
 add_feature_info(QT_QTWEBKIT_FOUND "QtWebKit" "Opensource web browser engine" "http://trac.webkit.org/wiki/QtWebKit" TRUE "" "Needed to display the online API and documentation.")
 
 #TODO this dependency is inside from the KdepimLibs which has not
@@ -19,105 +18,6 @@ set( KDEVELOP_VERSION_PATCH 60 )
 set( KDEVPLATFORM_VERSION "1.${KDEVELOP_VERSION_MINOR}.${KDEVELOP_VERSION_PATCH}" )
 
 find_package(KDevPlatform ${KDEVPLATFORM_VERSION} REQUIRED)
-
-set(KDevPlasmate_SRCS app/plasmateextention.cpp
-                      app/plasmateapp.cpp
-)
-
-set (PlasMate_SRC
-    editors/metadata/metadataeditor.cpp
-    editors/imageviewer/imageloader.cpp
-    editors/imageviewer/imageviewer.cpp
-    editors/imageviewer/imageviewerpart.cpp
-    editors/kconfigxt/kconfigxteditor.cpp
-    editors/kconfigxt/kconfigxtreader.cpp
-    editors/kconfigxt/kconfigxtwriter.cpp
-    editors/kconfigxt/kconfigxteditorpart.cpp
-    editors/metadata/metadatahandler.cpp
-    editors/metadata/metadataeditorpart.cpp
-    app/main.cpp
-    #savesystem/dvcsjob.cpp
-    #savesystem/gitrunner.cpp
-    #savesystem/commitdialog.cpp
-    #savesystem/timelineitem.cpp
-    #savesystem/tabledelegate.cpp
-    #savesystem/tablewidget.cpp
-    #savesystem/timeline.cpp
-    startpage.cpp
-    packagehandler/packagehandler.cpp
-    packagehandler/plasmoidhandler.cpp
-    packagehandler/themehandler.cpp
-    projecthandler.cpp
-    projectmanager/projectmanager.cpp
-    previewer/plasmoid/plasmoidpreviewer.cpp
-    ../plasmoidviewer/view.cpp
-    #previewer/plasmoid/plasmoidview.cpp
-    #previewer/runner/runnerpreviewer.cpp
-    #previewer/windowswitcher/windowswitcher.cpp
-    #previewer/windowswitcher/thumbnailitem.cpp
-    #previewer/windowswitcher/tabboxpreviewer.cpp
-    previewer/previewer.cpp
-    # publisher/signingwidget.cpp
-    #publisher/signingdialog.cpp
-    publisher/publisher.cpp
-    #publisher/remoteinstaller/remoteinstaller.cpp
-    #publisher/remoteinstaller/remoteinstallerdialog.cpp
-    #konsole/konsolepreviewer.cpp
-    docbrowser/docbrowser.cpp
-    noteseditor/noteseditor.cpp
-    ${KDevPlasmate_SRCS}
-)
-
-qt5_wrap_ui(PlasMate_SRC
-   editors/metadata/metadata.ui
-   publisher/publisher.ui
-   #publisher/remoteinstaller/remoteinstaller.ui
-   editors/kconfigxt/kconfigxteditor.ui
-   startpage.ui
-)
-
-include_directories(${QT_QTWEBKIT_INCLUDE_DIR}
-                    #${QGPGME_INCLUDE_DIR}
-                    #${GPGME_INCLUDES}
-)
-
-#add_subdirectory( icons )
-
-add_executable(plasmate ${PlasMate_SRC})
-target_link_libraries(plasmate
-                      KF5::TextEditor
-                      KF5::Parts
-                      KF5::Plasma
-                      KF5::NewStuff
-                      Qt5::Xml
-                      #${QGPGME_LIBRARIES}
-                      Qt5::Quick
-                      Qt5::Gui
-                      Qt5::Widgets
-                      Qt5::Svg
-                      Qt5::WebKitWidgets
-                      KF5::PlasmaQuick
-                      ${LibAttica_LIBRARIES}
-                      KF5::KIOCore
-                      KF5::ItemViews
-                      KF5::ConfigCore
-                      KF5::ConfigWidgets
-                      KF5::IconThemes
-                      KF5::I18n
-                      KF5::KIOWidgets
-                      KF5::Service
-                      KF5::Completion
-                      KF5::WidgetsAddons
-                      KF5::Archive
-                      #${KDEPIMLIBS_KPIMUTILS_LIBS}
-                      ${KDEVPLATFORM_INTERFACES_LIBRARIES}
-                      ${KDEVPLATFORM_SHELL_LIBRARIES}
-)
-
-install(TARGETS plasmate ${INSTALL_TARGETS_DEFAULT_ARGS})
-install(PROGRAMS plasmate.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
-install(FILES app/plasmateui.rc  DESTINATION ${DATA_INSTALL_DIR}/plasmate)
-install(FILES plasmate.knsrc DESTINATION ${CONFIG_INSTALL_DIR})
 
 #install( FILES previewer/windowswitcher/thumbnails/konqueror.png
 #previewer/windowswitcher/thumbnails/kmail.png
@@ -197,6 +97,30 @@ install(TARGETS plasmakconfigxteditor ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(DIRECTORY templates DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 
-add_subdirectory(tests)
+set(packagehandler_SRCS
+    ${CMAKE_CURRENT_SOURCE_DIR}/packagehandler/packagehandler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/packagehandler/plasmoidhandler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/packagehandler/themehandler.cpp
+)
+
+if(BUILD_TESTING)
+    include(ECMMarkAsTest)
+    macro(PLASMATE_UNIT_TEST testname srcs libraries)
+        set(testname_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/${testname}.cpp
+                          ${srcs}
+        )
+
+        add_executable(${testname} ${testname_SRCS})
+        add_test(plasmate-${testname} ${testname})
+
+        ecm_mark_as_test(${testname})
+
+        target_link_libraries(${testname} ${libraries} Qt5::Test Qt5::Core)
+    endmacro()
+
+    add_subdirectory(tests)
+endif()
+
+add_subdirectory(app)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

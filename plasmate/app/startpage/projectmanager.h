@@ -47,7 +47,6 @@ public:
 
     void addProject(QListWidgetItem *item);
 
-    static bool exportPackage(const QUrl &toExport, const QUrl &targetFile);
     static bool importPackage(const QUrl &toImport, const QUrl &targetLocation);
 
 signals:

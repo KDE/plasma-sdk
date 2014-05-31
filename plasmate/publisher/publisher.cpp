@@ -28,7 +28,6 @@
 
 #include "publisher.h"
 //#include "signingwidget.h"
-#include "../projectmanager/projectmanager.h"
 //#include "remoteinstaller/remoteinstallerdialog.h"
 
 Publisher::Publisher(QWidget *parent, const QUrl &path, const QString& type)
@@ -92,6 +91,39 @@ void Publisher::setProjectName(const QString &name)
     m_projectName = name;
 }
 
+bool Publisher::exportPackage(const QUrl &toExport, const QUrl &targetFile)
+{
+    // Think ONE minute before committing nonsense: if you want to zip a folder,
+    // and you create the *.zip file INSIDE that folder WHILE copying the files,
+    // guess what happens??
+    // This also means: always try at least once, before committing changes.
+    if (targetFile.path().contains(toExport.path())) {
+        // Sounds like we are attempting to create the package from inside the package folder, noooooo :)
+        return false;
+    }
+
+    if (QFile::exists(targetFile.path())) {
+        //TODO: Make sure this succeeds
+        QFile::remove(targetFile.path()); // overwrite!
+    }
+
+    // Create an empty zip file
+    KZip zip(targetFile.path());
+    zip.open(QIODevice::ReadWrite);
+    zip.close();
+
+    // Reopen for writing
+    if (zip.open(QIODevice::ReadWrite)) {
+        qDebug() << "zip file opened successfully";
+        zip.addLocalDirectory(toExport.path(), ".");
+        zip.close();
+        return true;
+    }
+
+    qDebug() << "Cant open zip file" ;
+    return false;
+}
+
 void Publisher::doExport()
 {
     if (QFile(m_ui.exporterUrl->text()).exists()) {
@@ -151,7 +183,7 @@ void Publisher::doPlasmaPkg()
     qDebug() << "tempPackagePath" << tempPackage.path();
     qDebug() << "m_projectPath" << m_projectPath.path();
 
-    ProjectManager::exportPackage(m_projectPath, tempPackage); // create temporary package
+    exportPackage(m_projectPath, tempPackage); // create temporary package
 
     QStringList argv("plasmapkg2");
     argv.append("-t");
@@ -266,7 +298,7 @@ bool Publisher::exportToFile(const QUrl& url)
         return false;
     }
 
-    return ProjectManager::exportPackage(m_projectPath, url); // will overwrite if exists!
+    return exportPackage(m_projectPath, url); // will overwrite if exists!
 }
 
 QString Publisher::currentPackagePath() const
