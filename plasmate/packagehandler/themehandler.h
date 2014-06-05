@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "packagehandler.h"
 
-#include <QMultiHash>
+#include <QHash>
 
 class ThemeHandler : public PackageHandler
 {
@@ -34,28 +34,17 @@ public:
     explicit ThemeHandler(QObject *parent = 0);
     ~ThemeHandler();
 
-    class ThemeNode : public PackageHandler::Node {
-        public:
-            ThemeNode(const QString &name, const QString &description,
-                      const QStringList &mimeTypes, ThemeHandler::Node *parent = 0);
-            ~ThemeNode();
-    };
+      void createPackage(const QString &userName, const QString &userEmail,
+                         const QString &serviceType, const QString &pluginName) override;
 
-    void createPackage(const QString &userName, const QString &userEmail,
-                       const QString &serviceType, const QString &pluginName) override;
-
-    void setPackagePath(const QString &path) override;
-
-    PackageHandler::Node* loadPackageInfo() override;
-
-    QUrl urlForNode(PackageHandler::Node *node) override;
+    QString description(const QString &entry) const override;
 
 protected:
     QString packageType() const override;
 
 private:
-    PackageHandler::Node* m_rootNode;
-    QMultiHash<QString, QString> m_entries;
+    QHash<QString, QString> m_orphanDirs;
+    void createDirectories();
 };
 
 #endif

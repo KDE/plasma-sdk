@@ -32,23 +32,12 @@ public:
     explicit PlasmoidHandler(QObject *parent = 0);
     ~PlasmoidHandler();
 
-    class PlasmoidNode : public PlasmoidHandler::Node {
-        public:
-            PlasmoidNode(const QString &name, const QString &description,
-                 const QStringList &mimetypes = QStringList(),
-                 PlasmoidHandler::Node *parent = 0);
-            ~PlasmoidNode();
-            bool needsNewFileNode() const;
-    };
-
     void createPackage(const QString &userName, const QString &userEmail,
-                        const QString &serviceType, const QString &pluginName) override;
+                       const QString &serviceType, const QString &pluginName) override;
 
     void setPackagePath(const QString &path) override;
 
-    PlasmoidHandler::Node* loadPackageInfo() override;
-
-    QUrl urlForNode(PackageHandler::Node *node) override;
+    QString description(const QString &entry) const override;
 
 protected:
     QString packageType() const override;
@@ -56,8 +45,6 @@ protected:
 private:
     QHash<QString, QString> m_fileDefinitions;
     QMultiHash<QString, QString> m_directoryDefinitions;
-    PackageHandler::Node* m_topNode;
-
 
     void createRequiredFiles(const QString &serviceType, const QString &pluginName,
                              const QString &userName, const QString &userEmail, const QString &fileExtension);

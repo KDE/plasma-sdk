@@ -58,16 +58,12 @@ void ThemeHandlerTest::createNewTheme()
     }
 
     newThemeLocation += packageName;
-
     m_packageHandler->setPackagePath(newThemeLocation);
     m_packageHandler->createPackage(dummyAuthor, dummyEmail, "", packageName);
     QDir d(newThemeLocation);
 
     Q_ASSERT(d.exists());
     Q_ASSERT(d.exists(QStringLiteral("metadata.desktop")));
-    Q_ASSERT(d.exists(m_packageHandler->contentsPrefix()));
-
-    d.cd(m_packageHandler->contentsPrefix());
 
     const QString dirName = QStringLiteral("dialogs");
     d.mkpath(dirName);
@@ -83,93 +79,11 @@ void ThemeHandlerTest::createNewTheme()
     }
 }
 
-void ThemeHandlerTest::checkNodes()
+void ThemeHandlerTest::checkDescriptions()
 {
-    PackageHandler::Node *topNode = m_packageHandler->loadPackageInfo();
-    Q_ASSERT(topNode->name().isEmpty());
-    Q_ASSERT(topNode->description().isEmpty());
-    Q_ASSERT(topNode->mimeTypes().isEmpty());
-    Q_ASSERT(!topNode->parent());
-    Q_ASSERT(!topNode->childNodes().isEmpty());
-    for (auto it : topNode->childNodes()) {
-        QCOMPARE(topNode, it->parent());
-        Q_ASSERT(!it->name().isEmpty());
-        Q_ASSERT(!it->description().isEmpty());
-    }
-    Q_ASSERT(m_packageHandler->urlForNode(topNode).isValid());
-
-
-    QStringList childNodeNames;
-
-    auto populateChildNodeNamesList = [&](PackageHandler::Node *node) {
-        childNodeNames.clear();
-        for (const auto it : node->childNodes()) {
-            childNodeNames.append(it->name());
-        }
-    };
-
-    auto checkUrl = [=](const QString &nodePath, PackageHandler::Node *node, bool hasContentsPath) {
-        QString path = m_packageHandler->packagePath();
-
-        if (hasContentsPath) {
-            path += m_packageHandler->contentsPrefix();
-        }
-
-        path += nodePath;
-
-        const QUrl url = QUrl::fromLocalFile(path);
-        const QUrl urlForNode = m_packageHandler->urlForNode(node);
-        QCOMPARE(urlForNode, url);
-    };
-
-    QCOMPARE(topNode->childNodes().size(), 8);
-    for (const auto it : topNode->childNodes()) {
-        populateChildNodeNamesList(it);
-
-        if (it->name() == QStringLiteral("dialogs") ||
-            it->name() == QStringLiteral("opaque/dialogs") ||
-            it->name() == QStringLiteral("locolor/dialogs")) {
-
-            QCOMPARE(childNodeNames.size(), 2);
-
-            Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/background")));
-            Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/shutdowndialog")));
-
-            if (it->name() == QStringLiteral("dialogs")) {
-                for (const auto &child : it->childNodes()) {
-                    checkUrl(child->name() + QStringLiteral(".svg"), child, true);
-                }
-            }
-        } else if (it->name() == QStringLiteral("widgets") ||
-                   it->name() == QStringLiteral("locolor/widgets")) {
-
-            QCOMPARE(childNodeNames.size(), 5);
-
-            Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/background")));
-            Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/clock")));
-            Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/panel-background")));
-            Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/plot-background")));
-            Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/tooltip")));
-
-            checkUrl(it->name(), it, true);
-        } else if (it->name() == QStringLiteral("opaque/widgets")) {
-            QCOMPARE(childNodeNames.size(), 2);
-
-            Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/panel-background")));
-            Q_ASSERT(childNodeNames.contains(it->name() + QStringLiteral("/tooltip")));
-        } else if (it->name() == QStringLiteral("colors")) {
-            QCOMPARE(childNodeNames.size(), 0);
-
-            checkUrl(it->name(), it, true);
-        } else if (it->name() == QStringLiteral("metadata.desktop")) {
-            QCOMPARE(childNodeNames.size(), 0);
-
-            checkUrl(it->name(), it, false);
-        } else {
-            const QString errorMessage = QString(QStringLiteral("Unrecognized name %1")).arg(it->name());
-            QFAIL(errorMessage.toLocal8Bit().data());
-        }
-    }
+   Q_ASSERT(!m_packageHandler->description(QStringLiteral("opaque")).isEmpty());
+   Q_ASSERT(!m_packageHandler->description(QStringLiteral("dialogs/background")).isEmpty());
+   Q_ASSERT(m_packageHandler->description(QStringLiteral("invalid")).isEmpty());
 }
 
 void ThemeHandlerTest::cleanupTestCase()
