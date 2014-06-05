@@ -36,6 +36,7 @@ target_link_libraries(plasmate
 install(TARGETS plasmate ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS plasmate.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES plasmateui.rc  DESTINATION ${DATA_INSTALL_DIR}/plasmate)
+install(FILES katepartui.rc  DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 install(FILES plasmate.knsrc DESTINATION ${CONFIG_INSTALL_DIR})
 
 if(BUILD_TESTING)
