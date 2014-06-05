@@ -101,6 +101,7 @@ set(packagehandler_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/packagehandler/packagehandler.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/packagehandler/plasmoidhandler.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/packagehandler/themehandler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/editors/metadata/metadatahandler.cpp
 )
 
 if(BUILD_TESTING)

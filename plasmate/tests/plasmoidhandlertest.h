@@ -41,9 +41,7 @@ private Q_SLOTS:
     void initTestCase();
     void createNewPlasmoid();
     void loadPlasmoidTestData();
-    void checkPlasmoidMimeTypes();
-    void checkNodes();
-    void checkPlasmoidNodes();
+    void checkDescriptions();
     void cleanupTestCase();
 private:
     PackageHandler *m_packageHandler;

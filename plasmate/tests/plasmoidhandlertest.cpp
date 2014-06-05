@@ -84,103 +84,12 @@ void PlasmoidHandlerTest::loadPlasmoidTestData()
     m_packageHandler->setPackagePath(packagePath);
 }
 
-void PlasmoidHandlerTest::checkPlasmoidMimeTypes()
+void PlasmoidHandlerTest::checkDescriptions()
 {
-    QStringList mimeTypes;
-    PackageHandler::Node* node = m_packageHandler->loadPackageInfo();
-    for (auto it : node->childNodes()) {
-        mimeTypes.append(it->mimeTypes());
-        if (!it->childNodes().isEmpty()) {
-            for(auto childIt : it->childNodes()) {
-                mimeTypes.append(childIt->mimeTypes());
-            }
-        }
-    }
-
-    Q_ASSERT_X(mimeTypes.contains(QStringLiteral("[plasmate]/kconfigxteditor")),
-               "Checking mimetypes","[plasmate]/kconfigxteditor/ doesn't exist");
-    Q_ASSERT_X(mimeTypes.contains(QStringLiteral("text/x-qml")), "Checking mimetypes",
-              "text/x-qml doesn't exist");
-    Q_ASSERT_X(mimeTypes.contains(QStringLiteral("[plasmate]/new")), "Checking mimetypes",
-              "[plasmate]/new doesn't exist");
-    Q_ASSERT_X(mimeTypes.contains(QStringLiteral("[plasmate]/imageViewer")), "Checking mimetypes",
-              "[plasmate]/imageViewer doesn't exist");
-    Q_ASSERT_X(mimeTypes.contains(QStringLiteral("[plasmate]/imageDialog")), "Checking mimetypes",
-              "[plasmate]/imageDialog doesn't exist");
-}
-
-void PlasmoidHandlerTest::checkNodes()
-{
-    PackageHandler::Node *topNode = m_packageHandler->loadPackageInfo();
-    Q_ASSERT(topNode->name().isEmpty());
-    Q_ASSERT(topNode->description().isEmpty());
-    Q_ASSERT(topNode->mimeTypes().isEmpty());
-    Q_ASSERT(!topNode->parent());
-    Q_ASSERT(!topNode->childNodes().isEmpty());
-    for (auto it : topNode->childNodes()) {
-        QCOMPARE(topNode, it->parent());
-        Q_ASSERT(!it->name().isEmpty());
-        Q_ASSERT(!it->description().isEmpty());
-        PlasmoidHandler::PlasmoidNode *plasmoidNode = static_cast<PlasmoidHandler::PlasmoidNode*>(it);
-        if (!it->isFile() && plasmoidNode->needsNewFileNode()) {
-            const QString firstNodeDescription = it->childNodes().at(0)->description();
-            QCOMPARE(firstNodeDescription, QStringLiteral("New.."));
-        } else {
-            Q_ASSERT(m_packageHandler->urlForNode(it).isValid());
-            QCOMPARE(plasmoidNode->needsNewFileNode(), false);
-        }
-    }
-    Q_ASSERT(m_packageHandler->urlForNode(topNode).isValid());
-}
-
-void PlasmoidHandlerTest::checkPlasmoidNodes()
-{
-    PackageHandler::Node *topNode = m_packageHandler->loadPackageInfo();
-
-    QStringList childNodeNames;
-
-    auto populateChildNodeNamesList = [&](PackageHandler::Node *node) {
-        childNodeNames.clear();
-        for (const auto it : node->childNodes()) {
-            childNodeNames.append(it->description());
-        }
-    };
-
-    QCOMPARE(topNode->childNodes().size(), 9);
-    for (const auto it : topNode->childNodes()) {
-        if (it->description() == QStringLiteral("User Interface")) {
-            populateChildNodeNamesList(it);
-            QCOMPARE(childNodeNames.size(), 3);
-            Q_ASSERT(childNodeNames.contains(QStringLiteral("New..")));
-            Q_ASSERT(childNodeNames.contains(QStringLiteral("Main Script File")));
-            Q_ASSERT(childNodeNames.contains(QStringLiteral("foo.qml")));
-        } else if (it->description() == QStringLiteral("Configuration Definitions")) {
-            populateChildNodeNamesList(it);
-            QCOMPARE(childNodeNames.size(), 2);
-            Q_ASSERT(childNodeNames.contains(QStringLiteral("Configuration UI pages model")));
-            Q_ASSERT(childNodeNames.contains("Configuration XML file"));
-        } else if (it->description() == QStringLiteral("Data Files") ||
-                   it->description() == QStringLiteral("Executable Scripts") ||
-                   it->description() == QStringLiteral("Translations") ||
-                   it->description() == QStringLiteral("Themed Images")) {
-            populateChildNodeNamesList(it);
-            QCOMPARE(childNodeNames.size(), 1);
-            Q_ASSERT(childNodeNames.contains(QStringLiteral("New..")));
-        } else if(it->description() == QStringLiteral("Images")) {
-            populateChildNodeNamesList(it);
-            QCOMPARE(childNodeNames.size(), 2);
-            Q_ASSERT(childNodeNames.contains(QStringLiteral("New..")));
-            Q_ASSERT(childNodeNames.contains(QStringLiteral("plasmagik.png")));
-        } else if (it->description() == QStringLiteral("metadata.desktop")) {
-            QCOMPARE(childNodeNames.size(), 0);
-        } else if (it->description() == QStringLiteral("bar.qml")) {
-            populateChildNodeNamesList(it);
-            QCOMPARE(childNodeNames.size(), 0);
-        } else {
-            const QString errorMessage = QString(QStringLiteral("Unrecognized name %1")).arg(it->name());
-            QFAIL(errorMessage.toLocal8Bit().data());
-        }
-    }
+    Q_ASSERT(!m_packageHandler->description(QStringLiteral("ui")).isEmpty());
+    Q_ASSERT(!m_packageHandler->description(QStringLiteral("main.qml")).isEmpty());
+    // invalid
+    Q_ASSERT(m_packageHandler->description(QStringLiteral("plasmoid")).isEmpty());
 }
 
 void PlasmoidHandlerTest::cleanupTestCase()

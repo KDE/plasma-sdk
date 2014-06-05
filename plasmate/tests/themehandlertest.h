@@ -38,7 +38,7 @@ public:
 private Q_SLOTS:
     void initTestCase();
     void createNewTheme();
-    void checkNodes();
+    void checkDescriptions();
     void cleanupTestCase();
 private:
     PackageHandler *m_packageHandler;
