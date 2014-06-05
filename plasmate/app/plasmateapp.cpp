@@ -148,16 +148,14 @@ void PlasmateApp::loadMainWindow(const QUrl &projectPath)
         configPlasmate.sync();
     }
 
-    showKDevUi(true);
-
-    m_documentController->openDocument(metadataFilePath);
     m_projectController->openProject(QUrl::fromLocalFile(projectPlasmateFile));
+    m_documentController->openDocument(metadataFilePath);
+
+    showKDevUi(true);
 }
 
 void PlasmateApp::showKDevUi(bool visible)
 {
-    m_uiControllerInternal->activeMainWindow()->menuBar()->setVisible(visible);
-
     for (auto action : m_toolbarActions) {
         action->setVisible(visible);
         if (action->isChecked()) {
@@ -171,5 +169,7 @@ void PlasmateApp::showKDevUi(bool visible)
             dockWidget->close();
         }
     }
+
+    m_uiControllerInternal->activeMainWindow()->menuBar()->setVisible(visible);
 }
 
