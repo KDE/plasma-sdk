@@ -21,13 +21,15 @@
 
 #include "privateheaders/view.h"
 
+class ViewerCorona;
+
 class View : public PlasmaQuick::View
 {
     Q_OBJECT
     Q_PROPERTY(bool konsoleVisible READ konsoleVisible CONSTANT);
 
 public:
-    View(Plasma::Corona *corona, bool konsoleVisible, QWindow *parent = 0);
+    View(ViewerCorona *corona, bool konsoleVisible, QWindow *parent = 0);
     ~View();
 
     void addApplet(const QString &applet);
@@ -40,7 +42,7 @@ public:
     Q_INVOKABLE void changeLocation(int location);
     Q_INVOKABLE void takeScreenShot();
 
-    static Plasma::Corona *createCorona();
+    static ViewerCorona *createCorona();
 
 protected:
     QString pluginFromPath(const QString &path) const;

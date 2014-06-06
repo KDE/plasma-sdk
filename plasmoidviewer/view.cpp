@@ -32,9 +32,37 @@
 
 #include "view.h"
 
-View::View(Plasma::Corona *cor, bool konsoleVisible, QWindow *parent)
+class ViewerCorona : public Plasma::Corona
+{
+public:
+    ViewerCorona()
+        : Plasma::Corona(),
+          m_view(0)
+    {}
+
+    void setView(View *view)
+    {
+        m_view = view;
+    }
+
+    QRect screenGeometry(int id) const
+    {
+        Q_UNUSED(id);
+        if (m_view) {
+            return m_view->geometry();
+        } else {
+            return QRect();
+        }
+    }
+
+private:
+    View *m_view;
+};
+
+View::View(ViewerCorona *cor, bool konsoleVisible, QWindow *parent)
     : PlasmaQuick::View(cor, parent)
 {
+    cor->setView(this);
     m_konsoleVisible = konsoleVisible;
     engine()->rootContext()->setContextProperty("desktop", this);
     setSource(QUrl::fromLocalFile(cor->package().filePath("views", "Desktop.qml")));
@@ -228,12 +256,12 @@ void View::changeLocation(int location)
     addLocation(locationType);
 }
 
-Plasma::Corona *View::createCorona()
+ViewerCorona *View::createCorona()
 {
     Plasma::Package package = Plasma::PluginLoader::self()->loadPackage("Plasma/Shell");
     package.setPath("org.kde.plasma.plasmoidviewershell");
 
-    Plasma::Corona *cor = new Plasma::Corona();
+    ViewerCorona *cor = new ViewerCorona();
     cor->setPackage(package);
 
     return cor;
