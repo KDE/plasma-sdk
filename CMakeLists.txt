@@ -22,13 +22,23 @@ find_package(ECM 0.0.8 REQUIRED NO_MODULE)
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
+find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core DBus Gui Qml Quick Svg WebKit WebKitWidgets Widgets Xml)
+
+find_package(Qt5Test ${QT_MIN_VERSION} CONFIG QUIET)
+set_package_properties(Qt5Test PROPERTIES
+         PURPOSE "Required for tests"
+         TYPE OPTIONAL
+         )
+add_feature_info("Qt5Test" Qt5Test_FOUND "Required for building tests")
+if (NOT Qt5Test_FOUND)
+    set(BUILD_TESTING OFF CACHE BOOL "Build the testing tree.")
+endif()
+
+add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0)
+
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings)
-
-find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Quick X11Extras Svg Test PrintSupport WebKitWidgets)
-
-add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0)
 
 if(KDE_PLATFORM_FEATURE_DISABLE_DEPRECATED)
    set(KDE_NO_DEPRECATED TRUE)
@@ -48,16 +58,8 @@ set (QT_MIN_VERSION "5.2.0")
 
 # Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
 find_package(KF5 REQUIRED COMPONENTS
-    IdleTime ItemModels WidgetsAddons WindowSystem Codecs Archive CoreAddons Solid ThreadWeaver
-    Config Auth JS Wallet DBusAddons Sonnet
-    I18n GuiAddons Service ConfigWidgets ItemViews Notifications IconThemes Completion JobWidgets TextWidgets
-    TextEditor GlobalAccel XmlGui Crash UnitConversion Bookmarks Parts Kross NewStuff Attica)
-
-find_package(KF5Plasma REQUIRED NO_MODULE)
-find_package(KF5PlasmaQuick REQUIRED NO_MODULE)
-find_package(KF5Declarative REQUIRED NO_MODULE)
-find_package(KF5KIO REQUIRED NO_MODULE)
-find_package(KF5KDE4Support REQUIRED NO_MODULE)
+    Archive Completion Config ConfigWidgets CoreAddons I18n IconThemes KDE4Support
+    KIO NewStuff Parts Plasma PlasmaQuick Service TextEditor WidgetsAddons XmlGui)
 
 #########################################################################
 

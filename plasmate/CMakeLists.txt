@@ -97,7 +97,6 @@ target_link_libraries(plasmate
                       KF5::NewStuff
                       Qt5::Xml
                       #${QGPGME_LIBRARIES}
-                      KF5::Declarative
                       Qt5::Quick
                       Qt5::Gui
 		      Qt5::Widgets
