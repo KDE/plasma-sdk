@@ -1,0 +1,14 @@
+<!DOCTYPE kpartgui>
+<kpartplugin name="kdevsavesystemview" library="libkdevsavesystemview" version="1">
+<MenuBar>
+ <Menu name="package">
+  <Text context="@title:menu">Package</Text>
+  <Action name="package_publish" group="package_operations"/>
+ </Menu>
+</MenuBar>
+
+<ToolBar name="mainToolBar" position="Top">
+  <Action name="package_publish" group="package_operations" />
+</ToolBar>
+</kpartplugin>
+
