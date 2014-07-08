@@ -2,6 +2,7 @@ set(kdevsavesystemview_SRCS
     savesystemviewplugin.cpp
     savesystemview.cpp
     commitsmodel.cpp
+    git.cpp
 )
 
 add_library(kdevsavesystemview MODULE ${kdevsavesystemview_SRCS})
