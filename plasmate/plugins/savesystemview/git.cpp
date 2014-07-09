@@ -41,6 +41,7 @@ Git::Git(KDevelop::IProject *project, QObject *parent)
     : QObject(parent)
 {
     m_project = project;
+    m_repositoryPath = m_project->path().toUrl().toLocalFile();
 }
 
 Git::~Git()
@@ -62,9 +63,10 @@ bool Git::initGit()
             return false;
         }
 
-        m_git = plugin->extension<KDevelop::IDistributedVersionControl>();
+        m_dvcs = plugin->extension<KDevelop::IDistributedVersionControl>();
+        m_branching = plugin->extension<KDevelop::IBranchingVersionControl>();
 
-        if (!m_git) {
+        if (!m_dvcs || !m_branching) {
             // something went wrong
             return false;
         }
@@ -76,17 +78,17 @@ bool Git::initGit()
 
 void Git::initializeRepository()
 {
-    if (!m_git) {
+    if (!m_dvcs) {
         return;
     }
 
-    KDevelop::VcsJob *job = m_git->init(m_project->path().toUrl());
+    KDevelop::VcsJob *job = m_dvcs->init(m_repositoryPath);
     if (!handleJob(job)) {
         return;
     }
 
     QStringList filesAndDirs;
-    QDirIterator it(m_project->path().toUrl().toLocalFile(), QDirIterator::Subdirectories);
+    QDirIterator it(m_repositoryPath, QDirIterator::Subdirectories);
     while (it.hasNext()) {
         const QString entry = it.next();
         const QString excludedFile = m_project->name() + ".plasmate";
@@ -96,19 +98,106 @@ void Git::initializeRepository()
 
     }
 
-    job = m_git->add(filesAndDirs, KDevelop::IBasicVersionControl::Recursive);
+    job = m_dvcs->add(filesAndDirs, KDevelop::IBasicVersionControl::Recursive);
 
     if (!handleJob(job)) {
         return;
     }
 
-    job = m_git->commit(QStringLiteral("initial Commit"),
+    job = m_dvcs->commit(QStringLiteral("initial Commit"),
                       filesAndDirs,
                       KDevelop::IBasicVersionControl::Recursive);
 
     if (!handleJob(job)) {
         return;
     }
+}
+
+QStringList Git::branches()
+{
+    QStringList l;
+
+    KDevelop::VcsJob *job = m_branching->branches(m_repositoryPath);
+    if (!handleJob(job)) {
+        return l;
+    }
+
+    l = job->fetchResults().toStringList();
+
+    return l;
+}
+
+QString Git::currentBranch()
+{
+    QString branch;
+
+    KDevelop::VcsJob *job = m_branching->currentBranch(m_repositoryPath);
+    if (!handleJob(job)) {
+        return branch;
+    }
+
+    branch = job->fetchResults().toString();
+
+    return branch;
+}
+
+bool Git::createBranch(const QString &branchName)
+{
+    KDevelop::VcsJob *job = m_branching->branch(m_repositoryPath, KDevelop::VcsRevision(), branchName);
+    if (!handleJob(job)) {
+        return false;
+    }
+
+    return true;
+}
+
+bool Git::switchBranch(const QString &branchName)
+{
+    KDevelop::VcsJob *job = m_branching->switchBranch(m_repositoryPath, branchName);
+    if (!handleJob(job)) {
+        return false;
+    }
+
+    return true;
+}
+
+bool Git::deleteBranch(const QString &branchName)
+{
+    KDevelop::VcsJob *job = m_branching->deleteBranch(m_repositoryPath, branchName);
+    if (!handleJob(job)) {
+        return false;
+    }
+
+    return true;
+}
+
+bool Git::renameBranch(const QString &oldName, const QString &newName)
+{
+    KDevelop::VcsJob *job = m_branching->renameBranch(m_repositoryPath, oldName, newName);
+    if (!handleJob(job)) {
+        return false;
+    }
+
+    return true;
+}
+
+QList<KDevelop::VcsEvent> Git::commits()
+{
+    QList<KDevelop::VcsEvent> vcsEventList;
+
+    KDevelop::VcsJob *job = m_dvcs->log(m_repositoryPath);
+    if (!handleJob(job)) {
+        return vcsEventList;
+    }
+
+    QList<QVariant> l = job->fetchResults().toList();
+
+    for (auto it : l) {
+        KDevelop::VcsEvent vcsEvent = it.value<KDevelop::VcsEvent>();
+        vcsEventList << vcsEvent;
+    }
+
+    return vcsEventList;
 }
 
 bool Git::handleJob(KDevelop::VcsJob *job)

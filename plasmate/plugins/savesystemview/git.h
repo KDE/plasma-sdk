@@ -22,10 +22,13 @@
 
 #include <QObject>
 
+#include <vcs/vcsevent.h>
+
 namespace KDevelop {
     class IProject;
     class VcsJob;
     class IDistributedVersionControl;
+    class IBranchingVersionControl;
 }; // end namespace
 
 class Git: public QObject
@@ -38,12 +41,21 @@ public:
     bool initGit();
 
     void initializeRepository();
+    QList<KDevelop::VcsEvent> commits();
+    QStringList branches();
+    QString currentBranch();
+    bool renameBranch(const QString &oldName, const QString &newName);
+    bool switchBranch(const QString &branchName);
+    bool deleteBranch(const QString &branchName);
+    bool createBranch(const QString &branchName);
 
 private:
     bool handleJob(KDevelop::VcsJob *job);
+    QString m_repositoryPath;
 
     KDevelop::IProject *m_project;
-    KDevelop::IDistributedVersionControl *m_git;
+    KDevelop::IDistributedVersionControl *m_dvcs;
+    KDevelop::IBranchingVersionControl *m_branching;
 };
 
 #endif
