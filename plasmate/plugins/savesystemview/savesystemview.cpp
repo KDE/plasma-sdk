@@ -30,12 +30,16 @@
 #include <KActionCollection>
 #include <KLocalizedString>
 
+#include <QQuickWidget>
+#include <QLayout>
+
 SaveSystemView::SaveSystemView(SaveSystemViewPlugin *plugin, QWidget *parent)
-    : QWidget(parent),
+    : QQuickWidget(parent),
       m_git(nullptr)
 {
     connect(KDevelop::ICore::self()->projectController(), SIGNAL(projectOpened(KDevelop::IProject*)),
             this, SLOT(projectOpened(KDevelop::IProject*)));
+
 }
 
 SaveSystemView::~SaveSystemView()
@@ -55,7 +59,7 @@ void SaveSystemView::projectOpened(KDevelop::IProject *project)
         return;
     }
 
-    m_git->initializeRepository();
+   m_git->initializeRepository();
 }
 
 #include "savesystemview.moc"

@@ -20,7 +20,7 @@
 #ifndef SAVESYSTEMVIEW_H
 #define SAVESYSTEMVIEW_H
 
-#include <QTreeView>
+#include <QQuickWidget>
 
 class SaveSystemViewPlugin;
 class Git;
@@ -30,7 +30,7 @@ namespace KDevelop {
 }; // end namespace
 
 
-class SaveSystemView: public QWidget
+class SaveSystemView: public QQuickWidget
 {
     Q_OBJECT
 public:
