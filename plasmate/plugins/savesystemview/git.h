@@ -31,23 +31,45 @@ namespace KDevelop {
     class IBranchingVersionControl;
 }; // end namespace
 
+class QAbstractItemModel;
+
+class CommitsModel;
+
 class Git: public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QAbstractItemModel* commitsModel READ commitsModel NOTIFY commitsModelChanged)
+    Q_PROPERTY(bool isRepository READ isRepository CONSTANT)
+    Q_PROPERTY(QString currentBranch READ currentBranch CONSTANT)
+    Q_PROPERTY(QStringList branches READ branches CONSTANT)
+
 public:
-    Git(KDevelop::IProject *project, QObject *parent = 0);
+    Git(QObject *parent = 0);
     ~Git();
+
+    void setProject(KDevelop::IProject *project);
+    KDevelop::IProject *project() const;
 
     bool initGit();
 
-    void initializeRepository();
+    bool isRepository() const;
+
+    Q_INVOKABLE bool initializeRepository();
+
     QList<KDevelop::VcsEvent> commits();
     QStringList branches();
+
     QString currentBranch();
-    bool renameBranch(const QString &oldName, const QString &newName);
-    bool switchBranch(const QString &branchName);
-    bool deleteBranch(const QString &branchName);
-    bool createBranch(const QString &branchName);
+    Q_INVOKABLE bool renameBranch(const QString &oldName, const QString &newName);
+    Q_INVOKABLE bool switchBranch(const QString &branchName);
+    Q_INVOKABLE bool deleteBranch(const QString &branchName);
+    Q_INVOKABLE bool createBranch(const QString &branchName);
+    Q_INVOKABLE bool newSavePoint(const QString &commitMessage, bool saveDocuments = true);
+
+    QAbstractItemModel* commitsModel() const;
+
+Q_SIGNALS:
+    void commitsModelChanged();
 
 private:
     bool handleJob(KDevelop::VcsJob *job);
@@ -56,6 +78,8 @@ private:
     KDevelop::IProject *m_project;
     KDevelop::IDistributedVersionControl *m_dvcs;
     KDevelop::IBranchingVersionControl *m_branching;
+
+    CommitsModel *m_commitsModel;
 };
 
 #endif

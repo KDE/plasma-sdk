@@ -18,10 +18,16 @@
 */
 
 #include "git.h"
+#include "commitsmodel.h"
 
 #include <interfaces/icore.h>
 #include <interfaces/iproject.h>
 #include <interfaces/iplugincontroller.h>
+#include <interfaces/idocumentcontroller.h>
+#include <interfaces/contextmenuextension.h>
+#include <interfaces/context.h>
+
+#include <project/projectmodel.h>
 
 #include <util/path.h>
 
@@ -34,18 +40,32 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 
+#include <QAction>
+#include <QMenu>
 #include <QDirIterator>
 #include <QDebug>
 
-Git::Git(KDevelop::IProject *project, QObject *parent)
-    : QObject(parent)
+Git::Git(QObject *parent)
+    : QObject(parent),
+      m_project(nullptr)
+{
+    m_commitsModel = new CommitsModel(this);
+    connect(this, &Git::commitsModelChanged, m_commitsModel, &CommitsModel::resetModel);
+}
+
+Git::~Git()
+{
+}
+
+void Git::setProject(KDevelop::IProject *project)
 {
     m_project = project;
     m_repositoryPath = m_project->path().toUrl().toLocalFile();
 }
 
-Git::~Git()
+ KDevelop::IProject *Git::project() const
 {
+    return m_project;
 }
 
 bool Git::initGit()
@@ -75,42 +95,27 @@ bool Git::initGit()
     return true;
 }
 
+bool Git::isRepository() const
+{
+    if(QDir(m_repositoryPath + "/.git").exists()) {
+        return true;
+    }
 
-void Git::initializeRepository()
+    return false;
+}
+
+bool Git::initializeRepository()
 {
     if (!m_dvcs) {
-        return;
+        return false;
     }
 
     KDevelop::VcsJob *job = m_dvcs->init(m_repositoryPath);
     if (!handleJob(job)) {
-        return;
+        return false;
     }
 
-    QStringList filesAndDirs;
-    QDirIterator it(m_repositoryPath, QDirIterator::Subdirectories);
-    while (it.hasNext()) {
-        const QString entry = it.next();
-        const QString excludedFile = m_project->name() + ".plasmate";
-        if (it.fileInfo().isFile() && it.fileName() != excludedFile) {
-            filesAndDirs << it.filePath();
-        }
-
-    }
-
-    job = m_dvcs->add(filesAndDirs, KDevelop::IBasicVersionControl::Recursive);
-
-    if (!handleJob(job)) {
-        return;
-    }
-
-    job = m_dvcs->commit(QStringLiteral("initial Commit"),
-                      filesAndDirs,
-                      KDevelop::IBasicVersionControl::Recursive);
-
-    if (!handleJob(job)) {
-        return;
-    }
+    return newSavePoint(QStringLiteral("Initial Commit"));
 }
 
 QStringList Git::branches()
@@ -148,6 +153,7 @@ bool Git::createBranch(const QString &branchName)
         return false;
     }
 
+    emit commitsModelChanged();
     return true;
 }
 
@@ -158,6 +164,7 @@ bool Git::switchBranch(const QString &branchName)
         return false;
     }
 
+    emit commitsModelChanged();
     return true;
 }
 
@@ -168,6 +175,7 @@ bool Git::deleteBranch(const QString &branchName)
         return false;
     }
 
+    emit commitsModelChanged();
     return true;
 }
 
@@ -178,6 +186,7 @@ bool Git::renameBranch(const QString &oldName, const QString &newName)
         return false;
     }
 
+    emit commitsModelChanged();
     return true;
 }
 
@@ -221,6 +230,45 @@ bool Git::handleJob(KDevelop::VcsJob *job)
     job->deleteLater();
     return success;
 }
+
+QAbstractItemModel* Git::commitsModel() const
+{
+    return m_commitsModel;
+}
+
+
+bool Git::newSavePoint(const QString &commitMessage, bool saveDocuments)
+{
+    if (saveDocuments && !KDevelop::ICore::self()->documentController()->saveAllDocuments()) {
+        return false;
+    }
+
+    QStringList filesAndDirs;
+    QDirIterator it(m_repositoryPath, QDirIterator::Subdirectories);
+    while (it.hasNext()) {
+        const QString entry = it.next();
+        const QString excludedFile = m_project->name() + ".plasmate";
+        if (it.fileInfo().isFile() && it.fileName() != excludedFile) {
+            filesAndDirs << it.filePath();
+        }
+    }
+
+    KDevelop::VcsJob *job = m_dvcs->add(filesAndDirs, KDevelop::IBasicVersionControl::Recursive);
+
+    if (!handleJob(job)) {
+        return false;
+    }
+
+    job = m_dvcs->commit(commitMessage, filesAndDirs, KDevelop::IBasicVersionControl::Recursive);
+
+    if (!handleJob(job)) {
+        return false;
+    }
+
+    emit commitsModelChanged();
+    return true;
+}
+
 
 #include "git.moc"
 
