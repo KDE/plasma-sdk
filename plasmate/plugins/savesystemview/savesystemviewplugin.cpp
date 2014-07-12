@@ -40,7 +40,8 @@ class KDevSaveSystemViewFactory: public KDevelop::IToolViewFactory
         }
         virtual QWidget* create(QWidget *parent = 0)
         {
-            return new SaveSystemView(m_plugin, parent);
+            SaveSystemView *view = new SaveSystemView(m_plugin);
+            return QWidget::createWindowContainer(view, parent);
         }
         virtual Qt::DockWidgetArea defaultPosition()
         {

@@ -30,16 +30,33 @@
 #include <KActionCollection>
 #include <KLocalizedString>
 
-#include <QQuickWidget>
-#include <QLayout>
+#include <QStandardPaths>
 
-SaveSystemView::SaveSystemView(SaveSystemViewPlugin *plugin, QWidget *parent)
-    : QQuickWidget(parent),
-      m_git(nullptr)
+#include <QAbstractItemModel>
+#include <QQuickItem>
+#include <QQmlContext>
+#include <QQmlError>
+#include <QDebug>
+
+SaveSystemView::SaveSystemView(SaveSystemViewPlugin *plugin, QWindow *parent)
+    : QQuickView(parent),
+      m_git(new Git(this))
 {
     connect(KDevelop::ICore::self()->projectController(), SIGNAL(projectOpened(KDevelop::IProject*)),
             this, SLOT(projectOpened(KDevelop::IProject*)));
 
+    connect(this, &QQuickView::statusChanged, [=](QQuickView::Status status) {
+        qDebug() << status << errors();
+    });
+
+    qmlRegisterType<QAbstractItemModel>();
+
+    const QString mainQmlFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                                       QStringLiteral("kdevsavesystemview/qml/main.qml"));
+
+    rootContext()->setContextProperty(QStringLiteral("git"), m_git);
+    setResizeMode(QQuickView::SizeRootObjectToView);
+    setSource(QUrl::fromLocalFile(mainQmlFile));
 }
 
 SaveSystemView::~SaveSystemView()
@@ -48,18 +65,13 @@ SaveSystemView::~SaveSystemView()
 
 void SaveSystemView::projectOpened(KDevelop::IProject *project)
 {
-    if (m_git) {
-        delete m_git;
-        m_git = nullptr;
-    }
-
-    m_git = new Git(project, this);
+    m_git->setProject(project);
 
     if (!m_git->initGit()) {
         return;
     }
 
-   m_git->initializeRepository();
+    //m_git->initializeRepository();
 }
 
 #include "savesystemview.moc"
