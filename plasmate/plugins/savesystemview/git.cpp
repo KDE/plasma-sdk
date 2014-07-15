@@ -62,7 +62,7 @@ Git::~Git()
 void Git::setProject(KDevelop::IProject *project)
 {
     m_project = project;
-    m_repositoryPath = m_project->path().toUrl().toLocalFile();
+    m_repositoryPath = m_project->path().toUrl();
 }
 
  KDevelop::IProject *Git::project() const
@@ -251,13 +251,13 @@ bool Git::newSavePoint(const QString &commitMessage, bool saveDocuments)
         return false;
     }
 
-    QStringList filesAndDirs;
-    QDirIterator it(m_repositoryPath, QDirIterator::Subdirectories);
+    QList<QUrl> filesAndDirs;
+    QDirIterator it(m_repositoryPath.toLocalFile(), QDirIterator::Subdirectories);
     while (it.hasNext()) {
         const QString entry = it.next();
         const QString excludedFile = m_project->name() + ".plasmate";
         if (it.fileInfo().isFile() && it.fileName() != excludedFile) {
-            filesAndDirs << it.filePath();
+            filesAndDirs << QUrl::fromLocalFile(it.filePath());
         }
     }
 

@@ -29,7 +29,7 @@
 #include <KActionCollection>
 #include <KLocalizedString>
 
-K_PLUGIN_FACTORY(PackageManagerFactory, registerPlugin<SaveSystemViewPlugin>(); )
+K_PLUGIN_FACTORY(KDevSaveSystemFactory, registerPlugin<SaveSystemViewPlugin>(); )
 
 class KDevSaveSystemViewFactory: public KDevelop::IToolViewFactory
 {

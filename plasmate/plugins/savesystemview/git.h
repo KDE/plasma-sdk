@@ -21,6 +21,7 @@
 #define GIT_H
 
 #include <QObject>
+#include <QUrl>
 
 #include <vcs/vcsevent.h>
 
@@ -72,7 +73,7 @@ Q_SIGNALS:
 
 private:
     bool handleJob(KDevelop::VcsJob *job);
-    QString m_repositoryPath;
+    QUrl m_repositoryPath;
 
     KDevelop::IProject *m_project;
     KDevelop::IDistributedVersionControl *m_dvcs;
