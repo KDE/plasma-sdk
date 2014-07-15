@@ -47,7 +47,9 @@
 
 Git::Git(QObject *parent)
     : QObject(parent),
-      m_project(nullptr)
+      m_project(nullptr),
+      m_dvcs(nullptr),
+      m_branching(nullptr)
 {
     m_commitsModel = new CommitsModel(this);
     connect(this, &Git::commitsModelChanged, m_commitsModel, &CommitsModel::resetModel);
@@ -74,22 +76,26 @@ bool Git::initGit()
         return false;
     }
 
+    KDevelop::IPlugin* plugin = nullptr;
+
     if (!m_project->versionControlPlugin()) {
-        KDevelop::IPlugin* plugin = KDevelop::ICore::self()->pluginController()->loadPlugin(QStringLiteral("kdevgit"));
+        plugin = KDevelop::ICore::self()->pluginController()->loadPlugin(QStringLiteral("kdevgit"));
+    } else {
+        plugin = m_project->versionControlPlugin();
+    }
 
-        if (!plugin) {
-            // the git plugin doesn't exist
-            // there is nothing more for us to do then
-            return false;
-        }
+    if (!plugin) {
+        // the git plugin doesn't exist
+        // there is nothing more for us to do then
+        return false;
+    }
 
-        m_dvcs = plugin->extension<KDevelop::IDistributedVersionControl>();
-        m_branching = plugin->extension<KDevelop::IBranchingVersionControl>();
+    m_dvcs = plugin->extension<KDevelop::IDistributedVersionControl>();
+    m_branching = plugin->extension<KDevelop::IBranchingVersionControl>();
 
-        if (!m_dvcs || !m_branching) {
-            // something went wrong
-            return false;
-        }
+    if (!m_dvcs || !m_branching) {
+        // something went wrong
+         return false;
     }
 
     return true;
