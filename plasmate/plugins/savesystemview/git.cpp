@@ -101,13 +101,15 @@ bool Git::initGit()
     return true;
 }
 
-bool Git::isRepository() const
+bool Git::isRepository()
 {
-    if(QDir(m_repositoryPath + "/.git").exists()) {
-        return true;
+    bool ok = m_dvcs->isVersionControlled(m_repositoryPath);
+    if (ok) {
+        // reset the model
+        emit commitsModelChanged();
     }
 
-    return false;
+    return ok;
 }
 
 bool Git::initializeRepository()

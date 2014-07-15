@@ -39,7 +39,6 @@ class Git: public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QAbstractItemModel* commitsModel READ commitsModel NOTIFY commitsModelChanged)
-    Q_PROPERTY(bool isRepository READ isRepository CONSTANT)
     Q_PROPERTY(QString currentBranch READ currentBranch CONSTANT)
     Q_PROPERTY(QStringList branches READ branches CONSTANT)
 
@@ -52,7 +51,7 @@ public:
 
     bool initGit();
 
-    bool isRepository() const;
+    bool isRepository();
 
     Q_INVOKABLE bool initializeRepository();
 
