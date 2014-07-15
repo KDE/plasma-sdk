@@ -38,6 +38,7 @@ QtControls.ScrollView {
                 enabled: textArea.text != ""
                 onClicked: {
                     git.newSavePoint(textArea.text)
+                    stackView.pop()
                 }
             }
 
