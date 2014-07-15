@@ -22,8 +22,5 @@ import QtQuick.Controls 1.2 as QtControls
 
 QtControls.StackView {
     id: stackView
-
-    initialItem: git.isRepository ? Qt.resolvedUrl("CommitsView/CommitsView.qml") : Qt.resolvedUrl("Home.qml")
-
 }
 

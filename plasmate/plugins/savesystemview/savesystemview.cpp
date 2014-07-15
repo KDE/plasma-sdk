@@ -71,7 +71,21 @@ void SaveSystemView::projectOpened(KDevelop::IProject *project)
         return;
     }
 
-    //m_git->initializeRepository();
+    QObject *object = rootObject();
+
+    QString initialItem;
+    if (m_git->isRepository()) {
+        initialItem = QStringLiteral("CommitsView/CommitsView.qml");
+    } else {
+        initialItem = QStringLiteral("Home.qml");
+    }
+
+
+    initialItem = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                         QStringLiteral("kdevsavesystemview/qml/") + initialItem);
+
+
+    QMetaObject::invokeMethod(object, "push", Q_ARG(QVariant, initialItem));
 }
 
 #include "savesystemview.moc"
