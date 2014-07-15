@@ -24,47 +24,41 @@ import QtQuick.Layouts 1.1 as QtLayouts
 QtControls.ScrollView {
     id: scrollView
     height: parent.height/2
-    Flickable {
-        id: flick
-        Item {
-            id: item
-            anchors.fill: parent
-            QtLayouts.RowLayout {
-                id: row
-                spacing: 10
-                width: branch.width + newSavePoint.width + repeater.delegatesWidth +
-                       (repeater.spacing * repeater.count) + (row.spacing * 3)
-                height: item.height
+    width: parent.width
 
-                Branch {
-                    id: branch
-                    text: git.currentBranch
-                }
+    QtLayouts.RowLayout {
+        id: row
+        spacing: 10
+        Branch {
+            id: branch
+            text: git.currentBranch
+        }
 
-                NewSavePoint {
-                    id: newSavePoint
-                }
+        NewSavePoint {
+            id: newSavePoint
+        }
 
-                QtLayouts.RowLayout {
-                    height: item.height
-                    width: item.width - branch.width - newSavePoint.width
-                    Repeater {
-                        id: repeater
-                        anchors.fill: parent
-                        property int delegatesWidth: 0
-                        model: git.commitsModel
-                        Commit {
-                            id: commit
-                            text: message
-                            commitAuthor: author
-                            commitdate: CommitDate
-                            Component.onCompleted: {
-                                repeater.delegatesWidth += commit.width
-                            }
-                        }
-                    }
+        Component {
+            id: delegate
+            Commit {
+                text: message
+                commitAuthor: author
+                commitdate: CommitDate
+                Component.onCompleted: {
+                    console.log(model.message)
                 }
-            } //end of row
-        } // end of item
+            }
+        }
+
+        ListView {
+            id: listView
+            width: scrollView.width - branch.width - newSavePoint.width
+            height: branch.height
+            spacing: 10
+            orientation: ListView.Horizontal
+            model: git.commitsModel
+            delegate: delegate
+        }
     }
 }
+
