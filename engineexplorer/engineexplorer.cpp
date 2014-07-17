@@ -325,7 +325,7 @@ QString EngineExplorer::convertToString(const QVariant &value)
     switch (value.type())
     {
         case QVariant::BitArray: {
-            return i18np("&lt;1 bit&gt;", "&lt;%1 bits&gt;", value.toBitArray().size());
+            return i18np("<1 bit>", "<%1 bits>", value.toBitArray().size());
         }
         case QVariant::Bitmap: {
             QBitmap bitmap = value.value<QBitmap>();
@@ -334,7 +334,7 @@ QString EngineExplorer::convertToString(const QVariant &value)
         case QVariant::ByteArray: {
             // Return the array size if it is not displayable
             if (value.toString().isEmpty()) {
-                return i18np("&lt;1 byte&gt;", "&lt;%1 bytes&gt;", value.toByteArray().size());
+                return i18np("<1 byte>", "<%1 bytes>", value.toByteArray().size());
             }
             else {
                 return value.toString();
@@ -357,7 +357,7 @@ QString EngineExplorer::convertToString(const QVariant &value)
         }
         case QVariant::Map: {
             QVariantMap map = value.toMap();
-            QString str = i18np("&lt;1 item&gt;", "&lt;%1 items&gt;", map.size());
+            QString str = i18np("<1 item>", "<%1 items>", map.size());
 
             QMapIterator<QString, QVariant> it(map);
             while (it.hasNext()) {
