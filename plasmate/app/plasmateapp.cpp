@@ -133,8 +133,7 @@ void PlasmateApp::loadMainWindow(const QUrl &projectPath)
     const QString metadataFilePath = projectPath.path() + QStringLiteral("/metadata.desktop");
 
     if (!QFile(metadataFilePath).exists()) {
-        const char *error = "Your package is invalid";
-        KMessageBox::error(m_uiControllerInternal->activeMainWindow(), i18n(error));
+        KMessageBox::error(m_uiControllerInternal->activeMainWindow(), i18n("Your package is invalid"));
         return;
     }
 
