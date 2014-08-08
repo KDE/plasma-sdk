@@ -68,10 +68,13 @@ add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FROM_BYTEARRAY -DQT_NO_KEYWORDS)
 
-
+option(PLASMATE_BUILD_WITH_KDEVPLATFORM "Build the plasmate repository with KDevPlatform Support" ON)
 
 add_subdirectory(engineexplorer)
 add_subdirectory(plasmoidviewer)
 #add_subdirectory(remote-widgets-browser)
 #add_subdirectory(wallpaperviewer)
-add_subdirectory(plasmate)
+if(PLASMATE_BUILD_WITH_KDEVPLATFORM)
+    add_subdirectory(plasmate)
+endif()
+
