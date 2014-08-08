@@ -152,6 +152,12 @@ void PlasmateApp::loadMainWindow(const QUrl &projectPath)
     m_documentController->openDocument(metadataFilePath);
 
     showKDevUi(true);
+
+   for (auto it: m_uiControllerInternal->activeMainWindow()->menuBar()->actions()) {
+        if(it->objectName() == QStringLiteral("run") || it->objectName() == QStringLiteral("project")) {
+            it->setVisible(false);
+        }
+    }
 }
 
 void PlasmateApp::showKDevUi(bool visible)
