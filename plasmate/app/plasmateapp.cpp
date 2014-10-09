@@ -149,7 +149,7 @@ void PlasmateApp::loadMainWindow(const QUrl &projectPath)
     }
 
     m_projectController->openProject(QUrl::fromLocalFile(projectPlasmateFile));
-    m_documentController->openDocument(metadataFilePath);
+    m_documentController->openDocument(QUrl::fromLocalFile(metadataFilePath));
 
     showKDevUi(true);
 
