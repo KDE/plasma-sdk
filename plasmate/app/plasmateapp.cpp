@@ -143,7 +143,7 @@ void PlasmateApp::loadMainWindow(const QUrl &projectPath)
     if (!QFile(projectPlasmateFile).exists()) {
         KConfigGroup configPlasmate(KSharedConfig::openConfig(projectPlasmateFile), QStringLiteral("Project"));
         configPlasmate.writeEntry("Name", projectName);
-        configPlasmate.writeEntry("Manager", "KDevGenericManager");
+        configPlasmate.writeEntry("Manager", "KDevPlasmaManager");
         configPlasmate.sync();
     }
 

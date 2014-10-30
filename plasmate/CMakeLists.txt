@@ -123,5 +123,6 @@ if(BUILD_TESTING)
 endif()
 
 add_subdirectory(app)
+add_subdirectory(plugins)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
