@@ -16,6 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <QApplication>
+#include <QIcon>
 
 #include <qcommandlineparser.h>
 #include <qcommandlineoption.h>
@@ -25,25 +26,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "plasmateapp.h"
 
-
-// TODO
-// HACK
-// FIXME
-// Remove those includes when we won't need them
-#include <k4aboutdata.h>
-#include <kapplication.h>
-#include <kcmdlineargs.h>
-
-
-
 static const char version[] = "2.0";
 
 int main(int argc, char *argv[])
 {
-   /*QApplication app(argc, argv);
+    QApplication app(argc, argv);
 
     KAboutData aboutData(QStringLiteral("plasmate"), i18n("Plasmate"), version,
-                         i18n("Plasma Add-Ons Creator"), KAboutData::License_GPL,
+                         i18n("Plasma Add-Ons Creator"), KAboutLicense::GPL,
                          i18n("Copyright 2009-2014 Plasma Development Team"));
 
     aboutData.setOrganizationDomain("kde.org");
@@ -60,46 +50,13 @@ int main(int argc, char *argv[])
     aboutData.addAuthor(i18n("Giorgos Tsiapaliokas"), i18n("Author"), "terietor@gmail.com");
     aboutData.addAuthor(i18n("Antonis Tsiapaliokas"), i18n("Author"), "kok3rs@gmail.com");
 
-    aboutData.setProgramIconName("plasmagik");
-
-    KAboutData::setApplicationData(aboutData);
+    app.setWindowIcon(QIcon::fromTheme("plasmagik"));
 
     QCommandLineParser parser;
     parser.addVersionOption();
     parser.addHelpOption();
     parser.addVersionOption();
     parser.process(app);
-    */
-
-    // Q: what is going on?
-    // A: In the KF5 world the above is correct and the following is wrong
-    //    because KApplication, K4AboutData and KCmdLineArgs are deprecated
-    //    *BUT* kdevelop isn't yet ported to the "correct" way so kdevplatform/shell/core.{h, cpp}
-    //    sets the about data to its own.
-
-    K4AboutData aboutData("plasmate", 0, ki18n("Plasmate"), version, ki18n("Plasma Add-Ons Creator"), K4AboutData::License_GPL,
-                          ki18n("Copyright 2009-2014 Plasma Development Team"), KLocalizedString(), "http://plasma.kde.org");
-
-    aboutData.addAuthor(ki18n("Sebastian Kügler"), ki18n("Author"), "sebas@kde.org");
-    aboutData.addAuthor(ki18n("Shantanu Tushar Jha"), ki18n("Author"), "shaan7in@gmail.com");
-    aboutData.addAuthor(ki18n("Diego Casella"), ki18n("Author"), "polentino911@gmail.com");
-    aboutData.addAuthor(ki18n("Yuen Hoe Lim"), ki18n("Author"), "yuenhoe@hotmail.com");
-    aboutData.addAuthor(ki18n("Richard Moore"), ki18n("Author"), "rich@kde.org");
-    aboutData.addAuthor(ki18n("Artur Duque de Souza"), ki18n("Author"), "asouza@kde.org");
-    aboutData.addAuthor(ki18n("Frerich Raabe"), ki18n("Author"), "raabe@kde.org");
-    aboutData.addAuthor(ki18n("Aaron Seigo"), ki18n("Author"), "aseigo@kde.org");
-    aboutData.addAuthor(ki18n("Riccardo Iaconelli"), ki18n("Author"), "riccardo@kde.org");
-    aboutData.addAuthor(ki18n("Giorgos Tsiapaliokas"),ki18n("Author"), "terietor@gmail.com");
-    aboutData.addAuthor(ki18n("Antonis Tsiapaliokas"), ki18n("Author"), "kok3rs@gmail.com");
-
-    aboutData.setProgramIconName("plasmagik");
-
-    KCmdLineArgs::init(argc, argv, &aboutData);
-    KCmdLineOptions options;
-
-    KCmdLineArgs::addCmdLineOptions(options);
-    KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
-    KApplication app;
 
     PlasmateApp *plasmateApp = new PlasmateApp();
     return app.exec();

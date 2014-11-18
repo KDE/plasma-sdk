@@ -41,7 +41,6 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KConfigGroup>
-#include <KSplashScreen>
 #include <KToolBar>
 
 #include <QDebug>
@@ -59,7 +58,7 @@ PlasmateApp::~PlasmateApp()
 
 void PlasmateApp::init()
 {
-    KSplashScreen* splash = 0;
+    QObject *splash = 0;
 
     QString session;
     PlasmateExtension::init();
