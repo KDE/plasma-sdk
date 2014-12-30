@@ -36,8 +36,10 @@ Rectangle {
     property string fullPath: ""
 
     ColumnLayout {
+
         anchors.leftMargin: units.gridUnit
         anchors.rightMargin: units.gridUnit
+
         anchors.fill: parent
         PlasmaExtras.Heading {
             level: 3
@@ -46,26 +48,82 @@ Rectangle {
             Layout.fillHeight: false
             text: iconName
         }
+        RowLayout {
+            Layout.fillWidth: true
+            Layout.fillHeight: false
+            Layout.preferredHeight: indexToSize(4)
+
+            PlasmaCore.IconItem {
+                source: iconName
+                Layout.preferredWidth: indexToSize(0)
+                Layout.preferredHeight: indexToSize(0)
+            }
+            PlasmaCore.IconItem {
+                source: iconName
+                Layout.preferredWidth: indexToSize(1)
+                Layout.preferredHeight: indexToSize(1)
+            }
+            PlasmaCore.IconItem {
+                source: iconName
+                Layout.preferredWidth: indexToSize(2)
+                Layout.preferredHeight: indexToSize(2)
+            }
+            PlasmaCore.IconItem {
+                source: iconName
+                Layout.preferredWidth: indexToSize(3)
+                Layout.preferredHeight: indexToSize(3)
+            }
+            PlasmaCore.IconItem {
+                source: iconName
+                Layout.preferredWidth: indexToSize(4)
+                Layout.preferredHeight: indexToSize(4)
+            }
+        }
+
         PlasmaCore.IconItem {
             source: iconName
-            Layout.preferredWidth: units.gridUnit * 10
-            Layout.preferredHeight: units.gridUnit * 10
+            Layout.fillWidth: true
+            Layout.preferredWidth: indexToSize(5)
+            Layout.preferredHeight: indexToSize(5)
         }
-        Image {
-            source: fullPath
-            Layout.preferredWidth: sourceSize.width * 4
-            Layout.preferredHeight: sourceSize.height * 4
+        PlasmaCore.IconItem {
+            source: iconName
+            Layout.fillHeight: false
+            Layout.preferredWidth: indexToSize(6)
+            Layout.preferredHeight: indexToSize(6)
+        }
+        PlasmaCore.IconItem {
+            source: iconName
+            Layout.fillHeight: false
+            Layout.preferredWidth: parent.width
+            Layout.preferredHeight: parent.width
+        }
+        RowLayout {
+
+            Layout.fillWidth: true
+            Layout.fillHeight: false
+            Layout.preferredHeight: indexToSize(4)
+
+
+            Image {
+                source: fullPath
+                Layout.fillWidth: false
+                Layout.preferredWidth: sourceSize.width
+                Layout.preferredHeight: sourceSize.height
+            }
+        }
+        Item {
+            Layout.fillHeight: true
         }
     }
+
     Rectangle {
         color: theme.highlightColor
-        width: units.gridUnit / 20
+        width: Math.round(units.gridUnit / 20)
         anchors {
             left: parent.left
             top: parent.top
             bottom: parent.bottom
         }
     }
-
-
 }

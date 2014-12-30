@@ -20,22 +20,27 @@
  ***************************************************************************/
 
 #include "iconmodel.h"
+
 #include <QDebug>
 #include <QByteArray>
 #include <QDateTime>
 #include <QDir>
 #include <QDirIterator>
 #include <QFile>
-//#include <QIcon>
+#include <QIcon>
 #include <QStandardPaths>
-
 #include <QJsonDocument>
 
+#include <KConfigGroup>
+#include <KSharedConfig>
+
+#include <Plasma/Theme>
 
 using namespace CuttleFish;
 
 IconModel::IconModel(QObject *parent) :
-    QAbstractListModel(parent)
+    QAbstractListModel(parent),
+    m_theme(QStringLiteral("breeze"))
 {
     m_roleNames.insert(FileName, "fileName");
     m_roleNames.insert(IconName, "iconName");
@@ -43,6 +48,15 @@ IconModel::IconModel(QObject *parent) :
     m_roleNames.insert(FullPath, "fullPath");
     m_roleNames.insert(Category, "category");
     m_roleNames.insert(Size, "size");
+
+
+    KConfigGroup cg(KSharedConfig::openConfig("cuttlefishrc"), "CuttleFish");
+    const QString themeName = cg.readEntry("theme", "default");
+
+    Plasma::Theme theme;
+    qDebug() << "Setting theme, package " << themeName;
+    theme.setUseGlobalSettings(false);
+    theme.setThemeName(themeName); // needs to happen after setUseGlobalSettings, since that clears themeName
 
     load();
     qDebug() << m_roleNames;
@@ -74,7 +88,7 @@ QVariant IconModel::data(const QModelIndex &index, int role) const
         case IconName:
             return icon;
         }
-        qDebug() << "Requesting " << key(role) << m_data[icon][key(role)];
+//         qDebug() << "Requesting " << key(role) << m_data[icon][key(role)];
         return m_data[icon][key(role)];
     }
     return QVariant();
@@ -120,8 +134,21 @@ void IconModel::add(const QFileInfo &info)
 
 void IconModel::remove(const QString& url)
 {
+    qDebug() << "IconModel::remove() TODO";
 
+}
 
+QString IconModel::category() const
+{
+    return m_category;
+}
+
+void IconModel::setCategory(const QString& cat)
+{
+    if (cat != m_category) {
+        m_category = cat;
+        emit categoryChanged();
+    }
 }
 
 QString IconModel::filter() const
@@ -139,11 +166,57 @@ void IconModel::load()
     const QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories;
     const QStringList nameFilters = QStringList();
 
-    QDirIterator it(QStringLiteral("/usr/share/icons/breeze/"), nameFilters, QDir::Files, flags);
+    QDirIterator it(QStringLiteral("/usr/share/icons/") + m_theme , nameFilters, QDir::Files, flags);
+
     while (it.hasNext()) {
         it.next();
         const QFileInfo &info = it.fileInfo();
         add(info);
+    }
+
+    m_themes << "default"
+             << "hicolor"
+             << "locolor"
+             << "oxygen"
+             << "Tango"
+             << "gnome";
+
+}
+
+QStringList IconModel::themes() const
+{
+    return m_themes;
+}
+
+QString IconModel::theme() const
+{
+    return m_theme;
+}
+
+void IconModel::setTheme(const QString& theme)
+{
+    if (theme != m_theme) {
+        qDebug() << "Theme is now: " << theme;
+
+
+        m_theme = theme;
+        emit themeChanged();
+    }
+}
+
+QString IconModel::plasmaTheme() const
+{
+    return m_plasmatheme;
+}
+
+void IconModel::setPlasmaTheme(const QString& ptheme)
+{
+    if (m_plasmatheme != ptheme) {
+        m_plasmatheme = ptheme;
+        Plasma::Theme theme;
+        qDebug() << "Setting theme, package " << ptheme;
+        theme.setThemeName(ptheme); // needs to happen after setUseGlobalSettings, since that clears themeName
+        emit plasmaThemeChanged();
     }
 }
 

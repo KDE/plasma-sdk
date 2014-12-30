@@ -35,6 +35,10 @@ class IconModel : public QAbstractListModel
     Q_OBJECT
 
     Q_PROPERTY(QString filter READ filter WRITE setFilter NOTIFY filterChanged)
+    Q_PROPERTY(QString category READ category WRITE setCategory NOTIFY categoryChanged)
+    Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
+    Q_PROPERTY(QStringList themes READ themes CONSTANT)
+    Q_PROPERTY(QString plasmaTheme READ plasmaTheme WRITE setPlasmaTheme NOTIFY plasmaThemeChanged)
 
 public:
     enum Roles {
@@ -58,8 +62,18 @@ public:
     void add(const QFileInfo &info);
     void remove(const QString &iconFile);
 
+    void setCategory(const QString &cat);
+    QString category() const;
+
     void setFilter(const QString &filter);
     QString filter() const;
+
+    void setTheme(const QString &theme);
+    QString theme() const;
+    QStringList themes() const;
+
+    void setPlasmaTheme(const QString &ptheme);
+    QString plasmaTheme() const;
 
     void load();
     void update();
@@ -67,11 +81,18 @@ public:
 
 Q_SIGNALS:
     void filterChanged();
+    void categoryChanged();
+    void themeChanged();
+    void plasmaThemeChanged();
 
 private:
     QHash<int, QByteArray> m_roleNames;
 
     QStringList m_icons; // icon theme,
+    QString m_category;
+    QString m_theme;
+    QStringList m_themes;
+    QString m_plasmatheme;
     QHash<QString, QVariantMap> m_data; // icon theme,
 };
 

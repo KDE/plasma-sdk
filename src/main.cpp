@@ -61,14 +61,6 @@ int main(int argc, char **argv)
 
     QString _cc = parser.value(category);
 
-    KConfigGroup cg(KSharedConfig::openConfig("cuttlefishrc"), "Browser");
-    const QString themeName = cg.readEntry("theme", "default");
-
-    Plasma::Theme theme;
-    qDebug() << "Setting theme, package " << themeName << _cc;
-    theme.setUseGlobalSettings(false);
-    theme.setThemeName(themeName); // needs to happen after setUseGlobalSettings, since that clears themeName
-
     auto settingsapp = new CuttleFish::View(_cc);
     if (parser.isSet(fullscreen)) {
         settingsapp->setVisibility(QWindow::FullScreen);

@@ -34,8 +34,52 @@ Item {
     width: units.gridUnit * 40
     height: Math.round(width / 3 * 2)
 
+    property int iconSize: units.iconSizes.large
+    property bool hoveredHighlight: false
+
     id: cuttlefish
     objectName: "cuttlefish"
+
+    function indexToSize(ix) {
+
+        /*
+         * from kiconloader.h
+         enum StdSizes {
+            /// small icons for menu entries
+            SizeSmall = 16,
+            /// slightly larger small icons for toolbars, panels, etc
+            SizeSmallMedium = 22,
+            /// medium sized icons for the desktop
+            SizeMedium = 32,
+            /// large sized icons for the panel
+            SizeLarge = 48,
+            /// huge sized icons for iconviews
+            SizeHuge = 64,
+            /// enormous sized icons for iconviews
+            SizeEnormous = 128
+
+         * from Plasma's units.cpp (this corrects for DPI)
+            m_iconSizes->insert("tiny", devicePixelIconSize(KIconLoader::SizeSmall) / 2);
+            m_iconSizes->insert("small", devicePixelIconSize(KIconLoader::SizeSmall));
+            m_iconSizes->insert("smallMedium", devicePixelIconSize(KIconLoader::SizeSmallMedium));
+            m_iconSizes->insert("medium", devicePixelIconSize(KIconLoader::SizeMedium));
+            m_iconSizes->insert("large", devicePixelIconSize(KIconLoader::SizeLarge));
+            m_iconSizes->insert("huge", devicePixelIconSize(KIconLoader::SizeHuge));
+            m_iconSizes->insert("enormous", devicePixelIconSize(KIconLoader::SizeEnormous));
+
+            */
+            var sizes = new Array();
+            sizes[0] = units.iconSizes.tiny;
+            sizes[1] = units.iconSizes.small;
+            sizes[2] = units.iconSizes.smallMedium;
+            sizes[3] = units.iconSizes.medium;
+            sizes[4] = units.iconSizes.large;
+            sizes[5] = units.iconSizes.huge;
+            sizes[6] = units.iconSizes.enormous;
+
+            return sizes[ix];
+
+    }
 
     Component.onCompleted: {
         print("Hi from Cuttlefish!");
@@ -43,83 +87,33 @@ Item {
         //dirModel.rootIndex = dirModel.index("/usr/share/icons")
     }
 
-    PlasmaCore.IconItem {
-        anchors.right: parent.right
-        source: "plasma"
-    }
-    /*
-    ListView {
-        id: view
-        anchors.fill: parent
-        opacity: 0.2
-        Text {
-            anchors.bottom: parent.bottom
-            //text: "count: " + dirModel}
-        }
-
-        model: VisualDataModel {
-            model: iconModel
-
-            delegate: Rectangle {
-                width: 200; height: 25
-                //Text { text: filePath }
-                Text { text: "File: " + iconName }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if (model.hasModelChildren)
-                            view.model.rootIndex = view.model.modelIndex(index)
-                    }
-                }
-            }
-        }
-    }
-    */
-    property int iconSize: units.iconSizes.large
 
     GridLayout {
 
         columns: 2
         anchors.fill: parent
+        rowSpacing: - Math.round(units.gridUnit / 20)
 
-        PlasmaComponents.ToolBar {
+        Tools {
             Layout.columnSpan: 2
             Layout.fillWidth: true
             Layout.preferredHeight: units.gridUnit * 2
-            tools: Row {
-                PlasmaComponents.ToolButton {
-                    iconSource: "go-previous"
-                    onClicked: {
-
-
-                    }
-                }
-                PlasmaComponents.TextField {
-                    id: filterInput
-
-                    Layout.fillWidth: true
-                    anchors.verticalCenter: parent.verticalCenter
-
-                    //text: currentWebView.url
-
-                    onTextChanged: iconModel.filter = text
-                    //Keys.onReturnPressed: load(browserManager.urlFromUserInput(text))
-                }
-            }
         }
 
         GridView {
             id: iconGrid
 
             focus: true
-            //spacing: 0
+//             spacing: 0
             //rowSpacing: 0
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-    //         cellWidth: iconSize
-    //         cellHeight: iconSize
+            cellWidth: iconSize + units.gridUnit
+            cellHeight: cellWidth
+
+            cacheBuffer: 2000
+            highlightMoveDuration: 0
 
             model: iconModel
 
@@ -129,7 +123,7 @@ Item {
                 id: delegateRoot
                 width: iconSize
                 height: iconSize + units.gridUnit
-                hoverEnabled: true
+                hoverEnabled: hoveredHighlight
 
                 function setAsPreview() {
                     print("preview() " + iconName + " " + fullPath);
@@ -167,7 +161,7 @@ Item {
         }
         Preview {
             id: preview
-            Layout.preferredWidth: units.gridUnit * 12
+            Layout.preferredWidth: Math.max(parent.width / 4, units.gridUnit * 12)
             Layout.fillHeight: true
         }
     }
