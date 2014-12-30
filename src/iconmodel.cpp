@@ -57,6 +57,12 @@ IconModel::IconModel(QObject *parent) :
     qDebug() << "Setting theme, package " << themeName;
     theme.setUseGlobalSettings(false);
     theme.setThemeName(themeName); // needs to happen after setUseGlobalSettings, since that clears themeName
+    m_themes << "default"
+             << "hicolor"
+             << "locolor"
+             << "oxygen"
+             << "Tango"
+             << "gnome";
 
     load();
     qDebug() << m_roleNames;
@@ -81,14 +87,12 @@ int IconModel::rowCount(const QModelIndex &parent) const
 QVariant IconModel::data(const QModelIndex &index, int role) const
 {
     if (index.isValid()) {
-
-//        QJsonObject currentData = m_data.at(index.row()).toObject();
         QString icon = m_icons.at(index.row());
         switch (role) {
         case IconName:
             return icon;
         }
-//         qDebug() << "Requesting " << key(role) << m_data[icon][key(role)];
+        qDebug() << "Requesting " << key(role) << m_data[icon][key(role)];
         return m_data[icon][key(role)];
     }
     return QVariant();
@@ -102,7 +106,13 @@ QString IconModel::key(int role) const
 
 void IconModel::update()
 {
-
+    // FIXME: Can we be more fine-grained, please?
+    beginResetModel();
+    endResetModel();
+    //emit QAbstractItemModel::modelReset();
+//     auto topleft = index(0);
+//     auto bottomright = index(rowCount(topleft));
+//     emit dataChanged(topleft, bottomright);
 }
 
 
@@ -128,7 +138,7 @@ void IconModel::add(const QFileInfo &info)
 
         m_data.insert(icon, data);
         m_icons << icon;
-        update();
+        //update();
     }
 }
 
@@ -163,6 +173,7 @@ void IconModel::setFilter(const QString &filter)
 
 void IconModel::load()
 {
+    qDebug() << "Loading from " << m_theme;
     const QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories;
     const QStringList nameFilters = QStringList();
 
@@ -171,15 +182,9 @@ void IconModel::load()
     while (it.hasNext()) {
         it.next();
         const QFileInfo &info = it.fileInfo();
+//         qDebug() << "..." << info.absoluteFilePath();
         add(info);
     }
-
-    m_themes << "default"
-             << "hicolor"
-             << "locolor"
-             << "oxygen"
-             << "Tango"
-             << "gnome";
 
 }
 
@@ -197,9 +202,12 @@ void IconModel::setTheme(const QString& theme)
 {
     if (theme != m_theme) {
         qDebug() << "Theme is now: " << theme;
-
-
+        beginResetModel();
+        m_data.clear();
+        m_icons.clear();
         m_theme = theme;
+        load();
+        endResetModel();
         emit themeChanged();
     }
 }
@@ -215,7 +223,7 @@ void IconModel::setPlasmaTheme(const QString& ptheme)
         m_plasmatheme = ptheme;
         Plasma::Theme theme;
         qDebug() << "Setting theme, package " << ptheme;
-        theme.setThemeName(ptheme); // needs to happen after setUseGlobalSettings, since that clears themeName
+        theme.setThemeName(ptheme);
         emit plasmaThemeChanged();
     }
 }
