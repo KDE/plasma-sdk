@@ -32,6 +32,8 @@
 #include <QJsonDocument>
 
 #include <KConfigGroup>
+#include <KIconLoader>
+#include <KIconTheme>
 #include <KSharedConfig>
 #include <PackageLoader>
 
@@ -48,7 +50,9 @@ IconModel::IconModel(QObject *parent) :
     m_roleNames.insert(Icon, "icon");
     m_roleNames.insert(FullPath, "fullPath");
     m_roleNames.insert(Category, "category");
-    m_roleNames.insert(Size, "size");
+    m_roleNames.insert(Sizes, "sizes");
+    m_roleNames.insert(Theme, "iconTheme");
+    m_roleNames.insert(Type, "type");
 
 
     KConfigGroup cg(KSharedConfig::openConfig("cuttlefishrc"), "CuttleFish");
@@ -200,7 +204,7 @@ void IconModel::update()
 }
 
 
-void IconModel::add(const QFileInfo &info)
+void IconModel::add(const QFileInfo &info, const QString &category)
 {
     QVariantMap data;
     const QString fname = info.fileName();
@@ -219,11 +223,17 @@ void IconModel::add(const QFileInfo &info)
         data["fullPath"] = info.absoluteFilePath();
         data["iconName"] = icon;
         data["fileName"] = info.fileName();
+        data["category"] = category;
 
         m_data.insert(icon, data);
         m_icons << icon;
         //update();
     }
+}
+
+void IconModel::addSvgIcon(const QString &file, const QString &icon)
+{
+
 }
 
 void IconModel::remove(const QString& url)
@@ -268,21 +278,42 @@ void IconModel::load()
     const QStringList nameFilters = QStringList();
 
     // FIXME: use QStandardPaths
-    QDirIterator it(QStringLiteral("/usr/share/icons/") + m_theme , nameFilters, QDir::Files, flags);
 
     beginResetModel();
     m_data.clear();
     m_icons.clear();
 
-    while (it.hasNext()) {
-        it.next();
-        const QFileInfo &info = it.fileInfo();
-        if (match(info)) {
-//         qDebug() << "..." << info.absoluteFilePath();
-            add(info);
+    const QString iconTheme = KIconLoader::global()->theme()->internalName();
+
+    qDebug() << "IconTHeme: " << KIconLoader::global()->theme()->internalName();
+    qDebug() << "iconPath: " << QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "icons/"+iconTheme, QStandardPaths::LocateDirectory);
+
+    //QStringList iconThemePaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "icons/hicolor", QStandardPaths::LocateDirectory);
+
+    QStringList iconThemePaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "icons/"+iconTheme, QStandardPaths::LocateDirectory);
+
+    if (iconThemePaths.count() > 0) {
+        QDirIterator cats(iconThemePaths.at(0), nameFilters, QDir::Dirs, QDirIterator::NoIteratorFlags);
+        while (cats.hasNext()) {
+            cats.next();
+            const QString fpath = cats.filePath();
+            qDebug() << "Category: !!! ..." << cats.path() << cats.filePath() << fpath;
+            const QString category = cats.fileName();
+            if (category != "." && category != "..") {
+                QDirIterator it(fpath, nameFilters, QDir::Files, flags);
+                qDebug() << "Parsing files." << fpath;
+                while (it.hasNext()) {
+                    it.next();
+                    const QFileInfo &info = it.fileInfo();
+                    if (match(info)) {
+                        qDebug() << "..." << info.absoluteFilePath();
+                        add(info, category);
+                    }
+                }
+            }
+
         }
     }
-
     endResetModel();
 
 }
@@ -315,7 +346,6 @@ void IconModel::setTheme(const QString& theme)
         qDebug() << "Theme is now: " << theme;
         m_theme = theme;
         load();
-        //endResetModel();
         emit themeChanged();
     }
 }

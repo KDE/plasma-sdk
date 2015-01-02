@@ -15,6 +15,7 @@ target_link_libraries(cuttlefish
     KF5::KIOWidgets
     KF5::Declarative
     KF5::I18n
+    KF5::IconThemes
     KF5::Package
 )
 

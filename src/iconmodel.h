@@ -50,7 +50,9 @@ public:
         Icon,
         FullPath,
         Category,
-        Size
+        Sizes,
+        Type,
+        Theme
     };
 
     explicit IconModel(QObject *parent = 0);
@@ -63,7 +65,8 @@ public:
     QString key(int role) const;
 
     bool match(const QFileInfo &info);
-    void add(const QFileInfo &info);
+    void add(const QFileInfo &info, const QString &category);
+    void addSvgIcon(const QString &file, const QString &icon);
     void remove(const QString &iconFile);
 
     void setCategory(const QString &cat);
