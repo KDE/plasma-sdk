@@ -27,6 +27,7 @@ import QtQuick.Layouts 1.0
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 
 Item {
@@ -105,7 +106,7 @@ Item {
             Layout.preferredHeight: units.gridUnit * 2
         }
 
-        Item {
+        PlasmaExtras.ScrollArea {
             Layout.fillWidth: true
             Layout.fillHeight: true
             IconGrid {
@@ -114,7 +115,7 @@ Item {
 
                 footer: SvgGrid {
                     id: svgGrid
-                    anchors.fill: parent
+                    //anchors.fill: parent
                     interactive: false
 
                 }
