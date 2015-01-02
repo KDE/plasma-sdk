@@ -26,6 +26,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QFileInfo>
+#include <QVariantMap>
 
 namespace CuttleFish {
 
@@ -38,6 +39,8 @@ class IconModel : public QAbstractListModel
     Q_PROPERTY(QString category READ category WRITE setCategory NOTIFY categoryChanged)
     Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
     Q_PROPERTY(QStringList themes READ themes CONSTANT)
+    Q_PROPERTY(QStringList plasmathemes READ plasmathemes CONSTANT)
+    Q_PROPERTY(QVariantList svgIcons READ svgIcons NOTIFY svgIconsChanged)
     Q_PROPERTY(QString plasmaTheme READ plasmaTheme WRITE setPlasmaTheme NOTIFY plasmaThemeChanged)
 
 public:
@@ -59,6 +62,7 @@ public:
 
     QString key(int role) const;
 
+    bool match(const QFileInfo &info);
     void add(const QFileInfo &info);
     void remove(const QString &iconFile);
 
@@ -74,6 +78,9 @@ public:
 
     void setPlasmaTheme(const QString &ptheme);
     QString plasmaTheme() const;
+    QStringList plasmathemes() const;
+
+    QVariantList svgIcons() const;
 
     void load();
     void update();
@@ -83,6 +90,7 @@ Q_SIGNALS:
     void filterChanged();
     void categoryChanged();
     void themeChanged();
+    void svgIconsChanged();
     void plasmaThemeChanged();
 
 private:
@@ -91,9 +99,12 @@ private:
     QStringList m_icons; // icon theme,
     QString m_category;
     QString m_theme;
+    QString m_filter;
     QStringList m_themes;
+    QStringList m_plasmathemes;
     QString m_plasmatheme;
     QHash<QString, QVariantMap> m_data; // icon theme,
+    QVariantMap m_svgIcons;
 };
 
 } // namespace

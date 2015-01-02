@@ -33,6 +33,7 @@
 
 #include <KConfigGroup>
 #include <KSharedConfig>
+#include <PackageLoader>
 
 #include <Plasma/Theme>
 
@@ -54,18 +55,101 @@ IconModel::IconModel(QObject *parent) :
     const QString themeName = cg.readEntry("theme", "default");
 
     Plasma::Theme theme;
-    qDebug() << "Setting theme, package " << themeName;
+    qDebug() << "Setting Plasma theme" << themeName;
     theme.setUseGlobalSettings(false);
     theme.setThemeName(themeName); // needs to happen after setUseGlobalSettings, since that clears themeName
-    m_themes << "default"
-             << "hicolor"
-             << "locolor"
-             << "oxygen"
-             << "Tango"
-             << "gnome";
+//     m_themes << "breeze"
+//              << "hicolor"
+//              << "locolor"
+//              << "oxygen"
+//              << "Tango"
+//              << "gnome";
+
+    QList<KPluginMetaData> themepackages = KPackage::PackageLoader::self()->listPackages(QString(), "plasma/desktoptheme");
+    foreach (const KPluginMetaData &pkg, themepackages) {
+        m_plasmathemes << pkg.pluginId();
+    }
+
+    m_svgIcons[QStringLiteral("amarok")] = QStringList() << "amarok";
+    m_svgIcons[QStringLiteral("audio")] = QStringList() << "audio-volume-muted"
+                                                        << "audio-volume-low"
+                                                        << "audio-volume-medium"
+                                                        << "audio-volume-high" ;
+
+    m_svgIcons[QStringLiteral("battery")] = QStringList() << "Battery"
+                                                        << "Acadapter"
+                                                        << "Unavailable"
+                                                        << "Fill10"
+                                                        << "Fill20"
+                                                        << "Fill30"
+                                                        << "Fill40"
+                                                        << "Fill50"
+                                                        << "Fill60"
+                                                        << "Fill70"
+                                                        << "Fill80"
+                                                        << "Fill90"
+                                                        << "Fill100";
+    m_svgIcons[QStringLiteral("device")] = QStringList() << "device-notfier";
+    m_svgIcons[QStringLiteral("juk")] = QStringList() << "juk";
+    m_svgIcons[QStringLiteral("kget")] = QStringList() << "kget";
+    m_svgIcons[QStringLiteral("klippper")] = QStringList() << "klippper";
+    m_svgIcons[QStringLiteral("konversation")] = QStringList() << "konversation";
+    m_svgIcons[QStringLiteral("kopete")] = QStringList() << "konversation"
+                                                         << "kopete-offline";
+    m_svgIcons[QStringLiteral("korgac")] = QStringList() << "korgac";
+    m_svgIcons[QStringLiteral("ktorrent")] = QStringList() << "ktorrent";
+    m_svgIcons[QStringLiteral("kget")] = QStringList() << "kget";
+
+    m_svgIcons[QStringLiteral("battery")] = QStringList() << "Battery"
+                                                        << "Acadapter"
+                                                        << "Unavailable"
+                                                        << "Fill10"
+                                                        << "Fill20"
+                                                        << "Fill30"
+                                                        << "Fill40"
+                                                        << "Fill50"
+                                                        << "Fill60"
+                                                        << "Fill70"
+                                                        << "Fill80"
+                                                        << "Fill90"
+                                                        << "Fill100";
+    m_svgIcons[QStringLiteral("message-indicator")] = QStringList() << "normal"
+                                                         << "new";
+
+    m_svgIcons[QStringLiteral("nepomuk")] = QStringList() << "nepomuk";
+    m_svgIcons[QStringLiteral("network")] = QStringList() << "network-wired-activated"
+                                                        << "network-wired"
+                                                        << "network-wireless-available"
+                                                        << "network-wireless-disconnected"
+                                                        << "network-wireless-0"
+                                                        << "network-wireless-20"
+                                                        << "network-wireless-25"
+                                                        << "network-wireless-40"
+                                                        << "network-wireless-50"
+                                                        << "network-wireless-60"
+                                                        << "network-wireless-75"
+                                                        << "network-wireless-80"
+                                                        << "network-wireless-100"
+                                                        << "network-mobile-20"
+                                                        << "network-mobile-40"
+                                                        << "network-mobile-60"
+                                                        << "network-mobile-80"
+                                                        << "network-mobile-100";
+    m_svgIcons[QStringLiteral("preferences")] = QStringList() << "preferences-system-bluetooth"
+                                                        << "preferences-system-bluetooth-inactive"
+                                                        << "preferences-desktop-texttospeach"
+                                                        << "preferences-desktop-display-randr"
+                                                        << "preferences-activities";
+    m_svgIcons[QStringLiteral("printer")] = QStringList() << "printer";
+    m_svgIcons[QStringLiteral("quassel")] = QStringList() << "quassel"
+                                                        << "quassel_inactive"
+                                                        << "quassel_message";
+    m_svgIcons[QStringLiteral("wallet")] = QStringList() << "wallet"
+                                                        << "wallet-open"
+                                                        << "wallet-closed";
 
     load();
-    qDebug() << m_roleNames;
+    //qDebug() << m_roleNames;
 }
 
 
@@ -92,7 +176,7 @@ QVariant IconModel::data(const QModelIndex &index, int role) const
         case IconName:
             return icon;
         }
-        qDebug() << "Requesting " << key(role) << m_data[icon][key(role)];
+        //qDebug() << "Requesting " << key(role) << m_data[icon][key(role)];
         return m_data[icon][key(role)];
     }
     return QVariant();
@@ -107,8 +191,8 @@ QString IconModel::key(int role) const
 void IconModel::update()
 {
     // FIXME: Can we be more fine-grained, please?
-    beginResetModel();
-    endResetModel();
+//     beginResetModel();
+//     endResetModel();
     //emit QAbstractItemModel::modelReset();
 //     auto topleft = index(0);
 //     auto bottomright = index(rowCount(topleft));
@@ -163,12 +247,18 @@ void IconModel::setCategory(const QString& cat)
 
 QString IconModel::filter() const
 {
-    return QString();
+    return m_filter;
 }
 
 void IconModel::setFilter(const QString &filter)
 {
-    qDebug() << "Filter: " << filter;
+    //qDebug() << "Filter: " << filter;
+    if (m_filter != filter) {
+        m_filter = filter;
+        load();
+        emit filterChanged();
+        emit svgIconsChanged();
+    }
 }
 
 void IconModel::load()
@@ -177,16 +267,37 @@ void IconModel::load()
     const QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories;
     const QStringList nameFilters = QStringList();
 
+    // FIXME: use QStandardPaths
     QDirIterator it(QStringLiteral("/usr/share/icons/") + m_theme , nameFilters, QDir::Files, flags);
+
+    beginResetModel();
+    m_data.clear();
+    m_icons.clear();
 
     while (it.hasNext()) {
         it.next();
         const QFileInfo &info = it.fileInfo();
+        if (match(info)) {
 //         qDebug() << "..." << info.absoluteFilePath();
-        add(info);
+            add(info);
+        }
     }
 
+    endResetModel();
+
 }
+
+bool IconModel::match(const QFileInfo& info)
+{
+    bool ok = false;
+
+    // name filter
+    if (m_filter.isEmpty() || info.fileName().indexOf(m_filter) != -1) {
+        ok = true;
+    }
+    return ok;
+}
+
 
 QStringList IconModel::themes() const
 {
@@ -202,12 +313,9 @@ void IconModel::setTheme(const QString& theme)
 {
     if (theme != m_theme) {
         qDebug() << "Theme is now: " << theme;
-        beginResetModel();
-        m_data.clear();
-        m_icons.clear();
         m_theme = theme;
         load();
-        endResetModel();
+        //endResetModel();
         emit themeChanged();
     }
 }
@@ -224,7 +332,33 @@ void IconModel::setPlasmaTheme(const QString& ptheme)
         Plasma::Theme theme;
         qDebug() << "Setting theme, package " << ptheme;
         theme.setThemeName(ptheme);
+        load();
         emit plasmaThemeChanged();
     }
 }
 
+QStringList IconModel::plasmathemes() const
+{
+    return m_plasmathemes;
+}
+
+QVariantList IconModel::svgIcons() const
+{
+    QVariantList out;
+
+    foreach (const QString &file, m_svgIcons.keys()) {
+        foreach (const QString &icon, m_svgIcons[file].toStringList()) {
+            if (m_filter.isEmpty() ||
+                (file.indexOf(m_filter) != -1 || icon.indexOf(m_filter) != -1)) {
+
+                QVariantMap vm;
+                vm["fileName"] = file;
+                vm["iconName"] = icon;
+    //             qDebug() << "Adding " << file << icon;
+                out << vm;
+            }
+        }
+    }
+
+    return out;
+}
