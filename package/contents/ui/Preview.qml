@@ -41,6 +41,11 @@ Rectangle {
         anchors.rightMargin: units.gridUnit
 
         anchors.fill: parent
+
+        spacing: units.gridUnit / 2
+
+        Item { height: units.gridUnit / 2 }
+
         PlasmaExtras.Heading {
             level: 3
             elide: Text.ElideRight
@@ -49,9 +54,10 @@ Rectangle {
             text: iconName
         }
         RowLayout {
-            Layout.fillWidth: true
+            Layout.fillWidth: false
             Layout.fillHeight: false
             Layout.preferredHeight: indexToSize(4)
+            anchors.horizontalCenter: parent.horizontalCenter
 
             PlasmaCore.IconItem {
                 source: iconName
@@ -79,7 +85,7 @@ Rectangle {
                 Layout.preferredHeight: indexToSize(4)
             }
         }
-
+        /*
         PlasmaCore.IconItem {
             source: iconName
             Layout.fillWidth: true
@@ -92,12 +98,14 @@ Rectangle {
             Layout.preferredWidth: indexToSize(6)
             Layout.preferredHeight: indexToSize(6)
         }
+        */
         PlasmaCore.IconItem {
             source: iconName
             Layout.fillHeight: false
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: parent.width
         }
+        /*
         RowLayout {
 
             Layout.fillWidth: true
@@ -112,6 +120,7 @@ Rectangle {
                 Layout.preferredHeight: sourceSize.height
             }
         }
+        */
         Item {
             Layout.fillHeight: true
         }

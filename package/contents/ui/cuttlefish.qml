@@ -31,7 +31,7 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
 
-    width: units.gridUnit * 40
+    width: units.gridUnit * 60
     height: Math.round(width / 3 * 2)
 
     property int iconSize: units.iconSizes.large
@@ -39,6 +39,7 @@ Item {
 
     id: cuttlefish
     objectName: "cuttlefish"
+    state: "svgs"
 
     function indexToSize(ix) {
 
@@ -87,7 +88,11 @@ Item {
         //dirModel.rootIndex = dirModel.index("/usr/share/icons")
     }
 
+    Rectangle {
 
+        color: theme.backgroundColor
+        anchors.fill: parent
+    }
     GridLayout {
 
         columns: 2
@@ -100,63 +105,20 @@ Item {
             Layout.preferredHeight: units.gridUnit * 2
         }
 
-        GridView {
-            id: iconGrid
-
-            focus: true
-//             spacing: 0
-            //rowSpacing: 0
+        Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
+            IconGrid {
+                id: iconGrid
+                anchors.fill: parent
 
-            cellWidth: iconSize + units.gridUnit
-            cellHeight: cellWidth
-
-            cacheBuffer: 2000
-            highlightMoveDuration: 0
-
-            model: iconModel
-
-            highlight: Rectangle { color: theme.highlightColor }
-
-            delegate: MouseArea {
-                id: delegateRoot
-                width: iconSize
-                height: iconSize + units.gridUnit
-                hoverEnabled: hoveredHighlight
-
-                function setAsPreview() {
-                    print("preview() " + iconName + " " + fullPath);
-                    preview.fullPath = fullPath
-                    preview.iconName = iconName
+                footer: SvgGrid {
+                    id: svgGrid
+                    anchors.fill: parent
+                    interactive: false
 
                 }
 
-                PlasmaCore.IconItem {
-                    width: iconSize
-                    source: iconName
-                    anchors {
-                        top: parent.top
-                        horizontalCenter: parent.horizontalCenter
-                        bottom: parent.bottom
-                    }
-                }
-                Connections {
-                    target: iconGrid
-                    onCurrentIndexChanged: {
-                        if (delegateRoot.GridView.isCurrentItem) {
-                            print("index changed" + iconName + " " + fullPath)
-                            //preview.fullPath = fullPath
-                            delegateRoot.setAsPreview();
-                        }
-                    }
-                }
-                onClicked: {
-                    iconGrid.currentIndex = index
-                }
-                onEntered: {
-                    setAsPreview();
-                }
             }
         }
         Preview {
@@ -165,4 +127,19 @@ Item {
             Layout.fillHeight: true
         }
     }
+    states: [
+        State {
+            name: "icons"
+            //when: navigationShown
+//             PropertyChanges { target: iconGrid; opacity: 1.0 }
+//             PropertyChanges { target: svgGrid; opacity: 0.0 }
+        },
+        State {
+            name: "svgs"
+            //when: !navigationShown
+//             PropertyChanges { target: iconGrid; opacity: 0.0 }
+//             PropertyChanges { target: svgGrid; opacity: 1.0 }
+        }
+    ]
+
 }
