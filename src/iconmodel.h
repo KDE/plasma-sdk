@@ -40,7 +40,8 @@ class IconModel : public QAbstractListModel
     Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
     Q_PROPERTY(QStringList themes READ themes CONSTANT)
     Q_PROPERTY(QStringList plasmathemes READ plasmathemes CONSTANT)
-    Q_PROPERTY(QVariantList svgIcons READ svgIcons NOTIFY svgIconsChanged)
+    //Q_PROPERTY(QVariantList svgIcons READ svgIcons NOTIFY svgIconsChanged)
+    Q_PROPERTY(QStringList categories READ categories NOTIFY categoriesChanged)
     Q_PROPERTY(QString plasmaTheme READ plasmaTheme WRITE setPlasmaTheme NOTIFY plasmaThemeChanged)
 
 public:
@@ -50,6 +51,7 @@ public:
         Icon,
         FullPath,
         Category,
+        Scalable,
         Sizes,
         Type,
         Theme
@@ -65,7 +67,7 @@ public:
     QString key(int role) const;
 
     bool match(const QFileInfo &info);
-    void add(const QFileInfo &info, const QString &category);
+    void add(const QFileInfo &info, const QString &cat);
     void addSvgIcon(const QString &file, const QString &icon);
     void remove(const QString &iconFile);
 
@@ -82,8 +84,9 @@ public:
     void setPlasmaTheme(const QString &ptheme);
     QString plasmaTheme() const;
     QStringList plasmathemes() const;
+    QStringList categories() const;
 
-    QVariantList svgIcons() const;
+    void svgIcons();
 
     void load();
     void update();
@@ -92,6 +95,7 @@ public:
 Q_SIGNALS:
     void filterChanged();
     void categoryChanged();
+    void categoriesChanged();
     void themeChanged();
     void svgIconsChanged();
     void plasmaThemeChanged();
@@ -101,6 +105,7 @@ private:
 
     QStringList m_icons; // icon theme,
     QString m_category;
+    QStringList m_categories;
     QString m_theme;
     QString m_filter;
     QStringList m_themes;
@@ -108,6 +113,8 @@ private:
     QString m_plasmatheme;
     QHash<QString, QVariantMap> m_data; // icon theme,
     QVariantMap m_svgIcons;
+
+    QString categoryFromPath(const QString &path);
 };
 
 } // namespace

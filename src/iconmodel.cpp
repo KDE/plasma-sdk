@@ -50,6 +50,7 @@ IconModel::IconModel(QObject *parent) :
     m_roleNames.insert(Icon, "icon");
     m_roleNames.insert(FullPath, "fullPath");
     m_roleNames.insert(Category, "category");
+    m_roleNames.insert(Scalable, "scalable");
     m_roleNames.insert(Sizes, "sizes");
     m_roleNames.insert(Theme, "iconTheme");
     m_roleNames.insert(Type, "type");
@@ -62,12 +63,6 @@ IconModel::IconModel(QObject *parent) :
     qDebug() << "Setting Plasma theme" << themeName;
     theme.setUseGlobalSettings(false);
     theme.setThemeName(themeName); // needs to happen after setUseGlobalSettings, since that clears themeName
-//     m_themes << "breeze"
-//              << "hicolor"
-//              << "locolor"
-//              << "oxygen"
-//              << "Tango"
-//              << "gnome";
 
     QList<KPluginMetaData> themepackages = KPackage::PackageLoader::self()->listPackages(QString(), "plasma/desktoptheme");
     foreach (const KPluginMetaData &pkg, themepackages) {
@@ -180,6 +175,7 @@ QVariant IconModel::data(const QModelIndex &index, int role) const
         case IconName:
             return icon;
         }
+
         //qDebug() << "Requesting " << key(role) << m_data[icon][key(role)];
         return m_data[icon][key(role)];
     }
@@ -204,31 +200,55 @@ void IconModel::update()
 }
 
 
-void IconModel::add(const QFileInfo &info, const QString &category)
+void IconModel::add(const QFileInfo &info, const QString &cat)
 {
-    QVariantMap data;
-    const QString fname = info.fileName();
+    if (!m_categories.contains(cat)) {
+        m_categories << cat;
+        emit categoriesChanged();
+    }
 
+    const QString fname = info.fileName();
+    bool scalable = false;
     QString icon = fname;
     if (fname.endsWith(".png")) {
-
         icon.remove(".png");
-
     } else if (fname.endsWith(".svgz")) {
         icon.remove(".svgz");
+        scalable = true;
     }
+    QVariantMap &data = m_data[icon];
     //qDebug() << "found Icon: " << info.fileName() << icon;
     if (!m_icons.contains(icon)) {
 
         data["fullPath"] = info.absoluteFilePath();
         data["iconName"] = icon;
         data["fileName"] = info.fileName();
-        data["category"] = category;
+        data["category"] = cat;
+        data["type"] = QStringLiteral("icon");
+        data["scalable"] = scalable;
+        data["iconTheme"] = "breeze";
 
-        m_data.insert(icon, data);
         m_icons << icon;
-        //update();
     }
+    if (scalable && !data["scalable"].toBool()) {
+        data["scalable"] = true;
+    }
+
+    QStringList _s = info.path().split('/');
+    if (_s.count() > 2) {
+        QString size = _s[_s.count()-2]; // last but one is size, last is category
+        if (size.indexOf("x") > 1) {
+            size = size.split("x")[0];
+            QStringList sizes = data["sizes"].toStringList();
+            if (!sizes.contains(size)) {
+                //qDebug() << "Size added" <<  sizes << size << data["iconName"];
+                sizes << size;
+                data["sizes"] = sizes;
+            }
+        }
+    }
+
+    //qDebug() << "Size: " << size;
 }
 
 void IconModel::addSvgIcon(const QString &file, const QString &icon)
@@ -246,6 +266,12 @@ QString IconModel::category() const
 {
     return m_category;
 }
+
+QStringList IconModel::categories() const
+{
+    return m_categories;
+}
+
 
 void IconModel::setCategory(const QString& cat)
 {
@@ -282,38 +308,51 @@ void IconModel::load()
     beginResetModel();
     m_data.clear();
     m_icons.clear();
+    m_categories.clear();
 
     const QString iconTheme = KIconLoader::global()->theme()->internalName();
 
     qDebug() << "IconTHeme: " << KIconLoader::global()->theme()->internalName();
     qDebug() << "iconPath: " << QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "icons/"+iconTheme, QStandardPaths::LocateDirectory);
 
-    //QStringList iconThemePaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "icons/hicolor", QStandardPaths::LocateDirectory);
+    QStringList searchPaths;
+
 
     QStringList iconThemePaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "icons/"+iconTheme, QStandardPaths::LocateDirectory);
 
     if (iconThemePaths.count() > 0) {
-        QDirIterator cats(iconThemePaths.at(0), nameFilters, QDir::Dirs, QDirIterator::NoIteratorFlags);
+        searchPaths << iconThemePaths;
+    }
+
+    QStringList hicolorThemePaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "icons/hicolor", QStandardPaths::LocateDirectory);
+    if (hicolorThemePaths.count() > 0) {
+        searchPaths << hicolorThemePaths;
+    }
+
+    foreach (const QString &iconPath, searchPaths) {
+
+        QDirIterator cats(iconPath, nameFilters, QDir::Dirs, QDirIterator::NoIteratorFlags);
         while (cats.hasNext()) {
             cats.next();
             const QString fpath = cats.filePath();
-            qDebug() << "Category: !!! ..." << cats.path() << cats.filePath() << fpath;
+//             qDebug() << "Category: !!! ..." << cats.path() << cats.filePath() << fpath;
             const QString category = cats.fileName();
             if (category != "." && category != "..") {
                 QDirIterator it(fpath, nameFilters, QDir::Files, flags);
-                qDebug() << "Parsing files." << fpath;
+                //qDebug() << "Parsing files." << fpath;
                 while (it.hasNext()) {
                     it.next();
                     const QFileInfo &info = it.fileInfo();
                     if (match(info)) {
-                        qDebug() << "..." << info.absoluteFilePath();
-                        add(info, category);
+                        //qDebug() << "..." << info.absoluteFilePath();
+                        add(info, categoryFromPath(info.absoluteFilePath()));
                     }
                 }
             }
-
         }
     }
+
+    svgIcons();
     endResetModel();
 
 }
@@ -372,23 +411,55 @@ QStringList IconModel::plasmathemes() const
     return m_plasmathemes;
 }
 
-QVariantList IconModel::svgIcons() const
+void IconModel::svgIcons()
 {
     QVariantList out;
 
     foreach (const QString &file, m_svgIcons.keys()) {
         foreach (const QString &icon, m_svgIcons[file].toStringList()) {
             if (m_filter.isEmpty() ||
-                (file.indexOf(m_filter) != -1 || icon.indexOf(m_filter) != -1)) {
+               (file.indexOf(m_filter) != -1 || icon.indexOf(m_filter) != -1)) {
 
+                QVariantMap &data = m_data[icon];
+                //qDebug() << "found Icon: " << info.fileName() << icon;
+                if (!m_icons.contains(icon)) {
+
+                    data["fullPath"] = "";
+                    data["iconName"] = icon;
+                    data["fileName"] = file;
+                    data["category"] = "system";
+                    data["type"] = QStringLiteral("svg");
+                    data["scalable"] = true;
+                    data["iconTheme"] = m_plasmatheme;
+
+                    m_icons << icon;
+                }
                 QVariantMap vm;
                 vm["fileName"] = file;
                 vm["iconName"] = icon;
     //             qDebug() << "Adding " << file << icon;
                 out << vm;
+
+
             }
         }
     }
 
-    return out;
+    //return out;
 }
+
+QString IconModel::categoryFromPath(const QString& path)
+{
+    QStringList cats;
+    cats << "actions" << "apps" << "places" << "status";
+    const QStringList _p1 = path.split("/icons/");
+    if (_p1.count() > 1) {
+        foreach (const QString &cat, cats) {
+            if (_p1[1].indexOf("cat") != -1) {
+                return cat;
+            }
+        }
+    }
+    return QString();
+}
+
