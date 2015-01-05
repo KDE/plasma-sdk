@@ -32,8 +32,15 @@ Rectangle {
 
     color: theme.backgroundColor
 
+
     property string iconName: "plasma"
     property string fullPath: ""
+    property string category: ""
+    property string fileName: ""
+    property string type: ""
+    property string iconTheme: ""
+    property variant sizes: []
+    property bool scalable: true
 
     ColumnLayout {
 
@@ -121,10 +128,65 @@ Rectangle {
             }
         }
         */
+        GridLayout {
+            columns: 2
+
+            PlasmaComponents.Label {
+                text: i18n("Name:")
+            }
+            PlasmaComponents.Label {
+                text: iconName
+            }
+            PlasmaComponents.Label {
+                text: i18n("Filename:")
+            }
+            PlasmaComponents.Label {
+                text: fileName
+            }
+            PlasmaComponents.Label {
+                text: i18n("Category:")
+            }
+            PlasmaComponents.Label {
+                text: category
+            }
+            PlasmaComponents.Label {
+                text: i18n("Scalable:")
+            }
+            PlasmaComponents.Label {
+                text: {
+                    print("SS:" + sizes);
+                    /*var out;
+                    for (s in sizes) {
+                        out = out + ", " + s;
+                    }
+                    return out;*/
+                    if (scalable) {
+                        return i18n("yes");
+                    } else {
+                        return i18n("no");
+                    }
+                }
+            }
+            PlasmaComponents.Label {
+                text: i18n("Sizes:")
+            }
+            PlasmaComponents.Label {
+                text: sizes
+//                 text: {
+//                     print("SS:" + sizes);
+//                     var out;
+//                     for (s in sizes) {
+//                         out = out + ", " + s;
+//                     }
+//                     return out;
+//                 }
+            }
+        }
         Item {
             Layout.fillHeight: true
         }
     }
+
 
     Rectangle {
         color: theme.highlightColor
