@@ -120,6 +120,8 @@ IconModel::IconModel(QObject *parent) :
                                                         << "network-wired"
                                                         << "network-wireless-available"
                                                         << "network-wireless-disconnected"
+                                                        << "flightmode-off"
+                                                        << "flightmode-on"
                                                         << "network-wireless-0"
                                                         << "network-wireless-20"
                                                         << "network-wireless-25"
