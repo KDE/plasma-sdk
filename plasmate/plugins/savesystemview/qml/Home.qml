@@ -23,11 +23,11 @@ import QtQuick.Layouts 1.1 as QtLayouts
 
 QtLayouts.ColumnLayout {
     QtControls.Label {
-        text: "Your project isn't in a git repository. \n Do you want to create one??"
+        text: i18n("Your project isn't in a git repository. \n Do you want to create one??")
     }
 
     QtControls.Button {
-        text: "Yes, I want to create a new git repository for my project"
+        text: i18n("Yes, I want to create a new git repository for my project")
         onClicked:  {
             var success = git.initializeRepository()
             if (success) {

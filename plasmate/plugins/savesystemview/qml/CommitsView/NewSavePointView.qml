@@ -24,7 +24,7 @@ import QtQuick.Layouts 1.1 as QtLayouts
 QtControls.ScrollView {
     QtLayouts.ColumnLayout {
         QtControls.Label {
-            text: "Please enter a commit message"
+            text: i18n("Please enter a commit message")
         }
 
         QtControls.TextArea {
@@ -34,7 +34,7 @@ QtControls.ScrollView {
         QtLayouts.RowLayout {
             QtControls.Button {
                 id: button
-                text: "Commit"
+                text: i18n("Commit")
                 enabled: textArea.text != ""
                 onClicked: {
                     git.newSavePoint(textArea.text)
@@ -43,7 +43,7 @@ QtControls.ScrollView {
             }
 
             QtControls.Button {
-                text: "Cancel"
+                text: i18n("Cancel")
                 onClicked: {
                     stackView.pop()
                 }

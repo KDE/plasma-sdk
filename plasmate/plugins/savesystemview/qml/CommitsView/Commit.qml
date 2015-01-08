@@ -34,11 +34,11 @@ SaveSystemItem {
         height: parent.height * 2
         mainItem: QtLayouts.ColumnLayout {
             QtControls.Label {
-                text: "Author: " + commitAuthor
+                text: i18n("Author: ") + commitAuthor
             }
 
             QtControls.Label {
-                text: "Date: " + commitdate
+                text: i18n("Date: ") + commitdate
             }
         }
     }

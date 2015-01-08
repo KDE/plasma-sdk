@@ -34,24 +34,24 @@ SaveSystemItem {
     QtControls.Menu {
         id: menu
         QtControls. MenuItem {
-            text: "Create New Branch"
+            text: i18n("Create New Branch")
             onTriggered: stackView.push(Qt.resolvedUrl("BranchView/NewBranchView.qml"))
         }
 
         QtControls. MenuItem {
-            text: "Switch to Branch"
+            text: i18n("Switch to Branch")
             onTriggered: stackView.push(Qt.resolvedUrl("BranchView/SwitchBranchView.qml"))
         }
 
         QtControls. MenuItem {
-            text: "Rename Branch"
+            text: i18n("Rename Branch")
             onTriggered: stackView.push(Qt.resolvedUrl("BranchView/RenameBranchView.qml"))
         }
 
         QtControls. MenuSeparator {}
 
         QtControls. MenuItem {
-            text: "Delete Branch"
+            text: i18n("Delete Branch")
             onTriggered: stackView.push(Qt.resolvedUrl("BranchView/DeleteBranchView.qml"))
         }
 
