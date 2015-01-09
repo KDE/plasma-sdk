@@ -31,7 +31,7 @@ QtControls.ScrollView {
         spacing: 10
         Branch {
             id: branch
-            text: git.currentBranch
+            text: git.branchesModel.currentBranch
         }
 
         NewSavePoint {

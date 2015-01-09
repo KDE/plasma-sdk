@@ -30,6 +30,7 @@ namespace KDevelop {
     class VcsJob;
     class IDistributedVersionControl;
     class IBranchingVersionControl;
+    class BranchesListModel;
 }; // end namespace
 
 class QAbstractItemModel;
@@ -40,8 +41,7 @@ class Git: public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QAbstractItemModel* commitsModel READ commitsModel NOTIFY commitsModelChanged)
-    Q_PROPERTY(QString currentBranch READ currentBranch CONSTANT)
-    Q_PROPERTY(QStringList branches READ branches CONSTANT)
+    Q_PROPERTY(QAbstractItemModel* branchesModel READ branchesModel NOTIFY branchesModelChanged)
 
 public:
     Git(QObject *parent = 0);
@@ -57,19 +57,16 @@ public:
     Q_INVOKABLE bool initializeRepository();
 
     QList<KDevelop::VcsEvent> commits();
-    QStringList branches();
 
-    QString currentBranch();
     Q_INVOKABLE bool renameBranch(const QString &oldName, const QString &newName);
-    Q_INVOKABLE bool switchBranch(const QString &branchName);
-    Q_INVOKABLE bool deleteBranch(const QString &branchName);
-    Q_INVOKABLE bool createBranch(const QString &branchName);
     Q_INVOKABLE bool newSavePoint(const QString &commitMessage, bool saveDocuments = true);
 
     QAbstractItemModel* commitsModel() const;
+    QAbstractItemModel* branchesModel() const;
 
 Q_SIGNALS:
     void commitsModelChanged();
+    void branchesModelChanged();
 
 private:
     bool handleJob(KDevelop::VcsJob *job);
@@ -80,6 +77,7 @@ private:
     KDevelop::IBranchingVersionControl *m_branching;
 
     CommitsModel *m_commitsModel;
+    KDevelop::BranchesListModel *m_branchesModel;
 };
 
 #endif

@@ -26,7 +26,7 @@ SelectionBranchView {
     buttonText: "Delete Branch"
 
     onDoWork: {
-        git.deleteBranch(input)
+        git.branchesModel.removeBranch(input)
         stackView.pop()
     }
 }

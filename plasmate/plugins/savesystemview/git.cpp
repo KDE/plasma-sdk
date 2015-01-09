@@ -36,6 +36,7 @@
 #include <vcs/interfaces/idistributedversioncontrol.h>
 #include <vcs/vcsjob.h>
 #include <vcs/dvcs/dvcsjob.h>
+#include <vcs/models/brancheslistmodel.h>
 
 #include <KLocalizedString>
 #include <KMessageBox>
@@ -49,10 +50,15 @@ Git::Git(QObject *parent)
     : QObject(parent),
       m_project(nullptr),
       m_dvcs(nullptr),
-      m_branching(nullptr)
+      m_branching(nullptr),
+      m_branchesModel(nullptr)
 {
+    m_branchesModel = new KDevelop::BranchesListModel(this);
+
     m_commitsModel = new CommitsModel(this);
     connect(this, &Git::commitsModelChanged, m_commitsModel, &CommitsModel::resetModel);
+    connect(m_branchesModel, &KDevelop::BranchesListModel::currentBranchChanged,
+            this, &Git::commitsModelChanged);
 }
 
 Git::~Git()
@@ -98,6 +104,7 @@ bool Git::initGit()
          return false;
     }
 
+    m_branchesModel->initialize(m_branching, m_repositoryPath);
     return true;
 }
 
@@ -126,73 +133,17 @@ bool Git::initializeRepository()
     return newSavePoint(QStringLiteral("Initial Commit"));
 }
 
-QStringList Git::branches()
-{
-    QStringList l;
-
-    KDevelop::VcsJob *job = m_branching->branches(m_repositoryPath);
-    if (!handleJob(job)) {
-        return l;
-    }
-
-    l = job->fetchResults().toStringList();
-
-    return l;
-}
-
-QString Git::currentBranch()
-{
-    QString branch;
-
-    KDevelop::VcsJob *job = m_branching->currentBranch(m_repositoryPath);
-    if (!handleJob(job)) {
-        return branch;
-    }
-
-    branch = job->fetchResults().toString();
-
-    return branch;
-}
-
-bool Git::createBranch(const QString &branchName)
-{
-    KDevelop::VcsJob *job = m_branching->branch(m_repositoryPath, KDevelop::VcsRevision(), branchName);
-    if (!handleJob(job)) {
-        return false;
-    }
-
-    emit commitsModelChanged();
-    return true;
-}
-
-bool Git::switchBranch(const QString &branchName)
-{
-    KDevelop::VcsJob *job = m_branching->switchBranch(m_repositoryPath, branchName);
-    if (!handleJob(job)) {
-        return false;
-    }
-
-    emit commitsModelChanged();
-    return true;
-}
-
-bool Git::deleteBranch(const QString &branchName)
-{
-    KDevelop::VcsJob *job = m_branching->deleteBranch(m_repositoryPath, branchName);
-    if (!handleJob(job)) {
-        return false;
-    }
-
-    emit commitsModelChanged();
-    return true;
-}
-
 bool Git::renameBranch(const QString &oldName, const QString &newName)
 {
-    KDevelop::VcsJob *job = m_branching->renameBranch(m_repositoryPath, oldName, newName);
-    if (!handleJob(job)) {
+    QList<QStandardItem *> branchItems = m_branchesModel->findItems(oldName);
+    if (branchItems.size() != 1) {
+        // its not 1, so either we don't have a branch
+        // or we have more than 1
         return false;
     }
+
+    QStandardItem *branchItem = branchItems.at(0);
+    branchItem->setData(newName, Qt::EditRole);
 
     emit commitsModelChanged();
     return true;
@@ -244,6 +195,10 @@ QAbstractItemModel* Git::commitsModel() const
     return m_commitsModel;
 }
 
+QAbstractItemModel* Git::branchesModel() const
+{
+    return m_branchesModel;
+}
 
 bool Git::newSavePoint(const QString &commitMessage, bool saveDocuments)
 {

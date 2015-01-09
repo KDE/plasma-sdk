@@ -28,7 +28,7 @@ InputBranchView {
 
     onDoWork: {
         console.log(input)
-        git.createBranch(input)
+        git.branchesModel.createBranch(git.branchesModel.currentBranch, input)
         stackView.pop()
     }
 }

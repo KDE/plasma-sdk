@@ -35,14 +35,18 @@ QtLayouts.ColumnLayout {
 
     QtControls.ComboBox {
         id: comboBox
-        //model: git.branches
+        model: git.branchesModel
+        // BranchesListModel's role for displaying
+        // the data is "display", but comboBox is using
+        // by default the "text", so lets change it
+        textRole: "display"
         currentIndex: -1
     }
 
     QtLayouts.RowLayout {
         QtControls.Button {
             id: button
-            enabled: currentIndex != -1
+            enabled: comboBox.currentIndex != -1
             onClicked: {
                 selectionBranchView.doWork()
             }
@@ -54,20 +58,6 @@ QtLayouts.ColumnLayout {
                 stackView.pop()
             }
         }
-    }
-
-    Component.onCompleted: {
-        var tmp = git.branches
-        var currentBranch = git.currentBranch
-        var branchList = []
-
-        for(var i in tmp) {
-            if (tmp[i] != currentBranch) {
-                branchList.append(tmp[i])
-            }
-        }
-
-        comboBox.model = branchList
     }
 }
 

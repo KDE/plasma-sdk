@@ -28,7 +28,7 @@ InputBranchView {
 
     onDoWork: {
         var success
-        var currentBranchName = git.currentBranch
+        var currentBranchName = git.branchesModel.currentBranch
         git.renameBranch(currentBranchName, input)
         stackView.pop()
     }
