@@ -32,6 +32,10 @@ Rectangle {
 
     color: theme.backgroundColor
 
+//     Rectangle {
+//         anchors.fill: parent
+//         color: "orange"
+//     }
 
     property string iconName: "plasma"
     property string fullPath: ""
@@ -45,7 +49,7 @@ Rectangle {
     ColumnLayout {
 
         anchors.leftMargin: units.gridUnit
-        anchors.rightMargin: units.gridUnit
+        anchors.rightMargin: units.gridUnit * 2
 
         anchors.fill: parent
 
@@ -58,6 +62,7 @@ Rectangle {
             elide: Text.ElideRight
             Layout.fillWidth: true
             Layout.fillHeight: false
+            wrapMode: Text.Wrap
             text: iconName
         }
         RowLayout {
@@ -136,18 +141,21 @@ Rectangle {
             }
             PlasmaComponents.Label {
                 text: iconName
+                wrapMode: Text.Wrap
             }
             PlasmaComponents.Label {
                 text: i18n("Filename:")
             }
             PlasmaComponents.Label {
                 text: fileName
+                wrapMode: Text.Wrap
             }
             PlasmaComponents.Label {
                 text: i18n("Category:")
             }
             PlasmaComponents.Label {
                 text: category
+                wrapMode: Text.WordWrap
             }
             PlasmaComponents.Label {
                 text: i18n("Scalable:")
