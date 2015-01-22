@@ -149,6 +149,35 @@ IconModel::IconModel(QObject *parent) :
                                                         << "wallet-open"
                                                         << "wallet-closed";
 
+    m_categories = QStringList() \
+        << "actions"
+        << "animations"
+        << "apps"
+        << "categories"
+        << "devices"
+        << "emblems"
+        << "emotes"
+        << "filesystems"
+        << "international"
+        << "mimetypes"
+        << "places"
+        << "status";
+
+
+    qDebug() << "XX: " << categoryFromPath("/usr/share/icons/hicolor/24x24/apps/gnome-cpu-frequency-applet.png");
+    qDebug() << "XX: " << categoryFromPath("/usr/share/icons/hicolor/24x24/apps/gnome-cpu-frequency-applet.png");
+    qDebug() << "XX: " << categoryFromPath("/usr/share/icons/hicolor/256x256/mimetypes/libreoffice-oasis-text.png");
+    qDebug() << "XX: " << categoryFromPath("/usr/share/icons/hicolor/scalable/places/gnome-flashback-compiz_badge-symbolic.svg");
+    qDebug() << "XX: " << categoryFromPath("/home/sebas/kf5/install/share/icons/breeze/apps/preferences/preferences-desktop-peripherals.svgz");
+    qDebug() << "XX: " << categoryFromPath("/usr/share/icons/breeze/actions/scalable/irc-unvoice.svgz");
+    qDebug() << "XX: " << categoryFromPath("/usr/share/icons/breeze/actions/toolbar-small/edit-clear.svg");
+    qDebug() << "XX: " << categoryFromPath("/usr/share/icons/breeze/categories/scalable/preferences-desktop.svg");
+    qDebug() << "XX: " << categoryFromPath("/usr/share/icons/breeze/status/im-status/user-online.svg");
+
+    qApp->exit();
+
+
+
     load();
     //qDebug() << m_roleNames;
 }
@@ -204,7 +233,12 @@ void IconModel::update()
 
 void IconModel::add(const QFileInfo &info, const QString &cat)
 {
-    if (!m_categories.contains(cat)) {
+    QStringList cats;
+    Q_FOREACH (auto c, m_categories) {
+        cats << c.toLower();
+    }
+
+    if (!cats.contains(cat)) {
         m_categories << cat;
         emit categoriesChanged();
     }
@@ -274,7 +308,6 @@ QStringList IconModel::categories() const
     return m_categories;
 }
 
-
 void IconModel::setCategory(const QString& cat)
 {
     if (cat != m_category) {
@@ -310,7 +343,7 @@ void IconModel::load()
     beginResetModel();
     m_data.clear();
     m_icons.clear();
-    m_categories.clear();
+    //sm_categories.clear();
 
     const QString iconTheme = KIconLoader::global()->theme()->internalName();
 
@@ -337,16 +370,16 @@ void IconModel::load()
         while (cats.hasNext()) {
             cats.next();
             const QString fpath = cats.filePath();
-//             qDebug() << "Category: !!! ..." << cats.path() << cats.filePath() << fpath;
             const QString category = cats.fileName();
             if (category != "." && category != "..") {
+                //qDebug() << "Category: !!! ..." << category << fpath;
                 QDirIterator it(fpath, nameFilters, QDir::Files, flags);
                 //qDebug() << "Parsing files." << fpath;
                 while (it.hasNext()) {
                     it.next();
                     const QFileInfo &info = it.fileInfo();
                     if (match(info)) {
-                        //qDebug() << "..." << info.absoluteFilePath();
+                        qDebug() << "..." << info.absoluteFilePath();
                         add(info, categoryFromPath(info.absoluteFilePath()));
                     }
                 }
@@ -453,11 +486,14 @@ void IconModel::svgIcons()
 QString IconModel::categoryFromPath(const QString& path)
 {
     QStringList cats;
-    cats << "actions" << "apps" << "places" << "status";
+    Q_FOREACH (auto c, m_categories) {
+        cats << c.toLower();
+    }
+    //cats << "actions" << "apps" << "places" << "status";
     const QStringList _p1 = path.split("/icons/");
     if (_p1.count() > 1) {
         foreach (const QString &cat, cats) {
-            if (_p1[1].indexOf("cat") != -1) {
+            if (_p1[1].indexOf(cat) != -1) {
                 return cat;
             }
         }

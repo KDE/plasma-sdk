@@ -77,7 +77,7 @@ PlasmaComponents.ToolBar {
         }
 
         ComboBox {
-            width: 200
+            Layout.preferredWidth: units.gridUnit * 6
             model: iconModel.categories
             onCurrentIndexChanged: {
                 if (currentText != "") {

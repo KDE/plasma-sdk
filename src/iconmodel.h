@@ -112,6 +112,7 @@ private:
     QStringList m_plasmathemes;
     QString m_plasmatheme;
     QHash<QString, QVariantMap> m_data; // icon theme,
+    QHash<QString, QString> m_categoryTranslations;
     QVariantMap m_svgIcons;
 
     QString categoryFromPath(const QString &path);
