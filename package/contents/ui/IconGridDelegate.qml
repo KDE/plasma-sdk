@@ -31,7 +31,7 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 MouseArea {
     id: delegateRoot
     width: iconSize
-    height: iconSize + Math.round(units.gridUnit * 1.5)
+    height: iconSize + Math.round(units.gridUnit * 1.25)
     hoverEnabled: hoveredHighlight
 
     function setAsPreview() {
@@ -53,9 +53,8 @@ MouseArea {
         visible: opacity != 0.0
         Behavior on opacity { NumberAnimation { duration: units.shortDuration } }
         anchors {
-            bottomMargin: -units.gridUnit
-            leftMargin: -units.gridUnit / 2
-            rightMargin: -units.gridUnit / 2
+            bottomMargin: Math.round(-units.gridUnit * 1.25)
+            margins: -units.gridUnit / 2
             fill: parent
         }
     }
