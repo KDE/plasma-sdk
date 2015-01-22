@@ -44,16 +44,16 @@ PlasmaComponents.ToolBar {
         }
     }
     */
-        Rectangle {
-            color: theme.backgroundColor
-            height: units.gridUnit / 20
-            width: preview.width
-            anchors {
-                right: parent.right
-                top: parent.bottom
-                //right: parent.right
-            }
+    Rectangle {
+        color: theme.backgroundColor
+        height: units.gridUnit / 20
+        width: preview.width
+        anchors {
+            right: parent.right
+            top: parent.bottom
+            //right: parent.right
         }
+    }
     tools: RowLayout {
 
         spacing: units.gridUnit / 2
@@ -86,16 +86,16 @@ PlasmaComponents.ToolBar {
             }
         }
 
-        ComboBox {
-            width: 200
-            model: iconModel.plasmathemes
-            onCurrentIndexChanged: {
-                if (currentText != "") {
-                    iconModel.plasmaTheme = currentText
-                }
-            }
-        }
-
+//         ComboBox {
+//             width: 200
+//             model: iconModel.plasmathemes
+//             onCurrentIndexChanged: {
+//                 if (currentText != "") {
+//                     iconModel.plasmaTheme = currentText
+//                 }
+//             }
+//         }
+//
         CheckBox {
             text: "Enable Hover"
             onCheckedChanged: hoveredHighlight = checked
@@ -128,6 +128,10 @@ PlasmaComponents.ToolBar {
         PlasmaComponents.Label {
             anchors.verticalCenter: parent.verticalCenter
             text: iconSize
+        }
+
+        Item {
+            Layout.preferredWidth: preview.width
         }
     }
 }

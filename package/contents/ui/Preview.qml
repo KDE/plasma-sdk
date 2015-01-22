@@ -179,7 +179,7 @@ Rectangle {
                 text: i18n("Sizes:")
             }
             PlasmaComponents.Label {
-                text: sizes
+                text: sizes.join(", ")
 //                 text: {
 //                     print("SS:" + sizes);
 //                     var out;
