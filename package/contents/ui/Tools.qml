@@ -89,21 +89,6 @@ PlasmaComponents.ToolBar {
             }
         }
 
-//         ComboBox {
-//             width: 200
-//             model: iconModel.plasmathemes
-//             onCurrentIndexChanged: {
-//                 if (currentText != "") {
-//                     iconModel.plasmaTheme = currentText
-//                 }
-//             }
-//         }
-//
-        CheckBox {
-            text: "Enable Hover"
-            onCheckedChanged: hoveredHighlight = checked
-        }
-
         Slider {
             id: sizeslider
             //anchors.verticalCenter: parent.verticalCenter

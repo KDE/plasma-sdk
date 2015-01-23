@@ -20,7 +20,7 @@
  ***************************************************************************/
 
 import QtQuick 2.2
-// import QtQuick.Controls 1.0
+import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.0
 
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -29,6 +29,8 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 
 Rectangle {
+
+    id: preview
 
     color: theme.backgroundColor
 
@@ -46,9 +48,21 @@ Rectangle {
     property variant sizes: []
     property bool scalable: true
 
+    function clipboard(text) {
+        clipboardHelper.text = text;
+        clipboardHelper.selectAll();
+        clipboardHelper.copy();
+
+    }
+    TextEdit {
+        id: clipboardHelper
+        visible: false
+    }
+
+
     ColumnLayout {
 
-        anchors.leftMargin: units.gridUnit
+        anchors.margins: units.gridUnit
         anchors.rightMargin: units.gridUnit * 2
 
         anchors.fill: parent
@@ -193,6 +207,16 @@ Rectangle {
         Item {
             Layout.fillHeight: true
         }
+        CheckBox {
+            text: "Enable Hover"
+            onCheckedChanged: hoveredHighlight = checked
+        }
+        PlasmaComponents.ToolButton {
+            text: i18n("Copy \"" + preview.iconName + "\" clipboard")
+            iconSource: "edit-copy"
+            onClicked: clipboard(preview.iconName);
+        }
+
     }
 
 
@@ -206,3 +230,4 @@ Rectangle {
         }
     }
 }
+// edit-copy help-about.svg
