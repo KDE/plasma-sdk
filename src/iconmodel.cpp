@@ -26,6 +26,7 @@
 #include <QDateTime>
 #include <QDir>
 #include <QDirIterator>
+#include <QElapsedTimer>
 #include <QFile>
 #include <QIcon>
 #include <QStandardPaths>
@@ -61,7 +62,7 @@ IconModel::IconModel(QObject *parent) :
     const QString themeName = cg.readEntry("theme", "default");
 
     Plasma::Theme theme;
-    qDebug() << "Setting Plasma theme" << themeName;
+//     qDebug() << "Setting Plasma theme" << themeName;
     theme.setUseGlobalSettings(false);
     theme.setThemeName(themeName); // needs to happen after setUseGlobalSettings, since that clears themeName
 
@@ -292,7 +293,6 @@ void IconModel::addSvgIcon(const QString &file, const QString &icon)
 void IconModel::remove(const QString& url)
 {
     qDebug() << "IconModel::remove() TODO";
-
 }
 
 QString IconModel::category() const
@@ -307,6 +307,7 @@ QStringList IconModel::categories() const
 
 void IconModel::setCategory(const QString& cat)
 {
+    qDebug() << "SETCATA" << cat;
     if (cat != m_category) {
         m_category = cat;
         emit categoryChanged();
@@ -331,14 +332,14 @@ void IconModel::setFilter(const QString &filter)
 
 void IconModel::load()
 {
+    qDebug() << "\n -- Loading (category / filter) : " << m_category << m_filter;
     m_loading = true;
     emit loadingChanged();
 
-    qDebug() << "Loading from " << m_theme;
+    QElapsedTimer tt;
+    tt.start();
     const QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories;
     const QStringList nameFilters = QStringList();
-
-    // FIXME: use QStandardPaths
 
     beginResetModel();
     m_data.clear();
@@ -347,8 +348,8 @@ void IconModel::load()
 
     const QString iconTheme = KIconLoader::global()->theme()->internalName();
 
-    qDebug() << "IconTHeme: " << KIconLoader::global()->theme()->internalName();
-    qDebug() << "iconPath: " << QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "icons/"+iconTheme, QStandardPaths::LocateDirectory);
+//     qDebug() << "IconTHeme: " << KIconLoader::global()->theme()->internalName();
+//     qDebug() << "iconPath: " << QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "icons/"+iconTheme, QStandardPaths::LocateDirectory);
 
     QStringList searchPaths;
 
@@ -390,8 +391,8 @@ void IconModel::load()
     svgIcons();
     endResetModel();
 
+    qDebug() << "Loading took" << tt.elapsed() << " msec";
     m_loading = false;
-    qDebug() << "Loadingchanged" << m_loading;
     emit loadingChanged();
 }
 
@@ -399,16 +400,17 @@ bool IconModel::match(const QFileInfo& info)
 {
     bool ok = false;
 
-    bool catmatch = false;
+    bool catmatch = m_category.isEmpty();
     // category match?
-    if (!m_category.isEmpty() && m_category == categoryFromPath(info.absoluteFilePath())) {
+    if (!catmatch && m_category == categoryFromPath(info.absoluteFilePath())) {
         catmatch = true;
     }
 
     // name filter
-    if ((m_filter.isEmpty() || info.fileName().indexOf(m_filter) != -1) &&
-        (!m_category.isEmpty() || catmatch)) {
-        ok = true;
+    if (m_filter.isEmpty() || info.fileName().indexOf(m_filter) != -1) {
+        if (catmatch) {
+            ok = true;
+        }
     }
     return ok;
 }
