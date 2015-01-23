@@ -150,7 +150,7 @@ IconModel::IconModel(QObject *parent) :
                                                         << "wallet-open"
                                                         << "wallet-closed";
 
-    m_categories = QStringList() \
+    m_categories = QStringList() << "all" \
         << "actions"
         << "animations"
         << "apps"
