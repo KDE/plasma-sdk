@@ -207,18 +207,34 @@ Rectangle {
         Item {
             Layout.fillHeight: true
         }
-        CheckBox {
-            text: "Enable Hover"
-            onCheckedChanged: hoveredHighlight = checked
-        }
         PlasmaComponents.ToolButton {
-            text: i18n("Copy \"" + preview.iconName + "\" clipboard")
+            text: i18n("Copy icon name to clipboard")
             iconSource: "edit-copy"
+            Layout.fillWidth: true
             onClicked: clipboard(preview.iconName);
         }
-
+        PlasmaComponents.ToolButton {
+            text: i18n("Copy QtQuick code to clipboard")
+            iconSource: "edit-copy"
+            Layout.fillWidth: true
+            onClicked: {
+                var code = "/* Don't forget to import...\n\
+import org.kde.plasma.core 2.0 as PlasmaCore\n\
+*/\n\
+PlasmaCore.IconItem {\n\
+    source: \"" + preview.iconName + "\"\n\
+    Layout.preferredWidth: units.iconSizes.medium\n\
+    Layout.preferredHeight: units.iconSizes.medium\n\
+}\n\
+";
+                clipboard(code);
+            }
+        }
+        CheckBox {
+            text: "Update preview on hover"
+            onCheckedChanged: hoveredHighlight = checked
+        }
     }
-
 
     Rectangle {
         color: theme.highlightColor
