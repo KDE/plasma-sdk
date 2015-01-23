@@ -49,4 +49,11 @@ GridView {
 
     delegate: IconGridDelegate {}
 
+    PlasmaComponents.BusyIndicator {
+        running: iconModel.loading
+        visible: running
+        anchors.centerIn: parent
+        width: units.gridUnit * 8
+        height: width
+    }
 }

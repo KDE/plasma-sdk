@@ -43,6 +43,7 @@ class IconModel : public QAbstractListModel
     //Q_PROPERTY(QVariantList svgIcons READ svgIcons NOTIFY svgIconsChanged)
     Q_PROPERTY(QStringList categories READ categories NOTIFY categoriesChanged)
     Q_PROPERTY(QString plasmaTheme READ plasmaTheme WRITE setPlasmaTheme NOTIFY plasmaThemeChanged)
+    Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged);
 
 public:
     enum Roles {
@@ -86,6 +87,8 @@ public:
     QStringList plasmathemes() const;
     QStringList categories() const;
 
+    bool loading();
+
     void svgIcons();
 
     void load();
@@ -99,6 +102,7 @@ Q_SIGNALS:
     void themeChanged();
     void svgIconsChanged();
     void plasmaThemeChanged();
+    void loadingChanged();
 
 private:
     QHash<int, QByteArray> m_roleNames;
@@ -115,6 +119,7 @@ private:
     QHash<QString, QString> m_categoryTranslations;
     QVariantMap m_svgIcons;
 
+    bool m_loading;
     QString categoryFromPath(const QString &path);
 };
 

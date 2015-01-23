@@ -80,6 +80,9 @@ PlasmaComponents.ToolBar {
             Layout.preferredWidth: units.gridUnit * 6
             model: iconModel.categories
             onCurrentIndexChanged: {
+                if (currentText == "all") {
+                    iconModel.category = "";
+                }
                 if (currentText != "") {
                     iconModel.category = currentText
                 }

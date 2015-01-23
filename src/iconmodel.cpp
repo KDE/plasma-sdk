@@ -44,6 +44,7 @@ using namespace CuttleFish;
 IconModel::IconModel(QObject *parent) :
     QAbstractListModel(parent),
     m_theme(QStringLiteral("breeze"))
+    , m_loading(false)
 {
     m_roleNames.insert(FileName, "fileName");
     m_roleNames.insert(IconName, "iconName");
@@ -55,7 +56,7 @@ IconModel::IconModel(QObject *parent) :
     m_roleNames.insert(Theme, "iconTheme");
     m_roleNames.insert(Type, "type");
 
-
+    connect(this, &IconModel::categoryChanged, this, &IconModel::load);
     KConfigGroup cg(KSharedConfig::openConfig("cuttlefishrc"), "CuttleFish");
     const QString themeName = cg.readEntry("theme", "default");
 
@@ -163,7 +164,7 @@ IconModel::IconModel(QObject *parent) :
         << "places"
         << "status";
 
-
+    /*
     qDebug() << "XX: " << categoryFromPath("/usr/share/icons/hicolor/24x24/apps/gnome-cpu-frequency-applet.png");
     qDebug() << "XX: " << categoryFromPath("/usr/share/icons/hicolor/24x24/apps/gnome-cpu-frequency-applet.png");
     qDebug() << "XX: " << categoryFromPath("/usr/share/icons/hicolor/256x256/mimetypes/libreoffice-oasis-text.png");
@@ -173,11 +174,7 @@ IconModel::IconModel(QObject *parent) :
     qDebug() << "XX: " << categoryFromPath("/usr/share/icons/breeze/actions/toolbar-small/edit-clear.svg");
     qDebug() << "XX: " << categoryFromPath("/usr/share/icons/breeze/categories/scalable/preferences-desktop.svg");
     qDebug() << "XX: " << categoryFromPath("/usr/share/icons/breeze/status/im-status/user-online.svg");
-
-    qApp->exit();
-
-
-
+    */
     load();
     //qDebug() << m_roleNames;
 }
@@ -334,6 +331,9 @@ void IconModel::setFilter(const QString &filter)
 
 void IconModel::load()
 {
+    m_loading = true;
+    emit loadingChanged();
+
     qDebug() << "Loading from " << m_theme;
     const QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories;
     const QStringList nameFilters = QStringList();
@@ -379,7 +379,7 @@ void IconModel::load()
                     it.next();
                     const QFileInfo &info = it.fileInfo();
                     if (match(info)) {
-                        qDebug() << "..." << info.absoluteFilePath();
+//                         qDebug() << "..." << info.absoluteFilePath();
                         add(info, categoryFromPath(info.absoluteFilePath()));
                     }
                 }
@@ -390,14 +390,24 @@ void IconModel::load()
     svgIcons();
     endResetModel();
 
+    m_loading = false;
+    qDebug() << "Loadingchanged" << m_loading;
+    emit loadingChanged();
 }
 
 bool IconModel::match(const QFileInfo& info)
 {
     bool ok = false;
 
+    bool catmatch = false;
+    // category match?
+    if (!m_category.isEmpty() && m_category == categoryFromPath(info.absoluteFilePath())) {
+        catmatch = true;
+    }
+
     // name filter
-    if (m_filter.isEmpty() || info.fileName().indexOf(m_filter) != -1) {
+    if ((m_filter.isEmpty() || info.fileName().indexOf(m_filter) != -1) &&
+        (!m_category.isEmpty() || catmatch)) {
         ok = true;
     }
     return ok;
@@ -417,7 +427,7 @@ QString IconModel::theme() const
 void IconModel::setTheme(const QString& theme)
 {
     if (theme != m_theme) {
-        qDebug() << "Theme is now: " << theme;
+//         qDebug() << "Theme is now: " << theme;
         m_theme = theme;
         load();
         emit themeChanged();
@@ -434,7 +444,7 @@ void IconModel::setPlasmaTheme(const QString& ptheme)
     if (m_plasmatheme != ptheme) {
         m_plasmatheme = ptheme;
         Plasma::Theme theme;
-        qDebug() << "Setting theme, package " << ptheme;
+//         qDebug() << "Setting theme, package " << ptheme;
         theme.setThemeName(ptheme);
         load();
         emit plasmaThemeChanged();
@@ -499,5 +509,10 @@ QString IconModel::categoryFromPath(const QString& path)
         }
     }
     return QString();
+}
+
+bool IconModel::loading()
+{
+    return m_loading;
 }
 
