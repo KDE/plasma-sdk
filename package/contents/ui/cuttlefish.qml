@@ -20,10 +20,7 @@
  ***************************************************************************/
 
 import QtQuick 2.1
-// import QtQuick.Controls 1.0
-// import QtQuick.Controls.Styles 1.0
 import QtQuick.Layouts 1.0
-//import QtQuick.Window 2.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
@@ -44,32 +41,6 @@ Item {
 
     function indexToSize(ix) {
 
-        /*
-         * from kiconloader.h
-         enum StdSizes {
-            /// small icons for menu entries
-            SizeSmall = 16,
-            /// slightly larger small icons for toolbars, panels, etc
-            SizeSmallMedium = 22,
-            /// medium sized icons for the desktop
-            SizeMedium = 32,
-            /// large sized icons for the panel
-            SizeLarge = 48,
-            /// huge sized icons for iconviews
-            SizeHuge = 64,
-            /// enormous sized icons for iconviews
-            SizeEnormous = 128
-
-         * from Plasma's units.cpp (this corrects for DPI)
-            m_iconSizes->insert("tiny", devicePixelIconSize(KIconLoader::SizeSmall) / 2);
-            m_iconSizes->insert("small", devicePixelIconSize(KIconLoader::SizeSmall));
-            m_iconSizes->insert("smallMedium", devicePixelIconSize(KIconLoader::SizeSmallMedium));
-            m_iconSizes->insert("medium", devicePixelIconSize(KIconLoader::SizeMedium));
-            m_iconSizes->insert("large", devicePixelIconSize(KIconLoader::SizeLarge));
-            m_iconSizes->insert("huge", devicePixelIconSize(KIconLoader::SizeHuge));
-            m_iconSizes->insert("enormous", devicePixelIconSize(KIconLoader::SizeEnormous));
-
-            */
             var sizes = new Array();
             sizes[0] = units.iconSizes.tiny;
             sizes[1] = units.iconSizes.small;
@@ -80,13 +51,6 @@ Item {
             sizes[6] = units.iconSizes.enormous;
 
             return sizes[ix];
-
-    }
-
-    Component.onCompleted: {
-        print("Hi from Cuttlefish!");
-        //dirModel.rootIndex = dirModel.indexForUrl("file:///usr/share/icons")
-        //dirModel.rootIndex = dirModel.index("/usr/share/icons")
     }
 
     Rectangle {
@@ -94,6 +58,7 @@ Item {
         color: theme.backgroundColor
         anchors.fill: parent
     }
+
     GridLayout {
 
         columns: 2

@@ -162,7 +162,7 @@ Rectangle {
             }
             PlasmaComponents.Label {
                 text: {
-                    print("SS:" + sizes);
+//                     print("SS:" + sizes);
                     /*var out;
                     for (s in sizes) {
                         out = out + ", " + s;
@@ -179,7 +179,7 @@ Rectangle {
                 text: i18n("Sizes:")
             }
             PlasmaComponents.Label {
-                text: sizes.join(", ")
+                text: (sizes != undefined) ? sizes.join(", ") : ""
 //                 text: {
 //                     print("SS:" + sizes);
 //                     var out;
