@@ -36,7 +36,7 @@
 #include <KIconLoader>
 #include <KIconTheme>
 #include <KSharedConfig>
-#include <PackageLoader>
+#include <KPackage/PackageLoader>
 
 #include <Plasma/Theme>
 
