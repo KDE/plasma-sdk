@@ -58,7 +58,7 @@ set (QT_MIN_VERSION "5.2.0")
 
 # Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
 find_package(KF5 REQUIRED COMPONENTS
-    Archive Completion Config ConfigWidgets CoreAddons I18n IconThemes KDE4Support
+	Archive Completion Config ConfigWidgets CoreAddons Declarative I18n IconThemes KDE4Support
     KIO NewStuff Parts Plasma PlasmaQuick Service TextEditor WidgetsAddons XmlGui)
 
 #########################################################################
@@ -70,6 +70,7 @@ remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FR
 
 option(PLASMATE_BUILD_WITH_KDEVPLATFORM "Build the plasmate repository with KDevPlatform Support" ON)
 
+add_subdirectory(cuttlefish)
 add_subdirectory(engineexplorer)
 add_subdirectory(plasmoidviewer)
 #add_subdirectory(remote-widgets-browser)
