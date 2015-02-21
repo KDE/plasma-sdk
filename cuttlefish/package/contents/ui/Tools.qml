@@ -25,25 +25,9 @@ import QtQuick.Layouts 1.0
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 PlasmaComponents.ToolBar {
-    /*
-    Rectangle {
 
-        color: theme.backgroundColor
-
-        Rectangle {
-            color: theme.highlightColor
-            height: units.gridUnit / 20
-            y: preview.y
-            width: preview.x
-            anchors {
-                left: parent.left
-            }
-        }
-    }
-    */
     Rectangle {
         color: theme.backgroundColor
         height: units.gridUnit / 20
@@ -51,7 +35,6 @@ PlasmaComponents.ToolBar {
         anchors {
             right: parent.right
             top: parent.bottom
-            //right: parent.right
         }
     }
     tools: RowLayout {
@@ -99,7 +82,10 @@ PlasmaComponents.ToolBar {
             tickmarksEnabled: true
             value: 4
 
-            onValueChanged: sizetimer.restart()
+            onValueChanged: {
+                sizetimer.restart()
+                pixelSizeInput.text = indexToSize(sizeslider.value);
+            }
 
             Timer {
                 id: sizetimer
@@ -111,11 +97,32 @@ PlasmaComponents.ToolBar {
                     iconSize = indexToSize(sizeslider.value);
                 }
             }
+
+            Component.onCompleted: {
+                pixelSizeInput.text = indexToSize(sizeslider.value);
+            }
         }
 
-        PlasmaComponents.Label {
-            anchors.verticalCenter: parent.verticalCenter
-            text: iconSize
+        PlasmaComponents.TextField {
+            id: pixelSizeInput
+
+            Layout.preferredWidth: units.gridUnit * 3
+
+            onTextChanged: {
+                if (pixelSizeInput.activeFocus) {
+                    pxSizetimer.restart()
+                }
+            }
+
+            Timer {
+                id: pxSizetimer
+                running: false
+                repeat: false
+                interval: 100
+                onTriggered: {
+                    iconSize = pixelSizeInput.text
+                }
+            }
         }
 
         Item {
