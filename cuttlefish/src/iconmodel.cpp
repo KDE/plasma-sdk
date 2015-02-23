@@ -400,7 +400,8 @@ bool IconModel::match(const QFileInfo& info)
 {
     bool ok = false;
 
-    bool catmatch = m_category.isEmpty();
+    // Category is empty or all? Skip further matching.
+    bool catmatch = m_category.isEmpty() || m_category == QStringLiteral("all");
     // category match?
     if (!catmatch && m_category == categoryFromPath(info.absoluteFilePath())) {
         catmatch = true;
