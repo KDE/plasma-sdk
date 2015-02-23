@@ -51,6 +51,26 @@ private Q_SLOTS:
     {
     };
 
+    void testCategoryFilter()
+    {
+        const int _all = m_iconModel->rowCount(QModelIndex());
+
+        m_iconModel->setFilter("edit");
+        const int _edit = m_iconModel->rowCount(QModelIndex());
+
+        m_iconModel->setCategory("actions");
+        const int _editactions = m_iconModel->rowCount(QModelIndex());
+
+        m_iconModel->setCategory("all");
+        const int _alledit = m_iconModel->rowCount(QModelIndex());
+
+        QVERIFY(_all > _edit);
+        QVERIFY(_all > _editactions);
+        QVERIFY(_edit >= _editactions);
+        QVERIFY(_alledit >= _editactions);
+    }
+
+
 
 private: // disable from here for testing just the above
 
