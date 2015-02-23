@@ -1,6 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2014 Sebastian Kügler <sebas@kde.org>                       *
+ *   Copyright 2014-2015 Sebastian Kügler <sebas@kde.org>                       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -19,8 +19,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef ICONMODEL_H
-#define ICONMODEL_H
+#ifndef CUTTLEFISHICONMODEL_H
+#define CUTTLEFISHICONMODEL_H
 
 #include <QAbstractListModel>
 #include <QJsonArray>
@@ -107,7 +107,7 @@ Q_SIGNALS:
 private:
     QHash<int, QByteArray> m_roleNames;
 
-    QStringList m_icons; // icon theme,
+    QStringList m_icons;
     QString m_category;
     QStringList m_categories;
     QString m_theme;
@@ -115,7 +115,7 @@ private:
     QStringList m_themes;
     QStringList m_plasmathemes;
     QString m_plasmatheme;
-    QHash<QString, QVariantMap> m_data; // icon theme,
+    QHash<QString, QVariantMap> m_data;
     QHash<QString, QString> m_categoryTranslations;
     QVariantMap m_svgIcons;
 
@@ -125,4 +125,4 @@ private:
 
 } // namespace
 
-#endif // ICONMODEL_H
+#endif // CUTTLEFISHICONMODEL_H

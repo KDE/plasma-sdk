@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef BROWSERVIEW_H
-#define BROWSERVIEW_H
+#ifndef CUTTEFISHVIEW_H
+#define CUTTEFISHVIEW_H
 
 #include <QQuickView>
 #include <KDirModel>
