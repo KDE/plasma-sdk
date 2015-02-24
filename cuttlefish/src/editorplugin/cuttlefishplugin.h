@@ -47,11 +47,8 @@ private Q_SLOTS:
     void contextMenuAboutToShow (KTextEditor::View *view, QMenu *menu);
     void documentCreated(KTextEditor::Document *document);
 
-    void showCuttleFish();
-    void iconPicked();
-
 private:
-    QAction m_action;
+    QList<QMenu*> m_decorated;
 };
 
 

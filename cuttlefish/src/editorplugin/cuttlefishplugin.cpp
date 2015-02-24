@@ -41,11 +41,7 @@ K_PLUGIN_FACTORY_WITH_JSON(CuttleFishPluginFactory, "cuttlefishplugin.json", reg
 
 CuttleFishPlugin::CuttleFishPlugin(QObject *parent, const QList<QVariant> &):
     KTextEditor::Plugin(parent)
-    , m_action(this)
 {
-    qDebug() << "CUTTLEFISH PLUGIN LOADED!";
-    m_action.setIcon(QIcon::fromTheme("cuttlefish"));
-    m_action.setText("Insert Icon with cuttlefish");
 }
 
 CuttleFishPlugin::~CuttleFishPlugin()
@@ -54,30 +50,20 @@ CuttleFishPlugin::~CuttleFishPlugin()
 
 QObject *CuttleFishPlugin::createView(KTextEditor::MainWindow *mainWindow)
 {
-    qDebug() << "CUTTLEFISH CREATE VIEW!";
+    Q_UNUSED(mainWindow);
     connect(KTextEditor::Editor::instance()->application(), &KTextEditor::Application::documentCreated,
             this, &CuttleFishPlugin::documentCreated);
     Q_FOREACH (auto doc, KTextEditor::Editor::instance()->application()->documents()) {
-        qDebug() << "Doc!";
         documentCreated(doc);
     }
-
-    //showCuttleFish();
-
     return new QObject(this);
 }
 
 void CuttleFishPlugin::documentCreated(KTextEditor::Document* document)
 {
-    qDebug() << "CUTTLEFISH documentCreated!!!";
-    Q_FOREACH (auto view, document->views()) {
-        qDebug() << "View!";
-    }
-
-    m_doc = document; // FIXME: we're currently not tracking this pointer
     connect(document, &KTextEditor::Document::viewCreated,
         [this](KTextEditor::Document *document, KTextEditor::View *view) {
-            qDebug() << "!!! ViewCreated";
+            Q_UNUSED(document);
             connect(view, &KTextEditor::View::contextMenuAboutToShow,
                     this, &CuttleFishPlugin::contextMenuAboutToShow);
         }
@@ -86,56 +72,49 @@ void CuttleFishPlugin::documentCreated(KTextEditor::Document* document)
 
 void CuttleFishPlugin::contextMenuAboutToShow(KTextEditor::View* view, QMenu* menu)
 {
-    qDebug() << "CUTTLEFISH ContextMenu!!!";
-    menu->addAction(&m_action);
-    //connect(&m_action, &QAction::triggered, this, &CuttleFishPlugin::showCuttleFish);
-
-    connect(&m_action, &QAction::triggered, [this, view] {
-        QProcess *cuttlefish = new QProcess(this);
-        const QString cfexe = QStandardPaths::findExecutable("cuttlefish");
-        qDebug() << "CU exe: " << cfexe;
-        cuttlefish->setProgram(cfexe);
-        connect(cuttlefish, &QProcess::readyReadStandardOutput,
-                [this, cuttlefish, view]() {
-                    qDebug() << "StdOut READ";
-                    auto qba = cuttlefish->readAllStandardOutput();
-                    qDebug() << "STDOUT: " << qba;
-
-                    m_doc->insertText(view->cursorPosition(), QString::fromLocal8Bit(qba));
-//                     m_doc->insertLine(0, QString::fromLocal8Bit(qba));
-                    cuttlefish->terminate();
-
-                }
-        );
-        cuttlefish->start();
+    Q_UNUSED(view);
+    if (m_decorated.contains(menu)) {
+        return;
     }
+    m_decorated << menu;
+    QAction *action = new QAction(menu);
+    action->setIcon(QIcon::fromTheme("cuttlefish"));
+    action->setText(i18n("Insert Icon with Cuttlefish"));
+    menu->addAction(action);
+
+    connect(action, &QAction::triggered,
+        [this] {
+            const QString cfexe = QStandardPaths::findExecutable("cuttlefish");
+
+            QProcess *cuttlefish = new QProcess(this);
+            cuttlefish->setProgram(cfexe);
+            cuttlefish->setArguments(QStringList() << "--picker");
+
+            connect(cuttlefish, &QProcess::readyReadStandardOutput,
+                [this, cuttlefish]() {
+                    auto qba = cuttlefish->readAllStandardOutput();
+                    auto view = KTextEditor::Editor::instance()->application()->activeMainWindow()->activeView();
+                    if (view) {
+                        view->document()->insertText(view->cursorPosition(), QString::fromLocal8Bit(qba));
+                    }
+                    cuttlefish->terminate();
+                }
+            );
+
+            connect(cuttlefish, &QProcess::stateChanged,
+                [cuttlefish](QProcess::ProcessState newState) {
+                    if (newState == QProcess::NotRunning &&
+                        KTextEditor::Editor::instance()->application()->activeMainWindow()) {
+
+                        delete cuttlefish;
+                    }
+                }
+            );
+
+            cuttlefish->start();
+        }
     );
 }
-
-void CuttleFishPlugin::showCuttleFish()
-{
-    qDebug() << "CUTTLFISH showCuttleFish";
-    QProcess *cuttlefish = new QProcess(this);
-    const QString cfexe = QStandardPaths::findExecutable("fake-cuttlefish");
-    qDebug() << "CU exe: " << cfexe;
-    cuttlefish->setProgram(cfexe);
-    connect(cuttlefish, &QProcess::readyReadStandardOutput,
-            [this, cuttlefish]() {
-                qDebug() << "StdOut READ";
-                auto qba = cuttlefish->readAllStandardOutput();
-                qDebug() << "STDOUT: " << qba;
-                //m_doc->insertAfterCursor(qba);
-
-            }
-    );
-    cuttlefish->start();
-}
-
-void CuttleFishPlugin::iconPicked()
-{
-    qDebug() << "CUTTLFISH iconPicked";
-}
-
 
 // required for CuttleFishPluginFactory vtable
 #include "cuttlefishplugin.moc"
