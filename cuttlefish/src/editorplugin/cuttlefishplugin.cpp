@@ -92,7 +92,7 @@ void CuttleFishPlugin::contextMenuAboutToShow(KTextEditor::View* view, QMenu* me
 
     connect(&m_action, &QAction::triggered, [this, view] {
         QProcess *cuttlefish = new QProcess(this);
-        const QString cfexe = QStandardPaths::findExecutable("fake-cuttlefish");
+        const QString cfexe = QStandardPaths::findExecutable("cuttlefish");
         qDebug() << "CU exe: " << cfexe;
         cuttlefish->setProgram(cfexe);
         connect(cuttlefish, &QProcess::readyReadStandardOutput,

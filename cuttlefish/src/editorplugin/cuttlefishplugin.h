@@ -52,10 +52,6 @@ private Q_SLOTS:
 
 private:
     QAction m_action;
-    KTextEditor::Document *m_doc;
-
-    QMap<QProcess*, KTextEditor::View*> m_views;
-
 };
 
 
