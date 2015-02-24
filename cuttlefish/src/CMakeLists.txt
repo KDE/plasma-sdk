@@ -20,3 +20,5 @@ target_link_libraries(cuttlefish
 )
 
 install( TARGETS cuttlefish ${INSTALL_TARGETS_DEFAULT_ARGS} )
+
+add_subdirectory(editorplugin)
