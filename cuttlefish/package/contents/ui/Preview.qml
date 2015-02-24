@@ -49,11 +49,14 @@ Rectangle {
     property bool scalable: true
 
     function clipboard(text) {
-        clipboardHelper.text = text;
-        clipboardHelper.selectAll();
-        clipboardHelper.copy();
-        print("Clippie!" + text);
-        iconModel.output(text);
+        if (!pickerMode) {
+            clipboardHelper.text = text;
+            clipboardHelper.selectAll();
+            clipboardHelper.copy();
+        } else {
+            print("Clippie!" + text);
+            iconModel.output(text);
+        }
 
     }
     TextEdit {
@@ -210,24 +213,24 @@ Rectangle {
             Layout.fillHeight: true
         }
         PlasmaComponents.ToolButton {
-            text: i18n("Copy icon name to clipboard")
+            text: pickerMode ? i18n("Insert icon name") : i18n("Copy icon name to clipboard")
             iconSource: "edit-copy"
             Layout.fillWidth: true
             onClicked: clipboard(preview.iconName);
         }
         PlasmaComponents.ToolButton {
-            text: i18n("Copy QtQuick code to clipboard")
+            text: pickerMode ?  i18n("Insert QtQuick code") : i18n("Copy QtQuick code to clipboard")
             iconSource: "edit-copy"
             Layout.fillWidth: true
             onClicked: {
                 var code = "/* Don't forget to import...\n\
 import org.kde.plasma.core 2.0 as PlasmaCore\n\
 */\n\
-PlasmaCore.IconItem {\n\
-    source: \"" + preview.iconName + "\"\n\
-    Layout.preferredWidth: units.iconSizes.medium\n\
-    Layout.preferredHeight: units.iconSizes.medium\n\
-}\n\
+    PlasmaCore.IconItem {\n\
+        source: \"" + preview.iconName + "\"\n\
+        Layout.preferredWidth: units.iconSizes.medium\n\
+        Layout.preferredHeight: units.iconSizes.medium\n\
+    }\n\
 ";
                 clipboard(code);
             }
