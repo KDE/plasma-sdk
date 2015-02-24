@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KTextEditor/Plugin
+X-KDE-Library=cuttlefishplugin
+Name=Icon Picker
+Comment=Invokes Cuttlefish icon picker
