@@ -1,6 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2014-2015 Sebastian Kügler <sebas@kde.org>                       *
+ *   Copyright 2014-2015 Sebastian Kügler <sebas@kde.org>                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -40,7 +40,11 @@
 
 #include <Plasma/Theme>
 
+#include <iostream>
+
 using namespace CuttleFish;
+
+static QTextStream cout(stdout);
 
 IconModel::IconModel(QObject *parent) :
     QAbstractListModel(parent),
@@ -517,5 +521,11 @@ QString IconModel::categoryFromPath(const QString& path)
 bool IconModel::loading()
 {
     return m_loading;
+}
+
+void IconModel::output(const QString& text)
+{
+    cout << text;
+    cout.flush();
 }
 

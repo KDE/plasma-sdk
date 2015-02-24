@@ -94,6 +94,8 @@ public:
     void load();
     void update();
 
+    Q_INVOKABLE void output(const QString &text);
+
 
 Q_SIGNALS:
     void filterChanged();

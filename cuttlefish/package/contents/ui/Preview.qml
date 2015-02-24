@@ -52,6 +52,8 @@ Rectangle {
         clipboardHelper.text = text;
         clipboardHelper.selectAll();
         clipboardHelper.copy();
+        print("Clippie!" + text);
+        iconModel.output(text);
 
     }
     TextEdit {
