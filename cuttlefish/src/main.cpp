@@ -50,12 +50,17 @@ int main(int argc, char **argv)
     QCommandLineOption fullscreen = QCommandLineOption(QStringList() << QStringLiteral("f") << _f,
                                i18n("Start full-screen"));
 
+    const static auto _p = QStringLiteral("picker");
+    QCommandLineOption picker = QCommandLineOption(QStringList() << QStringLiteral("p") << _p,
+                               i18n("Run in icon-picker mode"));
+
     QCommandLineParser parser;
     parser.addVersionOption();
     parser.setApplicationDescription(description);
     parser.addHelpOption();
     parser.addOption(category);
     parser.addOption(fullscreen);
+    parser.addOption(picker);
 
     parser.process(app);
 
