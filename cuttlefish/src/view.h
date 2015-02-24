@@ -21,6 +21,7 @@
 #ifndef CUTTEFISHVIEW_H
 #define CUTTEFISHVIEW_H
 
+#include <QCommandLineParser>
 #include <QQuickView>
 #include <KDirModel>
 #include <KDirLister>
@@ -34,7 +35,7 @@ class View : public QQuickView
     Q_OBJECT
 
 public:
-    explicit View(const QString &url, QWindow *parent = 0 );
+    explicit View(const QString &url, QCommandLineParser &parser, QWindow *parent = 0 );
     ~View();
 
 Q_SIGNALS:

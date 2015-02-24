@@ -525,7 +525,7 @@ bool IconModel::loading()
 
 void IconModel::output(const QString& text)
 {
-    cout << text;
+    cout << text.toLocal8Bit();
     cout.flush();
 }
 

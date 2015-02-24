@@ -66,7 +66,7 @@ int main(int argc, char **argv)
 
     QString _cc = parser.value(category);
 
-    auto settingsapp = new CuttleFish::View(_cc);
+    auto settingsapp = new CuttleFish::View(_cc, parser);
     if (parser.isSet(fullscreen)) {
         settingsapp->setVisibility(QWindow::FullScreen);
     }

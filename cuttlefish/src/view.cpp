@@ -35,7 +35,7 @@
 
 using namespace CuttleFish;
 
-View::View(const QString &url, QWindow *parent)
+View::View(const QString &url, QCommandLineParser &parser, QWindow *parent)
     : QQuickView(parent),
     m_browserRootItem(0)
 {
@@ -54,6 +54,7 @@ View::View(const QString &url, QWindow *parent)
     //m_dirModel.expandToUrl(QUrl::fromLocalFile("/usr/share/icons/"));
     auto iconModel = new IconModel(this);
     rootContext()->setContextProperty("iconModel", iconModel);
+    rootContext()->setContextProperty("pickerMode", parser.isSet("picker"));
     qmlRegisterType<IconModel>();
 
     m_package = Plasma::PluginLoader::self()->loadPackage("Plasma/Generic");
