@@ -5,9 +5,14 @@
     "delegate": "framesvg"
 },
 {
+    "imagePath": "widgets/tooltip",
+    "description": "The background for tooltip windows",
+    "delegate": "dialog"
+},
+{
     "imagePath": "dialogs/background",
     "description": "The background for popup windows",
-    "delegate": "framesvg"
+    "delegate": "dialog"
 },
 {
     "imagePath": "widgets/button",

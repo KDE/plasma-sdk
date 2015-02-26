@@ -18,42 +18,33 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.1
+import QtQuick.Controls 1.3
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-ApplicationWindow {
-    width: 500
-    height: 400
-    visible: true
-
-    toolBar: ToolBar {
-        RowLayout {
-            anchors.fill: parent
-            TextField {
-                placeholderText: i18n("Search...")
-                onTextChanged: searchModel.filterRegExp = ".*" + text + ".*"
+Item {
+    PlasmaCore.FrameSvgItem {
+        anchors {
+            fill: parent
+            margins: units.gridUnit
+        }
+        imagePath: model.imagePath
+        prefix: "shadow"
+        PlasmaCore.FrameSvgItem {
+            anchors {
+                fill: parent
+                leftMargin: parent.margins.left
+                topMargin: parent.margins.top
+                rightMargin: parent.margins.right
+                bottomMargin: parent.margins.bottom
             }
+            imagePath: model.imagePath
         }
     }
 
-    GridView {
-        id: view
-        anchors.fill: parent
-        model: PlasmaCore.SortFilterModel {
-            id: searchModel
-            sourceModel: themeModel
-            filterRole: "imagePath"
-        }
-        cellWidth: units.gridUnit * 15
-        cellHeight: cellWidth
-
-        delegate: Loader {
-            width: view.cellWidth
-            height: view.cellHeight
-            source: Qt.resolvedUrl("delegates/" + model.delegate + ".qml")
-        }
+    Label {
+        anchors.centerIn: parent
+        text: model.imagePath
     }
-
 }
