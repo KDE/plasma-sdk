@@ -34,6 +34,10 @@ ApplicationWindow {
     toolBar: ToolBar {
         RowLayout {
             anchors.fill: parent
+            CheckBox {
+                id: showMarginsCheckBox
+                text: i18n("Show Margins")
+            }
             Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
@@ -122,10 +126,6 @@ ApplicationWindow {
                 Layout.fillWidth: true
                 Layout.minimumHeight: width
                 source: Qt.resolvedUrl("delegates/" + model.delegate + ".qml")
-            }
-            CheckBox {
-                id: showMarginsCheckBox
-                text: i18n("Show Margins")
             }
             Item {
                 Layout.fillWidth: true
