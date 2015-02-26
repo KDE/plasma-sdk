@@ -73,6 +73,7 @@ option(PLASMATE_BUILD_WITH_KDEVPLATFORM "Build the plasmate repository with KDev
 add_subdirectory(cuttlefish)
 add_subdirectory(engineexplorer)
 add_subdirectory(plasmoidviewer)
+add_subdirectory(themeexplorer)
 #add_subdirectory(remote-widgets-browser)
 #add_subdirectory(wallpaperviewer)
 if(PLASMATE_BUILD_WITH_KDEVPLATFORM)
