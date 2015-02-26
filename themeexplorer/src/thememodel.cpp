@@ -26,14 +26,14 @@
 #include <QFile>
 #include <QIcon>
 #include <QStandardPaths>
-#include <QJsonDocument>
 
 #include <Plasma/Theme>
 
 
-ThemeModel::ThemeModel(QObject *parent)
+ThemeModel::ThemeModel(const QString &themeDescriptorJson, QObject *parent)
     : QAbstractListModel(parent),
-      m_theme(QStringLiteral("default"))
+      m_theme(QStringLiteral("default")),
+      m_themeDescriptorJson(themeDescriptorJson)
 {
     m_roleNames.insert(ImagePath, "imagePath");
 
@@ -54,18 +54,20 @@ QHash<int, QByteArray> ThemeModel::roleNames() const
 int ThemeModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
-    return 0;//m_data.size();
+    return m_jsonDoc.array().size();
 }
 
 QVariant ThemeModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid()) {
+    if (!index.isValid() || index.row() < 0 || index.row() > m_jsonDoc.array().size()) {
         return QVariant();
     }
 
+    const QVariantMap value = m_jsonDoc.array().at(index.row()).toObject().toVariantMap();
+
     switch (role) {
     case ImagePath:
-        return QVariant();
+        return value.value("imagePath");
     }
 
     return QVariant();
@@ -76,9 +78,20 @@ QVariant ThemeModel::data(const QModelIndex &index, int role) const
 
 void ThemeModel::load()
 {
-    qDebug() << "Loading theme description file";
+    beginResetModel();
+    qDebug() << "Loading theme description file" << m_themeDescriptorJson;
 
-    //QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll(), &e);
+    QFile jsonFile(m_themeDescriptorJson);
+    jsonFile.open(QIODevice::ReadOnly);
+
+    QJsonParseError error;
+    m_jsonDoc = QJsonDocument::fromJson(jsonFile.readAll(), &error);
+
+    if (error.error != QJsonParseError::NoError) {
+        qWarning() << "Error parsing Json" << error.errorString();
+    }
+
+    endResetModel();
 }
 
 QString ThemeModel::theme() const

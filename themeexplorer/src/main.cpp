@@ -18,6 +18,7 @@
  */
 
 #include <QGuiApplication>
+#include "thememodel.h"
 
 #include <klocalizedstring.h>
 #include <qcommandlineparser.h>
@@ -61,6 +62,9 @@ int main(int argc, char **argv)
     obj->setInitializationDelayed(true);
     obj->loadPackage(packagePath);
     obj->engine()->rootContext()->setContextProperty("commandlineArguments", parser.positionalArguments());
+
+    ThemeModel *themeModel = new ThemeModel(obj->package().filePath("data", "themeDescription.json"));
+    obj->engine()->rootContext()->setContextProperty("themeModel", QVariant::fromValue(themeModel));
 
     obj->completeInitialization();
 

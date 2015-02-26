@@ -22,8 +22,8 @@ import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.1
 
 ApplicationWindow {
-    width: 300
-    height: 100
+    width: 500
+    height: 400
     visible: true
 
     menuBar: MenuBar {
@@ -47,12 +47,12 @@ ApplicationWindow {
         }
     }
 
-    Column {
-        Label {
-            text: i18n("Hello world")
+    GridView {
+        anchors.fill: parent
+        model: themeModel
+        delegate: Label {
+            text: model.imagePath
         }
-        Label {
-            text: commandlineArguments.join(" ")
-        }    
     }
+
 }

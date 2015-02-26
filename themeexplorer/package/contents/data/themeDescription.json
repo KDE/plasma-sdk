@@ -1,0 +1,10 @@
+[
+{
+    "imagePath": "widgets/background",
+    "description": "The default background for plasmoids"
+},
+{
+    "imagePath": "dialogs/background",
+    "description": "The background for popup windows"
+}
+]

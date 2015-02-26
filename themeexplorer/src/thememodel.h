@@ -23,6 +23,7 @@
 #include <QAbstractListModel>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QJsonDocument>
 
 class ThemeModel : public QAbstractListModel
 {
@@ -35,7 +36,7 @@ public:
         ImagePath
     };
 
-    explicit ThemeModel(QObject *parent = 0);
+    explicit ThemeModel(const QString &themeDescriptorJson, QObject *parent = 0);
     ~ThemeModel();
 
     virtual QHash<int, QByteArray> roleNames() const;
@@ -54,6 +55,8 @@ private:
     QHash<int, QByteArray> m_roleNames;
 
     QString m_theme;
+    QString m_themeDescriptorJson;
+    QJsonDocument m_jsonDoc;
 };
 
 #endif // THEMEMODEL_H
