@@ -29,11 +29,14 @@ namespace Plasma {
     class Theme;
 }
 
+class ThemeListModel;
+
 class ThemeModel : public QAbstractListModel
 {
     Q_OBJECT
 
     Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
+    Q_PROPERTY(ThemeListModel *themeList READ themeList CONSTANT)
 
 public:
     enum Roles {
@@ -47,6 +50,8 @@ public:
 
     explicit ThemeModel(const QString &themeDescriptorJson, QObject *parent = 0);
     ~ThemeModel();
+
+    ThemeListModel *themeList();
 
     virtual QHash<int, QByteArray> roleNames() const;
     virtual int rowCount(const QModelIndex &parent) const;
@@ -67,6 +72,7 @@ private:
     QString m_themeName;
     QString m_themeDescriptorJson;
     QJsonDocument m_jsonDoc;
+    ThemeListModel *m_themeListModel;
 };
 
 #endif // THEMEMODEL_H

@@ -3,6 +3,7 @@
 set(plasmathemeexplorer_SRCS
     main.cpp
     thememodel.cpp
+    themelistmodel.cpp
 )
 
 add_executable(plasmathemeexplorer ${plasmathemeexplorer_SRCS})

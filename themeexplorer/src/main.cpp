@@ -18,12 +18,14 @@
  */
 
 #include <QApplication>
+#include "themelistmodel.h"
 #include "thememodel.h"
 
 #include <klocalizedstring.h>
 #include <qcommandlineparser.h>
 #include <qcommandlineoption.h>
 #include <QQuickItem>
+#include <QtQml>
 
 #include <kpackage/package.h>
 #include <kpackage/packageloader.h>
@@ -63,6 +65,7 @@ int main(int argc, char **argv)
     obj->loadPackage(packagePath);
     obj->engine()->rootContext()->setContextProperty("commandlineArguments", parser.positionalArguments());
 
+    qmlRegisterType<ThemeListModel>();
     ThemeModel *themeModel = new ThemeModel(obj->package().filePath("data", "themeDescription.json"));
     if (parser.isSet(themeOption)) {
         themeModel->setTheme(parser.value(themeOption));

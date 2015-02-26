@@ -34,6 +34,18 @@ ApplicationWindow {
     toolBar: ToolBar {
         RowLayout {
             anchors.fill: parent
+            Label {
+                text: i18n("Theme:")
+            }
+            ComboBox {
+                id: themeSelector
+                //FIXME: why crashes?
+                //model: 3//themeModel.themeList
+                textRole: "packageNameRole"
+                onCurrentIndexChanged: {
+                    themeModel.theme = themeModel.themeList.get(currentIndex).packageNameRole;
+                }
+            }
             CheckBox {
                 id: showMarginsCheckBox
                 text: i18n("Show Margins")
@@ -49,6 +61,13 @@ ApplicationWindow {
         }
     }
 
+    Timer {
+        running: true
+        interval: 200
+        onTriggered: {
+            themeSelector.model = themeModel.themeList
+        }
+    }
     SystemPalette {
         id: palette
     }

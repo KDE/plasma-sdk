@@ -18,6 +18,7 @@
  */
 
 #include "thememodel.h"
+#include "themelistmodel.h"
 
 #include <QDebug>
 #include <QByteArray>
@@ -34,7 +35,8 @@ ThemeModel::ThemeModel(const QString &themeDescriptorJson, QObject *parent)
     : QAbstractListModel(parent),
       m_theme(new Plasma::Theme),
       m_themeName(QStringLiteral("default")),
-      m_themeDescriptorJson(themeDescriptorJson)
+      m_themeDescriptorJson(themeDescriptorJson),
+      m_themeListModel(new ThemeListModel(this))
 {
     m_theme->setUseGlobalSettings(false);
     m_theme->setThemeName(m_themeName);
@@ -51,6 +53,11 @@ ThemeModel::ThemeModel(const QString &themeDescriptorJson, QObject *parent)
 
 ThemeModel::~ThemeModel()
 {
+}
+
+ThemeListModel *ThemeModel::themeList()
+{
+    return m_themeListModel;
 }
 
 QHash<int, QByteArray> ThemeModel::roleNames() const
