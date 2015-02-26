@@ -28,6 +28,7 @@ ApplicationWindow {
     width: units.gridUnit * 50
     height: units.gridUnit * 35
     visible: true
+    property int iconSize: iconSizeSlider.value
 
     toolBar: ToolBar {
         RowLayout {
@@ -40,6 +41,22 @@ ApplicationWindow {
                 placeholderText: i18n("Search...")
                 onTextChanged: searchModel.filterRegExp = ".*" + text + ".*"
             }
+        }
+    }
+
+    statusBar: RowLayout {
+        anchors.fill: parent
+        height: units.gridUnit * 1.5
+        Item {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
+        Slider {
+            id: iconSizeSlider
+            Layout.minimumWidth: root.width / 3
+            value: units.gridUnit * 12
+            minimumValue: units.gridUnit * 5
+            maximumValue: units.gridUnit * 20
         }
     }
 
@@ -62,7 +79,7 @@ ApplicationWindow {
                 sourceModel: themeModel
                 filterRole: "imagePath"
             }
-            cellWidth: units.gridUnit * 15
+            cellWidth: root.iconSize
             cellHeight: cellWidth
             highlightMoveDuration: 0
 
