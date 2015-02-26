@@ -19,13 +19,23 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
+import QtQuick.Controls 1.3
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
-    PlasmaComponents.Button {
+    Column {
         anchors.centerIn: parent
-        text: model.imagePath
+        PlasmaComponents.ToolButton {
+            text: i18n("ToolButton")
+        }
+        PlasmaComponents.Button {
+            text: i18n("Button")
+        }
+        Label {
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: model.imagePath
+        }
     }
 }
