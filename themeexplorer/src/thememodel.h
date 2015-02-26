@@ -25,6 +25,10 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 
+namespace Plasma {
+    class Theme;
+}
+
 class ThemeModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -35,7 +39,8 @@ public:
     enum Roles {
         ImagePath,
         Description,
-        Delegate
+        Delegate,
+        SvgAbsolutePath
     };
 
     explicit ThemeModel(const QString &themeDescriptorJson, QObject *parent = 0);
@@ -56,7 +61,8 @@ Q_SIGNALS:
 private:
     QHash<int, QByteArray> m_roleNames;
 
-    QString m_theme;
+    Plasma::Theme *m_theme;
+    QString m_themeName;
     QString m_themeDescriptorJson;
     QJsonDocument m_jsonDoc;
 };

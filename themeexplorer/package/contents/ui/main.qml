@@ -138,6 +138,10 @@ ApplicationWindow {
             Button {
                 text: i18n("Open In Editor...")
                 Layout.alignment: Qt.AlignHCenter
+                onClicked: {
+                    print(view.currentItem.modelData.svgAbsolutePath)
+                    Qt.openUrlExternally(view.currentItem.modelData.svgAbsolutePath)
+                }
             }
         }
     }

@@ -32,12 +32,14 @@
 
 ThemeModel::ThemeModel(const QString &themeDescriptorJson, QObject *parent)
     : QAbstractListModel(parent),
-      m_theme(QStringLiteral("default")),
+      m_theme(new Plasma::Theme),
+      m_themeName(QStringLiteral("default")),
       m_themeDescriptorJson(themeDescriptorJson)
 {
     m_roleNames.insert(ImagePath, "imagePath");
     m_roleNames.insert(Description, "description");
     m_roleNames.insert(Delegate, "delegate");
+    m_roleNames.insert(SvgAbsolutePath, "svgAbsolutePath");
 
     load();
 }
@@ -72,6 +74,8 @@ QVariant ThemeModel::data(const QModelIndex &index, int role) const
         return value.value("description");
     case Delegate:
         return value.value("delegate");
+    case SvgAbsolutePath:
+        return m_theme->imagePath(value.value("imagePath").toString());
     }
 
     return QVariant();
@@ -100,16 +104,16 @@ void ThemeModel::load()
 
 QString ThemeModel::theme() const
 {
-    return m_theme;
+    return m_themeName;
 }
 
 void ThemeModel::setTheme(const QString& theme)
 {
-    if (theme == m_theme) {
+    if (theme == m_themeName) {
         return;
     }
 
-    m_theme = theme;
+    m_themeName = theme;
     load();
     emit themeChanged();
 }
