@@ -36,8 +36,8 @@ ThemeModel::ThemeModel(const QString &themeDescriptorJson, QObject *parent)
       m_themeDescriptorJson(themeDescriptorJson)
 {
     m_roleNames.insert(ImagePath, "imagePath");
-
-    
+    m_roleNames.insert(Description, "description");
+    m_roleNames.insert(Delegate, "delegate");
 
     load();
 }
@@ -68,6 +68,10 @@ QVariant ThemeModel::data(const QModelIndex &index, int role) const
     switch (role) {
     case ImagePath:
         return value.value("imagePath");
+    case Description:
+        return value.value("description");
+    case Delegate:
+        return value.value("delegate");
     }
 
     return QVariant();

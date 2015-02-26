@@ -1,10 +1,17 @@
 [
 {
     "imagePath": "widgets/background",
-    "description": "The default background for plasmoids"
+    "description": "The default background for plasmoids",
+    "delegate": "framesvg"
 },
 {
     "imagePath": "dialogs/background",
-    "description": "The background for popup windows"
+    "description": "The background for popup windows",
+    "delegate": "framesvg"
+},
+{
+    "imagePath": "widgets/button",
+    "description": "Graphics for Buttons",
+    "delegate": "button"
 }
 ]

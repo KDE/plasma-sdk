@@ -33,7 +33,9 @@ class ThemeModel : public QAbstractListModel
 
 public:
     enum Roles {
-        ImagePath
+        ImagePath,
+        Description,
+        Delegate
     };
 
     explicit ThemeModel(const QString &themeDescriptorJson, QObject *parent = 0);

@@ -1,5 +1,5 @@
 /*
- *   Copyright 2014 Marco Martin <mart@kde.org>
+ *   Copyright 2015 Marco Martin <mart@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -21,6 +21,8 @@ import QtQuick 2.0
 import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.1
 
+import org.kde.plasma.core 2.0 as PlasmaCore
+
 ApplicationWindow {
     width: 500
     height: 400
@@ -41,17 +43,28 @@ ApplicationWindow {
     toolBar: ToolBar {
         RowLayout {
             anchors.fill: parent
-            ToolButton {
-                text: i18n("Button")
+            TextField {
+                placeholderText: i18n("Search...")
+                onTextChanged: searchModel.filterRegExp = ".*" + text + ".*"
             }
         }
     }
 
     GridView {
+        id: view
         anchors.fill: parent
-        model: themeModel
-        delegate: Label {
-            text: model.imagePath
+        model: PlasmaCore.SortFilterModel {
+            id: searchModel
+            sourceModel: themeModel
+            filterRole: "imagePath"
+        }
+        cellWidth: units.gridUnit * 15
+        cellHeight: cellWidth
+
+        delegate: Loader {
+            width: view.cellWidth
+            height: view.cellHeight
+            source: Qt.resolvedUrl("delegates/" + model.delegate + ".qml")
         }
     }
 
