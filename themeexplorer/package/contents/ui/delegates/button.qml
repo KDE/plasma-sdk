@@ -26,6 +26,7 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
     Rectangle {
+        id: background
         anchors {
             fill: parent
             margins: units.gridUnit * 2
@@ -38,13 +39,16 @@ Item {
         anchors.centerIn: parent
         PlasmaComponents.ToolButton {
             text: i18n("ToolButton")
+            width: background.width - 10
         }
         PlasmaComponents.Button {
             text: i18n("Button")
+            width: background.width - 10
         }
         PlasmaComponents.Label {
             anchors.horizontalCenter: parent.horizontalCenter
             text: model.imagePath
+            visible: width < background.width
         }
     }
 }

@@ -33,6 +33,7 @@ Item {
         imagePath: model.imagePath
 
         Rectangle {
+            id: marginsRectangle
             anchors {
                 fill: parent
                 leftMargin: parent.margins.left
@@ -49,5 +50,6 @@ Item {
     PlasmaComponents.Label {
         anchors.centerIn: parent
         text: model.imagePath
+        visible: width < marginsRectangle.width
     }
 }

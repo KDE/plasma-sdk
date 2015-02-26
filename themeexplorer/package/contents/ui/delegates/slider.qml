@@ -25,45 +25,25 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
-    PlasmaCore.FrameSvgItem {
+    Rectangle {
         id: background
         anchors {
             fill: parent
-            margins: units.gridUnit
+            margins: units.gridUnit * 2
         }
-        imagePath: model.imagePath
-        onImagePathChanged: visible = hasElementPrefix("shadow")
-        prefix: "shadow"
+        radius: 3
+        color: theme.backgroundColor
+        opacity: 0.6
     }
-    
-    PlasmaCore.FrameSvgItem {
-        anchors {
-            fill: background
-            leftMargin: background.margins.left
-            topMargin: background.margins.top
-            rightMargin: background.margins.right
-            bottomMargin: background.margins.bottom
+    Column {
+        anchors.centerIn: background
+        PlasmaComponents.Slider {
+            width: background.width - 10
         }
-        imagePath: model.imagePath
-
-        Rectangle {
-            id: marginsRectangle
-            anchors {
-                fill: parent
-                leftMargin: parent.margins.left
-                topMargin: parent.margins.top
-                rightMargin: parent.margins.right
-                bottomMargin: parent.margins.bottom
-            }
-            color: "green"
-            opacity: 0.5
-            visible: root.showMargins
+        PlasmaComponents.Label {
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: model.imagePath
+            visible: width < background.width
         }
-    }
-
-    PlasmaComponents.Label {
-        anchors.centerIn: parent
-        text: model.imagePath
-        visible: width < marginsRectangle.width
     }
 }

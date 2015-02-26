@@ -18,5 +18,10 @@
     "imagePath": "widgets/button",
     "description": "Graphics for Buttons and Toolbuttons, such as button face in normal and pressed states and the focus indicator",
     "delegate": "button"
+},
+{
+    "imagePath": "widgets/slider",
+    "description": "Graphics for the Slider widget, such has its groove and its handle",
+    "delegate": "slider"
 }
 ]
