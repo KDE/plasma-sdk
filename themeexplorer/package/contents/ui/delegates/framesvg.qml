@@ -31,6 +31,19 @@ Item {
             margins: units.gridUnit
         }
         imagePath: model.imagePath
+
+        Rectangle {
+            anchors {
+                fill: parent
+                leftMargin: parent.margins.left
+                topMargin: parent.margins.top
+                rightMargin: parent.margins.right
+                bottomMargin: parent.margins.bottom
+            }
+            color: "green"
+            opacity: 0.5
+            visible: root.showMargins
+        }
     }
 
     PlasmaComponents.Label {

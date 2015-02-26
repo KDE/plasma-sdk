@@ -29,6 +29,7 @@ ApplicationWindow {
     height: units.gridUnit * 35
     visible: true
     property int iconSize: iconSizeSlider.value
+    property alias showMargins: showMarginsCheckBox.checked
 
     toolBar: ToolBar {
         RowLayout {
@@ -121,6 +122,10 @@ ApplicationWindow {
                 Layout.fillWidth: true
                 Layout.minimumHeight: width
                 source: Qt.resolvedUrl("delegates/" + model.delegate + ".qml")
+            }
+            CheckBox {
+                id: showMarginsCheckBox
+                text: i18n("Show Margins")
             }
             Item {
                 Layout.fillWidth: true
