@@ -22,6 +22,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.3
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
     PlasmaCore.FrameSvgItem {
@@ -32,7 +33,7 @@ Item {
         imagePath: model.imagePath
     }
 
-    Label {
+    PlasmaComponents.Label {
         anchors.centerIn: parent
         text: model.imagePath
     }

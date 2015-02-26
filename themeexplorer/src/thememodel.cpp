@@ -36,6 +36,8 @@ ThemeModel::ThemeModel(const QString &themeDescriptorJson, QObject *parent)
       m_themeName(QStringLiteral("default")),
       m_themeDescriptorJson(themeDescriptorJson)
 {
+    m_theme->setUseGlobalSettings(false);
+    //m_theme->setThemeName("breeze-dark");
     m_roleNames.insert(ImagePath, "imagePath");
     m_roleNames.insert(Description, "description");
     m_roleNames.insert(Delegate, "delegate");

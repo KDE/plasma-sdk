@@ -111,6 +111,10 @@ ApplicationWindow {
                 fill: parent
                 margins: units.gridUnit
             }
+            Label {
+                Layout.fillWidth: true
+                text: i18n("Preview:")
+            }
             Loader {
                 id: extendedLoader
                 property QtObject model: view.currentItem.modelData
