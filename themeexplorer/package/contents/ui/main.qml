@@ -44,22 +44,6 @@ ApplicationWindow {
         }
     }
 
-    statusBar: RowLayout {
-        anchors.fill: parent
-        height: units.gridUnit * 1.5
-        Item {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-        }
-        Slider {
-            id: iconSizeSlider
-            Layout.minimumWidth: root.width / 3
-            value: units.gridUnit * 12
-            minimumValue: units.gridUnit * 5
-            maximumValue: units.gridUnit * 20
-        }
-    }
-
     SystemPalette {
         id: palette
     }
@@ -95,8 +79,21 @@ ApplicationWindow {
                     view.currentIndex = index;
                 }
                 Loader {
+                    z: -1
                     anchors.fill: parent
                     source: Qt.resolvedUrl("delegates/" + model.delegate + ".qml")
+                }
+                Rectangle {
+                    anchors {
+                        right: parent.right
+                        bottom: parent.bottom
+                        margins: units.gridUnit
+                    }
+                    width: units.gridUnit
+                    height: units.gridUnit
+                    radius: units.gridUnit
+                    opacity: 0.5
+                    color: model.usesFallback ? "red" : "green"
                 }
             }
         }
@@ -135,13 +132,25 @@ ApplicationWindow {
                 text: i18n("Description: %1", view.currentItem.modelData.description)
                 wrapMode: Text.WordWrap
             }
+            Label {
+                Layout.fillWidth: true
+                text: view.currentItem.modelData.usesFallback ? i18n("Missing from this theme") : i18n("Present in this theme")
+                wrapMode: Text.WordWrap
+            }
             Button {
-                text: i18n("Open In Editor...")
+                text: view.currentItem.modelData.usesFallback ? i18n("Create with Editor...") : i18n("Open In Editor...")
                 Layout.alignment: Qt.AlignHCenter
                 onClicked: {
                     print(view.currentItem.modelData.svgAbsolutePath)
                     Qt.openUrlExternally(view.currentItem.modelData.svgAbsolutePath)
                 }
+            }
+            Slider {
+                id: iconSizeSlider
+                Layout.fillWidth: true
+                value: units.gridUnit * 12
+                minimumValue: units.gridUnit * 5
+                maximumValue: units.gridUnit * 20
             }
         }
     }

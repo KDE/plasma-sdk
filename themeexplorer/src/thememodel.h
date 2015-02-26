@@ -40,6 +40,7 @@ public:
         ImagePath,
         Description,
         Delegate,
+        UsesFallback,
         SvgAbsolutePath
     };
 

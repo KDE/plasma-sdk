@@ -39,6 +39,7 @@ ThemeModel::ThemeModel(const QString &themeDescriptorJson, QObject *parent)
     m_roleNames.insert(ImagePath, "imagePath");
     m_roleNames.insert(Description, "description");
     m_roleNames.insert(Delegate, "delegate");
+    m_roleNames.insert(UsesFallback, "usesFallback");
     m_roleNames.insert(SvgAbsolutePath, "svgAbsolutePath");
 
     load();
@@ -74,6 +75,8 @@ QVariant ThemeModel::data(const QModelIndex &index, int role) const
         return value.value("description");
     case Delegate:
         return value.value("delegate");
+    case UsesFallback:
+        return !m_theme->currentThemeHasImage(value.value("imagePath").toString());
     case SvgAbsolutePath:
         return m_theme->imagePath(value.value("imagePath").toString());
     }

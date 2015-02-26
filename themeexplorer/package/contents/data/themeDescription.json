@@ -6,17 +6,17 @@
 },
 {
     "imagePath": "widgets/tooltip",
-    "description": "The background for tooltip windows",
+    "description": "The background for tooltip windows: the shadow is on a separate frame in order to be passed to KWin",
     "delegate": "dialog"
 },
 {
     "imagePath": "dialogs/background",
-    "description": "The background for popup windows",
+    "description": "The background for popup windows: the shadow is on a separate frame in order to be passed to KWin",
     "delegate": "dialog"
 },
 {
     "imagePath": "widgets/button",
-    "description": "Graphics for Buttons",
+    "description": "Graphics for Buttons and Toolbuttons, such as button face in normal and pressed states and the focus indicator",
     "delegate": "button"
 }
 ]
