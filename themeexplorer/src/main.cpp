@@ -64,6 +64,9 @@ int main(int argc, char **argv)
     obj->engine()->rootContext()->setContextProperty("commandlineArguments", parser.positionalArguments());
 
     ThemeModel *themeModel = new ThemeModel(obj->package().filePath("data", "themeDescription.json"));
+    if (parser.isSet(themeOption)) {
+        themeModel->setTheme(parser.value(themeOption));
+    }
     obj->engine()->rootContext()->setContextProperty("themeModel", QVariant::fromValue(themeModel));
 
     obj->completeInitialization();

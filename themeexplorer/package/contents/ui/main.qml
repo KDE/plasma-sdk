@@ -143,6 +143,7 @@ ApplicationWindow {
             }
             Button {
                 text: view.currentItem.modelData.usesFallback ? i18n("Create with Editor...") : i18n("Open In Editor...")
+                enabled: view.currentItem.modelData.isWritable
                 Layout.alignment: Qt.AlignHCenter
                 onClicked: {
                     print(view.currentItem.modelData.svgAbsolutePath)

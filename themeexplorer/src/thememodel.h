@@ -41,7 +41,8 @@ public:
         Description,
         Delegate,
         UsesFallback,
-        SvgAbsolutePath
+        SvgAbsolutePath,
+        IsWritable
     };
 
     explicit ThemeModel(const QString &themeDescriptorJson, QObject *parent = 0);

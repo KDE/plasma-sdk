@@ -37,12 +37,14 @@ ThemeModel::ThemeModel(const QString &themeDescriptorJson, QObject *parent)
       m_themeDescriptorJson(themeDescriptorJson)
 {
     m_theme->setUseGlobalSettings(false);
-    //m_theme->setThemeName("breeze-dark");
+    m_theme->setThemeName(m_themeName);
+
     m_roleNames.insert(ImagePath, "imagePath");
     m_roleNames.insert(Description, "description");
     m_roleNames.insert(Delegate, "delegate");
     m_roleNames.insert(UsesFallback, "usesFallback");
     m_roleNames.insert(SvgAbsolutePath, "svgAbsolutePath");
+    m_roleNames.insert(IsWritable, "isWritable");
 
     load();
 }
@@ -81,6 +83,8 @@ QVariant ThemeModel::data(const QModelIndex &index, int role) const
         return !m_theme->currentThemeHasImage(value.value("imagePath").toString());
     case SvgAbsolutePath:
         return m_theme->imagePath(value.value("imagePath").toString());
+    case IsWritable:
+        return QFile::exists(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/plasma/desktoptheme/" + m_themeName);
     }
 
     return QVariant();
@@ -119,6 +123,7 @@ void ThemeModel::setTheme(const QString& theme)
     }
 
     m_themeName = theme;
+    m_theme->setThemeName(theme);
     load();
     emit themeChanged();
 }
