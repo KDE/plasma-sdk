@@ -18,6 +18,8 @@ target_link_libraries(plasmathemeexplorer
  KF5::I18n
  KF5::Package
  KF5::Plasma
+ KF5::KIOCore
+ KF5::KIOWidgets
  KF5::QuickAddons
 )
 

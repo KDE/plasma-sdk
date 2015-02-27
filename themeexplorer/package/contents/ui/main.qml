@@ -176,7 +176,8 @@ ApplicationWindow {
                 Layout.alignment: Qt.AlignHCenter
                 onClicked: {
                     print(view.currentItem.modelData.svgAbsolutePath)
-                    Qt.openUrlExternally(view.currentItem.modelData.svgAbsolutePath)
+                    themeModel.editElement(view.currentItem.modelData.imagePath)
+                    //Qt.openUrlExternally(view.currentItem.modelData.svgAbsolutePath)
                 }
             }
             Slider {

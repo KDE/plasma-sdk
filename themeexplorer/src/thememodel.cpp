@@ -27,15 +27,19 @@
 #include <QFile>
 #include <QIcon>
 #include <QStandardPaths>
+#include <QVersionNumber>
+
+#include <KProcess>
+#include <KIO/Job>
 
 #include <Plasma/Theme>
 
 
-ThemeModel::ThemeModel(const QString &themeDescriptorJson, QObject *parent)
+ThemeModel::ThemeModel(const KPackage::Package &package, QObject *parent)
     : QAbstractListModel(parent),
       m_theme(new Plasma::Theme),
       m_themeName(QStringLiteral("default")),
-      m_themeDescriptorJson(themeDescriptorJson),
+      m_package(package),
       m_themeListModel(new ThemeListModel(this))
 {
     m_theme->setUseGlobalSettings(false);
@@ -108,9 +112,9 @@ QVariant ThemeModel::data(const QModelIndex &index, int role) const
 void ThemeModel::load()
 {
     beginResetModel();
-    qDebug() << "Loading theme description file" << m_themeDescriptorJson;
+    qDebug() << "Loading theme description file" << m_package.filePath("data", "themeDescription.json");
 
-    QFile jsonFile(m_themeDescriptorJson);
+    QFile jsonFile(m_package.filePath("data", "themeDescription.json"));
     jsonFile.open(QIODevice::ReadOnly);
 
     QJsonParseError error;
@@ -138,6 +142,51 @@ void ThemeModel::setTheme(const QString& theme)
     m_theme->setThemeName(theme);
     load();
     emit themeChanged();
+}
+
+void ThemeModel::editElement(const QString& imagePath)
+{
+    QString file = m_theme->imagePath(imagePath);
+    if (!file.contains("translucent")) {
+            file = file.replace("translucent/", "");
+    }
+
+    QString finalFile;
+
+    if (m_theme->currentThemeHasImage(imagePath)) {
+        finalFile = file;
+    } else {
+        finalFile = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/plasma/desktoptheme/" + m_themeName + "/" + imagePath + ".svgz";
+        KIO::FileCopyJob *job = KIO::file_copy( QUrl::fromLocalFile(file), QUrl::fromLocalFile(finalFile) );
+        if (!job->exec()) {
+            qWarning() << "Error copying" << file << "to" << finalFile;
+        }
+    }
+
+    //QProcess::startDetached("inkscape", QStringList() << finalFile);
+    KProcess *process = new KProcess();
+    //TODO: don't use the script to not depend from bash/linux?
+    process->setProgram("bash", QStringList() << m_package.filePath("scripts", "openInEditor.sh") << finalFile);
+
+    connect(process, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(processFinished()));
+    process->start();
+}
+
+void ThemeModel::processFinished()
+{
+    qWarning()<<sender();
+    
+
+    /*We increment the microversion of the theme: keeps track and will force the cache to be
+      discarded in order to reload immediately the graphics*/
+    const QString metadataPath(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1Literal("plasma/desktoptheme/") % m_themeName % QLatin1Literal("/metadata.desktop")));
+    KConfig c(metadataPath);
+    KConfigGroup cg(&c, "Desktop Entry");
+
+    QVersionNumber version = QVersionNumber::fromString(cg.readEntry("X-KDE-PluginInfo-Version", "0.0"));
+
+    cg.writeEntry("X-KDE-PluginInfo-Version", QVersionNumber(version.majorVersion(), version.minorVersion(), version.microVersion() + 1).toString());
+    cg.sync();
 }
 
 #include "moc_thememodel.cpp"

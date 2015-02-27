@@ -66,7 +66,7 @@ int main(int argc, char **argv)
     obj->engine()->rootContext()->setContextProperty("commandlineArguments", parser.positionalArguments());
 
     qmlRegisterType<ThemeListModel>();
-    ThemeModel *themeModel = new ThemeModel(obj->package().filePath("data", "themeDescription.json"));
+    ThemeModel *themeModel = new ThemeModel(obj->package());
     if (parser.isSet(themeOption)) {
         themeModel->setTheme(parser.value(themeOption));
     }

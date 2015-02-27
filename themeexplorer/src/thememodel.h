@@ -24,6 +24,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <kpackage/package.h>
 
 namespace Plasma {
     class Theme;
@@ -48,7 +49,7 @@ public:
         IsWritable
     };
 
-    explicit ThemeModel(const QString &themeDescriptorJson, QObject *parent = 0);
+    explicit ThemeModel(const KPackage::Package &package, QObject *parent = 0);
     ~ThemeModel();
 
     ThemeListModel *themeList();
@@ -62,15 +63,20 @@ public:
 
     void load();
 
+    Q_INVOKABLE void editElement(const QString& imagePath);
+
 Q_SIGNALS:
     void themeChanged();
+
+private Q_SLOTS:
+    void processFinished();
 
 private:
     QHash<int, QByteArray> m_roleNames;
 
     Plasma::Theme *m_theme;
     QString m_themeName;
-    QString m_themeDescriptorJson;
+    KPackage::Package m_package;
     QJsonDocument m_jsonDoc;
     ThemeListModel *m_themeListModel;
 };
