@@ -31,7 +31,7 @@ Item {
             fill: parent
             margins: units.gridUnit
         }
-        imagePath: model.svgAbsolutePath
+        imagePath: model.imagePath
         onImagePathChanged: visible = hasElementPrefix("shadow")
         prefix: "shadow"
     }
@@ -44,7 +44,7 @@ Item {
             rightMargin: background.margins.right
             bottomMargin: background.margins.bottom
         }
-        imagePath: model.svgAbsolutePath
+        imagePath: model.imagePath
 
         Rectangle {
             id: marginsRectangle

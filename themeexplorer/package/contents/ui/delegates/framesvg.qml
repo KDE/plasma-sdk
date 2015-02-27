@@ -30,7 +30,7 @@ Item {
             fill: parent
             margins: units.gridUnit
         }
-        imagePath: model.svgAbsolutePath
+        imagePath: model.imagePath
 
         Rectangle {
             id: marginsRectangle
