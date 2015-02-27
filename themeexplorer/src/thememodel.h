@@ -46,7 +46,8 @@ public:
         Delegate,
         UsesFallback,
         SvgAbsolutePath,
-        IsWritable
+        IsWritable,
+        IconElements
     };
 
     explicit ThemeModel(const KPackage::Package &package, QObject *parent = 0);

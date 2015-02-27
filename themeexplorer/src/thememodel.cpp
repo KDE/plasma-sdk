@@ -19,7 +19,6 @@
 
 #include "thememodel.h"
 #include "themelistmodel.h"
-
 #include <QDebug>
 #include <QByteArray>
 #include <QDir>
@@ -29,11 +28,42 @@
 #include <QStandardPaths>
 #include <QVersionNumber>
 
+#include <QXmlSimpleReader>
+#include <QXmlDefaultHandler>
+#include <QXmlInputSource>
+#include <QXmlInputSource>
+
+#include <KCompressionDevice>
 #include <KProcess>
 #include <KIO/Job>
 
 #include <Plasma/Theme>
 
+class IconsParserHandler : public QXmlDefaultHandler
+{
+public:
+    IconsParserHandler();
+    bool startElement(const QString &namespaceURI, const QString &localName,
+                      const QString &qName, const QXmlAttributes &atts) Q_DECL_OVERRIDE;
+    QStringList m_ids;
+};
+
+IconsParserHandler::IconsParserHandler()
+    : QXmlDefaultHandler()
+{}
+
+bool IconsParserHandler::startElement(const QString &namespaceURI, const QString &localName,
+                      const QString &qName, const QXmlAttributes &atts)
+{
+    const QString id = atts.value("id");
+    //qWarning() << "Start Element:"<<id;
+
+    if (!id.isEmpty() && !id.contains(QRegExp("\\d\\d$")) &&
+        id != "base" && !id.contains("layer")) {
+        m_ids<<id;
+    }
+    return true;
+}
 
 ThemeModel::ThemeModel(const KPackage::Package &package, QObject *parent)
     : QAbstractListModel(parent),
@@ -51,6 +81,7 @@ ThemeModel::ThemeModel(const KPackage::Package &package, QObject *parent)
     m_roleNames.insert(UsesFallback, "usesFallback");
     m_roleNames.insert(SvgAbsolutePath, "svgAbsolutePath");
     m_roleNames.insert(IsWritable, "isWritable");
+    m_roleNames.insert(IconElements, "iconElements");
 
     load();
 }
@@ -101,6 +132,24 @@ QVariant ThemeModel::data(const QModelIndex &index, int role) const
     }
     case IsWritable:
         return QFile::exists(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/plasma/desktoptheme/" + m_themeName);
+    case IconElements: {
+        QString path = m_theme->imagePath(value.value("imagePath").toString());
+        if (!value.value("imagePath").toString().contains("translucent")) {
+             path = path.replace("translucent/", "");
+        }
+        KCompressionDevice file(path, KCompressionDevice::GZip);
+        if (!file.open(QIODevice::ReadOnly)) {
+            return QVariant();
+        }
+
+        QXmlSimpleReader reader;
+        IconsParserHandler handler;
+        reader.setContentHandler(&handler);
+        QXmlInputSource source(&file);
+        reader.parse(&source);
+        qWarning()<<handler.m_ids;
+        return handler.m_ids;
+    }
     }
 
     return QVariant();

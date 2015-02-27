@@ -33,5 +33,10 @@
     "imagePath": "widgets/slider",
     "description": "Graphics for the Slider widget, such has its groove and its handle",
     "delegate": "slider"
+},
+{
+    "imagePath": "widgets/configuration-icons",
+    "description": "small icons for gui details such as the applet handle",
+    "delegate": "icons"
 }
 ]
