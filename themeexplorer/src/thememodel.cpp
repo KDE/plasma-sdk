@@ -88,8 +88,13 @@ QVariant ThemeModel::data(const QModelIndex &index, int role) const
         return value.value("delegate");
     case UsesFallback:
         return !m_theme->currentThemeHasImage(value.value("imagePath").toString());
-    case SvgAbsolutePath:
-        return m_theme->imagePath(value.value("imagePath").toString());
+    case SvgAbsolutePath: {
+        QString path = m_theme->imagePath(value.value("imagePath").toString());
+        if (!value.value("imagePath").toString().contains("translucent")) {
+             path = path.replace("translucent/", "");
+        }
+        return path;
+    }
     case IsWritable:
         return QFile::exists(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/plasma/desktoptheme/" + m_themeName);
     }
