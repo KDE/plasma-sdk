@@ -72,7 +72,12 @@ ApplicationWindow {
         id: palette
     }
 
+    Rectangle {
+        anchors.fill: scrollView
+        color: theme.viewBackgroundColor
+    }
     ScrollView {
+        id: scrollView
         anchors {
             top: parent.top
             bottom: parent.bottom
