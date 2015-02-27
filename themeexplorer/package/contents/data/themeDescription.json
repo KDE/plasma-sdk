@@ -15,6 +15,16 @@
     "delegate": "dialog"
 },
 {
+    "imagePath": "translucent/dialogs/background",
+    "description": "The background for popup windows: the shadow is on a separate frame in order to be passed to KWin: this version will be used only when the blur and background contrast KWin effects are used.",
+    "delegate": "dialog"
+},
+{
+    "imagePath": "opaque/dialogs/background",
+    "description": "The background for popup windows: this version is used only when compositing is disabled. If the graphics has rounded borders, they must NOT use antialiasing due to X11 limitations, but should use pixelart tecniques. A mask prefix will be used to cut the window to its rounded borders.",
+    "delegate": "dialog"
+},
+{
     "imagePath": "widgets/button",
     "description": "Graphics for Buttons and Toolbuttons, such as button face in normal and pressed states and the focus indicator",
     "delegate": "button"
