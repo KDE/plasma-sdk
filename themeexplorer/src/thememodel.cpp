@@ -146,7 +146,7 @@ QVariant ThemeModel::data(const QModelIndex &index, int role) const
         reader.setContentHandler(&handler);
         QXmlInputSource source(&file);
         reader.parse(&source);
-        qWarning()<<handler.m_ids;
+
         return handler.m_ids;
     }
     }
@@ -222,9 +222,6 @@ void ThemeModel::editElement(const QString& imagePath)
 
 void ThemeModel::processFinished()
 {
-    qWarning()<<sender();
-    
-
     /*We increment the microversion of the theme: keeps track and will force the cache to be
       discarded in order to reload immediately the graphics*/
     const QString metadataPath(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1Literal("plasma/desktoptheme/") % m_themeName % QLatin1Literal("/metadata.desktop")));

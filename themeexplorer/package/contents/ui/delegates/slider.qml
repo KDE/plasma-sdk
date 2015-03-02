@@ -39,6 +39,7 @@ Item {
         anchors.centerIn: background
         PlasmaComponents.Slider {
             width: background.width - 10
+            value: 0.5
         }
         PlasmaComponents.Label {
             anchors.horizontalCenter: parent.horizontalCenter

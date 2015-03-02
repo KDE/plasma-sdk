@@ -26,27 +26,17 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
     id: iconsDelegate
-    PlasmaCore.FrameSvgItem {
+    Rectangle {
+        id: background
         anchors {
             fill: parent
-            margins: units.gridUnit
+            margins: units.gridUnit * 2
         }
-        imagePath: model.imagePath
-
-        Rectangle {
-            id: marginsRectangle
-            anchors {
-                fill: parent
-                leftMargin: parent.margins.left
-                topMargin: parent.margins.top
-                rightMargin: parent.margins.right
-                bottomMargin: parent.margins.bottom
-            }
-            color: "green"
-            opacity: 0.5
-            visible: root.showMargins
-        }
+        radius: 3
+        color: theme.backgroundColor
+        opacity: 0.6
     }
+
     PlasmaCore.Svg {
         id: iconsSvg
         imagePath: model.imagePath
@@ -56,12 +46,11 @@ Item {
     Flow {
         clip: true
         anchors {
-            fill: parent
+            fill: background
             margins: units.gridUnit
         }
         Repeater {
             model: iconsDelegate.iconElements
-            
             delegate: PlasmaCore.SvgItem {
                 svg: iconsSvg
                 elementId: modelData
@@ -72,8 +61,11 @@ Item {
     }
 
     PlasmaComponents.Label {
-        anchors.centerIn: parent
+        anchors {
+            horizontalCenter: background.horizontalCenter
+            bottom: background.bottom
+        }
         text: model.imagePath
-        visible: width < marginsRectangle.width
+        visible: width < background.width
     }
 }
