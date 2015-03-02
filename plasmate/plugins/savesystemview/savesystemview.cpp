@@ -56,8 +56,6 @@ SaveSystemView::SaveSystemView(SaveSystemViewPlugin *plugin, QWindow *parent)
         qDebug() << status << errors();
     });
 
-    qmlRegisterType<QAbstractItemModel>();
-
     const QString mainQmlFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
                                                        QStringLiteral("kdevsavesystemview/qml/main.qml"));
 
