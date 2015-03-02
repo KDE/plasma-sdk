@@ -29,7 +29,7 @@ Item {
         id: background
         anchors {
             fill: parent
-            margins: units.gridUnit * 2
+            margins: units.gridUnit
         }
         radius: 3
         color: theme.backgroundColor

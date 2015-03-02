@@ -28,12 +28,22 @@ Item {
     id: delegateRoot
     property var prefixes: model.frameSvgPrefixes
     property var imagePath: model.imagePath
+    Rectangle {
+        id: background
+        anchors {
+            fill: parent
+            margins: units.gridUnit
+        }
+        radius: 3
+        color: theme.backgroundColor
+        opacity: 0.6
+    }
     Flow {
         id: flow
         clip: true
         anchors {
             fill: parent
-            margins: units.gridUnit
+            margins: units.gridUnit * 2
         }
         Repeater {
             model: delegateRoot.prefixes
@@ -67,8 +77,8 @@ Item {
 
     PlasmaComponents.Label {
         anchors {
-            horizontalCenter: parent.horizontalCenter
-            bottom: parent.bottom
+            horizontalCenter: background.horizontalCenter
+            bottom: background.bottom
         }
         text: model.imagePath
         visible: width < flow.width
