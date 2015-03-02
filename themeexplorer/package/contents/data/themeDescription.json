@@ -55,6 +55,11 @@
     "delegate": "textfield"
 },
 {
+    "imagePath": "widgets/bar_meter_horizontal",
+    "description": "Graphics for the ProgressBar.",
+    "delegate": "progressbar"
+},
+{
     "imagePath": "widgets/checkmarks",
     "description": "Graphics for check marks of Checkboxes and radiobuttons. The backgrounds comes instead from widgets/button and widgets/actionbutton instead",
     "delegate": "checkmarks"
@@ -103,6 +108,11 @@
     "imagePath": "widgets/pager",
     "description": "Background for the Desktop Pager plasmoid.",
     "delegate": "allframesvgs"
+},
+{
+    "imagePath": "widgets/busywidget",
+    "description": "Graphics for the BusyWidget control.",
+    "delegate": "busyindicator"
 },
 {
     "imagePath": "widgets/toolbar",
