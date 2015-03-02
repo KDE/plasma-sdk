@@ -25,6 +25,11 @@
     "delegate": "dialog"
 },
 {
+    "imagePath": "widgets/panel-background",
+    "description": "Graphics for the panel background. It can use a single one or a different graphic for the 4 screen edges.",
+    "delegate": "panel"
+},
+{
     "imagePath": "widgets/tooltip",
     "description": "The background for tooltip windows: the shadow is on a separate frame in order to be passed to KWin",
     "delegate": "dialog"
