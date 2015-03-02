@@ -68,6 +68,16 @@
     "imagePath": "widgets/configuration-icons",
     "description": "Small icons for gui details such as the applet handle",
     "delegate": "icons"
+},
+{
+    "imagePath": "widgets/arrows",
+    "description": "Small arrows icons used as expanders, for instance by the systemtray plasmoid.",
+    "delegate": "icons"
+},
+{
+    "imagePath": "widgets/action-overlays",
+    "description": "Small icons used by the Folderview plasmoid to select/unselect items",
+    "delegate": "icons"
 }
 
 ]
