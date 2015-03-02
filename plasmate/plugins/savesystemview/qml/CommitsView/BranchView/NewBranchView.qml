@@ -22,9 +22,9 @@ import QtQuick.Controls 1.2 as QtControls
 import QtQuick.Layouts 1.1 as QtLayouts
 
 InputBranchView {
-    title:  "You are about to create a new branch"
-    placeholderText: "New branch name"
-    buttonText: "Create New Branch"
+    title:  i18n("You are about to create a new branch")
+    placeholderText: i18n("New branch name")
+    buttonText: i18n("Create New Branch")
 
     onDoWork: {
         console.log(input)

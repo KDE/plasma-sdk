@@ -22,8 +22,8 @@ import QtQuick.Controls 1.2 as QtControls
 import QtQuick.Layouts 1.1 as QtLayouts
 
 SelectionBranchView {
-    title:  "You are about to delete a branch"
-    buttonText: "Delete Branch"
+    title:  i18n("You are about to delete a branch")
+    buttonText: i18n("Delete Branch")
 
     onDoWork: {
         git.branchesModel.removeBranch(input)

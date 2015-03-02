@@ -53,7 +53,7 @@ QtLayouts.ColumnLayout {
         }
 
         QtControls.Button {
-            text: "Cancel"
+            text: i18n("Cancel")
             onClicked: {
                 stackView.pop()
             }

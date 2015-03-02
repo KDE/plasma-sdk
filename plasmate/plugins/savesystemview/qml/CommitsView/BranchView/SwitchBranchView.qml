@@ -22,8 +22,8 @@ import QtQuick.Controls 1.2 as QtControls
 import QtQuick.Layouts 1.1 as QtLayouts
 
 SelectionBranchView {
-    title:  "You are in the <b>" + git.branchesModel.currentBranch + "</b> branch and you are about to switch to another branch"
-    buttonText: "Switch Branch"
+    title:  i18n("You are in the <b> %1 </b> branch and you are about to switch to another branch", git.branchesModel.currentBranch)
+    buttonText: i18n("Switch Branch")
 
     onDoWork: {
         git.branchesModel.currentBranch = input

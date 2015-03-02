@@ -11,6 +11,7 @@ target_link_libraries(kdevsavesystemview ${KDEVPLATFORM_INTERFACES_LIBRARIES}
                                          ${KDEVPLATFORM_UTIL_LIBRARIES}
                                          ${KDEVPLATFORM_VCS_LIBRARIES}
                                          Qt5::Quick
+                                         KF5::Declarative
 )
 
 install(TARGETS kdevsavesystemview DESTINATION ${PLUGIN_INSTALL_DIR} )

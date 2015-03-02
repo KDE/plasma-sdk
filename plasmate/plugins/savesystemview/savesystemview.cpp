@@ -38,10 +38,17 @@
 #include <QQmlError>
 #include <QDebug>
 
+#include <KDeclarative/KDeclarative>
+
 SaveSystemView::SaveSystemView(SaveSystemViewPlugin *plugin, QWindow *parent)
     : QQuickView(parent),
       m_git(new Git(this))
 {
+
+    KDeclarative::KDeclarative kdeclarative;
+    kdeclarative.setDeclarativeEngine(engine());
+    kdeclarative.setupBindings();
+
     connect(KDevelop::ICore::self()->projectController(), SIGNAL(projectOpened(KDevelop::IProject*)),
             this, SLOT(projectOpened(KDevelop::IProject*)));
 

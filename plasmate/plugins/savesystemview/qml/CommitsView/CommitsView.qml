@@ -44,9 +44,6 @@ QtControls.ScrollView {
                 text: message
                 commitAuthor: author
                 commitdate: CommitDate
-                Component.onCompleted: {
-                    console.log(model.message)
-                }
             }
         }
 

@@ -23,7 +23,7 @@ import QtQuick.Controls 1.2 as QtControls
 SaveSystemItem {
     id: branch
     icon: "document-save"
-    text: "New Savepoint"
+    text: i18n("New Savepoint")
 
     MouseArea {
         anchors.fill: parent
