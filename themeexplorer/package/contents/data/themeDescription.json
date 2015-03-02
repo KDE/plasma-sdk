@@ -30,6 +30,16 @@
     "delegate": "panel"
 },
 {
+    "imagePath": "translucent/widgets/panel-background",
+    "description": "Graphics for the panel background. It can use a single one or a different graphic for the 4 screen edges. This version will be used only when the blur and background contrast KWin effects are used.",
+    "delegate": "panel"
+},
+{
+    "imagePath": "opaque/widgets/panel-background",
+    "description": "Graphics for the panel background. It can use a single one or a different graphic for the 4 screen edges. This version is used only when compositing is disabled. If the graphics has rounded borders, they must NOT use antialiasing due to X11 limitations, but should use pixelart tecniques. A mask prefix will be used to cut the window to its rounded borders.",
+    "delegate": "panel"
+},
+{
     "imagePath": "widgets/tooltip",
     "description": "The background for tooltip windows: the shadow is on a separate frame in order to be passed to KWin",
     "delegate": "dialog"
@@ -133,6 +143,11 @@
     "imagePath": "widgets/toolbar",
     "description": "Background the ToolBar component.",
     "delegate": "framesvg"
+},
+{
+    "imagePath": "widgets/clock",
+    "description": "Graphics for the Analog Clock widget",
+    "delegate": "clock"
 },
 {
     "imagePath": "widgets/picker",
