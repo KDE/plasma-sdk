@@ -100,12 +100,16 @@ ApplicationWindow {
                 radius: 3
                 color: palette.highlight
             }
-            delegate: MouseArea {
+            delegate: Item {
                 width: view.cellWidth
                 height: view.cellHeight
                 property QtObject modelData: model
-                onClicked: {
-                    view.currentIndex = index;
+                MouseArea {
+                    z: 2
+                    anchors.fill: parent
+                    onClicked: {
+                        view.currentIndex = index;
+                    }
                 }
                 Loader {
                     z: -1
