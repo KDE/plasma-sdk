@@ -47,7 +47,8 @@ public:
         UsesFallback,
         SvgAbsolutePath,
         IsWritable,
-        IconElements
+        IconElements,
+        FrameSvgPrefixes
     };
 
     explicit ThemeModel(const KPackage::Package &package, QObject *parent = 0);

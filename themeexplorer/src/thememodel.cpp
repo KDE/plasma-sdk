@@ -45,6 +45,7 @@ public:
     bool startElement(const QString &namespaceURI, const QString &localName,
                       const QString &qName, const QXmlAttributes &atts) Q_DECL_OVERRIDE;
     QStringList m_ids;
+    QStringList m_prefixes;
 };
 
 IconsParserHandler::IconsParserHandler()
@@ -60,6 +61,10 @@ bool IconsParserHandler::startElement(const QString &namespaceURI, const QString
     if (!id.isEmpty() && !id.contains(QRegExp("\\d\\d$")) &&
         id != "base" && !id.contains("layer")) {
         m_ids<<id;
+    }
+    if (id.endsWith("-center") && !id.contains("hint-")) {
+        //remove -center
+        m_prefixes << id.mid(0, id.length() - 7);
     }
     return true;
 }
@@ -81,6 +86,7 @@ ThemeModel::ThemeModel(const KPackage::Package &package, QObject *parent)
     m_roleNames.insert(SvgAbsolutePath, "svgAbsolutePath");
     m_roleNames.insert(IsWritable, "isWritable");
     m_roleNames.insert(IconElements, "iconElements");
+    m_roleNames.insert(FrameSvgPrefixes, "frameSvgPrefixes");
 
     load();
 }
@@ -131,7 +137,9 @@ QVariant ThemeModel::data(const QModelIndex &index, int role) const
     }
     case IsWritable:
         return QFile::exists(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/plasma/desktoptheme/" + m_themeName);
-    case IconElements: {
+    case IconElements:
+    case FrameSvgPrefixes:
+    {
         QString path = m_theme->imagePath(value.value("imagePath").toString());
         if (!value.value("imagePath").toString().contains("translucent")) {
              path = path.replace("translucent/", "");
@@ -147,7 +155,11 @@ QVariant ThemeModel::data(const QModelIndex &index, int role) const
         QXmlInputSource source(&file);
         reader.parse(&source);
 
-        return handler.m_ids;
+        if (role == IconElements) {
+            return handler.m_ids;
+        } else {
+            return handler.m_prefixes;
+        }
     }
     }
 

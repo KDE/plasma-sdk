@@ -5,21 +5,13 @@ branding.svgz
 busywidget.svgz
 clock.svgz
 containment-controls.svgz
-frame.svgz
 glowbar.svgz
 line.svgz
 listitem.svgz
 monitor.svgz
-pager.svgz
 panel-background.svgz
 scrollbar.svgz
 scrollwidget.svgz
-tabbar.svgz
-tasks.svgz
-viewitem.svgz
-
-toolbar.svgz
-picker.svgz
 
 
 to remove:

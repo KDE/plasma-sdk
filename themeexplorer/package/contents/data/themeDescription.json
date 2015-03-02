@@ -65,6 +65,16 @@
     "delegate": "actionbutton"
 },
 {
+    "imagePath": "widgets/frame",
+    "description": "A generic visual container, that can look either flat, raised or sunken.",
+    "delegate": "allframesvgs"
+},
+{
+    "imagePath": "widgets/viewitem",
+    "description": "Graphics to show selected items from a view, sich as FolderView icons or items under the mouse in Kickoff.",
+    "delegate": "allframesvgs"
+},
+{
     "imagePath": "widgets/configuration-icons",
     "description": "Small icons for gui details such as the applet handle",
     "delegate": "icons"
@@ -78,6 +88,31 @@
     "imagePath": "widgets/action-overlays",
     "description": "Small icons used by the Folderview plasmoid to select/unselect items",
     "delegate": "icons"
+},
+{
+    "imagePath": "widgets/tasks",
+    "description": "Different states for the tasks in the main Taskbar plasmoid.",
+    "delegate": "allframesvgs"
+},
+{
+    "imagePath": "widgets/tabbar",
+    "description": "background and active tab for the Tabbar component",
+    "delegate": "tabbar"
+},
+{
+    "imagePath": "widgets/pager",
+    "description": "Background for the Desktop Pager plasmoid.",
+    "delegate": "allframesvgs"
+},
+{
+    "imagePath": "widgets/toolbar",
+    "description": "Background the ToolBar component.",
+    "delegate": "framesvg"
+},
+{
+    "imagePath": "widgets/picker",
+    "description": "Background the date picker component in mobile devices.(TODO: remove?)",
+    "delegate": "framesvg"
 }
 
 ]
