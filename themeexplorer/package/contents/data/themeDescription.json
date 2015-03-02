@@ -105,6 +105,12 @@
     "delegate": "allframesvgs"
 },
 {
+    "imagePath": "widgets/listitem",
+    "description": "Graphics used to decorate the background of items in ListView components.",
+    "delegate": "listitem"
+},
+
+{
     "imagePath": "widgets/configuration-icons",
     "description": "Small icons for gui details such as the applet handle",
     "delegate": "icons"
