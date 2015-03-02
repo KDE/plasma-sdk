@@ -50,6 +50,16 @@
     "delegate": "slider"
 },
 {
+    "imagePath": "widgets/scrollbar",
+    "description": "Graphics for the ScrollBar widget, used standalone or in the ScrollView component",
+    "delegate": "scrollbar"
+},
+{
+    "imagePath": "widgets/scrollwidget",
+    "description": "borders for the ScrollView widget when there is something that can be scrolled in given direction",
+    "delegate": "scrollbar"
+},
+{
     "imagePath": "widgets/lineedit",
     "description": "Graphics for text fields and text areas, such as the background and the focus indicator.",
     "delegate": "textfield"
