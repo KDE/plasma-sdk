@@ -5,9 +5,9 @@
     "delegate": "framesvg"
 },
 {
-    "imagePath": "widgets/tooltip",
-    "description": "The background for tooltip windows: the shadow is on a separate frame in order to be passed to KWin",
-    "delegate": "dialog"
+    "imagePath": "widgets/translucentbackground",
+    "description": "The background for plasmoids that set translucent as their background flag. It's rarely used, but plasmoids can chose between the default more opaque background or an alternate, usually more translucent version.",
+    "delegate": "framesvg"
 },
 {
     "imagePath": "dialogs/background",
@@ -25,6 +25,21 @@
     "delegate": "dialog"
 },
 {
+    "imagePath": "widgets/tooltip",
+    "description": "The background for tooltip windows: the shadow is on a separate frame in order to be passed to KWin",
+    "delegate": "dialog"
+},
+{
+    "imagePath": "translucent/widgets/tooltip",
+    "description": "The background for tooltip windows: the shadow is on a separate frame in order to be passed to KWin: this version will be used only when the blur and background contrast KWin effects are used.",
+    "delegate": "dialog"
+},
+{
+    "imagePath": "opaque/widgets/tooltip",
+    "description": "The background for tooltip windows: this version is used only when compositing is disabled. If the graphics has rounded borders, they must NOT use antialiasing due to X11 limitations, but should use pixelart tecniques. A mask prefix will be used to cut the window to its rounded borders.",
+    "delegate": "dialog"
+},
+{
     "imagePath": "widgets/button",
     "description": "Graphics for Buttons and Toolbuttons, such as button face in normal and pressed states and the focus indicator",
     "delegate": "button"
@@ -35,8 +50,15 @@
     "delegate": "slider"
 },
 {
+    "imagePath": "widgets/lineedit",
+    "description": "Graphics for text fields and text areas, such as the background and the focus indicator.",
+    "delegate": "textfield"
+},
+{
     "imagePath": "widgets/configuration-icons",
     "description": "small icons for gui details such as the applet handle",
     "delegate": "icons"
 }
+
 ]
+
