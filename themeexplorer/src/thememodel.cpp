@@ -26,7 +26,6 @@
 #include <QFile>
 #include <QIcon>
 #include <QStandardPaths>
-#include <QVersionNumber>
 
 #include <QXmlSimpleReader>
 #include <QXmlDefaultHandler>
@@ -232,9 +231,15 @@ void ThemeModel::processFinished()
     KConfig c(metadataPath);
     KConfigGroup cg(&c, "Desktop Entry");
 
-    QVersionNumber version = QVersionNumber::fromString(cg.readEntry("X-KDE-PluginInfo-Version", "0.0"));
+    QStringList version = cg.readEntry("X-KDE-PluginInfo-Version", "0.0").split('.');
+    if (version.length() < 2) {
+        version << QLatin1Literal("0");
+    }
+    if (version.length() < 3) {
+        version << QLatin1Literal("0");
+    }
 
-    cg.writeEntry("X-KDE-PluginInfo-Version", QVersionNumber(version.majorVersion(), version.minorVersion(), version.microVersion() + 1).toString());
+    cg.writeEntry("X-KDE-PluginInfo-Version", QString(version.first() + QLatin1Literal(".") + version[1] + QLatin1Literal(".") + QString::number(version.last().toInt() + 1)));
     cg.sync();
 }
 
