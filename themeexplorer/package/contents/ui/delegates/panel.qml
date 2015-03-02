@@ -42,8 +42,8 @@ Item {
             horizontalCenter: background.horizontalCenter
             bottom: background.bottom
         }
-        width: background.width - units.gridUnit * 2
-        height: units.gridUnit * 3
+        width: background.width * 0.7
+        height: background.width * 0.2
         enabledBorders: PlasmaCore.FrameSvgItem.TopBorder | PlasmaCore.FrameSvgItem.LeftBorder | PlasmaCore.FrameSvgItem.RightBorder
         imagePath: model.imagePath
         onImagePathChanged: visible = hasElementPrefix("shadow")
@@ -82,8 +82,8 @@ Item {
             verticalCenter: background.verticalCenter
             left: background.left
         }
-        height: background.height - units.gridUnit * 2
-        width: units.gridUnit * 3
+        height: background.height - background.width * 0.2
+        width: background.width * 0.2
         enabledBorders: PlasmaCore.FrameSvgItem.TopBorder | PlasmaCore.FrameSvgItem.BottomBorder | PlasmaCore.FrameSvgItem.RightBorder
         imagePath: model.imagePath
         onImagePathChanged: visible = hasElementPrefix("shadow")
@@ -121,8 +121,8 @@ Item {
             horizontalCenter: background.horizontalCenter
             top: background.top
         }
-        width: background.width - units.gridUnit * 2
-        height: units.gridUnit * 3
+        width: background.width * 0.7
+        height: background.width * 0.2
         enabledBorders: PlasmaCore.FrameSvgItem.BottomBorder | PlasmaCore.FrameSvgItem.LeftBorder | PlasmaCore.FrameSvgItem.RightBorder
         imagePath: model.imagePath
         onImagePathChanged: visible = hasElementPrefix("shadow")
@@ -160,8 +160,8 @@ Item {
             verticalCenter: background.verticalCenter
             right: background.right
         }
-        height: background.height - units.gridUnit * 2
-        width: units.gridUnit * 3
+        height: background.height - background.width * 0.2
+        width: background.width * 0.2
         enabledBorders: PlasmaCore.FrameSvgItem.TopBorder | PlasmaCore.FrameSvgItem.BottomBorder | PlasmaCore.FrameSvgItem.LeftBorder
         imagePath: model.imagePath
         onImagePathChanged: visible = hasElementPrefix("shadow")
