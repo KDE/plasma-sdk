@@ -161,9 +161,9 @@
     "delegate": "clock"
 },
 {
-    "imagePath": "widgets/picker",
-    "description": "Background the date picker component in mobile devices.(TODO: remove?)",
-    "delegate": "framesvg"
+    "imagePath": "widgets/containment-controls",
+    "description": "Graphicsfor the controls used to resize panels.",
+    "delegate": "containment-controls"
 },
 {
     "imagePath": "widgets/branding",
@@ -175,7 +175,11 @@
     "description": "Glows to be used at screen edges and corners to suggest an \"hot edge\", such as autohide panels.",
     "delegate": "framesvg"
 },
-
+{
+    "imagePath": "widgets/picker",
+    "description": "Background the date picker component in mobile devices.(TODO: remove?)",
+    "delegate": "framesvg"
+},
 
 
 
