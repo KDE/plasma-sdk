@@ -25,6 +25,12 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
+    PlasmaCore.Svg {
+        imagePath: model.imagePath
+        onRepaintNeeded: {
+            background.visible = background.hasElementPrefix("shadow")
+        }
+    }
     PlasmaCore.FrameSvgItem {
         id: background
         anchors {
@@ -35,7 +41,7 @@ Item {
         onImagePathChanged: visible = hasElementPrefix("shadow")
         prefix: "shadow"
     }
-    
+
     PlasmaCore.FrameSvgItem {
         anchors {
             fill: background

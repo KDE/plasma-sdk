@@ -25,6 +25,15 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
+    PlasmaCore.Svg {
+        imagePath: model.imagePath
+        onRepaintNeeded: {
+            bottomPanelShadow.visible = bottomPanelShadow.hasElementPrefix("shadow")
+            topPanelShadow.visible = topPanelShadow.hasElementPrefix("shadow")
+            leftPanelShadow.visible = leftPanelShadow.hasElementPrefix("shadow")
+            rightPanelShadow.visible = rightPanelShadow.hasElementPrefix("shadow")
+        }
+    }
     Rectangle {
         id: background
         anchors {
