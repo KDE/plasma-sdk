@@ -166,6 +166,11 @@
     "delegate": "containment-controls"
 },
 {
+    "imagePath": "widgets/monitor",
+    "description": "A monitor that can be used in setup kcms that have to show a screen, such as lock screen, screen setup etc.",
+    "delegate": "monitor"
+},
+{
     "imagePath": "widgets/branding",
     "description": "Branding elements for the Kickoff menu.",
     "delegate": "icons"
