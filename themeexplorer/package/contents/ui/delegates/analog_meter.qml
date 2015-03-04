@@ -24,6 +24,7 @@ import org.kde.plasma.calendar 2.0 as PlasmaCalendar
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
 
@@ -75,6 +76,22 @@ Item {
             width: naturalSize.width * centerScrew.svgScale
             height: naturalSize.height * centerScrew.svgScale
         }
+    }
+    PlasmaCore.SvgItem {
+        svg: meterSvg
+        elementId: "foreground"
+        anchors.centerIn: centerScrew
+
+        width: naturalSize.width * centerScrew.svgScale
+        height: naturalSize.height * centerScrew.svgScale
+    }
+    PlasmaComponents.Label {
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            top: face.bottom
+        }
+        text: model.imagePath
+        visible: width < parent.width
     }
 
 }
