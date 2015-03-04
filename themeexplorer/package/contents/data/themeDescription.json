@@ -171,6 +171,11 @@
     "delegate": "monitor"
 },
 {
+    "imagePath": "widgets/analog_meter",
+    "description": "A meter with an hand, used in the System monitor plasmoid.",
+    "delegate": "analog_meter"
+},
+{
     "imagePath": "widgets/branding",
     "description": "Branding elements for the Kickoff menu.",
     "delegate": "icons"
