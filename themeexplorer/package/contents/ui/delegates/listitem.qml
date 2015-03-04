@@ -33,6 +33,10 @@ Item {
         }
         clip: true
 
+        PlasmaCore.Svg {
+            id: lineSvg
+            imagePath: "widgets/listitem"
+        }
         Column {
             anchors {
                 fill: parent
@@ -62,6 +66,16 @@ Item {
                     PlasmaComponents.Label {
                         anchors.centerIn: parent
                         text: parent.prefix
+                    }
+                    PlasmaCore.SvgItem {
+                        svg: lineSvg
+                        elementId: "separator"
+                        height: naturalSize.height
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            top: parent.bottom
+                        }
                     }
                 }
             }

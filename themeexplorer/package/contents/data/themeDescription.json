@@ -116,6 +116,11 @@
     "delegate": "icons"
 },
 {
+    "imagePath": "widgets/line",
+    "description": "A line, used as separator in layouts.",
+    "delegate": "icons"
+},
+{
     "imagePath": "widgets/arrows",
     "description": "Small arrows icons used as expanders, for instance by the systemtray plasmoid.",
     "delegate": "icons"
@@ -160,6 +165,17 @@
     "description": "Background the date picker component in mobile devices.(TODO: remove?)",
     "delegate": "framesvg"
 },
+{
+    "imagePath": "widgets/branding",
+    "description": "Branding elements for the Kickoff menu.",
+    "delegate": "icons"
+},
+{
+    "imagePath": "widgets/glowbar",
+    "description": "Glows to be used at screen edges and corners to suggest an \"hot edge\", such as autohide panels.",
+    "delegate": "framesvg"
+},
+
 
 
 
