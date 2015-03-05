@@ -54,6 +54,11 @@ ApplicationWindow {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
             }
+            ToolButton {
+                text: i18n("Help")
+                iconName: "help-contents"
+                onClicked: Qt.openUrlExternally("https://techbase.kde.org/Development/Tutorials/Plasma4/Theme");
+            }
             TextField {
                 placeholderText: i18n("Search...")
                 onTextChanged: searchModel.filterRegExp = ".*" + text + ".*"
