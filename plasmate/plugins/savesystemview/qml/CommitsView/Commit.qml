@@ -24,7 +24,7 @@ import QtQuick.Controls 1.2 as QtControls
 
 SaveSystemItem {
     property string commitAuthor
-    property date commitdate
+    property string commitdate
 
     icon: "dialog-ok"
 

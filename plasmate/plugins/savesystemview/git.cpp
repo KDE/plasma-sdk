@@ -37,6 +37,7 @@
 #include <vcs/vcsjob.h>
 #include <vcs/dvcs/dvcsjob.h>
 #include <vcs/models/brancheslistmodel.h>
+#include <vcs/models/vcseventmodel.h>
 
 #include <KLocalizedString>
 #include <KMessageBox>
@@ -54,9 +55,8 @@ Git::Git(QObject *parent)
       m_branchesModel(nullptr)
 {
     m_branchesModel = new KDevelop::BranchesListModel(this);
-
     m_commitsModel = new CommitsModel(this);
-    connect(this, &Git::commitsModelChanged, m_commitsModel, &CommitsModel::resetModel);
+
     connect(m_branchesModel, &KDevelop::BranchesListModel::currentBranchChanged,
             this, &Git::commitsModelChanged);
 }
@@ -98,13 +98,19 @@ bool Git::initGit()
 
     m_dvcs = plugin->extension<KDevelop::IDistributedVersionControl>();
     m_branching = plugin->extension<KDevelop::IBranchingVersionControl>();
+    KDevelop::IBasicVersionControl *basicVersionControl = plugin->extension<KDevelop::IBasicVersionControl>();
 
-    if (!m_dvcs || !m_branching) {
+    if (!m_dvcs || !m_branching || !basicVersionControl) {
         // something went wrong
          return false;
     }
 
     m_branchesModel->initialize(m_branching, m_repositoryPath);
+
+    KDevelop::VcsRevision rev = KDevelop::VcsRevision::createSpecialRevision(KDevelop::VcsRevision::Base);
+    KDevelop::VcsEventModel *vcsEventModel = new KDevelop::VcsEventModel(basicVersionControl, rev, m_repositoryPath, this);
+    m_commitsModel->setSourceModel(vcsEventModel);
+
     return true;
 }
 
@@ -147,25 +153,6 @@ bool Git::renameBranch(const QString &oldName, const QString &newName)
 
     emit commitsModelChanged();
     return true;
-}
-
-QList<KDevelop::VcsEvent> Git::commits()
-{
-    QList<KDevelop::VcsEvent> vcsEventList;
-
-    KDevelop::VcsJob *job = m_dvcs->log(m_repositoryPath);
-    if (!handleJob(job)) {
-        return vcsEventList;
-    }
-
-    QList<QVariant> l = job->fetchResults().toList();
-
-    for (auto it : l) {
-        KDevelop::VcsEvent vcsEvent = it.value<KDevelop::VcsEvent>();
-        vcsEventList << vcsEvent;
-    }
-
-    return vcsEventList;
 }
 
 bool Git::handleJob(KDevelop::VcsJob *job)

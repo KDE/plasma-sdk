@@ -20,12 +20,12 @@
 #ifndef COMMITSMODEL_H
 #define COMMITSMODEL_H
 
-#include <QAbstractListModel>
+#include <QIdentityProxyModel>
 #include <vcs/vcsevent.h>
 
 class Git;
 
-class CommitsModel : public QAbstractListModel
+class CommitsModel : public QIdentityProxyModel
 {
     Q_OBJECT
 public:
@@ -39,12 +39,8 @@ public:
     };
 
     QVariant data(const QModelIndex &proxyIndex, int role = Qt::DisplayRole) const override;
-    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
     QHash<int, QByteArray> roleNames() const override;
-
-public Q_SLOTS:
-    void resetModel();
 
 private:
     Git *m_git;

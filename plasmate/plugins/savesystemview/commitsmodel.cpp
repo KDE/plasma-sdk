@@ -23,7 +23,7 @@
 #include <QDateTime>
 
 CommitsModel::CommitsModel(Git* parent)
-    : QAbstractListModel(parent),
+    : QIdentityProxyModel(parent),
       m_git(parent)
 {
 }
@@ -34,26 +34,23 @@ CommitsModel::~CommitsModel()
 
 QVariant CommitsModel::data(const QModelIndex &index, int role) const
 {
-    if (index.row() < 0 || index.row() > m_commitsList.size()) {
-        return QVariant();
-    }
-
+    int column;
     switch(role) {
         case Author:
-            return m_commitsList.at(index.row()).author();
+            column = 2;
+            break;
         case Date:
-            return m_commitsList.at(index.row()).date();
+            column = 3;
+            break;
         case Message:
-            return m_commitsList.at(index.row()).message();
+            column = 1;
+            break;
         default:
             return QVariant();
     }
-}
 
-int CommitsModel::rowCount(const QModelIndex &parent) const
-{
-    Q_UNUSED(parent);
-    return m_commitsList.size();
+    QModelIndex idx = sourceModel()->index(index.row(), column);
+    return sourceModel()->data(idx, Qt::DisplayRole);
 }
 
 QHash<int, QByteArray> CommitsModel::roleNames() const
@@ -64,16 +61,5 @@ QHash<int, QByteArray> CommitsModel::roleNames() const
     roleNames[CommitsModel::Message] = "message";
 
     return roleNames;
-}
-
-void CommitsModel::resetModel()
-{
-    beginResetModel();
-    m_commitsList.clear();
-    endResetModel();
-
-    beginInsertRows(QModelIndex(), 0, m_git->commits().size() - 1);
-    m_commitsList = m_git->commits();
-    endInsertRows();
 }
 

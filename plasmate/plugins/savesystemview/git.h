@@ -56,8 +56,6 @@ public:
 
     Q_INVOKABLE bool initializeRepository();
 
-    QList<KDevelop::VcsEvent> commits();
-
     Q_INVOKABLE bool renameBranch(const QString &oldName, const QString &newName);
     Q_INVOKABLE bool newSavePoint(const QString &commitMessage, bool saveDocuments = true);
 
