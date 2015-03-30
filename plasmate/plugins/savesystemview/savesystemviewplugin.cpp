@@ -28,6 +28,7 @@
 
 #include <KActionCollection>
 #include <KLocalizedString>
+#include <KPluginFactory>
 
 K_PLUGIN_FACTORY(KDevSaveSystemFactory, registerPlugin<SaveSystemViewPlugin>(); )
 
