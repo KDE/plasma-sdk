@@ -1,8 +1,8 @@
 project(plasma-sdk)
+cmake_minimum_required(VERSION 2.8.12)
 
-cmake_minimum_required(VERSION 2.8.10.1)
-
-project(plasma)
+set(QT_MIN_VERSION "5.4.0")
+set(KF5_MIN_VERSION "5.8.0")
 
 ################# Disallow in-source build #################
 
@@ -17,7 +17,7 @@ include(FeatureSummary)
 
 ################# set KDE specific information #################
 
-find_package(ECM 0.0.8 REQUIRED NO_MODULE)
+find_package(ECM 1.8.0 REQUIRED NO_MODULE)
 
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
@@ -51,14 +51,10 @@ if(UNIX)
    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++0x")
 endif()
 
-################# now find all used packages #################
-
-set (QT_MIN_VERSION "5.2.0")
-
 
 # Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
 find_package(KF5 REQUIRED COMPONENTS
-	Archive Completion Config ConfigWidgets CoreAddons Declarative I18n IconThemes KDE4Support
+    Archive Completion Config ConfigWidgets CoreAddons Declarative I18n IconThemes KDE4Support KDELibs4Support
     KIO NewStuff Parts Plasma PlasmaQuick Service TextEditor WidgetsAddons XmlGui)
 
 #########################################################################
@@ -68,7 +64,9 @@ add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FROM_BYTEARRAY -DQT_NO_KEYWORDS)
 
-option(PLASMATE_BUILD_WITH_KDEVPLATFORM "Build the plasmate repository with KDevPlatform Support" ON)
+option(PLASMATE_BUILD_WITH_KDEVPLATFORM "Build the plasmate repository with KDevPlatform Support" OFF)
+message("Plasmate depends on Kdevplatform. So since Kdevplatform has not been released yes, Plasmate's build is being disabled by default for the time being.")
+message("Please pass -DPLASMATE_BUILD_WITH_KDEVPLATFORM=ON in order to build the Plasmate")
 
 add_subdirectory(cuttlefish)
 add_subdirectory(engineexplorer)

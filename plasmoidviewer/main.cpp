@@ -39,7 +39,7 @@
 
 #include <Plasma/Theme>
 
-static const char version[] = "2.0";
+static const char version[] = "5.2.90";
 
 int main(int argc, char **argv)
 {

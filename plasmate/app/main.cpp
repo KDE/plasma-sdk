@@ -26,11 +26,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "plasmateapp.h"
 
-static const char version[] = "2.0";
+static const char version[] = "5.2.90";
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+    app.setApplicationVersion(version);
 
     KAboutData aboutData(QStringLiteral("plasmate"), i18n("Plasmate"), version,
                          i18n("Plasma Add-Ons Creator"), KAboutLicense::GPL,
