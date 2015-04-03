@@ -33,7 +33,7 @@
 #include "view.h"
 
 static const char description[] = I18N_NOOP("Cuttlefish Icon Browser");
-static const char version[] = "5.2.90";
+static const char version[] = PROJECT_VERSION;
 static const char HOME_URL[] = "http://kde.org";
 
 int main(int argc, char **argv)

@@ -7,6 +7,7 @@ set(plasmathemeexplorer_SRCS
 )
 
 add_executable(plasmathemeexplorer ${plasmathemeexplorer_SRCS})
+target_compile_definitions(plasmathemeexplorer PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
 
 #find_package(ActiveApp REQUIRED)
 

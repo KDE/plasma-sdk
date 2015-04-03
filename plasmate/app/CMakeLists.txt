@@ -22,6 +22,8 @@ set (PlasMate_SRC
 )
 
 add_executable(plasmate ${PlasMate_SRC})
+target_compile_definitions(plasmate PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
+
 target_link_libraries(plasmate
                       KF5::NewStuff
                       Qt5::Gui

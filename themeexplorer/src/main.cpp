@@ -43,7 +43,7 @@ int main(int argc, char **argv)
     QApplication app(argc, argv);
 
     const QString description = i18n("Plasma Theme Explorer");
-    const char version[] = "5.2.90";
+    const char version[] = PROJECT_VERSION;
 
     app.setApplicationVersion(version);
     parser.addVersionOption();

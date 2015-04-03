@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "plasmateapp.h"
 
-static const char version[] = "5.2.90";
+static const char version[] = PROJECT_VERSION;
 
 int main(int argc, char *argv[])
 {

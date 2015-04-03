@@ -30,7 +30,7 @@
 #include "engineexplorer.h"
 
 static const char description[] = I18N_NOOP("Explore the data published by Plasma DataEngines");
-static const char version[] = "5.2.90";
+static const char version[] = PROJECT_VERSION;
 
 void listEngines()
 {

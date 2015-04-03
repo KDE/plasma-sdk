@@ -6,6 +6,7 @@ set(cuttlefish_SRCS
 )
 
 add_executable(cuttlefish ${cuttlefish_SRCS})
+target_compile_definitions(cuttlefish PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
 
 target_link_libraries(cuttlefish
     Qt5::Quick

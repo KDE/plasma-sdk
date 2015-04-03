@@ -9,6 +9,7 @@ set(plasmaengineexplorer_SRCS
 qt5_wrap_ui(plasmaengineexplorer_SRCS engineexplorer.ui serviceviewer.ui)
 
 add_executable(plasmaengineexplorer ${plasmaengineexplorer_SRCS})
+target_compile_definitions(plasmaengineexplorer PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
 
 target_link_libraries(plasmaengineexplorer
     KF5::IconThemes

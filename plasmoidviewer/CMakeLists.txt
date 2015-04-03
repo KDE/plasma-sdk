@@ -4,6 +4,7 @@ set(plasmoidviewer_SRCS
 )
 
 add_executable(plasmoidviewer ${plasmoidviewer_SRCS})
+target_compile_definitions(plasmoidviewer PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
 
 target_link_libraries(plasmoidviewer
     Qt5::Quick
