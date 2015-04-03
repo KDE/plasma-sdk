@@ -19,6 +19,9 @@ set( KDEVPLATFORM_VERSION "1.${KDEVELOP_VERSION_MINOR}.${KDEVELOP_VERSION_PATCH}
 
 find_package(KDevPlatform ${KDEVPLATFORM_VERSION} REQUIRED)
 
+find_package(KF5 REQUIRED COMPONENTS
+    KDELibs4Support)
+
 #install( FILES previewer/windowswitcher/thumbnails/konqueror.png
 #previewer/windowswitcher/thumbnails/kmail.png
 #previewer/windowswitcher/thumbnails/systemsettings.png
@@ -43,7 +46,7 @@ add_executable(plasmaremoteinstaller ${PlasmaRemoteInstaller_SRC})
 target_link_libraries(plasmaremoteinstaller
                       KF5::KIOCore
                       KF5::KIOWidgets
-                      KF5::KDE4Support
+                      KF5::KDELibs4Support
 )
 
 #install(TARGETS plasmaremoteinstaller ${INSTALL_TARGETS_DEFAULT_ARGS})
