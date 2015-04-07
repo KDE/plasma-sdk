@@ -3,25 +3,27 @@ set(plasmaengineexplorer_SRCS
     ktreeviewsearchline.cpp
     main.cpp
     serviceviewer.cpp
+    modelviewer.cpp
 )
 
-macro_optional_find_package(Soprano)
-macro_log_feature(Soprano_FOUND "Soprano" "Semantic Desktop Storing" "http://soprano.sourceforge.net" FALSE "" "Adds support for the Soprano data type to Plasma Engine Explorer.")
+qt5_wrap_ui(plasmaengineexplorer_SRCS engineexplorer.ui serviceviewer.ui)
 
-if (Soprano_FOUND)
-   include_directories( ${SOPRANO_INCLUDE_DIR} )
-   add_definitions( -DFOUND_SOPRANO=1 )
-endif (Soprano_FOUND)
+add_executable(plasmaengineexplorer ${plasmaengineexplorer_SRCS})
+target_compile_definitions(plasmaengineexplorer PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
 
-kde4_add_ui_files(plasmaengineexplorer_SRCS engineexplorer.ui serviceviewer.ui)
-kde4_add_executable(plasmaengineexplorer ${plasmaengineexplorer_SRCS})
-
-target_link_libraries(plasmaengineexplorer ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS})
-
-if (Soprano_FOUND)
-   target_link_libraries(plasmaengineexplorer ${SOPRANO_LIBRARIES})
-endif (Soprano_FOUND)
+target_link_libraries(plasmaengineexplorer
+    KF5::IconThemes
+    KF5::I18n
+    KF5::Service
+    KF5::Completion
+    KF5::Plasma
+    KF5::XmlGui
+    KF5::I18n
+    KF5::ConfigCore
+    KF5::ConfigWidgets
+)
 
 install(TARGETS plasmaengineexplorer ${INSTALL_TARGETS_DEFAULT_ARGS})
 
-kde4_create_manpage(man-plasmaengineexplorer.1.docbook 1 INSTALL_DESTINATION ${MAN_INSTALL_DIR})
+# FIXME: needs replacement
+#kde4_create_manpage(man-plasmaengineexplorer.1.docbook 1 INSTALL_DESTINATION ${MAN_INSTALL_DIR})

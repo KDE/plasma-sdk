@@ -27,6 +27,9 @@
 class QModelIndex;
 class QTreeView;
 
+class KTreeViewSearchLinePrivate;
+class KTreeViewSearchLineWidgetPrivate;
+
 /**
  * This class makes it easy to add a search line for filtering the items in
  * listviews based on a simple text search.
@@ -179,36 +182,12 @@ class KTreeViewSearchLine : public KLineEdit
      */
     void setTreeViews( const QList<QTreeView *> &treeViews );
 
-
-  protected:
     /**
      * Returns true if \a item matches the search \a pattern.  This will be evaluated
      * based on the value of caseSensitive().  This can be overridden in
      * subclasses to implement more complicated matching schemes.
      */
     virtual bool itemMatches( const QModelIndex &item, int row, const QString &pattern ) const;
-
-    /**
-    * Re-implemented for internal reasons.  API not affected.
-    */
-    virtual void contextMenuEvent( QContextMenuEvent* );
-
-    /**
-     * Updates search to only make visible appropriate items in \a treeView.  If
-     * \a treeView is null then nothing is done.
-     */
-    virtual void updateSearch( QTreeView *treeView );
-
-    /**
-     * Connects signals of this listview to the appropriate slots of the search
-     * line.
-     */
-    virtual void connectTreeView( QTreeView* );
-
-    /**
-     * Disconnects signals of a listviews from the search line.
-     */
-    virtual void disconnectTreeView( QTreeView* );
 
     /**
      * Checks columns in all listviews and decides whether choosing columns to
@@ -225,6 +204,30 @@ class KTreeViewSearchLine : public KLineEdit
      * @see setSearchColumns()
      */
     virtual bool canChooseColumnsCheck();
+
+
+  protected:
+    /**
+    * Re-implemented for internal reasons.  API not affected.
+    */
+    virtual void contextMenuEvent( QContextMenuEvent* );
+
+    /**
+     * Updates search to only make visible appropriate items in \a treeView.  If
+     * \a treeView is null then nothing is done.
+     */
+    virtual void updateSearch( QTreeView *treeView );
+
+    /**
+     * Connects signals of this listview to the appropriate Q_SLOTS of the search
+     * line.
+     */
+    virtual void connectTreeView( QTreeView* );
+
+    /**
+     * Disconnects signals of a listviews from the search line.
+     */
+    virtual void disconnectTreeView( QTreeView* );
 
   protected Q_SLOTS:
     /**
@@ -253,13 +256,15 @@ class KTreeViewSearchLine : public KLineEdit
     void activateSearch();
 
   private:
-    class Private;
-    Private* const d;
+    KTreeViewSearchLinePrivate* const d;
 
-    Q_PRIVATE_SLOT( d, void rowsInserted( const QModelIndex&, int, int ) const )
+    //Q_PRIVATE_SLOT( d, void rowsInserted( const QModelIndex&, int, int ) const )
     Q_PRIVATE_SLOT( d, void treeViewDeleted( QObject* ) )
     Q_PRIVATE_SLOT( d, void slotColumnActivated( QAction* ) )
     Q_PRIVATE_SLOT( d, void slotAllVisibleColumns() )
+
+  private Q_SLOTS:
+    void rowsInserted(const QModelIndex & parent, int start, int end) const;
 };
 
 /**
@@ -307,8 +312,7 @@ class KTreeViewSearchLineWidget : public QWidget
     virtual KTreeViewSearchLine *createSearchLine( QTreeView *treeView ) const;
 
   private:
-    class Private;
-    Private* const d;
+    KTreeViewSearchLineWidgetPrivate* const d;
 };
 
 #endif

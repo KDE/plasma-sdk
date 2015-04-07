@@ -1,17 +1,82 @@
 project(plasma-sdk)
+set(PROJECT_VERSION "5.2.90")
+set(PROJECT_VERSION_MAJOR 5)
+cmake_minimum_required(VERSION 2.8.12)
 
-find_package(KDE4 REQUIRED)
-find_package(KDeclarative REQUIRED)
+set(QT_MIN_VERSION "5.4.0")
+set(KF5_MIN_VERSION "5.8.0")
 
-include(MacroLibrary)
-include(KDE4Defaults)
+################# Disallow in-source build #################
 
-include_directories(${KDE4_INCLUDES}
-                    ${KDECLARATIVE_INCLUDE_DIR}
-)
+if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
+   message(FATAL_ERROR "plasmate requires an out of source build. Please create a separate build directory and run 'cmake path_to_plasmate [options]' there.")
+endif()
 
+# Make CPack available to easy generate binary packages
+include(CPack)
+
+include(FeatureSummary)
+
+################# set KDE specific information #################
+
+find_package(ECM 1.8.0 REQUIRED NO_MODULE)
+
+# where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+
+find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core DBus Gui Qml Quick Svg WebKit WebKitWidgets Widgets Xml)
+
+find_package(Qt5Test ${QT_MIN_VERSION} CONFIG QUIET)
+set_package_properties(Qt5Test PROPERTIES
+         PURPOSE "Required for tests"
+         TYPE OPTIONAL
+         )
+add_feature_info("Qt5Test" Qt5Test_FOUND "Required for building tests")
+if (NOT Qt5Test_FOUND)
+    set(BUILD_TESTING OFF CACHE BOOL "Build the testing tree.")
+endif()
+
+add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0)
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings)
+
+if(KDE_PLATFORM_FEATURE_DISABLE_DEPRECATED)
+   set(KDE_NO_DEPRECATED TRUE)
+   set(CMAKE_AUTOMOC_MOC_OPTIONS "-DKDE_NO_DEPRECATED")
+endif()
+
+################# Enable C++11 features for clang and gcc #################
+
+if(UNIX)
+   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++0x")
+endif()
+
+
+# Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
+find_package(KF5 REQUIRED COMPONENTS
+    Archive Completion Config ConfigWidgets CoreAddons Declarative I18n IconThemes
+    KIO NewStuff Parts Plasma PlasmaQuick Service TextEditor WidgetsAddons XmlGui WindowSystem)
+
+#########################################################################
+
+add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
+add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
+
+remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FROM_BYTEARRAY -DQT_NO_KEYWORDS)
+
+option(PLASMATE_BUILD_WITH_KDEVPLATFORM "Build the plasmate repository with KDevPlatform Support" OFF)
+message("Plasmate depends on Kdevplatform. So since Kdevplatform has not been released yes, Plasmate's build is being disabled by default for the time being.")
+message("Please pass -DPLASMATE_BUILD_WITH_KDEVPLATFORM=ON in order to build the Plasmate")
+
+add_subdirectory(cuttlefish)
 add_subdirectory(engineexplorer)
 add_subdirectory(plasmoidviewer)
-add_subdirectory(remote-widgets-browser)
-add_subdirectory(wallpaperviewer)
-add_subdirectory(plasmate)
+add_subdirectory(themeexplorer)
+#add_subdirectory(remote-widgets-browser)
+#add_subdirectory(wallpaperviewer)
+if(PLASMATE_BUILD_WITH_KDEVPLATFORM)
+    add_subdirectory(plasmate)
+endif()
+

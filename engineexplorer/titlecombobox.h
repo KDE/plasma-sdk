@@ -20,11 +20,12 @@
 #ifndef TITLECOMBOBOX_H
 #define TITLECOMBOBOX_H
 
+#include <KLocalizedString>
+
 #include <QComboBox>
 #include <QPainter>
 
-#include <KDebug>
-#include <KLocale>
+#include <QDebug>
 
 class TitleComboBox : public QComboBox
 {

@@ -11,7 +11,7 @@
 #define REMOTEINSTALLERCORE_H
 
 #include <QObject>
-#include <KUrl>
+#include <QUrl>
 
 class KJob;
 
@@ -27,10 +27,10 @@ private Q_SLOTS:
 
 private:
     void doInstall();
-    KUrl m_execUrl;
+    QUrl m_execUrl;
     QString m_plasmaPkgUrl;
     QString m_sourcePath;
-    KUrl m_destinationPath;
+    QUrl m_destinationPath;
     QWidget *m_widget;
 };
 

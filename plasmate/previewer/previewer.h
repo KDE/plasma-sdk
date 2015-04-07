@@ -27,13 +27,12 @@ class Previewer : public QDockWidget {
 
     Q_OBJECT
 
-signals:
-    void refreshRequested();
-    void showKonsole();
-
 public:
     Previewer(const QString & title, QWidget * parent = 0, Qt::WindowFlags flags = 0 );
     Previewer(QWidget * parent = 0, Qt::WindowFlags flags = 0 );
+
+    virtual ~Previewer();
+
     /**
      * Subclasses should override this method with actual previewing code
      */
@@ -43,25 +42,8 @@ public:
      * Subclasses should override this method with code that refreshes the preview
      */
     virtual void refreshPreview() = 0;
-
-    /**
-     * Subclasses should override this method with code that will show/hide the konsole previewer
-     */
-    virtual void setKonsolePreviewerVisible(bool visible = true);
-
-public slots:
-    /**
-     * Emits refreshRequested(), which should signal the editor to save its contents
-     * and then invoke refresh() on the previewer. All subclasses should call/connect to
-     * this when the user requests a refresh.
-     */
-    void emitRefreshRequest();
-
-    /**
-     * Emits showKonsole(), which will show the konsole. All subclasses should call/connect
-     * to this when the user requests a to see the konsole.
-     **/
-    void emitShowKonsole();
+Q_SIGNALS:
+    void toggleKonsole();
 };
 
 #endif // PREVIEWER_H

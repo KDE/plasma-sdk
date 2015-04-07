@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>374</width>
-    <height>207</height>
+    <width>528</width>
+    <height>286</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -24,7 +24,7 @@
    <item>
     <layout class="QHBoxLayout">
      <item>
-      <widget class="KLineEdit" name="m_sourceRequester">
+      <widget class="QLineEdit" name="m_sourceRequester">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -34,7 +34,7 @@
          <height>0</height>
         </size>
        </property>
-       <property name="clickMessage">
+       <property name="placeholderText">
         <string>Source name</string>
        </property>
        <property name="showClearButton" stdset="0">
@@ -43,36 +43,39 @@
       </widget>
      </item>
      <item>
-      <widget class="KIntSpinBox" name="m_updateInterval">
+      <widget class="QSpinBox" name="m_updateInterval">
        <property name="enabled">
         <bool>false</bool>
        </property>
-       <property name="minimumSize">
-        <size>
-         <width>130</width>
-         <height>0</height>
-        </size>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="wrapping">
+        <bool>false</bool>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+       <property name="readOnly">
+        <bool>false</bool>
        </property>
        <property name="specialValueText">
         <string>Update on demand</string>
+       </property>
+       <property name="accelerated">
+        <bool>false</bool>
        </property>
        <property name="suffix">
         <string>ms</string>
        </property>
        <property name="prefix">
-        <string>Update every </string>
-       </property>
-       <property name="minimum">
-        <number>0</number>
+        <string>Update Every </string>
        </property>
        <property name="maximum">
         <number>10000000</number>
        </property>
        <property name="singleStep">
         <number>50</number>
-       </property>
-       <property name="value">
-        <number>0</number>
        </property>
       </widget>
      </item>
@@ -91,7 +94,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="KLineEdit" name="m_serviceRequester">
+      <widget class="QLineEdit" name="m_serviceRequester">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -101,7 +104,7 @@
          <height>0</height>
         </size>
        </property>
-       <property name="clickMessage">
+       <property name="placeholderText">
         <string>Service for source</string>
        </property>
        <property name="showClearButton" stdset="0">
@@ -138,16 +141,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KIntSpinBox</class>
-   <extends>QSpinBox</extends>
-   <header>knuminput.h</header>
-  </customwidget>
-  <customwidget>
    <class>KTitleWidget</class>
    <extends>QWidget</extends>
    <header>ktitlewidget.h</header>
@@ -166,29 +159,11 @@
  <tabstops>
   <tabstop>m_engines</tabstop>
   <tabstop>m_sourceRequester</tabstop>
-  <tabstop>m_updateInterval</tabstop>
   <tabstop>m_sourceRequesterButton</tabstop>
   <tabstop>m_serviceRequester</tabstop>
   <tabstop>m_serviceRequesterButton</tabstop>
   <tabstop>m_data</tabstop>
  </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>m_updateInterval</sender>
-   <signal>editingFinished()</signal>
-   <receiver>m_sourceRequesterButton</receiver>
-   <slot>animateClick()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>375</x>
-     <y>91</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>447</x>
-     <y>94</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

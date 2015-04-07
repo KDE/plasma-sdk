@@ -19,9 +19,11 @@
 
 #include "serviceviewer.h"
 
-#include <KDebug>
+#include <QDebug>
+#include <QDialogButtonBox>
 #include <KMessageBox>
 #include <KStringHandler>
+#include <KLocalizedString>
 
 #include <Plasma/DataEngine>
 #include <Plasma/Service>
@@ -30,22 +32,32 @@
 #include "engineexplorer.h"
 
 ServiceViewer::ServiceViewer(Plasma::DataEngine *engine, const QString &source, QWidget *parent)
-    : KDialog(parent),
+    : QDialog(parent),
       m_engine(engine),
       m_service(0),
       m_source(source),
-      m_operationCount(0)
+      m_operationCount(0),
+      m_operationButton(new QPushButton(i18n("Start Operation"), this))
 {
     setAttribute(Qt::WA_DeleteOnClose);
     QWidget* mainWidget = new QWidget(this);
-    setMainWidget(mainWidget);
+    QVBoxLayout *layout = new QVBoxLayout();
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
+    buttonBox->addButton(m_operationButton, QDialogButtonBox::ActionRole);
+    buttonBox->addButton(QDialogButtonBox::Close);
+
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+
+    layout->addWidget(mainWidget);
+    layout->addWidget(buttonBox);
+    setLayout(layout);
+
     setupUi(mainWidget);
     m_operationStatus->hide();
 
-    setButtons(KDialog::Close | KDialog::User1);
-    setButtonText(KDialog::User1, i18n("Start Operation"));
-    connect(this, SIGNAL(user1Clicked()), this, SLOT(startOperation()));
-    enableButton(KDialog::User1, false);
+    connect(m_operationButton, SIGNAL(clicked()), this, SLOT(startOperation()));
+    m_operationButton->setEnabled(false);
 
     connect(m_operations, SIGNAL(currentIndexChanged(QString)),
             this, SLOT(operationSelected(QString)));
@@ -54,8 +66,8 @@ ServiceViewer::ServiceViewer(Plasma::DataEngine *engine, const QString &source, 
     QString serviceName = i18nc("Plasma service with unknown name", "Unknown");
 
     if (m_engine) {
-        engineName = KStringHandler::capwords(m_engine->name());
-        kDebug() << "########### CALLING SERVICE FOR SOURCE: " << m_source;
+        engineName = KStringHandler::capwords(m_engine->pluginInfo().name());
+        qDebug() << "########### CALLING SERVICE FOR SOURCE: " << m_source;
         m_service = m_engine->serviceForSource(m_source);
 
         if (m_service != 0) {
@@ -117,7 +129,7 @@ void ServiceViewer::startOperation()
     }
 
     QString operation = m_operations->currentText();
-    KConfigGroup desc = m_service->operationDescription(operation);
+    QVariantMap desc = m_service->operationDescription(operation);
     for (int i = 0; i < m_operationDescription->rowCount(); ++i) {
         QTableWidgetItem *item = m_operationDescription->item(i, 1);
         QString value = item->text();
@@ -128,7 +140,7 @@ void ServiceViewer::startOperation()
 
         item = m_operationDescription->item(i, 0);
         QString key = item->text();
-        desc.writeEntry(key, value);
+        desc[key] = value;
     }
 
     updateJobCount(1);
@@ -142,21 +154,21 @@ void ServiceViewer::operationSelected(const QString &operation)
         return;
     }
 
-    enableButton(KDialog::User1, true);
+    m_operationButton->setEnabled(true);
     QStringList headers;
     headers << i18n("Key") << i18n("Value");
     m_operationDescription->setHorizontalHeaderLabels(headers);
 
-    KConfigGroup desc = m_service->operationDescription(operation);
+    QVariantMap desc = m_service->operationDescription(operation);
     int i = 0;
-    const QStringList keys = desc.keyList();
+    const QStringList keys = desc.keys();
     m_operationDescription->setRowCount(keys.count());
     foreach (const QString &key, keys) {
         QTableWidgetItem *item = new QTableWidgetItem(key);
         item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
         m_operationDescription->setItem(i, 0, item);
 
-        item = new QTableWidgetItem(desc.readEntry(key, QString()));
+        item = new QTableWidgetItem(desc[key].toString());
         m_operationDescription->setItem(i, 1, item);
 
         ++i;
@@ -195,7 +207,7 @@ void ServiceViewer::operationResult(KJob *j)
                                  i18n("Operation Result"));
     }
 
-    kDebug() << "operation results are in!";
+    qDebug() << "operation results are in!";
 }
 
 void ServiceViewer::engineDestroyed()
@@ -218,6 +230,4 @@ void ServiceViewer::updateJobCount(int numberOfJobs)
         m_operationStatus->show();
     }
 }
-
-#include "serviceviewer.moc"
 

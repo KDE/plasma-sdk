@@ -20,10 +20,11 @@
 #ifndef SERVICEVIEWER_H
 #define SERVICEVIEWER_H
 
-#include <KDialog>
+#include <QDialog>
 #include "ui_serviceviewer.h"
 
 class KJob;
+class QPushButton;
 
 namespace Plasma
 {
@@ -31,7 +32,7 @@ namespace Plasma
     class Service;
 } // namespace Plasma
 
-class ServiceViewer : public KDialog, public Ui::ServiceViewer
+class ServiceViewer : public QDialog, public Ui::ServiceViewer
 {
     Q_OBJECT
 
@@ -42,7 +43,7 @@ public:
 private:
     void updateJobCount(int numberOfJobs);
 
-private slots:
+private Q_SLOTS:
     void updateOperations();
     void startOperation();
     void operationSelected(const QString &operation);
@@ -54,6 +55,7 @@ private:
     Plasma::Service *m_service;
     QString m_source;
     int m_operationCount;
+    QPushButton *m_operationButton;
 };
 
 #endif

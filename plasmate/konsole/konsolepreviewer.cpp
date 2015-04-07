@@ -24,7 +24,7 @@
 #include <KStandardAction>
 #include <KStandardDirs>
 #include <KToolBar>
-#include <KUrl>
+#include <QUrl>
 #include <KUser>
 #include <klocalizedstring.h>
 
@@ -129,14 +129,14 @@ void KonsolePreviewer::clearOutput()
 void KonsolePreviewer::saveOutput()
 {
     KUser user;
-    KUrl destination = KFileDialog::getSaveUrl(KUrl(user.homeDir()), ".*", this);
+    QUrl destination = KFileDialog::getSaveUrl(QUrl(user.homeDir()), ".*", this);
 
     if (destination.isEmpty()) {
         return;
     }
 
     m_textEdit->toPlainText();
-    QFile f(destination.pathOrUrl());
+    QFile f(destination.path());
     f.open(QIODevice::ReadWrite);
     f.write(m_textEdit->toPlainText().toAscii());
 }

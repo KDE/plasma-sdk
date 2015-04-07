@@ -1,123 +1,33 @@
 # Find needed packages
-set(LIBATTICA_MIN_VERSION "0.1.4")
-find_package(LibAttica REQUIRED)
-macro_log_feature(LIBATTICA_FOUND "libattica" "A library to access Open Collaboration Service providers" "http://websvn.kde.org/trunk/kdesupport/attica/" TRUE "${LIBATTICA_MIN_VERSION}" "Required uploading and downloading plasmoids using Get Hot New Stuff.")
 
-# No need to find(Qt4), since QT4_FOUND it's already set by finding kde4
-macro_log_feature(QT_QTWEBKIT_FOUND "QtWebKit" "Opensource web browser engine" "http://trac.webkit.org/wiki/QtWebKit" TRUE "" "Needed to display the online API and documentation.")
+add_feature_info(QT_QTWEBKIT_FOUND "QtWebKit" "Opensource web browser engine" "http://trac.webkit.org/wiki/QtWebKit" TRUE "" "Needed to display the online API and documentation.")
 
-find_package(QGpgme REQUIRED) # Maybe check for GPGME_PTHREAD_FOUND ?
-find_package(KdepimLibs REQUIRED)
+#TODO this dependency is inside from the KdepimLibs which has not
+#been ported yet. So we are disabling it.
+#find_package(QGpgme REQUIRED) # Maybe check for GPGME_PTHREAD_FOUND ?
+#find_package(KdepimLibs REQUIRED)
 
 # Find optional executables
 find_program(GIT_EXECUTABLE_FOUND git)
-macro_log_feature(GIT_EXECUTABLE_FOUND "Git" "Distributed Revision Control System" "http://git-scm.com/" FALSE "" "Runtime dependency needed to use the TimeLine feature.")
+add_feature_info(GIT_EXECUTABLE_FOUND "Git" "Distributed Revision Control System" "http://git-scm.com/" FALSE "" "Runtime dependency needed to use the TimeLine feature.")
 
-string(TOLOWER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE_TOLOWER)
-if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
-   add_definitions(-DDEBUG_MODEL)
-   set (DEBUG_MODEL 1)
-endif()
+set( KDEVELOP_VERSION_MAJOR 4 )
+set( KDEVELOP_VERSION_MINOR 90 )
+set( KDEVELOP_VERSION_PATCH 60 )
+# KDevplatform dependency version
+set( KDEVPLATFORM_VERSION "1.${KDEVELOP_VERSION_MINOR}.${KDEVELOP_VERSION_PATCH}" )
 
-set (PlasMate_SRC
-    editors/editpage.cpp
-    editors/metadata/metadataeditor.cpp
-    editors/imageviewer/imageloader.cpp
-    editors/imageviewer/imageviewer.cpp
-    editors/text/texteditor.cpp
-    editors/kconfigxt/kconfigxteditor.cpp
-    editors/kconfigxt/kconfigxtreader.cpp
-    editors/kconfigxt/kconfigxtwriter.cpp
-    main.cpp
-    sidebaritem.cpp
-    sidebardelegate.cpp
-    sidebartablewidget.cpp
-    sidebar.cpp
-    savesystem/dvcsjob.cpp
-    savesystem/gitrunner.cpp
-    savesystem/commitdialog.cpp
-    savesystem/timelineitem.cpp
-    savesystem/tabledelegate.cpp
-    savesystem/tablewidget.cpp
-    savesystem/timeline.cpp
-    mainwindow.cpp
-    startpage.cpp
-    packagemodel.cpp
-    previewer/plasmoid/plasmoidpreviewer.cpp
-    previewer/plasmoid/plasmoidview.cpp
-    previewer/runner/runnerpreviewer.cpp
-    previewer/windowswitcher/windowswitcher.cpp
-    previewer/windowswitcher/thumbnailitem.cpp
-    previewer/windowswitcher/tabboxpreviewer.cpp
-    previewer/previewer.cpp
-    publisher/signingwidget.cpp
-    publisher/signingdialog.cpp
-    publisher/publisher.cpp
-    publisher/remoteinstaller/remoteinstaller.cpp
-    publisher/remoteinstaller/remoteinstallerdialog.cpp
-    konsole/konsolepreviewer.cpp
-    docbrowser/docbrowser.cpp
-    projectmanager/projectmanager.cpp
-)
+find_package(KDevPlatform ${KDEVPLATFORM_VERSION} REQUIRED)
 
-if (DEBUG_MODEL)
-      set (PlasMate_SRC
-         ${PlasMate_SRC}
-         modeltest/dynamictreemodel.cpp
-         modeltest/modeltest.cpp
-         )
-endif (DEBUG_MODEL)
+find_package(KF5 REQUIRED COMPONENTS
+    KDELibs4Support)
 
-kde4_add_ui_files (PlasMate_SRC
-   startpage.ui
-   editors/metadata/metadata.ui
-   publisher/publisher.ui
-   publisher/remoteinstaller/remoteinstaller.ui
-   editors/kconfigxt/kconfigxteditor.ui
-)
-
-include_directories(${QT_QTWEBKIT_INCLUDE_DIR}
-                    ${QGPGME_INCLUDE_DIR}
-                    ${GPGME_INCLUDES}
-)
-
-add_subdirectory( editors )
-add_subdirectory( previewer/plasmoid )
-add_subdirectory( templates )
-add_subdirectory( icons )
-
-kde4_add_executable(plasmate ${PlasMate_SRC})
-target_link_libraries(plasmate
-                      ${KDE4_KDEUI_LIBS}
-                      ${KDE4_KTEXTEDITOR_LIBS}
-                      ${KDE4_KPARTS_LIBS}
-                      ${KDE4_KIO_LIBRARY}
-                      ${KDE4_PLASMA_LIBS}
-                      ${KDE4_KNEWSTUFF3_LIBRARY}
-                      ${QT_QTWEBKIT_LIBRARY}
-                      ${QT_QTXML_LIBRARY}
-                      ${LIBATTICA_LIBRARY_DIRS}
-                      ${QGPGME_LIBRARIES}
-                      ${QT_QTDECLARATIVE_LIBRARIES}
-                      ${KDECLARATIVE_LIBRARIES}
-                      ${KDEPIMLIBS_KPIMUTILS_LIBS}
-)
-
-if (DEBUG_MODEL)
-   target_link_libraries(plasmate ${QT_QTTEST_LIBRARY})
-endif (DEBUG_MODEL)
-
-install(TARGETS plasmate ${INSTALL_TARGETS_DEFAULT_ARGS})
-install(PROGRAMS plasmate.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
-install(FILES plasmateui.rc  DESTINATION ${DATA_INSTALL_DIR}/plasmate)
-install(FILES plasmate.knsrc DESTINATION ${CONFIG_INSTALL_DIR})
-
-install( FILES previewer/windowswitcher/thumbnails/konqueror.png
-previewer/windowswitcher/thumbnails/kmail.png
-previewer/windowswitcher/thumbnails/systemsettings.png
-previewer/windowswitcher/thumbnails/dolphin.png
-DESTINATION ${DATA_INSTALL_DIR}/plasmate)
-install( FILES previewer/windowswitcher/tabboxdelegate.qml DESTINATION ${DATA_INSTALL_DIR}/plasmate)
+#install( FILES previewer/windowswitcher/thumbnails/konqueror.png
+#previewer/windowswitcher/thumbnails/kmail.png
+#previewer/windowswitcher/thumbnails/systemsettings.png
+#previewer/windowswitcher/thumbnails/dolphin.png
+#DESTINATION ${DATA_INSTALL_DIR}/plasmate)
+#install( FILES previewer/windowswitcher/tabboxdelegate.qml DESTINATION ${DATA_INSTALL_DIR}/plasmate)
 
 ##standalone applications
 #plasmaremoteinstaller
@@ -128,37 +38,37 @@ set (PlasmaRemoteInstaller_SRC
     publisher/remoteinstaller/standalone/plasmaremoteinstaller.cpp
 )
 
-kde4_add_ui_files (PlasmaRemoteInstaller_SRC
+qt5_wrap_ui (PlasmaRemoteInstaller_SRC
    publisher/remoteinstaller/remoteinstaller.ui
 )
 
-kde4_add_executable(plasmaremoteinstaller ${PlasmaRemoteInstaller_SRC})
+add_executable(plasmaremoteinstaller ${PlasmaRemoteInstaller_SRC})
 target_link_libraries(plasmaremoteinstaller
-                      ${KDE4_KDEUI_LIBS}
-                      ${KDE4_KIO_LIBRARY}
+                      KF5::KIOCore
+                      KF5::KIOWidgets
+                      KF5::KDELibs4Support
 )
 
-install(TARGETS plasmaremoteinstaller ${INSTALL_TARGETS_DEFAULT_ARGS})
+#install(TARGETS plasmaremoteinstaller ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 #kwin-windowswitcherpreviewer
-set (KWin-WindowSwitcherPreviewer_SRC
-    previewer/windowswitcher/windowswitcher.cpp
-    previewer/windowswitcher/thumbnailitem.cpp
-    previewer/windowswitcher/tabboxpreviewer.cpp
-    previewer/previewer.cpp
-    previewer/windowswitcher/standalone/main.cpp
-    previewer/windowswitcher/standalone/windowswitcherpreviewer.cpp
-)
+#set (KWin-WindowSwitcherPreviewer_SRC
+#    previewer/windowswitcher/windowswitcher.cpp
+#    previewer/windowswitcher/thumbnailitem.cpp
+#    previewer/windowswitcher/tabboxpreviewer.cpp
+#    previewer/previewer.cpp
+#    previewer/windowswitcher/standalone/main.cpp
+#    previewer/windowswitcher/standalone/windowswitcherpreviewer.cpp
+#)
 
-kde4_add_executable(kwin-windowswitcherpreviewer ${KWin-WindowSwitcherPreviewer_SRC})
-target_link_libraries(kwin-windowswitcherpreviewer
-                      ${KDE4_KDEUI_LIBS}
-                      ${KDE4_KIO_LIBRARY}
-                      ${QT_QTDECLARATIVE_LIBRARIES}
-                      ${KDECLARATIVE_LIBRARIES}
-)
+#add_executable(kwin-windowswitcherpreviewer ${KWin-WindowSwitcherPreviewer_SRC})
+#target_link_libraries(kwin-windowswitcherpreviewer
+#                      KF5::KDeclarative
+#                      Qt5::Quick
+#                      Qt5::KIO
+#)
 
-install(TARGETS kwin-windowswitcherpreviewer ${INSTALL_TARGETS_DEFAULT_ARGS})
+#install(TARGETS kwin-windowswitcherpreviewer ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 #plasmakconfigxteditor
 set(plasmakconfigxt_SRCS
@@ -169,17 +79,53 @@ set(plasmakconfigxt_SRCS
      editors/kconfigxt/standalone/main.cpp
 )
 
-kde4_add_ui_files (plasmakconfigxt_SRCS
+qt5_wrap_ui (plasmakconfigxt_SRCS
     editors/kconfigxt/kconfigxteditor.ui
 )
 
-kde4_add_executable(plasmakconfigxteditor ${plasmakconfigxt_SRCS})
+add_executable(plasmakconfigxteditor ${plasmakconfigxt_SRCS})
 target_link_libraries(plasmakconfigxteditor
-                        ${KDE4_KDEUI_LIBS}
-                        ${KDE4_KIO_LIBRARY}
-                        ${QT_QTXML_LIBRARY}
+                        Qt5::Widgets
+                        KF5::CoreAddons
+                        KF5::ConfigCore
+                        KF5::KIOCore
+                        KF5::I18n
+                        Qt5::Xml
+                        KF5::Completion
+                        KF5::WidgetsAddons
+                        KF5::KIOWidgets
 )
 
 install(TARGETS plasmakconfigxteditor ${INSTALL_TARGETS_DEFAULT_ARGS})
 
-macro_display_feature_log()
+install(DIRECTORY templates DESTINATION ${DATA_INSTALL_DIR}/plasmate)
+
+set(packagehandler_SRCS
+    ${CMAKE_CURRENT_SOURCE_DIR}/packagehandler/packagehandler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/packagehandler/plasmoidhandler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/packagehandler/themehandler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/editors/metadata/metadatahandler.cpp
+)
+
+if(BUILD_TESTING)
+    include(ECMMarkAsTest)
+    macro(PLASMATE_UNIT_TEST testname srcs libraries)
+        set(testname_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/${testname}.cpp
+                          ${srcs}
+        )
+
+        add_executable(${testname} ${testname_SRCS})
+        add_test(plasmate-${testname} ${testname})
+
+        ecm_mark_as_test(${testname})
+
+        target_link_libraries(${testname} ${libraries} Qt5::Test Qt5::Core)
+    endmacro()
+
+    add_subdirectory(tests)
+endif()
+
+add_subdirectory(app)
+add_subdirectory(plugins)
+
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

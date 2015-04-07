@@ -13,7 +13,6 @@
 #include <KIO/CopyJob>
 #include <KMessageBox>
 #include <KLocalizedString>
-#include <KStandardDirs>
 
 #include <QWidget>
 #include <QDir>
@@ -37,8 +36,8 @@ RemoteInstaller::RemoteInstaller(const QString& username, const QString& hostnam
     QString temporaryDirectory = QDir::tempPath();
     temporaryDirectory.append("/plasmaremoteinstaller");
 
-    KUrl tmpUrl = m_execUrl;
-    tmpUrl.addPath(temporaryDirectory);
+    QUrl tmpUrl;
+    tmpUrl.setPath(m_execUrl.path() + temporaryDirectory);
     if (!KIO::NetAccess::exists(tmpUrl, KIO::NetAccess::DestinationSide, m_widget)) {
         const bool ok = KIO::NetAccess::mkdir(tmpUrl, m_widget);
         if (!ok) {
@@ -68,7 +67,7 @@ RemoteInstaller::RemoteInstaller(const QString& username, const QString& hostnam
 void RemoteInstaller::doInstall()
 {
     //copy the project in the target's plasmate data directory
-    KIO::CopyJob *copy = KIO::copy(m_sourcePath, m_destinationPath);
+    KIO::CopyJob *copy = KIO::copy(QUrl::fromLocalFile(m_sourcePath), m_destinationPath);
 
     connect(copy, SIGNAL(result(KJob*)), this, SLOT(doPlasmaPkg(KJob*)));
 }

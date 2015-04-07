@@ -23,14 +23,19 @@
 #include <QStandardItemModel>
 #include <QBitmap>
 #include <QBitArray>
+#include <QDialogButtonBox>
+#include <QMenu>
+#include <QUrl>
 
 #include <KIconLoader>
 #include <KIconTheme>
-#include <KMenu>
 #include <KStandardAction>
 #include <KStringHandler>
-#include <KAction>
-#include <KDateTime>
+#include <KLocalizedString>
+#include <QAction>
+#include <QDateTime>
+
+#include <Plasma/PluginLoader>
 
 #ifdef FOUND_SOPRANO
 #include <Soprano/Node>
@@ -38,29 +43,42 @@ Q_DECLARE_METATYPE(Soprano::Node)
 #endif // FOUND_SOPRANO
 Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 
-#include <Plasma/DataEngineManager>
-
+#include "modelviewer.h"
 #include "serviceviewer.h"
 #include "titlecombobox.h"
 
 EngineExplorer::EngineExplorer(QWidget* parent)
-    : KDialog(parent),
+    : QDialog(parent),
       m_engine(0),
       m_sourceCount(0),
-      m_requestingSource(false)
+      m_requestingSource(false),
+      m_expandButton(new QPushButton(i18n("Expand All"), this)),
+      m_collapseButton(new QPushButton(i18n("Collapse All"), this))
 {
 #ifdef FOUND_SOPRANO
     (void) qRegisterMetaType<Soprano::Node>();
 #endif
     setWindowTitle(i18n("Plasma Engine Explorer"));
     QWidget* mainWidget = new QWidget(this);
-    setMainWidget(mainWidget);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
+    buttonBox->addButton(m_expandButton, QDialogButtonBox::ActionRole);
+    buttonBox->addButton(m_collapseButton, QDialogButtonBox::ActionRole);
+    buttonBox->addButton(QDialogButtonBox::Close);
+
+    QVBoxLayout *layout = new QVBoxLayout(this);
+    layout->addWidget(mainWidget);
+    layout->addWidget(buttonBox);
+    setLayout(layout);
+
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+
     setupUi(mainWidget);
 
-    m_engineManager = Plasma::DataEngineManager::self();
+    m_engineManager = Plasma::PluginLoader::self();
     m_dataModel = new QStandardItemModel(this);
-    KIcon pix("plasma");
-    int size = IconSize(KIconLoader::Dialog);
+    const QIcon pix = QIcon::fromTheme("plasma");
+    const int size = IconSize(KIconLoader::Dialog);
     m_title->setPixmap(pix.pixmap(size, size));
     connect(m_engines, SIGNAL(activated(QString)), this, SLOT(showEngine(QString)));
     connect(m_sourceRequesterButton, SIGNAL(clicked(bool)), this, SLOT(requestSource()));
@@ -69,18 +87,14 @@ EngineExplorer::EngineExplorer(QWidget* parent)
     m_data->setWordWrap(true);
 
     m_searchLine->setTreeView(m_data);
-    m_searchLine->setClickMessage(i18n("Search"));
+    m_searchLine->setPlaceholderText(i18n("Search"));
 
     listEngines();
     m_engines->setFocus();
 
-    setButtons(KDialog::Close | KDialog::User1 | KDialog::User2);
-    setButtonText(KDialog::User1, i18n("Collapse All"));
-    setButtonText(KDialog::User2, i18n("Expand All"));
-    connect(this, SIGNAL(user1Clicked()), m_data, SLOT(collapseAll()));
-    connect(this, SIGNAL(user2Clicked()), m_data, SLOT(expandAll()));
-    enableButton(KDialog::User1, false);
-    enableButton(KDialog::User2, false);
+    connect(m_collapseButton, SIGNAL(clicked()), m_data, SLOT(collapseAll()));
+    connect(m_expandButton, SIGNAL(clicked()), m_data, SLOT(expandAll()));
+    enableButtons(false);
 
     addAction(KStandardAction::quit(qApp, SLOT(quit()), this));
 
@@ -97,7 +111,7 @@ EngineExplorer::~EngineExplorer()
 void EngineExplorer::cleanUp()
 {
     if (!m_engineName.isEmpty()) {
-        m_engineManager->unloadEngine(m_engineName);
+        //m_engineManager->unloadEngine(m_engineName);
     }
 }
 
@@ -113,9 +127,9 @@ void EngineExplorer::setApp(const QString &app)
 void EngineExplorer::setEngine(const QString &engine)
 {
     //find the engine in the combo box
-    int index = m_engines->findText(engine);
+    const int index = m_engines->findText(engine);
     if (index != -1) {
-        kDebug() << QString("Engine %1 found!").arg(engine);
+        qDebug() << QString("Engine %1 found!").arg(engine);
         m_engines->setCurrentIndex(index);
         showEngine(engine);
     }
@@ -146,11 +160,11 @@ void EngineExplorer::dataUpdated(const QString& source, const Plasma::DataEngine
 void EngineExplorer::listEngines()
 {
     m_engines->clear();
-    KPluginInfo::List engines = m_engineManager->listEngineInfo(m_app);
+    KPluginInfo::List engines = m_engineManager->listDataEngineInfo(m_app);
     qSort(engines);
 
     foreach (const KPluginInfo engine, engines) {
-        m_engines->addItem(KIcon(engine.icon()), engine.pluginName());
+        m_engines->addItem(QIcon::fromTheme(engine.icon()), engine.pluginName());
     }
 
     m_engines->setCurrentIndex(-1);
@@ -162,8 +176,7 @@ void EngineExplorer::showEngine(const QString& name)
     m_sourceRequesterButton->setEnabled(false);
     m_serviceRequester->setEnabled(false);
     m_serviceRequesterButton->setEnabled(false);
-    enableButton(KDialog::User1, false);
-    enableButton(KDialog::User2, false);
+    enableButtons(false);
     m_dataModel->clear();
     m_dataModel->setColumnCount(4);
     QStringList headers;
@@ -173,7 +186,7 @@ void EngineExplorer::showEngine(const QString& name)
     m_sourceCount = 0;
 
     if (!m_engineName.isEmpty()) {
-        m_engineManager->unloadEngine(m_engineName);
+        //m_engineManager->unloadEngine(m_engineName);
     }
 
     m_engineName = name;
@@ -182,19 +195,19 @@ void EngineExplorer::showEngine(const QString& name)
         return;
     }
 
-    m_engine = m_engineManager->loadEngine(m_engineName);
+    m_engine = m_engineManager->loadDataEngine(m_engineName);
     if (!m_engine) {
         m_engineName.clear();
         updateTitle();
         return;
     }
 
-    //kDebug() << "showing engine " << m_engine->objectName();
-    //kDebug() << "we have " << sources.count() << " data sources";
+    //qDebug() << "showing engine " << m_engine->objectName();
+    //qDebug() << "we have " << sources.count() << " data sources";
     connect(m_engine, SIGNAL(sourceAdded(QString)), this, SLOT(addSource(QString)));
     connect(m_engine, SIGNAL(sourceRemoved(QString)), this, SLOT(removeSource(QString)));
     foreach (const QString& source, m_engine->sources()) {
-        //kDebug() << "adding " << source;
+        //qDebug() << "adding " << source;
         addSource(source);
     }
 
@@ -209,27 +222,26 @@ void EngineExplorer::showEngine(const QString& name)
 
 void EngineExplorer::addSource(const QString& source)
 {
-    //kDebug() << "adding" << source;
+    //qDebug() << "adding" << source;
     QList<QStandardItem*> items = m_dataModel->findItems(source, 0);
     if (!items.isEmpty()) {
-        kDebug() << "er... already there?";
+        //qDebug() << "er... already there?";
         return;
     }
 
     QStandardItem* parent = new QStandardItem(source);
     m_dataModel->appendRow(parent);
 
-    //kDebug() << "getting data for source " << source;
+    //qDebug() << "getting data for source " << source;
     if (!m_requestingSource || m_sourceRequester->text() != source) {
-        //kDebug() << "connecting up now";
+        //qDebug() << "connecting up now";
         m_engine->connectSource(source, this);
     }
 
     ++m_sourceCount;
     updateTitle();
 
-    enableButton(KDialog::User1, true);
-    enableButton(KDialog::User2, true);
+    enableButtons(true);
 }
 
 void EngineExplorer::removeSource(const QString& source)
@@ -266,7 +278,7 @@ void EngineExplorer::requestSource(const QString &source)
         return;
     }
 
-    kDebug() << "request source" << source;
+    qDebug() << "request source" << source;
     m_requestingSource = true;
     m_engine->connectSource(source, this, (uint)m_updateInterval->value());
     m_requestingSource = false;
@@ -285,9 +297,10 @@ void EngineExplorer::showDataContextMenu(const QPoint &point)
         }
 
         const QString source = index.data().toString();
-        KMenu menu;
-        menu.addTitle(source);
+        QMenu menu;
+        menu.addSection(source);
         QAction *service = menu.addAction(i18n("Get associated service"));
+        QAction *model = menu.addAction(i18n("Get associated model"));
         QAction *update = menu.addAction(i18n("Update source now"));
         QAction *remove = menu.addAction(i18n("Remove source"));
 
@@ -295,9 +308,12 @@ void EngineExplorer::showDataContextMenu(const QPoint &point)
         if (activated == service) {
             ServiceViewer *viewer = new ServiceViewer(m_engine, source);
             viewer->show();
+        } else if (activated == model) {
+            ModelViewer *viewer = new ModelViewer(m_engine, source);
+            viewer->show();
         } else if (activated == update) {
             m_engine->connectSource(source, this);
-            Plasma::DataEngine::Data data = m_engine->query(source);
+            //Plasma::DataEngine::Data data = m_engine->query(source);
         } else if (activated == remove) {
             removeSource(source);
         }
@@ -309,7 +325,7 @@ QString EngineExplorer::convertToString(const QVariant &value)
     switch (value.type())
     {
         case QVariant::BitArray: {
-            return i18np("&lt;1 bit&gt;", "&lt;%1 bits&gt;", value.toBitArray().size());
+            return i18np("<1 bit>", "<%1 bits>", value.toBitArray().size());
         }
         case QVariant::Bitmap: {
             QBitmap bitmap = value.value<QBitmap>();
@@ -318,7 +334,7 @@ QString EngineExplorer::convertToString(const QVariant &value)
         case QVariant::ByteArray: {
             // Return the array size if it is not displayable
             if (value.toString().isEmpty()) {
-                return i18np("&lt;1 byte&gt;", "&lt;%1 bytes&gt;", value.toByteArray().size());
+                return i18np("<1 byte>", "<%1 bytes>", value.toByteArray().size());
             }
             else {
                 return value.toString();
@@ -341,7 +357,7 @@ QString EngineExplorer::convertToString(const QVariant &value)
         }
         case QVariant::Map: {
             QVariantMap map = value.toMap();
-            QString str = i18np("&lt;1 item&gt;", "&lt;%1 items&gt;", map.size());
+            QString str = i18np("<1 item>", "<%1 items>", map.size());
 
             QMapIterator<QString, QVariant> it(map);
             while (it.hasNext()) {
@@ -414,14 +430,14 @@ QString EngineExplorer::convertToString(const QVariant &value)
                 }
             }
 #endif
-            if (QLatin1String(value.typeName()) == "KDateTime") {
-                return QString("%1").arg(value.value<KDateTime>().toString());
+            if (QLatin1String(value.typeName()) == "QDateTime") {
+                return QString("%1").arg(value.value<QDateTime>().toString());
             }
 
             Plasma::DataEngine::Data data = value.value<Plasma::DataEngine::Data>();
             if (!data.isEmpty()) {
                 QStringList result;
-                QHashIterator<QString, QVariant> it(data);
+                QMapIterator<QString, QVariant> it(data);
 
                 while (it.hasNext()) {
                     it.next();
@@ -487,23 +503,32 @@ int EngineExplorer::showData(QStandardItem* parent, Plasma::DataEngine::Data dat
 void EngineExplorer::updateTitle()
 {
     if (!m_engine) {
-        m_title->setPixmap(KIcon("plasma").pixmap(IconSize(KIconLoader::Dialog)));
+        m_title->setPixmap(QIcon::fromTheme("plasma").pixmap(IconSize(KIconLoader::Dialog)));
         m_title->setText(i18n("Plasma DataEngine Explorer"));
         return;
     }
 
     m_title->setText(ki18ncp("The name of the engine followed by the number of data sources",
                              "%1 Engine - 1 data source", "%1 Engine - %2 data sources")
-                              .subs(KStringHandler::capwords(m_engine->name()))
+                              .subs(KStringHandler::capwords(m_engine->pluginInfo().name()))
                               .subs(m_sourceCount).toString());
 
-    if (m_engine->icon().isEmpty()) {
-        m_title->setPixmap(KIcon("plasma").pixmap(IconSize(KIconLoader::Dialog)));
+    if (m_engine->pluginInfo().icon().isEmpty()) {
+        m_title->setPixmap(QIcon::fromTheme("plasma").pixmap(IconSize(KIconLoader::Dialog)));
     } else {
         //m_title->setPixmap(KIcon("alarmclock").pixmap(IconSize(KIconLoader::Dialog)));
-        m_title->setPixmap(KIcon(m_engine->icon()).pixmap(IconSize(KIconLoader::Dialog)));
+        m_title->setPixmap(QIcon::fromTheme(m_engine->pluginInfo().icon()).pixmap(IconSize(KIconLoader::Dialog)));
     }
 }
 
-#include "engineexplorer.moc"
+void EngineExplorer::enableButtons(bool enable)
+{
+    if (m_expandButton) {
+        m_expandButton->setEnabled(enable);
+    }
+
+    if (m_collapseButton) {
+        m_collapseButton->setEnabled(enable);
+    }
+}
 

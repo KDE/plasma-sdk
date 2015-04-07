@@ -5,7 +5,7 @@ set(plasmawallpaperviewer_SRCS
 
 kde4_add_executable(plasmawallpaperviewer ${plasmawallpaperviewer_SRCS})
 
-target_link_libraries(plasmawallpaperviewer ${KDE4_PLASMA_LIBS})
+target_link_libraries(plasmawallpaperviewer KF5::Plasma)
 
 install(TARGETS plasmawallpaperviewer ${INSTALL_TARGETS_DEFAULT_ARGS})
 

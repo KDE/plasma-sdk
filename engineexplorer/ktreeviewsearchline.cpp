@@ -23,26 +23,24 @@
 
 #include <QtCore/QList>
 #include <QtCore/QTimer>
-#include <QtGui/QApplication>
+#include <QtWidgets/QApplication>
 #include <QtGui/QContextMenuEvent>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QMenu>
-#include <QtGui/QToolButton>
-#include <QtGui/QTreeView>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QMenu>
+#include <QtWidgets/QToolButton>
+#include <QtWidgets/QTreeView>
 
-#include <kdebug.h>
+#include <QDebug>
 #include <kiconloader.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <ktoolbar.h>
-#include <kvbox.h>
 
-
-class KTreeViewSearchLine::Private
+class KTreeViewSearchLinePrivate
 {
   public:
-    Private( KTreeViewSearchLine *_parent )
+    KTreeViewSearchLinePrivate( KTreeViewSearchLine *_parent )
       : parent( _parent ),
         caseSensitive( Qt::CaseInsensitive ),
         activeSearch( false ),
@@ -62,7 +60,7 @@ class KTreeViewSearchLine::Private
     int queuedSearches;
     QList<int> searchColumns;
 
-    void rowsInserted(const QModelIndex & parent, int start, int end) const;
+    void rowsInserted(QAbstractItemModel *model, const QModelIndex & parent, int start, int end) const;
     void treeViewDeleted( QObject *treeView );
     void slotColumnActivated(QAction* action);
     void slotAllVisibleColumns();
@@ -75,10 +73,15 @@ class KTreeViewSearchLine::Private
 ////////////////////////////////////////////////////////////////////////////////
 // private slots
 ////////////////////////////////////////////////////////////////////////////////
-
-void KTreeViewSearchLine::Private::rowsInserted( const QModelIndex & parentIndex, int start, int end ) const
+void KTreeViewSearchLine::rowsInserted( const QModelIndex & parentIndex, int start, int end ) const
 {
-  QAbstractItemModel* model = qobject_cast<QAbstractItemModel*>( parent->sender() );
+  QAbstractItemModel* model = qobject_cast<QAbstractItemModel*>( sender() );
+  d->rowsInserted(model, parentIndex, start, end);
+}
+
+void KTreeViewSearchLinePrivate::rowsInserted( QAbstractItemModel *model, const QModelIndex & parentIndex, int start, int end ) const
+{
+  //QAbstractItemModel* model = qobject_cast<QAbstractItemModel*>( parent->sender() );
   if ( !model )
     return;
 
@@ -97,13 +100,13 @@ void KTreeViewSearchLine::Private::rowsInserted( const QModelIndex & parentIndex
   }
 }
 
-void KTreeViewSearchLine::Private::treeViewDeleted( QObject *object )
+void KTreeViewSearchLinePrivate::treeViewDeleted( QObject *object )
 {
   treeViews.removeAll( static_cast<QTreeView *>( object ) );
   parent->setEnabled( treeViews.isEmpty() );
 }
 
-void KTreeViewSearchLine::Private::slotColumnActivated( QAction *action )
+void KTreeViewSearchLinePrivate::slotColumnActivated( QAction *action )
 {
   if ( !action )
     return;
@@ -142,7 +145,7 @@ void KTreeViewSearchLine::Private::slotColumnActivated( QAction *action )
   parent->updateSearch();
 }
 
-void KTreeViewSearchLine::Private::slotAllVisibleColumns()
+void KTreeViewSearchLinePrivate::slotAllVisibleColumns()
 {
   if ( searchColumns.isEmpty() )
     searchColumns.append( 0 );
@@ -157,12 +160,12 @@ void KTreeViewSearchLine::Private::slotAllVisibleColumns()
 ////////////////////////////////////////////////////////////////////////////////
 
 
-void KTreeViewSearchLine::Private::checkColumns()
+void KTreeViewSearchLinePrivate::checkColumns()
 {
   canChooseColumns = parent->canChooseColumnsCheck();
 }
 
-void KTreeViewSearchLine::Private::checkItemParentsNotVisible( QTreeView *treeView )
+void KTreeViewSearchLinePrivate::checkItemParentsNotVisible( QTreeView *treeView )
 {
     Q_UNUSED(treeView)
 
@@ -185,7 +188,7 @@ void KTreeViewSearchLine::Private::checkItemParentsNotVisible( QTreeView *treeVi
  *  \return \c true if an item which should be visible is found, \c false if all items found should be hidden. If this function
  *             returns true and \p highestHiddenParent was not 0, highestHiddenParent will have been shown.
  */
-bool KTreeViewSearchLine::Private::checkItemParentsVisible( QTreeView *treeView, const QModelIndex &index )
+bool KTreeViewSearchLinePrivate::checkItemParentsVisible( QTreeView *treeView, const QModelIndex &index )
 {
   bool childMatch = false;
   const int rowcount = treeView->model()->rowCount( index );
@@ -210,7 +213,7 @@ bool KTreeViewSearchLine::Private::checkItemParentsVisible( QTreeView *treeView,
 ////////////////////////////////////////////////////////////////////////////////
 
 KTreeViewSearchLine::KTreeViewSearchLine( QWidget *parent, QTreeView *treeView )
-  : KLineEdit( parent ), d( new Private( this ) )
+  : KLineEdit( parent ), d( new KTreeViewSearchLinePrivate( this ) )
 {
   connect( this, SIGNAL(textChanged(QString)),
            this, SLOT(queueSearch(QString)) );
@@ -225,7 +228,7 @@ KTreeViewSearchLine::KTreeViewSearchLine( QWidget *parent, QTreeView *treeView )
 
 KTreeViewSearchLine::KTreeViewSearchLine( QWidget *parent,
                                               const QList<QTreeView *> &treeViews )
-  : KLineEdit( parent ), d( new Private( this ) )
+  : KLineEdit( parent ), d( new KTreeViewSearchLinePrivate( this ) )
 {
   connect( this, SIGNAL(textChanged(QString)),
            this, SLOT(queueSearch(QString)) );
@@ -543,10 +546,10 @@ void KTreeViewSearchLine::activateSearch()
 // KTreeViewSearchLineWidget
 ////////////////////////////////////////////////////////////////////////////////
 
-class KTreeViewSearchLineWidget::Private
+class KTreeViewSearchLineWidgetPrivate
 {
   public:
-    Private()
+    KTreeViewSearchLineWidgetPrivate()
       : treeView( 0 ),
         searchLine( 0 )
     {
@@ -557,7 +560,7 @@ class KTreeViewSearchLineWidget::Private
 };
 
 KTreeViewSearchLineWidget::KTreeViewSearchLineWidget( QWidget *parent, QTreeView *treeView )
-  : QWidget( parent ), d( new Private )
+  : QWidget( parent ), d( new KTreeViewSearchLineWidgetPrivate )
 {
   d->treeView = treeView;
 
@@ -599,4 +602,4 @@ KTreeViewSearchLine *KTreeViewSearchLineWidget::searchLine() const
   return d->searchLine;
 }
 
-#include "ktreeviewsearchline.moc"
+#include "moc_ktreeviewsearchline.cpp"

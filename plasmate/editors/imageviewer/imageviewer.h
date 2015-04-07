@@ -1,5 +1,5 @@
 /*
-Copyright 2011 Giorgos Tsiapaliwkas <terietor@gmail.org>
+Copyright 2011 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@kde.org>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define IMAGEVIEWER_H
 
 #include <QWidget>
-#include <KUrl>
+#include <QUrl>
 #include <QSize>
 #include <QImage>
 
@@ -42,28 +42,28 @@ public:
      * Returns the directory for the image which will be displayed.
      * @see setImage()
      **/
-    const KUrl imagePath();
+    const QUrl imagePath();
 
     /**
      * Sets the directory for the image which will be displayed.
      **/
-    void loadImage(const KUrl& image);
+    void loadImage(const QUrl& image);
 
 protected:
     void resizeEvent(QResizeEvent *event);
 
 
 private Q_SLOTS:
-    void loadPixmap(const KUrl &url, const QSize &size, const QImage& image);
+    void loadPixmap(const QUrl &url, const QSize &size, const QImage& image);
     void reloadImage();
 
 private:
-    KUrl m_image;
+    QUrl m_image;
     QSvgWidget *m_svgWidget;
     QLabel *m_label;
     QTimer *m_reloadRequestTimer;
 
-    void loadSvg(const KUrl& image);
+    void loadSvg(const QUrl& image);
 };
 
 #endif // IMAGEVIEWER_H

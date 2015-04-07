@@ -36,7 +36,7 @@ void PlasmaKConfigXtEditor::checkProjectPath(const QString& path)
     //check if the files is an xml
     if(path.endsWith(".xml")) {
         enableWidgets(true);
-        setFilename(path);
+        setFilename(QUrl(path));
         readFile();
     } else {
         enableWidgets(false);

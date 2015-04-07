@@ -16,29 +16,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <QDir>
+#include <QDebug>
 #include <QRegExpValidator>
+
+#include <KIconButton>
 #include <KDesktopFile>
 #include <KConfigGroup>
-#include <KDebug>
 #include <KMessageWidget>
-
-#include <plasma/packagemetadata.h>
-#include <plasma/plasma.h>
-#include <plasma/scripting/scriptengine.h>
+#include <klocalizedstring.h>
 
 #include "ui_metadata.h"
 #include "metadataeditor.h"
-#include "../../packagemodel.h"
 
-//
 // TODO: Now we know what this does it needs rewriting to use the metadata object
 // as its main store. And to handle updates in a clean per-change way rather than
 // the hacks that are there right now.
 //
 
 MetaDataEditor::MetaDataEditor(QWidget *parent)
-        : QWidget(parent),
-        m_metadata(0)
+        : QWidget(parent)
 {
     m_view = new Ui::MetaDataEditor;
     m_view->setupUi(this);
@@ -52,67 +48,50 @@ MetaDataEditor::MetaDataEditor(QWidget *parent)
 
 MetaDataEditor::~MetaDataEditor()
 {
-    delete m_metadata;
 }
 
-void MetaDataEditor::setFilename(const QString &filename)
+void MetaDataEditor::setFilename(const QString &filePath)
 {
-    m_filename = filename;
+    m_metadata.setFilePath(filePath);
 }
 
 const QString MetaDataEditor::filename()
 {
-    return m_filename;
+    return m_metadata.filePath();
 }
-
-bool MetaDataEditor::isValidMetaData()
-{
-    kDebug() << "readFile file" << m_filename;
-
-    delete m_metadata;
-    m_metadata = new Plasma::PackageMetadata(m_filename);
-    return m_metadata->isValid();
-
-}
-
 
 void MetaDataEditor::readFile()
 {
-    if (!this->isValidMetaData()) {
-      kWarning() << "MetaData cannot read the file because the filename:" + m_filename + "is not valid.";
-      return;
-    }
+    m_view->name_edit->setText(m_metadata.name());
+    m_view->comment_edit->setText(m_metadata.description());
+    m_view->icon_button->setIcon(m_metadata.icon());
 
-    m_view->name_edit->setText(m_metadata->name());
-    m_view->comment_edit->setText(m_metadata->description());
-    m_view->icon_button->setIcon(m_metadata->icon());
+    m_view->pluginname_edit->setText(m_metadata.pluginName());
 
-    m_view->pluginname_edit->setText(m_metadata->pluginName());
-
-    QString serviceType = m_metadata->serviceType();
+    const QString serviceType = m_metadata.serviceTypes().at(0);
 
     initCatergories(serviceType);
 
     m_view->type_combo->clear();
     m_view->type_combo->setEnabled(false);
-    if (serviceType == "Plasma/DataEngine") {
+    if (serviceType == QStringLiteral("Plasma/DataEngine")) {
         m_view->type_combo->insertItem(0, i18n("Data Engine"));
-        m_metadata->setServiceType("Plasma/DataEngine");
-    } else if (serviceType == "Plasma/Theme") {
+        m_metadata.setServiceTypes(QStringList() << QStringLiteral("Plasma/DataEngine"));
+    } else if (serviceType == QStringLiteral("Plasma/Theme")) {
         m_view->type_combo->insertItem(0, i18n("Theme"));
-        m_metadata->setServiceType("Plasma/Theme");
-    } else if (serviceType == "Plasma/Runner") {
+        m_metadata.setServiceTypes(QStringList() << QStringLiteral("Plasma/Theme"));
+    } else if (serviceType == QStringLiteral("Plasma/Runner")) {
         m_view->type_combo->insertItem(0, i18n("Runner"));
-        m_metadata->setServiceType("Plasma/Runner");
-    } else if (serviceType == "KWin/WindowSwitcher") {
+        m_metadata.setServiceTypes(QStringList() << QStringLiteral("Plasma/Runner"));
+    } else if (serviceType == QStringLiteral("KWin/WindowSwitcher")) {
         m_view->type_combo->insertItem(0,i18n("Window Switcher"));
-        m_metadata->setServiceType("KWin/WindowSwitcher");
-    } else if (serviceType == "KWin/Script") {
+        m_metadata.setServiceTypes(QStringList() << QStringLiteral("KWin/WindowSwitcher"));
+    } else if (serviceType == QStringLiteral("KWin/Script")) {
         m_view->type_combo->insertItem(0, i18n("KWin Script"));
-        m_metadata->setServiceType("KWin/Script");
-    } else if (serviceType == "KWin/Effect") {
+        m_metadata.setServiceTypes(QStringList() << QStringLiteral("KWin/Script"));
+    } else if (serviceType == QStringLiteral("KWin/Effect")) {
         m_view->type_combo->insertItem(0, i18n("KWin Effect"));
-        m_metadata->setServiceType("KWin/Effect");
+        m_metadata.setServiceTypes(QStringList() << QStringLiteral("KWin/Effect"));
     } else {
         m_view->type_combo->insertItem(0, i18n("Applet"));
         m_view->type_combo->insertItem(1, i18n("Popup Applet"));
@@ -131,19 +110,19 @@ void MetaDataEditor::readFile()
     pluginname_validator->setRegExp(validatePluginName);
     m_view->pluginname_edit->setValidator(pluginname_validator);
 
-    int idx = m_view->category_combo->findText(m_metadata->category());
+    int idx = m_view->category_combo->findText(m_metadata.category());
     if (idx != -1) {
         m_view->category_combo->setCurrentIndex(idx);
     } else {
-        kWarning() << "Unknown category detected " << m_metadata->category() << "using miscellaneous instead";
+        qWarning() << "Unknown category detected " << m_metadata.category() << "using miscellaneous instead";
         m_view->category_combo->setCurrentIndex(m_view->category_combo->count() - 1); // misc is last
     }
 
-    m_view->version_edit->setText(m_metadata->version());
-    m_view->website_edit->setText(m_metadata->website());
-    m_view->author_edit->setText(m_metadata->author());
-    m_view->email_edit->setText(m_metadata->email());
-    m_view->license_edit->setText(m_metadata->license());
+    m_view->version_edit->setText(m_metadata.version());
+    m_view->website_edit->setText(m_metadata.website());
+    m_view->author_edit->setText(m_metadata.author());
+    m_view->email_edit->setText(m_metadata.email());
+    m_view->license_edit->setText(m_metadata.license());
     m_view->api_combo->setCurrentIndex(0);
 }
 
@@ -155,113 +134,40 @@ const QString MetaDataEditor::api()
 
 void MetaDataEditor::serviceTypeChanged()
 {
-    Plasma::ComponentTypes currentType;
-
-    switch (m_view->type_combo->currentIndex()) {
-    case 0:
-        m_metadata->setServiceType("Plasma/Applet");
-        currentType = Plasma::AppletComponent;
-        break;
-    case 1:
-        m_metadata->setServiceType("Plasma/Applet,Plasma/PopupApplet");
-        currentType = Plasma::AppletComponent;
-        break;
-    /*case 2:   // only applet/popupapplet can be dynamically selected now
-        m_metadata->setServiceType("Plasma/DataEngine");
-        currentType = Plasma::DataEngineComponent;
-        break;
-    case 3:
-        m_metadata->setServiceType("Plasma/Theme");
-        m_view->api_combo->setEnabled(false);
-        return;
-        break;
-    case 4:
-        m_metadata->setServiceType("Plasma/Runner");
-        currentType = Plasma::RunnerComponent;
-        break;*/
-    default:
-        kWarning() << "Unknown service type" << currentType;
-        return;
-    }
-
     m_view->api_combo->setEnabled(false); // disallow dynamic changing of api
-    //FIXME: shouldn't need to do most of the stuff below anymore
-    m_apis = Plasma::knownLanguages(currentType);
-    m_apis.append(QString());   // Add empty string for native
-
-    kDebug() << "Got m_apis " << m_apis;
-    // Map to friendly names (TODO: fix in library)
+    QStringList apis;
+    apis << QStringLiteral("declarativeappletscript") << QStringLiteral("javascript");
 
     //add  api from the metadata.desktop inside the api
-    KConfig filenamePath(m_filename);
-    KConfigGroup metaFilePreferences(&filenamePath, "Desktop Entry");
-    QString api = metaFilePreferences.readEntry("X-Plasma-API");
-    QStringList apiName;
-    apiName << formatApi(api, MetaDataEditor::uiApi);
     m_view->label_16->setVisible(false);
     m_view->api_combo->clear();
-    m_view->api_combo->insertItems(0, apiName);
-    if (m_view->api_combo->currentIndex() == -1 || apiName.first().isEmpty()) {
+    m_view->api_combo->insertItems(0, QStringList() << m_metadata.pluginApi());
+    if (m_view->api_combo->currentIndex() == -1 || m_metadata.pluginApi().isEmpty()) {
         m_view->label_16->setVisible(true);
         m_view->api_combo->clear();
-        m_view->api_combo->insertItems(0, m_apis);
+        m_view->api_combo->insertItems(0, apis);
         m_view->api_combo->setEnabled(true);
     }
-}
-
-QString MetaDataEditor::formatApi(const QString &api,  apiModes apiMode)
-{
-    if (apiMode == MetaDataEditor::uiApi) {
-        if (api == QString("dashboard")) {
-            return QString("Dashboard");
-        } else if (api == QString("javascript")) {
-            return QString("Javascript");
-        } else if (api == QString("ruby-script")) {
-            return QString("Ruby");
-        } else if (api == QString("webkit")) {
-            return QString("Webkit");
-        } else if (api == QString("python")) {
-            return QString("Python");
-        } else if (api == QString("declarativeappletscript")) {
-            return QString("declarativeappletscript");
-        }
-    } else if (apiMode == MetaDataEditor::coreApi) {
-        if (api == QString("Dashboard")) {
-            return QString("dashboard");
-        } else if (api == QString("Javascript")) {
-            return QString("javascript");
-        } else if (api == QString("Ruby")) {
-            return QString("ruby-script");
-        } else if (api == QString("Webkit")) {
-            return QString("webkit");
-        } else if (api == QString("Python")) {
-            return QString("python");
-        } else if (api == QString("declarativeappletscript")) {
-            return QString("declarativeappletscript");
-        }
-    }
-    kWarning() << "Unknown API " << api << apiMode;
-    return QString(api);
 }
 
 void MetaDataEditor::writeFile()
 {
     QString api = m_view->api_combo->currentText();
-    m_metadata->setName(m_view->name_edit->text());
-    m_metadata->setDescription(m_view->comment_edit->text());
-    m_metadata->setIcon(m_view->icon_button->icon());
+    m_metadata.setName(m_view->name_edit->text());
+    m_metadata.setDescription(m_view->comment_edit->text());
+    m_metadata.setIcon(m_view->icon_button->icon());
 
-    m_metadata->setCategory(m_categories[m_view->category_combo->currentIndex()]);
-    m_metadata->setImplementationApi(formatApi(api, MetaDataEditor::coreApi));
-    m_metadata->setPluginName(m_view->pluginname_edit->text());
-    m_metadata->setVersion(m_view->version_edit->text());
-    m_metadata->setWebsite(m_view->website_edit->text());
-    m_metadata->setAuthor(m_view->author_edit->text());
-    m_metadata->setEmail(m_view->email_edit->text());
+    m_metadata.setCategory(m_categories[m_view->category_combo->currentIndex()]);
+    m_metadata.setPluginApi(api);
+    m_metadata.setPluginName(m_view->pluginname_edit->text());
+    m_metadata.setVersion(m_view->version_edit->text());
+    m_metadata.setWebsite(m_view->website_edit->text());
+    m_metadata.setAuthor(m_view->author_edit->text());
+    m_metadata.setEmail(m_view->email_edit->text());
 
-    m_metadata->setLicense(m_view->license_edit->text());
+    m_metadata.setLicense(m_view->license_edit->text());
     emit apiChanged();
-    m_metadata->write(m_filename);
+    m_metadata.writeFile();
     //TODO: alert the necessary components (eg. packagemodel) if plugin type/api is changed
 }
 

@@ -15,32 +15,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <KApplication>
-#include <KAboutData>
+#include <QApplication>
 #include <KLocale>
-#include <KCmdLineArgs>
 
 #include <QPointer>
 
+#include <qcommandlineparser.h>
+#include <qcommandlineoption.h>
+
 #include "plasmaremoteinstaller.h"
+
+static const char version[] = "2.0";
 
 int main(int argc, char *argv[])
 {
-    KAboutData aboutData("plasmaremoteinstaller", 0, ki18n("Plasma Remote installer"),
-                         "0.1alpha3", ki18n("Plasma Remote Installer"),
-                         KAboutData::License_GPL,
-                         ki18n("Copyright 2012 Plasma Development Team"),
-                         KLocalizedString(), "", "plasma-devel@kde.org");
+    QApplication app(argc, argv);
+    QCommandLineParser parser;
 
-    aboutData.addAuthor(ki18n("Giorgos Tsiapaliwkas"), ki18n("Author"), "terietor@gmail.com");
-    aboutData.setProgramIconName("plasmagik");
-
-    KCmdLineArgs::init(argc, argv, &aboutData);
-
-    KCmdLineOptions options;
-    KCmdLineArgs::addCmdLineOptions(options);
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-    KApplication app;
+    app.setApplicationVersion(version);
+    parser.addVersionOption();
+    parser.addHelpOption();
+    parser.addVersionOption();
+    parser.process(app);
 
     QPointer<PlasmaRemoteInstaller> dialog = new PlasmaRemoteInstaller();
     dialog->exec();

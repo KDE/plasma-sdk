@@ -1,5 +1,5 @@
 /*
-Copyright 2011 Giorgos Tsiapaliwkas <terietor@gmail.org>
+Copyright 2011 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@kde.org>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
@@ -45,7 +45,7 @@ ImageViewer::ImageViewer(QWidget* parent)
     connect(m_reloadRequestTimer, SIGNAL(timeout()), this, SLOT(reloadImage()));
 }
 
-void ImageViewer::loadImage(const KUrl& image)
+void ImageViewer::loadImage(const QUrl& image)
 {
     m_reloadRequestTimer->stop();
 
@@ -55,7 +55,7 @@ void ImageViewer::loadImage(const KUrl& image)
         loadSvg(image);
     } else {
         ImageLoader *loader = new ImageLoader(image, size(), this);
-        connect(loader, SIGNAL(loadImage(KUrl,QSize,QImage)), this, SLOT(loadPixmap(KUrl,QSize,QImage)));
+        connect(loader, SIGNAL(loadImage(QUrl,QSize,QImage)), this, SLOT(loadPixmap(QUrl,QSize,QImage)));
         QThreadPool::globalInstance()->start(loader);
     }
 }
@@ -70,19 +70,19 @@ void ImageViewer::reloadImage()
     loadImage(m_image);
 }
 
-void ImageViewer::loadPixmap(const KUrl &url, const QSize &s, const QImage& image)
+void ImageViewer::loadPixmap(const QUrl &url, const QSize &s, const QImage& image)
 {
     if (url == m_image && s == size()) {
         m_label->setPixmap(QPixmap::fromImage(image));
     }
 }
 
-void ImageViewer::loadSvg(const KUrl& image)
+void ImageViewer::loadSvg(const QUrl& image)
 {
     m_svgWidget->load(image.path());
 }
 
-const KUrl ImageViewer::imagePath()
+const QUrl ImageViewer::imagePath()
 {
     return m_image;
 }

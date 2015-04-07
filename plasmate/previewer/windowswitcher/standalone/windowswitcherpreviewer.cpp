@@ -22,13 +22,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 WindowSwitcherPreviewer::WindowSwitcherPreviewer(QWidget* parent)
-        : KDialog(parent)
+        : QDialog(parent)
 {
     setMinimumSize(400,370);
     tmpWidget = new QWidget();
     tmpLayout = new QVBoxLayout();
     m_previewer = new TabBoxPreviewer(i18nc("Window Title", "Window Switcher Previewer"));
-    m_filePath = new KUrlRequester(tmpWidget);
+    m_filePath = new QUrlRequester(tmpWidget);
     QLabel *welcome = new QLabel(tmpWidget);
 
     m_filePath->setFilter("*.qml");

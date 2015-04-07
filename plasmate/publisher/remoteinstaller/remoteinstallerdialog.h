@@ -10,13 +10,13 @@
 #ifndef REMOTEINSTALLERDIALOG_H
 #define REMOTEINSTALLERDIALOG_H
 
-#include <KDialog>
+#include <QDialog>
 
 #include "ui_remoteinstaller.h"
 
 class RemoteInstaller;
 
-class RemoteInstallerDialog : public KDialog
+class RemoteInstallerDialog : public QDialog
 {
     Q_OBJECT;
 public:

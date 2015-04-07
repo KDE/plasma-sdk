@@ -29,10 +29,24 @@
     </widget>
    </item>
    <item>
-    <widget class="KUrlRequester" name="exporterUrl"/>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLineEdit" name="exporterUrl"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="exporterDialogButton">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset theme="document-open"/>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
-    <widget class="KPushButton" name="exporterButton">
+    <widget class="QPushButton" name="exporterButton">
      <property name="text">
       <string>Export current project</string>
      </property>
@@ -58,7 +72,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="KComboBox" name="installerButton">
+      <widget class="QComboBox" name="installerButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
          <horstretch>0</horstretch>
@@ -74,7 +88,7 @@
       </widget>
      </item>
      <item>
-      <widget class="KPushButton" name="installButton">
+      <widget class="QPushButton" name="installButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -115,7 +129,7 @@
     </widget>
    </item>
    <item>
-    <widget class="KPushButton" name="publisherButton">
+    <widget class="QPushButton" name="publisherButton">
      <property name="text">
       <string>Publish current project</string>
      </property>
@@ -125,24 +139,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
-  </customwidget>
-  <customwidget>
    <class>KSeparator</class>
    <extends>QFrame</extends>
    <header>kseparator.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KUrlRequester</class>
-   <extends>QFrame</extends>
-   <header>kurlrequester.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

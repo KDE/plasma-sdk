@@ -20,11 +20,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef WINDOWSWITCHER
 #define WINDOWSWITCHER
 
-#include <QtCore/QAbstractListModel>
-#include <QtDeclarative/QDeclarativeView>
-#include <QtDeclarative/QDeclarativeImageProvider>
+#include <QAbstractListModel>
+#include <QQuickView>
+#include <QQuickImageProvider>
 
-class WindowSwitcher : public QDeclarativeView
+class WindowSwitcher : public QQuickView
 {
     Q_OBJECT
 public:
@@ -34,7 +34,7 @@ public:
     void setLayout(const QString &path, const QString &name = QString());
 };
 
-class TabBoxImageProvider : public QDeclarativeImageProvider
+class TabBoxImageProvider : public QQuickImageProvider
 {
 public:
     TabBoxImageProvider(QAbstractListModel *model);

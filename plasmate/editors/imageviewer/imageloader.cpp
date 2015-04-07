@@ -1,5 +1,5 @@
 /*
-Copyright 2011 Giorgos Tsiapaliwkas <terietor@gmail.org>
+Copyright 2011 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@kde.org>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "imageloader.h"
 
-ImageLoader::ImageLoader(const KUrl& image, const QSize &size, QObject *parent)
+ImageLoader::ImageLoader(const QUrl& image, const QSize &size, QObject *parent)
      : QObject(parent),
        m_image(image),
        m_size(size)
