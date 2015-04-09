@@ -107,6 +107,7 @@ void View::addApplet(const QString &applet)
     }
 
     if (!a->pluginInfo().isValid()) {
+        // xgettext:no-c-format
         qCritical() << i18n("Applet %0 doesn't exist!").arg(applet);
         return;
     }
@@ -123,6 +124,7 @@ void View::addContainment(const QString &cont)
     Plasma::Containment *c = corona()->createContainment(actualCont);
 
     if (!c->pluginInfo().isValid()) {
+        // xgettext:no-c-format
         qCritical() << i18n("Containment %0 doesn't exist").arg(actualCont);
         return;
     }
