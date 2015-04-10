@@ -31,6 +31,7 @@
 #include <QDebug>
 #include <KAboutData>
 #include <KLocalizedString>
+#include <KDBusService>
 
 #include <qcommandlineparser.h>
 #include <qcommandlineoption.h>
@@ -46,6 +47,8 @@ int main(int argc, char **argv)
     QQmlDebuggingEnabler debugEnabler;
 
     QApplication app(argc, argv);
+    KDBusService service(KDBusService::Multiple);
+
     app.setApplicationVersion(version);
 
     QCommandLineParser parser;

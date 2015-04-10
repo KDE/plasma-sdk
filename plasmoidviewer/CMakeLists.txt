@@ -9,6 +9,7 @@ target_compile_definitions(plasmoidviewer PRIVATE -DPROJECT_VERSION="${PROJECT_V
 target_link_libraries(plasmoidviewer
     Qt5::Quick
     Qt5::DBus
+    KF5::DBusAddons
     KF5::Plasma
     KF5::PlasmaQuick
     KF5::I18n
