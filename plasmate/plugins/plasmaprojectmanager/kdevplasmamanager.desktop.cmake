@@ -1,16 +1,22 @@
 [Desktop Entry]
 Type=Service
 Name=Plasma Project Manager
+Name[gl]=Xestor de proxectos de Plasma
+Name[nl]=Plasma projectbeheerder
 Name[pt]=Gestor de Projectos do Plasma
 Name[sv]=Plasma-projekthanterare
 Name[uk]=Керування проектами Плазми
 Name[x-test]=xxPlasma Project Managerxx
 GenericName=Plasma Project Manager
+GenericName[gl]=Xestor de proxectos de Plasma
+GenericName[nl]=Plasma projectbeheerder
 GenericName[pt]=Gestor de Projectos do Plasma
 GenericName[sv]=Plasma-projekthanterare
 GenericName[uk]=Керування проектами Плазми
 GenericName[x-test]=xxPlasma Project Managerxx
 Comment=Allow KDevPlatform to manage plasma projects
+Comment[gl]=Permitir que KDevPlatform xestione proxectos de Plasma.
+Comment[nl]=KDevPlatform toestaan plasma-projecten te beheren
 Comment[pt]=Permite ao KDevPlatform gerir projectos do Plasma
 Comment[sv]=Tillåter att KDevelop hanterar Plasma-projekt
 Comment[uk]=Дозволяє KDevPlatform керувати проектами Плазми

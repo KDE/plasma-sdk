@@ -1,5 +1,7 @@
 [Desktop Entry]
 Comment=PlasmoidViewer Shell
+Comment[gl]=Shell do visor de plasmoides.
+Comment[nl]=Shell van PlasmoidViewer
 Comment[pt]=Consola do PlasmoidViewer
 Comment[sv]=Plasmoid-visningsskal
 Comment[uk]=Оболонка перегляду плазмоїдів
@@ -7,6 +9,8 @@ Comment[x-test]=xxPlasmoidViewer Shellxx
 Encoding=UTF-8
 Keywords=
 Name=PlasmoidViewerShell
+Name[gl]=Shell do visor de plasmoides
+Name[nl]=PlasmoidViewerShell
 Name[pt]=Consola do PlasmoidViewer
 Name[sv]=Plasmoid-visningsskal
 Name[uk]=Оболонка перегляду плазмоїдів
