@@ -1,11 +1,15 @@
 [Desktop Entry]
 Name=StudioPreviewer
+Name[ca]=StudioPreviewer
 Name[nl]=StudioBekijken
+Name[pt_BR]=StudioPreviewer
 Name[sv]=Förhandsgranskning med Studio
 Name[uk]=StudioPreviewer
 Name[x-test]=xxStudioPreviewerxx
 Comment=Containment used to preview plasmoids on Plasma Studio
+Comment[ca]=Contenidor usat per a previsualitzar plasmoides al Plasma Studio
 Comment[nl]=Container gebruikt om plasmoids in Plasma Studio te bekijken
+Comment[pt_BR]=Contêiner usado para a antevisão de plasmoides no Plasma Studio
 Comment[sv]=Omgivning som används för att förhandsgranska Plasmoider med Plasma Studio
 Comment[uk]=Контейнер, який використовується для попереднього перегляду плазмоїдів у Plasma Studio
 Comment[x-test]=xxContainment used to preview plasmoids on Plasma Studioxx

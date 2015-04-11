@@ -1,12 +1,16 @@
 [Desktop Entry]
 Comment=Access hidden applications minimized in the system tray
+Comment[ca]=Accés a les aplicacions minimitzades ocultes en la safata del sistema
 Comment[nl]=Biedt toegang tot programma's die in het systeemvak draaien
+Comment[pt_BR]=Acessa aplicativos ocultos minimizados na área de notificação
 Comment[sv]=Kom åt dolda program minimerade i systembrickan
 Comment[uk]=Доступ до прихованих програм, мінімізованих до системного лотка
 Comment[x-test]=xxAccess hidden applications minimized in the system trayxx
 Encoding=UTF-8
 Name=System Tray
+Name[ca]=Safata del sistema
 Name[nl]=Systeemvak
+Name[pt_BR]=Área de notificação
 Name[sv]=Systembricka
 Name[uk]=Системний лоток
 Name[x-test]=xxSystem Trayxx
