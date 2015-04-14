@@ -1,10 +1,12 @@
 [Desktop Entry]
 Comment=PlasmoidViewer Shell
 Comment[ca]=Intèrpret d'ordres del visor de plasmoides
+Comment[es]=Entorno de vista de plasmoides
 Comment[gl]=Shell do visor de plasmoides.
 Comment[nl]=Shell van PlasmoidViewer
 Comment[pt]=Consola do PlasmoidViewer
 Comment[pt_BR]=Console do PlasmoidViewer
+Comment[sk]=Shell PlasmoidViewer
 Comment[sv]=Plasmoid-visningsskal
 Comment[uk]=Оболонка перегляду плазмоїдів
 Comment[x-test]=xxPlasmoidViewer Shellxx
@@ -12,10 +14,12 @@ Encoding=UTF-8
 Keywords=
 Name=PlasmoidViewerShell
 Name[ca]=Intèrpret d'ordres del visor de plasmoides
+Name[es]=Entorno de vista de plasmoides
 Name[gl]=Shell do visor de plasmoides
 Name[nl]=PlasmoidViewerShell
 Name[pt]=Consola do PlasmoidViewer
 Name[pt_BR]=Console do PlasmoidViewer
+Name[sk]=PlasmoidViewerShell
 Name[sv]=Plasmoid-visningsskal
 Name[uk]=Оболонка перегляду плазмоїдів
 Name[x-test]=xxPlasmoidViewerShellxx
