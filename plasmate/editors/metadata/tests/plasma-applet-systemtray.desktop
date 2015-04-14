@@ -2,6 +2,7 @@
 Comment=Access hidden applications minimized in the system tray
 Comment[ca]=Accés a les aplicacions minimitzades ocultes en la safata del sistema
 Comment[es]=Acceso a las aplicaciones ocultas minimizadas en la bandeja del sistema
+Comment[fi]=Hae piilotettuja sovelluksia, jotka on pienennetty ilmoitusalueelle
 Comment[nl]=Biedt toegang tot programma's die in het systeemvak draaien
 Comment[pt]=Aceder às aplicações escondidas e minimizadas na bandeja do sistema
 Comment[pt_BR]=Acessa aplicativos ocultos minimizados na área de notificação
@@ -13,6 +14,7 @@ Encoding=UTF-8
 Name=System Tray
 Name[ca]=Safata del sistema
 Name[es]=Bandeja del sistema
+Name[fi]=Ilmoitusalue
 Name[nl]=Systeemvak
 Name[pt]=Bandeja do Sistema
 Name[pt_BR]=Área de notificação
