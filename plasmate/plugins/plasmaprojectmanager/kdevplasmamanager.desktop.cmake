@@ -31,6 +31,7 @@ Comment[ca]=Permet al KDevPlatform gestionar els projectes de plasma
 Comment[es]=Permite a KDevPlatform gestionar proyectos de Plasma
 Comment[fi]=Mahdollistaa KDevPlatformin hallitsemaan Plasma-projekteja
 Comment[gl]=Permitir que KDevPlatform xestione proxectos de Plasma.
+Comment[hu]=Lehetővé teszi a Plasma projektek kezelését a KDevPlatformnak
 Comment[nl]=KDevPlatform toestaan plasma-projecten te beheren
 Comment[pt]=Permite ao KDevPlatform gerir projectos do Plasma
 Comment[pt_BR]=Permite ao KDevPlatform gerenciar projetos do Plasma
