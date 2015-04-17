@@ -2,6 +2,7 @@
 Comment=PlasmoidViewer Shell
 Comment[ca]=Intèrpret d'ordres del visor de plasmoides
 Comment[es]=Entorno de vista de plasmoides
+Comment[hu]=Plasmoidmegjelenítő felület
 Comment[nl]=Shell van PlasmoidViewer
 Comment[pt]=Consola do PlasmoidViewer
 Comment[pt_BR]=Console do PlasmoidViewer
@@ -15,6 +16,7 @@ Keywords=
 Name=PlasmoidViewerShell
 Name[ca]=Intèrpret d'ordres del visor de plasmoides
 Name[es]=Entorno de vista de plasmoides
+Name[hu]=Plasmoidmegjelenítő felület
 Name[nl]=PlasmoidViewerShell
 Name[pt]=Consola do PlasmoidViewer
 Name[pt_BR]=Console do PlasmoidViewer
