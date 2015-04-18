@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Battery & Brightness
 Name[ca]=Bateria i lluminositat
+Name[cs]=Baterie a Jas
 Name[es]=Batería y brillo
 Name[fi]=Akku ja kirkkaus
 Name[gl]=Batería e brillo
@@ -15,6 +16,7 @@ Name[uk]=Акумулятор і яскравість дисплея
 Name[x-test]=xxBattery & Brightnessxx
 Comment=See the power status of your battery
 Comment[ca]=Vegeu l'estat d'energia de la bateria
+Comment[cs]=Zobrazí stav nabití vaší baterie
 Comment[es]=Ver el estado de carga de su batería
 Comment[fi]=Näyttää akun virtatilanteen
 Comment[gl]=Consulta o estado enerxético da batería.
@@ -30,6 +32,7 @@ Comment[x-test]=xxSee the power status of your batteryxx
 Encoding=UTF-8
 Keywords=Power Management;Battery;System;Energy;
 Keywords[ca]=Sistema de gestió d'energia;Bateria;Sistema;Energia;
+Keywords[cs]=Správa napájení;Baterie;Systém;Energie;
 Keywords[es]=Gestión de energía;Batería;Sistema;Energía;
 Keywords[fi]=Virranhallinta;Akku;Järjestelmä;Virransäästö;
 Keywords[gl]=xestión da enerxía;batería;sistema;enerxía;

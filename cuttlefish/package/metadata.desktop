@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Cuttlefish
 Name[ca]=Cuttlefish
+Name[cs]=Cuttlefish
 Name[es]=Cuttlefish
 Name[fi]=Cuttlefish
 Name[gl]=Cuttlefish
@@ -28,6 +29,7 @@ Comment[uk]=Показ списку і попередній перегляду �
 Comment[x-test]=xxList and preview available iconsxx
 GenericName=Icon Browser
 GenericName[ca]=Navegador d'icones
+GenericName[cs]=Prohlížeč ikon
 GenericName[es]=Explorador de iconos
 GenericName[fi]=Kuvakeselain
 GenericName[gl]=Navegador de iconas
