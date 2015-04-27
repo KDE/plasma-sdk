@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=Explore and edit your Plasma themes
 Comment[ca]=Explora i edita els vostres temes de Plasma
+Comment[en_GB]=Explore and edit your Plasma themes
 Comment[es]=Explorar y editar sus temas de Plasma
 Comment[fi]=Selaa ja muokkaa Plasma-teemoja
 Comment[gl]=Explora e edita os teus temas de Plasma.
@@ -18,6 +19,7 @@ Encoding=UTF-8
 Keywords=
 Name=Plasma Theme Explorer
 Name[ca]=Explora els temes de Plasma
+Name[en_GB]=Plasma Theme Explorer
 Name[es]=Explorador de temas de Plasma
 Name[fi]=Plasma-teemaselain
 Name[gl]=Explorador de temas de Plasma
