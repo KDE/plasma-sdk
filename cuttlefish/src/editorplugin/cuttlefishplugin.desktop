@@ -4,6 +4,7 @@ ServiceTypes=KTextEditor/Plugin
 X-KDE-Library=cuttlefishplugin
 Name=Icon Picker
 Name[ca]=Selector d'icones
+Name[de]=Symbol-Auswahl
 Name[en_GB]=Icon Picker
 Name[es]=Selector de iconos
 Name[fi]=Kuvakevalitsin

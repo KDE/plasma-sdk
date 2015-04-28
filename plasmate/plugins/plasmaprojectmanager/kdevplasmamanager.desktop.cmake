@@ -2,6 +2,7 @@
 Type=Service
 Name=Plasma Project Manager
 Name[ca]=Gestor de projectes Plasma
+Name[de]=Plasma-Projektverwaltung
 Name[en_GB]=Plasma Project Manager
 Name[es]=Gestor de proyectos de Plasma
 Name[fi]=Plasma-projektinhallinta
@@ -17,6 +18,7 @@ Name[uk]=Керування проектами Плазми
 Name[x-test]=xxPlasma Project Managerxx
 GenericName=Plasma Project Manager
 GenericName[ca]=Gestor de projectes Plasma
+GenericName[de]=Plasma-Projektverwaltung
 GenericName[en_GB]=Plasma Project Manager
 GenericName[es]=Gestor de proyectos de Plasma
 GenericName[fi]=Plasma-projektinhallinta
