@@ -2,6 +2,7 @@
 [Desktop Entry]
 Terminal=false
 Name=Plasmate
+Name[ast]=Plasmate
 Name[bs]=Plasmate
 Name[ca]=Plasmate
 Name[ca@valencia]=Plasmate
@@ -37,6 +38,7 @@ Name[x-test]=xxPlasmatexx
 Name[zh_CN]=Plasmate
 Name[zh_TW]=Plasmate
 GenericName=Plasma Addon Creator
+GenericName[ast]=Creador d'amiestos Plasma
 GenericName[bs]=Kreator Plasma dodataka
 GenericName[ca]=Creador de complements pel Plasma
 GenericName[ca@valencia]=Creador de complements pel Plasma

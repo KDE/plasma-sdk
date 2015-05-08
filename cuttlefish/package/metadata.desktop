@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Cuttlefish
+Name[ast]=Cuttlefish
 Name[ca]=Cuttlefish
 Name[cs]=Cuttlefish
 Name[de]=Cuttlefish
@@ -19,6 +20,7 @@ Name[uk]=Cuttlefish
 Name[x-test]=xxCuttlefishxx
 Name[zh_CN]=Cuttlefish
 Comment=List and preview available icons
+Comment[ast]=Llista y previsualiza los iconos disponibles
 Comment[ca]=Llista i fa una vista prèvia de les icones disponibles
 Comment[en_GB]=List and preview available icons
 Comment[es]=Lista y vista previa de los iconos disponibles
@@ -35,6 +37,7 @@ Comment[sv]=Lista och visa tillgängliga ikoner
 Comment[uk]=Показ списку і попередній перегляду доступних піктограм
 Comment[x-test]=xxList and preview available iconsxx
 GenericName=Icon Browser
+GenericName[ast]=Restolador d'iconos
 GenericName[ca]=Navegador d'icones
 GenericName[cs]=Prohlížeč ikon
 GenericName[de]=Symbol-Browser

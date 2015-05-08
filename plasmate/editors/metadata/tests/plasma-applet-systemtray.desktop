@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Access hidden applications minimized in the system tray
+Comment[ast]=Accedi a les aplicaciones anubríes na bandexa'l sistema
 Comment[bs]=Pristup skrivenim programima minimizovanim u sistemsku kasetu
 Comment[ca]=Accés a les aplicacions minimitzades ocultes a la safata del sistema
 Comment[ca@valencia]=Accés a les aplicacions minimitzades ocultes a la safata del sistema
@@ -37,6 +38,7 @@ Comment[x-test]=xxAccess hidden applications minimized in the system trayxx
 Comment[zh_TW]=存取最小化在系統匣內的隱藏應用程式
 Encoding=UTF-8
 Name=System Tray
+Name[ast]=Bandexa del sistema
 Name[bs]=Sistemska kaseta
 Name[ca]=Safata del sistema
 Name[ca@valencia]=Safata del sistema

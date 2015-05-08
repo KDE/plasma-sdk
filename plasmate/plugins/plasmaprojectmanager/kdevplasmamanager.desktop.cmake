@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Service
 Name=Plasma Project Manager
+Name[ast]=Xestor de proyeutos Plasma
 Name[ca]=Gestor de projectes Plasma
 Name[de]=Plasma-Projektverwaltung
 Name[en_GB]=Plasma Project Manager
@@ -18,6 +19,7 @@ Name[sv]=Plasma-projekthanterare
 Name[uk]=Керування проектами Плазми
 Name[x-test]=xxPlasma Project Managerxx
 GenericName=Plasma Project Manager
+GenericName[ast]=Xestor de proyeutos Plasma
 GenericName[ca]=Gestor de projectes Plasma
 GenericName[de]=Plasma-Projektverwaltung
 GenericName[en_GB]=Plasma Project Manager
@@ -35,6 +37,7 @@ GenericName[sv]=Plasma-projekthanterare
 GenericName[uk]=Керування проектами Плазми
 GenericName[x-test]=xxPlasma Project Managerxx
 Comment=Allow KDevPlatform to manage plasma projects
+Comment[ast]=Permite a KDevPlatform platform xestionar los proyeutos Plasma
 Comment[ca]=Permet al KDevPlatform gestionar els projectes de plasma
 Comment[en_GB]=Allow KDevPlatform to manage plasma projects
 Comment[es]=Permite a KDevPlatform gestionar proyectos de Plasma
