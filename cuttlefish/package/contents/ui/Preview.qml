@@ -168,6 +168,7 @@ Rectangle {
             PlasmaComponents.Label {
                 text: fileName
                 wrapMode: Text.Wrap
+                verticalAlignment: Text.AlignVCenter
             }
             PlasmaComponents.Label {
                 text: i18n("Category:")
@@ -251,4 +252,3 @@ import org.kde.plasma.core 2.0 as PlasmaCore\n\
         }
     }
 }
-// edit-copy help-about.svg
