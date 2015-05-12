@@ -237,7 +237,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore\n\
             }
         }
         CheckBox {
-            text: "Update preview on hover"
+            text: i18n("Update preview on hover")
             onCheckedChanged: hoveredHighlight = checked
         }
     }
