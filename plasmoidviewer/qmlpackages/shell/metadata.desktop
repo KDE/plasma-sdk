@@ -14,6 +14,7 @@ Comment[sl]=Lupina PlasmoidViewer
 Comment[sv]=Plasmoid-visningsskal
 Comment[uk]=Оболонка перегляду плазмоїдів
 Comment[x-test]=xxPlasmoidViewer Shellxx
+Comment[zh_TW]=PlasmoidViewer Shell
 Encoding=UTF-8
 Keywords=
 Name=PlasmoidViewerShell
@@ -31,6 +32,7 @@ Name[sl]=PlasmoidViewerShell
 Name[sv]=Plasmoid-visningsskal
 Name[uk]=Оболонка перегляду плазмоїдів
 Name[x-test]=xxPlasmoidViewerShellxx
+Name[zh_TW]=PlasmoidViewerShell
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Shell
