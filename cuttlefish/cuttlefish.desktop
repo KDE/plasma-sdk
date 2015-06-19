@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Terminal=false
+Name=Cuttlefish
+GenericName=Icon Viewer
+Comment=Icon Previewer for Artists and Developers
+Exec=cuttlefish
+Icon=cuttlefish
+Type=Application
+InitialPreference=7
+Categories=Qt;KDE;Development;IDE;
