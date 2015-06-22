@@ -3,6 +3,7 @@ Type=Service
 Exec=blubb
 Comment=Lets you manage your git repository.
 Comment[ca]=Permet gestionar el vostre repositori git.
+Comment[de]=Verwaltung von Git-Quelltextarchiven.
 Comment[en_GB]=Lets you manage your git repository.
 Comment[es]=Le permite gestionar su repositorio git.
 Comment[fi]=Mahdollistaa git-varaston hallinnan.

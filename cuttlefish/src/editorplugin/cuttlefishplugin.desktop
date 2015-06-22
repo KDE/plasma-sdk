@@ -23,6 +23,7 @@ Name[zh_CN]=图标选择器
 Name[zh_TW]=圖示挑選器
 Comment=Invokes Cuttlefish icon picker
 Comment[ca]=Invoca al selector d'icones Cuttlefish
+Comment[de]=Öffnet die Symbol-Auswahl von Cuttlefish
 Comment[en_GB]=Invokes Cuttlefish icon picker
 Comment[es]=Llama al selector de iconos Cuttlefish
 Comment[fi]=Käynnistää Cuttlefish-kuvakevalitsimen
