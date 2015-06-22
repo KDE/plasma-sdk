@@ -41,6 +41,7 @@ GenericName[x-test]=xxPlasma Project Managerxx
 Comment=Allow KDevPlatform to manage plasma projects
 Comment[ast]=Permite a KDevPlatform platform xestionar los proyeutos Plasma
 Comment[ca]=Permet al KDevPlatform gestionar els projectes de plasma
+Comment[de]=Verwaltung von Plasma-Projekten mit KDevPlatform
 Comment[en_GB]=Allow KDevPlatform to manage plasma projects
 Comment[es]=Permite a KDevPlatform gestionar proyectos de Plasma
 Comment[fi]=Mahdollistaa KDevPlatformin hallitsemaan Plasma-projekteja
