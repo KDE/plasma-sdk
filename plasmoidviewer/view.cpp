@@ -271,7 +271,7 @@ ViewerCorona *View::createCorona()
 
 void View::takeScreenShot()
 {
-    QDBusInterface interface(QStringLiteral("org.kde.kwin"), QStringLiteral("/Screenshot"),
+    QDBusInterface interface(QStringLiteral("org.kde.KWin"), QStringLiteral("/Screenshot"),
                              QStringLiteral("org.kde.kwin.Screenshot"));
 
     QDBusPendingCall async = interface.asyncCall(QStringLiteral("screenshotArea"), x(), y(),
