@@ -253,6 +253,9 @@ void IconModel::add(const QFileInfo &info, const QString &cat)
     } else if (fname.endsWith(".svgz")) {
         icon.remove(".svgz");
         scalable = true;
+    } else if (fname.endsWith(".svg")) {
+        icon.remove(".svg");
+        scalable = true;
     }
     QVariantMap &data = m_data[icon];
     //qDebug() << "found Icon: " << info.fileName() << icon;
