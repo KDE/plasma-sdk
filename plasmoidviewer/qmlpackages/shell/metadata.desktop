@@ -19,6 +19,7 @@ Comment[sv]=Plasmoid-visningsskal
 Comment[tr]=PlasmoidViewer Kabuğu
 Comment[uk]=Оболонка перегляду плазмоїдів
 Comment[x-test]=xxPlasmoidViewer Shellxx
+Comment[zh_CN]=Plasmoid 查看器外壳
 Encoding=UTF-8
 Keywords=
 Name=PlasmoidViewerShell
@@ -41,6 +42,7 @@ Name[sv]=Plasmoid-visningsskal
 Name[tr]=PlasmoidViewerKabuğu
 Name[uk]=Оболонка перегляду плазмоїдів
 Name[x-test]=xxPlasmoidViewerShellxx
+Name[zh_CN]=Plasmoid 查看器外壳
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Shell

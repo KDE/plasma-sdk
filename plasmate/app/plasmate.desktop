@@ -67,6 +67,7 @@ GenericName[sv]=Skapa Plasma-tillägg
 GenericName[tr]=Plasma Eklenti Oluşturucu
 GenericName[uk]=Програма для створення додатків Плазми
 GenericName[x-test]=xxPlasma Addon Creatorxx
+GenericName[zh_CN]=Plasma 插件创建器
 GenericName[zh_TW]=Plasma 附加元件建立器
 Exec=plasmate
 Icon=plasmagik
