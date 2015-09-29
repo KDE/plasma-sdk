@@ -289,7 +289,7 @@ void View::takeScreenShot()
         }
 
         QString dest = QFileDialog::getSaveFileName(0, i18nc("@title:window", "Save Screenshot"),
-                                                    QDir::homePath(), QStringLiteral("Images (.*png)"));
+                                                    QDir::homePath(), QStringLiteral("Images (*.png)"));
 
         if (dest.isEmpty()) {
             return;
