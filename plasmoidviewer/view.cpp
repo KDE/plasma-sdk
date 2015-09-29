@@ -108,7 +108,7 @@ void View::addApplet(const QString &applet)
 
     if (!a->pluginInfo().isValid()) {
         // xgettext:no-c-format
-        qCritical() << i18n("Applet %1 doesn't exist!", applet);
+        qCritical() << i18n("Applet %1 does not exist.", applet);
         return;
     }
     m_lastAppletName = applet;
@@ -125,7 +125,7 @@ void View::addContainment(const QString &cont)
 
     if (!c->pluginInfo().isValid()) {
         // xgettext:no-c-format
-        qCritical() << i18n("Containment %1 doesn't exist", actualCont);
+        qCritical() << i18n("Containment %1 does not exist.", actualCont);
         return;
     }
 
