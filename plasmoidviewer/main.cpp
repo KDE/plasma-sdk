@@ -63,7 +63,7 @@ int main(int argc, char **argv)
     parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("f") << QStringLiteral("formfactor"),
                 i18n("The formfactor to use (horizontal, vertical, mediacenter, planar or application)"), QStringLiteral("formfactor"), QStringLiteral("planar")));
     parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("l") << QStringLiteral("location"),
-                i18n("The location constraint to start the Containment with (floating, desktop, fullscreen, top, bottom, left, right)"),
+                i18n("The location constraint to start the Containment with (floating, desktop, fullscreen, topedge, bottomedge, leftedge, rightedge)"),
                 QStringLiteral("location"), QStringLiteral("floating")));
 
     parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("x") << QStringLiteral("xPosition"),

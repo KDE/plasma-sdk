@@ -80,7 +80,7 @@ applets to be found.</para>
 <varlistentry>
 <term><option>-l, --location <replaceable>name</replaceable></option></term>
 <listitem><para>The location constraint to start the Containment with (floating, 
-desktop, fullscreen, top, bottom, left, right) [floating].</para></listitem>
+desktop, fullscreen, topedge, bottomedge, leftedge, rightedge) [floating].</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><option>-p, --pixmapcache <replaceable>size</replaceable></option></term>
