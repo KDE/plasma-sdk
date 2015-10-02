@@ -44,6 +44,7 @@ View::View(const QString &url, QCommandLineParser &parser, QWindow *parent)
 
     KDeclarative::KDeclarative kdeclarative;
     kdeclarative.setDeclarativeEngine(engine());
+    kdeclarative.setTranslationDomain(QStringLiteral("cuttlefish"));
     kdeclarative.initialize();
     kdeclarative.setupBindings();
 
