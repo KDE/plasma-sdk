@@ -1,7 +1,25 @@
 [Desktop Entry]
 Name=Cuttlefish
+Name[ca]=Cuttlefish
+Name[nl]=Cuttlefish
+Name[pt]=Cuttlefish
+Name[sv]=Cuttlefish
+Name[uk]=Cuttlefish
+Name[x-test]=xxCuttlefishxx
 Comment=List and preview available icons
+Comment[ca]=Llista i fa una vista prèvia de les icones disponibles
+Comment[nl]=Beschikbare pictogrammen in een lijst weergeven en bekijken
+Comment[pt]=Enumera e antevê os ícones disponíveis
+Comment[sv]=Lista och visa tillgängliga ikoner
+Comment[uk]=Показ списку і попередній перегляду доступних піктограм
+Comment[x-test]=xxList and preview available iconsxx
 GenericName=Icon Browser
+GenericName[ca]=Navegador d'icones
+GenericName[nl]=Pictogrambrowser
+GenericName[pt]=Navegador de Ícones
+GenericName[sv]=Ikonbläddrare
+GenericName[uk]=Навігатор піктограмами
+GenericName[x-test]=xxIcon Browserxx
 Encoding=UTF-8
 Type=Service
 Icon=internet-web-browser

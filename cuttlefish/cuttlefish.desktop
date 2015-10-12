@@ -2,8 +2,26 @@
 [Desktop Entry]
 Terminal=false
 Name=Cuttlefish
+Name[ca]=Cuttlefish
+Name[nl]=Cuttlefish
+Name[pt]=Cuttlefish
+Name[sv]=Cuttlefish
+Name[uk]=Cuttlefish
+Name[x-test]=xxCuttlefishxx
 GenericName=Icon Viewer
+GenericName[ca]=Visor d'icones
+GenericName[nl]=Pictogramviewer
+GenericName[pt]=Visualizador de Ícones
+GenericName[sv]=Ikonvisare
+GenericName[uk]=Перегляд піктограм
+GenericName[x-test]=xxIcon Viewerxx
 Comment=Icon Previewer for Artists and Developers
+Comment[ca]=Vista prèvia de les icones pels artistes i desenvolupadors
+Comment[nl]=Pictogramviewer voor kunstenaars en ontwikkelaars
+Comment[pt]=Antevisão em Ícones para os Artistas e Programadores
+Comment[sv]=Förhandsgranskning av ikoner för grafiker och utvecklare
+Comment[uk]=Засіб перегляду піктограм для художників та розробників
+Comment[x-test]=xxIcon Previewer for Artists and Developersxx
 Exec=cuttlefish
 Icon=cuttlefish
 Type=Application

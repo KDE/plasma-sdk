@@ -1,6 +1,18 @@
 [Desktop Entry]
 Name=Victory Calendar
+Name[ca]=Calendari victorià
+Name[nl]=Victory agenda
+Name[pt]=Calendário de Vitórias
+Name[sv]=Vinstkalender
+Name[uk]=Календар перемог
+Name[x-test]=xxVictory Calendarxx
 Comment=1) Log your daily accomplishments. 2) ??? 3) Profit!
+Comment[ca]=1) Registreu els vostres èxits diaris. 2) ??? 3) Obteniu beneficis!
+Comment[nl]=1) Log uw dagelijkse verrichtingen. 2) ??? 3) Winst!
+Comment[pt]=1) Registar os seus sucessos diários. 2) ??? 3) Lucro!
+Comment[sv]=1) Logga dagliga framsteg. 2) ??? 3) Dra nytta.
+Comment[uk]=1) Запишіть ваші щоденні звершення. 2) ??? 3) Profit!
+Comment[x-test]=xx1) Log your daily accomplishments. 2) ??? 3) Profit!xx
 Icon=view-calendar-tasks
 Type=Service
 X-Plasma-API=javascript
