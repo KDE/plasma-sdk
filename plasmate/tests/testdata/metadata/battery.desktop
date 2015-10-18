@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Battery & Brightness
 Name[ca]=Bateria i lluminositat
+Name[en_GB]=Battery & Brightness
 Name[nl]=Batterij & helderheid
 Name[pt]=Bateria & Brilho
 Name[pt_BR]=Bateria e brilho da tela
@@ -11,6 +12,7 @@ Name[x-test]=xxBattery & Brightnessxx
 Name[zh_CN]=电池和亮度
 Comment=See the power status of your battery
 Comment[ca]=Vegeu l'estat d'energia de la bateria
+Comment[en_GB]=See the power status of your battery
 Comment[nl]=Zie de capaciteitsstatus van uw accu
 Comment[pt]=Ver o estado de energia da sua bateria
 Comment[pt_BR]=Mostra o estado da carga da sua bateria
@@ -22,6 +24,7 @@ Comment[zh_CN]=查看电池电源的状态
 Encoding=UTF-8
 Keywords=Power Management;Battery;System;Energy;
 Keywords[ca]=Sistema de gestió d'energia;Bateria;Sistema;Energia;
+Keywords[en_GB]=Power Management;Battery;System;Energy;
 Keywords[nl]=Energiebeheer;Batterij;Accu;Systeem;Energie;
 Keywords[pt]=Gestão de Energia;Bateria;Sistema;Energia;
 Keywords[pt_BR]=Gerenciamento de energia;Bateria;Sistema;Energia;

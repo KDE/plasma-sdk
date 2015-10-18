@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=PlasmoidViewer Shell
 Comment[ca]=Intèrpret d'ordres del visor de plasmoides
+Comment[en_GB]=PlasmoidViewer Shell
 Comment[nl]=Shell van PlasmoidViewer
 Comment[pt]=Consola do PlasmoidViewer
 Comment[pt_BR]=Console do PlasmoidViewer
@@ -13,6 +14,7 @@ Encoding=UTF-8
 Keywords=
 Name=PlasmoidViewerShell
 Name[ca]=Intèrpret d'ordres del visor de plasmoides
+Name[en_GB]=PlasmoidViewerShell
 Name[nl]=PlasmoidViewerShell
 Name[pt]=Consola do PlasmoidViewer
 Name[pt_BR]=Console do PlasmoidViewer

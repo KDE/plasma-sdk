@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Cuttlefish
 Name[ca]=Cuttlefish
+Name[en_GB]=Cuttlefish
 Name[nl]=Cuttlefish
 Name[pt]=Cuttlefish
 Name[pt_BR]=Cuttlefish
@@ -11,6 +12,7 @@ Name[x-test]=xxCuttlefishxx
 Name[zh_CN]=Cuttlefish
 Comment=List and preview available icons
 Comment[ca]=Llista i fa una vista prèvia de les icones disponibles
+Comment[en_GB]=List and preview available icons
 Comment[nl]=Beschikbare pictogrammen in een lijst weergeven en bekijken
 Comment[pt]=Enumera e antevê os ícones disponíveis
 Comment[pt_BR]=Relaciona e visualiza os ícones disponíveis
@@ -21,6 +23,7 @@ Comment[x-test]=xxList and preview available iconsxx
 Comment[zh_CN]=列出并预览可用的图标
 GenericName=Icon Browser
 GenericName[ca]=Navegador d'icones
+GenericName[en_GB]=Icon Browser
 GenericName[nl]=Pictogrambrowser
 GenericName[pt]=Navegador de Ícones
 GenericName[pt_BR]=Navegador de ícones

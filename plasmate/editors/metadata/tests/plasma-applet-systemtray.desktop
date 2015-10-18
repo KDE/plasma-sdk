@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=Access hidden applications minimized in the system tray
 Comment[ca]=Accés a les aplicacions minimitzades ocultes a la safata del sistema
+Comment[en_GB]=Access hidden applications minimised in the system tray
 Comment[nl]=Biedt toegang tot programma's die in het systeemvak draaien
 Comment[pt]=Aceder às aplicações escondidas e minimizadas na bandeja do sistema
 Comment[pt_BR]=Acessa aplicativos ocultos minimizados na área de notificação
@@ -12,6 +13,7 @@ Comment[zh_CN]=访问在系统托盘中最小化隐藏的应用程序
 Encoding=UTF-8
 Name=System Tray
 Name[ca]=Safata del sistema
+Name[en_GB]=System Tray
 Name[nl]=Systeemvak
 Name[pt]=Bandeja do Sistema
 Name[pt_BR]=Área de notificação
