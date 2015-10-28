@@ -1,8 +1,17 @@
 [Desktop Entry]
 Name=Battery & Brightness
+Name[sk]=Batéria & jas
+Name[sv]=Batteri och ljusstyrka
+Name[x-test]=xxBattery & Brightnessxx
 Comment=See the power status of your battery
+Comment[sk]=Zobrazenie stavu nabitia vašej batérie
+Comment[sv]=Se batteriets laddningsstatus
+Comment[x-test]=xxSee the power status of your batteryxx
 Encoding=UTF-8
 Keywords=Power Management;Battery;System;Energy;
+Keywords[sk]=Správa napájania;Batéria;Systém;Energia;
+Keywords[sv]=Strömhantering;Batteri;System;Energi;
+Keywords[x-test]=xxPower Managementxx;xxBatteryxx;xxSystemxx;xxEnergyxx;
 
 Icon=battery
 Type=Service

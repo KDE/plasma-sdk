@@ -1,7 +1,16 @@
 [Desktop Entry]
 Name=Cuttlefish
+Name[sk]=Cuttlefish
+Name[sv]=Cuttlefish
+Name[x-test]=xxCuttlefishxx
 Comment=List and preview available icons
+Comment[sk]=Zoznam a náhľad dostupných ikon
+Comment[sv]=Lista och visa tillgängliga ikoner
+Comment[x-test]=xxList and preview available iconsxx
 GenericName=Icon Browser
+GenericName[sk]=Prehliadač ikon
+GenericName[sv]=Ikonbläddrare
+GenericName[x-test]=xxIcon Browserxx
 Encoding=UTF-8
 Type=Service
 Icon=internet-web-browser

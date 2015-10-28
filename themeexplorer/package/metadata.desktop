@@ -1,8 +1,14 @@
 [Desktop Entry]
 Comment=Explore and edit your Plasma themes
+Comment[sk]=Preskúmať a upraviť vaše témy Plasma
+Comment[sv]=Utforska och redigera Plasma-teman
+Comment[x-test]=xxExplore and edit your Plasma themesxx
 Encoding=UTF-8
 Keywords=
 Name=Plasma Theme Explorer
+Name[sk]=Exportér témy Plasma
+Name[sv]=Plasma-temautforskare
+Name[x-test]=xxPlasma Theme Explorerxx
 Type=Application
 Icon=preferences-desktop-theme
 Categories=Qt;KDE;Development

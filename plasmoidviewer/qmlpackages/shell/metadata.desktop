@@ -1,8 +1,14 @@
 [Desktop Entry]
 Comment=PlasmoidViewer Shell
+Comment[sk]=Shell PlasmoidViewer
+Comment[sv]=Plasmoid-visningsskal
+Comment[x-test]=xxPlasmoidViewer Shellxx
 Encoding=UTF-8
 Keywords=
 Name=PlasmoidViewerShell
+Name[sk]=PlasmoidViewerShell
+Name[sv]=Plasmoid-visningsskal
+Name[x-test]=xxPlasmoidViewerShellxx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Shell

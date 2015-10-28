@@ -1,7 +1,13 @@
 [Desktop Entry]
 Comment=Access hidden applications minimized in the system tray
+Comment[sk]=Prístup k skrytým aplikáciam minimalizovaným do systémovej lišty
+Comment[sv]=Kom åt dolda program minimerade i systembrickan
+Comment[x-test]=xxAccess hidden applications minimized in the system trayxx
 Encoding=UTF-8
 Name=System Tray
+Name[sk]=Systémová lišta
+Name[sv]=Systembricka
+Name[x-test]=xxSystem Trayxx
 Type=Service
 X-KDE-Library=plasma_applet_systemtray
 X-KDE-ParentApp=

@@ -2,8 +2,17 @@
 [Desktop Entry]
 Terminal=false
 Name=Cuttlefish
+Name[sk]=Cuttlefish
+Name[sv]=Cuttlefish
+Name[x-test]=xxCuttlefishxx
 GenericName=Icon Viewer
+GenericName[sk]=Prehliadač ikon
+GenericName[sv]=Ikonvisare
+GenericName[x-test]=xxIcon Viewerxx
 Comment=Icon Previewer for Artists and Developers
+Comment[sk]=Prehliadač ikon pre umelcov a vývojárov
+Comment[sv]=Förhandsgranskning av ikoner för grafiker och utvecklare
+Comment[x-test]=xxIcon Previewer for Artists and Developersxx
 Exec=cuttlefish
 Icon=cuttlefish
 Type=Application
