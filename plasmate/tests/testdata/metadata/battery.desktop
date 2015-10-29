@@ -1,16 +1,31 @@
 [Desktop Entry]
 Name=Battery & Brightness
+Name[ca]=Bateria i lluminositat
+Name[en_GB]=Battery & Brightness
+Name[es]=Batería y brillo
+Name[nl]=Batterij & helderheid
 Name[sk]=Batéria & jas
 Name[sv]=Batteri och ljusstyrka
+Name[uk]=Акумулятор і яскравість дисплея
 Name[x-test]=xxBattery & Brightnessxx
 Comment=See the power status of your battery
+Comment[ca]=Vegeu l'estat d'energia de la bateria
+Comment[en_GB]=See the power status of your battery
+Comment[es]=Ver el estado de carga de su batería
+Comment[nl]=Zie de capaciteitsstatus van uw accu
 Comment[sk]=Zobrazenie stavu nabitia vašej batérie
 Comment[sv]=Se batteriets laddningsstatus
+Comment[uk]=Перегляньте стан заряду акумулятора
 Comment[x-test]=xxSee the power status of your batteryxx
 Encoding=UTF-8
 Keywords=Power Management;Battery;System;Energy;
+Keywords[ca]=Sistema de gestió d'energia;Bateria;Sistema;Energia;
+Keywords[en_GB]=Power Management;Battery;System;Energy;
+Keywords[es]=Gestión de energía;Batería;Sistema;Energía;
+Keywords[nl]=Energiebeheer;Batterij;Accu;Systeem;Energie;
 Keywords[sk]=Správa napájania;Batéria;Systém;Energia;
 Keywords[sv]=Strömhantering;Batteri;System;Energi;
+Keywords[uk]=Power Management;Battery;System;Energy;керування живленням;акумулятор;система;енергія;батарея;батарейка;живлення;
 Keywords[x-test]=xxPower Managementxx;xxBatteryxx;xxSystemxx;xxEnergyxx;
 
 Icon=battery

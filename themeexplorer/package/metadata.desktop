@@ -1,13 +1,23 @@
 [Desktop Entry]
 Comment=Explore and edit your Plasma themes
+Comment[ca]=Explora i edita els vostres temes de Plasma
+Comment[en_GB]=Explore and edit your Plasma themes
+Comment[es]=Explorar y editar sus temas de Plasma
+Comment[nl]=Uw Plasma-thema's doorlopen en bewerken
 Comment[sk]=Preskúmať a upraviť vaše témy Plasma
 Comment[sv]=Utforska och redigera Plasma-teman
+Comment[uk]=Навігація вашими темами Плазми та редагування тем
 Comment[x-test]=xxExplore and edit your Plasma themesxx
 Encoding=UTF-8
 Keywords=
 Name=Plasma Theme Explorer
+Name[ca]=Explora els temes de Plasma
+Name[en_GB]=Plasma Theme Explorer
+Name[es]=Explorador de temas de Plasma
+Name[nl]=Plasma-thema-verkenner
 Name[sk]=Exportér témy Plasma
 Name[sv]=Plasma-temautforskare
+Name[uk]=Редактор тем Плазми
 Name[x-test]=xxPlasma Theme Explorerxx
 Type=Application
 Icon=preferences-desktop-theme
