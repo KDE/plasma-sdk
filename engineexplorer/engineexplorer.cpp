@@ -502,7 +502,7 @@ int EngineExplorer::showData(QStandardItem* parent, Plasma::DataEngine::Data dat
 
 void EngineExplorer::updateTitle()
 {
-    if (!m_engine) {
+    if (!m_engine || !m_engine->pluginInfo().isValid()) {
         m_title->setPixmap(QIcon::fromTheme("plasma").pixmap(IconSize(KIconLoader::Dialog)));
         m_title->setText(i18n("Plasma DataEngine Explorer"));
         return;
