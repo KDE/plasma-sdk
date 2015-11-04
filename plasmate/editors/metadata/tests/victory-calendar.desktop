@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Victory Calendar
 Name[ca]=Calendari victorià
+Name[ca@valencia]=Calendari victorià
 Name[de]=Victory-Kalender
 Name[en_GB]=Victory Calendar
 Name[es]=Calendario de triunfos
@@ -15,6 +16,7 @@ Name[uk]=Календар перемог
 Name[x-test]=xxVictory Calendarxx
 Comment=1) Log your daily accomplishments. 2) ??? 3) Profit!
 Comment[ca]=1) Registreu els vostres èxits diaris. 2) ??? 3) Obteniu beneficis!
+Comment[ca@valencia]=1) Registreu els vostres èxits diaris. 2) ??? 3) Obteniu beneficis!
 Comment[de]=1) Protokollieren Sie Ihre täglichen Leistungen. 2) ??? 3) Profit
 Comment[en_GB]=1) Log your daily accomplishments. 2) ??? 3) Profit!
 Comment[es]=1) Registre sus logros diarios. 2) ??? 3) ¡Benefíciese!
