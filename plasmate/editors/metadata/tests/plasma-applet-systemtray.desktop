@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=Access hidden applications minimized in the system tray
 Comment[ca]=Accés a les aplicacions minimitzades ocultes a la safata del sistema
+Comment[ca@valencia]=Accés a les aplicacions minimitzades ocultes a la safata del sistema
 Comment[de]=Ermöglicht den Zugriff auf Programme, die im Systemabschnitt der Kontrollleiste laufen.
 Comment[en_GB]=Access hidden applications minimised in the system tray
 Comment[es]=Acceso a las aplicaciones ocultas minimizadas en la bandeja del sistema
@@ -18,6 +19,7 @@ Comment[zh_CN]=访问在系统托盘中最小化隐藏的应用程序
 Encoding=UTF-8
 Name=System Tray
 Name[ca]=Safata del sistema
+Name[ca@valencia]=Safata del sistema
 Name[de]=Systemabschnitt der Kontrollleiste
 Name[en_GB]=System Tray
 Name[es]=Bandeja del sistema
