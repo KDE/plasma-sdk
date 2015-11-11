@@ -217,6 +217,9 @@ void ThemeModel::editElement(const QString& imagePath)
         finalFile = file;
     } else {
         finalFile = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/plasma/desktoptheme/" + m_themeName + "/" + imagePath + ".svgz";
+        const QString dirPath = QFileInfo(finalFile).absoluteDir().absolutePath();
+        KIO::mkdir(QUrl::fromLocalFile(dirPath))->exec();
+
         KIO::FileCopyJob *job = KIO::file_copy( QUrl::fromLocalFile(file), QUrl::fromLocalFile(finalFile) );
         if (!job->exec()) {
             qWarning() << "Error copying" << file << "to" << finalFile;
@@ -276,6 +279,8 @@ void ThemeModel::createNewTheme(const QString& name, const QString& author, cons
     cg.writeEntry("intensity", "0.5");
     cg.writeEntry("saturation", "1.7");
     cg2.sync();
+
+    m_themeListModel->reload();
 }
 
 #include "moc_thememodel.cpp"
