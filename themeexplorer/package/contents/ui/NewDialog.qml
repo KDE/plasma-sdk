@@ -26,6 +26,9 @@ Dialog {
     title: i18n("New Theme")
     standardButtons: nameField.text && authorField.text && emailField.text && websiteField.text ? StandardButton.Ok | StandardButton.Cancel : StandardButton.Cancel
 
+    onVisibleChanged: {
+        nameField.focus = true
+    }
     Grid {
         columns: 2
         spacing: units.smallSpacing
@@ -34,24 +37,40 @@ Dialog {
         verticalItemAlignment: Grid.AlignVCenter
         Label {
             text: i18n("Theme Name:")
+            MouseArea {
+                anchors.fill: parent
+                onClicked: nameField.focus = true
+            }
         }
         TextField {
             id: nameField
         }
         Label {
             text: i18n("Author:")
+            MouseArea {
+                anchors.fill: parent
+                onClicked: authorField.focus = true
+            }
         }
         TextField {
             id: authorField
         }
         Label {
             text: i18n("Email:")
+            MouseArea {
+                anchors.fill: parent
+                onClicked: emailField.focus = true
+            }
         }
         TextField {
             id: emailField
         }
         Label {
             text: i18n("Website:")
+            MouseArea {
+                anchors.fill: parent
+                onClicked: websiteField.focus = true
+            }
         }
         TextField {
             id: websiteField
