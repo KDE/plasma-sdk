@@ -34,6 +34,16 @@ ApplicationWindow {
     toolBar: ToolBar {
         RowLayout {
             anchors.fill: parent
+            ToolButton {
+                text: i18n("New Theme...")
+                iconName: "document-new"
+                onClicked: {
+                    if (!root.newDialog) {
+                        root.newDialog = newDialogComponent.createObject(root);
+                    }
+                    root.newDialog.open();
+                }
+            }
             Label {
                 text: i18n("Theme:")
             }
@@ -64,6 +74,12 @@ ApplicationWindow {
                 onTextChanged: searchModel.filterRegExp = ".*" + text + ".*"
             }
         }
+    }
+
+    property QtObject newDialog
+    Component {
+        id: newDialogComponent
+        NewDialog {}
     }
 
     Timer {

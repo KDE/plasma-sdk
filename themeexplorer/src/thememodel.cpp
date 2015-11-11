@@ -252,4 +252,30 @@ void ThemeModel::processFinished()
     cg.sync();
 }
 
+void ThemeModel::createNewTheme(const QString& name, const QString& author, const QString& email, const QString& website)
+{
+    const QString metadataPath(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1Literal("/plasma/desktoptheme/") % name % QLatin1Literal("/metadata.desktop"));
+    KConfig c(metadataPath);
+
+    KConfigGroup cg(&c, "Desktop Entry");
+    cg.writeEntry("X-KDE-PluginInfo-Name", name);
+    cg.writeEntry("X-KDE-PluginInfo-Author", author);
+    cg.writeEntry("X-KDE-PluginInfo-Email", email);
+    cg.writeEntry("X-KDE-PluginInfo-Website", website);
+    cg.writeEntry("X-KDE-PluginInfo-Category", "Plasma Theme");
+    cg.writeEntry("X-KDE-PluginInfo-Depends", "plasmashell");
+    cg.writeEntry("X-KDE-PluginInfo-License", "LGPL 2.1");
+    cg.writeEntry("X-KDE-PluginInfo-EnabledByDefault", "true");
+    cg.writeEntry("X-Plasma-API", "5.0");
+    cg.writeEntry("X-KDE-PluginInfo-Version", "0.1");
+    cg.sync();
+
+    KConfigGroup cg2(&c, "ContrastEffect");
+    cg.writeEntry("enabled", "true");
+    cg.writeEntry("contrast", "0.2");
+    cg.writeEntry("intensity", "0.5");
+    cg.writeEntry("saturation", "1.7");
+    cg2.sync();
+}
+
 #include "moc_thememodel.cpp"
