@@ -280,6 +280,16 @@ void ThemeModel::createNewTheme(const QString& name, const QString& author, cons
     cg.writeEntry("saturation", "1.7");
     cg2.sync();
 
+    QString file = QStandardPaths::locate(QStandardPaths::GenericDataLocation, + "/plasma/desktoptheme/" + m_themeName + "/colors");
+
+    QString finalFile = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/plasma/desktoptheme/" + name + "/colors";
+
+    KIO::FileCopyJob *job = KIO::file_copy( QUrl::fromLocalFile(file), QUrl::fromLocalFile(finalFile) );
+    if (!job->exec()) {
+        qWarning() << "Error copying" << file << "to" << finalFile;
+    }
+
+
     m_themeListModel->reload();
 }
 
