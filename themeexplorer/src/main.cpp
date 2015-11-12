@@ -69,6 +69,7 @@ int main(int argc, char **argv)
     ThemeModel *themeModel = new ThemeModel(obj->package());
     if (parser.isSet(themeOption)) {
         themeModel->setTheme(parser.value(themeOption));
+        obj->engine()->rootContext()->setContextProperty("commandlineTheme", parser.value(themeOption));
     }
     obj->engine()->rootContext()->setContextProperty("themeModel", QVariant::fromValue(themeModel));
 

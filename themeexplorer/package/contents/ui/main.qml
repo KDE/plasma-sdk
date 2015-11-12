@@ -110,6 +110,12 @@ ApplicationWindow {
         interval: 200
         onTriggered: {
             themeSelector.model = themeModel.themeList
+            for (var i = 0; i < themeModel.themeList.count; ++i) {
+                if (commandlineTheme == themeModel.themeList.get(i).packageNameRole) {
+                    themeSelector.currentIndex = i;
+                    break;
+                }
+            }
         }
     }
     SystemPalette {
@@ -183,10 +189,24 @@ ApplicationWindow {
             right: parent.right
         }
         width: root.width / 3
+        Rectangle {
+            width: 1
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+            }
+            color: palette.highlight
+        }
         ColumnLayout {
             anchors {
                 fill: parent
                 margins: units.gridUnit
+            }
+            Label {
+                Layout.fillWidth: true
+                visible: !view.currentItem.modelData.isWritable
+                text: i18n("This is a readonly, system wide installed theme")
+                wrapMode: Text.WordWrap
             }
             Label {
                 Layout.fillWidth: true
