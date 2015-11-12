@@ -35,6 +35,7 @@
 #include <KCompressionDevice>
 #include <KProcess>
 #include <KIO/Job>
+#include <KRun>
 
 #include <Plasma/Theme>
 
@@ -311,6 +312,11 @@ void ThemeModel::createNewTheme(const QString& name, const QString& author, cons
 
 
     m_themeListModel->reload();
+}
+
+QString ThemeModel::colorsFile()
+{
+    return QStandardPaths::locate(QStandardPaths::GenericDataLocation, + "/plasma/desktoptheme/" + m_themeName + "/colors");
 }
 
 #include "moc_thememodel.cpp"

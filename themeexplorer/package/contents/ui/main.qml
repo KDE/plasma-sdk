@@ -77,9 +77,11 @@ ApplicationWindow {
                     root.metadataEditor.open();
                 }
             }
-            CheckBox {
-                id: showMarginsCheckBox
-                text: i18n("Show Margins")
+            ToolButton {
+                text: i18n("Edit Colors...")
+                iconName: "color"
+                enabled: view.currentItem.modelData.isWritable
+                onClicked: Qt.openUrlExternally(themeModel.colorsFile);
             }
             Item {
                 Layout.fillWidth: true
@@ -215,6 +217,10 @@ ApplicationWindow {
                 Layout.fillWidth: true
                 text: view.currentItem.modelData.usesFallback ? i18n("Missing from this theme") : i18n("Present in this theme")
                 wrapMode: Text.WordWrap
+            }
+            CheckBox {
+                id: showMarginsCheckBox
+                text: i18n("Show Margins")
             }
             Button {
                 text: view.currentItem.modelData.usesFallback ? i18n("Create with Editor...") : i18n("Open In Editor...")
