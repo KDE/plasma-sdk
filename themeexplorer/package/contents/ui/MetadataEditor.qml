@@ -18,70 +18,95 @@
  */
 
 import QtQuick 2.3
+import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 Dialog {
+    id: dialog
     property alias name: nameField.text
     property alias author: authorField.text
     property alias email: emailField.text
     property alias website: websiteField.text
     property bool newTheme: false
 
+    property bool canEdit: false
+
     title: newTheme ? i18n("New Theme") : i18n("Edit Theme")
-    standardButtons: nameField.text && authorField.text && emailField.text && websiteField.text ? StandardButton.Ok | StandardButton.Cancel : StandardButton.Cancel
+    standardButtons: canEdit && nameField.text && authorField.text && emailField.text && websiteField.text ? StandardButton.Ok | StandardButton.Cancel : StandardButton.Cancel
 
     onVisibleChanged: {
         nameField.focus = true
     }
-    Grid {
-        columns: 2
-        spacing: units.smallSpacing
-        //anchors.fill:parent
-        horizontalItemAlignment: Grid.AlignRight 
-        verticalItemAlignment: Grid.AlignVCenter
+    ColumnLayout {
         Label {
-            visible: newTheme
-            text: i18n("Theme Name:")
-            MouseArea {
-                anchors.fill: parent
-                onClicked: nameField.focus = true
+            id: errorMessage
+        }
+        Grid {
+            columns: 2
+            spacing: units.smallSpacing
+            //anchors.fill:parent
+            horizontalItemAlignment: Grid.AlignRight 
+            verticalItemAlignment: Grid.AlignVCenter
+            Label {
+                visible: newTheme
+                text: i18n("Theme Name:")
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: nameField.focus = true
+                }
             }
-        }
-        TextField {
-            id: nameField
-            visible: newTheme
-        }
-        Label {
-            text: i18n("Author:")
-            MouseArea {
-                anchors.fill: parent
-                onClicked: authorField.focus = true
+            TextField {
+                id: nameField
+                visible: newTheme
+                onTextChanged: {
+                    if (!newTheme) {
+                        errorMessage.text = "";
+                        dialog.canEdit = true;
+                        return;
+                    }
+                    for (var i = 0; i < themeModel.themeList.count; ++i) {
+                        if (nameField.text == themeModel.themeList.get(i).packageNameRole) {
+                            dialog.canEdit = false;
+                            errorMessage.text = i18n("This theme name already exists");
+                            return;
+                        }
+                    }
+                    errorMessage.text = "";
+                    dialog.canEdit = true;
+                }
             }
-        }
-        TextField {
-            id: authorField
-        }
-        Label {
-            text: i18n("Email:")
-            MouseArea {
-                anchors.fill: parent
-                onClicked: emailField.focus = true
+            Label {
+                text: i18n("Author:")
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: authorField.focus = true
+                }
             }
-        }
-        TextField {
-            id: emailField
-        }
-        Label {
-            text: i18n("Website:")
-            MouseArea {
-                anchors.fill: parent
-                onClicked: websiteField.focus = true
+            TextField {
+                id: authorField
             }
-        }
-        TextField {
-            id: websiteField
+            Label {
+                text: i18n("Email:")
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: emailField.focus = true
+                }
+            }
+            TextField {
+                id: emailField
+            }
+            Label {
+                text: i18n("Website:")
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: websiteField.focus = true
+                }
+            }
+            TextField {
+                id: websiteField
+            }
         }
     }
 
