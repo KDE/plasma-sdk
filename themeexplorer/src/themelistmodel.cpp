@@ -118,6 +118,7 @@ void ThemeListModel::reload()
 
     beginResetModel();
     endResetModel();
+    emit countChanged();
 }
 
 int ThemeListModel::rowCount(const QModelIndex &) const

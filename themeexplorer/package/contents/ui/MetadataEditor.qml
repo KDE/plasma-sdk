@@ -88,6 +88,13 @@ Dialog {
     onAccepted: {
         if (newTheme) {
             themeModel.createNewTheme(nameField.text, authorField.text, emailField.text, websiteField.text);
+            for (var i = 0; i < themeModel.themeList.count; ++i) {
+                print("AAA"+i+" "+nameField.text +" "+ themeModel.themeList.get(i).packageNameRole);
+                if (nameField.text == themeModel.themeList.get(i).packageNameRole) {
+                    themeSelector.currentIndex = i;
+                    break;
+                }
+            }
         } else {
             themeModel.editThemeMetaData(nameField.text, authorField.text, emailField.text, websiteField.text);
         }
