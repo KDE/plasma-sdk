@@ -23,7 +23,13 @@ import QtQuick.Dialogs 1.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 Dialog {
-    title: i18n("New Theme")
+    property alias name: nameField.text
+    property alias author: authorField.text
+    property alias email: emailField.text
+    property alias website: websiteField.text
+    property bool newTheme: false
+
+    title: newTheme ? i18n("New Theme") : i18n("Edit Theme")
     standardButtons: nameField.text && authorField.text && emailField.text && websiteField.text ? StandardButton.Ok | StandardButton.Cancel : StandardButton.Cancel
 
     onVisibleChanged: {
@@ -36,6 +42,7 @@ Dialog {
         horizontalItemAlignment: Grid.AlignRight 
         verticalItemAlignment: Grid.AlignVCenter
         Label {
+            visible: newTheme
             text: i18n("Theme Name:")
             MouseArea {
                 anchors.fill: parent
@@ -44,6 +51,7 @@ Dialog {
         }
         TextField {
             id: nameField
+            visible: newTheme
         }
         Label {
             text: i18n("Author:")
@@ -78,6 +86,10 @@ Dialog {
     }
 
     onAccepted: {
-        themeModel.createNewTheme(nameField.text, authorField.text, emailField.text, websiteField.text);
+        if (newTheme) {
+            themeModel.createNewTheme(nameField.text, authorField.text, emailField.text, websiteField.text);
+        } else {
+            themeModel.editThemeMetaData(nameField.text, authorField.text, emailField.text, websiteField.text);
+        }
     }
 }

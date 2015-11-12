@@ -39,6 +39,10 @@ class ThemeModel : public QAbstractListModel
     Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
     Q_PROPERTY(ThemeListModel *themeList READ themeList CONSTANT)
 
+    Q_PROPERTY(QString author READ author NOTIFY authorChanged)
+    Q_PROPERTY(QString email READ email NOTIFY emailChanged)
+    Q_PROPERTY(QString website READ website NOTIFY websiteChanged)
+
 public:
     enum Roles {
         ImagePath,
@@ -63,13 +67,22 @@ public:
     void setTheme(const QString &theme);
     QString theme() const;
 
+    QString author() const;
+    QString email() const;
+    QString website() const;
+
     void load();
 
     Q_INVOKABLE void editElement(const QString& imagePath);
+    Q_INVOKABLE void editThemeMetaData(const QString& name, const QString& author, const QString& email, const QString& website);
     Q_INVOKABLE void createNewTheme(const QString& name, const QString& author, const QString& email, const QString& website);
 
 Q_SIGNALS:
     void themeChanged();
+    
+    void authorChanged();
+    void emailChanged();
+    void websiteChanged();
 
 private Q_SLOTS:
     void processFinished();

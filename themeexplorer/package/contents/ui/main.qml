@@ -41,6 +41,11 @@ ApplicationWindow {
                     if (!root.newDialog) {
                         root.newDialog = newDialogComponent.createObject(root);
                     }
+                    root.newDialog.newTheme = true;
+                    root.newDialog.name = "";
+                    root.newDialog.author = "";
+                    root.newDialog.email = "";
+                    root.newDialog.website = "";
                     root.newDialog.open();
                 }
             }
@@ -56,6 +61,22 @@ ApplicationWindow {
                     themeModel.theme = themeModel.themeList.get(currentIndex).packageNameRole;
                 }
             }
+            ToolButton {
+                text: i18n("Edit Metadata...")
+                iconName: "configure"
+                enabled: view.currentItem.modelData.isWritable
+                onClicked: {
+                    if (!root.newDialog) {
+                        root.newDialog = newDialogComponent.createObject(root);
+                    }
+                    root.newDialog.newTheme = false;
+                    root.newDialog.name = themeModel.theme;
+                    root.newDialog.author = themeModel.author;
+                    root.newDialog.email = themeModel.email;
+                    root.newDialog.website = themeModel.website;
+                    root.newDialog.open();
+                }
+            }
             CheckBox {
                 id: showMarginsCheckBox
                 text: i18n("Show Margins")
@@ -67,7 +88,7 @@ ApplicationWindow {
             ToolButton {
                 text: i18n("Help")
                 iconName: "help-contents"
-                onClicked: Qt.openUrlExternally("https://techbase.kde.org/Development/Tutorials/Plasma4/Theme");
+                onClicked: Qt.openUrlExternally("https://techbase.kde.org/Development/Tutorials/Plasma5/ThemeDetails");
             }
             TextField {
                 placeholderText: i18n("Search...")

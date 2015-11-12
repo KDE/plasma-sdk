@@ -192,6 +192,21 @@ QString ThemeModel::theme() const
     return m_themeName;
 }
 
+QString ThemeModel::author() const
+{
+    return m_theme->pluginInfo().author();
+}
+
+QString ThemeModel::email() const
+{
+    return m_theme->pluginInfo().email();
+}
+
+QString ThemeModel::website() const
+{
+    return m_theme->pluginInfo().website();
+}
+
 void ThemeModel::setTheme(const QString& theme)
 {
     if (theme == m_themeName) {
@@ -255,7 +270,7 @@ void ThemeModel::processFinished()
     cg.sync();
 }
 
-void ThemeModel::createNewTheme(const QString& name, const QString& author, const QString& email, const QString& website)
+void ThemeModel::editThemeMetaData(const QString& name, const QString& author, const QString& email, const QString& website)
 {
     const QString metadataPath(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1Literal("/plasma/desktoptheme/") % name % QLatin1Literal("/metadata.desktop"));
     KConfig c(metadataPath);
@@ -279,6 +294,11 @@ void ThemeModel::createNewTheme(const QString& name, const QString& author, cons
     cg.writeEntry("intensity", "0.5");
     cg.writeEntry("saturation", "1.7");
     cg2.sync();
+}
+
+void ThemeModel::createNewTheme(const QString& name, const QString& author, const QString& email, const QString& website)
+{
+    editThemeMetaData(name, author, email, website);
 
     QString file = QStandardPaths::locate(QStandardPaths::GenericDataLocation, + "/plasma/desktoptheme/" + m_themeName + "/colors");
 
