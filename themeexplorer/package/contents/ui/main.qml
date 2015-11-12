@@ -38,15 +38,15 @@ ApplicationWindow {
                 text: i18n("New Theme...")
                 iconName: "document-new"
                 onClicked: {
-                    if (!root.newDialog) {
-                        root.newDialog = newDialogComponent.createObject(root);
+                    if (!root.metadataEditor) {
+                        root.metadataEditor = metadataEditorComponent.createObject(root);
                     }
-                    root.newDialog.newTheme = true;
-                    root.newDialog.name = "";
-                    root.newDialog.author = "";
-                    root.newDialog.email = "";
-                    root.newDialog.website = "";
-                    root.newDialog.open();
+                    root.metadataEditor.newTheme = true;
+                    root.metadataEditor.name = "";
+                    root.metadataEditor.author = "";
+                    root.metadataEditor.email = "";
+                    root.metadataEditor.website = "";
+                    root.metadataEditor.open();
                 }
             }
             Label {
@@ -66,15 +66,15 @@ ApplicationWindow {
                 iconName: "configure"
                 enabled: view.currentItem.modelData.isWritable
                 onClicked: {
-                    if (!root.newDialog) {
-                        root.newDialog = newDialogComponent.createObject(root);
+                    if (!root.metadataEditor) {
+                        root.metadataEditor = metadataEditorComponent.createObject(root);
                     }
-                    root.newDialog.newTheme = false;
-                    root.newDialog.name = themeModel.theme;
-                    root.newDialog.author = themeModel.author;
-                    root.newDialog.email = themeModel.email;
-                    root.newDialog.website = themeModel.website;
-                    root.newDialog.open();
+                    root.metadataEditor.newTheme = false;
+                    root.metadataEditor.name = themeModel.theme;
+                    root.metadataEditor.author = themeModel.author;
+                    root.metadataEditor.email = themeModel.email;
+                    root.metadataEditor.website = themeModel.website;
+                    root.metadataEditor.open();
                 }
             }
             CheckBox {
@@ -97,10 +97,10 @@ ApplicationWindow {
         }
     }
 
-    property QtObject newDialog
+    property QtObject metadataEditor
     Component {
-        id: newDialogComponent
-        NewDialog {}
+        id: metadataEditorComponent
+        MetadataEditor {}
     }
 
     Timer {
