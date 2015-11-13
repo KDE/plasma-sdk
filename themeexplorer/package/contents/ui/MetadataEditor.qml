@@ -53,14 +53,10 @@ Dialog {
             columns: 2
             columnSpacing: units.smallSpacing
 
-            Label {
+            FormLabel {
                 visible: newTheme
                 text: i18n("Theme Name:")
-                Layout.alignment: Qt.AlignRight
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: nameField.focus = true
-                }
+                buddy: nameField
             }
             TextField {
                 id: nameField
@@ -83,37 +79,25 @@ Dialog {
                     dialog.canEdit = true;
                 }
             }
-            Label {
+            FormLabel {
                 text: i18n("Author:")
-                Layout.alignment: Qt.AlignRight
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: authorField.focus = true
-                }
+                buddy: authorField
             }
             TextField {
                 id: authorField
                 Layout.fillWidth: true
             }
-            Label {
+            FormLabel {
                 text: i18n("Email:")
-                Layout.alignment: Qt.AlignRight
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: emailField.focus = true
-                }
+                buddy: emailField
             }
             TextField {
                 id: emailField
                 Layout.fillWidth: true
             }
-            Label {
+            FormLabel {
                 text: i18n("Website:")
-                Layout.alignment: Qt.AlignRight
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: websiteField.focus = true
-                }
+                buddy: websiteField
             }
             TextField {
                 id: websiteField
