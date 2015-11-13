@@ -29,8 +29,11 @@ Dialog {
     visible: true
     property alias textColor: textColorButton.color
     property alias backgroundColor: backgroundButton.color
+
     property alias buttonTextColor: buttonTextButton.color
     property alias buttonBackgroundColor: buttonBackgroundButton.color
+    property alias buttonHoverColor: buttonHoverButton.color
+    property alias buttonFocusColor: buttonFocusButton.color
 
     title: i18n("Edit Colors");
     standardButtons: StandardButton.Ok | StandardButton.Cancel
@@ -68,11 +71,13 @@ Dialog {
                 ColumnLayout {
                     anchors.centerIn: parent
                     Label {
+                        Layout.alignment: Qt.AlignHCenter
                         text: i18n("Normal text")
                         color: textColor
                     }
                     Rectangle {
                         id: button
+                        Layout.alignment: Qt.AlignHCenter
                         implicitWidth: parent.width/1.2
                         implicitHeight: units.gridUnit * 1.6
                         radius: units.smallSpacing/2
@@ -85,7 +90,17 @@ Dialog {
                         MouseArea {
                             id: buttonMouse
                             anchors.fill: parent
+                            hoverEnabled: true
                             onClicked: button.focus = true
+                        }
+                        Rectangle {
+                            anchors.fill: parent
+                            radius: units.smallSpacing/2
+                            visible: buttonMouse.containsMouse || button.focus
+                            color: "transparent"
+                            border {
+                                color: buttonMouse.containsMouse ? buttonHoverColor : buttonFocusColor
+                            }
                         }
                     }
                     DropShadow {
@@ -143,6 +158,20 @@ Dialog {
             }
             ColorButton {
                 id: buttonBackgroundButton
+            }
+            FormLabel {
+                text: i18n("Button mouse over color:")
+                buddy: buttonHoverButton
+            }
+            ColorButton {
+                id: buttonHoverButton
+            }
+            FormLabel {
+                text: i18n("Button focus color:")
+                buddy: buttonFocusButton
+            }
+            ColorButton {
+                id: buttonFocusButton
             }
         }
     }
