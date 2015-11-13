@@ -40,18 +40,23 @@ Dialog {
         nameField.focus = true
     }
     ColumnLayout {
+        anchors {
+            left: parent.left
+            right: parent.right
+        }
         Label {
             id: errorMessage
+            Layout.fillWidth: true
         }
-        Grid {
+        GridLayout {
+            Layout.fillWidth: true
             columns: 2
-            spacing: units.smallSpacing
-            //anchors.fill:parent
-            horizontalItemAlignment: Grid.AlignRight 
-            verticalItemAlignment: Grid.AlignVCenter
+            columnSpacing: units.smallSpacing
+
             Label {
                 visible: newTheme
                 text: i18n("Theme Name:")
+                Layout.alignment: Qt.AlignRight
                 MouseArea {
                     anchors.fill: parent
                     onClicked: nameField.focus = true
@@ -60,6 +65,7 @@ Dialog {
             TextField {
                 id: nameField
                 visible: newTheme
+                Layout.fillWidth: true
                 onTextChanged: {
                     if (!newTheme) {
                         errorMessage.text = "";
@@ -79,6 +85,7 @@ Dialog {
             }
             Label {
                 text: i18n("Author:")
+                Layout.alignment: Qt.AlignRight
                 MouseArea {
                     anchors.fill: parent
                     onClicked: authorField.focus = true
@@ -86,9 +93,11 @@ Dialog {
             }
             TextField {
                 id: authorField
+                Layout.fillWidth: true
             }
             Label {
                 text: i18n("Email:")
+                Layout.alignment: Qt.AlignRight
                 MouseArea {
                     anchors.fill: parent
                     onClicked: emailField.focus = true
@@ -96,9 +105,11 @@ Dialog {
             }
             TextField {
                 id: emailField
+                Layout.fillWidth: true
             }
             Label {
                 text: i18n("Website:")
+                Layout.alignment: Qt.AlignRight
                 MouseArea {
                     anchors.fill: parent
                     onClicked: websiteField.focus = true
@@ -106,6 +117,7 @@ Dialog {
             }
             TextField {
                 id: websiteField
+                Layout.fillWidth: true
             }
         }
     }
