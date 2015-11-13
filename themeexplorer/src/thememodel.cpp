@@ -273,7 +273,9 @@ void ThemeModel::processFinished()
 
 void ThemeModel::editThemeMetaData(const QString& name, const QString& author, const QString& email, const QString& website)
 {
-    const QString metadataPath(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1Literal("/plasma/desktoptheme/") % name % QLatin1Literal("/metadata.desktop"));
+    QString compactName = name.toLower();
+    compactName.replace(' ', QString());
+    const QString metadataPath(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1Literal("/plasma/desktoptheme/") % compactName % QLatin1Literal("/metadata.desktop"));
     KConfig c(metadataPath);
 
     KConfigGroup cg(&c, "Desktop Entry");
@@ -303,7 +305,9 @@ void ThemeModel::createNewTheme(const QString& name, const QString& author, cons
 
     QString file = QStandardPaths::locate(QStandardPaths::GenericDataLocation, + "/plasma/desktoptheme/" + m_themeName + "/colors");
 
-    QString finalFile = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/plasma/desktoptheme/" + name + "/colors";
+    QString compactName = name.toLower();
+    compactName.replace(' ', QString());
+    QString finalFile = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/plasma/desktoptheme/" + compactName + "/colors";
 
     KIO::FileCopyJob *job = KIO::file_copy( QUrl::fromLocalFile(file), QUrl::fromLocalFile(finalFile) );
     if (!job->exec()) {
