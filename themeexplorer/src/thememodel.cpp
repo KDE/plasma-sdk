@@ -314,9 +314,9 @@ void ThemeModel::createNewTheme(const QString& name, const QString& author, cons
     m_themeListModel->reload();
 }
 
-QString ThemeModel::colorsFile()
+QString ThemeModel::themeFolder()
 {
-    return QStandardPaths::locate(QStandardPaths::GenericDataLocation, + "/plasma/desktoptheme/" + m_themeName + "/colors");
+    return QStandardPaths::locate(QStandardPaths::GenericDataLocation, + "plasma/desktoptheme/" + m_themeName, QStandardPaths::LocateDirectory);
 }
 
 #include "moc_thememodel.cpp"

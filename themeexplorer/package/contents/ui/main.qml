@@ -62,6 +62,11 @@ ApplicationWindow {
                 }
             }
             ToolButton {
+                text: i18n("Open Folder")
+                iconName: "document-open-folder"
+                onClicked: Qt.openUrlExternally(themeModel.themeFolder);
+            }
+            ToolButton {
                 text: i18n("Edit Metadata...")
                 iconName: "configure"
                 enabled: view.currentItem.modelData.isWritable
@@ -81,7 +86,7 @@ ApplicationWindow {
                 text: i18n("Edit Colors...")
                 iconName: "color"
                 enabled: view.currentItem.modelData.isWritable
-                onClicked: Qt.openUrlExternally(themeModel.colorsFile);
+                onClicked: Qt.openUrlExternally(themeModel.themeFolder+"/colors");
             }
             Item {
                 Layout.fillWidth: true
@@ -109,6 +114,9 @@ ApplicationWindow {
         running: true
         interval: 200
         onTriggered: {
+            if (!commandlineTheme) {
+                var commandlineTheme = "default";
+            }
             themeSelector.model = themeModel.themeList
             for (var i = 0; i < themeModel.themeList.count; ++i) {
                 if (commandlineTheme == themeModel.themeList.get(i).packageNameRole) {
