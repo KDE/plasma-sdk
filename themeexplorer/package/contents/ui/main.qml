@@ -114,9 +114,6 @@ ApplicationWindow {
         running: true
         interval: 200
         onTriggered: {
-            if (!commandlineTheme) {
-                var commandlineTheme = "default";
-            }
             themeSelector.model = themeModel.themeList
             for (var i = 0; i < themeModel.themeList.count; ++i) {
                 if (commandlineTheme == themeModel.themeList.get(i).packageNameRole) {
