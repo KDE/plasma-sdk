@@ -31,6 +31,7 @@ namespace Plasma {
 }
 
 class ThemeListModel;
+class ColorEditor;
 
 class ThemeModel : public QAbstractListModel
 {
@@ -38,6 +39,7 @@ class ThemeModel : public QAbstractListModel
 
     Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
     Q_PROPERTY(ThemeListModel *themeList READ themeList CONSTANT)
+    Q_PROPERTY(ColorEditor *colorEditor READ colorEditor CONSTANT)
 
     Q_PROPERTY(QString author READ author NOTIFY authorChanged)
     Q_PROPERTY(QString email READ email NOTIFY emailChanged)
@@ -60,6 +62,7 @@ public:
     ~ThemeModel();
 
     ThemeListModel *themeList();
+    ColorEditor *colorEditor();
 
     virtual QHash<int, QByteArray> roleNames() const;
     virtual int rowCount(const QModelIndex &parent) const;
@@ -98,6 +101,7 @@ private:
     KPackage::Package m_package;
     QJsonDocument m_jsonDoc;
     ThemeListModel *m_themeListModel;
+    ColorEditor *m_colorEditor;
 };
 
 #endif // THEMEMODEL_H

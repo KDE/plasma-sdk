@@ -26,7 +26,6 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 
 Dialog {
     id: dialog
-    visible: true
     property alias textColor: textColorButton.color
     property alias backgroundColor: backgroundButton.color
 
@@ -38,6 +37,16 @@ Dialog {
     title: i18n("Edit Colors");
     standardButtons: StandardButton.Ok | StandardButton.Cancel
 
+    onVisibleChanged: {
+        if (visible) {
+            textColor = themeModel.colorEditor.textColor;
+            backgroundColor = themeModel.colorEditor.backgroundColor;
+            buttonTextColor = themeModel.colorEditor.buttonTextColor;
+            buttonBackgroundColor = themeModel.colorEditor.buttonBackgroundColor;
+            buttonHoverColor = themeModel.colorEditor.buttonHoverColor;
+            buttonFocusColor = themeModel.colorEditor.buttonFocusColor;
+        }
+    }
     ColorDialog {
         id: colorDialog
         modality: Qt.WindowModal
@@ -177,6 +186,12 @@ Dialog {
     }
 
     onAccepted: {
-        
+        themeModel.colorEditor.textColor = textColor;
+        themeModel.colorEditor.backgroundColor = backgroundColor;
+        themeModel.colorEditor.buttonTextColor = buttonTextColor;
+        themeModel.colorEditor.buttonBackgroundColor = buttonBackgroundColor;
+        themeModel.colorEditor.buttonHoverColor = buttonHoverColor;
+        themeModel.colorEditor.buttonFocusColor = buttonFocusColor;
+        themeModel.colorEditor.save();
     }
 }

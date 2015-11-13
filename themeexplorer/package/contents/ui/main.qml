@@ -86,7 +86,13 @@ ApplicationWindow {
                 text: i18n("Edit Colors...")
                 iconName: "color"
                 enabled: view.currentItem.modelData.isWritable
-                onClicked: Qt.openUrlExternally(themeModel.themeFolder+"/colors");
+                onClicked: {
+                    if (!root.colorEditor) {
+                        root.colorEditor = colorEditorComponent.createObject(root);
+                    }
+
+                    root.colorEditor.open();
+                }
             }
             Item {
                 Layout.fillWidth: true
@@ -108,6 +114,11 @@ ApplicationWindow {
     Component {
         id: metadataEditorComponent
         MetadataEditor {}
+    }
+    property QtObject colorEditor
+    Component {
+        id: colorEditorComponent
+        ColorEditor {}
     }
 
     Timer {

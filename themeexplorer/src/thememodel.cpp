@@ -19,6 +19,7 @@
 
 #include "thememodel.h"
 #include "themelistmodel.h"
+#include "coloreditor.h"
 #include <QDebug>
 #include <QByteArray>
 #include <QDir>
@@ -75,7 +76,8 @@ ThemeModel::ThemeModel(const KPackage::Package &package, QObject *parent)
       m_theme(new Plasma::Theme),
       m_themeName(QStringLiteral("default")),
       m_package(package),
-      m_themeListModel(new ThemeListModel(this))
+      m_themeListModel(new ThemeListModel(this)),
+      m_colorEditor(new ColorEditor(this))      
 {
     m_theme->setUseGlobalSettings(false);
     m_theme->setThemeName(m_themeName);
@@ -99,6 +101,11 @@ ThemeModel::~ThemeModel()
 ThemeListModel *ThemeModel::themeList()
 {
     return m_themeListModel;
+}
+
+ColorEditor *ThemeModel::colorEditor()
+{
+    return m_colorEditor;
 }
 
 QHash<int, QByteArray> ThemeModel::roleNames() const
@@ -217,6 +224,7 @@ void ThemeModel::setTheme(const QString& theme)
     m_themeName = theme;
     m_theme->setThemeName(theme);
     load();
+    m_colorEditor->setTheme(theme);
     emit themeChanged();
 }
 
@@ -303,7 +311,7 @@ void ThemeModel::createNewTheme(const QString& name, const QString& author, cons
 {
     editThemeMetaData(name, author, email, website);
 
-    QString file = QStandardPaths::locate(QStandardPaths::GenericDataLocation, + "/plasma/desktoptheme/" + m_themeName + "/colors");
+    QString file = QStandardPaths::locate(QStandardPaths::GenericDataLocation, + "/plasma/desktoptheme/default/colors");
 
     QString compactName = name.toLower();
     compactName.replace(' ', QString());
