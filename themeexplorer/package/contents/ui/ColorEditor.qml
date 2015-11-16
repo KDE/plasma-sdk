@@ -26,13 +26,26 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 
 Dialog {
     id: dialog
-    property alias textColor: textColorButton.color
+    property alias textColor: textButton.color
     property alias backgroundColor: backgroundButton.color
+    property alias highlightColor: highlightButton.color
+    property alias linkColor: linkButton.color
+    property alias visitedLinkColor: visitedLinkButton.color
 
     property alias buttonTextColor: buttonTextButton.color
     property alias buttonBackgroundColor: buttonBackgroundButton.color
     property alias buttonHoverColor: buttonHoverButton.color
     property alias buttonFocusColor: buttonFocusButton.color
+
+    property alias viewTextColor: viewTextButton.color
+    property alias viewBackgroundColor: viewBackgroundButton.color
+    property alias viewHoverColor: viewHoverButton.color
+    property alias viewFocusColor: viewFocusButton.color
+
+    property alias complementaryTextColor: complementaryTextButton.color
+    property alias complementaryBackgroundColor: complementaryBackgroundButton.color
+    property alias complementaryHoverColor: complementaryHoverButton.color
+    property alias complementaryFocusColor: complementaryFocusButton.color
 
     title: i18n("Edit Colors");
     standardButtons: StandardButton.Ok | StandardButton.Cancel
@@ -41,10 +54,24 @@ Dialog {
         if (visible) {
             textColor = themeModel.colorEditor.textColor;
             backgroundColor = themeModel.colorEditor.backgroundColor;
+            highlightColor = themeModel.colorEditor.highlightColor;
+            linkColor = themeModel.colorEditor.linkColor;
+            visitedLinkColor = themeModel.colorEditor.visitedLinkColor;
+
             buttonTextColor = themeModel.colorEditor.buttonTextColor;
             buttonBackgroundColor = themeModel.colorEditor.buttonBackgroundColor;
             buttonHoverColor = themeModel.colorEditor.buttonHoverColor;
             buttonFocusColor = themeModel.colorEditor.buttonFocusColor;
+
+            viewTextColor = themeModel.colorEditor.viewTextColor;
+            viewBackgroundColor = themeModel.colorEditor.viewBackgroundColor;
+            viewHoverColor = themeModel.colorEditor.viewHoverColor;
+            viewFocusColor = themeModel.colorEditor.viewFocusColor;
+
+            complementaryTextColor = themeModel.colorEditor.complementaryTextColor;
+            complementaryBackgroundColor = themeModel.colorEditor.complementaryBackgroundColor;
+            complementaryHoverColor = themeModel.colorEditor.complementaryHoverColor;
+            complementaryFocusColor = themeModel.colorEditor.complementaryFocusColor;
         }
     }
     ColorDialog {
@@ -141,10 +168,10 @@ Dialog {
             
             FormLabel {
                 text: i18n("Text color:")
-                buddy: textColorButton
+                buddy: textButton
             }
             ColorButton {
-                id: textColorButton
+                id: textButton
             }
             FormLabel {
                 text: i18n("Background color:")
@@ -152,6 +179,27 @@ Dialog {
             }
             ColorButton {
                 id: backgroundButton
+            }
+            FormLabel {
+                text: i18n("Highlight color:")
+                buddy: highlightButton
+            }
+            ColorButton {
+                id: highlightButton
+            }
+            FormLabel {
+                text: i18n("Link color:")
+                buddy: linkButton
+            }
+            ColorButton {
+                id: linkButton
+            }
+            FormLabel {
+                text: i18n("Visited link color:")
+                buddy: visitedLinkButton
+            }
+            ColorButton {
+                id: visitedLinkButton
             }
 
             FormLabel {
@@ -182,16 +230,89 @@ Dialog {
             ColorButton {
                 id: buttonFocusButton
             }
+
+            FormLabel {
+                text: i18n("Text view text color:")
+                buddy: viewTextButton
+            }
+            ColorButton {
+                id: viewTextButton
+            }
+            FormLabel {
+                text: i18n("Text view background color:")
+                buddy: viewBackgroundButton
+            }
+            ColorButton {
+                id: viewBackgroundButton
+            }
+            FormLabel {
+                text: i18n("Text view mouse over color:")
+                buddy: viewHoverButton
+            }
+            ColorButton {
+                id: viewHoverButton
+            }
+            FormLabel {
+                text: i18n("Text view focus color:")
+                buddy: viewFocusButton
+            }
+            ColorButton {
+                id: viewFocusButton
+            }
+
+            FormLabel {
+                text: i18n("Complementary text color:")
+                buddy: complementaryTextButton
+            }
+            ColorButton {
+                id: complementaryTextButton
+            }
+            FormLabel {
+                text: i18n("Complementary background color:")
+                buddy: complementaryBackgroundButton
+            }
+            ColorButton {
+                id: complementaryBackgroundButton
+            }
+            FormLabel {
+                text: i18n("Complementary mouse over color:")
+                buddy: complementaryHoverButton
+            }
+            ColorButton {
+                id: complementaryHoverButton
+            }
+            FormLabel {
+                text: i18n("Complementary focus color:")
+                buddy: complementaryFocusButton
+            }
+            ColorButton {
+                id: complementaryFocusButton
+            }
         }
     }
 
     onAccepted: {
         themeModel.colorEditor.textColor = textColor;
         themeModel.colorEditor.backgroundColor = backgroundColor;
+        themeModel.colorEditor.highlightColor = highlightColor;
+        themeModel.colorEditor.linkColor = linkColor;
+        themeModel.colorEditor.visitedLinkColor = visitedLinkColor;
+
         themeModel.colorEditor.buttonTextColor = buttonTextColor;
         themeModel.colorEditor.buttonBackgroundColor = buttonBackgroundColor;
         themeModel.colorEditor.buttonHoverColor = buttonHoverColor;
         themeModel.colorEditor.buttonFocusColor = buttonFocusColor;
+
+        themeModel.colorEditor.viewTextColor = viewTextColor;
+        themeModel.colorEditor.viewBackgroundColor = viewBackgroundColor;
+        themeModel.colorEditor.viewHoverColor = viewHoverColor;
+        themeModel.colorEditor.viewFocusColor = viewFocusColor;
+
+        themeModel.colorEditor.complementaryTextColor = complementaryTextColor;
+        themeModel.colorEditor.complementaryBackgroundColor = complementaryBackgroundColor;
+        themeModel.colorEditor.complementaryHoverColor = complementaryHoverColor;
+        themeModel.colorEditor.complementaryFocusColor = complementaryFocusColor;
+
         themeModel.colorEditor.save();
     }
 }
