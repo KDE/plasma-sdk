@@ -29,6 +29,9 @@ MouseArea {
     implicitHeight: layout.height 
 
     property bool checked: true
+    //in real controls this is done by the color scope
+    property bool complementary: false
+
     onClicked: {
         buttonMouse.focus = true
         checked = !checked
@@ -50,11 +53,11 @@ MouseArea {
                 border {
                     color: {
                         if (buttonMouse.checked) {
-                            return highlightColor;
+                            return buttonMouse.complementary ? complementaryHoverColor : highlightColor;
                         } else if (buttonMouse.containsMouse) {
                             return buttonHoverColor;
                         } else {
-                           return  buttonFocusColor;
+                           return buttonFocusColor;
                         }
                     }
                 }
@@ -66,7 +69,7 @@ MouseArea {
                 }
                 radius: units.smallSpacing/2
                 visible: buttonMouse.checked
-                color: highlightColor
+                color: buttonMouse.complementary ? complementaryHoverColor : highlightColor
             }
         }
         DropShadow {
@@ -81,7 +84,7 @@ MouseArea {
         Label {
             anchors.centerIn: parent
             text: i18n("Checkbox")
-            color: textColor
+            color: buttonMouse.complementary ? complementaryTextColor : textColor
         }
     }
 }

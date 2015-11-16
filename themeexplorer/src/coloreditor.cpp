@@ -390,7 +390,7 @@ void ColorEditor::setComplementaryFocusColor(const QColor &color)
         return;
     }
 
-    m_complementaryHoverColor = color;
+    m_complementaryFocusColor = color;
     emit colorsChanged();
 }
 

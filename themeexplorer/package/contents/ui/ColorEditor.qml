@@ -96,6 +96,7 @@ Dialog {
         
         ColumnLayout {
             anchors.fill: parent
+            spacing: 0
             Rectangle {
                 Layout.fillWidth: true
                 //Layout.fillHeight: true
@@ -145,6 +146,39 @@ Dialog {
                     samples: 16
                     color: Qt.rgba(0, 0, 0, 0.5)
                     source: plasmoidPreview
+                }
+            }
+            Rectangle {
+                id: complementaryBar
+                color: complementaryBackgroundColor
+                height: units.gridUnit * 2
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+
+                Label {
+                    text: i18n("Complementary colors area:")
+                    color: complementaryTextColor
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        left: complementaryBar.left
+                        leftMargin: units.smallspacing
+                    }
+                }
+                RowLayout {
+                    anchors {
+                        top: complementaryBar.top
+                        bottom: complementaryBar.bottom
+                        horizontalCenter: complementaryBar.horizontalCenter
+                    }
+                    Label {
+                        text: i18n("Label")
+                        color: complementaryTextColor
+                    }
+                    FakeControls.CheckBox {
+                        complementary: true
+                    }
                 }
             }
             ScrollView {
