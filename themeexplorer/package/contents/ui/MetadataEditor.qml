@@ -34,74 +34,97 @@ Dialog {
     property bool canEdit: false
 
     title: newTheme ? i18n("New Theme") : i18n("Edit Theme")
-    standardButtons: canEdit && nameField.text && authorField.text && emailField.text && websiteField.text ? StandardButton.Ok | StandardButton.Cancel : StandardButton.Cancel
 
     onVisibleChanged: {
         nameField.focus = true
     }
-    ColumnLayout {
-        anchors {
-            left: parent.left
-            right: parent.right
-        }
-        Label {
-            id: errorMessage
-            Layout.fillWidth: true
-        }
-        GridLayout {
-            Layout.fillWidth: true
-            columns: 2
-            columnSpacing: units.smallSpacing
 
-            FormLabel {
-                visible: newTheme
-                text: i18n("Theme Name:")
-                buddy: nameField
-            }
-            TextField {
-                id: nameField
-                visible: newTheme
+    contentItem: Rectangle {
+        implicitWidth:  layout.Layout.minimumWidth
+        implicitHeight: layout.Layout.minimumHeight
+
+        SystemPalette {
+            id: palette
+        }
+        color: palette.window
+
+        ColumnLayout {
+            id: layout
+            anchors.fill: parent
+            Label {
+                id: errorMessage
                 Layout.fillWidth: true
-                onTextChanged: {
-                    if (!newTheme) {
-                        errorMessage.text = "";
-                        dialog.canEdit = true;
-                        return;
-                    }
-                    for (var i = 0; i < themeModel.themeList.count; ++i) {
-                        if (nameField.text == themeModel.themeList.get(i).packageNameRole) {
-                            dialog.canEdit = false;
-                            errorMessage.text = i18n("This theme name already exists");
+            }
+            GridLayout {
+                Layout.fillWidth: true
+                columns: 2
+                columnSpacing: units.smallSpacing
+
+                FormLabel {
+                    visible: newTheme
+                    text: i18n("Theme Name:")
+                    buddy: nameField
+                }
+                TextField {
+                    id: nameField
+                    visible: newTheme
+                    Layout.fillWidth: true
+                    onTextChanged: {
+                        if (!newTheme) {
+                            errorMessage.text = "";
+                            dialog.canEdit = true;
                             return;
                         }
+                        for (var i = 0; i < themeModel.themeList.count; ++i) {
+                            if (nameField.text == themeModel.themeList.get(i).packageNameRole) {
+                                dialog.canEdit = false;
+                                errorMessage.text = i18n("This theme name already exists");
+                                return;
+                            }
+                        }
+                        errorMessage.text = "";
+                        dialog.canEdit = true;
                     }
-                    errorMessage.text = "";
-                    dialog.canEdit = true;
+                }
+                FormLabel {
+                    text: i18n("Author:")
+                    buddy: authorField
+                }
+                TextField {
+                    id: authorField
+                    Layout.fillWidth: true
+                }
+                FormLabel {
+                    text: i18n("Email:")
+                    buddy: emailField
+                }
+                TextField {
+                    id: emailField
+                    Layout.fillWidth: true
+                }
+                FormLabel {
+                    text: i18n("Website:")
+                    buddy: websiteField
+                }
+                TextField {
+                    id: websiteField
+                    Layout.fillWidth: true
                 }
             }
-            FormLabel {
-                text: i18n("Author:")
-                buddy: authorField
+            Item {
+                Layout.fillHeight: true
             }
-            TextField {
-                id: authorField
-                Layout.fillWidth: true
-            }
-            FormLabel {
-                text: i18n("Email:")
-                buddy: emailField
-            }
-            TextField {
-                id: emailField
-                Layout.fillWidth: true
-            }
-            FormLabel {
-                text: i18n("Website:")
-                buddy: websiteField
-            }
-            TextField {
-                id: websiteField
-                Layout.fillWidth: true
+            RowLayout {
+                Layout.alignment: Qt.AlignRight
+                Button {
+                    text: i18n("Ok")
+                    onClicked: dialog.accept()
+                    enabled: canEdit && nameField.text && authorField.text && emailField.text && websiteField.text
+                }
+                Button {
+                    text: i18n("Cancel")
+                    onClicked: dialog.reject()
+                }
             }
         }
     }

@@ -50,7 +50,6 @@ Dialog {
     property alias complementaryFocusColor: complementaryFocusButton.color
 
     title: i18n("Edit Colors");
-    standardButtons: StandardButton.Ok | StandardButton.Cancel
 
     onVisibleChanged: {
         if (visible) {
@@ -86,189 +85,215 @@ Dialog {
             activeButton.color = color;
         }
     }
-    ColumnLayout {
-        anchors {
-            left: parent.left
-            right: parent.right
+    contentItem: Rectangle {
+        implicitWidth:  units.gridUnit * 50
+        implicitHeight: units.gridUnit * 42
+
+        SystemPalette {
+            id: palette
         }
-        Label {
-            id: errorMessage
-            Layout.fillWidth: true
-        }
-        Item {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.minimumHeight: units.gridUnit * 15
+        color: palette.window
+        
+        ColumnLayout {
+            anchors.fill: parent
             Rectangle {
-                id: plasmoidPreview
-                anchors.centerIn: parent
-                width: parent.width/1.5
-                height: parent.height/1.5
-                radius: units.smallSpacing
-                color: backgroundColor
-                ColumnLayout {
+                Layout.fillWidth: true
+                //Layout.fillHeight: true
+                Layout.minimumHeight: units.gridUnit * 15
+                color: palette.base
+                Rectangle {
+                    id: plasmoidPreview
                     anchors.centerIn: parent
-                    Label {
-                        Layout.alignment: Qt.AlignHCenter
-                        text: i18n("Normal text")
-                        color: textColor
-                    }
-                    RowLayout {
-                        Layout.alignment: Qt.AlignHCenter
+                    width: parent.width/1.5
+                    height: parent.height/1.5
+                    radius: units.smallSpacing
+                    color: backgroundColor
+                    ColumnLayout {
+                        anchors.centerIn: parent
                         Label {
-                            text: i18n("Link")
-                            color: linkColor
+                            Layout.alignment: Qt.AlignHCenter
+                            text: i18n("Normal text")
+                            color: textColor
                         }
-                        Label {
-                            text: i18n("Visited Link")
-                            color: visitedLinkColor
+                        RowLayout {
+                            Layout.alignment: Qt.AlignHCenter
+                            Label {
+                                text: i18n("Link")
+                                color: linkColor
+                            }
+                            Label {
+                                text: i18n("Visited Link")
+                                color: visitedLinkColor
+                            }
+                        }
+                        FakeControls.Button {
+                            Layout.alignment: Qt.AlignHCenter
+                        }
+                        FakeControls.LineEdit {
+                            Layout.alignment: Qt.AlignHCenter
                         }
                     }
-                    FakeControls.Button {
-                        Layout.alignment: Qt.AlignHCenter
-                    }
-                    FakeControls.LineEdit {
-                        Layout.alignment: Qt.AlignHCenter
+                }
+                DropShadow {
+                    anchors.fill: plasmoidPreview
+                    horizontalOffset: 0
+                    verticalOffset: units.smallSpacing/2
+                    radius: units.gridUnit / 2.2
+                    samples: 16
+                    color: Qt.rgba(0, 0, 0, 0.5)
+                    source: plasmoidPreview
+                }
+            }
+            ScrollView {
+                id: scroll
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.minimumHeight: units.gridUnit * 15
+                Item {
+                    width: scroll.viewport.width
+                    height: childrenRect.height
+                    GridLayout {
+                        //Layout.alignment: Qt.AlignHCenter
+                        anchors.centerIn: parent
+                        columns: 2
+                        columnSpacing: units.smallSpacing
+
+                        
+                        FormLabel {
+                            text: i18n("Text color:")
+                            buddy: textButton
+                        }
+                        ColorButton {
+                            id: textButton
+                        }
+                        FormLabel {
+                            text: i18n("Background color:")
+                            buddy: backgroundButton
+                        }
+                        ColorButton {
+                            id: backgroundButton
+                        }
+                        FormLabel {
+                            text: i18n("Highlight color:")
+                            buddy: highlightButton
+                        }
+                        ColorButton {
+                            id: highlightButton
+                        }
+                        FormLabel {
+                            text: i18n("Link color:")
+                            buddy: linkButton
+                        }
+                        ColorButton {
+                            id: linkButton
+                        }
+                        FormLabel {
+                            text: i18n("Visited link color:")
+                            buddy: visitedLinkButton
+                        }
+                        ColorButton {
+                            id: visitedLinkButton
+                        }
+
+                        FormLabel {
+                            text: i18n("Button text color:")
+                            buddy: buttonTextButton
+                        }
+                        ColorButton {
+                            id: buttonTextButton
+                        }
+                        FormLabel {
+                            text: i18n("Button background color:")
+                            buddy: buttonBackgroundButton
+                        }
+                        ColorButton {
+                            id: buttonBackgroundButton
+                        }
+                        FormLabel {
+                            text: i18n("Button mouse over color:")
+                            buddy: buttonHoverButton
+                        }
+                        ColorButton {
+                            id: buttonHoverButton
+                        }
+                        FormLabel {
+                            text: i18n("Button focus color:")
+                            buddy: buttonFocusButton
+                        }
+                        ColorButton {
+                            id: buttonFocusButton
+                        }
+
+                        FormLabel {
+                            text: i18n("Text view text color:")
+                            buddy: viewTextButton
+                        }
+                        ColorButton {
+                            id: viewTextButton
+                        }
+                        FormLabel {
+                            text: i18n("Text view background color:")
+                            buddy: viewBackgroundButton
+                        }
+                        ColorButton {
+                            id: viewBackgroundButton
+                        }
+                        FormLabel {
+                            text: i18n("Text view mouse over color:")
+                            buddy: viewHoverButton
+                        }
+                        ColorButton {
+                            id: viewHoverButton
+                        }
+                        FormLabel {
+                            text: i18n("Text view focus color:")
+                            buddy: viewFocusButton
+                        }
+                        ColorButton {
+                            id: viewFocusButton
+                        }
+
+                        FormLabel {
+                            text: i18n("Complementary text color:")
+                            buddy: complementaryTextButton
+                        }
+                        ColorButton {
+                            id: complementaryTextButton
+                        }
+                        FormLabel {
+                            text: i18n("Complementary background color:")
+                            buddy: complementaryBackgroundButton
+                        }
+                        ColorButton {
+                            id: complementaryBackgroundButton
+                        }
+                        FormLabel {
+                            text: i18n("Complementary mouse over color:")
+                            buddy: complementaryHoverButton
+                        }
+                        ColorButton {
+                            id: complementaryHoverButton
+                        }
+                        FormLabel {
+                            text: i18n("Complementary focus color:")
+                            buddy: complementaryFocusButton
+                        }
+                        ColorButton {
+                            id: complementaryFocusButton
+                        }
                     }
                 }
             }
-            DropShadow {
-                anchors.fill: plasmoidPreview
-                horizontalOffset: 0
-                verticalOffset: units.smallSpacing/2
-                radius: units.gridUnit / 2.2
-                samples: 16
-                color: Qt.rgba(0, 0, 0, 0.5)
-                source: plasmoidPreview
-            }
-        }
-        GridLayout {
-            Layout.alignment: Qt.AlignHCenter
-            columns: 2
-            columnSpacing: units.smallSpacing
-
-            
-            FormLabel {
-                text: i18n("Text color:")
-                buddy: textButton
-            }
-            ColorButton {
-                id: textButton
-            }
-            FormLabel {
-                text: i18n("Background color:")
-                buddy: backgroundButton
-            }
-            ColorButton {
-                id: backgroundButton
-            }
-            FormLabel {
-                text: i18n("Highlight color:")
-                buddy: highlightButton
-            }
-            ColorButton {
-                id: highlightButton
-            }
-            FormLabel {
-                text: i18n("Link color:")
-                buddy: linkButton
-            }
-            ColorButton {
-                id: linkButton
-            }
-            FormLabel {
-                text: i18n("Visited link color:")
-                buddy: visitedLinkButton
-            }
-            ColorButton {
-                id: visitedLinkButton
-            }
-
-            FormLabel {
-                text: i18n("Button text color:")
-                buddy: buttonTextButton
-            }
-            ColorButton {
-                id: buttonTextButton
-            }
-            FormLabel {
-                text: i18n("Button background color:")
-                buddy: buttonBackgroundButton
-            }
-            ColorButton {
-                id: buttonBackgroundButton
-            }
-            FormLabel {
-                text: i18n("Button mouse over color:")
-                buddy: buttonHoverButton
-            }
-            ColorButton {
-                id: buttonHoverButton
-            }
-            FormLabel {
-                text: i18n("Button focus color:")
-                buddy: buttonFocusButton
-            }
-            ColorButton {
-                id: buttonFocusButton
-            }
-
-            FormLabel {
-                text: i18n("Text view text color:")
-                buddy: viewTextButton
-            }
-            ColorButton {
-                id: viewTextButton
-            }
-            FormLabel {
-                text: i18n("Text view background color:")
-                buddy: viewBackgroundButton
-            }
-            ColorButton {
-                id: viewBackgroundButton
-            }
-            FormLabel {
-                text: i18n("Text view mouse over color:")
-                buddy: viewHoverButton
-            }
-            ColorButton {
-                id: viewHoverButton
-            }
-            FormLabel {
-                text: i18n("Text view focus color:")
-                buddy: viewFocusButton
-            }
-            ColorButton {
-                id: viewFocusButton
-            }
-
-            FormLabel {
-                text: i18n("Complementary text color:")
-                buddy: complementaryTextButton
-            }
-            ColorButton {
-                id: complementaryTextButton
-            }
-            FormLabel {
-                text: i18n("Complementary background color:")
-                buddy: complementaryBackgroundButton
-            }
-            ColorButton {
-                id: complementaryBackgroundButton
-            }
-            FormLabel {
-                text: i18n("Complementary mouse over color:")
-                buddy: complementaryHoverButton
-            }
-            ColorButton {
-                id: complementaryHoverButton
-            }
-            FormLabel {
-                text: i18n("Complementary focus color:")
-                buddy: complementaryFocusButton
-            }
-            ColorButton {
-                id: complementaryFocusButton
+            RowLayout {
+                Layout.alignment: Qt.AlignRight
+                Button {
+                    text: i18n("Ok")
+                    onClicked: dialog.accept()
+                }
+                Button {
+                    text: i18n("Cancel")
+                    onClicked: dialog.reject()
+                }
             }
         }
     }
