@@ -126,10 +126,13 @@ Dialog {
                                 color: visitedLinkColor
                             }
                         }
-                        FakeControls.Button {
+                        FakeControls.CheckBox {
                             Layout.alignment: Qt.AlignHCenter
                         }
                         FakeControls.LineEdit {
+                            Layout.alignment: Qt.AlignHCenter
+                        }
+                        FakeControls.Button {
                             Layout.alignment: Qt.AlignHCenter
                         }
                     }
