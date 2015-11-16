@@ -23,6 +23,8 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.2
 import org.kde.plasma.core 2.0 as PlasmaCore
+import "fakecontrols" as FakeControls
+
 
 Dialog {
     id: dialog
@@ -96,7 +98,7 @@ Dialog {
         Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.minimumHeight: units.gridUnit * 10
+            Layout.minimumHeight: units.gridUnit * 15
             Rectangle {
                 id: plasmoidPreview
                 anchors.centerIn: parent
@@ -111,42 +113,22 @@ Dialog {
                         text: i18n("Normal text")
                         color: textColor
                     }
-                    Rectangle {
-                        id: button
+                    RowLayout {
                         Layout.alignment: Qt.AlignHCenter
-                        implicitWidth: parent.width/1.2
-                        implicitHeight: units.gridUnit * 1.6
-                        radius: units.smallSpacing/2
-                        color: buttonMouse.pressed ? Qt.darker(buttonBackgroundColor, 1.5) : buttonBackgroundColor
                         Label {
-                            anchors.centerIn: parent
-                            text: i18n("Button")
-                            color: buttonTextColor
+                            text: i18n("Link")
+                            color: linkColor
                         }
-                        MouseArea {
-                            id: buttonMouse
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            onClicked: button.focus = true
-                        }
-                        Rectangle {
-                            anchors.fill: parent
-                            radius: units.smallSpacing/2
-                            visible: buttonMouse.containsMouse || button.focus
-                            color: "transparent"
-                            border {
-                                color: buttonMouse.containsMouse ? buttonHoverColor : buttonFocusColor
-                            }
+                        Label {
+                            text: i18n("Visited Link")
+                            color: visitedLinkColor
                         }
                     }
-                    DropShadow {
-                        anchors.fill: button
-                        horizontalOffset: 0
-                        verticalOffset: units.smallSpacing/4
-                        radius: units.smallSpacing 
-                        samples: 16
-                        color: buttonMouse.pressed ? Qt.rgba(0, 0, 0, 0) : Qt.rgba(0, 0, 0, 0.5)
-                        source: button
+                    FakeControls.Button {
+                        Layout.alignment: Qt.AlignHCenter
+                    }
+                    FakeControls.LineEdit {
+                        Layout.alignment: Qt.AlignHCenter
                     }
                 }
             }
