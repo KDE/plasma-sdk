@@ -39,9 +39,20 @@ Dialog {
         nameField.focus = true
     }
 
+    //all this reimplementing shouldn't be necessary,
+    //but unfortunately native standard buttons management
+    //is completely broken
     contentItem: Rectangle {
-        implicitWidth:  layout.Layout.minimumWidth
-        implicitHeight: layout.Layout.minimumHeight
+        implicitWidth:  layout.Layout.minimumWidth + units.smallSpacing*2
+        implicitHeight: layout.Layout.minimumHeight + units.smallSpacing*2
+
+        Keys.onPressed: {
+            if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
+                dialog.accept();
+            } else if (event.key == Qt.Key_Escape) {
+                dialog.reject();
+            }
+        }
 
         SystemPalette {
             id: palette
@@ -50,7 +61,10 @@ Dialog {
 
         ColumnLayout {
             id: layout
-            anchors.fill: parent
+            anchors {
+                fill: parent
+                margins: units.smallSpacing
+            }
             Label {
                 id: errorMessage
                 Layout.fillWidth: true
@@ -119,6 +133,7 @@ Dialog {
                 Button {
                     text: i18n("Ok")
                     onClicked: dialog.accept()
+                    isDefault: true
                     enabled: canEdit && nameField.text && authorField.text && emailField.text && websiteField.text
                 }
                 Button {

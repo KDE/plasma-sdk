@@ -89,11 +89,19 @@ Dialog {
         implicitWidth:  units.gridUnit * 50
         implicitHeight: units.gridUnit * 42
 
+        Keys.onPressed: {
+            if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
+                dialog.accept();
+            } else if (event.key == Qt.Key_Escape) {
+                dialog.reject();
+            }
+        }
+
         SystemPalette {
             id: palette
         }
         color: palette.window
-        
+
         ColumnLayout {
             anchors.fill: parent
             spacing: 0
@@ -195,7 +203,6 @@ Dialog {
                         columns: 2
                         columnSpacing: units.smallSpacing
 
-                        
                         FormLabel {
                             text: i18n("Text color:")
                             buddy: textButton
@@ -322,10 +329,14 @@ Dialog {
                 }
             }
             RowLayout {
-                Layout.alignment: Qt.AlignRight
+                anchors {
+                    right: parent.right
+                    rightMargin: units.smallSpacing
+                }
                 Button {
                     text: i18n("Ok")
                     onClicked: dialog.accept()
+                    isDefault: true
                 }
                 Button {
                     text: i18n("Cancel")
