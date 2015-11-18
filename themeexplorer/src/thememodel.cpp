@@ -57,6 +57,10 @@ IconsParserHandler::IconsParserHandler()
 bool IconsParserHandler::startElement(const QString &namespaceURI, const QString &localName,
                       const QString &qName, const QXmlAttributes &atts)
 {
+    Q_UNUSED(namespaceURI)
+    Q_UNUSED(localName)
+    Q_UNUSED(qName)
+
     const QString id = atts.value("id");
     //qWarning() << "Start Element:"<<id;
 
@@ -279,7 +283,7 @@ void ThemeModel::processFinished()
     cg.sync();
 }
 
-void ThemeModel::editThemeMetaData(const QString& name, const QString& author, const QString& email, const QString& website)
+void ThemeModel::editThemeMetaData(const QString& name, const QString& author, const QString& email, const QString &license, const QString& website)
 {
     QString compactName = name.toLower();
     compactName.replace(' ', QString());
@@ -293,7 +297,7 @@ void ThemeModel::editThemeMetaData(const QString& name, const QString& author, c
     cg.writeEntry("X-KDE-PluginInfo-Website", website);
     cg.writeEntry("X-KDE-PluginInfo-Category", "Plasma Theme");
     cg.writeEntry("X-KDE-PluginInfo-Depends", "plasmashell");
-    cg.writeEntry("X-KDE-PluginInfo-License", "LGPL 2.1");
+    cg.writeEntry("X-KDE-PluginInfo-License", license);
     cg.writeEntry("X-KDE-PluginInfo-EnabledByDefault", "true");
     cg.writeEntry("X-Plasma-API", "5.0");
     cg.writeEntry("X-KDE-PluginInfo-Version", "0.1");
@@ -307,9 +311,9 @@ void ThemeModel::editThemeMetaData(const QString& name, const QString& author, c
     cg2.sync();
 }
 
-void ThemeModel::createNewTheme(const QString& name, const QString& author, const QString& email, const QString& website)
+void ThemeModel::createNewTheme(const QString& name, const QString& author, const QString& email, const QString &license, const QString& website)
 {
-    editThemeMetaData(name, author, email, website);
+    editThemeMetaData(name, author, email, license, website);
 
     QString file = QStandardPaths::locate(QStandardPaths::GenericDataLocation, + "/plasma/desktoptheme/default/colors");
 

@@ -67,6 +67,9 @@ Dialog {
             }
             Label {
                 id: errorMessage
+                text: ""
+                property string defaultMEssage: newTheme ? "" : i18n("Warning: don't change author or license for themes you don't own")
+                wrapMode: Text.WordWrap
                 Layout.fillWidth: true
             }
             GridLayout {
@@ -85,7 +88,7 @@ Dialog {
                     Layout.fillWidth: true
                     onTextChanged: {
                         if (!newTheme) {
-                            errorMessage.text = "";
+                            errorMessage.text = errorMessage.defaultMEssage;
                             dialog.canEdit = true;
                             return;
                         }
@@ -115,6 +118,17 @@ Dialog {
                 TextField {
                     id: emailField
                     Layout.fillWidth: true
+                }
+                FormLabel {
+                    text: i18n("License:")
+                    buddy: licenseField
+                }
+                ComboBox {
+                    id: licenseField
+                    Layout.fillWidth: true
+                    editable: true
+                    editText: "LGPL 2.1"
+                    model: ["LGPL 2.1", "LGPL 2+", "GPL 3+", "LGPL 3+", "BSD"]
                 }
                 FormLabel {
                     text: i18n("Website:")
@@ -154,7 +168,7 @@ Dialog {
                 }
             }
         } else {
-            themeModel.editThemeMetaData(nameField.text, authorField.text, emailField.text, websiteField.text);
+            themeModel.editThemeMetaData(nameField.text, authorField.text, emailField.text, licenseField.editText, websiteField.text);
         }
     }
 }
