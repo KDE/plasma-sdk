@@ -45,6 +45,7 @@ ApplicationWindow {
                     root.metadataEditor.name = "";
                     root.metadataEditor.author = "";
                     root.metadataEditor.email = "";
+                    root.metadataEditor.license = "LGPL 2.1+";
                     root.metadataEditor.website = "";
                     root.metadataEditor.open();
                 }
@@ -78,6 +79,7 @@ ApplicationWindow {
                     root.metadataEditor.name = themeModel.theme;
                     root.metadataEditor.author = themeModel.author;
                     root.metadataEditor.email = themeModel.email;
+                    root.metadataEditor.license = themeModel.license;
                     root.metadataEditor.website = themeModel.website;
                     root.metadataEditor.open();
                 }

@@ -41,9 +41,10 @@ class ThemeModel : public QAbstractListModel
     Q_PROPERTY(ThemeListModel *themeList READ themeList CONSTANT)
     Q_PROPERTY(ColorEditor *colorEditor READ colorEditor CONSTANT)
 
-    Q_PROPERTY(QString author READ author NOTIFY authorChanged)
-    Q_PROPERTY(QString email READ email NOTIFY emailChanged)
-    Q_PROPERTY(QString website READ website NOTIFY websiteChanged)
+    Q_PROPERTY(QString author READ author NOTIFY themeChanged)
+    Q_PROPERTY(QString email READ email NOTIFY themeChanged)
+    Q_PROPERTY(QString license READ license NOTIFY themeChanged)
+    Q_PROPERTY(QString website READ website NOTIFY themeChanged)
 
     Q_PROPERTY(QString themeFolder READ themeFolder NOTIFY themeChanged)
 public:
@@ -73,6 +74,7 @@ public:
 
     QString author() const;
     QString email() const;
+    QString license() const;
     QString website() const;
 
     void load();
@@ -85,10 +87,6 @@ public:
 
 Q_SIGNALS:
     void themeChanged();
-    
-    void authorChanged();
-    void emailChanged();
-    void websiteChanged();
 
 private Q_SLOTS:
     void processFinished();

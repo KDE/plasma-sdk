@@ -28,6 +28,7 @@ Dialog {
     property alias name: nameField.text
     property alias author: authorField.text
     property alias email: emailField.text
+    property alias license: licenseField.editText
     property alias website: websiteField.text
     property bool newTheme: false
 
@@ -127,8 +128,8 @@ Dialog {
                     id: licenseField
                     Layout.fillWidth: true
                     editable: true
-                    editText: "LGPL 2.1"
-                    model: ["LGPL 2.1", "LGPL 2+", "GPL 3+", "LGPL 3+", "BSD"]
+                    editText: "LGPL 2.1+"
+                    model: ["LGPL 2.1+", "GPL 2+", "GPL 3+", "LGPL 3+", "BSD"]
                 }
                 FormLabel {
                     text: i18n("Website:")
@@ -160,7 +161,7 @@ Dialog {
 
     onAccepted: {
         if (newTheme) {
-            themeModel.createNewTheme(nameField.text, authorField.text, emailField.text, websiteField.text);
+            themeModel.createNewTheme(nameField.text, authorField.text, emailField.text, licenseField.editText, websiteField.text);
             for (var i = 0; i < themeModel.themeList.count; ++i) {
                 if (nameField.text == themeModel.themeList.get(i).packageNameRole) {
                     themeSelector.currentIndex = i;

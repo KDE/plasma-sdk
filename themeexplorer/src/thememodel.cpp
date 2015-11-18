@@ -214,6 +214,11 @@ QString ThemeModel::email() const
     return m_theme->pluginInfo().email();
 }
 
+QString ThemeModel::license() const
+{
+    return m_theme->pluginInfo().license();
+}
+
 QString ThemeModel::website() const
 {
     return m_theme->pluginInfo().website();
