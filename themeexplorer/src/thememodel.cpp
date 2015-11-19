@@ -309,10 +309,10 @@ void ThemeModel::editThemeMetaData(const QString& name, const QString& author, c
     cg.sync();
 
     KConfigGroup cg2(&c, "ContrastEffect");
-    cg.writeEntry("enabled", "true");
-    cg.writeEntry("contrast", "0.2");
-    cg.writeEntry("intensity", "0.5");
-    cg.writeEntry("saturation", "1.7");
+    cg2.writeEntry("enabled", "true");
+    cg2.writeEntry("contrast", "0.2");
+    cg2.writeEntry("intensity", "2.0");
+    cg2.writeEntry("saturation", "1.7");
     cg2.sync();
 }
 
