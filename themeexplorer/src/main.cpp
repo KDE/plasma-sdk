@@ -20,6 +20,7 @@
 #include <QApplication>
 #include "themelistmodel.h"
 #include "thememodel.h"
+#include "coloreditor.h"
 
 #include <klocalizedstring.h>
 #include <qcommandlineparser.h>
@@ -66,9 +67,14 @@ int main(int argc, char **argv)
     obj->engine()->rootContext()->setContextProperty("commandlineArguments", parser.positionalArguments());
 
     qmlRegisterType<ThemeListModel>();
+    qmlRegisterType<ColorEditor>();
     ThemeModel *themeModel = new ThemeModel(obj->package());
     if (parser.isSet(themeOption)) {
         themeModel->setTheme(parser.value(themeOption));
+        obj->engine()->rootContext()->setContextProperty("commandlineTheme", parser.value(themeOption));
+    } else {
+        themeModel->setTheme(parser.value("default"));
+        obj->engine()->rootContext()->setContextProperty("commandlineTheme", "default");
     }
     obj->engine()->rootContext()->setContextProperty("themeModel", QVariant::fromValue(themeModel));
 

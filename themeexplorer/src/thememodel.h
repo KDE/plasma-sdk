@@ -31,6 +31,7 @@ namespace Plasma {
 }
 
 class ThemeListModel;
+class ColorEditor;
 
 class ThemeModel : public QAbstractListModel
 {
@@ -38,7 +39,14 @@ class ThemeModel : public QAbstractListModel
 
     Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
     Q_PROPERTY(ThemeListModel *themeList READ themeList CONSTANT)
+    Q_PROPERTY(ColorEditor *colorEditor READ colorEditor CONSTANT)
 
+    Q_PROPERTY(QString author READ author NOTIFY themeChanged)
+    Q_PROPERTY(QString email READ email NOTIFY themeChanged)
+    Q_PROPERTY(QString license READ license NOTIFY themeChanged)
+    Q_PROPERTY(QString website READ website NOTIFY themeChanged)
+
+    Q_PROPERTY(QString themeFolder READ themeFolder NOTIFY themeChanged)
 public:
     enum Roles {
         ImagePath,
@@ -55,6 +63,7 @@ public:
     ~ThemeModel();
 
     ThemeListModel *themeList();
+    ColorEditor *colorEditor();
 
     virtual QHash<int, QByteArray> roleNames() const;
     virtual int rowCount(const QModelIndex &parent) const;
@@ -63,9 +72,18 @@ public:
     void setTheme(const QString &theme);
     QString theme() const;
 
+    QString author() const;
+    QString email() const;
+    QString license() const;
+    QString website() const;
+
     void load();
 
     Q_INVOKABLE void editElement(const QString& imagePath);
+    Q_INVOKABLE void editThemeMetaData(const QString& name, const QString& author, const QString& email, const QString &license, const QString& website);
+    Q_INVOKABLE void createNewTheme(const QString& name, const QString& author, const QString& email, const QString &license, const QString& website);
+
+    QString themeFolder();
 
 Q_SIGNALS:
     void themeChanged();
@@ -81,6 +99,7 @@ private:
     KPackage::Package m_package;
     QJsonDocument m_jsonDoc;
     ThemeListModel *m_themeListModel;
+    ColorEditor *m_colorEditor;
 };
 
 #endif // THEMEMODEL_H

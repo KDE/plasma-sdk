@@ -49,6 +49,7 @@ public:
 class ThemeListModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
 public:
     enum { PackageNameRole = Qt::UserRole,
            PackageDescriptionRole = Qt::UserRole + 1,
@@ -66,8 +67,15 @@ public:
     QModelIndex indexOf(const QString &path) const;
     void reload();
     void clearThemeList();
+    int count() const
+    {
+        return rowCount();
+    }
 
     Q_INVOKABLE QVariantMap get(int index) const;
+
+Q_SIGNALS:
+    void countChanged();
 
 private:
     QHash<int, QByteArray> m_roleNames;

@@ -34,6 +34,22 @@ ApplicationWindow {
     toolBar: ToolBar {
         RowLayout {
             anchors.fill: parent
+            ToolButton {
+                text: i18n("New Theme...")
+                iconName: "document-new"
+                onClicked: {
+                    if (!root.metadataEditor) {
+                        root.metadataEditor = metadataEditorComponent.createObject(root);
+                    }
+                    root.metadataEditor.newTheme = true;
+                    root.metadataEditor.name = "";
+                    root.metadataEditor.author = "";
+                    root.metadataEditor.email = "";
+                    root.metadataEditor.license = "LGPL 2.1+";
+                    root.metadataEditor.website = "";
+                    root.metadataEditor.open();
+                }
+            }
             Label {
                 text: i18n("Theme:")
             }
@@ -46,9 +62,39 @@ ApplicationWindow {
                     themeModel.theme = themeModel.themeList.get(currentIndex).packageNameRole;
                 }
             }
-            CheckBox {
-                id: showMarginsCheckBox
-                text: i18n("Show Margins")
+            ToolButton {
+                text: i18n("Open Folder")
+                iconName: "document-open-folder"
+                onClicked: Qt.openUrlExternally(themeModel.themeFolder);
+            }
+            ToolButton {
+                text: i18n("Edit Metadata...")
+                iconName: "configure"
+                enabled: view.currentItem.modelData.isWritable
+                onClicked: {
+                    if (!root.metadataEditor) {
+                        root.metadataEditor = metadataEditorComponent.createObject(root);
+                    }
+                    root.metadataEditor.newTheme = false;
+                    root.metadataEditor.name = themeModel.theme;
+                    root.metadataEditor.author = themeModel.author;
+                    root.metadataEditor.email = themeModel.email;
+                    root.metadataEditor.license = themeModel.license;
+                    root.metadataEditor.website = themeModel.website;
+                    root.metadataEditor.open();
+                }
+            }
+            ToolButton {
+                text: i18n("Edit Colors...")
+                iconName: "color"
+                enabled: view.currentItem.modelData.isWritable
+                onClicked: {
+                    if (!root.colorEditor) {
+                        root.colorEditor = colorEditorComponent.createObject(root);
+                    }
+
+                    root.colorEditor.open();
+                }
             }
             Item {
                 Layout.fillWidth: true
@@ -57,7 +103,7 @@ ApplicationWindow {
             ToolButton {
                 text: i18n("Help")
                 iconName: "help-contents"
-                onClicked: Qt.openUrlExternally("https://techbase.kde.org/Development/Tutorials/Plasma4/Theme");
+                onClicked: Qt.openUrlExternally("https://techbase.kde.org/Development/Tutorials/Plasma5/ThemeDetails");
             }
             TextField {
                 placeholderText: i18n("Search...")
@@ -66,11 +112,28 @@ ApplicationWindow {
         }
     }
 
+    property QtObject metadataEditor
+    Component {
+        id: metadataEditorComponent
+        MetadataEditor {}
+    }
+    property QtObject colorEditor
+    Component {
+        id: colorEditorComponent
+        ColorEditor {}
+    }
+
     Timer {
         running: true
         interval: 200
         onTriggered: {
             themeSelector.model = themeModel.themeList
+            for (var i = 0; i < themeModel.themeList.count; ++i) {
+                if (commandlineTheme == themeModel.themeList.get(i).packageNameRole) {
+                    themeSelector.currentIndex = i;
+                    break;
+                }
+            }
         }
     }
     SystemPalette {
@@ -144,10 +207,24 @@ ApplicationWindow {
             right: parent.right
         }
         width: root.width / 3
+        Rectangle {
+            width: 1
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+            }
+            color: palette.highlight
+        }
         ColumnLayout {
             anchors {
                 fill: parent
                 margins: units.gridUnit
+            }
+            Label {
+                Layout.fillWidth: true
+                visible: !view.currentItem.modelData.isWritable
+                text: i18n("This is a readonly, system wide installed theme")
+                wrapMode: Text.WordWrap
             }
             Label {
                 Layout.fillWidth: true
@@ -178,6 +255,10 @@ ApplicationWindow {
                 Layout.fillWidth: true
                 text: view.currentItem.modelData.usesFallback ? i18n("Missing from this theme") : i18n("Present in this theme")
                 wrapMode: Text.WordWrap
+            }
+            CheckBox {
+                id: showMarginsCheckBox
+                text: i18n("Show Margins")
             }
             Button {
                 text: view.currentItem.modelData.usesFallback ? i18n("Create with Editor...") : i18n("Open In Editor...")
