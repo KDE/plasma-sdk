@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Battery & Brightness
+Name[ast]=Batería y &rellumu
 Name[ca]=Bateria i lluminositat
 Name[ca@valencia]=Bateria i lluminositat
 Name[de]=Akku & Bildschirmhelligkeit
@@ -25,6 +26,7 @@ Name[uk]=Акумулятор і яскравість дисплея
 Name[x-test]=xxBattery & Brightnessxx
 Name[zh_CN]=电池和亮度
 Comment=See the power status of your battery
+Comment[ast]=Mira l'estáu d'enerxía de la to batería
 Comment[ca]=Vegeu l'estat d'energia de la bateria
 Comment[ca@valencia]=Vegeu l'estat d'energia de la bateria
 Comment[de]=Zeigt den Ladestatus des Akkus an
@@ -51,6 +53,7 @@ Comment[x-test]=xxSee the power status of your batteryxx
 Comment[zh_CN]=查看电池电源的状态
 Encoding=UTF-8
 Keywords=Power Management;Battery;System;Energy;
+Keywords[ast]=Xestión d'enerxía;Batería;Sistema;Enerxía;
 Keywords[ca]=Sistema de gestió d'energia;Bateria;Sistema;Energia;
 Keywords[ca@valencia]=Sistema de gestió d'energia;Bateria;Sistema;Energia;
 Keywords[de]=Energieverwaltungssystem;Akku;System;Energie;

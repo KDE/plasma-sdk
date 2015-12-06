@@ -26,6 +26,7 @@ Comment[x-test]=xxAccess hidden applications minimized in the system trayxx
 Comment[zh_CN]=访问在系统托盘中最小化隐藏的应用程序
 Encoding=UTF-8
 Name=System Tray
+Name[ast]=Bandexa del sistema
 Name[ca]=Safata del sistema
 Name[ca@valencia]=Safata del sistema
 Name[da]=Statusområde
