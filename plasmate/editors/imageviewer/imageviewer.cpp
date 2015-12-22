@@ -87,5 +87,4 @@ const QUrl ImageViewer::imagePath()
     return m_image;
 }
 
-#include "imageviewer.moc"
 

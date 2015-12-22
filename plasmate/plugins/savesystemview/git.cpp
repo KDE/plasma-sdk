@@ -220,5 +220,4 @@ bool Git::newSavePoint(const QString &commitMessage, bool saveDocuments)
 }
 
 
-#include "git.moc"
 

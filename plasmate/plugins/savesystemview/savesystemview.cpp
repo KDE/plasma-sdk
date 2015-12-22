@@ -93,5 +93,4 @@ void SaveSystemView::projectOpened(KDevelop::IProject *project)
     QMetaObject::invokeMethod(object, "push", Q_ARG(QVariant, initialItem));
 }
 
-#include "savesystemview.moc"
 

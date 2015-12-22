@@ -289,5 +289,4 @@ KConfigGroup WallpaperWidget::configGroup()
     return wallpaperConfig;
 }
 
-#include "wallpaperwidget.moc"
 

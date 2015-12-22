@@ -48,5 +48,4 @@ void ImageLoader::run()
     emit loadImage(m_image, m_size, image);
 }
 
-#include "imageloader.moc"
 
