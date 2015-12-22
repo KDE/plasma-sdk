@@ -36,6 +36,12 @@ if (NOT Qt5Test_FOUND)
     set(BUILD_TESTING OFF CACHE BOOL "Build the testing tree.")
 endif()
 
+find_package(KDevPlatform 4.90.90)
+set_package_properties(KDevPlatform PROPERTIES
+    PURPOSE "Required for plasmate"
+    TYPE OPTIONAL
+)
+
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0)
 
 include(KDEInstallDirs)
@@ -56,7 +62,7 @@ endif()
 
 # Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
 find_package(KF5 REQUIRED COMPONENTS
-    Archive Completion Config ConfigWidgets CoreAddons DBusAddons Declarative I18n IconThemes
+    Archive Completion Config ConfigWidgets CoreAddons DBusAddons Declarative I18n IconThemes ItemModels
     KIO NewStuff Parts Plasma PlasmaQuick Service TextEditor WidgetsAddons XmlGui WindowSystem)
 
 #########################################################################
@@ -66,17 +72,14 @@ add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FROM_BYTEARRAY -DQT_NO_KEYWORDS)
 
-option(PLASMATE_BUILD_WITH_KDEVPLATFORM "Build the plasmate repository with KDevPlatform Support" OFF)
-message("Plasmate depends on Kdevplatform. So since Kdevplatform has not been released yes, Plasmate's build is being disabled by default for the time being.")
-message("Please pass -DPLASMATE_BUILD_WITH_KDEVPLATFORM=ON in order to build the Plasmate")
-
 add_subdirectory(cuttlefish)
 add_subdirectory(engineexplorer)
 add_subdirectory(plasmoidviewer)
 add_subdirectory(themeexplorer)
 #add_subdirectory(remote-widgets-browser)
 #add_subdirectory(wallpaperviewer)
-if(PLASMATE_BUILD_WITH_KDEVPLATFORM)
+if (KDevPlatform_FOUND)
     add_subdirectory(plasmate)
 endif()
 
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

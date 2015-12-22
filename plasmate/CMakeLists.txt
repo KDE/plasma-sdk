@@ -11,16 +11,9 @@ add_feature_info(QT_QTWEBKIT_FOUND "QtWebKit" "Opensource web browser engine" "h
 find_program(GIT_EXECUTABLE_FOUND git)
 add_feature_info(GIT_EXECUTABLE_FOUND "Git" "Distributed Revision Control System" "http://git-scm.com/" FALSE "" "Runtime dependency needed to use the TimeLine feature.")
 
-set( KDEVELOP_VERSION_MAJOR 4 )
-set( KDEVELOP_VERSION_MINOR 90 )
-set( KDEVELOP_VERSION_PATCH 60 )
-# KDevplatform dependency version
-set( KDEVPLATFORM_VERSION "1.${KDEVELOP_VERSION_MINOR}.${KDEVELOP_VERSION_PATCH}" )
-
-find_package(KDevPlatform ${KDEVPLATFORM_VERSION} REQUIRED)
-
 find_package(KF5 REQUIRED COMPONENTS
-    KDELibs4Support)
+    KDELibs4Support
+)
 
 #install( FILES previewer/windowswitcher/thumbnails/konqueror.png
 #previewer/windowswitcher/thumbnails/kmail.png

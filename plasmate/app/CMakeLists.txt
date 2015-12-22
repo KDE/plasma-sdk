@@ -31,8 +31,8 @@ target_link_libraries(plasmate
                       KF5::PlasmaQuick
                       KF5::Archive
                       #${KDEPIMLIBS_KPIMUTILS_LIBS}
-                      ${KDEVPLATFORM_INTERFACES_LIBRARIES}
-                      ${KDEVPLATFORM_SHELL_LIBRARIES}
+                      KDev::Interfaces
+                      KDev::Shell
 )
 
 install(TARGETS plasmate ${INSTALL_TARGETS_DEFAULT_ARGS})

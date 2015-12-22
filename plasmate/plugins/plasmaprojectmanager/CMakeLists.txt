@@ -6,9 +6,9 @@ set(kdevplasmamanager_SRCS
 
 add_library(kdevplasmamanager MODULE ${kdevplasmamanager_SRCS})
 target_link_libraries(kdevplasmamanager
-    KF5::KIOWidgets
     KDev::Project
     KDev::Util
+    KF5::KIOWidgets
     KF5::Plasma
 )
 
