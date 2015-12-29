@@ -34,6 +34,7 @@ Item {
 
     property int iconSize: units.iconSizes.large
     property bool hoveredHighlight: false
+    property bool darkScheme: false
 
     id: cuttlefish
     objectName: "cuttlefish"
@@ -53,44 +54,47 @@ Item {
             return sizes[ix];
     }
 
-    Rectangle {
-
-        color: theme.backgroundColor
+    PlasmaCore.ColorScope {
         anchors.fill: parent
-    }
-
-    GridLayout {
-
-        columns: 2
-        anchors.fill: parent
-        rowSpacing: - Math.round(units.gridUnit / 20)
-
-        Tools {
-            Layout.columnSpan: 2
-            Layout.fillWidth: true
-            Layout.preferredHeight: units.gridUnit * 2
+        colorGroup: darkScheme ? PlasmaCore.Theme.ComplementaryColorGroup : PlasmaCore.Theme.NormalColorGroup
+        Rectangle {
+            color: PlasmaCore.ColorScope.backgroundColor
+            anchors.fill: parent
         }
 
-        PlasmaExtras.ScrollArea {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            IconGrid {
-                id: iconGrid
-                anchors.fill: parent
+        GridLayout {
 
-                footer: SvgGrid {
-                    id: svgGrid
-                    //anchors.fill: parent
-                    interactive: false
+            columns: 2
+            anchors.fill: parent
+            rowSpacing: - Math.round(units.gridUnit / 20)
+
+            Tools {
+                Layout.columnSpan: 2
+                Layout.fillWidth: true
+                Layout.preferredHeight: units.gridUnit * 2
+            }
+
+            PlasmaExtras.ScrollArea {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                IconGrid {
+                    id: iconGrid
+                    anchors.fill: parent
+
+                    footer: SvgGrid {
+                        id: svgGrid
+                        //anchors.fill: parent
+                        interactive: false
+
+                    }
 
                 }
-
             }
-        }
-        Preview {
-            id: preview
-            Layout.preferredWidth: Math.max(parent.width / 4, units.gridUnit * 12)
-            Layout.fillHeight: true
+            Preview {
+                id: preview
+                Layout.preferredWidth: Math.max(parent.width / 4, units.gridUnit * 12)
+                Layout.fillHeight: true
+            }
         }
     }
     states: [

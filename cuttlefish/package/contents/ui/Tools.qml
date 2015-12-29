@@ -125,6 +125,12 @@ PlasmaComponents.ToolBar {
             }
         }
 
+        PlasmaComponents.CheckBox {
+            id: colorContextCheckbox
+            text: i18n("Inverted Color Scheme")
+            onCheckedChanged: darkScheme = checked
+        }
+
         Item {
             Layout.preferredWidth: preview.width
         }

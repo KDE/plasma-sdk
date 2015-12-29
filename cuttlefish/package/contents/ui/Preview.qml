@@ -32,7 +32,7 @@ Rectangle {
 
     id: preview
 
-    color: theme.backgroundColor
+    color: PlasmaCore.ColorScope.backgroundColor
 
 //     Rectangle {
 //         anchors.fill: parent
@@ -92,26 +92,31 @@ Rectangle {
 
             PlasmaCore.IconItem {
                 source: iconName
+                colorGroup: PlasmaCore.ColorScope.colorGroup
                 Layout.preferredWidth: indexToSize(0)
                 Layout.preferredHeight: indexToSize(0)
             }
             PlasmaCore.IconItem {
                 source: iconName
+                colorGroup: PlasmaCore.ColorScope.colorGroup
                 Layout.preferredWidth: indexToSize(1)
                 Layout.preferredHeight: indexToSize(1)
             }
             PlasmaCore.IconItem {
                 source: iconName
+                colorGroup: PlasmaCore.ColorScope.colorGroup
                 Layout.preferredWidth: indexToSize(2)
                 Layout.preferredHeight: indexToSize(2)
             }
             PlasmaCore.IconItem {
                 source: iconName
+                colorGroup: PlasmaCore.ColorScope.colorGroup
                 Layout.preferredWidth: indexToSize(3)
                 Layout.preferredHeight: indexToSize(3)
             }
             PlasmaCore.IconItem {
                 source: iconName
+                colorGroup: PlasmaCore.ColorScope.colorGroup
                 Layout.preferredWidth: indexToSize(4)
                 Layout.preferredHeight: indexToSize(4)
             }
@@ -132,6 +137,7 @@ Rectangle {
         */
         PlasmaCore.IconItem {
             source: iconName
+            colorGroup: PlasmaCore.ColorScope.colorGroup
             Layout.fillHeight: false
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: parent.width
@@ -236,7 +242,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore\n\
                 clipboard(code);
             }
         }
-        CheckBox {
+        PlasmaComponents.CheckBox {
             text: i18n("Update preview on hover")
             onCheckedChanged: hoveredHighlight = checked
         }

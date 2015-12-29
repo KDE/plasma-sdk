@@ -64,6 +64,7 @@ MouseArea {
         width: iconSize
         height: width
         source: iconName
+        colorGroup: PlasmaCore.ColorScope.colorGroup
         anchors {
             top: parent.top
             horizontalCenter: parent.horizontalCenter
