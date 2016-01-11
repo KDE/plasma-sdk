@@ -62,12 +62,14 @@ QObject *CuttleFishPlugin::createView(KTextEditor::MainWindow *mainWindow)
 void CuttleFishPlugin::documentCreated(KTextEditor::Document* document)
 {
     connect(document, &KTextEditor::Document::viewCreated,
-        [this](KTextEditor::Document *document, KTextEditor::View *view) {
-            Q_UNUSED(document);
-            connect(view, &KTextEditor::View::contextMenuAboutToShow,
-                    this, &CuttleFishPlugin::contextMenuAboutToShow);
-        }
-    );
+            this, &CuttleFishPlugin::viewCreated);
+}
+
+void CuttleFishPlugin::viewCreated(KTextEditor::Document *document, KTextEditor::View *view)
+{
+     Q_UNUSED(document);
+     connect(view, &KTextEditor::View::contextMenuAboutToShow,
+             this, &CuttleFishPlugin::contextMenuAboutToShow);
 }
 
 void CuttleFishPlugin::contextMenuAboutToShow(KTextEditor::View* view, QMenu* menu)

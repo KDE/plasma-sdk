@@ -46,6 +46,7 @@ public:
 private Q_SLOTS:
     void contextMenuAboutToShow (KTextEditor::View *view, QMenu *menu);
     void documentCreated(KTextEditor::Document *document);
+    void viewCreated(KTextEditor::Document *document, KTextEditor::View *view);
 
 private:
     QList<QMenu*> m_decorated;
