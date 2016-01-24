@@ -55,7 +55,6 @@ Comment[uk]=Перегляньте стан заряду акумулятора
 Comment[x-test]=xxSee the power status of your batteryxx
 Comment[zh_CN]=查看电池电源的状态
 Comment[zh_TW]=查看您的電池的電源狀態
-Encoding=UTF-8
 Keywords=Power Management;Battery;System;Energy;
 Keywords[ca]=Sistema de gestió d'energia;Bateria;Sistema;Energia;
 Keywords[ca@valencia]=Sistema de gestió d'energia;Bateria;Sistema;Energia;

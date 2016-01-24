@@ -87,7 +87,6 @@ GenericName[uk]=Навігатор піктограмами
 GenericName[x-test]=xxIcon Browserxx
 GenericName[zh_CN]=图标浏览器
 GenericName[zh_TW]=圖示瀏覽器
-Encoding=UTF-8
 Type=Service
 Icon=internet-web-browser
 X-KDE-PluginInfo-Author=Sebastian Kügler
