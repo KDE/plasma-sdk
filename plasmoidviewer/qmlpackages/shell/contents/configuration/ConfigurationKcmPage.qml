@@ -1,5 +1,5 @@
 /*
- *  Copyright 2013 Marco Martin <mart@kde.org>
+ *  Copyright 2015 Marco Martin <mart@kde.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,35 +18,42 @@
 
 import QtQuick 2.0
 import QtQuick.Controls 1.0 as QtControls
-import QtQuick.Layouts 1.0
-import org.kde.kquickcontrols 2.0
+import org.kde.plasma.core 2.0 as PlasmaCore
 
 Item {
-    id: root
-    width: childrenRect.width
-    height: childrenRect.height
+    id: page
+
+    width: parent.width
+    height: parent.height
+
+//BEGIN properties
+    property QtObject kcm
 
     signal configurationChanged
+//END properties
+
+//BEGIN functions
     function saveConfig() {
-        plasmoid.globalShortcut = button.keySequence
+        kcm.save()
+    }
+//END functions
+
+//BEGIN connections
+    onKcmChanged: {
+        kcm.mainUi.parent = page;
+        kcm.mainUi.anchors.fill = page;
+        kcm.load();
     }
 
-    ColumnLayout {
-        anchors {
-            left: parent.left
-            right: parent.right
-        }
-        QtControls.Label {
-            Layout.fillWidth: true
-            text: i18nd("plasma_shell_org.kde.plasma.desktop", "This shortcut will activate the applet: it will give the keyboard focus to it, and if the applet has a popup (such as the start menu), the popup will be open.")
-            wrapMode: Text.WordWrap
-        }
-        KeySequenceItem {
-            id: button
-            keySequence: plasmoid.globalShortcut
-            onKeySequenceChanged: {
-                root.configurationChanged();
+    Connections {
+        target: kcm
+        onNeedsSaveChanged: {
+            if (kcm.needsSave) {
+                page.configurationChanged();
             }
         }
     }
+//END connections
+
+
 }
