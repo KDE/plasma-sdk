@@ -130,5 +130,28 @@ Item {
                 onClicked: location(PlasmaCore.Types.RightEdge)
             }
         }
+
+        PlasmaComponents.Button {
+            id: configButton
+            iconSource: "configure"
+            onClicked: {
+                var applet = containment.applets[0];
+                if (applet) {
+                    var action = applet.action('configure');
+                    if (action) {
+                        action.trigger();
+                    }
+                }
+            }
+        }
+        PlasmaComponents.Button {
+            text: i18n("Configure Containment")
+            onClicked: {
+                var action = containment.action('configure');
+                if (action) {
+                    action.trigger();
+                }
+            }
+        }
     }
 }
