@@ -19,11 +19,11 @@
 #ifndef VIEW_H
 #define VIEW_H
 
-#include "privateheaders/view.h"
+#include "privateheaders/containmentview.h"
 
 class ViewerCorona;
 
-class View : public PlasmaQuick::View
+class View : public PlasmaQuick::ContainmentView
 {
     Q_OBJECT
     Q_PROPERTY(bool konsoleVisible READ konsoleVisible CONSTANT);

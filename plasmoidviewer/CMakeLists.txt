@@ -12,6 +12,7 @@ target_link_libraries(plasmoidviewer
     KF5::DBusAddons
     KF5::Plasma
     KF5::PlasmaQuick
+    KF5::QuickAddons
     KF5::I18n
     KF5::ConfigCore
     KF5::ConfigWidgets

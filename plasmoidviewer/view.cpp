@@ -60,7 +60,7 @@ private:
 };
 
 View::View(ViewerCorona *cor, bool konsoleVisible, QWindow *parent)
-    : PlasmaQuick::View(cor, parent)
+    : PlasmaQuick::ContainmentView(cor, parent)
 {
     cor->setView(this);
     m_konsoleVisible = konsoleVisible;
