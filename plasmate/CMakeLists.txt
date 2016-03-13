@@ -13,6 +13,8 @@ add_feature_info(GIT_EXECUTABLE_FOUND "Git" "Distributed Revision Control System
 
 find_package(KF5 REQUIRED COMPONENTS
     KDELibs4Support
+    NewStuff
+    Parts
 )
 
 #install( FILES previewer/windowswitcher/thumbnails/konqueror.png

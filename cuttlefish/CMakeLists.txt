@@ -2,7 +2,9 @@ project(cuttlefish)
 add_definitions(-DTRANSLATION_DOMAIN=\"cuttlefish\")
 
 add_subdirectory(src)
-add_subdirectory(autotests)
+if(BUILD_TESTING)
+    add_subdirectory(autotests)
+endif()
 
 
 plasma_install_package(package org.kde.plasma.cuttlefish packages package)

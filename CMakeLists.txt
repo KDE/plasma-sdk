@@ -74,7 +74,7 @@ endif()
 # Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
 find_package(KF5 REQUIRED COMPONENTS
     Archive Completion Config ConfigWidgets CoreAddons DBusAddons Declarative I18n IconThemes ItemModels
-    KIO NewStuff Parts Plasma PlasmaQuick Service TextEditor WidgetsAddons XmlGui WindowSystem)
+    KIO Plasma PlasmaQuick Service TextEditor WidgetsAddons XmlGui WindowSystem)
 
 #########################################################################
 
