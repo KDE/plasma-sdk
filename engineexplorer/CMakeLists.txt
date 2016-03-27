@@ -6,7 +6,7 @@ set(plasmaengineexplorer_SRCS
     modelviewer.cpp
 )
 
-qt5_wrap_ui(plasmaengineexplorer_SRCS engineexplorer.ui serviceviewer.ui)
+ki18n_wrap_ui(plasmaengineexplorer_SRCS engineexplorer.ui serviceviewer.ui)
 
 add_executable(plasmaengineexplorer ${plasmaengineexplorer_SRCS})
 target_compile_definitions(plasmaengineexplorer PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
