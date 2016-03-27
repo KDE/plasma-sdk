@@ -66,6 +66,10 @@ void listEngines()
 
 int main(int argc, char **argv)
 {
+    QApplication app(argc, argv);
+
+    KLocalizedString::setApplicationDomain("plasmaengineexplorer");
+
     KAboutData aboutData("plasmaengineexplorer", i18n("Plasma Engine Explorer"),
                          version, i18n(description), KAboutLicense::GPL,
                          i18n("(c) 2006, The KDE Team"));
@@ -74,7 +78,7 @@ int main(int argc, char **argv)
                         "aseigo@kde.org");
     aboutData.setProgramIconName("plasma");
 
-    QApplication app(argc, argv);
+    KAboutData::setApplicationData(aboutData);
 
     QCommandLineParser parser;
     app.setApplicationVersion(version);
