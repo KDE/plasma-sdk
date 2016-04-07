@@ -4,19 +4,10 @@ set(kdevplasmamanager_SRCS
     ${packagehandler_SRCS}
 )
 
-add_library(kdevplasmamanager MODULE ${kdevplasmamanager_SRCS})
+kdevplatform_add_plugin(kdevplasmamanager JSON kdevplasmamanager.json SOURCES ${kdevplasmamanager_SRCS})
 target_link_libraries(kdevplasmamanager
     KDev::Project
     KDev::Util
     KF5::KIOWidgets
     KF5::Plasma
 )
-
-install(TARGETS kdevplasmamanager DESTINATION ${PLUGIN_INSTALL_DIR}/kdevplatform/${KDEV_PLUGIN_VERSION} )
-
-
-########### install files ###############
-
-configure_file(kdevplasmamanager.desktop.cmake ${CMAKE_CURRENT_BINARY_DIR}/kdevplasmamanager.desktop)
-kcoreaddons_desktop_to_json(kdevplasmamanager ${CMAKE_CURRENT_BINARY_DIR}/kdevplasmamanager.desktop)
-
