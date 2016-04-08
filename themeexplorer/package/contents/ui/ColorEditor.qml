@@ -334,7 +334,7 @@ Dialog {
                     rightMargin: units.smallSpacing
                 }
                 Button {
-                    text: i18n("Ok")
+                    text: i18n("OK")
                     onClicked: dialog.accept()
                     isDefault: true
                 }
