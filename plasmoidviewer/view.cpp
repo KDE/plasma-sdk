@@ -79,7 +79,7 @@ QString View::pluginFromPath(const QString &path) const
         return QString();
     }
 
-    QString metadataPath = dir.absoluteFilePath("metadata.desktop");
+    QString metadataPath = dir.absolutePath();
     if (!QFile(metadataPath).exists()) {
         return QString();
     } else {
@@ -102,7 +102,7 @@ void View::addApplet(const QString &applet)
     if (metadataPath.isEmpty()) {
         a = containment()->createApplet(applet);
     } else {
-        a = new Plasma::Applet(0, metadataPath);
+        a = Plasma::Applet::loadPlasmoid(metadataPath);
         containment()->addApplet(a);
     }
 
