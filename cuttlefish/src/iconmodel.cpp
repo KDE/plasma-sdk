@@ -352,9 +352,12 @@ void IconModel::load()
     m_data.clear();
     m_icons.clear();
     //sm_categories.clear();
-
-    const QString iconTheme = KIconLoader::global()->theme()->internalName();
-
+    QString iconTheme;
+    if (KIconLoader::global()) {
+        iconTheme = KIconLoader::global()->theme()->internalName();
+    } else {
+        return;
+    }
 //     qDebug() << "IconTHeme: " << KIconLoader::global()->theme()->internalName();
 //     qDebug() << "iconPath: " << QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "icons/"+iconTheme, QStandardPaths::LocateDirectory);
 
