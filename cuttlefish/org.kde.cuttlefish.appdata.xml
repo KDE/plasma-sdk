@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop">
+  <id>org.kde.cuttlefish.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <name>Cuttlefish</name>
+  <summary>Icon Previewer for Artists and Developers</summary>
+  <description>
+      <p>Cuttlefish allows artists and developers to preview and pick icons. Cuttlefish attempts to render the icons exactly as they would look drawn in the application. It allows to filter based on category and name. Cuttlefish is not a general-purpose tool, but geared towards artists' and developers' use-cases.<br />
+        Cutlefish also provides a plugin for Kate and KDevelop to be used as icon picker.
+    </p>
+  </description>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=plasma-sdk</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://www.kde.org/appstream-screenshots/org.kde.cuttlefish.png</image>
+    </screenshot>
+  </screenshots>
+  <project_group>KDE</project_group>
+  <provides>
+    <binary>cuttlefish</binary>
+  </provides>
+</component>
