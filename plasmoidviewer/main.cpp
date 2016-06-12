@@ -87,6 +87,12 @@ int main(int argc, char **argv)
     parser.addVersionOption();
     parser.process(app);
 
+    const QString applet = parser.value("applet");
+    if (applet.isEmpty()) {
+        qWarning() << "An applet name must be specified";
+        return 1;
+    }
+
     Plasma::Theme theme;
     if (parser.isSet("theme")) {
         theme.setUseGlobalSettings(false);
@@ -97,7 +103,7 @@ int main(int argc, char **argv)
 
     v->addContainment(parser.value("containment"));
     v->addFormFactor(parser.value("formfactor"));
-    v->addApplet(parser.value("applet"));
+    v->addApplet(applet);
     v->addLocation(parser.value("location"));
 
     if (parser.isSet("size")) {
