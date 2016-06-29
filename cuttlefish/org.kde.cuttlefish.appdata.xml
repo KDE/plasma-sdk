@@ -9,6 +9,7 @@
   <name xml:lang="da">Cuttlefish</name>
   <name xml:lang="de">Cuttlefish</name>
   <name xml:lang="es">Cuttlefish</name>
+  <name xml:lang="gl">Cuttlefish</name>
   <name xml:lang="nl">Cuttlefish</name>
   <name xml:lang="pl">Cuttlefish</name>
   <name xml:lang="pt">Cuttlefish</name>
@@ -21,6 +22,7 @@
   <summary xml:lang="ca-valencia">Vista prèvia de les icones pels artistes i desenvolupadors</summary>
   <summary xml:lang="de">Symbolvorschau für Künstler und Entwickler</summary>
   <summary xml:lang="es">Vista previa de iconos para artistas y desarrolladores</summary>
+  <summary xml:lang="gl">Visor de iconas para artistas e desenvolvedores</summary>
   <summary xml:lang="nl">Pictogramviewer voor kunstenaars en ontwikkelaars</summary>
   <summary xml:lang="pl">Podglądanie ikon dla artystów i programistów</summary>
   <summary xml:lang="pt">Antevisão de Ícones para Artistas e Programadores</summary>
@@ -35,6 +37,7 @@
     <p xml:lang="ca">El Cuttlefish permet als artistes i als desenvolupadors previsualitzar i seleccionar icones. El Cuttlefish intenta representar les icones exactament com es dibuixaran a l'aplicació. Permet filtrar segons la categoria i el nom. El Cuttlefish no és una eina de propòsit general, si no destinada als casos d'ús d'artistes i desenvolupadors. El Cuttlefish també proporciona un connector pel Kate i el KDevelop per ser usat com a selector d'icones.</p>
     <p xml:lang="ca-valencia">El Cuttlefish permet als artistes i als desenvolupadors previsualitzar i seleccionar icones. El Cuttlefish intenta representar les icones exactament com es dibuixaran a l'aplicació. Permet filtrar segons la categoria i el nom. El Cuttlefish no és una eina de propòsit general, si no destinada als casos d'ús d'artistes i desenvolupadors. El Cuttlefish també proporciona un connector pel Kate i el KDevelop per ser usat com a selector d'icones.</p>
     <p xml:lang="es">Cuttlefish permite a los artistas y a los desarrolladores obtener vistas previas de iconos y seleccionarlos. Cuttlefish trata de visualizar los iconos tal y como se verían en la aplicación. Permite filtrarlos por su categoría y por su nombre. Cuttlefish no es una herramienta de uso general, ya que está pensada para que la usen artistas y desarrolladores. Cuttlefish también proporciona un complemento para Kate y para KDevelop que se puede usar como selector de iconos.</p>
+    <p xml:lang="gl">Cuttlefish permite que artistas e desenvolvedores observen e seleccionen iconas. Cuttlefish intenta mostrar as iconas tal e como aparecerían nun programa. Permite filtrar por nome e por categoría. Cuttlefish non é unha ferramentas de uso xeral, senón que está pensada específicamente para casos de uso de artistas e desenvolvedores. Cuttlefish tamén fornece un complemento para usalo como selector de iconas en Kate e KDevelop.</p>
     <p xml:lang="nl">Cuttlefish biedt artiesten en ontwikkelaars om pictogrammen te kiezen en te bekijken. Cuttlefish probeert de pictogrammen exact weer te geven zoals ze er uit zouden zien in de toepassing. Het biedt filtering gebaseerd op categorie en naam. Cuttlefish is geen hulpmiddel voor algemeen gebruik, maar is toegespitst op gebruik door artiesten en ontwikkelaars. Cuttlefish biedt ook een plug-in voor Kate en KDevelop om te worden gebruikt als kiezer voor pictogrammen.</p>
     <p xml:lang="pl">Cuttlefish daje artystom i programistom podgląd i możliwość wyboru ikon. Cuttlefish wyświetla ikony dokładnie tak jak będą one wyświetlane w aplikacji. Umożliwia filtrowanie na podstawie kategorii i nazwy. Cuttlefish nie jest narzędziem ogólnego przeznaczenia, lecz przystosowanym do pracy artystów i programistów. Cuttlefish dostarcza także wtyczki dla Kate oraz KDevelop.</p>
     <p xml:lang="pt">O Cuttlefish permite aos artistas e programadores fazerem uma antevisão e selecção de ícones. O Cuttlefish tenta desenhar os ícones exactamente como iriam aparecer na aplicação. Permite filtrar com base na categoria e no nome. O Cuttlefish não é uma ferramenta de uso geral, mas destinada aos casos de uso dos artistas e programadores. O Cuttlefish também oferece um 'plugin' para o Kate e KDevelop para ser usado como selector de ícones.</p>
