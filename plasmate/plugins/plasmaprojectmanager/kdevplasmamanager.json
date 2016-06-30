@@ -38,7 +38,7 @@
             }
         ], 
         "Category": "Project Management", 
-        "Description": "Allow KDevPlatform to manage plasma projects", 
+        "Description": "Allow KDevPlatform to manage Plasma projects", 
         "Description[ca@valencia]": "Permet al KDevPlatform gestionar els projectes del Plasma", 
         "Description[ca]": "Permet al KDevPlatform gestionar els projectes del Plasma", 
         "Description[cs]": "Povolit KDevPlatform spravovat projekty Plasma", 
