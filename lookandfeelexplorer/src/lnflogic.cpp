@@ -42,7 +42,8 @@
 LnfLogic::LnfLogic(QObject *parent)
     : QObject(parent),
       m_themeName(QStringLiteral("org.kde.breeze.desktop")),
-      m_lnfListModel(new LnfListModel(this))
+      m_lnfListModel(new LnfListModel(this)),
+      m_needsSave(false)
 {
     m_package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/LookAndFeel"));
 }
@@ -77,7 +78,6 @@ void LnfLogic::createNewTheme(const QString &pluginName, const QString &name, co
 
 void LnfLogic::dumpPlasmaLayout(const QString &pluginName)
 {
-    //TODO: async and error management
     QDBusMessage message = QDBusMessage::createMethodCall("org.kde.plasmashell", "/PlasmaShell",
                                                      "org.kde.PlasmaShell", "dumpCurrentLayoutJS");
     QDBusPendingCall pcall = QDBusConnection::sessionBus().asyncCall(message);
@@ -94,7 +94,6 @@ void LnfLogic::dumpPlasmaLayout(const QString &pluginName)
         }
 
         const QString layout = msg.arguments().first().toString();
-        //TODO: error checking
         QDir themeDir(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1Literal("/plasma/look-and-feel/") % pluginName);
         if (!themeDir.mkpath("contents/layouts")) {
             qWarning() << "Impossible to create the layouts directory in the look and feel package";
@@ -161,12 +160,27 @@ void LnfLogic::dumpCurrentPlasmaLayout()
     dumpPlasmaLayout(m_themeName);
 }
 
-void LnfLogic::writeMetadata(const QString &key, const QString &value)
+void LnfLogic::save()
 {
     KConfig c(m_package.filePath("metadata"));
     KConfigGroup cg(&c, "Desktop Entry");
 
-    cg.writeEntry(key, value);
+    QHash<QString, QString>::const_iterator i;
+    for (i = m_tempMetadata.constBegin(); i != m_tempMetadata.constEnd(); ++i) {
+        cg.writeEntry(i.key(), i.value());
+    }
+    m_tempMetadata.clear();
+    m_needsSave = false;
+    if (m_performLayoutDump) {
+        dumpCurrentPlasmaLayout();
+        m_performLayoutDump = false;
+    }
+    if (m_performDefaultsDump) {
+        dumpDefaultsConfigFile(m_themeName);
+        m_performDefaultsDump = false;
+    }
+
+    emit needsSaveChanged();
 
     //HACK
     m_package.setPath(QString());
@@ -199,35 +213,66 @@ void LnfLogic::setTheme(const QString& theme)
         return;
     }
 
+    m_tempMetadata.clear();
     m_themeName = theme;
     m_package.setPath(theme);
+    m_needsSave = false;
+    emit needsSaveChanged();
     emit themeChanged();
+    emit nameChanged();
+    emit commentChanged();
+    emit authorChanged();
+    emit emailChanged();
+    emit versionChanged();
+    emit websiteChanged();
+    emit licenseChanged();
 }
 
 QString LnfLogic::name() const
 {
+    if (m_tempMetadata.contains(QStringLiteral("Name"))) {
+        return m_tempMetadata.value(QStringLiteral("Name"));
+    }
     return m_package.metadata().name();
 }
 
 void LnfLogic::setName(const QString &name)
 {
-    writeMetadata("Name", name);
-    emit themeChanged();
+    if (LnfLogic::name() == name) {
+        return;
+    }
+
+    m_tempMetadata[QStringLiteral("Name")] = name;
+    m_needsSave = true;
+    emit needsSaveChanged();
+    emit nameChanged();
 }
 
 QString LnfLogic::comment() const
 {
+    if (m_tempMetadata.contains(QStringLiteral("Comment"))) {
+        return m_tempMetadata.value(QStringLiteral("Comment"));
+    }
     return m_package.metadata().description();
 }
 
 void LnfLogic::setComment(const QString &comment)
 {
-    writeMetadata("Comment", comment);
-    emit themeChanged();
+    if (LnfLogic::comment() == comment) {
+        return;
+    }
+
+    m_tempMetadata[QStringLiteral("Comment")] = comment;
+    m_needsSave = true;
+    emit needsSaveChanged();
+    emit commentChanged();
 }
 
 QString LnfLogic::author() const
 {
+    if (m_tempMetadata.contains(QStringLiteral("X-KDE-PluginInfo-Author"))) {
+        return m_tempMetadata.value(QStringLiteral("X-KDE-PluginInfo-Author"));
+    }
     if (m_package.metadata().authors().isEmpty()) {
         return QString();
     }
@@ -236,12 +281,21 @@ QString LnfLogic::author() const
 
 void LnfLogic::setAuthor(const QString &author)
 {
-    writeMetadata("X-KDE-PluginInfo-Author", author);
-    emit themeChanged();
+    if (LnfLogic::author() == author) {
+        return;
+    }
+
+    m_tempMetadata[QStringLiteral("X-KDE-PluginInfo-Author")] = author;
+    m_needsSave = true;
+    emit needsSaveChanged();
+    emit authorChanged();
 }
 
 QString LnfLogic::email() const
 {
+    if (m_tempMetadata.contains(QStringLiteral("X-KDE-PluginInfo-Email"))) {
+        return m_tempMetadata.value(QStringLiteral("X-KDE-PluginInfo-Email"));
+    }
     if (m_package.metadata().authors().isEmpty()) {
         return QString();
     }
@@ -250,41 +304,113 @@ QString LnfLogic::email() const
 
 void LnfLogic::setEmail(const QString &email)
 {
-    writeMetadata("X-KDE-PluginInfo-Email", email);
-    emit themeChanged();
+    if (LnfLogic::email() == email) {
+        return;
+    }
+
+    m_tempMetadata[QStringLiteral("X-KDE-PluginInfo-Email")] = email;
+    m_needsSave = true;
+    emit needsSaveChanged();
+    emit emailChanged();
 }
 
 QString LnfLogic::version() const
 {
+    if (m_tempMetadata.contains(QStringLiteral("X-KDE-PluginInfo-Version"))) {
+        return m_tempMetadata.value(QStringLiteral("X-KDE-PluginInfo-Version"));
+    }
     return m_package.metadata().version();
 }
 
 void LnfLogic::setVersion(const QString &version)
 {
-    writeMetadata("X-KDE-PluginInfo-Version", version);
-    emit themeChanged();
+    if (LnfLogic::version() == version) {
+        return;
+    }
+
+    m_tempMetadata[QStringLiteral("X-KDE-PluginInfo-Version")] = version;
+    m_needsSave = true;
+    emit needsSaveChanged();
+    emit versionChanged();
 }
 
 QString LnfLogic::website() const
 {
+    if (m_tempMetadata.contains(QStringLiteral("X-KDE-PluginInfo-Website"))) {
+        return m_tempMetadata.value(QStringLiteral("X-KDE-PluginInfo-Website"));
+    }
     return m_package.metadata().website();
 }
 
 void LnfLogic::setWebsite(const QString &website)
 {
-    writeMetadata("X-KDE-PluginInfo-Website", website);
-    emit themeChanged();
+    if (LnfLogic::website() == website) {
+        return;
+    }
+
+    m_tempMetadata[QStringLiteral("X-KDE-PluginInfo-Website")] = website;
+    m_needsSave = true;
+    emit needsSaveChanged();
+    emit websiteChanged();
 }
 
 QString LnfLogic::license() const
 {
+    if (m_tempMetadata.contains(QStringLiteral("X-KDE-PluginInfo-License"))) {
+        return m_tempMetadata.value(QStringLiteral("X-KDE-PluginInfo-License"));
+    }
     return m_package.metadata().license();
 }
 
 void LnfLogic::setLicense(const QString &license)
 {
-    writeMetadata("X-KDE-PluginInfo-License", license);
-    emit themeChanged();
+    if (LnfLogic::license() == license) {
+        return;
+    }
+
+    m_tempMetadata[QStringLiteral("X-KDE-PluginInfo-License")] = license;
+    m_needsSave = true;
+    emit needsSaveChanged();
+    emit licenseChanged();
+}
+
+bool LnfLogic::performLayoutDump() const
+{
+    return m_performLayoutDump;
+}
+
+void LnfLogic::setPerformLayoutDump(bool dump)
+{
+    if (m_performLayoutDump == dump) {
+        return;
+    }
+
+    m_needsSave = true;
+    emit needsSaveChanged();
+    m_performLayoutDump = dump;
+    emit performLayoutDumpChanged();
+}
+
+bool LnfLogic::performDefaultsDump() const
+{
+    return m_performDefaultsDump;
+}
+
+void LnfLogic::setPerformDefaultsDump(bool dump)
+{
+    if (m_performDefaultsDump == dump) {
+        return;
+    }
+
+    m_needsSave = true;
+    emit needsSaveChanged();
+    m_performDefaultsDump = dump;
+    emit performDefaultsDumpChanged();
+}
+
+bool LnfLogic::needsSave()
+{
+    return m_needsSave;
 }
 
 QString LnfLogic::thumbnailPath() const

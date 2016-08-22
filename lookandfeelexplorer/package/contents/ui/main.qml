@@ -157,13 +157,13 @@ Kirigami.AbstractApplicationWindow {
             }
             Button {
                 text: i18n("Layout from current Plasma setup")
-                onClicked: lnfLogic.dumpCurrentPlasmaLayout();
+                onClicked: lnfLogic.performLayoutDump = true
                 Layout.columnSpan: 2
                 Layout.alignment: Qt.AlignRight
             }
             Button {
                 text: i18n("Defaults from current setup")
-                onClicked: lnfLogic.dumpDefaultsConfigFile(lnfLogic.theme);
+                onClicked: lnfLogic.performDefaultsDump = true
                 Layout.columnSpan: 2
                 Layout.alignment: Qt.AlignRight
             }
@@ -212,5 +212,14 @@ Kirigami.AbstractApplicationWindow {
                 }
             }
         }
+    }
+    Button {
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+        }
+        text: i18n("Save")
+        enabled: lnfLogic.needsSave
+        onClicked: lnfLogic.save()
     }
 }

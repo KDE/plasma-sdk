@@ -18,12 +18,15 @@
  */
 
 import QtQuick 2.3
+import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.2
+import org.kde.kirigami 1.0 as Kirigami
 
 TextField {
     id: field
     property string key
     text: lnfLogic[key]
+    Layout.minimumWidth: Kirigami.Units.gridUnit * 15
     onAccepted: {
         lnfLogic.name = text;
         timer.running = false;
