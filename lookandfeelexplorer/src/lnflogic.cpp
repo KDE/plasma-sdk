@@ -450,6 +450,23 @@ void LnfLogic::processThumbnail(const QString &path)
 
     image.save(&imageFile, "PNG"); // writes image into ba in PNG format
     imageFile.close();
+
+    //copy the fullscreen preview
+    QFile fullScreenImageFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1Literal("/plasma/look-and-feel/") % m_themeName % QLatin1Literal("/contents/previews/fullscreenpreview.jpg"));
+    if (!fullScreenImageFile.open(QIODevice::WriteOnly)) {
+        qWarning() << "Impossible to write to the thumbnail file";
+        return;
+    }
+
+    QImage fullScreenImage(QUrl(path).path());
+    if (fullScreenImage.isNull()) {
+        qWarning() << "invalid image";
+        return;
+    }
+
+    fullScreenImage.save(&fullScreenImageFile, "JPG"); // writes image into ba in PNG format
+    fullScreenImageFile.close();
+
     emit themeChanged();
 }
 
