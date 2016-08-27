@@ -1,10 +1,11 @@
 [Desktop Entry]
 Comment=Explore and edit your Plasma Look And Feel themes
-Comment[ca]=Explora i edita els vostres temes de Aspecte i comportament
+Comment[ca]=Explora i edita els vostres temes d'Aspecte i comportament
 Comment[ca@valencia]=Explora i edita els vostres temes d'Aspecte i comportament
 Comment[de]=Erforschen und bearbeiten Sie Ihr Plasma-Erscheinungsbild
 Comment[es]=Explorar y editar sus temas de aspecto visual de Plasma
 Comment[nl]=Uw Plasma-thema's voor uiterlijk en gedrag doorlopen en bewerken
+Comment[pl]=Przeglądaj i edytuj wrażenia wzrokowe i dotykowe Plazmy
 Comment[pt]=Explore e edite os seus temas de Aparência e Comportamento do Plasma
 Comment[sk]=Preskúmať a upraviť vaše témy Plasma
 Comment[sv]=Utforska och redigera Plasma utseende och känsla-teman
@@ -18,6 +19,7 @@ Name[ca@valencia]=Explorador pels temes d'Aspecte i comportament del Plasma
 Name[de]=Plasma-Erscheinungsbild-Betrachter
 Name[es]=Explorador de temas aspecto visual de Plasma
 Name[nl]=Plasma-verkenner voor uiterlijk en gedrag
+Name[pl]=Przeglądarka wrażeń wzrokowych i dotykowych Plazmy
 Name[pt]=Explorador de Aparências e Comportamentos do Plasma
 Name[sk]=Prehliadač témy Plasma
 Name[sv]=Plasma utseende och känsla-utforskare
