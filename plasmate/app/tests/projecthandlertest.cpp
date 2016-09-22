@@ -44,14 +44,14 @@ void ProjectHandlerTest::initTestCase()
 {
     QStandardPaths::enableTestMode(true);
 
-    QString projectTestPath = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0);
+    QString projectTestPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     Q_ASSERT(!projectTestPath.isEmpty());
 
     if (!projectTestPath.endsWith(QLatin1Char('/'))) {
         projectTestPath += QLatin1Char('/');
     }
 
-    const QString tempPath = QStandardPaths::standardLocations(QStandardPaths::TempLocation).at(0) + QLatin1Char('/');
+    const QString tempPath = QStandardPaths::writableLocation(QStandardPaths::TempLocation) + QLatin1Char('/');
 
     m_testPackagePath = projectTestPath + testPackage;
     m_externalTestPackagePath = tempPath + externalTestPackage;
@@ -61,7 +61,7 @@ void ProjectHandlerTest::initTestCase()
 
 void ProjectHandlerTest::createTestProject()
 {
-    PackageHandler *packageHandler = new ThemeHandler(this);
+    QScopedPointer<PackageHandler> packageHandler(new ThemeHandler);
     const QString dummyAuthor = QStringLiteral("dummyThemeAuthor");
     const QString dummyEmail = QStringLiteral("dummyThemeEmail");
     const QString packageName = QStringLiteral("dummyTheme");
@@ -127,6 +127,7 @@ void ProjectHandlerTest::projectsList()
 void ProjectHandlerTest::cleanupTestCase()
 {
     QDir(m_testPackagePath).removeRecursively();
+    QDir(m_externalTestPackagePath).removeRecursively();
     removeConfig();
 }
 
