@@ -127,6 +127,7 @@ void ProjectHandlerTest::projectsList()
 void ProjectHandlerTest::cleanupTestCase()
 {
     QDir(m_testPackagePath).removeRecursively();
+    QDir(m_externalTestPackagePath).removeRecursively();
     removeConfig();
 }
 
