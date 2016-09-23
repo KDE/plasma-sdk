@@ -53,6 +53,14 @@ set_package_properties(KDevPlatform PROPERTIES
     TYPE OPTIONAL
 )
 
+find_package(KF5Kirigami 1.0)
+set_package_properties(KF5Kirigami PROPERTIES
+    DESCRIPTION "KDE’s lightweight user interface framework for mobile and convergent applications"
+    URL "https://techbase.kde.org/Kirigami"
+    PURPOSE "Required by lookandfeelexplorer"
+    TYPE RUNTIME
+)
+
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0)
 
 include(KDEInstallDirs)
@@ -74,7 +82,7 @@ endif()
 # Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
 find_package(KF5 REQUIRED COMPONENTS
     Archive Completion Config ConfigWidgets CoreAddons DBusAddons Declarative I18n IconThemes ItemModels
-    KIO Plasma PlasmaQuick Service TextEditor WidgetsAddons XmlGui WindowSystem Kirigami)
+    KIO Plasma PlasmaQuick Service TextEditor WidgetsAddons XmlGui WindowSystem)
 
 #########################################################################
 
