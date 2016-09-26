@@ -64,7 +64,7 @@ void LnfLogic::createNewTheme(const QString &pluginName, const QString &name, co
     cg.writeEntry("X-KDE-PluginInfo-Author", author);
     cg.writeEntry("X-KDE-PluginInfo-Email", email);
     cg.writeEntry("X-KDE-PluginInfo-Website", website);
-    cg.writeEntry("X-KDE-PluginInfo-Category", "Plasma Look And  Feel");
+    cg.writeEntry("X-KDE-PluginInfo-Category", "Plasma Look And Feel");
     cg.writeEntry("X-KDE-PluginInfo-License", license);
     cg.writeEntry("X-KDE-PluginInfo-EnabledByDefault", "true");
     cg.writeEntry("X-KDE-PluginInfo-Version", "0.1");
