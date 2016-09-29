@@ -61,6 +61,9 @@ void ProjectHandlerTest::initTestCase()
 
 void ProjectHandlerTest::createTestProject()
 {
+    QDir(m_testPackagePath).removeRecursively();
+    QDir(m_externalTestPackagePath).removeRecursively();
+
     QScopedPointer<PackageHandler> packageHandler(new ThemeHandler);
     const QString dummyAuthor = QStringLiteral("dummyThemeAuthor");
     const QString dummyEmail = QStringLiteral("dummyThemeEmail");
