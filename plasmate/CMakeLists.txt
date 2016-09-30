@@ -1,15 +1,12 @@
 # Find needed packages
 
-add_feature_info(QT_QTWEBKIT_FOUND "QtWebKit" "Opensource web browser engine" "http://trac.webkit.org/wiki/QtWebKit" TRUE "" "Needed to display the online API and documentation.")
-
 #TODO this dependency is inside from the KdepimLibs which has not
 #been ported yet. So we are disabling it.
 #find_package(QGpgme REQUIRED) # Maybe check for GPGME_PTHREAD_FOUND ?
 #find_package(KdepimLibs REQUIRED)
 
 # Find optional executables
-find_program(GIT_EXECUTABLE_FOUND git)
-add_feature_info(GIT_EXECUTABLE_FOUND "Git" "Distributed Revision Control System" "http://git-scm.com/" FALSE "" "Runtime dependency needed to use the TimeLine feature.")
+find_program(GIT_EXECUTABLE git)
 
 find_package(KF5 REQUIRED COMPONENTS
     KDELibs4Support
