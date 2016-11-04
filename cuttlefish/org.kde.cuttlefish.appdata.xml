@@ -30,6 +30,7 @@
   <name xml:lang="uk">Cuttlefish</name>
   <name xml:lang="x-test">xxCuttlefishxx</name>
   <name xml:lang="zh-CN">Cuttlefish</name>
+  <name xml:lang="zh-TW">Cuttlefish</name>
   <summary>Icon Previewer for Artists and Developers</summary>
   <summary xml:lang="ca">Vista prèvia de les icones pels artistes i desenvolupadors</summary>
   <summary xml:lang="ca-valencia">Vista prèvia de les icones pels artistes i desenvolupadors</summary>
@@ -56,6 +57,7 @@
   <summary xml:lang="uk">Засіб перегляду піктограм для художників та розробників</summary>
   <summary xml:lang="x-test">xxIcon Previewer for Artists and Developersxx</summary>
   <summary xml:lang="zh-CN">为艺术家和开发者设计的图标预览器</summary>
+  <summary xml:lang="zh-TW">給美工與開發者用的圖示預覽器</summary>
   <description>
     <p>Cuttlefish allows artists and developers to preview and pick icons. Cuttlefish attempts to render the icons exactly as they would look drawn in the application. It allows to filter based on category and name. Cuttlefish is not a general-purpose tool, but geared towards artists' and developers' use-cases.
         Cuttlefish also provides a plugin for Kate and KDevelop to be used as icon picker.
@@ -82,6 +84,7 @@
     <p xml:lang="uk">Cuttlefish надає змогу художникам і розробникам попередньо переглядати і вибирати піктограми. У Cuttlefish зроблено спробу показати піктограми точно так, як вони виглядатимуть у програмі. Передбачено можливість фільтрувати списки за категорією і назвою. Cuttlefish не є інструментом загального призначення: програму призначено лише для потреб художників і розробників. У Cutlefish також передбачено додаток для Kate і KDevelop, яким можна скористатися для вибору піктограм.</p>
     <p xml:lang="x-test">xxCuttlefish allows artists and developers to preview and pick icons. Cuttlefish attempts to render the icons exactly as they would look drawn in the application. It allows to filter based on category and name. Cuttlefish is not a general-purpose tool, but geared towards artists' and developers' use-cases. Cuttlefish also provides a plugin for Kate and KDevelop to be used as icon picker.xx</p>
     <p xml:lang="zh-CN">Cuttlefish 允许艺术家和开发者预览和选择图标。 Cuttlefish 尝试精确按程序中的方式渲染图标。它允许按分类和名称过滤。 Cuttlefish 不是一个面向一般使用的工具，而是为艺术家和开发者使用设计 的工具。Cuttlefish 也提供了 Kate 和 KDevelop 的图标选择器插件。</p>
+    <p xml:lang="zh-TW">Cuttlefish 讓藝術家與開發者可以預覽並挑選圖示。Cuttlefish 會盡量將圖示顯示為在應用程式裡時的樣子。它也可使用類別或名稱來過濾。Cuttlefish 並不是一個通用的工具，它是專為藝術家與開發者的需求設計。Cuttlefish 也提供一份給 Kate 與KDevelop 使用的外掛程式，讓它們也可以用於挑選圖示。</p>
   </description>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=plasma-sdk</url>
   <screenshots>
