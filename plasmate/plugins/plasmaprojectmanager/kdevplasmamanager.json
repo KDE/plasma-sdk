@@ -64,6 +64,7 @@
         "Description[uk]": "Надає змогу KDevPlatform керувати проектами Плазми", 
         "Description[x-test]": "xxAllow KDevPlatform to manage Plasma projectsxx", 
         "Description[zh_CN]": "允许 KDevPlatform 来管理 Plasma 工程", 
+        "Description[zh_TW]": "允許 KDevPlatform 管理 Plasma 專案", 
         "Icon": "plasmagik", 
         "Id": "KDevPlasmaManager", 
         "Name": "Plasma Project Manager", 
@@ -95,6 +96,7 @@
         "Name[uk]": "Менеджер проекту Плазми", 
         "Name[x-test]": "xxPlasma Project Managerxx", 
         "Name[zh_CN]": "Plasma 工程管理器", 
+        "Name[zh_TW]": "Plasma 專案管理員", 
         "ServiceTypes": [
             "KDevelop/Plugin"
         ]
