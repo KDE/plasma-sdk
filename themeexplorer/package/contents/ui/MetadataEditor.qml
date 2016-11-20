@@ -146,7 +146,7 @@ Dialog {
             RowLayout {
                 Layout.alignment: Qt.AlignRight
                 Button {
-                    text: i18n("Ok")
+                    text: i18n("OK")
                     onClicked: dialog.accept()
                     isDefault: true
                     enabled: canEdit && nameField.text && authorField.text && emailField.text && websiteField.text
