@@ -31,6 +31,7 @@ static const char version[] = PROJECT_VERSION;
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+    KLocalizedString::setApplicationDomain("plasmate");
     app.setApplicationVersion(version);
 
     KAboutData aboutData(QStringLiteral("plasmate"), i18n("Plasmate"), version,

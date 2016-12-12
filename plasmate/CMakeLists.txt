@@ -30,7 +30,7 @@ set (PlasmaRemoteInstaller_SRC
     publisher/remoteinstaller/standalone/plasmaremoteinstaller.cpp
 )
 
-qt5_wrap_ui (PlasmaRemoteInstaller_SRC
+ki18n_wrap_ui (PlasmaRemoteInstaller_SRC
    publisher/remoteinstaller/remoteinstaller.ui
 )
 
@@ -71,7 +71,7 @@ set(plasmakconfigxt_SRCS
      editors/kconfigxt/standalone/main.cpp
 )
 
-qt5_wrap_ui (plasmakconfigxt_SRCS
+ki18n_wrap_ui (plasmakconfigxt_SRCS
     editors/kconfigxt/kconfigxteditor.ui
 )
 

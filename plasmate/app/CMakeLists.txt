@@ -8,7 +8,7 @@ set(startpage_SRCS
     startpage/projectmanager.cpp
 )
 
-qt5_wrap_ui(startpage_SRCS
+ki18n_wrap_ui(startpage_SRCS
    startpage/startpage.ui
 )
 
