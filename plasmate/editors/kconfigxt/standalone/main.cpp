@@ -21,6 +21,8 @@
 #include <QVBoxLayout>
 #include <QScopedPointer>
 
+#include <KLocalizedString>
+
 #include "plasmakconfigxteditor.h"
 #include <qcommandlineparser.h>
 #include <qcommandlineoption.h>
@@ -30,6 +32,7 @@ static const char version[] = "2.0";
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+    KLocalizedString::setApplicationDomain("plasmate");
     QCommandLineParser parser;
 
     app.setApplicationVersion(version);
