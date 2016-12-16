@@ -2,6 +2,7 @@
 Comment=PlasmoidViewer Shell
 Comment[ca]=Intèrpret d'ordres del visor de plasmoides
 Comment[ca@valencia]=Intèrpret d'ordes del visor de plasmoides
+Comment[da]=PlasmoidViewer-skal
 Comment[de]=PlasmoidViewer-Shell
 Comment[en_GB]=PlasmoidViewer Shell
 Comment[es]=Entorno de vista de plasmoides
@@ -33,6 +34,7 @@ Keywords=
 Name=PlasmoidViewerShell
 Name[ca]=Intèrpret d'ordres del visor de plasmoides
 Name[ca@valencia]=Intèrpret d'ordes del visor de plasmoides
+Name[da]=PlasmoidViewerShell
 Name[de]=PlasmoidViewerShell
 Name[en_GB]=PlasmoidViewerShell
 Name[es]=Entorno de vista de plasmoides
