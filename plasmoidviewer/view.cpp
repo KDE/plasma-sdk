@@ -223,6 +223,23 @@ void View::addLocation(const QString &location)
     setLocation(locationType);
 }
 
+void View::emitExternalData(const QString &data)
+{
+    if (data.isEmpty()) {
+        return;
+    }
+
+    Plasma::Applet *applet = containment()->applets().constFirst();
+
+    QObject *graphicsObject = qobject_cast<QQuickItem *>(applet->property("_plasma_graphicObject").value<QObject *>());
+    if (!graphicsObject) {
+        return;
+    }
+
+    QMetaObject::invokeMethod(graphicsObject, "externalData", Q_ARG(QString, QString()),
+                                                              Q_ARG(QVariant, data));
+}
+
 bool View::konsoleVisible()
 {
     return m_konsoleVisible;

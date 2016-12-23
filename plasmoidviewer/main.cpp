@@ -82,6 +82,7 @@ int main(int argc, char **argv)
                 i18n("The name of the theme which the shell will use"),
                 QStringLiteral("themeName")));
 
+    parser.addPositionalArgument(QStringLiteral("externalData"), i18n("Data that should be passed to the applet as 'externalData' event"));
 
     parser.addHelpOption();
     parser.addVersionOption();
@@ -133,6 +134,11 @@ int main(int argc, char **argv)
 
     if (parser.isSet("pixmapcache")) {
         QPixmapCache::setCacheLimit(parser.value("pixmapcache").toInt());
+    }
+
+    // emit externalData event so we you can launch e.g. an icon applet already with a proper URL
+    if (parser.positionalArguments().count() == 1) {
+        v->emitExternalData(parser.positionalArguments().constFirst());
     }
 
     v->show();

@@ -36,6 +36,7 @@ public:
     void addContainment(const QString &containment);
     void addFormFactor(const QString &formFactor = QStringLiteral("planar"));
     void addLocation(const QString &location = QStringLiteral("floating"));
+    void emitExternalData(const QString &data);
     bool konsoleVisible();
 
     Q_INVOKABLE void changeFormFactor(int formFactor);
