@@ -6,6 +6,7 @@ Comment[ca]=Permet gestionar el vostre repositori git.
 Comment[ca@valencia]=Permet gestionar el vostre repositori git.
 Comment[da]=Lader dig håndtere dit git-depot.
 Comment[de]=Verwaltung von Git-Quelltextarchiven.
+Comment[el]=Επιτρέπει τη διαχείριση του αποθετηρίου σας (git).
 Comment[en_GB]=Lets you manage your git repository.
 Comment[es]=Le permite gestionar su repositorio git.
 Comment[et]=Võimaldab hallata oma giti hoidlat.
