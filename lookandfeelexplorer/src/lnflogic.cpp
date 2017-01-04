@@ -61,6 +61,7 @@ void LnfLogic::createNewTheme(const QString &pluginName, const QString &name, co
     cg.writeEntry("Name", name);
     cg.writeEntry("Comment", comment);
     cg.writeEntry("X-KDE-PluginInfo-Name", pluginName);
+    cg.writeEntry("X-KDE-ServiceTypes", "Plasma/LookAndFeel");
     cg.writeEntry("X-KDE-PluginInfo-Author", author);
     cg.writeEntry("X-KDE-PluginInfo-Email", email);
     cg.writeEntry("X-KDE-PluginInfo-Website", website);
@@ -146,11 +147,19 @@ void LnfLogic::dumpDefaultsConfigFile(const QString &pluginName)
 
     //KWin window switcher theme
     systemCG = KConfigGroup(KSharedConfig::openConfig(QStringLiteral("kwinrc")), "TabBox");
+    defaultsConfigGroup = KConfigGroup(&defaultsConfig, "kwinrc");
     defaultsConfigGroup = KConfigGroup(&defaultsConfigGroup, "WindowSwitcher");
     defaultsConfigGroup.writeEntry("LayoutName", systemCG.readEntry("LayoutName", QStringLiteral("org.kde.breeze.desktop")));
 
+    defaultsConfigGroup = KConfigGroup(&defaultsConfig, "kwinrc");
     defaultsConfigGroup = KConfigGroup(&defaultsConfigGroup, "DesktopSwitcher");
     defaultsConfigGroup.writeEntry("LayoutName", systemCG.readEntry("DesktopLayout", QStringLiteral("org.kde.breeze.desktop")));
+
+    systemCG = KConfigGroup(KSharedConfig::openConfig(QStringLiteral("kwinrc")), "org.kde.kdecoration2");
+    defaultsConfigGroup = KConfigGroup(&defaultsConfig, "kwinrc");
+    defaultsConfigGroup = KConfigGroup(&defaultsConfigGroup, "org.kde.kdecoration2");
+    defaultsConfigGroup.writeEntry("library", systemCG.readEntry("library", QStringLiteral("org.kde.breeze")));
+    defaultsConfigGroup.writeEntry("theme", systemCG.readEntry("theme", QString()));
 
     emit messageRequested(ErrorLevel::Info, i18n("Defaults config file saved from your current setup"));
 }
