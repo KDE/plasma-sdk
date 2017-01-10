@@ -5,9 +5,10 @@
 
 <refentry lang="&language;">
 <refentryinfo>
-<title>KDE User's Manual</title>
-<date>2010-10-06</date>
-<productname>K Desktop Environment</productname>
+<title>plasmaengineexplorer User's Manual</title>
+<date>2017-01-09</date>
+<releaseinfo>Plasma 5.8</releaseinfo>
+<productname>KDE Plasma</productname>
 </refentryinfo>
 
 <refmeta>
@@ -24,15 +25,17 @@
 <cmdsynopsis>
 <command>plasmaengineexplorer</command>
 
+<group choice="opt"><option>-v, --version</option></group>
+<group choice="opt"><option>-h, --help</option></group>
 <group choice="opt"><option>--list</option></group>
-<group choice="opt"><option>--height</option> <replaceable> pixels</replaceable></group>
-<group choice="opt"><option>--width</option> <replaceable> pixels</replaceable></group>
-<group choice="opt"><option>-x</option> <replaceable> pixels</replaceable></group>
-<group choice="opt"><option>-y</option> <replaceable> pixels</replaceable></group>
-<group choice="opt"><option>--engine</option> <replaceable> data engine</replaceable></group>
-<group choice="opt"><option>--source</option> <replaceable> data engine</replaceable></group>
-<group choice="opt"><option>--interval</option> <replaceable> ms</replaceable></group>
-<group choice="opt"><option>--app</option> <replaceable> application</replaceable></group>
+<group choice="opt"><option>--height</option> <replaceable>pixels</replaceable></group>
+<group choice="opt"><option>--width</option> <replaceable>pixels</replaceable></group>
+<group choice="opt"><option>-x</option> <replaceable>pixels</replaceable></group>
+<group choice="opt"><option>-y</option> <replaceable>pixels</replaceable></group>
+<group choice="opt"><option>--engine</option> <replaceable>data engine</replaceable></group>
+<group choice="opt"><option>--source</option> <replaceable>data engine</replaceable></group>
+<group choice="opt"><option>--interval</option> <replaceable>ms</replaceable></group>
+<group choice="opt"><option>--app</option> <replaceable>application</replaceable></group>
 
 </cmdsynopsis>
 <cmdsynopsis>
@@ -59,6 +62,14 @@ data engines to be found.</para>
 <title>Options</title>
 
 <variablelist>
+<varlistentry>
+<term><option>-v, --version</option></term>
+<listitem><para>Displays version information.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term><option>-h, --help</option></term>
+<listitem><para>Displays this help.</para></listitem>
+</varlistentry>
 <varlistentry>
 <term><option>--list <replaceable>pixels</replaceable></option></term>
 <listitem><para>Displays a list of known engines and their descriptions.</para></listitem>
@@ -96,7 +107,6 @@ Requests a specific source from the data engine when
 <listitem><para>Sets the default update interval for requested sources
 to <parameter>time</parameter> milliseconds.  If not set, the source will update
 on demand (for some sources, this will be when new data is available).</para>
-
 <para>If <option>--source</option> is specified, this is the update interval
 that will be used when requesting that source.</para></listitem>
 </varlistentry>

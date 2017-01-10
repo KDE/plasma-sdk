@@ -25,5 +25,4 @@ target_link_libraries(plasmaengineexplorer
 
 install(TARGETS plasmaengineexplorer ${INSTALL_TARGETS_DEFAULT_ARGS})
 
-# FIXME: needs replacement
-#kde4_create_manpage(man-plasmaengineexplorer.1.docbook 1 INSTALL_DESTINATION ${MAN_INSTALL_DIR})
+kdoctools_create_manpage (man-plasmaengineexplorer.1.docbook 1 INSTALL_DESTINATION ${MAN_INSTALL_DIR})
