@@ -34,6 +34,8 @@
 #include <interfaces/idocumentcontroller.h>
 #include <interfaces/iprojectcontroller.h>
 
+#include <kdevplatform_version.h>
+
 #include <QMenuBar>
 #include <QDockWidget>
 
@@ -58,12 +60,15 @@ PlasmateApp::~PlasmateApp()
 
 void PlasmateApp::init()
 {
-    QObject *splash = 0;
-
     QString session;
     PlasmateExtension::init();
 
+#if KDEVPLATFORM_VERSION >= QT_VERSION_CHECK(5, 1, 40)
+    KDevelop::Core::initialize(KDevelop::Core::Default, session);
+#else
+    QObject *splash = 0;
     KDevelop::Core::initialize(splash, KDevelop::Core::Default, session);
+#endif
 
     m_core = KDevelop::Core::self();
     m_uiControllerInternal = m_core->uiControllerInternal();
