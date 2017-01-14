@@ -67,10 +67,10 @@ int main(int argc, char **argv)
                 QStringLiteral("location"), QStringLiteral("floating")));
 
     parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("x") << QStringLiteral("xPosition"),
-                i18n("Set the x position of the plasmoidviewer on the plasma desktop"),
+                i18n("Set the x position of the plasmoidviewer on the Plasma desktop"),
                 QStringLiteral("xPosition")));
     parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("y") << QStringLiteral("yPosition"),
-                i18n("Set the y position of the plasmoidviewer on the plasma desktop"),
+                i18n("Set the y position of the plasmoidviewer on the Plasma desktop"),
                 QStringLiteral("yPosition")));
     parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("s") << QStringLiteral("size"),
                 i18n("Set the window size of the plasmoidview"),

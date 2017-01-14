@@ -77,11 +77,11 @@ desktop, fullscreen, topedge, bottomedge, leftedge, rightedge).</para></listitem
 </varlistentry>
 <varlistentry>
 <term><option>-x, --xPosition <replaceable>xPosition</replaceable></option></term>
-<listitem><para>Set the x position of the plasmoidviewer on the plasma desktop.</para></listitem>
+<listitem><para>Set the x position of the plasmoidviewer on the Plasma desktop.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><option>-y, --yPosition <replaceable>yPosition</replaceable></option></term>
-<listitem><para>Set the y position of the plasmoidviewer on the plasma desktop.</para></listitem>
+<listitem><para>Set the y position of the plasmoidviewer on the Plasma desktop.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><option>-s, --size <replaceable>widthXheight</replaceable></option></term>
