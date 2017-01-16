@@ -134,6 +134,8 @@ ApplicationWindow {
                     break;
                 }
             }
+            //NOTE:assigning this in a second moment solves a crash in some versions of Qt 5.8
+            searchModel.sourceModel= themeModel
         }
     }
     SystemPalette {
@@ -157,7 +159,6 @@ ApplicationWindow {
             anchors.fill: parent
             model: PlasmaCore.SortFilterModel {
                 id: searchModel
-                sourceModel: themeModel
                 filterRole: "imagePath"
             }
             cellWidth: root.iconSize
