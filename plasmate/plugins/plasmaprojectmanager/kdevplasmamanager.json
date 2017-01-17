@@ -30,6 +30,7 @@
         "Authors": [
             {
                 "Name": "Giorgos Tsiapaliokas", 
+                "Name[ia]": "Giorgios Tsiapaliokas", 
                 "Name[sr@ijekavian]": "Јоргос Цијапалиокас", 
                 "Name[sr@ijekavianlatin]": "Jorgos Cijapaliokas", 
                 "Name[sr@latin]": "Jorgos Cijapaliokas", 
@@ -49,6 +50,7 @@
         "Description[et]": "Võimaldab KDevPlatformil hallata Plasma projekte", 
         "Description[fi]": "Mahdollistaa KDevPlatformin hallita Plasma-projekteja", 
         "Description[fr]": "Permet à KDevPlatform de gérer des projets Plasma", 
+        "Description[ia]": "Perrmitte KDevPlatform gerer projectos de Plasma", 
         "Description[it]": "Permette a KDevPlatform di gestire progetti Plasma", 
         "Description[ko]": "KDevPlatform으로 Plasma 프로젝트 관리 허용", 
         "Description[nl]": "KDevPlatform toestaan Plasma-projecten te beheren", 
@@ -81,6 +83,7 @@
         "Name[fi]": "Plasma-projektinhallinta", 
         "Name[fr]": "Gestionnaire de projet Plasma", 
         "Name[gl]": "Xestor de proxectos de Plasma", 
+        "Name[ia]": "Gerente de projecto de Plasma", 
         "Name[it]": "Gestore progetto Plasma", 
         "Name[ko]": "Plasma 프로젝트 관리자", 
         "Name[nl]": "Plasma projectbeheerder", 
