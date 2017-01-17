@@ -14,6 +14,7 @@
   <name xml:lang="et">Cuttlefish</name>
   <name xml:lang="fi">Cuttlefish</name>
   <name xml:lang="fr">Cuttlefish</name>
+  <name xml:lang="ia">Cuttlefish</name>
   <name xml:lang="it">Cuttlefish</name>
   <name xml:lang="ko">Cuttlefish</name>
   <name xml:lang="nl">Cuttlefish</name>
@@ -43,6 +44,7 @@
   <summary xml:lang="et">Ikoonide eelvaatlus kunstnikele ja arendajatele</summary>
   <summary xml:lang="fi">Kuvakkeiden esikatselu graafikoille ja kehittäjille</summary>
   <summary xml:lang="fr">Afficheur d'icônes pour les artistes et développeurs</summary>
+  <summary xml:lang="ia">Monstrator preliminar de icone per artistas e disveloppatores</summary>
   <summary xml:lang="it">Visore di anteprime di icone per artisti e sviluppatori</summary>
   <summary xml:lang="ko">예술가와 개발자를 위한 아이콘 뷰어</summary>
   <summary xml:lang="nl">Pictogramviewer voor kunstenaars en ontwikkelaars</summary>
