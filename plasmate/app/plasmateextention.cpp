@@ -39,7 +39,11 @@ QString PlasmateExtension::xmlFile()
     return "plasmateui.rc";
 }
 
+#if KDEVPLATFORM_VERSION >= QT_VERSION_CHECK(5, 1, 40)
+QString PlasmateExtension::executableFilePath()
+#else
 QString PlasmateExtension::binaryPath()
+#endif
 {
     return QApplication::applicationDirPath() + "/plasmate";
 }
