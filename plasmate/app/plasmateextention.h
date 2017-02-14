@@ -21,6 +21,7 @@
 #define PLASMATEEXTENSION_H
 
 #include <shell/shellextension.h>
+#include <kdevplatform_version.h>
 
 
 class PlasmateExtension : public KDevelop::ShellExtension {
@@ -28,7 +29,11 @@ public:
     static void init();
 
     virtual QString xmlFile();
+#if KDEVPLATFORM_VERSION >= QT_VERSION_CHECK(5, 1, 40)
+    virtual QString executableFilePath();
+#else
     virtual QString binaryPath();
+#endif
     virtual KDevelop::AreaParams defaultArea();
     virtual QString projectFileExtension();
     virtual QString projectFileDescription();
