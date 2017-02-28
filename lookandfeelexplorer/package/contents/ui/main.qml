@@ -23,11 +23,11 @@ import QtQuick.Layouts 1.1
 
 import org.kde.draganddrop 2.0 as DragAndDrop
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.kirigami 1.0 as Kirigami
+import org.kde.kirigami 2.0 as Kirigami
 
 Kirigami.AbstractApplicationWindow {
     id: root
-    width: units.gridUnit * 50
+    width: units.gridUnit * 65
     height: units.gridUnit * 26
     visible: true
 

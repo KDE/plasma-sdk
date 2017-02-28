@@ -20,7 +20,7 @@
 import QtQuick 2.3
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.2
-import org.kde.kirigami 1.0 as Kirigami
+import org.kde.kirigami 2.0 as Kirigami
 
 Kirigami.Label {
     Layout.alignment: Qt.AlignRight
