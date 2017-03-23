@@ -38,6 +38,7 @@
 #include <vcs/dvcs/dvcsjob.h>
 #include <vcs/models/brancheslistmodel.h>
 #include <vcs/models/vcseventmodel.h>
+#include <kdevplatform_version.h>
 
 #include <KLocalizedString>
 #include <KMessageBox>
@@ -108,7 +109,11 @@ bool Git::initGit()
     m_branchesModel->initialize(m_branching, m_repositoryPath);
 
     KDevelop::VcsRevision rev = KDevelop::VcsRevision::createSpecialRevision(KDevelop::VcsRevision::Base);
+#if KDEVPLATFORM_VERSION >= QT_VERSION_CHECK(5, 1, 40)
+    KDevelop::VcsEventLogModel *vcsEventModel = new KDevelop::VcsEventLogModel(basicVersionControl, rev, m_repositoryPath, this);
+#else
     KDevelop::VcsEventModel *vcsEventModel = new KDevelop::VcsEventModel(basicVersionControl, rev, m_repositoryPath, this);
+#endif
     m_commitsModel->setSourceModel(vcsEventModel);
 
     return true;
