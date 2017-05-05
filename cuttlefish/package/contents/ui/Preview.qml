@@ -92,30 +92,36 @@ Rectangle {
 
             PlasmaCore.IconItem {
                 source: iconName
+                usesPlasmaTheme: cuttlefish.usesPlasmaTheme
                 colorGroup: PlasmaCore.ColorScope.colorGroup
                 Layout.preferredWidth: indexToSize(0)
                 Layout.preferredHeight: indexToSize(0)
             }
             PlasmaCore.IconItem {
                 source: iconName
+                usesPlasmaTheme: cuttlefish.usesPlasmaTheme
                 colorGroup: PlasmaCore.ColorScope.colorGroup
                 Layout.preferredWidth: indexToSize(1)
                 Layout.preferredHeight: indexToSize(1)
             }
             PlasmaCore.IconItem {
                 source: iconName
+                usesPlasmaTheme: cuttlefish.usesPlasmaTheme
                 colorGroup: PlasmaCore.ColorScope.colorGroup
                 Layout.preferredWidth: indexToSize(2)
                 Layout.preferredHeight: indexToSize(2)
             }
             PlasmaCore.IconItem {
                 source: iconName
+                usesPlasmaTheme: cuttlefish.usesPlasmaTheme
+                onUsesPlasmaThemeChanged: print("PlasmaTHeme? " + (cuttlefish.usesPlasmaTheme ? "true" : "false"))
                 colorGroup: PlasmaCore.ColorScope.colorGroup
                 Layout.preferredWidth: indexToSize(3)
                 Layout.preferredHeight: indexToSize(3)
             }
             PlasmaCore.IconItem {
                 source: iconName
+                usesPlasmaTheme: cuttlefish.usesPlasmaTheme
                 colorGroup: PlasmaCore.ColorScope.colorGroup
                 Layout.preferredWidth: indexToSize(4)
                 Layout.preferredHeight: indexToSize(4)

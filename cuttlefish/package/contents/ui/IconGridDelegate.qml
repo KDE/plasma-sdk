@@ -64,6 +64,7 @@ MouseArea {
         width: iconSize
         height: width
         source: iconName
+        usesPlasmaTheme: cuttlefish.usesPlasmaTheme
         colorGroup: PlasmaCore.ColorScope.colorGroup
         anchors {
             top: parent.top

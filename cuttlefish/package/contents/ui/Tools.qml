@@ -127,8 +127,18 @@ PlasmaComponents.ToolBar {
 
         PlasmaComponents.CheckBox {
             id: colorContextCheckbox
-            text: i18n("Inverted Color Scheme")
+            text: i18n("Inverted Colors")
             onCheckedChanged: darkScheme = checked
+        }
+
+        PlasmaComponents.CheckBox {
+            id: plasmaThemeCheckbox
+            text: i18n("Monochrome")
+            checked: true
+            onCheckedChanged: {
+                print("now?" + (checked ? "Checked" : "Unchecked"))
+                cuttlefish.usesPlasmaTheme = checked
+            }
         }
 
         Item {

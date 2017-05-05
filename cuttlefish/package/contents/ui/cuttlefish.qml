@@ -35,6 +35,7 @@ Item {
     property int iconSize: units.iconSizes.large
     property bool hoveredHighlight: false
     property bool darkScheme: false
+    property bool usesPlasmaTheme: true
 
     id: cuttlefish
     objectName: "cuttlefish"
