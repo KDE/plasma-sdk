@@ -1,6 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2014-2015 Sebastian Kügler <sebas@kde.org>                  *
+ *   Copyright 2014-2017 Sebastian Kügler <sebas@kde.org>                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -34,11 +34,6 @@ Rectangle {
 
     color: PlasmaCore.ColorScope.backgroundColor
 
-//     Rectangle {
-//         anchors.fill: parent
-//         color: "orange"
-//     }
-
     property string iconName: "plasma"
     property string fullPath: ""
     property string category: ""
@@ -54,7 +49,6 @@ Rectangle {
             clipboardHelper.selectAll();
             clipboardHelper.copy();
         } else {
-            print("Clippie!" + text);
             iconModel.output(text);
         }
 
@@ -66,12 +60,9 @@ Rectangle {
 
 
     ColumnLayout {
-
         anchors.margins: units.gridUnit
         anchors.rightMargin: units.gridUnit * 2
-
         anchors.fill: parent
-
         spacing: units.gridUnit / 2
 
         Item { height: units.gridUnit / 2 }
@@ -114,7 +105,6 @@ Rectangle {
             PlasmaCore.IconItem {
                 source: iconName
                 usesPlasmaTheme: cuttlefish.usesPlasmaTheme
-                onUsesPlasmaThemeChanged: print("PlasmaTHeme? " + (cuttlefish.usesPlasmaTheme ? "true" : "false"))
                 colorGroup: PlasmaCore.ColorScope.colorGroup
                 Layout.preferredWidth: indexToSize(3)
                 Layout.preferredHeight: indexToSize(3)
@@ -127,45 +117,16 @@ Rectangle {
                 Layout.preferredHeight: indexToSize(4)
             }
         }
-        /*
-        PlasmaCore.IconItem {
-            source: iconName
-            Layout.fillWidth: true
-            Layout.preferredWidth: indexToSize(5)
-            Layout.preferredHeight: indexToSize(5)
-        }
-        PlasmaCore.IconItem {
-            source: iconName
-            Layout.fillHeight: false
-            Layout.preferredWidth: indexToSize(6)
-            Layout.preferredHeight: indexToSize(6)
-        }
-        */
+
         PlasmaCore.IconItem {
             source: iconName
             usesPlasmaTheme: cuttlefish.usesPlasmaTheme
             colorGroup: PlasmaCore.ColorScope.colorGroup
-            usesPlasmaTheme: cuttlefish.usesPlasmaTheme
             Layout.fillHeight: false
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: parent.width
         }
-        /*
-        RowLayout {
 
-            Layout.fillWidth: true
-            Layout.fillHeight: false
-            Layout.preferredHeight: indexToSize(4)
-
-
-            Image {
-                source: fullPath
-                Layout.fillWidth: false
-                Layout.preferredWidth: sourceSize.width
-                Layout.preferredHeight: sourceSize.height
-            }
-        }
-        */
         GridLayout {
             columns: 2
 
@@ -196,12 +157,6 @@ Rectangle {
             }
             PlasmaComponents.Label {
                 text: {
-//                     print("SS:" + sizes);
-                    /*var out;
-                    for (s in sizes) {
-                        out = out + ", " + s;
-                    }
-                    return out;*/
                     if (scalable) {
                         return i18n("yes");
                     } else {
@@ -214,14 +169,6 @@ Rectangle {
             }
             PlasmaComponents.Label {
                 text: (sizes != undefined) ? sizes.join(", ") : ""
-//                 text: {
-//                     print("SS:" + sizes);
-//                     var out;
-//                     for (s in sizes) {
-//                         out = out + ", " + s;
-//                     }
-//                     return out;
-//                 }
             }
         }
         Item {

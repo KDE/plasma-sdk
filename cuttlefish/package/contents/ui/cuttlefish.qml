@@ -64,7 +64,6 @@ Item {
         }
 
         GridLayout {
-
             columns: 2
             anchors.fill: parent
             rowSpacing: - Math.round(units.gridUnit / 20)
@@ -84,11 +83,8 @@ Item {
 
                     footer: SvgGrid {
                         id: svgGrid
-                        //anchors.fill: parent
                         interactive: false
-
                     }
-
                 }
             }
             Preview {
@@ -101,16 +97,9 @@ Item {
     states: [
         State {
             name: "icons"
-            //when: navigationShown
-//             PropertyChanges { target: iconGrid; opacity: 1.0 }
-//             PropertyChanges { target: svgGrid; opacity: 0.0 }
         },
         State {
             name: "svgs"
-            //when: !navigationShown
-//             PropertyChanges { target: iconGrid; opacity: 0.0 }
-//             PropertyChanges { target: svgGrid; opacity: 1.0 }
         }
     ]
-
 }

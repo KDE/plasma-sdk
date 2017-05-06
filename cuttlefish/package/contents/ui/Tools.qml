@@ -1,6 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2014-2015 Sebastian Kügler <sebas@kde.org>                  *
+ *   Copyright 2014-2017 Sebastian Kügler <sebas@kde.org>                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -74,7 +74,6 @@ PlasmaComponents.ToolBar {
 
         Slider {
             id: sizeslider
-            //anchors.verticalCenter: parent.verticalCenter
             Layout.preferredWidth: preview.width - units.gridUnit * 2
 
             maximumValue: 6.0
@@ -84,7 +83,7 @@ PlasmaComponents.ToolBar {
 
             onValueChanged: {
                 sizetimer.restart()
-                pixelSizeInput.text = indexToSize(sizeslider.value);
+                pixelSizeInput.text = indexToSize(sizeslider.value)
             }
 
             Timer {
@@ -92,10 +91,7 @@ PlasmaComponents.ToolBar {
                 running: false
                 repeat: false
                 interval: 200
-                onTriggered: {
-                    print("Size is now: " + sizeslider.value + " => " + indexToSize(sizeslider.value));
-                    iconSize = indexToSize(sizeslider.value);
-                }
+                onTriggered: iconSize = indexToSize(sizeslider.value)
             }
 
             Component.onCompleted: {
@@ -119,9 +115,7 @@ PlasmaComponents.ToolBar {
                 running: false
                 repeat: false
                 interval: 100
-                onTriggered: {
-                    iconSize = pixelSizeInput.text
-                }
+                onTriggered: iconSize = pixelSizeInput.text
             }
         }
 
@@ -135,10 +129,7 @@ PlasmaComponents.ToolBar {
             id: plasmaThemeCheckbox
             text: i18n("Monochrome")
             checked: true
-            onCheckedChanged: {
-                print("now?" + (checked ? "Checked" : "Unchecked"))
-                cuttlefish.usesPlasmaTheme = checked
-            }
+            onCheckedChanged: cuttlefish.usesPlasmaTheme = checked
         }
 
         Item {
