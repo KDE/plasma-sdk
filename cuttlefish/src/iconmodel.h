@@ -40,7 +40,6 @@ class IconModel : public QAbstractListModel
     Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
     Q_PROPERTY(QStringList themes READ themes CONSTANT)
     Q_PROPERTY(QStringList plasmathemes READ plasmathemes CONSTANT)
-    //Q_PROPERTY(QVariantList svgIcons READ svgIcons NOTIFY svgIconsChanged)
     Q_PROPERTY(QStringList categories READ categories NOTIFY categoriesChanged)
     Q_PROPERTY(QString plasmaTheme READ plasmaTheme WRITE setPlasmaTheme NOTIFY plasmaThemeChanged)
     Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged);
@@ -67,7 +66,7 @@ public:
 
     QString key(int role) const;
 
-    bool match(const QFileInfo &info);
+    virtual bool match(const QFileInfo &info);
     void add(const QFileInfo &info, const QString &cat);
     void addSvgIcon(const QString &file, const QString &icon);
     void remove(const QString &iconFile);

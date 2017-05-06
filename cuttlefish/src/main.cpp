@@ -19,7 +19,7 @@
  ***************************************************************************/
 
 // Qt
-#include <QGuiApplication>
+#include <QApplication>
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 #include <QDebug>
@@ -38,7 +38,7 @@ static const char HOME_URL[] = "http://kde.org";
 
 int main(int argc, char **argv)
 {
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
 
     app.setApplicationVersion(version);
 

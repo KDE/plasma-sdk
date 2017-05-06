@@ -169,19 +169,7 @@ IconModel::IconModel(QObject *parent) :
         << "places"
         << "status";
 
-    /*
-    qDebug() << "XX: " << categoryFromPath("/usr/share/icons/hicolor/24x24/apps/gnome-cpu-frequency-applet.png");
-    qDebug() << "XX: " << categoryFromPath("/usr/share/icons/hicolor/24x24/apps/gnome-cpu-frequency-applet.png");
-    qDebug() << "XX: " << categoryFromPath("/usr/share/icons/hicolor/256x256/mimetypes/libreoffice-oasis-text.png");
-    qDebug() << "XX: " << categoryFromPath("/usr/share/icons/hicolor/scalable/places/gnome-flashback-compiz_badge-symbolic.svg");
-    qDebug() << "XX: " << categoryFromPath("/home/sebas/kf5/install/share/icons/breeze/apps/preferences/preferences-desktop-peripherals.svgz");
-    qDebug() << "XX: " << categoryFromPath("/usr/share/icons/breeze/actions/scalable/irc-unvoice.svgz");
-    qDebug() << "XX: " << categoryFromPath("/usr/share/icons/breeze/actions/toolbar-small/edit-clear.svg");
-    qDebug() << "XX: " << categoryFromPath("/usr/share/icons/breeze/categories/scalable/preferences-desktop.svg");
-    qDebug() << "XX: " << categoryFromPath("/usr/share/icons/breeze/status/im-status/user-online.svg");
-    */
     load();
-    //qDebug() << m_roleNames;
 }
 
 
@@ -208,8 +196,6 @@ QVariant IconModel::data(const QModelIndex &index, int role) const
         case IconName:
             return icon;
         }
-
-        //qDebug() << "Requesting " << key(role) << m_data[icon][key(role)];
         return m_data[icon][key(role)];
     }
     return QVariant();
@@ -219,19 +205,6 @@ QString IconModel::key(int role) const
 {
     return QString::fromLocal8Bit(m_roleNames[role]);
 }
-
-
-void IconModel::update()
-{
-    // FIXME: Can we be more fine-grained, please?
-//     beginResetModel();
-//     endResetModel();
-    //emit QAbstractItemModel::modelReset();
-//     auto topleft = index(0);
-//     auto bottomright = index(rowCount(topleft));
-//     emit dataChanged(topleft, bottomright);
-}
-
 
 void IconModel::add(const QFileInfo &info, const QString &cat)
 {
@@ -258,7 +231,6 @@ void IconModel::add(const QFileInfo &info, const QString &cat)
         scalable = true;
     }
     QVariantMap &data = m_data[icon];
-    //qDebug() << "found Icon: " << info.fileName() << icon;
     if (!m_icons.contains(icon)) {
 
         data["fullPath"] = info.absoluteFilePath();
@@ -267,7 +239,7 @@ void IconModel::add(const QFileInfo &info, const QString &cat)
         data["category"] = cat;
         data["type"] = QStringLiteral("icon");
         data["scalable"] = scalable;
-        data["iconTheme"] = "breeze";
+        data["iconTheme"] = QStringLiteral("breeze");
 
         m_icons << icon;
     }
@@ -288,18 +260,6 @@ void IconModel::add(const QFileInfo &info, const QString &cat)
             }
         }
     }
-
-    //qDebug() << "Size: " << size;
-}
-
-void IconModel::addSvgIcon(const QString &file, const QString &icon)
-{
-
-}
-
-void IconModel::remove(const QString& url)
-{
-    qDebug() << "IconModel::remove() TODO";
 }
 
 QString IconModel::category() const
@@ -314,7 +274,6 @@ QStringList IconModel::categories() const
 
 void IconModel::setCategory(const QString& cat)
 {
-    qDebug() << "SETCATA" << cat;
     if (cat != m_category) {
         m_category = cat;
         emit categoryChanged();
@@ -339,7 +298,7 @@ void IconModel::setFilter(const QString &filter)
 
 void IconModel::load()
 {
-    qDebug() << "\n -- Loading (category / filter) : " << m_category << m_filter;
+    //qDebug() << "\n -- Loading (category / filter) : " << m_category << m_filter;
     m_loading = true;
     emit loadingChanged();
 
@@ -358,19 +317,15 @@ void IconModel::load()
     } else {
         return;
     }
-//     qDebug() << "IconTHeme: " << KIconLoader::global()->theme()->internalName();
-//     qDebug() << "iconPath: " << QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "icons/"+iconTheme, QStandardPaths::LocateDirectory);
-
     QStringList searchPaths;
 
-
-    QStringList iconThemePaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "icons/"+iconTheme, QStandardPaths::LocateDirectory);
+    QStringList iconThemePaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("icons/") + iconTheme, QStandardPaths::LocateDirectory);
 
     if (iconThemePaths.count() > 0) {
         searchPaths << iconThemePaths;
     }
 
-    QStringList hicolorThemePaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "icons/hicolor", QStandardPaths::LocateDirectory);
+    QStringList hicolorThemePaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("icons/hicolor"), QStandardPaths::LocateDirectory);
     if (hicolorThemePaths.count() > 0) {
         searchPaths << hicolorThemePaths;
     }
@@ -383,14 +338,11 @@ void IconModel::load()
             const QString fpath = cats.filePath();
             const QString category = cats.fileName();
             if (category != "." && category != "..") {
-                //qDebug() << "Category: !!! ..." << category << fpath;
                 QDirIterator it(fpath, nameFilters, QDir::Files, flags);
-                //qDebug() << "Parsing files." << fpath;
                 while (it.hasNext()) {
                     it.next();
                     const QFileInfo &info = it.fileInfo();
                     if (match(info)) {
-//                         qDebug() << "..." << info.absoluteFilePath();
                         add(info, categoryFromPath(info.absoluteFilePath()));
                     }
                 }
@@ -400,8 +352,7 @@ void IconModel::load()
 
     svgIcons();
     endResetModel();
-
-    qDebug() << "Loading took" << tt.elapsed() << " msec";
+    //qDebug() << "Loading took" << tt.elapsed() << " msec";
     m_loading = false;
     emit loadingChanged();
 }
@@ -440,7 +391,6 @@ QString IconModel::theme() const
 void IconModel::setTheme(const QString& theme)
 {
     if (theme != m_theme) {
-//         qDebug() << "Theme is now: " << theme;
         m_theme = theme;
         load();
         emit themeChanged();
@@ -457,7 +407,6 @@ void IconModel::setPlasmaTheme(const QString& ptheme)
     if (m_plasmatheme != ptheme) {
         m_plasmatheme = ptheme;
         Plasma::Theme theme;
-//         qDebug() << "Setting theme, package " << ptheme;
         theme.setThemeName(ptheme);
         load();
         emit plasmaThemeChanged();
@@ -479,7 +428,6 @@ void IconModel::svgIcons()
                (file.indexOf(m_filter) != -1 || icon.indexOf(m_filter) != -1)) {
 
                 QVariantMap &data = m_data[icon];
-                //qDebug() << "found Icon: " << info.fileName() << icon;
                 if (!m_icons.contains(icon)) {
 
                     data["fullPath"] = "";
@@ -495,15 +443,10 @@ void IconModel::svgIcons()
                 QVariantMap vm;
                 vm["fileName"] = file;
                 vm["iconName"] = icon;
-    //             qDebug() << "Adding " << file << icon;
                 out << vm;
-
-
             }
         }
     }
-
-    //return out;
 }
 
 QString IconModel::categoryFromPath(const QString& path)
