@@ -143,6 +143,7 @@ Rectangle {
         */
         PlasmaCore.IconItem {
             source: iconName
+            usesPlasmaTheme: cuttlefish.usesPlasmaTheme
             colorGroup: PlasmaCore.ColorScope.colorGroup
             usesPlasmaTheme: cuttlefish.usesPlasmaTheme
             Layout.fillHeight: false
