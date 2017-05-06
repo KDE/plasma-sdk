@@ -156,13 +156,7 @@ Rectangle {
                 text: i18n("Scalable:")
             }
             PlasmaComponents.Label {
-                text: {
-                    if (scalable) {
-                        return i18n("yes");
-                    } else {
-                        return i18n("no");
-                    }
-                }
+                text: scalable ? i18n("yes") : i18n("no")
             }
             PlasmaComponents.Label {
                 text: i18n("Sizes:")

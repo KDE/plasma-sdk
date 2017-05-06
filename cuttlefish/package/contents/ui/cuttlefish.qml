@@ -28,6 +28,8 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 
 Item {
+    id: cuttlefish
+    objectName: "cuttlefish"
 
     width: units.gridUnit * 60
     height: Math.round(width / 3 * 2)
@@ -36,10 +38,6 @@ Item {
     property bool hoveredHighlight: false
     property bool darkScheme: false
     property bool usesPlasmaTheme: true
-
-    id: cuttlefish
-    objectName: "cuttlefish"
-    state: "svgs"
 
     function indexToSize(ix) {
 
@@ -94,12 +92,4 @@ Item {
             }
         }
     }
-    states: [
-        State {
-            name: "icons"
-        },
-        State {
-            name: "svgs"
-        }
-    ]
 }

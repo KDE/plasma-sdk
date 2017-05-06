@@ -43,9 +43,7 @@ PlasmaComponents.ToolBar {
 
         PlasmaComponents.TextField {
             id: filterInput
-
             Layout.fillWidth: true
-
             onTextChanged: typingtimer.restart()
 
             Timer {
@@ -65,8 +63,7 @@ PlasmaComponents.ToolBar {
             onCurrentIndexChanged: {
                 if (currentText == "all") {
                     iconModel.category = "";
-                }
-                if (currentText != "") {
+                } else if (currentText != "") {
                     iconModel.category = currentText
                 }
             }
@@ -121,7 +118,7 @@ PlasmaComponents.ToolBar {
 
         PlasmaComponents.CheckBox {
             id: colorContextCheckbox
-            text: i18n("Inverted Colors")
+            text: i18n("Inverted")
             onCheckedChanged: darkScheme = checked
         }
 
