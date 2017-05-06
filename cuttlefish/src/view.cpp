@@ -35,7 +35,7 @@
 
 using namespace CuttleFish;
 
-View::View(const QString &url, QCommandLineParser &parser, QWindow *parent)
+View::View(const QString &category, QCommandLineParser &parser, QWindow *parent)
     : QQuickView(parent),
     m_browserRootItem(0)
 {
@@ -48,11 +48,6 @@ View::View(const QString &url, QCommandLineParser &parser, QWindow *parent)
     kdeclarative.initialize();
     kdeclarative.setupBindings();
 
-//     BrowserManager *browserManager = new BrowserManager(rootContext());
-//     rootContext()->setContextProperty("browserManager", browserManager);
-//     qmlRegisterUncreatableType<BrowserManager>("org.kde.plasma.cuttlefish", 1, 0, "BrowserManager", "");
-
-    //m_dirModel.expandToUrl(QUrl::fromLocalFile("/usr/share/icons/"));
     auto iconModel = new IconModel(this);
     rootContext()->setContextProperty("iconModel", iconModel);
     rootContext()->setContextProperty("pickerMode", parser.isSet("picker"));

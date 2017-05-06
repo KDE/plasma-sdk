@@ -342,7 +342,7 @@ void IconModel::load()
                 while (it.hasNext()) {
                     it.next();
                     const QFileInfo &info = it.fileInfo();
-                    if (match(info)) {
+                    if (matchIcons(info)) {
                         add(info, categoryFromPath(info.absoluteFilePath()));
                     }
                 }
@@ -357,7 +357,7 @@ void IconModel::load()
     emit loadingChanged();
 }
 
-bool IconModel::match(const QFileInfo& info)
+bool IconModel::matchIcons(const QFileInfo& info)
 {
     bool ok = false;
 

@@ -66,7 +66,7 @@ public:
 
     QString key(int role) const;
 
-    virtual bool match(const QFileInfo &info);
+    bool matchIcons(const QFileInfo &info);
     void add(const QFileInfo &info, const QString &cat);
     void addSvgIcon(const QString &file, const QString &icon);
     void remove(const QString &iconFile);
@@ -91,7 +91,6 @@ public:
     void svgIcons();
 
     void load();
-    void update();
 
     Q_INVOKABLE void output(const QString &text);
 
