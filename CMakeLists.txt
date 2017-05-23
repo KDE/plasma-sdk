@@ -98,8 +98,10 @@ add_subdirectory(themeexplorer)
 add_subdirectory(lookandfeelexplorer)
 #add_subdirectory(remote-widgets-browser)
 #add_subdirectory(wallpaperviewer)
-if (KDevPlatform_FOUND AND Qt5WebKit_FOUND AND Qt5WebKitWidgets_FOUND)
-    add_subdirectory(plasmate)
-endif()
+
+# Plasmate now moved to kde:plasmate because it is unmaintained
+#if (KDevPlatform_FOUND AND Qt5WebKit_FOUND AND Qt5WebKitWidgets_FOUND)
+#    add_subdirectory(plasmate)
+#endif()
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
