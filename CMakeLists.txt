@@ -12,9 +12,6 @@ if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
    message(FATAL_ERROR "plasmate requires an out of source build. Please create a separate build directory and run 'cmake path_to_plasmate [options]' there.")
 endif()
 
-# Make CPack available to easy generate binary packages
-include(CPack)
-
 include(FeatureSummary)
 
 ################# set KDE specific information #################
@@ -26,17 +23,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_D
 
 find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core DBus Gui Qml Quick Svg Widgets Xml)
 
-find_package(Qt5WebKit ${QT_MIN_VERSION} CONFIG)
-set_package_properties(Qt5WebKit PROPERTIES
-         PURPOSE "Required for plasmate"
-         TYPE OPTIONAL
-         )
-find_package(Qt5WebKitWidgets ${QT_MIN_VERSION} CONFIG)
-set_package_properties(Qt5WebKitWidgets PROPERTIES
-         PURPOSE "Required for plasmate"
-         TYPE OPTIONAL
-         )
-
 find_package(Qt5Test ${QT_MIN_VERSION} CONFIG QUIET)
 set_package_properties(Qt5Test PROPERTIES
          PURPOSE "Required for tests"
@@ -46,12 +32,6 @@ add_feature_info("Qt5Test" Qt5Test_FOUND "Required for building tests")
 if (NOT Qt5Test_FOUND)
     set(BUILD_TESTING OFF CACHE BOOL "Build the testing tree.")
 endif()
-
-find_package(KDevPlatform 4.90.90)
-set_package_properties(KDevPlatform PROPERTIES
-    PURPOSE "Required for plasmate"
-    TYPE OPTIONAL
-)
 
 find_package(KF5Kirigami2 5.22)
 set_package_properties(KF5Kirigami2 PROPERTIES
@@ -98,8 +78,10 @@ add_subdirectory(themeexplorer)
 add_subdirectory(lookandfeelexplorer)
 #add_subdirectory(remote-widgets-browser)
 #add_subdirectory(wallpaperviewer)
-if (KDevPlatform_FOUND AND Qt5WebKit_FOUND AND Qt5WebKitWidgets_FOUND)
-    add_subdirectory(plasmate)
-endif()
+
+# Plasmate now moved to kde:plasmate because it is unmaintained
+#if (KDevPlatform_FOUND AND Qt5WebKit_FOUND AND Qt5WebKitWidgets_FOUND)
+#    add_subdirectory(plasmate)
+#endif()
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
