@@ -17,7 +17,6 @@ target_link_libraries(plasmaengineexplorer
     KF5::Service
     KF5::Completion
     KF5::Plasma
-    KF5::XmlGui
     KF5::I18n
     KF5::ConfigCore
     KF5::ConfigWidgets
