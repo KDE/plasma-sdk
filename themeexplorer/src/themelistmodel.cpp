@@ -43,6 +43,7 @@
 ThemeListModel::ThemeListModel( QObject *parent )
 : QAbstractListModel( parent )
 {
+    m_roleNames.insert(Qt::DisplayRole, "display");
     m_roleNames.insert(PackageNameRole, "packageNameRole");
     m_roleNames.insert(PackageDescriptionRole, "packageDescriptionRole");
     m_roleNames.insert(PackageAuthorRole, "packageAuthorRole");

@@ -62,7 +62,7 @@ ApplicationWindow {
                 id: themeSelector
                 //FIXME: why crashes?
                 //model: 3//themeModel.themeList
-                textRole: "packageNameRole"
+                textRole: "display"
                 onCurrentIndexChanged: {
                     themeModel.theme = themeModel.themeList.get(currentIndex).packageNameRole;
                 }
