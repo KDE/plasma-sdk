@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 2.0
+import QtQuick 2.5
 import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.1
 
@@ -30,6 +30,11 @@ ApplicationWindow {
     visible: true
     property int iconSize: iconSizeSlider.value
     property alias showMargins: showMarginsCheckBox.checked
+
+    Shortcut {
+        sequence: StandardKey.Quit
+        onActivated: Qt.quit()
+    }
 
     toolBar: ToolBar {
         RowLayout {

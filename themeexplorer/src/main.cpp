@@ -66,6 +66,8 @@ int main(int argc, char **argv)
     obj->loadPackage(packagePath);
     obj->engine()->rootContext()->setContextProperty("commandlineArguments", parser.positionalArguments());
 
+    QObject::connect(obj->engine(), &QQmlEngine::quit, &app, &QApplication::quit);
+
     qmlRegisterType<ThemeListModel>();
     qmlRegisterType<ColorEditor>();
     ThemeModel *themeModel = new ThemeModel(obj->package());
