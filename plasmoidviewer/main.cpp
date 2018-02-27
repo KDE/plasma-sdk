@@ -47,6 +47,8 @@ int main(int argc, char **argv)
     QQmlDebuggingEnabler debugEnabler;
 
     QApplication app(argc, argv);
+    KLocalizedString::setApplicationDomain("plasmoidviewer");
+
     KDBusService service(KDBusService::Multiple);
 
     app.setApplicationVersion(version);
