@@ -76,7 +76,7 @@ int main(int argc, char **argv)
     aboutData.addAuthor(i18n("Aaron J. Seigo"),
                         i18n( "Author and maintainer" ),
                         "aseigo@kde.org");
-    aboutData.setProgramIconName("plasma");
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("plasma"), app.windowIcon()));
 
     KAboutData::setApplicationData(aboutData);
 
