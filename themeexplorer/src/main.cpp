@@ -26,7 +26,6 @@
 #include <qcommandlineparser.h>
 #include <qcommandlineoption.h>
 #include <QQuickItem>
-#include <QtQml>
 
 #include <kpackage/package.h>
 #include <kpackage/packageloader.h>

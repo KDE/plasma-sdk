@@ -22,7 +22,6 @@
 #include "iconmodel.h"
 
 #include <QDebug>
-#include <QtQml>
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQuickItem>
