@@ -400,12 +400,12 @@ bool KTreeViewSearchLine::itemMatches( const QModelIndex &index, int row, const 
     QList<int>::ConstIterator it = d->searchColumns.constBegin();
     for ( ; it != d->searchColumns.constEnd(); ++it ) {
       if ( *it < columncount &&
-           index.child( row, *it ).data( Qt::DisplayRole ).toString().indexOf( pattern, 0, d->caseSensitive ) >= 0 )
+           index.model()->index( row, *it, index ).data( Qt::DisplayRole ).toString().indexOf( pattern, 0, d->caseSensitive ) >= 0 )
         return true;
     }
   } else {
     for ( int i = 0; i < columncount; ++i) {
-      if ( index.child( row, i ).data( Qt::DisplayRole ).toString().indexOf( pattern, 0, d->caseSensitive ) >= 0 )
+      if ( index.model()->index( row, i, index ).data( Qt::DisplayRole ).toString().indexOf( pattern, 0, d->caseSensitive ) >= 0 )
         return true;
     }
   }
