@@ -1,4 +1,3 @@
-project(cuttlefish)
 add_definitions(-DTRANSLATION_DOMAIN=\"cuttlefish\")
 
 add_subdirectory(src)
