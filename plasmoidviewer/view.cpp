@@ -16,6 +16,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include "view.h"
+
 #include <QFileDialog>
 #include <QQmlEngine>
 #include <QQuickItem>
@@ -30,7 +32,6 @@
 #include <Plasma/Package>
 #include <Plasma/PluginLoader>
 
-#include "view.h"
 
 class ViewerCorona : public Plasma::Corona
 {
