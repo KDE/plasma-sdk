@@ -3,8 +3,8 @@ set(PROJECT_VERSION "5.12.2")
 set(PROJECT_VERSION_MAJOR 5)
 cmake_minimum_required(VERSION 2.8.12)
 
-set(QT_MIN_VERSION "5.4.0")
-set(KF5_MIN_VERSION "5.8.0")
+set(QT_MIN_VERSION "5.9.0")
+set(KF5_MIN_VERSION "5.42.0")
 
 ################# Disallow in-source build #################
 
