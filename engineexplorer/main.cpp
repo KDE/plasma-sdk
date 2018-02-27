@@ -81,7 +81,6 @@ int main(int argc, char **argv)
     KAboutData::setApplicationData(aboutData);
 
     QCommandLineParser parser;
-    app.setApplicationVersion(version);
     parser.addVersionOption();
     parser.addHelpOption();
     parser.addOption(QCommandLineOption(QStringList() << "list", i18n("Displays a list of known engines and their descriptions")));
