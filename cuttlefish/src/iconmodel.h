@@ -60,9 +60,9 @@ public:
     explicit IconModel(QObject *parent = nullptr);
 
 
-    virtual QHash<int, QByteArray> roleNames() const;
-    virtual int rowCount(const QModelIndex &parent) const;
-    virtual QVariant data(const QModelIndex &index, int role) const;
+    QHash<int, QByteArray> roleNames() const override;
+    int rowCount(const QModelIndex &parent) const override;
+    QVariant data(const QModelIndex &index, int role) const override;
 
     QString key(int role) const;
 

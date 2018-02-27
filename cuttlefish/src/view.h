@@ -36,7 +36,7 @@ class View : public QQuickView
 
 public:
     explicit View(const QString &category, QCommandLineParser &parser, QWindow *parent = nullptr);
-    ~View();
+    ~View() override;
 
 Q_SIGNALS:
     void titleChanged(const QString&);

@@ -60,12 +60,12 @@ public:
          };
 
     LnfListModel(QObject *parent = nullptr);
-    virtual ~LnfListModel();
+    ~LnfListModel() override;
 
-    virtual QHash<int, QByteArray> roleNames() const;
+    QHash<int, QByteArray> roleNames() const override;
 
-    virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QModelIndex indexOf(const QString &path) const;
     void reload();
     void clearThemeList();

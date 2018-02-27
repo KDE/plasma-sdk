@@ -45,7 +45,7 @@ public:
         m_view = view;
     }
 
-    QRect screenGeometry(int id) const
+    QRect screenGeometry(int id) const override
     {
         Q_UNUSED(id);
         if (m_view) {

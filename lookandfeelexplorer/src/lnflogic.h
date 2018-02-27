@@ -58,7 +58,7 @@ public:
     Q_ENUMS(ErrorLevel)
 
     explicit LnfLogic(QObject *parent = nullptr);
-    ~LnfLogic();
+    ~LnfLogic() override;
 
     LnfListModel *lnfList();
 

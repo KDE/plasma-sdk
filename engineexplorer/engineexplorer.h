@@ -44,7 +44,7 @@ class EngineExplorer : public QDialog, public Ui::EngineExplorer
 
     public:
         explicit EngineExplorer(QWidget *parent = nullptr);
-        ~EngineExplorer();
+        ~EngineExplorer() override;
 
         void setApp(const QString &app);
         void setEngine(const QString &engine);

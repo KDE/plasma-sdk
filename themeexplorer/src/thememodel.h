@@ -60,14 +60,14 @@ public:
     };
 
     explicit ThemeModel(const KPackage::Package &package, QObject *parent = nullptr);
-    ~ThemeModel();
+    ~ThemeModel() override;
 
     ThemeListModel *themeList();
     ColorEditor *colorEditor();
 
-    virtual QHash<int, QByteArray> roleNames() const;
-    virtual int rowCount(const QModelIndex &parent) const;
-    virtual QVariant data(const QModelIndex &index, int role) const;
+    QHash<int, QByteArray> roleNames() const override;
+    int rowCount(const QModelIndex &parent) const override;
+    QVariant data(const QModelIndex &index, int role) const override;
 
     void setTheme(const QString &theme);
     QString theme() const;

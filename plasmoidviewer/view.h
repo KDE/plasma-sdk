@@ -30,7 +30,7 @@ class View : public PlasmaQuick::ContainmentView
 
 public:
     View(ViewerCorona *corona, bool konsoleVisible, QWindow *parent = nullptr);
-    ~View();
+    ~View() override;
 
     void addApplet(const QString &applet);
     void addContainment(const QString &containment);

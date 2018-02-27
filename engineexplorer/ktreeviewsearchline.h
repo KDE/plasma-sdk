@@ -69,7 +69,7 @@ class KTreeViewSearchLine : public KLineEdit
     /**
      * Destroys the KTreeViewSearchLine.
      */
-    virtual ~KTreeViewSearchLine();
+    ~KTreeViewSearchLine() override;
 
     /**
      * Returns true if the search is case sensitive.  This defaults to false.
@@ -210,7 +210,7 @@ class KTreeViewSearchLine : public KLineEdit
     /**
     * Re-implemented for internal reasons.  API not affected.
     */
-    virtual void contextMenuEvent( QContextMenuEvent* );
+    void contextMenuEvent( QContextMenuEvent* ) override;
 
     /**
      * Updates search to only make visible appropriate items in \a treeView.  If
@@ -285,7 +285,7 @@ class KTreeViewSearchLineWidget : public QWidget
     /**
      * Destroys the KTreeViewSearchLineWidget
      */
-    ~KTreeViewSearchLineWidget();
+    ~KTreeViewSearchLineWidget() override;
 
     /**
      * Returns a pointer to the search line.

@@ -39,14 +39,14 @@ class Delegate : public QAbstractItemDelegate
 
 public:
     Delegate(QObject *parent = nullptr);
-    virtual ~Delegate();
+    ~Delegate() override;
 
-    virtual void paint(QPainter *painter, const QStyleOptionViewItem &option,
-                       const QModelIndex &index) const;
+    void paint(QPainter *painter, const QStyleOptionViewItem &option,
+               const QModelIndex &index) const override;
 
 protected:
-    virtual QSize sizeHint(const QStyleOptionViewItem &option,
-                           const QModelIndex &index) const;
+    QSize sizeHint(const QStyleOptionViewItem &option,
+                   const QModelIndex &index) const override;
 };
 
 class ModelViewer : public QDialog
@@ -55,7 +55,7 @@ class ModelViewer : public QDialog
 
 public:
     ModelViewer(Plasma::DataEngine *engine, const QString &m_source, QWidget *parent = nullptr);
-    ~ModelViewer();
+    ~ModelViewer() override;
 
 private Q_SLOTS:
     void engineDestroyed();

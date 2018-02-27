@@ -38,7 +38,7 @@ class ServiceViewer : public QDialog, public Ui::ServiceViewer
 
 public:
     ServiceViewer(Plasma::DataEngine *engine, const QString &m_source, QWidget *parent = nullptr);
-    ~ServiceViewer();
+    ~ServiceViewer() override;
 
 private:
     void updateJobCount(int numberOfJobs);

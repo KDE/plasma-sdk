@@ -52,7 +52,7 @@ class ColorEditor : public QObject
 public:
 
     explicit ColorEditor(QObject *parent = nullptr);
-    ~ColorEditor();
+    ~ColorEditor() override;
 
     QString theme() const;
     void setTheme(const QString &theme);
