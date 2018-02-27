@@ -31,7 +31,6 @@
 #include <QXmlSimpleReader>
 #include <QXmlDefaultHandler>
 #include <QXmlInputSource>
-#include <QXmlInputSource>
 
 #include <KCompressionDevice>
 #include <KProcess>
