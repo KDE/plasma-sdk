@@ -33,7 +33,7 @@ if (NOT Qt5Test_FOUND)
     set(BUILD_TESTING OFF CACHE BOOL "Build the testing tree.")
 endif()
 
-find_package(KF5Kirigami2 5.22)
+find_package(KF5Kirigami2 ${KF5_MIN_VERSION})
 set_package_properties(KF5Kirigami2 PROPERTIES
     DESCRIPTION "KDE's lightweight user interface framework for mobile and convergent applications"
     URL "https://techbase.kde.org/Kirigami"
@@ -60,7 +60,7 @@ endif()
 
 
 # Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
-find_package(KF5 REQUIRED COMPONENTS
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Archive Completion Config ConfigWidgets CoreAddons DBusAddons Declarative I18n IconThemes
     KIO Plasma PlasmaQuick Service TextEditor WidgetsAddons DocTools)
 
