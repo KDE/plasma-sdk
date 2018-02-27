@@ -44,7 +44,6 @@ View::View(const QString &category, QCommandLineParser &parser, QWindow *parent)
     KDeclarative::KDeclarative kdeclarative;
     kdeclarative.setDeclarativeEngine(engine());
     kdeclarative.setTranslationDomain(QStringLiteral("cuttlefish"));
-    kdeclarative.initialize();
     kdeclarative.setupBindings();
 
     auto iconModel = new IconModel(this);
