@@ -25,7 +25,7 @@
  */
 
 #include <QApplication>
-#include <QtQml/QQmlDebuggingEnabler>
+#include <QQmlDebuggingEnabler>
 
 #include <QPixmapCache>
 #include <QDebug>
