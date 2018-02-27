@@ -39,10 +39,11 @@
 
 int main(int argc, char **argv)
 {
-    QCommandLineParser parser;
     QApplication app(argc, argv);
 
     app.setApplicationVersion(PROJECT_VERSION);
+
+    QCommandLineParser parser;
     parser.addVersionOption();
     parser.addHelpOption();
     parser.setApplicationDescription(i18n("Plasma Theme Explorer"));
