@@ -161,7 +161,7 @@ void EngineExplorer::listEngines()
 {
     m_engines->clear();
     KPluginInfo::List engines = m_engineManager->listDataEngineInfo(m_app);
-    qSort(engines);
+    std::sort(engines.begin(), engines.end());
 
     foreach (const KPluginInfo engine, engines) {
         m_engines->addItem(QIcon::fromTheme(engine.icon()), engine.pluginName());
