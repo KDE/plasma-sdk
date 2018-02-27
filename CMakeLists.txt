@@ -21,7 +21,7 @@ find_package(ECM 1.8.0 REQUIRED NO_MODULE)
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
-find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core DBus Gui Qml Quick Svg Widgets Xml)
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core DBus Gui Qml Quick Svg Widgets Xml)
 
 find_package(Qt5Test ${QT_MIN_VERSION} CONFIG QUIET)
 set_package_properties(Qt5Test PROPERTIES
