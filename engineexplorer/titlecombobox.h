@@ -30,7 +30,7 @@
 class TitleComboBox : public QComboBox
 {
 public:
-    TitleComboBox(QWidget *parent = nullptr)
+    explicit TitleComboBox(QWidget *parent = nullptr)
         : QComboBox(parent)
     {
     }

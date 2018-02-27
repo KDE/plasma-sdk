@@ -38,7 +38,7 @@ class Delegate : public QAbstractItemDelegate
     Q_OBJECT
 
 public:
-    Delegate(QObject *parent = nullptr);
+    explicit Delegate(QObject *parent = nullptr);
     ~Delegate() override;
 
     void paint(QPainter *painter, const QStyleOptionViewItem &option,
