@@ -39,6 +39,7 @@ static const char HOME_URL[] = "http://kde.org";
 int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
+    KLocalizedString::setApplicationDomain("cuttlefish");
 
     app.setApplicationVersion(version);
 

@@ -47,9 +47,12 @@ int main(int argc, char **argv)
     QQmlDebuggingEnabler debugEnabler;
 
     QApplication app(argc, argv);
+    KLocalizedString::setApplicationDomain("plasmoidviewer");
+
     KDBusService service(KDBusService::Multiple);
 
     app.setApplicationVersion(version);
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("plasma"), app.windowIcon()));
 
     QCommandLineParser parser;
     parser.setApplicationDescription(i18n("Run Plasma widgets in their own window"));

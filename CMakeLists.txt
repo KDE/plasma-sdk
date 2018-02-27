@@ -3,8 +3,8 @@ set(PROJECT_VERSION "5.12.80")
 set(PROJECT_VERSION_MAJOR 5)
 cmake_minimum_required(VERSION 2.8.12)
 
-set(QT_MIN_VERSION "5.4.0")
-set(KF5_MIN_VERSION "5.8.0")
+set(QT_MIN_VERSION "5.9.0")
+set(KF5_MIN_VERSION "5.42.0")
 
 ################# Disallow in-source build #################
 
@@ -21,7 +21,7 @@ find_package(ECM 1.8.0 REQUIRED NO_MODULE)
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
-find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core DBus Gui Qml Quick Svg Widgets Xml)
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core DBus Gui Qml Quick Svg Widgets Xml)
 
 find_package(Qt5Test ${QT_MIN_VERSION} CONFIG QUIET)
 set_package_properties(Qt5Test PROPERTIES
@@ -33,7 +33,7 @@ if (NOT Qt5Test_FOUND)
     set(BUILD_TESTING OFF CACHE BOOL "Build the testing tree.")
 endif()
 
-find_package(KF5Kirigami2 5.22)
+find_package(KF5Kirigami2 ${KF5_MIN_VERSION})
 set_package_properties(KF5Kirigami2 PROPERTIES
     DESCRIPTION "KDE's lightweight user interface framework for mobile and convergent applications"
     URL "https://techbase.kde.org/Kirigami"
@@ -60,7 +60,7 @@ endif()
 
 
 # Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
-find_package(KF5 REQUIRED COMPONENTS
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Archive Completion Config ConfigWidgets CoreAddons DBusAddons Declarative I18n IconThemes
     KIO Plasma PlasmaQuick Service TextEditor WidgetsAddons DocTools)
 

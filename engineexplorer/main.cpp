@@ -76,14 +76,12 @@ int main(int argc, char **argv)
     aboutData.addAuthor(i18n("Aaron J. Seigo"),
                         i18n( "Author and maintainer" ),
                         "aseigo@kde.org");
-    aboutData.setProgramIconName("plasma");
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("plasma"), app.windowIcon()));
 
     KAboutData::setApplicationData(aboutData);
 
     QCommandLineParser parser;
-    app.setApplicationVersion(version);
-    parser.addVersionOption();
-    parser.addHelpOption();
+    aboutData.setupCommandLine(&parser);
     parser.addOption(QCommandLineOption(QStringList() << "list", i18n("Displays a list of known engines and their descriptions")));
     parser.addOption(QCommandLineOption(QStringList() << "height", i18n("The desired height in pixels"), "pixels"));
     parser.addOption(QCommandLineOption(QStringList() << "width", i18n("The desired width in pixels"), "pixels"));
@@ -97,6 +95,7 @@ int main(int argc, char **argv)
 
 
     parser.process(app);
+    aboutData.processCommandLine(&parser);
 
     if (parser.isSet("list")) {
         listEngines();

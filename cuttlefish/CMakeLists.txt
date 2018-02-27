@@ -1,6 +1,3 @@
-project(cuttlefish)
-add_definitions(-DTRANSLATION_DOMAIN=\"cuttlefish\")
-
 add_subdirectory(src)
 if(BUILD_TESTING)
     add_subdirectory(autotests)
