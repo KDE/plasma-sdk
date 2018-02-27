@@ -45,18 +45,23 @@ set_package_properties(KF5Kirigami2 PROPERTIES
     TYPE RUNTIME
 )
 
-add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0)
-
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Archive Completion Config ConfigWidgets CoreAddons DBusAddons Declarative I18n IconThemes
     KIO Plasma PlasmaQuick Service TextEditor WidgetsAddons DocTools)
 
 #########################################################################
 
-add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
-add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
-
-remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FROM_BYTEARRAY -DQT_NO_KEYWORDS)
+add_definitions(
+    -DQT_DEPRECATED_WARNINGS
+    -DQT_DISABLE_DEPRECATED_BEFORE=0x050900
+    -DQT_USE_QSTRINGBUILDER
+    -DQT_NO_CAST_TO_ASCII
+#     -DQT_NO_CAST_FROM_ASCII
+    -DQT_NO_CAST_FROM_BYTEARRAY
+    -DQT_STRICT_ITERATORS
+    -DQT_NO_URL_CAST_FROM_STRING
+    -DQT_NO_SIGNALS_SLOTS_KEYWORDS
+)
 
 add_subdirectory(cuttlefish)
 add_subdirectory(engineexplorer)
