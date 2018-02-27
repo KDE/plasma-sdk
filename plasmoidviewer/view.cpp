@@ -29,8 +29,8 @@
 #include <KLocalizedString>
 #include <KDesktopFile>
 
-#include <Plasma/Package>
-#include <Plasma/PluginLoader>
+#include <KPackage/Package>
+#include <KPackage/PackageLoader>
 
 
 class ViewerCorona : public Plasma::Corona
@@ -66,7 +66,7 @@ View::View(ViewerCorona *cor, bool konsoleVisible, QWindow *parent)
     cor->setView(this);
     m_konsoleVisible = konsoleVisible;
     engine()->rootContext()->setContextProperty("desktop", this);
-    setSource(QUrl::fromLocalFile(cor->package().filePath("views", "Desktop.qml")));
+    setSource(QUrl::fromLocalFile(cor->kPackage().filePath("views", "Desktop.qml")));
 }
 
 View::~View()
@@ -286,11 +286,11 @@ void View::changeLocation(int location)
 
 ViewerCorona *View::createCorona()
 {
-    Plasma::Package package = Plasma::PluginLoader::self()->loadPackage("Plasma/Shell");
+    KPackage::Package package = KPackage::PackageLoader::self()->loadPackage("Plasma/Shell");
     package.setPath("org.kde.plasma.plasmoidviewershell");
 
     ViewerCorona *cor = new ViewerCorona();
-    cor->setPackage(package);
+    cor->setKPackage(package);
 
     return cor;
 }

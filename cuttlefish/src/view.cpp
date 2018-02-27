@@ -26,8 +26,7 @@
 #include <QQmlEngine>
 #include <QQuickItem>
 
-#include <Plasma/Package>
-#include <Plasma/PluginLoader>
+#include <KPackage/PackageLoader>
 
 #include <KDeclarative/KDeclarative>
 #include <KLocalizedString>
@@ -51,7 +50,7 @@ View::View(const QString &category, QCommandLineParser &parser, QWindow *parent)
     rootContext()->setContextProperty("pickerMode", parser.isSet("picker"));
     qmlRegisterType<IconModel>();
 
-    m_package = Plasma::PluginLoader::self()->loadPackage("Plasma/Generic");
+    m_package = KPackage::PackageLoader::self()->loadPackage("Plasma/Generic");
     m_package.setPath("org.kde.plasma.cuttlefish");
 
     if (!m_package.isValid() || !m_package.metadata().isValid()) {
@@ -59,7 +58,7 @@ View::View(const QString &category, QCommandLineParser &parser, QWindow *parent)
         return;
     }
 
-    setIcon(QIcon::fromTheme(m_package.metadata().icon()));
+    setIcon(QIcon::fromTheme(m_package.metadata().iconName()));
     setTitle(m_package.metadata().name());
 
     const QString qmlFile = m_package.filePath("mainscript");

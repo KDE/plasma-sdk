@@ -26,7 +26,7 @@
 #include <KDirModel>
 #include <KDirLister>
 
-#include <Plasma/Package>
+#include <KPackage/Package>
 
 namespace CuttleFish {
 
@@ -42,7 +42,7 @@ Q_SIGNALS:
     void titleChanged(const QString&);
 
 private:
-    Plasma::Package m_package;
+    KPackage::Package m_package;
     QQuickItem* m_browserRootItem;
     KDirModel m_dirModel;
 };
