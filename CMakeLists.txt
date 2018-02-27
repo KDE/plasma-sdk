@@ -47,12 +47,6 @@ set_package_properties(KF5Kirigami2 PROPERTIES
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0)
 
-if(KDE_PLATFORM_FEATURE_DISABLE_DEPRECATED)
-   set(KDE_NO_DEPRECATED TRUE)
-   set(CMAKE_AUTOMOC_MOC_OPTIONS "-DKDE_NO_DEPRECATED")
-endif()
-
-# Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Archive Completion Config ConfigWidgets CoreAddons DBusAddons Declarative I18n IconThemes
     KIO Plasma PlasmaQuick Service TextEditor WidgetsAddons DocTools)
@@ -71,10 +65,5 @@ add_subdirectory(themeexplorer)
 add_subdirectory(lookandfeelexplorer)
 #add_subdirectory(remote-widgets-browser)
 #add_subdirectory(wallpaperviewer)
-
-# Plasmate now moved to kde:plasmate because it is unmaintained
-#if (KDevPlatform_FOUND AND Qt5WebKit_FOUND AND Qt5WebKitWidgets_FOUND)
-#    add_subdirectory(plasmate)
-#endif()
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
