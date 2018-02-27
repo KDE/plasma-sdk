@@ -43,7 +43,7 @@ class EngineExplorer : public QDialog, public Ui::EngineExplorer
     Q_OBJECT
 
     public:
-        explicit EngineExplorer(QWidget *parent = 0);
+        explicit EngineExplorer(QWidget *parent = nullptr);
         ~EngineExplorer();
 
         void setApp(const QString &app);

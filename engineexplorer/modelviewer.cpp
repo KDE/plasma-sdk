@@ -104,7 +104,7 @@ ModelViewer::ModelViewer(Plasma::DataEngine *engine, const QString &source, QWid
         qDebug() << "########### CALLING SERVICE FOR SOURCE: " << m_source;
         m_model = m_engine->modelForSource(m_source);
 
-        if (m_model != 0) {
+        if (m_model != nullptr) {
             connect(m_engine, SIGNAL(destroyed(QObject*)), this, SLOT(engineDestroyed()));
             m_view->setModel(m_model);
         } else {
@@ -118,14 +118,14 @@ ModelViewer::ModelViewer(Plasma::DataEngine *engine, const QString &source, QWid
 
 ModelViewer::~ModelViewer()
 {
-    m_engine = 0;
+    m_engine = nullptr;
 }
 
 
 void ModelViewer::engineDestroyed()
 {
-    m_model = 0;
-    m_engine = 0;
+    m_model = nullptr;
+    m_engine = nullptr;
     hide();
     deleteLater();
 }

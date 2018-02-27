@@ -59,7 +59,7 @@ public:
            PackageVersionRole = Qt::UserRole + 3
          };
 
-    LnfListModel(QObject *parent = 0);
+    LnfListModel(QObject *parent = nullptr);
     virtual ~LnfListModel();
 
     virtual QHash<int, QByteArray> roleNames() const;

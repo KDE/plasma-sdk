@@ -49,7 +49,7 @@ Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 
 EngineExplorer::EngineExplorer(QWidget* parent)
     : QDialog(parent),
-      m_engine(0),
+      m_engine(nullptr),
       m_sourceCount(0),
       m_requestingSource(false),
       m_expandButton(new QPushButton(i18n("Expand All"), this)),
@@ -142,7 +142,7 @@ void EngineExplorer::setInterval(const int interval)
 
 void EngineExplorer::dataUpdated(const QString& source, const Plasma::DataEngine::Data& data)
 {
-    QList<QStandardItem*> items = m_dataModel->findItems(source, 0);
+    QList<QStandardItem*> items = m_dataModel->findItems(source, nullptr);
 
     if (items.isEmpty()) {
         return;
@@ -182,7 +182,7 @@ void EngineExplorer::showEngine(const QString& name)
     QStringList headers;
     headers << i18n("DataSource") << i18n("Key") << i18n("Value") << i18n("Type");
     m_dataModel->setHorizontalHeaderLabels(headers);
-    m_engine = 0;
+    m_engine = nullptr;
     m_sourceCount = 0;
 
     if (!m_engineName.isEmpty()) {
@@ -223,7 +223,7 @@ void EngineExplorer::showEngine(const QString& name)
 void EngineExplorer::addSource(const QString& source)
 {
     //qDebug() << "adding" << source;
-    QList<QStandardItem*> items = m_dataModel->findItems(source, 0);
+    QList<QStandardItem*> items = m_dataModel->findItems(source, nullptr);
     if (!items.isEmpty()) {
         //qDebug() << "er... already there?";
         return;
@@ -246,7 +246,7 @@ void EngineExplorer::addSource(const QString& source)
 
 void EngineExplorer::removeSource(const QString& source)
 {
-    QList<QStandardItem*> items = m_dataModel->findItems(source, 0);
+    QList<QStandardItem*> items = m_dataModel->findItems(source, nullptr);
 
     if (items.count() < 1) {
         return;

@@ -57,7 +57,7 @@ public:
         Theme
     };
 
-    explicit IconModel(QObject *parent = 0);
+    explicit IconModel(QObject *parent = nullptr);
 
 
     virtual QHash<int, QByteArray> roleNames() const;

@@ -38,7 +38,7 @@ class CuttleFishPlugin : public KTextEditor::Plugin
     Q_OBJECT
 
 public:
-    explicit CuttleFishPlugin(QObject *parent = 0, const QList<QVariant> & = QList<QVariant>());
+    explicit CuttleFishPlugin(QObject *parent = nullptr, const QList<QVariant> & = QList<QVariant>());
     virtual ~CuttleFishPlugin();
 
     QObject *createView(KTextEditor::MainWindow *mainWindow) Q_DECL_OVERRIDE;

@@ -84,7 +84,7 @@ void KTreeViewSearchLinePrivate::rowsInserted( QAbstractItemModel *model, const 
   if ( !model )
     return;
 
-  QTreeView* widget = 0L;
+  QTreeView* widget = nullptr;
   foreach ( QTreeView* tree, treeViews )
     if ( tree->model() == model ) {
       widget = tree;
@@ -264,7 +264,7 @@ QTreeView *KTreeViewSearchLine::treeView() const
   if ( d->treeViews.count() == 1 )
     return d->treeViews.first();
   else
-    return 0;
+    return nullptr;
 }
 
 QList<QTreeView *> KTreeViewSearchLine::treeViews() const
@@ -549,8 +549,8 @@ class KTreeViewSearchLineWidgetPrivate
 {
   public:
     KTreeViewSearchLineWidgetPrivate()
-      : treeView( 0 ),
-        searchLine( 0 )
+      : treeView( nullptr ),
+        searchLine( nullptr )
     {
     }
 

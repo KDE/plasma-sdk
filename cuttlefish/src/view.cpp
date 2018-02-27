@@ -36,7 +36,7 @@ using namespace CuttleFish;
 
 View::View(const QString &category, QCommandLineParser &parser, QWindow *parent)
     : QQuickView(parent),
-    m_browserRootItem(0)
+    m_browserRootItem(nullptr)
 {
     setResizeMode(QQuickView::SizeRootObjectToView);
     QQuickWindow::setDefaultAlphaBuffer(true);

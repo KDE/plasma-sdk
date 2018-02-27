@@ -57,7 +57,7 @@ public:
            PackageVersionRole = Qt::UserRole + 3
          };
 
-    ThemeListModel(QObject *parent = 0);
+    ThemeListModel(QObject *parent = nullptr);
     virtual ~ThemeListModel();
 
     virtual QHash<int, QByteArray> roleNames() const;

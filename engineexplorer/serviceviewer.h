@@ -37,7 +37,7 @@ class ServiceViewer : public QDialog, public Ui::ServiceViewer
     Q_OBJECT
 
 public:
-    ServiceViewer(Plasma::DataEngine *engine, const QString &m_source, QWidget *parent = 0);
+    ServiceViewer(Plasma::DataEngine *engine, const QString &m_source, QWidget *parent = nullptr);
     ~ServiceViewer();
 
 private:

@@ -59,7 +59,7 @@ public:
         FrameSvgPrefixes
     };
 
-    explicit ThemeModel(const KPackage::Package &package, QObject *parent = 0);
+    explicit ThemeModel(const KPackage::Package &package, QObject *parent = nullptr);
     ~ThemeModel();
 
     ThemeListModel *themeList();

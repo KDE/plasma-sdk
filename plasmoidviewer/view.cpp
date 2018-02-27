@@ -37,7 +37,7 @@ class ViewerCorona : public Plasma::Corona
 public:
     ViewerCorona()
         : Plasma::Corona(),
-          m_view(0)
+          m_view(nullptr)
     {}
 
     void setView(View *view)
@@ -98,7 +98,7 @@ void View::addApplet(const QString &applet)
         return;
     }
 
-    Plasma::Applet *a = 0;
+    Plasma::Applet *a = nullptr;
     if (metadataPath.isEmpty()) {
         a = containment()->createApplet(applet);
     } else {
@@ -313,7 +313,7 @@ void View::takeScreenShot()
             return;
         }
 
-        QString dest = QFileDialog::getSaveFileName(0, i18nc("@title:window", "Save Screenshot"),
+        QString dest = QFileDialog::getSaveFileName(nullptr, i18nc("@title:window", "Save Screenshot"),
                                                     QDir::homePath(), QStringLiteral("Images (*.png)"));
 
         if (dest.isEmpty()) {

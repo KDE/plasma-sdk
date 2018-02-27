@@ -51,7 +51,7 @@ class ColorEditor : public QObject
     Q_PROPERTY(QColor complementaryFocusColor READ complementaryFocusColor WRITE setComplementaryFocusColor NOTIFY colorsChanged) 
 public:
 
-    explicit ColorEditor(QObject *parent = 0);
+    explicit ColorEditor(QObject *parent = nullptr);
     ~ColorEditor();
 
     QString theme() const;

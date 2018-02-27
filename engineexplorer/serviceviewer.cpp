@@ -34,7 +34,7 @@
 ServiceViewer::ServiceViewer(Plasma::DataEngine *engine, const QString &source, QWidget *parent)
     : QDialog(parent),
       m_engine(engine),
-      m_service(0),
+      m_service(nullptr),
       m_source(source),
       m_operationCount(0),
       m_operationButton(new QPushButton(i18n("Start Operation"), this))
@@ -72,7 +72,7 @@ ServiceViewer::ServiceViewer(Plasma::DataEngine *engine, const QString &source, 
         qDebug() << "########### CALLING SERVICE FOR SOURCE: " << m_source;
         m_service = m_engine->serviceForSource(m_source);
 
-        if (m_service != 0) {
+        if (m_service != nullptr) {
             serviceName = m_service->name();
             updateOperations();
             connect(m_service, SIGNAL(operationsChanged()), this, SLOT(updateOperations()));
@@ -93,7 +93,7 @@ ServiceViewer::ServiceViewer(Plasma::DataEngine *engine, const QString &source, 
 ServiceViewer::~ServiceViewer()
 {
     delete m_service;
-    m_engine = 0;
+    m_engine = nullptr;
 }
 
 void ServiceViewer::updateOperations()
@@ -214,8 +214,8 @@ void ServiceViewer::operationResult(KJob *j)
 
 void ServiceViewer::engineDestroyed()
 {
-    m_service = 0;
-    m_engine = 0;
+    m_service = nullptr;
+    m_engine = nullptr;
     hide();
     deleteLater();
 }

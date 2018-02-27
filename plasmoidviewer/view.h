@@ -29,7 +29,7 @@ class View : public PlasmaQuick::ContainmentView
     Q_PROPERTY(bool konsoleVisible READ konsoleVisible CONSTANT);
 
 public:
-    View(ViewerCorona *corona, bool konsoleVisible, QWindow *parent = 0);
+    View(ViewerCorona *corona, bool konsoleVisible, QWindow *parent = nullptr);
     ~View();
 
     void addApplet(const QString &applet);

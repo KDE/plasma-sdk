@@ -38,7 +38,7 @@ class Delegate : public QAbstractItemDelegate
     Q_OBJECT
 
 public:
-    Delegate(QObject *parent = 0);
+    Delegate(QObject *parent = nullptr);
     virtual ~Delegate();
 
     virtual void paint(QPainter *painter, const QStyleOptionViewItem &option,
@@ -54,7 +54,7 @@ class ModelViewer : public QDialog
     Q_OBJECT
 
 public:
-    ModelViewer(Plasma::DataEngine *engine, const QString &m_source, QWidget *parent = 0);
+    ModelViewer(Plasma::DataEngine *engine, const QString &m_source, QWidget *parent = nullptr);
     ~ModelViewer();
 
 private Q_SLOTS:

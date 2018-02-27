@@ -481,7 +481,7 @@ void LnfLogic::processThumbnail(const QString &path)
 
 QString LnfLogic::openFile()
 {
-    return QFileDialog::getOpenFileName(0,
+    return QFileDialog::getOpenFileName(nullptr,
     i18n("Open Image"), QStandardPaths::writableLocation(QStandardPaths::HomeLocation), i18n("Image Files (*.png *.jpg *.bmp)"));
 }
 
