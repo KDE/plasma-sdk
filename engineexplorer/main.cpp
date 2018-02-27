@@ -29,9 +29,6 @@
 
 #include "engineexplorer.h"
 
-static const char description[] = I18N_NOOP("Explore the data published by Plasma DataEngines");
-static const char version[] = PROJECT_VERSION;
-
 void listEngines()
 {
     int maxLen = 0;
@@ -71,7 +68,8 @@ int main(int argc, char **argv)
     KLocalizedString::setApplicationDomain("plasmaengineexplorer");
 
     KAboutData aboutData("plasmaengineexplorer", i18n("Plasma Engine Explorer"),
-                         version, i18n(description), KAboutLicense::GPL,
+                         PROJECT_VERSION, i18n("Explore the data published by Plasma DataEngines"),
+                         KAboutLicense::GPL,
                          i18n("(c) 2006, The KDE Team"));
     aboutData.addAuthor(i18n("Aaron J. Seigo"),
                         i18n( "Author and maintainer" ),

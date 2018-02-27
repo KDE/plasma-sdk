@@ -32,16 +32,12 @@
 // Own
 #include "view.h"
 
-static const char description[] = I18N_NOOP("Cuttlefish Icon Browser");
-static const char version[] = PROJECT_VERSION;
-static const char HOME_URL[] = "http://kde.org";
-
 int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
     KLocalizedString::setApplicationDomain("cuttlefish");
 
-    app.setApplicationVersion(version);
+    app.setApplicationVersion(PROJECT_VERSION);
 
     const static auto _category = QStringLiteral("category");
     QCommandLineOption category = QCommandLineOption(QStringList() << QStringLiteral("c") << _category,
@@ -57,7 +53,7 @@ int main(int argc, char **argv)
 
     QCommandLineParser parser;
     parser.addVersionOption();
-    parser.setApplicationDescription(description);
+    parser.setApplicationDescription("Cuttlefish Icon Browser");
     parser.addHelpOption();
     parser.addOption(category);
     parser.addOption(fullscreen);

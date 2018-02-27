@@ -40,8 +40,6 @@
 
 #include <Plasma/Theme>
 
-static const char version[] = PROJECT_VERSION;
-
 int main(int argc, char **argv)
 {
     QQmlDebuggingEnabler debugEnabler;
@@ -51,7 +49,7 @@ int main(int argc, char **argv)
 
     KDBusService service(KDBusService::Multiple);
 
-    app.setApplicationVersion(version);
+    app.setApplicationVersion(PROJECT_VERSION);
     QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("plasma"), app.windowIcon()));
 
     QCommandLineParser parser;

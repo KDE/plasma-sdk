@@ -42,13 +42,10 @@ int main(int argc, char **argv)
     QCommandLineParser parser;
     QApplication app(argc, argv);
 
-    const QString description = i18n("Plasma Theme Explorer");
-    const char version[] = PROJECT_VERSION;
-
-    app.setApplicationVersion(version);
+    app.setApplicationVersion(PROJECT_VERSION);
     parser.addVersionOption();
     parser.addHelpOption();
-    parser.setApplicationDescription(description);
+    parser.setApplicationDescription(i18n("Plasma Theme Explorer"));
 
     QCommandLineOption themeOption(QCommandLineOption(QStringList() << "t" << "theme", i18n("The theme to open"), "theme"));
 
