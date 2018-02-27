@@ -70,7 +70,7 @@ void LnfListModel::clearThemeList()
 
 void LnfListModel::reload()
 {
-    reset();
+    beginResetModel();
     clearThemeList();
 
     // get all desktop themes
@@ -118,7 +118,6 @@ void LnfListModel::reload()
         m_themes << info;
     }
 
-    beginResetModel();
     endResetModel();
     emit countChanged();
 }

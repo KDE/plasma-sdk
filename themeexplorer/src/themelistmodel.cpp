@@ -69,7 +69,7 @@ void ThemeListModel::clearThemeList()
 
 void ThemeListModel::reload()
 {
-    reset();
+    beginResetModel();
     clearThemeList();
 
     // get all desktop themes
@@ -117,7 +117,6 @@ void ThemeListModel::reload()
         m_themes[name] = info;
     }
 
-    beginResetModel();
     endResetModel();
     emit countChanged();
 }
