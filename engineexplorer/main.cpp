@@ -81,8 +81,7 @@ int main(int argc, char **argv)
     KAboutData::setApplicationData(aboutData);
 
     QCommandLineParser parser;
-    parser.addVersionOption();
-    parser.addHelpOption();
+    aboutData.setupCommandLine(&parser);
     parser.addOption(QCommandLineOption(QStringList() << "list", i18n("Displays a list of known engines and their descriptions")));
     parser.addOption(QCommandLineOption(QStringList() << "height", i18n("The desired height in pixels"), "pixels"));
     parser.addOption(QCommandLineOption(QStringList() << "width", i18n("The desired width in pixels"), "pixels"));
@@ -96,6 +95,7 @@ int main(int argc, char **argv)
 
 
     parser.process(app);
+    aboutData.processCommandLine(&parser);
 
     if (parser.isSet("list")) {
         listEngines();
