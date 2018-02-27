@@ -115,7 +115,7 @@ void View::addApplet(const QString &applet)
         containment()->addApplet(a);
     }
 
-    if (!a->pluginInfo().isValid()) {
+    if (!a->pluginMetaData().isValid()) {
         // xgettext:no-c-format
         qCritical() << i18n("Applet %1 does not exist.", applet);
         return;
@@ -132,7 +132,7 @@ void View::addContainment(const QString &cont)
 
     Plasma::Containment *c = corona()->createContainment(actualCont);
 
-    if (!c->pluginInfo().isValid()) {
+    if (!c->pluginMetaData().isValid()) {
         // xgettext:no-c-format
         qCritical() << i18n("Containment %1 does not exist.", actualCont);
         return;
@@ -141,8 +141,8 @@ void View::addContainment(const QString &cont)
     setContainment(c);
 
     connect(containment(), &Plasma::Containment::appletRemoved, [=](Plasma::Applet *applet) {
-        if (applet && applet->pluginInfo().isValid()) {
-            addApplet(applet->pluginInfo().pluginName());
+        if (applet && applet->pluginMetaData().isValid()) {
+            addApplet(applet->pluginMetaData().pluginId());
         }
     });
 }
