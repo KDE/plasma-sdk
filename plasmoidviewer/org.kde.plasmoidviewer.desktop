@@ -1,0 +1,9 @@
+[Desktop Entry]
+Terminal=false
+Name=Plasmoidviewer
+Comment=Testing tool for Plasma applets
+Exec=plasmoidviewer
+Icon=plasma
+Type=Application
+Categories=Qt;KDE;Development;IDE;
+NoDisplay=True

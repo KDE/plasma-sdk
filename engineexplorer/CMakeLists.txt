@@ -24,4 +24,7 @@ target_link_libraries(plasmaengineexplorer
 
 install(TARGETS plasmaengineexplorer ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
+install(PROGRAMS org.kde.plasmaengineexplorer.desktop  DESTINATION ${KDE_INSTALL_APPDIR})
+install(FILES org.kde.plasmaengineexplorer.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
+
 kdoctools_create_manpage (man-plasmaengineexplorer.1.docbook 1 INSTALL_DESTINATION ${KDE_INSTALL_MANDIR})

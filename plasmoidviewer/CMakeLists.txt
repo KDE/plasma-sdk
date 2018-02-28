@@ -20,6 +20,9 @@ target_link_libraries(plasmoidviewer
 
 install(TARGETS plasmoidviewer ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
+install(PROGRAMS org.kde.plasmoidviewer.desktop  DESTINATION ${KDE_INSTALL_APPDIR})
+install(FILES org.kde.plasmoidviewer.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
+
 kdoctools_create_manpage (man-plasmoidviewer.1.docbook 1 INSTALL_DESTINATION ${KDE_INSTALL_MANDIR})
 
 #qml

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Terminal=false
+Name=Plasma Engine Explorer
+Comment=Explorer for the data published by Plasma DataEngines
+Exec=plasmaengineexplorer
+Icon=plasma
+Type=Application
+Categories=Qt;KDE;Development;IDE;

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop">
+  <id>org.kde.plasmaengineexplorer</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <name>Plasma Engine Explorer</name>
+  <summary>Explorer for the data published by Plasma DataEngines</summary>
+  <description>
+    <p>Plasma Engine Explorer is a graphical tool allowing developers to test Plasma DataEngines without writing a Plasma applet.</p>
+  </description>
+  <launchable type="desktop-id">org.kde.plasmaengineexplorer.desktop</launchable>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Plasma%20SDK&amp;component=engineexplorer</url>
+  <project_group>KDE</project_group>
+  <provides>
+    <binary>plasmaengineexplorer</binary>
+  </provides>
+</component>

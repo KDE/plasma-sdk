@@ -48,8 +48,10 @@ int main(int argc, char **argv)
     KLocalizedString::setApplicationDomain("plasmoidviewer");
 
     app.setApplicationName(QStringLiteral("plasmoidviewer"));
+    app.setApplicationDisplayName(i18n("Plasmoidviewer"));
     app.setOrganizationDomain(QStringLiteral("kde.org"));
     app.setApplicationVersion(PROJECT_VERSION);
+    app.setDesktopFileName(QStringLiteral("org.kde.plasmoidviewer"));
     QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("plasma"), app.windowIcon()));
 
     QCommandLineParser parser;
