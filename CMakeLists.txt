@@ -76,7 +76,6 @@ add_subdirectory(engineexplorer)
 add_subdirectory(plasmoidviewer)
 add_subdirectory(themeexplorer)
 add_subdirectory(lookandfeelexplorer)
-#add_subdirectory(remote-widgets-browser)
 #add_subdirectory(wallpaperviewer)
 
 # Plasmate now moved to kde:plasmate because it is unmaintained
