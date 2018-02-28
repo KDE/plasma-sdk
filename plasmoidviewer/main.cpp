@@ -49,8 +49,6 @@ int main(int argc, char **argv)
     QApplication app(argc, argv);
     KLocalizedString::setApplicationDomain("plasmoidviewer");
 
-    KDBusService service(KDBusService::Multiple);
-
     app.setApplicationVersion(version);
     QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("plasma"), app.windowIcon()));
 
@@ -90,6 +88,8 @@ int main(int argc, char **argv)
     parser.addHelpOption();
     parser.addVersionOption();
     parser.process(app);
+
+    KDBusService service(KDBusService::Multiple);
 
     const QString applet = parser.value("applet");
     if (applet.isEmpty()) {
