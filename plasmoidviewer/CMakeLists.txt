@@ -18,9 +18,9 @@ target_link_libraries(plasmoidviewer
     KF5::ConfigWidgets
 )
 
-install(TARGETS plasmoidviewer ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS plasmoidviewer ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
-kdoctools_create_manpage (man-plasmoidviewer.1.docbook 1 INSTALL_DESTINATION ${MAN_INSTALL_DIR})
+kdoctools_create_manpage (man-plasmoidviewer.1.docbook 1 INSTALL_DESTINATION ${KDE_INSTALL_MANDIR})
 
 #qml
 plasma_install_package(qmlpackages/shell org.kde.plasma.plasmoidviewershell shells shell)

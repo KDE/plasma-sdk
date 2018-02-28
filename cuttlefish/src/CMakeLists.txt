@@ -20,6 +20,6 @@ target_link_libraries(cuttlefish
     KF5::Package
 )
 
-install( TARGETS cuttlefish ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS cuttlefish ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 add_subdirectory(editorplugin)

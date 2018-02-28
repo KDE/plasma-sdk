@@ -15,6 +15,6 @@ target_link_libraries(cuttlefishplugin
     KF5::Service
 )
 
-install(TARGETS cuttlefishplugin  DESTINATION ${PLUGIN_INSTALL_DIR}/ktexteditor)
+install(TARGETS cuttlefishplugin  DESTINATION ${KDE_INSTALL_PLUGINDIR}/ktexteditor)
 
 kcoreaddons_desktop_to_json (cuttlefishplugin cuttlefishplugin.desktop)

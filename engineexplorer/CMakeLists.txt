@@ -22,6 +22,6 @@ target_link_libraries(plasmaengineexplorer
     KF5::ConfigWidgets
 )
 
-install(TARGETS plasmaengineexplorer ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS plasmaengineexplorer ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
-kdoctools_create_manpage (man-plasmaengineexplorer.1.docbook 1 INSTALL_DESTINATION ${MAN_INSTALL_DIR})
+kdoctools_create_manpage (man-plasmaengineexplorer.1.docbook 1 INSTALL_DESTINATION ${KDE_INSTALL_MANDIR})

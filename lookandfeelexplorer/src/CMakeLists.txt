@@ -26,4 +26,4 @@ target_link_libraries(lookandfeelexplorer
  KF5::QuickAddons
 )
 
-install(TARGETS lookandfeelexplorer ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS lookandfeelexplorer ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})

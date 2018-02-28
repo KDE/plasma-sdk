@@ -27,4 +27,4 @@ target_link_libraries(plasmathemeexplorer
  KF5::QuickAddons
 )
 
-install(TARGETS plasmathemeexplorer ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS plasmathemeexplorer ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
