@@ -68,7 +68,6 @@ add_subdirectory(engineexplorer)
 add_subdirectory(plasmoidviewer)
 add_subdirectory(themeexplorer)
 add_subdirectory(lookandfeelexplorer)
-#add_subdirectory(remote-widgets-browser)
 #add_subdirectory(wallpaperviewer)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
