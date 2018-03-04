@@ -2,6 +2,7 @@
 Terminal=false
 Name=Plasma Engine Explorer
 Name[ca]=Explorador de motors del Plasma
+Name[en_GB]=Plasma Engine Explorer
 Name[nl]=Plasma-engine-verkenner
 Name[pt]=Explorador do Motor do Plasma
 Name[sv]=Gränssnittsutforskare för Plasma
@@ -9,6 +10,7 @@ Name[uk]=Навігатор рушіїв Плазми
 Name[x-test]=xxPlasma Engine Explorerxx
 Comment=Explorer for the data published by Plasma DataEngines
 Comment[ca]=Explorador de les dades publicades pels motors de dades del Plasma
+Comment[en_GB]=Explorer for the data published by Plasma DataEngines
 Comment[nl]=Verkenner voor de gegevens gepubliceerd door Plasma DataEngines
 Comment[pt]=Explorador dos dados publicados pelos motores de dados do Plasma
 Comment[sv]=Utforskare av data som publiceras av datagränssnitt i Plasma
