@@ -13,6 +13,7 @@
   <name xml:lang="sv">Gränssnittsutforskare för Plasma</name>
   <name xml:lang="uk">Навігатор рушіїв Плазми</name>
   <name xml:lang="x-test">xxPlasma Engine Explorerxx</name>
+  <name xml:lang="zh-CN">Plasma 引擎浏览器</name>
   <summary>Explorer for the data published by Plasma DataEngines</summary>
   <summary xml:lang="ca">Explorador de les dades publicades pels motors de dades del Plasma</summary>
   <summary xml:lang="en-GB">Explorer for the data published by Plasma DataEngines</summary>
