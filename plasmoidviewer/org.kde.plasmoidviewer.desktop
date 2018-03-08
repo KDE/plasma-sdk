@@ -22,4 +22,4 @@ Exec=plasmoidviewer
 Icon=plasma
 Type=Application
 Categories=Qt;KDE;Development;IDE;
-NoDisplay=True
+NoDisplay=true
