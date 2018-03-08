@@ -41,7 +41,7 @@ public:
     explicit CuttleFishPlugin(QObject *parent = nullptr, const QList<QVariant> & = QList<QVariant>());
     ~CuttleFishPlugin() override;
 
-    QObject *createView(KTextEditor::MainWindow *mainWindow) Q_DECL_OVERRIDE;
+    QObject *createView(KTextEditor::MainWindow *mainWindow) override;
 
 private Q_SLOTS:
     void contextMenuAboutToShow (KTextEditor::View *view, QMenu *menu);

@@ -44,7 +44,7 @@ class IconsParserHandler : public QXmlDefaultHandler
 public:
     IconsParserHandler();
     bool startElement(const QString &namespaceURI, const QString &localName,
-                      const QString &qName, const QXmlAttributes &atts) Q_DECL_OVERRIDE;
+                      const QString &qName, const QXmlAttributes &atts) override;
     QStringList m_ids;
     QStringList m_prefixes;
 };
