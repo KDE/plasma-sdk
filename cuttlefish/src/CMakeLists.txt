@@ -18,6 +18,7 @@ target_link_libraries(cuttlefish
     KF5::I18n
     KF5::IconThemes
     KF5::Package
+    Qt5::DBus
 )
 
 install(TARGETS cuttlefish ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
