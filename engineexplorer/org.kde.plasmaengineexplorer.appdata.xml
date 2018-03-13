@@ -5,6 +5,7 @@
   <project_license>GPL-2.0+</project_license>
   <name>Plasma Engine Explorer</name>
   <name xml:lang="ca">Explorador de motors del Plasma</name>
+  <name xml:lang="ca-valencia">Explorador de motors del Plasma</name>
   <name xml:lang="de">Plasma-Datenquellen</name>
   <name xml:lang="en-GB">Plasma Engine Explorer</name>
   <name xml:lang="fr">Moteur d'exploration Plasma</name>
@@ -18,6 +19,7 @@
   <name xml:lang="zh-CN">Plasma 引擎浏览器</name>
   <summary>Explorer for the data published by Plasma DataEngines</summary>
   <summary xml:lang="ca">Explorador de les dades publicades pels motors de dades del Plasma</summary>
+  <summary xml:lang="ca-valencia">Explorador de les dades publicades pels motors de dades del Plasma</summary>
   <summary xml:lang="en-GB">Explorer for the data published by Plasma DataEngines</summary>
   <summary xml:lang="nl">Verkenner voor de gegevens gepubliceerd door Plasma DataEngines</summary>
   <summary xml:lang="nn">Utforsking av data publisert av Plasma-datamotorar</summary>
@@ -28,6 +30,7 @@
   <description>
     <p>Plasma Engine Explorer is a graphical tool allowing developers to test Plasma DataEngines without writing a Plasma applet.</p>
     <p xml:lang="ca">L'explorador de motors del Plasma és una eina gràfica que permet als desenvolupadors provar els motors de dades Plasma sense escriure una miniaplicació Plasma.</p>
+    <p xml:lang="ca-valencia">L'explorador de motors del Plasma és una eina gràfica que permet als desenvolupadors provar els motors de dades Plasma sense escriure una miniaplicació Plasma.</p>
     <p xml:lang="en-GB">Plasma Engine Explorer is a graphical tool allowing developers to test Plasma DataEngines without writing a Plasma applet.</p>
     <p xml:lang="nl">Plasma-engine-verkenner is een grafisch hulpmiddel die ontwikkelaars in staat stelt om Plasma DataEngines te testen zonder een Plasma-applet te schrijven.</p>
     <p xml:lang="nn">Utforskaren for Plasma-motorar er eit grafisk verktøy som lèt utviklarar testa datamotorar for Plasma utan å skriva eit eige Plasma-element.</p>
