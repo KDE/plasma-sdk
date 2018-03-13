@@ -2,6 +2,7 @@
 Terminal=false
 Name=Plasmoidviewer
 Name[ca]=Plasmoidviewer
+Name[ca@valencia]=Plasmoidviewer
 Name[en_GB]=Plasmoidviewer
 Name[it]=Plasmoidviewer
 Name[nl]=Plasmoidviewer
@@ -12,6 +13,7 @@ Name[uk]=Перегляд плазмоїдів
 Name[x-test]=xxPlasmoidviewerxx
 Comment=Testing tool for Plasma applets
 Comment[ca]=Eina de proves de les miniaplicacions del Plasma
+Comment[ca@valencia]=Eina de proves de les miniaplicacions del Plasma
 Comment[en_GB]=Testing tool for Plasma applets
 Comment[it]=Strumento di prova delle applet di Plasma
 Comment[nl]=Testhulpmiddel voor Plasma-applets

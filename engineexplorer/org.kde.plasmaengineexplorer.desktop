@@ -2,6 +2,7 @@
 Terminal=false
 Name=Plasma Engine Explorer
 Name[ca]=Explorador de motors del Plasma
+Name[ca@valencia]=Explorador de motors del Plasma
 Name[de]=Plasma-Datenquellen
 Name[en_GB]=Plasma Engine Explorer
 Name[it]=Plasma Engine Explorer
@@ -14,6 +15,7 @@ Name[x-test]=xxPlasma Engine Explorerxx
 Name[zh_CN]=Plasma 引擎浏览器
 Comment=Explorer for the data published by Plasma DataEngines
 Comment[ca]=Explorador de les dades publicades pels motors de dades del Plasma
+Comment[ca@valencia]=Explorador de les dades publicades pels motors de dades del Plasma
 Comment[en_GB]=Explorer for the data published by Plasma DataEngines
 Comment[it]=Esploratore per i dati pubblicati da Plasma DataEngines
 Comment[nl]=Verkenner voor de gegevens gepubliceerd door Plasma DataEngines
