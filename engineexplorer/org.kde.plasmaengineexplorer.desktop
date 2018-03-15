@@ -24,6 +24,7 @@ Comment[pt]=Explorador dos dados publicados pelos motores de dados do Plasma
 Comment[sv]=Utforskare av data som publiceras av datagränssnitt i Plasma
 Comment[uk]=Навігатор для даних, оприлюднених рушієм даних Плазми
 Comment[x-test]=xxExplorer for the data published by Plasma DataEnginesxx
+Comment[zh_CN]=Plasma DataEngines 发布数据的浏览器
 Exec=plasmaengineexplorer
 Icon=plasma
 Type=Application
