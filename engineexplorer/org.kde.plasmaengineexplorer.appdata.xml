@@ -8,6 +8,7 @@
   <name xml:lang="ca-valencia">Explorador de motors del Plasma</name>
   <name xml:lang="de">Plasma-Datenquellen</name>
   <name xml:lang="en-GB">Plasma Engine Explorer</name>
+  <name xml:lang="es">Explorador de motores de Plasma</name>
   <name xml:lang="fr">Moteur d'exploration Plasma</name>
   <name xml:lang="nl">Plasma-engine-verkenner</name>
   <name xml:lang="nn">Utforskar for Plasma-motorar</name>
@@ -21,6 +22,7 @@
   <summary xml:lang="ca">Explorador de les dades publicades pels motors de dades del Plasma</summary>
   <summary xml:lang="ca-valencia">Explorador de les dades publicades pels motors de dades del Plasma</summary>
   <summary xml:lang="en-GB">Explorer for the data published by Plasma DataEngines</summary>
+  <summary xml:lang="es">Explorador para los datos publicados por los motores de datos de Plasma</summary>
   <summary xml:lang="nl">Verkenner voor de gegevens gepubliceerd door Plasma DataEngines</summary>
   <summary xml:lang="nn">Utforsking av data publisert av Plasma-datamotorar</summary>
   <summary xml:lang="pt">Explorador dos dados publicados pelos Motores de Dados do Plasma</summary>
@@ -33,6 +35,7 @@
     <p xml:lang="ca">L'explorador de motors del Plasma és una eina gràfica que permet als desenvolupadors provar els motors de dades Plasma sense escriure una miniaplicació Plasma.</p>
     <p xml:lang="ca-valencia">L'explorador de motors del Plasma és una eina gràfica que permet als desenvolupadors provar els motors de dades Plasma sense escriure una miniaplicació Plasma.</p>
     <p xml:lang="en-GB">Plasma Engine Explorer is a graphical tool allowing developers to test Plasma DataEngines without writing a Plasma applet.</p>
+    <p xml:lang="es">El explorador de motores de Plasma es una herramienta gráfica que permite a los desarrolladores probar motores de datos de Plasma sin la necesidad de escribir una miniaplicación para Plasma.</p>
     <p xml:lang="nl">Plasma-engine-verkenner is een grafisch hulpmiddel die ontwikkelaars in staat stelt om Plasma DataEngines te testen zonder een Plasma-applet te schrijven.</p>
     <p xml:lang="nn">Utforskaren for Plasma-motorar er eit grafisk verktøy som lèt utviklarar testa datamotorar for Plasma utan å skriva eit eige Plasma-element.</p>
     <p xml:lang="pt">O Explorador do Motor do Plasma é uma ferramenta gráfica que permite aos programadores testarem os motores de dados do Plasma sem criar uma 'applet' do Plasma.</p>
