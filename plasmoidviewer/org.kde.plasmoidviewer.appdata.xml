@@ -15,6 +15,7 @@
   <name xml:lang="it">Visore di plasmoidi</name>
   <name xml:lang="nl">Plasmoidviewer</name>
   <name xml:lang="nn">PlasmoidViewer</name>
+  <name xml:lang="pl">Przeglądarka plazmoidów</name>
   <name xml:lang="pt">Visualizador de Plasmóides</name>
   <name xml:lang="sk">Plasmoidviewer</name>
   <name xml:lang="sv">Plasmoid-visning</name>
@@ -33,6 +34,7 @@
   <summary xml:lang="it">Strumento di prova per le applet di Plasma</summary>
   <summary xml:lang="nl">Testhulpmiddel voor Plasma-applets</summary>
   <summary xml:lang="nn">Testverktøy for Plasma-element</summary>
+  <summary xml:lang="pl">Narzędzie do prób apletów Plazmy</summary>
   <summary xml:lang="pt">Ferramenta de testes para as 'applets' do Plasma</summary>
   <summary xml:lang="sk">Testovací nástroj pre Plasma applety</summary>
   <summary xml:lang="sv">Testverktyg för Plasma miniprogram</summary>
@@ -51,6 +53,7 @@
     <p xml:lang="it">Il visore di plasmoidi è uno strumento grafico che permette agli sviluppatori di Plasma di provare le applet di Plasma.</p>
     <p xml:lang="nl">Plasmoidviewer is een grafisch hulpmiddel die ontwikkelaars in staat stelt om Plasma applets te testen.</p>
     <p xml:lang="nn">Plasmoidviewer er eit grafisk verktøy utviklarar kan bruka til å testa Plasma-verktøy.</p>
+    <p xml:lang="pl">Przeglądarka Plazmoidów jest graficznym narzędziem umożliwiającym programistom wypróbowywanie apletów Plazmy.</p>
     <p xml:lang="pt">O Visualizador de Plasmóides é uma ferramenta gráfica que permite aos programadores testarem as 'applets' do Plasma.</p>
     <p xml:lang="sk">Plasmoidviewer je grafický nástroj na umožnenie vývojárom testovať Plasma applety.</p>
     <p xml:lang="sv">Plasmoid-visning är ett grafiskt verktyg som låter utvecklare prova Plasma miniprogram.</p>
