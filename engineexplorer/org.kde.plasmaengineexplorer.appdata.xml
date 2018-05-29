@@ -36,6 +36,7 @@
   <summary xml:lang="nn">Utforsking av data publisert av Plasma-datamotorar</summary>
   <summary xml:lang="pl">Przeglądaj dane udostępniane przez silniki danych Plazmy</summary>
   <summary xml:lang="pt">Explorador dos dados publicados pelos Motores de Dados do Plasma</summary>
+  <summary xml:lang="pt-BR">Explorador para os dados publicados pelo Plasma DataEngines</summary>
   <summary xml:lang="sv">Utforskare av data som publiceras av datagränssnitt i Plasma</summary>
   <summary xml:lang="uk">Навігатор для даних, оприлюднених рушієм даних Плазми</summary>
   <summary xml:lang="x-test">xxExplorer for the data published by Plasma DataEnginesxx</summary>
@@ -54,6 +55,7 @@
     <p xml:lang="nn">Utforskaren for Plasma-motorar er eit grafisk verktøy som lèt utviklarar testa datamotorar for Plasma utan å skriva eit eige Plasma-element.</p>
     <p xml:lang="pl">Przeglądarka silnika Plazmy jest narzędziem graficznym umożliwiającym programistom wypróbowywanie silników danych Plazmy bez pisania apletów Plazmy.</p>
     <p xml:lang="pt">O Explorador do Motor do Plasma é uma ferramenta gráfica que permite aos programadores testarem os motores de dados do Plasma sem criar uma 'applet' do Plasma.</p>
+    <p xml:lang="pt-BR">O Explorador de mecanismos do Plasma é uma ferramenta gráfica que permite aos desenvolvedores testar o Plasma DataEngines sem escrever um miniaplicativo Plasma.</p>
     <p xml:lang="sv">Gränssnittsutforskare för Plasma är ett grafiskt verktyg som låter utvecklare testa Plasma datagränssnitt utan att skriva ett Plasma miniprogram.</p>
     <p xml:lang="uk">Навігатор рушіїв Плазми — це графічний інструмент, який надає розробникам можливість перевірити рушії Плазми без написання аплету Плазми.</p>
     <p xml:lang="x-test">xxPlasma Engine Explorer is a graphical tool allowing developers to test Plasma DataEngines without writing a Plasma applet.xx</p>
