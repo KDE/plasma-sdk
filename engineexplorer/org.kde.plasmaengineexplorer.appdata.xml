@@ -7,6 +7,7 @@
   <name xml:lang="ca">Explorador de motors del Plasma</name>
   <name xml:lang="ca-valencia">Explorador de motors del Plasma</name>
   <name xml:lang="cs">Průzkumník zdrojů Plasma</name>
+  <name xml:lang="da">Plasma Engine Explorer</name>
   <name xml:lang="de">Plasma-Datenquellen</name>
   <name xml:lang="en-GB">Plasma Engine Explorer</name>
   <name xml:lang="es">Explorador de motores de Plasma</name>
@@ -28,6 +29,7 @@
   <summary>Explorer for the data published by Plasma DataEngines</summary>
   <summary xml:lang="ca">Explorador de les dades publicades pels motors de dades del Plasma</summary>
   <summary xml:lang="ca-valencia">Explorador de les dades publicades pels motors de dades del Plasma</summary>
+  <summary xml:lang="da">Udforsk de data der offentliggøres af Plasma datamotorer</summary>
   <summary xml:lang="de">Anzeige von Daten, die von Plasma-Datenquellen veröffentlicht werden.</summary>
   <summary xml:lang="en-GB">Explorer for the data published by Plasma DataEngines</summary>
   <summary xml:lang="es">Explorador para los datos publicados por los motores de datos de Plasma</summary>

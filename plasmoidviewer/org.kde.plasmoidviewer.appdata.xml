@@ -7,6 +7,7 @@
   <name xml:lang="ca">Plasmoidviewer</name>
   <name xml:lang="ca-valencia">Plasmoidviewer</name>
   <name xml:lang="cs">Plasmoidviewer</name>
+  <name xml:lang="da">Plasmoidviewer</name>
   <name xml:lang="de">PlasmoidViewer</name>
   <name xml:lang="en-GB">Plasmoidviewer</name>
   <name xml:lang="es">Plasmoidviewer</name>
@@ -29,6 +30,7 @@
   <summary xml:lang="ca">Eina de proves de les miniaplicacions del Plasma</summary>
   <summary xml:lang="ca-valencia">Eina de proves de les miniaplicacions del Plasma</summary>
   <summary xml:lang="cs">Testovací nástroj pro applety Plasma</summary>
+  <summary xml:lang="da">Testværktøj til Plasma-applets</summary>
   <summary xml:lang="de">Test-Werkzeug für Plasma-Miniprogramme</summary>
   <summary xml:lang="en-GB">Testing tool for Plasma applets</summary>
   <summary xml:lang="es">Herramienta de prueba para miniaplicaciones de Plasma</summary>
@@ -52,6 +54,7 @@
     <p>Plasmoidviewer is a graphical tool allowing developers to test Plasma applets.</p>
     <p xml:lang="ca">El Plasmoidviewer és una eina gràfica que permet als desenvolupadors provar les miniaplicacions Plasma.</p>
     <p xml:lang="ca-valencia">El Plasmoidviewer és una eina gràfica que permet als desenvolupadors provar les miniaplicacions Plasma.</p>
+    <p xml:lang="da">Plasmoidviewer er et grafisk værktøj der lader udviklere teste Plasma-applets.</p>
     <p xml:lang="de">Plasmoidviewer ist ein Programm mit grafischer Oberfläche, das es Entwicklern ermöglicht, Plasma-Miniprogramme zu testen.</p>
     <p xml:lang="en-GB">Plasmoidviewer is a graphical tool allowing developers to test Plasma applets.</p>
     <p xml:lang="es">Plasmoidviewer es una herramienta gráfica que permite a los desarrolladores probar miniaplicaciones de Plasma.</p>
