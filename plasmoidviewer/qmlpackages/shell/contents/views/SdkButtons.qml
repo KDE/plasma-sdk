@@ -153,5 +153,11 @@ Item {
                 }
             }
         }
+        PlasmaComponents.Button {
+            iconSource: "hide_table_row"
+            onClicked: {
+                root.visible = false;
+            }
+        }
     }
 }
