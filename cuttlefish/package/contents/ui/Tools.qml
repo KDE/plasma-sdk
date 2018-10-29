@@ -45,6 +45,7 @@ PlasmaComponents.ToolBar {
             id: filterInput
             Layout.fillWidth: true
             onTextChanged: typingtimer.restart()
+            focus: true
 
             Timer {
                 id: typingtimer
