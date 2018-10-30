@@ -23,6 +23,7 @@
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 #include <QDebug>
+#include <QQmlEngine>
 
 // Frameworks
 #include <KConfigGroup>
@@ -64,6 +65,8 @@ int main(int argc, char **argv)
     QString _cc = parser.value(category);
 
     auto settingsapp = new CuttleFish::View(_cc, parser);
+    QObject::connect(settingsapp->engine(), &QQmlEngine::quit, &app, &QApplication::quit);
+
     if (parser.isSet(fullscreen)) {
         settingsapp->setVisibility(QWindow::FullScreen);
     }
