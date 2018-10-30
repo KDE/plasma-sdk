@@ -19,7 +19,7 @@
  *                                                                         *
  ***************************************************************************/
 
-import QtQuick 2.1
+import QtQuick 2.5
 import QtQuick.Layouts 1.0
 
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -91,5 +91,10 @@ Item {
                 Layout.fillHeight: true
             }
         }
+    }
+
+    Shortcut {
+        sequence: StandardKey.Quit
+        onActivated: Qt.quit()
     }
 }
