@@ -30,6 +30,7 @@
   <name xml:lang="uk">Навігатор рушіїв Плазми</name>
   <name xml:lang="x-test">xxPlasma Engine Explorerxx</name>
   <name xml:lang="zh-CN">Plasma 引擎浏览器</name>
+  <name xml:lang="zh-TW">Plasma 引擎瀏覽器</name>
   <summary>Explorer for the data published by Plasma DataEngines</summary>
   <summary xml:lang="ca">Explorador de les dades publicades pels motors de dades del Plasma</summary>
   <summary xml:lang="ca-valencia">Explorador de les dades publicades pels motors de dades del Plasma</summary>
@@ -54,6 +55,7 @@
   <summary xml:lang="uk">Навігатор для даних, оприлюднених рушієм даних Плазми</summary>
   <summary xml:lang="x-test">xxExplorer for the data published by Plasma DataEnginesxx</summary>
   <summary xml:lang="zh-CN">Plasma DataEngines 发布数据的浏览器</summary>
+  <summary xml:lang="zh-TW">瀏覽由 Plasma DataEngines 發布之資料的瀏覽器</summary>
   <description>
     <p>Plasma Engine Explorer is a graphical tool allowing developers to test Plasma DataEngines without writing a Plasma applet.</p>
     <p xml:lang="ca">L'explorador de motors del Plasma és una eina gràfica que permet als desenvolupadors provar els motors de dades Plasma sense escriure una miniaplicació Plasma.</p>
@@ -79,6 +81,7 @@
     <p xml:lang="uk">Навігатор рушіїв Плазми — це графічний інструмент, який надає розробникам можливість перевірити рушії Плазми без написання аплету Плазми.</p>
     <p xml:lang="x-test">xxPlasma Engine Explorer is a graphical tool allowing developers to test Plasma DataEngines without writing a Plasma applet.xx</p>
     <p xml:lang="zh-CN">Plasma 引擎浏览器是给开发者的图形工具，用于测试 Plasma 数据引擎而无需编写 Plasma 小部件。</p>
+    <p xml:lang="zh-TW">Plasma 引擎瀏覽器是個圖形化工具，能讓開發者不用寫 Plasma 元件也能測試 Plasma DataEngines。</p>
   </description>
   <launchable type="desktop-id">org.kde.plasmaengineexplorer.desktop</launchable>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Plasma%20SDK&amp;component=engineexplorer</url>

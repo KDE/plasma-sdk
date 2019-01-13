@@ -29,6 +29,7 @@
   <name xml:lang="uk">Перегляд плазмоїдів</name>
   <name xml:lang="x-test">xxPlasmoidviewerxx</name>
   <name xml:lang="zh-CN">Plasma 小程序查看器</name>
+  <name xml:lang="zh-TW">Plasmoidviewer</name>
   <summary>Testing tool for Plasma applets</summary>
   <summary xml:lang="ast">Ferramienta de prueba pa ver applets de Plasma</summary>
   <summary xml:lang="ca">Eina de proves de les miniaplicacions del Plasma</summary>
@@ -57,6 +58,7 @@
   <summary xml:lang="uk">Засіб тестування аплетів Плазми</summary>
   <summary xml:lang="x-test">xxTesting tool for Plasma appletsxx</summary>
   <summary xml:lang="zh-CN">Plasma 小程序测试工具</summary>
+  <summary xml:lang="zh-TW">用來測試 Plasma 元件的測試工具</summary>
   <description>
     <p>Plasmoidviewer is a graphical tool allowing developers to test Plasma applets.</p>
     <p xml:lang="ca">El Plasmoidviewer és una eina gràfica que permet als desenvolupadors provar les miniaplicacions Plasma.</p>
@@ -83,6 +85,7 @@
     <p xml:lang="uk">Перегляд плазмоїдів — програма з графічним інтерфейсом, за допомогою якої розробники можуть тестувати аплети Плазми.</p>
     <p xml:lang="x-test">xxPlasmoidviewer is a graphical tool allowing developers to test Plasma applets.xx</p>
     <p xml:lang="zh-CN">Plasma 小程序查看器是给开发者测试 Plasma 小部件的图形工具。</p>
+    <p xml:lang="zh-TW">Plasmoidviewer 是個允許開發者測試 Plasma 元件的圖形化工具。</p>
   </description>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Plasma%20SDK&amp;component=plasmoidviewer</url>
   <project_group>KDE</project_group>
