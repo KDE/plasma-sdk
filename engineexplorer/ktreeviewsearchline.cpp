@@ -217,7 +217,7 @@ KTreeViewSearchLine::KTreeViewSearchLine( QWidget *parent, QTreeView *treeView )
   connect( this, SIGNAL(textChanged(QString)),
            this, SLOT(queueSearch(QString)) );
 
-  setClearButtonShown( true );
+  setClearButtonEnabled( true );
   setTreeView( treeView );
 
   if ( !treeView ) {
@@ -232,7 +232,7 @@ KTreeViewSearchLine::KTreeViewSearchLine( QWidget *parent,
   connect( this, SIGNAL(textChanged(QString)),
            this, SLOT(queueSearch(QString)) );
 
-  setClearButtonShown( true );
+  setClearButtonEnabled( true );
   setTreeViews( treeViews );
 }
 
