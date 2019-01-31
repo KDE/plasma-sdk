@@ -32,6 +32,7 @@
 #include <KAboutData>
 #include <KLocalizedString>
 #include <KDBusService>
+#include <KQuickAddons/QtQuickSettings>
 
 #include <qcommandlineparser.h>
 #include <qcommandlineoption.h>
@@ -92,6 +93,7 @@ int main(int argc, char **argv)
     parser.process(app);
 
     KDBusService service(KDBusService::Multiple);
+    KQuickAddons::QtQuickSettings::init();
 
     const QString applet = parser.value("applet");
     if (applet.isEmpty()) {
