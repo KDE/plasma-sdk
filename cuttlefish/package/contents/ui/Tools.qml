@@ -20,7 +20,7 @@
  ***************************************************************************/
 
 import QtQuick 2.2
-import QtQuick.Controls 1.0
+import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -61,7 +61,7 @@ PlasmaComponents.ToolBar {
         ComboBox {
             Layout.preferredWidth: units.gridUnit * 6
             model: iconModel.categories
-            onCurrentIndexChanged: {
+            onActivated: {
                 if (currentText == "all") {
                     iconModel.category = "";
                 } else if (currentText != "") {
@@ -74,10 +74,10 @@ PlasmaComponents.ToolBar {
             id: sizeslider
             Layout.preferredWidth: preview.width - units.gridUnit * 2
 
-            maximumValue: 6.0
+            to: 6.0
             stepSize: 1.0
-            tickmarksEnabled: true
-            value: 4
+            snapMode: Slider.AlwaysSnap
+            value: 4.0
 
             onValueChanged: {
                 sizetimer.restart()
