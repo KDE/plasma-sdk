@@ -89,4 +89,7 @@
   <provides>
     <binary>plasmaengineexplorer</binary>
   </provides>
+  <releases>
+    <release version="5.15.4" date="2019-04-02"/>
+  </releases>
 </component>
