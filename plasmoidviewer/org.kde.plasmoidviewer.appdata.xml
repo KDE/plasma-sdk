@@ -3,34 +3,34 @@
   <id>org.kde.plasmoidviewer</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
-  <name>Plasmoidviewer</name>
-  <name xml:lang="ca">Plasmoidviewer</name>
-  <name xml:lang="ca-valencia">Plasmoidviewer</name>
-  <name xml:lang="cs">Plasmoidviewer</name>
-  <name xml:lang="da">Plasmoidviewer</name>
+  <name>Plasmoid Viewer</name>
+  <name xml:lang="ca">Plasmoid Viewer</name>
+  <name xml:lang="ca-valencia">Plasmoid Viewer</name>
+  <name xml:lang="cs">Plasmoid Viewer</name>
+  <name xml:lang="da">Plasmoid Viewer</name>
   <name xml:lang="de">PlasmoidViewer</name>
-  <name xml:lang="en-GB">Plasmoidviewer</name>
-  <name xml:lang="es">Plasmoidviewer</name>
-  <name xml:lang="eu">Plasmoidviewer</name>
-  <name xml:lang="fi">Plasmoidviewer</name>
+  <name xml:lang="en-GB">Plasmoid Viewer</name>
+  <name xml:lang="es">Plasmoid Viewer</name>
+  <name xml:lang="eu">Plasmoid Viewer</name>
+  <name xml:lang="fi">Plasmoid Viewer</name>
   <name xml:lang="fr">Afficheur de composants graphiques</name>
   <name xml:lang="gl">Visor de plasmoides</name>
-  <name xml:lang="id">Plasmoidviewer</name>
+  <name xml:lang="id">Plasmoid Viewer</name>
   <name xml:lang="it">Visore di plasmoidi</name>
-  <name xml:lang="ko">Plasmoidviewer</name>
-  <name xml:lang="nb">Plasmoidviewer</name>
-  <name xml:lang="nl">Plasmoidviewer</name>
+  <name xml:lang="ko">Plasmoid Viewer</name>
+  <name xml:lang="nb">Plasmoid Viewer</name>
+  <name xml:lang="nl">Plasmoid Viewer</name>
   <name xml:lang="nn">PlasmoidViewer</name>
   <name xml:lang="pl">Przeglądarka plazmoidów</name>
   <name xml:lang="pt">Visualizador de Plasmóides</name>
-  <name xml:lang="pt-BR">Plasmoidviewer</name>
+  <name xml:lang="pt-BR">Plasmoid Viewer</name>
   <name xml:lang="ru">Просмотр виджета Plasma</name>
-  <name xml:lang="sk">Plasmoidviewer</name>
+  <name xml:lang="sk">Plasmoid Viewer</name>
   <name xml:lang="sv">Plasmoid-visning</name>
   <name xml:lang="uk">Перегляд плазмоїдів</name>
-  <name xml:lang="x-test">xxPlasmoidviewerxx</name>
+  <name xml:lang="x-test">xxPlasmoid Viewerxx</name>
   <name xml:lang="zh-CN">Plasma 小程序查看器</name>
-  <name xml:lang="zh-TW">Plasmoidviewer</name>
+  <name xml:lang="zh-TW">Plasmoid Viewer</name>
   <summary>Testing tool for Plasma applets</summary>
   <summary xml:lang="ca">Eina de proves de les miniaplicacions del Plasma</summary>
   <summary xml:lang="ca-valencia">Eina de proves de les miniaplicacions del Plasma</summary>
@@ -60,33 +60,33 @@
   <summary xml:lang="zh-CN">Plasma 小程序测试工具</summary>
   <summary xml:lang="zh-TW">用來測試 Plasma 元件的測試工具</summary>
   <description>
-    <p>Plasmoidviewer is a graphical tool allowing developers to test Plasma applets.</p>
-    <p xml:lang="ca">El Plasmoidviewer és una eina gràfica que permet als desenvolupadors provar les miniaplicacions Plasma.</p>
-    <p xml:lang="ca-valencia">El Plasmoidviewer és una eina gràfica que permet als desenvolupadors provar les miniaplicacions Plasma.</p>
-    <p xml:lang="da">Plasmoidviewer er et grafisk værktøj der lader udviklere teste Plasma-applets.</p>
-    <p xml:lang="de">Plasmoidviewer ist ein Programm mit grafischer Oberfläche, das es Entwicklern ermöglicht, Plasma-Miniprogramme zu testen.</p>
-    <p xml:lang="en-GB">Plasmoidviewer is a graphical tool allowing developers to test Plasma applets.</p>
-    <p xml:lang="es">Plasmoidviewer es una herramienta gráfica que permite a los desarrolladores probar miniaplicaciones de Plasma.</p>
-    <p xml:lang="eu">Plasmoidviewer garatzaileek Plasma aplikaziotxoak probatzeko tresna grafiko bat da.</p>
-    <p xml:lang="fi">Plasmoidviewer on graafinen työkalu, jolla kehittäjät voivat testata Plasma-sovelmia.</p>
+    <p>Plasmoid Viewer is a graphical tool allowing developers to test Plasma applets.</p>
+    <p xml:lang="ca">El Plasmoid Viewer és una eina gràfica que permet als desenvolupadors provar les miniaplicacions Plasma.</p>
+    <p xml:lang="ca-valencia">El Plasmoid Viewer és una eina gràfica que permet als desenvolupadors provar les miniaplicacions Plasma.</p>
+    <p xml:lang="da">Plasmoid Viewer er et grafisk værktøj der lader udviklere teste Plasma-applets.</p>
+    <p xml:lang="de">Plasmoid Viewer ist ein Programm mit grafischer Oberfläche, das es Entwicklern ermöglicht, Plasma-Miniprogramme zu testen.</p>
+    <p xml:lang="en-GB">Plasmoid Viewer is a graphical tool allowing developers to test Plasma applets.</p>
+    <p xml:lang="es">Plasmoid Viewer es una herramienta gráfica que permite a los desarrolladores probar miniaplicaciones de Plasma.</p>
+    <p xml:lang="eu">Plasmoid Viewer garatzaileek Plasma aplikaziotxoak probatzeko tresna grafiko bat da.</p>
+    <p xml:lang="fi">Plasmoid Viewer on graafinen työkalu, jolla kehittäjät voivat testata Plasma-sovelmia.</p>
     <p xml:lang="fr">L'afficheur de composants graphiques est un outil graphique qui permet aux développeurs de tester des applets Plasma.</p>
     <p xml:lang="gl">O visor de plasmoides é unha ferramenta gráfica que permite aos desenvolvedores probar trebellos de Plasma.</p>
-    <p xml:lang="id">Plasmoidviewer adalah sebuah alat grafik memungkinkan developer untuk menguji applet-applet Plasma</p>
+    <p xml:lang="id">Plasmoid Viewer adalah sebuah alat grafik memungkinkan developer untuk menguji applet-applet Plasma</p>
     <p xml:lang="it">Il visore di plasmoidi è uno strumento grafico che permette agli sviluppatori di Plasma di provare le applet di Plasma.</p>
-    <p xml:lang="ko">Plasmoidviewer는 Plasma 애플릿을 테스트할 수 있는 그래픽 도구입니다..</p>
-    <p xml:lang="nb">Plasmoidviewer er et grafisk verktøy utviklerer kan bruke for å teste Plasma-elementer.</p>
-    <p xml:lang="nl">Plasmoidviewer is een grafisch hulpmiddel die ontwikkelaars in staat stelt om Plasma applets te testen.</p>
-    <p xml:lang="nn">Plasmoidviewer er eit grafisk verktøy utviklarar kan bruka til å testa Plasma-verktøy.</p>
+    <p xml:lang="ko">Plasmoid Viewer는 Plasma 애플릿을 테스트할 수 있는 그래픽 도구입니다..</p>
+    <p xml:lang="nb">Plasmoid Viewer er et grafisk verktøy utviklerer kan bruke for å teste Plasma-elementer.</p>
+    <p xml:lang="nl">Plasmoid Viewer is een grafisch hulpmiddel die ontwikkelaars in staat stelt om Plasma applets te testen.</p>
+    <p xml:lang="nn">Plasmoid Viewer er eit grafisk verktøy utviklarar kan bruka til å testa Plasma-verktøy.</p>
     <p xml:lang="pl">Przeglądarka Plazmoidów jest graficznym narzędziem umożliwiającym programistom wypróbowywanie apletów Plazmy.</p>
     <p xml:lang="pt">O Visualizador de Plasmóides é uma ferramenta gráfica que permite aos programadores testarem as 'applets' do Plasma.</p>
-    <p xml:lang="pt-BR">O Plasmoidviewer é uma ferramenta gráfica que permite aos programadores testarem os miniaplicativos do Plasma.</p>
+    <p xml:lang="pt-BR">O Plasmoid Viewer é uma ferramenta gráfica que permite aos programadores testarem os miniaplicativos do Plasma.</p>
     <p xml:lang="ru">Диспетчер данных Plasma — приложение с графическим интерфейсом, предназначенное для тестирования апплетов.</p>
-    <p xml:lang="sk">Plasmoidviewer je grafický nástroj na umožnenie vývojárom testovať Plasma applety.</p>
+    <p xml:lang="sk">Plasmoid Viewer je grafický nástroj na umožnenie vývojárom testovať Plasma applety.</p>
     <p xml:lang="sv">Plasmoid-visning är ett grafiskt verktyg som låter utvecklare prova Plasma miniprogram.</p>
     <p xml:lang="uk">Перегляд плазмоїдів — програма з графічним інтерфейсом, за допомогою якої розробники можуть тестувати аплети Плазми.</p>
-    <p xml:lang="x-test">xxPlasmoidviewer is a graphical tool allowing developers to test Plasma applets.xx</p>
+    <p xml:lang="x-test">xxPlasmoid Viewer is a graphical tool allowing developers to test Plasma applets.xx</p>
     <p xml:lang="zh-CN">Plasma 小程序查看器是给开发者测试 Plasma 小部件的图形工具。</p>
-    <p xml:lang="zh-TW">Plasmoidviewer 是個允許開發者測試 Plasma 元件的圖形化工具。</p>
+    <p xml:lang="zh-TW">Plasmoid Viewer 是個允許開發者測試 Plasma 元件的圖形化工具。</p>
   </description>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Plasma%20SDK&amp;component=plasmoidviewer</url>
   <project_group>KDE</project_group>

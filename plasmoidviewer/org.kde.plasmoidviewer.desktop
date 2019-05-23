@@ -28,6 +28,7 @@ Name[uk]=Перегляд плазмоїдів
 Name[x-test]=xxPlasmoidviewerxx
 Name[zh_CN]=Plasma 小程序查看器
 Name[zh_TW]=Plasmoidviewer
+GenericName=Plasma Widget Testing Tool
 Comment=Testing tool for Plasma applets
 Comment[ca]=Eina de proves de les miniaplicacions del Plasma
 Comment[ca@valencia]=Eina de proves de les miniaplicacions del Plasma
