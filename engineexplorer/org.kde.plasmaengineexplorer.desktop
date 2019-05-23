@@ -27,6 +27,7 @@ Name[uk]=Навігатор рушіїв Плазми
 Name[x-test]=xxPlasma Engine Explorerxx
 Name[zh_CN]=Plasma 引擎浏览器
 Name[zh_TW]=Plasma 引擎探索器
+GenericName=Plasma DataEngines Viewing Tool
 Comment=Explorer for the data published by Plasma DataEngines
 Comment[ca]=Explorador de les dades publicades pels motors de dades del Plasma
 Comment[ca@valencia]=Explorador de les dades publicades pels motors de dades del Plasma
