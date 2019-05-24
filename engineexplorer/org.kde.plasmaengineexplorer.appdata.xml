@@ -31,31 +31,6 @@
   <name xml:lang="zh-CN">Plasma 引擎浏览器</name>
   <name xml:lang="zh-TW">Plasma 引擎瀏覽器</name>
   <summary>Explorer for the data published by Plasma Data Engines</summary>
-  <summary xml:lang="ca">Explorador de les dades publicades pels motors de dades del Plasma</summary>
-  <summary xml:lang="ca-valencia">Explorador de les dades publicades pels motors de dades del Plasma</summary>
-  <summary xml:lang="da">Udforsk de data der offentliggøres af Plasma datamotorer</summary>
-  <summary xml:lang="de">Anzeige von Daten, die von Plasma-Datenquellen veröffentlicht werden.</summary>
-  <summary xml:lang="en-GB">Explorer for the data published by Plasma DataEngines</summary>
-  <summary xml:lang="es">Explorador para los datos publicados por los motores de datos de Plasma</summary>
-  <summary xml:lang="eu">Plasma datu-motorrek argitaratutako datuen esploratzailea</summary>
-  <summary xml:lang="fi">Plasman tietomoottorien julkaisemien tietojen selain</summary>
-  <summary xml:lang="fr">Explorer les données publiées par les moteurs de données Plasma</summary>
-  <summary xml:lang="gl">Explorador dos datos publicados polos motores de datos de Plasma</summary>
-  <summary xml:lang="id">Penjelajah data yang dipublikasikan oleh Plasma DataEngines</summary>
-  <summary xml:lang="it">Esploratore dei dati pubblicati con i motori di dati di Plasma</summary>
-  <summary xml:lang="ko">Plasma 데이터 엔진에서 제공하는 데이터 탐색기</summary>
-  <summary xml:lang="nl">Verkenner voor de gegevens gepubliceerd door Plasma DataEngines</summary>
-  <summary xml:lang="nn">Utforsking av data publisert av Plasma-datamotorar</summary>
-  <summary xml:lang="pl">Przeglądaj dane udostępniane przez silniki danych Plazmy</summary>
-  <summary xml:lang="pt">Explorador dos dados publicados pelos Motores de Dados do Plasma</summary>
-  <summary xml:lang="pt-BR">Explorador para os dados publicados pelo Plasma DataEngines</summary>
-  <summary xml:lang="ru">Просмотр данных, опубликованных поставщиками данных Plasma</summary>
-  <summary xml:lang="sk">Prehliadač pre dáta publikované cez Plasma DataEngines</summary>
-  <summary xml:lang="sv">Utforskare av data som publiceras av datagränssnitt i Plasma</summary>
-  <summary xml:lang="uk">Навігатор для даних, оприлюднених рушієм даних Плазми</summary>
-  <summary xml:lang="x-test">xxExplorer for the data published by Plasma DataEnginesxx</summary>
-  <summary xml:lang="zh-CN">Plasma DataEngines 发布数据的浏览器</summary>
-  <summary xml:lang="zh-TW">瀏覽由 Plasma DataEngines 發布之資料的瀏覽器</summary>
   <description>
     <p>Plasma Engine Explorer is a graphical tool allowing developers to test Plasma DataEngines without writing a Plasma applet.</p>
     <p xml:lang="ca">L'explorador de motors del Plasma és una eina gràfica que permet als desenvolupadors provar els motors de dades Plasma sense escriure una miniaplicació Plasma.</p>
