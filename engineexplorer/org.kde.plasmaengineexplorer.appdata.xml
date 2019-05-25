@@ -31,6 +31,13 @@
   <name xml:lang="zh-CN">Plasma 引擎浏览器</name>
   <name xml:lang="zh-TW">Plasma 引擎瀏覽器</name>
   <summary>Explorer for the data published by Plasma Data Engines</summary>
+  <summary xml:lang="ca">Explorador de les dades publicades pels motors de dades del Plasma</summary>
+  <summary xml:lang="ca-valencia">Explorador de les dades publicades pels motors de dades del Plasma</summary>
+  <summary xml:lang="nl">Verkenner voor de gegevens gepubliceerd door Plasma Data Engines</summary>
+  <summary xml:lang="pt">Explorador dos dados publicados pelos Motores de Dados do Plasma</summary>
+  <summary xml:lang="uk">Навігатор для даних, оприлюднених рушіями даних Плазми</summary>
+  <summary xml:lang="x-test">xxExplorer for the data published by Plasma Data Enginesxx</summary>
+  <summary xml:lang="zh-TW">用來瀏覽 Plamsa 資料引擎發佈之資料的瀏覽器</summary>
   <description>
     <p>Plasma Engine Explorer is a graphical tool allowing developers to test Plasma DataEngines without writing a Plasma applet.</p>
     <p xml:lang="ca">L'explorador de motors del Plasma és una eina gràfica que permet als desenvolupadors provar els motors de dades Plasma sense escriure una miniaplicació Plasma.</p>

@@ -4,6 +4,13 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>Plasmoid Viewer</name>
+  <name xml:lang="ca">Plasmoid Viewer</name>
+  <name xml:lang="ca-valencia">Plasmoid Viewer</name>
+  <name xml:lang="nl">Plasmoid-viewer</name>
+  <name xml:lang="pt">Visualizador do Plasmóide</name>
+  <name xml:lang="uk">Перегляд плазмоїдів</name>
+  <name xml:lang="x-test">xxPlasmoid Viewerxx</name>
+  <name xml:lang="zh-TW">Plasmoid 檢視器</name>
   <summary>Testing tool for Plasma applets</summary>
   <summary xml:lang="ca">Eina de proves de les miniaplicacions del Plasma</summary>
   <summary xml:lang="ca-valencia">Eina de proves de les miniaplicacions del Plasma</summary>
@@ -34,6 +41,13 @@
   <summary xml:lang="zh-TW">用來測試 Plasma 元件的測試工具</summary>
   <description>
     <p>Plasmoid Viewer is a graphical tool allowing developers to test Plasma applets.</p>
+    <p xml:lang="ca">El Plasmoid Viewer és una eina gràfica que permet als desenvolupadors provar les miniaplicacions Plasma.</p>
+    <p xml:lang="ca-valencia">El Plasmoid Viewer és una eina gràfica que permet als desenvolupadors provar les miniaplicacions Plasma.</p>
+    <p xml:lang="nl">Plasmoid-viewer is een grafisch hulpmiddel die ontwikkelaars in staat stelt om Plasma applets te testen.</p>
+    <p xml:lang="pt">O Visualizador de Plasmóides é uma ferramenta gráfica que permite aos programadores testarem as 'applets' do Plasma.</p>
+    <p xml:lang="uk">Перегляд плазмоїдів — програма з графічним інтерфейсом, за допомогою якої розробники можуть тестувати аплети Плазми.</p>
+    <p xml:lang="x-test">xxPlasmoid Viewer is a graphical tool allowing developers to test Plasma applets.xx</p>
+    <p xml:lang="zh-TW">Plasmoid 檢視器是個允許開發者測試 Plasma 元件的圖形化工具。</p>
   </description>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Plasma%20SDK&amp;component=plasmoidviewer</url>
   <project_group>KDE</project_group>
