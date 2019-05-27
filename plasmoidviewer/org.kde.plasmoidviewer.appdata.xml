@@ -6,6 +6,8 @@
   <name>Plasmoid Viewer</name>
   <name xml:lang="ca">Plasmoid Viewer</name>
   <name xml:lang="ca-valencia">Plasmoid Viewer</name>
+  <name xml:lang="en-GB">Plasmoid Viewer</name>
+  <name xml:lang="es">Visor de plasmoides</name>
   <name xml:lang="nl">Plasmoid-viewer</name>
   <name xml:lang="pt">Visualizador do Plasmóide</name>
   <name xml:lang="sv">Plasmoid-visning</name>
@@ -44,6 +46,8 @@
     <p>Plasmoid Viewer is a graphical tool allowing developers to test Plasma applets.</p>
     <p xml:lang="ca">El Plasmoid Viewer és una eina gràfica que permet als desenvolupadors provar les miniaplicacions Plasma.</p>
     <p xml:lang="ca-valencia">El Plasmoid Viewer és una eina gràfica que permet als desenvolupadors provar les miniaplicacions Plasma.</p>
+    <p xml:lang="en-GB">Plasmoid Viewer is a graphical tool allowing developers to test Plasma applets.</p>
+    <p xml:lang="es">El visor de plasmoides es una herramienta gráfica que permite a los desarrolladores probar miniaplicaciones de Plasma.</p>
     <p xml:lang="nl">Plasmoid-viewer is een grafisch hulpmiddel die ontwikkelaars in staat stelt om Plasma applets te testen.</p>
     <p xml:lang="pt">O Visualizador de Plasmóides é uma ferramenta gráfica que permite aos programadores testarem as 'applets' do Plasma.</p>
     <p xml:lang="sv">Plasmoid-visning är ett grafiskt verktyg som låter utvecklare prova Plasma miniprogram.</p>
