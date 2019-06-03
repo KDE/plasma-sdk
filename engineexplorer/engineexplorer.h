@@ -31,7 +31,6 @@ class QStandardItem;
 
 namespace Plasma
 {
-    class DataEngineManager;
     class DataEngine;
     class PluginLoader;
 } // namespace Plasma

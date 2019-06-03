@@ -25,7 +25,6 @@
 
 
 class LnfListModel;
-class QDBusPendingCallWatcher;
 
 class LnfLogic : public QObject
 {

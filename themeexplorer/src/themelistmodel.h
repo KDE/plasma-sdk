@@ -32,7 +32,6 @@
 
 namespace Plasma
 {
-    class FrameSvg;
 }
 
 //Theme selector code by Andre Duffeck (modified to add package description)
