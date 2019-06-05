@@ -79,4 +79,9 @@
   <releases>
     <release version="5.15.90" date="2019-05-16"/>
   </releases>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://cdn.kde.org/screenshots/plasmoidviewer/plasmoidviewer.png</image>
+    </screenshot>
+  </screenshots>
 </component>
