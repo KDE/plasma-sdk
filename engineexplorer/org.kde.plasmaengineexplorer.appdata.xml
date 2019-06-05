@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component type="desktop">
   <id>org.kde.plasmaengineexplorer</id>
+  <launchable type="desktop-id">org.kde.plasmaengineexplorer.desktop</launchable>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>Plasma Engine Explorer</name>
@@ -87,4 +88,9 @@
   <releases>
     <release version="5.15.90" date="2019-05-16"/>
   </releases>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://cdn.kde.org/screenshots/plasmaengineexplorer/plasmaengineexplorer.png</image>
+    </screenshot>
+  </screenshots>
 </component>
