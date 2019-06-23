@@ -43,6 +43,7 @@
   <summary xml:lang="ko">Plasma 데이터 엔진에서 게시한 데이터에 대한 탐색기</summary>
   <summary xml:lang="lt">Tyrinėtojas, skirtas Plasma duomenų modulių paskelbtiems duomenims</summary>
   <summary xml:lang="nl">Verkenner voor de gegevens gepubliceerd door Plasma Data Engines</summary>
+  <summary xml:lang="pl">Przeglądaj dane udostępniane przez silniki danych Plazmy</summary>
   <summary xml:lang="pt">Explorador dos dados publicados pelos Motores de Dados do Plasma</summary>
   <summary xml:lang="pt-BR">Explorador para os dados publicados pelo mecanismo de dados do Plasma</summary>
   <summary xml:lang="ru">Просмотр данных, опубликованных поставщиками данных Plasma</summary>
