@@ -16,6 +16,7 @@
   <name xml:lang="ko">Plasmoid 뷰어</name>
   <name xml:lang="lt">Plasma įskiepių žiūryklė</name>
   <name xml:lang="nl">Plasmoid-viewer</name>
+  <name xml:lang="nn">Plasmoid-visar</name>
   <name xml:lang="pl">Przeglądarka plazmoidów</name>
   <name xml:lang="pt">Visualizador do Plasmóide</name>
   <name xml:lang="pt-BR">Visualizador de Plasmoide</name>
@@ -67,6 +68,7 @@
     <p xml:lang="ko">Plasmoid 뷰어는 개발자가 Plasma 애플릿을 테스트할 수 있는 그래픽 도구입니다.</p>
     <p xml:lang="lt">Plasma įskiepių žiūryklė yra grafinis įrankis, leidžiantis kūrėjams išbandyti Plasma įskiepius.</p>
     <p xml:lang="nl">Plasmoid-viewer is een grafisch hulpmiddel die ontwikkelaars in staat stelt om Plasma applets te testen.</p>
+    <p xml:lang="nn">Plasmoid-visar er eit grafisk verktøy utviklarar kan bruka til å testa Plasma-verktøy.</p>
     <p xml:lang="pl">Przeglądarka Plazmoidów jest graficznym narzędziem umożliwiającym programistom wypróbowywanie apletów Plazmy.</p>
     <p xml:lang="pt">O Visualizador de Plasmóides é uma ferramenta gráfica que permite aos programadores testarem as 'applets' do Plasma.</p>
     <p xml:lang="pt-BR">O Visualizador de Plasmoide é uma ferramenta gráfica que permite aos programadores testarem os miniaplicativos do Plasma.</p>
