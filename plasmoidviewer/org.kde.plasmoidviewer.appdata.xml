@@ -6,6 +6,7 @@
   <name>Plasmoid Viewer</name>
   <name xml:lang="ca">Plasmoid Viewer</name>
   <name xml:lang="ca-valencia">Plasmoid Viewer</name>
+  <name xml:lang="de">Plasmoid-Betrachter</name>
   <name xml:lang="en-GB">Plasmoid Viewer</name>
   <name xml:lang="es">Visor de plasmoides</name>
   <name xml:lang="eu">Plasmoide erakuslea</name>
@@ -59,6 +60,7 @@
     <p>Plasmoid Viewer is a graphical tool allowing developers to test Plasma applets.</p>
     <p xml:lang="ca">El Plasmoid Viewer és una eina gràfica que permet als desenvolupadors provar les miniaplicacions Plasma.</p>
     <p xml:lang="ca-valencia">El Plasmoid Viewer és una eina gràfica que permet als desenvolupadors provar les miniaplicacions Plasma.</p>
+    <p xml:lang="de">Plasmoid-Betrachter ist ein Programm mit grafischer Oberfläche, das es Entwicklern ermöglicht, Plasma-Miniprogramme zu testen.</p>
     <p xml:lang="en-GB">Plasmoid Viewer is a graphical tool allowing developers to test Plasma applets.</p>
     <p xml:lang="es">El visor de plasmoides es una herramienta gráfica que permite a los desarrolladores probar miniaplicaciones de Plasma.</p>
     <p xml:lang="eu">Plasmoide erakuslea garatzaileei Plasma aplikaziotxoak probatzen uzten dien tresna grafiko bat da.</p>
