@@ -39,6 +39,7 @@ int main(int argc, char **argv)
     KLocalizedString::setApplicationDomain("cuttlefish");
 
     app.setApplicationVersion(PROJECT_VERSION);
+    app.setDesktopFileName(QStringLiteral("org.kde.cuttlefish"));
 
     const static auto _category = QStringLiteral("category");
     QCommandLineOption category = QCommandLineOption(QStringList() << QStringLiteral("c") << _category,
