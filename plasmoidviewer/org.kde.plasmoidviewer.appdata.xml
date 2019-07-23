@@ -29,7 +29,7 @@
   <name xml:lang="zh-TW">Plasmoid 檢視器</name>
   <summary>Testing tool for Plasma applets</summary>
   <summary xml:lang="ca">Eina de proves de les miniaplicacions del Plasma</summary>
-  <summary xml:lang="ca-valencia">Eina de proves de les miniaplicacions del Plasma</summary>
+  <summary xml:lang="ca-valencia">Eina de proves de les miniaplicacions de Plasma</summary>
   <summary xml:lang="cs">Testovací nástroj pro applety Plasma</summary>
   <summary xml:lang="da">Testværktøj til Plasma-applets</summary>
   <summary xml:lang="de">Test-Werkzeug für Plasma-Miniprogramme</summary>
@@ -59,7 +59,7 @@
   <description>
     <p>Plasmoid Viewer is a graphical tool allowing developers to test Plasma applets.</p>
     <p xml:lang="ca">El Plasmoid Viewer és una eina gràfica que permet als desenvolupadors provar les miniaplicacions Plasma.</p>
-    <p xml:lang="ca-valencia">El Plasmoid Viewer és una eina gràfica que permet als desenvolupadors provar les miniaplicacions Plasma.</p>
+    <p xml:lang="ca-valencia">Plasmoid Viewer és una eina gràfica que permet als desenvolupadors provar les miniaplicacions Plasma.</p>
     <p xml:lang="de">Plasmoid-Betrachter ist ein Programm mit grafischer Oberfläche, das es Entwicklern ermöglicht, Plasma-Miniprogramme zu testen.</p>
     <p xml:lang="en-GB">Plasmoid Viewer is a graphical tool allowing developers to test Plasma applets.</p>
     <p xml:lang="es">El visor de plasmoides es una herramienta gráfica que permite a los desarrolladores probar miniaplicaciones de Plasma.</p>
