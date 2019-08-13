@@ -80,6 +80,8 @@ View::~View()
 void View::resizeEvent(QResizeEvent *event)
 {
     emit corona()->screenGeometryChanged(0);
+    emit corona()->availableScreenRectChanged();
+    emit corona()->availableScreenRegionChanged();
     PlasmaQuick::ContainmentView::resizeEvent(event);
 }
 
