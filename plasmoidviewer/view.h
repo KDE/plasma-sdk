@@ -46,6 +46,7 @@ public:
     static ViewerCorona *createCorona();
 
 protected:
+    void resizeEvent(QResizeEvent *event) override;
     QString pluginFromPath(const QString &path) const;
 
 private:

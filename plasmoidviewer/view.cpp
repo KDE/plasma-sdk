@@ -56,6 +56,10 @@ public:
         }
     }
 
+    int screenForContainment(const Plasma::Containment *containment) const override {
+        return 0;
+    }
+
 private:
     View *m_view;
 };
@@ -71,6 +75,12 @@ View::View(ViewerCorona *cor, bool konsoleVisible, QWindow *parent)
 
 View::~View()
 {
+}
+
+void View::resizeEvent(QResizeEvent *event)
+{
+    emit corona()->screenGeometryChanged(0);
+    PlasmaQuick::ContainmentView::resizeEvent(event);
 }
 
 QString View::pluginFromPath(const QString &path) const
