@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component type="desktop">
-  <id>org.kde.cuttlefish.desktop</id>
+  <id>org.kde.plasma.cuttlefish</id>
+  <provides>
+​    <id>org.kde.cuttlefish.desktop</id>
+  ​</provides>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>Cuttlefish</name>
@@ -126,6 +129,9 @@
     <binary>cuttlefish</binary>
   </provides>
   <releases>
+    <release version="5.16.4" date="2019-07-30"/>
+    <release version="5.16.3" date="2019-07-09"/>
     <release version="5.15.90" date="2019-05-16"/>
+    <release version="5.16.1" date="2019-06-18"/>
   </releases>
 </component>
