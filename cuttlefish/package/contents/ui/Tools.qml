@@ -19,29 +19,26 @@
  *                                                                         *
  ***************************************************************************/
 
-import QtQuick 2.2
-import QtQuick.Controls 2.0
+import QtQuick 2.5
+import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.0
 
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.kirigami 2.8 as Kirigami
 
-PlasmaComponents.ToolBar {
+Rectangle {
+    id: root
+    width: parent.width
+    color: Kirigami.Theme.backgroundColor
+    signal colorschemeChanged(int index)
+    property alias slider: sizeslider
 
-    Rectangle {
-        color: theme.backgroundColor
-        height: units.gridUnit / 20
-        width: preview.width
-        anchors {
-            right: parent.right
-            top: parent.bottom
-        }
-    }
-    tools: RowLayout {
-
-        spacing: units.gridUnit / 2
-
-        PlasmaComponents.TextField {
+    RowLayout {
+        anchors.fill: parent
+        anchors.leftMargin: Kirigami.Units.smallSpacing
+        anchors.rightMargin: Kirigami.Units.smallSpacing
+        anchors.verticalCenter: parent.verticalCenter
+        spacing: Kirigami.Units.largeSpacing
+        Kirigami.SearchField {
             id: filterInput
             Layout.fillWidth: true
             onTextChanged: typingtimer.restart()
@@ -56,9 +53,13 @@ PlasmaComponents.ToolBar {
                     iconModel.filter = filterInput.text
                 }
             }
+            Component.onCompleted: {
+                filterInput.forceActiveFocus()
+            }
         }
 
-        ComboBox {
+        QQC2.ComboBox {
+            id: catsCombo
             Layout.preferredWidth: units.gridUnit * 6
             model: iconModel.categories
             onActivated: {
@@ -68,15 +69,16 @@ PlasmaComponents.ToolBar {
                     iconModel.category = currentText
                 }
             }
+            popup.modal: false
         }
 
-        Slider {
+        QQC2.Slider {
             id: sizeslider
             Layout.preferredWidth: preview.width - units.gridUnit * 2
 
-            to: 6.0
+            to: 5.0
             stepSize: 1.0
-            snapMode: Slider.AlwaysSnap
+            snapMode: QQC2.Slider.SnapAlways
             value: 4.0
 
             onValueChanged: {
@@ -97,41 +99,32 @@ PlasmaComponents.ToolBar {
             }
         }
 
-        PlasmaComponents.TextField {
+        QQC2.Label {
             id: pixelSizeInput
 
             Layout.preferredWidth: units.gridUnit * 3
-
-            onTextChanged: {
-                if (pixelSizeInput.activeFocus) {
-                    pxSizetimer.restart()
-                }
+        }
+        QQC2.Label {
+            text: i18n("Color scheme:")
+        }
+        QQC2.ComboBox {
+            model: ["System Color Scheme", "Breeze (Normal)", "Breeze Dark"]
+            delegate: QQC2.ItemDelegate {
+                text: i18n(modelData)
+                width: parent.width
             }
-
-            Timer {
-                id: pxSizetimer
-                running: false
-                repeat: false
-                interval: 100
-                onTriggered: iconSize = pixelSizeInput.text
+            onActivated: (index) => {
+                root.colorschemeChanged(index)
             }
+            popup.modal: false
         }
-
-        PlasmaComponents.CheckBox {
-            id: colorContextCheckbox
-            text: i18n("Inverted")
-            onCheckedChanged: darkScheme = checked
-        }
-
-        PlasmaComponents.CheckBox {
-            id: plasmaThemeCheckbox
-            text: i18n("Monochrome")
-            checked: true
-            onCheckedChanged: cuttlefish.usesPlasmaTheme = checked
-        }
-
-        Item {
-            Layout.preferredWidth: preview.width
+    }
+    Kirigami.Separator {
+        height: 1
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
         }
     }
 }

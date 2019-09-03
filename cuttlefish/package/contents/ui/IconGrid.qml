@@ -19,41 +19,37 @@
  *                                                                         *
  ***************************************************************************/
 
-import QtQuick 2.2
-// import QtQuick.Controls 1.0
+import QtQuick 2.5
+import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.0
 
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-
+import org.kde.kirigami 2.8 as Kirigami
 
 GridView {
     id: iconGrid
 
     focus: true
 
-    cellWidth: iconSize + units.gridUnit
-    cellHeight: cellWidth + Math.round(units.gridUnit * 2)
+    cellWidth: iconSize + Kirigami.Units.gridUnit
+    cellHeight: cellWidth + Math.round(Kirigami.Units.gridUnit * 2)
 
-    cacheBuffer: 10000
+    cacheBuffer: 20
     highlightMoveDuration: 0
     boundsBehavior: Flickable.StopAtBounds
     model: iconModel
 
     highlight: Rectangle {
         color: theme.highlightColor
-        //height: parent.height + units.gridUnit * 3
-        anchors.bottomMargin: -units.gridUnit * 2
+        anchors.bottomMargin: -Kirigami.Units.gridUnit * 2
     }
 
     delegate: IconGridDelegate {}
 
-    PlasmaComponents.BusyIndicator {
+    QQC2.BusyIndicator {
         running: iconModel.loading
         visible: running
         anchors.centerIn: parent
-        width: units.gridUnit * 8
+        width: Kirigami.Units.gridUnit * 8
         height: width
     }
 }
