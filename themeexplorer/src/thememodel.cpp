@@ -271,19 +271,19 @@ void ThemeModel::processFinished()
 {
     /*We increment the microversion of the theme: keeps track and will force the cache to be
       discarded in order to reload immediately the graphics*/
-    const QString metadataPath(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1Literal("plasma/desktoptheme/") % m_themeName % QLatin1Literal("/metadata.desktop")));
+    const QString metadataPath(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("plasma/desktoptheme/") % m_themeName % QLatin1String("/metadata.desktop")));
     KConfig c(metadataPath);
     KConfigGroup cg(&c, "Desktop Entry");
 
     QStringList version = cg.readEntry("X-KDE-PluginInfo-Version", "0.0").split('.');
     if (version.length() < 2) {
-        version << QLatin1Literal("0");
+        version << QLatin1String("0");
     }
     if (version.length() < 3) {
-        version << QLatin1Literal("0");
+        version << QLatin1String("0");
     }
 
-    cg.writeEntry("X-KDE-PluginInfo-Version", QString(version.first() + QLatin1Literal(".") + version[1] + QLatin1Literal(".") + QString::number(version.last().toInt() + 1)));
+    cg.writeEntry("X-KDE-PluginInfo-Version", QString(version.first() + QLatin1String(".") + version[1] + QLatin1String(".") + QString::number(version.last().toInt() + 1)));
     cg.sync();
 }
 
@@ -291,7 +291,7 @@ void ThemeModel::editThemeMetaData(const QString& name, const QString& author, c
 {
     QString compactName = name.toLower();
     compactName.replace(' ', QString());
-    const QString metadataPath(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1Literal("/plasma/desktoptheme/") % compactName % QLatin1Literal("/metadata.desktop"));
+    const QString metadataPath(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/desktoptheme/") % compactName % QLatin1String("/metadata.desktop"));
     KConfig c(metadataPath);
 
     KConfigGroup cg(&c, "Desktop Entry");

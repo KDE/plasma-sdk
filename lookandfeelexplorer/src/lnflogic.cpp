@@ -54,7 +54,7 @@ LnfLogic::~LnfLogic()
 
 void LnfLogic::createNewTheme(const QString &pluginName, const QString &name, const QString &comment, const QString &author, const QString &email, const QString &license, const QString &website)
 {
-    const QString metadataPath(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1Literal("/plasma/look-and-feel/") % pluginName % QLatin1Literal("/metadata.desktop"));
+    const QString metadataPath(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/look-and-feel/") % pluginName % QLatin1String("/metadata.desktop"));
     KConfig c(metadataPath);
 
     KConfigGroup cg(&c, "Desktop Entry");
@@ -95,14 +95,14 @@ void LnfLogic::dumpPlasmaLayout(const QString &pluginName)
         }
 
         const QString layout = msg.arguments().first().toString();
-        QDir themeDir(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1Literal("/plasma/look-and-feel/") % pluginName);
+        QDir themeDir(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/look-and-feel/") % pluginName);
         if (!themeDir.mkpath("contents/layouts")) {
             qWarning() << "Impossible to create the layouts directory in the look and feel package";
             emit messageRequested(ErrorLevel::Error, i18n("Impossible to create the layouts directory in the look and feel package"));
             return;
         }
 
-        QFile layoutFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1Literal("/plasma/look-and-feel/") % pluginName % QLatin1Literal("/contents/layouts/org.kde.plasma.desktop-layout.js"));
+        QFile layoutFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/look-and-feel/") % pluginName % QLatin1String("/contents/layouts/org.kde.plasma.desktop-layout.js"));
         if (layoutFile.open(QIODevice::WriteOnly)) {
             layoutFile.write(layout.toUtf8());
             layoutFile.close();
@@ -118,7 +118,7 @@ void LnfLogic::dumpPlasmaLayout(const QString &pluginName)
 void LnfLogic::dumpDefaultsConfigFile(const QString &pluginName)
 {
     //write the defaults file, read from kde config files and save to the defaultsrc
-    KConfig defaultsConfig(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1Literal("/plasma/look-and-feel/") % pluginName % "/contents/defaults");
+    KConfig defaultsConfig(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/look-and-feel/") % pluginName % "/contents/defaults");
 
     KConfigGroup defaultsConfigGroup(&defaultsConfig, "kdeglobals");
     defaultsConfigGroup = KConfigGroup(&defaultsConfigGroup, "KDE");
@@ -439,12 +439,12 @@ void LnfLogic::processThumbnail(const QString &path)
         return;
     }
 
-    QDir themeDir(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1Literal("/plasma/look-and-feel/") % m_themeName);
+    QDir themeDir(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/look-and-feel/") % m_themeName);
     if (!themeDir.mkpath("contents/previews")) {
         qWarning() << "Impossible to create the layouts directory in the look and feel package";
     }
 
-    QFile imageFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1Literal("/plasma/look-and-feel/") % m_themeName % QLatin1Literal("/contents/previews/preview.png"));
+    QFile imageFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/look-and-feel/") % m_themeName % QLatin1String("/contents/previews/preview.png"));
     if (!imageFile.open(QIODevice::WriteOnly)) {
         qWarning() << "Impossible to write to the thumbnail file";
         return;
@@ -461,7 +461,7 @@ void LnfLogic::processThumbnail(const QString &path)
     imageFile.close();
 
     //copy the fullscreen preview
-    QFile fullScreenImageFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1Literal("/plasma/look-and-feel/") % m_themeName % QLatin1Literal("/contents/previews/fullscreenpreview.jpg"));
+    QFile fullScreenImageFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/look-and-feel/") % m_themeName % QLatin1String("/contents/previews/fullscreenpreview.jpg"));
     if (!fullScreenImageFile.open(QIODevice::WriteOnly)) {
         qWarning() << "Impossible to write to the thumbnail file";
         return;
