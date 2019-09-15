@@ -1,7 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2014-2017 Sebastian Kügler <sebas@kde.org>                  *
- *   Copyrihgt 2019      Carson Black <uhhadd@gmail.com>                   *
+ *   Copyright 2019 Carson Black <uhhadd@gmail.com>                        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -27,12 +26,9 @@ import QtQuick.Layouts 1.0
 import org.kde.kirigami 2.8 as Kirigami
 
 Rectangle {
-    id: root
+    id: root 
     width: parent.width
     color: Kirigami.Theme.backgroundColor
-    signal colorschemeChanged(int index)
-    property alias slider: sizeslider
-    property alias currentIndex: colorcombo.currentIndex
 
     Kirigami.Theme.textColor: cuttlefish.textcolor
     Kirigami.Theme.backgroundColor: cuttlefish.bgcolor
@@ -42,51 +38,26 @@ Rectangle {
     Kirigami.Theme.neutralTextColor: cuttlefish.neutraltextcolor
     Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
 
+    property alias currentIndex: colorcombo.currentIndex
+    signal colorschemeChanged(int index)
+    Kirigami.Separator {
+        height: 1
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
+        }
+    }
     RowLayout {
         anchors.fill: parent
         anchors.leftMargin: Kirigami.Units.smallSpacing
         anchors.rightMargin: Kirigami.Units.smallSpacing
         anchors.verticalCenter: parent.verticalCenter
         spacing: Kirigami.Units.largeSpacing
-        Kirigami.SearchField {
-            id: filterInput
-            Layout.fillWidth: true
-            onTextChanged: typingtimer.restart()
-            focus: true
-
-            Timer {
-                id: typingtimer
-                running: false
-                repeat: false
-                interval: 100
-                onTriggered: {
-                    iconModel.filter = filterInput.text
-                }
-            }
-            Component.onCompleted: {
-                filterInput.forceActiveFocus()
-            }
-        }
-
-        QQC2.ComboBox {
-            id: catsCombo
-            Layout.preferredWidth: units.gridUnit * 6
-            model: iconModel.categories
-            onActivated: {
-                if (currentText == "all") {
-                    iconModel.category = "";
-                } else if (currentText != "") {
-                    iconModel.category = currentText
-                }
-                iconModel.sort()
-            }
-            popup.modal: false
-        }
-
         QQC2.Slider {
-            visible: cuttlefish.widescreen
+            visible: !cuttlefish.widescreen
             id: sizeslider
-            Layout.preferredWidth: preview.width - units.gridUnit * 2
+            Layout.fillWidth: true
 
             to: 5.0
             stepSize: 1.0
@@ -112,18 +83,14 @@ Rectangle {
         }
 
         QQC2.Label {
-            visible: cuttlefish.widescreen
+            visible: !cuttlefish.widescreen
             id: pixelSizeInput
 
-            Layout.preferredWidth: units.gridUnit * 3
-        }
-        QQC2.Label {
-            visible: cuttlefish.widescreen
-            text: i18n("Color scheme:")
+            Layout.preferredWidth: units.gridUnit * 1
         }
         QQC2.ComboBox {
             id: colorcombo
-            visible: cuttlefish.widescreen
+            visible: !cuttlefish.widescreen
             model: ["System Color Scheme", "Breeze (Normal)", "Breeze Dark"]
             delegate: QQC2.ItemDelegate {
                 text: i18n(modelData)
@@ -134,14 +101,8 @@ Rectangle {
             }
             popup.modal: false
         }
-    }
-    Kirigami.Separator {
-        height: 1
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
+        Item {
+            width: Kirigami.Units.largeSpacing * 3
         }
     }
 }
-

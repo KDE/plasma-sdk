@@ -93,6 +93,7 @@ public:
     void load();
 
     Q_INVOKABLE void output(const QString &text);
+    Q_INVOKABLE void sort();
 
 
 Q_SIGNALS:

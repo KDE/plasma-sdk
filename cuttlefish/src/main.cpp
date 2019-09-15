@@ -24,22 +24,60 @@
 #include <QCommandLineOption>
 #include <QDebug>
 #include <QQmlEngine>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
 
 // Frameworks
 #include <KConfigGroup>
+#include <KDeclarative/KDeclarative>
 #include <KLocalizedString>
+#include <KPackage/PackageLoader>
 #include <Plasma/Theme>
 
 // Own
-#include "view.h"
+#include "iconmodel.h"
+
+void messageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+    if ((msg.contains("qt.svg") && msg.contains("Could not resolve property: #linearGradient")) || msg.contains("Could not resolve property: #pattern")) {
+      return;
+    }
+    
+    QByteArray localMsg = msg.toLocal8Bit();
+    const char *file = context.file ? context.file : "";
+    const char *function = context.function ? context.function : "";
+    switch (type) {
+    case QtDebugMsg:
+        fprintf(stderr, "Debug: %s (%s:%u, %s)\n", localMsg.constData(), file, context.line, function);
+        break;
+    case QtInfoMsg:
+        fprintf(stderr, "Info: %s (%s:%u, %s)\n", localMsg.constData(), file, context.line, function);
+        break;
+    case QtWarningMsg:
+        fprintf(stderr, "\u001b[33mWarning\u001b[0m: %s (%s:%u, %s)\n", localMsg.constData(), file, context.line, function);
+        break;
+    case QtCriticalMsg:
+        fprintf(stderr, "\u001b[33;1mCritical\u001b[0m: %s (%s:%u, %s)\n", localMsg.constData(), file, context.line, function);
+        break;
+    case QtFatalMsg:
+        fprintf(stderr, "\u001b[31;1mFatal\u001b[0m: %s (%s:%u, %s)\n", localMsg.constData(), file, context.line, function);
+        break;
+    }
+}
 
 int main(int argc, char **argv)
 {
+    qInstallMessageHandler(messageOutput);
+
     QApplication app(argc, argv);
     KLocalizedString::setApplicationDomain("cuttlefish");
 
     app.setApplicationVersion(PROJECT_VERSION);
     app.setDesktopFileName(QStringLiteral("org.kde.cuttlefish"));
+
+    app.setOrganizationName("KDE");
+    app.setOrganizationDomain("org.kde");
+    app.setApplicationName("Cuttlefish");
 
     const static auto _category = QStringLiteral("category");
     QCommandLineOption category = QCommandLineOption(QStringList() << QStringLiteral("c") << _category,
@@ -65,12 +103,29 @@ int main(int argc, char **argv)
 
     QString _cc = parser.value(category);
 
-    auto settingsapp = new CuttleFish::View(_cc, parser);
-    QObject::connect(settingsapp->engine(), &QQmlEngine::quit, &app, &QApplication::quit);
+    QQmlApplicationEngine engine;
 
-    if (parser.isSet(fullscreen)) {
-        settingsapp->setVisibility(QWindow::FullScreen);
+    KDeclarative::KDeclarative kdeclarative;
+    kdeclarative.setDeclarativeEngine(qobject_cast<QQmlEngine *>(&engine));
+    kdeclarative.setTranslationDomain(QStringLiteral("cuttlefish"));
+    kdeclarative.setupBindings();
+
+    auto package = KPackage::PackageLoader::self()->loadPackage("Plasma/Generic");
+    package.setPath("org.kde.plasma.cuttlefish");
+
+    if (!package.isValid() || !package.metadata().isValid()) {
+        qWarning() << "Could not load package org.kde.plasma.cuttlefish:" << package.path();
+        return -1;
     }
+
+    engine.load(QUrl::fromLocalFile(package.filePath("mainscript")));
+    if (engine.rootObjects().isEmpty())
+        return -1;
+
+    auto iconModel = new CuttleFish::IconModel(engine.rootContext());
+    engine.rootContext()->setContextProperty("iconModel", iconModel);
+    engine.rootContext()->setContextProperty("pickerMode", parser.isSet("picker"));
+    qmlRegisterType<CuttleFish::IconModel>();
 
     return app.exec();
 }

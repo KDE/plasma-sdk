@@ -20,13 +20,10 @@
  ***************************************************************************/
 
 import QtQuick 2.2
-// import QtQuick.Controls 1.0
+import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.0
 
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-
+import org.kde.kirigami 2.8 as Kirigami
 
 GridView {
     id: iconGrid
@@ -55,14 +52,19 @@ GridView {
 
         function setAsPreview() {
             print("preview() " + modelData.iconName + " " + modelData.fileName);
-//             preview.fullPath = fullPath
             preview.iconName = modelData.iconName
 
         }
 
         Rectangle {
+            Kirigami.Theme.textColor: cuttlefish.textcolor
+            Kirigami.Theme.backgroundColor: cuttlefish.bgcolor
+            Kirigami.Theme.highlightColor: cuttlefish.highlightcolor
+            Kirigami.Theme.highlightedTextColor: cuttlefish.highlightedtextcolor
+            Kirigami.Theme.positiveTextColor: cuttlefish.positivetextcolor
+            Kirigami.Theme.neutralTextColor: cuttlefish.neutraltextcolor
+            Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
             color: theme.highlightColor
-            //height: parent.height + units.gridUnit * 3
             opacity: iconGrid.currentIndex == index ? 1.0 : 0
             Behavior on opacity { NumberAnimation { duration: units.shortDuration } }
             anchors {
@@ -73,7 +75,14 @@ GridView {
             }
         }
 
-        PlasmaCore.IconItem {
+        Kirigami.Icon {
+            Kirigami.Theme.textColor: cuttlefish.textcolor
+            Kirigami.Theme.backgroundColor: cuttlefish.bgcolor
+            Kirigami.Theme.highlightColor: cuttlefish.highlightcolor
+            Kirigami.Theme.highlightedTextColor: cuttlefish.highlightedtextcolor
+            Kirigami.Theme.positiveTextColor: cuttlefish.positivetextcolor
+            Kirigami.Theme.neutralTextColor: cuttlefish.neutraltextcolor
+            Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
             id: delegateIcon
             width: iconSize
             height: width
@@ -84,22 +93,25 @@ GridView {
             }
         }
 
-        PlasmaComponents.Label {
+        QQC2.Label {
+            Kirigami.Theme.textColor: cuttlefish.textcolor
+            Kirigami.Theme.backgroundColor: cuttlefish.bgcolor
+            Kirigami.Theme.highlightColor: cuttlefish.highlightcolor
+            Kirigami.Theme.highlightedTextColor: cuttlefish.highlightedtextcolor
+            Kirigami.Theme.positiveTextColor: cuttlefish.positivetextcolor
+            Kirigami.Theme.neutralTextColor: cuttlefish.neutraltextcolor
+            Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
             font.pointSize: iconSize > 96 ? theme.defaultFont.pointSize : theme.smallestFont.pointSize
             text: modelData.fileName + " " + modelData.iconName
-            wrapMode: Text.Wrap
-//             elide: Text.ElideRight
+            wrapMode: QQC2.Text.Wrap
             maximumLineCount: 3
-            horizontalAlignment: Text.AlignHCenter
+            horizontalAlignment: QQC2.Text.AlignHCenter
             opacity: iconGrid.currentIndex == index ? 1.0 : 0.7
             anchors {
                 left: parent.left
                 right: parent.right
                 top: delegateIcon.bottom
-                //topMargin: Math.round(-units.gridUnit / 4)
                 margins: Math.round(-units.gridUnit / 4)
-                //horizontalCenter: parent.horizontalCenter
-                //bottom: parent.bottom
             }
         }
 
@@ -108,7 +120,6 @@ GridView {
             onCurrentIndexChanged: {
                 if (delegateRoot.GridView.isCurrentItem) {
                     print("index changed" + modelData.iconName + " " + modelData.fileName)
-                    //preview.fullPath = fullPath
                     delegateRoot.setAsPreview();
                 }
             }
@@ -119,10 +130,6 @@ GridView {
         }
         onEntered: {
             setAsPreview();
-        }
-        Component.onCompleted: {
-//             print("ModelData.fileName:" + modelData.fileName)
-//             print("ModelData.iconName:" + modelData.iconName)
         }
     }
 }

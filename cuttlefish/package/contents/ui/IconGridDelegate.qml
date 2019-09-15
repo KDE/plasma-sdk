@@ -19,23 +19,19 @@
  *                                                                         *
  ***************************************************************************/
 
-import QtQuick 2.2
-// import QtQuick.Controls 1.0
+import QtQuick 2.5
+import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.0
 
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-
+import org.kde.kirigami 2.8 as Kirigami
 
 MouseArea {
     id: delegateRoot
-    width: iconSize
-    height: iconSize + Math.round(units.gridUnit * 1.25)
-    hoverEnabled: hoveredHighlight
+    width: iconSize + Kirigami.Units.gridUnit
+    height: cellWidth + Math.round(Kirigami.Units.gridUnit * 2)
+    acceptedButtons: Qt.LeftButton | Qt.RightButton
 
     function setAsPreview() {
-        print("preview() " + iconName + " " + fullPath);
         preview.fullPath = fullPath
         preview.iconName = iconName
         preview.fileName = fileName
@@ -47,36 +43,51 @@ MouseArea {
     }
 
     Rectangle {
-        color: theme.highlightColor
-        //height: parent.height + units.gridUnit * 3
-        opacity: iconGrid.currentIndex == index ? 1.0 : 0.0
+        color: Kirigami.Theme.highlightColor
+        opacity: iconGrid.currentIndex == index ? 0.5 : 0.0
         visible: opacity != 0.0
         Behavior on opacity { NumberAnimation { duration: units.shortDuration } }
         anchors {
-            bottomMargin: Math.round(-units.gridUnit * 1.25)
-            margins: -units.gridUnit / 2
             fill: parent
         }
+        Kirigami.Theme.textColor: cuttlefish.textcolor
+        Kirigami.Theme.backgroundColor: cuttlefish.bgcolor
+        Kirigami.Theme.highlightColor: cuttlefish.highlightcolor
+        Kirigami.Theme.highlightedTextColor: cuttlefish.highlightedtextcolor
+        Kirigami.Theme.positiveTextColor: cuttlefish.positivetextcolor
+        Kirigami.Theme.neutralTextColor: cuttlefish.neutraltextcolor
+        Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
     }
 
-    PlasmaCore.IconItem {
+    Kirigami.Icon {
+        Kirigami.Theme.textColor: cuttlefish.textcolor
+        Kirigami.Theme.backgroundColor: cuttlefish.bgcolor
+        Kirigami.Theme.highlightColor: cuttlefish.highlightcolor
+        Kirigami.Theme.highlightedTextColor: cuttlefish.highlightedtextcolor
+        Kirigami.Theme.positiveTextColor: cuttlefish.positivetextcolor
+        Kirigami.Theme.neutralTextColor: cuttlefish.neutraltextcolor
+        Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
         id: delegateIcon
         width: iconSize
         height: width
         source: iconName
-        usesPlasmaTheme: cuttlefish.usesPlasmaTheme
-        colorGroup: PlasmaCore.ColorScope.colorGroup
         anchors {
             top: parent.top
             horizontalCenter: parent.horizontalCenter
         }
     }
 
-    PlasmaComponents.Label {
+    QQC2.Label {
+        Kirigami.Theme.textColor: cuttlefish.textcolor
+        Kirigami.Theme.backgroundColor: cuttlefish.bgcolor
+        Kirigami.Theme.highlightColor: cuttlefish.highlightcolor
+        Kirigami.Theme.highlightedTextColor: cuttlefish.highlightedtextcolor
+        Kirigami.Theme.positiveTextColor: cuttlefish.positivetextcolor
+        Kirigami.Theme.neutralTextColor: cuttlefish.neutraltextcolor
+        Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
         font.pointSize: iconSize > 96 ? theme.defaultFont.pointSize : theme.smallestFont.pointSize
         text: iconName
         wrapMode: Text.Wrap
-//             elide: Text.ElideRight
         maximumLineCount: 3
         horizontalAlignment: Text.AlignHCenter
         opacity: iconGrid.currentIndex == index ? 1.0 : 0.7
@@ -84,11 +95,8 @@ MouseArea {
             left: parent.left
             right: parent.right
             top: delegateIcon.bottom
-            //topMargin: Math.round(-units.gridUnit / 4)
             topMargin: 0
             margins: Math.round(-units.gridUnit / 4)
-            //horizontalCenter: parent.horizontalCenter
-            //bottom: parent.bottom
         }
     }
 
@@ -96,15 +104,16 @@ MouseArea {
         target: iconGrid
         onCurrentIndexChanged: {
             if (delegateRoot.GridView.isCurrentItem) {
-                print("index changed" + iconName + " " + fullPath)
-                //preview.fullPath = fullPath
                 delegateRoot.setAsPreview();
             }
         }
     }
-    onClicked: {
+    onClicked: (mouse) => {
         iconGrid.currentIndex = index;
         iconGrid.forceActiveFocus();
+        if (mouse.button == Qt.RightButton) {            
+            cuttlefish.itemRightClicked()
+        }
     }
     onEntered: {
         setAsPreview();

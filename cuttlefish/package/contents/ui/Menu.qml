@@ -1,6 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2014 Sebastian Kügler <sebas@kde.org>                       *
+ *   Copyright 2019 Carson Black <uhhadd@gmail.com>                        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -16,37 +16,33 @@
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
+ *                                                                         *
  ***************************************************************************/
 
-#ifndef CUTTEFISHVIEW_H
-#define CUTTEFISHVIEW_H
+import QtQuick 2.5
+import Qt.labs.platform 1.0
 
-#include <QCommandLineParser>
-#include <QQuickView>
-#include <KDirModel>
-#include <KDirLister>
-
-#include <KPackage/Package>
-
-namespace CuttleFish {
-
-class View : public QQuickView
-{
-    Q_OBJECT
-
-public:
-    explicit View(const QString &category, QCommandLineParser &parser, QWindow *parent = nullptr);
-    ~View() override;
-
-Q_SIGNALS:
-    void titleChanged(const QString&);
-
-private:
-    KPackage::Package m_package;
-    QQuickItem* m_browserRootItem;
-    KDirModel m_dirModel;
-};
-
+Menu {
+    id: root
+    Connections {
+        target: cuttlefish
+        onItemRightClicked: {
+            root.open()
+        }
+    }
+    MenuItem {
+        iconName: "edit-copy"
+        text: i18n("Copy icon name to clipboard")
+        onTriggered: {
+            previewPane.clipboard(iconName)
+            cuttlefish.showPassiveNotification(i18n("Icon name copied to clipboard"), "short")
+        }
+    }
+    MenuItem {
+        iconName: "document-open"
+        text: i18n("Open icon with external program")
+        onTriggered: {
+            Qt.openUrlExternally(preview.fullPath)
+        }
+    }
 }
-
-#endif // BROWSERVIEW_H

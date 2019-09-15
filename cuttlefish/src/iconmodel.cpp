@@ -40,6 +40,8 @@
 
 #include <Plasma/Theme>
 
+#include <algorithm>
+#include <cstring>
 #include <iostream>
 
 using namespace CuttleFish;
@@ -74,86 +76,6 @@ IconModel::IconModel(QObject *parent) :
     foreach (const KPluginMetaData &pkg, themepackages) {
         m_plasmathemes << pkg.pluginId();
     }
-
-    m_svgIcons[QStringLiteral("amarok")] = QStringList() << "amarok";
-    m_svgIcons[QStringLiteral("audio")] = QStringList() << "audio-volume-muted"
-                                                        << "audio-volume-low"
-                                                        << "audio-volume-medium"
-                                                        << "audio-volume-high" ;
-
-    m_svgIcons[QStringLiteral("battery")] = QStringList() << "Battery"
-                                                        << "Acadapter"
-                                                        << "Unavailable"
-                                                        << "Fill10"
-                                                        << "Fill20"
-                                                        << "Fill30"
-                                                        << "Fill40"
-                                                        << "Fill50"
-                                                        << "Fill60"
-                                                        << "Fill70"
-                                                        << "Fill80"
-                                                        << "Fill90"
-                                                        << "Fill100";
-    m_svgIcons[QStringLiteral("device")] = QStringList() << "device-notfier";
-    m_svgIcons[QStringLiteral("juk")] = QStringList() << "juk";
-    m_svgIcons[QStringLiteral("kget")] = QStringList() << "kget";
-    m_svgIcons[QStringLiteral("klippper")] = QStringList() << "klippper";
-    m_svgIcons[QStringLiteral("konversation")] = QStringList() << "konversation";
-    m_svgIcons[QStringLiteral("kopete")] = QStringList() << "konversation"
-                                                         << "kopete-offline";
-    m_svgIcons[QStringLiteral("korgac")] = QStringList() << "korgac";
-    m_svgIcons[QStringLiteral("ktorrent")] = QStringList() << "ktorrent";
-    m_svgIcons[QStringLiteral("kget")] = QStringList() << "kget";
-
-    m_svgIcons[QStringLiteral("battery")] = QStringList() << "Battery"
-                                                        << "Acadapter"
-                                                        << "Unavailable"
-                                                        << "Fill10"
-                                                        << "Fill20"
-                                                        << "Fill30"
-                                                        << "Fill40"
-                                                        << "Fill50"
-                                                        << "Fill60"
-                                                        << "Fill70"
-                                                        << "Fill80"
-                                                        << "Fill90"
-                                                        << "Fill100";
-    m_svgIcons[QStringLiteral("message-indicator")] = QStringList() << "normal"
-                                                         << "new";
-
-    m_svgIcons[QStringLiteral("nepomuk")] = QStringList() << "nepomuk";
-    m_svgIcons[QStringLiteral("network")] = QStringList() << "network-wired-activated"
-                                                        << "network-wired"
-                                                        << "network-wireless-available"
-                                                        << "network-wireless-disconnected"
-                                                        << "flightmode-off"
-                                                        << "flightmode-on"
-                                                        << "network-wireless-0"
-                                                        << "network-wireless-20"
-                                                        << "network-wireless-25"
-                                                        << "network-wireless-40"
-                                                        << "network-wireless-50"
-                                                        << "network-wireless-60"
-                                                        << "network-wireless-75"
-                                                        << "network-wireless-80"
-                                                        << "network-wireless-100"
-                                                        << "network-mobile-20"
-                                                        << "network-mobile-40"
-                                                        << "network-mobile-60"
-                                                        << "network-mobile-80"
-                                                        << "network-mobile-100";
-    m_svgIcons[QStringLiteral("preferences")] = QStringList() << "preferences-system-bluetooth"
-                                                        << "preferences-system-bluetooth-inactive"
-                                                        << "preferences-desktop-texttospeach"
-                                                        << "preferences-desktop-display-randr"
-                                                        << "preferences-activities";
-    m_svgIcons[QStringLiteral("printer")] = QStringList() << "printer";
-    m_svgIcons[QStringLiteral("quassel")] = QStringList() << "quassel"
-                                                        << "quassel_inactive"
-                                                        << "quassel_message";
-    m_svgIcons[QStringLiteral("wallet")] = QStringList() << "wallet"
-                                                        << "wallet-open"
-                                                        << "wallet-closed";
 
     m_categories = QStringList() << "all" \
         << "actions"
@@ -351,10 +273,18 @@ void IconModel::load()
     }
 
     svgIcons();
+
+    sort();
+
     endResetModel();
-    //qDebug() << "Loading took" << tt.elapsed() << " msec";
+    
     m_loading = false;
     emit loadingChanged();
+}
+
+void IconModel::sort()
+{
+    std::sort(m_icons.begin(), m_icons.end());
 }
 
 bool IconModel::matchIcons(const QFileInfo& info)
@@ -447,6 +377,7 @@ void IconModel::svgIcons()
             }
         }
     }
+    sort();
 }
 
 QString IconModel::categoryFromPath(const QString& path)

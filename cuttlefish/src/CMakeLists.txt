@@ -1,7 +1,6 @@
 
 set(cuttlefish_SRCS
     main.cpp
-    view.cpp
     iconmodel.cpp
 )
 
