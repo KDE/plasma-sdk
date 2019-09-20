@@ -53,13 +53,13 @@ void Delegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
     int maxWidth = 0;
     foreach (int role, index.model()->roleNames().keys()) {
         const QString text = index.model()->roleNames().value(role) + QLatin1String(": ");
-        maxWidth = qMax(maxWidth, fm.width(text));
+        maxWidth = qMax(maxWidth, fm.boundingRect(text).width());
     }
 
     int i = 2;
     foreach (int role, index.model()->roleNames().keys()) {
         const QString text = index.model()->roleNames().value(role) + QLatin1String(": ");
-        painter->drawText(option.rect.x() + maxWidth - fm.width(text), option.rect.y() + i*fm.height(), text);
+        painter->drawText(option.rect.x() + maxWidth - fm.boundingRect(text).width(), option.rect.y() + i*fm.height(), text);
 
         if (index.data(role).canConvert<QIcon>()) {
             index.data(role).value<QIcon>().paint(painter, option.rect.x() + maxWidth, option.rect.y() + (i-1)*fm.height(), 16, 16);
@@ -81,7 +81,7 @@ QSize Delegate::sizeHint(const QStyleOptionViewItem &option,
     }
 
     QFontMetrics fm(option.font);
-    return QSize(fm.width("M") * 50, fm.height() * (index.model()->roleNames().count()+2));
+    return QSize(fm.boundingRect("M").width() * 50, fm.height() * (index.model()->roleNames().count()+2));
 }
 
 
