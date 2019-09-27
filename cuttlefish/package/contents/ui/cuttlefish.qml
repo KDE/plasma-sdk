@@ -143,8 +143,9 @@ Kirigami.ApplicationWindow {
             sizes[1] = 16;
             sizes[2] = 22;
             sizes[3] = 32;
-            sizes[4] = 64;
-            sizes[5] = 128;
+            sizes[4] = 48
+            sizes[5] = 64;
+            sizes[6] = 128;
 
             return sizes[ix];
     }

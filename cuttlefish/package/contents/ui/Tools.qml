@@ -88,7 +88,7 @@ Rectangle {
             id: sizeslider
             Layout.preferredWidth: preview.width - units.gridUnit * 2
 
-            to: 5.0
+            to: 6.0
             stepSize: 1.0
             snapMode: QQC2.Slider.SnapAlways
             value: 4.0
