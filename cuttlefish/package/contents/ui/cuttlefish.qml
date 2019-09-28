@@ -207,6 +207,9 @@ Kirigami.ApplicationWindow {
         active: !cuttlefish.widescreen
         source: "ResponsivePreview.qml"
     }
+    Comparison {
+        id: comparison
+    }
     Connections {
         target: tools
         onColorschemeChanged: (index) => {

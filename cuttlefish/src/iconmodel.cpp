@@ -409,3 +409,14 @@ void IconModel::output(const QString& text)
     cout.flush();
 }
 
+QVariantList IconModel::inOtherThemes(const QString& name, int iconSize)
+{
+    QVariantList list;
+    const QStringList themes = KIconTheme::list();
+    for (const auto& themeName : themes) {
+        const KIconTheme theme(themeName);
+        const QString iconPath = theme.iconPathByName(name, iconSize, KIconLoader::MatchBest);
+        list.append(QVariantMap({{"themeName", themeName}, {"iconPath", iconPath}}));
+    }
+    return list;
+}

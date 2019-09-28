@@ -27,6 +27,7 @@
 #include <QJsonObject>
 #include <QFileInfo>
 #include <QVariantMap>
+#include <QVariantList>
 
 namespace CuttleFish {
 
@@ -59,6 +60,7 @@ public:
 
     explicit IconModel(QObject *parent = nullptr);
 
+    Q_INVOKABLE QVariantList inOtherThemes(const QString& iconName, int size);
 
     QHash<int, QByteArray> roleNames() const override;
     int rowCount(const QModelIndex &parent) const override;

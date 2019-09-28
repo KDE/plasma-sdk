@@ -305,6 +305,12 @@ Rectangle {
                 }
             }
         }
+        QQC2.Button {
+            Layout.alignment: Qt.AlignCenter
+            text: i18n("View icon in other themes")
+            icon.name: "document-equal"
+            onClicked: comparison.sheetOpen = true
+        }
         Item {
             Layout.fillHeight: true
         }

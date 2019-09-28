@@ -90,6 +90,11 @@ Kirigami.GlobalDrawer {
                 onTriggered: iconPreview.shot("active")
                 text: i18n("Active Color Scheme")
             }
+        },
+        Kirigami.Action {
+            text: i18n("View icon in other themes")
+            icon.name: "document-equal"
+            onTriggered: comparison.sheetOpen = true
         }
     ]
     Kirigami.Heading {
