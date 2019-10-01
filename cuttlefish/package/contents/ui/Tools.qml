@@ -31,8 +31,11 @@ Rectangle {
     width: parent.width
     color: Kirigami.Theme.backgroundColor
     signal colorschemeChanged(int index)
+    signal sliderValueChanged(int val)
+
     property alias slider: sizeslider
     property alias currentIndex: colorcombo.currentIndex
+    property alias value: sizeslider.value
 
     Kirigami.Theme.textColor: cuttlefish.textcolor
     Kirigami.Theme.backgroundColor: cuttlefish.bgcolor
@@ -96,6 +99,7 @@ Rectangle {
             onValueChanged: {
                 sizetimer.restart()
                 pixelSizeInput.text = indexToSize(sizeslider.value)
+                root.sliderValueChanged(sizeslider.value)
             }
 
             Timer {
