@@ -39,7 +39,11 @@ Rectangle {
     Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
 
     property alias currentIndex: colorcombo.currentIndex
+    property alias value: sizeslider.value
+
     signal colorschemeChanged(int index)
+    signal sliderValueChanged(int val)
+
     Kirigami.Separator {
         height: 1
         anchors {
@@ -59,7 +63,7 @@ Rectangle {
             id: sizeslider
             Layout.fillWidth: true
 
-            to: 5.0
+            to: 6.0
             stepSize: 1.0
             snapMode: QQC2.Slider.SnapAlways
             value: 4.0
@@ -67,6 +71,7 @@ Rectangle {
             onValueChanged: {
                 sizetimer.restart()
                 pixelSizeInput.text = indexToSize(sizeslider.value)
+                root.sliderValueChanged(sizeslider.value)
             }
 
             Timer {

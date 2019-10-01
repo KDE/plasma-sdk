@@ -216,12 +216,18 @@ Kirigami.ApplicationWindow {
             cuttlefish.changeColors(index)
             toolsResponsive.currentIndex = index
         }
+        onSliderValueChanged: (val) => {
+            toolsResponsive.value = val
+        }
     }
     Connections {
         target: toolsResponsive
         onColorschemeChanged: (index) => {
             cuttlefish.changeColors(index)
             tools.currentIndex = index
+        }
+        onSliderValueChanged: (val) => {
+            tools.value = val
         }
     }
     Item {
