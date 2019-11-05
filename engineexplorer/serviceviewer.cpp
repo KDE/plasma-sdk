@@ -47,7 +47,7 @@ ServiceViewer::ServiceViewer(Plasma::DataEngine *engine, const QString &source, 
     buttonBox->addButton(m_operationButton, QDialogButtonBox::ActionRole);
     buttonBox->addButton(QDialogButtonBox::Close);
 
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
     layout->addWidget(mainWidget);
     layout->addWidget(buttonBox);
@@ -56,7 +56,7 @@ ServiceViewer::ServiceViewer(Plasma::DataEngine *engine, const QString &source, 
     setupUi(mainWidget);
     m_operationStatus->hide();
 
-    connect(m_operationButton, SIGNAL(clicked()), this, SLOT(startOperation()));
+    connect(m_operationButton, &QAbstractButton::clicked, this, &ServiceViewer::startOperation);
     m_operationButton->setEnabled(false);
 
     connect(m_operations, SIGNAL(currentIndexChanged(QString)),
@@ -76,7 +76,7 @@ ServiceViewer::ServiceViewer(Plasma::DataEngine *engine, const QString &source, 
             serviceName = m_service->name();
             updateOperations();
             connect(m_service, SIGNAL(operationsChanged()), this, SLOT(updateOperations()));
-            connect(m_engine, SIGNAL(destroyed(QObject*)), this, SLOT(engineDestroyed()));
+            connect(m_engine, &QObject::destroyed, this, &ServiceViewer::engineDestroyed);
         } else {
             KMessageBox::sorry(this, i18n("No valid service was returned. Verify that a service is available for this source."));
             close();
@@ -147,7 +147,7 @@ void ServiceViewer::startOperation()
 
     updateJobCount(1);
     Plasma::ServiceJob *job = m_service->startOperationCall(desc);
-    connect(job, SIGNAL(finished(KJob*)), this, SLOT(operationResult(KJob*)));
+    connect(job, &KJob::finished, this, &ServiceViewer::operationResult);
 }
 
 void ServiceViewer::operationSelected(const QString &operation)

@@ -93,7 +93,7 @@ void CuttleFishPlugin::contextMenuAboutToShow(KTextEditor::View* view, QMenu* me
             cuttlefish->setArguments(QStringList() << "--picker");
 
             connect(cuttlefish, &QProcess::readyReadStandardOutput,
-                [this, cuttlefish]() {
+                [ cuttlefish]() {
                     auto qba = cuttlefish->readAllStandardOutput();
                     auto view = KTextEditor::Editor::instance()->application()->activeMainWindow()->activeView();
                     if (view) {

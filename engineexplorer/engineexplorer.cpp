@@ -71,7 +71,7 @@ EngineExplorer::EngineExplorer(QWidget* parent)
     layout->addWidget(buttonBox);
     setLayout(layout);
 
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
     setupUi(mainWidget);
 
@@ -82,7 +82,7 @@ EngineExplorer::EngineExplorer(QWidget* parent)
     m_title->setPixmap(pix.pixmap(size, size));
     connect(m_engines, SIGNAL(activated(QString)), this, SLOT(showEngine(QString)));
     connect(m_sourceRequesterButton, SIGNAL(clicked(bool)), this, SLOT(requestSource()));
-    connect(m_serviceRequesterButton, SIGNAL(clicked(bool)), this, SLOT(requestServiceForSource()));
+    connect(m_serviceRequesterButton, &QAbstractButton::clicked, this, &EngineExplorer::requestServiceForSource);
     m_data->setModel(m_dataModel);
     m_data->setWordWrap(true);
 
@@ -92,16 +92,16 @@ EngineExplorer::EngineExplorer(QWidget* parent)
     listEngines();
     m_engines->setFocus();
 
-    connect(m_collapseButton, SIGNAL(clicked()), m_data, SLOT(collapseAll()));
-    connect(m_expandButton, SIGNAL(clicked()), m_data, SLOT(expandAll()));
+    connect(m_collapseButton, &QAbstractButton::clicked, m_data, &QTreeView::collapseAll);
+    connect(m_expandButton, &QAbstractButton::clicked, m_data, &QTreeView::expandAll);
     enableButtons(false);
 
     addAction(KStandardAction::quit(qApp, SLOT(quit()), this));
 
-    connect(m_data, SIGNAL(customContextMenuRequested(QPoint)),
-            this, SLOT(showDataContextMenu(QPoint)));
+    connect(m_data, &QWidget::customContextMenuRequested,
+            this, &EngineExplorer::showDataContextMenu);
     m_data->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(qApp, SIGNAL(aboutToQuit()), this, SLOT(cleanUp()));
+    connect(qApp, &QCoreApplication::aboutToQuit, this, &EngineExplorer::cleanUp);
 }
 
 EngineExplorer::~EngineExplorer()
@@ -204,8 +204,8 @@ void EngineExplorer::showEngine(const QString& name)
 
     //qDebug() << "showing engine " << m_engine->objectName();
     //qDebug() << "we have " << sources.count() << " data sources";
-    connect(m_engine, SIGNAL(sourceAdded(QString)), this, SLOT(addSource(QString)));
-    connect(m_engine, SIGNAL(sourceRemoved(QString)), this, SLOT(removeSource(QString)));
+    connect(m_engine, &Plasma::DataEngine::sourceAdded, this, &EngineExplorer::addSource);
+    connect(m_engine, &Plasma::DataEngine::sourceRemoved, this, &EngineExplorer::removeSource);
     foreach (const QString& source, m_engine->sources()) {
         //qDebug() << "adding " << source;
         addSource(source);

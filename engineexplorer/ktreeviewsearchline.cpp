@@ -214,8 +214,8 @@ bool KTreeViewSearchLinePrivate::checkItemParentsVisible( QTreeView *treeView, c
 KTreeViewSearchLine::KTreeViewSearchLine( QWidget *parent, QTreeView *treeView )
   : KLineEdit( parent ), d( new KTreeViewSearchLinePrivate( this ) )
 {
-  connect( this, SIGNAL(textChanged(QString)),
-           this, SLOT(queueSearch(QString)) );
+  connect( this, &QLineEdit::textChanged,
+           this, &KTreeViewSearchLine::queueSearch );
 
   setClearButtonEnabled( true );
   setTreeView( treeView );
@@ -229,8 +229,8 @@ KTreeViewSearchLine::KTreeViewSearchLine( QWidget *parent,
                                               const QList<QTreeView *> &treeViews )
   : KLineEdit( parent ), d( new KTreeViewSearchLinePrivate( this ) )
 {
-  connect( this, SIGNAL(textChanged(QString)),
-           this, SLOT(queueSearch(QString)) );
+  connect( this, &QLineEdit::textChanged,
+           this, &KTreeViewSearchLine::queueSearch );
 
   setClearButtonEnabled( true );
   setTreeViews( treeViews );
@@ -469,8 +469,8 @@ void KTreeViewSearchLine::connectTreeView( QTreeView *treeView )
   connect( treeView, SIGNAL(destroyed(QObject*)),
            this, SLOT(treeViewDeleted(QObject*)) );
 
-  connect( treeView->model(), SIGNAL(rowsInserted(QModelIndex,int,int)),
-           this, SLOT(rowsInserted(QModelIndex,int,int)) );
+  connect( treeView->model(), &QAbstractItemModel::rowsInserted,
+           this, &KTreeViewSearchLine::rowsInserted );
 }
 
 void KTreeViewSearchLine::disconnectTreeView( QTreeView *treeView )
@@ -478,8 +478,8 @@ void KTreeViewSearchLine::disconnectTreeView( QTreeView *treeView )
   disconnect( treeView, SIGNAL(destroyed(QObject*)),
               this, SLOT(treeViewDeleted(QObject*)) );
 
-  disconnect( treeView->model(), SIGNAL(rowsInserted(QModelIndex,int,int)),
-              this, SLOT(rowsInserted(QModelIndex,int,int)) );
+  disconnect( treeView->model(), &QAbstractItemModel::rowsInserted,
+              this, &KTreeViewSearchLine::rowsInserted );
 }
 
 bool KTreeViewSearchLine::canChooseColumnsCheck()
@@ -530,7 +530,7 @@ void KTreeViewSearchLine::queueSearch( const QString &search )
   d->queuedSearches++;
   d->search = search;
 
-  QTimer::singleShot( 200, this, SLOT(activateSearch()) );
+  QTimer::singleShot( 200, this, &KTreeViewSearchLine::activateSearch );
 }
 
 void KTreeViewSearchLine::activateSearch()
@@ -563,7 +563,7 @@ KTreeViewSearchLineWidget::KTreeViewSearchLineWidget( QWidget *parent, QTreeView
 {
   d->treeView = treeView;
 
-  QTimer::singleShot( 0, this, SLOT(createWidgets()) );
+  QTimer::singleShot( 0, this, &KTreeViewSearchLineWidget::createWidgets );
 }
 
 KTreeViewSearchLineWidget::~KTreeViewSearchLineWidget()

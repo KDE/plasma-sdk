@@ -263,7 +263,7 @@ void ThemeModel::editElement(const QString& imagePath)
     //TODO: don't use the script to not depend from bash/linux?
     process->setProgram("bash", QStringList() << m_package.filePath("scripts", "openInEditor.sh") << finalFile);
 
-    connect(process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processFinished()));
+    connect(process, &QProcess::finished, this, &ThemeModel::processFinished);
     process->start();
 }
 

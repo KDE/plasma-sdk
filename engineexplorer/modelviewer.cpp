@@ -107,7 +107,7 @@ ModelViewer::ModelViewer(Plasma::DataEngine *engine, const QString &source, QWid
         m_model = m_engine->modelForSource(m_source);
 
         if (m_model != nullptr) {
-            connect(m_engine, SIGNAL(destroyed(QObject*)), this, SLOT(engineDestroyed()));
+            connect(m_engine, &QObject::destroyed, this, &ModelViewer::engineDestroyed);
             m_view->setModel(m_model);
         } else {
             KMessageBox::sorry(this, i18n("No valid model was returned. Verify that a model is available for this source."));
