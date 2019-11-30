@@ -115,7 +115,4 @@ MouseArea {
             cuttlefish.itemRightClicked()
         }
     }
-    onEntered: {
-        setAsPreview();
-    }
 }
