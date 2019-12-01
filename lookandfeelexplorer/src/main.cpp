@@ -62,8 +62,13 @@ int main(int argc, char **argv)
     obj.engine()->rootContext()->setContextProperty("commandlineArguments", parser.positionalArguments());
     obj.loadPackage(packagePath);
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     qmlRegisterType<LnfLogic>();
     qmlRegisterType<LnfListModel>();
+#else
+    qmlRegisterAnonymousType<LnfLogic>("org.kde.plasma.sdk", 1);
+    qmlRegisterAnonymousType<LnfListModel>("org.kde.plasma.sdk", 1);
+#endif
 
     LnfLogic *lnfLogic = new LnfLogic(&obj);
     obj.engine()->rootContext()->setContextProperty("lnfLogic", QVariant::fromValue(lnfLogic));

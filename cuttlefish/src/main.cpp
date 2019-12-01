@@ -125,7 +125,12 @@ int main(int argc, char **argv)
     auto iconModel = new CuttleFish::IconModel(engine.rootContext());
     engine.rootContext()->setContextProperty("iconModel", iconModel);
     engine.rootContext()->setContextProperty("pickerMode", parser.isSet("picker"));
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     qmlRegisterType<CuttleFish::IconModel>();
+#else
+    qmlRegisterAnonymousType<CuttleFish::IconModel>("org.kde.plasma.sdk", 1);
+#endif
 
     return app.exec();
 }
