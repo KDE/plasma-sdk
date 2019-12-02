@@ -1,5 +1,5 @@
 [Desktop Entry]
-Comment=Explore and edit your Plasma Look And Feel themes
+Comment=Explore and edit your Plasma Global Themes
 Comment[ca]=Explora i edita els vostres temes d'Aspecte i comportament
 Comment[ca@valencia]=Explora i edita els vostres temes d'Aspecte i comportament
 Comment[da]=Udforsk og redigér dine temaer for Plasmas udseende og fremtoning
@@ -36,7 +36,7 @@ Comment[x-test]=xxExplore and edit your Plasma Look And Feel themesxx
 Comment[zh_CN]=浏览并编辑您的 Plasma 观感主题
 Comment[zh_TW]=探索並編輯您的 Plasma 外觀與感覺主題
 Keywords=
-Name=Plasma Look And Feel Explorer
+Name=Plasma Global Theme Explorer
 Name[ca]=Explorador pels temes d'Aspecte i comportament del Plasma
 Name[ca@valencia]=Explorador per als temes d'Aspecte i comportament del Plasma
 Name[cs]=Prohlížeč vzhledu a chování Plasmy
