@@ -142,7 +142,7 @@ void EngineExplorer::setInterval(const int interval)
 
 void EngineExplorer::dataUpdated(const QString& source, const Plasma::DataEngine::Data& data)
 {
-    QList<QStandardItem*> items = m_dataModel->findItems(source, nullptr);
+    QList<QStandardItem*> items = m_dataModel->findItems(source, Qt::MatchExactly);
 
     if (items.isEmpty()) {
         return;
@@ -223,7 +223,7 @@ void EngineExplorer::showEngine(const QString& name)
 void EngineExplorer::addSource(const QString& source)
 {
     //qDebug() << "adding" << source;
-    QList<QStandardItem*> items = m_dataModel->findItems(source, nullptr);
+    QList<QStandardItem*> items = m_dataModel->findItems(source, Qt::MatchExactly);
     if (!items.isEmpty()) {
         //qDebug() << "er... already there?";
         return;
@@ -246,7 +246,7 @@ void EngineExplorer::addSource(const QString& source)
 
 void EngineExplorer::removeSource(const QString& source)
 {
-    QList<QStandardItem*> items = m_dataModel->findItems(source, nullptr);
+    QList<QStandardItem*> items = m_dataModel->findItems(source, Qt::MatchExactly);
 
     if (items.count() < 1) {
         return;
