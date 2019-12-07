@@ -260,7 +260,7 @@ Rectangle {
         }
         QQC2.Button {
             Layout.alignment: Qt.AlignHCenter
-            text: i18n("Copy icon name to clipboard")
+            text: pickerMode ? i18n("Insert icon name") : i18n("Copy icon name to clipboard")
             icon.name: "edit-copy"
             onClicked: { 
                 clipboard(preview.iconName)

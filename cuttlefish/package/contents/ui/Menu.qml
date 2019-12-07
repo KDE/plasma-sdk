@@ -32,9 +32,9 @@ Menu {
     }
     MenuItem {
         iconName: "edit-copy"
-        text: i18n("Copy icon name to clipboard")
+        text: pickerMode ? i18n("Insert icon name") : i18n("Copy icon name to clipboard")
         onTriggered: {
-            previewPane.clipboard(iconName)
+            previewPane.clipboard(preview.iconName)
             cuttlefish.showPassiveNotification(i18n("Icon name copied to clipboard"), "short")
         }
     }

@@ -64,7 +64,7 @@ Kirigami.GlobalDrawer {
             onTriggered: Qt.openUrlExternally(preview.fullPath)
         },
         Kirigami.Action {
-            text: i18n("Copy icon name to clipboard")
+            text: pickerMode ? i18n("Insert icon name") : i18n("Copy icon name to clipboard")
             iconName: "edit-copy"
             onTriggered: {
                 root.clipboard(preview.iconName)
