@@ -3,6 +3,7 @@
   <id>org.kde.plasma.cuttlefish</id>
   <provides>
 ​    <id>org.kde.cuttlefish.desktop</id>
+    <binary>cuttlefish</binary>
   ​</provides>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
@@ -128,9 +129,6 @@
     </screenshot>
   </screenshots>
   <project_group>KDE</project_group>
-  <provides>
-    <binary>cuttlefish</binary>
-  </provides>
   <releases>
     <release version="5.16.4" date="2019-07-30"/>
     <release version="5.16.3" date="2019-07-09"/>
