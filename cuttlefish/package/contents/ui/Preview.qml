@@ -41,21 +41,6 @@ Rectangle {
 
     color: Kirigami.Theme.backgroundColor
 
-    function clipboard(text) {
-        if (!pickerMode) {
-            clipboardHelper.text = text;
-            clipboardHelper.selectAll();
-            clipboardHelper.copy();
-        } else {
-            iconModel.output(text);
-        }
-
-    }
-    TextEdit {
-        id: clipboardHelper
-        visible: false
-    }
-
     FileDialog {
         id: ssPicker
         selectExisting: false
@@ -252,64 +237,12 @@ Rectangle {
                 ssPicker.open()
             }
         }
-        QQC2.Button {
-            Layout.alignment: Qt.AlignHCenter
-            text: i18n("Open icon with external program")
-            icon.name: "document-open"
-            onClicked: Qt.openUrlExternally(preview.fullPath)
-        }
-        QQC2.Button {
-            Layout.alignment: Qt.AlignHCenter
-            text: pickerMode ? i18n("Insert icon name") : i18n("Copy icon name to clipboard")
-            icon.name: "edit-copy"
-            onClicked: { 
-                clipboard(preview.iconName)
-                cuttlefish.showPassiveNotification(i18n("Icon name copied to clipboard"), "short")
+        Repeater {
+            model: cuttlefish.actions
+            delegate: QQC2.Button {
+                Layout.alignment: Qt.AlignHCenter
+                action: modelData
             }
-        }
-        QQC2.Button {
-            Layout.alignment: Qt.AlignHCenter
-            visible: !iconPreview.screenshotting
-            icon.name: "camera-web-symbolic"
-            text: i18n("Create screenshot of icon")
-
-            onClicked: {
-                screenshotActions.popup()
-            }
-
-            QQC2.Menu {
-                id: screenshotActions
-                QQC2.MenuItem {
-                    text: i18n("Screenshot with Breeze Colors")
-                    onTriggered: {
-                        iconPreview.shot("normal")
-                    }
-                }
-                QQC2.MenuItem {
-                    text: i18n("Screenshot with Breeze Dark Colors")
-                    onTriggered: {
-                        iconPreview.shot("dark")
-                    }
-                }
-                QQC2.MenuItem {
-                    text: i18n("Screenshot with Breeze (Normal) and Breeze Dark")
-                    onTriggered: {
-                        dualMont.shot()
-                    }
-                }
-                QQC2.MenuItem {
-                    text: i18n("Screenshot with Active Color Scheme")
-                    onTriggered: {
-                        iconPreview.shot("active")
-                    }
-                }
-            }
-        }
-        QQC2.Button {
-            Layout.alignment: Qt.AlignCenter
-            text: i18n("View icon in other themes")
-            icon.name: "document-equal"
-            onClicked: comparison.sheetOpen = true
         }
         Item {
             Layout.fillHeight: true

@@ -42,61 +42,8 @@ Kirigami.GlobalDrawer {
 
     focus: false
 
-    function clipboard(text) {
-        if (!pickerMode) {
-            clipboardHelper.text = text;
-            clipboardHelper.selectAll();
-            clipboardHelper.copy();
-        } else {
-            iconModel.output(text);
-        }
-    }
+    actions: cuttlefish.actions
 
-    TextEdit {
-        id: clipboardHelper
-        visible: false
-    }
-
-    actions: [
-        Kirigami.Action {
-            text: i18n("Open icon with external program")
-            iconName: "document-open"
-            onTriggered: Qt.openUrlExternally(preview.fullPath)
-        },
-        Kirigami.Action {
-            text: pickerMode ? i18n("Insert icon name") : i18n("Copy icon name to clipboard")
-            iconName: "edit-copy"
-            onTriggered: {
-                root.clipboard(preview.iconName)
-                cuttlefish.showPassiveNotification(i18n("Icon name copied to clipboard"), "short")
-            }
-        },
-        Kirigami.Action {
-            iconName: "camera-web-symbolic"
-            text: i18n("Create screenshot of icon with...")
-            Kirigami.Action {
-                text: i18n("Breeze Colors")
-                onTriggered: iconPreview.shot("normal")
-            }
-            Kirigami.Action {
-                text: i18n("Breeze Dark Colors")
-                onTriggered: iconPreview.shot("dark")
-            }
-            Kirigami.Action {
-                onTriggered: dualMont.shot()
-                text: i18n("Breeze (Normal) and Breeze Dark")
-            }
-            Kirigami.Action {
-                onTriggered: iconPreview.shot("active")
-                text: i18n("Active Color Scheme")
-            }
-        },
-        Kirigami.Action {
-            text: i18n("View icon in other themes")
-            icon.name: "document-equal"
-            onTriggered: comparison.sheetOpen = true
-        }
-    ]
     Kirigami.Heading {
         level: 1
         Layout.fillWidth: true

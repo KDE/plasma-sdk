@@ -43,6 +43,8 @@ Kirigami.ApplicationWindow {
     property bool usesPlasmaTheme: true
     property var schemeStash
 
+    property alias actions: actions.actions
+
     property color textcolor: Kirigami.Theme.textColor
     property color bgcolor: Kirigami.Theme.backgroundColor
     property color highlightcolor: Kirigami.Theme.highlightColor
@@ -59,16 +61,19 @@ Kirigami.ApplicationWindow {
     Kirigami.Theme.positiveTextColor: cuttlefish.positivetextcolor
     Kirigami.Theme.neutralTextColor: cuttlefish.neutraltextcolor
     Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
-    
+
     Loader {
         // Use a Loader instead of creating a GMB directly,
         // so if the GMB errors, it doesn't affect Cuttlefish's operation
         id: loader
         source: "GlobalMenuBar.qml"
     }
-    Loader {
-        // Ditto for the right click context menu.
-        source: "Menu.qml"
+    Actions {
+        id: actions
+    }
+
+    Menu {
+        id: menu
     }
     Settings {
         property alias x: cuttlefish.x

@@ -1,6 +1,8 @@
 /***************************************************************************
  *                                                                         *
+ *   Copyright 2018 Aleix Pol Gonzalez <aleixpol@kde.org>                  *
  *   Copyright 2019 Carson Black <uhhadd@gmail.com>                        *
+ *   Copyright 2019 David Redondo <kde@david-redondo.de>                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -20,29 +22,63 @@
  ***************************************************************************/
 
 import QtQuick 2.5
-import Qt.labs.platform 1.0
+import QtQuick.Controls 2.5 as QQC2
+import org.kde.kirigami 2.8 as Kirigami
 
-Menu {
-    id: root
-    Connections {
-        target: cuttlefish
-        onItemRightClicked: {
-            root.open()
+Item {
+    Loader {
+        id:menuLoader
+        sourceComponent: actionsMenu
+        onLoaded: {
+            item.actions = cuttlefish.actions
+        }
+         Connections {
+            target: cuttlefish
+            onItemRightClicked: {
+                menuLoader.item.popup()
+            }
         }
     }
-    MenuItem {
-        iconName: "edit-copy"
-        text: pickerMode ? i18n("Insert icon name") : i18n("Copy icon name to clipboard")
-        onTriggered: {
-            previewPane.clipboard(preview.iconName)
-            cuttlefish.showPassiveNotification(i18n("Icon name copied to clipboard"), "short")
-        }
-    }
-    MenuItem {
-        iconName: "document-open"
-        text: i18n("Open icon with external program")
-        onTriggered: {
-            Qt.openUrlExternally(preview.fullPath)
+    Component {
+        id: actionsMenu
+        QQC2.Menu {
+            id: theMenu
+            property Component submenuComponent: actionsMenu
+            property Component itemDelegate: QQC2.MenuItem { }
+            property Component seperatorDelegate: Kirigami.Separator {}
+            property alias actions: actionsInstantiator.model
+            Item {
+                id: invisibleItems
+                visible: false
+            }
+            Instantiator {
+                id: actionsInstantiator
+                active: theMenu.visible
+                delegate: QtObject {
+                    readonly property var action: modelData
+                    property QtObject item: null
+                    function create() {
+                        if (!action.hasOwnProperty("children") && !action.children || action.children.length === 0) {
+                            item = theMenu.itemDelegate.createObject(null, { action: action });
+                            theMenu.addItem(item)
+                        } else {
+                            item = theMenu.submenuComponent.createObject(null, { actions: action.children, title: action.text});
+                            theMenu.insertMenu(theMenu.count, item)
+                            var menuitem = theMenu.contentData[theMenu.contentData.length-1]
+                            menuitem.icon = action.icon
+                        }
+                    }
+                    function remove() {
+                        if (!action.hasOwnProperty("children") && !action.children || action.children.length === 0) {
+                            theMenu.removeItem(item)
+                        } else if (theMenu.submenuComponent) {
+                            theMenu.removeMenu(item)
+                        }
+                    }
+                }
+                onObjectAdded: object.create()
+                onObjectRemoved: object.remove()
+            }
         }
     }
 }
