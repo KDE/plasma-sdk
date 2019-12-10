@@ -119,13 +119,14 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    engine.load(QUrl::fromLocalFile(package.filePath("mainscript")));
-    if (engine.rootObjects().isEmpty())
-        return -1;
-
     auto iconModel = new CuttleFish::IconModel(engine.rootContext());
     engine.rootContext()->setContextProperty("iconModel", iconModel);
     engine.rootContext()->setContextProperty("pickerMode", parser.isSet("picker"));
+
+    engine.load(QUrl::fromLocalFile(package.filePath("mainscript")));
+    if (engine.rootObjects().isEmpty()) {
+        return -1;
+    }
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     qmlRegisterType<CuttleFish::IconModel>();
