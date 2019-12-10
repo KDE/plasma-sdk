@@ -106,9 +106,10 @@ int main(int argc, char **argv)
     QQmlApplicationEngine engine;
 
     KDeclarative::KDeclarative kdeclarative;
-    kdeclarative.setDeclarativeEngine(qobject_cast<QQmlEngine *>(&engine));
+    kdeclarative.setDeclarativeEngine(&engine);
     kdeclarative.setTranslationDomain(QStringLiteral("cuttlefish"));
-    kdeclarative.setupBindings();
+    kdeclarative.setupContext();
+    kdeclarative.setupEngine(&engine);
 
     auto package = KPackage::PackageLoader::self()->loadPackage("Plasma/Generic");
     package.setPath("org.kde.plasma.cuttlefish");
