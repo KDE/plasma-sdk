@@ -26,14 +26,6 @@ import QtQuick.Controls 2.5 as QQC2
 import org.kde.kirigami 2.8 as Kirigami
 
 Item {
-    property QQC2.Action screenshotAction:  QQC2.Action {
-        enabled: !iconPreview.screenshotting
-        icon.name: "camera-web-symbolic"
-        text: i18n("Create screenshot of icon")
-        onTriggered: {
-            screenshotPopup.popup()
-        }
-    }
     property list<Kirigami.Action> actions:[
         Kirigami.Action {
             text: i18n("Open icon with external program")
