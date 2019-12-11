@@ -8,7 +8,8 @@ Kirigami.OverlaySheet {
     property int comparisonSize
     background: Rectangle {
         id:background
-        color: cuttlefish.viewbgcolor
+        Kirigami.Theme.colorSet: Kirigami.Theme.View
+        color: Kirigami.Theme.backgroundColor
         anchors.fill: parent
     }
 
@@ -20,12 +21,6 @@ Kirigami.OverlaySheet {
     }
 
     ColumnLayout {
-        Kirigami.Theme.textColor: cuttlefish.textcolor
-        Kirigami.Theme.highlightColor: cuttlefish.highlightcolor
-        Kirigami.Theme.highlightedTextColor: cuttlefish.highlightedtextcolor
-        Kirigami.Theme.positiveTextColor: cuttlefish.positivetextcolor
-        Kirigami.Theme.neutralTextColor: cuttlefish.neutraltextcolor
-        Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
         RowLayout {
             Layout.alignment: Qt.AlignHCenter
             QQC2.Slider {

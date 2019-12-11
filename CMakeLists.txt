@@ -48,7 +48,7 @@ set_package_properties(KF5Kirigami2 PROPERTIES
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Archive Completion Config ConfigWidgets CoreAddons DBusAddons Declarative I18n IconThemes
-    KIO Plasma PlasmaQuick Service TextEditor WidgetsAddons DocTools)
+    KIO Plasma PlasmaQuick Service TextEditor WidgetsAddons DocTools ConfigWidgets)
 
 #########################################################################
 if (EXISTS "${CMAKE_SOURCE_DIR}/.git")

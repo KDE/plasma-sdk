@@ -35,6 +35,7 @@
 #include <Plasma/Theme>
 
 // Own
+#include "colorschemes.h"
 #include "iconmodel.h"
 
 void messageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -120,8 +121,10 @@ int main(int argc, char **argv)
     }
 
     auto iconModel = new CuttleFish::IconModel(engine.rootContext());
+    auto colorSchemes = new CuttleFish::ColorSchemes(engine.rootContext());
     engine.rootContext()->setContextProperty("iconModel", iconModel);
     engine.rootContext()->setContextProperty("pickerMode", parser.isSet("picker"));
+    engine.rootContext()->setContextProperty("colorSchemes", colorSchemes);
 
     engine.load(QUrl::fromLocalFile(package.filePath("mainscript")));
     if (engine.rootObjects().isEmpty()) {
@@ -130,8 +133,10 @@ int main(int argc, char **argv)
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     qmlRegisterType<CuttleFish::IconModel>();
+    qmlRegisterType<CuttleFish::ColorSchemes>();
 #else
     qmlRegisterAnonymousType<CuttleFish::IconModel>("org.kde.plasma.sdk", 1);
+    qmlRegisterAnonymousType<CuttleFish::ColorSchemes>("org.kde.plasma.sdk", 1);
 #endif
 
     return app.exec();

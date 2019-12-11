@@ -15,4 +15,5 @@ ecm_add_test(iconmodeltest.cpp ../src/iconmodel.cpp
                 KF5::Package
                 KF5::Service
                 KF5::Plasma
+                KF5::ConfigWidgets
                 )

@@ -50,23 +50,9 @@ MouseArea {
         anchors {
             fill: parent
         }
-        Kirigami.Theme.textColor: cuttlefish.textcolor
-        Kirigami.Theme.backgroundColor: cuttlefish.bgcolor
-        Kirigami.Theme.highlightColor: cuttlefish.highlightcolor
-        Kirigami.Theme.highlightedTextColor: cuttlefish.highlightedtextcolor
-        Kirigami.Theme.positiveTextColor: cuttlefish.positivetextcolor
-        Kirigami.Theme.neutralTextColor: cuttlefish.neutraltextcolor
-        Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
     }
 
     Kirigami.Icon {
-        Kirigami.Theme.textColor: cuttlefish.textcolor
-        Kirigami.Theme.backgroundColor: cuttlefish.bgcolor
-        Kirigami.Theme.highlightColor: cuttlefish.highlightcolor
-        Kirigami.Theme.highlightedTextColor: cuttlefish.highlightedtextcolor
-        Kirigami.Theme.positiveTextColor: cuttlefish.positivetextcolor
-        Kirigami.Theme.neutralTextColor: cuttlefish.neutraltextcolor
-        Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
         id: delegateIcon
         width: iconSize
         height: width
@@ -78,13 +64,6 @@ MouseArea {
     }
 
     QQC2.Label {
-        Kirigami.Theme.textColor: cuttlefish.textcolor
-        Kirigami.Theme.backgroundColor: cuttlefish.bgcolor
-        Kirigami.Theme.highlightColor: cuttlefish.highlightcolor
-        Kirigami.Theme.highlightedTextColor: cuttlefish.highlightedtextcolor
-        Kirigami.Theme.positiveTextColor: cuttlefish.positivetextcolor
-        Kirigami.Theme.neutralTextColor: cuttlefish.neutraltextcolor
-        Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
         font.pointSize: iconSize > 96 ? theme.defaultFont.pointSize : theme.smallestFont.pointSize
         text: iconName
         wrapMode: Text.Wrap

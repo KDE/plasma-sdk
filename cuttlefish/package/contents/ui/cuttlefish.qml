@@ -39,28 +39,8 @@ Kirigami.ApplicationWindow {
     property bool widescreen: cuttlefish.width >= 800
 
     property int iconSize: Kirigami.Units.iconSizes.large
-    property bool darkScheme: false
-    property bool usesPlasmaTheme: true
-    property var schemeStash
 
     property alias actions: actions.actions
-
-    property color textcolor: Kirigami.Theme.textColor
-    property color bgcolor: Kirigami.Theme.backgroundColor
-    property color highlightcolor: Kirigami.Theme.highlightColor
-    property color highlightedtextcolor: Kirigami.Theme.highlightedTextColor
-    property color positivetextcolor: Kirigami.Theme.positiveTextColor
-    property color neutraltextcolor: Kirigami.Theme.neutralTextColor
-    property color negativetextcolor: Kirigami.Theme.negativeTextColor
-    property color viewbgcolor: Kirigami.Theme.viewBackgroundColor
-
-    Kirigami.Theme.textColor: cuttlefish.textcolor
-    Kirigami.Theme.backgroundColor: cuttlefish.bgcolor
-    Kirigami.Theme.highlightColor: cuttlefish.highlightcolor
-    Kirigami.Theme.highlightedTextColor: cuttlefish.highlightedtextcolor
-    Kirigami.Theme.positiveTextColor: cuttlefish.positivetextcolor
-    Kirigami.Theme.neutralTextColor: cuttlefish.neutraltextcolor
-    Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
 
     Loader {
         // Use a Loader instead of creating a GMB directly,
@@ -103,43 +83,6 @@ Kirigami.ApplicationWindow {
             }
         }
     }
-    function changeColors(index) {
-        switch(index) {
-        case 0:
-            cuttlefish.Kirigami.Theme.inherit = true
-            cuttlefish.textcolor            = cuttlefish.schemeStash[0]
-            cuttlefish.bgcolor      = cuttlefish.schemeStash[1]
-            cuttlefish.highlightcolor       = cuttlefish.schemeStash[2]
-            cuttlefish.highlightedtextcolor = cuttlefish.schemeStash[3]
-            cuttlefish.positivetextcolor    = cuttlefish.schemeStash[4]
-            cuttlefish.neutraltextcolor     = cuttlefish.schemeStash[5]
-            cuttlefish.negativetextcolor    = cuttlefish.schemeStash[6]
-            cuttlefish.viewbgcolor = cuttlefish.schemeStash[7]
-            break
-        case 1:
-            cuttlefish.Kirigami.Theme.inherit = false
-            cuttlefish.textcolor = "#232629"
-            cuttlefish.bgcolor = "#eff0f1"
-            cuttlefish.highlightcolor = "#3daee9"
-            cuttlefish.highlightedtextcolor = "#eff0f1"
-            cuttlefish.positivetextcolor = "#27ae60"
-            cuttlefish.neutraltextcolor = "#f67400"
-            cuttlefish.negativetextcolor = "#da4453"
-            cuttlefish.viewbgcolor = "#fcfcfc"
-            break
-        case 2:
-            cuttlefish.Kirigami.Theme.inherit = false
-            cuttlefish.textcolor = "#eff0f1"
-            cuttlefish.bgcolor = "#31363b"
-            cuttlefish.highlightcolor = "#3daee9"
-            cuttlefish.highlightedtextcolor = "#eff0f1"
-            cuttlefish.positivetextcolor = "#27ae60"
-            cuttlefish.neutraltextcolor = "#f67400"
-            cuttlefish.negativetextcolor = "#da4453"
-            cuttlefish.viewbgcolor = "#232629"
-            break
-    }
-    }
 
     function indexToSize(ix) {
 
@@ -156,7 +99,7 @@ Kirigami.ApplicationWindow {
     }
     Rectangle {
         Kirigami.Theme.colorSet: Kirigami.Theme.View
-        color: tools.currentIndex != 0 ? cuttlefish.viewbgcolor : Kirigami.Theme.viewBackgroundColor
+        color: Kirigami.Theme.backgroundColor
         anchors.fill: parent
     }
     ColumnLayout {
@@ -218,7 +161,6 @@ Kirigami.ApplicationWindow {
     Connections {
         target: tools
         onColorschemeChanged: (index) => {
-            cuttlefish.changeColors(index)
             toolsResponsive.currentIndex = index
         }
         onSliderValueChanged: (val) => {
@@ -228,7 +170,6 @@ Kirigami.ApplicationWindow {
     Connections {
         target: toolsResponsive
         onColorschemeChanged: (index) => {
-            cuttlefish.changeColors(index)
             tools.currentIndex = index
         }
         onSliderValueChanged: (val) => {
@@ -245,17 +186,5 @@ Kirigami.ApplicationWindow {
         property string iconTheme: ""
         property variant sizes: []
         property bool scalable: true
-    }
-
-    Component.onCompleted: {
-        cuttlefish.schemeStash += Kirigami.Theme.textColor
-        cuttlefish.schemeStash += Kirigami.Theme.backgroundColor
-        cuttlefish.schemeStash += Kirigami.Theme.highlightColor
-        cuttlefish.schemeStash += Kirigami.Theme.highlightedTextColor
-        cuttlefish.schemeStash += Kirigami.Theme.positiveTextColor 
-        cuttlefish.schemeStash += Kirigami.Theme.neutralTextColor 
-        cuttlefish.schemeStash += Kirigami.Theme.negativeTextColor
-        cuttlefish.schemeStash += Kirigami.Theme.viewBackgroundColor
-        console.log(cuttlefish.schemeStash)
     }
 }

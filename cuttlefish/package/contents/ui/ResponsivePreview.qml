@@ -32,14 +32,6 @@ Kirigami.GlobalDrawer {
     handleOpenIcon.source: "dialog-close"
     handleClosedIcon.source: "view-preview"
 
-    Kirigami.Theme.textColor: cuttlefish.textcolor
-    Kirigami.Theme.backgroundColor: cuttlefish.bgcolor
-    Kirigami.Theme.highlightColor: cuttlefish.highlightcolor
-    Kirigami.Theme.highlightedTextColor: cuttlefish.highlightedtextcolor
-    Kirigami.Theme.positiveTextColor: cuttlefish.positivetextcolor
-    Kirigami.Theme.neutralTextColor: cuttlefish.neutraltextcolor
-    Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
-
     focus: false
 
     actions: cuttlefish.actions

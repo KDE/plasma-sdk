@@ -25,6 +25,7 @@ import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.0
 
 import org.kde.kirigami 2.8 as Kirigami
+import org.kde.kquickcontrolsaddons 2.0 as KQCAddons
 
 Rectangle {
     id: root
@@ -36,14 +37,6 @@ Rectangle {
     property alias slider: sizeslider
     property alias currentIndex: colorcombo.currentIndex
     property alias value: sizeslider.value
-
-    Kirigami.Theme.textColor: cuttlefish.textcolor
-    Kirigami.Theme.backgroundColor: cuttlefish.bgcolor
-    Kirigami.Theme.highlightColor: cuttlefish.highlightcolor
-    Kirigami.Theme.highlightedTextColor: cuttlefish.highlightedtextcolor
-    Kirigami.Theme.positiveTextColor: cuttlefish.positivetextcolor
-    Kirigami.Theme.neutralTextColor: cuttlefish.neutraltextcolor
-    Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
 
     RowLayout {
         anchors.fill: parent
@@ -128,13 +121,28 @@ Rectangle {
         QQC2.ComboBox {
             id: colorcombo
             visible: cuttlefish.widescreen
-            model: ["System Color Scheme", "Breeze (Normal)", "Breeze Dark"]
+            model: colorSchemes.colorSchemes
             delegate: QQC2.ItemDelegate {
-                text: i18n(modelData)
+                Kirigami.Theme.colorSet: Kirigami.Theme.View
                 width: parent.width
+                highlighted: colorcombo.highlightedIndex == index
+                contentItem: RowLayout {
+                    Kirigami.Icon {
+                        source: model.decoration
+                        Layout.preferredHeight: Kirigami.Units.iconSizes.small
+                        Layout.preferredWidth: Kirigami.Units.iconSizes.small
+                    }
+                    QQC2.Label {
+                        text: model.display
+                        color: highlighted ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
+                        Layout.fillWidth: true
+                    }
+                }
             }
+            textRole: "display"
             onActivated: (index) => {
                 root.colorschemeChanged(index)
+                colorSchemes.activateColorScheme(currentText)
             }
             popup.modal: false
         }

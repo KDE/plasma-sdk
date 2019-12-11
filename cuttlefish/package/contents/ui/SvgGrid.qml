@@ -57,13 +57,6 @@ GridView {
         }
 
         Rectangle {
-            Kirigami.Theme.textColor: cuttlefish.textcolor
-            Kirigami.Theme.backgroundColor: cuttlefish.bgcolor
-            Kirigami.Theme.highlightColor: cuttlefish.highlightcolor
-            Kirigami.Theme.highlightedTextColor: cuttlefish.highlightedtextcolor
-            Kirigami.Theme.positiveTextColor: cuttlefish.positivetextcolor
-            Kirigami.Theme.neutralTextColor: cuttlefish.neutraltextcolor
-            Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
             color: theme.highlightColor
             opacity: iconGrid.currentIndex == index ? 1.0 : 0
             Behavior on opacity { NumberAnimation { duration: units.shortDuration } }
@@ -76,13 +69,6 @@ GridView {
         }
 
         Kirigami.Icon {
-            Kirigami.Theme.textColor: cuttlefish.textcolor
-            Kirigami.Theme.backgroundColor: cuttlefish.bgcolor
-            Kirigami.Theme.highlightColor: cuttlefish.highlightcolor
-            Kirigami.Theme.highlightedTextColor: cuttlefish.highlightedtextcolor
-            Kirigami.Theme.positiveTextColor: cuttlefish.positivetextcolor
-            Kirigami.Theme.neutralTextColor: cuttlefish.neutraltextcolor
-            Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
             id: delegateIcon
             width: iconSize
             height: width
@@ -94,13 +80,6 @@ GridView {
         }
 
         QQC2.Label {
-            Kirigami.Theme.textColor: cuttlefish.textcolor
-            Kirigami.Theme.backgroundColor: cuttlefish.bgcolor
-            Kirigami.Theme.highlightColor: cuttlefish.highlightcolor
-            Kirigami.Theme.highlightedTextColor: cuttlefish.highlightedtextcolor
-            Kirigami.Theme.positiveTextColor: cuttlefish.positivetextcolor
-            Kirigami.Theme.neutralTextColor: cuttlefish.neutraltextcolor
-            Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
             font.pointSize: iconSize > 96 ? theme.defaultFont.pointSize : theme.smallestFont.pointSize
             text: modelData.fileName + " " + modelData.iconName
             wrapMode: QQC2.Text.Wrap

@@ -29,6 +29,8 @@
 #include <QVariantMap>
 #include <QVariantList>
 
+class KColorSchemeManager;
+
 namespace CuttleFish {
 
 
@@ -87,6 +89,7 @@ public:
     QString plasmaTheme() const;
     QStringList plasmathemes() const;
     QStringList categories() const;
+    QAbstractItemModel* colorschemes() const;
 
     bool loading();
 

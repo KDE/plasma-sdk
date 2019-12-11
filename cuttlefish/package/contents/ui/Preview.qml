@@ -31,14 +31,6 @@ Rectangle {
     property alias iconPreview: iconPreview
     property alias dualMont: dualMont
 
-    Kirigami.Theme.textColor: cuttlefish.textcolor
-    Kirigami.Theme.backgroundColor: cuttlefish.bgcolor
-    Kirigami.Theme.highlightColor: cuttlefish.highlightcolor
-    Kirigami.Theme.highlightedTextColor: cuttlefish.highlightedtextcolor
-    Kirigami.Theme.positiveTextColor: cuttlefish.positivetextcolor
-    Kirigami.Theme.neutralTextColor: cuttlefish.neutraltextcolor
-    Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
-
     color: Kirigami.Theme.backgroundColor
 
     FileDialog {
@@ -103,13 +95,6 @@ Rectangle {
         }
         Rectangle {
             id: iconPreview
-            Kirigami.Theme.textColor: cuttlefish.textcolor
-            Kirigami.Theme.backgroundColor: cuttlefish.bgcolor
-            Kirigami.Theme.highlightColor: cuttlefish.highlightcolor
-            Kirigami.Theme.highlightedTextColor: cuttlefish.highlightedtextcolor
-            Kirigami.Theme.positiveTextColor: cuttlefish.positivetextcolor
-            Kirigami.Theme.neutralTextColor: cuttlefish.neutraltextcolor
-            Kirigami.Theme.negativeTextColor: cuttlefish.negativetextcolor
 
             property bool screenshotting: false
 
