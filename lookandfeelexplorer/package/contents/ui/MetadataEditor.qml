@@ -19,11 +19,12 @@
 
 import QtQuick 2.3
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 1.2
+import QtQuick.Controls 2.4 as QQC2
+import QtQuick.Controls 1.3
 import QtQuick.Dialogs 1.2
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.3 as Kirigami
 
-Dialog {
+QQC2.Dialog {
     id: dialog
     property alias pluginName: pluginNameField.text
     property alias name: nameField.text
@@ -36,27 +37,15 @@ Dialog {
     property bool canEdit: false
 
     width: 500
+    x: (parent.width - width) / 2
+    y: (parent.height - height) / 2
     title: i18n("New Theme")
 
     onVisibleChanged: {
         nameField.focus = true
     }
 
-    //all this reimplementing shouldn't be necessary,
-    //but unfortunately native standard buttons management
-    //is completely broken
     contentItem: Rectangle {
-        implicitWidth:  layout.Layout.minimumWidth + units.smallSpacing*2
-        implicitHeight: layout.Layout.minimumHeight + units.smallSpacing*2
-
-        Keys.onPressed: {
-            if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
-                dialog.accept();
-            } else if (event.key == Qt.Key_Escape) {
-                dialog.reject();
-            }
-        }
-
         SystemPalette {
             id: palette
         }
@@ -74,18 +63,12 @@ Dialog {
                 wrapMode: Text.WordWrap
                 Layout.fillWidth: true
             }
-            GridLayout {
+            Kirigami.FormLayout {
                 Layout.fillWidth: true
-                columns: 2
-                columnSpacing: units.smallSpacing
-
-                FormLabel {
-                    text: i18n("Theme Plugin Name:")
-                    buddy: pluginNameField
-                }
-                TextField {
+                QQC2.TextField {
                     id: pluginNameField
                     Layout.fillWidth: true
+                    Kirigami.FormData.label: i18n("Theme Plugin Name:")
                     onTextChanged: {
                         for (var i = 0; i < lnfLogic.lnfList.count; ++i) {
                             if (pluginNameField.text == lnfLogic.lnfList.get(i).packageNameRole) {
@@ -98,85 +81,54 @@ Dialog {
                         dialog.canEdit = true;
                     }
                 }
-                FormLabel {
-                    text: i18n("Theme Name:")
-                    buddy: nameField
+                QQC2.TextField {
+                    id: "nameField"
+                    Kirigami.FormData.label: i18n("Theme Name:")
                 }
-                TextField {
-                    id: nameField
-                    Layout.fillWidth: true
-                    onTextChanged: {
-                        for (var i = 0; i < lnfLogic.lnfList.count; ++i) {
-                            if (nameField.text == lnfLogic.lnfList.get(i).displayRole) {
-                                dialog.canEdit = false;
-                                errorMessage.text = i18n("This theme name already exists");
-                                return;
-                            }
-                        }
-                        errorMessage.text = "";
-                        dialog.canEdit = true;
-                    }
+                QQC2.TextField {
+                    id: "commentField"
+                    Kirigami.FormData.label: i18n("Comment:")
                 }
-                FormLabel {
-                    text: i18n("Comment:")
-                    buddy: commentField
+                QQC2.TextField {
+                    id: "authorField"
+                    Kirigami.FormData.label: i18n("Author:")
                 }
-                TextField {
-                    id: commentField
-                    Layout.fillWidth: true
+                QQC2.TextField {
+                    id: "emailField"
+                    Kirigami.FormData.label:  i18n("Email:")
                 }
-                FormLabel {
-                    text: i18n("Author:")
-                    buddy: authorField
+                QQC2.TextField {
+                    id: "versionField"
+                    Kirigami.FormData.label: i18n("Version:")
                 }
-                TextField {
-                    id: authorField
-                    Layout.fillWidth: true
-                }
-                FormLabel {
-                    text: i18n("Email:")
-                    buddy: emailField
-                }
-                TextField {
-                    id: emailField
-                    Layout.fillWidth: true
-                }
-                FormLabel {
-                    text: i18n("License:")
-                    buddy: licenseField
+                QQC2.TextField {
+                    id: "websiteField"
+                    Kirigami.FormData.label:  i18n("Website:")
                 }
                 ComboBox {
                     id: licenseField
                     Layout.fillWidth: true
+                    Kirigami.FormData.label: i18n("License:")
                     editable: true
                     editText: "LGPL 2.1+"
                     model: ["LGPL 2.1+", "GPL 2+", "GPL 3+", "LGPL 3+", "BSD"]
                 }
-                FormLabel {
-                    text: i18n("Website:")
-                    buddy: websiteField
-                }
-                TextField {
-                    id: websiteField
-                    Layout.fillWidth: true
-                }
             }
-            Item {
-                Layout.fillHeight: true
-            }
-            RowLayout {
-                Layout.alignment: Qt.AlignRight
-                Button {
-                    text: i18n("OK")
-                    onClicked: dialog.accept()
-                    isDefault: true
-                    enabled: canEdit && nameField.text && authorField.text && emailField.text && websiteField.text
-                }
-                Button {
-                    text: i18n("Cancel")
-                    onClicked: dialog.reject()
-                }
-            }
+        }
+    }
+
+
+    footer: QQC2.DialogButtonBox {
+        QQC2.Button {
+            text: i18n("OK ")
+            enabled: canEdit && nameField.text && authorField.text && emailField.text && websiteField.text
+            QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.AcceptRole
+            onClicked: dialog.accept()
+        }
+        QQC2.Button {
+            text: i18n("Cancel")
+            QQC2.DialogButtonBox.buttonRole: QQC2.DialogButtonBox.DestructiveRole
+            onClicked: dialog.reject()
         }
     }
 

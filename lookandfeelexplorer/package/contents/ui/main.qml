@@ -19,16 +19,16 @@
 
 import QtQuick 2.0
 import QtQuick.Controls 1.3
+import QtQuick.Controls 2.0 as QQC2
 import QtQuick.Layouts 1.1
 
 import org.kde.draganddrop 2.0 as DragAndDrop
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.kirigami 2.0 as Kirigami
+import org.kde.kirigami 2.3 as Kirigami
 
 Kirigami.AbstractApplicationWindow {
     id: root
-    width: units.gridUnit * 65
-    height: units.gridUnit * 26
+    width: Kirigami.Units.gridUnit * 50
+    height: Kirigami.Units.gridUnit * 26
     visible: true
 
     Component.onCompleted: {
@@ -43,12 +43,12 @@ Kirigami.AbstractApplicationWindow {
     globalDrawer: Kirigami.GlobalDrawer {
         title: i18n("Look And Feel")
         titleIcon: "preferences-desktop-theme"
+        modal: true;
+        collapsible: false;
+        collapsed: false;
         topContent: ComboBox {
             id: themeSelector
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
+            Layout.fillWidth: true
             model: lnfLogic.lnfList
             textRole: "displayRole"
             onCurrentIndexChanged: {
@@ -92,80 +92,60 @@ Kirigami.AbstractApplicationWindow {
     }
 
     RowLayout {
-        enabled: lnfLogic.isWritable
         anchors {
             fill: parent
-            margins: 10
+            margins: Kirigami.Units.largeSpacing
         }
-        GridLayout {
-            columns: 2
-            Layout.alignment: Qt.AlignHCenter|Qt.AlignVCenter
-            FormLabel {
-                text: i18n("Plugin Name:")
-            }
-            Kirigami.Label {
-                text: lnfLogic.theme
-            }
-            FormLabel {
-                text: i18n("Name:")
-                buddy: nameField
-            }
-            FormField {
-                key: "name"
-            }
-            FormLabel {
-                text: i18n("Comment:")
-                buddy: nameField
-            }
-            FormField {
-                key: "comment"
-            }
-            FormLabel {
-                text: i18n("Author:")
-                buddy: nameField
-            }
-            FormField {
-                key: "author"
-            }
-            FormLabel {
-                text: i18n("Email:")
-                buddy: nameField
-            }
-            FormField {
-                key: "email"
-            }
-            FormLabel {
-                text: i18n("Version:")
-                buddy: nameField
-            }
-            FormField {
-                key: "version"
-            }
-            FormLabel {
-                text: i18n("Website:")
-                buddy: nameField
-            }
-            FormField {
-                key: "website"
-            }
-            FormLabel {
-                text: i18n("License:")
-                buddy: nameField
-            }
-            FormField {
-                key: "license"
-            }
-            Button {
-                text: i18n("Layout from current Plasma setup")
-                onClicked: lnfLogic.performLayoutDump = true
-                Layout.columnSpan: 2
-                Layout.alignment: Qt.AlignRight
-            }
-            Button {
-                text: i18n("Defaults from current setup")
-                onClicked: lnfLogic.performDefaultsDump = true
-                Layout.columnSpan: 2
-                Layout.alignment: Qt.AlignRight
+        Layout.alignment: Qt.AlignHCenter
+        ColumnLayout {
+            Layout.alignment: Qt.AlignHCenter
+            Layout.fillWidth: true
+            Kirigami.FormLayout {
+                enabled: lnfLogic.isWritable
+                QQC2.Label {
+                    text: i18n("Plugin name:") + lnfLogic.theme
+                }
+                FormField {
+                    id: formField
+                    label: i18n("Name:")
+                    key: "name"
+                }
+                FormField {
+                    label: i18n("Comment:")
+                    key: "comment"
+                }
+                FormField {
+                    label: i18n("Author:")
+                    key: "author"
+                }
+                FormField {
+                    label: i18n("Email:")
+                    key: "email"
+                }
+                FormField {
+                    label: i18n("Version:")
+                    key: "version"
+                }
+                FormField {
+                    label: i18n("Website:")
+                    key: "website"
+                }
+                FormField {
+                    label: i18n("License:")
+                    key: "license"
+                }
+                QQC2.Button {
+                    text: i18n("Layout from current Plasma setup")
+                    onClicked: lnfLogic.performLayoutDump = true
+                    Layout.columnSpan: 2
+                    implicitWidth: formField.width
+                }
+                QQC2.Button {
+                    text: i18n("Defaults from current setup")
+                    onClicked: lnfLogic.performDefaultsDump = true
+                    Layout.columnSpan: 2
+                    implicitWidth: formField.width
+                }
             }
         }
         Connections {
@@ -181,9 +161,9 @@ Kirigami.AbstractApplicationWindow {
         Rectangle {
             width: 250
             height: 250
-            Kirigami.Label {
+            QQC2.Label {
                 anchors.centerIn: parent
-                text: i18n("click to open an image")
+                text: i18n("Click to open an image")
                 visible: thumbnail.source == ""
             }
             Image {
@@ -213,10 +193,11 @@ Kirigami.AbstractApplicationWindow {
             }
         }
     }
-    Button {
+    QQC2.Button {
         anchors {
             right: parent.right
             bottom: parent.bottom
+            margins: Kirigami.Units.largeSpacing
         }
         text: i18n("Save")
         enabled: lnfLogic.needsSave

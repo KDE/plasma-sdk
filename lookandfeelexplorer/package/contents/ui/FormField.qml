@@ -20,11 +20,13 @@
 import QtQuick 2.3
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.2
-import org.kde.kirigami 2.0 as Kirigami
+import org.kde.kirigami 2.3 as Kirigami
 
 TextField {
     id: field
     property string key
+    property string label
+    Kirigami.FormData.label: label
     text: lnfLogic[key]
     Layout.minimumWidth: Kirigami.Units.gridUnit * 15
     onAccepted: {
