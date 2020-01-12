@@ -14,6 +14,7 @@
   <name xml:lang="fi">Plasmoid Viewer</name>
   <name xml:lang="fr">Afficheur de composants graphiques</name>
   <name xml:lang="gl">Visor de plasmoides</name>
+  <name xml:lang="ia">Visor de plasmoid</name>
   <name xml:lang="id">Plasmoid Viewer</name>
   <name xml:lang="it">Visore di plasmoidi</name>
   <name xml:lang="ko">Plasmoid 뷰어</name>
@@ -42,6 +43,7 @@
   <summary xml:lang="fi">Plasma-sovelmien testaustyökalu</summary>
   <summary xml:lang="fr">Outil de test pour les applets Plasma</summary>
   <summary xml:lang="gl">Ferramenta de probas para trebellos de Plasma</summary>
+  <summary xml:lang="ia">Instrumento de essayar pro applets de Plasma</summary>
   <summary xml:lang="id">Alat pengujian untuk applet Plasma</summary>
   <summary xml:lang="it">Strumento di prova per le applet di Plasma</summary>
   <summary xml:lang="ko">Plasma 애플릿 테스트 도구</summary>
