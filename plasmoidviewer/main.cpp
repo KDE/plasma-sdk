@@ -58,8 +58,6 @@ int main(int argc, char **argv)
     QCommandLineParser parser;
     parser.setApplicationDescription(i18n("Run Plasma widgets in their own window"));
 
-    parser.addVersionOption();
-
     parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("c") << QStringLiteral("containment"),
                 i18n("The name of the containment plugin"), QStringLiteral("containment"), QStringLiteral("org.kde.desktopcontainment")));
     parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("a") << QStringLiteral("applet"),
