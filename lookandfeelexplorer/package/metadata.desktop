@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=Explore and edit your Plasma Global Themes
 Comment[ca]=Explora i edita els vostres temes globals del Plasma
+Comment[da]=Udforsk og redigér dine globale Plasma-temaer
 Comment[de]=Erforschen und bearbeiten Sie Ihre globalen Plasma-Designs
 Comment[en_GB]=Explore and edit your Plasma Global Themes
 Comment[es]=Explorar y editar temas globales de Plasma
@@ -25,6 +26,7 @@ Comment[zh_TW]=探索並編輯您的 Plasma 全域主題
 Keywords=
 Name=Plasma Global Theme Explorer
 Name[ca]=Explorador pels temes globals del Plasma
+Name[da]=Plasma global temaudforsker
 Name[en_GB]=Plasma Global Theme Explorer
 Name[es]=Explorador de temas globales de Plasma
 Name[et]=Plasma globaalsete teemade uurija
