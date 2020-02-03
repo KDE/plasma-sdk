@@ -24,6 +24,9 @@ import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.0
 
 import org.kde.kirigami 2.8 as Kirigami
+// for smallestFont
+import org.kde.plasma.core 2.0 as PlasmaCore
+
 
 MouseArea {
     id: delegateRoot
@@ -46,7 +49,7 @@ MouseArea {
         color: Kirigami.Theme.highlightColor
         opacity: iconGrid.currentIndex == index ? 0.5 : 0.0
         visible: opacity != 0.0
-        Behavior on opacity { NumberAnimation { duration: units.shortDuration } }
+        Behavior on opacity { NumberAnimation { duration: Kirigami.Units.shortDuration } }
         anchors {
             fill: parent
         }
@@ -64,7 +67,7 @@ MouseArea {
     }
 
     QQC2.Label {
-        font.pointSize: iconSize > 96 ? theme.defaultFont.pointSize : theme.smallestFont.pointSize
+        font.pointSize: iconSize > 96 ? Kirigami.Theme.defaultFont.pointSize : theme.smallestFont.pointSize
         text: iconName
         wrapMode: Text.Wrap
         maximumLineCount: 3
@@ -75,7 +78,7 @@ MouseArea {
             right: parent.right
             top: delegateIcon.bottom
             topMargin: 0
-            margins: Math.round(-units.gridUnit / 4)
+            margins: Math.round(-Kirigami.Units.gridUnit / 4)
         }
     }
 
