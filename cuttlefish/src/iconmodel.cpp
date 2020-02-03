@@ -39,8 +39,6 @@
 #include <KSharedConfig>
 #include <KPackage/PackageLoader>
 
-#include <Plasma/Theme>
-
 #include <algorithm>
 #include <cstring>
 #include <iostream>
@@ -50,8 +48,7 @@ using namespace CuttleFish;
 static QTextStream cout(stdout);
 
 IconModel::IconModel(QObject *parent) :
-    QAbstractListModel(parent),
-    m_theme(QStringLiteral("breeze"))
+    QAbstractListModel(parent)
     , m_loading(false)
 {
     m_roleNames.insert(FileName, "fileName");
@@ -65,18 +62,6 @@ IconModel::IconModel(QObject *parent) :
     m_roleNames.insert(Type, "type");
 
     connect(this, &IconModel::categoryChanged, this, &IconModel::load);
-    KConfigGroup cg(KSharedConfig::openConfig("cuttlefishrc"), "CuttleFish");
-    const QString themeName = cg.readEntry("theme", "default");
-
-    Plasma::Theme theme;
-//     qDebug() << "Setting Plasma theme" << themeName;
-    theme.setUseGlobalSettings(false);
-    theme.setThemeName(themeName); // needs to happen after setUseGlobalSettings, since that clears themeName
-
-    QList<KPluginMetaData> themepackages = KPackage::PackageLoader::self()->listPackages(QString(), "plasma/desktoptheme");
-    foreach (const KPluginMetaData &pkg, themepackages) {
-        m_plasmathemes << pkg.pluginId();
-    }
 
     m_categories = QStringList() << "all" \
         << "actions"
@@ -215,7 +200,6 @@ void IconModel::setFilter(const QString &filter)
         m_filter = filter;
         load();
         emit filterChanged();
-        emit svgIconsChanged();
     }
 }
 
@@ -254,7 +238,6 @@ void IconModel::load()
     }
 
     foreach (const QString &iconPath, searchPaths) {
-
         QDirIterator cats(iconPath, nameFilters, QDir::Dirs, QDirIterator::NoIteratorFlags);
         while (cats.hasNext()) {
             cats.next();
@@ -273,12 +256,10 @@ void IconModel::load()
         }
     }
 
-    svgIcons();
-
     sort();
 
     endResetModel();
-    
+
     m_loading = false;
     emit loadingChanged();
 }
@@ -306,79 +287,6 @@ bool IconModel::matchIcons(const QFileInfo& info)
         }
     }
     return ok;
-}
-
-
-QStringList IconModel::themes() const
-{
-    return m_themes;
-}
-
-QString IconModel::theme() const
-{
-    return m_theme;
-}
-
-void IconModel::setTheme(const QString& theme)
-{
-    if (theme != m_theme) {
-        m_theme = theme;
-        load();
-        emit themeChanged();
-    }
-}
-
-QString IconModel::plasmaTheme() const
-{
-    return m_plasmatheme;
-}
-
-void IconModel::setPlasmaTheme(const QString& ptheme)
-{
-    if (m_plasmatheme != ptheme) {
-        m_plasmatheme = ptheme;
-        Plasma::Theme theme;
-        theme.setThemeName(ptheme);
-        load();
-        emit plasmaThemeChanged();
-    }
-}
-
-QStringList IconModel::plasmathemes() const
-{
-    return m_plasmathemes;
-}
-
-void IconModel::svgIcons()
-{
-    QVariantList out;
-
-    foreach (const QString &file, m_svgIcons.keys()) {
-        foreach (const QString &icon, m_svgIcons[file].toStringList()) {
-            if (m_filter.isEmpty() ||
-               (file.indexOf(m_filter) != -1 || icon.indexOf(m_filter) != -1)) {
-
-                QVariantMap &data = m_data[icon];
-                if (!m_icons.contains(icon)) {
-
-                    data["fullPath"] = "";
-                    data["iconName"] = icon;
-                    data["fileName"] = file;
-                    data["category"] = "system";
-                    data["type"] = QStringLiteral("svg");
-                    data["scalable"] = true;
-                    data["iconTheme"] = m_plasmatheme;
-
-                    m_icons << icon;
-                }
-                QVariantMap vm;
-                vm["fileName"] = file;
-                vm["iconName"] = icon;
-                out << vm;
-            }
-        }
-    }
-    sort();
 }
 
 QString IconModel::categoryFromPath(const QString& path)

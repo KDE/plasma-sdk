@@ -130,11 +130,6 @@ Kirigami.ApplicationWindow {
                     id: iconGrid
                     anchors.fill: parent
                     anchors.margins: Kirigami.Units.gridUnit
-
-                    footer: SvgGrid {
-                        id: svgGrid
-                        interactive: false
-                    }
                 }
             }
             Preview {

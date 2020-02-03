@@ -40,11 +40,7 @@ class IconModel : public QAbstractListModel
 
     Q_PROPERTY(QString filter READ filter WRITE setFilter NOTIFY filterChanged)
     Q_PROPERTY(QString category READ category WRITE setCategory NOTIFY categoryChanged)
-    Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
-    Q_PROPERTY(QStringList themes READ themes CONSTANT)
-    Q_PROPERTY(QStringList plasmathemes READ plasmathemes CONSTANT)
     Q_PROPERTY(QStringList categories READ categories NOTIFY categoriesChanged)
-    Q_PROPERTY(QString plasmaTheme READ plasmaTheme WRITE setPlasmaTheme NOTIFY plasmaThemeChanged)
     Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged);
 
 public:
@@ -72,7 +68,6 @@ public:
 
     bool matchIcons(const QFileInfo &info);
     void add(const QFileInfo &info, const QString &cat);
-    void addSvgIcon(const QString &file, const QString &icon);
     void remove(const QString &iconFile);
 
     void setCategory(const QString &cat);
@@ -81,19 +76,10 @@ public:
     void setFilter(const QString &filter);
     QString filter() const;
 
-    void setTheme(const QString &theme);
-    QString theme() const;
-    QStringList themes() const;
-
-    void setPlasmaTheme(const QString &ptheme);
-    QString plasmaTheme() const;
-    QStringList plasmathemes() const;
     QStringList categories() const;
     QAbstractItemModel* colorschemes() const;
 
     bool loading();
-
-    void svgIcons();
 
     void load();
 
@@ -105,9 +91,6 @@ Q_SIGNALS:
     void filterChanged();
     void categoryChanged();
     void categoriesChanged();
-    void themeChanged();
-    void svgIconsChanged();
-    void plasmaThemeChanged();
     void loadingChanged();
 
 private:
@@ -116,14 +99,9 @@ private:
     QStringList m_icons;
     QString m_category;
     QStringList m_categories;
-    QString m_theme;
     QString m_filter;
-    QStringList m_themes;
-    QStringList m_plasmathemes;
-    QString m_plasmatheme;
     QHash<QString, QVariantMap> m_data;
     QHash<QString, QString> m_categoryTranslations;
-    QVariantMap m_svgIcons;
 
     bool m_loading;
     QString categoryFromPath(const QString &path);
