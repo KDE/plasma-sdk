@@ -143,7 +143,7 @@ class KTreeViewSearchLine : public KLineEdit
 
     /**
      * When a search is active on a list that's organized into a tree view if
-     * a parent or ancesestor of an item is does not match the search then it
+     * a parent or ancestor of an item is does not match the search then it
      * will be hidden and as such so too will any children that match.
      *
      * If this is set to true (the default) then the parents of matching items

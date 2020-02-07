@@ -67,7 +67,7 @@ bool IconsParserHandler::startElement(const QString &namespaceURI, const QString
         id != "base" && !id.contains("layer")) {
         m_ids<<id;
     }
-    if (id.endsWith("-center") && !id.contains("hint-")) {
+    if (id.endsWith(QLatin1String("-center")) && !id.contains("hint-")) {
         //remove -center
         m_prefixes << id.mid(0, id.length() - 7);
     }

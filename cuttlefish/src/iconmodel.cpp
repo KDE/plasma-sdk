@@ -144,12 +144,12 @@ void IconModel::add(const QFileInfo &info, const QString &cat)
     const QString fname = info.fileName();
     bool scalable = false;
     QString icon = fname;
-    if (fname.endsWith(".png")) {
+    if (fname.endsWith(QLatin1String(".png"))) {
         icon.remove(".png");
-    } else if (fname.endsWith(".svgz")) {
+    } else if (fname.endsWith(QLatin1String(".svgz"))) {
         icon.remove(".svgz");
         scalable = true;
-    } else if (fname.endsWith(".svg")) {
+    } else if (fname.endsWith(QLatin1String(".svg"))) {
         icon.remove(".svg");
         scalable = true;
     }

@@ -1,7 +1,7 @@
 /***************************************************************************
  *                                                                         *
  *   Copyright 2014-2017 Sebastian Kügler <sebas@kde.org>                  *
- *   Copyrihgt 2019      Carson Black <uhhadd@gmail.com>                   *
+ *   Copyright 2019      Carson Black <uhhadd@gmail.com>                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
