@@ -3,6 +3,7 @@ set(cuttlefish_SRCS
     main.cpp
     iconmodel.cpp
     colorschemes.cpp
+    sortfiltermodel.cpp
 )
 
 add_executable(cuttlefish ${cuttlefish_SRCS})

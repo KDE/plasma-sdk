@@ -5,7 +5,7 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Test)
 
 include_directories(../src)
 
-ecm_add_test(iconmodeltest.cpp ../src/iconmodel.cpp
+ecm_add_test(iconmodeltest.cpp ../src/iconmodel.cpp ../src/sortfiltermodel.cpp
              TEST_NAME iconmodeltest
              LINK_LIBRARIES
                 Qt5::Gui

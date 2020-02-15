@@ -36,8 +36,6 @@ class IconModel : public QAbstractListModel
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString filter READ filter WRITE setFilter NOTIFY filterChanged)
-    Q_PROPERTY(QString category READ category WRITE setCategory NOTIFY categoryChanged)
     Q_PROPERTY(QStringList categories READ categories NOTIFY categoriesChanged)
     Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged);
 
@@ -64,15 +62,8 @@ public:
 
     QString key(int role) const;
 
-    bool matchIcons(const QFileInfo &info);
     void add(const QFileInfo &info, const QString &cat);
     void remove(const QString &iconFile);
-
-    void setCategory(const QString &cat);
-    QString category() const;
-
-    void setFilter(const QString &filter);
-    QString filter() const;
 
     QStringList categories() const;
 
@@ -81,12 +72,9 @@ public:
     void load();
 
     Q_INVOKABLE void output(const QString &text);
-    Q_INVOKABLE void sort();
 
 
 Q_SIGNALS:
-    void filterChanged();
-    void categoryChanged();
     void categoriesChanged();
     void loadingChanged();
 
@@ -94,9 +82,7 @@ private:
     QHash<int, QByteArray> m_roleNames;
 
     QStringList m_icons;
-    QString m_category;
     QStringList m_categories;
-    QString m_filter;
     QHash<QString, QVariantMap> m_data;
     QHash<QString, QString> m_categoryTranslations;
 

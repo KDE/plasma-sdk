@@ -56,7 +56,7 @@ Rectangle {
                 repeat: false
                 interval: 100
                 onTriggered: {
-                    iconModel.filter = filterInput.text
+                    proxyModel.filter = filterInput.text
                 }
             }
             Component.onCompleted: {
@@ -70,11 +70,10 @@ Rectangle {
             model: iconModel.categories
             onActivated: {
                 if (currentText == "all") {
-                    iconModel.category = "";
+                    proxyModel.category = "";
                 } else if (currentText != "") {
-                    iconModel.category = currentText
+                    proxyModel.category = currentText
                 }
-                iconModel.sort()
             }
             popup.modal: false
         }

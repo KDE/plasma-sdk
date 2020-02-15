@@ -60,8 +60,6 @@ IconModel::IconModel(QObject *parent) :
     m_roleNames.insert(Theme, "iconTheme");
     m_roleNames.insert(Type, "type");
 
-    connect(this, &IconModel::categoryChanged, this, &IconModel::load);
-
     m_categories = QStringList() << "all" \
         << "actions"
         << "animations"
@@ -169,37 +167,9 @@ void IconModel::add(const QFileInfo &info, const QString &cat)
     }
 }
 
-QString IconModel::category() const
-{
-    return m_category;
-}
-
 QStringList IconModel::categories() const
 {
     return m_categories;
-}
-
-void IconModel::setCategory(const QString& cat)
-{
-    if (cat != m_category) {
-        m_category = cat;
-        emit categoryChanged();
-    }
-}
-
-QString IconModel::filter() const
-{
-    return m_filter;
-}
-
-void IconModel::setFilter(const QString &filter)
-{
-    //qDebug() << "Filter: " << filter;
-    if (m_filter != filter) {
-        m_filter = filter;
-        load();
-        emit filterChanged();
-    }
 }
 
 void IconModel::load()
@@ -247,45 +217,16 @@ void IconModel::load()
                 while (it.hasNext()) {
                     it.next();
                     const QFileInfo &info = it.fileInfo();
-                    if (matchIcons(info)) {
-                        add(info, categoryFromPath(info.absoluteFilePath()));
-                    }
+                    add(info, categoryFromPath(info.absoluteFilePath()));
                 }
             }
         }
     }
 
-    sort();
-
     endResetModel();
 
     m_loading = false;
     emit loadingChanged();
-}
-
-void IconModel::sort()
-{
-    std::sort(m_icons.begin(), m_icons.end());
-}
-
-bool IconModel::matchIcons(const QFileInfo& info)
-{
-    bool ok = false;
-
-    // Category is empty or all? Skip further matching.
-    bool catmatch = m_category.isEmpty() || m_category == QStringLiteral("all");
-    // category match?
-    if (!catmatch && m_category == categoryFromPath(info.absoluteFilePath())) {
-        catmatch = true;
-    }
-
-    // name filter
-    if (m_filter.isEmpty() || info.fileName().indexOf(m_filter) != -1) {
-        if (catmatch) {
-            ok = true;
-        }
-    }
-    return ok;
 }
 
 QString IconModel::categoryFromPath(const QString& path)

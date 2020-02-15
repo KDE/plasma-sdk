@@ -26,6 +26,7 @@
 #include <QSignalSpy>
 
 #include "iconmodel.h"
+#include "sortfiltermodel.h"
 
 
 using namespace CuttleFish;
@@ -40,11 +41,14 @@ private Q_SLOTS:
     void init()
     {
         m_iconModel = new IconModel(this);
+        m_proxyModel = new SortFilterModel(this);
+        m_proxyModel->setSourceModel(m_iconModel);
     }
 
     void cleanup()
     {
         delete m_iconModel;
+        delete m_proxyModel;
     }
 
     void initTestCase()
@@ -55,14 +59,14 @@ private Q_SLOTS:
     {
         const int _all = m_iconModel->rowCount(QModelIndex());
 
-        m_iconModel->setFilter("edit");
-        const int _edit = m_iconModel->rowCount(QModelIndex());
+        m_proxyModel->setFilter("edit");
+        const int _edit = m_proxyModel->rowCount(QModelIndex());
 
-        m_iconModel->setCategory("actions");
-        const int _editactions = m_iconModel->rowCount(QModelIndex());
+        m_proxyModel->setCategory("actions");
+        const int _editactions = m_proxyModel->rowCount(QModelIndex());
 
-        m_iconModel->setCategory("all");
-        const int _alledit = m_iconModel->rowCount(QModelIndex());
+        m_proxyModel->setCategory("all");
+        const int _alledit = m_proxyModel->rowCount(QModelIndex());
 
         QVERIFY(_all > _edit);
         QVERIFY(_all > _editactions);
@@ -80,6 +84,7 @@ private:
     QJsonArray m_empty;
 
     IconModel* m_iconModel;
+    SortFilterModel* m_proxyModel;
 
 };
 

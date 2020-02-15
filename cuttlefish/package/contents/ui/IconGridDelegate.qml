@@ -91,9 +91,9 @@ MouseArea {
         }
     }
     onClicked: (mouse) => {
-        iconGrid.currentIndex = index;
+        proxyModel.currentIndex = index
         iconGrid.forceActiveFocus();
-        if (mouse.button == Qt.RightButton) {            
+        if (mouse.button == Qt.RightButton) {
             cuttlefish.itemRightClicked()
         }
     }

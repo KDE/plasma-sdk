@@ -1,6 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2014-2015 Sebastian Kügler <sebas@kde.org>                  *
+ *   Copyright 2020 David Redondo <kde@david-redondo.de>                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -19,37 +19,39 @@
  *                                                                         *
  ***************************************************************************/
 
-import QtQuick 2.5
-import QtQuick.Controls 2.5 as QQC2
-import QtQuick.Layouts 1.0
 
-import org.kde.kirigami 2.8 as Kirigami
+#include <QSortFilterProxyModel>
 
-GridView {
-    id: iconGrid
-    focus: true
+namespace CuttleFish {
 
-    cellWidth: iconSize + Math.round(Kirigami.Units.gridUnit * 1.5)
-    cellHeight: cellWidth + Math.round(Kirigami.Units.gridUnit * 2)
+class SortFilterModel : public QSortFilterProxyModel {
+    Q_OBJECT
+    Q_PROPERTY(QString filter READ filter WRITE setFilter NOTIFY filterChanged)
+    Q_PROPERTY(QString category READ category WRITE setCategory NOTIFY categoryChanged)
+    Q_PROPERTY(int currentIndex READ currentIndex WRITE setCurrentIndex NOTIFY currentIndexChanged)
+public:
+    SortFilterModel(QObject *parent);
 
-    cacheBuffer: 20
-    highlightMoveDuration: 0
-    boundsBehavior: Flickable.StopAtBounds
-    model: proxyModel
-    currentIndex: proxyModel.currentIndex
+    void setCategory(const QString &category);
+    QString category() const;
 
-    highlight: Item {}
+    void setFilter(const QString &filter);
+    QString filter() const;
 
-    delegate: IconGridDelegate {}
+    void setCurrentIndex(int index);
+    int currentIndex();
 
-    QQC2.BusyIndicator {
-        running: iconModel.loading
-        visible: running
-        anchors.centerIn: parent
-        width: Kirigami.Units.gridUnit * 8
-        height: width
-    }
-    Component.onCompleted: {
-        currentItem.setAsPreview()
-    }
+Q_SIGNALS:
+    void filterChanged();
+    void categoryChanged();
+    void currentIndexChanged();
+
+private: 
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
+
+    QString m_category;
+    QString m_filter;
+    QModelIndex m_currentSourceIndex;
+};
+
 }

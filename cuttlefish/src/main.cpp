@@ -37,6 +37,7 @@
 // Own
 #include "colorschemes.h"
 #include "iconmodel.h"
+#include "sortfiltermodel.h"
 
 void messageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
@@ -121,8 +122,13 @@ int main(int argc, char **argv)
     }
 
     auto iconModel = new CuttleFish::IconModel(engine.rootContext());
+    auto proxyModel = new CuttleFish::SortFilterModel(engine.rootContext());
+    proxyModel->setSourceModel(iconModel);
+    proxyModel->sort(0);
     auto colorSchemes = new CuttleFish::ColorSchemes(engine.rootContext());
+
     engine.rootContext()->setContextProperty("iconModel", iconModel);
+    engine.rootContext()->setContextProperty("proxyModel", proxyModel);
     engine.rootContext()->setContextProperty("pickerMode", parser.isSet("picker"));
     engine.rootContext()->setContextProperty("colorSchemes", colorSchemes);
 
