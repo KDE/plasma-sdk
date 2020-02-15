@@ -33,7 +33,6 @@
 #include <QJsonDocument>
 
 #include <KConfigGroup>
-#include <KColorSchemeManager>
 #include <KIconLoader>
 #include <KIconTheme>
 #include <KSharedConfig>

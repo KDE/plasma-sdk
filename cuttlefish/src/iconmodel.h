@@ -29,8 +29,6 @@
 #include <QVariantMap>
 #include <QVariantList>
 
-class KColorSchemeManager;
-
 namespace CuttleFish {
 
 
@@ -77,7 +75,6 @@ public:
     QString filter() const;
 
     QStringList categories() const;
-    QAbstractItemModel* colorschemes() const;
 
     bool loading();
 
