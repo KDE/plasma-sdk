@@ -34,7 +34,6 @@ ColorSchemes::ColorSchemes(QObject *parent)
     : QObject(parent)
     , m_colorManager(new KColorSchemeManager(this))
 {
-    QAbstractItemModel *model = m_colorManager->model();
 }
 
 QAbstractItemModel* CuttleFish::ColorSchemes::colorSchemes()
