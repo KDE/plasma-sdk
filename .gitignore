@@ -23,3 +23,5 @@ Makefile
 .cmake/
 CMakeLists.txt.user*
 *.unc-backup*
+.clang-format
+/build*/
