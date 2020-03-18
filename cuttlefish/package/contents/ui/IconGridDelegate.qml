@@ -84,7 +84,7 @@ MouseArea {
 
     Connections {
         target: iconGrid
-        onCurrentIndexChanged: {
+        onCurrentItemChanged: {
             if (delegateRoot.GridView.isCurrentItem) {
                 delegateRoot.setAsPreview();
             }

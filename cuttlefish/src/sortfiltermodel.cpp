@@ -51,8 +51,8 @@ int SortFilterModel::currentIndex()
     const QModelIndex index =  mapFromSource(m_currentSourceIndex);
     if (index.isValid()) {
         return index.row();
-    } 
-    m_currentSourceIndex = mapFromSource(this->index(0, 0));
+    }
+    m_currentSourceIndex = mapToSource(this->index(0, 0));
     return 0;
 }
 
