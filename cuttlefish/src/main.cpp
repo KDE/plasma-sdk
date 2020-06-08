@@ -144,6 +144,6 @@ int main(int argc, char **argv)
     qmlRegisterAnonymousType<CuttleFish::IconModel>("org.kde.plasma.sdk", 1);
     qmlRegisterAnonymousType<CuttleFish::ColorSchemes>("org.kde.plasma.sdk", 1);
 #endif
-
+    app.setAttribute(Qt::AA_UseHighDpiPixmaps);
     return app.exec();
 }

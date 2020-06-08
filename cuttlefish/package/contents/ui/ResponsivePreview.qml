@@ -67,20 +67,19 @@ Kirigami.GlobalDrawer {
     GridLayout {
         id: grid
         columns: 2
-        property var sizes: [8, 16, 22, 32, 48, 64]
         Layout.alignment: Qt.AlignHCenter
         Repeater {
-            model: parent.sizes.length
+            model: cuttlefish.iconSizes.slice(0, cuttlefish.iconSizes.length - 1)
             delegate: ColumnLayout {
+                Layout.alignment: Qt.AlignBottom
                 Kirigami.Icon {
-                    Layout.alignment: Qt.AlignBottom
                     source: preview.iconName
-                    width: grid.sizes[index]
-                    height: grid.sizes[index]
+                    width: modelData
+                    height: width
                 }
                 QQC2.Label {
                     Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                    text: grid.sizes[index]
+                    text: modelData
                     Behavior on color {
                         ColorAnimation {
                             duration: Kirigami.Units.longDuration

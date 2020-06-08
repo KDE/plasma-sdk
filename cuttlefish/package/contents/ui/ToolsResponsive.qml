@@ -62,7 +62,7 @@ Rectangle {
 
             onValueChanged: {
                 sizetimer.restart()
-                pixelSizeInput.text = indexToSize(sizeslider.value)
+                pixelSizeInput.text = cuttlefish.iconSizes[sizeslider.value];
                 root.sliderValueChanged(sizeslider.value)
             }
 
@@ -71,11 +71,11 @@ Rectangle {
                 running: false
                 repeat: false
                 interval: 200
-                onTriggered: iconSize = indexToSize(sizeslider.value)
+                onTriggered: iconSize = cuttlefish.iconSizes[sizeslider.value];
             }
 
             Component.onCompleted: {
-                pixelSizeInput.text = indexToSize(sizeslider.value);
+                pixelSizeInput.text = cuttlefish.iconSizes[sizeslider.value];
             }
         }
 

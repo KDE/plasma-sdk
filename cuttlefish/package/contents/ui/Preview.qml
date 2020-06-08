@@ -2,6 +2,8 @@
  *                                                                         *
  *   Copyright 2014-2017 Sebastian Kügler <sebas@kde.org>                  *
  *   Copyright 2019      Carson Black <uhhadd@gmail.com>                   *
+ *   Copyright 2020      David Redondo <kde@david-redondo.de>              *
+ *                                                                         *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -9,8 +11,8 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
  *   GNU General Public License for more details.                          *
  *                                                                         *
  *   You should have received a copy of the GNU General Public License     *
@@ -110,7 +112,7 @@ Rectangle {
                     duration: Kirigami.Units.longDuration
                 }
             }
-            
+
             Layout.fillWidth: true
             Layout.preferredHeight: screenshotting ? previewGrid.height + (Kirigami.Units.gridUnit * 4) : previewGrid.height
 
@@ -121,56 +123,42 @@ Rectangle {
                 id: previewGrid
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
-                property var sizes: [8, 16, 22, 32, 48, 64]
-                property var largeSizes: [128]
-                GridLayout {
+                RowLayout {
                     Layout.alignment: Qt.AlignHCenter
-                    rows: 2
-                    columns: previewGrid.sizes.length
                     Repeater {
-                        model: previewGrid.sizes.length
-                        delegate: Kirigami.Icon {
+                        model: cuttlefish.iconSizes.slice(0, cuttlefish.iconSizes.length - 1)
+                        delegate: ColumnLayout {
                             Layout.alignment: Qt.AlignBottom
-                            source: preview.iconName
-                            width: previewGrid.sizes[index]
-                            height: previewGrid.sizes[index]
-                        }
-                    }
-                    Repeater {
-                        model: previewGrid.sizes.length
-                        delegate: QQC2.Label {
-                            Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                            text: previewGrid.sizes[index]
-                            Behavior on color {
-                                ColorAnimation {
-                                    duration: Kirigami.Units.longDuration
+                            Kirigami.Icon {
+                                source: preview.iconName
+                                width: modelData
+                                height: width
+                            }
+                            QQC2.Label {
+                                Layout.alignment: Qt.AlignHCenter
+                                text: modelData
+                                Behavior on color {
+                                    ColorAnimation {
+                                        duration: Kirigami.Units.longDuration
+                                    }
                                 }
                             }
                         }
                     }
                 }
-                GridLayout {
+                ColumnLayout {
                     Layout.alignment: Qt.AlignHCenter
-                    rows: 2
-                    columns: previewGrid.largeSizes.length
-                    Repeater {
-                        model: previewGrid.largeSizes.length
-                        delegate: Kirigami.Icon {
-                            Layout.alignment: Qt.AlignBottom
-                            source: preview.iconName
-                            width: previewGrid.largeSizes[index]
-                            height: previewGrid.largeSizes[index]
-                        }
+                    Kirigami.Icon {
+                        source: preview.iconName
+                        width:  cuttlefish.iconSizes[cuttlefish.iconSizes.length - 1]
+                        height: width
                     }
-                    Repeater {
-                        model: previewGrid.largeSizes.length
-                        delegate: QQC2.Label {
-                            Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                            text: previewGrid.largeSizes[index]
-                            Behavior on color {
-                                ColorAnimation {
-                                    duration: Kirigami.Units.longDuration
-                                }
+                    QQC2.Label {
+                        Layout.alignment: Qt.AlignHCenter
+                        text: cuttlefish.iconSizes[cuttlefish.iconSizes.length - 1]
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: Kirigami.Units.longDuration
                             }
                         }
                     }

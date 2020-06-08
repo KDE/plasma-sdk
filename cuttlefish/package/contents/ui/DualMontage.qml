@@ -1,6 +1,7 @@
 /***************************************************************************
  *                                                                         *
  *   Copyright 2019 Carson Black <uhhadd@gmail.com>                        *
+ *   Copyright 2020 David Redondo <kde@david-redondo.de>                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -61,26 +62,27 @@ Item {
             Kirigami.Theme.neutralTextColor: "#f67400"
             Kirigami.Theme.negativeTextColor: "#da4453"
 
-            GridLayout {
+            RowLayout {
                 id: previewGrid
                 anchors.centerIn: parent
-                columns: sizes.length
-                rows: 2
-                property var sizes: [8, 16, 22, 32, 48, 64, 128]
                 Repeater {
-                    model: previewGrid.sizes.length
-                    delegate: Kirigami.Icon {
+                    model: cuttlefish.iconSizes
+                    delegate: ColumnLayout {
                         Layout.alignment: Qt.AlignBottom
-                        source: preview.iconName
-                        width: previewGrid.sizes[index]
-                        height: previewGrid.sizes[index]
-                    }
-                }
-                Repeater {
-                    model: previewGrid.sizes.length
-                    delegate: QQC2.Label {
-                        Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                        text: previewGrid.sizes[index]
+                        Kirigami.Icon {
+                            source: preview.iconName
+                            width: modelData
+                            height: width
+                        }
+                        QQC2.Label {
+                            Layout.alignment: Qt.AlignHCenter
+                            text: modelData
+                            Behavior on color {
+                                ColorAnimation {
+                                    duration: Kirigami.Units.longDuration
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -111,26 +113,27 @@ Item {
             Kirigami.Theme.positiveTextColor: "#27ae60"
             Kirigami.Theme.neutralTextColor: "#f67400"
             Kirigami.Theme.negativeTextColor: "#da4453"
-            
-            GridLayout {
+
+            RowLayout {
                 anchors.centerIn: parent
-                columns: sizes.length
-                rows: 2
-                property var sizes: [8, 16, 22, 32, 48, 64, 128]
                 Repeater {
-                    model: previewGrid.sizes.length
-                    delegate: Kirigami.Icon {
+                    model: cuttlefish.iconSizes
+                    delegate: ColumnLayout {
                         Layout.alignment: Qt.AlignBottom
-                        source: preview.iconName
-                        width: previewGrid.sizes[index]
-                        height: previewGrid.sizes[index]
-                    }
-                }
-                Repeater {
-                    model: previewGrid.sizes.length
-                    delegate: QQC2.Label {
-                        Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                        text: previewGrid.sizes[index]
+                        Kirigami.Icon {
+                            source: preview.iconName
+                            width: modelData
+                            height: width
+                        }
+                        QQC2.Label {
+                            Layout.alignment: Qt.AlignHCenter
+                            text: modelData
+                            Behavior on color {
+                                ColorAnimation {
+                                    duration: Kirigami.Units.longDuration
+                                }
+                            }
+                        }
                     }
                 }
             }

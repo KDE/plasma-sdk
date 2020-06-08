@@ -9,7 +9,7 @@ Kirigami.OverlaySheet {
     onSheetOpenChanged: {
         if (sheetOpen) {
             comparisonSize = iconSize;
-            comparisonSlider.value = [8, 16, 22, 32, 48, 64, 128].indexOf(comparisonSize);
+            comparisonSlider.value = cuttlefish.iconSizes.indexOf(comparisonSize);
         }
     }
 
@@ -32,12 +32,12 @@ Kirigami.OverlaySheet {
                 running: false
                 repeat: false
                 interval: 200
-                onTriggered: comparisonSize = indexToSize(comparisonSlider.value)
+                onTriggered: comparisonSize = cuttlefish.iconSizes[comparisonSlider.value]
             }
         }
         QQC2.Label {
             Layout.alignment: Qt.AlignHCenter
-            text: indexToSize(comparisonSlider.value)
+            text: cuttlefish.iconSizes[comparisonSlider.value]
         }
         Item {
             Layout.fillWidth:true
@@ -45,8 +45,8 @@ Kirigami.OverlaySheet {
     }
     contentItem: GridView {
         id: comparisonGrid
-        cellWidth: 128
-        cellHeight: 128 + 2 * Kirigami.Units.gridUnit  +  Kirigami.Units.largeSpacing
+        cellWidth: Kirigami.Units.iconSizes.enormous
+        cellHeight: cellWidth  + 2 * Kirigami.Units.gridUnit  +  Kirigami.Units.largeSpacing
         implicitWidth: {
             const availableWidth = cuttlefish.width - leftPadding - rightPadding;
             return availableWidth < comparisonGrid.count * cellWidth  ? availableWidth - availableWidth % cellWidth :  comparisonGrid.count * cellWidth
@@ -59,8 +59,8 @@ Kirigami.OverlaySheet {
             spacing: Kirigami.Units.largeSpacing
             Item {
                 id: wrapper
-                Layout.preferredWidth: 128
-                Layout.preferredHeight: 128
+                Layout.preferredWidth: comparisonGrid.cellWidth
+                Layout.preferredHeight: comparisonGrid.cellWidth
                 Kirigami.Icon {
                     property bool hasIcon : modelData.iconPath
                     anchors.centerIn: parent

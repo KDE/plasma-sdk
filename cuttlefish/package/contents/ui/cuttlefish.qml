@@ -1,7 +1,8 @@
 /***************************************************************************
  *                                                                         *
  *   Copyright 2014-2015 Sebastian Kügler <sebas@kde.org>                  *
- *   Copyright 2019      Carson Black <uhhadd@gmail.com>                   *
+ *   Copyright 2019      Carson Black <uhhadd@gmail.com>
+ *   Copyright 2020      David Redondo <kde@david-redondo.com>
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -41,6 +42,10 @@ Kirigami.ApplicationWindow {
     property int iconSize: Kirigami.Units.iconSizes.large
 
     property alias actions: actions.actions
+
+    readonly property var iconSizes: [Kirigami.Units.iconSizes.small / 2,
+        Kirigami.Units.iconSizes.small, Kirigami.Units.iconSizes.smallMedium, Kirigami.Units.iconSizes.medium,
+        Kirigami.Units.iconSizes.large, Kirigami.Units.iconSizes.huge, Kirigami.Units.iconSizes.enormous]
 
     Loader {
         // Use a Loader instead of creating a GMB directly,
@@ -84,19 +89,6 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    function indexToSize(ix) {
-
-            var sizes = new Array();
-            sizes[0] = 8;
-            sizes[1] = 16;
-            sizes[2] = 22;
-            sizes[3] = 32;
-            sizes[4] = 48
-            sizes[5] = 64;
-            sizes[6] = 128;
-
-            return sizes[ix];
-    }
     Rectangle {
         Kirigami.Theme.colorSet: Kirigami.Theme.View
         color: Kirigami.Theme.backgroundColor
