@@ -43,6 +43,7 @@
   <name xml:lang="tg">Рӯдапо (Cuttlefish)</name>
   <name xml:lang="tr">Cuttlefish</name>
   <name xml:lang="uk">Cuttlefish</name>
+  <name xml:lang="x-test">xxCuttlefishxx</name>
   <name xml:lang="zh-CN">Cuttlefish</name>
   <name xml:lang="zh-TW">Cuttlefish</name>
   <summary>Icon Previewer for Artists and Developers</summary>
@@ -80,6 +81,7 @@
   <summary xml:lang="tg">Пешнамоиши нишонаҳо барои рассомон ва барномарезон</summary>
   <summary xml:lang="tr">Sanatçılar ve Geliştiriciler için Simge Önizleyicisi</summary>
   <summary xml:lang="uk">Засіб перегляду піктограм для художників та розробників</summary>
+  <summary xml:lang="x-test">xxIcon Previewer for Artists and Developersxx</summary>
   <summary xml:lang="zh-CN">为艺术家和开发者设计的图标预览器</summary>
   <summary xml:lang="zh-TW">給美工與開發者用的圖示預覽器</summary>
   <description>
@@ -117,6 +119,7 @@
     <p xml:lang="tg">Барномаи Рӯдапо (Cuttlefish) ба рассомон ва барномарезон имкон медиҳад, то тавонанд нишонаҳоро пешнамоиш кунанд ва интихоб намоянд. Барномаи Рӯдапо (Cuttlefish) нишонаҳоро нуқта ба нуқта коркард мекунад, то ки онҳо дар барнома ба таври аслӣ нишон дода шаванд. Барнома метавонад нишонаҳоро аз рӯи категория ва ном ҷудогона нишон диҳад. Барномаи Рӯдапо (Cuttlefish) танҳо барои мақсадҳои барномарезӣ барои осонсозии кори рассомон ва барномарезон сохта шудааст. Барномаи Рӯдапо (Cuttlefish) инчунин барои интихоби нишонаҳо аз дохили барномаи Kate ва KDevelop васлкунакро таъмин менамояд.</p>
     <p xml:lang="tr">Cuttlefish, sanatçıların ve geliştiricilerin simgeleri önizlemelerini ve seçmelerini sağlar. Cuttlefish, simgeleri uygulamada çizilmiş gibi görünür hale getirmeye çalışır. Kategori ve isim temelinde filtrelemeye izin verir. Cuttlefish genel amaçlı bir araç değil, aynı zamanda sanatçıların ve geliştiricilerin kullanımına yöneliktir. Cuttlefish aynı zamanda Kate ve KDevelop için simge seçici olarak kullanılmak üzere bir eklenti de sunmaktadır.</p>
     <p xml:lang="uk">Cuttlefish надає змогу художникам і розробникам попередньо переглядати і вибирати піктограми. У Cuttlefish зроблено спробу показати піктограми точно так, як вони виглядатимуть у програмі. Передбачено можливість фільтрувати списки за категорією і назвою. Cuttlefish не є інструментом загального призначення: програму призначено лише для потреб художників і розробників. У Cutlefish також передбачено додаток для Kate і KDevelop, яким можна скористатися для вибору піктограм.</p>
+    <p xml:lang="x-test">xxCuttlefish allows artists and developers to preview and pick icons. Cuttlefish attempts to render the icons exactly as they would look drawn in the application. It allows to filter based on category and name. Cuttlefish is not a general-purpose tool, but geared towards artists' and developers' use-cases. Cuttlefish also provides a plugin for Kate and KDevelop to be used as icon picker.xx</p>
     <p xml:lang="zh-CN">Cuttlefish 允许艺术家和开发者预览和选择图标。 Cuttlefish 尝试精确按程序中的方式渲染图标。它允许按分类和名称过滤。 Cuttlefish 不是一个面向一般使用的工具，而是为艺术家和开发者使用设计 的工具。Cuttlefish 也提供了 Kate 和 KDevelop 的图标选择器插件。</p>
     <p xml:lang="zh-TW">Cuttlefish 讓藝術家與開發者可以預覽並挑選圖示。Cuttlefish 會盡量將圖示顯示為在應用程式裡時的樣子。它也可使用類別或名稱來過濾。Cuttlefish 並不是一個通用的工具，它是專為藝術家與開發者的需求設計。Cuttlefish 也提供一份給 Kate 與KDevelop 使用的外掛程式，讓它們也可以用於挑選圖示。</p>
   </description>
