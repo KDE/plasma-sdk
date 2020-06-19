@@ -29,6 +29,7 @@
   <name xml:lang="pt-BR">Visualizador de Plasmoide</name>
   <name xml:lang="ru">Просмотр виджета Plasma</name>
   <name xml:lang="sk">Plasmoid Viewer</name>
+  <name xml:lang="sl">Plasmoid Viewer</name>
   <name xml:lang="sv">Plasmoid-visning</name>
   <name xml:lang="tg">Намоишгари Плазмойд</name>
   <name xml:lang="uk">Перегляд плазмоїдів</name>
@@ -62,6 +63,7 @@
   <summary xml:lang="pt-BR">Ferramenta de testes para miniaplicativos do Plasma</summary>
   <summary xml:lang="ru">Инструмент тестирования виджетов Plasma</summary>
   <summary xml:lang="sk">Testovací nástroj pre Plasma applety</summary>
+  <summary xml:lang="sl">Orodje za testiranje Plasminih appletov</summary>
   <summary xml:lang="sv">Testverktyg för Plasma miniprogram</summary>
   <summary xml:lang="tg">Абзорҳои санҷишӣ барои зербарномаҳои Плазма</summary>
   <summary xml:lang="uk">Засіб тестування аплетів Плазми</summary>
@@ -93,6 +95,7 @@
     <p xml:lang="pt-BR">O Visualizador de Plasmoide é uma ferramenta gráfica que permite aos programadores testarem os miniaplicativos do Plasma.</p>
     <p xml:lang="ru">Просмотрщик виджетов Plasma — приложение с графическим интерфейсом, предназначенное для тестирования виджетов.</p>
     <p xml:lang="sk">Plasmoid Viewer je grafický nástroj na umožnenie vývojárom testovať Plasma applety.</p>
+    <p xml:lang="sl">Plasmoid Viewer je grafično orodje, ki razvijalcem omogoča testiranje Plasminih apletov.</p>
     <p xml:lang="sv">Plasmoid-visning är ett grafiskt verktyg som låter utvecklare prova Plasma miniprogram.</p>
     <p xml:lang="tg">Намоишгари Плазмойд абзори графикие мебошад, ки ба барномарезон барои гузаронидани санҷишҳо бо зербарномаҳои Плазма имкон медиҳад.</p>
     <p xml:lang="uk">Перегляд плазмоїдів — програма з графічним інтерфейсом, за допомогою якої розробники можуть тестувати аплети Плазми.</p>
