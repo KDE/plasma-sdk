@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Explore and edit your Plasma themes
+Comment[az]=Plasma movzularınıza baxış və onlara düzəliş
 Comment[ca]=Explora i edita els vostres temes de Plasma
 Comment[ca@valencia]=Explora i edita els vostres temes de Plasma
 Comment[da]=Udforsk og redigér dine Plasma-temaer
@@ -37,6 +38,7 @@ Comment[zh_CN]=浏览并编辑您的 Plasma 主题
 Comment[zh_TW]=探索並編輯您的 Plasma 主題
 Keywords=
 Name=Plasma Theme Explorer
+Name[az]=Plasma Mövzu Bələdçisi
 Name[ca]=Explorador pels temes del Plasma
 Name[ca@valencia]=Explorador dels temes de Plasma
 Name[cs]=Průzkumník motivů Plasma
