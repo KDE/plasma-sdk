@@ -5,6 +5,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>Plasma Engine Explorer</name>
+  <name xml:lang="az">Plasma Mexanizmi Bələdçisi</name>
   <name xml:lang="ca">Explorador de motors del Plasma</name>
   <name xml:lang="ca-valencia">Explorador de motors de Plasma</name>
   <name xml:lang="cs">Průzkumník zdrojů Plasma</name>
@@ -37,6 +38,7 @@
   <name xml:lang="zh-CN">Plasma 引擎浏览器</name>
   <name xml:lang="zh-TW">Plasma 引擎瀏覽器</name>
   <summary>Explorer for the data published by Plasma Data Engines</summary>
+  <summary xml:lang="az">Plasma Məlumat Mexanizmləri tərəfindən yayımlanan məlumatlara baxış</summary>
   <summary xml:lang="ca">Explorador de les dades publicades pels motors de dades del Plasma</summary>
   <summary xml:lang="ca-valencia">Explorador de les dades publicades pels motors de dades de Plasma</summary>
   <summary xml:lang="da">Udforsk de data der offentliggøres af Plasma datamotorer</summary>
@@ -68,6 +70,7 @@
   <summary xml:lang="zh-TW">用來瀏覽 Plamsa 資料引擎發佈之資料的瀏覽器</summary>
   <description>
     <p>Plasma Engine Explorer is a graphical tool allowing developers to test Plasma DataEngines without writing a Plasma applet.</p>
+    <p xml:lang="az">Plasmoidlərə baxış vasitəsi, tərtibatçılara Plasma əlavələrini yenidən  yazmadan onların test olunmasına imkan verən qrafik alətidir.</p>
     <p xml:lang="ca">L'explorador de motors del Plasma és una eina gràfica que permet als desenvolupadors provar els motors de dades Plasma sense escriure una miniaplicació Plasma.</p>
     <p xml:lang="ca-valencia">L'explorador de motors de Plasma és una eina gràfica que permet als desenvolupadors provar els motors de dades Plasma sense escriure una miniaplicació Plasma.</p>
     <p xml:lang="da">Plasma Engine Explorer er et grafisk værktøj så udviklere kan teste Plasma datamotorer uden at skrive en Plasma-applet.</p>
