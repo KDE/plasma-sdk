@@ -66,7 +66,7 @@
   <summary xml:lang="zh-TW">用來瀏覽 Plamsa 資料引擎發佈之資料的瀏覽器</summary>
   <description>
     <p>Plasma Engine Explorer is a graphical tool allowing developers to test Plasma DataEngines without writing a Plasma applet.</p>
-    <p xml:lang="ca">L'explorador de motors del Plasma és una eina gràfica que permet als desenvolupadors provar els motors de dades Plasma sense escriure una miniaplicació Plasma.</p>
+    <p xml:lang="ca">L'explorador de motors del Plasma és una eina gràfica que permet als desenvolupadors provar els motors de dades del Plasma sense escriure una miniaplicació del Plasma.</p>
     <p xml:lang="ca-valencia">L'explorador de motors de Plasma és una eina gràfica que permet als desenvolupadors provar els motors de dades Plasma sense escriure una miniaplicació Plasma.</p>
     <p xml:lang="da">Plasma Engine Explorer er et grafisk værktøj så udviklere kan teste Plasma datamotorer uden at skrive en Plasma-applet.</p>
     <p xml:lang="de">Dies ist eine grafische Benutzeroberfläche, mit der Entwickler Plasma-Datenquellen testen können, ohne ein Plasma-Miniprogramm zu schreiben.</p>
