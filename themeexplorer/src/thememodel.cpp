@@ -287,7 +287,6 @@ void ThemeModel::editThemeMetaData(const QString& name, const QString& author, c
     cg.writeEntry("X-KDE-PluginInfo-Email", email);
     cg.writeEntry("X-KDE-PluginInfo-Website", website);
     cg.writeEntry("X-KDE-PluginInfo-Category", "Plasma Theme");
-    cg.writeEntry("X-KDE-PluginInfo-Depends", "plasmashell");
     cg.writeEntry("X-KDE-PluginInfo-License", license);
     cg.writeEntry("X-KDE-PluginInfo-EnabledByDefault", "true");
     cg.writeEntry("X-Plasma-API", "5.0");
