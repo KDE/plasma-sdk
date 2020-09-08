@@ -1,3 +1,9 @@
+/*
+    SPDX-FileCopyrightText: 2019 David Redondo <kde@david-redondo.de>
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
+
 import QtQuick 2.4
 import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.3

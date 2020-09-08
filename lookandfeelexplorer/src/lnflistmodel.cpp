@@ -1,29 +1,16 @@
 /*
  * LnfListModel
- * Copyright (C) 2016 Marco Martin <mart@kde.org>
- * Copyright (C) 2002 Karol Szwed <gallium@kde.org>
- * Copyright (C) 2002 Daniel Molkentin <molkentin@kde.org>
- * Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
- * Copyright (C) 2009 by Davide Bettio <davide.bettio@kdemail.net>
-
- * Portions Copyright (C) 2007 Paolo Capriotti <p.capriotti@gmail.com>
- * Portions Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
- * Portions Copyright (C) 2008 by Petri Damsten <damu@iki.fi>
- * Portions Copyright (C) 2000 TrollTech AS.
+ * SPDX-FileCopyrightText: 2016 Marco Martin <mart@kde.org>
+ * SPDX-FileCopyrightText: 2002 Karol Szwed <gallium@kde.org>
+ * SPDX-FileCopyrightText: 2002 Daniel Molkentin <molkentin@kde.org>
+ * SPDX-FileCopyrightText: 2007 Urs Wolfer <uwolfer @ kde.org>
+ * SPDX-FileCopyrightText: 2009 Davide Bettio <davide.bettio@kdemail.net>
+ * SPDX-FileCopyrightText: 2007 Paolo Capriotti <p.capriotti@gmail.com>
+ * SPDX-FileCopyrightText: 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
+ * SPDX-FileCopyrightText: 2008 Petri Damsten <damu@iki.fi>
+ * SPDX-FileCopyrightText: 2000 TrollTech AS.
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public
- * License version 2 as published by the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; see the file COPYING.  If not, write to
- * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1301, USA.
+ * SPDX-License-Identifier: GPL-2.0-only
  */
 
 #include "lnflistmodel.h"
