@@ -12,7 +12,6 @@ add_executable(plasmaengineexplorer ${plasmaengineexplorer_SRCS})
 target_compile_definitions(plasmaengineexplorer PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
 
 target_link_libraries(plasmaengineexplorer
-    KF5::IconThemes
     KF5::I18n
     KF5::Service
     KF5::Completion

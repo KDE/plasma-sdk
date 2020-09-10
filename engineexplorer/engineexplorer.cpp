@@ -14,8 +14,6 @@
 #include <QMenu>
 #include <QUrl>
 
-#include <KIconLoader>
-#include <KIconTheme>
 #include <KStandardAction>
 #include <KStringHandler>
 #include <KLocalizedString>
@@ -64,9 +62,9 @@ EngineExplorer::EngineExplorer(QWidget* parent)
 
     m_engineManager = Plasma::PluginLoader::self();
     m_dataModel = new QStandardItemModel(this);
-    const QIcon pix = QIcon::fromTheme("plasma");
-    const int size = IconSize(KIconLoader::Dialog);
-    m_title->setPixmap(pix.pixmap(size, size));
+    const int size = m_title->style()->pixelMetric(QStyle::PM_LargeIconSize);
+    m_title->setIconSize(QSize(size, size));
+    m_title->setIcon(QIcon::fromTheme("plasma"));
     connect(m_engines, SIGNAL(activated(QString)), this, SLOT(showEngine(QString)));
     connect(m_sourceRequesterButton, SIGNAL(clicked(bool)), this, SLOT(requestSource()));
     connect(m_serviceRequesterButton, &QAbstractButton::clicked, this, &EngineExplorer::requestServiceForSource);
@@ -490,7 +488,7 @@ int EngineExplorer::showData(QStandardItem* parent, Plasma::DataEngine::Data dat
 void EngineExplorer::updateTitle()
 {
     if (!m_engine || !m_engine->pluginInfo().isValid()) {
-        m_title->setPixmap(QIcon::fromTheme("plasma").pixmap(IconSize(KIconLoader::Dialog)));
+        m_title->setIcon(QIcon::fromTheme("plasma"));
         m_title->setText(i18n("Plasma DataEngine Explorer"));
         return;
     }
@@ -501,10 +499,9 @@ void EngineExplorer::updateTitle()
                               .subs(m_sourceCount).toString());
 
     if (m_engine->pluginInfo().icon().isEmpty()) {
-        m_title->setPixmap(QIcon::fromTheme("plasma").pixmap(IconSize(KIconLoader::Dialog)));
+        m_title->setIcon(QIcon::fromTheme("plasma"));
     } else {
-        //m_title->setPixmap(KIcon("alarmclock").pixmap(IconSize(KIconLoader::Dialog)));
-        m_title->setPixmap(QIcon::fromTheme(m_engine->pluginInfo().icon()).pixmap(IconSize(KIconLoader::Dialog)));
+        m_title->setIcon(QIcon::fromTheme(m_engine->pluginInfo().icon()));
     }
 }
 

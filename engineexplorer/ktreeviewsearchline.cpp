@@ -21,7 +21,6 @@
 #include <QTreeView>
 
 #include <QDebug>
-#include <kiconloader.h>
 #include <klocalizedstring.h>
 
 class KTreeViewSearchLinePrivate
