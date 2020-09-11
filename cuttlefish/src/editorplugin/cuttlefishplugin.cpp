@@ -11,15 +11,11 @@
 #include <KTextEditor/Editor>
 #include <KTextEditor/View>
 
-#include <KActionCollection>
-#include <KIconLoader>
 #include <KLocalizedString>
 #include <KPluginFactory>
 
 #include <QAction>
-#include <QMimeDatabase>
 #include <QProcess>
-#include <QStandardItemModel>
 #include <QStandardPaths>
 
 K_PLUGIN_FACTORY_WITH_JSON(CuttleFishPluginFactory, "cuttlefishplugin.json", registerPlugin<CuttleFishPlugin>();)
