@@ -19,7 +19,7 @@ Item {
         }
          Connections {
             target: cuttlefish
-            onItemRightClicked: {
+            function onItemRightClicked() {
                 menuLoader.item.popup()
             }
         }

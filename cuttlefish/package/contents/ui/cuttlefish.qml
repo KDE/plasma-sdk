@@ -53,10 +53,10 @@ Kirigami.ApplicationWindow {
     }
     Connections {
         target: loader.item
-        onQuit: { cuttlefish.close() }
-        onZoomIn: { tools.slider.value += 1 }
-        onZoomOut: { tools.slider.value -= 1 }
-        onMontage: {
+        function onQuit() { cuttlefish.close() }
+        function onZoomIn() { tools.slider.value += 1 }
+        function onZoomOut() { tools.slider.value -= 1 }
+        function onMontage() {
             switch(type) {
                 case 0:
                     previewPane.iconPreview.shot("active")
@@ -141,19 +141,19 @@ Kirigami.ApplicationWindow {
     }
     Connections {
         target: tools
-        onColorschemeChanged: (index) => {
+        function onColorschemeChanged(index) {
             toolsResponsive.currentIndex = index
         }
-        onSliderValueChanged: (val) => {
+        function onSliderValueChanged(val) {
             toolsResponsive.value = val
         }
     }
     Connections {
         target: toolsResponsive
-        onColorschemeChanged: (index) => {
+        function onColorschemeChanged(index) {
             tools.currentIndex = index
         }
-        onSliderValueChanged: (val) => {
+        function onSliderValueChanged(val) {
             tools.value = val
         }
     }
