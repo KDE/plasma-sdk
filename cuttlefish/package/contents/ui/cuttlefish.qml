@@ -116,6 +116,15 @@ Kirigami.ApplicationWindow {
                 Layout.fillHeight: true
             }
         }
+
+        // ToolsResponsive is a QQC2 toolbar which automatically draws a
+        // separator line on the bottom, but not on the top, and we need one
+        // on the top because we're using it as a footer, so we have to draw
+        // our own separator
+        Kirigami.Separator {
+            Layout.fillWidth: true
+            visible: toolsResponsive.visible
+        }
         ToolsResponsive {
             visible: !cuttlefish.widescreen
             id: toolsResponsive

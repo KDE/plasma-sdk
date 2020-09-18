@@ -12,10 +12,9 @@ import QtQuick.Layouts 1.0
 import org.kde.kirigami 2.8 as Kirigami
 import org.kde.kquickcontrolsaddons 2.0 as KQCAddons
 
-Rectangle {
+QQC2.ToolBar {
     id: root
-    width: parent.width
-    color: Kirigami.Theme.backgroundColor
+
     signal colorschemeChanged(int index)
     signal sliderValueChanged(int val)
 
@@ -25,9 +24,6 @@ Rectangle {
 
     RowLayout {
         anchors.fill: parent
-        anchors.leftMargin: Kirigami.Units.smallSpacing
-        anchors.rightMargin: Kirigami.Units.smallSpacing
-        anchors.verticalCenter: parent.verticalCenter
         spacing: Kirigami.Units.largeSpacing
         Kirigami.SearchField {
             id: filterInput
@@ -129,14 +125,6 @@ Rectangle {
                 colorSchemes.activateColorScheme(currentText)
             }
             popup.modal: false
-        }
-    }
-    Kirigami.Separator {
-        height: 1
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
         }
     }
 }

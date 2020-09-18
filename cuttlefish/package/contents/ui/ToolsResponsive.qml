@@ -10,10 +10,8 @@ import QtQuick.Layouts 1.0
 
 import org.kde.kirigami 2.8 as Kirigami
 
-Rectangle {
-    id: root 
-    width: parent.width
-    color: Kirigami.Theme.backgroundColor
+QQC2.ToolBar {
+    id: root
 
     property alias currentIndex: colorcombo.currentIndex
     property alias value: sizeslider.value
@@ -21,19 +19,13 @@ Rectangle {
     signal colorschemeChanged(int index)
     signal sliderValueChanged(int val)
 
-    Kirigami.Separator {
-        height: 1
-        anchors {
-            left: parent.left
-            right: parent.right
-            top: parent.top
-        }
-    }
+    // Normally Toolbars use header colors, but this is a footer! So use the
+    // window color set instead
+    Kirigami.Theme.colorSet: Kirigami.Theme.Window
+    Kirigami.Theme.inherit: false
+
     RowLayout {
         anchors.fill: parent
-        anchors.leftMargin: Kirigami.Units.smallSpacing
-        anchors.rightMargin: Kirigami.Units.smallSpacing
-        anchors.verticalCenter: parent.verticalCenter
         spacing: Kirigami.Units.largeSpacing
         QQC2.Slider {
             visible: !cuttlefish.widescreen
