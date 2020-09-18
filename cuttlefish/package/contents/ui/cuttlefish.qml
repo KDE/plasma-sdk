@@ -19,10 +19,10 @@ Kirigami.ApplicationWindow {
 
     signal itemRightClicked()
 
-    minimumWidth: 400
-    minimumHeight: 400
+    minimumWidth: Kirigami.Units.gridUnit * 22
+    minimumHeight: Kirigami.Units.gridUnit * 22
 
-    property bool widescreen: cuttlefish.width >= 800
+    property bool widescreen: cuttlefish.width >= Kirigami.Units.gridUnit * 44
 
     property int iconSize: Kirigami.Units.iconSizes.large
 
@@ -74,57 +74,59 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    Rectangle {
-        Kirigami.Theme.colorSet: Kirigami.Theme.View
-        color: Kirigami.Theme.backgroundColor
-        anchors.fill: parent
+    Shortcut {
+        sequence: StandardKey.ZoomIn
+        onActivated: tools.slider.value += 1
     }
-    ColumnLayout {
-        Shortcut {
-            sequence: StandardKey.ZoomIn
-            onActivated: tools.slider.value += 1
-        }
-        Shortcut {
-            sequence: StandardKey.ZoomOut
-            onActivated: tools.slider.value -= 1
-        }
+    Shortcut {
+        sequence: StandardKey.ZoomOut
+        onActivated: tools.slider.value -= 1
+    }
+
+    header: Tools {
+        id: tools
+    }
+
+    RowLayout {
         anchors.fill: parent
         spacing: 0
 
-        Tools {
-            id: tools
+        // To set the scrollview's background color correctly without
+        // explicitly adding a frame
+        Rectangle {
             Layout.fillWidth: true
-            Layout.preferredHeight: (Kirigami.Units.gridUnit * 2) + Kirigami.Units.largeSpacing
-        }
+            Layout.fillHeight: true
 
-        RowLayout {
-            spacing: 0
+            Kirigami.Theme.colorSet: Kirigami.Theme.View
+            color: Kirigami.Theme.backgroundColor
+
             QQC2.ScrollView {
                 id: grid
-                Layout.fillWidth: true
-                Layout.fillHeight: true
+                anchors.fill: parent
+
+                contentHeight: iconGrid.height
                 QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
+
                 IconGrid {
                     id: iconGrid
                     anchors.fill: parent
                     anchors.margins: Kirigami.Units.gridUnit
                 }
             }
-            Preview {
-                visible: cuttlefish.widescreen
-                id: previewPane
-                Layout.preferredWidth: Kirigami.Units.gridUnit * 22
-                Layout.fillHeight: true
-            }
         }
-
-        ToolsResponsive {
-            visible: !cuttlefish.widescreen
-            id: toolsResponsive
-            Layout.fillWidth: true
-            Layout.preferredHeight: (Kirigami.Units.gridUnit * 2) + Kirigami.Units.largeSpacing
+        Preview {
+            visible: cuttlefish.widescreen
+            id: previewPane
+            Layout.preferredWidth: Kirigami.Units.gridUnit * 22
+            Layout.fillHeight: true
         }
     }
+
+    footer: ToolsResponsive {
+        id: toolsResponsive
+        visible: !cuttlefish.widescreen
+    }
+
     Loader {
         active: !cuttlefish.widescreen
         source: "ResponsivePreview.qml"

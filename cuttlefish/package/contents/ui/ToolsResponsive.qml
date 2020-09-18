@@ -87,8 +87,5 @@ QQC2.ToolBar {
             }
             popup.modal: false
         }
-        Item {
-            width: Kirigami.Units.largeSpacing * 3
-        }
     }
 }
