@@ -98,6 +98,7 @@ Kirigami.ApplicationWindow {
         }
 
         RowLayout {
+            spacing: 0
             QQC2.ScrollView {
                 id: grid
                 Layout.fillWidth: true
