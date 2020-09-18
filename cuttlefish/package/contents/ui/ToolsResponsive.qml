@@ -19,10 +19,7 @@ QQC2.ToolBar {
     signal colorschemeChanged(int index)
     signal sliderValueChanged(int val)
 
-    // Normally Toolbars use header colors, but this is a footer! So use the
-    // window color set instead
-    Kirigami.Theme.colorSet: Kirigami.Theme.Window
-    Kirigami.Theme.inherit: false
+    position: QQC2.ToolBar.Footer
 
     RowLayout {
         anchors.fill: parent
