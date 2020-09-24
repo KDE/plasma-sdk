@@ -40,7 +40,6 @@
   <name xml:lang="sr-Latn">Cuttlefish</name>
   <name xml:lang="sr-ijekavian">Катлфиш</name>
   <name xml:lang="sr-ijekavianlatin">Cuttlefish</name>
-  <name xml:lang="sv">Cuttlefish</name>
   <name xml:lang="tg">Рӯдапо (Cuttlefish)</name>
   <name xml:lang="tr">Cuttlefish</name>
   <name xml:lang="uk">Cuttlefish</name>
@@ -79,7 +78,6 @@
   <summary xml:lang="sr-Latn">Prikazivač ikonica za grafičare i programere</summary>
   <summary xml:lang="sr-ijekavian">Приказивач иконица за графичаре и програмере</summary>
   <summary xml:lang="sr-ijekavianlatin">Prikazivač ikonica za grafičare i programere</summary>
-  <summary xml:lang="sv">Förhandsgranskning av ikoner för grafiker och utvecklare</summary>
   <summary xml:lang="tg">Пешнамоиши нишонаҳо барои рассомон ва барномарезон</summary>
   <summary xml:lang="tr">Sanatçılar ve Geliştiriciler için Simge Önizleyicisi</summary>
   <summary xml:lang="uk">Засіб перегляду піктограм для художників та розробників</summary>
@@ -118,7 +116,6 @@
     <p xml:lang="sr-Latn">Cuttlefish omogućava grafičarima i programerima da pregledaju i biraju ikonice. Namera je da ikonice budu renderovane tačno onako kako bi se videle u nekom programu. Moguće je filtriranje na osnovu kategorija i imena. Cuttlefish nije alatka opšte namene, već je namenjen potrebama grafičara i programera. Priložen je i priključak za Kate i KDevelop koji služi kao birač ikonica.</p>
     <p xml:lang="sr-ijekavian">Катлфиш омогућава графичарима и програмерима да прегледају и бирају иконице. Намера је да иконице буду рендероване тачно онако како би се виделе у неком програму. Могуће је филтрирање на основу категорија и имена. Катлфиш није алатка опште намене, већ је намењен потребама графичара и програмера. Приложен је и прикључак за Кејт и К‑девелоп који служи као бирач иконица.</p>
     <p xml:lang="sr-ijekavianlatin">Cuttlefish omogućava grafičarima i programerima da pregledaju i biraju ikonice. Namera je da ikonice budu renderovane tačno onako kako bi se videle u nekom programu. Moguće je filtriranje na osnovu kategorija i imena. Cuttlefish nije alatka opšte namene, već je namenjen potrebama grafičara i programera. Priložen je i priključak za Kate i KDevelop koji služi kao birač ikonica.</p>
-    <p xml:lang="sv">Cuttlefish låter grafiker och utvecklare förhandsgranska och välj ikoner. Cuttlefish försöker återge ikonerna exakt som de skulle se ut när de ritas i programmet. Det tillåter filtrering baserat på kategori och namn. Cuttlefish är inte ett verktyg för allmänt bruk, utan inriktat på grafikers och utvecklares användarfall. Cuttlefish tillhandahåller också ett insticksprogram för Kate och KDevelop att användas som ikonväljare.</p>
     <p xml:lang="tg">Барномаи Рӯдапо (Cuttlefish) ба рассомон ва барномарезон имкон медиҳад, то тавонанд нишонаҳоро пешнамоиш кунанд ва интихоб намоянд. Барномаи Рӯдапо (Cuttlefish) нишонаҳоро нуқта ба нуқта коркард мекунад, то ки онҳо дар барнома ба таври аслӣ нишон дода шаванд. Барнома метавонад нишонаҳоро аз рӯи категория ва ном ҷудогона нишон диҳад. Барномаи Рӯдапо (Cuttlefish) танҳо барои мақсадҳои барномарезӣ барои осонсозии кори рассомон ва барномарезон сохта шудааст. Барномаи Рӯдапо (Cuttlefish) инчунин барои интихоби нишонаҳо аз дохили барномаи Kate ва KDevelop васлкунакро таъмин менамояд.</p>
     <p xml:lang="tr">Cuttlefish, sanatçıların ve geliştiricilerin simgeleri önizlemelerini ve seçmelerini sağlar. Cuttlefish, simgeleri uygulamada çizilmiş gibi görünür hale getirmeye çalışır. Kategori ve isim temelinde filtrelemeye izin verir. Cuttlefish genel amaçlı bir araç değil, aynı zamanda sanatçıların ve geliştiricilerin kullanımına yöneliktir. Cuttlefish aynı zamanda Kate ve KDevelop için simge seçici olarak kullanılmak üzere bir eklenti de sunmaktadır.</p>
     <p xml:lang="uk">Cuttlefish надає змогу художникам і розробникам попередньо переглядати і вибирати піктограми. У Cuttlefish зроблено спробу показати піктограми точно так, як вони виглядатимуть у програмі. Передбачено можливість фільтрувати списки за категорією і назвою. Cuttlefish не є інструментом загального призначення: програму призначено лише для потреб художників і розробників. У Cutlefish також передбачено додаток для Kate і KDevelop, яким можна скористатися для вибору піктограм.</p>
