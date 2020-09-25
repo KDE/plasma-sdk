@@ -107,12 +107,18 @@ Rectangle {
                 id: previewGrid
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
-                RowLayout {
+                GridLayout {
+                    id: previewGridLayout
                     Layout.alignment: Qt.AlignHCenter
+                    columns: cuttlefish.iconSizes.length - 1
                     Repeater {
-                        model: cuttlefish.iconSizes.slice(0, cuttlefish.iconSizes.length - 1)
+                        model: cuttlefish.iconSizes
                         delegate: ColumnLayout {
-                            Layout.alignment: Qt.AlignBottom
+                            readonly property bool isLastItem: (index == previewGridLayout.columns)
+                            Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
+                            Layout.row: isLastItem ? 1 : 0
+                            Layout.column: isLastItem ? 0 : index
+                            Layout.columnSpan: isLastItem ? previewGridLayout.columns : 1
                             Kirigami.Icon {
                                 source: preview.iconName
                                 implicitWidth: modelData
@@ -126,23 +132,6 @@ Rectangle {
                                         duration: Kirigami.Units.longDuration
                                     }
                                 }
-                            }
-                        }
-                    }
-                }
-                ColumnLayout {
-                    Layout.alignment: Qt.AlignHCenter
-                    Kirigami.Icon {
-                        source: preview.iconName
-                        implicitWidth: cuttlefish.iconSizes[cuttlefish.iconSizes.length - 1]
-                        implicitHeight: implicitWidth
-                    }
-                    QQC2.Label {
-                        Layout.alignment: Qt.AlignHCenter
-                        text: cuttlefish.iconSizes[cuttlefish.iconSizes.length - 1]
-                        Behavior on color {
-                            ColorAnimation {
-                                duration: Kirigami.Units.longDuration
                             }
                         }
                     }
