@@ -92,7 +92,7 @@ Rectangle {
                 }
             }
             Behavior on Layout.preferredHeight {
-                NumberAnimation { 
+                NumberAnimation {
                     duration: Kirigami.Units.longDuration
                 }
             }
@@ -115,8 +115,8 @@ Rectangle {
                             Layout.alignment: Qt.AlignBottom
                             Kirigami.Icon {
                                 source: preview.iconName
-                                width: modelData
-                                height: width
+                                implicitWidth: modelData
+                                implicitHeight: implicitWidth
                             }
                             QQC2.Label {
                                 Layout.alignment: Qt.AlignHCenter
@@ -134,8 +134,8 @@ Rectangle {
                     Layout.alignment: Qt.AlignHCenter
                     Kirigami.Icon {
                         source: preview.iconName
-                        width:  cuttlefish.iconSizes[cuttlefish.iconSizes.length - 1]
-                        height: width
+                        implicitWidth: cuttlefish.iconSizes[cuttlefish.iconSizes.length - 1]
+                        implicitHeight: implicitWidth
                     }
                     QQC2.Label {
                         Layout.alignment: Qt.AlignHCenter
