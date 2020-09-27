@@ -21,7 +21,7 @@ Kirigami.ApplicationWindow {
     visible: true
 
     Component.onCompleted: {
-        for (var i = 0; i < SDK.GlobalTheme.themeList.count; ++i) {
+        for (let i in SDK.GlobalTheme.themeList) {
             if (commandlineTheme == SDK.GlobalTheme.themeList.get(i).packageNameRole) {
                 themeSelector.currentIndex = i;
                 break;

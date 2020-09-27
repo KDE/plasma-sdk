@@ -58,7 +58,7 @@ QQC2.Dialog {
                     Layout.fillWidth: true
                     Kirigami.FormData.label: i18n("Theme Plugin Name:")
                     onTextChanged: {
-                        for (var i = 0; i < SDK.GlobalTheme.themeList.count; ++i) {
+                        for (let i in SDK.GlobalTheme.themeList) {
                             if (pluginNameField.text == SDK.GlobalTheme.themeList.get(i).packageNameRole) {
                                 dialog.canEdit = false;
                                 errorMessage.text = i18n("This theme plugin name already exists");
@@ -122,7 +122,7 @@ QQC2.Dialog {
 
     onAccepted: {
         SDK.GlobalTheme.createNewTheme(pluginNameField.text, nameField.text, commentField.text, authorField.text, emailField.text, licenseField.editText, websiteField.text);
-        for (var i = 0; i < SDK.GlobalTheme.themeList.count; ++i) {
+        for (let i in SDK.GlobalTheme.themeList) {
             if (nameField.text == SDK.GlobalTheme.themeList.get(i).packageNameRole) {
                 themeSelector.currentIndex = i;
                 break;
