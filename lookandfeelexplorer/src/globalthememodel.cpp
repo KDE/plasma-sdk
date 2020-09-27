@@ -1,5 +1,5 @@
 /*
- * LnfListModel
+ * GlobalThemeModel
  * SPDX-FileCopyrightText: 2016 Marco Martin <mart@kde.org>
  * SPDX-FileCopyrightText: 2002 Karol Szwed <gallium@kde.org>
  * SPDX-FileCopyrightText: 2002 Daniel Molkentin <molkentin@kde.org>
@@ -13,7 +13,7 @@
  * SPDX-License-Identifier: GPL-2.0-only
  */
 
-#include "lnflistmodel.h"
+#include "globalthememodel.h"
 
 #include <QApplication>
 #include <QDir>
@@ -28,7 +28,7 @@
 
 #include <QDebug>
 
-LnfListModel::LnfListModel( QObject *parent )
+GlobalThemeModel::GlobalThemeModel( QObject *parent )
 : QAbstractListModel( parent )
 {
     m_roleNames.insert(Qt::DisplayRole, "displayRole");
@@ -40,22 +40,22 @@ LnfListModel::LnfListModel( QObject *parent )
     reload();
 }
 
-LnfListModel::~LnfListModel()
+GlobalThemeModel::~GlobalThemeModel()
 {
     clearThemeList();
 }
 
-QHash<int, QByteArray> LnfListModel::roleNames() const
+QHash<int, QByteArray> GlobalThemeModel::roleNames() const
 {
     return m_roleNames;
 }
 
-void LnfListModel::clearThemeList()
+void GlobalThemeModel::clearThemeList()
 {
     m_themes.clear();
 }
 
-void LnfListModel::reload()
+void GlobalThemeModel::reload()
 {
     beginResetModel();
     clearThemeList();
@@ -109,12 +109,12 @@ void LnfListModel::reload()
     emit countChanged();
 }
 
-int LnfListModel::rowCount(const QModelIndex &) const
+int GlobalThemeModel::rowCount(const QModelIndex &) const
 {
     return m_themes.size();
 }
 
-QVariant LnfListModel::data(const QModelIndex &index, int role) const
+QVariant GlobalThemeModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid()) {
         return QVariant();
@@ -140,7 +140,7 @@ QVariant LnfListModel::data(const QModelIndex &index, int role) const
     }
 }
 
-QVariantMap LnfListModel::get(int row) const
+QVariantMap GlobalThemeModel::get(int row) const
 {
     QVariantMap item;
 
@@ -155,7 +155,7 @@ QVariantMap LnfListModel::get(int row) const
     return item;
 }
 
-QModelIndex LnfListModel::indexOf(const QString &name) const
+QModelIndex GlobalThemeModel::indexOf(const QString &name) const
 {
     QListIterator<ThemeInfo> it(m_themes);
     int i = -1;
@@ -169,4 +169,4 @@ QModelIndex LnfListModel::indexOf(const QString &name) const
     return QModelIndex();
 }
 
-#include "moc_lnflistmodel.cpp"
+#include "moc_globalthememodel.cpp"

@@ -1,17 +1,16 @@
 
 
-set(lookandfeelexplorer_SRCS
+set(globalthemeexplorer_SRCS
     main.cpp
-    lnflogic.cpp
-    lnflistmodel.cpp
+    globaltheme.cpp
+    globalthememodel.cpp
+    resources.qrc
 )
 
-add_executable(lookandfeelexplorer ${lookandfeelexplorer_SRCS})
-target_compile_definitions(lookandfeelexplorer PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
+add_executable(globalthemeexplorer ${globalthemeexplorer_SRCS})
+target_compile_definitions(globalthemeexplorer PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
 
-#find_package(ActiveApp REQUIRED)
-
-target_link_libraries(lookandfeelexplorer
+target_link_libraries(globalthemeexplorer
  Qt5::Gui
  Qt5::Quick
  Qt5::Widgets
@@ -26,4 +25,4 @@ target_link_libraries(lookandfeelexplorer
  KF5::QuickAddons
 )
 
-install(TARGETS lookandfeelexplorer ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS globalthemeexplorer ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})

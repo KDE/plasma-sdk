@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="main.qml">contents/ui/main.qml</file>
+    <file alias="FormField.qml">contents/ui/FormField.qml</file>
+    <file alias="MetadataEditor.qml">contents/ui/MetadataEditor.qml</file>
+  </qresource>
+</RCC>

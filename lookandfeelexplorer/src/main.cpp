@@ -3,85 +3,69 @@
  *
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
+#include "globaltheme.h"
+#include "globalthememodel.h"
 
 #include <QApplication>
-#include "lnflogic.h"
-#include "lnflistmodel.h"
-
-#include <klocalizedstring.h>
-#include <qcommandlineparser.h>
-#include <qcommandlineoption.h>
-#include <QQuickItem>
-
-#include <kpackage/package.h>
-#include <kpackage/packageloader.h>
+#include <QCommandLineParser>
+#include <QCommandLineOption>
+#include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQmlExpression>
 #include <QQmlProperty>
+#include <QQuickItem>
 #include <QQuickWindow>
-#include <kdeclarative/qmlobject.h>
+
 #include <KAboutData>
+#include <KDeclarative/QmlObject>
+#include <KLocalizedString>
+#include <KPackage/Package>
+#include <KPackage/PackageLoader>
 
 int main(int argc, char **argv)
 {
+    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCommandLineParser parser;
     QApplication app(argc, argv);
+    KLocalizedString::setApplicationDomain("org.kde.plasma.lookandfeelexplorer");
 
-    app.setApplicationVersion(PROJECT_VERSION);
-    parser.addVersionOption();
-    parser.addHelpOption();
-    parser.setApplicationDescription(i18n("Plasma Look And Feel Explorer"));
+    KAboutData aboutData(QStringLiteral("lookandfeelexplorer"),
+                         i18nc("@title", "Global Theme Explorer"),
+                         QStringLiteral(PROJECT_VERSION),
+                         i18nc("@title", "Explore and edit your Plasma Global Themes"),
+                         KAboutLicense::LGPL_V2);
 
-    QCommandLineOption themeOption(QCommandLineOption(QStringList() << "l" << "lookandfeel", i18n("Look And Feel to open"), "lookandfeel"));
+    aboutData.addAuthor(i18nc("@info:credit", "Marco Martin"), i18nc("@info:credit", "Creator"),
+                        QStringLiteral("mart@kde.org"));
 
+    aboutData.addAuthor(i18nc("@info:credit", "Carl Schwan"), i18nc("@info:credit", "Developer"),
+                        QStringLiteral("carl@carlschwan.eu"), QStringLiteral("https://carlschwan.eu"));
+
+    KAboutData::setApplicationData(aboutData);
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("preferences-desktop-theme-global")));
+
+    aboutData.setupCommandLine(&parser);
+
+    QCommandLineOption themeOption(QCommandLineOption(QStringList() << "l" << "lookandfeel",
+                i18n("Global Theme to open"), "lookandfeel"));
     parser.addOption(themeOption);
-
     parser.process(app);
+    aboutData.processCommandLine(&parser);
 
-    const QString packagePath("org.kde.plasma.lookandfeelexplorer");
+    // Initialize QmlEngine
+    QQmlApplicationEngine engine;
+    qmlRegisterAnonymousType<GlobalThemeModel>("org.kde.plasma.sdk", 1);
+    GlobalTheme globalTheme;
+    qmlRegisterSingletonInstance<GlobalTheme>("org.kde.plasma.sdk", 1, 0, "GlobalTheme", &globalTheme);
 
-    //usually we have an ApplicationWindow here, so we do not need to create a window by ourselves
-    KDeclarative::QmlObject obj;
-    obj.setTranslationDomain(packagePath);
-    obj.setInitializationDelayed(true);
-    obj.engine()->rootContext()->setContextProperty("commandlineTheme", parser.value(themeOption));
-    obj.engine()->rootContext()->setContextProperty("commandlineArguments", parser.positionalArguments());
-    obj.loadPackage(packagePath);
+    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
+    engine.rootContext()->setContextProperty("commandlineTheme", parser.value(themeOption));
+    engine.rootContext()->setContextProperty("commandlineArguments", parser.positionalArguments());
+    engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-    qmlRegisterType<LnfLogic>();
-    qmlRegisterType<LnfListModel>();
-#else
-    qmlRegisterAnonymousType<LnfLogic>("org.kde.plasma.sdk", 1);
-    qmlRegisterAnonymousType<LnfListModel>("org.kde.plasma.sdk", 1);
-#endif
-
-    LnfLogic *lnfLogic = new LnfLogic(&obj);
-    obj.engine()->rootContext()->setContextProperty("lnfLogic", QVariant::fromValue(lnfLogic));
-
-    obj.completeInitialization();
-
-    if (!obj.package().metadata().isValid()) {
+    if (engine.rootObjects().isEmpty()) {
         return -1;
-    }
-
-    KPluginMetaData data = obj.package().metadata();
-    // About data
-    KAboutData aboutData(data.pluginId(), data.name(), data.version(), data.description(), KAboutLicense::byKeyword(data.license()).key());
-
-    for (auto author : data.authors()) {
-        aboutData.addAuthor(author.name(), author.task(), author.emailAddress(), author.webAddress(), author.ocsUsername());
-    }
-
-    //The root is not a window?
-    //have to use a normal QQuickWindow since the root item is already created
-    QWindow *window = qobject_cast<QWindow *>(obj.rootObject());
-    if (window) {
-        window->setTitle(obj.package().metadata().name());
-        window->setIcon(QIcon::fromTheme(obj.package().metadata().iconName()));
-    } else {
-        qWarning() << "Error loading the ApplicationWindow";
     }
 
     return app.exec();

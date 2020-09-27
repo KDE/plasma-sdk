@@ -11,13 +11,13 @@
 #include <kpackage/package.h>
 
 
-class LnfListModel;
+class GlobalThemeModel;
 
-class LnfLogic : public QObject
+class GlobalTheme : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(LnfListModel *lnfList READ lnfList CONSTANT)
+    Q_PROPERTY(GlobalThemeModel *themeList READ themeList CONSTANT)
     Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
     Q_PROPERTY(bool isWritable READ isWritable NOTIFY themeChanged)
     Q_PROPERTY(QString themeFolder READ themeFolder NOTIFY themeChanged)
@@ -43,10 +43,10 @@ public:
     };
     Q_ENUMS(ErrorLevel)
 
-    explicit LnfLogic(QObject *parent = nullptr);
-    ~LnfLogic() override;
+    explicit GlobalTheme(QObject *parent = nullptr);
+    ~GlobalTheme() override;
 
-    LnfListModel *lnfList();
+    GlobalThemeModel *themeList();
 
     void setTheme(const QString &theme);
     QString theme() const;
@@ -112,7 +112,7 @@ Q_SIGNALS:
 private:
     QString m_themeName;
     KPackage::Package m_package;
-    LnfListModel *m_lnfListModel;
+    GlobalThemeModel *m_themeListModel;
     QHash<QString, QString> m_tempMetadata;
     bool m_performLayoutDump : 1;
     bool m_performDefaultsDump : 1;

@@ -1,5 +1,5 @@
 /*
- * LnfListModel
+ * GlobalThemeModel
  * SPDX-FileCopyrightText: 2016 Marco Martin <mart@kde.org>
  * SPDX-FileCopyrightText: 2002 Karol Szwed <gallium@kde.org>
  * SPDX-FileCopyrightText: 2002 Daniel Molkentin <molkentin@kde.org>
@@ -18,10 +18,6 @@
 
 #include <QAbstractItemView>
 
-namespace Plasma
-{
-}
-
 //Theme selector code by Andre Duffeck (modified to add package description)
 class ThemeInfo
 {
@@ -34,7 +30,7 @@ public:
     QString themeRoot;
 };
 
-class LnfListModel : public QAbstractListModel
+class GlobalThemeModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(int count READ count NOTIFY countChanged)
@@ -45,8 +41,8 @@ public:
            PackageVersionRole = Qt::UserRole + 3
          };
 
-    explicit LnfListModel(QObject *parent = nullptr);
-    ~LnfListModel() override;
+    explicit GlobalThemeModel(QObject *parent = nullptr);
+    ~GlobalThemeModel() override;
 
     QHash<int, QByteArray> roleNames() const override;
 
