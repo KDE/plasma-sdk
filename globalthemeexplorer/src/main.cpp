@@ -1,5 +1,6 @@
 /*
  *   SPDX-FileCopyrightText: 2015 Marco Martin <mart@kde.org>
+ *   SPDX-FileCopyrightText: 2020 Carl Schwan <carl@carlschwan.eu>
  *
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */

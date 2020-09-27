@@ -1,0 +1,9 @@
+[Desktop Entry]
+Terminal=false
+Name=Plasma Global Theme Explorer
+Comment=Explore Plasma global theme
+Exec=globalthemeexplorer
+Icon=preferences-desktop-theme-global
+Type=Application
+InitialPreference=7
+Categories=Qt;KDE;Development;IDE;
