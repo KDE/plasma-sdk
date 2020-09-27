@@ -28,7 +28,7 @@ int main(int argc, char **argv)
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCommandLineParser parser;
     QApplication app(argc, argv);
-    KLocalizedString::setApplicationDomain("org.kde.plasma.lookandfeelexplorer");
+    KLocalizedString::setApplicationDomain("org.kde.plasma.globalthemeexplorer");
 
     KAboutData aboutData(QStringLiteral("lookandfeelexplorer"),
                          i18nc("@title", "Global Theme Explorer"),
