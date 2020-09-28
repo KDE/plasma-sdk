@@ -56,8 +56,8 @@ Kirigami.ApplicationWindow {
         function onQuit() { cuttlefish.close() }
         function onZoomIn() { tools.slider.value += 1 }
         function onZoomOut() { tools.slider.value -= 1 }
-        function onMontage() {
-            switch(type) {
+        function onMontage(montageType) {
+            switch(montageType) {
                 case 0:
                     previewPane.iconPreview.shot("active")
                     break;
