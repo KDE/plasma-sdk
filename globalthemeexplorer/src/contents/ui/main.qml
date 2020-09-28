@@ -146,14 +146,6 @@ Kirigami.ApplicationWindow {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: Kirigami.Units.gridUnit
                 Layout.preferredWidth: formField.width
-                MouseArea {
-                    anchors.fill:parent
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: {
-                        SDK.GlobalTheme.processThumbnail(SDK.GlobalTheme.openFile());
-                        thumbnail.sourceChanged(thumbnail.source);
-                    }
-                }
 
                 Image {
                     id: thumbnail
@@ -169,6 +161,15 @@ Kirigami.ApplicationWindow {
                                 SDK.GlobalTheme.processThumbnail(event.mimeData.urls[0]);
                             }
                             event.accept(Qt.CopyAction);
+                            thumbnail.sourceChanged(thumbnail.source);
+                        }
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            SDK.GlobalTheme.processThumbnail(SDK.GlobalTheme.openFile());
                             thumbnail.sourceChanged(thumbnail.source);
                         }
                     }
