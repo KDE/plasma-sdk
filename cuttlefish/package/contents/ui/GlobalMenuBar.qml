@@ -33,7 +33,7 @@ MenuBar {
             }
             MenuItem {
                 text: i18n("Breeze (Normal) and Breeze Dark")
-                onTriggered: root.montage(0)
+                onTriggered: root.montage(3)
             }
         }
         MenuSeparator {}
