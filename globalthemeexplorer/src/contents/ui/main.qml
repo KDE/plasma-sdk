@@ -69,7 +69,13 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 text: i18n("Open Theme Folder")
                 iconName: "document-open-folder"
-                onTriggered: Qt.openUrlExternally(SDK.GlobalTheme.themeFolder);
+                onTriggered: Qt.openUrlExternally(`file://${SDK.GlobalTheme.themeFolder}`);
+            },
+            Kirigami.Action {
+                text: i18n("Save")
+                iconName: "document-save"
+                onTriggered: SDK.GlobalTheme.save()
+                enabled: SDK.GlobalTheme.needsSave
             }
         ]
         GridLayout {
@@ -111,24 +117,15 @@ Kirigami.ApplicationWindow {
                         label: i18n("License:")
                         key: "license"
                     }
-                    QQC2.Button {
-                        text: i18n("Layout from current Plasma setup")
-                        onClicked: SDK.GlobalTheme.performLayoutDump = true
-                        Layout.columnSpan: 2
-                        implicitWidth: formField.width
+                    CheckBox {
+                        onClicked: SDK.GlobalTheme.performLayoutDump = checked
+                        checked: SDK.GlobalTheme.performLayoutDump
+                        text: i18n("Use layout from current Plasma setup")
                     }
-                    QQC2.Button {
-                        text: i18n("Defaults from current setup")
-                        onClicked: SDK.GlobalTheme.performDefaultsDump = true
-                        Layout.columnSpan: 2
-                        implicitWidth: formField.width
-                    }
-                    QQC2.Button {
-                        text: i18n("Save")
-                        enabled: SDK.GlobalTheme.needsSave
-                        onClicked: SDK.GlobalTheme.save()
-                        Layout.columnSpan: 2
-                        implicitWidth: formField.width
+                    CheckBox {
+                        onClicked: SDK.GlobalTheme.performDefaultsDump = checked
+                        checked: SDK.GlobalTheme.performDefaultsDump
+                        text: i18n("Use configuration from current Plasma setup")
                     }
                 }
             }
