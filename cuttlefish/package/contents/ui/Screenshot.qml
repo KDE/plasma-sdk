@@ -1,43 +1,87 @@
 /*
     SPDX-FileCopyrightText: 2019 Carson Black <uhhadd@gmail.com>
     SPDX-FileCopyrightText: 2020 David Redondo <kde@david-redondo.de>
+    SPDX-FileCopyrightText: 2020 Ismael Asensio <isma.af@gmail.com>
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
 import QtQuick 2.2
-import QtQuick.Controls 2.5 as QQC2
-import QtQuick.Layouts 1.0
 import QtQuick.Dialogs 1.3
 
 import org.kde.kirigami 2.8 as Kirigami
 
+
 Item {
-    id: dualMontage
+    id: screenshot
+
+    enum MontageType {
+        Active,
+        Normal,
+        Dark,
+        Dual
+    }
+
     visible: false
-    height: 512
-    width: 512
+
+    signal finished
+
+    property int type: Screenshot.MontageType.Dual;
+    property Item selectedMontage: {
+        switch (type) {
+        case Screenshot.MontageType.Active:
+            return activeMontage
+        case Screenshot.MontageType.Normal:
+            return lightMontage
+        case Screenshot.MontageType.Dark:
+            return darkMontage
+        case Screenshot.MontageType.Dual:
+            return dualMontage
+        }
+    }
+
     Kirigami.Theme.inherit: false
-    function shot() {
+
+    function shot(montageType) {
+        type = montageType
         ssPicker.open()
     }
+
     FileDialog {
         id: ssPicker
         selectExisting: false
         selectMultiple: false
         selectFolder: false
         onAccepted: {
-            dualMontage.grabToImage(function(result) {
-                res = result.saveToFile(ssPicker.fileUrl.toString().slice(7))
+            selectedMontage.grabToImage(function(result) {
+                result.saveToFile(ssPicker.fileUrl.toString().slice(7))
+                finished()
             });
+        }
+        onRejected: {
+            finished()
         }
         nameFilters: [ "PNG screenshot files (*.png)" ]
     }
+
+    IconMontage {
+        id: activeMontage
+        showWatermark: true
+
+        width: 512
+        height: 256
+
+        Kirigami.Theme.inherit: true
+    }
     Column {
+        id:dualMontage
+
         IconMontage {
-            height: 256
-            width: 512
+            id: lightMontage
             showWatermark: true
+
+            width: 512
+            height: 256
 
             Kirigami.Theme.inherit: false
             Kirigami.Theme.textColor: "#232629"
@@ -49,9 +93,11 @@ Item {
             Kirigami.Theme.negativeTextColor: "#da4453"
         }
         IconMontage {
-            height: 256
+            id: darkMontage
+            showWatermark: screenshot.type == Screenshot.MontageType.Dark
+
             width: 512
-            showWatermark: false
+            height: 256
 
             Kirigami.Theme.inherit: false
             Kirigami.Theme.textColor: "#eff0f1"

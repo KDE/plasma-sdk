@@ -21,19 +21,19 @@ MenuBar {
             title: i18n("Export Montage with Color Scheme...")
             MenuItem {
                 text: i18n("Active Color Scheme")
-                onTriggered: root.montage(0)
+                onTriggered: root.montage(Screenshot.MontageType.Active)
             }
             MenuItem {
                 text: i18n("Breeze (Normal)")
-                onTriggered: root.montage(1)
+                onTriggered: root.montage(Screenshot.MontageType.Normal)
             }
             MenuItem {
                 text: i18n("Breeze Dark")
-                onTriggered: root.montage(2)
+                onTriggered: root.montage(Screenshot.MontageType.Dark)
             }
             MenuItem {
                 text: i18n("Breeze (Normal) and Breeze Dark")
-                onTriggered: root.montage(3)
+                onTriggered: root.montage(Screenshot.MontageType.Dual)
             }
         }
         MenuSeparator {}

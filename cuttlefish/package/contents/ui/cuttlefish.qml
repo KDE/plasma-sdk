@@ -32,6 +32,11 @@ Kirigami.ApplicationWindow {
         Kirigami.Units.iconSizes.small, Kirigami.Units.iconSizes.smallMedium, Kirigami.Units.iconSizes.medium,
         Kirigami.Units.iconSizes.large, Kirigami.Units.iconSizes.huge, Kirigami.Units.iconSizes.enormous]
 
+    function doScreenshot(montageType) {
+        ssLoader.type = montageType
+        ssLoader.active = true
+    }
+
     Loader {
         // Use a Loader instead of creating a GMB directly,
         // so if the GMB errors, it doesn't affect Cuttlefish's operation
@@ -57,20 +62,7 @@ Kirigami.ApplicationWindow {
         function onZoomIn() { tools.slider.value += 1 }
         function onZoomOut() { tools.slider.value -= 1 }
         function onMontage(montageType) {
-            switch(montageType) {
-                case 0:
-                    previewPane.iconPreview.shot("active")
-                    break;
-                case 1:
-                    previewPane.iconPreview.shot("normal")
-                    break;
-                case 2:
-                    previewPane.iconPreview.shot("dark")
-                    break;
-                case 3:
-                    previewPane.dualMont.shot()
-                    break;
-            }
+            cuttlefish.doScreenshot(montageType)
         }
     }
 
@@ -162,5 +154,21 @@ Kirigami.ApplicationWindow {
         property string iconTheme: ""
         property variant sizes: []
         property bool scalable: true
+    }
+    Loader {
+        id: ssLoader
+        sourceComponent: Screenshot {}
+        active: false
+
+        property int type: Screenshot.MontageType.Dual
+        onLoaded: {
+            ssLoader.item.shot(type)
+        }
+        Connections {
+            target: ssLoader.item
+            function onFinished() {
+                ssLoader.active = false
+            }
+        }
     }
 }

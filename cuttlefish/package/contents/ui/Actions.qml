@@ -32,19 +32,19 @@ Item {
             onTriggered: screenshotPopup.popup()
             Kirigami.Action {
                 text: i18n("Breeze Colors")
-                onTriggered: previewPane.iconPreview.shot("normal")
+                onTriggered: cuttlefish.doScreenshot(Screenshot.MontageType.Normal)
             }
             Kirigami.Action {
                 text: i18n("Breeze Dark Colors")
-                onTriggered: previewPane.iconPreview.shot("dark")
+                onTriggered: cuttlefish.doScreenshot(Screenshot.MontageType.Dark)
             }
             Kirigami.Action {
-                onTriggered: previewPane.dualMont.shot()
                 text: i18n("Breeze (Normal) and Breeze Dark")
+                onTriggered: cuttlefish.doScreenshot(Screenshot.MontageType.Dual)
             }
             Kirigami.Action {
-                onTriggered: previewPane.iconPreview.shot("active")
                 text: i18n("Active Color Scheme")
+                onTriggered: cuttlefish.doScreenshot(Screenshot.MontageType.Active)
             }
         },
         Kirigami.Action {
