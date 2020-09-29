@@ -59,8 +59,8 @@ Kirigami.GlobalDrawer {
                 Layout.alignment: Qt.AlignBottom
                 Kirigami.Icon {
                     source: preview.iconName
-                    width: modelData
-                    height: width
+                    implicitWidth: modelData
+                    implicitHeight: implicitWidth
                 }
                 QQC2.Label {
                     Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
