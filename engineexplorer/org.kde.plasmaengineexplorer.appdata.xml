@@ -11,6 +11,7 @@
   <name xml:lang="cs">Průzkumník zdrojů Plasma</name>
   <name xml:lang="da">Udforsk Plasma-motorer</name>
   <name xml:lang="de">Plasma-Datenquellen</name>
+  <name xml:lang="el">Περιηγητής μηχανών Plasma</name>
   <name xml:lang="en-GB">Plasma Engine Explorer</name>
   <name xml:lang="es">Explorador de motores de Plasma</name>
   <name xml:lang="et">Plasma mootori uurija</name>
@@ -42,6 +43,7 @@
   <summary xml:lang="ca-valencia">Explorador de les dades publicades pels motors de dades de Plasma</summary>
   <summary xml:lang="da">Udforsk de data der offentliggøres af Plasma datamotorer</summary>
   <summary xml:lang="de">Anzeige von Daten, die von Plasma-Datenquellen veröffentlicht werden.</summary>
+  <summary xml:lang="el">Περιηγητής για τα δεδομένα που δημοσιεύουν οι μηχανές δεδομένων Plasma</summary>
   <summary xml:lang="en-GB">Explorer for the data published by Plasma Data Engines</summary>
   <summary xml:lang="es">Explorador para los datos publicados por los motores de datos de Plasma</summary>
   <summary xml:lang="et">Plasma andmemootorite avaldatud andmete uurija</summary>
@@ -73,6 +75,7 @@
     <p xml:lang="ca-valencia">L'explorador de motors de Plasma és una eina gràfica que permet als desenvolupadors provar els motors de dades Plasma sense escriure una miniaplicació Plasma.</p>
     <p xml:lang="da">Plasma Engine Explorer er et grafisk værktøj så udviklere kan teste Plasma datamotorer uden at skrive en Plasma-applet.</p>
     <p xml:lang="de">Dies ist eine grafische Benutzeroberfläche, mit der Entwickler Plasma-Datenquellen testen können, ohne ein Plasma-Miniprogramm zu schreiben.</p>
+    <p xml:lang="el">Ο περιηγητής μηχανών Plasma είναι ένα γραφικό εργαλείο που επιτρέπει στους προγραμματιστές να δοκιμάζουν μηχανές δεδομένων Plasma χωρίς να χρειάζεται να γράψουν μια μικροεφαρμογή Plasma.</p>
     <p xml:lang="en-GB">Plasma Engine Explorer is a graphical tool allowing developers to test Plasma DataEngines without writing a Plasma applet.</p>
     <p xml:lang="es">El explorador de motores de Plasma es una herramienta gráfica que permite a los desarrolladores probar motores de datos de Plasma sin la necesidad de escribir una miniaplicación para Plasma.</p>
     <p xml:lang="et">Plasma mootori uurija on graafiline tööriist, mis võimaldab arendajatel katsetada Plasma andmemootoreid ilma Plasma apletti valmis kirjutamata.</p>
