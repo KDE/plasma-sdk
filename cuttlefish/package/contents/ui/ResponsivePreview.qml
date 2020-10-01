@@ -49,29 +49,9 @@ Kirigami.GlobalDrawer {
             font.capitalization: Font.Capitalize
         }
     }
-    GridLayout {
+    IconMontage {
         id: grid
-        columns: 2
+        columns: cuttlefish.iconSizes.length - 1
         Layout.alignment: Qt.AlignHCenter
-        Repeater {
-            model: cuttlefish.iconSizes.slice(0, cuttlefish.iconSizes.length - 1)
-            delegate: ColumnLayout {
-                Layout.alignment: Qt.AlignBottom
-                Kirigami.Icon {
-                    source: preview.iconName
-                    implicitWidth: modelData
-                    implicitHeight: implicitWidth
-                }
-                QQC2.Label {
-                    Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                    text: modelData
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: Kirigami.Units.longDuration
-                        }
-                    }
-                }
-            }
-        }
     }
 }

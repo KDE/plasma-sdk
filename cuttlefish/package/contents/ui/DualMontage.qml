@@ -34,10 +34,11 @@ Item {
         nameFilters: [ "PNG screenshot files (*.png)" ]
     }
     Column {
-        Rectangle {
+        IconMontage {
             height: 256
             width: 512
-            color: Kirigami.Theme.backgroundColor
+            showWatermark: true
+
             Kirigami.Theme.inherit: false
             Kirigami.Theme.textColor: "#232629"
             Kirigami.Theme.backgroundColor: "#eff0f1"
@@ -46,50 +47,12 @@ Item {
             Kirigami.Theme.positiveTextColor: "#27ae60"
             Kirigami.Theme.neutralTextColor: "#f67400"
             Kirigami.Theme.negativeTextColor: "#da4453"
-
-            RowLayout {
-                id: previewGrid
-                anchors.centerIn: parent
-                Repeater {
-                    model: cuttlefish.iconSizes
-                    delegate: ColumnLayout {
-                        Layout.alignment: Qt.AlignBottom
-                        Kirigami.Icon {
-                            source: preview.iconName
-                            implicitWidth:  modelData
-                            implicitHeight: implicitWidth
-                        }
-                        QQC2.Label {
-                            Layout.alignment: Qt.AlignHCenter
-                            text: modelData
-                            Behavior on color {
-                                ColorAnimation {
-                                    duration: Kirigami.Units.longDuration
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            Row {
-                anchors.top: parent.top
-                anchors.left: parent.left
-                anchors.margins: Kirigami.Units.smallSpacing
-                Kirigami.Icon {
-                    height: 32
-                    width: 32
-                    source: "cuttlefish"
-                }
-                QQC2.Label {
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: "Montage made with Cuttlefish"
-                }
-            }
         }
-        Rectangle {
+        IconMontage {
             height: 256
             width: 512
-            color: Kirigami.Theme.backgroundColor
+            showWatermark: false
+
             Kirigami.Theme.inherit: false
             Kirigami.Theme.textColor: "#eff0f1"
             Kirigami.Theme.backgroundColor: "#31363b"
@@ -98,30 +61,6 @@ Item {
             Kirigami.Theme.positiveTextColor: "#27ae60"
             Kirigami.Theme.neutralTextColor: "#f67400"
             Kirigami.Theme.negativeTextColor: "#da4453"
-
-            RowLayout {
-                anchors.centerIn: parent
-                Repeater {
-                    model: cuttlefish.iconSizes
-                    delegate: ColumnLayout {
-                        Layout.alignment: Qt.AlignBottom
-                        Kirigami.Icon {
-                            source: preview.iconName
-                            implicitWidth: modelData
-                            implicitHeight: implicitWidth
-                        }
-                        QQC2.Label {
-                            Layout.alignment: Qt.AlignHCenter
-                            text: modelData
-                            Behavior on color {
-                                ColorAnimation {
-                                    duration: Kirigami.Units.longDuration
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
 }

@@ -79,12 +79,13 @@ Rectangle {
                 font.capitalization: Font.Capitalize
             }
         }
-        Rectangle {
+        IconMontage {
             id: iconPreview
 
             property bool screenshotting: false
 
-            color: Kirigami.Theme.backgroundColor
+            columns: cuttlefish.iconSizes.length - 1
+            showWatermark: iconPreview.screenshotting
 
             Behavior on color {
                 ColorAnimation {
@@ -98,65 +99,11 @@ Rectangle {
             }
 
             Layout.fillWidth: true
-            Layout.preferredHeight: screenshotting ? previewGrid.height + (Kirigami.Units.gridUnit * 4) : previewGrid.height
+            Layout.preferredHeight: implicitHeight + (screenshotting ? (Kirigami.Units.gridUnit * 4) : 0)
 
             Layout.topMargin: Kirigami.Units.largeSpacing
             Layout.bottomMargin: Kirigami.Units.largeSpacing * 4
 
-            ColumnLayout {
-                id: previewGrid
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenter: parent.verticalCenter
-                GridLayout {
-                    id: previewGridLayout
-                    Layout.alignment: Qt.AlignHCenter
-                    columns: cuttlefish.iconSizes.length - 1
-                    Repeater {
-                        model: cuttlefish.iconSizes
-                        delegate: ColumnLayout {
-                            readonly property bool isLastItem: (index == previewGridLayout.columns)
-                            Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
-                            Layout.row: isLastItem ? 1 : 0
-                            Layout.column: isLastItem ? 0 : index
-                            Layout.columnSpan: isLastItem ? previewGridLayout.columns : 1
-                            Kirigami.Icon {
-                                source: preview.iconName
-                                implicitWidth: modelData
-                                implicitHeight: implicitWidth
-                            }
-                            QQC2.Label {
-                                Layout.alignment: Qt.AlignHCenter
-                                text: modelData
-                                Behavior on color {
-                                    ColorAnimation {
-                                        duration: Kirigami.Units.longDuration
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            Row {
-                opacity: iconPreview.screenshotting ? 1 : 0
-                anchors.top: parent.top
-                anchors.left: parent.left
-                anchors.margins: Kirigami.Units.smallSpacing
-                Kirigami.Icon {
-                    height: 32
-                    width: 32
-                    source: "cuttlefish"
-                }
-                QQC2.Label {
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: "Montage made with Cuttlefish"
-                }
-                Behavior on opacity {
-                    OpacityAnimator {
-                        duration: Kirigami.Units.longDuration
-                    }
-                }
-            }
             function shot(type) {
                 iconPreview.screenshotting = true
                 if (type == "normal") {
