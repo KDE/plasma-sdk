@@ -7,15 +7,12 @@
 #include "cuttlefishplugin.h"
 
 #include <KTextEditor/Application>
-#include <KTextEditor/Document>
 #include <KTextEditor/Editor>
-#include <KTextEditor/View>
 
 #include <KLocalizedString>
 #include <KPluginFactory>
 
 #include <QAction>
-#include <QProcess>
 #include <QStandardPaths>
 
 K_PLUGIN_FACTORY_WITH_JSON(CuttleFishPluginFactory, "cuttlefishplugin.json", registerPlugin<CuttleFishPlugin>();)
