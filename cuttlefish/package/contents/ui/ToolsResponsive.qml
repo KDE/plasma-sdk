@@ -57,7 +57,7 @@ QQC2.ToolBar {
             visible: !cuttlefish.widescreen
             id: pixelSizeInput
 
-            Layout.preferredWidth: units.gridUnit * 1
+            Layout.preferredWidth: Kirigami.Units.gridUnit
         }
         QQC2.ComboBox {
             id: colorcombo

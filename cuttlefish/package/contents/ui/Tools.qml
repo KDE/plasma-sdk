@@ -47,7 +47,7 @@ QQC2.ToolBar {
 
         QQC2.ComboBox {
             id: catsCombo
-            Layout.preferredWidth: units.gridUnit * 6
+            Layout.preferredWidth: Kirigami.Units.gridUnit * 6
             model: iconModel.categories
             onActivated: {
                 if (currentText == "all") {
@@ -62,7 +62,7 @@ QQC2.ToolBar {
         QQC2.Slider {
             visible: cuttlefish.widescreen
             id: sizeslider
-            Layout.preferredWidth: preview.width - units.gridUnit * 2
+            Layout.preferredWidth: preview.width - Kirigami.Units.gridUnit * 2
 
             to: 6.0
             stepSize: 1.0
@@ -92,7 +92,7 @@ QQC2.ToolBar {
             visible: cuttlefish.widescreen
             id: pixelSizeInput
 
-            Layout.preferredWidth: units.gridUnit * 3
+            Layout.preferredWidth: Kirigami.Units.gridUnit * 3
         }
         QQC2.Label {
             visible: cuttlefish.widescreen
