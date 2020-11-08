@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Explore and edit your Plasma Global Themes
+Comment[ast]=Esplora y edita los estilos globales de Plasma
 Comment[az]=Plasma Qlobal Mövzularına baxış və onlara düzəliş etmək
 Comment[ca]=Explora i edita els vostres temes globals del Plasma
 Comment[cs]=Prohlížejte a editujte Globální Motivy Plasma
@@ -31,6 +32,7 @@ Comment[zh_CN]=浏览并编辑您的 Plasma 全局主题
 Comment[zh_TW]=探索並編輯您的 Plasma 全域主題
 Keywords=
 Name=Plasma Global Theme Explorer
+Name[ast]=Esplorador d'estilos globales de Plasma
 Name[az]=Plasma Qlobal Mövzu Bələdçisi
 Name[ca]=Explorador per als temes globals del Plasma
 Name[cs]=Průzkumník Globálních Motivů Plasma

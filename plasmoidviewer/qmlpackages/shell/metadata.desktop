@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=PlasmoidViewer Shell
+Comment[ast]=Shell de PlasmoidViewer
 Comment[az]=Plasmoidlərə baxış üzlüyü
 Comment[ca]=Intèrpret d'ordres del visor de plasmoides
 Comment[ca@valencia]=Intèrpret d'ordres del visualitzador de plasmoides
@@ -38,6 +39,7 @@ Comment[zh_CN]=Plasmoid 查看器外壳
 Comment[zh_TW]=Plasmoid 檢視器殼層
 Keywords=
 Name=PlasmoidViewerShell
+Name[ast]=PlasmoidViewerShell
 Name[az]=PlasmoidViewer üzlüyü
 Name[ca]=Intèrpret d'ordres del visor de plasmoides
 Name[ca@valencia]=Intèrpret d'ordres del visualitzador de plasmoides
