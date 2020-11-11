@@ -137,11 +137,11 @@ Kirigami.AbstractApplicationWindow {
         }
         Connections {
             target: lnfLogic
-            onThumbnailPathChanged: {
+            function onThumbnailPathChanged() {
                 thumbnail.source = ""
                 thumbnail.source = lnfLogic.thumbnailPath
             }
-            onMessageRequested: {
+            function onMessageRequested(level, message) {
                 root.showPassiveNotification(message);
             }
         }

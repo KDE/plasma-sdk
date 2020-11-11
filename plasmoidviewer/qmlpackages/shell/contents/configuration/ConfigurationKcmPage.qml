@@ -35,7 +35,7 @@ Item {
 
     Connections {
         target: kcm
-        onNeedsSaveChanged: {
+        function onNeedsSaveChanged() {
             if (kcm.needsSave) {
                 page.configurationChanged();
             }
