@@ -18,6 +18,7 @@
 #include <KStringHandler>
 #include <KPluginMetaData>
 #include <KLocalizedString>
+#include <KPluginMetaData>
 #include <QAction>
 #include <QDateTime>
 
@@ -139,11 +140,19 @@ void EngineExplorer::dataUpdated(const QString& source, const Plasma::DataEngine
 void EngineExplorer::listEngines()
 {
     m_engines->clear();
-    KPluginInfo::List engines = m_engineManager->listDataEngineInfo(m_app);
-    std::sort(engines.begin(), engines.end());
+    QVector<KPluginMetaData> engines = m_engineManager->listDataEngineMetaData(m_app);
+    std::sort(engines.begin(), engines.end(), [](auto lhs, auto rhs) {
+        if (lhs.category() < rhs.category()) {
+            return true;
+        }
+        if (lhs.category() == rhs.category()) {
+            return lhs.name() < rhs.name();
+        }
+        return false;
+    });
 
-    foreach (const KPluginInfo engine, engines) {
-        m_engines->addItem(QIcon::fromTheme(engine.icon()), engine.pluginName());
+    foreach (const KPluginMetaData &engine, engines) {
+        m_engines->addItem(QIcon::fromTheme(engine.iconName()), engine.pluginId());
     }
 
     m_engines->setCurrentIndex(-1);
