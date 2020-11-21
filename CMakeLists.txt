@@ -7,6 +7,9 @@ set(PROJECT_VERSION_MAJOR 5)
 set(QT_MIN_VERSION "5.15.0")
 set(KF5_MIN_VERSION "5.74")
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 ################# Disallow in-source build #################
 
 if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
