@@ -23,10 +23,6 @@
 
 #include <Plasma/PluginLoader>
 
-#ifdef FOUND_SOPRANO
-#include <Soprano/Node>
-Q_DECLARE_METATYPE(Soprano::Node)
-#endif // FOUND_SOPRANO
 Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 
 #include "modelviewer.h"
@@ -41,9 +37,6 @@ EngineExplorer::EngineExplorer(QWidget* parent)
       m_expandButton(new QPushButton(i18n("Expand All"), this)),
       m_collapseButton(new QPushButton(i18n("Collapse All"), this))
 {
-#ifdef FOUND_SOPRANO
-    (void) qRegisterMetaType<Soprano::Node>();
-#endif
     setWindowTitle(i18n("Plasma Engine Explorer"));
     QWidget* mainWidget = new QWidget(this);
 
@@ -404,18 +397,6 @@ QString EngineExplorer::convertToString(const QVariant &value)
             return QString("%1").arg(value.toTime().toString());
         }
         default: {
-#ifdef FOUND_SOPRANO
-            if (QLatin1String(value.typeName()) == "Soprano::Node") {
-                Soprano::Node node = value.value<Soprano::Node>();
-                if (node.isLiteral()) {
-                    return convertToString(node.literal().variant());
-                } else if (node.isResource()) {
-                    return node.uri().toString();
-                } else if (node.isBlank()) {
-                    return QString("_:%1").arg(node.identifier());
-                }
-            }
-#endif
             if (QLatin1String(value.typeName()) == "QDateTime") {
                 return QString("%1").arg(value.value<QDateTime>().toString());
             }
