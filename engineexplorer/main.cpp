@@ -22,7 +22,7 @@ void listEngines()
     int maxLen = 0;
     QMap<QString, QString> engines;
     const auto plugins = Plasma::PluginLoader::self()->listDataEngineMetaData();
-    foreach (const KPluginMetaData &info, plugins) {
+    for (const KPluginMetaData &info : plugins) {
 
         int len = info.pluginId().length();
         if (len > maxLen) {

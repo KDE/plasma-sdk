@@ -151,7 +151,7 @@ void EngineExplorer::listEngines()
         return false;
     });
 
-    foreach (const KPluginMetaData &engine, engines) {
+    for (const KPluginMetaData &engine : qAsConst(engines)) {
         m_engines->addItem(QIcon::fromTheme(engine.iconName()), engine.pluginId());
     }
 
