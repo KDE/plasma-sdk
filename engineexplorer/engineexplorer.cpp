@@ -16,6 +16,7 @@
 
 #include <KStandardAction>
 #include <KStringHandler>
+#include <KPluginMetaData>
 #include <KLocalizedString>
 #include <QAction>
 #include <QDateTime>
@@ -487,7 +488,7 @@ int EngineExplorer::showData(QStandardItem* parent, Plasma::DataEngine::Data dat
 
 void EngineExplorer::updateTitle()
 {
-    if (!m_engine || !m_engine->pluginInfo().isValid()) {
+    if (!m_engine || !m_engine->metadata().isValid()) {
         m_title->setIcon(QIcon::fromTheme("plasma"));
         m_title->setText(i18n("Plasma DataEngine Explorer"));
         return;
@@ -495,13 +496,13 @@ void EngineExplorer::updateTitle()
 
     m_title->setText(ki18ncp("The name of the engine followed by the number of data sources",
                              "%1 Engine - 1 data source", "%1 Engine - %2 data sources")
-                              .subs(KStringHandler::capwords(m_engine->pluginInfo().name()))
+                              .subs(KStringHandler::capwords(m_engine->metadata().name()))
                               .subs(m_sourceCount).toString());
 
-    if (m_engine->pluginInfo().icon().isEmpty()) {
+    if (m_engine->metadata().iconName().isEmpty()) {
         m_title->setIcon(QIcon::fromTheme("plasma"));
     } else {
-        m_title->setIcon(QIcon::fromTheme(m_engine->pluginInfo().icon()));
+        m_title->setIcon(QIcon::fromTheme(m_engine->metadata().iconName()));
     }
 }
 
