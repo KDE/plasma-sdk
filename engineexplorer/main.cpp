@@ -21,10 +21,6 @@ void listEngines()
     int maxLen = 0;
     QMap<QString, QString> engines;
     foreach (const KPluginInfo &info, Plasma::PluginLoader::listEngineInfo()) {
-        if (info.property("NoDisplay").toBool()) {
-            continue;
-        }
-
         int len = info.pluginName().length();
         if (len > maxLen) {
             maxLen = len;
