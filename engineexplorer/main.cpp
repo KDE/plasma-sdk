@@ -9,6 +9,7 @@
 #include <QApplication>
 #include <KAboutData>
 #include <KLocalizedString>
+#include <KPluginMetaData>
 
 #include <Plasma/PluginLoader>
 #include <qcommandlineparser.h>
@@ -20,14 +21,16 @@ void listEngines()
 {
     int maxLen = 0;
     QMap<QString, QString> engines;
-    foreach (const KPluginInfo &info, Plasma::PluginLoader::listEngineInfo()) {
-        int len = info.pluginName().length();
+    const auto plugins = Plasma::PluginLoader::self()->listDataEngineMetaData();
+    foreach (const KPluginMetaData &info, plugins) {
+
+        int len = info.pluginId().length();
         if (len > maxLen) {
             maxLen = len;
         }
 
-        QString name = info.pluginName();
-        QString comment = info.comment();
+        QString name = info.pluginId();
+        QString comment = info.description();
 
         if (comment.isEmpty()) {
             comment = i18n("No description available");
