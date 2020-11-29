@@ -96,7 +96,6 @@ Kirigami.ApplicationWindow {
                 id: grid
                 anchors.fill: parent
 
-                contentHeight: iconGrid.height
                 QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
                 IconGrid {
