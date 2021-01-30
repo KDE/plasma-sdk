@@ -7,8 +7,8 @@ add_executable(plasmoidviewer ${plasmoidviewer_SRCS})
 target_compile_definitions(plasmoidviewer PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
 
 target_link_libraries(plasmoidviewer
-    Qt5::Quick
-    Qt5::DBus
+    Qt::Quick
+    Qt::DBus
     KF5::DBusAddons
     KF5::Plasma
     KF5::PlasmaQuick

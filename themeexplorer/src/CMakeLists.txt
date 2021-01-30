@@ -13,10 +13,10 @@ target_compile_definitions(plasmathemeexplorer PRIVATE -DPROJECT_VERSION="${PROJ
 #find_package(ActiveApp REQUIRED)
 
 target_link_libraries(plasmathemeexplorer
- Qt5::Gui
- Qt5::Quick
- Qt5::Widgets
- Qt5::Xml
+ Qt::Gui
+ Qt::Quick
+ Qt::Widgets
+ Qt::Xml
  KF5::Archive
  KF5::Declarative
  KF5::I18n

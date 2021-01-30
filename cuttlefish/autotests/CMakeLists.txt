@@ -8,8 +8,8 @@ include_directories(../src)
 ecm_add_test(iconmodeltest.cpp ../src/iconmodel.cpp ../src/sortfiltermodel.cpp
              TEST_NAME iconmodeltest
              LINK_LIBRARIES
-                Qt5::Gui
-                Qt5::Test
+                Qt::Gui
+                Qt::Test
                 KF5::ConfigCore
                 KF5::IconThemes
                 KF5::Package
