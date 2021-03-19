@@ -21,7 +21,7 @@ namespace Plasma
 {
 }
 
-//Theme selector code by Andre Duffeck (modified to add package description)
+// Theme selector code by Andre Duffeck (modified to add package description)
 class ThemeInfo
 {
 public:
@@ -69,6 +69,5 @@ private:
 
     QMap<QString, ThemeInfo> m_themes;
 };
-
 
 #endif

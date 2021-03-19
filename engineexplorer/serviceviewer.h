@@ -7,16 +7,16 @@
 #ifndef SERVICEVIEWER_H
 #define SERVICEVIEWER_H
 
-#include <QDialog>
 #include "ui_serviceviewer.h"
+#include <QDialog>
 
 class KJob;
 class QPushButton;
 
 namespace Plasma
 {
-    class DataEngine;
-    class Service;
+class DataEngine;
+class Service;
 } // namespace Plasma
 
 class ServiceViewer : public QDialog, public Ui::ServiceViewer
@@ -46,4 +46,3 @@ private:
 };
 
 #endif
-

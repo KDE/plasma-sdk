@@ -9,12 +9,13 @@
 
 #include <QAbstractListModel>
 #include <QJsonArray>
-#include <QJsonObject>
 #include <QJsonDocument>
+#include <QJsonObject>
 #include <kpackage/package.h>
 
-namespace Plasma {
-    class Theme;
+namespace Plasma
+{
+class Theme;
 }
 
 class ThemeListModel;
@@ -66,9 +67,9 @@ public:
 
     void load();
 
-    Q_INVOKABLE void editElement(const QString& imagePath);
-    Q_INVOKABLE void editThemeMetaData(const QString& name, const QString& author, const QString& email, const QString &license, const QString& website);
-    Q_INVOKABLE void createNewTheme(const QString& name, const QString& author, const QString& email, const QString &license, const QString& website);
+    Q_INVOKABLE void editElement(const QString &imagePath);
+    Q_INVOKABLE void editThemeMetaData(const QString &name, const QString &author, const QString &email, const QString &license, const QString &website);
+    Q_INVOKABLE void createNewTheme(const QString &name, const QString &author, const QString &email, const QString &license, const QString &website);
 
     QString themeFolder();
 

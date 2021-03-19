@@ -10,7 +10,6 @@
 #include <QAbstractListModel>
 #include <kpackage/package.h>
 
-
 class LnfListModel;
 
 class LnfLogic : public QObject
@@ -88,7 +87,13 @@ public:
     bool needsSave();
 
     Q_INVOKABLE void save();
-    Q_INVOKABLE void createNewTheme(const QString &pluginName, const QString &name, const QString &comment, const QString &author, const QString &email, const QString &license, const QString &website);
+    Q_INVOKABLE void createNewTheme(const QString &pluginName,
+                                    const QString &name,
+                                    const QString &comment,
+                                    const QString &author,
+                                    const QString &email,
+                                    const QString &license,
+                                    const QString &website);
     Q_INVOKABLE void processThumbnail(const QString &path);
     Q_INVOKABLE QString openFile();
 

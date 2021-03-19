@@ -6,28 +6,28 @@
 
 #include "view.h"
 
-#include <QFileDialog>
-#include <QQmlEngine>
-#include <QQuickItem>
-#include <QQmlContext>
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QDebug>
+#include <QFileDialog>
+#include <QQmlContext>
+#include <QQmlEngine>
+#include <QQuickItem>
 
-#include <KLocalizedString>
 #include <KDesktopFile>
+#include <KLocalizedString>
 
 #include <KPackage/Package>
 #include <KPackage/PackageLoader>
-
 
 class ViewerCorona : public Plasma::Corona
 {
 public:
     ViewerCorona()
-        : Plasma::Corona(),
-          m_view(nullptr)
-    {}
+        : Plasma::Corona()
+        , m_view(nullptr)
+    {
+    }
 
     void setView(View *view)
     {
@@ -44,7 +44,8 @@ public:
         }
     }
 
-    int screenForContainment(const Plasma::Containment *containment) const override {
+    int screenForContainment(const Plasma::Containment *containment) const override
+    {
         return 0;
     }
 
@@ -179,21 +180,21 @@ void View::changeFormFactor(int formFactor)
 {
     QString formFactorType = "planar";
     switch (formFactor) {
-        case Plasma::Types::Planar:
-            formFactorType = "planar";
-            break;
-        case Plasma::Types::Vertical:
-            formFactorType = "vertical";
-            break;
-        case Plasma::Types::Horizontal:
-            formFactorType = "horizontal";
-            break;
-        case Plasma::Types::MediaCenter:
-            formFactorType = "mediacenter";
-            break;
-        case Plasma::Types::Application:
-            formFactorType = "application";
-            break;
+    case Plasma::Types::Planar:
+        formFactorType = "planar";
+        break;
+    case Plasma::Types::Vertical:
+        formFactorType = "vertical";
+        break;
+    case Plasma::Types::Horizontal:
+        formFactorType = "horizontal";
+        break;
+    case Plasma::Types::MediaCenter:
+        formFactorType = "mediacenter";
+        break;
+    case Plasma::Types::Application:
+        formFactorType = "application";
+        break;
     }
 
     addFormFactor(formFactorType);
@@ -245,8 +246,7 @@ void View::emitExternalData(const QString &data)
         return;
     }
 
-    QMetaObject::invokeMethod(graphicsObject, "externalData", Q_ARG(QString, QString()),
-                                                              Q_ARG(QVariant, data));
+    QMetaObject::invokeMethod(graphicsObject, "externalData", Q_ARG(QString, QString()), Q_ARG(QVariant, data));
 }
 
 bool View::konsoleVisible()
@@ -258,27 +258,27 @@ void View::changeLocation(int location)
 {
     QString locationType = "floating";
     switch (location) {
-        case Plasma::Types::Floating:
-            locationType = "floating";
-            break;
-        case Plasma::Types::Desktop:
-            locationType = "desktop";
-            break;
-        case Plasma::Types::FullScreen:
-            locationType = "fullscreen";
-            break;
-        case Plasma::Types::TopEdge:
-            locationType = "topedge";
-            break;
-        case Plasma::Types::BottomEdge:
-            locationType = "bottomedge";
-            break;
-        case Plasma::Types::RightEdge:
-            locationType = "rightedge";
-            break;
-        case Plasma::Types::LeftEdge:
-            locationType = "leftedge";
-            break;
+    case Plasma::Types::Floating:
+        locationType = "floating";
+        break;
+    case Plasma::Types::Desktop:
+        locationType = "desktop";
+        break;
+    case Plasma::Types::FullScreen:
+        locationType = "fullscreen";
+        break;
+    case Plasma::Types::TopEdge:
+        locationType = "topedge";
+        break;
+    case Plasma::Types::BottomEdge:
+        locationType = "bottomedge";
+        break;
+    case Plasma::Types::RightEdge:
+        locationType = "rightedge";
+        break;
+    case Plasma::Types::LeftEdge:
+        locationType = "leftedge";
+        break;
     }
 
     addLocation(locationType);
@@ -297,15 +297,13 @@ ViewerCorona *View::createCorona()
 
 void View::takeScreenShot()
 {
-    QDBusInterface interface(QStringLiteral("org.kde.KWin"), QStringLiteral("/Screenshot"),
-                             QStringLiteral("org.kde.kwin.Screenshot"));
+    QDBusInterface interface(QStringLiteral("org.kde.KWin"), QStringLiteral("/Screenshot"), QStringLiteral("org.kde.kwin.Screenshot"));
 
-    QDBusPendingCall async = interface.asyncCall(QStringLiteral("screenshotArea"), x(), y(),
-                                                 width(), height());
+    QDBusPendingCall async = interface.asyncCall(QStringLiteral("screenshotArea"), x(), y(), width(), height());
 
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
 
-    connect(watcher,&QDBusPendingCallWatcher::finished, [](QDBusPendingCallWatcher *call) {
+    connect(watcher, &QDBusPendingCallWatcher::finished, [](QDBusPendingCallWatcher *call) {
         QDBusPendingReply<QString> reply = *call;
         call->deleteLater();
 
@@ -314,8 +312,7 @@ void View::takeScreenShot()
             return;
         }
 
-        QString dest = QFileDialog::getSaveFileName(nullptr, i18nc("@title:window", "Save Screenshot"),
-                                                    QDir::homePath(), QStringLiteral("Images (*.png)"));
+        QString dest = QFileDialog::getSaveFileName(nullptr, i18nc("@title:window", "Save Screenshot"), QDir::homePath(), QStringLiteral("Images (*.png)"));
 
         if (dest.isEmpty()) {
             return;

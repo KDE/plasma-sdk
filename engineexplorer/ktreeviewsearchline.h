@@ -30,11 +30,10 @@ class KTreeViewSearchLine : public KLineEdit
 {
     Q_OBJECT
 
-    Q_PROPERTY( Qt::CaseSensitivity caseSensitity READ caseSensitivity WRITE setCaseSensitivity )
-    Q_PROPERTY( bool keepParentsVisible READ keepParentsVisible WRITE setKeepParentsVisible )
+    Q_PROPERTY(Qt::CaseSensitivity caseSensitity READ caseSensitivity WRITE setCaseSensitivity)
+    Q_PROPERTY(bool keepParentsVisible READ keepParentsVisible WRITE setKeepParentsVisible)
 
-
-  public:
+public:
     /**
      * Constructs a KTreeViewSearchLine with \a treeView being the QTreeView to
      * be filtered.
@@ -42,7 +41,7 @@ class KTreeViewSearchLine : public KLineEdit
      * If \a treeView is null then the widget will be disabled until listviews
      * are set with setTreeView(), setTreeViews() or added with addTreeView().
      */
-    explicit KTreeViewSearchLine( QWidget *parent = nullptr, QTreeView *treeView = nullptr );
+    explicit KTreeViewSearchLine(QWidget *parent = nullptr, QTreeView *treeView = nullptr);
 
     /**
      * Constructs a KTreeViewSearchLine with \a treeViews being the list of
@@ -51,8 +50,7 @@ class KTreeViewSearchLine : public KLineEdit
      * If \a treeViews is empty then the widget will be disabled until listviews
      * are set with setTreeView(), setTreeViews() or added with addTreeView().
      */
-    KTreeViewSearchLine( QWidget *parent, const QList<QTreeView *> &treeViews );
-
+    KTreeViewSearchLine(QWidget *parent, const QList<QTreeView *> &treeViews);
 
     /**
      * Destroys the KTreeViewSearchLine.
@@ -98,14 +96,14 @@ class KTreeViewSearchLine : public KLineEdit
      */
     QList<QTreeView *> treeViews() const;
 
-  public Q_SLOTS:
+public Q_SLOTS:
     /**
      * Adds a QTreeView to the list of listviews filtered by this search line.
      * If \a treeView is null then the widget will be disabled.
      *
      * @see treeView(), setTreeViews(), removeTreeView()
      */
-    void addTreeView( QTreeView *treeView );
+    void addTreeView(QTreeView *treeView);
 
     /**
      * Removes a QTreeView from the list of listviews filtered by this search
@@ -114,20 +112,20 @@ class KTreeViewSearchLine : public KLineEdit
      *
      * @see listVew(), setTreeView(), addTreeView()
      */
-    void removeTreeView( QTreeView *treeView );
+    void removeTreeView(QTreeView *treeView);
 
     /**
      * Updates search to only make visible the items that match \a pattern.  If
      * \a s is null then the line edit's text will be used.
      */
-    virtual void updateSearch( const QString &pattern = QString() );
+    virtual void updateSearch(const QString &pattern = QString());
 
     /**
      * Make the search case sensitive or case insensitive.
      *
      * @see caseSenstivity()
      */
-    void setCaseSensitivity( Qt::CaseSensitivity caseSensitivity );
+    void setCaseSensitivity(Qt::CaseSensitivity caseSensitivity);
 
     /**
      * When a search is active on a list that's organized into a tree view if
@@ -139,7 +137,7 @@ class KTreeViewSearchLine : public KLineEdit
      *
      * @see keepParentsVisible
      */
-    void setKeepParentsVisible( bool value );
+    void setKeepParentsVisible(bool value);
 
     /**
      * Sets the list of columns to be searched.  The default is to search all,
@@ -150,7 +148,7 @@ class KTreeViewSearchLine : public KLineEdit
      *
      * @see searchColumns
      */
-    void setSearchColumns( const QList<int> &columns );
+    void setSearchColumns(const QList<int> &columns);
 
     /**
      * Sets the QTreeView that is filtered by this search line, replacing any
@@ -159,7 +157,7 @@ class KTreeViewSearchLine : public KLineEdit
      *
      * @see treeView(), setTreeViews()
      */
-    void setTreeView( QTreeView *treeView );
+    void setTreeView(QTreeView *treeView);
 
     /**
      * Sets QTreeViews that are filtered by this search line, replacing any
@@ -168,14 +166,14 @@ class KTreeViewSearchLine : public KLineEdit
      *
      * @see treeViews(), addTreeView(), setTreeView()
      */
-    void setTreeViews( const QList<QTreeView *> &treeViews );
+    void setTreeViews(const QList<QTreeView *> &treeViews);
 
     /**
      * Returns true if \a item matches the search \a pattern.  This will be evaluated
      * based on the value of caseSensitive().  This can be overridden in
      * subclasses to implement more complicated matching schemes.
      */
-    virtual bool itemMatches( const QModelIndex &item, int row, const QString &pattern ) const;
+    virtual bool itemMatches(const QModelIndex &item, int row, const QString &pattern) const;
 
     /**
      * Checks columns in all listviews and decides whether choosing columns to
@@ -193,31 +191,30 @@ class KTreeViewSearchLine : public KLineEdit
      */
     virtual bool canChooseColumnsCheck();
 
-
-  protected:
+protected:
     /**
-    * Re-implemented for internal reasons.  API not affected.
-    */
-    void contextMenuEvent( QContextMenuEvent* ) override;
+     * Re-implemented for internal reasons.  API not affected.
+     */
+    void contextMenuEvent(QContextMenuEvent *) override;
 
     /**
      * Updates search to only make visible appropriate items in \a treeView.  If
      * \a treeView is null then nothing is done.
      */
-    virtual void updateSearch( QTreeView *treeView );
+    virtual void updateSearch(QTreeView *treeView);
 
     /**
      * Connects signals of this listview to the appropriate Q_SLOTS of the search
      * line.
      */
-    virtual void connectTreeView( QTreeView* );
+    virtual void connectTreeView(QTreeView *);
 
     /**
      * Disconnects signals of a listviews from the search line.
      */
-    virtual void disconnectTreeView( QTreeView* );
+    virtual void disconnectTreeView(QTreeView *);
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     /**
      * When keys are pressed a new search string is created and a timer is
      * activated.  The most recent search is activated when this timer runs out
@@ -231,7 +228,7 @@ class KTreeViewSearchLine : public KLineEdit
      *
      * @see activateSearch()
      */
-    void queueSearch( const QString &search );
+    void queueSearch(const QString &search);
 
     /**
      * When the timer started with queueSearch() expires this slot is called.
@@ -243,16 +240,16 @@ class KTreeViewSearchLine : public KLineEdit
      */
     void activateSearch();
 
-  private:
-    KTreeViewSearchLinePrivate* const d;
+private:
+    KTreeViewSearchLinePrivate *const d;
 
-    //Q_PRIVATE_SLOT( d, void rowsInserted( const QModelIndex&, int, int ) const )
-    Q_PRIVATE_SLOT( d, void treeViewDeleted( QObject* ) )
-    Q_PRIVATE_SLOT( d, void slotColumnActivated( QAction* ) )
-    Q_PRIVATE_SLOT( d, void slotAllVisibleColumns() )
+    // Q_PRIVATE_SLOT( d, void rowsInserted( const QModelIndex&, int, int ) const )
+    Q_PRIVATE_SLOT(d, void treeViewDeleted(QObject *))
+    Q_PRIVATE_SLOT(d, void slotColumnActivated(QAction *))
+    Q_PRIVATE_SLOT(d, void slotAllVisibleColumns())
 
-  private Q_SLOTS:
-    void rowsInserted(const QModelIndex & parent, int start, int end) const;
+private Q_SLOTS:
+    void rowsInserted(const QModelIndex &parent, int start, int end) const;
 };
 
 /**
@@ -263,12 +260,12 @@ class KTreeViewSearchLineWidget : public QWidget
 {
     Q_OBJECT
 
-  public:
+public:
     /**
      * Creates a KTreeViewSearchLineWidget for \a treeView with \a parent as the
      * parent.
      */
-    explicit KTreeViewSearchLineWidget( QWidget *parent = nullptr, QTreeView *treeView = nullptr );
+    explicit KTreeViewSearchLineWidget(QWidget *parent = nullptr, QTreeView *treeView = nullptr);
 
     /**
      * Destroys the KTreeViewSearchLineWidget
@@ -280,7 +277,7 @@ class KTreeViewSearchLineWidget : public QWidget
      */
     KTreeViewSearchLine *searchLine() const;
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     /**
      * Creates the widgets inside of the widget.  This is called from the
      * constructor via a single shot timer so that it it guaranteed to run
@@ -289,7 +286,7 @@ class KTreeViewSearchLineWidget : public QWidget
      */
     virtual void createWidgets();
 
-  protected:
+protected:
     /**
      * Creates the search line.  This can be useful to reimplement in cases where
      * a KTreeViewSearchLine subclass is used.
@@ -297,10 +294,10 @@ class KTreeViewSearchLineWidget : public QWidget
      * It is const because it is be called from searchLine(), which to the user
      * doesn't conceptually alter the widget.
      */
-    virtual KTreeViewSearchLine *createSearchLine( QTreeView *treeView ) const;
+    virtual KTreeViewSearchLine *createSearchLine(QTreeView *treeView) const;
 
-  private:
-    KTreeViewSearchLineWidgetPrivate* const d;
+private:
+    KTreeViewSearchLineWidgetPrivate *const d;
 };
 
 #endif

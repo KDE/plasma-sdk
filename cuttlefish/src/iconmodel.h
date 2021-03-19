@@ -8,15 +8,14 @@
 #define CUTTLEFISHICONMODEL_H
 
 #include <QAbstractListModel>
+#include <QFileInfo>
 #include <QJsonArray>
 #include <QJsonObject>
-#include <QFileInfo>
-#include <QVariantMap>
 #include <QVariantList>
+#include <QVariantMap>
 
-namespace CuttleFish {
-
-
+namespace CuttleFish
+{
 class IconModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -39,7 +38,7 @@ public:
 
     explicit IconModel(QObject *parent = nullptr);
 
-    Q_INVOKABLE QVariantList inOtherThemes(const QString& iconName, int size);
+    Q_INVOKABLE QVariantList inOtherThemes(const QString &iconName, int size);
 
     QHash<int, QByteArray> roleNames() const override;
     int rowCount(const QModelIndex &parent) const override;
@@ -57,7 +56,6 @@ public:
     void load();
 
     Q_INVOKABLE void output(const QString &text);
-
 
 Q_SIGNALS:
     void categoriesChanged();

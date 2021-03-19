@@ -6,22 +6,22 @@
 
 #include "iconmodel.h"
 
-#include <QDebug>
 #include <QByteArray>
 #include <QDateTime>
+#include <QDebug>
 #include <QDir>
 #include <QDirIterator>
 #include <QElapsedTimer>
 #include <QFile>
 #include <QIcon>
-#include <QStandardPaths>
 #include <QJsonDocument>
+#include <QStandardPaths>
 
 #include <KConfigGroup>
 #include <KIconLoader>
 #include <KIconTheme>
-#include <KSharedConfig>
 #include <KPackage/PackageLoader>
+#include <KSharedConfig>
 
 #include <algorithm>
 #include <cstring>
@@ -31,8 +31,8 @@ using namespace CuttleFish;
 
 static QTextStream cout(stdout);
 
-IconModel::IconModel(QObject *parent) :
-    QAbstractListModel(parent)
+IconModel::IconModel(QObject *parent)
+    : QAbstractListModel(parent)
     , m_loading(false)
 {
     m_roleNames.insert(FileName, "fileName");
@@ -45,23 +45,22 @@ IconModel::IconModel(QObject *parent) :
     m_roleNames.insert(Theme, "iconTheme");
     m_roleNames.insert(Type, "type");
 
-    m_categories = QStringList() << "all" \
-        << "actions"
-        << "animations"
-        << "apps"
-        << "categories"
-        << "devices"
-        << "emblems"
-        << "emotes"
-        << "filesystems"
-        << "international"
-        << "mimetypes"
-        << "places"
-        << "status";
+    m_categories = QStringList() << "all"
+                                 << "actions"
+                                 << "animations"
+                                 << "apps"
+                                 << "categories"
+                                 << "devices"
+                                 << "emblems"
+                                 << "emotes"
+                                 << "filesystems"
+                                 << "international"
+                                 << "mimetypes"
+                                 << "places"
+                                 << "status";
 
     load();
 }
-
 
 QHash<int, QByteArray> IconModel::roleNames() const
 {
@@ -122,7 +121,6 @@ void IconModel::add(const QFileInfo &info, const QString &cat)
     }
     QVariantMap &data = m_data[icon];
     if (!m_icons.contains(icon)) {
-
         data["fullPath"] = info.absoluteFilePath();
         data["iconName"] = icon;
         data["fileName"] = info.fileName();
@@ -139,12 +137,12 @@ void IconModel::add(const QFileInfo &info, const QString &cat)
 
     QStringList _s = info.path().split('/');
     if (_s.count() > 2) {
-        QString size = _s[_s.count()-2]; // last but one is size, last is category
+        QString size = _s[_s.count() - 2]; // last but one is size, last is category
         if (size.indexOf("x") > 1) {
             size = size.split("x")[0];
             QStringList sizes = data["sizes"].toStringList();
             if (!sizes.contains(size)) {
-                //qDebug() << "Size added" <<  sizes << size << data["iconName"];
+                // qDebug() << "Size added" <<  sizes << size << data["iconName"];
                 sizes << size;
                 data["sizes"] = sizes;
             }
@@ -159,7 +157,7 @@ QStringList IconModel::categories() const
 
 void IconModel::load()
 {
-    //qDebug() << "\n -- Loading (category / filter) : " << m_category << m_filter;
+    // qDebug() << "\n -- Loading (category / filter) : " << m_category << m_filter;
     m_loading = true;
     emit loadingChanged();
 
@@ -171,7 +169,7 @@ void IconModel::load()
     beginResetModel();
     m_data.clear();
     m_icons.clear();
-    //sm_categories.clear();
+    // sm_categories.clear();
     QString iconTheme;
     if (KIconLoader::global()) {
         iconTheme = KIconLoader::global()->theme()->internalName();
@@ -218,13 +216,13 @@ void IconModel::load()
     emit loadingChanged();
 }
 
-QString IconModel::categoryFromPath(const QString& path)
+QString IconModel::categoryFromPath(const QString &path)
 {
     QStringList cats;
     Q_FOREACH (auto c, m_categories) {
         cats << c.toLower();
     }
-    //cats << "actions" << "apps" << "places" << "status";
+    // cats << "actions" << "apps" << "places" << "status";
     const QStringList _p1 = path.split("/icons/");
     if (_p1.count() > 1) {
         foreach (const QString &cat, cats) {
@@ -241,17 +239,17 @@ bool IconModel::loading()
     return m_loading;
 }
 
-void IconModel::output(const QString& text)
+void IconModel::output(const QString &text)
 {
     cout << text.toLocal8Bit();
     cout.flush();
 }
 
-QVariantList IconModel::inOtherThemes(const QString& name, int iconSize)
+QVariantList IconModel::inOtherThemes(const QString &name, int iconSize)
 {
     QVariantList list;
     const QStringList themes = KIconTheme::list();
-    for (const auto& themeName : themes) {
+    for (const auto &themeName : themes) {
         const KIconTheme theme(themeName);
         const QString iconPath = theme.iconPathByName(name, iconSize, KIconLoader::MatchBest);
         list.append(QVariantMap({{"themeName", themeName}, {"iconPath", iconPath}}));

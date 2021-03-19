@@ -6,12 +6,12 @@
 
 // Qt
 #include <QApplication>
-#include <QCommandLineParser>
 #include <QCommandLineOption>
+#include <QCommandLineParser>
 #include <QDebug>
-#include <QQmlEngine>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QQmlEngine>
 
 // Frameworks
 #include <KConfigGroup>
@@ -28,9 +28,9 @@
 void messageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     if ((msg.contains("qt.svg") && msg.contains("Could not resolve property: #linearGradient")) || msg.contains("Could not resolve property: #pattern")) {
-      return;
+        return;
     }
-    
+
     QByteArray localMsg = msg.toLocal8Bit();
     const char *file = context.file ? context.file : "";
     const char *function = context.function ? context.function : "";
@@ -68,16 +68,13 @@ int main(int argc, char **argv)
     app.setApplicationName("Cuttlefish");
 
     const static auto _category = QStringLiteral("category");
-    QCommandLineOption category = QCommandLineOption(QStringList() << QStringLiteral("c") << _category,
-                               i18n("Start with category"), i18n("category"));
+    QCommandLineOption category = QCommandLineOption(QStringList() << QStringLiteral("c") << _category, i18n("Start with category"), i18n("category"));
 
     const static auto _f = QStringLiteral("fullscreen");
-    QCommandLineOption fullscreen = QCommandLineOption(QStringList() << QStringLiteral("f") << _f,
-                               i18n("Start full-screen"));
+    QCommandLineOption fullscreen = QCommandLineOption(QStringList() << QStringLiteral("f") << _f, i18n("Start full-screen"));
 
     const static auto _p = QStringLiteral("picker");
-    QCommandLineOption picker = QCommandLineOption(QStringList() << QStringLiteral("p") << _p,
-                               i18n("Run in icon-picker mode"));
+    QCommandLineOption picker = QCommandLineOption(QStringList() << QStringLiteral("p") << _p, i18n("Run in icon-picker mode"));
 
     QCommandLineParser parser;
     parser.addVersionOption();

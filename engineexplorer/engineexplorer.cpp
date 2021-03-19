@@ -7,18 +7,17 @@
 #include "engineexplorer.h"
 
 #include <QApplication>
-#include <QStandardItemModel>
-#include <QBitmap>
 #include <QBitArray>
+#include <QBitmap>
 #include <QDialogButtonBox>
 #include <QMenu>
+#include <QStandardItemModel>
 #include <QUrl>
 
-#include <KStandardAction>
-#include <KStringHandler>
-#include <KPluginMetaData>
 #include <KLocalizedString>
 #include <KPluginMetaData>
+#include <KStandardAction>
+#include <KStringHandler>
 #include <QAction>
 #include <QDateTime>
 
@@ -30,16 +29,16 @@ Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 #include "serviceviewer.h"
 #include "titlecombobox.h"
 
-EngineExplorer::EngineExplorer(QWidget* parent)
-    : QDialog(parent),
-      m_engine(nullptr),
-      m_sourceCount(0),
-      m_requestingSource(false),
-      m_expandButton(new QPushButton(i18n("Expand All"), this)),
-      m_collapseButton(new QPushButton(i18n("Collapse All"), this))
+EngineExplorer::EngineExplorer(QWidget *parent)
+    : QDialog(parent)
+    , m_engine(nullptr)
+    , m_sourceCount(0)
+    , m_requestingSource(false)
+    , m_expandButton(new QPushButton(i18n("Expand All"), this))
+    , m_collapseButton(new QPushButton(i18n("Collapse All"), this))
 {
     setWindowTitle(i18n("Plasma Engine Explorer"));
-    QWidget* mainWidget = new QWidget(this);
+    QWidget *mainWidget = new QWidget(this);
 
     QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
     buttonBox->addButton(m_expandButton, QDialogButtonBox::ActionRole);
@@ -78,8 +77,7 @@ EngineExplorer::EngineExplorer(QWidget* parent)
 
     addAction(KStandardAction::quit(qApp, SLOT(quit()), this));
 
-    connect(m_data, &QWidget::customContextMenuRequested,
-            this, &EngineExplorer::showDataContextMenu);
+    connect(m_data, &QWidget::customContextMenuRequested, this, &EngineExplorer::showDataContextMenu);
     m_data->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(qApp, &QCoreApplication::aboutToQuit, this, &EngineExplorer::cleanUp);
 }
@@ -91,7 +89,7 @@ EngineExplorer::~EngineExplorer()
 void EngineExplorer::cleanUp()
 {
     if (!m_engineName.isEmpty()) {
-        //m_engineManager->unloadEngine(m_engineName);
+        // m_engineManager->unloadEngine(m_engineName);
     }
 }
 
@@ -106,7 +104,7 @@ void EngineExplorer::setApp(const QString &app)
 
 void EngineExplorer::setEngine(const QString &engine)
 {
-    //find the engine in the combo box
+    // find the engine in the combo box
     const int index = m_engines->findText(engine);
     if (index != -1) {
         qDebug() << QString("Engine %1 found!").arg(engine);
@@ -120,15 +118,15 @@ void EngineExplorer::setInterval(const int interval)
     m_updateInterval->setValue(interval);
 }
 
-void EngineExplorer::dataUpdated(const QString& source, const Plasma::DataEngine::Data& data)
+void EngineExplorer::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
-    QList<QStandardItem*> items = m_dataModel->findItems(source, Qt::MatchExactly);
+    QList<QStandardItem *> items = m_dataModel->findItems(source, Qt::MatchExactly);
 
     if (items.isEmpty()) {
         return;
     }
 
-    QStandardItem* parent = items.first();
+    QStandardItem *parent = items.first();
 
     int rows = showData(parent, data);
 
@@ -158,7 +156,7 @@ void EngineExplorer::listEngines()
     m_engines->setCurrentIndex(-1);
 }
 
-void EngineExplorer::showEngine(const QString& name)
+void EngineExplorer::showEngine(const QString &name)
 {
     m_sourceRequester->setEnabled(false);
     m_sourceRequesterButton->setEnabled(false);
@@ -174,7 +172,7 @@ void EngineExplorer::showEngine(const QString& name)
     m_sourceCount = 0;
 
     if (!m_engineName.isEmpty()) {
-        //m_engineManager->unloadEngine(m_engineName);
+        // m_engineManager->unloadEngine(m_engineName);
     }
 
     m_engineName = name;
@@ -190,12 +188,12 @@ void EngineExplorer::showEngine(const QString& name)
         return;
     }
 
-    //qDebug() << "showing engine " << m_engine->objectName();
-    //qDebug() << "we have " << sources.count() << " data sources";
+    // qDebug() << "showing engine " << m_engine->objectName();
+    // qDebug() << "we have " << sources.count() << " data sources";
     connect(m_engine, &Plasma::DataEngine::sourceAdded, this, &EngineExplorer::addSource);
     connect(m_engine, &Plasma::DataEngine::sourceRemoved, this, &EngineExplorer::removeSource);
-    foreach (const QString& source, m_engine->sources()) {
-        //qDebug() << "adding " << source;
+    foreach (const QString &source, m_engine->sources()) {
+        // qDebug() << "adding " << source;
         addSource(source);
     }
 
@@ -208,21 +206,21 @@ void EngineExplorer::showEngine(const QString& name)
     updateTitle();
 }
 
-void EngineExplorer::addSource(const QString& source)
+void EngineExplorer::addSource(const QString &source)
 {
-    //qDebug() << "adding" << source;
-    QList<QStandardItem*> items = m_dataModel->findItems(source, Qt::MatchExactly);
+    // qDebug() << "adding" << source;
+    QList<QStandardItem *> items = m_dataModel->findItems(source, Qt::MatchExactly);
     if (!items.isEmpty()) {
-        //qDebug() << "er... already there?";
+        // qDebug() << "er... already there?";
         return;
     }
 
-    QStandardItem* parent = new QStandardItem(source);
+    QStandardItem *parent = new QStandardItem(source);
     m_dataModel->appendRow(parent);
 
-    //qDebug() << "getting data for source " << source;
+    // qDebug() << "getting data for source " << source;
     if (!m_requestingSource || m_sourceRequester->text() != source) {
-        //qDebug() << "connecting up now";
+        // qDebug() << "connecting up now";
         m_engine->connectSource(source, this);
     }
 
@@ -232,15 +230,15 @@ void EngineExplorer::addSource(const QString& source)
     enableButtons(true);
 }
 
-void EngineExplorer::removeSource(const QString& source)
+void EngineExplorer::removeSource(const QString &source)
 {
-    QList<QStandardItem*> items = m_dataModel->findItems(source, Qt::MatchExactly);
+    QList<QStandardItem *> items = m_dataModel->findItems(source, Qt::MatchExactly);
 
     if (items.count() < 1) {
         return;
     }
 
-    foreach (QStandardItem* item, items) {
+    foreach (QStandardItem *item, items) {
         m_dataModel->removeRow(item->row());
     }
 
@@ -301,7 +299,7 @@ void EngineExplorer::showDataContextMenu(const QPoint &point)
             viewer->show();
         } else if (activated == update) {
             m_engine->connectSource(source, this);
-            //Plasma::DataEngine::Data data = m_engine->query(source);
+            // Plasma::DataEngine::Data data = m_engine->query(source);
         } else if (activated == remove) {
             removeSource(source);
         }
@@ -310,132 +308,129 @@ void EngineExplorer::showDataContextMenu(const QPoint &point)
 
 QString EngineExplorer::convertToString(const QVariant &value)
 {
-    switch (value.type())
-    {
-        case QVariant::BitArray: {
-            return i18np("<1 bit>", "<%1 bits>", value.toBitArray().size());
+    switch (value.type()) {
+    case QVariant::BitArray: {
+        return i18np("<1 bit>", "<%1 bits>", value.toBitArray().size());
+    }
+    case QVariant::Bitmap: {
+        QBitmap bitmap = value.value<QBitmap>();
+        return QString("<%1x%2px - %3bpp>").arg(bitmap.width()).arg(bitmap.height()).arg(bitmap.depth());
+    }
+    case QVariant::ByteArray: {
+        // Return the array size if it is not displayable
+        if (value.toString().isEmpty()) {
+            return i18np("<1 byte>", "<%1 bytes>", value.toByteArray().size());
+        } else {
+            return value.toString();
         }
-        case QVariant::Bitmap: {
-            QBitmap bitmap = value.value<QBitmap>();
-            return QString("<%1x%2px - %3bpp>").arg(bitmap.width()).arg(bitmap.height()).arg(bitmap.depth());
+    }
+    case QVariant::Image: {
+        QImage image = value.value<QImage>();
+        return QString("<%1x%2px - %3bpp>").arg(image.width()).arg(image.height()).arg(image.depth());
+    }
+    case QVariant::Line: {
+        QLine line = value.toLine();
+        return QString("<x1:%1, y1:%2, x2:%3, y2:%4>").arg(line.x1()).arg(line.y1()).arg(line.x2()).arg(line.y2());
+    }
+    case QVariant::LineF: {
+        QLineF lineF = value.toLineF();
+        return QString("<x1:%1, y1:%2, x2:%3, y2:%4>").arg(lineF.x1()).arg(lineF.y1()).arg(lineF.x2()).arg(lineF.y2());
+    }
+    case QVariant::Locale: {
+        return QString("%1").arg(value.toLocale().name());
+    }
+    case QVariant::Map: {
+        QVariantMap map = value.toMap();
+        QString str = i18np("<1 item>", "<%1 items>", map.size());
+
+        QMapIterator<QString, QVariant> it(map);
+        while (it.hasNext()) {
+            it.next();
+            str += "\n" + it.key() + ": " + convertToString(it.value());
         }
-        case QVariant::ByteArray: {
-            // Return the array size if it is not displayable
-            if (value.toString().isEmpty()) {
-                return i18np("<1 byte>", "<%1 bytes>", value.toByteArray().size());
+
+        return str;
+    }
+    case QVariant::Pixmap: {
+        QPixmap pixmap = value.value<QPixmap>();
+        return QString("<%1x%2px - %3bpp>").arg(pixmap.width()).arg(pixmap.height()).arg(pixmap.depth());
+    }
+    case QVariant::Point: {
+        QPoint point = value.toPoint();
+        return QString("<x:%1, y:%2>").arg(point.x()).arg(point.y());
+    }
+    case QVariant::PointF: {
+        QPointF pointF = value.toPointF();
+        return QString("<x:%1, y:%2>").arg(pointF.x()).arg(pointF.y());
+    }
+    case QVariant::Rect: {
+        QRect rect = value.toRect();
+        return QString("<x:%1, y:%2, w:%3, h:%4>").arg(rect.x()).arg(rect.y()).arg(rect.width()).arg(rect.height());
+    }
+    case QVariant::RectF: {
+        QRectF rectF = value.toRectF();
+        return QString("<x:%1, y:%2, w:%3, h:%4>").arg(rectF.x()).arg(rectF.y()).arg(rectF.width()).arg(rectF.height());
+    }
+    case QVariant::RegExp: {
+        return QString("%1").arg(value.toRegExp().pattern());
+    }
+    case QVariant::Region: {
+        QRect region = value.value<QRegion>().boundingRect();
+        return QString("<x:%1, y:%2, w:%3, h:%4>").arg(region.x()).arg(region.y()).arg(region.width()).arg(region.height());
+    }
+    case QVariant::Size: {
+        QSize size = value.toSize();
+        return QString("<w:%1, h:%2>").arg(size.width()).arg(size.height());
+    }
+    case QVariant::SizeF: {
+        QSizeF sizeF = value.toSizeF();
+        return QString("<w:%1, h:%2>").arg(sizeF.width()).arg(sizeF.height());
+    }
+    case QVariant::Url: {
+        return QString("%1").arg(value.toUrl().toString());
+    }
+    case QVariant::StringList: {
+        return QString("%1").arg(value.toStringList().join(", "));
+    }
+    case QVariant::Date: {
+        return QString("%1").arg(value.toDate().toString());
+    }
+    case QVariant::DateTime: {
+        return QString("%1").arg(value.toDateTime().toString());
+    }
+    case QVariant::Time: {
+        return QString("%1").arg(value.toTime().toString());
+    }
+    default: {
+        if (QLatin1String(value.typeName()) == "QDateTime") {
+            return QString("%1").arg(value.value<QDateTime>().toString());
+        }
+
+        Plasma::DataEngine::Data data = value.value<Plasma::DataEngine::Data>();
+        if (!data.isEmpty()) {
+            QStringList result;
+            QMapIterator<QString, QVariant> it(data);
+
+            while (it.hasNext()) {
+                it.next();
+                result << (it.key() + ": " + convertToString(it.value()));
             }
-            else {
+
+            return result.join("\n");
+        } else if (value.canConvert(QVariant::String)) {
+            if (value.toString().isEmpty()) {
+                return i18nc("The user did a query to a dataengine and it returned empty data", "<empty>");
+            } else {
                 return value.toString();
             }
         }
-        case QVariant::Image: {
-            QImage image = value.value<QImage>();
-            return QString("<%1x%2px - %3bpp>").arg(image.width()).arg(image.height()).arg(image.depth());
-        }
-        case QVariant::Line: {
-           QLine line = value.toLine();
-           return QString("<x1:%1, y1:%2, x2:%3, y2:%4>").arg(line.x1()).arg(line.y1()).arg(line.x2()).arg(line.y2());
-        }
-        case QVariant::LineF: {
-           QLineF lineF = value.toLineF();
-           return QString("<x1:%1, y1:%2, x2:%3, y2:%4>").arg(lineF.x1()).arg(lineF.y1()).arg(lineF.x2()).arg(lineF.y2());
-        }
-        case QVariant::Locale: {
-            return QString("%1").arg(value.toLocale().name());
-        }
-        case QVariant::Map: {
-            QVariantMap map = value.toMap();
-            QString str = i18np("<1 item>", "<%1 items>", map.size());
 
-            QMapIterator<QString, QVariant> it(map);
-            while (it.hasNext()) {
-                it.next();
-                str += "\n" + it.key() + ": " + convertToString(it.value());
-            }
-
-            return str;
-        }
-        case QVariant::Pixmap: {
-            QPixmap pixmap = value.value<QPixmap>();
-            return QString("<%1x%2px - %3bpp>").arg(pixmap.width()).arg(pixmap.height()).arg(pixmap.depth());
-        }
-        case QVariant::Point: {
-           QPoint point = value.toPoint();
-           return QString("<x:%1, y:%2>").arg(point.x()).arg(point.y());
-        }
-        case QVariant::PointF: {
-           QPointF pointF = value.toPointF();
-           return QString("<x:%1, y:%2>").arg(pointF.x()).arg(pointF.y());
-        }
-        case QVariant::Rect: {
-            QRect rect = value.toRect();
-            return QString("<x:%1, y:%2, w:%3, h:%4>").arg(rect.x()).arg(rect.y()).arg(rect.width()).arg(rect.height());
-        }
-        case QVariant::RectF: {
-            QRectF rectF = value.toRectF();
-            return QString("<x:%1, y:%2, w:%3, h:%4>").arg(rectF.x()).arg(rectF.y()).arg(rectF.width()).arg(rectF.height());
-        }
-        case QVariant::RegExp: {
-            return QString("%1").arg(value.toRegExp().pattern());
-        }
-        case QVariant::Region: {
-            QRect region = value.value<QRegion>().boundingRect();
-            return QString("<x:%1, y:%2, w:%3, h:%4>").arg(region.x()).arg(region.y()).arg(region.width()).arg(region.height());
-        }
-        case QVariant::Size: {
-            QSize size = value.toSize();
-            return QString("<w:%1, h:%2>").arg(size.width()).arg(size.height());
-        }
-        case QVariant::SizeF: {
-            QSizeF sizeF = value.toSizeF();
-            return QString("<w:%1, h:%2>").arg(sizeF.width()).arg(sizeF.height());
-        }
-        case QVariant::Url: {
-            return QString("%1").arg(value.toUrl().toString());
-        }
-        case QVariant::StringList: {
-            return QString("%1").arg(value.toStringList().join(", "));
-        }
-        case QVariant::Date: {
-            return QString("%1").arg(value.toDate().toString());
-        }
-        case QVariant::DateTime: {
-            return QString("%1").arg(value.toDateTime().toString());
-        }
-        case QVariant::Time: {
-            return QString("%1").arg(value.toTime().toString());
-        }
-        default: {
-            if (QLatin1String(value.typeName()) == "QDateTime") {
-                return QString("%1").arg(value.value<QDateTime>().toString());
-            }
-
-            Plasma::DataEngine::Data data = value.value<Plasma::DataEngine::Data>();
-            if (!data.isEmpty()) {
-                QStringList result;
-                QMapIterator<QString, QVariant> it(data);
-
-                while (it.hasNext()) {
-                    it.next();
-                    result << (it.key() + ": " + convertToString(it.value()));
-                }
-
-                return result.join("\n");
-            } else if (value.canConvert(QVariant::String)) {
-                if (value.toString().isEmpty()) {
-                    return i18nc("The user did a query to a dataengine and it returned empty data", "<empty>");
-                }
-                else {
-                    return value.toString();
-                }
-            }
-
-            return i18nc("A the dataengine returned something that the humble view on the engineexplorer can't display, like a picture", "<not displayable>");
-        }
+        return i18nc("A the dataengine returned something that the humble view on the engineexplorer can't display, like a picture", "<not displayable>");
+    }
     }
 }
 
-int EngineExplorer::showData(QStandardItem* parent, Plasma::DataEngine::Data data)
+int EngineExplorer::showData(QStandardItem *parent, Plasma::DataEngine::Data data)
 {
     int rowCount = 0;
     Plasma::DataEngine::DataIterator it(data);
@@ -484,10 +479,10 @@ void EngineExplorer::updateTitle()
         return;
     }
 
-    m_title->setText(ki18ncp("The name of the engine followed by the number of data sources",
-                             "%1 Engine - 1 data source", "%1 Engine - %2 data sources")
-                              .subs(KStringHandler::capwords(m_engine->metadata().name()))
-                              .subs(m_sourceCount).toString());
+    m_title->setText(ki18ncp("The name of the engine followed by the number of data sources", "%1 Engine - 1 data source", "%1 Engine - %2 data sources")
+                         .subs(KStringHandler::capwords(m_engine->metadata().name()))
+                         .subs(m_sourceCount)
+                         .toString());
 
     if (m_engine->metadata().iconName().isEmpty()) {
         m_title->setIcon(QIcon::fromTheme("plasma"));
@@ -506,4 +501,3 @@ void EngineExplorer::enableButtons(bool enable)
         m_collapseButton->setEnabled(enable);
     }
 }
-

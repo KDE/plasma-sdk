@@ -21,13 +21,12 @@ ColorSchemes::ColorSchemes(QObject *parent)
 {
 }
 
-QAbstractItemModel* CuttleFish::ColorSchemes::colorSchemes()
+QAbstractItemModel *CuttleFish::ColorSchemes::colorSchemes()
 {
     return m_colorManager->model();
 }
 
-void ColorSchemes::activateColorScheme(const QString& name)
+void ColorSchemes::activateColorScheme(const QString &name)
 {
     m_colorManager->activateScheme(m_colorManager->indexForScheme(name));
 }
-

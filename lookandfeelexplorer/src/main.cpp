@@ -4,24 +4,24 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#include <QApplication>
-#include "lnflogic.h"
 #include "lnflistmodel.h"
+#include "lnflogic.h"
+#include <QApplication>
 
-#include <klocalizedstring.h>
-#include <qcommandlineparser.h>
-#include <qcommandlineoption.h>
 #include <QQuickItem>
+#include <klocalizedstring.h>
+#include <qcommandlineoption.h>
+#include <qcommandlineparser.h>
 
-#include <kpackage/package.h>
-#include <kpackage/packageloader.h>
+#include <KAboutData>
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQmlExpression>
 #include <QQmlProperty>
 #include <QQuickWindow>
 #include <kdeclarative/qmlobject.h>
-#include <KAboutData>
+#include <kpackage/package.h>
+#include <kpackage/packageloader.h>
 
 int main(int argc, char **argv)
 {
@@ -33,7 +33,10 @@ int main(int argc, char **argv)
     parser.addHelpOption();
     parser.setApplicationDescription(i18n("Plasma Look And Feel Explorer"));
 
-    QCommandLineOption themeOption(QCommandLineOption(QStringList() << "l" << "lookandfeel", i18n("Look And Feel to open"), "lookandfeel"));
+    QCommandLineOption themeOption(QCommandLineOption(QStringList() << "l"
+                                                                    << "lookandfeel",
+                                                      i18n("Look And Feel to open"),
+                                                      "lookandfeel"));
 
     parser.addOption(themeOption);
 
@@ -41,7 +44,7 @@ int main(int argc, char **argv)
 
     const QString packagePath("org.kde.plasma.lookandfeelexplorer");
 
-    //usually we have an ApplicationWindow here, so we do not need to create a window by ourselves
+    // usually we have an ApplicationWindow here, so we do not need to create a window by ourselves
     KDeclarative::QmlObject obj;
     obj.setTranslationDomain(packagePath);
     obj.setInitializationDelayed(true);
@@ -74,8 +77,8 @@ int main(int argc, char **argv)
         aboutData.addAuthor(author.name(), author.task(), author.emailAddress(), author.webAddress(), author.ocsUsername());
     }
 
-    //The root is not a window?
-    //have to use a normal QQuickWindow since the root item is already created
+    // The root is not a window?
+    // have to use a normal QQuickWindow since the root item is already created
     QWindow *window = qobject_cast<QWindow *>(obj.rootObject());
     if (window) {
         window->setTitle(obj.package().metadata().name());
@@ -86,4 +89,3 @@ int main(int argc, char **argv)
 
     return app.exec();
 }
-

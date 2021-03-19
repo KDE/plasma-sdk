@@ -7,30 +7,30 @@
 #include "lnflogic.h"
 #include "lnflistmodel.h"
 
+#include <QDebug>
 #include <QDir>
 #include <QFile>
 #include <QFileDialog>
-#include <QDebug>
 #include <QStandardPaths>
 #include <QUrl>
 
-#include <QDBusMessage>
 #include <QDBusConnection>
+#include <QDBusMessage>
 #include <QDBusPendingCall>
 #include <QDBusPendingCallWatcher>
 
+#include <KAboutData>
 #include <KConfig>
 #include <KConfigGroup>
-#include <KPackage/PackageLoader>
-#include <KAboutData>
-#include <KSharedConfig>
 #include <KLocalizedString>
+#include <KPackage/PackageLoader>
+#include <KSharedConfig>
 
 LnfLogic::LnfLogic(QObject *parent)
-    : QObject(parent),
-      m_themeName(QStringLiteral("org.kde.breeze.desktop")),
-      m_lnfListModel(new LnfListModel(this)),
-      m_needsSave(false)
+    : QObject(parent)
+    , m_themeName(QStringLiteral("org.kde.breeze.desktop"))
+    , m_lnfListModel(new LnfListModel(this))
+    , m_needsSave(false)
 {
     m_package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/LookAndFeel"));
 }
@@ -39,9 +39,16 @@ LnfLogic::~LnfLogic()
 {
 }
 
-void LnfLogic::createNewTheme(const QString &pluginName, const QString &name, const QString &comment, const QString &author, const QString &email, const QString &license, const QString &website)
+void LnfLogic::createNewTheme(const QString &pluginName,
+                              const QString &name,
+                              const QString &comment,
+                              const QString &author,
+                              const QString &email,
+                              const QString &license,
+                              const QString &website)
 {
-    const QString metadataPath(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/look-and-feel/") % pluginName % QLatin1String("/metadata.desktop"));
+    const QString metadataPath(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/look-and-feel/") % pluginName
+                               % QLatin1String("/metadata.desktop"));
     KConfig c(metadataPath);
 
     KConfigGroup cg(&c, "Desktop Entry");
@@ -66,14 +73,12 @@ void LnfLogic::createNewTheme(const QString &pluginName, const QString &name, co
 
 void LnfLogic::dumpPlasmaLayout(const QString &pluginName)
 {
-    QDBusMessage message = QDBusMessage::createMethodCall("org.kde.plasmashell", "/PlasmaShell",
-                                                     "org.kde.PlasmaShell", "dumpCurrentLayoutJS");
+    QDBusMessage message = QDBusMessage::createMethodCall("org.kde.plasmashell", "/PlasmaShell", "org.kde.PlasmaShell", "dumpCurrentLayoutJS");
     QDBusPendingCall pcall = QDBusConnection::sessionBus().asyncCall(message);
 
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pcall, this);
 
-    QObject::connect(watcher, &QDBusPendingCallWatcher::finished,
-                     this, [=](QDBusPendingCallWatcher *watcher) {
+    QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [=](QDBusPendingCallWatcher *watcher) {
         const QDBusMessage &msg = watcher->reply();
         watcher->deleteLater();
         if (watcher->isError()) {
@@ -89,7 +94,8 @@ void LnfLogic::dumpPlasmaLayout(const QString &pluginName)
             return;
         }
 
-        QFile layoutFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/look-and-feel/") % pluginName % QLatin1String("/contents/layouts/org.kde.plasma.desktop-layout.js"));
+        QFile layoutFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/look-and-feel/") % pluginName
+                         % QLatin1String("/contents/layouts/org.kde.plasma.desktop-layout.js"));
         if (layoutFile.open(QIODevice::WriteOnly)) {
             layoutFile.write(layout.toUtf8());
             layoutFile.close();
@@ -104,35 +110,36 @@ void LnfLogic::dumpPlasmaLayout(const QString &pluginName)
 
 void LnfLogic::dumpDefaultsConfigFile(const QString &pluginName)
 {
-    //write the defaults file, read from kde config files and save to the defaultsrc
-    KConfig defaultsConfig(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/look-and-feel/") % pluginName % "/contents/defaults");
+    // write the defaults file, read from kde config files and save to the defaultsrc
+    KConfig defaultsConfig(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/look-and-feel/") % pluginName
+                           % "/contents/defaults");
 
     KConfigGroup defaultsConfigGroup(&defaultsConfig, "kdeglobals");
     defaultsConfigGroup = KConfigGroup(&defaultsConfigGroup, "KDE");
 
-    //widget style
+    // widget style
     KConfigGroup systemCG(KSharedConfig::openConfig(QStringLiteral("kdeglobals")), "KDE");
     defaultsConfigGroup.writeEntry("widgetStyle", systemCG.readEntry("widgetStyle", QStringLiteral("breeze")));
 
-    //color scheme (TODO: create an in-place color scheme?)
+    // color scheme (TODO: create an in-place color scheme?)
     defaultsConfigGroup = KConfigGroup(&defaultsConfig, "kdeglobals");
     defaultsConfigGroup = KConfigGroup(&defaultsConfigGroup, "General");
     systemCG = KConfigGroup(KSharedConfig::openConfig(QStringLiteral("kdeglobals")), "General");
     defaultsConfigGroup.writeEntry("ColorScheme", systemCG.readEntry("ColorScheme", QStringLiteral("Breeze")));
 
-    //plasma theme
+    // plasma theme
     defaultsConfigGroup = KConfigGroup(&defaultsConfig, "plasmarc");
     defaultsConfigGroup = KConfigGroup(&defaultsConfigGroup, "Theme");
     systemCG = KConfigGroup(KSharedConfig::openConfig(QStringLiteral("plasmarc")), "Theme");
     defaultsConfigGroup.writeEntry("name", systemCG.readEntry("name", QStringLiteral("default")));
 
-    //cursor theme
+    // cursor theme
     defaultsConfigGroup = KConfigGroup(&defaultsConfig, "kcminputrc");
     defaultsConfigGroup = KConfigGroup(&defaultsConfigGroup, "Mouse");
     systemCG = KConfigGroup(KSharedConfig::openConfig(QStringLiteral("kcminputrc")), "Mouse");
     defaultsConfigGroup.writeEntry("cursorTheme", systemCG.readEntry("cursorTheme", QStringLiteral("breeze_cursors")));
 
-    //KWin window switcher theme
+    // KWin window switcher theme
     systemCG = KConfigGroup(KSharedConfig::openConfig(QStringLiteral("kwinrc")), "TabBox");
     defaultsConfigGroup = KConfigGroup(&defaultsConfig, "kwinrc");
     defaultsConfigGroup = KConfigGroup(&defaultsConfigGroup, "WindowSwitcher");
@@ -178,7 +185,7 @@ void LnfLogic::save()
 
     emit needsSaveChanged();
 
-    //HACK
+    // HACK
     m_package.setPath(QString());
     m_package.setPath(m_themeName);
 }
@@ -203,7 +210,7 @@ QString LnfLogic::theme() const
     return m_themeName;
 }
 
-void LnfLogic::setTheme(const QString& theme)
+void LnfLogic::setTheme(const QString &theme)
 {
     if (theme == m_themeName) {
         return;
@@ -411,7 +418,7 @@ bool LnfLogic::needsSave()
 
 QString LnfLogic::thumbnailPath() const
 {
-    //don't fallback
+    // don't fallback
     QString path = m_package.filePath("previews", QStringLiteral("preview.png"));
     if (path.contains(m_package.path())) {
         return path;
@@ -431,7 +438,8 @@ void LnfLogic::processThumbnail(const QString &path)
         qWarning() << "Impossible to create the layouts directory in the look and feel package";
     }
 
-    QFile imageFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/look-and-feel/") % m_themeName % QLatin1String("/contents/previews/preview.png"));
+    QFile imageFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/look-and-feel/") % m_themeName
+                    % QLatin1String("/contents/previews/preview.png"));
     if (!imageFile.open(QIODevice::WriteOnly)) {
         qWarning() << "Impossible to write to the thumbnail file";
         return;
@@ -447,8 +455,9 @@ void LnfLogic::processThumbnail(const QString &path)
     image.save(&imageFile, "PNG"); // writes image into ba in PNG format
     imageFile.close();
 
-    //copy the fullscreen preview
-    QFile fullScreenImageFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/look-and-feel/") % m_themeName % QLatin1String("/contents/previews/fullscreenpreview.jpg"));
+    // copy the fullscreen preview
+    QFile fullScreenImageFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/look-and-feel/") % m_themeName
+                              % QLatin1String("/contents/previews/fullscreenpreview.jpg"));
     if (!fullScreenImageFile.open(QIODevice::WriteOnly)) {
         qWarning() << "Impossible to write to the thumbnail file";
         return;
@@ -469,7 +478,9 @@ void LnfLogic::processThumbnail(const QString &path)
 QString LnfLogic::openFile()
 {
     return QFileDialog::getOpenFileName(nullptr,
-    i18n("Open Image"), QStandardPaths::writableLocation(QStandardPaths::HomeLocation), i18n("Image Files (*.png *.jpg *.bmp)"));
+                                        i18n("Open Image"),
+                                        QStandardPaths::writableLocation(QStandardPaths::HomeLocation),
+                                        i18n("Image Files (*.png *.jpg *.bmp)"));
 }
 
 #include "moc_lnflogic.cpp"

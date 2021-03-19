@@ -8,8 +8,8 @@
 #ifndef MODELVIEWER
 #define MODELVIEWER
 
-#include <QDialog>
 #include <QAbstractItemDelegate>
+#include <QDialog>
 #include <QStyleOptionViewItem>
 
 class QAbstractItemModel;
@@ -17,7 +17,7 @@ class QTreeView;
 
 namespace Plasma
 {
-    class DataEngine;
+class DataEngine;
 } // namespace Plasma
 
 class Delegate : public QAbstractItemDelegate
@@ -28,12 +28,10 @@ public:
     explicit Delegate(QObject *parent = nullptr);
     ~Delegate() override;
 
-    void paint(QPainter *painter, const QStyleOptionViewItem &option,
-               const QModelIndex &index) const override;
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
 protected:
-    QSize sizeHint(const QStyleOptionViewItem &option,
-                   const QModelIndex &index) const override;
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 };
 
 class ModelViewer : public QDialog
@@ -55,4 +53,3 @@ private:
 };
 
 #endif
-

@@ -7,11 +7,11 @@
 
 #include "modelviewer.h"
 
-#include <QDebug>
-#include <QDialogButtonBox>
+#include <KLocalizedString>
 #include <KMessageBox>
 #include <KStringHandler>
-#include <KLocalizedString>
+#include <QDebug>
+#include <QDialogButtonBox>
 
 #include <Plasma/DataEngine>
 #include <Plasma/Service>
@@ -22,15 +22,13 @@
 Delegate::Delegate(QObject *parent)
     : QAbstractItemDelegate(parent)
 {
-
 }
 
 Delegate::~Delegate()
 {
 }
 
-void Delegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
-           const QModelIndex &index) const
+void Delegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     if (!index.model()) {
         return;
@@ -46,36 +44,33 @@ void Delegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
     int i = 2;
     foreach (int role, index.model()->roleNames().keys()) {
         const QString text = index.model()->roleNames().value(role) + QLatin1String(": ");
-        painter->drawText(option.rect.x() + maxWidth - fm.boundingRect(text).width(), option.rect.y() + i*fm.height(), text);
+        painter->drawText(option.rect.x() + maxWidth - fm.boundingRect(text).width(), option.rect.y() + i * fm.height(), text);
 
         if (index.data(role).canConvert<QIcon>()) {
-            index.data(role).value<QIcon>().paint(painter, option.rect.x() + maxWidth, option.rect.y() + (i-1)*fm.height(), 16, 16);
+            index.data(role).value<QIcon>().paint(painter, option.rect.x() + maxWidth, option.rect.y() + (i - 1) * fm.height(), 16, 16);
         } else if (!index.data(role).isValid()) {
-            painter->drawText(option.rect.x() + maxWidth, option.rect.y() + i*fm.height(), "null");
+            painter->drawText(option.rect.x() + maxWidth, option.rect.y() + i * fm.height(), "null");
         } else {
-            painter->drawText(option.rect.x() + maxWidth, option.rect.y() + i*fm.height(), index.data(role).toString());
+            painter->drawText(option.rect.x() + maxWidth, option.rect.y() + i * fm.height(), index.data(role).toString());
         }
         ++i;
     }
 }
 
-
-QSize Delegate::sizeHint(const QStyleOptionViewItem &option,
-               const QModelIndex &index) const
+QSize Delegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     if (!index.model()) {
         return QSize();
     }
 
     QFontMetrics fm(option.font);
-    return QSize(fm.boundingRect("M").width() * 50, fm.height() * (index.model()->roleNames().count()+2));
+    return QSize(fm.boundingRect("M").width() * 50, fm.height() * (index.model()->roleNames().count() + 2));
 }
 
-
 ModelViewer::ModelViewer(Plasma::DataEngine *engine, const QString &source, QWidget *parent)
-    : QDialog(parent),
-      m_engine(engine),
-      m_source(source)
+    : QDialog(parent)
+    , m_engine(engine)
+    , m_source(source)
 {
     setAttribute(Qt::WA_DeleteOnClose);
     m_view = new QTreeView(this);
@@ -110,7 +105,6 @@ ModelViewer::~ModelViewer()
     m_engine = nullptr;
 }
 
-
 void ModelViewer::engineDestroyed()
 {
     m_model = nullptr;
@@ -118,5 +112,3 @@ void ModelViewer::engineDestroyed()
     hide();
     deleteLater();
 }
-
-

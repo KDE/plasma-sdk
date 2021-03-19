@@ -7,22 +7,20 @@
 #include <QTest>
 
 #include <QDebug>
-#include <QJsonDocument>
 #include <QFileInfo>
 #include <QJsonArray>
+#include <QJsonDocument>
 #include <QJsonObject>
 #include <QSignalSpy>
 
 #include "iconmodel.h"
 #include "sortfiltermodel.h"
 
-
 using namespace CuttleFish;
 
 class IconModelTest : public QObject
 {
     Q_OBJECT
-
 
 private Q_SLOTS:
 
@@ -39,9 +37,7 @@ private Q_SLOTS:
         delete m_proxyModel;
     }
 
-    void initTestCase()
-    {
-    };
+    void initTestCase(){};
 
     void testCategoryFilter()
     {
@@ -62,18 +58,13 @@ private Q_SLOTS:
         QVERIFY(_alledit >= _editactions);
     }
 
-
-
 private: // disable from here for testing just the above
-
-
 private:
     QJsonArray m_data;
     QJsonArray m_empty;
 
-    IconModel* m_iconModel;
-    SortFilterModel* m_proxyModel;
-
+    IconModel *m_iconModel;
+    SortFilterModel *m_proxyModel;
 };
 
 QTEST_MAIN(IconModelTest)

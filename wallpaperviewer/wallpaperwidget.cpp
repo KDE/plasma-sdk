@@ -16,18 +16,18 @@
 #include <QVBoxLayout>
 #include <QWheelEvent>
 
+#include <KAction>
 #include <KDebug>
 #include <KDialog>
 #include <KGlobal>
 #include <KStandardAction>
-#include <KAction>
 
 #include <Plasma/Wallpaper>
 
 WallpaperWidget::WallpaperWidget(const QString &paper, const QString &mode, QWidget *parent)
-    : QWidget(parent),
-      m_wallpaper(Plasma::Wallpaper::load(paper)),
-      m_configDialog(0)
+    : QWidget(parent)
+    , m_wallpaper(Plasma::Wallpaper::load(paper))
+    , m_configDialog(0)
 {
     if (m_wallpaper) {
         if (!mode.isEmpty()) {
@@ -223,7 +223,7 @@ void WallpaperWidget::configure()
             // delayed paper initialization
             m_wallpaper->restore(configGroup());
         }
-        
+
         if (!m_configDialog) {
             m_configDialog = new KDialog(this);
             m_configDialog->setCaption(i18n("Configure %1 Wallpaper", m_wallpaper->name()));
@@ -275,5 +275,3 @@ KConfigGroup WallpaperWidget::configGroup()
 
     return wallpaperConfig;
 }
-
-

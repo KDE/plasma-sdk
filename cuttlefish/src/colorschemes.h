@@ -14,22 +14,23 @@ class QAbstractItemModel;
 
 class KColorSchemeManager;
 
-namespace CuttleFish {
-class ColorSchemes : public QObject {
-
+namespace CuttleFish
+{
+class ColorSchemes : public QObject
+{
     Q_OBJECT
 
-    Q_PROPERTY(QAbstractItemModel *colorSchemes READ  colorSchemes CONSTANT)
+    Q_PROPERTY(QAbstractItemModel *colorSchemes READ colorSchemes CONSTANT)
 
 public:
     Q_INVOKABLE void activateColorScheme(const QString &name);
 
     ColorSchemes(QObject *parent);
 
-    QAbstractItemModel* colorSchemes();
+    QAbstractItemModel *colorSchemes();
 
 private:
-    KColorSchemeManager* m_colorManager;
+    KColorSchemeManager *m_colorManager;
 };
 }
 #endif

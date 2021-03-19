@@ -6,11 +6,11 @@
 
 #include "serviceviewer.h"
 
-#include <QDebug>
-#include <QDialogButtonBox>
+#include <KLocalizedString>
 #include <KMessageBox>
 #include <KStringHandler>
-#include <KLocalizedString>
+#include <QDebug>
+#include <QDialogButtonBox>
 
 #include <Plasma/DataEngine>
 #include <Plasma/Service>
@@ -19,15 +19,15 @@
 #include "engineexplorer.h"
 
 ServiceViewer::ServiceViewer(Plasma::DataEngine *engine, const QString &source, QWidget *parent)
-    : QDialog(parent),
-      m_engine(engine),
-      m_service(nullptr),
-      m_source(source),
-      m_operationCount(0),
-      m_operationButton(new QPushButton(i18n("Start Operation"), this))
+    : QDialog(parent)
+    , m_engine(engine)
+    , m_service(nullptr)
+    , m_source(source)
+    , m_operationCount(0)
+    , m_operationButton(new QPushButton(i18n("Start Operation"), this))
 {
     setAttribute(Qt::WA_DeleteOnClose);
-    QWidget* mainWidget = new QWidget(this);
+    QWidget *mainWidget = new QWidget(this);
     QVBoxLayout *layout = new QVBoxLayout();
 
     QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
@@ -46,8 +46,7 @@ ServiceViewer::ServiceViewer(Plasma::DataEngine *engine, const QString &source, 
     connect(m_operationButton, &QAbstractButton::clicked, this, &ServiceViewer::startOperation);
     m_operationButton->setEnabled(false);
 
-    connect(m_operations, SIGNAL(currentIndexChanged(QString)),
-            this, SLOT(operationSelected(QString)));
+    connect(m_operations, SIGNAL(currentIndexChanged(QString)), this, SLOT(operationSelected(QString)));
 
     QString engineName = i18nc("Plasma engine with unknown name", "Unknown");
     QString serviceName = i18nc("Plasma service with unknown name", "Unknown");
@@ -72,7 +71,11 @@ ServiceViewer::ServiceViewer(Plasma::DataEngine *engine, const QString &source, 
 
     setWindowTitle(i18nc("%1 is a Plasma service name", "%1 Service Explorer", serviceName));
 
-    QString title = i18nc("Source: name of the data, Service: writes data instead of fetching", "DataEngine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>", engineName, m_source, serviceName);
+    QString title = i18nc("Source: name of the data, Service: writes data instead of fetching",
+                          "DataEngine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>",
+                          engineName,
+                          m_source,
+                          serviceName);
     m_title->setText(title);
     m_operations->setFocus();
 }
@@ -100,7 +103,7 @@ void ServiceViewer::updateOperations()
         if (!operations.isEmpty()) {
             enable = true;
 
-            foreach (const QString& operation, operations) {
+            foreach (const QString &operation, operations) {
                 m_operations->addItem(operation);
             }
         }
@@ -180,8 +183,11 @@ void ServiceViewer::operationResult(KJob *j)
     if (job->error()) {
         KMessageBox::information(this,
                                  i18n("<b>'%1'</b> operation with destination <b>'%2'</b> failed. "
-                                      "<p>The error was: <b>'%3: %4'</b></p>", job->operationName(), job->destination(),
-                                      job->error(), job->errorString()),
+                                      "<p>The error was: <b>'%3: %4'</b></p>",
+                                      job->operationName(),
+                                      job->destination(),
+                                      job->error(),
+                                      job->errorString()),
                                  i18n("Operation Result"));
     } else {
         QString result = EngineExplorer::convertToString(job->result());
@@ -191,8 +197,10 @@ void ServiceViewer::operationResult(KJob *j)
 
         KMessageBox::information(this,
                                  i18n("<b>'%1'</b> operation with destination <b>'%2'</b> returned successfully. "
-                                      "<p>The result was: <b>'%3'</b></p>", job->operationName(),
-                                      job->destination(), result),
+                                      "<p>The result was: <b>'%3'</b></p>",
+                                      job->operationName(),
+                                      job->destination(),
+                                      result),
                                  i18n("Operation Result"));
     }
 
@@ -219,4 +227,3 @@ void ServiceViewer::updateJobCount(int numberOfJobs)
         m_operationStatus->show();
     }
 }
-

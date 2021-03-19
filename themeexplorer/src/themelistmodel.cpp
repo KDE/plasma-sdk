@@ -27,8 +27,8 @@
 
 #include <QDebug>
 
-ThemeListModel::ThemeListModel( QObject *parent )
-: QAbstractListModel( parent )
+ThemeListModel::ThemeListModel(QObject *parent)
+    : QAbstractListModel(parent)
 {
     m_roleNames.insert(Qt::DisplayRole, "display");
     m_roleNames.insert(PackageNameRole, "packageNameRole");
@@ -66,9 +66,8 @@ void ThemeListModel::reload()
         const QDir cd(ppath);
         const QStringList &entries = cd.entryList(QDir::Dirs | QDir::Hidden);
         foreach (const QString pack, entries) {
-            const QString _metadata = ppath+QLatin1Char('/')+pack+QStringLiteral("/metadata.desktop");
-            if ((pack != "." && pack != "..") &&
-                (QFile::exists(_metadata))) {
+            const QString _metadata = ppath + QLatin1Char('/') + pack + QStringLiteral("/metadata.desktop");
+            if ((pack != "." && pack != "..") && (QFile::exists(_metadata))) {
                 themes << _metadata;
             }
         }
@@ -91,9 +90,8 @@ void ThemeListModel::reload()
             name = packageName;
         }
         const QString comment = df.readComment();
-        const QString author = df.desktopGroup().readEntry("X-KDE-PluginInfo-Author",QString());
-        const QString version = df.desktopGroup().readEntry("X-KDE-PluginInfo-Version",QString());
-
+        const QString author = df.desktopGroup().readEntry("X-KDE-PluginInfo-Author", QString());
+        const QString version = df.desktopGroup().readEntry("X-KDE-PluginInfo-Version", QString());
 
         ThemeInfo info;
         info.package = packageName;
@@ -129,18 +127,18 @@ QVariant ThemeListModel::data(const QModelIndex &index, int role) const
     }
 
     switch (role) {
-        case Qt::DisplayRole:
-            return it.key();
-        case PackageNameRole:
-            return (*it).package;
-        case PackageDescriptionRole:
-            return (*it).description;
-        case PackageAuthorRole:
-            return (*it).author;
-        case PackageVersionRole:
-            return (*it).version;
-        default:
-            return QVariant();
+    case Qt::DisplayRole:
+        return it.key();
+    case PackageNameRole:
+        return (*it).package;
+    case PackageDescriptionRole:
+        return (*it).description;
+    case PackageAuthorRole:
+        return (*it).author;
+    case PackageVersionRole:
+        return (*it).version;
+    default:
+        return QVariant();
     }
 }
 

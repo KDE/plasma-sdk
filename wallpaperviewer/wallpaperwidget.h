@@ -15,7 +15,7 @@ class KDialog;
 
 namespace Plasma
 {
-    class Wallpaper;
+class Wallpaper;
 } // namespace Plasma
 
 class WallpaperWidget : public QWidget
@@ -60,14 +60,14 @@ private:
 // WallpaperConfigWidget is passed the wallpaper
 // in createConfigurationInterface so it can notify
 // of changes (used to enable the apply button)
-class WallpaperConfigWidget :public QWidget
+class WallpaperConfigWidget : public QWidget
 {
     Q_OBJECT
 public:
-      WallpaperConfigWidget(QWidget *parent)
-          : QWidget(parent)
-      {
-      }
+    WallpaperConfigWidget(QWidget *parent)
+        : QWidget(parent)
+    {
+    }
 
 signals:
     void modified(bool isModified);
@@ -80,4 +80,3 @@ public slots:
 };
 
 #endif
-

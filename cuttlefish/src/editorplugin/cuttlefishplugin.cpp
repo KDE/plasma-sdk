@@ -17,8 +17,8 @@
 
 K_PLUGIN_FACTORY_WITH_JSON(CuttleFishPluginFactory, "cuttlefishplugin.json", registerPlugin<CuttleFishPlugin>();)
 
-CuttleFishPlugin::CuttleFishPlugin(QObject *parent, const QList<QVariant> &):
-    KTextEditor::Plugin(parent)
+CuttleFishPlugin::CuttleFishPlugin(QObject *parent, const QList<QVariant> &)
+    : KTextEditor::Plugin(parent)
 {
 }
 
@@ -29,28 +29,25 @@ CuttleFishPlugin::~CuttleFishPlugin()
 QObject *CuttleFishPlugin::createView(KTextEditor::MainWindow *mainWindow)
 {
     Q_UNUSED(mainWindow);
-    connect(KTextEditor::Editor::instance()->application(), &KTextEditor::Application::documentCreated,
-            this, &CuttleFishPlugin::documentCreated);
+    connect(KTextEditor::Editor::instance()->application(), &KTextEditor::Application::documentCreated, this, &CuttleFishPlugin::documentCreated);
     Q_FOREACH (auto doc, KTextEditor::Editor::instance()->application()->documents()) {
         documentCreated(doc);
     }
     return new QObject(this);
 }
 
-void CuttleFishPlugin::documentCreated(KTextEditor::Document* document)
+void CuttleFishPlugin::documentCreated(KTextEditor::Document *document)
 {
-    connect(document, &KTextEditor::Document::viewCreated,
-            this, &CuttleFishPlugin::viewCreated);
+    connect(document, &KTextEditor::Document::viewCreated, this, &CuttleFishPlugin::viewCreated);
 }
 
 void CuttleFishPlugin::viewCreated(KTextEditor::Document *document, KTextEditor::View *view)
 {
-     Q_UNUSED(document);
-     connect(view, &KTextEditor::View::contextMenuAboutToShow,
-             this, &CuttleFishPlugin::contextMenuAboutToShow);
+    Q_UNUSED(document);
+    connect(view, &KTextEditor::View::contextMenuAboutToShow, this, &CuttleFishPlugin::contextMenuAboutToShow);
 }
 
-void CuttleFishPlugin::contextMenuAboutToShow(KTextEditor::View* view, QMenu* menu)
+void CuttleFishPlugin::contextMenuAboutToShow(KTextEditor::View *view, QMenu *menu)
 {
     Q_UNUSED(view);
     if (m_decorated.contains(menu)) {
@@ -62,38 +59,30 @@ void CuttleFishPlugin::contextMenuAboutToShow(KTextEditor::View* view, QMenu* me
     action->setText(i18n("Insert Icon with Cuttlefish"));
     menu->addAction(action);
 
-    connect(action, &QAction::triggered,
-        [this] {
-            const QString cfexe = QStandardPaths::findExecutable("cuttlefish");
+    connect(action, &QAction::triggered, [this] {
+        const QString cfexe = QStandardPaths::findExecutable("cuttlefish");
 
-            QProcess *cuttlefish = new QProcess(this);
-            cuttlefish->setProgram(cfexe);
-            cuttlefish->setArguments(QStringList() << "--picker");
+        QProcess *cuttlefish = new QProcess(this);
+        cuttlefish->setProgram(cfexe);
+        cuttlefish->setArguments(QStringList() << "--picker");
 
-            connect(cuttlefish, &QProcess::readyReadStandardOutput,
-                [ cuttlefish]() {
-                    auto qba = cuttlefish->readAllStandardOutput();
-                    auto view = KTextEditor::Editor::instance()->application()->activeMainWindow()->activeView();
-                    if (view) {
-                        view->document()->insertText(view->cursorPosition(), QString::fromLocal8Bit(qba));
-                    }
-                    cuttlefish->terminate();
-                }
-            );
+        connect(cuttlefish, &QProcess::readyReadStandardOutput, [cuttlefish]() {
+            auto qba = cuttlefish->readAllStandardOutput();
+            auto view = KTextEditor::Editor::instance()->application()->activeMainWindow()->activeView();
+            if (view) {
+                view->document()->insertText(view->cursorPosition(), QString::fromLocal8Bit(qba));
+            }
+            cuttlefish->terminate();
+        });
 
-            connect(cuttlefish, &QProcess::stateChanged,
-                [cuttlefish](QProcess::ProcessState newState) {
-                    if (newState == QProcess::NotRunning &&
-                        KTextEditor::Editor::instance()->application()->activeMainWindow()) {
+        connect(cuttlefish, &QProcess::stateChanged, [cuttlefish](QProcess::ProcessState newState) {
+            if (newState == QProcess::NotRunning && KTextEditor::Editor::instance()->application()->activeMainWindow()) {
+                delete cuttlefish;
+            }
+        });
 
-                        delete cuttlefish;
-                    }
-                }
-            );
-
-            cuttlefish->start();
-        }
-    );
+        cuttlefish->start();
+    });
 }
 
 // required for CuttleFishPluginFactory vtable

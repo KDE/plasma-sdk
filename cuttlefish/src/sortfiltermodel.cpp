@@ -4,25 +4,22 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include "iconmodel.h"
 #include "sortfiltermodel.h"
+#include "iconmodel.h"
 
 using namespace CuttleFish;
 
 SortFilterModel::SortFilterModel(QObject *parent)
- : QSortFilterProxyModel(parent)
+    : QSortFilterProxyModel(parent)
 {
     setSortRole(IconModel::IconName);
     setSortCaseSensitivity(Qt::CaseInsensitive);
 }
 
-
-bool SortFilterModel::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
+bool SortFilterModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
-
     const QModelIndex sourceIndex = sourceModel()->index(source_row, 0, source_parent);
-    if (!(m_category.isEmpty() || m_category == QLatin1String("all"))
-        && (m_category != sourceIndex.data(IconModel::Category))) {
+    if (!(m_category.isEmpty() || m_category == QLatin1String("all")) && (m_category != sourceIndex.data(IconModel::Category))) {
         return false;
     }
     if (!m_filter.isEmpty()) {
@@ -33,7 +30,7 @@ bool SortFilterModel::filterAcceptsRow(int source_row, const QModelIndex& source
 
 int SortFilterModel::currentIndex()
 {
-    const QModelIndex index =  mapFromSource(m_currentSourceIndex);
+    const QModelIndex index = mapFromSource(m_currentSourceIndex);
     if (index.isValid()) {
         return index.row();
     }
@@ -47,7 +44,6 @@ void SortFilterModel::setCurrentIndex(int index)
         m_currentSourceIndex = mapToSource(this->index(index, 0));
         emit currentIndexChanged();
     }
-
 }
 
 QString SortFilterModel::category() const
@@ -58,7 +54,7 @@ QString SortFilterModel::category() const
 void SortFilterModel::setCategory(const QString &category)
 {
     if (category == m_category) {
-       return;
+        return;
     }
     int oldIndex = currentIndex();
     m_category = category;
@@ -74,7 +70,7 @@ QString SortFilterModel::filter() const
     return m_filter;
 }
 
-void SortFilterModel::setFilter(const QString& filter)
+void SortFilterModel::setFilter(const QString &filter)
 {
     if (filter == m_filter) {
         return;
@@ -87,5 +83,3 @@ void SortFilterModel::setFilter(const QString& filter)
         emit currentIndexChanged();
     }
 }
-
-

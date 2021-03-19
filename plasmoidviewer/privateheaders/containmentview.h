@@ -9,8 +9,8 @@
 
 #include <kquickaddons/quickviewsharedengine.h>
 
-#include "plasma/corona.h"
 #include "plasma/containment.h"
+#include "plasma/corona.h"
 
 //
 //  W A R N I N G
@@ -25,7 +25,6 @@
 
 namespace PlasmaQuick
 {
-
 class ContainmentViewPrivate;
 
 class ContainmentView : public KQuickAddons::QuickViewSharedEngine

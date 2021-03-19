@@ -6,9 +6,10 @@
 
 #include <QSortFilterProxyModel>
 
-namespace CuttleFish {
-
-class SortFilterModel : public QSortFilterProxyModel {
+namespace CuttleFish
+{
+class SortFilterModel : public QSortFilterProxyModel
+{
     Q_OBJECT
     Q_PROPERTY(QString filter READ filter WRITE setFilter NOTIFY filterChanged)
     Q_PROPERTY(QString category READ category WRITE setCategory NOTIFY categoryChanged)
@@ -30,7 +31,7 @@ Q_SIGNALS:
     void categoryChanged();
     void currentIndexChanged();
 
-private: 
+private:
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
 
     QString m_category;

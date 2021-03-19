@@ -109,7 +109,6 @@ void ColorEditor::setTheme(const QString &theme)
     load();
 }
 
-
 QColor ColorEditor::textColor() const
 {
     return m_textColor;
@@ -124,7 +123,6 @@ void ColorEditor::setTextColor(const QColor &color)
     m_textColor = color;
     emit colorsChanged();
 }
-
 
 QColor ColorEditor::highlightColor() const
 {
@@ -141,7 +139,6 @@ void ColorEditor::setHighlightColor(const QColor &color)
     emit colorsChanged();
 }
 
-
 QColor ColorEditor::backgroundColor() const
 {
     return m_backgroundColor;
@@ -156,7 +153,6 @@ void ColorEditor::setBackgroundColor(const QColor &color)
     m_backgroundColor = color;
     emit colorsChanged();
 }
-
 
 QColor ColorEditor::buttonTextColor() const
 {
@@ -173,7 +169,6 @@ void ColorEditor::setButtonTextColor(const QColor &color)
     emit colorsChanged();
 }
 
-
 QColor ColorEditor::buttonBackgroundColor() const
 {
     return m_buttonBackgroundColor;
@@ -188,7 +183,6 @@ void ColorEditor::setButtonBackgroundColor(const QColor &color)
     m_buttonBackgroundColor = color;
     emit colorsChanged();
 }
-
 
 QColor ColorEditor::linkColor() const
 {
@@ -205,7 +199,6 @@ void ColorEditor::setLinkColor(const QColor &color)
     emit colorsChanged();
 }
 
-
 QColor ColorEditor::visitedLinkColor() const
 {
     return m_visitedLinkColor;
@@ -220,7 +213,6 @@ void ColorEditor::setVisitedLinkColor(const QColor &color)
     m_visitedLinkColor = color;
     emit colorsChanged();
 }
-
 
 QColor ColorEditor::buttonHoverColor() const
 {
@@ -237,7 +229,6 @@ void ColorEditor::setButtonHoverColor(const QColor &color)
     emit colorsChanged();
 }
 
-
 QColor ColorEditor::buttonFocusColor() const
 {
     return m_buttonFocusColor;
@@ -252,7 +243,6 @@ void ColorEditor::setButtonFocusColor(const QColor &color)
     m_buttonFocusColor = color;
     emit colorsChanged();
 }
-
 
 QColor ColorEditor::viewTextColor() const
 {
@@ -269,7 +259,6 @@ void ColorEditor::setViewTextColor(const QColor &color)
     emit colorsChanged();
 }
 
-
 QColor ColorEditor::viewBackgroundColor() const
 {
     return m_viewBackgroundColor;
@@ -284,7 +273,6 @@ void ColorEditor::setViewBackgroundColor(const QColor &color)
     m_viewBackgroundColor = color;
     emit colorsChanged();
 }
-
 
 QColor ColorEditor::viewHoverColor() const
 {
@@ -301,7 +289,6 @@ void ColorEditor::setViewHoverColor(const QColor &color)
     emit colorsChanged();
 }
 
-
 QColor ColorEditor::viewFocusColor() const
 {
     return m_viewFocusColor;
@@ -316,7 +303,6 @@ void ColorEditor::setViewFocusColor(const QColor &color)
     m_viewFocusColor = color;
     emit colorsChanged();
 }
-
 
 QColor ColorEditor::complementaryTextColor() const
 {
@@ -333,7 +319,6 @@ void ColorEditor::setComplementaryTextColor(const QColor &color)
     emit colorsChanged();
 }
 
-
 QColor ColorEditor::complementaryBackgroundColor() const
 {
     return m_complementaryBackgroundColor;
@@ -348,7 +333,6 @@ void ColorEditor::setComplementaryBackgroundColor(const QColor &color)
     m_complementaryBackgroundColor = color;
     emit colorsChanged();
 }
-
 
 QColor ColorEditor::complementaryHoverColor() const
 {
@@ -365,7 +349,6 @@ void ColorEditor::setComplementaryHoverColor(const QColor &color)
     emit colorsChanged();
 }
 
-
 QColor ColorEditor::complementaryFocusColor() const
 {
     return m_complementaryFocusColor;
@@ -380,7 +363,5 @@ void ColorEditor::setComplementaryFocusColor(const QColor &color)
     m_complementaryFocusColor = color;
     emit colorsChanged();
 }
-
-
 
 #include "moc_coloreditor.cpp"

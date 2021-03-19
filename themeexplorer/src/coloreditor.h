@@ -7,14 +7,13 @@
 #ifndef COLOREDITOR_H
 #define COLOREDITOR_H
 
-#include <QObject>
 #include <QColor>
-
+#include <QObject>
 
 class ColorEditor : public QObject
 {
     Q_OBJECT
-    //Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
+    // Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
 
     Q_PROPERTY(QColor textColor READ textColor WRITE setTextColor NOTIFY colorsChanged)
     Q_PROPERTY(QColor highlightColor READ highlightColor WRITE setHighlightColor NOTIFY colorsChanged)
@@ -35,15 +34,14 @@ class ColorEditor : public QObject
     Q_PROPERTY(QColor complementaryTextColor READ complementaryTextColor WRITE setComplementaryTextColor NOTIFY colorsChanged)
     Q_PROPERTY(QColor complementaryBackgroundColor READ complementaryBackgroundColor WRITE setComplementaryBackgroundColor NOTIFY colorsChanged)
     Q_PROPERTY(QColor complementaryHoverColor READ complementaryHoverColor WRITE setComplementaryHoverColor NOTIFY colorsChanged)
-    Q_PROPERTY(QColor complementaryFocusColor READ complementaryFocusColor WRITE setComplementaryFocusColor NOTIFY colorsChanged) 
+    Q_PROPERTY(QColor complementaryFocusColor READ complementaryFocusColor WRITE setComplementaryFocusColor NOTIFY colorsChanged)
 public:
-
     explicit ColorEditor(QObject *parent = nullptr);
     ~ColorEditor() override;
 
     QString theme() const;
     void setTheme(const QString &theme);
-    
+
     QColor textColor() const;
     void setTextColor(const QColor &color);
 
@@ -94,7 +92,6 @@ public:
 
     QColor complementaryFocusColor() const;
     void setComplementaryFocusColor(const QColor &color);
-
 
     void load();
     Q_INVOKABLE void save();

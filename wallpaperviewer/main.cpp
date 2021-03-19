@@ -43,10 +43,10 @@ void listWallpapers()
 
         wallpapers.insert(name, comment);
 
-        const QList<KServiceAction>& modeActions = info.service()->actions();
+        const QList<KServiceAction> &modeActions = info.service()->actions();
         QStringList modeStrings;
         if (!modeActions.isEmpty()) {
-            foreach (const KServiceAction& mode, modeActions) {
+            foreach (const KServiceAction &mode, modeActions) {
                 modeStrings << mode.name();
             }
 
@@ -72,20 +72,21 @@ void listWallpapers()
 
         QString modeString = modes.value(it.key());
         if (!modeString.isEmpty()) {
-            std::cout << spaces.toLocal8Bit().data()
-                      << i18n("Modes: %1", modeString).toLocal8Bit().data() << std::endl;
+            std::cout << spaces.toLocal8Bit().data() << i18n("Modes: %1", modeString).toLocal8Bit().data() << std::endl;
         }
     }
 }
 
 int main(int argc, char **argv)
 {
-    KAboutData aboutData("plasmawallpaperviewer", 0, ki18n("Plasma Wallpaper Viewer"),
-                         version, ki18n(description), KAboutData::License_GPL,
+    KAboutData aboutData("plasmawallpaperviewer",
+                         0,
+                         ki18n("Plasma Wallpaper Viewer"),
+                         version,
+                         ki18n(description),
+                         KAboutData::License_GPL,
                          ki18n("(c) 2009, Aaron J. Seigo"));
-    aboutData.addAuthor(ki18n("Aaron J. Seigo"),
-                        ki18n( "Author and maintainer" ),
-                        "aseigo@kde.org");
+    aboutData.addAuthor(ki18n("Aaron J. Seigo"), ki18n("Author and maintainer"), "aseigo@kde.org");
 
     KCmdLineArgs::init(argc, argv, &aboutData);
 
@@ -126,7 +127,7 @@ int main(int argc, char **argv)
     }
 
     w.show();
-    if(args->isSet("configure")) {
+    if (args->isSet("configure")) {
         w.configure();
     }
     args->clear();

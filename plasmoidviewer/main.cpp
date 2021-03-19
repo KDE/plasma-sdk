@@ -8,15 +8,15 @@
 #include <QApplication>
 #include <QQmlDebuggingEnabler>
 
-#include <QPixmapCache>
-#include <QDebug>
 #include <KAboutData>
-#include <KLocalizedString>
 #include <KDBusService>
+#include <KLocalizedString>
 #include <KQuickAddons/QtQuickSettings>
+#include <QDebug>
+#include <QPixmapCache>
 
-#include <qcommandlineparser.h>
 #include <qcommandlineoption.h>
+#include <qcommandlineparser.h>
 
 #include "view.h"
 
@@ -40,30 +40,36 @@ int main(int argc, char **argv)
     parser.setApplicationDescription(i18n("Run Plasma widgets in their own window"));
 
     parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("c") << QStringLiteral("containment"),
-                i18n("The name of the containment plugin"), QStringLiteral("containment"), QStringLiteral("org.kde.desktopcontainment")));
-    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("a") << QStringLiteral("applet"),
-                i18n("The name of the applet plugin"), QStringLiteral("applet")));
+                                        i18n("The name of the containment plugin"),
+                                        QStringLiteral("containment"),
+                                        QStringLiteral("org.kde.desktopcontainment")));
+    parser.addOption(
+        QCommandLineOption(QStringList() << QStringLiteral("a") << QStringLiteral("applet"), i18n("The name of the applet plugin"), QStringLiteral("applet")));
     parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("f") << QStringLiteral("formfactor"),
-                i18n("The formfactor to use (horizontal, vertical, mediacenter, planar or application)"), QStringLiteral("formfactor"), QStringLiteral("planar")));
-    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("l") << QStringLiteral("location"),
-                i18n("The location constraint to start the Containment with (floating, desktop, fullscreen, topedge, bottomedge, leftedge, rightedge)"),
-                QStringLiteral("location"), QStringLiteral("floating")));
+                                        i18n("The formfactor to use (horizontal, vertical, mediacenter, planar or application)"),
+                                        QStringLiteral("formfactor"),
+                                        QStringLiteral("planar")));
+    parser.addOption(QCommandLineOption(
+        QStringList() << QStringLiteral("l") << QStringLiteral("location"),
+        i18n("The location constraint to start the Containment with (floating, desktop, fullscreen, topedge, bottomedge, leftedge, rightedge)"),
+        QStringLiteral("location"),
+        QStringLiteral("floating")));
 
     parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("x") << QStringLiteral("xPosition"),
-                i18n("Set the x position of the plasmoidviewer on the Plasma desktop"),
-                QStringLiteral("xPosition")));
+                                        i18n("Set the x position of the plasmoidviewer on the Plasma desktop"),
+                                        QStringLiteral("xPosition")));
     parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("y") << QStringLiteral("yPosition"),
-                i18n("Set the y position of the plasmoidviewer on the Plasma desktop"),
-                QStringLiteral("yPosition")));
+                                        i18n("Set the y position of the plasmoidviewer on the Plasma desktop"),
+                                        QStringLiteral("yPosition")));
     parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("s") << QStringLiteral("size"),
-                i18n("Set the window size of the plasmoidview"),
-                QStringLiteral("widthXheight")));
+                                        i18n("Set the window size of the plasmoidview"),
+                                        QStringLiteral("widthXheight")));
     parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("p") << QStringLiteral("pixmapcache"),
-                i18n("The size in kB to set the pixmap cache to"),
-                QStringLiteral("size")));
+                                        i18n("The size in kB to set the pixmap cache to"),
+                                        QStringLiteral("size")));
     parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("t") << QStringLiteral("theme"),
-                i18n("The name of the theme which the shell will use"),
-                QStringLiteral("themeName")));
+                                        i18n("The name of the theme which the shell will use"),
+                                        QStringLiteral("themeName")));
 
     parser.addPositionalArgument(QStringLiteral("externalData"), i18n("Data that should be passed to the applet as 'externalData' event"));
 
@@ -131,4 +137,3 @@ int main(int argc, char **argv)
 
     return app.exec();
 }
-

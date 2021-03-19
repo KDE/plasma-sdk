@@ -5,23 +5,23 @@
  */
 
 #include "thememodel.h"
-#include "themelistmodel.h"
 #include "coloreditor.h"
-#include <QDebug>
+#include "themelistmodel.h"
 #include <QByteArray>
+#include <QDebug>
 #include <QDir>
 #include <QDirIterator>
 #include <QFile>
 #include <QIcon>
 #include <QStandardPaths>
 
-#include <QXmlSimpleReader>
 #include <QXmlDefaultHandler>
 #include <QXmlInputSource>
+#include <QXmlSimpleReader>
 
 #include <KCompressionDevice>
-#include <KProcess>
 #include <KIO/Job>
+#include <KProcess>
 #include <KRun>
 
 #include <Plasma/Theme>
@@ -30,44 +30,42 @@ class IconsParserHandler : public QXmlDefaultHandler
 {
 public:
     IconsParserHandler();
-    bool startElement(const QString &namespaceURI, const QString &localName,
-                      const QString &qName, const QXmlAttributes &atts) override;
+    bool startElement(const QString &namespaceURI, const QString &localName, const QString &qName, const QXmlAttributes &atts) override;
     QStringList m_ids;
     QStringList m_prefixes;
 };
 
 IconsParserHandler::IconsParserHandler()
     : QXmlDefaultHandler()
-{}
+{
+}
 
-bool IconsParserHandler::startElement(const QString &namespaceURI, const QString &localName,
-                      const QString &qName, const QXmlAttributes &atts)
+bool IconsParserHandler::startElement(const QString &namespaceURI, const QString &localName, const QString &qName, const QXmlAttributes &atts)
 {
     Q_UNUSED(namespaceURI)
     Q_UNUSED(localName)
     Q_UNUSED(qName)
 
     const QString id = atts.value("id");
-    //qWarning() << "Start Element:"<<id;
+    // qWarning() << "Start Element:"<<id;
 
-    if (!id.isEmpty() && !id.contains(QRegExp("\\d\\d$")) &&
-        id != "base" && !id.contains("layer")) {
-        m_ids<<id;
+    if (!id.isEmpty() && !id.contains(QRegExp("\\d\\d$")) && id != "base" && !id.contains("layer")) {
+        m_ids << id;
     }
     if (id.endsWith(QLatin1String("-center")) && !id.contains("hint-")) {
-        //remove -center
+        // remove -center
         m_prefixes << id.mid(0, id.length() - 7);
     }
     return true;
 }
 
 ThemeModel::ThemeModel(const KPackage::Package &package, QObject *parent)
-    : QAbstractListModel(parent),
-      m_theme(new Plasma::Theme),
-      m_themeName(QStringLiteral("default")),
-      m_package(package),
-      m_themeListModel(new ThemeListModel(this)),
-      m_colorEditor(new ColorEditor(this))      
+    : QAbstractListModel(parent)
+    , m_theme(new Plasma::Theme)
+    , m_themeName(QStringLiteral("default"))
+    , m_package(package)
+    , m_themeListModel(new ThemeListModel(this))
+    , m_colorEditor(new ColorEditor(this))
 {
     m_theme->setUseGlobalSettings(false);
     m_theme->setThemeName(m_themeName);
@@ -129,18 +127,17 @@ QVariant ThemeModel::data(const QModelIndex &index, int role) const
     case SvgAbsolutePath: {
         QString path = m_theme->imagePath(value.value("imagePath").toString());
         if (!value.value("imagePath").toString().contains("translucent")) {
-             path = path.replace("translucent/", "");
+            path = path.replace("translucent/", "");
         }
         return path;
     }
     case IsWritable:
         return QFile::exists(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/plasma/desktoptheme/" + m_themeName);
     case IconElements:
-    case FrameSvgPrefixes:
-    {
+    case FrameSvgPrefixes: {
         QString path = m_theme->imagePath(value.value("imagePath").toString());
         if (!value.value("imagePath").toString().contains("translucent")) {
-             path = path.replace("translucent/", "");
+            path = path.replace("translucent/", "");
         }
         KCompressionDevice file(path, KCompressionDevice::GZip);
         if (!file.open(QIODevice::ReadOnly)) {
@@ -163,9 +160,6 @@ QVariant ThemeModel::data(const QModelIndex &index, int role) const
 
     return QVariant();
 }
-
-
-
 
 void ThemeModel::load()
 {
@@ -210,7 +204,7 @@ QString ThemeModel::website() const
     return m_theme->pluginInfo().website();
 }
 
-void ThemeModel::setTheme(const QString& theme)
+void ThemeModel::setTheme(const QString &theme)
 {
     if (theme == m_themeName) {
         return;
@@ -223,11 +217,11 @@ void ThemeModel::setTheme(const QString& theme)
     emit themeChanged();
 }
 
-void ThemeModel::editElement(const QString& imagePath)
+void ThemeModel::editElement(const QString &imagePath)
 {
     QString file = m_theme->imagePath(imagePath);
     if (!file.contains("translucent")) {
-            file = file.replace("translucent/", "");
+        file = file.replace("translucent/", "");
     }
 
     QString finalFile;
@@ -239,15 +233,15 @@ void ThemeModel::editElement(const QString& imagePath)
         const QString dirPath = QFileInfo(finalFile).absoluteDir().absolutePath();
         KIO::mkdir(QUrl::fromLocalFile(dirPath))->exec();
 
-        KIO::FileCopyJob *job = KIO::file_copy( QUrl::fromLocalFile(file), QUrl::fromLocalFile(finalFile) );
+        KIO::FileCopyJob *job = KIO::file_copy(QUrl::fromLocalFile(file), QUrl::fromLocalFile(finalFile));
         if (!job->exec()) {
             qWarning() << "Error copying" << file << "to" << finalFile;
         }
     }
 
-    //QProcess::startDetached("inkscape", QStringList() << finalFile);
+    // QProcess::startDetached("inkscape", QStringList() << finalFile);
     KProcess *process = new KProcess();
-    //TODO: don't use the script to not depend from bash/linux?
+    // TODO: don't use the script to not depend from bash/linux?
     process->setProgram("bash", QStringList() << m_package.filePath("scripts", "openInEditor.sh") << finalFile);
 
     connect(process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &ThemeModel::processFinished);
@@ -258,7 +252,8 @@ void ThemeModel::processFinished()
 {
     /*We increment the microversion of the theme: keeps track and will force the cache to be
       discarded in order to reload immediately the graphics*/
-    const QString metadataPath(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("plasma/desktoptheme/") % m_themeName % QLatin1String("/metadata.desktop")));
+    const QString metadataPath(
+        QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("plasma/desktoptheme/") % m_themeName % QLatin1String("/metadata.desktop")));
     KConfig c(metadataPath);
     KConfigGroup cg(&c, "Desktop Entry");
 
@@ -270,15 +265,17 @@ void ThemeModel::processFinished()
         version << QLatin1String("0");
     }
 
-    cg.writeEntry("X-KDE-PluginInfo-Version", QString(version.first() + QLatin1String(".") + version[1] + QLatin1String(".") + QString::number(version.last().toInt() + 1)));
+    cg.writeEntry("X-KDE-PluginInfo-Version",
+                  QString(version.first() + QLatin1String(".") + version[1] + QLatin1String(".") + QString::number(version.last().toInt() + 1)));
     cg.sync();
 }
 
-void ThemeModel::editThemeMetaData(const QString& name, const QString& author, const QString& email, const QString &license, const QString& website)
+void ThemeModel::editThemeMetaData(const QString &name, const QString &author, const QString &email, const QString &license, const QString &website)
 {
     QString compactName = name.toLower();
     compactName.replace(' ', QString());
-    const QString metadataPath(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/desktoptheme/") % compactName % QLatin1String("/metadata.desktop"));
+    const QString metadataPath(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/desktoptheme/") % compactName
+                               % QLatin1String("/metadata.desktop"));
     KConfig c(metadataPath);
 
     KConfigGroup cg(&c, "Desktop Entry");
@@ -301,28 +298,27 @@ void ThemeModel::editThemeMetaData(const QString& name, const QString& author, c
     cg2.sync();
 }
 
-void ThemeModel::createNewTheme(const QString& name, const QString& author, const QString& email, const QString &license, const QString& website)
+void ThemeModel::createNewTheme(const QString &name, const QString &author, const QString &email, const QString &license, const QString &website)
 {
     editThemeMetaData(name, author, email, license, website);
 
-    QString file = QStandardPaths::locate(QStandardPaths::GenericDataLocation, + "/plasma/desktoptheme/default/colors");
+    QString file = QStandardPaths::locate(QStandardPaths::GenericDataLocation, +"/plasma/desktoptheme/default/colors");
 
     QString compactName = name.toLower();
     compactName.replace(' ', QString());
     QString finalFile = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/plasma/desktoptheme/" + compactName + "/colors";
 
-    KIO::FileCopyJob *job = KIO::file_copy( QUrl::fromLocalFile(file), QUrl::fromLocalFile(finalFile) );
+    KIO::FileCopyJob *job = KIO::file_copy(QUrl::fromLocalFile(file), QUrl::fromLocalFile(finalFile));
     if (!job->exec()) {
         qWarning() << "Error copying" << file << "to" << finalFile;
     }
-
 
     m_themeListModel->reload();
 }
 
 QString ThemeModel::themeFolder()
 {
-    return QStandardPaths::locate(QStandardPaths::GenericDataLocation, + "plasma/desktoptheme/" + m_themeName, QStandardPaths::LocateDirectory);
+    return QStandardPaths::locate(QStandardPaths::GenericDataLocation, +"plasma/desktoptheme/" + m_themeName, QStandardPaths::LocateDirectory);
 }
 
 #include "moc_thememodel.cpp"
