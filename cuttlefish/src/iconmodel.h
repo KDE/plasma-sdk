@@ -34,7 +34,7 @@ public:
         Scalable,
         Sizes,
         Type,
-        Theme
+        Theme,
     };
 
     explicit IconModel(QObject *parent = nullptr);

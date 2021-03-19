@@ -39,11 +39,12 @@ class LnfListModel : public QAbstractListModel
     Q_OBJECT
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 public:
-    enum { PackageNameRole = Qt::UserRole,
-           PackageDescriptionRole = Qt::UserRole + 1,
-           PackageAuthorRole = Qt::UserRole + 2,
-           PackageVersionRole = Qt::UserRole + 3
-         };
+    enum {
+        PackageNameRole = Qt::UserRole,
+        PackageDescriptionRole = Qt::UserRole + 1,
+        PackageAuthorRole = Qt::UserRole + 2,
+        PackageVersionRole = Qt::UserRole + 3,
+    };
 
     explicit LnfListModel(QObject *parent = nullptr);
     ~LnfListModel() override;

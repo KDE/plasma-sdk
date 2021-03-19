@@ -439,8 +439,8 @@ int EngineExplorer::showData(QStandardItem* parent, Plasma::DataEngine::Data dat
 {
     int rowCount = 0;
     Plasma::DataEngine::DataIterator it(data);
-//    parent->insertRows(0, data.count());
-//    parent->setColumnCount(3);
+    // parent->insertRows(0, data.count());
+    // parent->setColumnCount(3);
     while (it.hasNext()) {
         it.next();
         parent->setChild(rowCount, 1, new QStandardItem(it.key()));

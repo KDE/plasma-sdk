@@ -43,7 +43,7 @@ public:
         SvgAbsolutePath,
         IsWritable,
         IconElements,
-        FrameSvgPrefixes
+        FrameSvgPrefixes,
     };
 
     explicit ThemeModel(const KPackage::Package &package, QObject *parent = nullptr);

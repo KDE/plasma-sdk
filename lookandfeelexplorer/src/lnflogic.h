@@ -39,7 +39,7 @@ class LnfLogic : public QObject
 public:
     enum ErrorLevel {
         Info,
-        Error
+        Error,
     };
     Q_ENUMS(ErrorLevel)
 

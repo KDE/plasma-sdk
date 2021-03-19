@@ -180,13 +180,17 @@ void IconModel::load()
     }
     QStringList searchPaths;
 
-    QStringList iconThemePaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("icons/") + iconTheme, QStandardPaths::LocateDirectory);
+    QStringList iconThemePaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, //
+                                                           QStringLiteral("icons/") + iconTheme,
+                                                           QStandardPaths::LocateDirectory);
 
     if (iconThemePaths.count() > 0) {
         searchPaths << iconThemePaths;
     }
 
-    QStringList hicolorThemePaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("icons/hicolor"), QStandardPaths::LocateDirectory);
+    QStringList hicolorThemePaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, //
+                                                              QStringLiteral("icons/hicolor"),
+                                                              QStandardPaths::LocateDirectory);
     if (hicolorThemePaths.count() > 0) {
         searchPaths << hicolorThemePaths;
     }
