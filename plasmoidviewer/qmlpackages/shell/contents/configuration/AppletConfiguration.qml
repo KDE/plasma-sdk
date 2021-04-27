@@ -1,39 +1,43 @@
 /*
  *  SPDX-FileCopyrightText: 2013 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2020 Nicolas Fella <nicolas.fella@gmx.de>
+ *  SPDX-FileCopyrightText: 2020 Carl Schwan <carlschwan@kde.org>
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.0
+import QtQuick 2.15
 import QtQuick.Dialogs 1.1
-import QtQuick.Controls 1.0 as QtControls
-import QtQuick.Layouts 1.0
+import QtQuick.Controls 2.3 as QtControls
+import QtQuick.Layouts 1.1
+import QtQuick.Window 2.2
+
+import org.kde.kirigami 2.14 as Kirigami
 import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.configuration 2.0
-import org.kde.kquickcontrolsaddons 2.0
 
-
-//TODO: all of this will be done with desktop components
 Rectangle {
     id: root
-    Layout.minimumWidth: units.gridUnit * 30
-    Layout.minimumHeight: units.gridUnit * 20
 
-//BEGIN properties
-    color: syspal.window
-    width: units.gridUnit * 40
-    height: units.gridUnit * 30
+    implicitWidth: PlasmaCore.Units.gridUnit * 40
+    implicitHeight: PlasmaCore.Units.gridUnit * 31
+
+    Layout.minimumWidth: PlasmaCore.Units.gridUnit * 40
+    Layout.minimumHeight: PlasmaCore.Units.gridUnit * 31
+
+    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
+    LayoutMirroring.childrenInherit: true
+
+    color: Kirigami.Theme.backgroundColor
 
     property bool isContainment: false
-//END properties
 
-//BEGIN model
     property ConfigModel globalConfigModel:  globalAppletConfigModel
 
     ConfigModel {
         id: globalAppletConfigModel
         ConfigCategory {
-            name: i18nd("plasma_shell_org.kde.plasma.desktop", "Keyboard shortcuts")
+            name: i18nd("plasma_shell_org.kde.plasma.desktop", "Keyboard Shortcuts")
             icon: "preferences-desktop-keyboard"
             source: "ConfigurationShortcuts.qml"
         }
@@ -45,238 +49,279 @@ Rectangle {
         filterRole: "visible"
         filterCallback: function(source_row, value) { return value; }
     }
-//END model
-
-//BEGIN functions
-    function saveConfig() {
-        if (main.currentItem.saveConfig) {
-            main.currentItem.saveConfig()
-        }
-        for (var key in plasmoid.configuration) {
-            if (main.currentItem["cfg_"+key] !== undefined) {
-                plasmoid.configuration[key] = main.currentItem["cfg_"+key]
-            }
-        }
-    }
-
-    function restoreConfig() {
-        for (var key in plasmoid.configuration) {
-            if (main.currentItem["cfg_"+key] !== undefined) {
-                main.currentItem["cfg_"+key] = plasmoid.configuration[key]
-            }
-        }
-    }
 
     function settingValueChanged() {
         applyButton.enabled = true;
     }
-//END functions
 
-
-//BEGIN connections
-    Component.onCompleted: {
-        if (!isContainment && configDialog.configModel && configDialog.configModel.count > 0) {
-            if (configDialog.configModel.get(0).source) {
-                main.sourceFile = configDialog.configModel.get(0).source
-            } else if (configDialog.configModel.get(0).kcm) {
-                main.sourceFile = Qt.resolvedUrl("ConfigurationKcmPage.qml");
-                main.currentItem.kcm = configDialog.configModel.get(0).kcm;
-            } else {
-                main.sourceFile = "";
-            }
-            main.title = configDialog.configModel.get(0).name
+    function pushReplace(item, config) {
+        let page;
+        if (app.pageStack.depth === 0) {
+            page = app.pageStack.push(item, config);
         } else {
-            main.sourceFile = globalConfigModel.get(0).source
-            main.title = globalConfigModel.get(0).name
+            page = app.pageStack.replace(item, config);
         }
-//         root.width = mainColumn.implicitWidth
-//         root.height = mainColumn.implicitHeight
+        app.currentConfigPage = page;
     }
-//END connections
-
-//BEGIN UI components
-    SystemPalette {id: syspal}
-
-    MouseEventListener {
-        anchors.fill: parent
-        property int oldX
-        property int oldY
-        onPressed: {
-            oldX = mouse.screenX
-            oldY = mouse.screenY
-        }
-        onPositionChanged: {
-            configDialog.y += mouse.screenY - oldY
-            configDialog.x += mouse.screenX - oldX
-            oldX = mouse.screenX
-            oldY = mouse.screenY
+    Component {
+        id: configurationKcmPageComponent
+        ConfigurationKcmPage {
         }
     }
 
-    MessageDialog {
-        id: messageDialog
-        icon: StandardIcon.Warning
-        property Item delegate
-        title: i18nd("plasma_shell_org.kde.plasma.desktop", "Apply Settings")
-        text: i18nd("plasma_shell_org.kde.plasma.desktop", "The settings of the current module have changed. Do you want to apply the changes or discard them?")
-        standardButtons: StandardButton.Apply | StandardButton.Discard | StandardButton.Cancel
-        onApply: {
-            applyAction.trigger()
-            delegate.openCategory()
-        }
-        onDiscard: {
-            delegate.openCategory()
-        }
-    }
-
-    ColumnLayout {
-        id: mainColumn
-        anchors {
-            fill: parent
-            margins: mainColumn.spacing //margins are hardcoded in QStyle we should match that here
-        }
-        property int implicitWidth: Math.max(contentRow.implicitWidth, buttonsRow.implicitWidth) + 8
-        property int implicitHeight: contentRow.implicitHeight + buttonsRow.implicitHeight + 8
-
-        RowLayout {
-            id: contentRow
-            anchors {
-                left: parent.left
-                right: parent.right
+    function open(item) {
+        app.isAboutPage = false;
+        if (item.source) {
+            app.isAboutPage = item.source === "AboutPlugin.qml";
+            if (item.source === "ConfigurationContainmentAppearance.qml") {
+                pushReplace(Qt.resolvedUrl(item.source), {title: item.name});
+            } else {
+                pushReplace(Qt.resolvedUrl("ConfigurationAppletPage.qml"), {configItem: item, title: item.name});
             }
-            spacing: units.largeSpacing
-            Layout.fillHeight: true
-            Layout.preferredHeight: parent.height - buttonsRow.height
+        } else if (item.kcm) {
+            pushReplace(configurationKcmPageComponent, {kcm: item.kcm, internalPage: item.kcm.mainUi});
+        } else {
+            app.pageStack.pop();
+        }
 
-            QtControls.ScrollView {
-                id: categoriesScroll
-                frameVisible: true
-                Layout.fillHeight: true
-                visible: (configDialog.configModel ? configDialog.configModel.count : 0) + globalConfigModel.count > 1
-                Layout.preferredWidth: units.gridUnit * 7
-                flickableItem.interactive: false
+        applyButton.enabled = false
+    }
 
-                Rectangle {
-                    width: categoriesScroll.viewport.width
-                    height: Math.max(categoriesScroll.viewport.height, categories.height)
-                    color: syspal.base
+    Connections {
+        target: app.currentConfigPage
 
-                    Column {
-                        id: categories
-                        width: parent.width
-                        height: childrenRect.height
+        function onSettingValueChanged() {
+            applyButton.enabled = true;
+        }
+    }
 
-                        property Item currentItem: children[1]
+    Component.onCompleted: {
+        // if we are a containment then the first item will be ConfigurationContainmentAppearance
+        // if the applet does not have own configs then the first item will be Shortcuts
+        if (isContainment || !configDialog.configModel || configDialog.configModel.count === 0) {
+            open(root.globalConfigModel.get(0))
+        } else {
+            open(configDialog.configModel.get(0))
+        }
+    }
 
-                        Repeater {
-                            model: root.isContainment ? globalConfigModel : undefined
-                            delegate: ConfigCategoryDelegate {}
-                        }
-                        Repeater {
-                            model: configDialogFilterModel
-                            delegate: ConfigCategoryDelegate {}
-                        }
-                        Repeater {
-                            model: !root.isContainment ? globalConfigModel : undefined
-                            delegate: ConfigCategoryDelegate {}
-                        }
+    function applicationWindow() {
+        return app;
+    }
+
+
+    QtControls.ScrollView {
+        id: categoriesScroll
+        anchors {
+            left: parent.left
+            top: parent.top
+            bottom: parent.bottom
+        }
+        width: Kirigami.Units.gridUnit * 7
+        Kirigami.Theme.colorSet: Kirigami.Theme.View
+        leftPadding: 0
+        rightPadding: 0
+        topPadding: 0
+        bottomPadding: 0
+        focus: true
+        Accessible.role: Accessible.MenuBar
+        background: Rectangle {
+            color: Kirigami.Theme.backgroundColor
+        }
+
+        ColumnLayout {
+            id: categories
+            Keys.onUpPressed: {
+                const buttons = categories.children
+
+                let foundPrevious = false
+                for (let i = buttons.length - 1; i >= 0; --i) {
+                    const button = buttons[i];
+                    if (!button.hasOwnProperty("highlighted")) {
+                        // not a ConfigCategoryDelegate
+                        continue;
+                    }
+
+                    if (foundPrevious) {
+                        categories.openCategory(button.item)
+                        return
+                    } else if (button.highlighted) {
+                        foundPrevious = true
                     }
                 }
             }
-            QtControls.ScrollView {
-                id: scroll
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Column {
-                    spacing: units.largeSpacing / 2
 
-                    QtControls.Label {
-                        id: pageTitle
-                        width: scroll.viewport.width
-                        font.pointSize: theme.defaultFont.pointSize*2
-                        font.weight: Font.Light
-                        text: main.title
+            Keys.onDownPressed: {
+                const buttons = categories.children
+
+                let foundNext = false
+                for (let i = 0, length = buttons.length; i < length; ++i) {
+                    const button = buttons[i];
+                    if (!button.hasOwnProperty("highlighted")) {
+                        continue;
                     }
 
-                    QtControls.StackView {
-                        id: main
-                        property string title: ""
-                        property bool invertAnimations: false
+                    if (foundNext) {
+                        categories.openCategory(button.item)
+                        return
+                    } else if (button.highlighted) {
+                        foundNext = true
+                    }
+                }
+            }
+            spacing: 0
+            anchors.fill: parent
+            focus: true
 
-                        height: Math.max((scroll.viewport.height - pageTitle.height - parent.spacing), (main.currentItem  ? (main.currentItem.implicitHeight ? main.currentItem.implicitHeight : main.currentItem.childrenRect.height) : 0))
-                        width: scroll.viewport.width
+            function openCategory(item) {
+                if (applyButton.enabled) {
+                    messageDialog.item = item;
+                    messageDialog.open();
+                    return;
+                }
+                open(item)
+            }
 
-                        property string sourceFile
-
-                        onSourceFileChanged: {
-                            if (!sourceFile) {
-                                return;
-                            }
-//                             print("Source file changed in flickable" + sourceFile);
-                            replace(Qt.resolvedUrl(sourceFile));
-                            root.restoreConfig()
-                            for (var prop in currentItem) {
-                                if (prop.indexOf("cfg_") === 0 && prop.indexOf("Changed") > 0 ) {
-                                    currentItem[prop].connect(root.settingValueChanged)
-                                }
-                            }
-                            if (currentItem["configurationChanged"]) {
-                                currentItem["configurationChanged"].connect(root.settingValueChanged)
-                            }
-                            applyButton.enabled = false;
-                            scroll.flickableItem.contentY = 0
-                            /*
-                                * This is not needed on a desktop shell that has ok/apply/cancel buttons, i'll leave it here only for future reference until we have a prototype for the active shell.
-                                * root.pageChanged will start a timer, that in turn will call saveConfig() when triggered
-
-                            for (var prop in currentItem) {
-                                if (prop.indexOf("cfg_") === 0) {
-                                    currentItem[prop+"Changed"].connect(root.pageChanged)
-                                }
-                            }*/
+            Component {
+                id: categoryDelegate
+                ConfigCategoryDelegate {
+                    id: delegate
+                    onActivated: categories.openCategory(model);
+                    highlighted: {
+                        if (model.kcm && app.pageStack.currentItem.kcm) {
+                            return model.kcm == app.pageStack.currentItem.kcm
                         }
 
-                        delegate: QtControls.StackViewDelegate {
-                            function transitionFinished(properties)
-                            {
-                                properties.exitItem.opacity = 1
-                            }
-
-                            pushTransition: QtControls.StackViewTransition {
-                                PropertyAnimation {
-                                    target: enterItem
-                                    property: "opacity"
-                                    from: 0
-                                    to: 1
-                                    duration: units.longDuration
-                                    easing.type: Easing.InOutQuad
-                                }
-                                PropertyAnimation {
-                                    target: enterItem
-                                    property: "x"
-                                    from: main.invertAnimations ? -target.width/3: target.width/3
-                                    to: 0
-                                    duration: units.longDuration
-                                    easing.type: Easing.InOutQuad
-                                }
-                                PropertyAnimation {
-                                    target: exitItem
-                                    property: "opacity"
-                                    from: 1
-                                    to: 0
-                                    duration: units.longDuration
-                                    easing.type: Easing.InOutQuad
-                                }
-                                PropertyAnimation {
-                                    target: exitItem
-                                    property: "x"
-                                    from: 0
-                                    to: main.invertAnimations ? target.width/3 : -target.width/3
-                                    duration: units.longDuration
-                                    easing.type: Easing.InOutQuad
-                                }
-                            }
+                        if (app.pageStack.currentItem && app.pageStack.currentItem.configItem) {
+                            return model.source == app.pageStack.currentItem.configItem.source
                         }
+                        return app.pageStack.currentItem.source == Qt.resolvedUrl(model.source)
+                    }
+                    item: model
+                }
+            }
+
+            Repeater {
+                Layout.fillWidth: true
+                model: root.isContainment ? globalConfigModel : undefined
+                delegate: categoryDelegate
+            }
+            Repeater {
+                Layout.fillWidth: true
+                model: configDialogFilterModel
+                delegate: categoryDelegate
+            }
+            Repeater {
+                Layout.fillWidth: true
+                model: !root.isContainment ? globalConfigModel : undefined
+                delegate: categoryDelegate
+            }
+            Repeater {
+                Layout.fillWidth: true
+                model: ConfigModel {
+                    ConfigCategory{
+                        name: i18nd("plasma_shell_org.kde.plasma.desktop", "About")
+                        icon: "help-about"
+                        source: "AboutPlugin.qml"
+                    }
+                }
+                delegate: categoryDelegate
+            }
+        }
+    }
+
+    Kirigami.Separator {
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
+        }
+        z: 1
+    }
+    Kirigami.Separator {
+        anchors {
+            right: categoriesScroll.right
+            top: parent.top
+            bottom: parent.bottom
+        }
+        z: 1
+    }
+
+    Kirigami.ApplicationItem {
+        id: app
+        anchors {
+            left: categoriesScroll.right
+            top: parent.top
+            right: parent.right
+            bottom: parent.bottom
+        }
+
+        pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.Breadcrumb
+        wideScreen: true
+        pageStack.globalToolBar.separatorVisible: bottomSeparator.visible
+        pageStack.globalToolBar.colorSet: Kirigami.Theme.Window
+
+        property var currentConfigPage: null
+        property bool isAboutPage: false
+
+        MessageDialog {
+            id: messageDialog
+            icon: StandardIcon.Warning
+            property var item
+            title: i18nd("plasma_shell_org.kde.plasma.desktop", "Apply Settings")
+            text: i18nd("plasma_shell_org.kde.plasma.desktop", "The settings of the current module have changed. Do you want to apply the changes or discard them?")
+            standardButtons: StandardButton.Apply | StandardButton.Discard | StandardButton.Cancel
+            onApply: {
+                applyAction.trigger()
+                root.open(item)
+            }
+            onDiscard: {
+                root.open(item)
+            }
+        }
+
+        footer: QtControls.Pane {
+            
+            contentItem: RowLayout {
+                id: buttonsRow
+                spacing: Kirigami.Units.smallSpacing
+
+                Item {
+                    Layout.fillWidth: true
+                }
+
+                QtControls.Button {
+                    icon.name: "dialog-ok"
+                    text: i18nd("plasma_shell_org.kde.plasma.desktop", "OK")
+                    onClicked: acceptAction.trigger()
+                    KeyNavigation.tab: categories
+                }
+                QtControls.Button {
+                    id: applyButton
+                    enabled: false
+                    icon.name: "dialog-ok-apply"
+                    text: i18nd("plasma_shell_org.kde.plasma.desktop", "Apply")
+                    visible: !app.isAboutPage && app.pageStack.currentItem && (!app.pageStack.currentItem.kcm || app.pageStack.currentItem.kcm.buttons & 4) // 4 = Apply button
+                    onClicked: applyAction.trigger()
+                }
+                QtControls.Button {
+                    icon.name: "dialog-cancel"
+                    text: i18nd("plasma_shell_org.kde.plasma.desktop", "Cancel")
+                    onClicked: cancelAction.trigger()
+                    visible: !app.isAboutPage
+                }
+            }
+            background: Item {
+                Kirigami.Separator {
+                    id: bottomSeparator
+                    visible: app.pageStack.currentItem
+                        && app.pageStack.currentItem.flickable
+                        && !(app.pageStack.currentItem.flickable.atYBeginning
+                        && app.pageStack.currentItem.flickable.atYEnd)
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        top: parent.top
                     }
                 }
             }
@@ -294,11 +339,7 @@ Rectangle {
         QtControls.Action {
             id: applyAction
             onTriggered: {
-                if (main.currentItem.saveConfig !== undefined) {
-                    main.currentItem.saveConfig();
-                }
-
-                root.saveConfig();
+                app.pageStack.get(0).saveConfig()
 
                 applyButton.enabled = false;
             }
@@ -309,28 +350,5 @@ Rectangle {
             onTriggered: configDialog.close();
             shortcut: "Escape"
         }
-
-        RowLayout {
-            id: buttonsRow
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-            QtControls.Button {
-                iconName: "dialog-ok"
-                text: i18nd("plasma_shell_org.kde.plasma.desktop", "OK")
-                onClicked: acceptAction.trigger()
-            }
-            QtControls.Button {
-                id: applyButton
-                enabled: false
-                iconName: "dialog-ok-apply"
-                text: i18nd("plasma_shell_org.kde.plasma.desktop", "Apply")
-                onClicked: applyAction.trigger()
-            }
-            QtControls.Button {
-                iconName: "dialog-cancel"
-                text: i18nd("plasma_shell_org.kde.plasma.desktop", "Cancel")
-                onClicked: cancelAction.trigger()
-            }
-        }
     }
-//END UI components
 }

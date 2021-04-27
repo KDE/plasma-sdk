@@ -1,115 +1,73 @@
 /*
  *  SPDX-FileCopyrightText: 2013 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2020 Carl Schwan <carlschwan@kde.org>
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
 import QtQuick 2.0
-import QtQuick.Controls 1.0 as QtControls
-import org.kde.kquickcontrolsaddons 2.0
+import QtQuick.Layouts 1.1
+import QtQuick.Controls 2.3 as QtControls
+import QtQuick.Window 2.2
+import org.kde.plasma.core 2.0 as PlasmaCore
 
-MouseArea {
+import org.kde.kquickcontrolsaddons 2.0
+import org.kde.kirigami 2.5 as Kirigami
+
+QtControls.ItemDelegate {
     id: delegate
 
-//BEGIN properties
-    y: units.smallSpacing *2
-    width: parent.width
-    height: delegateContents.height + units.smallSpacing * 4
-    hoverEnabled: true
-    property bool current: (model.kcm && main.currentItem.kcm && model.kcm == main.currentItem.kcm) || (model.source == main.sourceFile)
-    property string name: model.name
-//END properties
+    signal activated()
 
-//BEGIN functions
-    function openCategory() {
-        if (current) {
-            return;
-        }
-        if (typeof(categories.currentItem) !== "undefined") {
-            main.invertAnimations = (categories.currentItem.y > delegate.y);
-            categories.currentItem = delegate;
-        }
-        if (model.source) {
-            main.sourceFile = model.source;
-        } else if (model.kcm) {
-            main.sourceFile = "";
-            main.sourceFile = Qt.resolvedUrl("ConfigurationKcmPage.qml");
-            main.currentItem.kcm = model.kcm;
-        } else {
-            main.sourceFile = "";
-        }
-        main.title = model.name
-    }
-//END functions
+//BEGIN properties
+    Layout.fillWidth: true
+    Layout.maximumWidth: Kirigami.Units.gridUnit * 7
+    hoverEnabled: true
+
+    Accessible.role: Accessible.MenuItem
+    Accessible.name: model.name
+    Accessible.description: i18n("Open configuration page")
+
+    property var item
+//END properties
 
 //BEGIN connections
     onClicked: {
-        //print("model source: " + model.source + " " + main.sourceFile);
-        if (applyButton.enabled) {
-            messageDialog.delegate = delegate;
-            messageDialog.open();
+        if (highlighted) {
             return;
         }
-        if (delegate.current) {
-            return;
-        } else {
-            openCategory();
-        }
-    }
-    onCurrentChanged: {
-        if (current) {
-            categories.currentItem = delegate;
-        }
+
+        activated()
     }
 //END connections
 
 //BEGIN UI components
-    Rectangle {
-        anchors.fill: parent
-        color: syspal.highlight
-        opacity: {
-            if (categories.currentItem == delegate) {
-                return 1
-            } else if (delegate.containsMouse) {
-                return 0.3 // there's no "hover" color in SystemPalette
-            } else {
-                return 0
-            }
-        }
-        Behavior on opacity {
-            NumberAnimation {
-                duration: units.longDuration
-            }
-        }
-    }
-
-    Column {
+    contentItem: ColumnLayout {
         id: delegateContents
-        spacing: units.smallSpacing
-        anchors {
-            verticalCenter: parent.verticalCenter
-            left: parent.left
-            right: parent.right
-        }
+        spacing: PlasmaCore.Units.smallSpacing
+
         QIconItem {
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: units.iconSizes.medium
+            id: iconItem
+            Layout.alignment: Qt.AlignHCenter
+            width: PlasmaCore.Units.iconSizes.medium
             height: width
             icon: model.icon
+            state: highlighted && Window.active ? QIconItem.SelectedState : QIconItem.DefaultState
         }
+
         QtControls.Label {
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
+            id: nameLabel
+            Layout.fillWidth: true
+            Layout.leftMargin: PlasmaCore.Units.smallSpacing
+            Layout.rightMargin: PlasmaCore.Units.smallSpacing
             text: model.name
             wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
-            color: current ? syspal.highlightedText : syspal.text
+            color: highlighted && Window.active ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
             Behavior on color {
                 ColorAnimation {
-                    duration: units.longDuration
-                    easing.type: "InOutQuad"
+                    duration: PlasmaCore.Units.longDuration
+                    easing.type: Easing.InOutQuad
                 }
             }
         }

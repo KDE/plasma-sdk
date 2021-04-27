@@ -5,7 +5,7 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Controls 1.0 as QtControls
+import QtQuick.Controls 2.3 as QtControls
 import QtQuick.Layouts 1.0
 
 Item {
@@ -18,7 +18,9 @@ Item {
     property var prettyStrings: {
         "LeftButton": i18nd("plasma_shell_org.kde.plasma.desktop", "Left-Button"),
         "RightButton": i18nd("plasma_shell_org.kde.plasma.desktop", "Right-Button"),
-        "MidButton": i18nd("plasma_shell_org.kde.plasma.desktop", "Middle-Button"),
+        "MiddleButton": i18nd("plasma_shell_org.kde.plasma.desktop", "Middle-Button"),
+        "BackButton": i18nd("plasma_shell_org.kde.plasma.desktop", "Back-Button"),
+        "ForwardButton": i18nd("plasma_shell_org.kde.plasma.desktop", "Forward-Button"),
 
         "wheel:Vertical": i18nd("plasma_shell_org.kde.plasma.desktop", "Vertical-Scroll"),
         "wheel:Horizontal": i18nd("plasma_shell_org.kde.plasma.desktop", "Horizontal-Scroll"),
@@ -33,78 +35,124 @@ Item {
         configDialog.currentContainmentActionsModel.save();
     }
 
-    Column {
+    Connections {
+        target: configDialog.currentContainmentActionsModel
+        function onConfigurationChanged() {
+            root.configurationChanged()
+        }
+    }
+
+    GridLayout {
         id: mainColumn
-        anchors {
-            top: parent.top
-            topMargin: 25
-            horizontalCenter: parent.horizontalCenter
+        flow: GridLayout.TopToBottom
+        y: 25
+        width: parent.width
+
+        Repeater {
+            id: actionsRepeater
+            model: configDialog.currentContainmentActionsModel
+
+            MouseEventInputButton {
+                Layout.column: 0
+                Layout.row: index
+                Layout.fillWidth: true
+                Layout.minimumWidth: implicitWidth
+                defaultText: {
+                    var splitAction = model.action.split(';');
+
+                    var button = splitAction[0];
+                    var modifiers = (splitAction[1] || "").split('|').filter(function (item) {
+                        return item !== "NoModifier";
+                    });
+
+                    var parts = modifiers;
+                    modifiers.push(button);
+
+                    return parts.map(function (item) {
+                        return prettyStrings[item] || item;
+                    }).join(i18nc("Concatenation sign for shortcuts, e.g. Ctrl+Shift", "+"));
+                }
+                eventString: model.action
+                onEventStringChanged: {
+                    configDialog.currentContainmentActionsModel.update(index, eventString, model.pluginName);
+                }
+            }
         }
 
         Repeater {
             model: configDialog.currentContainmentActionsModel
-            delegate: RowLayout {
-                width: root.width
-                MouseEventInputButton {
-                    defaultText: prettyStrings ? (prettyStrings[model.action.split(';')[1]] ? prettyStrings[model.action.split(';')[1]] + "+" : "") + prettyStrings[model.action.split(';')[0]] : ""
-                    eventString: model.action
-                    onEventStringChanged: {
-                        configDialog.currentContainmentActionsModel.update(index, eventString, model.pluginName);
-                    }
-                }
 
-                QtControls.ComboBox {
-                    id: pluginsCombo
-                    Layout.fillWidth: true
-                    model: configDialog.containmentActionConfigModel
-                    textRole: "name"
-                    property bool initialized: false
-                    Component.onCompleted: {
-                        for (var i = 0; i < configDialog.containmentActionConfigModel.count; ++i) {
-                            if (configDialog.containmentActionConfigModel.get(i).pluginName == pluginName) {
-                                pluginsCombo.currentIndex = i;
-                                break;
-                            }
+            QtControls.ComboBox {
+                id: pluginsCombo
+                // "index" argument of onActivated shadows the model index
+                readonly property int pluginIndex: index
+                Layout.fillWidth: true
+                Layout.column: 1
+                Layout.row: index
+                // both MouseEventInputButton and this ComboBox have fillWidth for a uniform layout
+                // however, their implicit sizes is taken into account and they compete against
+                // each other for available space. By setting an insane preferredWidth we give
+                // ComboBox a greater share of the available space
+                Layout.preferredWidth: 9000
+                model: configDialog.containmentActionConfigModel
+                textRole: "name"
+                property bool initialized: false
+                Component.onCompleted: {
+                    for (var i = 0; i < configDialog.containmentActionConfigModel.count; ++i) {
+                        if (configDialog.containmentActionConfigModel.get(i).pluginName === pluginName) {
+                            pluginsCombo.currentIndex = i;
+                            break;
                         }
-                        pluginsCombo.initialized = true;
                     }
-                    onCurrentIndexChanged: {
-                        if (initialized && configDialog.containmentActionConfigModel.get(currentIndex).pluginName != pluginName) {
-                            configDialog.currentContainmentActionsModel.update(index, action, configDialog.containmentActionConfigModel.get(currentIndex).pluginName);
-                            root.configurationChanged();
+                    pluginsCombo.initialized = true;
+                }
+                onActivated: {
+                    if (initialized) {
+                        var newPluginName = configDialog.containmentActionConfigModel.get(index).pluginName;
+                        if (newPluginName !== pluginName) {
+                            configDialog.currentContainmentActionsModel.update(pluginIndex, action, newPluginName);
                         }
-                    }
-                }
-                QtControls.Button {
-                    iconName: "configure"
-                    width: height
-                    enabled: model.hasConfigurationInterface
-                    onClicked: {
-                        configDialog.currentContainmentActionsModel.showConfiguration(index);
-                    }
-                }
-                QtControls.Button {
-                    iconName: "dialog-information"
-                    width: height
-                    onClicked: {
-                        configDialog.currentContainmentActionsModel.showAbout(index);
-                    }
-                }
-                QtControls.Button {
-                    iconName: "list-remove"
-                    width: height
-                    onClicked: {
-                        configDialog.currentContainmentActionsModel.remove(index);
-                        root.configurationChanged();
                     }
                 }
             }
         }
+
+        Repeater {
+            model: configDialog.currentContainmentActionsModel
+
+            RowLayout {
+                Layout.column: 2
+                Layout.row: index
+
+                QtControls.Button {
+                    icon.name: "configure"
+                    width: height
+                    enabled: model.hasConfigurationInterface
+                    onClicked: {
+                        configDialog.currentContainmentActionsModel.showConfiguration(index, this);
+                    }
+                }
+                QtControls.Button {
+                    icon.name: "dialog-information"
+                    width: height
+                    onClicked: {
+                        configDialog.currentContainmentActionsModel.showAbout(index, this);
+                    }
+                }
+                QtControls.Button {
+                    icon.name: "list-remove"
+                    width: height
+                    onClicked: {
+                        configDialog.currentContainmentActionsModel.remove(index);
+                    }
+                }
+            }
+        }
+
         MouseEventInputButton {
             defaultText: i18nd("plasma_shell_org.kde.plasma.desktop", "Add Action");
             onEventStringChanged: {
                 configDialog.currentContainmentActionsModel.append(eventString, "org.kde.contextmenu");
-                root.configurationChanged();
             }
         }
     }

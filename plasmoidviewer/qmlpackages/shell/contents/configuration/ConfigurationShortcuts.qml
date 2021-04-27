@@ -5,14 +5,15 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Controls 1.0 as QtControls
+import QtQuick.Controls 2.3 as QtControls
 import QtQuick.Layouts 1.0
 import org.kde.kquickcontrols 2.0
+import org.kde.kirigami 2.14 as Kirigami
 
-Item {
+Kirigami.ScrollablePage {
     id: root
-    width: childrenRect.width
-    height: childrenRect.height
+
+    title: i18n("Shortcuts")
 
     signal configurationChanged
     function saveConfig() {
@@ -20,20 +21,18 @@ Item {
     }
 
     ColumnLayout {
-        anchors {
-            left: parent.left
-            right: parent.right
-        }
         QtControls.Label {
             Layout.fillWidth: true
-            text: i18nd("plasma_shell_org.kde.plasma.desktop", "This shortcut will activate the applet: it will give the keyboard focus to it, and if the applet has a popup (such as the start menu), the popup will be open.")
+            text: i18nd("plasma_shell_org.kde.plasma.desktop", "This shortcut will activate the applet as though it had been clicked.")
             wrapMode: Text.WordWrap
         }
         KeySequenceItem {
             id: button
             keySequence: plasmoid.globalShortcut
             onKeySequenceChanged: {
-                root.configurationChanged();
+                if (keySequence != plasmoid.globalShortcut) {
+                    root.configurationChanged();
+                }
             }
         }
     }

@@ -24,6 +24,9 @@ PlasmaCore.FrameSvgItem {
     height: 64
     imagePath: "dialogs/background"
 
+    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
+    LayoutMirroring.childrenInherit: true
+
     state: {
         switch (panel.location) {
         case PlasmaCore.Types.TopEdge:
@@ -38,7 +41,7 @@ PlasmaCore.FrameSvgItem {
         }
     }
 
-    property bool vertical: (panel.location == PlasmaCore.Types.LeftEdge || panel.location == PlasmaCore.Types.RightEdge)
+    property bool vertical: (panel.location === PlasmaCore.Types.LeftEdge || panel.location === PlasmaCore.Types.RightEdge)
 //END properties
 
 //BEGIN Connections
@@ -82,7 +85,7 @@ PlasmaCore.FrameSvgItem {
         id: panelResetAnimation
         NumberAnimation {
             target: panel
-            properties: (panel.location == PlasmaCore.Types.LeftEdge || panel.location == PlasmaCore.Types.RightEdge) ? "x" : "y"
+            properties: (panel.location === PlasmaCore.Types.LeftEdge || panel.location === PlasmaCore.Types.RightEdge) ? "x" : "y"
             to:  {
                 switch (panel.location) {
                 case PlasmaCore.Types.TopEdge:
@@ -96,12 +99,12 @@ PlasmaCore.FrameSvgItem {
                     return panel.screenGeometry.y + panel.screenGeometry.height - panel.height - panel.distance
                 }
             }
-            duration: units.shortDuration * 3
+            duration: PlasmaCore.Units.shortDuration
         }
 
         NumberAnimation {
             target: configDialog
-            properties: (panel.location == PlasmaCore.Types.LeftEdge || panel.location == PlasmaCore.Types.RightEdge) ? "x" : "y"
+            properties: (panel.location === PlasmaCore.Types.LeftEdge || panel.location === PlasmaCore.Types.RightEdge) ? "x" : "y"
             to: {
                 switch (panel.location) {
                 case PlasmaCore.Types.TopEdge:
@@ -115,7 +118,7 @@ PlasmaCore.FrameSvgItem {
                     return panel.screenGeometry.y + panel.screenGeometry.height - panel.height - configDialog.height - panel.distance
                 }
             }
-            duration: units.shortDuration * 3
+            duration: PlasmaCore.Units.shortDuration
         }
     }
 //END Animations
