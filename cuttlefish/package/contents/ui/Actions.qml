@@ -28,7 +28,7 @@ Item {
         Kirigami.Action {
             id: screenshotAction
             iconName: "camera-web-symbolic"
-            text: i18n("Create screenshot of icon with...")
+            text: i18n("Create screenshot of icon with…")
             onTriggered: screenshotPopup.popup()
             Kirigami.Action {
                 text: i18n("Breeze Colors")

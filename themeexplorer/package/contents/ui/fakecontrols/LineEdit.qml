@@ -31,7 +31,7 @@ Item {
                 verticalCenter: parent.verticalCenter
                 margins: units.smallSpacing
             }
-            text: i18n("Text input...")
+            text: i18n("Text input…")
             color: viewTextColor
         }
         Rectangle {

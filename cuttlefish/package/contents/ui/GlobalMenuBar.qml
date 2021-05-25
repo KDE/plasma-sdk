@@ -18,7 +18,7 @@ MenuBar {
     Menu {
         title: i18n("File")
         Menu {
-            title: i18n("Export Montage with Color Scheme...")
+            title: i18n("Export Montage with Color Scheme…")
             MenuItem {
                 text: i18n("Active Color Scheme")
                 onTriggered: root.montage(Screenshot.MontageType.Active)

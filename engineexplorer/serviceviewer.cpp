@@ -223,7 +223,7 @@ void ServiceViewer::updateJobCount(int numberOfJobs)
         m_operationCount = 0;
         m_operationStatus->hide();
     } else {
-        m_operationStatus->setText(i18np("One active operation...", "%1 operations active...", m_operationCount));
+        m_operationStatus->setText(i18np("One active operation…", "%1 operations active…", m_operationCount));
         m_operationStatus->show();
     }
 }

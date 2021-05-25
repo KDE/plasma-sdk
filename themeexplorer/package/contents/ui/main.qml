@@ -27,7 +27,7 @@ ApplicationWindow {
         RowLayout {
             anchors.fill: parent
             ToolButton {
-                text: i18n("New Theme...")
+                text: i18n("New Theme…")
                 iconName: "document-new"
                 onClicked: {
                     if (!root.metadataEditor) {
@@ -60,7 +60,7 @@ ApplicationWindow {
                 onClicked: Qt.openUrlExternally(themeModel.themeFolder);
             }
             ToolButton {
-                text: i18n("Edit Metadata...")
+                text: i18n("Edit Metadata…")
                 iconName: "configure"
                 enabled: view.currentItem.modelData.isWritable
                 onClicked: {
@@ -77,7 +77,7 @@ ApplicationWindow {
                 }
             }
             ToolButton {
-                text: i18n("Edit Colors...")
+                text: i18n("Edit Colors…")
                 iconName: "color"
                 enabled: view.currentItem.modelData.isWritable
                 onClicked: {
@@ -98,7 +98,7 @@ ApplicationWindow {
                 onClicked: Qt.openUrlExternally("https://techbase.kde.org/Development/Tutorials/Plasma5/ThemeDetails");
             }
             TextField {
-                placeholderText: i18n("Search...")
+                placeholderText: i18n("Search…")
                 onTextChanged: searchModel.filterRegExp = ".*" + text + ".*"
             }
         }
@@ -254,7 +254,7 @@ ApplicationWindow {
                 text: i18n("Show Margins")
             }
             Button {
-                text: view.currentItem.modelData.usesFallback ? i18n("Create with Editor...") : i18n("Open In Editor...")
+                text: view.currentItem.modelData.usesFallback ? i18n("Create with Editor…") : i18n("Open In Editor…")
                 enabled: view.currentItem.modelData.isWritable
                 Layout.alignment: Qt.AlignHCenter
                 onClicked: {

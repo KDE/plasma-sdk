@@ -44,7 +44,7 @@ Kirigami.AbstractApplicationWindow {
         }
         actions: [
             Kirigami.Action {
-                text: i18n("New Theme...")
+                text: i18n("New Theme…")
                 iconName: "document-new"
                 onTriggered: {
                     if (!root.metadataEditor) {
