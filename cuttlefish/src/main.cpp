@@ -120,13 +120,8 @@ int main(int argc, char **argv)
         return -1;
     }
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-    qmlRegisterType<CuttleFish::IconModel>();
-    qmlRegisterType<CuttleFish::ColorSchemes>();
-#else
     qmlRegisterAnonymousType<CuttleFish::IconModel>("org.kde.plasma.sdk", 1);
     qmlRegisterAnonymousType<CuttleFish::ColorSchemes>("org.kde.plasma.sdk", 1);
-#endif
     app.setAttribute(Qt::AA_UseHighDpiPixmaps);
     return app.exec();
 }

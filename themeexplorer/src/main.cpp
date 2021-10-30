@@ -55,13 +55,8 @@ int main(int argc, char **argv)
 
     QObject::connect(obj->engine(), &QQmlEngine::quit, &app, &QApplication::quit);
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-    qmlRegisterType<ThemeListModel>();
-    qmlRegisterType<ColorEditor>();
-#else
     qmlRegisterAnonymousType<ThemeListModel>("org.kde.plasma.sdk", 1);
     qmlRegisterAnonymousType<ColorEditor>("org.kde.plasma.sdk", 1);
-#endif
     ThemeModel *themeModel = new ThemeModel(obj->package());
     if (parser.isSet(themeOption)) {
         themeModel->setTheme(parser.value(themeOption));
