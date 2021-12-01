@@ -72,7 +72,6 @@ add_subdirectory(engineexplorer)
 add_subdirectory(plasmoidviewer)
 add_subdirectory(themeexplorer)
 add_subdirectory(lookandfeelexplorer)
-#add_subdirectory(wallpaperviewer)
 
 # add clang-format target for all our real source files
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
