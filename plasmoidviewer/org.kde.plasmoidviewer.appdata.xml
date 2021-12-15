@@ -7,7 +7,7 @@
   <name xml:lang="ast">Visor de plasmoides</name>
   <name xml:lang="az">Plasmoidə baxış</name>
   <name xml:lang="ca">Visor de plasmoides</name>
-  <name xml:lang="ca-valencia">Plasmoid Viewer</name>
+  <name xml:lang="ca-valencia">Visor de plasmoides</name>
   <name xml:lang="cs">Prohlížeč Plasmoidů</name>
   <name xml:lang="da">Plasmoid Viewer</name>
   <name xml:lang="de">Plasmoid-Betrachter</name>
@@ -43,7 +43,7 @@
   <summary xml:lang="ast">Ferramienta de prueba pa los applets de Plasma</summary>
   <summary xml:lang="az">Plasma əlavələrinin test olunması aləti</summary>
   <summary xml:lang="ca">Eina de proves per a les miniaplicacions del Plasma</summary>
-  <summary xml:lang="ca-valencia">Eina de proves de les miniaplicacions de Plasma</summary>
+  <summary xml:lang="ca-valencia">Eina de proves per a les miniaplicacions del Plasma</summary>
   <summary xml:lang="cs">Testovací nástroj pro applety Plasma</summary>
   <summary xml:lang="da">Testværktøj til Plasma-applets</summary>
   <summary xml:lang="de">Test-Werkzeug für Plasma-Miniprogramme</summary>
@@ -81,7 +81,7 @@
     <p xml:lang="ast">Visor de plasmoides ye una ferramienta gráfica que permite a los desendolcadores probar los applets pa Plasma.</p>
     <p xml:lang="az">Plasmoidlərə baxış vasitəsi, tərtibatçılara Plasma əlavələrinin test olunmasına imkan verən qrafik alətidir.</p>
     <p xml:lang="ca">El Visor de plasmoides és una eina gràfica que permet als desenvolupadors provar les miniaplicacions del Plasma.</p>
-    <p xml:lang="ca-valencia">Plasmoid Viewer és una eina gràfica que permet als desenvolupadors provar les miniaplicacions Plasma.</p>
+    <p xml:lang="ca-valencia">El Visor de plasmoides és una eina gràfica que permet als desenvolupadors provar les miniaplicacions del Plasma.</p>
     <p xml:lang="cs">Prohlížeč Plasmoidů je grafický nástroj umožňující vývojářům testovat aplety Plasma.</p>
     <p xml:lang="da">Plasmoid Viewer er et grafisk værktøj der lader udviklere teste Plasma-applets.</p>
     <p xml:lang="de">Plasmoid-Betrachter ist ein Programm mit grafischer Oberfläche, das es Entwicklern ermöglicht, Plasma-Miniprogramme zu testen.</p>
