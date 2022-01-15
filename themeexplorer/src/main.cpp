@@ -29,6 +29,7 @@ int main(int argc, char **argv)
     QApplication app(argc, argv);
 
     app.setApplicationVersion(PROJECT_VERSION);
+    app.setDesktopFileName(QStringLiteral("org.kde.plasma.themeexplorer"));
 
     QCommandLineParser parser;
     parser.addVersionOption();
