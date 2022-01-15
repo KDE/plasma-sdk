@@ -166,7 +166,7 @@ void EngineExplorer::showEngine(const QString &name)
     m_dataModel->clear();
     m_dataModel->setColumnCount(4);
     QStringList headers;
-    headers << i18n("DataSource") << i18n("Key") << i18n("Value") << i18n("Type");
+    headers << i18n("DataSource") << i18n("Key") << i18n("Type") << i18n("Value");
     m_dataModel->setHorizontalHeaderLabels(headers);
     m_engine = nullptr;
     m_sourceCount = 0;
@@ -445,20 +445,20 @@ int EngineExplorer::showData(QStandardItem *parent, Plasma::DataEngine::Data dat
                 if (!first) {
                     parent->setChild(rowCount, 1, new QStandardItem(QString()));
                 }
+                parent->setChild(rowCount, 2, new QStandardItem(var.typeName()));
                 QStandardItem *item = new QStandardItem(convertToString(var));
                 item->setToolTip(item->text());
-                parent->setChild(rowCount, 2, item);
-                parent->setChild(rowCount, 3, new QStandardItem(var.typeName()));
+                parent->setChild(rowCount, 3, item);
                 first = false;
                 ++rowCount;
             }
         } else {
+            parent->setChild(rowCount, 2, new QStandardItem(it.value().typeName()));
             QStandardItem *item = (it.value().canConvert<QIcon>())
                 ? new QStandardItem(it.value().value<QIcon>(), "")
                 : new QStandardItem(convertToString(it.value()));
             item->setToolTip(item->text());
-            parent->setChild(rowCount, 2, item);
-            parent->setChild(rowCount, 3, new QStandardItem(it.value().typeName()));
+            parent->setChild(rowCount, 3, item);
             ++rowCount;
         }
     }
