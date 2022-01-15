@@ -103,7 +103,7 @@ void ServiceViewer::updateOperations()
         if (!operations.isEmpty()) {
             enable = true;
 
-            foreach (const QString &operation, operations) {
+            for (const QString &operation : operations) {
                 m_operations->addItem(operation);
             }
         }
@@ -155,7 +155,7 @@ void ServiceViewer::operationSelected(const QString &operation)
     int i = 0;
     const QStringList keys = desc.keys();
     m_operationDescription->setRowCount(keys.count());
-    foreach (const QString &key, keys) {
+    for (const QString &key : keys) {
         QTableWidgetItem *item = new QTableWidgetItem(key);
         item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
         m_operationDescription->setItem(i, 0, item);

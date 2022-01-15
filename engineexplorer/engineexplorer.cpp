@@ -192,7 +192,8 @@ void EngineExplorer::showEngine(const QString &name)
     // qDebug() << "we have " << sources.count() << " data sources";
     connect(m_engine, &Plasma::DataEngine::sourceAdded, this, &EngineExplorer::addSource);
     connect(m_engine, &Plasma::DataEngine::sourceRemoved, this, &EngineExplorer::removeSource);
-    foreach (const QString &source, m_engine->sources()) {
+    const QStringList &sources = m_engine->sources();
+    for (const QString &source : sources) {
         // qDebug() << "adding " << source;
         addSource(source);
     }
@@ -232,13 +233,13 @@ void EngineExplorer::addSource(const QString &source)
 
 void EngineExplorer::removeSource(const QString &source)
 {
-    QList<QStandardItem *> items = m_dataModel->findItems(source, Qt::MatchExactly);
+    const QList<QStandardItem *> items = m_dataModel->findItems(source, Qt::MatchExactly);
 
     if (items.count() < 1) {
         return;
     }
 
-    foreach (QStandardItem *item, items) {
+    for (QStandardItem *item : items) {
         m_dataModel->removeRow(item->row());
     }
 
@@ -442,7 +443,8 @@ int EngineExplorer::showData(QStandardItem *parent, Plasma::DataEngine::Data dat
         if (it.value().canConvert(QVariant::List) /* && ! it.value().type() == QVariant::StringList
                                                      */) {
             bool first = true;
-            foreach (const QVariant &var, it.value().toList()) {
+            const auto &list = it.value().toList();
+            for (const QVariant &var : list) {
                 QStandardItem *item = new QStandardItem(convertToString(var));
                 if (!first) {
                     parent->setChild(rowCount, 1, new QStandardItem(QString()));

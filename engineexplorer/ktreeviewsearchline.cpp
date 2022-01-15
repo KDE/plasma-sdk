@@ -72,17 +72,14 @@ void KTreeViewSearchLinePrivate::rowsInserted(QAbstractItemModel *model, const Q
         return;
     }
 
-    QTreeView *widget = nullptr;
-    foreach (QTreeView *tree, treeViews)
-        if (tree->model() == model) {
-            widget = tree;
-            break;
-        }
-
-    if (!widget) {
+    const auto it = std::find_if(treeViews.cbegin(), treeViews.cend(), [=](QTreeView *tree) {
+        return tree->model() == model;
+    });
+    if (it == treeViews.cend()) {
         return;
     }
 
+    QTreeView *widget = *it;
     for (int i = start; i <= end; ++i) {
         widget->setRowHidden(i, parentIndex, !parent->itemMatches(parentIndex, i, parent->text()));
     }
@@ -302,8 +299,9 @@ void KTreeViewSearchLine::updateSearch(const QString &pattern)
 {
     d->search = pattern.isNull() ? text() : pattern;
 
-    foreach (QTreeView *treeView, d->treeViews)
+    for (QTreeView *treeView : std::as_const(d->treeViews)) {
         updateSearch(treeView);
+    }
 }
 
 void KTreeViewSearchLine::updateSearch(QTreeView *treeView)
@@ -364,13 +362,15 @@ void KTreeViewSearchLine::setTreeView(QTreeView *treeView)
 
 void KTreeViewSearchLine::setTreeViews(const QList<QTreeView *> &treeViews)
 {
-    foreach (QTreeView *treeView, d->treeViews)
+    for (QTreeView *treeView : std::as_const(d->treeViews)) {
         disconnectTreeView(treeView);
+    }
 
     d->treeViews = treeViews;
 
-    foreach (QTreeView *treeView, d->treeViews)
+    for (QTreeView *treeView : std::as_const(d->treeViews)) {
         connectTreeView(treeView);
+    }
 
     d->checkColumns();
 

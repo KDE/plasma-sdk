@@ -34,16 +34,19 @@ void Delegate::paint(QPainter *painter, const QStyleOptionViewItem &option, cons
         return;
     }
 
+    const QHash<int, QByteArray> roleNames = index.model()->roleNames();
+    const QList<int> roles = roleNames.keys();
+
     QFontMetrics fm(option.font);
     int maxWidth = 0;
-    foreach (int role, index.model()->roleNames().keys()) {
-        const QString text = index.model()->roleNames().value(role) + QLatin1String(": ");
+    for (int role : roles) {
+        const QString text = roleNames.value(role) + QLatin1String(": ");
         maxWidth = qMax(maxWidth, fm.boundingRect(text).width());
     }
 
     int i = 2;
-    foreach (int role, index.model()->roleNames().keys()) {
-        const QString text = index.model()->roleNames().value(role) + QLatin1String(": ");
+    for (int role : roles) {
+        const QString text = roleNames.value(role) + QLatin1String(": ");
         painter->drawText(option.rect.x() + maxWidth - fm.boundingRect(text).width(), option.rect.y() + i * fm.height(), text);
 
         if (index.data(role).canConvert<QIcon>()) {
