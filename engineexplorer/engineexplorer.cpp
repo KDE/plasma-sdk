@@ -442,10 +442,10 @@ int EngineExplorer::showData(QStandardItem *parent, Plasma::DataEngine::Data dat
             bool first = true;
             const auto &list = it.value().toList();
             for (const QVariant &var : list) {
-                QStandardItem *item = new QStandardItem(convertToString(var));
                 if (!first) {
                     parent->setChild(rowCount, 1, new QStandardItem(QString()));
                 }
+                QStandardItem *item = new QStandardItem(convertToString(var));
                 item->setToolTip(item->text());
                 parent->setChild(rowCount, 2, item);
                 parent->setChild(rowCount, 3, new QStandardItem(var.typeName()));
@@ -453,13 +453,9 @@ int EngineExplorer::showData(QStandardItem *parent, Plasma::DataEngine::Data dat
                 ++rowCount;
             }
         } else {
-            QStandardItem *item;
-            if (it.value().canConvert<QIcon>()) {
-                item = new QStandardItem(it.value().value<QIcon>(), "");
-            } else {
-                item = new QStandardItem(convertToString(it.value()));
-            }
-
+            QStandardItem *item = (it.value().canConvert<QIcon>())
+                ? new QStandardItem(it.value().value<QIcon>(), "")
+                : new QStandardItem(convertToString(it.value()));
             item->setToolTip(item->text());
             parent->setChild(rowCount, 2, item);
             parent->setChild(rowCount, 3, new QStandardItem(it.value().typeName()));
