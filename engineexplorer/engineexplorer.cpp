@@ -29,6 +29,15 @@ Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 #include "serviceviewer.h"
 #include "titlecombobox.h"
 
+enum {
+    ColumnDataSource = 0,
+    ColumnKey = 1,
+    ColumnType = 2,
+    ColumnValue = 3,
+
+    ColumnCount,
+};
+
 EngineExplorer::EngineExplorer(QWidget *parent)
     : QDialog(parent)
     , m_engine(nullptr)
@@ -168,7 +177,7 @@ void EngineExplorer::showEngine(const QString &name)
     m_serviceRequesterButton->setEnabled(false);
     enableButtons(false);
     m_dataModel->clear();
-    m_dataModel->setColumnCount(4);
+    m_dataModel->setColumnCount(ColumnCount);
     QStringList headers;
     headers << i18n("DataSource") << i18n("Key") << i18n("Type") << i18n("Value");
     m_dataModel->setHorizontalHeaderLabels(headers);
@@ -446,11 +455,11 @@ void EngineExplorer::showData(QStandardItem *parent, int row, const QString &key
 {
     // QTreeView only expands tree for children of column #zero.
     QStandardItem *current = new QStandardItem();
-    parent->setChild(row, 0, current);
+    parent->setChild(row, ColumnDataSource, current);
 
     QStandardItem *keyItem = new QStandardItem(key);
     keyItem->setToolTip(key);
-    parent->setChild(row, 1, keyItem);
+    parent->setChild(row, ColumnKey, keyItem);
 
     const char *typeName = value.typeName();
     int rowCount = 0;
@@ -466,14 +475,14 @@ void EngineExplorer::showData(QStandardItem *parent, int row, const QString &key
         const QVariantMap map = value.toMap();
         rowCount = showContainerData(parent, current, row, typeName, map);
     } else {
-        parent->setChild(row, 2, new QStandardItem(typeName));
+        parent->setChild(row, ColumnType, new QStandardItem(typeName));
         // clang-format off
         QStandardItem *item = value.canConvert<QIcon>()
             ? new QStandardItem(value.value<QIcon>(), "")
             : new QStandardItem(convertToString(value));
         // clang-format on
         item->setToolTip(item->text());
-        parent->setChild(row, 3, item);
+        parent->setChild(row, ColumnValue, item);
         // leave rowCount at value 0
     }
     removeExtraRows(current, rowCount);
@@ -483,8 +492,8 @@ int EngineExplorer::showContainerData(QStandardItem *parent, QStandardItem *curr
 {
     QStandardItem *typeItem = new QStandardItem(typeName);
     typeItem->setToolTip(typeItem->text());
-    parent->setChild(row, 2, typeItem);
-    parent->setChild(row, 3, new QStandardItem(ki18ncp("Length of the list", "<%1 item>", "<%1 items>").subs(list.length()).toString()));
+    parent->setChild(row, ColumnType, typeItem);
+    parent->setChild(row, ColumnValue, new QStandardItem(ki18ncp("Length of the list", "<%1 item>", "<%1 items>").subs(list.length()).toString()));
 
     int rowCount = 0;
     for (const QVariantMap &map : list) {
@@ -498,8 +507,8 @@ int EngineExplorer::showContainerData(QStandardItem *parent, QStandardItem *curr
 {
     QStandardItem *typeItem = new QStandardItem(typeName);
     typeItem->setToolTip(typeItem->text());
-    parent->setChild(row, 2, typeItem);
-    parent->setChild(row, 3, new QStandardItem(ki18ncp("Length of the list", "<%1 item>", "<%1 items>").subs(list.length()).toString()));
+    parent->setChild(row, ColumnType, typeItem);
+    parent->setChild(row, ColumnValue, new QStandardItem(ki18ncp("Length of the list", "<%1 item>", "<%1 items>").subs(list.length()).toString()));
 
     int rowCount = 0;
     for (const QVariant &var : list) {
@@ -513,8 +522,8 @@ int EngineExplorer::showContainerData(QStandardItem *parent, QStandardItem *curr
 {
     QStandardItem *typeItem = new QStandardItem(typeName);
     typeItem->setToolTip(typeItem->text());
-    parent->setChild(row, 2, typeItem);
-    parent->setChild(row, 3, new QStandardItem(ki18ncp("Size of the map", "<%1 pair>", "<%1 pairs>").subs(map.size()).toString()));
+    parent->setChild(row, ColumnType, typeItem);
+    parent->setChild(row, ColumnValue, new QStandardItem(ki18ncp("Size of the map", "<%1 pair>", "<%1 pairs>").subs(map.size()).toString()));
 
     int rowCount = 0;
     for (auto it = map.constBegin(); it != map.constEnd(); it++) {
