@@ -30,10 +30,9 @@ Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 #include "titlecombobox.h"
 
 enum {
-    ColumnDataSource = 0,
-    ColumnKey = 1,
-    ColumnType = 2,
-    ColumnValue = 3,
+    ColumnDataSourceAndKey = 0,
+    ColumnType = 1,
+    ColumnValue = 2,
 
     ColumnCount,
 };
@@ -178,9 +177,9 @@ void EngineExplorer::showEngine(const QString &name)
     enableButtons(false);
     m_dataModel->clear();
     m_dataModel->setColumnCount(ColumnCount);
-    QStringList headers;
-    headers << i18n("DataSource") << i18n("Key") << i18n("Type") << i18n("Value");
+    QStringList headers{i18n("DataSource/Key"), i18n("Type"), i18n("Value")};
     m_dataModel->setHorizontalHeaderLabels(headers);
+    m_data->setColumnWidth(ColumnDataSourceAndKey, 200);
     m_engine = nullptr;
     m_sourceCount = 0;
 
@@ -453,13 +452,11 @@ int EngineExplorer::showData(QStandardItem *parent, Plasma::DataEngine::Data dat
 
 void EngineExplorer::showData(QStandardItem *parent, int row, const QString &key, const QVariant &value)
 {
+    static_assert(ColumnDataSourceAndKey == 0);
     // QTreeView only expands tree for children of column #zero.
-    QStandardItem *current = new QStandardItem();
-    parent->setChild(row, ColumnDataSource, current);
-
-    QStandardItem *keyItem = new QStandardItem(key);
-    keyItem->setToolTip(key);
-    parent->setChild(row, ColumnKey, keyItem);
+    QStandardItem *current = new QStandardItem(key);
+    current->setToolTip(key);
+    parent->setChild(row, ColumnDataSourceAndKey, current);
 
     const char *typeName = value.typeName();
     int rowCount = 0;
