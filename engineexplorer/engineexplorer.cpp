@@ -217,6 +217,7 @@ void EngineExplorer::addSource(const QString &source)
     }
 
     QStandardItem *parent = new QStandardItem(source);
+    parent->setToolTip(source);
     m_dataModel->appendRow(parent);
 
     // qDebug() << "getting data for source " << source;
@@ -432,7 +433,10 @@ int EngineExplorer::showData(QStandardItem *parent, Plasma::DataEngine::Data dat
     int rowCount = 0;
 
     for (auto it = data.constBegin(); it != data.constEnd(); it++) {
-        parent->setChild(rowCount, 1, new QStandardItem(it.key()));
+        QStandardItem *keyItem = new QStandardItem(it.key());
+        keyItem->setToolTip(it.key());
+        parent->setChild(rowCount, 1, keyItem);
+
         if (it.value().canConvert(QVariant::List) /* && ! it.value().type() == QVariant::StringList
                                                      */) {
             bool first = true;
