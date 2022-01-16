@@ -455,7 +455,11 @@ void EngineExplorer::showData(QStandardItem *parent, int row, const QString &key
     const char *typeName = value.typeName();
     int rowCount = 0;
 
-    if (value.canConvert<QVariantList>()) {
+    if (value.userType() == qMetaTypeId<QList<QVariantMap>>()) {
+        // this case is a bit special, and has to be handled before generic QVariantList
+        const QList<QVariantMap> list = value.value<QList<QVariantMap>>();
+        rowCount = showContainerData(parent, current, row, typeName, list);
+    } else if (value.canConvert<QVariantList>()) {
         const QVariantList list = value.toList();
         rowCount = showContainerData(parent, current, row, typeName, list);
     } else if (value.canConvert<QVariantMap>()) {
@@ -473,6 +477,21 @@ void EngineExplorer::showData(QStandardItem *parent, int row, const QString &key
         // leave rowCount at value 0
     }
     removeExtraRows(current, rowCount);
+}
+
+int EngineExplorer::showContainerData(QStandardItem *parent, QStandardItem *current, int row, const char *typeName, const QList<QVariantMap> &list)
+{
+    QStandardItem *typeItem = new QStandardItem(typeName);
+    typeItem->setToolTip(typeItem->text());
+    parent->setChild(row, 2, typeItem);
+    parent->setChild(row, 3, new QStandardItem(ki18ncp("Length of the list", "<%1 item>", "<%1 items>").subs(list.length()).toString()));
+
+    int rowCount = 0;
+    for (const QVariantMap &map : list) {
+        showData(current, rowCount, QString::number(rowCount), map);
+        rowCount++;
+    }
+    return rowCount;
 }
 
 int EngineExplorer::showContainerData(QStandardItem *parent, QStandardItem *current, int row, const char *typeName, const QVariantList &list)

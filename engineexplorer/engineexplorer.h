@@ -55,6 +55,7 @@ private:
     void listEngines();
     int showData(QStandardItem *parent, Plasma::DataEngine::Data data);
     void showData(QStandardItem *parent, int row, const QString &key, const QVariant &value);
+    int showContainerData(QStandardItem *parent, QStandardItem *current, int row, const char *typeName, const QList<QVariantMap> &list);
     int showContainerData(QStandardItem *parent, QStandardItem *current, int row, const char *typeName, const QVariantList &list);
     int showContainerData(QStandardItem *parent, QStandardItem *current, int row, const char *typeName, const QVariantMap &map);
     void updateTitle();
