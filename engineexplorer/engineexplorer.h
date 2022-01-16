@@ -56,6 +56,7 @@ private:
     int showData(QStandardItem *parent, Plasma::DataEngine::Data data);
     void updateTitle();
     void enableButtons(bool enable);
+    void removeExtraRows(QStandardItem *parent, int preserve);
 
     Plasma::PluginLoader *m_engineManager;
     QStandardItemModel *m_dataModel;

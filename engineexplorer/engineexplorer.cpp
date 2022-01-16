@@ -118,6 +118,13 @@ void EngineExplorer::setInterval(const int interval)
     m_updateInterval->setValue(interval);
 }
 
+void EngineExplorer::removeExtraRows(QStandardItem *parent, int preserve)
+{
+    if (parent->rowCount() > preserve) {
+        parent->removeRows(preserve, parent->rowCount() - preserve);
+    }
+}
+
 void EngineExplorer::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
     QList<QStandardItem *> items = m_dataModel->findItems(source, Qt::MatchExactly);
@@ -129,10 +136,7 @@ void EngineExplorer::dataUpdated(const QString &source, const Plasma::DataEngine
     QStandardItem *parent = items.first();
 
     int rows = showData(parent, data);
-
-    while (parent->rowCount() > rows) {
-        parent->removeRow(rows);
-    }
+    removeExtraRows(parent, rows);
 }
 
 void EngineExplorer::listEngines()
@@ -276,7 +280,7 @@ void EngineExplorer::showDataContextMenu(const QPoint &point)
 {
     QModelIndex index = m_data->indexAt(point);
     if (index.isValid()) {
-        if (index.parent().isValid()) {
+        while (index.parent().isValid()) {
             index = index.parent();
         }
 
@@ -433,34 +437,44 @@ int EngineExplorer::showData(QStandardItem *parent, Plasma::DataEngine::Data dat
     int rowCount = 0;
 
     for (auto it = data.constBegin(); it != data.constEnd(); it++) {
+        // QTreeView only expands tree for children of column #zero.
+        QStandardItem *listRootItem = new QStandardItem();
+        parent->setChild(rowCount, 0, listRootItem);
+
         QStandardItem *keyItem = new QStandardItem(it.key());
         keyItem->setToolTip(it.key());
         parent->setChild(rowCount, 1, keyItem);
 
-        if (it.value().canConvert(QVariant::List) /* && ! it.value().type() == QVariant::StringList
-                                                     */) {
-            bool first = true;
+        if (it.value().canConvert(QVariant::List)) {
             const auto &list = it.value().toList();
-            for (const QVariant &var : list) {
-                if (!first) {
-                    parent->setChild(rowCount, 1, new QStandardItem(QString()));
-                }
-                parent->setChild(rowCount, 2, new QStandardItem(var.typeName()));
+
+            QStandardItem *listTypeItem = new QStandardItem(it.value().typeName());
+            listTypeItem->setToolTip(listTypeItem->text());
+            parent->setChild(rowCount, 2, listTypeItem);
+            parent->setChild(rowCount, 3, new QStandardItem(ki18ncp("Length of the list", "<%1 item>", "<%1 items>").subs(list.length()).toString()));
+
+            int subRowCount = 0;
+            for (const auto &var : list) {
+                listRootItem->setChild(subRowCount, 1, new QStandardItem(QString::number(subRowCount)));
+                listRootItem->setChild(subRowCount, 2, new QStandardItem(var.typeName()));
+
                 QStandardItem *item = new QStandardItem(convertToString(var));
                 item->setToolTip(item->text());
-                parent->setChild(rowCount, 3, item);
-                first = false;
-                ++rowCount;
+                listRootItem->setChild(subRowCount, 3, item);
+
+                subRowCount++;
             }
+            removeExtraRows(listRootItem, subRowCount);
         } else {
+            removeExtraRows(listRootItem, 0);
             parent->setChild(rowCount, 2, new QStandardItem(it.value().typeName()));
             QStandardItem *item = (it.value().canConvert<QIcon>())
                 ? new QStandardItem(it.value().value<QIcon>(), "")
                 : new QStandardItem(convertToString(it.value()));
             item->setToolTip(item->text());
             parent->setChild(rowCount, 3, item);
-            ++rowCount;
         }
+        ++rowCount;
     }
 
     return rowCount;
