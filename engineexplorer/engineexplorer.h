@@ -54,6 +54,8 @@ private Q_SLOTS:
 private:
     void listEngines();
     int showData(QStandardItem *parent, Plasma::DataEngine::Data data);
+    void showData(QStandardItem *parent, int row, const QString &key, const QVariant &value);
+    int showContainerData(QStandardItem *parent, QStandardItem *current, int row, const char *typeName, const QVariantList &list);
     void updateTitle();
     void enableButtons(bool enable);
     void removeExtraRows(QStandardItem *parent, int preserve);
