@@ -55,7 +55,7 @@ ServiceViewer::ServiceViewer(Plasma::DataEngine *engine, const QString &source, 
         if (m_engine->pluginInfo().isValid()) {
             engineName = KStringHandler::capwords(m_engine->pluginInfo().name());
         }
-        qDebug() << "########### CALLING SERVICE FOR SOURCE: " << m_source;
+        qDebug() << "Requesting service for source" << m_source;
         m_service = m_engine->serviceForSource(m_source);
 
         if (m_service != nullptr) {

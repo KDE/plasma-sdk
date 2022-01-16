@@ -88,7 +88,7 @@ ModelViewer::ModelViewer(Plasma::DataEngine *engine, const QString &source, QWid
         if (m_engine->pluginInfo().isValid()) {
             engineName = KStringHandler::capwords(m_engine->pluginInfo().name());
         }
-        qDebug() << "########### CALLING SERVICE FOR SOURCE: " << m_source;
+        qDebug() << "Requesting model for source:" << m_source;
         m_model = m_engine->modelForSource(m_source);
 
         if (m_model != nullptr) {
