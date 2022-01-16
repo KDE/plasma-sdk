@@ -344,9 +344,7 @@ QString EngineExplorer::convertToString(const QVariant &value)
         QVariantMap map = value.toMap();
         QString str = i18np("<1 item>", "<%1 items>", map.size());
 
-        QMapIterator<QString, QVariant> it(map);
-        while (it.hasNext()) {
-            it.next();
+        for (auto it = map.constBegin(); it != map.constEnd(); it++) {
             str += "\n" + it.key() + ": " + convertToString(it.value());
         }
 
@@ -410,10 +408,8 @@ QString EngineExplorer::convertToString(const QVariant &value)
         Plasma::DataEngine::Data data = value.value<Plasma::DataEngine::Data>();
         if (!data.isEmpty()) {
             QStringList result;
-            QMapIterator<QString, QVariant> it(data);
 
-            while (it.hasNext()) {
-                it.next();
+            for (auto it = data.constBegin(); it != data.constEnd(); it++) {
                 result << (it.key() + ": " + convertToString(it.value()));
             }
 
@@ -434,11 +430,8 @@ QString EngineExplorer::convertToString(const QVariant &value)
 int EngineExplorer::showData(QStandardItem *parent, Plasma::DataEngine::Data data)
 {
     int rowCount = 0;
-    Plasma::DataEngine::DataIterator it(data);
-    // parent->insertRows(0, data.count());
-    // parent->setColumnCount(3);
-    while (it.hasNext()) {
-        it.next();
+
+    for (auto it = data.constBegin(); it != data.constEnd(); it++) {
         parent->setChild(rowCount, 1, new QStandardItem(it.key()));
         if (it.value().canConvert(QVariant::List) /* && ! it.value().type() == QVariant::StringList
                                                      */) {
