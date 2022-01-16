@@ -458,6 +458,9 @@ void EngineExplorer::showData(QStandardItem *parent, int row, const QString &key
     if (value.canConvert<QVariantList>()) {
         const QVariantList list = value.toList();
         rowCount = showContainerData(parent, current, row, typeName, list);
+    } else if (value.canConvert<QVariantMap>()) {
+        const QVariantMap map = value.toMap();
+        rowCount = showContainerData(parent, current, row, typeName, map);
     } else {
         parent->setChild(row, 2, new QStandardItem(typeName));
         // clang-format off
@@ -483,6 +486,20 @@ int EngineExplorer::showContainerData(QStandardItem *parent, QStandardItem *curr
     for (const QVariant &var : list) {
         showData(current, rowCount, QString::number(rowCount), var);
         rowCount++;
+    }
+    return rowCount;
+}
+
+int EngineExplorer::showContainerData(QStandardItem *parent, QStandardItem *current, int row, const char *typeName, const QVariantMap &map)
+{
+    QStandardItem *typeItem = new QStandardItem(typeName);
+    typeItem->setToolTip(typeItem->text());
+    parent->setChild(row, 2, typeItem);
+    parent->setChild(row, 3, new QStandardItem(ki18ncp("Size of the map", "<%1 pair>", "<%1 pairs>").subs(map.size()).toString()));
+
+    int rowCount = 0;
+    for (auto it = map.constBegin(); it != map.constEnd(); it++) {
+        showData(current, rowCount++, it.key(), it.value());
     }
     return rowCount;
 }
