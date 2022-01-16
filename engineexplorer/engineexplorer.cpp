@@ -419,11 +419,12 @@ QString EngineExplorer::convertToString(const QVariant &value)
             }
 
             return result.join("\n");
-        } else if (value.canConvert(QVariant::String)) {
-            if (value.toString().isEmpty()) {
+        } else if (value.canConvert<QString>()) {
+            QString str = value.toString();
+            if (str.isEmpty()) {
                 return i18nc("The user did a query to a dataengine and it returned empty data", "<empty>");
             } else {
-                return value.toString();
+                return str;
             }
         }
 
@@ -445,7 +446,7 @@ int EngineExplorer::showData(QStandardItem *parent, Plasma::DataEngine::Data dat
         keyItem->setToolTip(it.key());
         parent->setChild(rowCount, 1, keyItem);
 
-        if (it.value().canConvert(QVariant::List)) {
+        if (it.value().canConvert<QVariantList>()) {
             const auto &list = it.value().toList();
 
             QStandardItem *listTypeItem = new QStandardItem(it.value().typeName());
