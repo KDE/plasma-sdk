@@ -135,6 +135,7 @@ Keywords[sl]=design;ikona;predogled;simbol;
 Keywords[sv]=design;ikon;förhandsgranskning;symbol;
 Keywords[uk]=design;icon;preview;symbol;дизайн;піктограма;іконка;перегляд;символ;
 Keywords[x-test]=xxdesignxx;xxiconxx;xxpreviewxx;xxsymbolxx;
+Keywords[zh_CN]=design;icon;preview;symbol;设计;图标;预览;符号;
 Exec=cuttlefish
 Icon=cuttlefish
 Type=Application
