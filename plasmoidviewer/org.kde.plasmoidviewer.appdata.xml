@@ -35,6 +35,7 @@
   <name xml:lang="sl">Plasmoid Viewer</name>
   <name xml:lang="sv">Plasmoid-visning</name>
   <name xml:lang="tg">Намоишгари Плазмойд</name>
+  <name xml:lang="tr">Plasmoid Görüntüleyici</name>
   <name xml:lang="uk">Перегляд плазмоїдів</name>
   <name xml:lang="x-test">xxPlasmoid Viewerxx</name>
   <name xml:lang="zh-CN">小部件查看器</name>
@@ -72,6 +73,7 @@
   <summary xml:lang="sl">Orodje za testiranje Plasminih appletov</summary>
   <summary xml:lang="sv">Testverktyg för Plasma miniprogram</summary>
   <summary xml:lang="tg">Абзорҳои санҷишӣ барои зербарномаҳои Плазма</summary>
+  <summary xml:lang="tr">Plasma uygulamacıkları için sınama aracı</summary>
   <summary xml:lang="uk">Засіб тестування аплетів Плазми</summary>
   <summary xml:lang="x-test">xxTesting tool for Plasma appletsxx</summary>
   <summary xml:lang="zh-CN">Plasma 小程序测试工具</summary>
@@ -109,6 +111,7 @@
     <p xml:lang="sl">Plasmoid Viewer je grafično orodje, ki razvijalcem omogoča testiranje Plasminih apletov.</p>
     <p xml:lang="sv">Plasmoid-visning är ett grafiskt verktyg som låter utvecklare prova Plasma miniprogram.</p>
     <p xml:lang="tg">Намоишгари Плазмойд абзори графикие мебошад, ки ба барномарезон барои гузаронидани санҷишҳо бо зербарномаҳои Плазма имкон медиҳад.</p>
+    <p xml:lang="tr">Plasmoid Görüntüleyici, geliştiricilerin Plasma uygulamacıklarını sınamalarına izin veren bir grafik arabirimli araçtır.</p>
     <p xml:lang="uk">Перегляд плазмоїдів — програма з графічним інтерфейсом, за допомогою якої розробники можуть тестувати аплети Плазми.</p>
     <p xml:lang="x-test">xxPlasmoid Viewer is a graphical tool allowing developers to test Plasma applets.xx</p>
     <p xml:lang="zh-CN">Plasma 小程序查看器是给开发者测试 Plasma 小部件的图形工具。</p>
