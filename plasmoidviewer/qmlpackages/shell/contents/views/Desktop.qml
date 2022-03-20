@@ -72,9 +72,8 @@ Rectangle {
         height: root.height/3
         anchors.horizontalCenter: root.horizontalCenter
         anchors.bottom: buttons.top
-        anchors.bottomMargin: units.largeSpacing / 4
+        anchors.bottomMargin: PlasmaCore.Units.smallSpacing
     }
-
 
     onContainmentChanged: {
         print("New Containment: " + containment)
