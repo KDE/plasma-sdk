@@ -12,6 +12,7 @@ import QtQml 2.15
 
 import org.kde.newstuff 1.62 as NewStuff
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.plasmoid 2.0
 import org.kde.kirigami 2.5 as Kirigami
 import org.kde.kcm 1.4
 
@@ -64,7 +65,7 @@ AbstractKCM {
         }
 
         Kirigami.InlineMessage {
-            visible: plasmoid.immutable || animating
+            visible: Plasmoid.immutable || animating
             text: i18nd("plasma_shell_org.kde.plasma.desktop", "Layout changes have been restricted by the system administrator")
             showCloseButton: true
             Layout.fillWidth: true
@@ -81,7 +82,7 @@ AbstractKCM {
                 id: pluginComboBox
                 Layout.preferredWidth: Math.max(implicitWidth, wallpaperComboBox.implicitWidth)
                 Kirigami.FormData.label: i18nd("plasma_shell_org.kde.plasma.desktop", "Layout:")
-                enabled: !plasmoid.immutable
+                enabled: !Plasmoid.immutable
                 model: configDialog.containmentPluginsConfigModel
                 implicitWidth: PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).width * 24
                 textRole: "name"

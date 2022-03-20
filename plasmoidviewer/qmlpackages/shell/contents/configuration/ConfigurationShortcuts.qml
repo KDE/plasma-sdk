@@ -7,8 +7,10 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.3 as QtControls
 import QtQuick.Layouts 1.0
+
 import org.kde.kquickcontrols 2.0
 import org.kde.kirigami 2.14 as Kirigami
+import org.kde.plasma.plasmoid 2.0
 
 Kirigami.ScrollablePage {
     id: root
@@ -17,7 +19,7 @@ Kirigami.ScrollablePage {
 
     signal configurationChanged
     function saveConfig() {
-        plasmoid.globalShortcut = button.keySequence
+        Plasmoid.globalShortcut = button.keySequence
     }
 
     ColumnLayout {
@@ -28,9 +30,9 @@ Kirigami.ScrollablePage {
         }
         KeySequenceItem {
             id: button
-            keySequence: plasmoid.globalShortcut
+            keySequence: Plasmoid.globalShortcut
             onKeySequenceChanged: {
-                if (keySequence != plasmoid.globalShortcut) {
+                if (keySequence != Plasmoid.globalShortcut) {
                     root.configurationChanged();
                 }
             }

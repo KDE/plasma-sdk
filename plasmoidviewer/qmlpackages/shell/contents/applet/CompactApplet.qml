@@ -9,6 +9,7 @@ import QtQuick.Window 2.0
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.plasmoid 2.0
 import org.kde.kquickcontrolsaddons 2.0
 
 PlasmaCore.ToolTipArea {
@@ -16,12 +17,12 @@ PlasmaCore.ToolTipArea {
     objectName: "org.kde.desktop-CompactApplet"
     anchors.fill: parent
 
-    mainText: plasmoid.toolTipMainText
-    subText: plasmoid.toolTipSubText
-    location: plasmoid.location
-    active: !plasmoid.expanded
-    textFormat: plasmoid.toolTipTextFormat
-    mainItem: plasmoid.toolTipItem ? plasmoid.toolTipItem : null
+    mainText: Plasmoid.toolTipMainText
+    subText: Plasmoid.toolTipSubText
+    location: Plasmoid.location
+    active: !Plasmoid.expanded
+    textFormat: Plasmoid.toolTipTextFormat
+    mainItem: Plasmoid.toolTipItem ? Plasmoid.toolTipItem : null
 
     property Item fullRepresentation
     property Item compactRepresentation
@@ -90,7 +91,7 @@ PlasmaCore.ToolTipArea {
         visible: fromCurrentTheme && opacity > 0
         prefix: {
             var prefix;
-            switch (plasmoid.location) {
+            switch (Plasmoid.location) {
                 case PlasmaCore.Types.LeftEdge:
                     prefix = "west-active-tab";
                     break;
@@ -108,7 +109,7 @@ PlasmaCore.ToolTipArea {
                 }
                 return prefix;
             }
-        opacity: plasmoid.expanded ? 1 : 0
+        opacity: Plasmoid.expanded ? 1 : 0
         Behavior on opacity {
             NumberAnimation {
                 duration: PlasmaCore.Units.shortDuration
@@ -120,16 +121,17 @@ PlasmaCore.ToolTipArea {
     Timer {
         id: expandedSync
         interval: 100
-        onTriggered: plasmoid.expanded = popupWindow.visible;
+        onTriggered: Plasmoid.expanded = popupWindow.visible;
     }
 
     Connections {
-        target: plasmoid.action("configure")
-        function onTriggered() { plasmoid.expanded = false }
+        target: Plasmoid.action("configure")
+        function onTriggered() { Plasmoid.expanded = false }
     }
 
     Connections {
-        target: plasmoid
+        // TODO KF6: strip `.self` as it is a workaround that is no longer needed in Qt 6
+        target: Plasmoid.self
         function onContextualActionsAboutToShow() { root.hideToolTip() }
     }
 
@@ -137,11 +139,11 @@ PlasmaCore.ToolTipArea {
         id: popupWindow
         objectName: "popupWindow"
         flags: Qt.WindowStaysOnTopHint
-        visible: plasmoid.expanded && fullRepresentation
+        visible: Plasmoid.expanded && fullRepresentation
         visualParent: compactRepresentation ? compactRepresentation : null
-        location: plasmoid.location
-        hideOnWindowDeactivate: plasmoid.hideOnWindowDeactivate
-        backgroundHints: (plasmoid.containmentDisplayHints & PlasmaCore.Types.DesktopFullyCovered) ? PlasmaCore.Dialog.SolidBackground : PlasmaCore.Dialog.StandardBackground
+        location: Plasmoid.location
+        hideOnWindowDeactivate: Plasmoid.hideOnWindowDeactivate
+        backgroundHints: (Plasmoid.containmentDisplayHints & PlasmaCore.Types.DesktopFullyCovered) ? PlasmaCore.Dialog.SolidBackground : PlasmaCore.Dialog.StandardBackground
 
         property var oldStatus: PlasmaCore.Types.UnknownStatus
 
@@ -152,7 +154,7 @@ PlasmaCore.ToolTipArea {
             focus: true
 
             Keys.onEscapePressed: {
-                plasmoid.expanded = false;
+                Plasmoid.expanded = false;
             }
 
             LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
@@ -177,10 +179,10 @@ PlasmaCore.ToolTipArea {
         onVisibleChanged: {
             if (!visible) {
                 expandedSync.restart();
-                plasmoid.status = oldStatus;
+                Plasmoid.status = oldStatus;
             } else {
-                oldStatus = plasmoid.status;
-                plasmoid.status = PlasmaCore.Types.RequiresAttentionStatus;
+                oldStatus = Plasmoid.status;
+                Plasmoid.status = PlasmaCore.Types.RequiresAttentionStatus;
                 // This call currently fails and complains at runtime:
                 // QWindow::setWindowState: QWindow::setWindowState does not accept Qt::WindowActive
                 popupWindow.requestActivate();
