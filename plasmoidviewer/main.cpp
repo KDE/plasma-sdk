@@ -11,7 +11,6 @@
 #include <KAboutData>
 #include <KDBusService>
 #include <KLocalizedString>
-#include <KQuickAddons/QtQuickSettings>
 #include <QDebug>
 #include <QPixmapCache>
 
@@ -78,7 +77,6 @@ int main(int argc, char **argv)
     parser.process(app);
 
     KDBusService service(KDBusService::Multiple);
-    KQuickAddons::QtQuickSettings::init();
 
     const QString applet = parser.value("applet");
     if (applet.isEmpty()) {
