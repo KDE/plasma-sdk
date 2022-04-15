@@ -18,6 +18,7 @@
 #include <QStandardPaths>
 
 #include <KConfigGroup>
+#include <KIO/OpenFileManagerWindowJob>
 #include <KIconLoader>
 #include <KIconTheme>
 #include <KPackage/PackageLoader>
@@ -243,6 +244,11 @@ void IconModel::output(const QString &text)
 {
     cout << text.toLocal8Bit();
     cout.flush();
+}
+
+void IconModel::openContainingFolder(const QString &filename)
+{
+    KIO::highlightInFileManager({QUrl(filename)});
 }
 
 QVariantList IconModel::inOtherThemes(const QString &name, int iconSize)

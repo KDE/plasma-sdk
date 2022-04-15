@@ -57,6 +57,8 @@ public:
 
     Q_INVOKABLE void output(const QString &text);
 
+    Q_INVOKABLE void openContainingFolder(const QString &filename);
+
 Q_SIGNALS:
     void categoriesChanged();
     void loadingChanged();

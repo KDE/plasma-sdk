@@ -18,6 +18,11 @@ Item {
             onTriggered: Qt.openUrlExternally(preview.fullPath)
         },
         Kirigami.Action {
+            text: i18n("Open icon containing folder")
+            iconName: "document-open-folder"
+            onTriggered: iconModel.openContainingFolder(preview.fullPath)
+        },
+        Kirigami.Action {
             text: pickerMode ? i18n("Insert icon name") : i18n("Copy icon name to clipboard")
             iconName: "edit-copy"
             onTriggered: {
