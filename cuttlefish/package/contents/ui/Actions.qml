@@ -13,17 +13,17 @@ import org.kde.kirigami 2.8 as Kirigami
 Item {
     property list<Kirigami.Action> actions:[
         Kirigami.Action {
-            text: i18n("Open icon with external program")
+            text: i18n("Open with External Program")
             iconName: "document-open"
             onTriggered: Qt.openUrlExternally(preview.fullPath)
         },
         Kirigami.Action {
-            text: i18n("Open icon containing folder")
+            text: i18n("Open Containing Folder")
             iconName: "document-open-folder"
             onTriggered: iconModel.openContainingFolder(preview.fullPath)
         },
         Kirigami.Action {
-            text: pickerMode ? i18n("Insert icon name") : i18n("Copy icon name to clipboard")
+            text: pickerMode ? i18n("Insert Name") : i18n("Copy Name to Clipboard")
             iconName: "edit-copy"
             onTriggered: {
                 clipboard(preview.iconName)
@@ -33,7 +33,7 @@ Item {
         Kirigami.Action {
             id: screenshotAction
             iconName: "camera-web-symbolic"
-            text: i18n("Create screenshot of icon with…")
+            text: i18n("Take Screenshot…")
             onTriggered: screenshotPopup.popup()
             Kirigami.Action {
                 text: i18n("Breeze Colors")
@@ -53,7 +53,7 @@ Item {
             }
         },
         Kirigami.Action {
-            text: i18n("View icon in other themes")
+            text: i18n("View in Other Icon Themes")
             icon.name: "document-equal"
             onTriggered: comparison.sheetOpen = true
         }
