@@ -29,7 +29,7 @@ Item {
         anchors.fill: background
         clip: true
         Column {
-            anchors.centerIn: background
+            anchors.centerIn: parent
             PlasmaComponents.ToolButton {
                 flat: false
                 iconSource: "window-close"

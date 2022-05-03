@@ -29,12 +29,11 @@ Item {
         Column {
             anchors {
                 fill: parent
-                bottomMargin: label.top
             }
             Repeater {
                 model: 5
                 PlasmaCore.FrameSvgItem {
-                    width: background.width
+                    width: parent.width
                     height: Kirigami.Units.gridUnit * 3
                     imagePath: "widgets/listitem"
                     prefix: modelData == 0 ? "section" : (modelData == 1 ? "pressed" : "normal")
@@ -69,15 +68,15 @@ Item {
                 }
             }
         }
-    }
 
-    PlasmaComponents.Label {
-        id: label
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            bottom: parent.bottom
+        PlasmaComponents.Label {
+            id: label
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                bottom: parent.bottom
+            }
+            text: model.imagePath
+            visible: width < parent.width
         }
-        text: model.imagePath
-        visible: width < marginsRectangle.width
     }
 }
