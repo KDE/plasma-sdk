@@ -118,7 +118,11 @@ Kirigami.ApplicationWindow {
     property QtObject metadataEditor
     Component {
         id: metadataEditorComponent
-        MetadataEditor {}
+        MetadataEditor {
+            onCreated: name => {
+                themeSelector.currentIndex = themeSelector.indexOfValue(name);
+            }
+        }
     }
     property QtObject colorEditor
     Component {

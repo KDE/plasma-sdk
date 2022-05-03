@@ -16,6 +16,9 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 Kirigami.Dialog {
     id: dialog
 
+    signal created(name: string)
+    signal edited(name: string)
+
     property alias name: nameField.text
     property alias author: authorField.text
     property alias email: emailField.text
@@ -113,9 +116,10 @@ Kirigami.Dialog {
     onAccepted: {
         if (newTheme) {
             themeModel.createNewTheme(name, author, email, license, website);
-            themeSelector.currentIndex = themeSelector.indexOfValue(name);
+            dialog.created(name);
         } else {
             themeModel.editThemeMetaData(name, author, email, license, website);
+            dialog.edited(name);
         }
     }
 }
