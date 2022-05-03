@@ -134,17 +134,20 @@ Kirigami.ApplicationWindow {
         id: palette
     }
 
-    Rectangle {
-        anchors.fill: scrollView
-        color: theme.viewBackgroundColor
-    }
-    ScrollView {
-        id: scrollView
+    QQC2.ScrollView {
+        id: scroll
+
+        // HACK: workaround for https://bugreports.qt.io/browse/QTBUG-83890
+        QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
+
         anchors {
             top: parent.top
             bottom: parent.bottom
             left: parent.left
             right: sidebar.left
+        }
+        background: Rectangle {
+            color: theme.viewBackgroundColor
         }
         GridView {
             id: view
