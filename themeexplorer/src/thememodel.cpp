@@ -168,9 +168,11 @@ QVariant ThemeModel::data(const QModelIndex &index, int role) const
 void ThemeModel::load()
 {
     beginResetModel();
-    qDebug() << "Loading theme description file" << m_package.filePath("data", "themeDescription.json");
 
-    QFile jsonFile(m_package.filePath("data", "themeDescription.json"));
+    const auto filePath = m_package.filePath("data", "themeDescription.json");
+    qDebug() << "Loading theme description file" << filePath;
+
+    QFile jsonFile(filePath);
     jsonFile.open(QIODevice::ReadOnly);
 
     QJsonParseError error;
