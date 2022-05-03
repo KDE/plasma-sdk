@@ -110,7 +110,7 @@ Kirigami.ApplicationWindow {
             }
             Kirigami.SearchField {
                 placeholderText: i18n("Search…")
-                onTextChanged: searchModel.filterRegExp = ".*" + text + ".*"
+                onTextEdited: searchModel.setFilterFixedString(text)
             }
         }
     }
@@ -130,14 +130,6 @@ Kirigami.ApplicationWindow {
         ColorEditor {}
     }
 
-    Timer {
-        running: true
-        interval: 200
-        onTriggered: {
-            //NOTE:assigning this in a second moment solves a crash in some versions of Qt 5.8
-            searchModel.sourceModel= themeModel
-        }
-    }
     SystemPalette {
         id: palette
     }
@@ -159,6 +151,7 @@ Kirigami.ApplicationWindow {
             anchors.fill: parent
             model: PlasmaCore.SortFilterModel {
                 id: searchModel
+                sourceModel: themeModel
                 filterRole: "imagePath"
             }
             cellWidth: root.iconSize
