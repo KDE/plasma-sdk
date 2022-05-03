@@ -15,6 +15,8 @@
 #include <qcommandlineparser.h>
 
 #include <KAboutData>
+#include <KLocalizedContext>
+#include <KLocalizedString>
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQmlExpression>
@@ -30,6 +32,7 @@ int main(int argc, char **argv)
 
     app.setApplicationVersion(PROJECT_VERSION);
     app.setDesktopFileName(QStringLiteral("org.kde.plasma.themeexplorer"));
+    KLocalizedString::setApplicationDomain("org.kde.plasma.themeexplorer");
 
     QCommandLineParser parser;
     parser.addVersionOption();
@@ -75,6 +78,8 @@ int main(int argc, char **argv)
     for (auto author : data.authors()) {
         aboutData.addAuthor(author.name(), author.task(), author.emailAddress(), author.webAddress(), author.ocsUsername());
     }
+
+    obj->engine()->rootContext()->setContextObject(new KLocalizedContext(obj->engine()));
 
     // The root is not a window?
     // have to use a normal QQuickWindow since the root item is already created

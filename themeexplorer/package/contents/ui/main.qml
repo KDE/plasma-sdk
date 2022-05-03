@@ -10,7 +10,9 @@ import QtQuick.Layouts 1.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-ApplicationWindow {
+import org.kde.kirigami 2.18 as Kirigami
+
+Kirigami.ApplicationWindow {
     id: root
     width: units.gridUnit * 50
     height: units.gridUnit * 35
@@ -23,7 +25,7 @@ ApplicationWindow {
         onActivated: Qt.quit()
     }
 
-    toolBar: ToolBar {
+    header: ToolBar {
         RowLayout {
             anchors.fill: parent
             ToolButton {

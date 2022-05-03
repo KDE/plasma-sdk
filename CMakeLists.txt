@@ -48,18 +48,9 @@ if (QT_MAJOR_VERSION STREQUAL "6")
     find_package(Qt6Core5Compat)
 endif()
 
-
-find_package(KF5Kirigami2 ${KF5_MIN_VERSION})
-set_package_properties(KF5Kirigami2 PROPERTIES
-    DESCRIPTION "KDE's lightweight user interface framework for mobile and convergent applications"
-    URL "https://techbase.kde.org/Kirigami"
-    PURPOSE "Required by lookandfeelexplorer"
-    TYPE RUNTIME
-)
-
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Archive Completion Config ConfigWidgets CoreAddons DBusAddons Declarative I18n IconThemes
-    KIO Plasma PlasmaQuick Service TextEditor WidgetsAddons DocTools)
+    KIO Kirigami2 Plasma PlasmaQuick Service TextEditor WidgetsAddons DocTools)
 
 #########################################################################
 add_definitions(
