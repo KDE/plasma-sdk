@@ -9,13 +9,15 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
+import org.kde.kirigami 2.19 as Kirigami
+
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 Item {
     id: analogclock
 
-    width: units.gridUnit * 15
-    height: units.gridUnit * 15
+    width: Kirigami.Units.gridUnit * 15
+    height: Kirigami.Units.gridUnit * 15
     property int hours
     property int minutes
     property int seconds

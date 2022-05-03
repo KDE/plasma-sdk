@@ -8,14 +8,14 @@ import QtQuick 2.5
 import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.1
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.19 as Kirigami
 
-import org.kde.kirigami 2.18 as Kirigami
+import org.kde.plasma.core 2.0 as PlasmaCore
 
 Kirigami.ApplicationWindow {
     id: root
-    width: units.gridUnit * 50
-    height: units.gridUnit * 35
+    width: Kirigami.Units.gridUnit * 50
+    height: Kirigami.Units.gridUnit * 35
     visible: true
     property int iconSize: iconSizeSlider.value
     property alias showMargins: showMarginsCheckBox.checked
@@ -183,11 +183,11 @@ Kirigami.ApplicationWindow {
                     anchors {
                         right: parent.right
                         bottom: parent.bottom
-                        margins: units.gridUnit
+                        margins: Kirigami.Units.gridUnit
                     }
-                    width: units.gridUnit
-                    height: units.gridUnit
-                    radius: units.gridUnit
+                    width: Kirigami.Units.gridUnit
+                    height: Kirigami.Units.gridUnit
+                    radius: Kirigami.Units.gridUnit
                     opacity: 0.5
                     color: model.usesFallback ? "red" : "green"
                 }
@@ -213,7 +213,7 @@ Kirigami.ApplicationWindow {
         ColumnLayout {
             anchors {
                 fill: parent
-                margins: units.gridUnit
+                margins: Kirigami.Units.gridUnit
             }
             Label {
                 Layout.fillWidth: true
@@ -268,9 +268,9 @@ Kirigami.ApplicationWindow {
             Slider {
                 id: iconSizeSlider
                 Layout.fillWidth: true
-                value: units.gridUnit * 12
-                minimumValue: units.gridUnit * 5
-                maximumValue: units.gridUnit * 20
+                value: Kirigami.Units.gridUnit * 12
+                minimumValue: Kirigami.Units.gridUnit * 5
+                maximumValue: Kirigami.Units.gridUnit * 20
             }
         }
     }

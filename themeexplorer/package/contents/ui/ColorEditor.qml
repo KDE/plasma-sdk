@@ -9,9 +9,12 @@ import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.2
-import org.kde.plasma.core 2.0 as PlasmaCore
-import "fakecontrols" as FakeControls
 
+import org.kde.kirigami 2.19 as Kirigami
+
+import org.kde.plasma.core 2.0 as PlasmaCore
+
+import "fakecontrols" as FakeControls
 
 Dialog {
     id: dialog
@@ -73,8 +76,8 @@ Dialog {
         }
     }
     contentItem: Rectangle {
-        implicitWidth:  units.gridUnit * 50
-        implicitHeight: units.gridUnit * 42
+        implicitWidth:  Kirigami.Units.gridUnit * 50
+        implicitHeight: Kirigami.Units.gridUnit * 42
 
         Keys.onPressed: {
             if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
@@ -95,14 +98,14 @@ Dialog {
             Rectangle {
                 Layout.fillWidth: true
                 //Layout.fillHeight: true
-                Layout.minimumHeight: units.gridUnit * 15
+                Layout.minimumHeight: Kirigami.Units.gridUnit * 15
                 color: palette.base
                 Rectangle {
                     id: plasmoidPreview
                     anchors.centerIn: parent
                     width: parent.width/1.5
                     height: parent.height/1.5
-                    radius: units.smallSpacing
+                    radius: Kirigami.Units.smallSpacing
                     color: backgroundColor
                     ColumnLayout {
                         anchors.centerIn: parent
@@ -136,8 +139,8 @@ Dialog {
                 DropShadow {
                     anchors.fill: plasmoidPreview
                     horizontalOffset: 0
-                    verticalOffset: units.smallSpacing/2
-                    radius: units.gridUnit / 2.2
+                    verticalOffset: Kirigami.Units.smallSpacing/2
+                    radius: Kirigami.Units.gridUnit / 2.2
                     samples: 16
                     color: Qt.rgba(0, 0, 0, 0.5)
                     source: plasmoidPreview
@@ -146,7 +149,7 @@ Dialog {
             Rectangle {
                 id: complementaryBar
                 color: complementaryBackgroundColor
-                height: units.gridUnit * 2
+                height: Kirigami.Units.gridUnit * 2
                 anchors {
                     left: parent.left
                     right: parent.right
@@ -158,7 +161,7 @@ Dialog {
                     anchors {
                         verticalCenter: parent.verticalCenter
                         left: complementaryBar.left
-                        leftMargin: units.smallspacing
+                        leftMargin: Kirigami.Units.smallspacing
                     }
                 }
                 RowLayout {
@@ -180,7 +183,7 @@ Dialog {
                 id: scroll
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumHeight: units.gridUnit * 15
+                Layout.minimumHeight: Kirigami.Units.gridUnit * 15
                 Item {
                     width: scroll.viewport.width
                     height: childrenRect.height
@@ -188,7 +191,7 @@ Dialog {
                         //Layout.alignment: Qt.AlignHCenter
                         anchors.centerIn: parent
                         columns: 2
-                        columnSpacing: units.smallSpacing
+                        columnSpacing: Kirigami.Units.smallSpacing
 
                         FormLabel {
                             text: i18n("Text color:")
@@ -318,7 +321,7 @@ Dialog {
             RowLayout {
                 anchors {
                     right: parent.right
-                    rightMargin: units.smallSpacing
+                    rightMargin: Kirigami.Units.smallSpacing
                 }
                 Button {
                     text: i18n("OK")

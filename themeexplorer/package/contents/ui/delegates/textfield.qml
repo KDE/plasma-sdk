@@ -8,6 +8,8 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.3
 
+import org.kde.kirigami 2.19 as Kirigami
+
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
@@ -16,7 +18,7 @@ Item {
         id: background
         anchors {
             fill: parent
-            margins: units.gridUnit
+            margins: Kirigami.Units.gridUnit
         }
         radius: 3
         color: theme.backgroundColor

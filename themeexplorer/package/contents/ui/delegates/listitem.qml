@@ -8,6 +8,8 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.3
 
+import org.kde.kirigami 2.19 as Kirigami
+
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
@@ -16,7 +18,7 @@ Item {
         id: background
         anchors {
             fill: parent
-            margins: units.gridUnit
+            margins: Kirigami.Units.gridUnit
         }
         clip: true
 
@@ -33,7 +35,7 @@ Item {
                 model: 5
                 PlasmaCore.FrameSvgItem {
                     width: background.width
-                    height: units.gridUnit * 3
+                    height: Kirigami.Units.gridUnit * 3
                     imagePath: "widgets/listitem"
                     prefix: modelData == 0 ? "section" : (modelData == 1 ? "pressed" : "normal")
 

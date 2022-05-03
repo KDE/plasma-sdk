@@ -8,6 +8,8 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.3
 
+import org.kde.kirigami 2.19 as Kirigami
+
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
@@ -17,7 +19,7 @@ Item {
         id: background
         anchors {
             fill: parent
-            margins: units.gridUnit
+            margins: Kirigami.Units.gridUnit
         }
         radius: 3
         color: theme.backgroundColor
@@ -26,7 +28,7 @@ Item {
     Column {
         anchors.centerIn: background
         PlasmaExtras.ScrollArea {
-            width: background.width - units.gridUnit*2
+            width: background.width - Kirigami.Units.gridUnit*2
             height: width
             Item {
                 width: background.width * 2

@@ -8,11 +8,14 @@ import QtQuick 2.3
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.2
+
+import org.kde.kirigami 2.19 as Kirigami
+
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 Button {
     id: colorButton
-    Layout.minimumWidth: units.gridUnit * 3
+    Layout.minimumWidth: Kirigami.Units.gridUnit * 3
     onClicked: {
         colorDialog.activeButton = colorButton;
         colorDialog.open();
@@ -22,7 +25,7 @@ Button {
     Rectangle {
         id: colorRect
         anchors.centerIn: parent
-        width: parent.width - 2 * units.smallSpacing
+        width: parent.width - 2 * Kirigami.Units.smallSpacing
         height: theme.mSize(theme.defaultFont).height
     }
 }
