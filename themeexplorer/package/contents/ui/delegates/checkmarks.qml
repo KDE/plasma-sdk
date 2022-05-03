@@ -52,5 +52,5 @@ Item {
                 visible: width < background.width
             }
         }
-}
+    }
 }

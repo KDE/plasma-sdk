@@ -79,5 +79,4 @@ Item {
         text: model.imagePath
         visible: width < parent.width
     }
-
 }

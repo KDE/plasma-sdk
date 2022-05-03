@@ -23,7 +23,7 @@ Item {
     property int seconds
     property bool showSecondsHand: true
 
- 
+
     PlasmaCore.DataSource {
         id: dataSource
         engine: "time"
