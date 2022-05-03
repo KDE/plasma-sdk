@@ -23,7 +23,6 @@ Item {
     property int seconds
     property bool showSecondsHand: true
 
-
     PlasmaCore.DataSource {
         id: dataSource
         engine: "time"
@@ -39,12 +38,6 @@ Item {
             onDataChanged();
         }
     }
-
-
-    Component.onCompleted: {
-        dataSource.onDataChanged.connect(dateTimeChanged);
-    }
-
 
     PlasmaCore.Svg {
         id: clockSvg
