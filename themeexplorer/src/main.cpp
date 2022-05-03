@@ -36,11 +36,7 @@ int main(int argc, char **argv)
     parser.addHelpOption();
     parser.setApplicationDescription(i18n("Plasma Theme Explorer"));
 
-    QCommandLineOption themeOption(QCommandLineOption(QStringList() << "t"
-                                                                    << "theme",
-                                                      i18n("The theme to open"),
-                                                      "theme"));
-
+    QCommandLineOption themeOption({"t", "theme"}, i18n("The theme to open"), "theme", "default");
     parser.addOption(themeOption);
 
     parser.process(app);
@@ -59,13 +55,11 @@ int main(int argc, char **argv)
     qmlRegisterAnonymousType<ThemeListModel>("org.kde.plasma.sdk", 1);
     qmlRegisterAnonymousType<ColorEditor>("org.kde.plasma.sdk", 1);
     ThemeModel *themeModel = new ThemeModel(obj->package());
-    if (parser.isSet(themeOption)) {
-        themeModel->setTheme(parser.value(themeOption));
-        obj->engine()->rootContext()->setContextProperty("commandlineTheme", parser.value(themeOption));
-    } else {
-        themeModel->setTheme(parser.value("default"));
-        obj->engine()->rootContext()->setContextProperty("commandlineTheme", "default");
-    }
+
+    const QString theme = parser.value(themeOption);
+    themeModel->setTheme(theme);
+    obj->engine()->rootContext()->setContextProperty("commandlineTheme", theme);
+
     obj->engine()->rootContext()->setContextProperty("themeModel", QVariant::fromValue(themeModel));
 
     obj->completeInitialization();
