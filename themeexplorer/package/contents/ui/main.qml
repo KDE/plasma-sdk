@@ -12,6 +12,7 @@ import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.19 as Kirigami
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 Kirigami.ApplicationWindow {
     id: root
@@ -160,11 +161,8 @@ Kirigami.ApplicationWindow {
             cellWidth: root.iconSize
             cellHeight: cellWidth
             highlightMoveDuration: 0
+            highlight: PlasmaExtras.Highlight {}
 
-            highlight: Rectangle {
-                radius: 3
-                color: palette.highlight
-            }
             delegate: Item {
                 width: view.cellWidth
                 height: view.cellHeight
