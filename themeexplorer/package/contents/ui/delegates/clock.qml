@@ -28,10 +28,10 @@ Item {
         connectedSources: "Local"
         interval: showSecondsHand ? 1000 : 30000
         onDataChanged: {
-            var date = new Date(data["Local"]["DateTime"]);
-            hours = date.getHours();
-            minutes = date.getMinutes();
-            seconds = date.getSeconds();
+            const date = new Date(data["Local"]["DateTime"]);
+            analogclock.hours = date.getHours();
+            analogclock.minutes = date.getMinutes();
+            analogclock.seconds = date.getSeconds();
         }
         Component.onCompleted: {
             onDataChanged();
