@@ -11,7 +11,7 @@ import QtQuick.Controls 1.3
 import org.kde.kirigami 2.19 as Kirigami
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 2.0 as PlasmaComponents3
 
 Item {
     Rectangle {
@@ -26,10 +26,11 @@ Item {
     }
     Column {
         anchors.centerIn: background
-        PlasmaComponents.BusyIndicator {
+
+        PlasmaComponents3.BusyIndicator {
             anchors.horizontalCenter: parent.horizontalCenter
         }
-        PlasmaComponents.Label {
+        PlasmaComponents3.Label {
             anchors.horizontalCenter: parent.horizontalCenter
             text: model.imagePath
             visible: width < background.width

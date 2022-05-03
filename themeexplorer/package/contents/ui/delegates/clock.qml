@@ -6,8 +6,7 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+import QtQuick 2.15
 
 import org.kde.kirigami 2.19 as Kirigami
 

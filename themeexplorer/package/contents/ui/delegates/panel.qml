@@ -4,23 +4,21 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 1.3
+import QtQuick 2.15
 
 import org.kde.kirigami 2.19 as Kirigami
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 Item {
     PlasmaCore.Svg {
         imagePath: model.imagePath
         onRepaintNeeded: {
-            bottomPanelShadow.visible = bottomPanelShadow.hasElementPrefix("shadow")
             topPanelShadow.visible = topPanelShadow.hasElementPrefix("shadow")
             leftPanelShadow.visible = leftPanelShadow.hasElementPrefix("shadow")
             rightPanelShadow.visible = rightPanelShadow.hasElementPrefix("shadow")
+            bottomPanelShadow.visible = bottomPanelShadow.hasElementPrefix("shadow")
         }
     }
     Rectangle {
@@ -51,8 +49,8 @@ Item {
     PlasmaCore.FrameSvgItem {
         anchors {
             fill: bottomPanelShadow
-            leftMargin: bottomPanelShadow.margins.left
             topMargin: bottomPanelShadow.margins.top
+            leftMargin: bottomPanelShadow.margins.left
             rightMargin: bottomPanelShadow.margins.right
             bottomMargin: bottomPanelShadow.margins.bottom
         }
@@ -63,8 +61,8 @@ Item {
             id: marginsRectangle
             anchors {
                 fill: parent
-                leftMargin: parent.margins.left
                 topMargin: parent.margins.top
+                leftMargin: parent.margins.left
                 rightMargin: parent.margins.right
                 bottomMargin: parent.margins.bottom
             }
@@ -91,8 +89,8 @@ Item {
     PlasmaCore.FrameSvgItem {
         anchors {
             fill: leftPanelShadow
-            leftMargin: leftPanelShadow.margins.left
             topMargin: leftPanelShadow.margins.top
+            leftMargin: leftPanelShadow.margins.left
             rightMargin: leftPanelShadow.margins.right
             bottomMargin: leftPanelShadow.margins.bottom
         }
@@ -102,8 +100,8 @@ Item {
         Rectangle {
             anchors {
                 fill: parent
-                leftMargin: parent.margins.left
                 topMargin: parent.margins.top
+                leftMargin: parent.margins.left
                 rightMargin: parent.margins.right
                 bottomMargin: parent.margins.bottom
             }
@@ -130,8 +128,8 @@ Item {
     PlasmaCore.FrameSvgItem {
         anchors {
             fill: topPanelShadow
-            leftMargin: topPanelShadow.margins.left
             topMargin: topPanelShadow.margins.top
+            leftMargin: topPanelShadow.margins.left
             rightMargin: topPanelShadow.margins.right
             bottomMargin: topPanelShadow.margins.bottom
         }
@@ -141,8 +139,8 @@ Item {
         Rectangle {
             anchors {
                 fill: parent
-                leftMargin: parent.margins.left
                 topMargin: parent.margins.top
+                leftMargin: parent.margins.left
                 rightMargin: parent.margins.right
                 bottomMargin: parent.margins.bottom
             }
@@ -169,8 +167,8 @@ Item {
     PlasmaCore.FrameSvgItem {
         anchors {
             fill: rightPanelShadow
-            leftMargin: rightPanelShadow.margins.left
             topMargin: rightPanelShadow.margins.top
+            leftMargin: rightPanelShadow.margins.left
             rightMargin: rightPanelShadow.margins.right
             bottomMargin: rightPanelShadow.margins.bottom
         }
@@ -180,8 +178,8 @@ Item {
         Rectangle {
             anchors {
                 fill: parent
-                leftMargin: parent.margins.left
                 topMargin: parent.margins.top
+                leftMargin: parent.margins.left
                 rightMargin: parent.margins.right
                 bottomMargin: parent.margins.bottom
             }
@@ -191,7 +189,7 @@ Item {
         }
     }
 
-    PlasmaComponents.Label {
+    PlasmaComponents3.Label {
         anchors.centerIn: parent
         text: model.imagePath
         visible: width < marginsRectangle.width

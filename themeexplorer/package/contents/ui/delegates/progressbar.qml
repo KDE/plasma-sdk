@@ -4,14 +4,12 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 1.3
+import QtQuick 2.15
 
 import org.kde.kirigami 2.19 as Kirigami
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 Item {
     Rectangle {
@@ -26,15 +24,17 @@ Item {
     }
     Column {
         anchors.centerIn: background
-        PlasmaComponents.ProgressBar {
-            width: background.width - 10
+        spacing: PlasmaCore.Units.gridUnit
+
+        PlasmaComponents3.ProgressBar {
+            width: background.width - Kirigami.Units.gridUnit
             value: 0.5
         }
-        PlasmaComponents.ProgressBar {
-            width: background.width - 10
+        PlasmaComponents3.ProgressBar {
+            width: background.width - Kirigami.Units.gridUnit
             indeterminate: true
         }
-        PlasmaComponents.Label {
+        PlasmaComponents3.Label {
             anchors.horizontalCenter: parent.horizontalCenter
             text: model.imagePath
             visible: width < background.width

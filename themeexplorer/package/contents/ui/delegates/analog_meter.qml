@@ -6,13 +6,13 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+import QtQuick 2.15
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 Item {
+    id: root
 
     property int value: 30
 
@@ -34,7 +34,7 @@ Item {
         id: centerScrew
         svg: meterSvg
         elementId: "rotatecenter"
-        rotation: value + 90
+        rotation: root.value + 90
 
         x: face.x + meterSvg.elementRect("rotatecenter").x * svgScale
         y: face.y + meterSvg.elementRect("rotatecenter").y * svgScale
@@ -71,7 +71,7 @@ Item {
         width: naturalSize.width * centerScrew.svgScale
         height: naturalSize.height * centerScrew.svgScale
     }
-    PlasmaComponents.Label {
+    PlasmaComponents3.Label {
         anchors {
             horizontalCenter: parent.horizontalCenter
             top: face.bottom

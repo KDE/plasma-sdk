@@ -4,14 +4,12 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 1.3
+import QtQuick 2.15
 
 import org.kde.kirigami 2.19 as Kirigami
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 Item {
     Item {
@@ -36,7 +34,7 @@ Item {
                     width: parent.width
                     height: Kirigami.Units.gridUnit * 3
                     imagePath: "widgets/listitem"
-                    prefix: modelData == 0 ? "section" : (modelData == 1 ? "pressed" : "normal")
+                    prefix: modelData === 0 ? "section" : (modelData === 1 ? "pressed" : "normal")
 
                     Rectangle {
                         id: marginsRectangle
@@ -51,7 +49,7 @@ Item {
                         opacity: 0.5
                         visible: root.showMargins
                     }
-                    PlasmaComponents.Label {
+                    PlasmaComponents3.Label {
                         anchors.centerIn: parent
                         text: parent.prefix
                     }
@@ -69,7 +67,7 @@ Item {
             }
         }
 
-        PlasmaComponents.Label {
+        PlasmaComponents3.Label {
             id: label
             anchors {
                 horizontalCenter: parent.horizontalCenter
