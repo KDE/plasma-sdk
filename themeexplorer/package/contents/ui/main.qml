@@ -4,9 +4,10 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.5
+import QtQuick 2.15
 import QtQuick.Controls 1.3
-import QtQuick.Layouts 1.1
+import QtQuick.Controls 2.15 as QQC2
+import QtQuick.Layouts 1.15
 
 import org.kde.kirigami 2.19 as Kirigami
 
@@ -14,23 +15,25 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 
 Kirigami.ApplicationWindow {
     id: root
+
+    property int iconSize: iconSizeSlider.value
+    property alias showMargins: showMarginsCheckBox.checked
+
     width: Kirigami.Units.gridUnit * 50
     height: Kirigami.Units.gridUnit * 35
     visible: true
-    property int iconSize: iconSizeSlider.value
-    property alias showMargins: showMarginsCheckBox.checked
 
     Shortcut {
         sequence: StandardKey.Quit
         onActivated: Qt.quit()
     }
 
-    header: ToolBar {
+    header: QQC2.ToolBar {
         RowLayout {
             anchors.fill: parent
-            ToolButton {
+            QQC2.ToolButton {
                 text: i18n("New Theme…")
-                iconName: "document-new"
+                icon.name: "document-new"
                 onClicked: {
                     if (!root.metadataEditor) {
                         root.metadataEditor = metadataEditorComponent.createObject(root);
@@ -44,26 +47,32 @@ Kirigami.ApplicationWindow {
                     root.metadataEditor.open();
                 }
             }
-            Label {
+            QQC2.Label {
                 text: i18n("Theme:")
             }
-            ComboBox {
+            QQC2.ComboBox {
                 id: themeSelector
-                //FIXME: why crashes?
-                //model: 3//themeModel.themeList
+                model: themeModel.themeList
+
                 textRole: "display"
-                onCurrentIndexChanged: {
-                    themeModel.theme = themeModel.themeList.get(currentIndex).packageNameRole;
+                valueRole: "packageNameRole"
+
+                Component.onCompleted: {
+                    currentIndex = indexOfValue(commandlineTheme)
+                }
+
+                onActivated: {
+                    themeModel.theme = currentValue;
                 }
             }
-            ToolButton {
+            QQC2.ToolButton {
                 text: i18n("Open Folder")
-                iconName: "document-open-folder"
+                icon.name: "document-open-folder"
                 onClicked: Qt.openUrlExternally(themeModel.themeFolder);
             }
-            ToolButton {
+            QQC2.ToolButton {
                 text: i18n("Edit Metadata…")
-                iconName: "configure"
+                icon.name: "configure"
                 enabled: view.currentItem.modelData.isWritable
                 onClicked: {
                     if (!root.metadataEditor) {
@@ -78,9 +87,9 @@ Kirigami.ApplicationWindow {
                     root.metadataEditor.open();
                 }
             }
-            ToolButton {
+            QQC2.ToolButton {
                 text: i18n("Edit Colors…")
-                iconName: "color"
+                icon.name: "color"
                 enabled: view.currentItem.modelData.isWritable
                 onClicked: {
                     if (!root.colorEditor) {
@@ -94,12 +103,12 @@ Kirigami.ApplicationWindow {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
             }
-            ToolButton {
+            QQC2.ToolButton {
                 text: i18n("Help")
-                iconName: "help-contents"
+                icon.name: "help-contents"
                 onClicked: Qt.openUrlExternally("https://techbase.kde.org/Development/Tutorials/Plasma5/ThemeDetails");
             }
-            TextField {
+            Kirigami.SearchField {
                 placeholderText: i18n("Search…")
                 onTextChanged: searchModel.filterRegExp = ".*" + text + ".*"
             }
@@ -121,13 +130,6 @@ Kirigami.ApplicationWindow {
         running: true
         interval: 200
         onTriggered: {
-            themeSelector.model = themeModel.themeList
-            for (var i = 0; i < themeModel.themeList.count; ++i) {
-                if (commandlineTheme == themeModel.themeList.get(i).packageNameRole) {
-                    themeSelector.currentIndex = i;
-                    break;
-                }
-            }
             //NOTE:assigning this in a second moment solves a crash in some versions of Qt 5.8
             searchModel.sourceModel= themeModel
         }

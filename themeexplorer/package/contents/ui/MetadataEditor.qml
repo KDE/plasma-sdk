@@ -152,12 +152,7 @@ Dialog {
     onAccepted: {
         if (newTheme) {
             themeModel.createNewTheme(nameField.text, authorField.text, emailField.text, licenseField.editText, websiteField.text);
-            for (var i = 0; i < themeModel.themeList.count; ++i) {
-                if (nameField.text == themeModel.themeList.get(i).packageNameRole) {
-                    themeSelector.currentIndex = i;
-                    break;
-                }
-            }
+            themeSelector.currentIndex = themeSelector.indexOfValue(name);
         } else {
             themeModel.editThemeMetaData(nameField.text, authorField.text, emailField.text, licenseField.editText, websiteField.text);
         }
