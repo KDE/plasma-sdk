@@ -131,10 +131,6 @@ Kirigami.ApplicationWindow {
         ColorEditor {}
     }
 
-    SystemPalette {
-        id: palette
-    }
-
     QQC2.ScrollView {
         id: scroll
 
@@ -202,14 +198,6 @@ Kirigami.ApplicationWindow {
             right: parent.right
         }
         width: root.width / 3
-        Rectangle {
-            width: 1
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-            }
-            color: palette.highlight
-        }
         ColumnLayout {
             anchors {
                 fill: parent
