@@ -72,15 +72,6 @@ ThemeModel::ThemeModel(const KPackage::Package &package, QObject *parent)
     m_theme->setUseGlobalSettings(false);
     m_theme->setThemeName(m_themeName);
 
-    m_roleNames.insert(ImagePath, "imagePath");
-    m_roleNames.insert(Description, "description");
-    m_roleNames.insert(Delegate, "delegate");
-    m_roleNames.insert(UsesFallback, "usesFallback");
-    m_roleNames.insert(SvgAbsolutePath, "svgAbsolutePath");
-    m_roleNames.insert(IsWritable, "isWritable");
-    m_roleNames.insert(IconElements, "iconElements");
-    m_roleNames.insert(FrameSvgPrefixes, "frameSvgPrefixes");
-
     load();
 }
 
@@ -100,7 +91,18 @@ ColorEditor *ThemeModel::colorEditor()
 
 QHash<int, QByteArray> ThemeModel::roleNames() const
 {
-    return m_roleNames;
+    QHash<int, QByteArray> roles = QAbstractListModel::roleNames();
+
+    roles.insert(ImagePath, "imagePath");
+    roles.insert(Description, "description");
+    roles.insert(Delegate, "delegate");
+    roles.insert(UsesFallback, "usesFallback");
+    roles.insert(SvgAbsolutePath, "svgAbsolutePath");
+    roles.insert(IsWritable, "isWritable");
+    roles.insert(IconElements, "iconElements");
+    roles.insert(FrameSvgPrefixes, "frameSvgPrefixes");
+
+    return roles;
 }
 
 int ThemeModel::rowCount(const QModelIndex &parent) const

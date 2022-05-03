@@ -80,8 +80,6 @@ private Q_SLOTS:
     void processFinished();
 
 private:
-    QHash<int, QByteArray> m_roleNames;
-
     Plasma::Theme *m_theme;
     QString m_themeName;
     KPackage::Package m_package;
