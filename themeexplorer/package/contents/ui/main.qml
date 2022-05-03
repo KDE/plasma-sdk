@@ -131,134 +131,134 @@ Kirigami.ApplicationWindow {
         ColorEditor {}
     }
 
-    QQC2.ScrollView {
-        id: scroll
+    QQC2.SplitView {
+        anchors.fill: parent
 
-        // HACK: workaround for https://bugreports.qt.io/browse/QTBUG-83890
-        QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
+        QQC2.ScrollView {
+            id: scroll
 
-        anchors {
-            top: parent.top
-            bottom: parent.bottom
-            left: parent.left
-            right: sidebar.left
-        }
-        background: Rectangle {
-            color: theme.viewBackgroundColor
-        }
-        GridView {
-            id: view
-            anchors.fill: parent
-            model: PlasmaCore.SortFilterModel {
-                id: searchModel
-                sourceModel: themeModel
-                filterRole: "imagePath"
+            QQC2.SplitView.fillHeight: true
+            QQC2.SplitView.fillWidth: true
+
+            // HACK: workaround for https://bugreports.qt.io/browse/QTBUG-83890
+            QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
+
+            background: Rectangle {
+                color: theme.viewBackgroundColor
             }
-            cellWidth: root.iconSize
-            cellHeight: cellWidth
-            highlightMoveDuration: 0
-            highlight: PlasmaExtras.Highlight {}
+            GridView {
+                id: view
+                anchors.fill: parent
+                model: PlasmaCore.SortFilterModel {
+                    id: searchModel
+                    sourceModel: themeModel
+                    filterRole: "imagePath"
+                }
+                cellWidth: root.iconSize
+                cellHeight: cellWidth
+                highlightMoveDuration: 0
+                highlight: PlasmaExtras.Highlight {}
 
-            delegate: Item {
-                width: view.cellWidth
-                height: view.cellHeight
-                property QtObject modelData: model
-                MouseArea {
-                    z: 2
-                    anchors.fill: parent
-                    onClicked: {
-                        view.currentIndex = index;
+                delegate: Item {
+                    width: view.cellWidth
+                    height: view.cellHeight
+                    property QtObject modelData: model
+                    MouseArea {
+                        z: 2
+                        anchors.fill: parent
+                        onClicked: {
+                            view.currentIndex = index;
+                        }
                     }
+                    Loader {
+                        z: -1
+                        anchors.fill: parent
+                        source: Qt.resolvedUrl("delegates/" + model.delegate + ".qml")
+                    }
+                    Rectangle {
+                        anchors {
+                            right: parent.right
+                            bottom: parent.bottom
+                            margins: Kirigami.Units.gridUnit
+                        }
+                        width: Kirigami.Units.gridUnit
+                        height: Kirigami.Units.gridUnit
+                        radius: Kirigami.Units.gridUnit
+                        opacity: 0.5
+                        color: model.usesFallback ? "red" : "green"
+                    }
+                }
+            }
+        }
+        Item {
+            id: sidebar
+
+            QQC2.SplitView.fillHeight: true
+            QQC2.SplitView.fillWidth: true
+            QQC2.SplitView.preferredWidth: QQC2.SplitView.view.width / 3
+
+            ColumnLayout {
+                anchors {
+                    fill: parent
+                    margins: Kirigami.Units.gridUnit
+                }
+                Label {
+                    Layout.fillWidth: true
+                    visible: !view.currentItem.modelData.isWritable
+                    text: i18n("This is a readonly, system wide installed theme")
+                    wrapMode: Text.WordWrap
+                }
+                Label {
+                    Layout.fillWidth: true
+                    text: i18n("Preview:")
                 }
                 Loader {
-                    z: -1
-                    anchors.fill: parent
+                    id: extendedLoader
+                    property QtObject model: view.currentItem.modelData
+                    Layout.fillWidth: true
+                    Layout.minimumHeight: width
                     source: Qt.resolvedUrl("delegates/" + model.delegate + ".qml")
                 }
-                Rectangle {
-                    anchors {
-                        right: parent.right
-                        bottom: parent.bottom
-                        margins: Kirigami.Units.gridUnit
+                Item {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                }
+                Label {
+                    Layout.fillWidth: true
+                    text: i18n("Image path: %1", view.currentItem.modelData.imagePath)
+                    wrapMode: Text.WordWrap
+                }
+                Label {
+                    Layout.fillWidth: true
+                    text: i18n("Description: %1", view.currentItem.modelData.description)
+                    wrapMode: Text.WordWrap
+                }
+                Label {
+                    Layout.fillWidth: true
+                    text: view.currentItem.modelData.usesFallback ? i18n("Missing from this theme") : i18n("Present in this theme")
+                    wrapMode: Text.WordWrap
+                }
+                CheckBox {
+                    id: showMarginsCheckBox
+                    text: i18n("Show Margins")
+                }
+                Button {
+                    text: view.currentItem.modelData.usesFallback ? i18n("Create with Editor…") : i18n("Open In Editor…")
+                    enabled: view.currentItem.modelData.isWritable
+                    Layout.alignment: Qt.AlignHCenter
+                    onClicked: {
+                        print(view.currentItem.modelData.svgAbsolutePath)
+                        themeModel.editElement(view.currentItem.modelData.imagePath)
+                        //Qt.openUrlExternally(view.currentItem.modelData.svgAbsolutePath)
                     }
-                    width: Kirigami.Units.gridUnit
-                    height: Kirigami.Units.gridUnit
-                    radius: Kirigami.Units.gridUnit
-                    opacity: 0.5
-                    color: model.usesFallback ? "red" : "green"
                 }
-            }
-        }
-    }
-    Item {
-        id: sidebar
-        anchors {
-            top: parent.top
-            bottom: parent.bottom
-            right: parent.right
-        }
-        width: root.width / 3
-        ColumnLayout {
-            anchors {
-                fill: parent
-                margins: Kirigami.Units.gridUnit
-            }
-            Label {
-                Layout.fillWidth: true
-                visible: !view.currentItem.modelData.isWritable
-                text: i18n("This is a readonly, system wide installed theme")
-                wrapMode: Text.WordWrap
-            }
-            Label {
-                Layout.fillWidth: true
-                text: i18n("Preview:")
-            }
-            Loader {
-                id: extendedLoader
-                property QtObject model: view.currentItem.modelData
-                Layout.fillWidth: true
-                Layout.minimumHeight: width
-                source: Qt.resolvedUrl("delegates/" + model.delegate + ".qml")
-            }
-            Item {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-            }
-            Label {
-                Layout.fillWidth: true
-                text: i18n("Image path: %1", view.currentItem.modelData.imagePath)
-                wrapMode: Text.WordWrap
-            }
-            Label {
-                Layout.fillWidth: true
-                text: i18n("Description: %1", view.currentItem.modelData.description)
-                wrapMode: Text.WordWrap
-            }
-            Label {
-                Layout.fillWidth: true
-                text: view.currentItem.modelData.usesFallback ? i18n("Missing from this theme") : i18n("Present in this theme")
-                wrapMode: Text.WordWrap
-            }
-            CheckBox {
-                id: showMarginsCheckBox
-                text: i18n("Show Margins")
-            }
-            Button {
-                text: view.currentItem.modelData.usesFallback ? i18n("Create with Editor…") : i18n("Open In Editor…")
-                enabled: view.currentItem.modelData.isWritable
-                Layout.alignment: Qt.AlignHCenter
-                onClicked: {
-                    print(view.currentItem.modelData.svgAbsolutePath)
-                    themeModel.editElement(view.currentItem.modelData.imagePath)
-                    //Qt.openUrlExternally(view.currentItem.modelData.svgAbsolutePath)
+                Slider {
+                    id: iconSizeSlider
+                    Layout.fillWidth: true
+                    value: Kirigami.Units.gridUnit * 12
+                    minimumValue: Kirigami.Units.gridUnit * 5
+                    maximumValue: Kirigami.Units.gridUnit * 20
                 }
-            }
-            Slider {
-                id: iconSizeSlider
-                Layout.fillWidth: true
-                value: Kirigami.Units.gridUnit * 12
-                minimumValue: Kirigami.Units.gridUnit * 5
-                maximumValue: Kirigami.Units.gridUnit * 20
             }
         }
     }
