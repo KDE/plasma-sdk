@@ -190,74 +190,106 @@ Kirigami.ApplicationWindow {
                 }
             }
         }
-        Item {
+
+        QQC2.Pane {
             id: sidebar
 
             QQC2.SplitView.fillHeight: true
             QQC2.SplitView.fillWidth: true
             QQC2.SplitView.preferredWidth: QQC2.SplitView.view.width / 3
 
+            padding: 0
+
             ColumnLayout {
-                anchors {
-                    fill: parent
-                    margins: Kirigami.Units.gridUnit
-                }
-                Label {
+                anchors.fill: parent
+                spacing: 0
+
+                ColumnLayout {
                     Layout.fillWidth: true
-                    visible: !view.currentItem.modelData.isWritable
-                    text: i18n("This is a readonly, system wide installed theme")
-                    wrapMode: Text.WordWrap
-                }
-                Label {
-                    Layout.fillWidth: true
-                    text: i18n("Preview:")
-                }
-                Loader {
-                    id: extendedLoader
-                    property QtObject model: view.currentItem.modelData
-                    Layout.fillWidth: true
-                    Layout.minimumHeight: width
-                    source: Qt.resolvedUrl("delegates/" + model.delegate + ".qml")
-                }
-                Item {
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                }
-                Label {
-                    Layout.fillWidth: true
-                    text: i18n("Image path: %1", view.currentItem.modelData.imagePath)
-                    wrapMode: Text.WordWrap
-                }
-                Label {
-                    Layout.fillWidth: true
-                    text: i18n("Description: %1", view.currentItem.modelData.description)
-                    wrapMode: Text.WordWrap
-                }
-                Label {
-                    Layout.fillWidth: true
-                    text: view.currentItem.modelData.usesFallback ? i18n("Missing from this theme") : i18n("Present in this theme")
-                    wrapMode: Text.WordWrap
-                }
-                CheckBox {
-                    id: showMarginsCheckBox
-                    text: i18n("Show Margins")
-                }
-                Button {
-                    text: view.currentItem.modelData.usesFallback ? i18n("Create with Editor…") : i18n("Open In Editor…")
-                    enabled: view.currentItem.modelData.isWritable
-                    Layout.alignment: Qt.AlignHCenter
-                    onClicked: {
-                        print(view.currentItem.modelData.svgAbsolutePath)
-                        themeModel.editElement(view.currentItem.modelData.imagePath)
-                        //Qt.openUrlExternally(view.currentItem.modelData.svgAbsolutePath)
+                    Layout.fillHeight: false
+                    Layout.margins: Kirigami.Units.largeSpacing
+                    spacing: Kirigami.Units.smallSpacing
+
+                    QQC2.Label {
+                        Layout.fillWidth: true
+                        visible: !view.currentItem.modelData.isWritable
+                        text: i18n("This is a readonly, system wide installed theme.")
+                        wrapMode: Text.WordWrap
+                    }
+                    QQC2.Label {
+                        Layout.fillWidth: true
+                        horizontalAlignment: Text.AlignHCenter
+                        text: i18n("Preview:")
+                    }
+                    Loader {
+                        id: extendedLoader
+                        property QtObject model: view.currentItem.modelData
+                        Layout.fillWidth: true
+                        Layout.minimumHeight: width
+                        source: Qt.resolvedUrl("delegates/" + model.delegate + ".qml")
+                    }
+
+                    Kirigami.Separator {
+                        Layout.fillWidth: true
                     }
                 }
-                Slider {
-                    id: iconSizeSlider
+
+                QQC2.ScrollView {
+                    id: sidebarScroll
+
                     Layout.fillWidth: true
-                    value: Kirigami.Units.gridUnit * 12
-                    minimumValue: Kirigami.Units.gridUnit * 5
-                    maximumValue: Kirigami.Units.gridUnit * 20
+                    Layout.fillHeight: true
+
+                    // HACK: workaround for https://bugreports.qt.io/browse/QTBUG-83890
+                    QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
+
+                    contentWidth: availableWidth
+
+                    QQC2.Pane {
+                        width: sidebarScroll.availableWidth
+                        background: null
+
+                        contentItem: ColumnLayout {
+                            spacing: Kirigami.Units.smallSpacing
+
+                            QQC2.Label {
+                                Layout.fillWidth: true
+                                text: i18n("Image path: %1", view.currentItem.modelData.imagePath)
+                                wrapMode: Text.WordWrap
+                            }
+                            QQC2.Label {
+                                Layout.fillWidth: true
+                                text: i18n("Description: %1", view.currentItem.modelData.description)
+                                wrapMode: Text.WordWrap
+                            }
+                            QQC2.Label {
+                                Layout.fillWidth: true
+                                text: view.currentItem.modelData.usesFallback ? i18n("Missing from this theme") : i18n("Present in this theme")
+                                wrapMode: Text.WordWrap
+                            }
+                            QQC2.CheckBox {
+                                id: showMarginsCheckBox
+                                text: i18n("Show Margins")
+                            }
+                            QQC2.Button {
+                                text: view.currentItem.modelData.usesFallback ? i18n("Create with Editor…") : i18n("Open In Editor…")
+                                enabled: view.currentItem.modelData.isWritable
+                                Layout.alignment: Qt.AlignHCenter
+                                onClicked: {
+                                    print(view.currentItem.modelData.svgAbsolutePath)
+                                    themeModel.editElement(view.currentItem.modelData.imagePath)
+                                    //Qt.openUrlExternally(view.currentItem.modelData.svgAbsolutePath)
+                                }
+                            }
+                            QQC2.Slider {
+                                id: iconSizeSlider
+                                Layout.fillWidth: true
+                                value: Kirigami.Units.gridUnit * 12
+                                from: Kirigami.Units.gridUnit * 5
+                                to: Kirigami.Units.gridUnit * 20
+                            }
+                        }
+                    }
                 }
             }
         }
