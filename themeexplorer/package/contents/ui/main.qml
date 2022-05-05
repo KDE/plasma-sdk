@@ -143,26 +143,48 @@ Kirigami.ApplicationWindow {
             // HACK: workaround for https://bugreports.qt.io/browse/QTBUG-83890
             QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
+            QQC2.ScrollBar.vertical.policy: QQC2.ScrollBar.AlwaysOn
+
             background: Rectangle {
                 color: theme.viewBackgroundColor
             }
             GridView {
                 id: view
-                anchors.fill: parent
+
+                QtObject {
+                    id: internal
+                    readonly property int availableWidth: scroll.width - internal.scrollBarSpace - Kirigami.Units.smallSpacing
+                    readonly property int scrollBarSpace: scroll.QQC2.ScrollBar.vertical.width
+                }
+
+                anchors {
+                    fill: parent
+                    margins: Kirigami.Units.smallSpacing / 2
+                }
+
+                clip: true
+                activeFocusOnTab: true
+
+                property int implicitCellWidth: root.iconSize
+                property int implicitCellHeight: root.iconSize
+
+                cellWidth: Math.floor(internal.availableWidth / Math.floor(internal.availableWidth / implicitCellWidth))
+                cellHeight: implicitCellHeight
+
                 model: PlasmaCore.SortFilterModel {
                     id: searchModel
                     sourceModel: themeModel
                     filterRole: "imagePath"
                 }
-                cellWidth: root.iconSize
-                cellHeight: cellWidth
                 highlightMoveDuration: 0
                 highlight: PlasmaExtras.Highlight {}
 
                 delegate: Item {
-                    width: view.cellWidth
-                    height: view.cellHeight
                     property QtObject modelData: model
+
+                    width: GridView.view.cellWidth
+                    height: GridView.view.cellHeight
+
                     MouseArea {
                         z: 2
                         anchors.fill: parent
@@ -171,15 +193,19 @@ Kirigami.ApplicationWindow {
                         }
                     }
                     Loader {
+                        id: delegate
                         z: -1
-                        anchors.fill: parent
+                        width: Math.min(parent.width, parent.height)
+                        height: width
+                        anchors.centerIn: parent
+
                         source: Qt.resolvedUrl("delegates/" + model.delegate + ".qml")
                     }
                     PresenceIndicator {
                         z: 3
                         anchors {
-                            right: parent.right
-                            bottom: parent.bottom
+                            right: delegate.right
+                            bottom: delegate.bottom
                             margins: Kirigami.Units.gridUnit
                         }
                         usesFallback: model.usesFallback
