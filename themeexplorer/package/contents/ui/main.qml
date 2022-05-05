@@ -175,17 +175,14 @@ Kirigami.ApplicationWindow {
                         anchors.fill: parent
                         source: Qt.resolvedUrl("delegates/" + model.delegate + ".qml")
                     }
-                    Rectangle {
+                    PresenceIndicator {
+                        z: 3
                         anchors {
                             right: parent.right
                             bottom: parent.bottom
                             margins: Kirigami.Units.gridUnit
                         }
-                        width: Kirigami.Units.gridUnit
-                        height: Kirigami.Units.gridUnit
-                        radius: Kirigami.Units.gridUnit
-                        opacity: 0.5
-                        color: model.usesFallback ? "red" : "green"
+                        usesFallback: model.usesFallback
                     }
                 }
             }
@@ -262,10 +259,10 @@ Kirigami.ApplicationWindow {
                                 text: i18n("Description: %1", view.currentItem.modelData.description)
                                 wrapMode: Text.WordWrap
                             }
-                            QQC2.Label {
+                            PresenceIndicator {
                                 Layout.fillWidth: true
-                                text: view.currentItem.modelData.usesFallback ? i18n("Missing from this theme") : i18n("Present in this theme")
-                                wrapMode: Text.WordWrap
+                                usesFallback: view.currentItem.modelData.usesFallback
+                                mode: PresenceIndicator.Mode.Full
                             }
                             QQC2.CheckBox {
                                 id: showMarginsCheckBox
