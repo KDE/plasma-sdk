@@ -251,12 +251,12 @@ Kirigami.ApplicationWindow {
 
                             QQC2.Label {
                                 Layout.fillWidth: true
-                                text: i18n("Image path: %1", view.currentItem.modelData.imagePath)
+                                text: i18n("<b>Image path:</b> %1", view.currentItem.modelData.imagePath)
                                 wrapMode: Text.WordWrap
                             }
                             QQC2.Label {
                                 Layout.fillWidth: true
-                                text: i18n("Description: %1", view.currentItem.modelData.description)
+                                text: i18n("<b>Description:</b> %1", view.currentItem.modelData.description)
                                 wrapMode: Text.WordWrap
                             }
                             PresenceIndicator {
