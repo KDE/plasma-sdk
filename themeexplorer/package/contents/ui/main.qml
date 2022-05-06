@@ -179,6 +179,37 @@ Kirigami.ApplicationWindow {
                 highlightMoveDuration: 0
                 highlight: PlasmaExtras.Highlight {}
 
+                Loader {
+                    anchors.centerIn: parent
+                    width: parent.width - (Kirigami.Units.gridUnit * 4)
+                    active: false
+                    opacity: view.count === 0 ? 1 : 0
+                    Behavior on opacity {
+                        id: behaviorScroll
+                        SequentialAnimation {
+                            PropertyAction {
+                                target: behaviorScroll.targetProperty.object
+                                property: 'active'
+                                value: true
+                            }
+                            OpacityAnimator {
+                                duration: Kirigami.Units.longDuration
+                                easing.type: Easing.InOutQuad
+                            }
+                            PropertyAction {
+                                target: behaviorScroll.targetProperty.object
+                                property: 'active'
+                                value: behaviorScroll.targetValue > 0
+                            }
+                        }
+                    }
+                    sourceComponent: Kirigami.PlaceholderMessage {
+                        width: parent.width
+                        icon.name: "edit-none"
+                        text: i18nc("A search yielded no results", "No items matching your search")
+                    }
+                }
+
                 delegate: Item {
                     property QtObject modelData: model
 
@@ -223,9 +254,49 @@ Kirigami.ApplicationWindow {
 
             padding: 0
 
+            Loader {
+                id: placeholderSideBar
+                anchors.centerIn: parent
+                z: 1
+                width: parent.width - (Kirigami.Units.gridUnit * 4)
+                active: false
+                opacity: view.currentIndex === -1 ? 1 : 0
+                Behavior on opacity {
+                    id: behaviorSidebar
+                    SequentialAnimation {
+                        PropertyAction {
+                            target: behaviorSidebar.targetProperty.object
+                            property: 'active'
+                            value: true
+                        }
+                        OpacityAnimator {
+                            duration: Kirigami.Units.longDuration
+                            easing.type: Easing.InOutQuad
+                        }
+                        PropertyAction {
+                            target: behaviorSidebar.targetProperty.object
+                            property: 'active'
+                            value: behaviorSidebar.targetValue > 0
+                        }
+                    }
+                }
+                sourceComponent: Kirigami.PlaceholderMessage {
+                    width: parent.width
+                    text: i18n("Select an image on the left to see its properties here")
+                }
+            }
+
             ColumnLayout {
                 anchors.fill: parent
                 spacing: 0
+
+                opacity: view.currentIndex === -1 ? 0 : 1
+                Behavior on opacity {
+                    OpacityAnimator {
+                        duration: Kirigami.Units.longDuration
+                        easing.type: Easing.InOutQuad
+                    }
+                }
 
                 ColumnLayout {
                     Layout.fillWidth: true
