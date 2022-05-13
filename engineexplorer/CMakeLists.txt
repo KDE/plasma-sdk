@@ -20,6 +20,10 @@ target_link_libraries(plasmaengineexplorer
     KF5::ConfigCore
     KF5::ConfigWidgets
 )
+if (TARGET Qt6::Core5Compat)
+    target_link_libraries(plasmaengineexplorer Qt6::Core5Compat)
+endif()
+
 
 install(TARGETS plasmaengineexplorer ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 

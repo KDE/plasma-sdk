@@ -27,4 +27,8 @@ target_link_libraries(plasmathemeexplorer
  KF5::QuickAddons
 )
 
+if (TARGET Qt6::Core5Compat)
+    target_link_libraries(plasmathemeexplorer Qt6::Core5Compat)
+endif()
+
 install(TARGETS plasmathemeexplorer ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})

@@ -38,10 +38,15 @@ set_package_properties(Qt${QT_MAJOR_VERSION}Test PROPERTIES
          PURPOSE "Required for tests"
          TYPE OPTIONAL
          )
-add_feature_info("Qt5Test" Qt5Test_FOUND "Required for building tests")
-if (NOT Qt5Test_FOUND)
+add_feature_info("Qt${QT_MAJOR_VERSION}Test" Qt5Test_FOUND "Required for building tests")
+if (NOT Qt${QT_MAJOR_VERSION}Test_FOUND)
     set(BUILD_TESTING OFF CACHE BOOL "Build the testing tree.")
 endif()
+
+if (QT_MAJOR_VERSION STREQUAL "6")
+    find_package(Qt6Core5Compat)
+endif()
+
 
 find_package(KF5Kirigami2 ${KF5_MIN_VERSION})
 set_package_properties(KF5Kirigami2 PROPERTIES
