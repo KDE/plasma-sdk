@@ -7,10 +7,9 @@
 #ifndef CUTTLEFISHCOLORSCHEMES_H
 #define CUTTLEFISHCOLORSCHEMES_H
 
+#include <QAbstractItemModel>
 #include <QObject>
 #include <QString>
-
-class QAbstractItemModel;
 
 class KColorSchemeManager;
 

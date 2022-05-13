@@ -9,6 +9,7 @@
 
 #include "ktreeviewsearchline.h"
 
+#include <QActionGroup>
 #include <QApplication>
 #include <QContextMenuEvent>
 #include <QHBoxLayout>
