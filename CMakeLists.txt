@@ -5,7 +5,7 @@ set(PROJECT_VERSION "5.24.80")
 set(PROJECT_VERSION_MAJOR 5)
 
 set(QT_MIN_VERSION "5.15.0")
-set(KF5_MIN_VERSION "5.86")
+set(KF5_MIN_VERSION "5.90")
 set(KDE_COMPILERSETTINGS_LEVEL "5.82")
 
 set(CMAKE_CXX_STANDARD 17)
@@ -31,10 +31,10 @@ include(KDEClangFormat)
 include(KDEGitCommitHooks)
 include(FeatureSummary)
 
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core DBus Gui Qml Quick Svg Widgets Xml)
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core DBus Gui Qml Quick Svg Widgets Xml)
 
-find_package(Qt5Test ${QT_MIN_VERSION} CONFIG QUIET)
-set_package_properties(Qt5Test PROPERTIES
+find_package(Qt${QT_MAJOR_VERSION}Test ${QT_MIN_VERSION} CONFIG QUIET)
+set_package_properties(Qt${QT_MAJOR_VERSION}Test PROPERTIES
          PURPOSE "Required for tests"
          TYPE OPTIONAL
          )
