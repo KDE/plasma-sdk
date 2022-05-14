@@ -49,7 +49,7 @@ bool IconsParserHandler::startElement(const QString &namespaceURI, const QString
     const QString id = atts.value("id");
     // qWarning() << "Start Element:"<<id;
 
-    if (!id.isEmpty() && !id.contains(QRegExp("\\d\\d$")) && id != "base" && !id.contains("layer")) {
+    if (!id.isEmpty() && !id.contains(QRegularExpression("\\d\\d$")) && id != "base" && !id.contains("layer")) {
         m_ids << id;
     }
     if (id.endsWith(QLatin1String("-center")) && !id.contains("hint-")) {

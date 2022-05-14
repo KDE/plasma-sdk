@@ -383,8 +383,13 @@ QString EngineExplorer::convertToString(const QVariant &value)
         QRectF rectF = value.toRectF();
         return QString("<x:%1, y:%2, w:%3, h:%4>").arg(rectF.x()).arg(rectF.y()).arg(rectF.width()).arg(rectF.height());
     }
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     case QVariant::RegExp: {
         return QString("%1").arg(value.toRegExp().pattern());
+    }
+#endif
+    case QVariant::RegularExpression: {
+        return value.toRegularExpression().pattern();
     }
     case QVariant::Region: {
         QRect region = value.value<QRegion>().boundingRect();
