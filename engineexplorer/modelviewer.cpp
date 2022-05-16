@@ -85,8 +85,8 @@ ModelViewer::ModelViewer(Plasma::DataEngine *engine, const QString &source, QWid
     QString engineName = i18nc("Plasma engine with unknown name", "Unknown");
 
     if (m_engine) {
-        if (m_engine->pluginInfo().isValid()) {
-            engineName = KStringHandler::capwords(m_engine->pluginInfo().name());
+        if (m_engine->metadata().isValid()) {
+            engineName = KStringHandler::capwords(m_engine->metadata().name());
         }
         qDebug() << "Requesting model for source:" << m_source;
         m_model = m_engine->modelForSource(m_source);
