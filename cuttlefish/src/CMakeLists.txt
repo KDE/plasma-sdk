@@ -15,7 +15,6 @@ target_link_libraries(cuttlefish
     Qt::Widgets # for QDirModel
     KF5::Plasma
     KF5::KIOWidgets
-    KF5::Declarative
     KF5::ConfigWidgets
     KF5::I18n
     KF5::IconThemes

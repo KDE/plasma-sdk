@@ -15,7 +15,6 @@
 
 // Frameworks
 #include <KConfigGroup>
-#include <KDeclarative/KDeclarative>
 #include <KLocalizedString>
 #include <KPackage/PackageLoader>
 #include <Plasma/Theme>
@@ -90,11 +89,9 @@ int main(int argc, char **argv)
 
     QQmlApplicationEngine engine;
 
-    KDeclarative::KDeclarative kdeclarative;
-    kdeclarative.setDeclarativeEngine(&engine);
-    kdeclarative.setTranslationDomain(QStringLiteral("cuttlefish"));
-    kdeclarative.setupContext();
-    kdeclarative.setupEngine(&engine);
+    auto l10nContext = new KLocalizedContext(&engine);
+    l10nContext->setTranslationDomain(QStringLiteral("cuttlefish"));
+    engine.rootContext()->setContextObject(l10nContext);
 
     auto package = KPackage::PackageLoader::self()->loadPackage("Plasma/Generic");
     package.setPath("org.kde.plasma.cuttlefish");
