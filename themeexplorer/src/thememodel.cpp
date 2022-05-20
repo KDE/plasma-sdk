@@ -19,7 +19,9 @@
 #include <QXmlInputSource>
 #include <QXmlSimpleReader>
 
+#include <KAboutData>
 #include <KCompressionDevice>
+#include <KConfigGroup>
 #include <KIO/Job>
 #include <KProcess>
 #include <KRun>
@@ -186,22 +188,24 @@ QString ThemeModel::theme() const
 
 QString ThemeModel::author() const
 {
-    return m_theme->pluginInfo().author();
+    const QList<KAboutPerson> authors = m_theme->metadata().authors();
+    return authors.isEmpty() ? authors.at(0).name() : QString();
 }
 
 QString ThemeModel::email() const
 {
-    return m_theme->pluginInfo().email();
+    const QList<KAboutPerson> authors = m_theme->metadata().authors();
+    return authors.isEmpty() ? authors.at(0).emailAddress() : QString();
 }
 
 QString ThemeModel::license() const
 {
-    return m_theme->pluginInfo().license();
+    return m_theme->metadata().license();
 }
 
 QString ThemeModel::website() const
 {
-    return m_theme->pluginInfo().website();
+    return m_theme->metadata().website();
 }
 
 void ThemeModel::setTheme(const QString &theme)
