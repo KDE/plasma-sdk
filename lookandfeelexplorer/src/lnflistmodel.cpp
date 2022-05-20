@@ -21,6 +21,7 @@
 #include <QPainter>
 #include <QStandardPaths>
 
+#include <KConfigGroup>
 #include <KDesktopFile>
 
 #include <Plasma/Theme>
