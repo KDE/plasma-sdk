@@ -193,8 +193,9 @@ void EngineExplorer::showEngine(const QString &name)
         return;
     }
 
-    m_engine = m_engineManager->loadDataEngine(m_engineName);
-    if (!m_engine) {
+    if (auto res = KPluginFactory::instantiatePlugin<Plasma::DataEngine>(KPluginMetaData::findPluginById(QStringLiteral("plasma/dataengine"), m_engineName))) {
+        m_engine = res.plugin;
+    } else {
         m_engineName.clear();
         updateTitle();
         return;

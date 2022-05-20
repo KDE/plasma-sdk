@@ -19,6 +19,7 @@
 
 #include <KPackage/Package>
 #include <KPackage/PackageLoader>
+#include <Plasma/PluginLoader>
 
 class ViewerCorona : public Plasma::Corona
 {
@@ -104,7 +105,7 @@ void View::addApplet(const QString &applet)
     if (metadataPath.isEmpty()) {
         a = containment()->createApplet(applet);
     } else {
-        a = Plasma::Applet::loadPlasmoid(metadataPath);
+        a = Plasma::PluginLoader::self()->loadApplet(metadataPath);
 
         // Load translations from KPackage files if bundled
         const QString localePath = a->kPackage().filePath("translations");
