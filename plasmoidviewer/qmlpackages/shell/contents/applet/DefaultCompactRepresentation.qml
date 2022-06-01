@@ -1,22 +1,18 @@
 /*
- *  SPDX-FileCopyrightText: 2013 Marco Martin <mart@kde.org>
- *
- *  SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2013 Marco Martin <mart@kde.org>
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
+
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasmoid 2.0
 
 PlasmaCore.IconItem {
-    id: icon
-
-    readonly property bool inPanel: (Plasmoid.location === PlasmaCore.Types.TopEdge
-        || Plasmoid.location === PlasmaCore.Types.RightEdge
-        || Plasmoid.location === PlasmaCore.Types.BottomEdge
-        || Plasmoid.location === PlasmaCore.Types.LeftEdge)
+    readonly property bool inPanel: [PlasmaCore.Types.TopEdge, PlasmaCore.Types.RightEdge, PlasmaCore.Types.BottomEdge, PlasmaCore.Types.LeftEdge]
+        .includes(Plasmoid.location)
 
     Layout.minimumWidth: {
         switch (Plasmoid.formFactor) {
@@ -40,10 +36,10 @@ PlasmaCore.IconItem {
         }
     }
 
-    Layout.maximumWidth: inPanel ? PlasmaCore.Units.iconSizeHints.panel : -1;
-    Layout.maximumHeight: inPanel ? PlasmaCore.Units.iconSizeHints.panel : -1;
+    Layout.maximumWidth: inPanel ? PlasmaCore.Units.iconSizeHints.panel : -1
+    Layout.maximumHeight: inPanel ? PlasmaCore.Units.iconSizeHints.panel : -1
 
-    source: Plasmoid.icon ? Plasmoid.icon : "plasma"
+    source: Plasmoid.icon || "plasma"
     active: mouseArea.containsMouse
 
     MouseArea {
