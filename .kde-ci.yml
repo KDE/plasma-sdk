@@ -30,3 +30,5 @@ Dependencies:
     'frameworks/solid': '@latest'
     'frameworks/sonnet': '@latest'
     'frameworks/syntax-highlighting': '@latest'
+Options:
+  require-passing-tests-on: [ 'Linux', 'FreeBSD']
