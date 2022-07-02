@@ -2,6 +2,7 @@
 Comment=Explore and edit your Plasma Global Themes
 Comment[ast]=Esplora y edita los estilos globales de Plasma
 Comment[az]=Plasma Qlobal Mövzularına baxış və onlara düzəliş etmək
+Comment[bg]=Разглеждане и редактиране вашите глобални теми на Plasma
 Comment[ca]=Explora i edita els vostres temes globals del Plasma
 Comment[ca@valencia]=Explora i edita els vostres temes globals de Plasma
 Comment[cs]=Prohlížejte a editujte Globální Motivy Plasma
@@ -38,6 +39,7 @@ Keywords=
 Name=Plasma Global Theme Explorer
 Name[ast]=Esplorador d'estilos globales de Plasma
 Name[az]=Plasma Qlobal Mövzu Bələdçisi
+Name[bg]=Преглед на глобални теми на Plasma
 Name[ca]=Explorador de temes globals del Plasma
 Name[ca@valencia]=Explorador de temes globals de Plasma
 Name[cs]=Průzkumník Globálních Motivů Plasma
