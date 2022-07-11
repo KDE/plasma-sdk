@@ -471,7 +471,7 @@ void EngineExplorer::showData(QStandardItem *parent, int row, const QString &key
         // this case is a bit special, and has to be handled before generic QVariantList
         const QList<QVariantMap> list = value.value<QList<QVariantMap>>();
         rowCount = showContainerData(parent, current, row, typeName, list);
-    } else if (value.canConvert<QVariantList>()) {
+    } else if (value.canConvert<QVariantList>() && value.type() != QVariant::String && value.type() != QVariant::ByteArray) {
         const QVariantList list = value.toList();
         rowCount = showContainerData(parent, current, row, typeName, list);
     } else if (value.canConvert<QVariantMap>()) {
