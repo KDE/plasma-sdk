@@ -9,7 +9,7 @@
 import QtQuick 2.2
 import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.0
-import QtQuick.Dialogs 1.3
+import Qt.labs.platform 1.1
 
 import org.kde.kirigami 2.8 as Kirigami
 
