@@ -6,7 +6,7 @@
 
 import QtQuick 2.0
 import QtQuick.Controls 1.3
-import QtQuick.Controls 2.0 as QQC2
+import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.1
 
 import org.kde.draganddrop 2.0 as DragAndDrop
@@ -93,7 +93,6 @@ Kirigami.AbstractApplicationWindow {
                     text: i18n("Plugin name:") + lnfLogic.theme
                 }
                 FormField {
-                    id: formField
                     label: i18n("Name:")
                     key: "name"
                 }
@@ -124,14 +123,12 @@ Kirigami.AbstractApplicationWindow {
                 QQC2.Button {
                     text: i18n("Layout from current Plasma setup")
                     onClicked: lnfLogic.performLayoutDump = true
-                    Layout.columnSpan: 2
-                    implicitWidth: formField.width
+                    Layout.fillWidth: true
                 }
                 QQC2.Button {
                     text: i18n("Defaults from current setup")
                     onClicked: lnfLogic.performDefaultsDump = true
-                    Layout.columnSpan: 2
-                    implicitWidth: formField.width
+                    Layout.fillWidth: true
                 }
             }
         }

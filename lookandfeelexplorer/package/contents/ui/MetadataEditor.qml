@@ -6,8 +6,7 @@
 
 import QtQuick 2.3
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.4 as QQC2
-import QtQuick.Controls 1.3
+import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Dialogs 1.2
 import org.kde.kirigami 2.3 as Kirigami
 
@@ -42,9 +41,9 @@ QQC2.Dialog {
             id: layout
             anchors {
                 fill: parent
-                margins: units.smallSpacing
+                margins: Kirigami.Units.smallSpacing
             }
-            Label {
+            QQC2.Label {
                 id: errorMessage
                 text: ""
                 wrapMode: Text.WordWrap
@@ -92,7 +91,7 @@ QQC2.Dialog {
                     id: "websiteField"
                     Kirigami.FormData.label:  i18n("Website:")
                 }
-                ComboBox {
+                QQC2.ComboBox {
                     id: licenseField
                     Layout.fillWidth: true
                     Kirigami.FormData.label: i18n("License:")
