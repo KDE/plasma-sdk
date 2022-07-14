@@ -6,7 +6,7 @@
 
 import QtQuick 2.3
 import QtGraphicalEffects 1.0
-import QtQuick.Controls 1.2
+import QtQuick.Controls 2.15
 
 Item {
     implicitWidth: parent.width/1.2

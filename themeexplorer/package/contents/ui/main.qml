@@ -5,7 +5,7 @@
  */
 
 import QtQuick 2.5
-import QtQuick.Controls 1.3
+import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -23,12 +23,12 @@ ApplicationWindow {
         onActivated: Qt.quit()
     }
 
-    toolBar: ToolBar {
+    header: ToolBar {
         RowLayout {
             anchors.fill: parent
             ToolButton {
-                text: i18n("New Theme…")
-                iconName: "document-new"
+                ToolTip.text: i18n("New Theme…")
+                icon.name: "document-new"
                 onClicked: {
                     if (!root.metadataEditor) {
                         root.metadataEditor = metadataEditorComponent.createObject(root);
@@ -55,13 +55,13 @@ ApplicationWindow {
                 }
             }
             ToolButton {
-                text: i18n("Open Folder")
-                iconName: "document-open-folder"
+                ToolTip.text: i18n("Open Folder")
+                icon.name: "document-open-folder"
                 onClicked: Qt.openUrlExternally(themeModel.themeFolder);
             }
             ToolButton {
-                text: i18n("Edit Metadata…")
-                iconName: "configure"
+                ToolTip.text: i18n("Edit Metadata…")
+                icon.name: "configure"
                 enabled: view.currentItem.modelData.isWritable
                 onClicked: {
                     if (!root.metadataEditor) {
@@ -77,8 +77,8 @@ ApplicationWindow {
                 }
             }
             ToolButton {
-                text: i18n("Edit Colors…")
-                iconName: "color"
+                ToolTip.text: i18n("Edit Colors…")
+                icon.name: "color"
                 enabled: view.currentItem.modelData.isWritable
                 onClicked: {
                     if (!root.colorEditor) {
@@ -93,8 +93,8 @@ ApplicationWindow {
                 Layout.fillHeight: true
             }
             ToolButton {
-                text: i18n("Help")
-                iconName: "help-contents"
+                ToolTip.text: i18n("Help")
+                icon.name: "help-contents"
                 onClicked: Qt.openUrlExternally("https://techbase.kde.org/Development/Tutorials/Plasma5/ThemeDetails");
             }
             TextField {
@@ -267,8 +267,8 @@ ApplicationWindow {
                 id: iconSizeSlider
                 Layout.fillWidth: true
                 value: units.gridUnit * 12
-                minimumValue: units.gridUnit * 5
-                maximumValue: units.gridUnit * 20
+                from: units.gridUnit * 5
+                to: units.gridUnit * 20
             }
         }
     }

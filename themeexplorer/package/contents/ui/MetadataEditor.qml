@@ -6,7 +6,7 @@
 
 import QtQuick 2.3
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 1.2
+import QtQuick.Controls 2.15
 import QtQuick.Dialogs 1.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 
@@ -130,15 +130,16 @@ Dialog {
             Item {
                 Layout.fillHeight: true
             }
-            RowLayout {
+            DialogButtonBox {
                 Layout.alignment: Qt.AlignRight
                 Button {
+                    DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
                     text: i18n("OK")
                     onClicked: dialog.accept()
-                    isDefault: true
                     enabled: canEdit && nameField.text && authorField.text && emailField.text && websiteField.text
                 }
                 Button {
+                    DialogButtonBox.buttonRole: DialogButtonBox.DestructiveRole
                     text: i18n("Cancel")
                     onClicked: dialog.reject()
                 }

@@ -7,7 +7,7 @@
 import QtQuick 2.3
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 1.2
+import QtQuick.Controls 2.15
 import QtQuick.Dialogs 1.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 import "fakecontrols" as FakeControls
@@ -182,8 +182,8 @@ Dialog {
                 Layout.fillHeight: true
                 Layout.minimumHeight: units.gridUnit * 15
                 Item {
-                    width: scroll.viewport.width
-                    height: childrenRect.height
+                    width: parent.width
+                    implicitHeight: childrenRect.height
                     GridLayout {
                         //Layout.alignment: Qt.AlignHCenter
                         anchors.centerIn: parent
@@ -315,7 +315,7 @@ Dialog {
                     }
                 }
             }
-            RowLayout {
+            DialogButtonBox {
                 anchors {
                     right: parent.right
                     rightMargin: units.smallSpacing
@@ -323,11 +323,12 @@ Dialog {
                 Button {
                     text: i18n("OK")
                     onClicked: dialog.accept()
-                    isDefault: true
+                    DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
                 }
                 Button {
                     text: i18n("Cancel")
                     onClicked: dialog.reject()
+                    DialogButtonBox.buttonRole: DialogButtonBox.DestructiveRole
                 }
             }
         }
