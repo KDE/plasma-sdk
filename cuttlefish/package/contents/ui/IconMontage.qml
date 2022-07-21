@@ -14,6 +14,7 @@ import QtQuick.Layouts 1.0
 import org.kde.kirigami 2.8 as Kirigami
 
 Rectangle {
+    id: root
     property int columns: cuttlefish.iconSizes.length
     property bool showWatermark: false
 
@@ -43,6 +44,8 @@ Rectangle {
                 QQC2.Label {
                     Layout.alignment: Qt.AlignHCenter
                     text: modelData
+                    // Inheriting doesn't correctly work when in a repeater
+                    color: root.Kirigami.Theme.textColor
                     Behavior on color {
                         ColorAnimation {
                             duration: Kirigami.Units.longDuration
