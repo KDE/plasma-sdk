@@ -64,7 +64,7 @@ ServiceViewer::ServiceViewer(Plasma::DataEngine *engine, const QString &source, 
             connect(m_service, SIGNAL(operationsChanged()), this, SLOT(updateOperations()));
             connect(m_engine, &QObject::destroyed, this, &ServiceViewer::engineDestroyed);
         } else {
-            KMessageBox::sorry(this, i18n("No valid service was returned. Verify that a service is available for this source."));
+            KMessageBox::error(this, i18n("No valid service was returned. Verify that a service is available for this source."));
             close();
         }
     }
