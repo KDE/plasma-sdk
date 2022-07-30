@@ -1,7 +1,5 @@
 [Desktop Entry]
 Type=Service
-X-KDE-ServiceTypes=KTextEditor/Plugin
-X-KDE-Library=cuttlefishplugin
 Name=Icon Picker
 Name[ast]=Seleutor d'iconos
 Name[az]=İkon seçimi
