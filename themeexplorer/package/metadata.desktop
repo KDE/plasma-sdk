@@ -2,6 +2,7 @@
 Comment=Explore and edit your Plasma themes
 Comment[ast]=Esplora y edita los estilos de Plasma
 Comment[az]=Plasma movzularınıza baxış və onlara düzəliş
+Comment[bg]=Разглеждане и редактиране вашите теми на Plasma
 Comment[ca]=Explora i edita els vostres temes del Plasma
 Comment[ca@valencia]=Explora i edita els vostres temes de Plasma
 Comment[da]=Udforsk og redigér dine Plasma-temaer
@@ -42,6 +43,7 @@ Keywords=
 Name=Plasma Theme Explorer
 Name[ast]=Esplorador d'estilos de Plasma
 Name[az]=Plasma Mövzu Bələdçisi
+Name[bg]=Преглед на теми за Plasma
 Name[ca]=Explorador de temes del Plasma
 Name[ca@valencia]=Explorador de temes de Plasma
 Name[cs]=Průzkumník motivů Plasma
