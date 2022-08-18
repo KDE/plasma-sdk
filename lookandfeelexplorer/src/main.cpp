@@ -50,7 +50,10 @@ int main(int argc, char **argv)
     obj.setInitializationDelayed(true);
     obj.engine()->rootContext()->setContextProperty("commandlineTheme", parser.value(themeOption));
     obj.engine()->rootContext()->setContextProperty("commandlineArguments", parser.positionalArguments());
-    obj.loadPackage(packagePath);
+    KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("KPackage/GenericQML"));
+    package.setPath(packagePath);
+    obj.setSource(QUrl::fromLocalFile(package.filePath("mainscript")));
+    const KPluginMetaData data = package.metadata();
 
     qmlRegisterAnonymousType<LnfLogic>("org.kde.plasma.sdk", 1);
     qmlRegisterAnonymousType<LnfListModel>("org.kde.plasma.sdk", 1);
@@ -60,11 +63,10 @@ int main(int argc, char **argv)
 
     obj.completeInitialization();
 
-    if (!obj.package().metadata().isValid()) {
+    if (!data.isValid()) {
         return -1;
     }
 
-    KPluginMetaData data = obj.package().metadata();
     // About data
     KAboutData aboutData(data.pluginId(), data.name(), data.version(), data.description(), KAboutLicense::byKeyword(data.license()).key());
 
@@ -76,8 +78,8 @@ int main(int argc, char **argv)
     // have to use a normal QQuickWindow since the root item is already created
     QWindow *window = qobject_cast<QWindow *>(obj.rootObject());
     if (window) {
-        window->setTitle(obj.package().metadata().name());
-        window->setIcon(QIcon::fromTheme(obj.package().metadata().iconName()));
+        window->setTitle(data.name());
+        window->setIcon(QIcon::fromTheme(data.iconName()));
     } else {
         qWarning() << "Error loading the ApplicationWindow";
     }

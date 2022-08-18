@@ -51,14 +51,18 @@ int main(int argc, char **argv)
     KDeclarative::QmlObject *obj = new KDeclarative::QmlObject();
     obj->setTranslationDomain(packagePath);
     obj->setInitializationDelayed(true);
-    obj->loadPackage(packagePath);
     obj->engine()->rootContext()->setContextProperty("commandlineArguments", parser.positionalArguments());
 
     QObject::connect(obj->engine(), &QQmlEngine::quit, &app, &QApplication::quit);
 
     qmlRegisterAnonymousType<ThemeListModel>("org.kde.plasma.sdk", 1);
     qmlRegisterAnonymousType<ColorEditor>("org.kde.plasma.sdk", 1);
-    ThemeModel *themeModel = new ThemeModel(obj->package());
+
+    KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("KPackage/GenericQML"));
+    package.setPath(packagePath);
+    obj->setSource(QUrl::fromLocalFile(package.filePath("mainscript")));
+    const KPluginMetaData data = package.metadata();
+    ThemeModel *themeModel = new ThemeModel(package);
     if (parser.isSet(themeOption)) {
         themeModel->setTheme(parser.value(themeOption));
         obj->engine()->rootContext()->setContextProperty("commandlineTheme", parser.value(themeOption));
@@ -70,11 +74,10 @@ int main(int argc, char **argv)
 
     obj->completeInitialization();
 
-    if (!obj->package().metadata().isValid()) {
+    if (!data.isValid()) {
         return -1;
     }
 
-    KPluginMetaData data = obj->package().metadata();
     // About data
     KAboutData aboutData(data.pluginId(), data.name(), data.version(), data.description(), KAboutLicense::byKeyword(data.license()).key());
 
@@ -86,8 +89,8 @@ int main(int argc, char **argv)
     // have to use a normal QQuickWindow since the root item is already created
     QWindow *window = qobject_cast<QWindow *>(obj->rootObject());
     if (window) {
-        window->setTitle(obj->package().metadata().name());
-        window->setIcon(QIcon::fromTheme(obj->package().metadata().iconName()));
+        window->setTitle(data.name());
+        window->setIcon(QIcon::fromTheme(data.iconName()));
     } else {
         qWarning() << "Error loading the ApplicationWindow";
     }
