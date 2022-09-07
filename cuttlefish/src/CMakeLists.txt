@@ -4,6 +4,7 @@ set(cuttlefish_SRCS
     iconmodel.cpp
     colorschemes.cpp
     sortfiltermodel.cpp
+    qml.qrc
 )
 
 add_executable(cuttlefish ${cuttlefish_SRCS})
@@ -18,7 +19,6 @@ target_link_libraries(cuttlefish
     KF5::ConfigWidgets
     KF5::I18n
     KF5::IconThemes
-    KF5::Package
     Qt::DBus
 )
 

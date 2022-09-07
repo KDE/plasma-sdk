@@ -21,7 +21,6 @@
 #include <KIO/OpenFileManagerWindowJob>
 #include <KIconLoader>
 #include <KIconTheme>
-#include <KPackage/PackageLoader>
 #include <KSharedConfig>
 
 #include <algorithm>

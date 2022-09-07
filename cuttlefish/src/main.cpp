@@ -16,7 +16,6 @@
 // Frameworks
 #include <KConfigGroup>
 #include <KLocalizedString>
-#include <KPackage/PackageLoader>
 #include <Plasma/Theme>
 
 // Own
@@ -93,14 +92,6 @@ int main(int argc, char **argv)
     l10nContext->setTranslationDomain(QStringLiteral("cuttlefish"));
     engine.rootContext()->setContextObject(l10nContext);
 
-    auto package = KPackage::PackageLoader::self()->loadPackage("Plasma/Generic");
-    package.setPath("org.kde.plasma.cuttlefish");
-
-    if (!package.isValid() || !package.metadata().isValid()) {
-        qWarning() << "Could not load package org.kde.plasma.cuttlefish:" << package.path();
-        return -1;
-    }
-
     auto iconModel = new CuttleFish::IconModel(engine.rootContext());
     auto proxyModel = new CuttleFish::SortFilterModel(engine.rootContext());
     proxyModel->setSourceModel(iconModel);
@@ -112,7 +103,7 @@ int main(int argc, char **argv)
     engine.rootContext()->setContextProperty("pickerMode", parser.isSet("picker"));
     engine.rootContext()->setContextProperty("colorSchemes", colorSchemes);
 
-    engine.load(QUrl::fromLocalFile(package.filePath("mainscript")));
+    engine.load(QUrl("qrc:/qml/cuttlefish.qml"));
     if (engine.rootObjects().isEmpty()) {
         return -1;
     }
