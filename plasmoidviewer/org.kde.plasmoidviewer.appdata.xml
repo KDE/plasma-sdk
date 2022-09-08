@@ -9,7 +9,7 @@
   <name xml:lang="ast">Visor de plasmoides</name>
   <name xml:lang="az">Plasmoidə baxış</name>
   <name xml:lang="bg">Преглед на уиджети</name>
-  <name xml:lang="ca">Visor de plasmoides</name>
+  <name xml:lang="ca">Visualitzador de plasmoides</name>
   <name xml:lang="ca-valencia">Visor de plasmoides</name>
   <name xml:lang="cs">Prohlížeč Plasmoidů</name>
   <name xml:lang="da">Plasmoid Viewer</name>
@@ -87,7 +87,7 @@
     <p xml:lang="ast">Visor de plasmoides ye una ferramienta gráfica que permite a los desendolcadores probar los applets pa Plasma.</p>
     <p xml:lang="az">Plasmoidlərə baxış vasitəsi, tərtibatçılara Plasma əlavələrinin test olunmasına imkan verən qrafik alətidir.</p>
     <p xml:lang="bg">Преглед на уиджети е графичен инструмент за тестване на аплети на Plasma.</p>
-    <p xml:lang="ca">El Visor de plasmoides és una eina gràfica que permet als desenvolupadors provar les miniaplicacions del Plasma.</p>
+    <p xml:lang="ca">El Visualitzador de plasmoides és una eina gràfica que permet als desenvolupadors provar les miniaplicacions del Plasma.</p>
     <p xml:lang="ca-valencia">El Visor de plasmoides és una eina gràfica que permet als desenvolupadors provar les miniaplicacions de Plasma.</p>
     <p xml:lang="cs">Prohlížeč Plasmoidů je grafický nástroj umožňující vývojářům testovat aplety Plasma.</p>
     <p xml:lang="da">Plasmoid Viewer er et grafisk værktøj der lader udviklere teste Plasma-applets.</p>
