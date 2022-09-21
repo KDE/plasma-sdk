@@ -13,6 +13,7 @@
 #include <KLocalizedString>
 #include <QDebug>
 #include <QPixmapCache>
+#include <QSurfaceFormat>
 
 #include <qcommandlineoption.h>
 #include <qcommandlineparser.h>
@@ -24,6 +25,10 @@
 int main(int argc, char **argv)
 {
     QQmlDebuggingEnabler debugEnabler;
+
+    auto format = QSurfaceFormat::defaultFormat();
+    format.setOption(QSurfaceFormat::ResetNotification);
+    QSurfaceFormat::setDefaultFormat(format);
 
     QApplication app(argc, argv);
     KLocalizedString::setApplicationDomain("plasmoidviewer");
