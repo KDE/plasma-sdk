@@ -26,6 +26,7 @@
   <name xml:lang="ia">Visor de plasmoid</name>
   <name xml:lang="id">Plasmoid Viewer</name>
   <name xml:lang="it">Visore di plasmoidi</name>
+  <name xml:lang="ka">პლაზმოიდის დათვალიერება</name>
   <name xml:lang="ko">Plasmoid 뷰어</name>
   <name xml:lang="lt">Plasma įskiepių žiūryklė</name>
   <name xml:lang="nl">Plasmoid-viewer</name>
@@ -64,6 +65,7 @@
   <summary xml:lang="ia">Instrumento de essayar pro applets de Plasma</summary>
   <summary xml:lang="id">Alat pengujian untuk applet Plasma</summary>
   <summary xml:lang="it">Strumento di prova per le applet di Plasma</summary>
+  <summary xml:lang="ka">Plasma-ის აპლეტების დასატესტი ხელსაწყო</summary>
   <summary xml:lang="ko">Plasma 애플릿 테스트 도구</summary>
   <summary xml:lang="lt">Plasma įskiepių išbandymo įrankis</summary>
   <summary xml:lang="nb">Testverktøy for Plasma-elementer</summary>
@@ -104,6 +106,7 @@
     <p xml:lang="ia">Plasmoid Viewer (Visor de Plasmoid) es un instrumento graphic permettente a disveloppatores de testar applets de Plasma.</p>
     <p xml:lang="id">Plasmoid Viewer adalah sebuah alat grafik yang memungkinkan pengembang untuk menguji applet-applet Plasma.</p>
     <p xml:lang="it">Il visore di plasmoidi è uno strumento grafico che permette agli sviluppatori di Plasma di provare le applet di Plasma.</p>
+    <p xml:lang="ka">პლაზმოიდის დამთვალიერებელი გრაფიკული ხელსაწყოა, რომელიც პროგრამისტების Plasma-ის აპლეტების დატესტვის საშუალებას აძლევს.</p>
     <p xml:lang="ko">Plasmoid 뷰어는 개발자가 Plasma 애플릿을 테스트할 수 있는 그래픽 도구입니다.</p>
     <p xml:lang="lt">Plasma įskiepių žiūryklė yra grafinis įrankis, leidžiantis kūrėjams išbandyti Plasma įskiepius.</p>
     <p xml:lang="nl">Plasmoid-viewer is een grafisch hulpmiddel die ontwikkelaars in staat stelt om Plasma applets te testen.</p>
