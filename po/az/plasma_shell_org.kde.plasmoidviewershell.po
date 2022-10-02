@@ -1,0 +1,268 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-sdk package.
+#
+# Xəyyam Qocayev <xxmn77@gmail.com>, 2020, 2021, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-sdk\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-06-04 00:47+0000\n"
+"PO-Revision-Date: 2022-07-03 14:23+0400\n"
+"Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
+"Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
+"Language: az\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 22.04.2\n"
+
+#: contents/applet/AppletError.qml:40
+msgid "Sorry! There was an error loading %1."
+msgstr "Təəssüf! %1 yüklənməsində xəta baş verdi."
+
+#: contents/applet/AppletError.qml:48
+msgid "Copy Error Details to Clipboard"
+msgstr "Xəta təfərrüatlarını mübadilə yaddaşına kopyalayın"
+
+#: contents/applet/CompactApplet.qml:70
+msgid "Open %1"
+msgstr "%1 açın"
+
+#: contents/configuration/AboutPlugin.qml:20
+#: contents/configuration/AppletConfiguration.qml:223
+msgid "About"
+msgstr "Haqqında"
+
+#: contents/configuration/AboutPlugin.qml:46
+msgid "Send an email to %1"
+msgstr "%1 ünvanına e-poçt göndərin"
+
+#: contents/configuration/AboutPlugin.qml:95
+msgid "Copyright"
+msgstr "Müəllif Hüquqları"
+
+#: contents/configuration/AboutPlugin.qml:115
+msgid "License:"
+msgstr "Lisenziya:"
+
+#: contents/configuration/AboutPlugin.qml:128
+msgid "Authors"
+msgstr "Müəlliflər"
+
+#: contents/configuration/AboutPlugin.qml:138
+msgid "Credits"
+msgstr "Minnətdarlıq"
+
+#: contents/configuration/AboutPlugin.qml:149
+msgid "Translators"
+msgstr "Tərcüməçilər"
+
+#: contents/configuration/AppletConfiguration.qml:40
+msgid "Keyboard Shortcuts"
+msgstr "Klaviatura qısayolları"
+
+#: contents/configuration/AppletConfiguration.qml:271
+msgid "Apply Settings"
+msgstr "Ayarları tətbiq etmək"
+
+#: contents/configuration/AppletConfiguration.qml:272
+msgid ""
+"The settings of the current module have changed. Do you want to apply the "
+"changes or discard them?"
+msgstr ""
+"Cari modulun ayarları dəyişdirildi. Siz bu dəyişiklikləri tətbiq etmək, "
+"yoxsa onları ləğv etmək istəyirsiniz"
+
+#: contents/configuration/AppletConfiguration.qml:295
+msgid "OK"
+msgstr "OK"
+
+#: contents/configuration/AppletConfiguration.qml:303
+msgid "Apply"
+msgstr "Tətbiq etmək"
+
+#: contents/configuration/AppletConfiguration.qml:309
+msgid "Cancel"
+msgstr "İmtina"
+
+#: contents/configuration/ConfigCategoryDelegate.qml:29
+msgid "Open configuration page"
+msgstr "Tənzimləmə səhifəsini açın"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:19
+msgid "Left-Button"
+msgstr "Sol düymə"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:20
+msgid "Right-Button"
+msgstr "Sağ düymə"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:21
+msgid "Middle-Button"
+msgstr "Orta düymə"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:22
+msgid "Back-Button"
+msgstr "Geriyə düyməsi"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:23
+msgid "Forward-Button"
+msgstr "İrəli düyməsi"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:25
+msgid "Vertical-Scroll"
+msgstr "Şaquli sürüşdürmə"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:26
+msgid "Horizontal-Scroll"
+msgstr "Üfüqi sürüşdürmə"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:28
+msgid "Shift"
+msgstr "Shift"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:29
+msgid "Ctrl"
+msgstr "Ctrl"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:30
+msgid "Alt"
+msgstr "Alt"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:31
+msgid "Meta"
+msgstr "Meta"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:73
+msgctxt "Concatenation sign for shortcuts, e.g. Ctrl+Shift"
+msgid "+"
+msgstr "+"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:153
+#: contents/configuration/MouseEventInputButton.qml:15
+msgid "Add Action"
+msgstr "Fəaliyyət əlavə etmək"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:27
+msgid "Appearance"
+msgstr "Xarici görünüş"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:69
+msgid "Layout changes have been restricted by the system administrator"
+msgstr ""
+"İş otaqlarının növünün dəyişdirilməsi imkanları admin tərəfindən "
+"məhdudlaşdırıldı"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:84
+msgid "Layout:"
+msgstr "İş otağı növü:"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+msgid "Wallpaper Type:"
+msgstr "Divar kağızı növü"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:116
+msgid "Get New Plugins..."
+msgstr "Yeni Əlavələr Almaq..."
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:128
+msgid "Layout changes must be applied before other changes can be made"
+msgstr "İş otağı növü digər ayarları tətbiq etmədən öncə dəyişdirilməlidir"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+msgid "Apply now"
+msgstr "İndi tətbiq etmək"
+
+#: contents/configuration/ConfigurationShortcuts.qml:18
+msgid "Shortcuts"
+msgstr "Qısayollar"
+
+#: contents/configuration/ConfigurationShortcuts.qml:28
+msgid "This shortcut will activate the applet as though it had been clicked."
+msgstr "Bu qısayol vidjeti, ona kliklənmiş kimi əlavə edəcəkdir."
+
+#: contents/configuration/ContainmentConfiguration.qml:33
+msgid "Wallpaper"
+msgstr "Divar Kağızı"
+
+#: contents/configuration/ContainmentConfiguration.qml:38
+msgid "Mouse Actions"
+msgstr "Siçan fəaliyyətləri"
+
+#: contents/configuration/MouseEventInputButton.qml:22
+msgid "Input Here"
+msgstr "Buraya daxil edin"
+
+#: contents/views/SdkButtons.qml:47
+msgid "FormFactors"
+msgstr "Form-Faktorlar"
+
+#: contents/views/SdkButtons.qml:55
+msgid "Planar"
+msgstr "Düz səthli"
+
+#: contents/views/SdkButtons.qml:59
+msgid "Vertical"
+msgstr "Şaquli"
+
+#: contents/views/SdkButtons.qml:63
+msgid "Horizontal"
+msgstr "Üfüqi"
+
+#: contents/views/SdkButtons.qml:67
+msgid "Mediacenter"
+msgstr "Media mərkəzi"
+
+#: contents/views/SdkButtons.qml:71
+msgid "Application"
+msgstr "Tətbiq"
+
+#: contents/views/SdkButtons.qml:78
+msgid "Location"
+msgstr "Məkan"
+
+#: contents/views/SdkButtons.qml:92
+msgid "Floating"
+msgstr "Üzən nöqtə"
+
+#: contents/views/SdkButtons.qml:96
+msgid "Desktop"
+msgstr "İş masası"
+
+#: contents/views/SdkButtons.qml:100
+msgid "Fullscreen"
+msgstr "Tam ekran"
+
+#: contents/views/SdkButtons.qml:104
+msgid "Top Edge"
+msgstr "Yuxarı kənar"
+
+#: contents/views/SdkButtons.qml:108
+msgid "Bottom Edge"
+msgstr "Aşağı kənar"
+
+#: contents/views/SdkButtons.qml:112
+msgid "Left Edge"
+msgstr "Sol kənar"
+
+#: contents/views/SdkButtons.qml:116
+msgid "Right Edge"
+msgstr "Sağ kənar"
+
+#: contents/views/SdkButtons.qml:135
+msgid "Configure Containment"
+msgstr "Konteyneri ayarlamaq"
+
+#~ msgid "Layout cannot be changed whilst widgets are locked"
+#~ msgstr ""
+#~ "Vidjetlər kilidli olduqda İş Otaqlarının növünü dəyişmək mümkün deyil"
+
+#~ msgid ""
+#~ "This shortcut will activate the applet: it will give the keyboard focus "
+#~ "to it, and if the applet has a popup (such as the start menu), the popup "
+#~ "will be open."
+#~ msgstr ""
+#~ "Bu qısayol vidjeti aktivləşdirəcək: fokua klaviaturadan ona keçəcəkdir. "
+#~ "Əgər vidjetin sürüşən menyusu varsa (məs., start menyusunda olduğu kimi) "
+#~ "o zaman həmin menyu açılacaqdır."

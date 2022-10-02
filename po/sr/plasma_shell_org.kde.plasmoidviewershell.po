@@ -1,0 +1,193 @@
+# Translation of plasma_shell_org.kde.plasmoidviewershell.po into Serbian.
+# Chusslove Illich <caslav.ilic@gmx.net>, 2015, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2019-05-20 03:26+0200\n"
+"PO-Revision-Date: 2016-02-14 17:49+0100\n"
+"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
+
+#: contents/configuration/AppletConfiguration.qml:48
+msgid "Keyboard shortcuts"
+msgstr "Пречице са тастатуре"
+
+# >> @title:window
+#: contents/configuration/AppletConfiguration.qml:132
+msgid "Apply Settings"
+msgstr "Применити поставке?"
+
+#: contents/configuration/AppletConfiguration.qml:133
+msgid ""
+"The settings of the current module have changed. Do you want to apply the "
+"changes or discard them?"
+msgstr ""
+"Измењене су поставке текућег модула. Желите ли да их примените или одбаците?"
+
+#: contents/configuration/AppletConfiguration.qml:330
+msgid "OK"
+msgstr "У реду"
+
+#: contents/configuration/AppletConfiguration.qml:337
+msgid "Apply"
+msgstr "Примени"
+
+#: contents/configuration/AppletConfiguration.qml:342
+msgid "Cancel"
+msgstr "Одустани"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:31
+msgid "Left-Button"
+msgstr "лево дугме"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:32
+msgid "Right-Button"
+msgstr "десно дугме"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:33
+msgid "Middle-Button"
+msgstr "средње дугме"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:35
+msgid "Vertical-Scroll"
+msgstr "усправно клизање"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:36
+msgid "Horizontal-Scroll"
+msgstr "водоравно клизање"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:38
+msgid "Shift"
+msgstr "Shift"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:39
+msgid "Ctrl"
+msgstr "Ctrl"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:40
+msgid "Alt"
+msgstr "Alt"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:41
+msgid "Meta"
+msgstr "Meta"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:116
+#: contents/configuration/MouseEventInputButton.qml:27
+msgid "Add Action"
+msgstr "Додај радњу"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:87
+msgid "Layout:"
+msgstr "Распоред:"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:108
+msgid "Layout cannot be changed whilst widgets are locked"
+msgstr "Распоред не може да се измени док су виџети закључани"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:121
+msgid "Wallpaper Type:"
+msgstr "Тип тапета:"
+
+#: contents/configuration/ConfigurationShortcuts.qml:41
+msgid ""
+"This shortcut will activate the applet: it will give the keyboard focus to "
+"it, and if the applet has a popup (such as the start menu), the popup will "
+"be open."
+msgstr ""
+"Ова пречица ће активирати аплет: даће му фокус тастатуре и отворити искакач "
+"(попут почетног менија), ако га има."
+
+#: contents/configuration/ContainmentConfiguration.qml:43
+msgid "Wallpaper"
+msgstr "Тапет"
+
+#: contents/configuration/ContainmentConfiguration.qml:48
+msgid "Mouse Actions"
+msgstr "Радње мишем"
+
+#: contents/configuration/MouseEventInputButton.qml:38
+msgid "Input Here"
+msgstr "Унос овде"
+
+#: contents/views/SdkButtons.qml:60
+msgid "FormFactors"
+msgstr "Подлоге"
+
+# @item:inmenu FormFactors
+#: contents/views/SdkButtons.qml:68
+msgid "Planar"
+msgstr "раванска"
+
+# @item:inmenu FormFactors
+#: contents/views/SdkButtons.qml:72
+msgid "Vertical"
+msgstr "усправна"
+
+# @item:inmenu FormFactors
+#: contents/views/SdkButtons.qml:76
+msgid "Horizontal"
+msgstr "водоравна"
+
+# @item:inmenu FormFactors
+#: contents/views/SdkButtons.qml:80
+msgid "Mediacenter"
+msgstr "медија центар"
+
+# @item:inmenu FormFactors
+#: contents/views/SdkButtons.qml:84
+msgid "Application"
+msgstr "програм"
+
+#: contents/views/SdkButtons.qml:91
+msgid "Location"
+msgstr "Локација"
+
+# @item:inmenu Location
+#: contents/views/SdkButtons.qml:105
+msgid "Floating"
+msgstr "плутајуће"
+
+# @item:inmenu Location
+#: contents/views/SdkButtons.qml:109
+msgid "Desktop"
+msgstr "површ"
+
+# @item:inmenu Location
+#: contents/views/SdkButtons.qml:113
+msgid "Fullscreen"
+msgstr "цео екран"
+
+# @item:inmenu Location
+#: contents/views/SdkButtons.qml:117
+msgid "Top Edge"
+msgstr "горња ивица"
+
+# @item:inmenu Location
+#: contents/views/SdkButtons.qml:121
+msgid "Bottom Edge"
+msgstr "доња ивица"
+
+# @item:inmenu Location
+#: contents/views/SdkButtons.qml:125
+msgid "Left Edge"
+msgstr "лева ивица"
+
+# @item:inmenu Location
+#: contents/views/SdkButtons.qml:129
+msgid "Right Edge"
+msgstr "десна ивица"
+
+#: contents/views/SdkButtons.qml:148
+msgid "Configure Containment"
+msgstr "Подеси садржалац"

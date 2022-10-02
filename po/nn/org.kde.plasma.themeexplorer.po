@@ -1,0 +1,350 @@
+# Translation of org.kde.plasma.themeexplorer to Norwegian Nynorsk
+#
+# Karl Ove Hufthammer <karl@huftis.org>, 2015, 2016, 2018, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-13 00:47+0000\n"
+"PO-Revision-Date: 2021-09-19 12:36+0200\n"
+"Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
+"Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
+"Language: nn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 21.11.70\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Karl Ove Hufthammer"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "karl@huftis.org"
+
+#: package/contents/ui/ColorEditor.qml:39
+#, kde-format
+msgid "Edit Colors"
+msgstr "Rediger fargar"
+
+#: package/contents/ui/ColorEditor.qml:69
+#, kde-format
+msgid "Select Color"
+msgstr "Vel farge"
+
+#: package/contents/ui/ColorEditor.qml:111
+#, kde-format
+msgid "Normal text"
+msgstr "Normal tekst"
+
+#: package/contents/ui/ColorEditor.qml:117
+#, kde-format
+msgid "Link"
+msgstr "Lenkje"
+
+#: package/contents/ui/ColorEditor.qml:121
+#, kde-format
+msgid "Visited Link"
+msgstr "Vitja lenkje"
+
+#: package/contents/ui/ColorEditor.qml:156
+#, kde-format
+msgid "Complementary colors area:"
+msgstr "Komplementærfarge for område:"
+
+#: package/contents/ui/ColorEditor.qml:171
+#, kde-format
+msgid "Label"
+msgstr "Merkelapp"
+
+#: package/contents/ui/ColorEditor.qml:194
+#, kde-format
+msgid "Text color:"
+msgstr "Tekstfarge:"
+
+#: package/contents/ui/ColorEditor.qml:201
+#, kde-format
+msgid "Background color:"
+msgstr "Bakgrunnsfarge:"
+
+#: package/contents/ui/ColorEditor.qml:208
+#, kde-format
+msgid "Highlight color:"
+msgstr "Framhevingsfarge:"
+
+#: package/contents/ui/ColorEditor.qml:215
+#, kde-format
+msgid "Link color:"
+msgstr "Lenkjefarge:"
+
+#: package/contents/ui/ColorEditor.qml:222
+#, kde-format
+msgid "Visited link color:"
+msgstr "Vitja lenkje-farge:"
+
+#: package/contents/ui/ColorEditor.qml:230
+#, kde-format
+msgid "Button text color:"
+msgstr "Knapptekst-farge:"
+
+#: package/contents/ui/ColorEditor.qml:237
+#, kde-format
+msgid "Button background color:"
+msgstr "Knapptekst-bakgrunnsfarge:"
+
+#: package/contents/ui/ColorEditor.qml:244
+#, kde-format
+msgid "Button mouse over color:"
+msgstr "Farge for peikar over knapp:"
+
+#: package/contents/ui/ColorEditor.qml:251
+#, kde-format
+msgid "Button focus color:"
+msgstr "Farge for fokus på knapp:"
+
+#: package/contents/ui/ColorEditor.qml:259
+#, kde-format
+msgid "Text view text color:"
+msgstr "Farge for tekst i tekstvising:"
+
+#: package/contents/ui/ColorEditor.qml:266
+#, kde-format
+msgid "Text view background color:"
+msgstr "Bagrkunnsfarge for tekst i tekstvising:"
+
+#: package/contents/ui/ColorEditor.qml:273
+#, kde-format
+msgid "Text view mouse over color:"
+msgstr "Farge når peikar over tekst i tekstvising:"
+
+#: package/contents/ui/ColorEditor.qml:280
+#, kde-format
+msgid "Text view focus color:"
+msgstr "Farge for fokus på tekst i tekstvising:"
+
+#: package/contents/ui/ColorEditor.qml:288
+#, kde-format
+msgid "Complementary text color:"
+msgstr "Komplementær tekstfarge:"
+
+#: package/contents/ui/ColorEditor.qml:295
+#, kde-format
+msgid "Complementary background color:"
+msgstr "Komplementær bakgrunnsfarge:"
+
+#: package/contents/ui/ColorEditor.qml:302
+#, kde-format
+msgid "Complementary mouse over color:"
+msgstr "Komplementærfarge når peikar over:"
+
+#: package/contents/ui/ColorEditor.qml:309
+#, kde-format
+msgid "Complementary focus color:"
+msgstr "Komplementærfarge ved fokus:"
+
+#: package/contents/ui/ColorEditor.qml:324
+#: package/contents/ui/MetadataEditor.qml:137
+#, kde-format
+msgid "OK"
+msgstr "OK"
+
+#: package/contents/ui/ColorEditor.qml:329
+#: package/contents/ui/MetadataEditor.qml:143
+#, kde-format
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: package/contents/ui/delegates/actionbutton.qml:35
+#: package/contents/ui/delegates/actionbutton.qml:39
+#: package/contents/ui/delegates/checkmarks.qml:31
+#: package/contents/ui/delegates/checkmarks.qml:35
+#: package/contents/ui/delegates/checkmarks.qml:39
+#: package/contents/ui/delegates/checkmarks.qml:43
+#, kde-format
+msgid "Option"
+msgstr "Val"
+
+#: package/contents/ui/delegates/button.qml:27
+#, kde-format
+msgid "ToolButton"
+msgstr "Verktøyknapp"
+
+#: package/contents/ui/delegates/button.qml:31
+#: package/contents/ui/fakecontrols/Button.qml:22
+#, kde-format
+msgid "Button"
+msgstr "Knapp"
+
+#: package/contents/ui/delegates/tabbar.qml:29
+#, kde-format
+msgid "Tab1"
+msgstr "Fane 1"
+
+#: package/contents/ui/delegates/tabbar.qml:32
+#, kde-format
+msgid "Tab2"
+msgstr "Fane 2"
+
+#: package/contents/ui/delegates/tabbar.qml:35
+#, kde-format
+msgid "Tab3"
+msgstr "Fane 3"
+
+#: package/contents/ui/delegates/textfield.qml:28
+#, kde-format
+msgid "Text"
+msgstr "Tekst"
+
+#: package/contents/ui/fakecontrols/CheckBox.qml:73
+#, kde-format
+msgid "Checkbox"
+msgstr "Avkryssingsboks"
+
+#: package/contents/ui/fakecontrols/LineEdit.qml:33
+#, kde-format
+msgid "Text input…"
+msgstr "Tekstfelt …"
+
+#: package/contents/ui/main.qml:30
+#, kde-format
+msgid "New Theme…"
+msgstr "Nytt tema …"
+
+#: package/contents/ui/main.qml:46
+#, kde-format
+msgid "Theme:"
+msgstr "Tema:"
+
+#: package/contents/ui/main.qml:58
+#, kde-format
+msgid "Open Folder"
+msgstr "Opna mappe"
+
+#: package/contents/ui/main.qml:63
+#, kde-format
+msgid "Edit Metadata…"
+msgstr "Rediger metadata …"
+
+#: package/contents/ui/main.qml:80
+#, kde-format
+msgid "Edit Colors…"
+msgstr "Rediger fargar …"
+
+#: package/contents/ui/main.qml:96
+#, kde-format
+msgid "Help"
+msgstr "Hjelp"
+
+#: package/contents/ui/main.qml:101
+#, kde-format
+msgid "Search…"
+msgstr "Søk …"
+
+#: package/contents/ui/main.qml:219
+#, kde-format
+msgid "This is a readonly, system wide installed theme"
+msgstr "Dette er eit skriveverna, systeminstallert tema"
+
+#: package/contents/ui/main.qml:224
+#, kde-format
+msgid "Preview:"
+msgstr "Førehandsvising:"
+
+#: package/contents/ui/main.qml:239
+#, kde-format
+msgid "Image path: %1"
+msgstr "Biletadresse: %1"
+
+#: package/contents/ui/main.qml:244
+#, kde-format
+msgid "Description: %1"
+msgstr "Skildring: %1"
+
+#: package/contents/ui/main.qml:249
+#, kde-format
+msgid "Missing from this theme"
+msgstr "Manglar i dette temaet"
+
+#: package/contents/ui/main.qml:249
+#, kde-format
+msgid "Present in this theme"
+msgstr "Finst i dette temaet"
+
+#: package/contents/ui/main.qml:254
+#, kde-format
+msgid "Show Margins"
+msgstr "Vis margar"
+
+#: package/contents/ui/main.qml:257
+#, kde-format
+msgid "Create with Editor…"
+msgstr "Lag med redigeringsprogram …"
+
+#: package/contents/ui/main.qml:257
+#, kde-format
+msgid "Open In Editor…"
+msgstr "Opna i redigeringsprogram …"
+
+#: package/contents/ui/MetadataEditor.qml:24
+#, kde-format
+msgid "New Theme"
+msgstr "Nytt tema"
+
+#: package/contents/ui/MetadataEditor.qml:24
+#, kde-format
+msgid "Edit Theme"
+msgstr "Rediger tema"
+
+#: package/contents/ui/MetadataEditor.qml:59
+#, kde-format
+msgid "Warning: don't change author or license for themes you don't own"
+msgstr ""
+"Åtvaring: Ikkje endra opphavsperson eller lisensvilkåra for tema som ikkje "
+"er dine eigne"
+
+#: package/contents/ui/MetadataEditor.qml:70
+#, kde-format
+msgid "Theme Name:"
+msgstr "Temanamn:"
+
+#: package/contents/ui/MetadataEditor.qml:86
+#, kde-format
+msgid "This theme name already exists"
+msgstr "Det finst alt eit tema med dette namnet"
+
+#: package/contents/ui/MetadataEditor.qml:95
+#, kde-format
+msgid "Author:"
+msgstr "Opphavsperson:"
+
+#: package/contents/ui/MetadataEditor.qml:103
+#, kde-format
+msgid "Email:"
+msgstr "E-postadresse:"
+
+#: package/contents/ui/MetadataEditor.qml:111
+#, kde-format
+msgid "License:"
+msgstr "Lisens:"
+
+#: package/contents/ui/MetadataEditor.qml:122
+#, kde-format
+msgid "Website:"
+msgstr "Heimeside:"
+
+#: src/main.cpp:37
+#, kde-format
+msgid "Plasma Theme Explorer"
+msgstr "Utforskar for Plasma-tema"
+
+#: src/main.cpp:41
+#, kde-format
+msgid "The theme to open"
+msgstr "Temaet som skal opnast"

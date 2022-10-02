@@ -1,0 +1,268 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Kiszel Kristóf <kiszel.kristof@gmail.com>, 2017, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-06-04 00:47+0000\n"
+"PO-Revision-Date: 2021-10-17 16:03+0200\n"
+"Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 21.08.2\n"
+
+#: contents/applet/AppletError.qml:40
+msgid "Sorry! There was an error loading %1."
+msgstr "Elnézést, hiba történt a(z) %1 betöltésekor."
+
+#: contents/applet/AppletError.qml:48
+msgid "Copy Error Details to Clipboard"
+msgstr "Hiba részleteinek másolása a vágólapra"
+
+#: contents/applet/CompactApplet.qml:70
+msgid "Open %1"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:20
+#: contents/configuration/AppletConfiguration.qml:223
+msgid "About"
+msgstr "Névjegy"
+
+#: contents/configuration/AboutPlugin.qml:46
+msgid "Send an email to %1"
+msgstr "E-mail küldése neki: %1"
+
+#: contents/configuration/AboutPlugin.qml:95
+msgid "Copyright"
+msgstr "Copyright"
+
+#: contents/configuration/AboutPlugin.qml:115
+msgid "License:"
+msgstr "Licenc:"
+
+#: contents/configuration/AboutPlugin.qml:128
+msgid "Authors"
+msgstr "Szerzők"
+
+#: contents/configuration/AboutPlugin.qml:138
+msgid "Credits"
+msgstr "Köszönetnyilvánítás"
+
+#: contents/configuration/AboutPlugin.qml:149
+msgid "Translators"
+msgstr "Fordítók"
+
+#: contents/configuration/AppletConfiguration.qml:40
+msgid "Keyboard Shortcuts"
+msgstr "Gyorsbillentyűk"
+
+#: contents/configuration/AppletConfiguration.qml:271
+msgid "Apply Settings"
+msgstr "Beállítások alkalmazása"
+
+#: contents/configuration/AppletConfiguration.qml:272
+msgid ""
+"The settings of the current module have changed. Do you want to apply the "
+"changes or discard them?"
+msgstr ""
+"Az aktuális modul beállításai megváltoztak. Szeretné menteni a "
+"módosításokat, vagy elveti azokat?"
+
+#: contents/configuration/AppletConfiguration.qml:295
+msgid "OK"
+msgstr "OK"
+
+#: contents/configuration/AppletConfiguration.qml:303
+msgid "Apply"
+msgstr "Alkalmazás"
+
+#: contents/configuration/AppletConfiguration.qml:309
+msgid "Cancel"
+msgstr "Mégsem"
+
+#: contents/configuration/ConfigCategoryDelegate.qml:29
+msgid "Open configuration page"
+msgstr "Beállítóoldal megnyitása"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:19
+msgid "Left-Button"
+msgstr "Bal gomb"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:20
+msgid "Right-Button"
+msgstr "Jobb gomb"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:21
+msgid "Middle-Button"
+msgstr "Középső gomb"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:22
+msgid "Back-Button"
+msgstr "Vissza gomb"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:23
+msgid "Forward-Button"
+msgstr "Előre gomb"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:25
+msgid "Vertical-Scroll"
+msgstr "Függőleges görgetés"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:26
+msgid "Horizontal-Scroll"
+msgstr "Vízszintes görgetés"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:28
+msgid "Shift"
+msgstr "Shift"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:29
+msgid "Ctrl"
+msgstr "Ctrl"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:30
+msgid "Alt"
+msgstr "Alt"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:31
+msgid "Meta"
+msgstr "Meta"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:73
+msgctxt "Concatenation sign for shortcuts, e.g. Ctrl+Shift"
+msgid "+"
+msgstr "+"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:153
+#: contents/configuration/MouseEventInputButton.qml:15
+msgid "Add Action"
+msgstr "Művelet hozzáadása"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:27
+msgid "Appearance"
+msgstr "Megjelenés"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:69
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "Az elrendezés változtatásait a rendszeradminisztrátor korlátozta"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:84
+msgid "Layout:"
+msgstr "Elrendezés:"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+msgid "Wallpaper Type:"
+msgstr "Háttérkép típus:"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:116
+msgid "Get New Plugins..."
+msgstr "Új bővítmények letöltése…"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:128
+msgid "Layout changes must be applied before other changes can be made"
+msgstr ""
+"Az elrendezés változtatásait alkalmazni kell, mielőtt más változtatások "
+"történnek"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+msgid "Apply now"
+msgstr "Alkalmazás most"
+
+#: contents/configuration/ConfigurationShortcuts.qml:18
+msgid "Shortcuts"
+msgstr "Gyorsbillentyűk"
+
+#: contents/configuration/ConfigurationShortcuts.qml:28
+msgid "This shortcut will activate the applet as though it had been clicked."
+msgstr ""
+"EZ a gyorsbillentyű aktiválja a kisalkalmazást, mintha rákattintottak volna."
+
+#: contents/configuration/ContainmentConfiguration.qml:33
+msgid "Wallpaper"
+msgstr "Háttérkép"
+
+#: contents/configuration/ContainmentConfiguration.qml:38
+msgid "Mouse Actions"
+msgstr "Egérműveletek"
+
+#: contents/configuration/MouseEventInputButton.qml:22
+msgid "Input Here"
+msgstr "Bevitel itt"
+
+#: contents/views/SdkButtons.qml:47
+msgid "FormFactors"
+msgstr "Helyigény"
+
+#: contents/views/SdkButtons.qml:55
+msgid "Planar"
+msgstr "Sík"
+
+#: contents/views/SdkButtons.qml:59
+msgid "Vertical"
+msgstr "Függőleges"
+
+#: contents/views/SdkButtons.qml:63
+msgid "Horizontal"
+msgstr "Vízszintes"
+
+#: contents/views/SdkButtons.qml:67
+msgid "Mediacenter"
+msgstr "Médiaközpont"
+
+#: contents/views/SdkButtons.qml:71
+msgid "Application"
+msgstr "Alkalmazás"
+
+#: contents/views/SdkButtons.qml:78
+msgid "Location"
+msgstr "Hely"
+
+#: contents/views/SdkButtons.qml:92
+msgid "Floating"
+msgstr "Lebegő"
+
+#: contents/views/SdkButtons.qml:96
+msgid "Desktop"
+msgstr "Asztal"
+
+#: contents/views/SdkButtons.qml:100
+msgid "Fullscreen"
+msgstr "Teljes képernyő"
+
+#: contents/views/SdkButtons.qml:104
+msgid "Top Edge"
+msgstr "Felső él"
+
+#: contents/views/SdkButtons.qml:108
+msgid "Bottom Edge"
+msgstr "Alsó él"
+
+#: contents/views/SdkButtons.qml:112
+msgid "Left Edge"
+msgstr "Bal oldali él"
+
+#: contents/views/SdkButtons.qml:116
+msgid "Right Edge"
+msgstr "Jobb oldali él"
+
+#: contents/views/SdkButtons.qml:135
+msgid "Configure Containment"
+msgstr "Befoglaló beállítása"
+
+#~ msgid "Layout cannot be changed whilst widgets are locked"
+#~ msgstr "A felület nem változtatható, amíg a widgetek zárolva vannak"
+
+#~ msgid ""
+#~ "This shortcut will activate the applet: it will give the keyboard focus "
+#~ "to it, and if the applet has a popup (such as the start menu), the popup "
+#~ "will be open."
+#~ msgstr ""
+#~ "Ez a gyorsbillentyű aktiválja a kisalkalmazást: átadja neki a "
+#~ "billentyűzet fókuszát, és ha a kisalkalmazásnak van felugró eleme (mint "
+#~ "például az indítómenünek), a felugró elem megnyílik."

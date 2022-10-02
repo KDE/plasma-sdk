@@ -1,0 +1,325 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Brazilian-Portuguese "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>Manual do Usuário do KDE</title>
+<date
+>21/10/2010</date>
+<productname
+>KDE</productname>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>plasmoidviewer</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>plasmoidviewer</command
+></refname>
+<refpurpose
+>Executar os widgets do Plasma na sua própria janela</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>plasmoidviewer</command
+> <group choice="opt"
+><option
+>-c, --containment</option
+> <replaceable
+> nome</replaceable
+></group
+> <group choice="opt"
+><option
+>-f, --formfactor</option
+> <replaceable
+> nome</replaceable
+></group
+> <group choice="opt"
+><option
+>--list</option
+></group
+> <group choice="opt"
+><option
+>--list-wallpapers</option
+></group
+> <group choice="opt"
+><option
+>--list-containments</option
+></group
+> <group choice="opt"
+><option
+>-l, --location</option
+> <replaceable
+> nome</replaceable
+></group
+> <group choice="opt"
+><option
+>-p, --pixmapcache</option
+> <replaceable
+> tamanho</replaceable
+></group
+> <group choice="opt"
+><option
+>-s, --screenshot</option
+></group
+> <group choice="opt"
+><option
+>--screenshot-all</option
+></group
+> <group choice="opt"
+><option
+>-t, --theme</option
+> <replaceable
+> nome</replaceable
+></group
+> <group choice="opt"
+><option
+>-w, --wallpaper</option
+> <replaceable
+> nome</replaceable
+></group
+> <arg choice="opt"
+>applet</arg
+> <arg choice="opt"
+>args</arg
+> <arg choice="opt"
+>--list-remote</arg
+> <arg choice="opt"
+>Opções genéricas do KDE</arg
+> <arg choice="opt"
+>Opções genéricas do Qt</arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Descrição</title>
+<para
+>O <command
+>plasmoidviewer</command
+> é uma ferramenta gráfica que permite aos programadores testarem os miniaplicativos do Plasma.</para>
+
+<para
+>Só serão encontrados os miniaplicativos instalados. O <command
+>kbuildsycoca4</command
+> poderá ter que ser executado para os mini-aplicativos recém instalados serem encontrados.</para>
+</refsect1>
+
+<refsect1>
+<title
+>Opções</title>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>-c, --containment <replaceable
+>nome</replaceable
+></option
+></term>
+<listitem
+><para
+>Nome do plugin do contêiner [nulo].</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-f, --formfactor <replaceable
+>nome</replaceable
+></option
+></term>
+<listitem
+><para
+>O fator do formato a usar (horizontal, vertical, mediacenter ou planar) [planar].</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>--list</option
+></term>
+<listitem
+><para
+>Mostra uma lista de miniaplicativos conhecidos.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>--list-wallpapers</option
+></term>
+<listitem
+><para
+>Mostra uma lista de papéis de parede conhecidos.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>--list-containments</option
+></term>
+<listitem
+><para
+>Mostra uma lista de contêineres conhecidos.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-l, --location <replaceable
+>nome</replaceable
+></option
+></term>
+<listitem
+><para
+>A restrição de localização com a qual iniciar o contêiner (floating, desktop, fullscreen, topedge, bottomedge, leftedge, rightedge) [floating].</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-p, --pixmapcache <replaceable
+>tamanho</replaceable
+></option
+></term>
+<listitem
+><para
+>O tamanho em KB da cache de imagens.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-s, --screenshot</option
+></term>
+<listitem
+><para
+>Faz uma captura de tela do elemento e salva-a na pasta de trabalho como &lt;nome-plugin&gt;.png.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-s, --screenshot-all</option
+></term>
+<listitem
+><para
+>Faz uma captura do tela de cada elemento e salva-a a na pasta de trabalho como &lt;nome-plugin&gt;.png.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-t, --theme <replaceable
+>nome</replaceable
+></option
+></term>
+<listitem
+><para
+>Tema SVG a ser usado na área de trabalho.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-w, --wallpaper <replaceable
+>nome</replaceable
+></option
+></term>
+<listitem
+><para
+>O nome do plugin de papéis de parede. Necessita que um plugin de contêiner seja especificado.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+><replaceable
+>miniaplicativo</replaceable
+></option
+></term>
+<listitem
+><para
+>Nome do miniaplicativo a visualizar; pode se referir ao nome do plugin ou localização (completa ou relativa) de um pacote. Se não for fornecido, então uma tentativa é feita para carregar o pacote da pasta atual.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+><replaceable
+>args</replaceable
+></option
+></term>
+<listitem
+><para
+>Argumentos opcionais do miniaplicativo a ser adicionado.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+><replaceable
+>--list-remote</replaceable
+></option
+></term>
+<listitem
+><para
+>Listar os widgets remotos anunciados pelo zeroconf.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</refsect1>
+
+<refsect1>
+<title
+>Veja também</title>
+
+<para
+>Mais documentação do usuário está disponível em <ulink url="help:/plasma-desktop"
+>help:/plasma-desktop</ulink
+> (quer através deste <acronym
+>URL</acronym
+> no &konqueror;, quer através do comando <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/plasma-desktop</parameter
+></userinput
+>).</para>
+
+</refsect1>
+
+<refsect1>
+<title
+>Autores</title>
+<para
+>O <command
+>plasmoidviewer</command
+> foi criado por <personname
+><firstname
+>Aaron</firstname
+><surname
+>Seigo</surname
+></personname
+> <email
+>aseigo@kde.org</email
+>.</para>
+</refsect1>
+
+</refentry>

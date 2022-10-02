@@ -1,0 +1,181 @@
+# translation of plasmoidviewer.po to Khmer
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2008, 2009, 2010, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasmoidviewer\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-22 00:47+0000\n"
+"PO-Revision-Date: 2012-06-14 10:27+0700\n"
+"Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
+"Language-Team: Khmer\n"
+"Language: km\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "ខឹម សុខែម, អេង វណ្ណៈ, អោក ពិសិដ្ឋ"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "khoemsokhem@khmeros.info,​​evannak@khmeros.info,piseth_dv@khmeros.info"
+
+#: main.cpp:37
+#, fuzzy, kde-format
+#| msgid "Plasma Widget Viewer"
+msgid "Plasmoidviewer"
+msgstr "កម្មវិធី​មើល​ធាតុក្រាហ្វិក​ប្លាស្មា"
+
+#: main.cpp:44
+#, kde-format
+msgid "Run Plasma widgets in their own window"
+msgstr "រត់​ធាតុក្រាហ្វិក​ប្លាស្មា​នៅ​ក្នុង​បង្អួច​ផ្ទាល់​របស់​ពួកវា"
+
+#: main.cpp:47
+#, fuzzy, kde-format
+#| msgid "Name of the containment plugin"
+msgid "The name of the containment plugin"
+msgstr "ឈ្មោះ​របស់​កម្មវិធី​ជំនួយ​ឧបករណ៍​ផ្ទុក"
+
+#: main.cpp:51
+#, fuzzy, kde-format
+msgid "The name of the applet plugin"
+msgstr "ឈ្មោះ​របស់​កម្មវិធី​ជំនួយ​ឧបករណ៍​ផ្ទុក"
+
+#: main.cpp:53
+#, fuzzy, kde-format
+#| msgctxt "Do not translate horizontal, vertical, mediacenter nor planar"
+#| msgid "The formfactor to use (horizontal, vertical, mediacenter or planar)"
+msgid ""
+"The formfactor to use (horizontal, vertical, mediacenter, planar or "
+"application)"
+msgstr "formfactor ត្រូវ​ប្រើ (ផ្ដេក បញ្ឈរ mediacenter or planar)"
+
+#: main.cpp:58
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "Do not translate floating, desktop, fullscreen, top, bottom, left nor "
+#| "right"
+#| msgid ""
+#| "The location constraint to start the Containment with (floating, desktop, "
+#| "fullscreen, top, bottom, left, right)"
+msgid ""
+"The location constraint to start the Containment with (floating, desktop, "
+"fullscreen, topedge, bottomedge, leftedge, rightedge)"
+msgstr "កម្រិត​ទីតាំង​​ដើម្បី​ចាប់ផ្ដើម​​ទប់​ជា​មួយ (អណ្ដែត ផ្ទៃតុ ពេញអេក្រង់ កំបូល បាត ឆ្វេង ស្ដាម)"
+
+#: main.cpp:63
+#, kde-format
+msgid "Set the x position of the plasmoidviewer on the Plasma desktop"
+msgstr ""
+
+#: main.cpp:66
+#, kde-format
+msgid "Set the y position of the plasmoidviewer on the Plasma desktop"
+msgstr ""
+
+#: main.cpp:69
+#, kde-format
+msgid "Set the window size of the plasmoidview"
+msgstr ""
+
+#: main.cpp:72
+#, fuzzy, kde-format
+#| msgid "The size in kB to set the pixmap cache to"
+msgid "The size in kB to set the pixmap cache to"
+msgstr "ទំហំ​គិតជា​គីឡូបៃ​ ដើម្បី​កំណត់​ឃ្លាំង​សម្ងាត់​ pixmap"
+
+#: main.cpp:75
+#, kde-format
+msgid "The name of the theme which the shell will use"
+msgstr ""
+
+#: main.cpp:78
+#, kde-format
+msgid "Data that should be passed to the applet as 'externalData' event"
+msgstr ""
+
+#: view.cpp:122
+#, no-c-format, kde-format
+msgid "Applet %1 does not exist."
+msgstr ""
+
+#: view.cpp:139
+#, no-c-format, kde-format
+msgid "Containment %1 does not exist."
+msgstr ""
+
+#: view.cpp:316
+#, kde-format
+msgctxt "@title:window"
+msgid "Save Screenshot"
+msgstr ""
+
+#~ msgid "No description available"
+#~ msgstr "មិន​មាន​សេចក្ដីពិពណ៌​នា"
+
+#~ msgid "2007-2008, Frerich Raabe"
+#~ msgstr "រក្សាសិទ្ធិ ២០០៧-២០០៨ ដោយ Frerich Raabe"
+
+#~ msgid "Frerich Raabe"
+#~ msgstr "Frerich Raabe"
+
+#~ msgid "Original author"
+#~ msgstr "អ្នកនិពន្ធ​ដើម"
+
+#~ msgid "Displays a list of known applets"
+#~ msgstr "បង្ហាញ​បញ្ជី​អាប់ភ្លេត​ដែលស្គាល់"
+
+#~ msgid "Displays a list of known wallpapers"
+#~ msgstr "បង្ហាញ​បញ្ជី​ផ្ទាំង​រូបភាព​​ដែល​បាន​ស្គាល់"
+
+#~ msgid "Displays a list of known containments"
+#~ msgstr "បង្ហាញ​បញ្ជី​ការ​ផ្ទុក​ដែល​ស្គាល់"
+
+#~ msgid "Displays a list of known themes"
+#~ msgstr "បង្ហាញ​បញ្ជី​រូបរាង​​អាប់ភ្លេត​ដែលស្គាល់"
+
+#~ msgid "Disables save and restore of the config between runs"
+#~ msgstr "បិទ​កា​ររក្សាទុក និង​ស្ដារ​ការ​កំណត់​រចនាសម្ព័​ន្ធ​រវាង​ដំណើរការ"
+
+#~ msgid ""
+#~ "Takes a screenshot of the widget and saves it the working directory as "
+#~ "<pluginname>.png"
+#~ msgstr "ថត​រូប​អេក្រង់​របស់​ធាតុក្រាហ្វិក ហើយ​រក្សាទុក​វា​ក្នុងថត​ដំណើរការ​ជា<pluginname>.png"
+
+#~ msgid ""
+#~ "Takes a screenshot of each widget and saves it the working directory as "
+#~ "<pluginname>.png"
+#~ msgstr ""
+#~ "ថត​រូប​អេក្រង់​របស់​ធាតុក្រាហ្វិក​នីមួយៗ​ ហើយ​រក្សាទុក​វា​ក្នុង​ថត​ដំណើរការ​ជា <pluginname>.png"
+
+#~ msgid "Desktop SVG theme to use"
+#~ msgstr "ស្បែក​ផ្ទៃតុ SVG ត្រូវ​ប្រើ"
+
+#~ msgid ""
+#~ "Name of the wallpaper plugin. Requires a containment plugin to be "
+#~ "specified."
+#~ msgstr "ឈ្មោះ​របស់​កម្មវិធី​ជំនួយ​ផ្ទាំង​រូបភាព ។ តម្រូវ​ឲ្យ​បញ្ជាក់​​កម្មវិធី​ជំនួយ​ផ្ទុក ។"
+
+#~ msgid ""
+#~ "Name of applet to view; may refer to the plugin name or be a path "
+#~ "(absolute or relative) to a package. If not provided, then an attempt is "
+#~ "made to load a package from the current directory."
+#~ msgstr ""
+#~ "ឈ្មោះ​អាប់ភ្លេត​ត្រូវ​មើល អាច​សំអាង​លើ​ឈ្មោះ​កម្មវិធី​ជំនួយ ឬ​ជា​ផ្លូវ (ពេញលេញ ឬ​ទាក់ទង) ទៅ​កញ្ចប់ ។ "
+#~ "ប្រសិនបើ​មិន​បានផ្ដល់ បន្ទាប់​មក​ការ​ប៉ុនប៉ង​ត្រូ​វបាន​ធ្វើ​ឡើង ដើម្បី​ផ្ទុក​កញ្ចប់​ពី​ថត​បច្ចុប្បន្ន ។"
+
+#~ msgid "Optional arguments of the applet to add"
+#~ msgstr "អាគុយម៉ង់​ជម្រើស​របស់​អាប់ភ្លេត​ត្រូវ​បន្ថែម"
+
+#~ msgid "List zeroconf announced remote widgets"
+#~ msgstr "រាយ​ zeroconf ដែល​បានប្រកាស​ធាតុ​ក្រាហ្វិក​ពីចម្ងាយ"

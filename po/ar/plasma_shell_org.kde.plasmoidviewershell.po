@@ -1,0 +1,269 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Safa Alfulaij <safa1996alfulaij@gmail.com>, ٢٠١٦.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-06-04 00:47+0000\n"
+"PO-Revision-Date: ٢٠١٦-٠٨-٣١ ١٢:٠٤+0300\n"
+"Last-Translator: Safa Alfulaij <safa1996alfulaij@gmail.com>\n"
+"Language-Team: Arabic <doc@arabeyes.org>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: contents/applet/AppletError.qml:40
+msgid "Sorry! There was an error loading %1."
+msgstr ""
+
+#: contents/applet/AppletError.qml:48
+msgid "Copy Error Details to Clipboard"
+msgstr ""
+
+#: contents/applet/CompactApplet.qml:70
+msgid "Open %1"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:20
+#: contents/configuration/AppletConfiguration.qml:223
+msgid "About"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:46
+msgid "Send an email to %1"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:95
+msgid "Copyright"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:115
+msgid "License:"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:128
+msgid "Authors"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:138
+msgid "Credits"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:149
+msgid "Translators"
+msgstr ""
+
+#: contents/configuration/AppletConfiguration.qml:40
+#, fuzzy
+#| msgid "Keyboard shortcuts"
+msgid "Keyboard Shortcuts"
+msgstr "اختصارات لوحة المفاتيح"
+
+#: contents/configuration/AppletConfiguration.qml:271
+msgid "Apply Settings"
+msgstr "طبّق الإعدادات"
+
+#: contents/configuration/AppletConfiguration.qml:272
+msgid ""
+"The settings of the current module have changed. Do you want to apply the "
+"changes or discard them?"
+msgstr "تغيّرت إعدادت الوحدة الحاليّة. أتريد تطبيقها أو رفضها؟"
+
+#: contents/configuration/AppletConfiguration.qml:295
+msgid "OK"
+msgstr "حسنًا"
+
+#: contents/configuration/AppletConfiguration.qml:303
+msgid "Apply"
+msgstr "طبّق"
+
+#: contents/configuration/AppletConfiguration.qml:309
+msgid "Cancel"
+msgstr "ألغِ"
+
+#: contents/configuration/ConfigCategoryDelegate.qml:29
+msgid "Open configuration page"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentActions.qml:19
+msgid "Left-Button"
+msgstr "الزّرّ الأيسر"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:20
+msgid "Right-Button"
+msgstr "الزّرّ الأيمن"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:21
+msgid "Middle-Button"
+msgstr "الزّرّ الأوسط"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:22
+#, fuzzy
+#| msgid "Left-Button"
+msgid "Back-Button"
+msgstr "الزّرّ الأيسر"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:23
+msgid "Forward-Button"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentActions.qml:25
+msgid "Vertical-Scroll"
+msgstr "الممرّر الرّأسيّ"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:26
+msgid "Horizontal-Scroll"
+msgstr "الممرّر الأفقيّ"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:28
+msgid "Shift"
+msgstr "Shift"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:29
+msgid "Ctrl"
+msgstr "Ctrl"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:30
+msgid "Alt"
+msgstr "Alt"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:31
+msgid "Meta"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentActions.qml:73
+msgctxt "Concatenation sign for shortcuts, e.g. Ctrl+Shift"
+msgid "+"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentActions.qml:153
+#: contents/configuration/MouseEventInputButton.qml:15
+msgid "Add Action"
+msgstr "أضف إجراء"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:27
+msgid "Appearance"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:69
+msgid "Layout changes have been restricted by the system administrator"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:84
+msgid "Layout:"
+msgstr "التّخطيط:"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+msgid "Wallpaper Type:"
+msgstr "نوع الخلفيّة:"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:116
+msgid "Get New Plugins..."
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:128
+msgid "Layout changes must be applied before other changes can be made"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#, fuzzy
+#| msgid "Apply"
+msgid "Apply now"
+msgstr "طبّق"
+
+#: contents/configuration/ConfigurationShortcuts.qml:18
+msgid "Shortcuts"
+msgstr ""
+
+#: contents/configuration/ConfigurationShortcuts.qml:28
+msgid "This shortcut will activate the applet as though it had been clicked."
+msgstr ""
+
+#: contents/configuration/ContainmentConfiguration.qml:33
+msgid "Wallpaper"
+msgstr "الخلفيّة"
+
+#: contents/configuration/ContainmentConfiguration.qml:38
+msgid "Mouse Actions"
+msgstr "إجراءات الفأرة"
+
+#: contents/configuration/MouseEventInputButton.qml:22
+msgid "Input Here"
+msgstr "أدخل هنا"
+
+#: contents/views/SdkButtons.qml:47
+msgid "FormFactors"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:55
+msgid "Planar"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:59
+msgid "Vertical"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:63
+msgid "Horizontal"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:67
+msgid "Mediacenter"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:71
+msgid "Application"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:78
+msgid "Location"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:92
+msgid "Floating"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:96
+msgid "Desktop"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:100
+msgid "Fullscreen"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:104
+msgid "Top Edge"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:108
+msgid "Bottom Edge"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:112
+msgid "Left Edge"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:116
+msgid "Right Edge"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:135
+msgid "Configure Containment"
+msgstr ""
+
+#~ msgid "Layout cannot be changed whilst widgets are locked"
+#~ msgstr "لا يمكن تغير التّخطيط والودجات مقفلة"
+
+#~ msgid ""
+#~ "This shortcut will activate the applet: it will give the keyboard focus "
+#~ "to it, and if the applet has a popup (such as the start menu), the popup "
+#~ "will be open."
+#~ msgstr ""
+#~ "سيُنشّط هذا الاختصار البريمج: أي سيعطيه تركيز لوحة المفاتيح، وإن كان "
+#~ "للبريمج منبثقة (مثل قائمة البدء)، فستُفتح."

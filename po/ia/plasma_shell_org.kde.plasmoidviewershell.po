@@ -1,0 +1,269 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# giovanni <g.sora@tiscali.it>, 2017, 2020, 2021, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-06-04 00:47+0000\n"
+"PO-Revision-Date: 2022-06-06 22:08+0200\n"
+"Last-Translator: giovanni <g.sora@tiscali.it>\n"
+"Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
+"Language: ia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.04.1\n"
+
+#: contents/applet/AppletError.qml:40
+msgid "Sorry! There was an error loading %1."
+msgstr "Desolate! Il habeva un error a cargar %1"
+
+#: contents/applet/AppletError.qml:48
+msgid "Copy Error Details to Clipboard"
+msgstr "Copia  detalios de error in area de transferentia"
+
+#: contents/applet/CompactApplet.qml:70
+msgid "Open %1"
+msgstr "Aperi %1"
+
+#: contents/configuration/AboutPlugin.qml:20
+#: contents/configuration/AppletConfiguration.qml:223
+msgid "About"
+msgstr "A proposito"
+
+#: contents/configuration/AboutPlugin.qml:46
+msgid "Send an email to %1"
+msgstr "Invia un message de e-posta a  %1"
+
+#: contents/configuration/AboutPlugin.qml:95
+msgid "Copyright"
+msgstr "Copyright"
+
+#: contents/configuration/AboutPlugin.qml:115
+msgid "License:"
+msgstr "Licentia:"
+
+#: contents/configuration/AboutPlugin.qml:128
+msgid "Authors"
+msgstr "Autores"
+
+#: contents/configuration/AboutPlugin.qml:138
+msgid "Credits"
+msgstr "Gratias"
+
+#: contents/configuration/AboutPlugin.qml:149
+msgid "Translators"
+msgstr "Traductores"
+
+#: contents/configuration/AppletConfiguration.qml:40
+msgid "Keyboard Shortcuts"
+msgstr "Vias breve global de claviero"
+
+#: contents/configuration/AppletConfiguration.qml:271
+msgid "Apply Settings"
+msgstr "Applica preferentias"
+
+#: contents/configuration/AppletConfiguration.qml:272
+msgid ""
+"The settings of the current module have changed. Do you want to apply the "
+"changes or discard them?"
+msgstr ""
+"Le preferentias del modulo currente ha cambiate.Tu vole applicar le "
+"variationes o rejectar los?"
+
+#: contents/configuration/AppletConfiguration.qml:295
+msgid "OK"
+msgstr "OK"
+
+#: contents/configuration/AppletConfiguration.qml:303
+msgid "Apply"
+msgstr "Applica"
+
+#: contents/configuration/AppletConfiguration.qml:309
+msgid "Cancel"
+msgstr "Cancella"
+
+#: contents/configuration/ConfigCategoryDelegate.qml:29
+msgid "Open configuration page"
+msgstr "Aperi pagina de configuration"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:19
+msgid "Left-Button"
+msgstr "Button sinistre"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:20
+msgid "Right-Button"
+msgstr "Button dextere"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:21
+msgid "Middle-Button"
+msgstr "Button de centro"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:22
+msgid "Back-Button"
+msgstr "Button de retro"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:23
+msgid "Forward-Button"
+msgstr "Button de avantiar"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:25
+msgid "Vertical-Scroll"
+msgstr "Rolar de lineas vertical"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:26
+msgid "Horizontal-Scroll"
+msgstr "Rolar Horizontalmente"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:28
+msgid "Shift"
+msgstr "Shift"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:29
+msgid "Ctrl"
+msgstr "Ctrl"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:30
+msgid "Alt"
+msgstr "Alt"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:31
+msgid "Meta"
+msgstr "Meta"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:73
+msgctxt "Concatenation sign for shortcuts, e.g. Ctrl+Shift"
+msgid "+"
+msgstr "+"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:153
+#: contents/configuration/MouseEventInputButton.qml:15
+msgid "Add Action"
+msgstr "Adde Action"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:27
+msgid "Appearance"
+msgstr "Apparentia"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:69
+msgid "Layout changes have been restricted by the system administrator"
+msgstr ""
+"Modificationes de disposition ha essite restringite per le administrator de "
+"systema"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:84
+msgid "Layout:"
+msgstr "Disposition:"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+msgid "Wallpaper Type:"
+msgstr "Typo de Tapete de papiro:"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:116
+msgid "Get New Plugins..."
+msgstr "Obtene nove plugins..."
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:128
+msgid "Layout changes must be applied before other changes can be made"
+msgstr ""
+"Cambiamentos  de disposition debe esser applicate ante altere modificationes "
+"pote esser facite"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+msgid "Apply now"
+msgstr "Applica hora"
+
+#: contents/configuration/ConfigurationShortcuts.qml:18
+msgid "Shortcuts"
+msgstr "Vias breve"
+
+#: contents/configuration/ConfigurationShortcuts.qml:28
+msgid "This shortcut will activate the applet as though it had been clicked."
+msgstr "Iste via breve activara le applet como si illo ha essite pulsate."
+
+#: contents/configuration/ContainmentConfiguration.qml:33
+msgid "Wallpaper"
+msgstr "Tapete de papiro"
+
+#: contents/configuration/ContainmentConfiguration.qml:38
+msgid "Mouse Actions"
+msgstr "Actiones de mus"
+
+#: contents/configuration/MouseEventInputButton.qml:22
+msgid "Input Here"
+msgstr "Inserta ci"
+
+#: contents/views/SdkButtons.qml:47
+msgid "FormFactors"
+msgstr "FormFactors (Factores de forma) "
+
+#: contents/views/SdkButtons.qml:55
+msgid "Planar"
+msgstr "Planar"
+
+#: contents/views/SdkButtons.qml:59
+msgid "Vertical"
+msgstr "Vertical"
+
+#: contents/views/SdkButtons.qml:63
+msgid "Horizontal"
+msgstr "Horizontal"
+
+#: contents/views/SdkButtons.qml:67
+msgid "Mediacenter"
+msgstr "Mediacenter"
+
+#: contents/views/SdkButtons.qml:71
+msgid "Application"
+msgstr "Application"
+
+#: contents/views/SdkButtons.qml:78
+msgid "Location"
+msgstr "Location"
+
+#: contents/views/SdkButtons.qml:92
+msgid "Floating"
+msgstr "Fluctuante"
+
+#: contents/views/SdkButtons.qml:96
+msgid "Desktop"
+msgstr "Scriptorio"
+
+#: contents/views/SdkButtons.qml:100
+msgid "Fullscreen"
+msgstr "Schermo plen"
+
+#: contents/views/SdkButtons.qml:104
+msgid "Top Edge"
+msgstr "Bordo culmine"
+
+#: contents/views/SdkButtons.qml:108
+msgid "Bottom Edge"
+msgstr "Bordo a basso"
+
+#: contents/views/SdkButtons.qml:112
+msgid "Left Edge"
+msgstr "Bordo sinistre"
+
+#: contents/views/SdkButtons.qml:116
+msgid "Right Edge"
+msgstr "Bordo dextere"
+
+#: contents/views/SdkButtons.qml:135
+msgid "Configure Containment"
+msgstr "Configura Continemento"
+
+#~ msgid "Layout cannot be changed whilst widgets are locked"
+#~ msgstr "Disposition non pote esser modificate quando le widgets es blocate"
+
+#~ msgid ""
+#~ "This shortcut will activate the applet: it will give the keyboard focus "
+#~ "to it, and if the applet has a popup (such as the start menu), the popup "
+#~ "will be open."
+#~ msgstr ""
+#~ "Iste via breve activara le applet: illo dara le foco de claviero a illo, "
+#~ "e si le applet ha unpopup (ta como le menu de initio), le popup essera "
+#~ "aperite."

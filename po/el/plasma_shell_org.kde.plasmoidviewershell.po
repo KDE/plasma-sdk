@@ -1,0 +1,271 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Dimitris Kardarakos <dimkard@gmail.com>, 2017.
+# Stelios <sstavra@gmail.com>, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-06-04 00:47+0000\n"
+"PO-Revision-Date: 2021-09-04 09:48+0300\n"
+"Last-Translator: Stelios <sstavra@gmail.com>\n"
+"Language-Team: Greek <kde-i18n-el@kde.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.04.2\n"
+
+#: contents/applet/AppletError.qml:40
+msgid "Sorry! There was an error loading %1."
+msgstr "Συγγνώμη! Παρουσιάστηκε σφάλμα στη φόρτωση του %1."
+
+#: contents/applet/AppletError.qml:48
+msgid "Copy Error Details to Clipboard"
+msgstr "Αντιγραφή λεπτομερειών σφάλματος στο πρόχειρο"
+
+#: contents/applet/CompactApplet.qml:70
+msgid "Open %1"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:20
+#: contents/configuration/AppletConfiguration.qml:223
+msgid "About"
+msgstr "Περίγραμμα"
+
+#: contents/configuration/AboutPlugin.qml:46
+msgid "Send an email to %1"
+msgstr "Αποστολή αλληλογραφίας στο %1"
+
+#: contents/configuration/AboutPlugin.qml:95
+msgid "Copyright"
+msgstr "Copyright"
+
+#: contents/configuration/AboutPlugin.qml:115
+msgid "License:"
+msgstr "Άδεια χρήσης:"
+
+#: contents/configuration/AboutPlugin.qml:128
+msgid "Authors"
+msgstr "Συγγραφείς"
+
+#: contents/configuration/AboutPlugin.qml:138
+msgid "Credits"
+msgstr "Εύσημα"
+
+#: contents/configuration/AboutPlugin.qml:149
+msgid "Translators"
+msgstr "Μεταφραστές"
+
+#: contents/configuration/AppletConfiguration.qml:40
+msgid "Keyboard Shortcuts"
+msgstr "Συντομεύσεις πληκτρολογίου"
+
+#: contents/configuration/AppletConfiguration.qml:271
+msgid "Apply Settings"
+msgstr "Εφαρμογή ρυθμίσεων"
+
+#: contents/configuration/AppletConfiguration.qml:272
+msgid ""
+"The settings of the current module have changed. Do you want to apply the "
+"changes or discard them?"
+msgstr ""
+"Οι ρυθμίσεις του τρέχοντος αρθρώματος τροποποιήθηκαν. Επιθυμείτε την "
+"εφαρμογή των τροποποιήσεων ή την απόρριψή τους;"
+
+#: contents/configuration/AppletConfiguration.qml:295
+msgid "OK"
+msgstr "Εντάξει"
+
+#: contents/configuration/AppletConfiguration.qml:303
+msgid "Apply"
+msgstr "Εφαρμογή"
+
+#: contents/configuration/AppletConfiguration.qml:309
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+#: contents/configuration/ConfigCategoryDelegate.qml:29
+msgid "Open configuration page"
+msgstr "Άνοιγμα σελίδας διαμόρφωσης"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:19
+msgid "Left-Button"
+msgstr "Αριστερό κουμπί"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:20
+msgid "Right-Button"
+msgstr "Δεξί κουμπί"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:21
+msgid "Middle-Button"
+msgstr "Μεσαίο κουμπί"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:22
+msgid "Back-Button"
+msgstr "Πίσω-κουμπί"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:23
+msgid "Forward-Button"
+msgstr "Εμπρός-κουμπί"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:25
+msgid "Vertical-Scroll"
+msgstr "Κατακόρυφη κύλιση"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:26
+msgid "Horizontal-Scroll"
+msgstr "Οριζόντια κύλιση"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:28
+msgid "Shift"
+msgstr "Shift"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:29
+msgid "Ctrl"
+msgstr "Ctrl"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:30
+msgid "Alt"
+msgstr "Alt"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:31
+msgid "Meta"
+msgstr "Meta"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:73
+msgctxt "Concatenation sign for shortcuts, e.g. Ctrl+Shift"
+msgid "+"
+msgstr "+"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:153
+#: contents/configuration/MouseEventInputButton.qml:15
+msgid "Add Action"
+msgstr "Προσθήκη ενέργειας"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:27
+msgid "Appearance"
+msgstr "Εμφάνιση"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:69
+msgid "Layout changes have been restricted by the system administrator"
+msgstr ""
+"Οι αλλαγές στη διάταξη έχουν απαγορευθεί από τον διαχειριστή του συστήματος"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:84
+msgid "Layout:"
+msgstr "Διάταξη:"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+msgid "Wallpaper Type:"
+msgstr "Τύπος ταπετσαρίας:"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:116
+msgid "Get New Plugins..."
+msgstr "Ανάκτηση νέων πρόσθετων..."
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:128
+msgid "Layout changes must be applied before other changes can be made"
+msgstr "Οι αλλαγές στη διάταξη πρέπει να εφαρμοστούν πριν γίνουν άλλες αλλαγές"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+msgid "Apply now"
+msgstr "Εφαρμογή τώρα"
+
+#: contents/configuration/ConfigurationShortcuts.qml:18
+msgid "Shortcuts"
+msgstr "Συντομεύσεις"
+
+#: contents/configuration/ConfigurationShortcuts.qml:28
+msgid "This shortcut will activate the applet as though it had been clicked."
+msgstr ""
+"Αυτή η συντόμευση θα ενεργοποιήσει το συστατικό όπως και αν είχε γίνει κλικ "
+"πάνω του."
+
+#: contents/configuration/ContainmentConfiguration.qml:33
+msgid "Wallpaper"
+msgstr "Ταπετσαρία"
+
+#: contents/configuration/ContainmentConfiguration.qml:38
+msgid "Mouse Actions"
+msgstr "Ενέργειες ποντικιού"
+
+#: contents/configuration/MouseEventInputButton.qml:22
+msgid "Input Here"
+msgstr "Είσοδος εδώ"
+
+#: contents/views/SdkButtons.qml:47
+msgid "FormFactors"
+msgstr "FormFactors"
+
+#: contents/views/SdkButtons.qml:55
+msgid "Planar"
+msgstr "Επίπεδα"
+
+#: contents/views/SdkButtons.qml:59
+msgid "Vertical"
+msgstr "Κατακόρυφα"
+
+#: contents/views/SdkButtons.qml:63
+msgid "Horizontal"
+msgstr "Οριζόντια"
+
+#: contents/views/SdkButtons.qml:67
+msgid "Mediacenter"
+msgstr "Κέντρο πολυμέσων"
+
+#: contents/views/SdkButtons.qml:71
+msgid "Application"
+msgstr "Εφαρμογή"
+
+#: contents/views/SdkButtons.qml:78
+msgid "Location"
+msgstr "Τοποθεσία"
+
+#: contents/views/SdkButtons.qml:92
+msgid "Floating"
+msgstr "Αιωρούμενο"
+
+#: contents/views/SdkButtons.qml:96
+msgid "Desktop"
+msgstr "Επιφάνεια εργασίας"
+
+#: contents/views/SdkButtons.qml:100
+msgid "Fullscreen"
+msgstr "Πλήρης οθόνη"
+
+#: contents/views/SdkButtons.qml:104
+msgid "Top Edge"
+msgstr "Πάνω άκρο"
+
+#: contents/views/SdkButtons.qml:108
+msgid "Bottom Edge"
+msgstr "Κάτω άκρο"
+
+#: contents/views/SdkButtons.qml:112
+msgid "Left Edge"
+msgstr "Αριστερό άκρο"
+
+#: contents/views/SdkButtons.qml:116
+msgid "Right Edge"
+msgstr "Δεξί άκρο"
+
+#: contents/views/SdkButtons.qml:135
+msgid "Configure Containment"
+msgstr "Διαμόρφωση υποδοχέα"
+
+#~ msgid "Layout cannot be changed whilst widgets are locked"
+#~ msgstr ""
+#~ "Η διάταξη δεν μπορεί να τροποποιηθεί όταν τα γραφικά συστατικά είναι "
+#~ "κλειδωμένα"
+
+#~ msgid ""
+#~ "This shortcut will activate the applet: it will give the keyboard focus "
+#~ "to it, and if the applet has a popup (such as the start menu), the popup "
+#~ "will be open."
+#~ msgstr ""
+#~ "Αυτή η συντόμευση θα ενεργοποιήσει αυτήν τη μικροεφαρμογή: η εστίαση του "
+#~ "πληκτρολογίου θα δοθεί σε αυτή και αν η μικροεφαρμογή έχει αναδυόμενο "
+#~ "(όπως το μενού εκκίνησης), το αναδυόμενο θα ανοίξει."

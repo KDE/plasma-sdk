@@ -1,0 +1,274 @@
+# Lithuanian translations for trunk-kf package.
+# Copyright (C) 2015 This_file_is_part_of_KDE
+# This file is distributed under the same license as the trunk-kf package.
+#
+# Automatically generated, 2015.
+# Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>, 2017.
+msgid ""
+msgstr ""
+"Project-Id-Version: trunk-kf 5\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-06-04 00:47+0000\n"
+"PO-Revision-Date: 2019-07-26 15:22+0300\n"
+"Last-Translator: Moo\n"
+"Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
+"%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#: contents/applet/AppletError.qml:40
+msgid "Sorry! There was an error loading %1."
+msgstr ""
+
+#: contents/applet/AppletError.qml:48
+msgid "Copy Error Details to Clipboard"
+msgstr ""
+
+#: contents/applet/CompactApplet.qml:70
+msgid "Open %1"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:20
+#: contents/configuration/AppletConfiguration.qml:223
+msgid "About"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:46
+msgid "Send an email to %1"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:95
+msgid "Copyright"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:115
+msgid "License:"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:128
+msgid "Authors"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:138
+msgid "Credits"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:149
+msgid "Translators"
+msgstr ""
+
+#: contents/configuration/AppletConfiguration.qml:40
+#, fuzzy
+#| msgid "Keyboard shortcuts"
+msgid "Keyboard Shortcuts"
+msgstr "Spartieji klavišai"
+
+#: contents/configuration/AppletConfiguration.qml:271
+msgid "Apply Settings"
+msgstr "Taikyti nuostatas"
+
+#: contents/configuration/AppletConfiguration.qml:272
+msgid ""
+"The settings of the current module have changed. Do you want to apply the "
+"changes or discard them?"
+msgstr ""
+"Esamo modulio nuostatos pasikeitė. Ar norite šiuos pakeitimus taikyti, ar "
+"juos atmesti?"
+
+#: contents/configuration/AppletConfiguration.qml:295
+msgid "OK"
+msgstr "Gerai"
+
+#: contents/configuration/AppletConfiguration.qml:303
+msgid "Apply"
+msgstr "Taikyti"
+
+#: contents/configuration/AppletConfiguration.qml:309
+msgid "Cancel"
+msgstr "Atsisakyti"
+
+#: contents/configuration/ConfigCategoryDelegate.qml:29
+msgid "Open configuration page"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentActions.qml:19
+msgid "Left-Button"
+msgstr "Kairysis mygtukas"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:20
+msgid "Right-Button"
+msgstr "Dešinysis mygtukas"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:21
+msgid "Middle-Button"
+msgstr "Vidurinysis mygtukas"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:22
+#, fuzzy
+#| msgid "Left-Button"
+msgid "Back-Button"
+msgstr "Kairysis mygtukas"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:23
+msgid "Forward-Button"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentActions.qml:25
+msgid "Vertical-Scroll"
+msgstr "Vertikali slinktis"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:26
+msgid "Horizontal-Scroll"
+msgstr "Horizontali slinktis"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:28
+msgid "Shift"
+msgstr "Lyg2"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:29
+msgid "Ctrl"
+msgstr "Vald"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:30
+msgid "Alt"
+msgstr "Alt"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:31
+msgid "Meta"
+msgstr "Meta"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:73
+msgctxt "Concatenation sign for shortcuts, e.g. Ctrl+Shift"
+msgid "+"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentActions.qml:153
+#: contents/configuration/MouseEventInputButton.qml:15
+msgid "Add Action"
+msgstr "Pridėti veiksmą"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:27
+msgid "Appearance"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:69
+msgid "Layout changes have been restricted by the system administrator"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:84
+msgid "Layout:"
+msgstr "Išdėstymas:"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+msgid "Wallpaper Type:"
+msgstr "Darbalaukio fono tipas:"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:116
+msgid "Get New Plugins..."
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:128
+msgid "Layout changes must be applied before other changes can be made"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#, fuzzy
+#| msgid "Apply"
+msgid "Apply now"
+msgstr "Taikyti"
+
+#: contents/configuration/ConfigurationShortcuts.qml:18
+msgid "Shortcuts"
+msgstr ""
+
+#: contents/configuration/ConfigurationShortcuts.qml:28
+msgid "This shortcut will activate the applet as though it had been clicked."
+msgstr ""
+
+#: contents/configuration/ContainmentConfiguration.qml:33
+msgid "Wallpaper"
+msgstr "Darbalaukio fonas"
+
+#: contents/configuration/ContainmentConfiguration.qml:38
+msgid "Mouse Actions"
+msgstr "Pelės veiksmai"
+
+#: contents/configuration/MouseEventInputButton.qml:22
+msgid "Input Here"
+msgstr "Įveskite čia"
+
+#: contents/views/SdkButtons.qml:47
+msgid "FormFactors"
+msgstr "Formos faktoriai"
+
+#: contents/views/SdkButtons.qml:55
+msgid "Planar"
+msgstr "Plokštuminis"
+
+#: contents/views/SdkButtons.qml:59
+msgid "Vertical"
+msgstr "Vertikalus"
+
+#: contents/views/SdkButtons.qml:63
+msgid "Horizontal"
+msgstr "Horizontalus"
+
+#: contents/views/SdkButtons.qml:67
+msgid "Mediacenter"
+msgstr "Įvairialypės terpės centras"
+
+#: contents/views/SdkButtons.qml:71
+msgid "Application"
+msgstr "Programa"
+
+#: contents/views/SdkButtons.qml:78
+msgid "Location"
+msgstr "Vieta"
+
+#: contents/views/SdkButtons.qml:92
+msgid "Floating"
+msgstr "Slankus"
+
+#: contents/views/SdkButtons.qml:96
+msgid "Desktop"
+msgstr "Darbalaukis"
+
+#: contents/views/SdkButtons.qml:100
+msgid "Fullscreen"
+msgstr "Visas ekranas"
+
+#: contents/views/SdkButtons.qml:104
+msgid "Top Edge"
+msgstr "Viršutinis kraštas"
+
+#: contents/views/SdkButtons.qml:108
+msgid "Bottom Edge"
+msgstr "Apatinis kraštas"
+
+#: contents/views/SdkButtons.qml:112
+msgid "Left Edge"
+msgstr "Kairysis kraštas"
+
+#: contents/views/SdkButtons.qml:116
+msgid "Right Edge"
+msgstr "Dešinysis kraštas"
+
+#: contents/views/SdkButtons.qml:135
+msgid "Configure Containment"
+msgstr "Konfigūruoti varžymą"
+
+#~ msgid "Layout cannot be changed whilst widgets are locked"
+#~ msgstr "Kol valdikliai užrakinti, negalite keisti išdėstymo"
+
+#~ msgid ""
+#~ "This shortcut will activate the applet: it will give the keyboard focus "
+#~ "to it, and if the applet has a popup (such as the start menu), the popup "
+#~ "will be open."
+#~ msgstr ""
+#~ "Šis spartusis klavišas aktyvuos įskiepį: sufokusuos į jį klaviatūrą ir, "
+#~ "jei įskiepis turi iškylantįjį langą (tokį kaip paleidimo meniu), jis bus "
+#~ "atvertas."

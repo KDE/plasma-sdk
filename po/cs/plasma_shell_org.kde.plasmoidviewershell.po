@@ -1,0 +1,255 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Vít Pelčák <vit@pelcak.org>, 2015, 2016.
+# Vit Pelcak <vpelcak@suse.cz>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-06-04 00:47+0000\n"
+"PO-Revision-Date: 2021-08-20 11:41+0200\n"
+"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
+"Language-Team: Czech <kde-i18n-doc@kde.org>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 21.08.0\n"
+
+#: contents/applet/AppletError.qml:40
+msgid "Sorry! There was an error loading %1."
+msgstr "Při načítání došlo k chybě %1."
+
+#: contents/applet/AppletError.qml:48
+msgid "Copy Error Details to Clipboard"
+msgstr "Zkopírovat podrobnosti chyby do schránky"
+
+#: contents/applet/CompactApplet.qml:70
+msgid "Open %1"
+msgstr "Otevřít %1"
+
+#: contents/configuration/AboutPlugin.qml:20
+#: contents/configuration/AppletConfiguration.qml:223
+msgid "About"
+msgstr "O aplikaci"
+
+#: contents/configuration/AboutPlugin.qml:46
+msgid "Send an email to %1"
+msgstr "Odeslat e-mail %1"
+
+#: contents/configuration/AboutPlugin.qml:95
+msgid "Copyright"
+msgstr "Copyright"
+
+#: contents/configuration/AboutPlugin.qml:115
+msgid "License:"
+msgstr "Licence:"
+
+#: contents/configuration/AboutPlugin.qml:128
+msgid "Authors"
+msgstr "Autoři"
+
+#: contents/configuration/AboutPlugin.qml:138
+msgid "Credits"
+msgstr "Poděkování"
+
+#: contents/configuration/AboutPlugin.qml:149
+msgid "Translators"
+msgstr "Překladatelé"
+
+#: contents/configuration/AppletConfiguration.qml:40
+msgid "Keyboard Shortcuts"
+msgstr "Klávesové zkratky"
+
+#: contents/configuration/AppletConfiguration.qml:271
+msgid "Apply Settings"
+msgstr "Provést nastavení"
+
+#: contents/configuration/AppletConfiguration.qml:272
+msgid ""
+"The settings of the current module have changed. Do you want to apply the "
+"changes or discard them?"
+msgstr ""
+"V aktivním modulu jsou neuložené změny. Přejete si změny aplikovat, nebo "
+"zahodit?"
+
+#: contents/configuration/AppletConfiguration.qml:295
+msgid "OK"
+msgstr "OK"
+
+#: contents/configuration/AppletConfiguration.qml:303
+msgid "Apply"
+msgstr "Použít"
+
+#: contents/configuration/AppletConfiguration.qml:309
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: contents/configuration/ConfigCategoryDelegate.qml:29
+msgid "Open configuration page"
+msgstr "Otevřít stránku s nastavením"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:19
+msgid "Left-Button"
+msgstr "Levé tlačítko"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:20
+msgid "Right-Button"
+msgstr "Pravé tlačítko"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:21
+msgid "Middle-Button"
+msgstr "Prostřední tlačítko"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:22
+msgid "Back-Button"
+msgstr "Tlačítko zpět"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:23
+msgid "Forward-Button"
+msgstr "Tlačítko vpřed"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:25
+msgid "Vertical-Scroll"
+msgstr "Svislý posuv"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:26
+msgid "Horizontal-Scroll"
+msgstr "Vodorovný posuv"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:28
+msgid "Shift"
+msgstr "Shift"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:29
+msgid "Ctrl"
+msgstr "Ctrl"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:30
+msgid "Alt"
+msgstr "Alt"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:31
+msgid "Meta"
+msgstr "Meta"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:73
+msgctxt "Concatenation sign for shortcuts, e.g. Ctrl+Shift"
+msgid "+"
+msgstr "+"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:153
+#: contents/configuration/MouseEventInputButton.qml:15
+msgid "Add Action"
+msgstr "Přidat činnost"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:27
+msgid "Appearance"
+msgstr "Vzhled"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:69
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "Změny rozvržení byly zakázány správcem systému"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:84
+msgid "Layout:"
+msgstr "Rozvržení:"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+msgid "Wallpaper Type:"
+msgstr "Typ tapety:"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:116
+msgid "Get New Plugins..."
+msgstr "Získat nové moduly..."
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:128
+msgid "Layout changes must be applied before other changes can be made"
+msgstr "Změny rozložení musí být aplikovány před ostatními změnami"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+msgid "Apply now"
+msgstr "Aplikovat nyní"
+
+#: contents/configuration/ConfigurationShortcuts.qml:18
+msgid "Shortcuts"
+msgstr "Zkratky"
+
+#: contents/configuration/ConfigurationShortcuts.qml:28
+msgid "This shortcut will activate the applet as though it had been clicked."
+msgstr ""
+"Tato klávesová zkratka applet aktivuje stejně jako by na něj uživatel klikl."
+
+#: contents/configuration/ContainmentConfiguration.qml:33
+msgid "Wallpaper"
+msgstr "Tapeta"
+
+#: contents/configuration/ContainmentConfiguration.qml:38
+msgid "Mouse Actions"
+msgstr "Činnosti myši"
+
+#: contents/configuration/MouseEventInputButton.qml:22
+msgid "Input Here"
+msgstr "Vstup zde"
+
+#: contents/views/SdkButtons.qml:47
+msgid "FormFactors"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:55
+msgid "Planar"
+msgstr "Planární"
+
+#: contents/views/SdkButtons.qml:59
+msgid "Vertical"
+msgstr "Svisle"
+
+#: contents/views/SdkButtons.qml:63
+msgid "Horizontal"
+msgstr "Vodorovně"
+
+#: contents/views/SdkButtons.qml:67
+msgid "Mediacenter"
+msgstr "Mediacenter"
+
+#: contents/views/SdkButtons.qml:71
+msgid "Application"
+msgstr "Aplikace"
+
+#: contents/views/SdkButtons.qml:78
+msgid "Location"
+msgstr "Umístění"
+
+#: contents/views/SdkButtons.qml:92
+msgid "Floating"
+msgstr "Plovoucí"
+
+#: contents/views/SdkButtons.qml:96
+msgid "Desktop"
+msgstr "Pracovní plocha"
+
+#: contents/views/SdkButtons.qml:100
+msgid "Fullscreen"
+msgstr "Celá obrazovka"
+
+#: contents/views/SdkButtons.qml:104
+msgid "Top Edge"
+msgstr "Horní okraj"
+
+#: contents/views/SdkButtons.qml:108
+msgid "Bottom Edge"
+msgstr "Spodní okraj"
+
+#: contents/views/SdkButtons.qml:112
+msgid "Left Edge"
+msgstr "Levý okraj"
+
+#: contents/views/SdkButtons.qml:116
+msgid "Right Edge"
+msgstr "Pravý okraj"
+
+#: contents/views/SdkButtons.qml:135
+msgid "Configure Containment"
+msgstr ""
