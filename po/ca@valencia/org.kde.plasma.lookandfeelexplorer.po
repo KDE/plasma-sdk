@@ -183,4 +183,4 @@ msgstr "Explorador de temes d'Aspecte i comportament de Plasma"
 #: src/main.cpp:38
 #, kde-format
 msgid "Look And Feel to open"
-msgstr "Aspecte i comportament que s'obrirà"
+msgstr "Aspecte i comportament que s'ha d'obrir"

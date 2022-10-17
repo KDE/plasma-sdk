@@ -57,8 +57,8 @@ msgid ""
 "The formfactor to use (horizontal, vertical, mediacenter, planar or "
 "application)"
 msgstr ""
-"El factor de format a utilitzar (horitzontal, vertical, centre multimèdia, "
-"planar o aplicació)"
+"El factor de format que s'ha d'utilitzar (horitzontal, vertical, centre "
+"multimèdia, planar o aplicació)"
 
 #: main.cpp:58
 #, kde-format

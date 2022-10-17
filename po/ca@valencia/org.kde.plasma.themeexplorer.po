@@ -349,4 +349,4 @@ msgstr "Explorador de temes de Plasma"
 #: src/main.cpp:41
 #, kde-format
 msgid "The theme to open"
-msgstr "El tema que s'obrirà"
+msgstr "El tema que s'ha d'obrir"

@@ -262,7 +262,7 @@ msgstr "La posició Y desitjada en píxels"
 #: main.cpp:73
 #, kde-format
 msgid "The data engine to use"
-msgstr "El motor de dades que s'utilitzarà"
+msgstr "El motor de dades que s'ha d'utilitzar"
 
 #: main.cpp:74
 #, kde-format
