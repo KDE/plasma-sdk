@@ -11,7 +11,6 @@ import QtQuick.Controls 2.3 as QtControls
 import QtQuick.Window 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-import org.kde.kquickcontrolsaddons 2.0
 import org.kde.kirigami 2.5 as Kirigami
 
 QtControls.ItemDelegate {
@@ -46,14 +45,14 @@ QtControls.ItemDelegate {
         id: delegateContents
         spacing: PlasmaCore.Units.smallSpacing
 
-        QIconItem {
-            id: iconItem
+        Kirigami.Icon {
             Layout.alignment: Qt.AlignHCenter
-            width: PlasmaCore.Units.iconSizes.medium
-            height: width
-            icon: model.icon
-            state: highlighted && Window.active ? QIconItem.SelectedState : QIconItem.DefaultState
+            implicitWidth: Kirigami.Units.iconSizes.medium
+            implicitHeight: Kirigami.Units.iconSizes.medium
+            source: model.icon
+            selected: Window.active && (delegate.highlighted || delegate.pressed)
         }
+
 
         QtControls.Label {
             id: nameLabel
