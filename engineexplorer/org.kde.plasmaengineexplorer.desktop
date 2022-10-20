@@ -1,7 +1,6 @@
 [Desktop Entry]
 Terminal=false
 Name=Plasma Engine Explorer
-Name[ast]=Esplorador de motores de Plasma
 Name[az]=Plasma Mexanizmi Bələdçisi
 Name[bg]=Преглед на енджини на Plasma
 Name[ca]=Explorador de motors del Plasma
@@ -38,7 +37,6 @@ Name[x-test]=xxPlasma Engine Explorerxx
 Name[zh_CN]=Plasma 引擎浏览器
 Name[zh_TW]=Plasma 引擎探索器
 GenericName=Plasma Data Engines Viewing Tool
-GenericName[ast]=Ferramienta de visualización de los motores de datos de Plasma
 GenericName[az]=Məlumat Mexanizmlərinə baxış aləti
 GenericName[bg]=Инструмент за преглед на Plasma енджини за данни
 GenericName[ca]=Eina de visualització dels motors de dades del Plasma
@@ -74,7 +72,6 @@ GenericName[x-test]=xxPlasma Data Engines Viewing Toolxx
 GenericName[zh_CN]=Plasma 数据引擎查看工具
 GenericName[zh_TW]=Plasma 資料引擎檢視工具
 Comment=Explorer for the data published by Plasma DataEngines
-Comment[ast]=Esplorador pa los datos espublizaos polos motores de datos de Plasma
 Comment[az]=Yayınlanan Plasma Mexanizmləri məlumatlarına baxış
 Comment[bg]=Преглед на данните, представени от Plasma енджин за данни
 Comment[ca]=Explorador de les dades publicades pels motors de dades del Plasma

@@ -1,7 +1,6 @@
 [Desktop Entry]
 Type=Service
 Name=Icon Picker
-Name[ast]=Seleutor d'iconos
 Name[az]=İkon seçimi
 Name[bg]=Избор на икони
 Name[ca]=Selector d'icones
@@ -42,7 +41,6 @@ Name[x-test]=xxIcon Pickerxx
 Name[zh_CN]=图标选择器
 Name[zh_TW]=圖示挑選器
 Comment=Invokes Cuttlefish icon picker
-Comment[ast]=Invoca al seleutor d'iconos Cuttlefish
 Comment[az]=Cuttlefish-i ikon seçimi rejimində başlatmaq
 Comment[bg]=Извиква Cuttlefisch за избор на икони
 Comment[ca]=Invoca el selector d'icones Cuttlefish

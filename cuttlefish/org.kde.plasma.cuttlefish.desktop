@@ -1,7 +1,6 @@
 [Desktop Entry]
 Terminal=false
 Name=Cuttlefish
-Name[ast]=Cuttlefish
 Name[az]=Cuttlefish
 Name[bg]=Cuttlefish
 Name[ca]=Cuttlefish
@@ -43,7 +42,6 @@ Name[x-test]=xxCuttlefishxx
 Name[zh_CN]=Cuttlefish
 Name[zh_TW]=Cuttlefish
 GenericName=Icon Viewer
-GenericName[ast]=Visor d'iconos
 GenericName[az]=İkonlara baxış
 GenericName[bg]=Преглед на икони
 GenericName[ca]=Visualitzador d'icones
@@ -85,7 +83,6 @@ GenericName[x-test]=xxIcon Viewerxx
 GenericName[zh_CN]=图标查看器
 GenericName[zh_TW]=圖示檢視器
 Comment=Icon Previewer for Artists and Developers
-Comment[ast]=Previsualizador d'iconos p'artistes y desendolcadores
 Comment[az]=Dizaynerlər və Tərtibatçılar üçün ikonlara baxış vasitəsi
 Comment[bg]=Програма за преглед на икони за дизайнери и разработчици
 Comment[ca]=Vista prèvia de les icones per als artistes i desenvolupadors
