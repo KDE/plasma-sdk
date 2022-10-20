@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-04 00:47+0000\n"
+"POT-Creation-Date: 2022-10-20 00:52+0000\n"
 "PO-Revision-Date: 2022-06-04 18:10+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -88,7 +88,7 @@ msgstr "Aplicar"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: contents/configuration/ConfigCategoryDelegate.qml:29
+#: contents/configuration/ConfigCategoryDelegate.qml:28
 msgid "Open configuration page"
 msgstr "Abrir la página de configuración"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-04 00:47+0000\n"
+"POT-Creation-Date: 2022-10-20 00:52+0000\n"
 "PO-Revision-Date: 2017-10-04 22:39+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <kde-i18n-doc@kde.org>\n"
@@ -88,7 +88,7 @@ msgstr "Aplicar"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: contents/configuration/ConfigCategoryDelegate.qml:29
+#: contents/configuration/ConfigCategoryDelegate.qml:28
 msgid "Open configuration page"
 msgstr ""
 

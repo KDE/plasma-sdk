@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-04 00:47+0000\n"
+"POT-Creation-Date: 2022-10-20 00:52+0000\n"
 "PO-Revision-Date: 2022-07-13 12:04+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -86,7 +86,7 @@ msgstr "적용"
 msgid "Cancel"
 msgstr "취소"
 
-#: contents/configuration/ConfigCategoryDelegate.qml:29
+#: contents/configuration/ConfigCategoryDelegate.qml:28
 msgid "Open configuration page"
 msgstr "설정 페이지 열기"
 

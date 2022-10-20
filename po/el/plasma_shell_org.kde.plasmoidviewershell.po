@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-04 00:47+0000\n"
+"POT-Creation-Date: 2022-10-20 00:52+0000\n"
 "PO-Revision-Date: 2021-09-04 09:48+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -87,7 +87,7 @@ msgstr "Εφαρμογή"
 msgid "Cancel"
 msgstr "Ακύρωση"
 
-#: contents/configuration/ConfigCategoryDelegate.qml:29
+#: contents/configuration/ConfigCategoryDelegate.qml:28
 msgid "Open configuration page"
 msgstr "Άνοιγμα σελίδας διαμόρφωσης"
 
