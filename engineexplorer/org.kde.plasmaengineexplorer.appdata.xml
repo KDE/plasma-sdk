@@ -25,6 +25,7 @@
   <name xml:lang="ia">Explorator de Motor de Plasma (Plasma Engine Explorer)</name>
   <name xml:lang="id">Plasma Engine Explorer</name>
   <name xml:lang="it">Esploratore del motore di Plasma</name>
+  <name xml:lang="ka">Plasma-ის ძრავის დათვალიერება</name>
   <name xml:lang="ko">Plasma 엔진 탐색기</name>
   <name xml:lang="lt">Plasma modulių tyrinėtojas</name>
   <name xml:lang="nl">Plasma-engine-verkenner</name>
@@ -61,6 +62,7 @@
   <summary xml:lang="ia">Explorator per le datos publicate per Plasma Data Engines  (Motores de Datos de Plasma)</summary>
   <summary xml:lang="id">Penjelajah data yang dipublikasikan oleh Plasma Data Engines</summary>
   <summary xml:lang="it">Esploratore dei dati pubblicati con i motori di dati di Plasma</summary>
+  <summary xml:lang="ka">Plasma-ის მონაცემების ძრავების მიერ გამოქვეყნებული მონაცემების დამთვალიერებელი</summary>
   <summary xml:lang="ko">Plasma 데이터 엔진에서 게시한 데이터에 대한 탐색기</summary>
   <summary xml:lang="lt">Tyrinėtojas, skirtas Plasma duomenų modulių paskelbtiems duomenims</summary>
   <summary xml:lang="nl">Verkenner voor de gegevens gepubliceerd door Plasma Data Engines</summary>
