@@ -2,67 +2,66 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Jeff Huang <s8321414@gmail.com>, 2016.
+# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-20 00:52+0000\n"
-"PO-Revision-Date: 2016-11-03 19:56+0800\n"
-"Last-Translator: Jeff Huang <s8321414@gmail.com>\n"
-"Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2022-10-19 06:51+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
 "Language: Traditional Chinese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 22.08.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: contents/applet/AppletError.qml:40
 msgid "Sorry! There was an error loading %1."
-msgstr ""
+msgstr "很抱歉！載入 %1 時發生錯誤。"
 
 #: contents/applet/AppletError.qml:48
 msgid "Copy Error Details to Clipboard"
-msgstr ""
+msgstr "複製錯誤詳細資訊到剪貼簿"
 
 #: contents/applet/CompactApplet.qml:70
 msgid "Open %1"
-msgstr ""
+msgstr "開啟 %1"
 
 #: contents/configuration/AboutPlugin.qml:20
 #: contents/configuration/AppletConfiguration.qml:223
 msgid "About"
-msgstr ""
+msgstr "關於"
 
 #: contents/configuration/AboutPlugin.qml:46
 msgid "Send an email to %1"
-msgstr ""
+msgstr "傳送電子郵件給 %1"
 
 #: contents/configuration/AboutPlugin.qml:95
 msgid "Copyright"
-msgstr ""
+msgstr "版權"
 
 #: contents/configuration/AboutPlugin.qml:115
 msgid "License:"
-msgstr ""
+msgstr "授權條款："
 
 #: contents/configuration/AboutPlugin.qml:128
 msgid "Authors"
-msgstr ""
+msgstr "作者群"
 
 #: contents/configuration/AboutPlugin.qml:138
 msgid "Credits"
-msgstr ""
+msgstr "致謝"
 
 #: contents/configuration/AboutPlugin.qml:149
 msgid "Translators"
-msgstr ""
+msgstr "翻譯者"
 
 #: contents/configuration/AppletConfiguration.qml:40
-#, fuzzy
-#| msgid "Keyboard shortcuts"
 msgid "Keyboard Shortcuts"
-msgstr "鍵盤捷徑"
+msgstr "鍵盤快捷鍵"
 
 #: contents/configuration/AppletConfiguration.qml:271
 msgid "Apply Settings"
@@ -88,7 +87,7 @@ msgstr "取消"
 
 #: contents/configuration/ConfigCategoryDelegate.qml:28
 msgid "Open configuration page"
-msgstr ""
+msgstr "開啟設定頁面"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:19
 msgid "Left-Button"
@@ -103,22 +102,20 @@ msgid "Middle-Button"
 msgstr "滑鼠中鍵"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:22
-#, fuzzy
-#| msgid "Left-Button"
 msgid "Back-Button"
-msgstr "滑鼠左鍵"
+msgstr "返回鍵"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:23
 msgid "Forward-Button"
-msgstr ""
+msgstr "前進鍵"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:25
 msgid "Vertical-Scroll"
-msgstr "垂直捲軸"
+msgstr "垂直滾動"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:26
 msgid "Horizontal-Scroll"
-msgstr "水平捲軸"
+msgstr "水平滾動"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:28
 msgid "Shift"
@@ -139,7 +136,7 @@ msgstr "Meta"
 #: contents/configuration/ConfigurationContainmentActions.qml:73
 msgctxt "Concatenation sign for shortcuts, e.g. Ctrl+Shift"
 msgid "+"
-msgstr ""
+msgstr "+"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:153
 #: contents/configuration/MouseEventInputButton.qml:15
@@ -148,11 +145,11 @@ msgstr "新增動作"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:27
 msgid "Appearance"
-msgstr ""
+msgstr "外觀"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:69
 msgid "Layout changes have been restricted by the system administrator"
-msgstr ""
+msgstr "佈局變更已被系統管理員限制"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:84
 msgid "Layout:"
@@ -164,25 +161,23 @@ msgstr "桌布型態："
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:116
 msgid "Get New Plugins..."
-msgstr ""
+msgstr "取得新的外掛程式…"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:128
 msgid "Layout changes must be applied before other changes can be made"
-msgstr ""
+msgstr "佈局變更必須先套用才能進行其他變更"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:134
-#, fuzzy
-#| msgid "Apply"
 msgid "Apply now"
-msgstr "套用"
+msgstr "立刻套用"
 
 #: contents/configuration/ConfigurationShortcuts.qml:18
 msgid "Shortcuts"
-msgstr ""
+msgstr "快捷鍵"
 
 #: contents/configuration/ConfigurationShortcuts.qml:28
 msgid "This shortcut will activate the applet as though it had been clicked."
-msgstr ""
+msgstr "這個快捷鍵將會觸發小程式，就如同它被點擊了一樣。"
 
 #: contents/configuration/ContainmentConfiguration.qml:33
 msgid "Wallpaper"
