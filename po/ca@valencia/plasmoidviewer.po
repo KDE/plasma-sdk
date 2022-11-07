@@ -73,12 +73,12 @@ msgstr ""
 #: main.cpp:63
 #, kde-format
 msgid "Set the x position of the plasmoidviewer on the Plasma desktop"
-msgstr "Ajusta la posició «x» del visor de plasmoides a l'escriptori Plasma"
+msgstr "Ajusta la posició «x» del visor de plasmoides en l'escriptori Plasma"
 
 #: main.cpp:66
 #, kde-format
 msgid "Set the y position of the plasmoidviewer on the Plasma desktop"
-msgstr "Ajusta la posició «y» del visor de plasmoides a l'escriptori Plasma"
+msgstr "Ajusta la posició «y» del visor de plasmoides en l'escriptori Plasma"
 
 #: main.cpp:69
 #, kde-format
