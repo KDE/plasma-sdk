@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-20 00:52+0000\n"
-"PO-Revision-Date: 2022-06-07 13:03+0300\n"
+"PO-Revision-Date: 2022-11-14 14:12+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #: contents/applet/AppletError.qml:40
 msgid "Sorry! There was an error loading %1."
@@ -113,11 +113,11 @@ msgstr "İleri Düğmesi"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:25
 msgid "Vertical-Scroll"
-msgstr "Dikey Kaydırma"
+msgstr "Dikey Sarma"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:26
 msgid "Horizontal-Scroll"
-msgstr "Yatay Kaydırma"
+msgstr "Yatay Sarma"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:28
 msgid "Shift"
@@ -147,7 +147,7 @@ msgstr "Eylem Ekle"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:27
 msgid "Appearance"
-msgstr "Görünüm"
+msgstr "Görünüş"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:69
 msgid "Layout changes have been restricted by the system administrator"
