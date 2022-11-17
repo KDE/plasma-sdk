@@ -25,6 +25,8 @@ install(PROGRAMS org.kde.plasmoidviewer.desktop  DESTINATION ${KDE_INSTALL_APPDI
 install(FILES org.kde.plasmoidviewer.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
 kdoctools_create_manpage (man-plasmoidviewer.1.docbook 1 INSTALL_DESTINATION ${KDE_INSTALL_MANDIR})
+install(FILES completions/plasmoidviewer.zsh RENAME _plasmoidviewer DESTINATION ${KDE_INSTALL_ZSHAUTOCOMPLETEDIR})
+
 
 #qml
 plasma_install_package(qmlpackages/shell org.kde.plasma.plasmoidviewershell shells shell)
