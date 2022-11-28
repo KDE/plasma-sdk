@@ -16,6 +16,7 @@ target_link_libraries(plasmoidviewer
     KF5::I18n
     KF5::ConfigCore
     KF5::ConfigWidgets
+    KF5::Package
 )
 
 install(TARGETS plasmoidviewer ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
