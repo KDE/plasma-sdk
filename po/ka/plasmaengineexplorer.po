@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-05-24 00:45+0000\n"
-"PO-Revision-Date: 2022-09-27 06:04+0200\n"
+"PO-Revision-Date: 2022-12-06 09:10+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -292,6 +292,8 @@ msgid ""
 "No valid model was returned. Verify that a model is available for this "
 "source."
 msgstr ""
+"სწორი მოდელი არ დაბრუნებულა. გადაამოწმეთ, ამ წყაროდან ეს მოდელი "
+"ხელმისაწვდომია, თუ არა."
 
 #: modelviewer.cpp:103
 #, kde-format
@@ -316,6 +318,8 @@ msgid ""
 "No valid service was returned. Verify that a service is available for this "
 "source."
 msgstr ""
+"სწორი სერვისი არ დაბრუნებულა. გადაამოწმეთ, ამ წყაროდან ეს სერვისი "
+"ხელმისაწვდომია, თუ არა."
 
 #: serviceviewer.cpp:72
 #, kde-format
@@ -360,6 +364,8 @@ msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> returned successfully. "
 "<p>The result was: <b>'%3'</b></p>"
 msgstr ""
+"<b>'%1'</b> ოპერაცია დანიშნულებით <b>'%2'</b> წარმატებით დაბრუნდა. "
+"<p>შედეგია: <b>'%3'</b></p>"
 
 #: serviceviewer.cpp:226
 #, kde-format

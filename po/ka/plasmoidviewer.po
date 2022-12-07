@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-22 00:47+0000\n"
-"PO-Revision-Date: 2022-09-27 06:07+0200\n"
+"PO-Revision-Date: 2022-12-06 09:10+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -63,36 +63,38 @@ msgid ""
 "The location constraint to start the Containment with (floating, desktop, "
 "fullscreen, topedge, bottomedge, leftedge, rightedge)"
 msgstr ""
+"მდებარეობის შეზღუდვა დასაწყებად (floating, desktop, fullscreen, topedge, "
+"bottomedge, leftedge, rightedge)"
 
 #: main.cpp:63
 #, kde-format
 msgid "Set the x position of the plasmoidviewer on the Plasma desktop"
-msgstr ""
+msgstr "Plasma-ის სამუშაო მაგიდაზე plasmoidviewer-ის X მდებარეობის დაყენება"
 
 #: main.cpp:66
 #, kde-format
 msgid "Set the y position of the plasmoidviewer on the Plasma desktop"
-msgstr ""
+msgstr "Plasma-ის სამუშაო მაგიდაზე plasmoidviewer-ის Y მდებარეობის დაყენება"
 
 #: main.cpp:69
 #, kde-format
 msgid "Set the window size of the plasmoidview"
-msgstr ""
+msgstr "Plasmodviewe-ის ფანჯრის ზომის დაყენება"
 
 #: main.cpp:72
 #, kde-format
 msgid "The size in kB to set the pixmap cache to"
-msgstr ""
+msgstr "პიქსელების რუკის ქეშის ზომის დაყენება (კბ)"
 
 #: main.cpp:75
 #, kde-format
 msgid "The name of the theme which the shell will use"
-msgstr ""
+msgstr "გარსის მიერ გამოყენებული თემის სახელი"
 
 #: main.cpp:78
 #, kde-format
 msgid "Data that should be passed to the applet as 'externalData' event"
-msgstr ""
+msgstr "'externalData' მოვლენით აპლეტისთვის გადასაცემი მონაცემები"
 
 #: view.cpp:122
 #, no-c-format, kde-format

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-08 00:49+0000\n"
-"PO-Revision-Date: 2022-09-27 05:32+0200\n"
+"PO-Revision-Date: 2022-12-06 09:09+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: src/main.cpp:69
 #, kde-format
@@ -71,17 +71,17 @@ msgstr "ეკრანის ანაბეჭდის გადაღებ�
 #: src/qml/Actions.qml:39
 #, kde-format
 msgid "Breeze Colors"
-msgstr ""
+msgstr "Breeze -ის ფერები"
 
 #: src/qml/Actions.qml:43
 #, kde-format
 msgid "Breeze Dark Colors"
-msgstr ""
+msgstr "Breeze -ის მუქი ფერებ"
 
 #: src/qml/Actions.qml:47 src/qml/GlobalMenuBar.qml:35
 #, kde-format
 msgid "Breeze (Normal) and Breeze Dark"
-msgstr ""
+msgstr "Breeze (ნორმალური) და მუქი Breeze"
 
 #: src/qml/Actions.qml:51 src/qml/GlobalMenuBar.qml:23
 #, kde-format
@@ -101,12 +101,12 @@ msgstr "ფაილი"
 #: src/qml/GlobalMenuBar.qml:21
 #, kde-format
 msgid "Export Montage with Color Scheme…"
-msgstr ""
+msgstr "მონტაჟის ფერის სქემით გატანა…"
 
 #: src/qml/GlobalMenuBar.qml:27
 #, kde-format
 msgid "Breeze (Normal)"
-msgstr ""
+msgstr "Breeze (ნორმალური)"
 
 #: src/qml/GlobalMenuBar.qml:31
 #, kde-format

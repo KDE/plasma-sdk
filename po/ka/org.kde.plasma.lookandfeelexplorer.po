@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-15 00:48+0000\n"
-"PO-Revision-Date: 2022-09-27 05:37+0200\n"
+"PO-Revision-Date: 2022-12-06 09:09+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -141,12 +141,12 @@ msgstr "Plasma-ის მიმდინარე განლაგების
 #: src/lnflogic.cpp:93
 #, kde-format
 msgid "Impossible to create the layouts directory in the look and feel package"
-msgstr ""
+msgstr "გარეგნობის პაკეტში განლაგების საქაღალდის შექმნა შეუძლებელია"
 
 #: src/lnflogic.cpp:104
 #, kde-format
 msgid "Impossible to write to org.kde.plasma.desktop-layout.js"
-msgstr ""
+msgstr "შეცდომა org.kde.plasma.desktop-layout.js-შიჩაწერისას"
 
 #: src/lnflogic.cpp:107
 #, kde-format
@@ -157,6 +157,8 @@ msgstr "Plasma-ის განლაგება წარმატებით
 #, kde-format
 msgid "Defaults config file saved from your current setup"
 msgstr ""
+"ნაგულისხმები მნიშვნელობების შემცველი კონფიგურაციის ფაილი თქვენი მორგებიდან "
+"ჩაიწერა"
 
 #: src/lnflogic.cpp:481
 #, kde-format
