@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-20 00:52+0000\n"
+"POT-Creation-Date: 2022-12-10 00:47+0000\n"
 "PO-Revision-Date: 2022-12-01 06:53\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -31,7 +31,7 @@ msgid "Open %1"
 msgstr "打开 %1"
 
 #: contents/configuration/AboutPlugin.qml:20
-#: contents/configuration/AppletConfiguration.qml:223
+#: contents/configuration/AppletConfiguration.qml:248
 msgid "About"
 msgstr "关于"
 
@@ -59,29 +59,29 @@ msgstr "致谢"
 msgid "Translators"
 msgstr "翻译人员"
 
-#: contents/configuration/AppletConfiguration.qml:40
+#: contents/configuration/AppletConfiguration.qml:56
 msgid "Keyboard Shortcuts"
 msgstr "键盘快捷键"
 
-#: contents/configuration/AppletConfiguration.qml:271
+#: contents/configuration/AppletConfiguration.qml:296
 msgid "Apply Settings"
 msgstr "应用设置"
 
-#: contents/configuration/AppletConfiguration.qml:272
+#: contents/configuration/AppletConfiguration.qml:297
 msgid ""
 "The settings of the current module have changed. Do you want to apply the "
 "changes or discard them?"
 msgstr "当前模块的设置已被更改。您想要应用更改，还是丢弃更改？"
 
-#: contents/configuration/AppletConfiguration.qml:295
+#: contents/configuration/AppletConfiguration.qml:327
 msgid "OK"
 msgstr "确定"
 
-#: contents/configuration/AppletConfiguration.qml:303
+#: contents/configuration/AppletConfiguration.qml:335
 msgid "Apply"
 msgstr "应用"
 
-#: contents/configuration/AppletConfiguration.qml:309
+#: contents/configuration/AppletConfiguration.qml:341
 msgid "Cancel"
 msgstr "取消"
 

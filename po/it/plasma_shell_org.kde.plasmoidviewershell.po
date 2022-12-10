@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-20 00:52+0000\n"
+"POT-Creation-Date: 2022-12-10 00:47+0000\n"
 "PO-Revision-Date: 2022-06-06 13:06+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -31,7 +31,7 @@ msgid "Open %1"
 msgstr "Apri %1"
 
 #: contents/configuration/AboutPlugin.qml:20
-#: contents/configuration/AppletConfiguration.qml:223
+#: contents/configuration/AppletConfiguration.qml:248
 msgid "About"
 msgstr "Informazioni"
 
@@ -59,15 +59,15 @@ msgstr "Riconoscimenti"
 msgid "Translators"
 msgstr "Traduttori"
 
-#: contents/configuration/AppletConfiguration.qml:40
+#: contents/configuration/AppletConfiguration.qml:56
 msgid "Keyboard Shortcuts"
 msgstr "Scorciatoie da tastiera"
 
-#: contents/configuration/AppletConfiguration.qml:271
+#: contents/configuration/AppletConfiguration.qml:296
 msgid "Apply Settings"
 msgstr "Applica le impostazioni"
 
-#: contents/configuration/AppletConfiguration.qml:272
+#: contents/configuration/AppletConfiguration.qml:297
 msgid ""
 "The settings of the current module have changed. Do you want to apply the "
 "changes or discard them?"
@@ -75,15 +75,15 @@ msgstr ""
 "Le impostazioni del modulo attuale sono cambiate. Vuoi applicare le "
 "modifiche o annullarle?"
 
-#: contents/configuration/AppletConfiguration.qml:295
+#: contents/configuration/AppletConfiguration.qml:327
 msgid "OK"
 msgstr "OK"
 
-#: contents/configuration/AppletConfiguration.qml:303
+#: contents/configuration/AppletConfiguration.qml:335
 msgid "Apply"
 msgstr "Applica"
 
-#: contents/configuration/AppletConfiguration.qml:309
+#: contents/configuration/AppletConfiguration.qml:341
 msgid "Cancel"
 msgstr "Annulla"
 

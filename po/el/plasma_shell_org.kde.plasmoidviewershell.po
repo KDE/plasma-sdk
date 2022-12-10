@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-20 00:52+0000\n"
+"POT-Creation-Date: 2022-12-10 00:47+0000\n"
 "PO-Revision-Date: 2021-09-04 09:48+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -31,7 +31,7 @@ msgid "Open %1"
 msgstr ""
 
 #: contents/configuration/AboutPlugin.qml:20
-#: contents/configuration/AppletConfiguration.qml:223
+#: contents/configuration/AppletConfiguration.qml:248
 msgid "About"
 msgstr "Περίγραμμα"
 
@@ -59,15 +59,15 @@ msgstr "Εύσημα"
 msgid "Translators"
 msgstr "Μεταφραστές"
 
-#: contents/configuration/AppletConfiguration.qml:40
+#: contents/configuration/AppletConfiguration.qml:56
 msgid "Keyboard Shortcuts"
 msgstr "Συντομεύσεις πληκτρολογίου"
 
-#: contents/configuration/AppletConfiguration.qml:271
+#: contents/configuration/AppletConfiguration.qml:296
 msgid "Apply Settings"
 msgstr "Εφαρμογή ρυθμίσεων"
 
-#: contents/configuration/AppletConfiguration.qml:272
+#: contents/configuration/AppletConfiguration.qml:297
 msgid ""
 "The settings of the current module have changed. Do you want to apply the "
 "changes or discard them?"
@@ -75,15 +75,15 @@ msgstr ""
 "Οι ρυθμίσεις του τρέχοντος αρθρώματος τροποποιήθηκαν. Επιθυμείτε την "
 "εφαρμογή των τροποποιήσεων ή την απόρριψή τους;"
 
-#: contents/configuration/AppletConfiguration.qml:295
+#: contents/configuration/AppletConfiguration.qml:327
 msgid "OK"
 msgstr "Εντάξει"
 
-#: contents/configuration/AppletConfiguration.qml:303
+#: contents/configuration/AppletConfiguration.qml:335
 msgid "Apply"
 msgstr "Εφαρμογή"
 
-#: contents/configuration/AppletConfiguration.qml:309
+#: contents/configuration/AppletConfiguration.qml:341
 msgid "Cancel"
 msgstr "Ακύρωση"
 

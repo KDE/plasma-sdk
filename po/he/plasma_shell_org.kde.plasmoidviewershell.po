@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-20 00:52+0000\n"
+"POT-Creation-Date: 2022-12-10 00:47+0000\n"
 "PO-Revision-Date: 2017-05-16 06:57-0400\n"
 "Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -31,7 +31,7 @@ msgid "Open %1"
 msgstr ""
 
 #: contents/configuration/AboutPlugin.qml:20
-#: contents/configuration/AppletConfiguration.qml:223
+#: contents/configuration/AppletConfiguration.qml:248
 msgid "About"
 msgstr ""
 
@@ -59,31 +59,31 @@ msgstr ""
 msgid "Translators"
 msgstr ""
 
-#: contents/configuration/AppletConfiguration.qml:40
+#: contents/configuration/AppletConfiguration.qml:56
 #, fuzzy
 #| msgid "Keyboard shortcuts"
 msgid "Keyboard Shortcuts"
 msgstr "קיצורי מקלדת"
 
-#: contents/configuration/AppletConfiguration.qml:271
+#: contents/configuration/AppletConfiguration.qml:296
 msgid "Apply Settings"
 msgstr "החל הגדרות"
 
-#: contents/configuration/AppletConfiguration.qml:272
+#: contents/configuration/AppletConfiguration.qml:297
 msgid ""
 "The settings of the current module have changed. Do you want to apply the "
 "changes or discard them?"
 msgstr "מודול ההגדרות הנוכחי השתנה. האם להחיל את ההגדרות או לבטל אותם?"
 
-#: contents/configuration/AppletConfiguration.qml:295
+#: contents/configuration/AppletConfiguration.qml:327
 msgid "OK"
 msgstr "אישור"
 
-#: contents/configuration/AppletConfiguration.qml:303
+#: contents/configuration/AppletConfiguration.qml:335
 msgid "Apply"
 msgstr "החל"
 
-#: contents/configuration/AppletConfiguration.qml:309
+#: contents/configuration/AppletConfiguration.qml:341
 msgid "Cancel"
 msgstr "בטל"
 

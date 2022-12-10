@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-20 00:52+0000\n"
+"POT-Creation-Date: 2022-12-10 00:47+0000\n"
 "PO-Revision-Date: 2022-09-27 05:52+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -31,7 +31,7 @@ msgid "Open %1"
 msgstr "%1-ის გახსნა"
 
 #: contents/configuration/AboutPlugin.qml:20
-#: contents/configuration/AppletConfiguration.qml:223
+#: contents/configuration/AppletConfiguration.qml:248
 msgid "About"
 msgstr "შესახებ"
 
@@ -59,15 +59,15 @@ msgstr "კრედიტები"
 msgid "Translators"
 msgstr "მთარგმნელები"
 
-#: contents/configuration/AppletConfiguration.qml:40
+#: contents/configuration/AppletConfiguration.qml:56
 msgid "Keyboard Shortcuts"
 msgstr "კლავიატურის მალსახსომები"
 
-#: contents/configuration/AppletConfiguration.qml:271
+#: contents/configuration/AppletConfiguration.qml:296
 msgid "Apply Settings"
 msgstr "პარამეტრების გადატარება"
 
-#: contents/configuration/AppletConfiguration.qml:272
+#: contents/configuration/AppletConfiguration.qml:297
 msgid ""
 "The settings of the current module have changed. Do you want to apply the "
 "changes or discard them?"
@@ -75,15 +75,15 @@ msgstr ""
 "მიმდინარე მოდულის პარამეტრები შეიცვალა. გნებავთ გადაატაროთ ეს ცვლილებები თუ "
 "მოვაშოროთ ისინი?"
 
-#: contents/configuration/AppletConfiguration.qml:295
+#: contents/configuration/AppletConfiguration.qml:327
 msgid "OK"
 msgstr "დიახ"
 
-#: contents/configuration/AppletConfiguration.qml:303
+#: contents/configuration/AppletConfiguration.qml:335
 msgid "Apply"
 msgstr "გამოყენება"
 
-#: contents/configuration/AppletConfiguration.qml:309
+#: contents/configuration/AppletConfiguration.qml:341
 msgid "Cancel"
 msgstr "_გაუქმება"
 
