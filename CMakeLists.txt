@@ -14,7 +14,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 ################# Disallow in-source build #################
 
 if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
-   message(FATAL_ERROR "plasmate requires an out of source build. Please create a separate build directory and run 'cmake path_to_plasmate [options]' there.")
+    message(FATAL_ERROR "plasmate requires an out of source build. Please create a separate build directory and run 'cmake path_to_plasmate [options]' there.")
 endif()
 
 ################# set KDE specific information #################
@@ -36,9 +36,9 @@ find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS 
 
 find_package(Qt${QT_MAJOR_VERSION}Test ${QT_MIN_VERSION} CONFIG QUIET)
 set_package_properties(Qt${QT_MAJOR_VERSION}Test PROPERTIES
-         PURPOSE "Required for tests"
-         TYPE OPTIONAL
-         )
+    PURPOSE "Required for tests"
+    TYPE OPTIONAL
+)
 add_feature_info("Qt${QT_MAJOR_VERSION}Test" Qt5Test_FOUND "Required for building tests")
 if (NOT Qt${QT_MAJOR_VERSION}Test_FOUND)
     set(BUILD_TESTING OFF CACHE BOOL "Build the testing tree.")
