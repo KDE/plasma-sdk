@@ -4,6 +4,7 @@
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
 
+# keep this function in sync with plasmashell from plasma-workspace
 function _plasma_list_packages() {
   local expl global_dir descr="$1" purpose="$2" type="${3:-Plasma/Applet}"
   local -a packages containments
