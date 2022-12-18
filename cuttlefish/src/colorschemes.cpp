@@ -6,8 +6,6 @@
 
 #include "colorschemes.h"
 
-#include <QAbstractItemModel>
-
 #include <KColorSchemeManager>
 #include <KConfigGroup>
 #include <KLocalizedString>
