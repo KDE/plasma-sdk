@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Pierre-Marie Pédrot <pedrotpmx@wanadoo.fr>, 2007.
 # Cindy McKee <cfmckee@gmail.com>, 2008, 2009.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-05-24 00:45+0000\n"
-"PO-Revision-Date: 2009-10-23 19:47+0300\n"
-"Last-Translator: Cindy McKee <cfmckee@gmail.com>\n"
+"PO-Revision-Date: 2023-01-01 20:27+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@lists.kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -50,10 +51,9 @@ msgid "Search"
 msgstr "Serĉi"
 
 #: engineexplorer.cpp:180
-#, fuzzy, kde-format
-#| msgid "DataSource"
+#, kde-format
 msgid "DataSource/Key"
-msgstr "Datumfonto"
+msgstr "Datumfonto/Ŝlosilo"
 
 #: engineexplorer.cpp:180
 #, kde-format
@@ -72,10 +72,9 @@ msgid "Get associated service"
 msgstr "Akiri asociigatan servon"
 
 #: engineexplorer.cpp:304
-#, fuzzy, kde-format
-#| msgid "Get associated service"
+#, kde-format
 msgid "Get associated model"
-msgstr "Akiri asociigatan servon"
+msgstr "Akiri asociigatan modelon"
 
 #: engineexplorer.cpp:305
 #, kde-format
@@ -91,22 +90,22 @@ msgstr "Forigi fonton"
 #, kde-format
 msgid "<1 bit>"
 msgid_plural "<%1 bits>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<1 bito>"
+msgstr[1] "<%1 bitoj>"
 
 #: engineexplorer.cpp:337
 #, kde-format
 msgid "<1 byte>"
 msgid_plural "<%1 bytes>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<1 bajto>"
+msgstr[1] "<%1 bajtoj>"
 
 #: engineexplorer.cpp:359
 #, kde-format
 msgid "<1 item>"
 msgid_plural "<%1 items>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<1 ero>"
+msgstr[1] "<%1 eroj>"
 
 #: engineexplorer.cpp:439
 #, kde-format
@@ -127,16 +126,16 @@ msgstr "<ne montrebla>"
 msgctxt "Length of the list"
 msgid "<%1 item>"
 msgid_plural "<%1 items>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<1 elemento>"
+msgstr[1] "<%1 elementoj>"
 
 #: engineexplorer.cpp:529
 #, kde-format
 msgctxt "Size of the map"
 msgid "<%1 pair>"
 msgid_plural "<%1 pairs>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<%1 paro>"
+msgstr[1] "<%1 paroj>"
 
 #. i18n: ectx: property (text), widget (KTitleWidget, m_title)
 #: engineexplorer.cpp:542 engineexplorer.ui:29
@@ -166,38 +165,33 @@ msgstr "Ĝisdatigi laŭpete"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
 #: engineexplorer.ui:81
-#, fuzzy, kde-format
-#| msgid "ms"
+#, kde-format
 msgid " ms"
 msgstr "ms"
 
 #. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
 #: engineexplorer.ui:84
-#, fuzzy, kde-format
-#| msgid "Update every "
+#, kde-format
 msgid "Update Every "
-msgstr "Ĝisdatigi je ĉiu"
+msgstr "Ĝisdatigi je Ĉiu"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
 #: engineexplorer.ui:100
-#, fuzzy, kde-format
-#| msgid "Request"
+#, kde-format
 msgid "Request Source"
-msgstr "Peto"
+msgstr "Peti Fonton"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
 #: engineexplorer.ui:120
-#, fuzzy, kde-format
-#| msgid "Remove source"
+#, kde-format
 msgid "Service for source"
-msgstr "Forigi fonton"
+msgstr "Servo por fonto"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
 #: engineexplorer.ui:133
-#, fuzzy, kde-format
-#| msgid "Remove source"
+#, kde-format
 msgid "Request Service for Source"
-msgstr "Forigi fonton"
+msgstr "Peti Servon por Fonto"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -302,12 +296,10 @@ msgid ""
 msgstr ""
 
 #: modelviewer.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "%1 is a Plasma service name"
-#| msgid "%1 Service Explorer"
+#, kde-format
 msgctxt "%1 is a Plasma dataengine name"
 msgid "%1 Model Explorer"
-msgstr "%1 servofoliumilo"
+msgstr "%1 modelfoliumilo"
 
 #: serviceviewer.cpp:27
 #, kde-format
@@ -334,12 +326,10 @@ msgid "%1 Service Explorer"
 msgstr "%1 servofoliumilo"
 
 #: serviceviewer.cpp:75
-#, fuzzy, kde-format
-#| msgctxt "Source: name of the data, Service: writes data instead of fetching"
-#| msgid "DataEngine: <b>%1</b>; Source: <b>%2</b>; Service <b>%3</b>"
+#, kde-format
 msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
-msgstr "Datumomotoro: <b>%1</b>; Fonto: <b>%2</b>; Servo <b>%3</b>"
+msgstr "Motoro: <b>%1</b>; Fonto: <b>%2</b>; Servo: <b>%3</b>"
 
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
 #: serviceviewer.cpp:151 serviceviewer.ui:73
@@ -348,12 +338,13 @@ msgid "Key"
 msgstr "Klavo"
 
 #: serviceviewer.cpp:185
-#, fuzzy, kde-format
-#| msgid "%1 operation with destination %2 failed. The error was:<p><b>%3</b>"
+#, kde-format
 msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> failed. <p>The error was: "
 "<b>'%3: %4'</b></p>"
-msgstr "%1 operacio kun la celo %2 malsukcesis. La eraro estis:<p><b>%3</b>"
+msgstr ""
+"<b>'%1'</b> operacio kun la celo <b>'%2'</b> malsukcesis. <p>La eraro estis: "
+"<b>%3: %4</b></p>"
 
 #: serviceviewer.cpp:191 serviceviewer.cpp:204
 #, kde-format
@@ -373,18 +364,15 @@ msgid ""
 msgstr "%1 operacio kun celo %2 sukcesis. La rezulto estis:<p><b>%3</b>"
 
 #: serviceviewer.cpp:226
-#, fuzzy, kde-format
-#| msgid "One active operation ..."
-#| msgid_plural "%1 operations active ..."
+#, kde-format
 msgid "One active operation…"
 msgid_plural "%1 operations active…"
-msgstr[0] "Unu aktiva operacio..."
-msgstr[1] "%1 aktivaj operacioj..."
+msgstr[0] "Unu aktiva operacio…"
+msgstr[1] "%1 operacioj aktivaj…"
 
 #. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
 #: serviceviewer.ui:39
-#, fuzzy, kde-format
-#| msgid "&Operation:"
+#, kde-format
 msgid "Opera&tion:"
 msgstr "&Operacio:"
 
@@ -398,18 +386,3 @@ msgstr "Nombro de operacioj"
 #, kde-format
 msgid "Data Engines"
 msgstr "Datumomotoroj"
-
-#~ msgid "&lt;1 bit&gt;"
-#~ msgid_plural "&lt;%1 bits&gt;"
-#~ msgstr[0] "&lt;1 bito&gt;"
-#~ msgstr[1] "&lt;%1 bitoj&gt;"
-
-#~ msgid "&lt;1 byte&gt;"
-#~ msgid_plural "&lt;%1 bytes&gt;"
-#~ msgstr[0] "&lt;1 bajto&gt;"
-#~ msgstr[1] "&lt;%1 bajtoj&gt;"
-
-#~ msgid "&lt;1 item&gt;"
-#~ msgid_plural "&lt;%1 items&gt;"
-#~ msgstr[0] "&lt;1 ero&gt;"
-#~ msgstr[1] "&lt;%1 eroj&gt;"

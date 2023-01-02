@@ -3,19 +3,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Sveinn í Felli <sveinki@nett.is>, 2008, 2009, 2015.
+# gummi <gudmundure@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-05-24 00:45+0000\n"
-"PO-Revision-Date: 2015-01-29 09:07+0000\n"
-"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
-"Language-Team: Icelandic <kde-isl@molar.is>\n"
+"PO-Revision-Date: 2022-12-12 22:40+0000\n"
+"Last-Translator: gummi <gudmundure@gmail.com>\n"
+"Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 22.08.3\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 "\n"
 "\n"
@@ -23,17 +24,17 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Sveinn í Felli"
+msgstr "Sveinn í Felli,Guðmundur Erlingsson"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "sv1@fellsnet.is"
+msgstr "sv1@fellsnet.is,gudmundure@gmail.com"
 
 #: engineexplorer.cpp:45
 #, kde-format
 msgid "Expand All"
-msgstr "Opna allt"
+msgstr "Víkka allt út"
 
 #: engineexplorer.cpp:46
 #, kde-format
@@ -51,10 +52,9 @@ msgid "Search"
 msgstr "Leita"
 
 #: engineexplorer.cpp:180
-#, fuzzy, kde-format
-#| msgid "DataSource"
+#, kde-format
 msgid "DataSource/Key"
-msgstr "Gagnabrunnur"
+msgstr "Gagnagjafi/Lykill"
 
 #: engineexplorer.cpp:180
 #, kde-format
@@ -73,10 +73,9 @@ msgid "Get associated service"
 msgstr "Ná í tengda þjónustu"
 
 #: engineexplorer.cpp:304
-#, fuzzy, kde-format
-#| msgid "Get associated service"
+#, kde-format
 msgid "Get associated model"
-msgstr "Ná í tengda þjónustu"
+msgstr "Ná í tengda gerð"
 
 #: engineexplorer.cpp:305
 #, kde-format
@@ -92,22 +91,22 @@ msgstr "Fjarlægja upptök"
 #, kde-format
 msgid "<1 bit>"
 msgid_plural "<%1 bits>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<1 biti>"
+msgstr[1] "<%1 bitar>"
 
 #: engineexplorer.cpp:337
 #, kde-format
 msgid "<1 byte>"
 msgid_plural "<%1 bytes>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<1 bæti>"
+msgstr[1] "<%1 bæti>"
 
 #: engineexplorer.cpp:359
 #, kde-format
 msgid "<1 item>"
 msgid_plural "<%1 items>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<1 atriði>"
+msgstr[1] "<%1 atriði>"
 
 #: engineexplorer.cpp:439
 #, kde-format
@@ -128,16 +127,16 @@ msgstr "<ekki sýnanlegt>"
 msgctxt "Length of the list"
 msgid "<%1 item>"
 msgid_plural "<%1 items>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<%1 atriði>"
+msgstr[1] "<%1 atriði>"
 
 #: engineexplorer.cpp:529
 #, kde-format
 msgctxt "Size of the map"
 msgid "<%1 pair>"
 msgid_plural "<%1 pairs>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<%1 par>"
+msgstr[1] "<%1 pör>"
 
 #. i18n: ectx: property (text), widget (KTitleWidget, m_title)
 #: engineexplorer.cpp:542 engineexplorer.ui:29
@@ -150,8 +149,8 @@ msgstr "Plasma gagnavélakönnuður"
 msgctxt "The name of the engine followed by the number of data sources"
 msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
-msgstr[0] "%1 gagnavél - 1 gagnalind"
-msgstr[1] "%1 gagnavél - %2 gagnalindir"
+msgstr[0] "%1 gagnavél - 1 gagnagjafi"
+msgstr[1] "%1 gagnavél - %2 gagnagjafar"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
 #: engineexplorer.ui:50
@@ -167,10 +166,9 @@ msgstr "Uppfæra við beiðni"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
 #: engineexplorer.ui:81
-#, fuzzy, kde-format
-#| msgid "ms"
+#, kde-format
 msgid " ms"
-msgstr "ms"
+msgstr " ms"
 
 #. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
 #: engineexplorer.ui:84
@@ -181,24 +179,21 @@ msgstr "Uppfæra hverja"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
 #: engineexplorer.ui:100
-#, fuzzy, kde-format
-#| msgid "Request"
+#, kde-format
 msgid "Request Source"
-msgstr "Beiðni"
+msgstr "Upptök beiðni"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
 #: engineexplorer.ui:120
-#, fuzzy, kde-format
-#| msgid "Remove source"
+#, kde-format
 msgid "Service for source"
-msgstr "Fjarlægja upptök"
+msgstr "Þjónusta fyrir upptök"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
 #: engineexplorer.ui:133
-#, fuzzy, kde-format
-#| msgid "Remove source"
+#, kde-format
 msgid "Request Service for Source"
-msgstr "Fjarlægja upptök"
+msgstr "Beiðniþjónusta fyrir upptök"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -228,7 +223,7 @@ msgstr "Kanna gögn sem gefin eru út af Plasma gagnavélum"
 #: main.cpp:60
 #, kde-format
 msgid "(c) 2006, The KDE Team"
-msgstr "(c) 2006, The KDE Team"
+msgstr "(c) 2006, KDE hópurinn"
 
 #: main.cpp:61
 #, kde-format
@@ -268,17 +263,17 @@ msgstr "Valin y staðsetning í dílum"
 #: main.cpp:73
 #, kde-format
 msgid "The data engine to use"
-msgstr "Gagnavélin sem nota á"
+msgstr "Gagnavélin sem á að nota"
 
 #: main.cpp:74
 #, kde-format
 msgid "The source to request"
-msgstr "Uppruni sem biðja á um"
+msgstr "Uppruni sem á að biðja um"
 
 #: main.cpp:75
 #, kde-format
 msgid "Update interval in milliseconds"
-msgstr "Tíðni uppfærslu í sekúndum"
+msgstr "Uppfærslutíðni í sekúndum"
 
 #: main.cpp:77
 #, kde-format
@@ -286,7 +281,7 @@ msgid ""
 "Only show engines associated with the parent application; maps to the X-KDE-"
 "ParentApp entry in the DataEngine's .desktop file."
 msgstr ""
-"Engöngu sýna gagnavélar sem tengjast upprunalega forritinu (parent "
+"Eingöngu sýna gagnavélar sem tengjast upprunalega forritinu (parent "
 "application); það samsvarar X-KDE-ParentApp færslunni í .desktop skrá "
 "viðkomandi gagnavélar."
 
@@ -302,14 +297,14 @@ msgid ""
 "No valid model was returned. Verify that a model is available for this "
 "source."
 msgstr ""
+"Engri gildri gerð var skilað. Staðfestu að gerðin sé tiltæk fyrir þessi "
+"upptök."
 
 #: modelviewer.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "%1 is a Plasma service name"
-#| msgid "%1 Service Explorer"
+#, kde-format
 msgctxt "%1 is a Plasma dataengine name"
 msgid "%1 Model Explorer"
-msgstr "%1 þjónustuskoðari"
+msgstr "%1 gerðarskoðari"
 
 #: serviceviewer.cpp:27
 #, kde-format
@@ -328,6 +323,8 @@ msgid ""
 "No valid service was returned. Verify that a service is available for this "
 "source."
 msgstr ""
+"Engri gildri þjónustu var skilað. Staðfestu að þjónusta sé tiltæk fyrir "
+"þessi upptök."
 
 #: serviceviewer.cpp:72
 #, kde-format
@@ -336,9 +333,7 @@ msgid "%1 Service Explorer"
 msgstr "%1 þjónustuskoðari"
 
 #: serviceviewer.cpp:75
-#, fuzzy, kde-format
-#| msgctxt "Source: name of the data, Service: writes data instead of fetching"
-#| msgid "DataEngine: <b>%1</b>; Source: <b>%2</b>; Service <b>%3</b>"
+#, kde-format
 msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "Gagnavél: <b>%1</b>; upptök: <b>%2</b>; þjónusta: <b>%3</b>"
@@ -350,12 +345,13 @@ msgid "Key"
 msgstr "Lykill"
 
 #: serviceviewer.cpp:185
-#, fuzzy, kde-format
-#| msgid "%1 operation with destination %2 failed. The error was:<p><b>%3</b>"
+#, kde-format
 msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> failed. <p>The error was: "
 "<b>'%3: %4'</b></p>"
-msgstr "%1 aðgerð með úttakið %2 brást. Villan var:<p><b>%3</b>"
+msgstr ""
+"<b>'%1'</b> aðgerð með viðtökustaðinn <b>'%2'</b> mistókst. <p>Villan sem "
+"kom upp: <b>'%3: %4'</b></p>"
 
 #: serviceviewer.cpp:191 serviceviewer.cpp:204
 #, kde-format
@@ -365,22 +361,19 @@ msgstr "Niðurstaða aðgerðar"
 #: serviceviewer.cpp:195
 #, kde-format
 msgid "No response from job."
-msgstr "Engin svörun frá verki."
+msgstr "Ekkert svar frá verki."
 
 #: serviceviewer.cpp:199
-#, fuzzy, kde-format
-#| msgid ""
-#| "%1 operation with destination %2 returned successfully. The result was:"
-#| "<p><b>%3</b>"
+#, kde-format
 msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> returned successfully. "
 "<p>The result was: <b>'%3'</b></p>"
-msgstr "%1 aðgerð með úttakið %2 kláraðist með stæl. Útkoman var:<p><b>%3</b>"
+msgstr ""
+"<b>'%1'</b> aðgerð með viðtökustaðinn <b>'%2'</b> tókst. <p>Niðurstaðan var: "
+"<b>'%3'</b></p>"
 
 #: serviceviewer.cpp:226
-#, fuzzy, kde-format
-#| msgid "One active operation ..."
-#| msgid_plural "%1 operations active ..."
+#, kde-format
 msgid "One active operation…"
 msgid_plural "%1 operations active…"
 msgstr[0] "Ein virk aðgerð ..."
@@ -388,8 +381,7 @@ msgstr[1] "%1 virkar aðgerðir ..."
 
 #. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
 #: serviceviewer.ui:39
-#, fuzzy, kde-format
-#| msgid "&Operation:"
+#, kde-format
 msgid "Opera&tion:"
 msgstr "&Aðgerð:"
 
@@ -397,7 +389,7 @@ msgstr "&Aðgerð:"
 #: serviceviewer.ui:86
 #, kde-format
 msgid "Operation count"
-msgstr "Talning aðgerða"
+msgstr "Fjöldi aðgerða"
 
 #: titlecombobox.h:41
 #, kde-format

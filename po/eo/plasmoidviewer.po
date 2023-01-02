@@ -1,13 +1,14 @@
 # Translation of plasmoidviewer into esperanto.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasmoidviewer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-22 00:47+0000\n"
-"PO-Revision-Date: 2009-12-24 10:07+0100\n"
-"Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
+"PO-Revision-Date: 2023-01-01 19:53+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -27,27 +28,24 @@ msgid "Your emails"
 msgstr "axel@esperanto-jeunes.org"
 
 #: main.cpp:37
-#, fuzzy, kde-format
-#| msgid "Plasma Widget Viewer"
+#, kde-format
 msgid "Plasmoidviewer"
-msgstr "Plasma fenestraĵo Vidilo"
+msgstr "PlasmoidVidilo"
 
 #: main.cpp:44
 #, kde-format
 msgid "Run Plasma widgets in their own window"
-msgstr ""
+msgstr "Lanĉi Plasma fenestraĵojn en ilia propa fenestro"
 
 #: main.cpp:47
-#, fuzzy, kde-format
-#| msgid "Name of the containment plugin"
+#, kde-format
 msgid "The name of the containment plugin"
-msgstr "Nomo de la entenila kromprogramo"
+msgstr "La nomo de la entenila kromprogramo"
 
 #: main.cpp:51
-#, fuzzy, kde-format
-#| msgid "Name of the containment plugin"
+#, kde-format
 msgid "The name of the applet plugin"
-msgstr "Nomo de la entenila kromprogramo"
+msgstr "La nomo de la apleta kromprogramo"
 
 #: main.cpp:53
 #, kde-format
@@ -55,6 +53,8 @@ msgid ""
 "The formfactor to use (horizontal, vertical, mediacenter, planar or "
 "application)"
 msgstr ""
+"La formfaktoro uzenda (horizontala, vertikala, mediacentra, planara aŭ "
+"aplikaĵa)"
 
 #: main.cpp:58
 #, kde-format
@@ -62,80 +62,51 @@ msgid ""
 "The location constraint to start the Containment with (floating, desktop, "
 "fullscreen, topedge, bottomedge, leftedge, rightedge)"
 msgstr ""
+"La loka limigo kun kiu starti the Entenon (flosanta, labortabla, plen-"
+"ekrana, supraborda, malsupraborda, maldekstraborda, dekstraborda)"
 
 #: main.cpp:63
 #, kde-format
 msgid "Set the x position of the plasmoidviewer on the Plasma desktop"
-msgstr ""
+msgstr "Meti la x pozicion de la plasmoidvidilo sur la Plasma laborspaco"
 
 #: main.cpp:66
 #, kde-format
 msgid "Set the y position of the plasmoidviewer on the Plasma desktop"
-msgstr ""
+msgstr "Meti la y pozicion de la plasmoidvidilo sur la Plasma laborspaco"
 
 #: main.cpp:69
 #, kde-format
 msgid "Set the window size of the plasmoidview"
-msgstr ""
+msgstr "Meti la fenestrograndecon de la plasmoid-videjo"
 
 #: main.cpp:72
 #, kde-format
 msgid "The size in kB to set the pixmap cache to"
-msgstr ""
+msgstr "La grandeco en kB al kiu meti la pixmap-kaŝmemoron"
 
 #: main.cpp:75
 #, kde-format
 msgid "The name of the theme which the shell will use"
-msgstr ""
+msgstr "La nomo de la etoso kiun la ŝelo uzos"
 
 #: main.cpp:78
 #, kde-format
 msgid "Data that should be passed to the applet as 'externalData' event"
-msgstr ""
+msgstr "Datumoj kiuj estu transdonataj al la apleto kiel 'externalData' evento"
 
 #: view.cpp:122
 #, no-c-format, kde-format
 msgid "Applet %1 does not exist."
-msgstr ""
+msgstr "Apleto %1 ne ekzistas."
 
 #: view.cpp:139
 #, no-c-format, kde-format
 msgid "Containment %1 does not exist."
-msgstr ""
+msgstr "Enteno %1 ne ekzistas."
 
 #: view.cpp:316
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Screenshot"
-msgstr ""
-
-#~ msgid "No description available"
-#~ msgstr "Neniu priskribo uzebla"
-
-#~ msgid "2007-2008, Frerich Raabe"
-#~ msgstr "2007-2008, Frerich Raabe"
-
-#~ msgid "Frerich Raabe"
-#~ msgstr "Frerich Raabe"
-
-#~ msgid "Original author"
-#~ msgstr "Origina aŭtoro"
-
-#~ msgid "Displays a list of known applets"
-#~ msgstr "Montri liston de ĉiuj konataj retprogramoj"
-
-#~ msgid "Displays a list of known wallpapers"
-#~ msgstr "Montri liston de ĉiuj konataj ekranfonoj"
-
-#~ msgid "Displays a list of known containments"
-#~ msgstr "Montri liston de ĉiuj konataj enteniloj"
-
-#, fuzzy
-#~ msgid "Displays a list of known themes"
-#~ msgstr "Montri liston de ĉiuj konataj retprogramoj"
-
-#~ msgid "Desktop SVG theme to use"
-#~ msgstr "Labortabla SVG etoso por uzi"
-
-#~ msgid "Optional arguments of the applet to add"
-#~ msgstr "Opciaj argumentoj de la retprogramo por aldoni"
+msgstr "Konservi Ekrankopion"
