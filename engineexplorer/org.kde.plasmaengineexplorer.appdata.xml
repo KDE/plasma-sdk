@@ -7,6 +7,7 @@
   <content_rating type="oars-1.0"/>
   <name>Plasma Engine Explorer</name>
   <name xml:lang="az">Plasma Mexanizmi Bələdçisi</name>
+  <name xml:lang="be">Агляд рухавіка Plasma</name>
   <name xml:lang="bg">Преглед на енджини на Plasma</name>
   <name xml:lang="ca">Explorador de motors del Plasma</name>
   <name xml:lang="ca-valencia">Explorador de motors de Plasma</name>
@@ -45,6 +46,7 @@
   <name xml:lang="zh-TW">Plasma 引擎瀏覽器</name>
   <summary>Explorer for the data published by Plasma Data Engines</summary>
   <summary xml:lang="az">Plasma Məlumat Mexanizmləri tərəfindən yayımlanan məlumatlara baxış</summary>
+  <summary xml:lang="be">Сродак агляду даных ад Plasma DataEngines</summary>
   <summary xml:lang="bg">Преглед на данни, представени от Plasma енджини</summary>
   <summary xml:lang="ca">Explorador de les dades publicades pels motors de dades del Plasma</summary>
   <summary xml:lang="ca-valencia">Explorador de les dades publicades pels motors de dades de Plasma</summary>
@@ -83,6 +85,7 @@
   <description>
     <p>Plasma Engine Explorer is a graphical tool allowing developers to test Plasma DataEngines without writing a Plasma applet.</p>
     <p xml:lang="az">Plasmoidlərə baxış vasitəsi, tərtibatçılara Plasma əlavələrini yenidən  yazmadan onların test olunmasına imkan verən qrafik alətidir.</p>
+    <p xml:lang="be">Сродак агляду даных ад Plasma DataEngines - графічны інструмент, які дазваляе распрацоўнікам тэставаць Plasma DataEngines без стварэння аплетаў Plasma.</p>
     <p xml:lang="bg">Преглед на енджини на Plasma е графичен инструмент, който позволява на разработчиците да тестват Plasma енджини за данни, без да пишат Plasma аплет.</p>
     <p xml:lang="ca">L'explorador de motors del Plasma és una eina gràfica que permet als desenvolupadors provar els motors de dades del Plasma sense escriure una miniaplicació del Plasma.</p>
     <p xml:lang="ca-valencia">L'explorador de motors de Plasma és una eina gràfica que permet als desenvolupadors provar els motors de dades de Plasma sense escriure una miniaplicació de Plasma.</p>

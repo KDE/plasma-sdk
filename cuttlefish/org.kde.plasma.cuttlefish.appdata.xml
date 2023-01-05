@@ -7,6 +7,7 @@
   <content_rating type="oars-1.0"/>
   <name>Cuttlefish</name>
   <name xml:lang="az">Cuttlefish</name>
+  <name xml:lang="be">Cuttlefish</name>
   <name xml:lang="bg">Cuttlefish</name>
   <name xml:lang="ca">Cuttlefish</name>
   <name xml:lang="ca-valencia">Cuttlefish</name>
@@ -49,6 +50,7 @@
   <name xml:lang="zh-TW">Cuttlefish</name>
   <summary>Icon Previewer for Artists and Developers</summary>
   <summary xml:lang="az">Dizaynerlər və Tərtibatçılar üçün ikonlara baxış vasitəsi</summary>
+  <summary xml:lang="be">Сродак папярэдняга прагляду значкоў для мастакоў і распрацоўнікаў</summary>
   <summary xml:lang="bg">Програма за преглед на икони за дизайнери и разработчици</summary>
   <summary xml:lang="ca">Vista prèvia d'icones per als artistes i desenvolupadors</summary>
   <summary xml:lang="ca-valencia">Vista prèvia d'icones per als artistes i desenvolupadors</summary>
@@ -94,6 +96,7 @@
         Cuttlefish also provides a plugin for Kate and KDevelop to be used as icon picker.
     </p>
     <p xml:lang="az">Cuttlefish dizaynerlərə və tərtibatçılara ikonlara baxmaq və onları seçmək alətidir. Cuttlefish ikonların məhz tətbiqlərdə necə görünəcəyini göstərir. Kateqoriya və adlarına görə çeşidləməyə imkan verir. Cuttlefish universal bir alət deyil, belə ki, o dizaynerlər və tərtibatçılar üçün nəzərdə tutulub. Cuttlefish həmçinin ikonları seçmə vasitəsi kimi istifadə olunacaq Kate və KDevelop tətbiqləri üçün əlavələr təqdim edir.</p>
+    <p xml:lang="be">Cuttlefish дазваляе мастакам і распрацоўнікам праглядаць і абіраць значкі. Cuttlefish спрабуе паказаць значкі так, як яны выглядалі б у праграме. Можна фільтраваць па катэгорыі і назве. Cuttlefish - не інструмент агульнага прызначэння, праграма створаная для мастакоў і распрацоўнікаў. Cuttlefish таксама мае ўбудову для Kate і KDevelop, якая выкарыстоўваецца для выбару значкоў.</p>
     <p xml:lang="bg">Cuttlefish позволява на дизайнерите и разработчиците да визуализират и да вземат икони. Cuttlefish се опитва да рендерира иконите точно както ще изглеждат в приложението. Тя позволява да се филтрира въз основа на категория и име. Cuttlefish не е инструмент с общо предназначение, но насочен към дизайнерите и разработчиците. Cuttlefish също така осигурява плъгин за Kate и KDevelop, който да се използва като инструмент за взимане на икона.</p>
     <p xml:lang="ca">El Cuttlefish permet als artistes i als desenvolupadors previsualitzar i seleccionar icones. El Cuttlefish intenta representar les icones exactament com es dibuixaran a l'aplicació. Permet filtrar segons la categoria i el nom. El Cuttlefish no és una eina d'utilitat general, sinó destinada als casos d'ús d'artistes i desenvolupadors. El Cuttlefish també proporciona un connector per al Kate i el KDevelop per a ser utilitzat com a selector d'icones.</p>
     <p xml:lang="ca-valencia">Cuttlefish permet als artistes i als desenvolupadors previsualitzar i seleccionar icones. Cuttlefish intenta representar les icones exactament com es dibuixaran en l'aplicació. Permet filtrar segons la categoria i el nom. Cuttlefish no és una eina d'utilitat general, sinó destinada als casos d'ús d'artistes i desenvolupadors. Cuttlefish també proporciona un connector per a Kate i KDevelop per a ser utilitzat com a selector d'icones.</p>
