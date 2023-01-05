@@ -1,0 +1,260 @@
+# Zmicier <zmicerturok@gmail.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-12-10 00:47+0000\n"
+"PO-Revision-Date: 2023-01-04 10:03\n"
+"Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
+"Language-Team: Belarusian\n"
+"Language: be_BY\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || n%10>=5 && n%10<=9 || n"
+"%100>=11 && n%100<=14 ? 2 : 3);\n"
+"X-Generator: Lokalize 22.12.0\n"
+"X-Crowdin-Project: 86ff119b1606fcaa910d6b44fc14b611\n"
+"X-Crowdin-Project-ID: 127\n"
+"X-Crowdin-Language: be\n"
+"X-Crowdin-File: /main/be/plasma-sdk/plasma_shell_org.kde.plasmoidviewershell."
+"po\n"
+"X-Crowdin-File-ID: 8952\n"
+
+#: contents/applet/AppletError.qml:40
+msgid "Sorry! There was an error loading %1."
+msgstr "Выбачайце! Не ўдалося загрузіць %1."
+
+#: contents/applet/AppletError.qml:48
+msgid "Copy Error Details to Clipboard"
+msgstr "Скапіяваць падрабязнасці памылкі буфер абмену"
+
+#: contents/applet/CompactApplet.qml:70
+msgid "Open %1"
+msgstr "Адкрыць %1"
+
+#: contents/configuration/AboutPlugin.qml:20
+#: contents/configuration/AppletConfiguration.qml:248
+msgid "About"
+msgstr "Пра праграму"
+
+#: contents/configuration/AboutPlugin.qml:46
+msgid "Send an email to %1"
+msgstr "Адправіць электронны ліст да %1"
+
+#: contents/configuration/AboutPlugin.qml:95
+msgid "Copyright"
+msgstr "Аўтарскія правы"
+
+#: contents/configuration/AboutPlugin.qml:115
+msgid "License:"
+msgstr "Ліцэнзія:"
+
+#: contents/configuration/AboutPlugin.qml:128
+msgid "Authors"
+msgstr "Стваральнікі"
+
+#: contents/configuration/AboutPlugin.qml:138
+msgid "Credits"
+msgstr "Падзякі"
+
+#: contents/configuration/AboutPlugin.qml:149
+msgid "Translators"
+msgstr "Перакладчыкі"
+
+#: contents/configuration/AppletConfiguration.qml:56
+msgid "Keyboard Shortcuts"
+msgstr "Спалучэнні клавіш"
+
+#: contents/configuration/AppletConfiguration.qml:296
+msgid "Apply Settings"
+msgstr "Ужыць налады"
+
+#: contents/configuration/AppletConfiguration.qml:297
+msgid ""
+"The settings of the current module have changed. Do you want to apply the "
+"changes or discard them?"
+msgstr ""
+"Налады бягучага модуля змяніліся.\n"
+"Хочаце ўжыць змены ці адкінуць іх?"
+
+#: contents/configuration/AppletConfiguration.qml:327
+msgid "OK"
+msgstr "Добра"
+
+#: contents/configuration/AppletConfiguration.qml:335
+msgid "Apply"
+msgstr "Ужыць"
+
+#: contents/configuration/AppletConfiguration.qml:341
+msgid "Cancel"
+msgstr "Скасаваць"
+
+#: contents/configuration/ConfigCategoryDelegate.qml:28
+msgid "Open configuration page"
+msgstr "Адкрыць старонку канфігурацыі"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:19
+msgid "Left-Button"
+msgstr "Левая кнопка"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:20
+msgid "Right-Button"
+msgstr "Правая кнопка"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:21
+msgid "Middle-Button"
+msgstr "Сярэдняя кнопка"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:22
+msgid "Back-Button"
+msgstr "Кнопка \"Назад\""
+
+#: contents/configuration/ConfigurationContainmentActions.qml:23
+msgid "Forward-Button"
+msgstr "Кнопка \"Наперад\""
+
+#: contents/configuration/ConfigurationContainmentActions.qml:25
+msgid "Vertical-Scroll"
+msgstr "Вертыкальнае пракручванне"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:26
+msgid "Horizontal-Scroll"
+msgstr "Гарызантальнае пракручванне"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:28
+msgid "Shift"
+msgstr "Shift"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:29
+msgid "Ctrl"
+msgstr "Ctrl"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:30
+msgid "Alt"
+msgstr "Alt"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:31
+msgid "Meta"
+msgstr "Meta"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:73
+msgctxt "Concatenation sign for shortcuts, e.g. Ctrl+Shift"
+msgid "+"
+msgstr "+"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:153
+#: contents/configuration/MouseEventInputButton.qml:15
+msgid "Add Action"
+msgstr "Дадаць дзеянне"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:27
+msgid "Appearance"
+msgstr "Выгляд"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:69
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "Змена макета абмежаваная сістэмным адміністратарам"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:84
+msgid "Layout:"
+msgstr "Макет:"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+msgid "Wallpaper Type:"
+msgstr "Тып шпалер:"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:116
+msgid "Get New Plugins..."
+msgstr "Атрымаць новыя ўбудовы..."
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:128
+msgid "Layout changes must be applied before other changes can be made"
+msgstr "Змены макета неабходна ўжыць да іншых зменаў"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+msgid "Apply now"
+msgstr "Ужыць зараз"
+
+#: contents/configuration/ConfigurationShortcuts.qml:18
+msgid "Shortcuts"
+msgstr "Спалучэнні клавіш"
+
+#: contents/configuration/ConfigurationShortcuts.qml:28
+msgid "This shortcut will activate the applet as though it had been clicked."
+msgstr ""
+"Гэтае спалучэнне клавіш будзе актываваць аплет, як быццам бы па ім "
+"пстрыкнулі."
+
+#: contents/configuration/ContainmentConfiguration.qml:33
+msgid "Wallpaper"
+msgstr "Шпалеры"
+
+#: contents/configuration/ContainmentConfiguration.qml:38
+msgid "Mouse Actions"
+msgstr "Дзеянні мышы"
+
+#: contents/configuration/MouseEventInputButton.qml:22
+msgid "Input Here"
+msgstr "Увядзіце тут"
+
+#: contents/views/SdkButtons.qml:47
+msgid "FormFactors"
+msgstr "Формфактары"
+
+#: contents/views/SdkButtons.qml:55
+msgid "Planar"
+msgstr "Плоскі"
+
+#: contents/views/SdkButtons.qml:59
+msgid "Vertical"
+msgstr "Вертыкальны"
+
+#: contents/views/SdkButtons.qml:63
+msgid "Horizontal"
+msgstr "Гарызантальны"
+
+#: contents/views/SdkButtons.qml:67
+msgid "Mediacenter"
+msgstr "Медыяцэнтр"
+
+#: contents/views/SdkButtons.qml:71
+msgid "Application"
+msgstr "Праграма"
+
+#: contents/views/SdkButtons.qml:78
+msgid "Location"
+msgstr "Размяшчэнне"
+
+#: contents/views/SdkButtons.qml:92
+msgid "Floating"
+msgstr "Плавальная"
+
+#: contents/views/SdkButtons.qml:96
+msgid "Desktop"
+msgstr "Працоўны стол"
+
+#: contents/views/SdkButtons.qml:100
+msgid "Fullscreen"
+msgstr "На ўвесь экран"
+
+#: contents/views/SdkButtons.qml:104
+msgid "Top Edge"
+msgstr "Верхні край"
+
+#: contents/views/SdkButtons.qml:108
+msgid "Bottom Edge"
+msgstr "Ніжні край"
+
+#: contents/views/SdkButtons.qml:112
+msgid "Left Edge"
+msgstr "Левы край"
+
+#: contents/views/SdkButtons.qml:116
+msgid "Right Edge"
+msgstr "Правы край"
+
+#: contents/views/SdkButtons.qml:135
+msgid "Configure Containment"
+msgstr "Наладжванне абмежавання"

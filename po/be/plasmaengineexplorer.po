@@ -1,16 +1,12 @@
-# translation of plasmaengineexplorer.po to Belarusian
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
-#
 # Darafei Praliaskouski <komzpa@licei2.com>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: plasmaengineexplorer\n"
+"Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-05-24 00:45+0000\n"
-"PO-Revision-Date: 2007-11-13 21:15+0200\n"
+"PO-Revision-Date: 2023-01-04 10:03\n"
 "Last-Translator: Darafei Praliaskouski <komzpa@licei2.com>\n"
-"Language-Team: Belarusian <i18n@mova.org>\n"
+"Language-Team: Belarusian\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,47 +15,51 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || n%10>=5 && n%10<=9 || n"
 "%100>=11 && n%100<=14 ? 2 : 3);\n"
+"X-Crowdin-Project: 86ff119b1606fcaa910d6b44fc14b611\n"
+"X-Crowdin-Project-ID: 127\n"
+"X-Crowdin-Language: be\n"
+"X-Crowdin-File: /main/be/plasma-sdk/plasmaengineexplorer.po\n"
+"X-Crowdin-File-ID: 8535\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Дарафей Праляскоўскі"
+msgstr "Дарафей Праляскоўскі, Antikruk"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "komzpa@licei2.com"
+msgstr "komzpa@licei2. com, nashtlumach@gmail. com"
 
 #: engineexplorer.cpp:45
 #, kde-format
 msgid "Expand All"
-msgstr ""
+msgstr "Разгарнуць усё"
 
 #: engineexplorer.cpp:46
 #, kde-format
 msgid "Collapse All"
-msgstr ""
+msgstr "Згарнуць усё"
 
 #: engineexplorer.cpp:48 main.cpp:56
 #, kde-format
 msgid "Plasma Engine Explorer"
-msgstr "Аглядчык рухавіку Plasma"
+msgstr "Агляд рухавіка Plasma"
 
 #: engineexplorer.cpp:77
 #, kde-format
 msgid "Search"
-msgstr ""
+msgstr "Пошук"
 
 #: engineexplorer.cpp:180
-#, fuzzy, kde-format
-#| msgid "DataSource"
+#, kde-format
 msgid "DataSource/Key"
-msgstr "Крыніца дадзеных"
+msgstr "Крыніца даных / ключ"
 
 #: engineexplorer.cpp:180
 #, kde-format
 msgid "Type"
-msgstr ""
+msgstr "Тып"
 
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
 #: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
@@ -70,54 +70,55 @@ msgstr "Значэнне"
 #: engineexplorer.cpp:303
 #, kde-format
 msgid "Get associated service"
-msgstr ""
+msgstr "Атрымаць асацыяваную службу"
 
 #: engineexplorer.cpp:304
 #, kde-format
 msgid "Get associated model"
-msgstr ""
+msgstr "Атрымаць асацыяваную мадэль"
 
 #: engineexplorer.cpp:305
-#, fuzzy, kde-format
-#| msgid "update every "
+#, kde-format
 msgid "Update source now"
-msgstr "абнаўляць кожныя"
+msgstr "Абнавіць крыніцу"
 
 #: engineexplorer.cpp:306
-#, fuzzy, kde-format
-#| msgid "Request a datasource"
+#, kde-format
 msgid "Remove source"
-msgstr "Запытаць крыніцу дадзеных"
+msgstr "Выдаліць крыніцу"
 
 #: engineexplorer.cpp:328
 #, kde-format
 msgid "<1 bit>"
 msgid_plural "<%1 bits>"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "<%1 біт>"
+msgstr[1] "<%1 біты>"
+msgstr[2] "<%1 бітаў>"
+msgstr[3] "<%1 біты>"
 
 #: engineexplorer.cpp:337
 #, kde-format
 msgid "<1 byte>"
 msgid_plural "<%1 bytes>"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "<%1 байт>"
+msgstr[1] "<%1 байты>"
+msgstr[2] "<%1 байтаў>"
+msgstr[3] "<%1 байты>"
 
 #: engineexplorer.cpp:359
 #, kde-format
 msgid "<1 item>"
 msgid_plural "<%1 items>"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "<%1 элемент>"
+msgstr[1] "<%1 элементы>"
+msgstr[2] "<%1 элементаў>"
+msgstr[3] "<%1 элементы>"
 
 #: engineexplorer.cpp:439
 #, kde-format
 msgctxt "The user did a query to a dataengine and it returned empty data"
 msgid "<empty>"
-msgstr ""
+msgstr "<пуста>"
 
 #: engineexplorer.cpp:445
 #, kde-format
@@ -125,42 +126,43 @@ msgctxt ""
 "A the dataengine returned something that the humble view on the "
 "engineexplorer can't display, like a picture"
 msgid "<not displayable>"
-msgstr ""
+msgstr "<не паказваецца>"
 
 #: engineexplorer.cpp:499 engineexplorer.cpp:514
 #, kde-format
 msgctxt "Length of the list"
 msgid "<%1 item>"
 msgid_plural "<%1 items>"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "<%1 элемент>"
+msgstr[1] "<%1 элементы>"
+msgstr[2] "<%1 элементаў>"
+msgstr[3] "<%1 элементы>"
 
 #: engineexplorer.cpp:529
 #, kde-format
 msgctxt "Size of the map"
 msgid "<%1 pair>"
 msgid_plural "<%1 pairs>"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "<%1 спалучэнне>"
+msgstr[1] "<%1 спалучэнні>"
+msgstr[2] "<%1 спалучэнняў>"
+msgstr[3] "<%1 спалучэнні>"
 
 #. i18n: ectx: property (text), widget (KTitleWidget, m_title)
 #: engineexplorer.cpp:542 engineexplorer.ui:29
 #, kde-format
 msgid "Plasma DataEngine Explorer"
-msgstr "Аглядчык рухавіку дадзеных Plasma"
+msgstr "Агляд DataEngine Plasma"
 
 #: engineexplorer.cpp:546
-#, fuzzy, kde-format
-#| msgctxt "The name of the engine followed by the number of data sources"
-#| msgid "%1 - %2 data sources"
+#, kde-format
 msgctxt "The name of the engine followed by the number of data sources"
 msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
-msgstr[0] "%1 - %2 крыніцы дадзеных"
-msgstr[1] "%1 - %2 крыніцы дадзеных"
-msgstr[2] "%1 - %2 крыніцы дадзеных"
+msgstr[0] "Рухавік \"%1\" - %2 крыніца даных"
+msgstr[1] "Рухавік \"%1\" - %2 крыніцы даных"
+msgstr[2] "Рухавік \"%1\" - %2 крыніц даных"
+msgstr[3] "Рухавік \"%1\" - %2 крыніцы даных"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
 #: engineexplorer.ui:50
@@ -170,70 +172,64 @@ msgstr "Назва крыніцы"
 
 #. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
 #: engineexplorer.ui:75
-#, fuzzy, kde-format
-#| msgid "update every "
+#, kde-format
 msgid "Update on demand"
-msgstr "абнаўляць кожныя"
+msgstr "Абнаўленне па патрабаванні"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
 #: engineexplorer.ui:81
-#, fuzzy, kde-format
-#| msgid "ms"
+#, kde-format
 msgid " ms"
-msgstr "мс"
+msgstr " мс"
 
 #. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
 #: engineexplorer.ui:84
-#, fuzzy, kde-format
-#| msgid "update every "
+#, kde-format
 msgid "Update Every "
-msgstr "абнаўляць кожныя"
+msgstr "Абнаўляць кожныя "
 
 #. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
 #: engineexplorer.ui:100
-#, fuzzy, kde-format
-#| msgid "Request"
+#, kde-format
 msgid "Request Source"
-msgstr "Запытаць"
+msgstr "Запытванне крыніцы"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
 #: engineexplorer.ui:120
-#, fuzzy, kde-format
-#| msgid "Request a datasource"
+#, kde-format
 msgid "Service for source"
-msgstr "Запытаць крыніцу дадзеных"
+msgstr "Служба крыніцы"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
 #: engineexplorer.ui:133
-#, fuzzy, kde-format
-#| msgid "Request a datasource"
+#, kde-format
 msgid "Request Service for Source"
-msgstr "Запытаць крыніцу дадзеных"
+msgstr "Запытванне службы крыніцы"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
 msgid "Search Columns"
-msgstr ""
+msgstr "Слупкі пошуку"
 
 #: ktreeviewsearchline.cpp:425
 #, kde-format
 msgid "All Visible Columns"
-msgstr ""
+msgstr "Усе бачныя слупкі"
 
 #: ktreeviewsearchline.cpp:587
 #, kde-format
 msgid "S&earch:"
-msgstr ""
+msgstr "По&шук:"
 
 #: main.cpp:35
 #, kde-format
 msgid "No description available"
-msgstr ""
+msgstr "Няма даступнага апісання"
 
 #: main.cpp:58
 #, kde-format
 msgid "Explore the data published by Plasma DataEngines"
-msgstr "Праглядзець дадзеныя, выдаваемыя рухавікамі дадзеных Plasma"
+msgstr "Агляд даных ад Plasma DataEngines"
 
 #: main.cpp:60
 #, kde-format
@@ -243,52 +239,52 @@ msgstr "(c) 2006, Каманда KDE"
 #: main.cpp:61
 #, kde-format
 msgid "Aaron J. Seigo"
-msgstr "Аарон Дж. Сейга"
+msgstr "Aaron J. Seigo"
 
 #: main.cpp:61
 #, kde-format
 msgid "Author and maintainer"
-msgstr "Аўтар і адказны за выпуск"
+msgstr "Аўтар і суправаджальнік"
 
 #: main.cpp:68
 #, kde-format
 msgid "Displays a list of known engines and their descriptions"
-msgstr ""
+msgstr "Паказвае спіс вядомых рухавікоў і іх апісанне"
 
 #: main.cpp:69
 #, kde-format
 msgid "The desired height in pixels"
-msgstr ""
+msgstr "Пажаданая вышыня ў пікселях"
 
 #: main.cpp:70
 #, kde-format
 msgid "The desired width in pixels"
-msgstr ""
+msgstr "Пажаданая шырыня ў пікселях"
 
 #: main.cpp:71
 #, kde-format
 msgid "The desired x position in pixels"
-msgstr ""
+msgstr "Пажаданая пазіцыя па x у пікселях"
 
 #: main.cpp:72
 #, kde-format
 msgid "The desired y position in pixels"
-msgstr ""
+msgstr "Пажаданая пазіцыя па y у пікселях"
 
 #: main.cpp:73
 #, kde-format
 msgid "The data engine to use"
-msgstr ""
+msgstr "Рухавік даных для выкарыстання"
 
 #: main.cpp:74
 #, kde-format
 msgid "The source to request"
-msgstr ""
+msgstr "Крыніца для запытвання"
 
 #: main.cpp:75
 #, kde-format
 msgid "Update interval in milliseconds"
-msgstr ""
+msgstr "Інтэрвал абнаўлення ў мілісекундах"
 
 #: main.cpp:77
 #, kde-format
@@ -296,12 +292,14 @@ msgid ""
 "Only show engines associated with the parent application; maps to the X-KDE-"
 "ParentApp entry in the DataEngine's .desktop file."
 msgstr ""
+"Паказваць толькі рухавікі, звязаныя з бацькоўскай праграмай; супастаўляецца "
+"з запісам X-KDE-ParentApp у файле .desktop DataEngine."
 
 #: modelviewer.cpp:85 serviceviewer.cpp:51
 #, kde-format
 msgctxt "Plasma engine with unknown name"
 msgid "Unknown"
-msgstr ""
+msgstr "Невядома"
 
 #: modelviewer.cpp:98
 #, kde-format
@@ -309,23 +307,25 @@ msgid ""
 "No valid model was returned. Verify that a model is available for this "
 "source."
 msgstr ""
+"Не вярнулася сапраўднай мадэлі. Пераканайцеся, што мадэль даступная для "
+"гэтай крыніцы."
 
 #: modelviewer.cpp:103
 #, kde-format
 msgctxt "%1 is a Plasma dataengine name"
 msgid "%1 Model Explorer"
-msgstr ""
+msgstr "Агляд мадэляў %1"
 
 #: serviceviewer.cpp:27
 #, kde-format
 msgid "Start Operation"
-msgstr ""
+msgstr "Пачаць аперацыю"
 
 #: serviceviewer.cpp:52
 #, kde-format
 msgctxt "Plasma service with unknown name"
 msgid "Unknown"
-msgstr ""
+msgstr "Невядома"
 
 #: serviceviewer.cpp:67
 #, kde-format
@@ -333,24 +333,26 @@ msgid ""
 "No valid service was returned. Verify that a service is available for this "
 "source."
 msgstr ""
+"Не вярнулася сапраўднай службы. Пераканайцеся, што служба даступная для "
+"гэтай крыніцы."
 
 #: serviceviewer.cpp:72
 #, kde-format
 msgctxt "%1 is a Plasma service name"
 msgid "%1 Service Explorer"
-msgstr ""
+msgstr "Агляд службаў %1"
 
 #: serviceviewer.cpp:75
 #, kde-format
 msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
-msgstr ""
+msgstr "Рухавік: <b>%1</b>; Крыніца: <b>%2</b>; Служба: <b>%3</b>"
 
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
 #: serviceviewer.cpp:151 serviceviewer.ui:73
 #, kde-format
 msgid "Key"
-msgstr "Ключ"
+msgstr "Клавіша"
 
 #: serviceviewer.cpp:185
 #, kde-format
@@ -358,16 +360,18 @@ msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> failed. <p>The error was: "
 "<b>'%3: %4'</b></p>"
 msgstr ""
+"Не ўдалося выканаць аперацыю <b>\"%1\"</b> з мэтай <b>\"%2\"</b>. "
+"<p>Памылка: <b>\"%3: %4\"</b></p>"
 
 #: serviceviewer.cpp:191 serviceviewer.cpp:204
 #, kde-format
 msgid "Operation Result"
-msgstr ""
+msgstr "Вынік аперацыі"
 
 #: serviceviewer.cpp:195
 #, kde-format
 msgid "No response from job."
-msgstr ""
+msgstr "Задача не адказвае."
 
 #: serviceviewer.cpp:199
 #, kde-format
@@ -375,31 +379,34 @@ msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> returned successfully. "
 "<p>The result was: <b>'%3'</b></p>"
 msgstr ""
+"Аперацыя <b>\"%1\"</b> з мэтай <b>\"%2\"</b> паспяхова завершаная. <p>Вынік: "
+"<b>\"%3: \"</b></p>"
 
 #: serviceviewer.cpp:226
 #, kde-format
 msgid "One active operation…"
 msgid_plural "%1 operations active…"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1 актыўная аперацыя…"
+msgstr[1] "%1 актыўныя аперацыі…"
+msgstr[2] "%1 актыўных аперацый…"
+msgstr[3] "%1 актыўныя аперацыі…"
 
 #. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
 #: serviceviewer.ui:39
 #, kde-format
 msgid "Opera&tion:"
-msgstr ""
+msgstr "&Аперацыя:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
 #: serviceviewer.ui:86
 #, kde-format
 msgid "Operation count"
-msgstr ""
+msgstr "Колькасць аперацый"
 
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
-msgstr ""
+msgstr "Рухавікі даных"
 
 #~ msgid "Form"
 #~ msgstr "Форма"
