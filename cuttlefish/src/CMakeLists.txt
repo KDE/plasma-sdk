@@ -1,9 +1,9 @@
 
 set(cuttlefish_SRCS
     main.cpp
-    iconmodel.cpp
-    colorschemes.cpp
-    sortfiltermodel.cpp
+    iconmodel.cpp iconmodel.h
+    colorschemes.cpp colorschemes.h
+    sortfiltermodel.cpp sortfiltermodel.h
     qml.qrc
 )
 

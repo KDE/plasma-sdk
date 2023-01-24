@@ -1,6 +1,6 @@
 set(plasmoidviewer_SRCS
     main.cpp
-    view.cpp
+    view.cpp view.h
 )
 
 add_executable(plasmoidviewer ${plasmoidviewer_SRCS})
