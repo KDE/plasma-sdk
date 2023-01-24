@@ -1,9 +1,9 @@
 set(plasmaengineexplorer_SRCS
-    engineexplorer.cpp engineexplorer.h
-    ktreeviewsearchline.cpp ktreeviewsearchline.h
+    engineexplorer.cpp
+    ktreeviewsearchline.cpp
     main.cpp
-    serviceviewer.cpp serviceviewer.h
-    modelviewer.cpp modelviewer.h
+    serviceviewer.cpp
+    modelviewer.cpp
 )
 
 ki18n_wrap_ui(plasmaengineexplorer_SRCS engineexplorer.ui serviceviewer.ui)

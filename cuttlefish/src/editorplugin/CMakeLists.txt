@@ -3,7 +3,7 @@ add_definitions(-DTRANSLATION_DOMAIN=\"cuttlefish_editorplugin\")
 include_directories( ${CMAKE_CURRENT_BINARY_DIR} )
 
 set(cuttlefishplugin_PART_SRCS
-    cuttlefishplugin.cpp cuttlefishplugin.h
+    cuttlefishplugin.cpp
 )
 
 add_library (cuttlefishplugin MODULE ${cuttlefishplugin_PART_SRCS})

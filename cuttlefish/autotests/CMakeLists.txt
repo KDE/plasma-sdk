@@ -5,7 +5,7 @@ find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED Test)
 
 include_directories(../src)
 
-ecm_add_test(iconmodeltest.cpp ../src/iconmodel.cpp ../src/iconmodel.h ../src/sortfiltermodel.cpp ../src/sortfiltermodel.h
+ecm_add_test(iconmodeltest.cpp ../src/iconmodel.cpp ../src/sortfiltermodel.cpp
    TEST_NAME iconmodeltest
    LINK_LIBRARIES
       Qt::Gui

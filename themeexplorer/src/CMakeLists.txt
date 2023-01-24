@@ -2,9 +2,9 @@
 
 set(plasmathemeexplorer_SRCS
     main.cpp
-    thememodel.cpp thememodel.h
-    themelistmodel.cpp themelistmodel.h
-    coloreditor.cpp coloreditor.h
+    thememodel.cpp
+    themelistmodel.cpp
+    coloreditor.cpp
 )
 
 add_executable(plasmathemeexplorer ${plasmathemeexplorer_SRCS})

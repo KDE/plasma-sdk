@@ -1,7 +1,7 @@
 set(lookandfeelexplorer_SRCS
     main.cpp
-    lnflogic.cpp lnflogic.h
-    lnflistmodel.cpp lnflistmodel.h
+    lnflogic.cpp
+    lnflistmodel.cpp
 )
 
 add_executable(lookandfeelexplorer ${lookandfeelexplorer_SRCS})
