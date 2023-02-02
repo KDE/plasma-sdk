@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Volkan Gezer <volkangezer@gmail.com>, 2022.
-# Emir SARI <emir_sari@icloud.com>, 2022.
+# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:47+0000\n"
-"PO-Revision-Date: 2022-11-14 14:12+0300\n"
+"PO-Revision-Date: 2023-02-01 14:05+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #: contents/applet/AppletError.qml:40
 msgid "Sorry! There was an error loading %1."
@@ -53,7 +53,7 @@ msgstr "Yazarlar"
 
 #: contents/configuration/AboutPlugin.qml:138
 msgid "Credits"
-msgstr "Teşekkürler"
+msgstr "Emeği Geçenler"
 
 #: contents/configuration/AboutPlugin.qml:149
 msgid "Translators"
