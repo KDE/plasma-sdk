@@ -350,12 +350,3 @@ msgstr "Explorador de temes del Plasma"
 #, kde-format
 msgid "The theme to open"
 msgstr "El tema a obrir"
-
-#~ msgid "New Theme..."
-#~ msgstr "Tema nou..."
-
-#~ msgid "Edit Colors..."
-#~ msgstr "Edita els colors..."
-
-#~ msgid "Ok"
-#~ msgstr "D'acord"
