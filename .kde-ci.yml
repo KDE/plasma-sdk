@@ -20,7 +20,6 @@ Dependencies:
     'frameworks/kjobwidgets': '@latest'
     'frameworks/kpackage': '@latest'
     'frameworks/kparts': '@latest'
-    'frameworks/kservice': '@latest'
     'frameworks/ktexteditor': '@latest'
     'frameworks/ktextwidgets': '@latest'
     'frameworks/kwidgetsaddons': '@latest'
