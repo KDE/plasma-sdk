@@ -6,11 +6,13 @@
 <refentry lang="&language;">
 <refentryinfo>
 <title
->Manual do Usuário do KDE</title>
+>Manual do usuário do plasmaengineexplorer</title>
 <date
->06/10/2010</date>
+>09/01/2917</date>
+<releaseinfo
+>Plasma 5.8</releaseinfo>
 <productname
->KDE</productname>
+>KDE Plasma</productname>
 </refentryinfo>
 
 <refmeta>
@@ -37,55 +39,63 @@
 >plasmaengineexplorer</command
 > <group choice="opt"
 ><option
+>-v, --version</option
+></group
+> <group choice="opt"
+><option
+>-h, --help</option
+></group
+> <group choice="opt"
+><option
 >--list</option
 ></group
 > <group choice="opt"
 ><option
 >--height</option
 > <replaceable
-> pixels</replaceable
+>pixels</replaceable
 ></group
 > <group choice="opt"
 ><option
 >--width</option
 > <replaceable
-> pixels</replaceable
+>pixels</replaceable
 ></group
 > <group choice="opt"
 ><option
 >-x</option
 > <replaceable
-> pixels</replaceable
+>pixels</replaceable
 ></group
 > <group choice="opt"
 ><option
 >-y</option
 > <replaceable
-> pixels</replaceable
+>pixels</replaceable
 ></group
 > <group choice="opt"
 ><option
 >--engine</option
 > <replaceable
-> motor de dados</replaceable
+>mecanismo de dados</replaceable
 ></group
 > <group choice="opt"
 ><option
 >--source</option
 > <replaceable
-> motor de dados</replaceable
+>mecanismo de dados</replaceable
 ></group
 > <group choice="opt"
 ><option
 >--interval</option
 > <replaceable
-> ms</replaceable
+>ms</replaceable
 ></group
 > <group choice="opt"
 ><option
 >--app</option
 > <replaceable
-> aplicação</replaceable
+>aplicativo</replaceable
 ></group
 > </cmdsynopsis>
 <cmdsynopsis
@@ -120,6 +130,26 @@
 >Opções</title>
 
 <variablelist>
+<varlistentry>
+<term
+><option
+>-v, --version</option
+></term>
+<listitem
+><para
+>Exibir informação de versão</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-h, --help</option
+></term>
+<listitem
+><para
+>Exibir esta ajuda.</para
+></listitem>
+</varlistentry>
 <varlistentry>
 <term
 ><option
@@ -222,7 +252,6 @@
 >Define o intervalo de atualização padrão das fontes solicitadas como sendo <parameter
 >tempo</parameter
 > milissegundos. Caso não seja definido, a fonte será atualizada sob demanda (para algumas fontes, ocorrerá quando dados novos estiverem disponíveis).</para>
-
 <para
 >Caso indique o <option
 >--source</option
