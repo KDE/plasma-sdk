@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2019-05-20 03:26+0200\n"
+"POT-Creation-Date: 2022-12-10 00:47+0000\n"
 "PO-Revision-Date: 2016-02-14 17:49+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -18,176 +18,266 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: contents/configuration/AppletConfiguration.qml:48
-msgid "Keyboard shortcuts"
+#: contents/applet/AppletError.qml:40
+msgid "Sorry! There was an error loading %1."
+msgstr ""
+
+#: contents/applet/AppletError.qml:48
+msgid "Copy Error Details to Clipboard"
+msgstr ""
+
+#: contents/applet/CompactApplet.qml:70
+msgid "Open %1"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:20
+#: contents/configuration/AppletConfiguration.qml:248
+msgid "About"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:46
+msgid "Send an email to %1"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:95
+msgid "Copyright"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:115
+msgid "License:"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:128
+msgid "Authors"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:138
+msgid "Credits"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:149
+msgid "Translators"
+msgstr ""
+
+#: contents/configuration/AppletConfiguration.qml:56
+#, fuzzy
+#| msgid "Keyboard shortcuts"
+msgid "Keyboard Shortcuts"
 msgstr "Prečice sa tastature"
 
 # >> @title:window
-#: contents/configuration/AppletConfiguration.qml:132
+#: contents/configuration/AppletConfiguration.qml:296
 msgid "Apply Settings"
 msgstr "Primeniti postavke?"
 
-#: contents/configuration/AppletConfiguration.qml:133
+#: contents/configuration/AppletConfiguration.qml:297
 msgid ""
 "The settings of the current module have changed. Do you want to apply the "
 "changes or discard them?"
 msgstr ""
 "Izmenjene su postavke tekućeg modula. Želite li da ih primenite ili odbacite?"
 
-#: contents/configuration/AppletConfiguration.qml:330
+#: contents/configuration/AppletConfiguration.qml:327
 msgid "OK"
 msgstr "U redu"
 
-#: contents/configuration/AppletConfiguration.qml:337
+#: contents/configuration/AppletConfiguration.qml:335
 msgid "Apply"
 msgstr "Primeni"
 
-#: contents/configuration/AppletConfiguration.qml:342
+#: contents/configuration/AppletConfiguration.qml:341
 msgid "Cancel"
 msgstr "Odustani"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:31
+#: contents/configuration/ConfigCategoryDelegate.qml:28
+msgid "Open configuration page"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentActions.qml:19
 msgid "Left-Button"
 msgstr "levo dugme"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:32
+#: contents/configuration/ConfigurationContainmentActions.qml:20
 msgid "Right-Button"
 msgstr "desno dugme"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:33
+#: contents/configuration/ConfigurationContainmentActions.qml:21
 msgid "Middle-Button"
 msgstr "srednje dugme"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:35
+#: contents/configuration/ConfigurationContainmentActions.qml:22
+#, fuzzy
+#| msgid "Left-Button"
+msgid "Back-Button"
+msgstr "levo dugme"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:23
+msgid "Forward-Button"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentActions.qml:25
 msgid "Vertical-Scroll"
 msgstr "uspravno klizanje"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:36
+#: contents/configuration/ConfigurationContainmentActions.qml:26
 msgid "Horizontal-Scroll"
 msgstr "vodoravno klizanje"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:38
+#: contents/configuration/ConfigurationContainmentActions.qml:28
 msgid "Shift"
 msgstr "Shift"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:39
+#: contents/configuration/ConfigurationContainmentActions.qml:29
 msgid "Ctrl"
 msgstr "Ctrl"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:40
+#: contents/configuration/ConfigurationContainmentActions.qml:30
 msgid "Alt"
 msgstr "Alt"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:41
+#: contents/configuration/ConfigurationContainmentActions.qml:31
 msgid "Meta"
 msgstr "Meta"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:116
-#: contents/configuration/MouseEventInputButton.qml:27
+#: contents/configuration/ConfigurationContainmentActions.qml:73
+msgctxt "Concatenation sign for shortcuts, e.g. Ctrl+Shift"
+msgid "+"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentActions.qml:153
+#: contents/configuration/MouseEventInputButton.qml:15
 msgid "Add Action"
 msgstr "Dodaj radnju"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:87
+#: contents/configuration/ConfigurationContainmentAppearance.qml:27
+msgid "Appearance"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:69
+msgid "Layout changes have been restricted by the system administrator"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:84
 msgid "Layout:"
 msgstr "Raspored:"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:108
-msgid "Layout cannot be changed whilst widgets are locked"
-msgstr "Raspored ne može da se izmeni dok su vidžeti zaključani"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:121
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
 msgid "Wallpaper Type:"
 msgstr "Tip tapeta:"
 
-#: contents/configuration/ConfigurationShortcuts.qml:41
-msgid ""
-"This shortcut will activate the applet: it will give the keyboard focus to "
-"it, and if the applet has a popup (such as the start menu), the popup will "
-"be open."
+#: contents/configuration/ConfigurationContainmentAppearance.qml:116
+msgid "Get New Plugins..."
 msgstr ""
-"Ova prečica će aktivirati aplet: daće mu fokus tastature i otvoriti iskakač "
-"(poput početnog menija), ako ga ima."
 
-#: contents/configuration/ContainmentConfiguration.qml:43
+#: contents/configuration/ConfigurationContainmentAppearance.qml:128
+msgid "Layout changes must be applied before other changes can be made"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#, fuzzy
+#| msgid "Apply"
+msgid "Apply now"
+msgstr "Primeni"
+
+#: contents/configuration/ConfigurationShortcuts.qml:18
+msgid "Shortcuts"
+msgstr ""
+
+#: contents/configuration/ConfigurationShortcuts.qml:28
+msgid "This shortcut will activate the applet as though it had been clicked."
+msgstr ""
+
+#: contents/configuration/ContainmentConfiguration.qml:33
 msgid "Wallpaper"
 msgstr "Tapet"
 
-#: contents/configuration/ContainmentConfiguration.qml:48
+#: contents/configuration/ContainmentConfiguration.qml:38
 msgid "Mouse Actions"
 msgstr "Radnje mišem"
 
-#: contents/configuration/MouseEventInputButton.qml:38
+#: contents/configuration/MouseEventInputButton.qml:22
 msgid "Input Here"
 msgstr "Unos ovde"
 
-#: contents/views/SdkButtons.qml:60
+#: contents/views/SdkButtons.qml:47
 msgid "FormFactors"
 msgstr "Podloge"
 
 # @item:inmenu FormFactors
-#: contents/views/SdkButtons.qml:68
+#: contents/views/SdkButtons.qml:55
 msgid "Planar"
 msgstr "ravanska"
 
 # @item:inmenu FormFactors
-#: contents/views/SdkButtons.qml:72
+#: contents/views/SdkButtons.qml:59
 msgid "Vertical"
 msgstr "uspravna"
 
 # @item:inmenu FormFactors
-#: contents/views/SdkButtons.qml:76
+#: contents/views/SdkButtons.qml:63
 msgid "Horizontal"
 msgstr "vodoravna"
 
 # @item:inmenu FormFactors
-#: contents/views/SdkButtons.qml:80
+#: contents/views/SdkButtons.qml:67
 msgid "Mediacenter"
 msgstr "medija centar"
 
 # @item:inmenu FormFactors
-#: contents/views/SdkButtons.qml:84
+#: contents/views/SdkButtons.qml:71
 msgid "Application"
 msgstr "program"
 
-#: contents/views/SdkButtons.qml:91
+#: contents/views/SdkButtons.qml:78
 msgid "Location"
 msgstr "Lokacija"
 
 # @item:inmenu Location
-#: contents/views/SdkButtons.qml:105
+#: contents/views/SdkButtons.qml:92
 msgid "Floating"
 msgstr "plutajuće"
 
 # @item:inmenu Location
-#: contents/views/SdkButtons.qml:109
+#: contents/views/SdkButtons.qml:96
 msgid "Desktop"
 msgstr "površ"
 
 # @item:inmenu Location
-#: contents/views/SdkButtons.qml:113
+#: contents/views/SdkButtons.qml:100
 msgid "Fullscreen"
 msgstr "ceo ekran"
 
 # @item:inmenu Location
-#: contents/views/SdkButtons.qml:117
+#: contents/views/SdkButtons.qml:104
 msgid "Top Edge"
 msgstr "gornja ivica"
 
 # @item:inmenu Location
-#: contents/views/SdkButtons.qml:121
+#: contents/views/SdkButtons.qml:108
 msgid "Bottom Edge"
 msgstr "donja ivica"
 
 # @item:inmenu Location
-#: contents/views/SdkButtons.qml:125
+#: contents/views/SdkButtons.qml:112
 msgid "Left Edge"
 msgstr "leva ivica"
 
 # @item:inmenu Location
-#: contents/views/SdkButtons.qml:129
+#: contents/views/SdkButtons.qml:116
 msgid "Right Edge"
 msgstr "desna ivica"
 
-#: contents/views/SdkButtons.qml:148
+#: contents/views/SdkButtons.qml:135
 msgid "Configure Containment"
 msgstr "Podesi sadržalac"
+
+#~ msgid "Layout cannot be changed whilst widgets are locked"
+#~ msgstr "Raspored ne može da se izmeni dok su vidžeti zaključani"
+
+#~ msgid ""
+#~ "This shortcut will activate the applet: it will give the keyboard focus "
+#~ "to it, and if the applet has a popup (such as the start menu), the popup "
+#~ "will be open."
+#~ msgstr ""
+#~ "Ova prečica će aktivirati aplet: daće mu fokus tastature i otvoriti "
+#~ "iskakač (poput početnog menija), ako ga ima."

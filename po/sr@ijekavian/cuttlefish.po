@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cuttlefish\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2020-03-12 03:53+0100\n"
+"POT-Creation-Date: 2022-09-08 00:49+0000\n"
 "PO-Revision-Date: 2017-05-07 22:20+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -18,151 +18,153 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: package/contents/ui/Actions.qml:31
+#: src/main.cpp:69
 #, kde-format
-msgid "Open icon with external program"
+msgid "Start with category"
+msgstr "Покрени са категоријом"
+
+#: src/main.cpp:69
+#, kde-format
+msgid "category"
+msgstr "категорија"
+
+#: src/main.cpp:72
+#, kde-format
+msgid "Start full-screen"
+msgstr "Покрени преко целог екрана"
+
+#: src/main.cpp:75
+#, kde-format
+msgid "Run in icon-picker mode"
+msgstr "Покрени у режиму бирача иконица"
+
+#: src/qml/Actions.qml:16
+#, kde-format
+msgid "Open with External Program"
 msgstr ""
 
-#: package/contents/ui/Actions.qml:36
+#: src/qml/Actions.qml:21
 #, kde-format
-msgid "Insert icon name"
+msgid "Open Containing Folder"
+msgstr ""
+
+#: src/qml/Actions.qml:26
+#, fuzzy, kde-format
+#| msgid "Insert icon name"
+msgid "Insert Name"
 msgstr "Унесите име иконице"
 
-#: package/contents/ui/Actions.qml:36
-#, kde-format
-msgid "Copy icon name to clipboard"
+#: src/qml/Actions.qml:26
+#, fuzzy, kde-format
+#| msgid "Copy icon name to clipboard"
+msgid "Copy Name to Clipboard"
 msgstr "Копирај име иконице у клипборд"
 
-#: package/contents/ui/Actions.qml:40
+#: src/qml/Actions.qml:30
 #, fuzzy, kde-format
 #| msgid "Copy icon name to clipboard"
 msgid "Icon name copied to clipboard"
 msgstr "Копирај име иконице у клипборд"
 
-#: package/contents/ui/Actions.qml:46
+#: src/qml/Actions.qml:36
 #, kde-format
-msgid "Create screenshot of icon with..."
+msgid "Take Screenshot…"
 msgstr ""
 
-#: package/contents/ui/Actions.qml:49
+#: src/qml/Actions.qml:39
 #, kde-format
 msgid "Breeze Colors"
 msgstr ""
 
-#: package/contents/ui/Actions.qml:53
+#: src/qml/Actions.qml:43
 #, kde-format
 msgid "Breeze Dark Colors"
 msgstr ""
 
-#: package/contents/ui/Actions.qml:58 package/contents/ui/GlobalMenuBar.qml:50
+#: src/qml/Actions.qml:47 src/qml/GlobalMenuBar.qml:35
 #, kde-format
 msgid "Breeze (Normal) and Breeze Dark"
 msgstr ""
 
-#: package/contents/ui/Actions.qml:62 package/contents/ui/GlobalMenuBar.qml:38
+#: src/qml/Actions.qml:51 src/qml/GlobalMenuBar.qml:23
 #, kde-format
 msgid "Active Color Scheme"
 msgstr ""
 
-#: package/contents/ui/Actions.qml:66
+#: src/qml/Actions.qml:56
 #, kde-format
-msgid "View icon in other themes"
+msgid "View in Other Icon Themes"
 msgstr ""
 
-#: package/contents/ui/GlobalMenuBar.qml:34
+#: src/qml/GlobalMenuBar.qml:19
 #, fuzzy, kde-format
 #| msgid "Filename:"
 msgid "File"
 msgstr "Име фајла:"
 
-#: package/contents/ui/GlobalMenuBar.qml:36
+#: src/qml/GlobalMenuBar.qml:21
 #, kde-format
-msgid "Export Montage with Color Scheme..."
+msgid "Export Montage with Color Scheme…"
 msgstr ""
 
-#: package/contents/ui/GlobalMenuBar.qml:42
+#: src/qml/GlobalMenuBar.qml:27
 #, kde-format
 msgid "Breeze (Normal)"
 msgstr ""
 
-#: package/contents/ui/GlobalMenuBar.qml:46
+#: src/qml/GlobalMenuBar.qml:31
 #, kde-format
 msgid "Breeze Dark"
 msgstr ""
 
-#: package/contents/ui/GlobalMenuBar.qml:57
+#: src/qml/GlobalMenuBar.qml:42
 #, kde-format
 msgid "Quit"
 msgstr ""
 
-#: package/contents/ui/GlobalMenuBar.qml:63
+#: src/qml/GlobalMenuBar.qml:48
 #, kde-format
 msgid "View"
 msgstr ""
 
-#: package/contents/ui/GlobalMenuBar.qml:66
+#: src/qml/GlobalMenuBar.qml:51
 #, kde-format
 msgid "Zoom In"
 msgstr ""
 
-#: package/contents/ui/GlobalMenuBar.qml:72
+#: src/qml/GlobalMenuBar.qml:57
 #, kde-format
 msgid "Zoom Out"
 msgstr ""
 
-#: package/contents/ui/Preview.qml:81
-#: package/contents/ui/ResponsivePreview.qml:52
+#: src/qml/Preview.qml:38 src/qml/ResponsivePreview.qml:37
 #, fuzzy, kde-format
 #| msgid "Filename:"
 msgid "File name:"
 msgstr "Име фајла:"
 
-#: package/contents/ui/Preview.qml:86
-#: package/contents/ui/ResponsivePreview.qml:57
+#: src/qml/Preview.qml:43 src/qml/ResponsivePreview.qml:42
 #, kde-format
 msgid "Category:"
 msgstr "Категорија:"
 
 # >> @label whether the icon is scalable
-#: package/contents/ui/Preview.qml:91
-#: package/contents/ui/ResponsivePreview.qml:62
+#: src/qml/Preview.qml:48 src/qml/ResponsivePreview.qml:47
 #, kde-format
 msgid "Scalable:"
 msgstr "Скалабилна:"
 
-#: package/contents/ui/Preview.qml:92
-#: package/contents/ui/ResponsivePreview.qml:63
+#: src/qml/Preview.qml:49 src/qml/ResponsivePreview.qml:48
 #, kde-format
 msgid "yes"
 msgstr "да"
 
-#: package/contents/ui/Preview.qml:92
-#: package/contents/ui/ResponsivePreview.qml:63
+#: src/qml/Preview.qml:49 src/qml/ResponsivePreview.qml:48
 #, kde-format
 msgid "no"
 msgstr "не"
 
-#: package/contents/ui/Tools.qml:118
+#: src/qml/Tools.qml:99
 #, kde-format
 msgid "Color scheme:"
 msgstr ""
-
-#: src/main.cpp:86
-#, kde-format
-msgid "Start with category"
-msgstr "Покрени са категоријом"
-
-#: src/main.cpp:86
-#, kde-format
-msgid "category"
-msgstr "категорија"
-
-#: src/main.cpp:90
-#, kde-format
-msgid "Start full-screen"
-msgstr "Покрени преко целог екрана"
-
-#: src/main.cpp:94
-#, kde-format
-msgid "Run in icon-picker mode"
-msgstr "Покрени у режиму бирача иконица"
