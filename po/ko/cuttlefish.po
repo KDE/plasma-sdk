@@ -85,7 +85,7 @@ msgstr "Breeze(일반) 및 어두운 Breeze"
 #: src/qml/Actions.qml:51 src/qml/GlobalMenuBar.qml:23
 #, kde-format
 msgid "Active Color Scheme"
-msgstr "활성 색 배열"
+msgstr "활성 색 구성표"
 
 #: src/qml/Actions.qml:56
 #, kde-format
@@ -160,7 +160,7 @@ msgstr "아니요"
 #: src/qml/Tools.qml:99
 #, kde-format
 msgid "Color scheme:"
-msgstr "색 배열:"
+msgstr "색 구성표:"
 
 #~ msgid "Create screenshot of icon with…"
 #~ msgstr "다음으로 아이콘 스크린샷 찍기…"
