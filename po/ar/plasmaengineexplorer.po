@@ -250,7 +250,7 @@ msgstr "إستكشف البيانات المنشورة بواسطة محركات
 #: main.cpp:60
 #, kde-format
 msgid "(c) 2006, The KDE Team"
-msgstr "(c) 2006, فريق كيدي"
+msgstr "(c) 2006, فريق كِيدِي"
 
 #: main.cpp:61
 #, kde-format
