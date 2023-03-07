@@ -154,6 +154,7 @@ Keywords[tr]=tasarım;simge;önizleme;sembol
 Keywords[uk]=design;icon;preview;symbol;дизайн;піктограма;іконка;перегляд;символ;
 Keywords[x-test]=xxdesignxx;xxiconxx;xxpreviewxx;xxsymbolxx;
 Keywords[zh_CN]=design;icon;preview;symbol;设计;图标;预览;符号;
+Keywords[zh_TW]=design;icon;preview;symbol;圖示;預覽;設計;符號;
 Exec=cuttlefish
 Icon=cuttlefish
 Type=Application
