@@ -12,11 +12,11 @@ class QStandardItem;
 
 #include <QDialog>
 
-#include <Plasma/DataEngine>
+#include <Plasma5Support/DataEngine>
 
 #include "ui_engineexplorer.h"
 
-namespace Plasma
+namespace Plasma5Support
 {
 class DataEngine;
 class PluginLoader;
@@ -40,7 +40,7 @@ public:
     static QString convertToString(const QVariant &value);
 
 public Q_SLOTS:
-    void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
+    void dataUpdated(const QString &source, const Plasma5Support::DataEngine::Data &data);
 
 private Q_SLOTS:
     void showEngine(const QString &engine);
@@ -53,7 +53,7 @@ private Q_SLOTS:
 
 private:
     void listEngines();
-    int showData(QStandardItem *parent, Plasma::DataEngine::Data data);
+    int showData(QStandardItem *parent, Plasma5Support::DataEngine::Data data);
     void showData(QStandardItem *parent, int row, const QString &key, const QVariant &value);
     int showContainerData(QStandardItem *parent, QStandardItem *current, int row, const char *typeName, const QList<QVariantMap> &list);
     int showContainerData(QStandardItem *parent, QStandardItem *current, int row, const char *typeName, const QVariantList &list);
@@ -62,11 +62,11 @@ private:
     void enableButtons(bool enable);
     void removeExtraRows(QStandardItem *parent, int preserve);
 
-    Plasma::PluginLoader *m_engineManager;
+    Plasma5Support::PluginLoader *m_engineManager;
     QStandardItemModel *m_dataModel;
     QString m_app;
     QString m_engineName;
-    Plasma::DataEngine *m_engine;
+    Plasma5Support::DataEngine *m_engine;
     int m_sourceCount;
     bool m_requestingSource;
     QPushButton *m_expandButton;

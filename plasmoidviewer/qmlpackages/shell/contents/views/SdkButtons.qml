@@ -7,8 +7,8 @@
 import QtQuick 2.1
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
-
+import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 Item {
     id: root
@@ -25,7 +25,7 @@ Item {
 
         PlasmaComponents.Button {
             id: refreshButton
-            iconSource: "view-refresh"
+            icon.name: "view-refresh"
             onClicked: {
                 var applet = containment.applets[0];
                 if (applet) {
@@ -38,7 +38,7 @@ Item {
         }
         PlasmaComponents.Button {
             id: konsoleButton
-            iconSource: "utilities-terminal"
+            icon.name: "utilities-terminal"
             visible: desktop.konsoleVisible
             onClicked: konsolePreviewer.visible = !konsolePreviewer.visible
         }
@@ -48,26 +48,26 @@ Item {
             onClicked: formFactorMenu.open()
         }
 
-        PlasmaComponents.ContextMenu {
+        PlasmaExtras.Menu {
             id: formFactorMenu
             visualParent: formFactorMenuButton
-            PlasmaComponents.MenuItem {
+            PlasmaExtras.MenuItem {
                 text: i18n("Planar")
                 onClicked: formFactor(PlasmaCore.Types.Planar)
             }
-            PlasmaComponents.MenuItem {
+            PlasmaExtras.MenuItem {
                 text: i18n("Vertical")
                 onClicked: formFactor(PlasmaCore.Types.Vertical)
             }
-            PlasmaComponents.MenuItem {
+            PlasmaExtras.MenuItem {
                 text: i18n("Horizontal")
                 onClicked: formFactor(PlasmaCore.Types.Horizontal)
             }
-            PlasmaComponents.MenuItem {
+            PlasmaExtras.MenuItem {
                 text: i18n("Mediacenter")
                 onClicked: formFactor(PlasmaCore.Types.MediaCenter)
             }
-            PlasmaComponents.MenuItem {
+            PlasmaExtras.MenuItem {
                 text: i18n("Application")
                 onClicked: formFactor(PlasmaCore.Types.Application)
             }
@@ -81,38 +81,38 @@ Item {
 
         PlasmaComponents.Button {
             id: screenshotButton
-            iconSource: "ksnapshot"
+            icon.name: "ksnapshot"
             onClicked: requestScreenshot()
         }
 
-        PlasmaComponents.ContextMenu {
+        PlasmaExtras.Menu {
             id: locationMenu
             visualParent: locationMenuButton
-            PlasmaComponents.MenuItem {
+            PlasmaExtras.MenuItem {
                 text: i18n("Floating")
                 onClicked: location(PlasmaCore.Types.Floating)
             }
-            PlasmaComponents.MenuItem {
+            PlasmaExtras.MenuItem {
                 text: i18n("Desktop")
                 onClicked: location(PlasmaCore.Types.Desktop)
             }
-            PlasmaComponents.MenuItem {
+            PlasmaExtras.MenuItem {
                 text: i18n("Fullscreen")
                 onClicked: location(PlasmaCore.Types.FullScreen)
             }
-            PlasmaComponents.MenuItem {
+            PlasmaExtras.MenuItem {
                 text: i18n("Top Edge")
                 onClicked: location(PlasmaCore.Types.TopEdge)
             }
-            PlasmaComponents.MenuItem {
+            PlasmaExtras.MenuItem {
                 text: i18n("Bottom Edge")
                 onClicked: location(PlasmaCore.Types.BottomEdge)
             }
-            PlasmaComponents.MenuItem {
+            PlasmaExtras.MenuItem {
                 text: i18n("Left Edge")
                 onClicked: location(PlasmaCore.Types.LeftEdge)
             }
-            PlasmaComponents.MenuItem {
+            PlasmaExtras.MenuItem {
                 text: i18n("Right Edge")
                 onClicked: location(PlasmaCore.Types.RightEdge)
             }
@@ -120,7 +120,7 @@ Item {
 
         PlasmaComponents.Button {
             id: configButton
-            iconSource: "configure"
+            icon.name: "configure"
             onClicked: {
                 var applet = containment.applets[0];
                 if (applet) {
@@ -141,7 +141,7 @@ Item {
             }
         }
         PlasmaComponents.Button {
-            iconSource: "hide_table_row"
+            icon.name: "hide_table_row"
             onClicked: {
                 root.visible = false;
             }

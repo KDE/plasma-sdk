@@ -7,7 +7,7 @@
 import QtQuick 2.3
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.15 as QQC2
-import QtQuick.Dialogs 1.2
+import QtQuick.Dialogs
 import org.kde.kirigami 2.3 as Kirigami
 
 QQC2.Dialog {

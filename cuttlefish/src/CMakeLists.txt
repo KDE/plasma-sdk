@@ -14,11 +14,11 @@ target_link_libraries(cuttlefish
     Qt::Quick
     Qt::Gui
     Qt::Widgets # for QDirModel
-    KF5::Plasma
-    KF5::KIOWidgets
-    KF5::ConfigWidgets
-    KF5::I18n
-    KF5::IconThemes
+    KF6::Plasma
+    KF6::KIOWidgets
+    KF6::ConfigWidgets
+    KF6::I18n
+    KF6::IconThemes
     Qt::DBus
 )
 

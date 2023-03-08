@@ -10,9 +10,10 @@ ecm_add_test(iconmodeltest.cpp ../src/iconmodel.cpp ../src/sortfiltermodel.cpp
    LINK_LIBRARIES
       Qt::Gui
       Qt::Test
-      KF5::KIOWidgets
-      KF5::ConfigCore
-      KF5::IconThemes
-      KF5::Plasma
-      KF5::ConfigWidgets
+      KF6::KIOWidgets
+      KF6::ConfigCore
+      KF6::IconThemes
+      KF6::Service
+      KF6::Plasma
+      KF6::ConfigWidgets
 )

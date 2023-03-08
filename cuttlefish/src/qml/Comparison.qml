@@ -12,8 +12,8 @@ import org.kde.kirigami 2.8 as Kirigami
 
 Kirigami.OverlaySheet {
     property int comparisonSize
-    onSheetOpenChanged: {
-        if (sheetOpen) {
+    onVisibleChanged: {
+        if (visible) {
             comparisonSize = iconSize;
             comparisonSlider.value = cuttlefish.iconSizes.indexOf(comparisonSize);
         }
@@ -57,7 +57,7 @@ Kirigami.OverlaySheet {
             const availableWidth = cuttlefish.width - leftPadding - rightPadding;
             return availableWidth < comparisonGrid.count * cellWidth  ? availableWidth - availableWidth % cellWidth :  comparisonGrid.count * cellWidth
         }
-        model: sheetOpen ? iconModel.inOtherThemes(preview.iconName, comparisonSize) : []
+        model: visible ? iconModel.inOtherThemes(preview.iconName, comparisonSize) : []
         delegate: ColumnLayout {
             id: iconColumn
             width: comparisonGrid.cellWidth

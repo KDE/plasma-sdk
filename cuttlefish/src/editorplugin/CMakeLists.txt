@@ -9,11 +9,11 @@ set(cuttlefishplugin_PART_SRCS
 add_library (cuttlefishplugin MODULE ${cuttlefishplugin_PART_SRCS})
 
 target_link_libraries(cuttlefishplugin
-    KF5::TextEditor
-    KF5::IconThemes
-    KF5::I18n
+    KF6::TextEditor
+    KF6::IconThemes
+    KF6::I18n
+    KF6::Service
 )
 
 install(TARGETS cuttlefishplugin  DESTINATION ${KDE_INSTALL_PLUGINDIR}/ktexteditor)
 
-kcoreaddons_desktop_to_json (cuttlefishplugin cuttlefishplugin.desktop)

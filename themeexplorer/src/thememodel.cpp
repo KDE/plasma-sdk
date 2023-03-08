@@ -24,7 +24,6 @@
 #include <KConfigGroup>
 #include <KIO/Job>
 #include <KProcess>
-#include <KRun>
 
 #include <Plasma/Theme>
 

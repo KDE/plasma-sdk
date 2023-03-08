@@ -21,9 +21,9 @@
 #include <QAction>
 #include <QDateTime>
 
-#include <Plasma/PluginLoader>
+#include <Plasma5Support/PluginLoader>
 
-Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
+Q_DECLARE_METATYPE(Plasma5Support::DataEngine::Data)
 
 #include "modelviewer.h"
 #include "serviceviewer.h"
@@ -62,12 +62,12 @@ EngineExplorer::EngineExplorer(QWidget *parent)
 
     setupUi(mainWidget);
 
-    m_engineManager = Plasma::PluginLoader::self();
+    m_engineManager = Plasma5Support::PluginLoader::self();
     m_dataModel = new QStandardItemModel(this);
     const int size = m_title->style()->pixelMetric(QStyle::PM_LargeIconSize);
     m_title->setIconSize(QSize(size, size));
     m_title->setIcon(QIcon::fromTheme("plasma"));
-    connect(m_engines, SIGNAL(activated(QString)), this, SLOT(showEngine(QString)));
+    connect(m_engines, &QComboBox::textActivated, this, &EngineExplorer::showEngine);
     connect(m_sourceRequesterButton, SIGNAL(clicked(bool)), this, SLOT(requestSource()));
     connect(m_serviceRequesterButton, &QAbstractButton::clicked, this, &EngineExplorer::requestServiceForSource);
     m_data->setModel(m_dataModel);
@@ -133,7 +133,7 @@ void EngineExplorer::removeExtraRows(QStandardItem *parent, int preserve)
     }
 }
 
-void EngineExplorer::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
+void EngineExplorer::dataUpdated(const QString &source, const Plasma5Support::DataEngine::Data &data)
 {
     QList<QStandardItem *> items = m_dataModel->findItems(source, Qt::MatchExactly);
 
@@ -193,7 +193,8 @@ void EngineExplorer::showEngine(const QString &name)
         return;
     }
 
-    if (auto res = KPluginFactory::instantiatePlugin<Plasma::DataEngine>(KPluginMetaData::findPluginById(QStringLiteral("plasma/dataengine"), m_engineName))) {
+    if (auto res = KPluginFactory::instantiatePlugin<Plasma5Support::DataEngine>(
+            KPluginMetaData::findPluginById(QStringLiteral("plasma5support/dataengine"), m_engineName))) {
         m_engine = res.plugin;
     } else {
         m_engineName.clear();
@@ -203,8 +204,8 @@ void EngineExplorer::showEngine(const QString &name)
 
     // qDebug() << "showing engine " << m_engine->objectName();
     // qDebug() << "we have " << sources.count() << " data sources";
-    connect(m_engine, &Plasma::DataEngine::sourceAdded, this, &EngineExplorer::addSource);
-    connect(m_engine, &Plasma::DataEngine::sourceRemoved, this, &EngineExplorer::removeSource);
+    connect(m_engine, &Plasma5Support::DataEngine::sourceAdded, this, &EngineExplorer::addSource);
+    connect(m_engine, &Plasma5Support::DataEngine::sourceRemoved, this, &EngineExplorer::removeSource);
     const QStringList &sources = m_engine->sources();
     for (const QString &source : sources) {
         // qDebug() << "adding " << source;
@@ -314,7 +315,7 @@ void EngineExplorer::showDataContextMenu(const QPoint &point)
             viewer->show();
         } else if (activated == update) {
             m_engine->connectSource(source, this);
-            // Plasma::DataEngine::Data data = m_engine->query(source);
+            // Plasma5Support::DataEngine::Data data = m_engine->query(source);
         } else if (activated == remove) {
             removeSource(source);
         }
@@ -424,7 +425,7 @@ QString EngineExplorer::convertToString(const QVariant &value)
             return QString("%1").arg(value.value<QDateTime>().toString());
         }
 
-        Plasma::DataEngine::Data data = value.value<Plasma::DataEngine::Data>();
+        Plasma5Support::DataEngine::Data data = value.value<Plasma5Support::DataEngine::Data>();
         if (!data.isEmpty()) {
             QStringList result;
 
@@ -447,7 +448,7 @@ QString EngineExplorer::convertToString(const QVariant &value)
     }
 }
 
-int EngineExplorer::showData(QStandardItem *parent, Plasma::DataEngine::Data data)
+int EngineExplorer::showData(QStandardItem *parent, Plasma5Support::DataEngine::Data data)
 {
     int rowCount = 0;
     for (auto it = data.constBegin(); it != data.constEnd(); it++) {

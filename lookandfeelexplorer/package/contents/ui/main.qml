@@ -5,7 +5,6 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Controls 1.3
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.1
 
@@ -33,7 +32,7 @@ Kirigami.AbstractApplicationWindow {
         modal: true;
         collapsible: false;
         collapsed: false;
-        topContent: ComboBox {
+        topContent: QQC2.ComboBox {
             id: themeSelector
             Layout.fillWidth: true
             model: lnfLogic.lnfList

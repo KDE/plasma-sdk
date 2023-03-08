@@ -9,14 +9,14 @@ target_compile_definitions(plasmoidviewer PRIVATE -DPROJECT_VERSION="${PROJECT_V
 target_link_libraries(plasmoidviewer
     Qt::Quick
     Qt::DBus
-    KF5::DBusAddons
-    KF5::Plasma
-    KF5::PlasmaQuick
-    KF5::QuickAddons
-    KF5::I18n
-    KF5::ConfigCore
-    KF5::ConfigWidgets
-    KF5::Package
+    KF6::DBusAddons
+    KF6::Plasma
+    KF6::PlasmaQuick
+    KF6::QuickAddons
+    KF6::I18n
+    KF6::ConfigCore
+    KF6::ConfigWidgets
+    KF6::Package
 )
 
 install(TARGETS plasmoidviewer ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})

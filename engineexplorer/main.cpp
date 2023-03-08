@@ -11,7 +11,7 @@
 #include <KPluginMetaData>
 #include <QApplication>
 
-#include <Plasma/PluginLoader>
+#include <Plasma5Support/PluginLoader>
 #include <qcommandlineoption.h>
 #include <qcommandlineparser.h>
 
@@ -21,7 +21,7 @@ void listEngines()
 {
     int maxLen = 0;
     QMap<QString, QString> engines;
-    const auto plugins = Plasma::PluginLoader::self()->listDataEngineMetaData();
+    const auto plugins = Plasma5Support::PluginLoader::self()->listDataEngineMetaData();
     for (const KPluginMetaData &info : plugins) {
         int len = info.pluginId().length();
         if (len > maxLen) {

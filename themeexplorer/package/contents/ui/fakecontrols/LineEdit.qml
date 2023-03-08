@@ -5,7 +5,7 @@
  */
 
 import QtQuick 2.3
-import QtGraphicalEffects 1.0
+import Qt5Compat.GraphicalEffects
 
 Item {
     implicitWidth: parent.width/1.2

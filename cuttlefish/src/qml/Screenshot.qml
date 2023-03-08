@@ -7,7 +7,7 @@
 */
 
 import QtQuick 2.2
-import QtQuick.Dialogs 1.3
+import QtQuick.Dialogs
 
 import org.kde.kirigami 2.8 as Kirigami
 
@@ -49,9 +49,6 @@ Item {
 
     FileDialog {
         id: ssPicker
-        selectExisting: false
-        selectMultiple: false
-        selectFolder: false
         onAccepted: {
             selectedMontage.grabToImage(function(result) {
                 result.saveToFile(ssPicker.fileUrl.toString().slice(7))

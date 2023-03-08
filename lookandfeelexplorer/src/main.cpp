@@ -71,7 +71,7 @@ int main(int argc, char **argv)
     KAboutData aboutData(data.pluginId(), data.name(), data.version(), data.description(), KAboutLicense::byKeyword(data.license()).key());
 
     for (auto author : data.authors()) {
-        aboutData.addAuthor(author.name(), author.task(), author.emailAddress(), author.webAddress(), author.ocsUsername());
+        aboutData.addAuthor(author.name(), author.task(), author.emailAddress(), author.webAddress());
     }
 
     // The root is not a window?

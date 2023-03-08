@@ -17,14 +17,14 @@ target_link_libraries(plasmathemeexplorer
  Qt::Quick
  Qt::Widgets
  Qt::Xml
- KF5::Archive
- KF5::Declarative
- KF5::I18n
- KF5::Package
- KF5::Plasma
- KF5::KIOCore
- KF5::KIOWidgets
- KF5::QuickAddons
+ KF6::Archive
+ KF6::Declarative
+ KF6::I18n
+ KF6::Package
+ KF6::Plasma
+ KF6::KIOCore
+ KF6::KIOWidgets
+ KF6::QuickAddons
 )
 
 if (TARGET Qt6::Core5Compat)

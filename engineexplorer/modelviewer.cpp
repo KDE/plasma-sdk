@@ -13,9 +13,9 @@
 #include <QDebug>
 #include <QDialogButtonBox>
 
-#include <Plasma/DataEngine>
-#include <Plasma/Service>
-#include <Plasma/ServiceJob>
+#include <Plasma5Support/DataEngine>
+#include <Plasma5Support/Service>
+#include <Plasma5Support/ServiceJob>
 
 #include "engineexplorer.h"
 
@@ -70,7 +70,7 @@ QSize Delegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &
     return QSize(fm.boundingRect("M").width() * 50, fm.height() * (index.model()->roleNames().count() + 2));
 }
 
-ModelViewer::ModelViewer(Plasma::DataEngine *engine, const QString &source, QWidget *parent)
+ModelViewer::ModelViewer(Plasma5Support::DataEngine *engine, const QString &source, QWidget *parent)
     : QDialog(parent)
     , m_engine(engine)
     , m_source(source)

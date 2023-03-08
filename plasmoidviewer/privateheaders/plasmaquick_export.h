@@ -7,7 +7,7 @@
 #define PLASMAQUICK_NO_EXPORT
 #else
 #ifndef PLASMAQUICK_EXPORT
-#ifdef KF5PlasmaQuick_EXPORTS
+#ifdef KF6PlasmaQuick_EXPORTS
 /* We are building this library */
 #define PLASMAQUICK_EXPORT __attribute__((visibility("default")))
 #else

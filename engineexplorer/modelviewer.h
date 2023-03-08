@@ -15,10 +15,10 @@
 class QAbstractItemModel;
 class QTreeView;
 
-namespace Plasma
+namespace Plasma5Support
 {
 class DataEngine;
-} // namespace Plasma
+} // namespace Plasma5Support
 
 class Delegate : public QAbstractItemDelegate
 {
@@ -39,14 +39,14 @@ class ModelViewer : public QDialog
     Q_OBJECT
 
 public:
-    ModelViewer(Plasma::DataEngine *engine, const QString &m_source, QWidget *parent = nullptr);
+    ModelViewer(Plasma5Support::DataEngine *engine, const QString &m_source, QWidget *parent = nullptr);
     ~ModelViewer() override;
 
 private Q_SLOTS:
     void engineDestroyed();
 
 private:
-    Plasma::DataEngine *m_engine;
+    Plasma5Support::DataEngine *m_engine;
     QString m_source;
     QAbstractItemModel *m_model;
     QTreeView *m_view;

@@ -12,13 +12,13 @@
 #include <QDebug>
 #include <QDialogButtonBox>
 
-#include <Plasma/DataEngine>
-#include <Plasma/Service>
-#include <Plasma/ServiceJob>
+#include <Plasma5Support/DataEngine>
+#include <Plasma5Support/Service>
+#include <Plasma5Support/ServiceJob>
 
 #include "engineexplorer.h"
 
-ServiceViewer::ServiceViewer(Plasma::DataEngine *engine, const QString &source, QWidget *parent)
+ServiceViewer::ServiceViewer(Plasma5Support::DataEngine *engine, const QString &source, QWidget *parent)
     : QDialog(parent)
     , m_engine(engine)
     , m_service(nullptr)
@@ -136,7 +136,7 @@ void ServiceViewer::startOperation()
     }
 
     updateJobCount(1);
-    Plasma::ServiceJob *job = m_service->startOperationCall(desc);
+    Plasma5Support::ServiceJob *job = m_service->startOperationCall(desc);
     connect(job, &KJob::finished, this, &ServiceViewer::operationResult);
 }
 
@@ -173,7 +173,7 @@ void ServiceViewer::operationResult(KJob *j)
         return;
     }
 
-    Plasma::ServiceJob *job = qobject_cast<Plasma::ServiceJob *>(j);
+    Plasma5Support::ServiceJob *job = qobject_cast<Plasma5Support::ServiceJob *>(j);
     if (!job) {
         return;
     }

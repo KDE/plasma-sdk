@@ -12,12 +12,13 @@ add_executable(plasmaengineexplorer ${plasmaengineexplorer_SRCS})
 target_compile_definitions(plasmaengineexplorer PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
 
 target_link_libraries(plasmaengineexplorer
-    KF5::I18n
-    KF5::Completion
-    KF5::Plasma
-    KF5::I18n
-    KF5::ConfigCore
-    KF5::ConfigWidgets
+    KF6::I18n
+    KF6::Service
+    KF6::Completion
+    KF6::Plasma5Support
+    KF6::I18n
+    KF6::ConfigCore
+    KF6::ConfigWidgets
 )
 if (TARGET Qt6::Core5Compat)
     target_link_libraries(plasmaengineexplorer Qt6::Core5Compat)

@@ -13,18 +13,18 @@
 class KJob;
 class QPushButton;
 
-namespace Plasma
+namespace Plasma5Support
 {
 class DataEngine;
 class Service;
-} // namespace Plasma
+} // namespace Plasma5Support
 
 class ServiceViewer : public QDialog, public Ui::ServiceViewer
 {
     Q_OBJECT
 
 public:
-    ServiceViewer(Plasma::DataEngine *engine, const QString &m_source, QWidget *parent = nullptr);
+    ServiceViewer(Plasma5Support::DataEngine *engine, const QString &m_source, QWidget *parent = nullptr);
     ~ServiceViewer() override;
 
 private:
@@ -38,8 +38,8 @@ private Q_SLOTS:
     void engineDestroyed();
 
 private:
-    Plasma::DataEngine *m_engine;
-    Plasma::Service *m_service;
+    Plasma5Support::DataEngine *m_engine;
+    Plasma5Support::Service *m_service;
     QString m_source;
     int m_operationCount;
     QPushButton *m_operationButton;

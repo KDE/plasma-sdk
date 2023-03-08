@@ -4,8 +4,8 @@ project(plasma-sdk)
 set(PROJECT_VERSION "5.27.80")
 set(PROJECT_VERSION_MAJOR 5)
 
-set(QT_MIN_VERSION "5.15.2")
-set(KF5_MIN_VERSION "5.102.0")
+set(QT_MIN_VERSION "6.4")
+set(KF6_MIN_VERSION "5.240.0")
 set(KDE_COMPILERSETTINGS_LEVEL "5.82")
 
 set(CMAKE_CXX_STANDARD 17)
@@ -19,7 +19,7 @@ endif()
 
 ################# set KDE specific information #################
 
-find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
+find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
 
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
@@ -49,17 +49,17 @@ if (QT_MAJOR_VERSION STREQUAL "6")
 endif()
 
 
-find_package(KF5Kirigami2 ${KF5_MIN_VERSION})
-set_package_properties(KF5Kirigami2 PROPERTIES
+find_package(KF6Kirigami2 ${KF6_MIN_VERSION})
+set_package_properties(KF6Kirigami2 PROPERTIES
     DESCRIPTION "KDE's lightweight user interface framework for mobile and convergent applications"
     URL "https://techbase.kde.org/Kirigami"
     PURPOSE "Required by lookandfeelexplorer"
     TYPE RUNTIME
 )
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
+find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     Archive Completion Config ConfigWidgets CoreAddons DBusAddons Declarative I18n IconThemes
-    KIO Plasma PlasmaQuick TextEditor WidgetsAddons DocTools)
+    KIO Plasma Plasma5Support PlasmaQuick TextEditor WidgetsAddons DocTools)
 
 #########################################################################
 add_definitions(
