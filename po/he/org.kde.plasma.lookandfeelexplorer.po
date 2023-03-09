@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.kde.plasma.lookandfeelexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-15 00:48+0000\n"
+"POT-Creation-Date: 2023-03-09 02:16+0000\n"
 "PO-Revision-Date: 2017-05-23 12:57-0400\n"
 "Last-Translator: Elkana Bardugo <ttv200@gmail.com>\n"
 "Language-Team: Hebrew\n"
@@ -24,80 +24,80 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
 
-#: package/contents/ui/main.qml:31
+#: package/contents/ui/main.qml:30
 #, kde-format
 msgid "Look And Feel"
 msgstr "מראה ותחושה"
 
-#: package/contents/ui/main.qml:47
+#: package/contents/ui/main.qml:46
 #, fuzzy, kde-format
 #| msgid "New Theme"
 msgid "New Theme…"
 msgstr "ערכת נושא חדשה"
 
-#: package/contents/ui/main.qml:64
+#: package/contents/ui/main.qml:63
 #, kde-format
 msgid "Open Theme Folder"
 msgstr "פתיחת תיקית ערכת נושא"
 
-#: package/contents/ui/main.qml:93
+#: package/contents/ui/main.qml:92
 #, fuzzy, kde-format
 #| msgid "Plugin Name:"
 msgid "Plugin name:"
 msgstr "שם תוסף:"
 
-#: package/contents/ui/main.qml:96
+#: package/contents/ui/main.qml:95
 #, kde-format
 msgid "Name:"
 msgstr "שם:"
 
-#: package/contents/ui/main.qml:100 package/contents/ui/MetadataEditor.qml:76
+#: package/contents/ui/main.qml:99 package/contents/ui/MetadataEditor.qml:76
 #, kde-format
 msgid "Comment:"
 msgstr "הערה:"
 
-#: package/contents/ui/main.qml:104 package/contents/ui/MetadataEditor.qml:80
+#: package/contents/ui/main.qml:103 package/contents/ui/MetadataEditor.qml:80
 #, kde-format
 msgid "Author:"
 msgstr "מחבר:"
 
-#: package/contents/ui/main.qml:108 package/contents/ui/MetadataEditor.qml:84
+#: package/contents/ui/main.qml:107 package/contents/ui/MetadataEditor.qml:84
 #, kde-format
 msgid "Email:"
 msgstr "דוא\"ל:"
 
-#: package/contents/ui/main.qml:112 package/contents/ui/MetadataEditor.qml:88
+#: package/contents/ui/main.qml:111 package/contents/ui/MetadataEditor.qml:88
 #, kde-format
 msgid "Version:"
 msgstr "גרסה:"
 
-#: package/contents/ui/main.qml:116 package/contents/ui/MetadataEditor.qml:92
+#: package/contents/ui/main.qml:115 package/contents/ui/MetadataEditor.qml:92
 #, kde-format
 msgid "Website:"
 msgstr "אתר:"
 
-#: package/contents/ui/main.qml:120 package/contents/ui/MetadataEditor.qml:97
+#: package/contents/ui/main.qml:119 package/contents/ui/MetadataEditor.qml:97
 #, kde-format
 msgid "License:"
 msgstr "רישיון:"
 
-#: package/contents/ui/main.qml:124
+#: package/contents/ui/main.qml:123
 #, kde-format
 msgid "Layout from current Plasma setup"
 msgstr "פריסה מהתקנה הנוכחית של Plasma"
 
-#: package/contents/ui/main.qml:129
+#: package/contents/ui/main.qml:128
 #, kde-format
 msgid "Defaults from current setup"
 msgstr "ברירות מחדל מההגדרה הנוכחית"
 
-#: package/contents/ui/main.qml:150
+#: package/contents/ui/main.qml:149
 #, fuzzy, kde-format
 #| msgid "click to open an image"
 msgid "Click to open an image"
 msgstr "לחץ כדי לפתוח תמונה"
 
-#: package/contents/ui/main.qml:186
+#: package/contents/ui/main.qml:185
 #, kde-format
 msgid "Save"
 msgstr "שמירה"

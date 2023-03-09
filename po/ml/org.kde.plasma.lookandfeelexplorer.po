@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-15 00:48+0000\n"
+"POT-Creation-Date: 2023-03-09 02:16+0000\n"
 "PO-Revision-Date: 2019-12-12 22:14+0000\n"
 "Last-Translator: Vivek KJ Pazhedath <vivekkj2004@gmail.com>\n"
 "Language-Team: SMC <smc.org.in>\n"
@@ -23,80 +23,80 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "shijualexonline@gmail.com,snalledam@dataone.in,vivekkj2004@gmail.com"
 
-#: package/contents/ui/main.qml:31
+#: package/contents/ui/main.qml:30
 #, kde-format
 msgid "Look And Feel"
 msgstr "കെട്ടും മട്ടും"
 
-#: package/contents/ui/main.qml:47
+#: package/contents/ui/main.qml:46
 #, fuzzy, kde-format
 #| msgid "New Theme"
 msgid "New Theme…"
 msgstr "പുതിയ തീം"
 
-#: package/contents/ui/main.qml:64
+#: package/contents/ui/main.qml:63
 #, kde-format
 msgid "Open Theme Folder"
 msgstr "തീം അറ തുറക്കുക"
 
-#: package/contents/ui/main.qml:93
+#: package/contents/ui/main.qml:92
 #, fuzzy, kde-format
 #| msgid "Plugin Name:"
 msgid "Plugin name:"
 msgstr "പ്ലഗിൻ നാമം:"
 
-#: package/contents/ui/main.qml:96
+#: package/contents/ui/main.qml:95
 #, kde-format
 msgid "Name:"
 msgstr "പേര്:"
 
-#: package/contents/ui/main.qml:100 package/contents/ui/MetadataEditor.qml:76
+#: package/contents/ui/main.qml:99 package/contents/ui/MetadataEditor.qml:76
 #, kde-format
 msgid "Comment:"
 msgstr "അഭിപ്രായം:"
 
-#: package/contents/ui/main.qml:104 package/contents/ui/MetadataEditor.qml:80
+#: package/contents/ui/main.qml:103 package/contents/ui/MetadataEditor.qml:80
 #, kde-format
 msgid "Author:"
 msgstr "രചയിതാവ്:"
 
-#: package/contents/ui/main.qml:108 package/contents/ui/MetadataEditor.qml:84
+#: package/contents/ui/main.qml:107 package/contents/ui/MetadataEditor.qml:84
 #, kde-format
 msgid "Email:"
 msgstr "ഇമെയിൽ:"
 
-#: package/contents/ui/main.qml:112 package/contents/ui/MetadataEditor.qml:88
+#: package/contents/ui/main.qml:111 package/contents/ui/MetadataEditor.qml:88
 #, kde-format
 msgid "Version:"
 msgstr "പതിപ്പ്:"
 
-#: package/contents/ui/main.qml:116 package/contents/ui/MetadataEditor.qml:92
+#: package/contents/ui/main.qml:115 package/contents/ui/MetadataEditor.qml:92
 #, kde-format
 msgid "Website:"
 msgstr "വെബ്സൈറ്റ്:"
 
-#: package/contents/ui/main.qml:120 package/contents/ui/MetadataEditor.qml:97
+#: package/contents/ui/main.qml:119 package/contents/ui/MetadataEditor.qml:97
 #, kde-format
 msgid "License:"
 msgstr "ലൈസൻസ്:"
 
-#: package/contents/ui/main.qml:124
+#: package/contents/ui/main.qml:123
 #, kde-format
 msgid "Layout from current Plasma setup"
 msgstr "നിലവിലെ പ്ലാസ്മ സജ്ജീകരണത്തിൽ നിന്നുള്ള ലേ-ഔട്ട്"
 
-#: package/contents/ui/main.qml:129
+#: package/contents/ui/main.qml:128
 #, kde-format
 msgid "Defaults from current setup"
 msgstr "നിലവിലെ സജ്ജീകരണത്തിൽ നിന്നുള്ള സ്ഥിരസ്ഥിതികൾ"
 
-#: package/contents/ui/main.qml:150
+#: package/contents/ui/main.qml:149
 #, fuzzy, kde-format
 #| msgid "click to open an image"
 msgid "Click to open an image"
 msgstr "ഒരു ചിത്രം തുറക്കാൻ ക്ലിക്കുചെയ്യുക"
 
-#: package/contents/ui/main.qml:186
+#: package/contents/ui/main.qml:185
 #, kde-format
 msgid "Save"
 msgstr "സംരക്ഷിക്കുക"

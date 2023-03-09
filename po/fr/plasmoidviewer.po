@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoidviewer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-22 00:47+0000\n"
+"POT-Creation-Date: 2023-03-09 02:16+0000\n"
 "PO-Revision-Date: 2021-01-14 12:08+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -114,17 +114,17 @@ msgstr ""
 "Données qui devraient être passées à l'applet comme évènement « Données-"
 "Externes »"
 
-#: view.cpp:122
+#: view.cpp:123
 #, no-c-format, kde-format
 msgid "Applet %1 does not exist."
 msgstr "L'applet %1 n'existe pas.."
 
-#: view.cpp:139
+#: view.cpp:140
 #, no-c-format, kde-format
 msgid "Containment %1 does not exist."
 msgstr "Le conteneur %1 n'existe pas."
 
-#: view.cpp:316
+#: view.cpp:317
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Screenshot"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.kde.plasma.themeexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-13 00:47+0000\n"
+"POT-Creation-Date: 2023-03-09 02:16+0000\n"
 "PO-Revision-Date: 2021-05-26 09:06+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -35,128 +35,128 @@ msgstr "yurchor@ukr.net"
 msgid "Edit Colors"
 msgstr "Змінити кольори"
 
-#: package/contents/ui/ColorEditor.qml:69
+#: package/contents/ui/ColorEditor.qml:68
 #, kde-format
 msgid "Select Color"
 msgstr "Вибір кольору"
 
-#: package/contents/ui/ColorEditor.qml:111
+#: package/contents/ui/ColorEditor.qml:110
 #, kde-format
 msgid "Normal text"
 msgstr "Звичайний текст"
 
-#: package/contents/ui/ColorEditor.qml:117
+#: package/contents/ui/ColorEditor.qml:116
 #, kde-format
 msgid "Link"
 msgstr "Посилання"
 
-#: package/contents/ui/ColorEditor.qml:121
+#: package/contents/ui/ColorEditor.qml:120
 #, kde-format
 msgid "Visited Link"
 msgstr "Відвідане посилання"
 
-#: package/contents/ui/ColorEditor.qml:156
+#: package/contents/ui/ColorEditor.qml:155
 #, kde-format
 msgid "Complementary colors area:"
 msgstr "Область кольорів доповнення"
 
-#: package/contents/ui/ColorEditor.qml:171
+#: package/contents/ui/ColorEditor.qml:170
 #, kde-format
 msgid "Label"
 msgstr "Мітка"
 
-#: package/contents/ui/ColorEditor.qml:194
+#: package/contents/ui/ColorEditor.qml:193
 #, kde-format
 msgid "Text color:"
 msgstr "Колір тексту:"
 
-#: package/contents/ui/ColorEditor.qml:201
+#: package/contents/ui/ColorEditor.qml:200
 #, kde-format
 msgid "Background color:"
 msgstr "Колір тла:"
 
-#: package/contents/ui/ColorEditor.qml:208
+#: package/contents/ui/ColorEditor.qml:207
 #, kde-format
 msgid "Highlight color:"
 msgstr "Колір підсвічування:"
 
-#: package/contents/ui/ColorEditor.qml:215
+#: package/contents/ui/ColorEditor.qml:214
 #, kde-format
 msgid "Link color:"
 msgstr "Колір посилань:"
 
-#: package/contents/ui/ColorEditor.qml:222
+#: package/contents/ui/ColorEditor.qml:221
 #, kde-format
 msgid "Visited link color:"
 msgstr "Колір відвіданого посилання:"
 
-#: package/contents/ui/ColorEditor.qml:230
+#: package/contents/ui/ColorEditor.qml:229
 #, kde-format
 msgid "Button text color:"
 msgstr "Колір тексту на кнопках:"
 
-#: package/contents/ui/ColorEditor.qml:237
+#: package/contents/ui/ColorEditor.qml:236
 #, kde-format
 msgid "Button background color:"
 msgstr "Колір тла кнопок:"
 
-#: package/contents/ui/ColorEditor.qml:244
+#: package/contents/ui/ColorEditor.qml:243
 #, kde-format
 msgid "Button mouse over color:"
 msgstr "Колір кнопки при наведенні вказівника:"
 
-#: package/contents/ui/ColorEditor.qml:251
+#: package/contents/ui/ColorEditor.qml:250
 #, kde-format
 msgid "Button focus color:"
 msgstr "Колір фокусованої кнопки:"
 
-#: package/contents/ui/ColorEditor.qml:259
+#: package/contents/ui/ColorEditor.qml:258
 #, kde-format
 msgid "Text view text color:"
 msgstr "Колір тексту на текстовій панелі:"
 
-#: package/contents/ui/ColorEditor.qml:266
+#: package/contents/ui/ColorEditor.qml:265
 #, kde-format
 msgid "Text view background color:"
 msgstr "Колір тла тексту на текстовій панелі:"
 
-#: package/contents/ui/ColorEditor.qml:273
+#: package/contents/ui/ColorEditor.qml:272
 #, kde-format
 msgid "Text view mouse over color:"
 msgstr "Колір текстової панелі при наведенні вказівника:"
 
-#: package/contents/ui/ColorEditor.qml:280
+#: package/contents/ui/ColorEditor.qml:279
 #, kde-format
 msgid "Text view focus color:"
 msgstr "Колір фокусованої текстової панелі:"
 
-#: package/contents/ui/ColorEditor.qml:288
+#: package/contents/ui/ColorEditor.qml:287
 #, kde-format
 msgid "Complementary text color:"
 msgstr "Колір доповнення тексту:"
 
-#: package/contents/ui/ColorEditor.qml:295
+#: package/contents/ui/ColorEditor.qml:294
 #, kde-format
 msgid "Complementary background color:"
 msgstr "Колір доповнення тла:"
 
-#: package/contents/ui/ColorEditor.qml:302
+#: package/contents/ui/ColorEditor.qml:301
 #, kde-format
 msgid "Complementary mouse over color:"
 msgstr "Колір доповнення при наведенні вказівника:"
 
-#: package/contents/ui/ColorEditor.qml:309
+#: package/contents/ui/ColorEditor.qml:308
 #, kde-format
 msgid "Complementary focus color:"
 msgstr "Колір доповнення фокусування:"
 
-#: package/contents/ui/ColorEditor.qml:324
+#: package/contents/ui/ColorEditor.qml:323
 #: package/contents/ui/MetadataEditor.qml:137
 #, kde-format
 msgid "OK"
 msgstr "Гаразд"
 
-#: package/contents/ui/ColorEditor.qml:329
+#: package/contents/ui/ColorEditor.qml:328
 #: package/contents/ui/MetadataEditor.qml:143
 #, kde-format
 msgid "Cancel"

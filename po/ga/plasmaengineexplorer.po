@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdebase/plasmaengineexplorer.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-24 00:45+0000\n"
+"POT-Creation-Date: 2023-03-09 02:16+0000\n"
 "PO-Revision-Date: 2007-07-08 10:16-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -64,28 +64,28 @@ msgstr "Cineál"
 msgid "Value"
 msgstr "Luach"
 
-#: engineexplorer.cpp:303
+#: engineexplorer.cpp:304
 #, kde-format
 msgid "Get associated service"
 msgstr "Faigh seirbhís a bhaineann leis"
 
-#: engineexplorer.cpp:304
+#: engineexplorer.cpp:305
 #, fuzzy, kde-format
 #| msgid "Get associated service"
 msgid "Get associated model"
 msgstr "Faigh seirbhís a bhaineann leis"
 
-#: engineexplorer.cpp:305
+#: engineexplorer.cpp:306
 #, kde-format
 msgid "Update source now"
 msgstr "Nuashonraigh an fhoinse anois"
 
-#: engineexplorer.cpp:306
+#: engineexplorer.cpp:307
 #, kde-format
 msgid "Remove source"
 msgstr "Bain foinse"
 
-#: engineexplorer.cpp:328
+#: engineexplorer.cpp:329
 #, kde-format
 msgid "<1 bit>"
 msgid_plural "<%1 bits>"
@@ -95,7 +95,7 @@ msgstr[2] "<%1 ghiotán>"
 msgstr[3] "<%1 ngiotán>"
 msgstr[4] "<%1 giotán>"
 
-#: engineexplorer.cpp:337
+#: engineexplorer.cpp:338
 #, kde-format
 msgid "<1 byte>"
 msgid_plural "<%1 bytes>"
@@ -105,7 +105,7 @@ msgstr[2] "<%1 bheart>"
 msgstr[3] "<%1 mbeart>"
 msgstr[4] "<%1 beart>"
 
-#: engineexplorer.cpp:359
+#: engineexplorer.cpp:360
 #, kde-format
 msgid "<1 item>"
 msgid_plural "<%1 items>"
@@ -115,13 +115,13 @@ msgstr[2] "<%1 mhír>"
 msgstr[3] "<%1 mír>"
 msgstr[4] "<%1 mír>"
 
-#: engineexplorer.cpp:439
+#: engineexplorer.cpp:440
 #, kde-format
 msgctxt "The user did a query to a dataengine and it returned empty data"
 msgid "<empty>"
 msgstr "<folamh>"
 
-#: engineexplorer.cpp:445
+#: engineexplorer.cpp:446
 #, kde-format
 msgctxt ""
 "A the dataengine returned something that the humble view on the "
@@ -129,7 +129,7 @@ msgctxt ""
 msgid "<not displayable>"
 msgstr "<ní féidir taispeáint>"
 
-#: engineexplorer.cpp:499 engineexplorer.cpp:514
+#: engineexplorer.cpp:500 engineexplorer.cpp:515
 #, fuzzy, kde-format
 #| msgid "<1 item>"
 #| msgid_plural "<%1 items>"
@@ -142,7 +142,7 @@ msgstr[2] "<%1 mhír>"
 msgstr[3] "<%1 mír>"
 msgstr[4] "<%1 mír>"
 
-#: engineexplorer.cpp:529
+#: engineexplorer.cpp:530
 #, kde-format
 msgctxt "Size of the map"
 msgid "<%1 pair>"
@@ -154,12 +154,12 @@ msgstr[3] ""
 msgstr[4] ""
 
 #. i18n: ectx: property (text), widget (KTitleWidget, m_title)
-#: engineexplorer.cpp:542 engineexplorer.ui:29
+#: engineexplorer.cpp:543 engineexplorer.ui:29
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Taiscéalaí Inneall Sonraí Plasma"
 
-#: engineexplorer.cpp:546
+#: engineexplorer.cpp:547
 #, kde-format
 msgctxt "The name of the engine followed by the number of data sources"
 msgid "%1 Engine - 1 data source"

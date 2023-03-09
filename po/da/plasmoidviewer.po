@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoidviewer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-22 00:47+0000\n"
+"POT-Creation-Date: 2023-03-09 02:16+0000\n"
 "PO-Revision-Date: 2018-07-12 10:16+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -95,17 +95,17 @@ msgstr "Navnet på det tema som skallen skal bruge"
 msgid "Data that should be passed to the applet as 'externalData' event"
 msgstr "Data skal sendes til appletten som \"externalData\"-hændelse"
 
-#: view.cpp:122
+#: view.cpp:123
 #, no-c-format, kde-format
 msgid "Applet %1 does not exist."
 msgstr "Appletten %1 findes ikke."
 
-#: view.cpp:139
+#: view.cpp:140
 #, no-c-format, kde-format
 msgid "Containment %1 does not exist."
 msgstr "Beholderen %1 findes ikke."
 
-#: view.cpp:316
+#: view.cpp:317
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Screenshot"

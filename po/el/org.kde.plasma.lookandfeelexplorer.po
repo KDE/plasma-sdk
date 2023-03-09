@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-15 00:48+0000\n"
+"POT-Creation-Date: 2023-03-09 02:16+0000\n"
 "PO-Revision-Date: 2021-07-07 11:54+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -28,77 +28,77 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "dimkard@gmail.com"
 
-#: package/contents/ui/main.qml:31
+#: package/contents/ui/main.qml:30
 #, kde-format
 msgid "Look And Feel"
 msgstr "Εμφάνιση και αίσθηση"
 
-#: package/contents/ui/main.qml:47
+#: package/contents/ui/main.qml:46
 #, kde-format
 msgid "New Theme…"
 msgstr "Νέο θέμα…"
 
-#: package/contents/ui/main.qml:64
+#: package/contents/ui/main.qml:63
 #, kde-format
 msgid "Open Theme Folder"
 msgstr "Άνοιγμα φακέλου θέματος"
 
-#: package/contents/ui/main.qml:93
+#: package/contents/ui/main.qml:92
 #, kde-format
 msgid "Plugin name:"
 msgstr "Όνομα πρόσθετου:"
 
-#: package/contents/ui/main.qml:96
+#: package/contents/ui/main.qml:95
 #, kde-format
 msgid "Name:"
 msgstr "Όνομα:"
 
-#: package/contents/ui/main.qml:100 package/contents/ui/MetadataEditor.qml:76
+#: package/contents/ui/main.qml:99 package/contents/ui/MetadataEditor.qml:76
 #, kde-format
 msgid "Comment:"
 msgstr "Σχόλιο:"
 
-#: package/contents/ui/main.qml:104 package/contents/ui/MetadataEditor.qml:80
+#: package/contents/ui/main.qml:103 package/contents/ui/MetadataEditor.qml:80
 #, kde-format
 msgid "Author:"
 msgstr "Συγγραφέας:"
 
-#: package/contents/ui/main.qml:108 package/contents/ui/MetadataEditor.qml:84
+#: package/contents/ui/main.qml:107 package/contents/ui/MetadataEditor.qml:84
 #, kde-format
 msgid "Email:"
 msgstr "Email:"
 
-#: package/contents/ui/main.qml:112 package/contents/ui/MetadataEditor.qml:88
+#: package/contents/ui/main.qml:111 package/contents/ui/MetadataEditor.qml:88
 #, kde-format
 msgid "Version:"
 msgstr "Έκδοση:"
 
-#: package/contents/ui/main.qml:116 package/contents/ui/MetadataEditor.qml:92
+#: package/contents/ui/main.qml:115 package/contents/ui/MetadataEditor.qml:92
 #, kde-format
 msgid "Website:"
 msgstr "Ιστοχώρος:"
 
-#: package/contents/ui/main.qml:120 package/contents/ui/MetadataEditor.qml:97
+#: package/contents/ui/main.qml:119 package/contents/ui/MetadataEditor.qml:97
 #, kde-format
 msgid "License:"
 msgstr "Άδεια χρήσης:"
 
-#: package/contents/ui/main.qml:124
+#: package/contents/ui/main.qml:123
 #, kde-format
 msgid "Layout from current Plasma setup"
 msgstr "Διάταξη από την τρέχουσα ρύθμιση Plasma"
 
-#: package/contents/ui/main.qml:129
+#: package/contents/ui/main.qml:128
 #, kde-format
 msgid "Defaults from current setup"
 msgstr "Προκαθορισμένα από την τρέχουσα ρύθμιση"
 
-#: package/contents/ui/main.qml:150
+#: package/contents/ui/main.qml:149
 #, kde-format
 msgid "Click to open an image"
 msgstr "Κλικ για άνοιγμα εικόνας"
 
-#: package/contents/ui/main.qml:186
+#: package/contents/ui/main.qml:185
 #, kde-format
 msgid "Save"
 msgstr "Αποθήκευση"

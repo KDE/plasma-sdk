@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-10 00:47+0000\n"
+"POT-Creation-Date: 2023-03-09 02:16+0000\n"
 "PO-Revision-Date: 2016-02-14 17:49+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -31,7 +31,7 @@ msgid "Open %1"
 msgstr ""
 
 #: contents/configuration/AboutPlugin.qml:20
-#: contents/configuration/AppletConfiguration.qml:248
+#: contents/configuration/AppletConfiguration.qml:247
 msgid "About"
 msgstr ""
 
@@ -59,14 +59,14 @@ msgstr ""
 msgid "Translators"
 msgstr ""
 
-#: contents/configuration/AppletConfiguration.qml:56
+#: contents/configuration/AppletConfiguration.qml:55
 #, fuzzy
 #| msgid "Keyboard shortcuts"
 msgid "Keyboard Shortcuts"
 msgstr "Пречице са тастатуре"
 
 # >> @title:window
-#: contents/configuration/AppletConfiguration.qml:296
+#: contents/configuration/AppletConfiguration.qml:294
 msgid "Apply Settings"
 msgstr "Применити поставке?"
 
@@ -77,15 +77,15 @@ msgid ""
 msgstr ""
 "Измењене су поставке текућег модула. Желите ли да их примените или одбаците?"
 
-#: contents/configuration/AppletConfiguration.qml:327
+#: contents/configuration/AppletConfiguration.qml:328
 msgid "OK"
 msgstr "У реду"
 
-#: contents/configuration/AppletConfiguration.qml:335
+#: contents/configuration/AppletConfiguration.qml:336
 msgid "Apply"
 msgstr "Примени"
 
-#: contents/configuration/AppletConfiguration.qml:341
+#: contents/configuration/AppletConfiguration.qml:342
 msgid "Cancel"
 msgstr "Одустани"
 

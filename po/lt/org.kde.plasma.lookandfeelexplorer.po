@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-15 00:48+0000\n"
+"POT-Creation-Date: 2023-03-09 02:16+0000\n"
 "PO-Revision-Date: 2021-06-15 21:50+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt\n"
@@ -29,77 +29,77 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "<>"
 
-#: package/contents/ui/main.qml:31
+#: package/contents/ui/main.qml:30
 #, kde-format
 msgid "Look And Feel"
 msgstr "Išvaizda ir turinys"
 
-#: package/contents/ui/main.qml:47
+#: package/contents/ui/main.qml:46
 #, kde-format
 msgid "New Theme…"
 msgstr "Naujas apipavidalinimas…"
 
-#: package/contents/ui/main.qml:64
+#: package/contents/ui/main.qml:63
 #, kde-format
 msgid "Open Theme Folder"
 msgstr "Atverti apipavidalinimo aplanką"
 
-#: package/contents/ui/main.qml:93
+#: package/contents/ui/main.qml:92
 #, kde-format
 msgid "Plugin name:"
 msgstr "Priedo pavadinimas:"
 
-#: package/contents/ui/main.qml:96
+#: package/contents/ui/main.qml:95
 #, kde-format
 msgid "Name:"
 msgstr "Pavadinimas:"
 
-#: package/contents/ui/main.qml:100 package/contents/ui/MetadataEditor.qml:76
+#: package/contents/ui/main.qml:99 package/contents/ui/MetadataEditor.qml:76
 #, kde-format
 msgid "Comment:"
 msgstr "Komentaras:"
 
-#: package/contents/ui/main.qml:104 package/contents/ui/MetadataEditor.qml:80
+#: package/contents/ui/main.qml:103 package/contents/ui/MetadataEditor.qml:80
 #, kde-format
 msgid "Author:"
 msgstr "Autorius:"
 
-#: package/contents/ui/main.qml:108 package/contents/ui/MetadataEditor.qml:84
+#: package/contents/ui/main.qml:107 package/contents/ui/MetadataEditor.qml:84
 #, kde-format
 msgid "Email:"
 msgstr "El. paštas:"
 
-#: package/contents/ui/main.qml:112 package/contents/ui/MetadataEditor.qml:88
+#: package/contents/ui/main.qml:111 package/contents/ui/MetadataEditor.qml:88
 #, kde-format
 msgid "Version:"
 msgstr "Versija:"
 
-#: package/contents/ui/main.qml:116 package/contents/ui/MetadataEditor.qml:92
+#: package/contents/ui/main.qml:115 package/contents/ui/MetadataEditor.qml:92
 #, kde-format
 msgid "Website:"
 msgstr "Internetinė svetainė:"
 
-#: package/contents/ui/main.qml:120 package/contents/ui/MetadataEditor.qml:97
+#: package/contents/ui/main.qml:119 package/contents/ui/MetadataEditor.qml:97
 #, kde-format
 msgid "License:"
 msgstr "Licencija:"
 
-#: package/contents/ui/main.qml:124
+#: package/contents/ui/main.qml:123
 #, kde-format
 msgid "Layout from current Plasma setup"
 msgstr "Išdėstymas iš dabartinės Plasma sąrankos"
 
-#: package/contents/ui/main.qml:129
+#: package/contents/ui/main.qml:128
 #, kde-format
 msgid "Defaults from current setup"
 msgstr "Numatytosios reikšmės iš dabartinės sąrankos"
 
-#: package/contents/ui/main.qml:150
+#: package/contents/ui/main.qml:149
 #, kde-format
 msgid "Click to open an image"
 msgstr "Spustelėkite, norėdami atverti paveikslą"
 
-#: package/contents/ui/main.qml:186
+#: package/contents/ui/main.qml:185
 #, kde-format
 msgid "Save"
 msgstr "Įrašyti"

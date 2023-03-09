@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-24 00:45+0000\n"
+"POT-Creation-Date: 2023-03-09 02:16+0000\n"
 "PO-Revision-Date: 2022-05-22 13:29+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -64,54 +64,54 @@ msgstr "Вид"
 msgid "Value"
 msgstr "Стойност"
 
-#: engineexplorer.cpp:303
+#: engineexplorer.cpp:304
 #, kde-format
 msgid "Get associated service"
 msgstr "Получаване на свързаната услуга"
 
-#: engineexplorer.cpp:304
+#: engineexplorer.cpp:305
 #, kde-format
 msgid "Get associated model"
 msgstr "Вземете асоцииран модел"
 
-#: engineexplorer.cpp:305
+#: engineexplorer.cpp:306
 #, kde-format
 msgid "Update source now"
 msgstr "Обновяване на източника"
 
-#: engineexplorer.cpp:306
+#: engineexplorer.cpp:307
 #, kde-format
 msgid "Remove source"
 msgstr "Премахване на източника"
 
-#: engineexplorer.cpp:328
+#: engineexplorer.cpp:329
 #, kde-format
 msgid "<1 bit>"
 msgid_plural "<%1 bits>"
 msgstr[0] "<1 бит>"
 msgstr[1] "<%1 бита>"
 
-#: engineexplorer.cpp:337
+#: engineexplorer.cpp:338
 #, kde-format
 msgid "<1 byte>"
 msgid_plural "<%1 bytes>"
 msgstr[0] "<1 байт>"
 msgstr[1] "<%1 байта>"
 
-#: engineexplorer.cpp:359
+#: engineexplorer.cpp:360
 #, kde-format
 msgid "<1 item>"
 msgid_plural "<%1 items>"
 msgstr[0] "<1 елемент>"
 msgstr[1] "<%1 елемента>"
 
-#: engineexplorer.cpp:439
+#: engineexplorer.cpp:440
 #, kde-format
 msgctxt "The user did a query to a dataengine and it returned empty data"
 msgid "<empty>"
 msgstr "<празно>"
 
-#: engineexplorer.cpp:445
+#: engineexplorer.cpp:446
 #, kde-format
 msgctxt ""
 "A the dataengine returned something that the humble view on the "
@@ -119,7 +119,7 @@ msgctxt ""
 msgid "<not displayable>"
 msgstr "<не може да се покаже>"
 
-#: engineexplorer.cpp:499 engineexplorer.cpp:514
+#: engineexplorer.cpp:500 engineexplorer.cpp:515
 #, kde-format
 msgctxt "Length of the list"
 msgid "<%1 item>"
@@ -127,7 +127,7 @@ msgid_plural "<%1 items>"
 msgstr[0] "<1 елемент>"
 msgstr[1] "<%1 елемента>"
 
-#: engineexplorer.cpp:529
+#: engineexplorer.cpp:530
 #, kde-format
 msgctxt "Size of the map"
 msgid "<%1 pair>"
@@ -136,12 +136,12 @@ msgstr[0] "<%1 двойка>"
 msgstr[1] "<%1 двойки>"
 
 #. i18n: ectx: property (text), widget (KTitleWidget, m_title)
-#: engineexplorer.cpp:542 engineexplorer.ui:29
+#: engineexplorer.cpp:543 engineexplorer.ui:29
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Преглед на енджини за данни за Plasma"
 
-#: engineexplorer.cpp:546
+#: engineexplorer.cpp:547
 #, kde-format
 msgctxt "The name of the engine followed by the number of data sources"
 msgid "%1 Engine - 1 data source"

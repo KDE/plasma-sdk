@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-15 00:48+0000\n"
+"POT-Creation-Date: 2023-03-09 02:16+0000\n"
 "PO-Revision-Date: 2021-10-17 14:08+0200\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -27,77 +27,77 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kiszel.kristof@gmail.com"
 
-#: package/contents/ui/main.qml:31
+#: package/contents/ui/main.qml:30
 #, kde-format
 msgid "Look And Feel"
 msgstr "Megjelenés"
 
-#: package/contents/ui/main.qml:47
+#: package/contents/ui/main.qml:46
 #, kde-format
 msgid "New Theme…"
 msgstr "Új téma…"
 
-#: package/contents/ui/main.qml:64
+#: package/contents/ui/main.qml:63
 #, kde-format
 msgid "Open Theme Folder"
 msgstr "Témamappa megnyitása"
 
-#: package/contents/ui/main.qml:93
+#: package/contents/ui/main.qml:92
 #, kde-format
 msgid "Plugin name:"
 msgstr "Bővítménynév:"
 
-#: package/contents/ui/main.qml:96
+#: package/contents/ui/main.qml:95
 #, kde-format
 msgid "Name:"
 msgstr "Név:"
 
-#: package/contents/ui/main.qml:100 package/contents/ui/MetadataEditor.qml:76
+#: package/contents/ui/main.qml:99 package/contents/ui/MetadataEditor.qml:76
 #, kde-format
 msgid "Comment:"
 msgstr "Megjegyzés:"
 
-#: package/contents/ui/main.qml:104 package/contents/ui/MetadataEditor.qml:80
+#: package/contents/ui/main.qml:103 package/contents/ui/MetadataEditor.qml:80
 #, kde-format
 msgid "Author:"
 msgstr "Szerző:"
 
-#: package/contents/ui/main.qml:108 package/contents/ui/MetadataEditor.qml:84
+#: package/contents/ui/main.qml:107 package/contents/ui/MetadataEditor.qml:84
 #, kde-format
 msgid "Email:"
 msgstr "E-mail:"
 
-#: package/contents/ui/main.qml:112 package/contents/ui/MetadataEditor.qml:88
+#: package/contents/ui/main.qml:111 package/contents/ui/MetadataEditor.qml:88
 #, kde-format
 msgid "Version:"
 msgstr "Verzió:"
 
-#: package/contents/ui/main.qml:116 package/contents/ui/MetadataEditor.qml:92
+#: package/contents/ui/main.qml:115 package/contents/ui/MetadataEditor.qml:92
 #, kde-format
 msgid "Website:"
 msgstr "Weboldal:"
 
-#: package/contents/ui/main.qml:120 package/contents/ui/MetadataEditor.qml:97
+#: package/contents/ui/main.qml:119 package/contents/ui/MetadataEditor.qml:97
 #, kde-format
 msgid "License:"
 msgstr "Licenc:"
 
-#: package/contents/ui/main.qml:124
+#: package/contents/ui/main.qml:123
 #, kde-format
 msgid "Layout from current Plasma setup"
 msgstr "Elrendezés a jelenlegi Plasma telepítésből"
 
-#: package/contents/ui/main.qml:129
+#: package/contents/ui/main.qml:128
 #, kde-format
 msgid "Defaults from current setup"
 msgstr "A jelenlegi telepítés alapértelmezései"
 
-#: package/contents/ui/main.qml:150
+#: package/contents/ui/main.qml:149
 #, kde-format
 msgid "Click to open an image"
 msgstr "Kattintson kép megnyitásához"
 
-#: package/contents/ui/main.qml:186
+#: package/contents/ui/main.qml:185
 #, kde-format
 msgid "Save"
 msgstr "Mentés"

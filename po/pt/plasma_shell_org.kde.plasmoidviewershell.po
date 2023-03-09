@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-10 00:47+0000\n"
+"POT-Creation-Date: 2023-03-09 02:16+0000\n"
 "PO-Revision-Date: 2021-09-04 18:30+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -30,7 +30,7 @@ msgid "Open %1"
 msgstr "Abrir o %1"
 
 #: contents/configuration/AboutPlugin.qml:20
-#: contents/configuration/AppletConfiguration.qml:248
+#: contents/configuration/AppletConfiguration.qml:247
 msgid "About"
 msgstr "Acerca"
 
@@ -58,11 +58,11 @@ msgstr "Créditos"
 msgid "Translators"
 msgstr "Tradutores"
 
-#: contents/configuration/AppletConfiguration.qml:56
+#: contents/configuration/AppletConfiguration.qml:55
 msgid "Keyboard Shortcuts"
 msgstr "Atalhos do Teclado"
 
-#: contents/configuration/AppletConfiguration.qml:296
+#: contents/configuration/AppletConfiguration.qml:294
 msgid "Apply Settings"
 msgstr "Aplicar a Configuração"
 
@@ -74,15 +74,15 @@ msgstr ""
 "A configuração do módulo actual foi alterada. Deseja aplicar as alterações "
 "ou esquecê-las?"
 
-#: contents/configuration/AppletConfiguration.qml:327
+#: contents/configuration/AppletConfiguration.qml:328
 msgid "OK"
 msgstr "OK"
 
-#: contents/configuration/AppletConfiguration.qml:335
+#: contents/configuration/AppletConfiguration.qml:336
 msgid "Apply"
 msgstr "Aplicar"
 
-#: contents/configuration/AppletConfiguration.qml:341
+#: contents/configuration/AppletConfiguration.qml:342
 msgid "Cancel"
 msgstr "Cancelar"
 

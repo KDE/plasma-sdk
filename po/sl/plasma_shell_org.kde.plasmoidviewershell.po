@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-10 00:47+0000\n"
+"POT-Creation-Date: 2023-03-09 02:16+0000\n"
 "PO-Revision-Date: 2022-06-05 07:17+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -32,7 +32,7 @@ msgid "Open %1"
 msgstr "Odpri %1"
 
 #: contents/configuration/AboutPlugin.qml:20
-#: contents/configuration/AppletConfiguration.qml:248
+#: contents/configuration/AppletConfiguration.qml:247
 msgid "About"
 msgstr "O programu"
 
@@ -60,11 +60,11 @@ msgstr "Zasluge"
 msgid "Translators"
 msgstr "Prevajalci"
 
-#: contents/configuration/AppletConfiguration.qml:56
+#: contents/configuration/AppletConfiguration.qml:55
 msgid "Keyboard Shortcuts"
 msgstr "Bližnjice na tipkovnici"
 
-#: contents/configuration/AppletConfiguration.qml:296
+#: contents/configuration/AppletConfiguration.qml:294
 msgid "Apply Settings"
 msgstr "Uveljavi nastavitve"
 
@@ -76,15 +76,15 @@ msgstr ""
 "Nastavitve trenutnega modula so se spremenile. Ali želite spremembe "
 "uveljaviti ali zavreči?"
 
-#: contents/configuration/AppletConfiguration.qml:327
+#: contents/configuration/AppletConfiguration.qml:328
 msgid "OK"
 msgstr "V redu"
 
-#: contents/configuration/AppletConfiguration.qml:335
+#: contents/configuration/AppletConfiguration.qml:336
 msgid "Apply"
 msgstr "Uveljavi"
 
-#: contents/configuration/AppletConfiguration.qml:341
+#: contents/configuration/AppletConfiguration.qml:342
 msgid "Cancel"
 msgstr "Prekliči"
 

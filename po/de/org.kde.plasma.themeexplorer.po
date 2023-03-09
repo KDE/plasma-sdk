@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-13 00:47+0000\n"
+"POT-Creation-Date: 2023-03-09 02:16+0000\n"
 "PO-Revision-Date: 2022-07-14 00:39+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -30,128 +30,128 @@ msgstr "lueck@hube-lueck.de"
 msgid "Edit Colors"
 msgstr "Farben bearbeiten"
 
-#: package/contents/ui/ColorEditor.qml:69
+#: package/contents/ui/ColorEditor.qml:68
 #, kde-format
 msgid "Select Color"
 msgstr "Farbe auswählen"
 
-#: package/contents/ui/ColorEditor.qml:111
+#: package/contents/ui/ColorEditor.qml:110
 #, kde-format
 msgid "Normal text"
 msgstr "Normaler Text"
 
-#: package/contents/ui/ColorEditor.qml:117
+#: package/contents/ui/ColorEditor.qml:116
 #, kde-format
 msgid "Link"
 msgstr "Verknüpfung"
 
-#: package/contents/ui/ColorEditor.qml:121
+#: package/contents/ui/ColorEditor.qml:120
 #, kde-format
 msgid "Visited Link"
 msgstr "Besuchte Verknüpfung"
 
-#: package/contents/ui/ColorEditor.qml:156
+#: package/contents/ui/ColorEditor.qml:155
 #, kde-format
 msgid "Complementary colors area:"
 msgstr "Komplementärfarbenbereich:"
 
-#: package/contents/ui/ColorEditor.qml:171
+#: package/contents/ui/ColorEditor.qml:170
 #, kde-format
 msgid "Label"
 msgstr "Beschriftung"
 
-#: package/contents/ui/ColorEditor.qml:194
+#: package/contents/ui/ColorEditor.qml:193
 #, kde-format
 msgid "Text color:"
 msgstr "Textfarbe:"
 
-#: package/contents/ui/ColorEditor.qml:201
+#: package/contents/ui/ColorEditor.qml:200
 #, kde-format
 msgid "Background color:"
 msgstr "Hintergrundfarbe:"
 
-#: package/contents/ui/ColorEditor.qml:208
+#: package/contents/ui/ColorEditor.qml:207
 #, kde-format
 msgid "Highlight color:"
 msgstr "Farbe für Hervorhebungen:"
 
-#: package/contents/ui/ColorEditor.qml:215
+#: package/contents/ui/ColorEditor.qml:214
 #, kde-format
 msgid "Link color:"
 msgstr "Farbe für Verknüpfungen:"
 
-#: package/contents/ui/ColorEditor.qml:222
+#: package/contents/ui/ColorEditor.qml:221
 #, kde-format
 msgid "Visited link color:"
 msgstr "Farbe für besuchte Verknüpfungen:"
 
-#: package/contents/ui/ColorEditor.qml:230
+#: package/contents/ui/ColorEditor.qml:229
 #, kde-format
 msgid "Button text color:"
 msgstr "Farbe für Knopfbeschriftung:"
 
-#: package/contents/ui/ColorEditor.qml:237
+#: package/contents/ui/ColorEditor.qml:236
 #, kde-format
 msgid "Button background color:"
 msgstr "Farbe für Knopfhintergrund:"
 
-#: package/contents/ui/ColorEditor.qml:244
+#: package/contents/ui/ColorEditor.qml:243
 #, kde-format
 msgid "Button mouse over color:"
 msgstr "Knopffarbe bei Mausberührung:"
 
-#: package/contents/ui/ColorEditor.qml:251
+#: package/contents/ui/ColorEditor.qml:250
 #, kde-format
 msgid "Button focus color:"
 msgstr "Knopffarbe bei Aktivierung:"
 
-#: package/contents/ui/ColorEditor.qml:259
+#: package/contents/ui/ColorEditor.qml:258
 #, kde-format
 msgid "Text view text color:"
 msgstr "Textfarbe der Textansicht:"
 
-#: package/contents/ui/ColorEditor.qml:266
+#: package/contents/ui/ColorEditor.qml:265
 #, kde-format
 msgid "Text view background color:"
 msgstr "Hintergrundfarbe der Textansicht:"
 
-#: package/contents/ui/ColorEditor.qml:273
+#: package/contents/ui/ColorEditor.qml:272
 #, kde-format
 msgid "Text view mouse over color:"
 msgstr "Farbe der Textansicht bei Mausberührung:"
 
-#: package/contents/ui/ColorEditor.qml:280
+#: package/contents/ui/ColorEditor.qml:279
 #, kde-format
 msgid "Text view focus color:"
 msgstr "Farbe der Textansicht bei Aktivierung:"
 
-#: package/contents/ui/ColorEditor.qml:288
+#: package/contents/ui/ColorEditor.qml:287
 #, kde-format
 msgid "Complementary text color:"
 msgstr "Komplementäre Textfarbe:"
 
-#: package/contents/ui/ColorEditor.qml:295
+#: package/contents/ui/ColorEditor.qml:294
 #, kde-format
 msgid "Complementary background color:"
 msgstr "Komplementäre Hintergrundfarbe:"
 
-#: package/contents/ui/ColorEditor.qml:302
+#: package/contents/ui/ColorEditor.qml:301
 #, kde-format
 msgid "Complementary mouse over color:"
 msgstr "Komplementäre Farbe bei Mausberührung:"
 
-#: package/contents/ui/ColorEditor.qml:309
+#: package/contents/ui/ColorEditor.qml:308
 #, kde-format
 msgid "Complementary focus color:"
 msgstr "Komplementäre Farbe bei Aktivierung:"
 
-#: package/contents/ui/ColorEditor.qml:324
+#: package/contents/ui/ColorEditor.qml:323
 #: package/contents/ui/MetadataEditor.qml:137
 #, kde-format
 msgid "OK"
 msgstr "OK"
 
-#: package/contents/ui/ColorEditor.qml:329
+#: package/contents/ui/ColorEditor.qml:328
 #: package/contents/ui/MetadataEditor.qml:143
 #, kde-format
 msgid "Cancel"
