@@ -1,6 +1,13 @@
 {
     "KPlugin": {
         "Description": "Invokes Cuttlefish icon picker",
-        "Name": "Icon Picker"
+        "Description[ca]": "Invoca el selector d'icones Cuttlefish",
+        "Description[nl]": "Start de pictogramkiezer Cuttlefish",
+        "Description[x-test]": "xxInvokes Cuttlefish icon pickerxx",
+        "Name": "Icon Picker",
+        "Name[ca]": "Selector d'icones",
+        "Name[nl]": "Pictogramkiezer",
+        "Name[nn]": "Ikonveljar",
+        "Name[x-test]": "xxIcon Pickerxx"
     }
 }

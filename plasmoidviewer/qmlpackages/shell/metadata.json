@@ -3,14 +3,24 @@
         "Authors": [
             {
                 "Email": "mart@kde.org",
-                "Name": "Marco Martin"
+                "Name": "Marco Martin",
+                "Name[ca]": "Marco Martin",
+                "Name[nl]": "Marco Martin",
+                "Name[x-test]": "xxMarco Martinxx"
             }
         ],
         "Category": "",
         "Description": "PlasmoidViewer Shell",
+        "Description[ca]": "Intèrpret d'ordres del visualitzador de plasmoides",
+        "Description[nl]": "Shell van PlasmoidViewer",
+        "Description[x-test]": "xxPlasmoidViewer Shellxx",
         "Id": "org.kde.plasmoidviewershell",
         "License": "GPL-2.0+",
         "Name": "PlasmoidViewerShell",
+        "Name[ca]": "Intèrpret d'ordres del visualitzador de plasmoides",
+        "Name[nl]": "PlasmoidViewerShell",
+        "Name[nn]": "PlasmoidViewerShell",
+        "Name[x-test]": "xxPlasmoidViewerShellxx",
         "ServiceTypes": [
             "Plasma/Shell"
         ],
