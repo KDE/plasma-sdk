@@ -1,10 +1,12 @@
 {
     "KPlugin": {
         "Description": "Invokes Cuttlefish icon picker",
+        "Description[ca@valencia]": "Invoca el selector d'icones Cuttlefish",
         "Description[ca]": "Invoca el selector d'icones Cuttlefish",
         "Description[en_GB]": "Invokes Cuttlefish icon picker",
         "Description[es]": "Llama al selector de iconos Cuttlefish",
         "Description[fr]": "Invoque le sélecteur d'icônes de Cuttlefish",
+        "Description[it]": "Invoca il selettore di icone Cuttlefish",
         "Description[ka]": "Cuttlefish - ხატულის ამრჩევის გაშვება",
         "Description[nl]": "Start de pictogramkiezer Cuttlefish",
         "Description[nn]": "Køyrer Cuttlefish ikonveljar",
@@ -31,7 +33,7 @@
         "Name[hu]": "Ikonválasztó",
         "Name[ia]": "Selector de icone",
         "Name[id]": "Icon Picker",
-        "Name[it]": "Selettore icone",
+        "Name[it]": "Selettore di icone",
         "Name[ka]": "ხატულის ამრჩევი",
         "Name[ko]": "아이콘 선택기",
         "Name[lt]": "Piktogramų parinkiklis",
