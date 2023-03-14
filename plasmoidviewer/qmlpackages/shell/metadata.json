@@ -4,6 +4,7 @@
             {
                 "Email": "mart@kde.org",
                 "Name": "Marco Martin",
+                "Name[bg]": "Marco Martin",
                 "Name[ca@valencia]": "Marco Martin",
                 "Name[ca]": "Marco Martin",
                 "Name[cs]": "Marco Martin",
@@ -22,6 +23,7 @@
         ],
         "Category": "",
         "Description": "PlasmoidViewer Shell",
+        "Description[bg]": "Обвивка на PlasmoidViewer",
         "Description[ca@valencia]": "Intèrpret d'ordres del visor de plasmoides",
         "Description[ca]": "Intèrpret d'ordres del visualitzador de plasmoides",
         "Description[en_GB]": "PlasmoidViewer Shell",

@@ -1,6 +1,7 @@
 {
     "KPlugin": {
         "Description": "Invokes Cuttlefish icon picker",
+        "Description[bg]": "Извиква Cuttlefisch за избор на икони",
         "Description[ca@valencia]": "Invoca el selector d'icones Cuttlefish",
         "Description[ca]": "Invoca el selector d'icones Cuttlefish",
         "Description[en_GB]": "Invokes Cuttlefish icon picker",
