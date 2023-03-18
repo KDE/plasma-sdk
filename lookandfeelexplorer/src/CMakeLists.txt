@@ -15,13 +15,12 @@ target_link_libraries(lookandfeelexplorer
     Qt::Widgets
     Qt::DBus
     KF6::Archive
-    KF6::Declarative
     KF6::I18n
     KF6::Package
-    KF6::Plasma
     KF6::KIOCore
     KF6::KIOWidgets
-    KF6::QuickAddons
+    KF6::Plasma
+    KF6::PlasmaQuick
 )
 
 install(TARGETS lookandfeelexplorer ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})

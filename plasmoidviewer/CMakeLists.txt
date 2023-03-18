@@ -12,7 +12,6 @@ target_link_libraries(plasmoidviewer
     KF6::DBusAddons
     KF6::Plasma
     KF6::PlasmaQuick
-    KF6::QuickAddons
     KF6::I18n
     KF6::ConfigCore
     KF6::ConfigWidgets

@@ -15,12 +15,12 @@
 #include <qcommandlineparser.h>
 
 #include <KAboutData>
+#include <PlasmaQuick/SharedQmlEngine>
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQmlExpression>
 #include <QQmlProperty>
 #include <QQuickWindow>
-#include <kdeclarative/qmlobject.h>
 #include <kpackage/package.h>
 #include <kpackage/packageloader.h>
 
@@ -48,12 +48,12 @@ int main(int argc, char **argv)
     const QString packagePath("org.kde.plasma.themeexplorer");
 
     // usually we have an ApplicationWindow here, so we do not need to create a window by ourselves
-    KDeclarative::QmlObject *obj = new KDeclarative::QmlObject();
+    auto obj = new PlasmaQuick::SharedQmlEngine();
     obj->setTranslationDomain(packagePath);
     obj->setInitializationDelayed(true);
     obj->engine()->rootContext()->setContextProperty("commandlineArguments", parser.positionalArguments());
 
-    QObject::connect(obj->engine(), &QQmlEngine::quit, &app, &QApplication::quit);
+    QObject::connect(obj->engine().get(), &QQmlEngine::quit, &app, &QApplication::quit);
 
     qmlRegisterAnonymousType<ThemeListModel>("org.kde.plasma.sdk", 1);
     qmlRegisterAnonymousType<ColorEditor>("org.kde.plasma.sdk", 1);

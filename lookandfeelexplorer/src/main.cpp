@@ -14,12 +14,12 @@
 #include <qcommandlineparser.h>
 
 #include <KAboutData>
+#include <PlasmaQuick/SharedQmlEngine>
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQmlExpression>
 #include <QQmlProperty>
 #include <QQuickWindow>
-#include <kdeclarative/qmlobject.h>
 #include <kpackage/package.h>
 #include <kpackage/packageloader.h>
 
@@ -45,7 +45,7 @@ int main(int argc, char **argv)
     const QString packagePath("org.kde.plasma.lookandfeelexplorer");
 
     // usually we have an ApplicationWindow here, so we do not need to create a window by ourselves
-    KDeclarative::QmlObject obj;
+    PlasmaQuick::SharedQmlEngine obj;
     obj.setTranslationDomain(packagePath);
     obj.setInitializationDelayed(true);
     obj.engine()->rootContext()->setContextProperty("commandlineTheme", parser.value(themeOption));
