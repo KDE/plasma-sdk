@@ -184,12 +184,3 @@ msgstr "Explorador de temes d'Aspecte i comportament del Plasma"
 #, kde-format
 msgid "Look And Feel to open"
 msgstr "Aspecte i comportament a obrir"
-
-#~ msgid "New Theme..."
-#~ msgstr "Tema nou..."
-
-#~ msgid "This theme name already exists"
-#~ msgstr "Aquest nom de tema ja existeix"
-
-#~ msgid "Ok"
-#~ msgstr "D'acord"

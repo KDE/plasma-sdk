@@ -394,18 +394,3 @@ msgstr "Comptador d'operacions"
 #, kde-format
 msgid "Data Engines"
 msgstr "Motors de dades"
-
-#~ msgid "&lt;1 bit&gt;"
-#~ msgid_plural "&lt;%1 bits&gt;"
-#~ msgstr[0] "&lt;1 bit&gt;"
-#~ msgstr[1] "&lt;%1 bits&gt;"
-
-#~ msgid "&lt;1 byte&gt;"
-#~ msgid_plural "&lt;%1 bytes&gt;"
-#~ msgstr[0] "&lt;1 byte&gt;"
-#~ msgstr[1] "&lt;%1 bytes&gt;"
-
-#~ msgid "&lt;1 item&gt;"
-#~ msgid_plural "&lt;%1 items&gt;"
-#~ msgstr[0] "&lt;1 element&gt;"
-#~ msgstr[1] "&lt;%1 elements&gt;"
