@@ -1,64 +1,63 @@
 # translation of plasma_shell_org.kde.desktop.po to Slovak
 # Roman Paholik <wizzardsk@gmail.com>, 2015, 2016.
+# Ferdinand Galko <galko.ferdinand@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.desktop\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-09 02:16+0000\n"
-"PO-Revision-Date: 2016-02-23 18:28+0100\n"
-"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
-"Language-Team: Slovak <kde-sk@linux.sk>\n"
+"PO-Revision-Date: 2023-03-29 18:30+0200\n"
+"Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
+"Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 21.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: contents/applet/AppletError.qml:40
 msgid "Sorry! There was an error loading %1."
-msgstr ""
+msgstr "Prepáčte! Pri načítaní %1 došlo k chybe."
 
 #: contents/applet/AppletError.qml:48
 msgid "Copy Error Details to Clipboard"
-msgstr ""
+msgstr "Skopírovať podrobnosti o chybe do schránky"
 
 #: contents/applet/CompactApplet.qml:70
 msgid "Open %1"
-msgstr ""
+msgstr "Otvoriť %1"
 
 #: contents/configuration/AboutPlugin.qml:20
 #: contents/configuration/AppletConfiguration.qml:247
 msgid "About"
-msgstr ""
+msgstr "O aplikácii"
 
 #: contents/configuration/AboutPlugin.qml:46
 msgid "Send an email to %1"
-msgstr ""
+msgstr "Odoslať email na %1"
 
 #: contents/configuration/AboutPlugin.qml:95
 msgid "Copyright"
-msgstr ""
+msgstr "Autorské práva"
 
 #: contents/configuration/AboutPlugin.qml:115
 msgid "License:"
-msgstr ""
+msgstr "Licencia:"
 
 #: contents/configuration/AboutPlugin.qml:128
 msgid "Authors"
-msgstr ""
+msgstr "Autori"
 
 #: contents/configuration/AboutPlugin.qml:138
 msgid "Credits"
-msgstr ""
+msgstr "Zásluhy"
 
 #: contents/configuration/AboutPlugin.qml:149
 msgid "Translators"
-msgstr ""
+msgstr "Prekladatelia"
 
 #: contents/configuration/AppletConfiguration.qml:55
-#, fuzzy
-#| msgid "Keyboard shortcuts"
 msgid "Keyboard Shortcuts"
 msgstr "Klávesové skratky"
 
@@ -88,7 +87,7 @@ msgstr "Zrušiť"
 
 #: contents/configuration/ConfigCategoryDelegate.qml:28
 msgid "Open configuration page"
-msgstr ""
+msgstr "Otvoriť konfiguračnú stránku"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:19
 msgid "Left-Button"
@@ -103,14 +102,12 @@ msgid "Middle-Button"
 msgstr "Stredné tlačidlo"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:22
-#, fuzzy
-#| msgid "Left-Button"
 msgid "Back-Button"
-msgstr "Ľavé tlačidlo"
+msgstr "Tlačidlo späť"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:23
 msgid "Forward-Button"
-msgstr ""
+msgstr "Tlačidlo vpred"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:25
 msgid "Vertical-Scroll"
@@ -139,7 +136,7 @@ msgstr "Meta"
 #: contents/configuration/ConfigurationContainmentActions.qml:73
 msgctxt "Concatenation sign for shortcuts, e.g. Ctrl+Shift"
 msgid "+"
-msgstr ""
+msgstr "+"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:153
 #: contents/configuration/MouseEventInputButton.qml:15
@@ -148,11 +145,11 @@ msgstr "Pridať akciu"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:27
 msgid "Appearance"
-msgstr ""
+msgstr "Vzhľad"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:69
 msgid "Layout changes have been restricted by the system administrator"
-msgstr ""
+msgstr "Zmeny rozloženia boli obmedzené systémovým administrátorom"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:84
 msgid "Layout:"
@@ -164,25 +161,23 @@ msgstr "Typ tapety:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:116
 msgid "Get New Plugins..."
-msgstr ""
+msgstr "Získať nové zásuvné moduly..."
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:128
 msgid "Layout changes must be applied before other changes can be made"
-msgstr ""
+msgstr "Pred vykonaním ďalších zmien sa musia použiť zmeny rozloženia."
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:134
-#, fuzzy
-#| msgid "Apply"
 msgid "Apply now"
-msgstr "Použiť"
+msgstr "Použiť teraz"
 
 #: contents/configuration/ConfigurationShortcuts.qml:18
 msgid "Shortcuts"
-msgstr ""
+msgstr "Skratky"
 
 #: contents/configuration/ConfigurationShortcuts.qml:28
 msgid "This shortcut will activate the applet as though it had been clicked."
-msgstr ""
+msgstr "Táto skratka aktivuje applet tak, ako keby bolo naň kliknuté."
 
 #: contents/configuration/ContainmentConfiguration.qml:33
 msgid "Wallpaper"

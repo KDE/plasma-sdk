@@ -3,19 +3,20 @@
 # Peter Mihalik <udavac@inmail.sk>, 2008, 2009.
 # Michal Sulek <misurel@gmail.com>, 2009.
 # Roman Paholík <wizzardsk@gmail.com>, 2012, 2015, 2016.
+# Ferdinand Galko <galko.ferdinand@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-09 02:16+0000\n"
-"PO-Revision-Date: 2016-04-02 21:15+0100\n"
-"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
-"Language-Team: Slovak <kde-sk@linux.sk>\n"
+"PO-Revision-Date: 2023-03-29 18:44+0200\n"
+"Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
+"Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 21.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #, kde-format
@@ -49,10 +50,9 @@ msgid "Search"
 msgstr "Hľadať"
 
 #: engineexplorer.cpp:180
-#, fuzzy, kde-format
-#| msgid "DataSource"
+#, kde-format
 msgid "DataSource/Key"
-msgstr "Dátový zdroj"
+msgstr "Dátový zdroj/Kľúč"
 
 #: engineexplorer.cpp:180
 #, kde-format
@@ -124,13 +124,11 @@ msgid "<not displayable>"
 msgstr "<nedá sa zobraziť>"
 
 #: engineexplorer.cpp:500 engineexplorer.cpp:515
-#, fuzzy, kde-format
-#| msgid "<1 item>"
-#| msgid_plural "<%1 items>"
+#, kde-format
 msgctxt "Length of the list"
 msgid "<%1 item>"
 msgid_plural "<%1 items>"
-msgstr[0] "<1 položka>"
+msgstr[0] "<%1 položka>"
 msgstr[1] "<%1 položky>"
 msgstr[2] "<%1 položiek>"
 
@@ -139,9 +137,9 @@ msgstr[2] "<%1 položiek>"
 msgctxt "Size of the map"
 msgid "<%1 pair>"
 msgid_plural "<%1 pairs>"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "<%1 pár>"
+msgstr[1] "<%1 páry>"
+msgstr[2] "<%1 párov>"
 
 #. i18n: ectx: property (text), widget (KTitleWidget, m_title)
 #: engineexplorer.cpp:543 engineexplorer.ui:29
@@ -337,12 +335,10 @@ msgid "%1 Service Explorer"
 msgstr "Prieskumník služby %1"
 
 #: serviceviewer.cpp:75
-#, fuzzy, kde-format
-#| msgctxt "Source: name of the data, Service: writes data instead of fetching"
-#| msgid "DataEngine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
+#, kde-format
 msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
-msgstr "Dátový nástroj: <b>%1</b>; Zdroj: <b>%2</b>; Služba <b>%3</b>"
+msgstr "Nástroj: <b>%1</b>; Zdroj: <b>%2</b>; Služba <b>%3</b>"
 
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
 #: serviceviewer.cpp:151 serviceviewer.ui:73
@@ -379,14 +375,12 @@ msgstr ""
 "<b>'%3'</b></p>"
 
 #: serviceviewer.cpp:226
-#, fuzzy, kde-format
-#| msgid "One active operation..."
-#| msgid_plural "%1 operations active..."
+#, kde-format
 msgid "One active operation…"
 msgid_plural "%1 operations active…"
-msgstr[0] "Jedna aktívna operácia ..."
-msgstr[1] "%1 aktívne operácie ..."
-msgstr[2] "%1 aktívnych operácií ..."
+msgstr[0] "Jedna aktívna operácia..."
+msgstr[1] "%1 aktívne operácie..."
+msgstr[2] "%1 aktívnych operácií..."
 
 #. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
 #: serviceviewer.ui:39
