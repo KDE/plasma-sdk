@@ -127,6 +127,12 @@ void LnfLogic::dumpDefaultsConfigFile(const QString &pluginName)
     systemCG = KConfigGroup(KSharedConfig::openConfig(QStringLiteral("kdeglobals")), "General");
     defaultsConfigGroup.writeEntry("ColorScheme", systemCG.readEntry("ColorScheme", QStringLiteral("Breeze")));
 
+    // icon theme
+    defaultsConfigGroup = KConfigGroup(&defaultsConfig, "kdeglobals");
+    defaultsConfigGroup = KConfigGroup(&defaultsConfigGroup, "Icons");
+    systemCG = KConfigGroup(KSharedConfig::openConfig(QStringLiteral("kdeglobals")), "Icons");
+    defaultsConfigGroup.writeEntry("Theme", systemCG.readEntry("Theme", QStringLiteral("breeze")));
+
     // plasma theme
     defaultsConfigGroup = KConfigGroup(&defaultsConfig, "plasmarc");
     defaultsConfigGroup = KConfigGroup(&defaultsConfigGroup, "Theme");
