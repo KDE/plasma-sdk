@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-15 00:48+0000\n"
+"POT-Creation-Date: 2023-04-05 02:55+0000\n"
 "PO-Revision-Date: 2022-12-06 09:09+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -153,19 +153,19 @@ msgstr "შეცდომა org.kde.plasma.desktop-layout.js-შიჩაწ�
 msgid "Plasma Layout successfully duplicated"
 msgstr "Plasma-ის განლაგება წარმატებით დადუბლირდა"
 
-#: src/lnflogic.cpp:158
+#: src/lnflogic.cpp:164
 #, kde-format
 msgid "Defaults config file saved from your current setup"
 msgstr ""
 "ნაგულისხმები მნიშვნელობების შემცველი კონფიგურაციის ფაილი თქვენი მორგებიდან "
 "ჩაიწერა"
 
-#: src/lnflogic.cpp:481
+#: src/lnflogic.cpp:487
 #, kde-format
 msgid "Open Image"
 msgstr "გამოსახულების გახსნა"
 
-#: src/lnflogic.cpp:483
+#: src/lnflogic.cpp:489
 #, kde-format
 msgid "Image Files (*.png *.jpg *.bmp)"
 msgstr "გამოსახულების ფაილები (*.png *.jpg *.bmp)"

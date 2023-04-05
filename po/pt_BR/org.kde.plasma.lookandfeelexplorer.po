@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-15 00:48+0000\n"
+"POT-Creation-Date: 2023-04-05 02:55+0000\n"
 "PO-Revision-Date: 2021-06-04 14:42-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -153,17 +153,17 @@ msgstr "Não é possível escrever em org.kde.plasma.desktop-layout.js"
 msgid "Plasma Layout successfully duplicated"
 msgstr "Layout do Plasma duplicado com êxito"
 
-#: src/lnflogic.cpp:158
+#: src/lnflogic.cpp:164
 #, kde-format
 msgid "Defaults config file saved from your current setup"
 msgstr "O arquivo de configuração padrão é salvo de sua configuração atual"
 
-#: src/lnflogic.cpp:481
+#: src/lnflogic.cpp:487
 #, kde-format
 msgid "Open Image"
 msgstr "Abrir imagem"
 
-#: src/lnflogic.cpp:483
+#: src/lnflogic.cpp:489
 #, kde-format
 msgid "Image Files (*.png *.jpg *.bmp)"
 msgstr "Arquivos de imagem (*.png *.jpg *.bmp)"

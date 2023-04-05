@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-15 00:48+0000\n"
+"POT-Creation-Date: 2023-04-05 02:55+0000\n"
 "PO-Revision-Date: 2021-07-20 23:50+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -157,17 +157,17 @@ msgstr "Ezinezkoa idaztea org.kde.plasma.desktop-layout.js"
 msgid "Plasma Layout successfully duplicated"
 msgstr "Plasma diseinua zuzen bikoiztua"
 
-#: src/lnflogic.cpp:158
+#: src/lnflogic.cpp:164
 #, kde-format
 msgid "Defaults config file saved from your current setup"
 msgstr "Lehenetsitako konfigurazio fitxategia gorde da zure uneko ezarpenetik"
 
-#: src/lnflogic.cpp:481
+#: src/lnflogic.cpp:487
 #, kde-format
 msgid "Open Image"
 msgstr "Ireki irudia"
 
-#: src/lnflogic.cpp:483
+#: src/lnflogic.cpp:489
 #, kde-format
 msgid "Image Files (*.png *.jpg *.bmp)"
 msgstr "Irudi fitxategiak (*.png *.jpg *.bmp)"

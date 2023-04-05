@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-15 00:48+0000\n"
+"POT-Creation-Date: 2023-04-05 02:55+0000\n"
 "PO-Revision-Date: 2019-12-12 22:14+0000\n"
 "Last-Translator: Vivek KJ Pazhedath <vivekkj2004@gmail.com>\n"
 "Language-Team: SMC <smc.org.in>\n"
@@ -152,17 +152,17 @@ msgstr "Org.kde.plasma.desktop-layout.js- ലേക്ക് എഴുതുന�
 msgid "Plasma Layout successfully duplicated"
 msgstr "പ്ലാസ്മ ലേഔട്ട് വിജയകരമായി തനിപ്പകർപ്പാക്കി"
 
-#: src/lnflogic.cpp:158
+#: src/lnflogic.cpp:164
 #, kde-format
 msgid "Defaults config file saved from your current setup"
 msgstr "നിങ്ങളുടെ നിലവിലെ സജ്ജീകരണത്തിൽ നിന്ന് സ്ഥിരസ്ഥിതി ക്രമീകരണ ഫയൽ സംരക്ഷിച്ചു"
 
-#: src/lnflogic.cpp:481
+#: src/lnflogic.cpp:487
 #, kde-format
 msgid "Open Image"
 msgstr "ചിത്രം തുറക്കുക"
 
-#: src/lnflogic.cpp:483
+#: src/lnflogic.cpp:489
 #, kde-format
 msgid "Image Files (*.png *.jpg *.bmp)"
 msgstr "ചിത്ര ഫയലുകൾ (*.png *.jpg *.bmp)"

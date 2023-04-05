@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-15 00:48+0000\n"
+"POT-Creation-Date: 2023-04-05 02:55+0000\n"
 "PO-Revision-Date: 2021-06-07 21:41+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -155,7 +155,7 @@ msgstr "Не удалось записать в файл org.kde.plasma.desktop-
 msgid "Plasma Layout successfully duplicated"
 msgstr "Макет Plasma успешно дублирован"
 
-#: src/lnflogic.cpp:158
+#: src/lnflogic.cpp:164
 #, kde-format
 msgid "Defaults config file saved from your current setup"
 msgstr ""
@@ -163,12 +163,12 @@ msgstr ""
 "конфигурации"
 
 # BUGME: please change to "Select Image" --aspotashev
-#: src/lnflogic.cpp:481
+#: src/lnflogic.cpp:487
 #, kde-format
 msgid "Open Image"
 msgstr "Выбор изображения"
 
-#: src/lnflogic.cpp:483
+#: src/lnflogic.cpp:489
 #, kde-format
 msgid "Image Files (*.png *.jpg *.bmp)"
 msgstr "Файлы изображений (*.png *.jpg *.bmp)"
