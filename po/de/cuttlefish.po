@@ -1,11 +1,11 @@
 # Burkhard Lück <lueck@hube-lueck.de>, 2015, 2017, 2019, 2020, 2021.
-# Frederik Schwarzer <schwarzer@kde.org>, 2016, 2020, 2022.
+# Frederik Schwarzer <schwarzer@kde.org>, 2016, 2020, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-08 00:49+0000\n"
-"PO-Revision-Date: 2022-07-02 12:49+0200\n"
+"PO-Revision-Date: 2023-04-03 16:57+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: src/main.cpp:69
 #, kde-format
@@ -36,10 +36,9 @@ msgid "Run in icon-picker mode"
 msgstr "Im Modus Symbol-Auswahl ausführen"
 
 #: src/qml/Actions.qml:16
-#, fuzzy, kde-format
-#| msgid "Open icon with external program"
+#, kde-format
 msgid "Open with External Program"
-msgstr "Symbol in externem Programm öffnen"
+msgstr "In externem Programm öffnen"
 
 #: src/qml/Actions.qml:21
 #, kde-format
