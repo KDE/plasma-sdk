@@ -16,6 +16,7 @@
   <name xml:lang="de">Plasmoid-Betrachter</name>
   <name xml:lang="el">Πρόγραμμα προβολής συστατικών Plasma</name>
   <name xml:lang="en-GB">Plasmoid Viewer</name>
+  <name xml:lang="eo">Plasmoid Viewer</name>
   <name xml:lang="es">Visor de plasmoides</name>
   <name xml:lang="et">Plasmoidide näitaja</name>
   <name xml:lang="eu">Plasmoide erakuslea</name>
@@ -55,6 +56,7 @@
   <summary xml:lang="de">Test-Werkzeug für Plasma-Miniprogramme</summary>
   <summary xml:lang="el">Εργαλείο δοκιμών για μικροεφαρμογές Plasma</summary>
   <summary xml:lang="en-GB">Testing tool for Plasma applets</summary>
+  <summary xml:lang="eo">Testilo por Plasma-apleto</summary>
   <summary xml:lang="es">Herramienta de prueba para miniaplicaciones de Plasma</summary>
   <summary xml:lang="et">Plasma aplettide testimise tööriist</summary>
   <summary xml:lang="eu">Plasma aplikaziotxoak probatzeko tresna</summary>
@@ -96,6 +98,7 @@
     <p xml:lang="de">Plasmoid-Betrachter ist ein Programm mit grafischer Oberfläche, das es Entwicklern ermöglicht, Plasma-Miniprogramme zu testen.</p>
     <p xml:lang="el">Το πρόγραμμα προβολής συστατικών Plasma είναι ένα γραφικό εργαλείο που επιτρέπει στους προγραμματιστές να δοκιμάζουν μικροεφαρμογές Plasma.</p>
     <p xml:lang="en-GB">Plasmoid Viewer is a graphical tool allowing developers to test Plasma applets.</p>
+    <p xml:lang="eo">Plasmoid-Rigardilo estas grafika ilo kiu permesas al evoluistoj testi Plasma-apletojn.</p>
     <p xml:lang="es">El visor de plasmoides es una herramienta gráfica que permite a los desarrolladores probar miniaplicaciones de Plasma.</p>
     <p xml:lang="et">Plasmoidide näitaja on graafiline tööriist, mis võimaldab arendajatel testida Plasma aplette.</p>
     <p xml:lang="eu">Plasmoide erakuslea garatzaileei Plasma aplikaziotxoak probatzen uzten dien tresna grafiko bat da.</p>
