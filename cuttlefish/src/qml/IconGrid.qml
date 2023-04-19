@@ -15,7 +15,7 @@ GridView {
     focus: true
 
     cellWidth: iconSize + Math.round(Kirigami.Units.gridUnit * 1.5)
-    cellHeight: cellWidth + Math.round(Kirigami.Units.gridUnit * 2)
+    cellHeight: iconSize + Math.round(Kirigami.Units.gridUnit * 3.5)
 
     cacheBuffer: 20
     highlightMoveDuration: 0
