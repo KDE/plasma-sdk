@@ -15,8 +15,10 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 
 MouseArea {
     id: delegateRoot
-    width: iconSize + Kirigami.Units.gridUnit
-    height: cellWidth + Math.round(Kirigami.Units.gridUnit * 2)
+
+    width: GridView.view.cellWidth
+    height: GridView.view.cellHeight
+
     acceptedButtons: Qt.LeftButton | Qt.RightButton
 
     function setAsPreview() {
@@ -34,19 +36,18 @@ MouseArea {
         color: Kirigami.Theme.highlightColor
         opacity: iconGrid.currentIndex == index ? 0.5 : 0.0
         visible: opacity != 0.0
+        anchors.fill: parent
         Behavior on opacity { NumberAnimation { duration: Kirigami.Units.shortDuration } }
-        anchors {
-            fill: parent
-        }
     }
 
     Kirigami.Icon {
         id: delegateIcon
         width: iconSize
-        height: width
+        height: iconSize
         source: iconName
         anchors {
             top: parent.top
+            topMargin: Kirigami.Units.smallSpacing
             horizontalCenter: parent.horizontalCenter
         }
     }
@@ -59,11 +60,11 @@ MouseArea {
         horizontalAlignment: Text.AlignHCenter
         opacity: iconGrid.currentIndex == index ? 1.0 : 0.7
         anchors {
+            top: delegateIcon.bottom
             left: parent.left
             right: parent.right
-            top: delegateIcon.bottom
-            topMargin: 0
-            margins: Math.round(-Kirigami.Units.gridUnit / 4)
+            bottom: parent.bottom
+            margins: Kirigami.Units.smallSpacing
         }
     }
 
