@@ -33,10 +33,15 @@ MouseArea {
     }
 
     Rectangle {
-        color: Kirigami.Theme.highlightColor
-        opacity: iconGrid.currentIndex == index ? 0.5 : 0.0
-        visible: opacity != 0.0
         anchors.fill: parent
+
+        color: Qt.rgba(Kirigami.Theme.focusColor.r, Kirigami.Theme.focusColor.g, Kirigami.Theme.focusColor.b, 0.3)
+        border.color: Kirigami.Theme.focusColor
+        border.width: 1
+        opacity: delegateRoot.GridView.isCurrentItem ? 1 : 0.0
+        visible: opacity !== 0
+        radius: Math.round(Kirigami.Units.smallSpacing / 2)
+
         Behavior on opacity { NumberAnimation { duration: Kirigami.Units.shortDuration } }
     }
 
@@ -58,7 +63,7 @@ MouseArea {
         wrapMode: Text.Wrap
         maximumLineCount: 3
         horizontalAlignment: Text.AlignHCenter
-        opacity: iconGrid.currentIndex == index ? 1.0 : 0.7
+        opacity: delegateRoot.GridView.isCurrentItem ? 1.0 : 0.7
         anchors {
             top: delegateIcon.bottom
             left: parent.left
