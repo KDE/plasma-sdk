@@ -178,7 +178,7 @@ msgstr "Schema de color"
 #~ msgstr "Copia codice de QtQuick in area de transferentia"
 
 #~ msgid "Update preview on hover"
-#~ msgstr "Actualiza vista preliminari quando on plana"
+#~ msgstr "Actualiza vista preliminar quando on plana"
 
 #~ msgid "Inverted"
 #~ msgstr "Invertite"
