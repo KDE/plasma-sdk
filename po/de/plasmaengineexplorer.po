@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-05-24 00:45+0000\n"
-"PO-Revision-Date: 2023-04-03 16:58+0200\n"
+"PO-Revision-Date: 2023-04-26 20:12+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 22.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -327,9 +327,7 @@ msgid "%1 Service Explorer"
 msgstr "%1 Dienst-Explorer"
 
 #: serviceviewer.cpp:75
-#, fuzzy, kde-format
-#| msgctxt "Source: name of the data, Service: writes data instead of fetching"
-#| msgid "DataEngine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
+#, kde-format
 msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "Datenquelle: <b>%1</b>; Quelle: <b>%2</b>; Dienst: <b>%3</b>"
