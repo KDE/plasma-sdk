@@ -9,6 +9,7 @@
 #include <QApplication>
 #include <QBitArray>
 #include <QBitmap>
+#include <QClipboard>
 #include <QDialogButtonBox>
 #include <QMenu>
 #include <QStandardItemModel>
@@ -301,13 +302,18 @@ void EngineExplorer::showDataContextMenu(const QPoint &point)
         const QString source = index.data().toString();
         QMenu menu;
         menu.addSection(source);
+
+        QAction *copy = KStandardAction::copy(nullptr, nullptr, &menu);
+        menu.addAction(copy);
         QAction *service = menu.addAction(i18n("Get associated service"));
         QAction *model = menu.addAction(i18n("Get associated model"));
         QAction *update = menu.addAction(i18n("Update source now"));
         QAction *remove = menu.addAction(i18n("Remove source"));
 
         QAction *activated = menu.exec(m_data->viewport()->mapToGlobal(point));
-        if (activated == service) {
+        if (activated == copy) {
+            QGuiApplication::clipboard()->setText(source);
+        } else if (activated == service) {
             ServiceViewer *viewer = new ServiceViewer(m_engine, source);
             viewer->show();
         } else if (activated == model) {
