@@ -12,7 +12,6 @@ target_link_libraries(cuttlefishplugin
     KF6::TextEditor
     KF6::IconThemes
     KF6::I18n
-    KF6::Service
 )
 
 install(TARGETS cuttlefishplugin  DESTINATION ${KDE_INSTALL_PLUGINDIR}/ktexteditor)

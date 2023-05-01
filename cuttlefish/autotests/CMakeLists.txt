@@ -13,7 +13,6 @@ ecm_add_test(iconmodeltest.cpp ../src/iconmodel.cpp ../src/sortfiltermodel.cpp
       KF6::KIOWidgets
       KF6::ConfigCore
       KF6::IconThemes
-      KF6::Service
       KF6::Plasma
       KF6::ConfigWidgets
 )
