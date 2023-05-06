@@ -14,17 +14,17 @@ Item {
     property list<Kirigami.Action> actions:[
         Kirigami.Action {
             text: i18n("Open with External Program")
-            iconName: "document-open"
+            icon.name: "document-open"
             onTriggered: Qt.openUrlExternally(preview.fullPath)
         },
         Kirigami.Action {
             text: i18n("Open Containing Folder")
-            iconName: "document-open-folder"
+            icon.name: "document-open-folder"
             onTriggered: iconModel.openContainingFolder(preview.fullPath)
         },
         Kirigami.Action {
             text: pickerMode ? i18n("Insert Name") : i18n("Copy Name to Clipboard")
-            iconName: "edit-copy"
+            icon.name: "edit-copy"
             onTriggered: {
                 clipboard(preview.iconName)
                 cuttlefish.showPassiveNotification(i18n("Icon name copied to clipboard"), "short")
@@ -32,7 +32,7 @@ Item {
         },
         Kirigami.Action {
             id: screenshotAction
-            iconName: "camera-web-symbolic"
+            icon.name: "camera-web-symbolic"
             text: i18n("Take Screenshot…")
             onTriggered: screenshotPopup.popup()
             Kirigami.Action {

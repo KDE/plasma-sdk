@@ -6,12 +6,12 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-import QtQuick 2.5
-import QtQuick.Layouts 1.0
-import QtQuick.Controls 2.5 as QQC2
-import Qt.labs.settings 1.0
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as QQC2
+import Qt.labs.settings
 
-import org.kde.kirigami 2.4 as Kirigami
+import org.kde.kirigami 2 as Kirigami
 
 Kirigami.ApplicationWindow {
     id: cuttlefish
@@ -67,11 +67,11 @@ Kirigami.ApplicationWindow {
     }
 
     Shortcut {
-        sequence: StandardKey.ZoomIn
+        sequences: [StandardKey.ZoomIn]
         onActivated: tools.slider.value += 1
     }
     Shortcut {
-        sequence: StandardKey.ZoomOut
+        sequences: [StandardKey.ZoomOut]
         onActivated: tools.slider.value -= 1
     }
 

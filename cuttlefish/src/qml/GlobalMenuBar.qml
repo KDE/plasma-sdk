@@ -4,8 +4,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-import QtQuick 2.5
-import Qt.labs.platform 1.0
+import QtQuick
+import Qt.labs.platform
 
 MenuBar {
     id: root
@@ -38,7 +38,7 @@ MenuBar {
         }
         MenuSeparator {}
         MenuItem {
-            iconName: "gtk-quit"
+            icon.name: "gtk-quit"
             text: i18n("Quit")
             shortcut: StandardKey.Quit
             onTriggered: root.quit()
@@ -47,13 +47,13 @@ MenuBar {
     Menu {
         title: i18n("View")
         MenuItem {
-            iconName: "zoom-in"
+            icon.name: "zoom-in"
             text: i18n("Zoom In")
             shortcut: StandardKey.ZoomIn
             onTriggered: root.zoomIn()
         }
         MenuItem {
-            iconName: "zoom-out"
+            icon.name: "zoom-out"
             text: i18n("Zoom Out")
             shortcut: StandardKey.ZoomOut
             onTriggered: root.zoomOut()

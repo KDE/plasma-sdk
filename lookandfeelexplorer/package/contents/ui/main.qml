@@ -44,7 +44,7 @@ Kirigami.AbstractApplicationWindow {
         actions: [
             Kirigami.Action {
                 text: i18n("New Theme…")
-                iconName: "document-new"
+                icon.name: "document-new"
                 onTriggered: {
                     if (!root.metadataEditor) {
                         root.metadataEditor = metadataEditorComponent.createObject(root);
@@ -61,7 +61,7 @@ Kirigami.AbstractApplicationWindow {
             },
             Kirigami.Action {
                 text: i18n("Open Theme Folder")
-                iconName: "document-open-folder"
+                icon.name: "document-open-folder"
                 onTriggered: Qt.openUrlExternally(lnfLogic.themeFolder);
             }
         ]
@@ -158,7 +158,7 @@ Kirigami.AbstractApplicationWindow {
                 DragAndDrop.DropArea {
                     id: dropArea
                     anchors.fill: parent
-                    onDrop: {
+                    onDrop: event => {
                         if (event.mimeData.urls[0]) {
                             lnfLogic.processThumbnail(event.mimeData.urls[0]);
                         }
