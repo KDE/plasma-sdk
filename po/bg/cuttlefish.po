@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-08 00:49+0000\n"
+"POT-Creation-Date: 2023-05-07 02:16+0000\n"
 "PO-Revision-Date: 2022-05-16 15:38+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -17,22 +17,22 @@ msgstr ""
 "X-Generator: Lokalize 22.04.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: src/main.cpp:69
+#: src/main.cpp:68
 #, kde-format
 msgid "Start with category"
 msgstr "Започване с категория"
 
-#: src/main.cpp:69
+#: src/main.cpp:68
 #, kde-format
 msgid "category"
 msgstr "категория"
 
-#: src/main.cpp:72
+#: src/main.cpp:71
 #, kde-format
 msgid "Start full-screen"
 msgstr "Стартиране на цял екран"
 
-#: src/main.cpp:75
+#: src/main.cpp:74
 #, kde-format
 msgid "Run in icon-picker mode"
 msgstr "Изпълняване в режим на избор на икони"

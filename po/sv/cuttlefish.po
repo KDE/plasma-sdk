@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-08 00:49+0000\n"
+"POT-Creation-Date: 2023-05-07 02:16+0000\n"
 "PO-Revision-Date: 2022-04-19 19:39+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -17,22 +17,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 20.08.1\n"
 
-#: src/main.cpp:69
+#: src/main.cpp:68
 #, kde-format
 msgid "Start with category"
 msgstr "Börja med kategori"
 
-#: src/main.cpp:69
+#: src/main.cpp:68
 #, kde-format
 msgid "category"
 msgstr "kategori"
 
-#: src/main.cpp:72
+#: src/main.cpp:71
 #, kde-format
 msgid "Start full-screen"
 msgstr "Starta med fullskärmsläge"
 
-#: src/main.cpp:75
+#: src/main.cpp:74
 #, kde-format
 msgid "Run in icon-picker mode"
 msgstr "Kör som ikonväljare"

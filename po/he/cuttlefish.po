@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cuttlefish\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-08 00:49+0000\n"
+"POT-Creation-Date: 2023-05-07 02:16+0000\n"
 "PO-Revision-Date: 2017-05-16 09:59-0400\n"
 "Last-Translator: Elkana Bardugo <ttv200@gmail.com>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -18,22 +18,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Zanata 3.9.6\n"
 
-#: src/main.cpp:69
+#: src/main.cpp:68
 #, kde-format
 msgid "Start with category"
 msgstr "התחל עם קטגוריה"
 
-#: src/main.cpp:69
+#: src/main.cpp:68
 #, kde-format
 msgid "category"
 msgstr "קטגוריה"
 
-#: src/main.cpp:72
+#: src/main.cpp:71
 #, kde-format
 msgid "Start full-screen"
 msgstr "התחל במסך מלא"
 
-#: src/main.cpp:75
+#: src/main.cpp:74
 #, kde-format
 msgid "Run in icon-picker mode"
 msgstr "הרץ במצב בחירת סמל"

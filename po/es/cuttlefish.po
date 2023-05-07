@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cuttlefish\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-08 00:49+0000\n"
+"POT-Creation-Date: 2023-05-07 02:16+0000\n"
 "PO-Revision-Date: 2022-04-22 00:26+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -20,22 +20,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 22.03.90\n"
 
-#: src/main.cpp:69
+#: src/main.cpp:68
 #, kde-format
 msgid "Start with category"
 msgstr "Iniciar con la categoría"
 
-#: src/main.cpp:69
+#: src/main.cpp:68
 #, kde-format
 msgid "category"
 msgstr "categoría"
 
-#: src/main.cpp:72
+#: src/main.cpp:71
 #, kde-format
 msgid "Start full-screen"
 msgstr "Iniciar a pantalla completa"
 
-#: src/main.cpp:75
+#: src/main.cpp:74
 #, kde-format
 msgid "Run in icon-picker mode"
 msgstr "Ejecutar en modo de selección de icono"

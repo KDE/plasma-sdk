@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cuttlefish\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-08 00:49+0000\n"
+"POT-Creation-Date: 2023-05-07 02:16+0000\n"
 "PO-Revision-Date: 2023-03-06 22:10+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -19,22 +19,22 @@ msgstr ""
 "X-Generator: Lokalize 22.12.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/main.cpp:69
+#: src/main.cpp:68
 #, kde-format
 msgid "Start with category"
 msgstr "以分類開始"
 
-#: src/main.cpp:69
+#: src/main.cpp:68
 #, kde-format
 msgid "category"
 msgstr "類別"
 
-#: src/main.cpp:72
+#: src/main.cpp:71
 #, kde-format
 msgid "Start full-screen"
 msgstr "全螢幕啟動"
 
-#: src/main.cpp:75
+#: src/main.cpp:74
 #, kde-format
 msgid "Run in icon-picker mode"
 msgstr "以圖示挑選模式執行"
