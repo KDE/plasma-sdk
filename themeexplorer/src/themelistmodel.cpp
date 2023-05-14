@@ -63,10 +63,10 @@ void ThemeListModel::reload()
     // get all desktop themes
     QStringList themes;
     const QStringList &packs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "plasma/desktoptheme", QStandardPaths::LocateDirectory);
-    foreach (const QString &ppath, packs) {
+    for (const QString &ppath : packs) {
         const QDir cd(ppath);
         const QStringList &entries = cd.entryList(QDir::Dirs | QDir::Hidden);
-        foreach (const QString pack, entries) {
+        for (const QString pack : entries) {
             const QString _metadata = ppath + QLatin1Char('/') + pack + QStringLiteral("/metadata.desktop");
             if ((pack != "." && pack != "..") && (QFile::exists(_metadata))) {
                 themes << _metadata;
@@ -74,7 +74,7 @@ void ThemeListModel::reload()
         }
     }
 
-    foreach (const QString &theme, themes) {
+    for (const QString &theme : themes) {
         int themeSepIndex = theme.lastIndexOf('/', -1);
         QString themeRoot = theme.left(themeSepIndex);
         int themeNameSepIndex = themeRoot.lastIndexOf('/', -1);

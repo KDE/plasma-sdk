@@ -98,7 +98,7 @@ QString IconModel::key(int role) const
 void IconModel::add(const QFileInfo &info, const QString &cat)
 {
     QStringList cats;
-    Q_FOREACH (auto c, m_categories) {
+    for (const auto &c : std::as_const(m_categories)) {
         cats << c.toLower();
     }
 
@@ -193,7 +193,7 @@ void IconModel::load()
         searchPaths << hicolorThemePaths;
     }
 
-    foreach (const QString &iconPath, searchPaths) {
+    for (const QString &iconPath : searchPaths) {
         QDirIterator cats(iconPath, nameFilters, QDir::Dirs, QDirIterator::NoIteratorFlags);
         while (cats.hasNext()) {
             cats.next();
@@ -219,13 +219,13 @@ void IconModel::load()
 QString IconModel::categoryFromPath(const QString &path)
 {
     QStringList cats;
-    Q_FOREACH (auto c, m_categories) {
+    for (const auto c : m_categories) {
         cats << c.toLower();
     }
     // cats << "actions" << "apps" << "places" << "status";
     const QStringList _p1 = path.split("/icons/");
     if (_p1.count() > 1) {
-        foreach (const QString &cat, cats) {
+        for (const QString &cat : cats) {
             if (_p1[1].indexOf(cat) != -1) {
                 return cat;
             }

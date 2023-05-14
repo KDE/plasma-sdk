@@ -30,7 +30,7 @@ QObject *CuttleFishPlugin::createView(KTextEditor::MainWindow *mainWindow)
 {
     Q_UNUSED(mainWindow);
     connect(KTextEditor::Editor::instance()->application(), &KTextEditor::Application::documentCreated, this, &CuttleFishPlugin::documentCreated);
-    Q_FOREACH (auto doc, KTextEditor::Editor::instance()->application()->documents()) {
+    for (const auto documents{KTextEditor::Editor::instance()->application()->documents()}; const auto doc : documents) {
         documentCreated(doc);
     }
     return new QObject(this);
