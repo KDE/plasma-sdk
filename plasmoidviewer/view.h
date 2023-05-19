@@ -14,7 +14,7 @@ class ViewerCorona;
 class View : public PlasmaQuick::ContainmentView
 {
     Q_OBJECT
-    Q_PROPERTY(bool konsoleVisible READ konsoleVisible CONSTANT);
+    Q_PROPERTY(bool konsoleVisible READ konsoleVisible CONSTANT)
 
 public:
     View(ViewerCorona *corona, bool konsoleVisible, QWindow *parent = nullptr);

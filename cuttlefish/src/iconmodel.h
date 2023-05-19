@@ -21,7 +21,7 @@ class IconModel : public QAbstractListModel
     Q_OBJECT
 
     Q_PROPERTY(QStringList categories READ categories NOTIFY categoriesChanged)
-    Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged);
+    Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged)
 
 public:
     enum Roles {
