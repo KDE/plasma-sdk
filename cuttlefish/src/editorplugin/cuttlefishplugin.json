@@ -24,6 +24,7 @@
         "Description[tr]": "Mürekkepbalığı simge seçicisini çağırır",
         "Description[uk]": "Запускає засіб вибору піктограми Cuttlefish",
         "Description[x-test]": "xxInvokes Cuttlefish icon pickerxx",
+        "Description[zh_CN]": "调用 Cuttlefish 图标选取器",
         "Description[zh_TW]": "呼叫 Cuttlefish 圖示挑選器",
         "Name": "Icon Picker",
         "Name[az]": "İkon seçimi",

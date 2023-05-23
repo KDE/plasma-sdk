@@ -29,6 +29,7 @@
                 "Name[tr]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
                 "Name[x-test]": "xxMarco Martinxx",
+                "Name[zh_CN]": "Marco Martin",
                 "Name[zh_TW]": "Marco Martin"
             }
         ],
@@ -57,6 +58,7 @@
         "Description[tr]": "PlasmoidViewer Kabuğu",
         "Description[uk]": "Оболонка перегляду плазмоїдів",
         "Description[x-test]": "xxPlasmoidViewer Shellxx",
+        "Description[zh_CN]": "Plasmoid 查看器外壳",
         "Description[zh_TW]": "Plasmoid 檢視器殼層",
         "Id": "org.kde.plasmoidviewershell",
         "License": "GPL-2.0+",
