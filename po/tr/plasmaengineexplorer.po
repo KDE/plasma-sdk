@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: extragear-sdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-09 02:16+0000\n"
-"PO-Revision-Date: 2023-01-18 22:29+0300\n"
+"PO-Revision-Date: 2023-05-24 01:31+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 23.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -43,7 +43,7 @@ msgstr "Tümünü Topla"
 #: engineexplorer.cpp:48 main.cpp:56
 #, kde-format
 msgid "Plasma Engine Explorer"
-msgstr "Plasma Motor Tarayıcı"
+msgstr "Plasma İşletke Tarayıcı"
 
 #: engineexplorer.cpp:77
 #, kde-format
@@ -69,7 +69,7 @@ msgstr "Değer"
 #: engineexplorer.cpp:304
 #, kde-format
 msgid "Get associated service"
-msgstr "İlgili servisi al"
+msgstr "İlgili hizmeti al"
 
 #: engineexplorer.cpp:305
 #, kde-format
@@ -141,15 +141,15 @@ msgstr[1] "<%1 eş>"
 #: engineexplorer.cpp:543 engineexplorer.ui:29
 #, kde-format
 msgid "Plasma DataEngine Explorer"
-msgstr "Plasma Veri Motoru Tarayıcı"
+msgstr "Plasma Veri İşletkesi Tarayıcısı"
 
 #: engineexplorer.cpp:547
 #, kde-format
 msgctxt "The name of the engine followed by the number of data sources"
 msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
-msgstr[0] "%1 Motoru - %2 veri kaynağı"
-msgstr[1] "%1 Motoru - %2 veri kaynağı"
+msgstr[0] "%1 İşletkesi - %2 veri kaynağı"
+msgstr[1] "%1 İşletkesi - %2 veri kaynağı"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
 #: engineexplorer.ui:50
@@ -185,13 +185,13 @@ msgstr "Kaynak İste"
 #: engineexplorer.ui:120
 #, kde-format
 msgid "Service for source"
-msgstr "Kaynak için servis"
+msgstr "Kaynak için hizmet"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
 #: engineexplorer.ui:133
 #, kde-format
 msgid "Request Service for Source"
-msgstr "Kaynak için Servis İste"
+msgstr "Kaynak için Hizmet İste"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -236,7 +236,7 @@ msgstr "Geliştirici ve projeyi yürüten"
 #: main.cpp:68
 #, kde-format
 msgid "Displays a list of known engines and their descriptions"
-msgstr "Bilinen motorların listesini ve açıklamalarını gösterir"
+msgstr "Bilinen işletkelerin listesini ve açıklamalarını gösterir"
 
 #: main.cpp:69
 #, kde-format
@@ -261,7 +261,7 @@ msgstr "Piksel cinsinden istenilen dikey konum"
 #: main.cpp:73
 #, kde-format
 msgid "The data engine to use"
-msgstr "Kullanılacak veri motoru"
+msgstr "Kullanılacak veri işletkesi"
 
 #: main.cpp:74
 #, kde-format
@@ -279,8 +279,8 @@ msgid ""
 "Only show engines associated with the parent application; maps to the X-KDE-"
 "ParentApp entry in the DataEngine's .desktop file."
 msgstr ""
-"Yalnızca üst uygulama ile ilişkili olan motorları göster; VeriMotorunun ."
-"desktop dosyasındaki X-KDE-ParentApp girdilerini listeler."
+"Yalnızca üst uygulama ile ilişkili olan işletkeleri göster; Veri "
+"İşletkesi'nin .desktop dosyasındaki X-KDE-ParentApp girdilerini listeler."
 
 #: modelviewer.cpp:85 serviceviewer.cpp:51
 #, kde-format
@@ -320,20 +320,20 @@ msgid ""
 "No valid service was returned. Verify that a service is available for this "
 "source."
 msgstr ""
-"Geçerli bir servis döndürülmedi. Bu kaynak için bir servis olup olmadığını "
+"Geçerli bir hizmet döndürülmedi. Bu kaynak için bir hizmet olup olmadığını "
 "doğrulayın."
 
 #: serviceviewer.cpp:72
 #, kde-format
 msgctxt "%1 is a Plasma service name"
 msgid "%1 Service Explorer"
-msgstr "%1 Servis Tarayıcı"
+msgstr "%1 Hizmeti Tarayıcı"
 
 #: serviceviewer.cpp:75
 #, kde-format
 msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
-msgstr "Motor: <b>%1</b>; Kaynak: <b>%2</b>; Servis <b>%3</b>"
+msgstr "İşletke: <b>%1</b>; Kaynak: <b>%2</b>; Hizmet <b>%3</b>"
 
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
 #: serviceviewer.cpp:151 serviceviewer.ui:73
@@ -390,7 +390,7 @@ msgstr "İşlem sayısı"
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
-msgstr "Veri Motorları"
+msgstr "Veri İşletkeleri"
 
 #~ msgid "&lt;1 bit&gt;"
 #~ msgid_plural "&lt;%1 bits&gt;"
