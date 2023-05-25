@@ -85,7 +85,7 @@ int main(int argc, char **argv)
 
     const QString applet = parser.value("applet");
     if (applet.isEmpty()) {
-        qWarning() << "An applet name must be specified";
+        qWarning() << "An applet name or path must be specified, e.g. --applet org.kde.plasma.analogclock";
         return 1;
     }
 
