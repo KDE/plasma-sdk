@@ -11,7 +11,7 @@ import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.0
 import QtQuick.Dialogs
 
-import org.kde.kirigami 2.8 as Kirigami
+import org.kde.kirigami 2.20 as Kirigami
 
 Rectangle {
     property alias iconPreview: iconPreview
@@ -22,12 +22,17 @@ Rectangle {
         anchors.fill: parent
         spacing: Kirigami.Units.largeSpacing
 
-        Kirigami.Heading {
-            level: 1
+        Kirigami.SelectableLabel {
+            Accessible.role: Accessible.Heading
             Layout.fillWidth: true
-            wrapMode: Text.Wrap
+
+            Layout.topMargin: Kirigami.Units.gridUnit * 2
+
+            // Match `level: 1` in Kirigami.Heading
+            font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.35
+            // Match `type: Kirigami.Heading.Type.Primary` in Kirigami.Heading
+            font.weight: Font.DemiBold
             horizontalAlignment: Text.AlignHCenter
-            elide: Text.ElideRight
             text: preview.iconName
         }
         Kirigami.FormLayout {
