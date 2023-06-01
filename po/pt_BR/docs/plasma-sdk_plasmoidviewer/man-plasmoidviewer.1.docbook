@@ -6,11 +6,13 @@
 <refentry lang="&language;">
 <refentryinfo>
 <title
->Manual do Usuário do KDE</title>
+>Manual do usuário do plasmoidviewer</title>
 <date
->21/10/2010</date>
+>09/01/2017</date>
+<releaseinfo
+>Plasma 5.8</releaseinfo>
 <productname
->KDE</productname>
+>KDE Plasma</productname>
 </refentryinfo>
 
 <refmeta>
@@ -37,70 +39,68 @@
 >plasmoidviewer</command
 > <group choice="opt"
 ><option
+>-v, --version</option
+></group
+> <group choice="opt"
+><option
 >-c, --containment</option
 > <replaceable
-> nome</replaceable
+>nome</replaceable
+></group
+> <group choice="opt"
+><option
+>-a, --applet</option
+> <replaceable
+>nome</replaceable
 ></group
 > <group choice="opt"
 ><option
 >-f, --formfactor</option
 > <replaceable
-> nome</replaceable
-></group
-> <group choice="opt"
-><option
->--list</option
-></group
-> <group choice="opt"
-><option
->--list-wallpapers</option
-></group
-> <group choice="opt"
-><option
->--list-containments</option
+>nome</replaceable
 ></group
 > <group choice="opt"
 ><option
 >-l, --location</option
 > <replaceable
-> nome</replaceable
+>nome</replaceable
+></group
+> <group choice="opt"
+><option
+>-x, --xPosition</option
+> <replaceable
+>posição X</replaceable
+></group
+> <group choice="opt"
+><option
+>-y, --yPosition</option
+> <replaceable
+>posição Y</replaceable
+></group
+> <group choice="opt"
+><option
+>-s, --size</option
+> <replaceable
+>largura X altura</replaceable
 ></group
 > <group choice="opt"
 ><option
 >-p, --pixmapcache</option
 > <replaceable
-> tamanho</replaceable
-></group
-> <group choice="opt"
-><option
->-s, --screenshot</option
-></group
-> <group choice="opt"
-><option
->--screenshot-all</option
+>tamanho</replaceable
 ></group
 > <group choice="opt"
 ><option
 >-t, --theme</option
 > <replaceable
-> nome</replaceable
+>nome</replaceable
 ></group
 > <group choice="opt"
 ><option
->-w, --wallpaper</option
-> <replaceable
-> nome</replaceable
+>-h, --help</option
 ></group
 > <arg choice="opt"
->applet</arg
-> <arg choice="opt"
 >args</arg
-> <arg choice="opt"
->--list-remote</arg
-> <arg choice="opt"
->Opções genéricas do KDE</arg
-> <arg choice="opt"
->Opções genéricas do Qt</arg
 > </cmdsynopsis>
 </refsynopsisdiv>
 
@@ -114,7 +114,7 @@
 
 <para
 >Só serão encontrados os miniaplicativos instalados. O <command
->kbuildsycoca4</command
+>kbuildsycoca5</command
 > poderá ter que ser executado para os mini-aplicativos recém instalados serem encontrados.</para>
 </refsect1>
 
@@ -126,13 +126,35 @@
 <varlistentry>
 <term
 ><option
+>-v, --version</option
+></term>
+<listitem
+><para
+>Mostra informações sobre a versão.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
 >-c, --containment <replaceable
 >nome</replaceable
 ></option
 ></term>
 <listitem
 ><para
->Nome do plugin do contêiner [nulo].</para
+>O nome do plugin do contêiner.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-a, --applet <replaceable
+>nome</replaceable
+></option
+></term>
+<listitem
+><para
+>Nome do plugin do miniaplicativo.</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -144,37 +166,7 @@
 ></term>
 <listitem
 ><para
->O fator do formato a usar (horizontal, vertical, mediacenter ou planar) [planar].</para
-></listitem>
-</varlistentry>
-<varlistentry>
-<term
-><option
->--list</option
-></term>
-<listitem
-><para
->Mostra uma lista de miniaplicativos conhecidos.</para
-></listitem>
-</varlistentry>
-<varlistentry>
-<term
-><option
->--list-wallpapers</option
-></term>
-<listitem
-><para
->Mostra uma lista de papéis de parede conhecidos.</para
-></listitem>
-</varlistentry>
-<varlistentry>
-<term
-><option
->--list-containments</option
-></term>
-<listitem
-><para
->Mostra uma lista de contêineres conhecidos.</para
+>O fator do formato a usar (horizontal, vertical, mediacenter, planar ou application).</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -186,7 +178,43 @@
 ></term>
 <listitem
 ><para
->A restrição de localização com a qual iniciar o contêiner (floating, desktop, fullscreen, topedge, bottomedge, leftedge, rightedge) [floating].</para
+>A restrição de localização com a qual iniciar o contêiner (floating, desktop, fullscreen, topedge, bottomedge, leftedge, rightedge).</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-x, --xPosition <replaceable
+>posição X</replaceable
+></option
+></term>
+<listitem
+><para
+>Define a posição X do plasmoidviewer na área de trabalho Plasma.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-y, --yPosition <replaceable
+>posição Y</replaceable
+></option
+></term>
+<listitem
+><para
+>Define a posição Y do plasmoidviewer na área de trabalho Plasma.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-s, --size <replaceable
+>largura X altura</replaceable
+></option
+></term>
+<listitem
+><para
+>Define o tamanho da janela do plasmoide.</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -198,27 +226,7 @@
 ></term>
 <listitem
 ><para
->O tamanho em KB da cache de imagens.</para
-></listitem>
-</varlistentry>
-<varlistentry>
-<term
-><option
->-s, --screenshot</option
-></term>
-<listitem
-><para
->Faz uma captura de tela do elemento e salva-a na pasta de trabalho como &lt;nome-plugin&gt;.png.</para
-></listitem>
-</varlistentry>
-<varlistentry>
-<term
-><option
->-s, --screenshot-all</option
-></term>
-<listitem
-><para
->Faz uma captura do tela de cada elemento e salva-a a na pasta de trabalho como &lt;nome-plugin&gt;.png.</para
+>O tamanho em KB do cache de imagens.</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -230,31 +238,17 @@
 ></term>
 <listitem
 ><para
->Tema SVG a ser usado na área de trabalho.</para
+>O nome do tema que o console irá usar.</para
 ></listitem>
 </varlistentry>
 <varlistentry>
 <term
 ><option
->-w, --wallpaper <replaceable
->nome</replaceable
-></option
+>-h, --help</option
 ></term>
 <listitem
 ><para
->O nome do plugin de papéis de parede. Necessita que um plugin de contêiner seja especificado.</para
-></listitem>
-</varlistentry>
-<varlistentry>
-<term
-><option
-><replaceable
->miniaplicativo</replaceable
-></option
-></term>
-<listitem
-><para
->Nome do miniaplicativo a visualizar; pode se referir ao nome do plugin ou localização (completa ou relativa) de um pacote. Se não for fornecido, então uma tentativa é feita para carregar o pacote da pasta atual.</para
+>Mostra esta ajuda.</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -266,19 +260,7 @@
 ></term>
 <listitem
 ><para
->Argumentos opcionais do miniaplicativo a ser adicionado.</para
-></listitem>
-</varlistentry>
-<varlistentry>
-<term
-><option
-><replaceable
->--list-remote</replaceable
-></option
-></term>
-<listitem
-><para
->Listar os widgets remotos anunciados pelo zeroconf.</para
+>Dados que devem ser passados ​​para o applet como evento 'externalData'.</para
 ></listitem>
 </varlistentry>
 
