@@ -1,7 +1,7 @@
 
 include(ECMAddTests)
 
-find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED Test)
+find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED Test)
 
 include_directories(../src)
 
