@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-07 02:16+0000\n"
+"POT-Creation-Date: 2023-06-03 02:04+0000\n"
 "PO-Revision-Date: 2016-08-31 10:57+0300\n"
 "Last-Translator: Safa Alfulaij <safa1996alfulaij@gmail.com>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -137,28 +137,28 @@ msgstr ""
 msgid "Zoom Out"
 msgstr ""
 
-#: src/qml/Preview.qml:38 src/qml/ResponsivePreview.qml:37
+#: src/qml/Preview.qml:43 src/qml/ResponsivePreview.qml:37
 #, fuzzy, kde-format
 #| msgid "Filename:"
 msgid "File name:"
 msgstr "اسم الملفّ:"
 
-#: src/qml/Preview.qml:43 src/qml/ResponsivePreview.qml:42
+#: src/qml/Preview.qml:48 src/qml/ResponsivePreview.qml:42
 #, kde-format
 msgid "Category:"
 msgstr "الفئة:"
 
-#: src/qml/Preview.qml:48 src/qml/ResponsivePreview.qml:47
+#: src/qml/Preview.qml:53 src/qml/ResponsivePreview.qml:47
 #, kde-format
 msgid "Scalable:"
 msgstr "تتحجّم:"
 
-#: src/qml/Preview.qml:49 src/qml/ResponsivePreview.qml:48
+#: src/qml/Preview.qml:54 src/qml/ResponsivePreview.qml:48
 #, kde-format
 msgid "yes"
 msgstr "نعم"
 
-#: src/qml/Preview.qml:49 src/qml/ResponsivePreview.qml:48
+#: src/qml/Preview.qml:54 src/qml/ResponsivePreview.qml:48
 #, kde-format
 msgid "no"
 msgstr "لا"

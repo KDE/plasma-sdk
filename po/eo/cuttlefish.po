@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cuttlefish\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-07 02:16+0000\n"
+"POT-Creation-Date: 2023-06-03 02:04+0000\n"
 "PO-Revision-Date: 2023-04-14 07:06+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@lists.kde.org>\n"
@@ -133,27 +133,27 @@ msgstr "Zomi enen"
 msgid "Zoom Out"
 msgstr "Malzomi"
 
-#: src/qml/Preview.qml:38 src/qml/ResponsivePreview.qml:37
+#: src/qml/Preview.qml:43 src/qml/ResponsivePreview.qml:37
 #, kde-format
 msgid "File name:"
 msgstr "Dosiernomo:"
 
-#: src/qml/Preview.qml:43 src/qml/ResponsivePreview.qml:42
+#: src/qml/Preview.qml:48 src/qml/ResponsivePreview.qml:42
 #, kde-format
 msgid "Category:"
 msgstr "Kategorio:"
 
-#: src/qml/Preview.qml:48 src/qml/ResponsivePreview.qml:47
+#: src/qml/Preview.qml:53 src/qml/ResponsivePreview.qml:47
 #, kde-format
 msgid "Scalable:"
 msgstr "Skalebla:"
 
-#: src/qml/Preview.qml:49 src/qml/ResponsivePreview.qml:48
+#: src/qml/Preview.qml:54 src/qml/ResponsivePreview.qml:48
 #, kde-format
 msgid "yes"
 msgstr "jes"
 
-#: src/qml/Preview.qml:49 src/qml/ResponsivePreview.qml:48
+#: src/qml/Preview.qml:54 src/qml/ResponsivePreview.qml:48
 #, kde-format
 msgid "no"
 msgstr "ne"

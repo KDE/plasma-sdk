@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cuttlefish\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-07 02:16+0000\n"
+"POT-Creation-Date: 2023-06-03 02:04+0000\n"
 "PO-Revision-Date: 2023-03-06 22:10+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -134,27 +134,27 @@ msgstr "放大"
 msgid "Zoom Out"
 msgstr "縮小"
 
-#: src/qml/Preview.qml:38 src/qml/ResponsivePreview.qml:37
+#: src/qml/Preview.qml:43 src/qml/ResponsivePreview.qml:37
 #, kde-format
 msgid "File name:"
 msgstr "檔案名稱："
 
-#: src/qml/Preview.qml:43 src/qml/ResponsivePreview.qml:42
+#: src/qml/Preview.qml:48 src/qml/ResponsivePreview.qml:42
 #, kde-format
 msgid "Category:"
 msgstr "類別："
 
-#: src/qml/Preview.qml:48 src/qml/ResponsivePreview.qml:47
+#: src/qml/Preview.qml:53 src/qml/ResponsivePreview.qml:47
 #, kde-format
 msgid "Scalable:"
 msgstr "可縮放："
 
-#: src/qml/Preview.qml:49 src/qml/ResponsivePreview.qml:48
+#: src/qml/Preview.qml:54 src/qml/ResponsivePreview.qml:48
 #, kde-format
 msgid "yes"
 msgstr "確定"
 
-#: src/qml/Preview.qml:49 src/qml/ResponsivePreview.qml:48
+#: src/qml/Preview.qml:54 src/qml/ResponsivePreview.qml:48
 #, kde-format
 msgid "no"
 msgstr "否"

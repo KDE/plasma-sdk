@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-07 02:16+0000\n"
+"POT-Creation-Date: 2023-06-03 02:04+0000\n"
 "PO-Revision-Date: 2023-04-03 16:57+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -130,27 +130,27 @@ msgstr "Vergrößern"
 msgid "Zoom Out"
 msgstr "Verkleinern"
 
-#: src/qml/Preview.qml:38 src/qml/ResponsivePreview.qml:37
+#: src/qml/Preview.qml:43 src/qml/ResponsivePreview.qml:37
 #, kde-format
 msgid "File name:"
 msgstr "Dateiname:"
 
-#: src/qml/Preview.qml:43 src/qml/ResponsivePreview.qml:42
+#: src/qml/Preview.qml:48 src/qml/ResponsivePreview.qml:42
 #, kde-format
 msgid "Category:"
 msgstr "Kategorie:"
 
-#: src/qml/Preview.qml:48 src/qml/ResponsivePreview.qml:47
+#: src/qml/Preview.qml:53 src/qml/ResponsivePreview.qml:47
 #, kde-format
 msgid "Scalable:"
 msgstr "Skalierbar:"
 
-#: src/qml/Preview.qml:49 src/qml/ResponsivePreview.qml:48
+#: src/qml/Preview.qml:54 src/qml/ResponsivePreview.qml:48
 #, kde-format
 msgid "yes"
 msgstr "Ja"
 
-#: src/qml/Preview.qml:49 src/qml/ResponsivePreview.qml:48
+#: src/qml/Preview.qml:54 src/qml/ResponsivePreview.qml:48
 #, kde-format
 msgid "no"
 msgstr "Nein"
