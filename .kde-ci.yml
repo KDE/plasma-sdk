@@ -28,6 +28,7 @@ Dependencies:
     'frameworks/solid': '@latest-kf6'
     'frameworks/sonnet': '@latest-kf6'
     'frameworks/syntax-highlighting': '@latest-kf6'
+    'frameworks/kcmutils': '@latest-kf6'
     'plasma/plasma5support': '@same'
 Options:
   require-passing-tests-on: [ 'Linux', 'FreeBSD']

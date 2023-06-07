@@ -14,7 +14,7 @@ import org.kde.newstuff 1.62 as NewStuff
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasmoid 2.0
 import org.kde.kirigami 2.5 as Kirigami
-import org.kde.kcm 1.4
+import org.kde.kcmutils
 
 AbstractKCM {
     id: root
