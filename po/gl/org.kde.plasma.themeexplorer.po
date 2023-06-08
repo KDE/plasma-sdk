@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-#
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2015, 2016.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2019.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2019, 2023.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-13 00:47+0000\n"
-"PO-Revision-Date: 2019-07-21 10:14+0200\n"
+"PO-Revision-Date: 2023-06-07 09:20+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -16,12 +16,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.04.1\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Adrián Chaves Fernández"
+msgstr "Adrian Chaves (Gallaecio)"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -207,16 +207,14 @@ msgid "Checkbox"
 msgstr "Caixa para marcar"
 
 #: package/contents/ui/fakecontrols/LineEdit.qml:33
-#, fuzzy, kde-format
-#| msgid "Text input..."
+#, kde-format
 msgid "Text input…"
 msgstr "Entrada de texto…"
 
 #: package/contents/ui/main.qml:30
-#, fuzzy, kde-format
-#| msgid "New Theme"
+#, kde-format
 msgid "New Theme…"
-msgstr "Tema novo"
+msgstr "Novo tema…"
 
 #: package/contents/ui/main.qml:46
 #, kde-format
@@ -229,16 +227,14 @@ msgid "Open Folder"
 msgstr "Abrir un cartafol"
 
 #: package/contents/ui/main.qml:63
-#, fuzzy, kde-format
-#| msgid "Edit Metadata..."
+#, kde-format
 msgid "Edit Metadata…"
 msgstr "Editar os metadatos…"
 
 #: package/contents/ui/main.qml:80
-#, fuzzy, kde-format
-#| msgid "Edit Colors"
+#, kde-format
 msgid "Edit Colors…"
-msgstr "Editar as cores"
+msgstr "Editar as cores…"
 
 #: package/contents/ui/main.qml:96
 #, kde-format
@@ -246,8 +242,7 @@ msgid "Help"
 msgstr "Axuda"
 
 #: package/contents/ui/main.qml:101
-#, fuzzy, kde-format
-#| msgid "Search..."
+#, kde-format
 msgid "Search…"
 msgstr "Buscar…"
 
@@ -287,14 +282,12 @@ msgid "Show Margins"
 msgstr "Mostrar as marxes"
 
 #: package/contents/ui/main.qml:257
-#, fuzzy, kde-format
-#| msgid "Create with Editor..."
+#, kde-format
 msgid "Create with Editor…"
 msgstr "Crear co editor…"
 
 #: package/contents/ui/main.qml:257
-#, fuzzy, kde-format
-#| msgid "Open In Editor..."
+#, kde-format
 msgid "Open In Editor…"
 msgstr "Abrir no editor…"
 

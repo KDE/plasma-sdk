@@ -1,19 +1,19 @@
 # translation of plasmaengineexplorer.po to Galician
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-#
 # mvillarino <mvillarino@users.sourceforge.net>, 2007, 2008.
 # marce villarino <mvillarino@users.sourceforge.net>, 2009.
 # Marce Villarino <mvillarino@gmail.com>, 2009, 2011.
 # Marce Villarino <mvillarino@kde-espana.es>, 2012.
 # Adrian Chaves Fernandez <adriyetichaves@gmail.com>, 2013, 2015, 2016, 2017.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2019.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2019, 2023.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-05-24 00:45+0000\n"
-"PO-Revision-Date: 2019-10-19 21:47+0200\n"
+"PO-Revision-Date: 2023-06-07 10:43+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.11.70\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -54,10 +54,9 @@ msgid "Search"
 msgstr "Buscar"
 
 #: engineexplorer.cpp:180
-#, fuzzy, kde-format
-#| msgid "DataSource"
+#, kde-format
 msgid "DataSource/Key"
-msgstr "Fonte de datos"
+msgstr "Fonte de datos ou clave"
 
 #: engineexplorer.cpp:180
 #, kde-format
@@ -126,13 +125,11 @@ msgid "<not displayable>"
 msgstr "<non mostrábel>"
 
 #: engineexplorer.cpp:499 engineexplorer.cpp:514
-#, fuzzy, kde-format
-#| msgid "<1 item>"
-#| msgid_plural "<%1 items>"
+#, kde-format
 msgctxt "Length of the list"
 msgid "<%1 item>"
 msgid_plural "<%1 items>"
-msgstr[0] "<1 elemento>"
+msgstr[0] "<%1 elemento>"
 msgstr[1] "<%1 elementos>"
 
 #: engineexplorer.cpp:529
@@ -140,8 +137,8 @@ msgstr[1] "<%1 elementos>"
 msgctxt "Size of the map"
 msgid "<%1 pair>"
 msgid_plural "<%1 pairs>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<%1 parella>"
+msgstr[1] "<%1 parellas>"
 
 #. i18n: ectx: property (text), widget (KTitleWidget, m_title)
 #: engineexplorer.cpp:542 engineexplorer.ui:29
@@ -237,7 +234,7 @@ msgstr "Aaron J. Seigo"
 #: main.cpp:61
 #, kde-format
 msgid "Author and maintainer"
-msgstr "Autor e mantenedor"
+msgstr "Autoría e mantemento."
 
 #: main.cpp:68
 #, kde-format
@@ -336,12 +333,10 @@ msgid "%1 Service Explorer"
 msgstr "Navegador do servizo %1"
 
 #: serviceviewer.cpp:75
-#, fuzzy, kde-format
-#| msgctxt "Source: name of the data, Service: writes data instead of fetching"
-#| msgid "DataEngine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
+#, kde-format
 msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
-msgstr "Motor de datos: <b>%1</b>, fonte: <b>%2</b>, servizo <b>%3</b>"
+msgstr "Motor: <b>%1</b>. Fonte: <b>%2</b>. Servizo: <b>%3</b>."
 
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
 #: serviceviewer.cpp:151 serviceviewer.ui:73
@@ -378,9 +373,7 @@ msgstr ""
 "%3</b></p>"
 
 #: serviceviewer.cpp:226
-#, fuzzy, kde-format
-#| msgid "One active operation..."
-#| msgid_plural "%1 operations active..."
+#, kde-format
 msgid "One active operation…"
 msgid_plural "%1 operations active…"
 msgstr[0] "Unha operación activa…"
