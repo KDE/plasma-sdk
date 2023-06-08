@@ -16,16 +16,19 @@ PlasmaCore.ToolTipArea {
     objectName: "org.kde.desktop-CompactApplet"
     anchors.fill: parent
 
-    mainText: Plasmoid.toolTipMainText
-    subText: Plasmoid.toolTipSubText
+    mainText: plasmoidItem?.toolTipMainText ?? ""
+    subText: plasmoidItem?.toolTipSubText ?? ""
     location: Plasmoid.location
-    active: !Plasmoid.expanded
-    textFormat: Plasmoid.toolTipTextFormat
-    mainItem: Plasmoid.toolTipItem ? Plasmoid.toolTipItem : null
+
+    active: !plasmoidItem.expanded
+    textFormat: plasmoidItem?.toolTipTextFormat ?? Text.AutoText
+
+    mainItem: plasmoidItem?.toolTipItem ?? null
 
     property Item fullRepresentation
     property Item compactRepresentation
     property Item expandedFeedback: expandedItem
+    property Item plasmoidItem
 
     onCompactRepresentationChanged: {
         if (compactRepresentation) {
@@ -111,7 +114,7 @@ PlasmaCore.ToolTipArea {
             }
             return prefix;
         }
-        opacity: Plasmoid.expanded ? 1 : 0
+        opacity: plasmoidItem.expanded ? 1 : 0
         Behavior on opacity {
             NumberAnimation {
                 duration: PlasmaCore.Units.shortDuration
@@ -123,20 +126,20 @@ PlasmaCore.ToolTipArea {
     Timer {
         id: expandedSync
         interval: 100
-        onTriggered: Plasmoid.expanded = popupWindow.visible;
+        onTriggered: root.plasmoidItem.expanded = popupWindow.visible;
     }
 
     Connections {
         target: Plasmoid.action("configure")
         function onTriggered() {
-            if (Plasmoid.hideOnWindowDeactivate) {
-                Plasmoid.expanded = false
+            if (root.plasmoidItem.hideOnWindowDeactivate) {
+                root.plasmoidItem.expanded = false
             }
         }
     }
 
     Connections {
-        target: Plasmoid.self
+        target: root.Plasmoid
         function onContextualActionsAboutToShow() { root.hideImmediately() }
     }
 
@@ -144,10 +147,10 @@ PlasmaCore.ToolTipArea {
         id: popupWindow
         objectName: "popupWindow"
         flags: Qt.WindowStaysOnTopHint
-        visible: Plasmoid.expanded && fullRepresentation
+        visible: root.plasmoidItem?.expanded && fullRepresentation
         visualParent: root.compactRepresentation
         location: Plasmoid.location
-        hideOnWindowDeactivate: Plasmoid.hideOnWindowDeactivate
+        hideOnWindowDeactivate: root.plasmoidItem.hideOnWindowDeactivate
         backgroundHints: (Plasmoid.containmentDisplayHints & PlasmaCore.Types.DesktopFullyCovered) ? PlasmaCore.Dialog.SolidBackground : PlasmaCore.Dialog.StandardBackground
 
         property var oldStatus: PlasmaCore.Types.UnknownStatus
@@ -165,7 +168,7 @@ PlasmaCore.ToolTipArea {
             focus: true
 
             Keys.onEscapePressed: {
-                Plasmoid.expanded = false;
+                root.plasmoidItem.expanded = false;
             }
 
             LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft

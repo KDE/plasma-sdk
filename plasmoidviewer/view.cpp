@@ -20,6 +20,7 @@
 #include <KPackage/Package>
 #include <KPackage/PackageLoader>
 #include <Plasma/PluginLoader>
+#include <plasmaquick/appletquickitem.h>
 
 class ViewerCorona : public Plasma::Corona
 {
@@ -70,8 +71,8 @@ View::~View()
 void View::resizeEvent(QResizeEvent *event)
 {
     emit corona()->screenGeometryChanged(0);
-    emit corona()->availableScreenRectChanged();
-    emit corona()->availableScreenRegionChanged();
+    emit corona()->availableScreenRectChanged(0);
+    emit corona()->availableScreenRegionChanged(0);
     PlasmaQuick::ContainmentView::resizeEvent(event);
 }
 
@@ -243,7 +244,8 @@ void View::emitExternalData(const QString &data)
 
     Plasma::Applet *applet = containment()->applets().constFirst();
 
-    QObject *graphicsObject = qobject_cast<QQuickItem *>(applet->property("_plasma_graphicObject").value<QObject *>());
+    PlasmaQuick::AppletQuickItem *graphicsObject = PlasmaQuick::AppletQuickItem::itemForApplet(applet);
+
     if (!graphicsObject) {
         return;
     }
