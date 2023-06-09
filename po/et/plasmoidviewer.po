@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoidviewer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:16+0000\n"
+"POT-Creation-Date: 2023-06-09 02:14+0000\n"
 "PO-Revision-Date: 2019-10-30 17:47+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -96,17 +96,17 @@ msgstr "Shelli kasutatava teema nimi"
 msgid "Data that should be passed to the applet as 'externalData' event"
 msgstr "Andmed, mis tuleb apletile edastada 'externalData' sündmusena"
 
-#: view.cpp:123
+#: view.cpp:124
 #, no-c-format, kde-format
 msgid "Applet %1 does not exist."
 msgstr "Apletti %1 ei ole olemas."
 
-#: view.cpp:140
+#: view.cpp:141
 #, no-c-format, kde-format
 msgid "Containment %1 does not exist."
 msgstr "Konteinerit %1 ei ole olemas."
 
-#: view.cpp:317
+#: view.cpp:319
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Screenshot"

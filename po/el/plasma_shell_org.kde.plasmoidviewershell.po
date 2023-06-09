@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:16+0000\n"
+"POT-Creation-Date: 2023-06-09 02:14+0000\n"
 "PO-Revision-Date: 2021-09-04 09:48+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -18,15 +18,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 20.04.2\n"
 
-#: contents/applet/AppletError.qml:40
+#: contents/applet/AppletError.qml:41
 msgid "Sorry! There was an error loading %1."
 msgstr "Συγγνώμη! Παρουσιάστηκε σφάλμα στη φόρτωση του %1."
 
-#: contents/applet/AppletError.qml:48
+#: contents/applet/AppletError.qml:49
 msgid "Copy Error Details to Clipboard"
 msgstr "Αντιγραφή λεπτομερειών σφάλματος στο πρόχειρο"
 
-#: contents/applet/CompactApplet.qml:70
+#: contents/applet/CompactApplet.qml:73
 msgid "Open %1"
 msgstr ""
 

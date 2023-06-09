@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:16+0000\n"
+"POT-Creation-Date: 2023-06-09 02:14+0000\n"
 "PO-Revision-Date: 2022-06-22 16:13-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -19,15 +19,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 21.12.3\n"
 
-#: contents/applet/AppletError.qml:40
+#: contents/applet/AppletError.qml:41
 msgid "Sorry! There was an error loading %1."
 msgstr "Desculpe! Ocorreu um erro ao carregar %1."
 
-#: contents/applet/AppletError.qml:48
+#: contents/applet/AppletError.qml:49
 msgid "Copy Error Details to Clipboard"
 msgstr "Copiar detalhes do erro para a área de transferência"
 
-#: contents/applet/CompactApplet.qml:70
+#: contents/applet/CompactApplet.qml:73
 msgid "Open %1"
 msgstr "Abrir %1"
 

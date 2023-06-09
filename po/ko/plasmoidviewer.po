@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoidviewer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:16+0000\n"
+"POT-Creation-Date: 2023-06-09 02:14+0000\n"
 "PO-Revision-Date: 2020-04-04 15:03+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -95,17 +95,17 @@ msgstr "셸에서 사용할 테마 이름"
 msgid "Data that should be passed to the applet as 'externalData' event"
 msgstr "애플릿의 'externalData' 이벤트에 전달할 데이터"
 
-#: view.cpp:123
+#: view.cpp:124
 #, no-c-format, kde-format
 msgid "Applet %1 does not exist."
 msgstr "애플릿 %1이(가) 없습니다."
 
-#: view.cpp:140
+#: view.cpp:141
 #, no-c-format, kde-format
 msgid "Containment %1 does not exist."
 msgstr "컨테이너 %1이(가) 없습니다."
 
-#: view.cpp:317
+#: view.cpp:319
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Screenshot"

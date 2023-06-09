@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:16+0000\n"
+"POT-Creation-Date: 2023-06-09 02:14+0000\n"
 "PO-Revision-Date: 2023-05-22 13:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,15 +18,15 @@ msgstr ""
 "plasmoidviewershell.pot\n"
 "X-Crowdin-File-ID: 42663\n"
 
-#: contents/applet/AppletError.qml:40
+#: contents/applet/AppletError.qml:41
 msgid "Sorry! There was an error loading %1."
 msgstr "对不起，加载 %1 时发生错误。"
 
-#: contents/applet/AppletError.qml:48
+#: contents/applet/AppletError.qml:49
 msgid "Copy Error Details to Clipboard"
 msgstr "复制错误详情到剪贴板"
 
-#: contents/applet/CompactApplet.qml:70
+#: contents/applet/CompactApplet.qml:73
 msgid "Open %1"
 msgstr "打开 %1"
 

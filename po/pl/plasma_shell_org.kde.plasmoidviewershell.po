@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:16+0000\n"
+"POT-Creation-Date: 2023-06-09 02:14+0000\n"
 "PO-Revision-Date: 2022-06-04 10:05+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -18,15 +18,15 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 22.03.70\n"
 
-#: contents/applet/AppletError.qml:40
+#: contents/applet/AppletError.qml:41
 msgid "Sorry! There was an error loading %1."
 msgstr "Wybacz! Wystąpił błąd podczas wczytywania %1."
 
-#: contents/applet/AppletError.qml:48
+#: contents/applet/AppletError.qml:49
 msgid "Copy Error Details to Clipboard"
 msgstr "Skopiuj szczegóły błędu do schowka"
 
-#: contents/applet/CompactApplet.qml:70
+#: contents/applet/CompactApplet.qml:73
 msgid "Open %1"
 msgstr "Otwórz %1"
 

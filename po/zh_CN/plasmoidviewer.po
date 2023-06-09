@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:16+0000\n"
+"POT-Creation-Date: 2023-06-09 02:14+0000\n"
 "PO-Revision-Date: 2023-05-22 13:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -92,17 +92,17 @@ msgstr "外壳要使用的主题名称"
 msgid "Data that should be passed to the applet as 'externalData' event"
 msgstr "要作为 externalData 事件传递给小程序的数据"
 
-#: view.cpp:123
+#: view.cpp:124
 #, no-c-format, kde-format
 msgid "Applet %1 does not exist."
 msgstr "小程序 %1 不存在。"
 
-#: view.cpp:140
+#: view.cpp:141
 #, no-c-format, kde-format
 msgid "Containment %1 does not exist."
 msgstr "容器 %1 不存在。"
 
-#: view.cpp:317
+#: view.cpp:319
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Screenshot"

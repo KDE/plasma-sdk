@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:16+0000\n"
+"POT-Creation-Date: 2023-06-09 02:14+0000\n"
 "PO-Revision-Date: 2022-09-07 18:28+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -102,17 +102,17 @@ msgstr ""
 "Les dades que s'han de passar a la miniaplicació com a esdeveniment «dades "
 "externes»"
 
-#: view.cpp:123
+#: view.cpp:124
 #, no-c-format, kde-format
 msgid "Applet %1 does not exist."
 msgstr "La miniaplicació %1 no existix."
 
-#: view.cpp:140
+#: view.cpp:141
 #, no-c-format, kde-format
 msgid "Containment %1 does not exist."
 msgstr "El contenidor %1 no existix."
 
-#: view.cpp:317
+#: view.cpp:319
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Screenshot"
