@@ -77,6 +77,7 @@ ecm_set_disabled_deprecation_versions(
 
 add_subdirectory(cuttlefish)
 add_subdirectory(engineexplorer)
+add_subdirectory(kqml)
 add_subdirectory(plasmoidviewer)
 add_subdirectory(themeexplorer)
 add_subdirectory(lookandfeelexplorer)
