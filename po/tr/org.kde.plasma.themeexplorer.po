@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Volkan Gezer <volkangezer@gmail.com>, 2017, 2021.
-# Emir SARI <emir_sari@icloud.com>, 2022.
+# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-09 02:16+0000\n"
-"PO-Revision-Date: 2022-05-02 14:26+0300\n"
+"PO-Revision-Date: 2023-06-10 12:13+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.04.0\n"
+"X-Generator: Lokalize 23.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -229,7 +229,7 @@ msgstr "Klasör Aç"
 #: package/contents/ui/main.qml:63
 #, kde-format
 msgid "Edit Metadata…"
-msgstr "Üstveriyi Düzenle…"
+msgstr "Üst Veriyi Düzenle…"
 
 #: package/contents/ui/main.qml:80
 #, kde-format
@@ -259,7 +259,7 @@ msgstr "Önizle:"
 #: package/contents/ui/main.qml:239
 #, kde-format
 msgid "Image path: %1"
-msgstr "Resim yolu: %1"
+msgstr "Görsel yolu: %1"
 
 #: package/contents/ui/main.qml:244
 #, kde-format
@@ -334,7 +334,7 @@ msgstr "Lisans:"
 #: package/contents/ui/MetadataEditor.qml:122
 #, kde-format
 msgid "Website:"
-msgstr "Web site:"
+msgstr "Web sitesi:"
 
 #: src/main.cpp:37
 #, kde-format
