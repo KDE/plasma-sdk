@@ -1,19 +1,19 @@
 # translation of plasmoidviewer.po to galician
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-#
 # mvillarino <mvillarino@users.sourceforge.net>, 2008, 2009.
 # marce villarino <mvillarino@users.sourceforge.net>, 2009.
 # Marce Villarino <mvillarino@gmail.com>, 2009, 2011.
 # Marce Villarino <mvillarino@kde-espana.es>, 2011, 2012.
 # Adrian Chaves Fernandez <adriyetichaves@gmail.com>, 2013, 2015, 2017.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2023.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: plasmoidviewer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-09 02:14+0000\n"
-"PO-Revision-Date: 2019-10-19 21:46+0200\n"
+"PO-Revision-Date: 2023-06-11 21:52+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.11.70\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -36,7 +36,7 @@ msgstr "mvillarino@users.sourceforge.net"
 #: main.cpp:37
 #, kde-format
 msgid "Plasmoidviewer"
-msgstr "Visor de plasmoides"
+msgstr "Visor de trebellos"
 
 #: main.cpp:44
 #, kde-format
@@ -77,19 +77,18 @@ msgstr ""
 #, kde-format
 msgid "Set the x position of the plasmoidviewer on the Plasma desktop"
 msgstr ""
-"Definir a posición horizontal (X) do visor de plasmoides no escritorio "
-"Plasma."
+"Definir a posición horizontal (X) do visor de trebellos no escritorio Plasma."
 
 #: main.cpp:66
 #, kde-format
 msgid "Set the y position of the plasmoidviewer on the Plasma desktop"
 msgstr ""
-"Definir a posición vertical (Y) do visor de plasmoides no escritorio Plasma."
+"Definir a posición vertical (Y) do visor de trebellos no escritorio Plasma."
 
 #: main.cpp:69
 #, kde-format
 msgid "Set the window size of the plasmoidview"
-msgstr "Definir o tamaño da xanela do visor de plasmoides."
+msgstr "Definir o tamaño da xanela do visor de trebellos."
 
 #: main.cpp:72
 #, kde-format
