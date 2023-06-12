@@ -8,6 +8,7 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 Item {
@@ -19,7 +20,7 @@ Item {
         }
         clip: true
 
-        PlasmaCore.Svg {
+        KSvg.Svg {
             id: lineSvg
             imagePath: "widgets/listitem"
         }
@@ -53,7 +54,7 @@ Item {
                         anchors.centerIn: parent
                         text: parent.prefix
                     }
-                    PlasmaCore.SvgItem {
+                    KSvg.SvgItem {
                         svg: lineSvg
                         elementId: "separator"
                         height: naturalSize.height
