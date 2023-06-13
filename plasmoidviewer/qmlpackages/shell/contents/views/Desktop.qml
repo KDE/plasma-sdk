@@ -29,10 +29,10 @@ Rectangle {
             bottomMargin: backgroundButtons.margins.bottom
         }
 
-        onFormFactor: {
+        onFormFactor: FormFactorType => {
             desktop.changeFormFactor(FormFactorType);
         }
-        onLocation: {
+        onLocation: LocationType => {
             desktop.changeLocation(LocationType);
         }
         onRequestScreenshot: {
