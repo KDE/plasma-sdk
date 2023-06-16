@@ -7,7 +7,7 @@
 import QtQuick 2.0
 //import org.kde.plasma 2.0
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 
 
 Rectangle {
@@ -72,7 +72,7 @@ Rectangle {
         height: root.height/3
         anchors.horizontalCenter: root.horizontalCenter
         anchors.bottom: buttons.top
-        anchors.bottomMargin: PlasmaCore.Units.smallSpacing
+        anchors.bottomMargin: Kirigami.Units.smallSpacing
     }
 
     onContainmentChanged: {

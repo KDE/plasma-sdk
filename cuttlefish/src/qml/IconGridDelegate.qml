@@ -10,7 +10,7 @@ import QtQuick.Layouts 1.0
 
 import org.kde.kirigami 2.8 as Kirigami
 // for smallestFont
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 
 
 MouseArea {

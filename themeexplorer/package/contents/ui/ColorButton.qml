@@ -8,7 +8,6 @@ import QtQuick 2.3
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.15
 import QtQuick.Dialogs
-import org.kde.plasma.core 2.0 as PlasmaCore
 
 Button {
     id: colorButton

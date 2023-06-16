@@ -9,7 +9,6 @@ import Qt5Compat.GraphicalEffects
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.15
 import QtQuick.Dialogs
-import org.kde.plasma.core 2.0 as PlasmaCore
 import "fakecontrols" as FakeControls
 
 

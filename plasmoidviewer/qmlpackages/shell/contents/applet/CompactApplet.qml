@@ -8,6 +8,7 @@ import QtQuick.Layouts 1.15
 import QtQuick.Window 2.15
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.plasmoid 2.0
 import org.kde.kquickcontrolsaddons 2.0
 
@@ -117,7 +118,7 @@ PlasmaCore.ToolTipArea {
         opacity: plasmoidItem.expanded ? 1 : 0
         Behavior on opacity {
             NumberAnimation {
-                duration: PlasmaCore.Units.shortDuration
+                duration: Kirigami.Units.shortDuration
                 easing.type: Easing.InOutQuad
             }
         }

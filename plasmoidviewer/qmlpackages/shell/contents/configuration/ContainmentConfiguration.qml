@@ -9,7 +9,7 @@ import QtQuick.Layouts 1.0
 
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.configuration 2.0
 import org.kde.plasma.plasmoid 2.0
 
@@ -17,10 +17,10 @@ import org.kde.plasma.plasmoid 2.0
 AppletConfiguration {
     id: root
     isContainment: true
-    Layout.minimumWidth: PlasmaCore.Units.gridUnit * 30
-    Layout.minimumHeight: PlasmaCore.Units.gridUnit * 20
-    Layout.preferredWidth: PlasmaCore.Units.gridUnit * 32
-    Layout.preferredHeight: PlasmaCore.Units.gridUnit * 36
+    Layout.minimumWidth: Kirigami.Units.gridUnit * 30
+    Layout.minimumHeight: Kirigami.Units.gridUnit * 20
+    Layout.preferredWidth: Kirigami.Units.gridUnit * 32
+    Layout.preferredHeight: Kirigami.Units.gridUnit * 36
     Layout.maximumWidth: Plasmoid.availableScreenRect.width
     Layout.maximumHeight: Plasmoid.availableScreenRect.height
 
