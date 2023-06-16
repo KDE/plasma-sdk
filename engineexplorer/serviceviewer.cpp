@@ -46,7 +46,9 @@ ServiceViewer::ServiceViewer(Plasma5Support::DataEngine *engine, const QString &
     connect(m_operationButton, &QAbstractButton::clicked, this, &ServiceViewer::startOperation);
     m_operationButton->setEnabled(false);
 
-    connect(m_operations, SIGNAL(currentIndexChanged(QString)), this, SLOT(operationSelected(QString)));
+    connect(m_operations, &KComboBox::currentIndexChanged, this, [this](int index) {
+        operationSelected(m_operations->itemText(index));
+    });
 
     QString engineName = i18nc("Plasma engine with unknown name", "Unknown");
     QString serviceName = i18nc("Plasma service with unknown name", "Unknown");
