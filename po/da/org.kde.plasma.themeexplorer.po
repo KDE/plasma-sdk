@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:16+0000\n"
+"POT-Creation-Date: 2023-06-17 02:07+0000\n"
 "PO-Revision-Date: 2016-06-18 14:35+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -27,175 +27,175 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "mschlander@opensuse.org"
 
-#: package/contents/ui/ColorEditor.qml:39
+#: package/contents/ui/ColorEditor.qml:38
 #, kde-format
 msgid "Edit Colors"
 msgstr "Redigér farver"
 
-#: package/contents/ui/ColorEditor.qml:68
+#: package/contents/ui/ColorEditor.qml:67
 #, kde-format
 msgid "Select Color"
 msgstr "Vælg farve"
 
-#: package/contents/ui/ColorEditor.qml:110
+#: package/contents/ui/ColorEditor.qml:109
 #, kde-format
 msgid "Normal text"
 msgstr "Normal tekst"
 
-#: package/contents/ui/ColorEditor.qml:116
+#: package/contents/ui/ColorEditor.qml:115
 #, kde-format
 msgid "Link"
 msgstr "Link"
 
-#: package/contents/ui/ColorEditor.qml:120
+#: package/contents/ui/ColorEditor.qml:119
 #, kde-format
 msgid "Visited Link"
 msgstr "Besøgt link"
 
-#: package/contents/ui/ColorEditor.qml:155
+#: package/contents/ui/ColorEditor.qml:154
 #, kde-format
 msgid "Complementary colors area:"
 msgstr "Område med komplementærfarver:"
 
-#: package/contents/ui/ColorEditor.qml:170
+#: package/contents/ui/ColorEditor.qml:169
 #, kde-format
 msgid "Label"
 msgstr "Etiket"
 
-#: package/contents/ui/ColorEditor.qml:193
+#: package/contents/ui/ColorEditor.qml:192
 #, kde-format
 msgid "Text color:"
 msgstr "Tekstfarve:"
 
-#: package/contents/ui/ColorEditor.qml:200
+#: package/contents/ui/ColorEditor.qml:199
 #, kde-format
 msgid "Background color:"
 msgstr "Baggrundsfarve:"
 
-#: package/contents/ui/ColorEditor.qml:207
+#: package/contents/ui/ColorEditor.qml:206
 #, kde-format
 msgid "Highlight color:"
 msgstr "Markeringsfarve:"
 
-#: package/contents/ui/ColorEditor.qml:214
+#: package/contents/ui/ColorEditor.qml:213
 #, kde-format
 msgid "Link color:"
 msgstr "Farve på link:"
 
-#: package/contents/ui/ColorEditor.qml:221
+#: package/contents/ui/ColorEditor.qml:220
 #, kde-format
 msgid "Visited link color:"
 msgstr "Farve på besøgt link:"
 
-#: package/contents/ui/ColorEditor.qml:229
+#: package/contents/ui/ColorEditor.qml:228
 #, kde-format
 msgid "Button text color:"
 msgstr "Farve på knaptekst:"
 
-#: package/contents/ui/ColorEditor.qml:236
+#: package/contents/ui/ColorEditor.qml:235
 #, kde-format
 msgid "Button background color:"
 msgstr "Baggrundsfarve på knap:"
 
-#: package/contents/ui/ColorEditor.qml:243
+#: package/contents/ui/ColorEditor.qml:242
 #, kde-format
 msgid "Button mouse over color:"
 msgstr "Farve på knap under mus:"
 
-#: package/contents/ui/ColorEditor.qml:250
+#: package/contents/ui/ColorEditor.qml:249
 #, kde-format
 msgid "Button focus color:"
 msgstr "Farve på knap i fokus:"
 
-#: package/contents/ui/ColorEditor.qml:258
+#: package/contents/ui/ColorEditor.qml:257
 #, kde-format
 msgid "Text view text color:"
 msgstr "Tekstfarve i tekstvisning:"
 
-#: package/contents/ui/ColorEditor.qml:265
+#: package/contents/ui/ColorEditor.qml:264
 #, kde-format
 msgid "Text view background color:"
 msgstr "Baggrundsfarve i tekstvisning:"
 
-#: package/contents/ui/ColorEditor.qml:272
+#: package/contents/ui/ColorEditor.qml:271
 #, kde-format
 msgid "Text view mouse over color:"
 msgstr "Farve på tekstvisning under mus:"
 
-#: package/contents/ui/ColorEditor.qml:279
+#: package/contents/ui/ColorEditor.qml:278
 #, kde-format
 msgid "Text view focus color:"
 msgstr "Farve på tekstvisning i fokus:"
 
-#: package/contents/ui/ColorEditor.qml:287
+#: package/contents/ui/ColorEditor.qml:286
 #, kde-format
 msgid "Complementary text color:"
 msgstr "Farve på komplementærtekst:"
 
-#: package/contents/ui/ColorEditor.qml:294
+#: package/contents/ui/ColorEditor.qml:293
 #, kde-format
 msgid "Complementary background color:"
 msgstr "Baggrundsfarve på komplementær:"
 
-#: package/contents/ui/ColorEditor.qml:301
+#: package/contents/ui/ColorEditor.qml:300
 #, kde-format
 msgid "Complementary mouse over color:"
 msgstr "Farve på komplementær under mus:"
 
-#: package/contents/ui/ColorEditor.qml:308
+#: package/contents/ui/ColorEditor.qml:307
 #, kde-format
 msgid "Complementary focus color:"
 msgstr "Farve på komplementær i fokus:"
 
-#: package/contents/ui/ColorEditor.qml:323
-#: package/contents/ui/MetadataEditor.qml:137
+#: package/contents/ui/ColorEditor.qml:322
+#: package/contents/ui/MetadataEditor.qml:136
 #, kde-format
 msgid "OK"
 msgstr "OK"
 
-#: package/contents/ui/ColorEditor.qml:328
-#: package/contents/ui/MetadataEditor.qml:143
+#: package/contents/ui/ColorEditor.qml:327
+#: package/contents/ui/MetadataEditor.qml:142
 #, kde-format
 msgid "Cancel"
 msgstr "Annullér"
 
-#: package/contents/ui/delegates/actionbutton.qml:35
-#: package/contents/ui/delegates/actionbutton.qml:39
-#: package/contents/ui/delegates/checkmarks.qml:31
-#: package/contents/ui/delegates/checkmarks.qml:35
-#: package/contents/ui/delegates/checkmarks.qml:39
-#: package/contents/ui/delegates/checkmarks.qml:43
+#: package/contents/ui/delegates/actionbutton.qml:34
+#: package/contents/ui/delegates/actionbutton.qml:38
+#: package/contents/ui/delegates/checkmarks.qml:30
+#: package/contents/ui/delegates/checkmarks.qml:34
+#: package/contents/ui/delegates/checkmarks.qml:38
+#: package/contents/ui/delegates/checkmarks.qml:42
 #, kde-format
 msgid "Option"
 msgstr "Indstilling"
 
-#: package/contents/ui/delegates/button.qml:27
+#: package/contents/ui/delegates/button.qml:26
 #, kde-format
 msgid "ToolButton"
 msgstr "VærktøjsKnap"
 
-#: package/contents/ui/delegates/button.qml:31
+#: package/contents/ui/delegates/button.qml:30
 #: package/contents/ui/fakecontrols/Button.qml:22
 #, kde-format
 msgid "Button"
 msgstr "Knap"
 
-#: package/contents/ui/delegates/tabbar.qml:29
+#: package/contents/ui/delegates/tabbar.qml:28
 #, kde-format
 msgid "Tab1"
 msgstr "Faneblad1"
 
-#: package/contents/ui/delegates/tabbar.qml:32
+#: package/contents/ui/delegates/tabbar.qml:31
 #, kde-format
 msgid "Tab2"
 msgstr "Faneblad2"
 
-#: package/contents/ui/delegates/tabbar.qml:35
+#: package/contents/ui/delegates/tabbar.qml:34
 #, kde-format
 msgid "Tab3"
 msgstr "Faneblad3"
 
-#: package/contents/ui/delegates/textfield.qml:28
+#: package/contents/ui/delegates/textfield.qml:27
 #, kde-format
 msgid "Text"
 msgstr "Tekst"
@@ -297,48 +297,48 @@ msgstr "Opret med editor..."
 msgid "Open In Editor…"
 msgstr "Åbn i editor..."
 
-#: package/contents/ui/MetadataEditor.qml:24
+#: package/contents/ui/MetadataEditor.qml:23
 #, kde-format
 msgid "New Theme"
 msgstr "Nyt tema"
 
-#: package/contents/ui/MetadataEditor.qml:24
+#: package/contents/ui/MetadataEditor.qml:23
 #, kde-format
 msgid "Edit Theme"
 msgstr "Redigér tema"
 
-#: package/contents/ui/MetadataEditor.qml:59
+#: package/contents/ui/MetadataEditor.qml:58
 #, kde-format
 msgid "Warning: don't change author or license for themes you don't own"
 msgstr ""
 "Advarsel: Skift ikke ophavsmand eller licens for temaer som du ikke ejer"
 
-#: package/contents/ui/MetadataEditor.qml:70
+#: package/contents/ui/MetadataEditor.qml:69
 #, kde-format
 msgid "Theme Name:"
 msgstr "Temanavn:"
 
-#: package/contents/ui/MetadataEditor.qml:86
+#: package/contents/ui/MetadataEditor.qml:85
 #, kde-format
 msgid "This theme name already exists"
 msgstr "Dette temanavn findes allerede"
 
-#: package/contents/ui/MetadataEditor.qml:95
+#: package/contents/ui/MetadataEditor.qml:94
 #, kde-format
 msgid "Author:"
 msgstr "Ophavsmand:"
 
-#: package/contents/ui/MetadataEditor.qml:103
+#: package/contents/ui/MetadataEditor.qml:102
 #, kde-format
 msgid "Email:"
 msgstr "E-mail:"
 
-#: package/contents/ui/MetadataEditor.qml:111
+#: package/contents/ui/MetadataEditor.qml:110
 #, kde-format
 msgid "License:"
 msgstr "Licens:"
 
-#: package/contents/ui/MetadataEditor.qml:122
+#: package/contents/ui/MetadataEditor.qml:121
 #, kde-format
 msgid "Website:"
 msgstr "Webside:"

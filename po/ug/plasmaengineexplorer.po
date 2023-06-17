@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:16+0000\n"
+"POT-Creation-Date: 2023-06-17 02:07+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -59,7 +59,7 @@ msgid "Type"
 msgstr "تىپى"
 
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
+#: engineexplorer.cpp:180 serviceviewer.cpp:153 serviceviewer.ui:78
 #, kde-format
 msgid "Value"
 msgstr "قىممەت"
@@ -277,7 +277,7 @@ msgstr ""
 "پەقەت ئاتا پروگراممىغا مۇناسىۋەتلىك موتورنىلا كۆرسىتىدۇ؛ سانلىق-مەلۇمات "
 "موتورىغا خەرىتىلەنگەن .desktop ھۆججەتتىكى X-KDE-ParentApp تۈرى."
 
-#: modelviewer.cpp:85 serviceviewer.cpp:51
+#: modelviewer.cpp:85 serviceviewer.cpp:53
 #, kde-format
 msgctxt "Plasma engine with unknown name"
 msgid "Unknown"
@@ -303,62 +303,62 @@ msgstr "مۇلازىمەت كۆرگۈ %1"
 msgid "Start Operation"
 msgstr "باشلا مەشغۇلاتى"
 
-#: serviceviewer.cpp:52
+#: serviceviewer.cpp:54
 #, kde-format
 msgctxt "Plasma service with unknown name"
 msgid "Unknown"
 msgstr "نامەلۇم"
 
-#: serviceviewer.cpp:67
+#: serviceviewer.cpp:69
 #, kde-format
 msgid ""
 "No valid service was returned. Verify that a service is available for this "
 "source."
 msgstr ""
 
-#: serviceviewer.cpp:72
+#: serviceviewer.cpp:74
 #, kde-format
 msgctxt "%1 is a Plasma service name"
 msgid "%1 Service Explorer"
 msgstr "مۇلازىمەت كۆرگۈ %1"
 
-#: serviceviewer.cpp:75
+#: serviceviewer.cpp:77
 #, kde-format
 msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: serviceviewer.cpp:151 serviceviewer.ui:73
+#: serviceviewer.cpp:153 serviceviewer.ui:73
 #, kde-format
 msgid "Key"
 msgstr "ئاچقۇچ"
 
-#: serviceviewer.cpp:185
+#: serviceviewer.cpp:187
 #, kde-format
 msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> failed. <p>The error was: "
 "<b>'%3: %4'</b></p>"
 msgstr ""
 
-#: serviceviewer.cpp:191 serviceviewer.cpp:204
+#: serviceviewer.cpp:193 serviceviewer.cpp:206
 #, kde-format
 msgid "Operation Result"
 msgstr "مەشغۇلات نەتىجىسى"
 
-#: serviceviewer.cpp:195
+#: serviceviewer.cpp:197
 #, kde-format
 msgid "No response from job."
 msgstr "ۋەزىپىدە ئىنكاس يوق."
 
-#: serviceviewer.cpp:199
+#: serviceviewer.cpp:201
 #, kde-format
 msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> returned successfully. "
 "<p>The result was: <b>'%3'</b></p>"
 msgstr ""
 
-#: serviceviewer.cpp:226
+#: serviceviewer.cpp:228
 #, kde-format
 msgid "One active operation…"
 msgid_plural "%1 operations active…"

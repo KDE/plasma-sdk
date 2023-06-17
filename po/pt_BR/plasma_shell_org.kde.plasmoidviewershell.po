@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 02:14+0000\n"
+"POT-Creation-Date: 2023-06-17 02:07+0000\n"
 "PO-Revision-Date: 2022-06-22 16:13-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -19,15 +19,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 21.12.3\n"
 
-#: contents/applet/AppletError.qml:41
+#: contents/applet/AppletError.qml:42
 msgid "Sorry! There was an error loading %1."
 msgstr "Desculpe! Ocorreu um erro ao carregar %1."
 
-#: contents/applet/AppletError.qml:49
+#: contents/applet/AppletError.qml:50
 msgid "Copy Error Details to Clipboard"
 msgstr "Copiar detalhes do erro para a área de transferência"
 
-#: contents/applet/CompactApplet.qml:73
+#: contents/applet/CompactApplet.qml:74
 msgid "Open %1"
 msgstr "Abrir %1"
 
@@ -142,38 +142,38 @@ msgid "+"
 msgstr "+"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:153
-#: contents/configuration/MouseEventInputButton.qml:15
+#: contents/configuration/MouseEventInputButton.qml:14
 msgid "Add Action"
 msgstr "Adicionar ação"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:27
+#: contents/configuration/ConfigurationContainmentAppearance.qml:28
 msgid "Appearance"
 msgstr "Aparência"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:69
+#: contents/configuration/ConfigurationContainmentAppearance.qml:70
 msgid "Layout changes have been restricted by the system administrator"
 msgstr ""
 "As alterações de layout foram restringidas pelo administrador do sistema"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:84
+#: contents/configuration/ConfigurationContainmentAppearance.qml:85
 msgid "Layout:"
 msgstr "Layout:"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+#: contents/configuration/ConfigurationContainmentAppearance.qml:100
 msgid "Wallpaper Type:"
 msgstr "Tipo de papel de parede:"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:116
+#: contents/configuration/ConfigurationContainmentAppearance.qml:117
 msgid "Get New Plugins..."
 msgstr "Baixar novos plugins..."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:128
+#: contents/configuration/ConfigurationContainmentAppearance.qml:129
 msgid "Layout changes must be applied before other changes can be made"
 msgstr ""
 "Mudanças do layout devem ser aplicadas antes que outras mudanças possam ser "
 "feitas"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/ConfigurationContainmentAppearance.qml:135
 msgid "Apply now"
 msgstr "Aplicar agora"
 
@@ -193,7 +193,7 @@ msgstr "Papel de parede"
 msgid "Mouse Actions"
 msgstr "Ações do mouse"
 
-#: contents/configuration/MouseEventInputButton.qml:22
+#: contents/configuration/MouseEventInputButton.qml:21
 msgid "Input Here"
 msgstr "Clique aqui"
 

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:16+0000\n"
+"POT-Creation-Date: 2023-06-17 02:07+0000\n"
 "PO-Revision-Date: 2007-09-11 22:44+0200\n"
 "Last-Translator: Northern Sami translation team <i18n-sme@lister.ping.uio."
 "no>\n"
@@ -60,7 +60,7 @@ msgid "Type"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
+#: engineexplorer.cpp:180 serviceviewer.cpp:153 serviceviewer.ui:78
 #, kde-format
 msgid "Value"
 msgstr ""
@@ -279,7 +279,7 @@ msgid ""
 "ParentApp entry in the DataEngine's .desktop file."
 msgstr ""
 
-#: modelviewer.cpp:85 serviceviewer.cpp:51
+#: modelviewer.cpp:85 serviceviewer.cpp:53
 #, kde-format
 msgctxt "Plasma engine with unknown name"
 msgid "Unknown"
@@ -303,62 +303,62 @@ msgstr ""
 msgid "Start Operation"
 msgstr ""
 
-#: serviceviewer.cpp:52
+#: serviceviewer.cpp:54
 #, kde-format
 msgctxt "Plasma service with unknown name"
 msgid "Unknown"
 msgstr ""
 
-#: serviceviewer.cpp:67
+#: serviceviewer.cpp:69
 #, kde-format
 msgid ""
 "No valid service was returned. Verify that a service is available for this "
 "source."
 msgstr ""
 
-#: serviceviewer.cpp:72
+#: serviceviewer.cpp:74
 #, kde-format
 msgctxt "%1 is a Plasma service name"
 msgid "%1 Service Explorer"
 msgstr ""
 
-#: serviceviewer.cpp:75
+#: serviceviewer.cpp:77
 #, kde-format
 msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: serviceviewer.cpp:151 serviceviewer.ui:73
+#: serviceviewer.cpp:153 serviceviewer.ui:73
 #, kde-format
 msgid "Key"
 msgstr ""
 
-#: serviceviewer.cpp:185
+#: serviceviewer.cpp:187
 #, kde-format
 msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> failed. <p>The error was: "
 "<b>'%3: %4'</b></p>"
 msgstr ""
 
-#: serviceviewer.cpp:191 serviceviewer.cpp:204
+#: serviceviewer.cpp:193 serviceviewer.cpp:206
 #, kde-format
 msgid "Operation Result"
 msgstr ""
 
-#: serviceviewer.cpp:195
+#: serviceviewer.cpp:197
 #, kde-format
 msgid "No response from job."
 msgstr ""
 
-#: serviceviewer.cpp:199
+#: serviceviewer.cpp:201
 #, kde-format
 msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> returned successfully. "
 "<p>The result was: <b>'%3'</b></p>"
 msgstr ""
 
-#: serviceviewer.cpp:226
+#: serviceviewer.cpp:228
 #, kde-format
 msgid "One active operation…"
 msgid_plural "%1 operations active…"

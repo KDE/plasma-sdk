@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 02:14+0000\n"
+"POT-Creation-Date: 2023-06-17 02:07+0000\n"
 "PO-Revision-Date: 2022-07-22 14:40+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 22.04.3\n"
 
-#: contents/applet/AppletError.qml:41
+#: contents/applet/AppletError.qml:42
 msgid "Sorry! There was an error loading %1."
 msgstr "Sorry! There was an error loading %1."
 
-#: contents/applet/AppletError.qml:49
+#: contents/applet/AppletError.qml:50
 msgid "Copy Error Details to Clipboard"
 msgstr "Copy Error Details to Clipboard"
 
-#: contents/applet/CompactApplet.qml:73
+#: contents/applet/CompactApplet.qml:74
 msgid "Open %1"
 msgstr "Open %1"
 
@@ -140,35 +140,35 @@ msgid "+"
 msgstr "+"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:153
-#: contents/configuration/MouseEventInputButton.qml:15
+#: contents/configuration/MouseEventInputButton.qml:14
 msgid "Add Action"
 msgstr "Add Action"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:27
+#: contents/configuration/ConfigurationContainmentAppearance.qml:28
 msgid "Appearance"
 msgstr "Appearance"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:69
+#: contents/configuration/ConfigurationContainmentAppearance.qml:70
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "Layout changes have been restricted by the system administrator"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:84
+#: contents/configuration/ConfigurationContainmentAppearance.qml:85
 msgid "Layout:"
 msgstr "Layout:"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+#: contents/configuration/ConfigurationContainmentAppearance.qml:100
 msgid "Wallpaper Type:"
 msgstr "Wallpaper Type:"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:116
+#: contents/configuration/ConfigurationContainmentAppearance.qml:117
 msgid "Get New Plugins..."
 msgstr "Get New Plugins..."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:128
+#: contents/configuration/ConfigurationContainmentAppearance.qml:129
 msgid "Layout changes must be applied before other changes can be made"
 msgstr "Layout changes must be applied before other changes can be made"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/ConfigurationContainmentAppearance.qml:135
 msgid "Apply now"
 msgstr "Apply now"
 
@@ -188,7 +188,7 @@ msgstr "Wallpaper"
 msgid "Mouse Actions"
 msgstr "Mouse Actions"
 
-#: contents/configuration/MouseEventInputButton.qml:22
+#: contents/configuration/MouseEventInputButton.qml:21
 msgid "Input Here"
 msgstr "Input Here"
 

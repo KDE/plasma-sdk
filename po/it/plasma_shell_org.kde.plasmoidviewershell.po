@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 02:14+0000\n"
+"POT-Creation-Date: 2023-06-17 02:07+0000\n"
 "PO-Revision-Date: 2022-06-06 13:06+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -18,15 +18,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 22.04.1\n"
 
-#: contents/applet/AppletError.qml:41
+#: contents/applet/AppletError.qml:42
 msgid "Sorry! There was an error loading %1."
 msgstr "Spiacenti! Si è verificato un errore durante il caricamento di %1."
 
-#: contents/applet/AppletError.qml:49
+#: contents/applet/AppletError.qml:50
 msgid "Copy Error Details to Clipboard"
 msgstr "Copia i dettagli dell'errore negli appunti"
 
-#: contents/applet/CompactApplet.qml:73
+#: contents/applet/CompactApplet.qml:74
 msgid "Open %1"
 msgstr "Apri %1"
 
@@ -141,39 +141,39 @@ msgid "+"
 msgstr "+"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:153
-#: contents/configuration/MouseEventInputButton.qml:15
+#: contents/configuration/MouseEventInputButton.qml:14
 msgid "Add Action"
 msgstr "Aggiungi azione"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:27
+#: contents/configuration/ConfigurationContainmentAppearance.qml:28
 msgid "Appearance"
 msgstr "Aspetto"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:69
+#: contents/configuration/ConfigurationContainmentAppearance.qml:70
 msgid "Layout changes have been restricted by the system administrator"
 msgstr ""
 "Le modifiche della disposizione sono state limitate dall'amministratore del "
 "sistema"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:84
+#: contents/configuration/ConfigurationContainmentAppearance.qml:85
 msgid "Layout:"
 msgstr "Disposizione:"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+#: contents/configuration/ConfigurationContainmentAppearance.qml:100
 msgid "Wallpaper Type:"
 msgstr "Tipo di sfondo:"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:116
+#: contents/configuration/ConfigurationContainmentAppearance.qml:117
 msgid "Get New Plugins..."
 msgstr "Ottieni nuove estensioni..."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:128
+#: contents/configuration/ConfigurationContainmentAppearance.qml:129
 msgid "Layout changes must be applied before other changes can be made"
 msgstr ""
 "Le modifiche alla disposizione devono essere applicate prima che ne possano "
 "essere apportate delle altre"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/ConfigurationContainmentAppearance.qml:135
 msgid "Apply now"
 msgstr "Applica adesso"
 
@@ -194,7 +194,7 @@ msgstr "Sfondo"
 msgid "Mouse Actions"
 msgstr "Azione del mouse"
 
-#: contents/configuration/MouseEventInputButton.qml:22
+#: contents/configuration/MouseEventInputButton.qml:21
 msgid "Input Here"
 msgstr "Digita qui"
 

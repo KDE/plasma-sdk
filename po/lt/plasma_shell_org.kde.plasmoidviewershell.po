@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trunk-kf 5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 02:14+0000\n"
+"POT-Creation-Date: 2023-06-17 02:07+0000\n"
 "PO-Revision-Date: 2019-07-26 15:22+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -20,15 +20,15 @@ msgstr ""
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: contents/applet/AppletError.qml:41
+#: contents/applet/AppletError.qml:42
 msgid "Sorry! There was an error loading %1."
 msgstr ""
 
-#: contents/applet/AppletError.qml:49
+#: contents/applet/AppletError.qml:50
 msgid "Copy Error Details to Clipboard"
 msgstr ""
 
-#: contents/applet/CompactApplet.qml:73
+#: contents/applet/CompactApplet.qml:74
 msgid "Open %1"
 msgstr ""
 
@@ -147,35 +147,35 @@ msgid "+"
 msgstr ""
 
 #: contents/configuration/ConfigurationContainmentActions.qml:153
-#: contents/configuration/MouseEventInputButton.qml:15
+#: contents/configuration/MouseEventInputButton.qml:14
 msgid "Add Action"
 msgstr "Pridėti veiksmą"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:27
+#: contents/configuration/ConfigurationContainmentAppearance.qml:28
 msgid "Appearance"
 msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:69
+#: contents/configuration/ConfigurationContainmentAppearance.qml:70
 msgid "Layout changes have been restricted by the system administrator"
 msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:84
+#: contents/configuration/ConfigurationContainmentAppearance.qml:85
 msgid "Layout:"
 msgstr "Išdėstymas:"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+#: contents/configuration/ConfigurationContainmentAppearance.qml:100
 msgid "Wallpaper Type:"
 msgstr "Darbalaukio fono tipas:"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:116
+#: contents/configuration/ConfigurationContainmentAppearance.qml:117
 msgid "Get New Plugins..."
 msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:128
+#: contents/configuration/ConfigurationContainmentAppearance.qml:129
 msgid "Layout changes must be applied before other changes can be made"
 msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/ConfigurationContainmentAppearance.qml:135
 #, fuzzy
 #| msgid "Apply"
 msgid "Apply now"
@@ -197,7 +197,7 @@ msgstr "Darbalaukio fonas"
 msgid "Mouse Actions"
 msgstr "Pelės veiksmai"
 
-#: contents/configuration/MouseEventInputButton.qml:22
+#: contents/configuration/MouseEventInputButton.qml:21
 msgid "Input Here"
 msgstr "Įveskite čia"
 

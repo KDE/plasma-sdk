@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:16+0000\n"
+"POT-Creation-Date: 2023-06-17 02:07+0000\n"
 "PO-Revision-Date: 2023-04-14 07:06+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@lists.kde.org>\n"
@@ -28,175 +28,175 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "okellogg@users.sourceforge.net"
 
-#: package/contents/ui/ColorEditor.qml:39
+#: package/contents/ui/ColorEditor.qml:38
 #, kde-format
 msgid "Edit Colors"
 msgstr "Redakti Kolorojn"
 
-#: package/contents/ui/ColorEditor.qml:68
+#: package/contents/ui/ColorEditor.qml:67
 #, kde-format
 msgid "Select Color"
 msgstr "Elekti Koloron"
 
-#: package/contents/ui/ColorEditor.qml:110
+#: package/contents/ui/ColorEditor.qml:109
 #, kde-format
 msgid "Normal text"
 msgstr "Normala teksto"
 
-#: package/contents/ui/ColorEditor.qml:116
+#: package/contents/ui/ColorEditor.qml:115
 #, kde-format
 msgid "Link"
 msgstr "Ligo"
 
-#: package/contents/ui/ColorEditor.qml:120
+#: package/contents/ui/ColorEditor.qml:119
 #, kde-format
 msgid "Visited Link"
 msgstr "Vizitita Ligo"
 
-#: package/contents/ui/ColorEditor.qml:155
+#: package/contents/ui/ColorEditor.qml:154
 #, kde-format
 msgid "Complementary colors area:"
 msgstr "Areo de komplementaj koloroj:"
 
-#: package/contents/ui/ColorEditor.qml:170
+#: package/contents/ui/ColorEditor.qml:169
 #, kde-format
 msgid "Label"
 msgstr "Etikedo"
 
-#: package/contents/ui/ColorEditor.qml:193
+#: package/contents/ui/ColorEditor.qml:192
 #, kde-format
 msgid "Text color:"
 msgstr "Teksta koloro:"
 
-#: package/contents/ui/ColorEditor.qml:200
+#: package/contents/ui/ColorEditor.qml:199
 #, kde-format
 msgid "Background color:"
 msgstr "Fona koloro:"
 
-#: package/contents/ui/ColorEditor.qml:207
+#: package/contents/ui/ColorEditor.qml:206
 #, kde-format
 msgid "Highlight color:"
 msgstr "Marki koloron:"
 
-#: package/contents/ui/ColorEditor.qml:214
+#: package/contents/ui/ColorEditor.qml:213
 #, kde-format
 msgid "Link color:"
 msgstr "Koloro de ligilo:"
 
-#: package/contents/ui/ColorEditor.qml:221
+#: package/contents/ui/ColorEditor.qml:220
 #, kde-format
 msgid "Visited link color:"
 msgstr "Vizitita ligilo-koloro:"
 
-#: package/contents/ui/ColorEditor.qml:229
+#: package/contents/ui/ColorEditor.qml:228
 #, kde-format
 msgid "Button text color:"
 msgstr "Butona tekstokoloro:"
 
-#: package/contents/ui/ColorEditor.qml:236
+#: package/contents/ui/ColorEditor.qml:235
 #, kde-format
 msgid "Button background color:"
 msgstr "Fonkoloro de butono:"
 
-#: package/contents/ui/ColorEditor.qml:243
+#: package/contents/ui/ColorEditor.qml:242
 #, kde-format
 msgid "Button mouse over color:"
 msgstr "Butono muso super koloro:"
 
-#: package/contents/ui/ColorEditor.qml:250
+#: package/contents/ui/ColorEditor.qml:249
 #, kde-format
 msgid "Button focus color:"
 msgstr "Butona fokusa koloro:"
 
-#: package/contents/ui/ColorEditor.qml:258
+#: package/contents/ui/ColorEditor.qml:257
 #, kde-format
 msgid "Text view text color:"
 msgstr "Teksta vido tekstokoloro:"
 
-#: package/contents/ui/ColorEditor.qml:265
+#: package/contents/ui/ColorEditor.qml:264
 #, kde-format
 msgid "Text view background color:"
 msgstr "Fonkoloro de tekstvido:"
 
-#: package/contents/ui/ColorEditor.qml:272
+#: package/contents/ui/ColorEditor.qml:271
 #, kde-format
 msgid "Text view mouse over color:"
 msgstr "Tekstrigarda muso-super koloro:"
 
-#: package/contents/ui/ColorEditor.qml:279
+#: package/contents/ui/ColorEditor.qml:278
 #, kde-format
 msgid "Text view focus color:"
 msgstr "Teksta vido fokusa koloro:"
 
-#: package/contents/ui/ColorEditor.qml:287
+#: package/contents/ui/ColorEditor.qml:286
 #, kde-format
 msgid "Complementary text color:"
 msgstr "Komplementa tekstokoloro:"
 
-#: package/contents/ui/ColorEditor.qml:294
+#: package/contents/ui/ColorEditor.qml:293
 #, kde-format
 msgid "Complementary background color:"
 msgstr "Komplementa fonkoloro:"
 
-#: package/contents/ui/ColorEditor.qml:301
+#: package/contents/ui/ColorEditor.qml:300
 #, kde-format
 msgid "Complementary mouse over color:"
 msgstr "Komplementa muso super koloro:"
 
-#: package/contents/ui/ColorEditor.qml:308
+#: package/contents/ui/ColorEditor.qml:307
 #, kde-format
 msgid "Complementary focus color:"
 msgstr "Komplementa fokusa koloro:"
 
-#: package/contents/ui/ColorEditor.qml:323
-#: package/contents/ui/MetadataEditor.qml:137
+#: package/contents/ui/ColorEditor.qml:322
+#: package/contents/ui/MetadataEditor.qml:136
 #, kde-format
 msgid "OK"
 msgstr "bone"
 
-#: package/contents/ui/ColorEditor.qml:328
-#: package/contents/ui/MetadataEditor.qml:143
+#: package/contents/ui/ColorEditor.qml:327
+#: package/contents/ui/MetadataEditor.qml:142
 #, kde-format
 msgid "Cancel"
 msgstr "Nuligi"
 
-#: package/contents/ui/delegates/actionbutton.qml:35
-#: package/contents/ui/delegates/actionbutton.qml:39
-#: package/contents/ui/delegates/checkmarks.qml:31
-#: package/contents/ui/delegates/checkmarks.qml:35
-#: package/contents/ui/delegates/checkmarks.qml:39
-#: package/contents/ui/delegates/checkmarks.qml:43
+#: package/contents/ui/delegates/actionbutton.qml:34
+#: package/contents/ui/delegates/actionbutton.qml:38
+#: package/contents/ui/delegates/checkmarks.qml:30
+#: package/contents/ui/delegates/checkmarks.qml:34
+#: package/contents/ui/delegates/checkmarks.qml:38
+#: package/contents/ui/delegates/checkmarks.qml:42
 #, kde-format
 msgid "Option"
 msgstr "Opcio"
 
-#: package/contents/ui/delegates/button.qml:27
+#: package/contents/ui/delegates/button.qml:26
 #, kde-format
 msgid "ToolButton"
 msgstr "IloButono"
 
-#: package/contents/ui/delegates/button.qml:31
+#: package/contents/ui/delegates/button.qml:30
 #: package/contents/ui/fakecontrols/Button.qml:22
 #, kde-format
 msgid "Button"
 msgstr "Butono"
 
-#: package/contents/ui/delegates/tabbar.qml:29
+#: package/contents/ui/delegates/tabbar.qml:28
 #, kde-format
 msgid "Tab1"
 msgstr "Tab1"
 
-#: package/contents/ui/delegates/tabbar.qml:32
+#: package/contents/ui/delegates/tabbar.qml:31
 #, kde-format
 msgid "Tab2"
 msgstr "Tab2"
 
-#: package/contents/ui/delegates/tabbar.qml:35
+#: package/contents/ui/delegates/tabbar.qml:34
 #, kde-format
 msgid "Tab3"
 msgstr "Tab3"
 
-#: package/contents/ui/delegates/textfield.qml:28
+#: package/contents/ui/delegates/textfield.qml:27
 #, kde-format
 msgid "Text"
 msgstr "Teksto"
@@ -291,47 +291,47 @@ msgstr "Krei per Redaktilo…"
 msgid "Open In Editor…"
 msgstr "Malfermi en Redaktilo…"
 
-#: package/contents/ui/MetadataEditor.qml:24
+#: package/contents/ui/MetadataEditor.qml:23
 #, kde-format
 msgid "New Theme"
 msgstr "Nova etoso"
 
-#: package/contents/ui/MetadataEditor.qml:24
+#: package/contents/ui/MetadataEditor.qml:23
 #, kde-format
 msgid "Edit Theme"
 msgstr "Redakti etoson"
 
-#: package/contents/ui/MetadataEditor.qml:59
+#: package/contents/ui/MetadataEditor.qml:58
 #, kde-format
 msgid "Warning: don't change author or license for themes you don't own"
 msgstr "Averto: ne ŝanĝu aŭtoron aŭ permesilon por etosoj, kiujn vi ne posedas"
 
-#: package/contents/ui/MetadataEditor.qml:70
+#: package/contents/ui/MetadataEditor.qml:69
 #, kde-format
 msgid "Theme Name:"
 msgstr "Nomo de etoso:"
 
-#: package/contents/ui/MetadataEditor.qml:86
+#: package/contents/ui/MetadataEditor.qml:85
 #, kde-format
 msgid "This theme name already exists"
 msgstr "Ĉi tiu etosnomo jam ekzistas"
 
-#: package/contents/ui/MetadataEditor.qml:95
+#: package/contents/ui/MetadataEditor.qml:94
 #, kde-format
 msgid "Author:"
 msgstr "Aŭtoro:"
 
-#: package/contents/ui/MetadataEditor.qml:103
+#: package/contents/ui/MetadataEditor.qml:102
 #, kde-format
 msgid "Email:"
 msgstr "Retpoŝto:"
 
-#: package/contents/ui/MetadataEditor.qml:111
+#: package/contents/ui/MetadataEditor.qml:110
 #, kde-format
 msgid "License:"
 msgstr "Permesilo:"
 
-#: package/contents/ui/MetadataEditor.qml:122
+#: package/contents/ui/MetadataEditor.qml:121
 #, kde-format
 msgid "Website:"
 msgstr "Retejo:"

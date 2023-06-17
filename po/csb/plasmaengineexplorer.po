@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:16+0000\n"
+"POT-Creation-Date: 2023-06-17 02:07+0000\n"
 "PO-Revision-Date: 2009-06-11 21:55+0200\n"
 "Last-Translator: Michôł Òstrowsczi <michol@linuxcsb.org>\n"
 "Language-Team: Kashubian <i18n-csb@linuxcsb.org>\n"
@@ -62,7 +62,7 @@ msgid "Type"
 msgstr "Ôrt"
 
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
+#: engineexplorer.cpp:180 serviceviewer.cpp:153 serviceviewer.ui:78
 #, kde-format
 msgid "Value"
 msgstr "Wôrtnota"
@@ -295,7 +295,7 @@ msgstr ""
 "Pòkazëje le mòtorë zrzëszoné z nôdrzãdnëma aplikacëjama. Mapùje do wpisënkù "
 "X-KDE-ParentApp w lopkù .desktop słëchającym do DataEngine. "
 
-#: modelviewer.cpp:85 serviceviewer.cpp:51
+#: modelviewer.cpp:85 serviceviewer.cpp:53
 #, kde-format
 msgctxt "Plasma engine with unknown name"
 msgid "Unknown"
@@ -321,26 +321,26 @@ msgstr "%1 eksplorera ùsłëznotów"
 msgid "Start Operation"
 msgstr "Sztartëjë dzéjanié"
 
-#: serviceviewer.cpp:52
+#: serviceviewer.cpp:54
 #, kde-format
 msgctxt "Plasma service with unknown name"
 msgid "Unknown"
 msgstr "Nieznóné"
 
-#: serviceviewer.cpp:67
+#: serviceviewer.cpp:69
 #, kde-format
 msgid ""
 "No valid service was returned. Verify that a service is available for this "
 "source."
 msgstr ""
 
-#: serviceviewer.cpp:72
+#: serviceviewer.cpp:74
 #, kde-format
 msgctxt "%1 is a Plasma service name"
 msgid "%1 Service Explorer"
 msgstr "%1 eksplorera ùsłëznotów"
 
-#: serviceviewer.cpp:75
+#: serviceviewer.cpp:77
 #, fuzzy, kde-format
 #| msgctxt "Source: name of the data, Service: writes data instead of fetching"
 #| msgid "DataEngine: <b>%1</b>; Source: <b>%2</b>; Service <b>%3</b>"
@@ -349,12 +349,12 @@ msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "Mòtór pòdôwków: <b>%1</b>; Zdrój: <b>%2</b>; Ùsłëżnota <b>%3</b>"
 
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: serviceviewer.cpp:151 serviceviewer.ui:73
+#: serviceviewer.cpp:153 serviceviewer.ui:73
 #, kde-format
 msgid "Key"
 msgstr "Klucz"
 
-#: serviceviewer.cpp:185
+#: serviceviewer.cpp:187
 #, fuzzy, kde-format
 #| msgid "%1 operation with destination %2 failed. The error was:<p><b>%3</b>"
 msgid ""
@@ -362,17 +362,17 @@ msgid ""
 "<b>'%3: %4'</b></p>"
 msgstr "%1 dzéjanié z célã %2 nie darzëło sã. Fela:<p><b>%3</b>"
 
-#: serviceviewer.cpp:191 serviceviewer.cpp:204
+#: serviceviewer.cpp:193 serviceviewer.cpp:206
 #, kde-format
 msgid "Operation Result"
 msgstr "Skùtk dzéjaniô"
 
-#: serviceviewer.cpp:195
+#: serviceviewer.cpp:197
 #, kde-format
 msgid "No response from job."
 msgstr "Felënk òdpòwiescë."
 
-#: serviceviewer.cpp:199
+#: serviceviewer.cpp:201
 #, fuzzy, kde-format
 #| msgid ""
 #| "%1 operation with destination %2 returned successfully. The result was:"
@@ -382,7 +382,7 @@ msgid ""
 "<p>The result was: <b>'%3'</b></p>"
 msgstr "%1 dzéjanié z célã %2 darzëło sã. Skùtk:<p><b>%3</b>"
 
-#: serviceviewer.cpp:226
+#: serviceviewer.cpp:228
 #, fuzzy, kde-format
 #| msgid "One active operation ..."
 #| msgid_plural "%1 operations active ..."
