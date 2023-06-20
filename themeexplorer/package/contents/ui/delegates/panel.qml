@@ -7,11 +7,11 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 Item {
-    PlasmaCore.Svg {
+    KSvg.Svg {
         imagePath: model.imagePath
         onRepaintNeeded: {
             bottomPanelShadow.visible = bottomPanelShadow.hasElementPrefix("shadow")
@@ -31,7 +31,7 @@ Item {
         opacity: 0.6
     }
 
-    PlasmaCore.FrameSvgItem {
+    KSvg.FrameSvgItem {
         id: bottomPanelShadow
         anchors {
             horizontalCenter: background.horizontalCenter
@@ -39,13 +39,13 @@ Item {
         }
         width: background.width * 0.7
         height: background.width * 0.2
-        enabledBorders: PlasmaCore.FrameSvgItem.TopBorder | PlasmaCore.FrameSvgItem.LeftBorder | PlasmaCore.FrameSvgItem.RightBorder
+        enabledBorders: KSvg.FrameSvgItem.TopBorder | KSvg.FrameSvgItem.LeftBorder | KSvg.FrameSvgItem.RightBorder
         imagePath: model.imagePath
         onImagePathChanged: visible = hasElementPrefix("shadow")
         prefix: "shadow"
     }
 
-    PlasmaCore.FrameSvgItem {
+    KSvg.FrameSvgItem {
         anchors {
             fill: bottomPanelShadow
             leftMargin: bottomPanelShadow.margins.left
@@ -71,7 +71,7 @@ Item {
         }
     }
 
-    PlasmaCore.FrameSvgItem {
+    KSvg.FrameSvgItem {
         id: leftPanelShadow
         anchors {
             verticalCenter: background.verticalCenter
@@ -79,13 +79,13 @@ Item {
         }
         height: background.height - background.width * 0.2
         width: background.width * 0.2
-        enabledBorders: PlasmaCore.FrameSvgItem.TopBorder | PlasmaCore.FrameSvgItem.BottomBorder | PlasmaCore.FrameSvgItem.RightBorder
+        enabledBorders: KSvg.FrameSvgItem.TopBorder | KSvg.FrameSvgItem.BottomBorder | KSvg.FrameSvgItem.RightBorder
         imagePath: model.imagePath
         onImagePathChanged: visible = hasElementPrefix("shadow")
         prefix: "shadow"
     }
 
-    PlasmaCore.FrameSvgItem {
+    KSvg.FrameSvgItem {
         anchors {
             fill: leftPanelShadow
             leftMargin: leftPanelShadow.margins.left
@@ -110,7 +110,7 @@ Item {
         }
     }
 
-    PlasmaCore.FrameSvgItem {
+    KSvg.FrameSvgItem {
         id: topPanelShadow
         anchors {
             horizontalCenter: background.horizontalCenter
@@ -118,13 +118,13 @@ Item {
         }
         width: background.width * 0.7
         height: background.width * 0.2
-        enabledBorders: PlasmaCore.FrameSvgItem.BottomBorder | PlasmaCore.FrameSvgItem.LeftBorder | PlasmaCore.FrameSvgItem.RightBorder
+        enabledBorders: KSvg.FrameSvgItem.BottomBorder | KSvg.FrameSvgItem.LeftBorder | KSvg.FrameSvgItem.RightBorder
         imagePath: model.imagePath
         onImagePathChanged: visible = hasElementPrefix("shadow")
         prefix: "shadow"
     }
 
-    PlasmaCore.FrameSvgItem {
+    KSvg.FrameSvgItem {
         anchors {
             fill: topPanelShadow
             leftMargin: topPanelShadow.margins.left
@@ -149,7 +149,7 @@ Item {
         }
     }
 
-    PlasmaCore.FrameSvgItem {
+    KSvg.FrameSvgItem {
         id: rightPanelShadow
         anchors {
             verticalCenter: background.verticalCenter
@@ -157,13 +157,13 @@ Item {
         }
         height: background.height - background.width * 0.2
         width: background.width * 0.2
-        enabledBorders: PlasmaCore.FrameSvgItem.TopBorder | PlasmaCore.FrameSvgItem.BottomBorder | PlasmaCore.FrameSvgItem.LeftBorder
+        enabledBorders: KSvg.FrameSvgItem.TopBorder | KSvg.FrameSvgItem.BottomBorder | KSvg.FrameSvgItem.LeftBorder
         imagePath: model.imagePath
         onImagePathChanged: visible = hasElementPrefix("shadow")
         prefix: "shadow"
     }
 
-    PlasmaCore.FrameSvgItem {
+    KSvg.FrameSvgItem {
         anchors {
             fill: rightPanelShadow
             leftMargin: rightPanelShadow.margins.left

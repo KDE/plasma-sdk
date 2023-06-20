@@ -9,30 +9,25 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 Item {
 
     property int value: 30
 
-    PlasmaCore.Svg {
-        id: meterSvg
-        imagePath: "widgets/analog_meter"
-    }
-
-    PlasmaCore.SvgItem {
+    KSvg.SvgItem {
         id: face
         anchors.centerIn: parent
         width: Math.min(parent.width, parent.height)
         height: width / (naturalSize.width / naturalSize.height)
-        svg: meterSvg
+        imagePath: "widgets/analog_meter"
         elementId: "background"
     }
 
-    PlasmaCore.SvgItem {
+    KSvg.SvgItem {
         id: centerScrew
-        svg: meterSvg
+        imagePath: "widgets/analog_meter"
         elementId: "rotatecenter"
         rotation: value + 90
 
@@ -43,8 +38,8 @@ Item {
         width: naturalSize.width * svgScale
         height: naturalSize.height * svgScale
 
-        PlasmaCore.SvgItem {
-            svg: meterSvg
+        KSvg.SvgItem {
+            imagePath: "widgets/analog_meter"
 
             anchors.horizontalCenter: parent.horizontalCenter
             y: x
@@ -52,9 +47,9 @@ Item {
             width: naturalSize.width * centerScrew.svgScale
             height: naturalSize.height * centerScrew.svgScale
         }
-        PlasmaCore.SvgItem {
+        KSvg.SvgItem {
             id: hand
-            svg: meterSvg
+            imagePath: "widgets/analog_meter"
             elementId: "pointer"
             anchors.horizontalCenter: parent.horizontalCenter
             y: x
@@ -63,8 +58,8 @@ Item {
             height: naturalSize.height * centerScrew.svgScale
         }
     }
-    PlasmaCore.SvgItem {
-        svg: meterSvg
+    KSvg.SvgItem {
+        imagePath: "widgets/analog_meter"
         elementId: "foreground"
         anchors.centerIn: centerScrew
 

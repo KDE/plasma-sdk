@@ -10,6 +10,7 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.ksvg 1.0 as KSvg
 
 Item {
     id: analogclock
@@ -44,7 +45,7 @@ Item {
     }
 
 
-    PlasmaCore.Svg {
+    KSvg.Svg {
         id: clockSvg
         imagePath: "widgets/clock"
         function estimateHorizontalHandShadowOffset() {
@@ -90,7 +91,7 @@ Item {
         readonly property double verticalShadowOffset:
             Math.round(clockSvg.naturalVerticalHandShadowOffset * svgScale) + Math.round(clockSvg.naturalVerticalHandShadowOffset * svgScale) % 2
 
-        PlasmaCore.SvgItem {
+        KSvg.SvgItem {
             id: face
             anchors.centerIn: parent
             width: Math.min(parent.width, parent.height)
@@ -147,7 +148,7 @@ Item {
             svgScale: clock.svgScale
         }
 
-        PlasmaCore.SvgItem {
+        KSvg.SvgItem {
             id: center
             width: naturalSize.width * clock.svgScale
             height: naturalSize.height * clock.svgScale
@@ -157,7 +158,7 @@ Item {
             z: 1000
         }
 
-        PlasmaCore.SvgItem {
+        KSvg.SvgItem {
             anchors.fill: face
             svg: clockSvg
             elementId: "Glass"

@@ -7,8 +7,8 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.ksvg 1.0 as KSvg
 
 Item {
     id: iconsDelegate
@@ -23,10 +23,6 @@ Item {
         opacity: 0.6
     }
 
-    PlasmaCore.Svg {
-        id: iconsSvg
-        imagePath: model.imagePath
-    }
     property var iconElements: model.iconElements
 
     Flow {
@@ -37,8 +33,8 @@ Item {
         }
         Repeater {
             model: iconsDelegate.iconElements
-            delegate: PlasmaCore.SvgItem {
-                svg: iconsSvg
+            delegate: KSvg.SvgItem {
+                imagePath: model.imagePath
                 elementId: modelData
                 width: naturalSize.width
                 height: naturalSize.height

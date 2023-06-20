@@ -7,7 +7,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 Item {
@@ -21,11 +21,7 @@ Item {
         color: theme.backgroundColor
         opacity: 0.6
     }
-    PlasmaCore.Svg {
-        id: controlsSvg
-        imagePath: "widgets/containment-controls"
-    }
-    PlasmaCore.FrameSvgItem {
+    KSvg.FrameSvgItem {
         anchors {
             left: background.left
             right: background.right
@@ -34,46 +30,46 @@ Item {
         height: maxSlider.height + minSlider.height
         imagePath: "widgets/containment-controls"
         prefix: "south"
-        PlasmaCore.SvgItem {
+        KSvg.SvgItem {
             anchors {
                 top: parent.top
                 horizontalCenter: parent.horizontalCenter
             }
-            svg: controlsSvg
+            imagePath: "widgets/containment-controls"
             elementId: "south-offsetslider"
         }
-        PlasmaCore.SvgItem {
+        KSvg.SvgItem {
             id: maxSlider
             anchors {
                 top: parent.top
                 right: parent.right
             }
-            svg: controlsSvg
+            imagePath: "widgets/containment-controls"
             elementId: "south-maxslider"
         }
-        PlasmaCore.SvgItem {
+        KSvg.SvgItem {
             id: minSlider
             anchors {
                 bottom: parent.bottom
                 right: parent.right
             }
-            svg: controlsSvg
+            imagePath: "widgets/containment-controls"
             elementId: "south-minslider"
         }
-        PlasmaCore.SvgItem {
+        KSvg.SvgItem {
             anchors {
                 top: parent.top
                 left: parent.left
             }
-            svg: controlsSvg
+            imagePath: "widgets/containment-controls"
             elementId: "south-minslider"
         }
-        PlasmaCore.SvgItem {
+        KSvg.SvgItem {
             anchors {
                 bottom: parent.bottom
                 left: parent.left
             }
-            svg: controlsSvg
+            imagePath: "widgets/containment-controls"
             elementId: "south-maxslider"
         }
     }

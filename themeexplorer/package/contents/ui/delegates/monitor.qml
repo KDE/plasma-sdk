@@ -7,8 +7,8 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.ksvg 1.0 as KSvg
 
 Item {
     Rectangle {
@@ -21,20 +21,16 @@ Item {
         color: theme.backgroundColor
         opacity: 0.6
     }
-    PlasmaCore.Svg {
-        id: monitorSvg
-        imagePath: "widgets/monitor"
-    }
-    PlasmaCore.SvgItem {
+    KSvg.SvgItem {
         anchors {
             horizontalCenter: parent.horizontalCenter
             top: screen.bottom
             topMargin: -units.gridUnit
         }
-        svg: monitorSvg
+        imagePath: "widgets/monitor"
         elementId: "base"
     }
-    PlasmaCore.FrameSvgItem {
+    KSvg.FrameSvgItem {
         id: screen
         anchors {
             left: background.left
