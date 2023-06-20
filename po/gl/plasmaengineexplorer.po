@@ -264,7 +264,7 @@ msgstr "A posición y desexada en píxeles"
 #: main.cpp:73
 #, kde-format
 msgid "The data engine to use"
-msgstr "O motor de datos que se ha empregar"
+msgstr "O motor de datos que se ha usar"
 
 #: main.cpp:74
 #, kde-format
