@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-03 02:04+0000\n"
+"POT-Creation-Date: 2023-06-22 02:08+0000\n"
 "PO-Revision-Date: 2022-06-19 13:37+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -160,7 +160,7 @@ msgstr "ja"
 msgid "no"
 msgstr "nei"
 
-#: src/qml/Tools.qml:99
+#: src/qml/Tools.qml:98
 #, kde-format
 msgid "Color scheme:"
 msgstr "Fargeoppsett:"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-17 02:07+0000\n"
+"POT-Creation-Date: 2023-06-22 02:08+0000\n"
 "PO-Revision-Date: 2022-06-05 16:27+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -180,11 +180,11 @@ msgstr "Genvägar"
 msgid "This shortcut will activate the applet as though it had been clicked."
 msgstr "Genvägen aktiverar miniprogrammet som om det hade klickats på"
 
-#: contents/configuration/ContainmentConfiguration.qml:33
+#: contents/configuration/ContainmentConfiguration.qml:31
 msgid "Wallpaper"
 msgstr "Skrivbordsunderlägg"
 
-#: contents/configuration/ContainmentConfiguration.qml:38
+#: contents/configuration/ContainmentConfiguration.qml:36
 msgid "Mouse Actions"
 msgstr "Musåtgärder"
 

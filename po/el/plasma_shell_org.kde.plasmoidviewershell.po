@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-17 02:07+0000\n"
+"POT-Creation-Date: 2023-06-22 02:08+0000\n"
 "PO-Revision-Date: 2021-09-04 09:48+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -184,11 +184,11 @@ msgstr ""
 "Αυτή η συντόμευση θα ενεργοποιήσει το συστατικό όπως και αν είχε γίνει κλικ "
 "πάνω του."
 
-#: contents/configuration/ContainmentConfiguration.qml:33
+#: contents/configuration/ContainmentConfiguration.qml:31
 msgid "Wallpaper"
 msgstr "Ταπετσαρία"
 
-#: contents/configuration/ContainmentConfiguration.qml:38
+#: contents/configuration/ContainmentConfiguration.qml:36
 msgid "Mouse Actions"
 msgstr "Ενέργειες ποντικιού"
 

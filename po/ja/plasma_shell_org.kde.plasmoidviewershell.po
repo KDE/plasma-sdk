@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-17 02:07+0000\n"
+"POT-Creation-Date: 2023-06-22 02:08+0000\n"
 "PO-Revision-Date: 2015-04-11 00:06-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -175,11 +175,11 @@ msgstr ""
 msgid "This shortcut will activate the applet as though it had been clicked."
 msgstr ""
 
-#: contents/configuration/ContainmentConfiguration.qml:33
+#: contents/configuration/ContainmentConfiguration.qml:31
 msgid "Wallpaper"
 msgstr ""
 
-#: contents/configuration/ContainmentConfiguration.qml:38
+#: contents/configuration/ContainmentConfiguration.qml:36
 msgid "Mouse Actions"
 msgstr ""
 

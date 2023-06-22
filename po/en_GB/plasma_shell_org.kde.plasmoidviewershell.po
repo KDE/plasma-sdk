@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-17 02:07+0000\n"
+"POT-Creation-Date: 2023-06-22 02:08+0000\n"
 "PO-Revision-Date: 2022-07-22 14:40+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -180,11 +180,11 @@ msgstr "Shortcuts"
 msgid "This shortcut will activate the applet as though it had been clicked."
 msgstr "This shortcut will activate the applet as though it had been clicked."
 
-#: contents/configuration/ContainmentConfiguration.qml:33
+#: contents/configuration/ContainmentConfiguration.qml:31
 msgid "Wallpaper"
 msgstr "Wallpaper"
 
-#: contents/configuration/ContainmentConfiguration.qml:38
+#: contents/configuration/ContainmentConfiguration.qml:36
 msgid "Mouse Actions"
 msgstr "Mouse Actions"
 
