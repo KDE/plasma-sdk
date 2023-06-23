@@ -122,9 +122,9 @@ Item {
             id: configButton
             icon.name: "configure"
             onClicked: {
-                var applet = containment.applets[0];
+                var applet = containment.plasmoid.applets[0];
                 if (applet) {
-                    var action = applet.plasmoid.action('configure');
+                    var action = applet.action('configure');
                     if (action) {
                         action.trigger();
                     }
