@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-22 02:08+0000\n"
+"POT-Creation-Date: 2023-06-23 02:18+0000\n"
 "PO-Revision-Date: 2022-06-04 18:10+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -27,7 +27,7 @@ msgstr "Ha ocurrido un error al cargar %1."
 msgid "Copy Error Details to Clipboard"
 msgstr "Copiar los detalles del error en el portapapeles"
 
-#: contents/applet/CompactApplet.qml:74
+#: contents/applet/CompactApplet.qml:75
 msgid "Open %1"
 msgstr "Abrir %1"
 

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-22 02:08+0000\n"
+"POT-Creation-Date: 2023-06-23 02:18+0000\n"
 "PO-Revision-Date: 2016-02-14 17:49+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -26,7 +26,7 @@ msgstr ""
 msgid "Copy Error Details to Clipboard"
 msgstr ""
 
-#: contents/applet/CompactApplet.qml:74
+#: contents/applet/CompactApplet.qml:75
 msgid "Open %1"
 msgstr ""
 

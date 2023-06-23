@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-22 02:08+0000\n"
+"POT-Creation-Date: 2023-06-23 02:18+0000\n"
 "PO-Revision-Date: 2022-07-31 08:08+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -29,7 +29,7 @@ msgstr "Barkatu! %1 zamatzean errore bat egon da."
 msgid "Copy Error Details to Clipboard"
 msgstr "Kopiatu errorearen zehaztasunak arbelera"
 
-#: contents/applet/CompactApplet.qml:74
+#: contents/applet/CompactApplet.qml:75
 msgid "Open %1"
 msgstr "Ireki %1"
 

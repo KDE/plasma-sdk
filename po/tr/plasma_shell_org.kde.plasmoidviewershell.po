@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-22 02:08+0000\n"
+"POT-Creation-Date: 2023-06-23 02:18+0000\n"
 "PO-Revision-Date: 2023-03-28 17:30+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -26,7 +26,7 @@ msgstr "Üzgünüm! %1 yüklenirken bir hata oluştu."
 msgid "Copy Error Details to Clipboard"
 msgstr "Hata Ayrıntılarını Panoya Kopyala"
 
-#: contents/applet/CompactApplet.qml:74
+#: contents/applet/CompactApplet.qml:75
 msgid "Open %1"
 msgstr "Aç: %1"
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-22 02:08+0000\n"
+"POT-Creation-Date: 2023-06-23 02:18+0000\n"
 "PO-Revision-Date: 2016-08-31 12:04+0300\n"
 "Last-Translator: Safa Alfulaij <safa1996alfulaij@gmail.com>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -26,7 +26,7 @@ msgstr ""
 msgid "Copy Error Details to Clipboard"
 msgstr ""
 
-#: contents/applet/CompactApplet.qml:74
+#: contents/applet/CompactApplet.qml:75
 msgid "Open %1"
 msgstr ""
 
