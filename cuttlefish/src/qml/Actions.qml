@@ -55,7 +55,7 @@ Item {
         Kirigami.Action {
             text: i18n("View in Other Icon Themes")
             icon.name: "document-equal"
-            onTriggered: comparison.sheetOpen = true
+            onTriggered: comparison.open()
         }
     ]
 
