@@ -239,7 +239,7 @@ msgstr "Autoría e mantemento."
 #: main.cpp:68
 #, kde-format
 msgid "Displays a list of known engines and their descriptions"
-msgstr "Mostra unha lista cos motores coñecidos e as súas descricións"
+msgstr "Amosa unha lista cos motores coñecidos e as súas descricións"
 
 #: main.cpp:69
 #, kde-format
