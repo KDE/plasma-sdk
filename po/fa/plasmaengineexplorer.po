@@ -12,7 +12,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -87,18 +87,21 @@ msgstr ""
 msgid "<1 bit>"
 msgid_plural "<%1 bits>"
 msgstr[0] ""
+msgstr[1] ""
 
 #: engineexplorer.cpp:338
 #, kde-format
 msgid "<1 byte>"
 msgid_plural "<%1 bytes>"
 msgstr[0] ""
+msgstr[1] ""
 
 #: engineexplorer.cpp:360
 #, kde-format
 msgid "<1 item>"
 msgid_plural "<%1 items>"
 msgstr[0] ""
+msgstr[1] ""
 
 #: engineexplorer.cpp:440
 #, kde-format
@@ -120,6 +123,7 @@ msgctxt "Length of the list"
 msgid "<%1 item>"
 msgid_plural "<%1 items>"
 msgstr[0] ""
+msgstr[1] ""
 
 #: engineexplorer.cpp:530
 #, kde-format
@@ -127,6 +131,7 @@ msgctxt "Size of the map"
 msgid "<%1 pair>"
 msgid_plural "<%1 pairs>"
 msgstr[0] ""
+msgstr[1] ""
 
 #. i18n: ectx: property (text), widget (KTitleWidget, m_title)
 #: engineexplorer.cpp:543 engineexplorer.ui:29
@@ -142,6 +147,7 @@ msgctxt "The name of the engine followed by the number of data sources"
 msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
 msgstr[0] "%1 - %2 منبع داده"
+msgstr[1] ""
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
 #: engineexplorer.ui:50
@@ -361,6 +367,7 @@ msgstr ""
 msgid "One active operation…"
 msgid_plural "%1 operations active…"
 msgstr[0] ""
+msgstr[1] ""
 
 #. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
 #: serviceviewer.ui:39
