@@ -132,7 +132,7 @@ PlasmaCore.ToolTipArea {
     }
 
     Connections {
-        target: Plasmoid.action("configure")
+        target: Plasmoid.internalAction("configure")
         function onTriggered() {
             if (root.plasmoidItem.hideOnWindowDeactivate) {
                 root.plasmoidItem.expanded = false
