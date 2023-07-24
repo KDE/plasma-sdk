@@ -261,3 +261,5 @@ QVariantList IconModel::inOtherThemes(const QString &name, int iconSize)
     }
     return list;
 }
+
+#include "moc_iconmodel.cpp"

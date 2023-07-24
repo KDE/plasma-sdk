@@ -87,3 +87,5 @@ void CuttleFishPlugin::contextMenuAboutToShow(KTextEditor::View *view, QMenu *me
 
 // required for CuttleFishPluginFactory vtable
 #include "cuttlefishplugin.moc"
+
+#include "moc_cuttlefishplugin.cpp"

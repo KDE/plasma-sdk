@@ -83,3 +83,5 @@ void SortFilterModel::setFilter(const QString &filter)
         emit currentIndexChanged();
     }
 }
+
+#include "moc_sortfiltermodel.cpp"

@@ -115,3 +115,5 @@ void ModelViewer::engineDestroyed()
     hide();
     deleteLater();
 }
+
+#include "moc_modelviewer.cpp"

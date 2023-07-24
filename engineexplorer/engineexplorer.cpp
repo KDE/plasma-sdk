@@ -566,3 +566,5 @@ void EngineExplorer::enableButtons(bool enable)
         m_collapseButton->setEnabled(enable);
     }
 }
+
+#include "moc_engineexplorer.cpp"

@@ -229,3 +229,5 @@ void ServiceViewer::updateJobCount(int numberOfJobs)
         m_operationStatus->show();
     }
 }
+
+#include "moc_serviceviewer.cpp"

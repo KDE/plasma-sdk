@@ -28,3 +28,5 @@ void ColorSchemes::activateColorScheme(const QString &name)
 {
     m_colorManager->activateScheme(m_colorManager->indexForScheme(name));
 }
+
+#include "moc_colorschemes.cpp"
