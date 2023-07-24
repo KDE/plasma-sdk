@@ -214,7 +214,7 @@ msgstr "미디어 센터"
 
 #: contents/views/SdkButtons.qml:71
 msgid "Application"
-msgstr "프로그램"
+msgstr "앱"
 
 #: contents/views/SdkButtons.qml:78
 msgid "Location"

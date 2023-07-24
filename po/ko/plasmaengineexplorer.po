@@ -271,8 +271,8 @@ msgid ""
 "Only show engines associated with the parent application; maps to the X-KDE-"
 "ParentApp entry in the DataEngine's .desktop file."
 msgstr ""
-"부모 프로그램과 연결된 엔진만 표시합니다. 데이터 엔진의 .desktop 파일에 정의"
-"되어 있는 X-KDE-ParentApp 항목에 해당합니다."
+"부모 앱과 연결된 엔진만 표시합니다. 데이터 엔진의 .desktop 파일에 정의되어 있"
+"는 X-KDE-ParentApp 항목에 해당합니다."
 
 #: modelviewer.cpp:85 serviceviewer.cpp:53
 #, kde-format
