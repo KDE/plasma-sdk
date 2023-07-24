@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Shinjo Park <kde@peremen.name>, 2015, 2016, 2020, 2021.
+# Shinjo Park <kde@peremen.name>, 2015, 2016, 2020, 2021, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-13 00:47+0000\n"
-"PO-Revision-Date: 2021-05-28 02:34+0200\n"
+"PO-Revision-Date: 2023-07-23 21:48+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 20.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -105,7 +105,7 @@ msgstr "단추 마우스 지나감 색:"
 #: package/contents/ui/ColorEditor.qml:251
 #, kde-format
 msgid "Button focus color:"
-msgstr "단추 초점 색:"
+msgstr "단추 포커스 색:"
 
 #: package/contents/ui/ColorEditor.qml:259
 #, kde-format
@@ -125,7 +125,7 @@ msgstr "텍스트 보기 마우스 지나감 색:"
 #: package/contents/ui/ColorEditor.qml:280
 #, kde-format
 msgid "Text view focus color:"
-msgstr "텍스트 보기 초점 색:"
+msgstr "텍스트 보기 포커스 색:"
 
 #: package/contents/ui/ColorEditor.qml:288
 #, kde-format
@@ -145,7 +145,7 @@ msgstr "보조 마우스 지나감 색:"
 #: package/contents/ui/ColorEditor.qml:309
 #, kde-format
 msgid "Complementary focus color:"
-msgstr "보조 초점 색:"
+msgstr "보조 포커스 색:"
 
 #: package/contents/ui/ColorEditor.qml:324
 #: package/contents/ui/MetadataEditor.qml:137
