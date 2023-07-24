@@ -219,7 +219,7 @@ void IconModel::load()
 QString IconModel::categoryFromPath(const QString &path)
 {
     QStringList cats;
-    for (const auto c : m_categories) {
+    for (const auto &c : m_categories) {
         cats << c.toLower();
     }
     // cats << "actions" << "apps" << "places" << "status";
