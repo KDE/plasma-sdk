@@ -95,7 +95,7 @@ PlasmaCore.ToolTipArea {
 
         anchors.fill: parent
         imagePath: "widgets/tabbar"
-        visible: fromCurrentTheme && opacity > 0
+        visible: opacity > 0
         prefix: {
             let prefix;
             switch (Plasmoid.location) {
