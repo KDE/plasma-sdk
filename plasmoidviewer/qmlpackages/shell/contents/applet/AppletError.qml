@@ -10,7 +10,6 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 PlasmoidItem {
     id: root
@@ -38,7 +37,7 @@ PlasmoidItem {
             Layout.alignment: Qt.AlignHCenter
         }
 
-        PlasmaExtras.Heading {
+        Kirigami.Heading {
             text: i18nd("plasma_shell_org.kde.plasma.desktop", "Sorry! There was an error loading %1.", root.errorInformation.appletName)
             level: 2
             wrapMode: Text.Wrap
