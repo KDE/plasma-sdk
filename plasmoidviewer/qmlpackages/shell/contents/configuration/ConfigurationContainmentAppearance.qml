@@ -11,10 +11,8 @@ import QtQuick.Layouts 1.1
 import QtQml 2.15
 
 import org.kde.newstuff 1.62 as NewStuff
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.plasmoid 2.0
-import org.kde.kirigami 2.5 as Kirigami
 import org.kde.kcmutils
 
 AbstractKCM {
@@ -85,7 +83,7 @@ AbstractKCM {
                 Kirigami.FormData.label: i18nd("plasma_shell_org.kde.plasma.desktop", "Layout:")
                 enabled: !Plasmoid.immutable
                 model: configDialog.containmentPluginsConfigModel
-                implicitWidth: PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).width * 24
+                implicitWidth: Kirigami.Units.gridUnit * 24
                 textRole: "name"
                 onActivated: {
                     var model = configDialog.containmentPluginsConfigModel.get(currentIndex)
@@ -102,7 +100,7 @@ AbstractKCM {
                     id: wallpaperComboBox
                     Layout.preferredWidth: Math.max(implicitWidth, pluginComboBox.implicitWidth)
                     model: configDialog.wallpaperConfigModel
-                    implicitWidth: PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).width * 24
+                    implicitWidth: Kirigami.Units.gridUnit * 24
                     textRole: "name"
                     onActivated: {
                         var model = configDialog.wallpaperConfigModel.get(currentIndex)

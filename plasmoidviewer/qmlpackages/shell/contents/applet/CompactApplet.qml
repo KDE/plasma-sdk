@@ -193,7 +193,7 @@ PlasmaCore.ToolTipArea {
                         return root.fullRepresentation.implicitWidth;
                     }
                 }
-                return PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).width * 35;
+                return Kirigami.Units.gridUnit * 35;
             }
             height: {
                 if (root.fullRepresentation !== null) {
@@ -203,7 +203,7 @@ PlasmaCore.ToolTipArea {
                         return fullRepresentation.implicitHeight;
                     }
                 }
-                return PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height * 25;
+                return Kirigami.Units.gridUnit * 25;
             }
 
             onActiveFocusChanged: {
