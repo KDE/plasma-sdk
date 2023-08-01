@@ -19,10 +19,6 @@ Item {
         }
         clip: true
 
-        KSvg.Svg {
-            id: lineSvg
-            imagePath: "widgets/listitem"
-        }
         Column {
             anchors {
                 fill: parent
@@ -54,7 +50,7 @@ Item {
                         text: parent.prefix
                     }
                     KSvg.SvgItem {
-                        svg: lineSvg
+                        imagePath: "widgets/listitem"
                         elementId: "separator"
                         height: naturalSize.height
                         anchors {
