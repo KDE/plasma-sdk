@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trunk-kf 5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-29 01:59+0000\n"
+"POT-Creation-Date: 2023-08-01 02:16+0000\n"
 "PO-Revision-Date: 2019-07-26 15:22+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -20,11 +20,11 @@ msgstr ""
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: contents/applet/AppletError.qml:41
+#: contents/applet/AppletError.qml:40
 msgid "Sorry! There was an error loading %1."
 msgstr ""
 
-#: contents/applet/AppletError.qml:49
+#: contents/applet/AppletError.qml:48
 msgid "Copy Error Details to Clipboard"
 msgstr ""
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-29 01:59+0000\n"
+"POT-Creation-Date: 2023-08-01 02:16+0000\n"
 "PO-Revision-Date: 2022-10-19 06:51+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "X-Generator: Lokalize 22.08.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: contents/applet/AppletError.qml:41
+#: contents/applet/AppletError.qml:40
 msgid "Sorry! There was an error loading %1."
 msgstr "很抱歉！載入 %1 時發生錯誤。"
 
-#: contents/applet/AppletError.qml:49
+#: contents/applet/AppletError.qml:48
 msgid "Copy Error Details to Clipboard"
 msgstr "複製錯誤詳細資訊到剪貼簿"
 

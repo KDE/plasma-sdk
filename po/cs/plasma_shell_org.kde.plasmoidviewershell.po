@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-29 01:59+0000\n"
+"POT-Creation-Date: 2023-08-01 02:16+0000\n"
 "PO-Revision-Date: 2023-02-21 09:40+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Lokalize 22.12.2\n"
 
-#: contents/applet/AppletError.qml:41
+#: contents/applet/AppletError.qml:40
 msgid "Sorry! There was an error loading %1."
 msgstr "Při načítání došlo k chybě %1."
 
-#: contents/applet/AppletError.qml:49
+#: contents/applet/AppletError.qml:48
 msgid "Copy Error Details to Clipboard"
 msgstr "Zkopírovat podrobnosti chyby do schránky"
 
