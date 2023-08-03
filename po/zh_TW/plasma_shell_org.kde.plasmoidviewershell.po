@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-01 02:16+0000\n"
+"POT-Creation-Date: 2023-08-03 02:38+0000\n"
 "PO-Revision-Date: 2022-10-19 06:51+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -143,31 +143,31 @@ msgstr "+"
 msgid "Add Action"
 msgstr "新增動作"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:28
+#: contents/configuration/ConfigurationContainmentAppearance.qml:26
 msgid "Appearance"
 msgstr "外觀"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:70
+#: contents/configuration/ConfigurationContainmentAppearance.qml:68
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "佈局變更已被系統管理員限制"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:85
+#: contents/configuration/ConfigurationContainmentAppearance.qml:83
 msgid "Layout:"
 msgstr "佈局："
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:100
+#: contents/configuration/ConfigurationContainmentAppearance.qml:98
 msgid "Wallpaper Type:"
 msgstr "桌布型態："
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:117
+#: contents/configuration/ConfigurationContainmentAppearance.qml:115
 msgid "Get New Plugins..."
 msgstr "取得新的外掛程式…"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:129
+#: contents/configuration/ConfigurationContainmentAppearance.qml:127
 msgid "Layout changes must be applied before other changes can be made"
 msgstr "佈局變更必須先套用才能進行其他變更"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:135
+#: contents/configuration/ConfigurationContainmentAppearance.qml:133
 msgid "Apply now"
 msgstr "立刻套用"
 

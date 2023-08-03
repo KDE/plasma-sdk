@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-01 02:16+0000\n"
+"POT-Creation-Date: 2023-08-03 02:38+0000\n"
 "PO-Revision-Date: 2022-07-18 22:17+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -145,31 +145,31 @@ msgstr "+"
 msgid "Add Action"
 msgstr "Lisää toiminto"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:28
+#: contents/configuration/ConfigurationContainmentAppearance.qml:26
 msgid "Appearance"
 msgstr "Ulkoasu"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:70
+#: contents/configuration/ConfigurationContainmentAppearance.qml:68
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "Järjestelmänvalvoja on rajoittanut asettelumuutoksia"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:85
+#: contents/configuration/ConfigurationContainmentAppearance.qml:83
 msgid "Layout:"
 msgstr "Asettelu:"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:100
+#: contents/configuration/ConfigurationContainmentAppearance.qml:98
 msgid "Wallpaper Type:"
 msgstr "Taustan tyyppi:"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:117
+#: contents/configuration/ConfigurationContainmentAppearance.qml:115
 msgid "Get New Plugins..."
 msgstr "Nouda uusia liitännäisiä…"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:129
+#: contents/configuration/ConfigurationContainmentAppearance.qml:127
 msgid "Layout changes must be applied before other changes can be made"
 msgstr "Asettelumuutoksia täytyy käyttää ennen muiden muutosten tekemistä"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:135
+#: contents/configuration/ConfigurationContainmentAppearance.qml:133
 msgid "Apply now"
 msgstr "Käytä nyt"
 

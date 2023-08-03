@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-01 02:16+0000\n"
+"POT-Creation-Date: 2023-08-03 02:38+0000\n"
 "PO-Revision-Date: 2022-07-31 08:08+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -148,33 +148,33 @@ msgstr "+"
 msgid "Add Action"
 msgstr "Gehitu ekintza"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:28
+#: contents/configuration/ConfigurationContainmentAppearance.qml:26
 msgid "Appearance"
 msgstr "Itxura"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:70
+#: contents/configuration/ConfigurationContainmentAppearance.qml:68
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "Sistema administratzaileak antolaera aldaketak murriztu ditu"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:85
+#: contents/configuration/ConfigurationContainmentAppearance.qml:83
 msgid "Layout:"
 msgstr "Antolamendua:"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:100
+#: contents/configuration/ConfigurationContainmentAppearance.qml:98
 msgid "Wallpaper Type:"
 msgstr "Horma-paper mota:"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:117
+#: contents/configuration/ConfigurationContainmentAppearance.qml:115
 msgid "Get New Plugins..."
 msgstr "Lortu plugin berriak..."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:129
+#: contents/configuration/ConfigurationContainmentAppearance.qml:127
 msgid "Layout changes must be applied before other changes can be made"
 msgstr ""
 "Antolaera gaineko aldaketak ezarri behar dira beste aldaketa batzuk egin "
 "aurretik."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:135
+#: contents/configuration/ConfigurationContainmentAppearance.qml:133
 msgid "Apply now"
 msgstr "Ezarri orain"
 

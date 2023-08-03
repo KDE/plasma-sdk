@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-01 02:16+0000\n"
+"POT-Creation-Date: 2023-08-03 02:38+0000\n"
 "PO-Revision-Date: 2021-09-04 18:30+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -144,34 +144,34 @@ msgstr "+"
 msgid "Add Action"
 msgstr "Adicionar uma Acção"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:28
+#: contents/configuration/ConfigurationContainmentAppearance.qml:26
 msgid "Appearance"
 msgstr "Aparência"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:70
+#: contents/configuration/ConfigurationContainmentAppearance.qml:68
 msgid "Layout changes have been restricted by the system administrator"
 msgstr ""
 "As mudanças de disposição estão restritas pelo administrador de sistemas"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:85
+#: contents/configuration/ConfigurationContainmentAppearance.qml:83
 msgid "Layout:"
 msgstr "Disposição:"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:100
+#: contents/configuration/ConfigurationContainmentAppearance.qml:98
 msgid "Wallpaper Type:"
 msgstr "Tipo de Papel de Parede:"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:117
+#: contents/configuration/ConfigurationContainmentAppearance.qml:115
 msgid "Get New Plugins..."
 msgstr "Obter 'Plugins' Novos..."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:129
+#: contents/configuration/ConfigurationContainmentAppearance.qml:127
 msgid "Layout changes must be applied before other changes can be made"
 msgstr ""
 "As mudanças de disposição devem ser aplicadas antes de se poderem fazer "
 "outras alterações"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:135
+#: contents/configuration/ConfigurationContainmentAppearance.qml:133
 msgid "Apply now"
 msgstr "Aplicar agora"
 

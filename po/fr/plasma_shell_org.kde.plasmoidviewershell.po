@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-01 02:16+0000\n"
+"POT-Creation-Date: 2023-08-03 02:38+0000\n"
 "PO-Revision-Date: 2022-06-04 18:50+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -146,35 +146,35 @@ msgstr "+"
 msgid "Add Action"
 msgstr "Ajouter une action"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:28
+#: contents/configuration/ConfigurationContainmentAppearance.qml:26
 msgid "Appearance"
 msgstr "Apparence"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:70
+#: contents/configuration/ConfigurationContainmentAppearance.qml:68
 msgid "Layout changes have been restricted by the system administrator"
 msgstr ""
 "Les changements de disposition ont été restreints par l'administrateur du "
 "système."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:85
+#: contents/configuration/ConfigurationContainmentAppearance.qml:83
 msgid "Layout:"
 msgstr "Disposition :"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:100
+#: contents/configuration/ConfigurationContainmentAppearance.qml:98
 msgid "Wallpaper Type:"
 msgstr "Type de fond d'écran : "
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:117
+#: contents/configuration/ConfigurationContainmentAppearance.qml:115
 msgid "Get New Plugins..."
 msgstr "Obtenir de nouveaux modules externes..."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:129
+#: contents/configuration/ConfigurationContainmentAppearance.qml:127
 msgid "Layout changes must be applied before other changes can be made"
 msgstr ""
 "Les changements de disposition doivent être appliqués avant de pouvoir faire "
 "d'autres changements."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:135
+#: contents/configuration/ConfigurationContainmentAppearance.qml:133
 msgid "Apply now"
 msgstr "Appliquer maintenant"
 
