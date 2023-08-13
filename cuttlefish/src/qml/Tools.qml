@@ -55,7 +55,6 @@ QQC2.ToolBar {
                     proxyModel.category = currentText
                 }
             }
-            popup.modal: false
         }
 
         QQC2.Slider {
@@ -123,7 +122,6 @@ QQC2.ToolBar {
                 root.colorschemeChanged(index)
                 colorSchemes.activateColorScheme(currentText)
             }
-            popup.modal: false
         }
     }
 }
