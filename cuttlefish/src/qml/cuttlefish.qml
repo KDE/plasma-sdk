@@ -28,9 +28,15 @@ Kirigami.ApplicationWindow {
 
     property alias actions: actions.actions
 
-    readonly property var iconSizes: [Kirigami.Units.iconSizes.small / 2,
-        Kirigami.Units.iconSizes.small, Kirigami.Units.iconSizes.smallMedium, Kirigami.Units.iconSizes.medium,
-        Kirigami.Units.iconSizes.large, Kirigami.Units.iconSizes.huge, Kirigami.Units.iconSizes.enormous]
+    readonly property list<int> iconSizes: [
+        Kirigami.Units.iconSizes.small / 2,
+        Kirigami.Units.iconSizes.small,
+        Kirigami.Units.iconSizes.smallMedium,
+        Kirigami.Units.iconSizes.medium,
+        Kirigami.Units.iconSizes.large,
+        Kirigami.Units.iconSizes.huge,
+        Kirigami.Units.iconSizes.enormous,
+    ]
 
     function doScreenshot(montageType) {
         ssLoader.type = montageType
