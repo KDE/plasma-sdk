@@ -11,25 +11,41 @@ import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.8 as Kirigami
 
 Kirigami.OverlaySheet {
+    id: root
+
     property int comparisonSize
-    onVisibleChanged: {
-        if (visible) {
-            comparisonSize = iconSize;
-            comparisonSlider.value = cuttlefish.iconSizes.indexOf(comparisonSize);
-        }
+
+    onAboutToShow: {
+        comparisonSize = cuttlefish.iconSize;
+        comparisonSlider.value = cuttlefish.iconSizes.indexOf(comparisonSize);
     }
 
-    header: RowLayout {
+    onOpened: {
+        comparisonSlider.forceActiveFocus(Qt.PopupFocusReason);
+    }
+
+    implicitWidth: Math.min(parent.width, Kirigami.Units.gridUnit * 50)
+    margins: Kirigami.Units.gridUnit * 2
+    modal: true
+    title: i18nc("@title placeholder is an icon name", "Other versions of %1", preview.iconName)
+
+    footer: RowLayout {
+        spacing: Kirigami.Units.largeSpacing
+
         Item {
-            Layout.fillWidth:true
+            Layout.fillWidth: true
         }
+
         QQC2.Slider {
-            Layout.preferredWidth: comparisonGrid.width * 0.75
             id: comparisonSlider
-            to: 6.0
-            stepSize: 1.0
+
+            Layout.preferredWidth: Math.round(parent.width * 0.75)
+
+            from: 0
+            to: 6
+            stepSize: 1
             snapMode: QQC2.Slider.SnapAlways
-            onValueChanged: {
+            onMoved: {
                 comparisonTimer.restart()
             }
 
@@ -41,23 +57,48 @@ Kirigami.OverlaySheet {
                 onTriggered: comparisonSize = cuttlefish.iconSizes[comparisonSlider.value]
             }
         }
+
         QQC2.Label {
-            Layout.alignment: Qt.AlignHCenter
+            id: iconSizeTextLabel
+
+            Layout.preferredWidth: Math.ceil(iconSizeTextMetrics.advanceWidth)
+            horizontalAlignment: Qt.AlignRight
             text: cuttlefish.iconSizes[comparisonSlider.value]
+
+            TextMetrics {
+                id: iconSizeTextMetrics
+                font: iconSizeTextLabel.font
+                text: cuttlefish.iconSizes[cuttlefish.iconSizes.length - 1]
+            }
         }
+
         Item {
             Layout.fillWidth:true
         }
     }
-    contentItem: GridView {
+
+    GridView {
         id: comparisonGrid
+
         cellWidth: Kirigami.Units.iconSizes.enormous
-        cellHeight: cellWidth  + 2 * Kirigami.Units.gridUnit  +  Kirigami.Units.largeSpacing
+        cellHeight: cellWidth + 2 * Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing
         implicitWidth: {
-            const availableWidth = cuttlefish.width - leftPadding - rightPadding;
-            return availableWidth < comparisonGrid.count * cellWidth  ? availableWidth - availableWidth % cellWidth :  comparisonGrid.count * cellWidth
+            const maxWidth = cuttlefish.width - root.leftMargin - root.rightMargin - root.leftPadding - root.rightPadding;
+            return maxWidth < count * cellWidth
+                ? maxWidth - maxWidth % cellWidth
+                : count * cellWidth;
         }
-        model: visible ? iconModel.inOtherThemes(preview.iconName, comparisonSize) : []
+        implicitHeight: {
+            const columns = Math.floor(implicitWidth / cellWidth);
+            if (columns === 0) {
+                return 0;
+            }
+            const rows = Math.ceil(count / columns);
+            return rows * cellHeight;
+        }
+        pixelAligned: true
+        clip: true
+        model: visible ? iconModel.inOtherThemes(preview.iconName, comparisonSize) : null
         delegate: ColumnLayout {
             id: iconColumn
             width: comparisonGrid.cellWidth
@@ -68,10 +109,10 @@ Kirigami.OverlaySheet {
                 Layout.preferredWidth: comparisonGrid.cellWidth
                 Layout.preferredHeight: comparisonGrid.cellWidth
                 Kirigami.Icon {
-                    property bool hasIcon : modelData.iconPath
+                    readonly property bool hasIcon: Boolean(modelData.iconPath)
                     anchors.centerIn: parent
-                    width: comparisonSize
-                    height: width
+                    width: root.comparisonSize
+                    height: root.comparisonSize
                     source: hasIcon ? modelData.iconPath : "paint-none"
                     color: hasIcon ? "" : Kirigami.Theme.disabledTextColor
                     isMask: !hasIcon
@@ -81,7 +122,11 @@ Kirigami.OverlaySheet {
                 id: themeName
                 text: modelData.themeName
                 horizontalAlignment: Text.AlignHCenter
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+                verticalAlignment: Text.AlignTop
+                wrapMode: Text.Wrap
+                maximumLineCount: 2
+                Layout.fillWidth: true
+                Layout.fillHeight: true
             }
         }
     }
