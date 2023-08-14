@@ -13,13 +13,19 @@ import QtQuick.Dialogs
 
 import org.kde.kirigami 2.20 as Kirigami
 
-Rectangle {
+QQC2.ScrollView {
+    id: root
+
     property alias iconPreview: iconPreview
 
-    color: Kirigami.Theme.backgroundColor
+    Kirigami.Theme.colorSet: Kirigami.Theme.Window
+
+    background: Rectangle {
+        color: Kirigami.Theme.backgroundColor
+    }
 
     ColumnLayout {
-        anchors.fill: parent
+        width: root.availableWidth
         spacing: Kirigami.Units.largeSpacing
 
         Kirigami.SelectableLabel {
@@ -70,16 +76,8 @@ Rectangle {
             }
         }
         Item {
+            // Keep it to apply ColumnLayout::spacing as a bottom margin.
             Layout.fillHeight: true
-        }
-    }
-
-    Kirigami.Separator {
-        width: 1
-        anchors {
-            left: parent.left
-            bottom: parent.bottom
-            top: parent.top
         }
     }
 }

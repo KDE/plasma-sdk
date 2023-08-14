@@ -105,9 +105,13 @@ Kirigami.ApplicationWindow {
                 }
             }
         }
-        Preview {
+        Kirigami.Separator {
+            Layout.fillHeight: true
             visible: cuttlefish.widescreen
+        }
+        Preview {
             id: previewPane
+            visible: cuttlefish.widescreen
             Layout.preferredWidth: Kirigami.Units.gridUnit * 22
             Layout.fillHeight: true
         }
