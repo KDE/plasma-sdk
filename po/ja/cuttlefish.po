@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cuttlefish\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-22 02:08+0000\n"
+"POT-Creation-Date: 2023-08-14 01:59+0000\n"
 "PO-Revision-Date: 2015-04-11 00:06-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -154,7 +154,7 @@ msgstr ""
 msgid "no"
 msgstr ""
 
-#: src/qml/Tools.qml:98
+#: src/qml/Tools.qml:97
 #, kde-format
 msgid "Color scheme:"
 msgstr ""
