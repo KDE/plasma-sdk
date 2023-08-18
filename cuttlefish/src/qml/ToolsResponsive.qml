@@ -85,7 +85,6 @@ QQC2.ToolBar {
                 root.colorschemeChanged(index)
                 colorSchemes.activateColorScheme(currentText)
             }
-            popup.modal: false
         }
     }
 }
