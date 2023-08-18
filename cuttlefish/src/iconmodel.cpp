@@ -45,19 +45,21 @@ IconModel::IconModel(QObject *parent)
     m_roleNames.insert(Theme, "iconTheme");
     m_roleNames.insert(Type, "type");
 
-    m_categories = QStringList() << "all"
-                                 << "actions"
-                                 << "animations"
-                                 << "apps"
-                                 << "categories"
-                                 << "devices"
-                                 << "emblems"
-                                 << "emotes"
-                                 << "filesystems"
-                                 << "international"
-                                 << "mimetypes"
-                                 << "places"
-                                 << "status";
+    m_categories = {
+        QLatin1String("all"),
+        QLatin1String("actions"),
+        QLatin1String("animations"),
+        QLatin1String("apps"),
+        QLatin1String("categories"),
+        QLatin1String("devices"),
+        QLatin1String("emblems"),
+        QLatin1String("emotes"),
+        QLatin1String("filesystems"),
+        QLatin1String("international"),
+        QLatin1String("mimetypes"),
+        QLatin1String("places"),
+        QLatin1String("status"),
+    };
 
     load();
 }
