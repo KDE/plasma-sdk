@@ -42,7 +42,7 @@ void SortFilterModel::setCurrentIndex(int index)
 {
     if (mapFromSource(m_currentSourceIndex).row() != index) {
         m_currentSourceIndex = mapToSource(this->index(index, 0));
-        emit currentIndexChanged();
+        Q_EMIT currentIndexChanged();
     }
 }
 
@@ -59,9 +59,9 @@ void SortFilterModel::setCategory(const QString &category)
     int oldIndex = currentIndex();
     m_category = category;
     invalidateFilter();
-    emit categoryChanged();
+    Q_EMIT categoryChanged();
     if (currentIndex() != oldIndex) {
-        emit currentIndexChanged();
+        Q_EMIT currentIndexChanged();
     }
 }
 
@@ -78,9 +78,9 @@ void SortFilterModel::setFilter(const QString &filter)
     int oldIndex = currentIndex();
     m_filter = filter;
     invalidateFilter();
-    emit filterChanged();
+    Q_EMIT filterChanged();
     if (currentIndex() != oldIndex) {
-        emit currentIndexChanged();
+        Q_EMIT currentIndexChanged();
     }
 }
 

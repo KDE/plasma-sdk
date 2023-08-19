@@ -105,7 +105,7 @@ void IconModel::add(const QFileInfo &info, const QString &cat)
     }
     if (!m_categories.contains(category)) {
         m_categories.append(category);
-        emit categoriesChanged();
+        Q_EMIT categoriesChanged();
     }
 
     const QString fname = info.fileName();
@@ -160,7 +160,7 @@ void IconModel::load()
 {
     // qDebug() << "\n -- Loading (category / filter) : " << m_category << m_filter;
     m_loading = true;
-    emit loadingChanged();
+    Q_EMIT loadingChanged();
 
     const QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories;
     const QStringList nameFilters = QStringList();
@@ -213,7 +213,7 @@ void IconModel::load()
     endResetModel();
 
     m_loading = false;
-    emit loadingChanged();
+    Q_EMIT loadingChanged();
 }
 
 QString IconModel::categoryFromPath(const QString &path)
