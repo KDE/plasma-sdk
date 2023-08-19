@@ -17,7 +17,7 @@ class SortFilterModel : public QSortFilterProxyModel
     Q_PROPERTY(QString category READ category WRITE setCategory NOTIFY categoryChanged)
     Q_PROPERTY(int currentIndex READ currentIndex WRITE setCurrentIndex NOTIFY currentIndexChanged)
 public:
-    SortFilterModel(QObject *parent);
+    explicit SortFilterModel(QObject *parent = nullptr);
 
     void setCategory(const QString &category);
     QString category() const;
