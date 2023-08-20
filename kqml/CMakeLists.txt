@@ -12,6 +12,7 @@ target_compile_definitions(kqml PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
 target_link_libraries(kqml
     Qt::Quick
     Qt::Gui
+    Qt::Widgets
     KF6::I18n
 )
 

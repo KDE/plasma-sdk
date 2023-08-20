@@ -4,11 +4,11 @@
     SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+#include <QApplication>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QCoreApplication>
 #include <QDir>
-#include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlComponent>
 #include <QQmlContext>
@@ -118,12 +118,12 @@ void LoadWatcher::contain(QQuickItem *item)
 
 int main(int argc, char *argv[])
 {
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
 
     app.setApplicationName("KDE QML Runtime");
     app.setOrganizationName("KDE");
     app.setOrganizationDomain("kde.org");
-    QCoreApplication::setApplicationVersion(QLatin1String(PROJECT_VERSION));
+    QApplication::setApplicationVersion(QLatin1String(PROJECT_VERSION));
 
     QStringList files;
 
