@@ -95,7 +95,7 @@ int main(int argc, char **argv)
         theme.setThemeName(parser.value("theme"));
     }
 
-    View *v = new View(View::createCorona(), false);
+    View *v = new View(View::createCorona());
 
     v->addContainment(parser.value("containment"));
     v->addFormFactor(parser.value("formfactor"));

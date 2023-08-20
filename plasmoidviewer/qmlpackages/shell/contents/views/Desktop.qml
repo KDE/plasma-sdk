@@ -50,31 +50,6 @@ Rectangle {
         }
     }
 
-    Konsole {
-        id: konsolePreviewer
-        z: +1
-        visible: desktop.konsoleVisible
-        anchors {
-            fill: backgroundKonsole
-            leftMargin: backgroundKonsole.margins.left + 8
-            rightMargin: backgroundKonsole.margins.right + 8
-            topMargin: backgroundKonsole.margins.top
-            bottomMargin: backgroundKonsole.margins.bottom + 8
-        }
-        width: backgroundKonsole.width/2
-        height: backgroundKonsole.height/4
-    }
-
-    Background {
-        id: backgroundKonsole
-        visible: konsolePreviewer.visible
-        width: root.width/2
-        height: root.height/3
-        anchors.horizontalCenter: root.horizontalCenter
-        anchors.bottom: buttons.top
-        anchors.bottomMargin: Kirigami.Units.smallSpacing
-    }
-
     onContainmentChanged: {
         print("New Containment: " + containment)
         //containment.parent = root

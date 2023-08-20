@@ -55,11 +55,10 @@ private:
     View *m_view;
 };
 
-View::View(ViewerCorona *cor, bool konsoleVisible, QWindow *parent)
+View::View(ViewerCorona *cor, QWindow *parent)
     : PlasmaQuick::ContainmentView(cor, parent)
 {
     cor->setView(this);
-    m_konsoleVisible = konsoleVisible;
     engine()->rootContext()->setContextProperty("desktop", this);
     setSource(QUrl::fromLocalFile(cor->kPackage().filePath("views", "Desktop.qml")));
 }
@@ -251,11 +250,6 @@ void View::emitExternalData(const QString &data)
     }
 
     QMetaObject::invokeMethod(graphicsObject, "externalData", Q_ARG(QString, QString()), Q_ARG(QVariant, data));
-}
-
-bool View::konsoleVisible()
-{
-    return m_konsoleVisible;
 }
 
 void View::changeLocation(int location)
