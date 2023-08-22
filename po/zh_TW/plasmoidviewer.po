@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoidviewer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 02:14+0000\n"
+"POT-Creation-Date: 2023-08-22 02:00+0000\n"
 "PO-Revision-Date: 2018-03-25 14:14+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -97,17 +97,17 @@ msgstr "shell 要使用的主題名稱"
 msgid "Data that should be passed to the applet as 'externalData' event"
 msgstr "需要以 'externalData' 事件被傳遞給小程式的資料"
 
-#: view.cpp:124
+#: view.cpp:123
 #, no-c-format, kde-format
 msgid "Applet %1 does not exist."
 msgstr "小程式 %1 不存在。"
 
-#: view.cpp:141
+#: view.cpp:140
 #, no-c-format, kde-format
 msgid "Containment %1 does not exist."
 msgstr "容器 %1 不存在。"
 
-#: view.cpp:319
+#: view.cpp:313
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Screenshot"

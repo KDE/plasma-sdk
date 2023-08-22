@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-14 01:59+0000\n"
+"POT-Creation-Date: 2023-08-22 02:00+0000\n"
 "PO-Revision-Date: 2022-09-05 12:22+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -95,6 +95,12 @@ msgstr "Активная цветовая схема"
 msgid "View in Other Icon Themes"
 msgstr "Посмотреть в других темах значков"
 
+#: src/qml/Comparison.qml:30
+#, kde-format
+msgctxt "@title placeholder is an icon name"
+msgid "Other versions of %1"
+msgstr ""
+
 #: src/qml/GlobalMenuBar.qml:19
 #, kde-format
 msgid "File"
@@ -135,27 +141,27 @@ msgstr "Увеличить"
 msgid "Zoom Out"
 msgstr "Уменьшить"
 
-#: src/qml/Preview.qml:43 src/qml/ResponsivePreview.qml:37
+#: src/qml/Preview.qml:49 src/qml/ResponsivePreview.qml:37
 #, kde-format
 msgid "File name:"
 msgstr "Имя файла:"
 
-#: src/qml/Preview.qml:48 src/qml/ResponsivePreview.qml:42
+#: src/qml/Preview.qml:54 src/qml/ResponsivePreview.qml:42
 #, kde-format
 msgid "Category:"
 msgstr "Категория:"
 
-#: src/qml/Preview.qml:53 src/qml/ResponsivePreview.qml:47
+#: src/qml/Preview.qml:59 src/qml/ResponsivePreview.qml:47
 #, kde-format
 msgid "Scalable:"
 msgstr "Масштабируемый:"
 
-#: src/qml/Preview.qml:54 src/qml/ResponsivePreview.qml:48
+#: src/qml/Preview.qml:60 src/qml/ResponsivePreview.qml:48
 #, kde-format
 msgid "yes"
 msgstr "да"
 
-#: src/qml/Preview.qml:54 src/qml/ResponsivePreview.qml:48
+#: src/qml/Preview.qml:60 src/qml/ResponsivePreview.qml:48
 #, kde-format
 msgid "no"
 msgstr "нет"

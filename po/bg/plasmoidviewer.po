@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoidviewer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 02:14+0000\n"
+"POT-Creation-Date: 2023-08-22 02:00+0000\n"
 "PO-Revision-Date: 2022-07-10 16:39+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -102,17 +102,17 @@ msgid "Data that should be passed to the applet as 'externalData' event"
 msgstr ""
 "Данни, които трябва да бъдат предадени на аплета като събитие 'externalData'"
 
-#: view.cpp:124
+#: view.cpp:123
 #, no-c-format, kde-format
 msgid "Applet %1 does not exist."
 msgstr "Аплет %1 не съществува."
 
-#: view.cpp:141
+#: view.cpp:140
 #, no-c-format, kde-format
 msgid "Containment %1 does not exist."
 msgstr "Съдържание %1 не съществува."
 
-#: view.cpp:319
+#: view.cpp:313
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Screenshot"

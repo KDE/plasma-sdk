@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-14 01:59+0000\n"
+"POT-Creation-Date: 2023-08-22 02:00+0000\n"
 "PO-Revision-Date: 2022-06-28 13:58+0200\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -93,6 +93,12 @@ msgstr "Aktivní barevné schéma"
 msgid "View in Other Icon Themes"
 msgstr "Pohled s jinými motivy ikon"
 
+#: src/qml/Comparison.qml:30
+#, kde-format
+msgctxt "@title placeholder is an icon name"
+msgid "Other versions of %1"
+msgstr ""
+
 #: src/qml/GlobalMenuBar.qml:19
 #, kde-format
 msgid "File"
@@ -133,27 +139,27 @@ msgstr "Přiblížit"
 msgid "Zoom Out"
 msgstr "Oddálit"
 
-#: src/qml/Preview.qml:43 src/qml/ResponsivePreview.qml:37
+#: src/qml/Preview.qml:49 src/qml/ResponsivePreview.qml:37
 #, kde-format
 msgid "File name:"
 msgstr "Název souboru:"
 
-#: src/qml/Preview.qml:48 src/qml/ResponsivePreview.qml:42
+#: src/qml/Preview.qml:54 src/qml/ResponsivePreview.qml:42
 #, kde-format
 msgid "Category:"
 msgstr "Kategorie:"
 
-#: src/qml/Preview.qml:53 src/qml/ResponsivePreview.qml:47
+#: src/qml/Preview.qml:59 src/qml/ResponsivePreview.qml:47
 #, kde-format
 msgid "Scalable:"
 msgstr "Škálovatelné:"
 
-#: src/qml/Preview.qml:54 src/qml/ResponsivePreview.qml:48
+#: src/qml/Preview.qml:60 src/qml/ResponsivePreview.qml:48
 #, kde-format
 msgid "yes"
 msgstr "ano"
 
-#: src/qml/Preview.qml:54 src/qml/ResponsivePreview.qml:48
+#: src/qml/Preview.qml:60 src/qml/ResponsivePreview.qml:48
 #, kde-format
 msgid "no"
 msgstr "ne"
