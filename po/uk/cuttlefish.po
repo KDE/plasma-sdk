@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2015, 2017, 2019, 2021, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2015, 2017, 2019, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cuttlefish\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-22 02:00+0000\n"
-"PO-Revision-Date: 2022-04-19 08:57+0300\n"
+"PO-Revision-Date: 2023-08-23 00:32+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -99,7 +99,7 @@ msgstr "Переглянути в інших темах піктограм"
 #, kde-format
 msgctxt "@title placeholder is an icon name"
 msgid "Other versions of %1"
-msgstr ""
+msgstr "Інші версії %1"
 
 #: src/qml/GlobalMenuBar.qml:19
 #, kde-format
