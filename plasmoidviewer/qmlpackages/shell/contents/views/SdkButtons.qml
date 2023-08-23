@@ -29,7 +29,7 @@ Item {
             onClicked: {
                 var applet = containment.applets[0];
                 if (applet) {
-                    var action = applet.action('remove');
+                    var action = applet.internalAction('remove');
                     if (action) {
                         action.trigger();
                     }
@@ -124,7 +124,7 @@ Item {
             onClicked: {
                 var applet = containment.plasmoid.applets[0];
                 if (applet) {
-                    var action = applet.action('configure');
+                    var action = applet.internalAction('configure');
                     if (action) {
                         action.trigger();
                     }
@@ -134,7 +134,7 @@ Item {
         PlasmaComponents.Button {
             text: i18n("Configure Containment")
             onClicked: {
-                var action = containment.plasmoid.action('configure');
+                var action = containment.plasmoid.internalAction('configure');
                 if (action) {
                     action.trigger();
                 }

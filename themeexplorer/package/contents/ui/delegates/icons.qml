@@ -9,6 +9,7 @@ import QtQuick.Layouts 1.1
 
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.ksvg 1.0 as KSvg
+import org.kde.kirigami 2.20 as Kirigami
 
 Item {
     id: iconsDelegate
@@ -16,10 +17,10 @@ Item {
         id: background
         anchors {
             fill: parent
-            margins: units.gridUnit
+            margins: Kirigami.Units.gridUnit
         }
         radius: 3
-        color: theme.backgroundColor
+        color: Kirigami.Theme.backgroundColor
         opacity: 0.6
     }
 

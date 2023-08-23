@@ -8,6 +8,7 @@ import QtQuick 2.3
 import Qt5Compat.GraphicalEffects
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.1
+import org.kde.kirigami 2.20 as Kirigami
 
 MouseArea {
     id: buttonMouse
@@ -25,16 +26,16 @@ MouseArea {
     }
     RowLayout {
         id: layout
-        height: units.gridUnit * 1.6
+        height: Kirigami.Units.gridUnit * 1.6
         Rectangle {
             id: button
-            radius: units.smallSpacing/2
+            radius: Kirigami.Units.smallSpacing/2
             color: buttonMouse.pressed ? Qt.darker(buttonBackgroundColor, 1.5) : buttonBackgroundColor
             height: parent.height / 1.2
             width: height
             Rectangle {
                 anchors.fill: parent
-                radius: units.smallSpacing/2
+                radius: Kirigami.Units.smallSpacing/2
                 visible: buttonMouse.containsMouse || buttonMouse.focus
                 color: "transparent"
                 border {
@@ -52,9 +53,9 @@ MouseArea {
             Rectangle {
                 anchors {
                     fill: parent
-                    margins: units.smallSpacing
+                    margins: Kirigami.Units.smallSpacing
                 }
-                radius: units.smallSpacing/2
+                radius: Kirigami.Units.smallSpacing/2
                 visible: buttonMouse.checked
                 color: buttonMouse.complementary ? complementaryHoverColor : highlightColor
             }
@@ -62,8 +63,8 @@ MouseArea {
         DropShadow {
             anchors.fill: button
             horizontalOffset: 0
-            verticalOffset: units.smallSpacing/4
-            radius: units.smallSpacing 
+            verticalOffset: Kirigami.Units.smallSpacing/4
+            radius: Kirigami.Units.smallSpacing
             samples: 16
             color: buttonMouse.pressed ? Qt.rgba(0, 0, 0, 0) : Qt.rgba(0, 0, 0, 0.5)
             source: button

@@ -9,11 +9,12 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 
 ApplicationWindow {
     id: root
-    width: units.gridUnit * 50
-    height: units.gridUnit * 35
+    width: Kirigami.Units.gridUnit * 50
+    height: Kirigami.Units.gridUnit * 35
     visible: true
     property int iconSize: iconSizeSlider.value
     property alias showMargins: showMarginsCheckBox.checked
@@ -136,7 +137,7 @@ ApplicationWindow {
 
     Rectangle {
         anchors.fill: scrollView
-        color: theme.viewBackgroundColor
+        color: Kirigami.Theme.viewBackgroundColor
     }
     ScrollView {
         id: scrollView
@@ -181,11 +182,11 @@ ApplicationWindow {
                     anchors {
                         right: parent.right
                         bottom: parent.bottom
-                        margins: units.gridUnit
+                        margins: Kirigami.Units.gridUnit
                     }
-                    width: units.gridUnit
-                    height: units.gridUnit
-                    radius: units.gridUnit
+                    width: Kirigami.Units.gridUnit
+                    height: Kirigami.Units.gridUnit
+                    radius: Kirigami.Units.gridUnit
                     opacity: 0.5
                     color: model.usesFallback ? "red" : "green"
                 }
@@ -211,7 +212,7 @@ ApplicationWindow {
         ColumnLayout {
             anchors {
                 fill: parent
-                margins: units.gridUnit
+                margins: Kirigami.Units.gridUnit
             }
             Label {
                 Layout.fillWidth: true
@@ -266,9 +267,9 @@ ApplicationWindow {
             Slider {
                 id: iconSizeSlider
                 Layout.fillWidth: true
-                value: units.gridUnit * 12
-                from: units.gridUnit * 5
-                to: units.gridUnit * 20
+                value: Kirigami.Units.gridUnit * 12
+                from: Kirigami.Units.gridUnit * 5
+                to: Kirigami.Units.gridUnit * 20
             }
         }
     }
