@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-17 02:07+0000\n"
+"POT-Creation-Date: 2023-08-24 01:57+0000\n"
 "PO-Revision-Date: 2023-06-10 12:13+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -160,133 +160,133 @@ msgstr "Tamam"
 msgid "Cancel"
 msgstr "İptal"
 
-#: package/contents/ui/delegates/actionbutton.qml:34
-#: package/contents/ui/delegates/actionbutton.qml:38
-#: package/contents/ui/delegates/checkmarks.qml:30
-#: package/contents/ui/delegates/checkmarks.qml:34
-#: package/contents/ui/delegates/checkmarks.qml:38
-#: package/contents/ui/delegates/checkmarks.qml:42
+#: package/contents/ui/delegates/actionbutton.qml:35
+#: package/contents/ui/delegates/actionbutton.qml:39
+#: package/contents/ui/delegates/checkmarks.qml:31
+#: package/contents/ui/delegates/checkmarks.qml:35
+#: package/contents/ui/delegates/checkmarks.qml:39
+#: package/contents/ui/delegates/checkmarks.qml:43
 #, kde-format
 msgid "Option"
 msgstr "Seçenek"
 
-#: package/contents/ui/delegates/button.qml:26
+#: package/contents/ui/delegates/button.qml:27
 #, kde-format
 msgid "ToolButton"
 msgstr "AraçDüğmesi"
 
-#: package/contents/ui/delegates/button.qml:30
+#: package/contents/ui/delegates/button.qml:31
 #: package/contents/ui/fakecontrols/Button.qml:22
 #, kde-format
 msgid "Button"
 msgstr "Düğme"
 
-#: package/contents/ui/delegates/tabbar.qml:28
+#: package/contents/ui/delegates/tabbar.qml:29
 #, kde-format
 msgid "Tab1"
 msgstr "Sekme1"
 
-#: package/contents/ui/delegates/tabbar.qml:31
+#: package/contents/ui/delegates/tabbar.qml:32
 #, kde-format
 msgid "Tab2"
 msgstr "Sekme2"
 
-#: package/contents/ui/delegates/tabbar.qml:34
+#: package/contents/ui/delegates/tabbar.qml:35
 #, kde-format
 msgid "Tab3"
 msgstr "Sekme3"
 
-#: package/contents/ui/delegates/textfield.qml:27
+#: package/contents/ui/delegates/textfield.qml:28
 #, kde-format
 msgid "Text"
 msgstr "Metin"
 
-#: package/contents/ui/fakecontrols/CheckBox.qml:73
+#: package/contents/ui/fakecontrols/CheckBox.qml:74
 #, kde-format
 msgid "Checkbox"
 msgstr "Onay kutusu"
 
-#: package/contents/ui/fakecontrols/LineEdit.qml:33
+#: package/contents/ui/fakecontrols/LineEdit.qml:34
 #, kde-format
 msgid "Text input…"
 msgstr "Metin girişi…"
 
-#: package/contents/ui/main.qml:30
+#: package/contents/ui/main.qml:31
 #, kde-format
 msgid "New Theme…"
 msgstr "Yeni Tema…"
 
-#: package/contents/ui/main.qml:46
+#: package/contents/ui/main.qml:47
 #, kde-format
 msgid "Theme:"
 msgstr "Tema:"
 
-#: package/contents/ui/main.qml:58
+#: package/contents/ui/main.qml:59
 #, kde-format
 msgid "Open Folder"
 msgstr "Klasör Aç"
 
-#: package/contents/ui/main.qml:63
+#: package/contents/ui/main.qml:64
 #, kde-format
 msgid "Edit Metadata…"
 msgstr "Üst Veriyi Düzenle…"
 
-#: package/contents/ui/main.qml:80
+#: package/contents/ui/main.qml:81
 #, kde-format
 msgid "Edit Colors…"
 msgstr "Renkleri Düzenle…"
 
-#: package/contents/ui/main.qml:96
+#: package/contents/ui/main.qml:97
 #, kde-format
 msgid "Help"
 msgstr "Yardım"
 
-#: package/contents/ui/main.qml:101
+#: package/contents/ui/main.qml:102
 #, kde-format
 msgid "Search…"
 msgstr "Ara…"
 
-#: package/contents/ui/main.qml:219
+#: package/contents/ui/main.qml:220
 #, kde-format
 msgid "This is a readonly, system wide installed theme"
 msgstr "Bu saltokunur, sisteme kurulu bir temadır"
 
-#: package/contents/ui/main.qml:224
+#: package/contents/ui/main.qml:225
 #, kde-format
 msgid "Preview:"
 msgstr "Önizle:"
 
-#: package/contents/ui/main.qml:239
+#: package/contents/ui/main.qml:240
 #, kde-format
 msgid "Image path: %1"
 msgstr "Görsel yolu: %1"
 
-#: package/contents/ui/main.qml:244
+#: package/contents/ui/main.qml:245
 #, kde-format
 msgid "Description: %1"
 msgstr "Açıklama: %1"
 
-#: package/contents/ui/main.qml:249
+#: package/contents/ui/main.qml:250
 #, kde-format
 msgid "Missing from this theme"
 msgstr "Bu temada eksik olanlar"
 
-#: package/contents/ui/main.qml:249
+#: package/contents/ui/main.qml:250
 #, kde-format
 msgid "Present in this theme"
 msgstr "Bu temada olanlar"
 
-#: package/contents/ui/main.qml:254
+#: package/contents/ui/main.qml:255
 #, kde-format
 msgid "Show Margins"
 msgstr "Boşlukları Göster"
 
-#: package/contents/ui/main.qml:257
+#: package/contents/ui/main.qml:258
 #, kde-format
 msgid "Create with Editor…"
 msgstr "Düzenleyici ile Oluştur…"
 
-#: package/contents/ui/main.qml:257
+#: package/contents/ui/main.qml:258
 #, kde-format
 msgid "Open In Editor…"
 msgstr "Düzenleyicide Aç…"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-17 02:07+0000\n"
+"POT-Creation-Date: 2023-08-24 01:57+0000\n"
 "PO-Revision-Date: 2023-01-04 10:03\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian\n"
@@ -163,133 +163,133 @@ msgstr "Добра"
 msgid "Cancel"
 msgstr "Скасаваць"
 
-#: package/contents/ui/delegates/actionbutton.qml:34
-#: package/contents/ui/delegates/actionbutton.qml:38
-#: package/contents/ui/delegates/checkmarks.qml:30
-#: package/contents/ui/delegates/checkmarks.qml:34
-#: package/contents/ui/delegates/checkmarks.qml:38
-#: package/contents/ui/delegates/checkmarks.qml:42
+#: package/contents/ui/delegates/actionbutton.qml:35
+#: package/contents/ui/delegates/actionbutton.qml:39
+#: package/contents/ui/delegates/checkmarks.qml:31
+#: package/contents/ui/delegates/checkmarks.qml:35
+#: package/contents/ui/delegates/checkmarks.qml:39
+#: package/contents/ui/delegates/checkmarks.qml:43
 #, kde-format
 msgid "Option"
 msgstr "Параметр"
 
-#: package/contents/ui/delegates/button.qml:26
+#: package/contents/ui/delegates/button.qml:27
 #, kde-format
 msgid "ToolButton"
 msgstr "Кнопка інструмента"
 
-#: package/contents/ui/delegates/button.qml:30
+#: package/contents/ui/delegates/button.qml:31
 #: package/contents/ui/fakecontrols/Button.qml:22
 #, kde-format
 msgid "Button"
 msgstr "Кнопка"
 
-#: package/contents/ui/delegates/tabbar.qml:28
+#: package/contents/ui/delegates/tabbar.qml:29
 #, kde-format
 msgid "Tab1"
 msgstr "Укладка 1"
 
-#: package/contents/ui/delegates/tabbar.qml:31
+#: package/contents/ui/delegates/tabbar.qml:32
 #, kde-format
 msgid "Tab2"
 msgstr "Укладка 2"
 
-#: package/contents/ui/delegates/tabbar.qml:34
+#: package/contents/ui/delegates/tabbar.qml:35
 #, kde-format
 msgid "Tab3"
 msgstr "Укладка 3"
 
-#: package/contents/ui/delegates/textfield.qml:27
+#: package/contents/ui/delegates/textfield.qml:28
 #, kde-format
 msgid "Text"
 msgstr "Тэкст"
 
-#: package/contents/ui/fakecontrols/CheckBox.qml:73
+#: package/contents/ui/fakecontrols/CheckBox.qml:74
 #, kde-format
 msgid "Checkbox"
 msgstr "Адзнака"
 
-#: package/contents/ui/fakecontrols/LineEdit.qml:33
+#: package/contents/ui/fakecontrols/LineEdit.qml:34
 #, kde-format
 msgid "Text input…"
 msgstr "Увод тэксту…"
 
-#: package/contents/ui/main.qml:30
+#: package/contents/ui/main.qml:31
 #, kde-format
 msgid "New Theme…"
 msgstr "Новая тэма…"
 
-#: package/contents/ui/main.qml:46
+#: package/contents/ui/main.qml:47
 #, kde-format
 msgid "Theme:"
 msgstr "Тэма:"
 
-#: package/contents/ui/main.qml:58
+#: package/contents/ui/main.qml:59
 #, kde-format
 msgid "Open Folder"
 msgstr "Адкрыць каталог"
 
-#: package/contents/ui/main.qml:63
+#: package/contents/ui/main.qml:64
 #, kde-format
 msgid "Edit Metadata…"
 msgstr "Рэдагаваць метаданыя…"
 
-#: package/contents/ui/main.qml:80
+#: package/contents/ui/main.qml:81
 #, kde-format
 msgid "Edit Colors…"
 msgstr "Рэдагаваць колеры…"
 
-#: package/contents/ui/main.qml:96
+#: package/contents/ui/main.qml:97
 #, kde-format
 msgid "Help"
 msgstr "Даведка"
 
-#: package/contents/ui/main.qml:101
+#: package/contents/ui/main.qml:102
 #, kde-format
 msgid "Search…"
 msgstr "Пошук…"
 
-#: package/contents/ui/main.qml:219
+#: package/contents/ui/main.qml:220
 #, kde-format
 msgid "This is a readonly, system wide installed theme"
 msgstr "Агульнасістэмная ўсталяваная тэма, даступная толькі для чытання"
 
-#: package/contents/ui/main.qml:224
+#: package/contents/ui/main.qml:225
 #, kde-format
 msgid "Preview:"
 msgstr "Папярэдні прагляд:"
 
-#: package/contents/ui/main.qml:239
+#: package/contents/ui/main.qml:240
 #, kde-format
 msgid "Image path: %1"
 msgstr "Шлях да выявы: %1"
 
-#: package/contents/ui/main.qml:244
+#: package/contents/ui/main.qml:245
 #, kde-format
 msgid "Description: %1"
 msgstr "Апісанне: %1"
 
-#: package/contents/ui/main.qml:249
+#: package/contents/ui/main.qml:250
 #, kde-format
 msgid "Missing from this theme"
 msgstr "Няма ў гэтай тэме"
 
-#: package/contents/ui/main.qml:249
+#: package/contents/ui/main.qml:250
 #, kde-format
 msgid "Present in this theme"
 msgstr "Ёсць у гэтай тэме"
 
-#: package/contents/ui/main.qml:254
+#: package/contents/ui/main.qml:255
 #, kde-format
 msgid "Show Margins"
 msgstr "Паказваць палі"
 
-#: package/contents/ui/main.qml:257
+#: package/contents/ui/main.qml:258
 #, kde-format
 msgid "Create with Editor…"
 msgstr "Стварыць у рэдактары…"
 
-#: package/contents/ui/main.qml:257
+#: package/contents/ui/main.qml:258
 #, kde-format
 msgid "Open In Editor…"
 msgstr "Адкрыць у рэдактары…"

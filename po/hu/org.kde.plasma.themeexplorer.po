@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-17 02:07+0000\n"
+"POT-Creation-Date: 2023-08-24 01:57+0000\n"
 "PO-Revision-Date: 2021-10-17 14:09+0200\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -159,133 +159,133 @@ msgstr "OK"
 msgid "Cancel"
 msgstr "Mégsem"
 
-#: package/contents/ui/delegates/actionbutton.qml:34
-#: package/contents/ui/delegates/actionbutton.qml:38
-#: package/contents/ui/delegates/checkmarks.qml:30
-#: package/contents/ui/delegates/checkmarks.qml:34
-#: package/contents/ui/delegates/checkmarks.qml:38
-#: package/contents/ui/delegates/checkmarks.qml:42
+#: package/contents/ui/delegates/actionbutton.qml:35
+#: package/contents/ui/delegates/actionbutton.qml:39
+#: package/contents/ui/delegates/checkmarks.qml:31
+#: package/contents/ui/delegates/checkmarks.qml:35
+#: package/contents/ui/delegates/checkmarks.qml:39
+#: package/contents/ui/delegates/checkmarks.qml:43
 #, kde-format
 msgid "Option"
 msgstr "Opció"
 
-#: package/contents/ui/delegates/button.qml:26
+#: package/contents/ui/delegates/button.qml:27
 #, kde-format
 msgid "ToolButton"
 msgstr "Eszköztárgomb"
 
-#: package/contents/ui/delegates/button.qml:30
+#: package/contents/ui/delegates/button.qml:31
 #: package/contents/ui/fakecontrols/Button.qml:22
 #, kde-format
 msgid "Button"
 msgstr "Gomb"
 
-#: package/contents/ui/delegates/tabbar.qml:28
+#: package/contents/ui/delegates/tabbar.qml:29
 #, kde-format
 msgid "Tab1"
 msgstr "Lap 1"
 
-#: package/contents/ui/delegates/tabbar.qml:31
+#: package/contents/ui/delegates/tabbar.qml:32
 #, kde-format
 msgid "Tab2"
 msgstr "Lap 2"
 
-#: package/contents/ui/delegates/tabbar.qml:34
+#: package/contents/ui/delegates/tabbar.qml:35
 #, kde-format
 msgid "Tab3"
 msgstr "Lap 3"
 
-#: package/contents/ui/delegates/textfield.qml:27
+#: package/contents/ui/delegates/textfield.qml:28
 #, kde-format
 msgid "Text"
 msgstr "Szöveg"
 
-#: package/contents/ui/fakecontrols/CheckBox.qml:73
+#: package/contents/ui/fakecontrols/CheckBox.qml:74
 #, kde-format
 msgid "Checkbox"
 msgstr "Jelölőnégyzet"
 
-#: package/contents/ui/fakecontrols/LineEdit.qml:33
+#: package/contents/ui/fakecontrols/LineEdit.qml:34
 #, kde-format
 msgid "Text input…"
 msgstr "Szövegbevitel…"
 
-#: package/contents/ui/main.qml:30
+#: package/contents/ui/main.qml:31
 #, kde-format
 msgid "New Theme…"
 msgstr "Új téma…"
 
-#: package/contents/ui/main.qml:46
+#: package/contents/ui/main.qml:47
 #, kde-format
 msgid "Theme:"
 msgstr "Téma:"
 
-#: package/contents/ui/main.qml:58
+#: package/contents/ui/main.qml:59
 #, kde-format
 msgid "Open Folder"
 msgstr "Mappa megnyitása"
 
-#: package/contents/ui/main.qml:63
+#: package/contents/ui/main.qml:64
 #, kde-format
 msgid "Edit Metadata…"
 msgstr "Metaadatok szerkesztése…"
 
-#: package/contents/ui/main.qml:80
+#: package/contents/ui/main.qml:81
 #, kde-format
 msgid "Edit Colors…"
 msgstr "Színek szerkesztése…"
 
-#: package/contents/ui/main.qml:96
+#: package/contents/ui/main.qml:97
 #, kde-format
 msgid "Help"
 msgstr "Súgó"
 
-#: package/contents/ui/main.qml:101
+#: package/contents/ui/main.qml:102
 #, kde-format
 msgid "Search…"
 msgstr "Keresés…"
 
-#: package/contents/ui/main.qml:219
+#: package/contents/ui/main.qml:220
 #, kde-format
 msgid "This is a readonly, system wide installed theme"
 msgstr "Ez egy csak olvasható, rendszerszinten telepített téma"
 
-#: package/contents/ui/main.qml:224
+#: package/contents/ui/main.qml:225
 #, kde-format
 msgid "Preview:"
 msgstr "Előnézet:"
 
-#: package/contents/ui/main.qml:239
+#: package/contents/ui/main.qml:240
 #, kde-format
 msgid "Image path: %1"
 msgstr "Kép útvonala: %1"
 
-#: package/contents/ui/main.qml:244
+#: package/contents/ui/main.qml:245
 #, kde-format
 msgid "Description: %1"
 msgstr "Leírás: %1"
 
-#: package/contents/ui/main.qml:249
+#: package/contents/ui/main.qml:250
 #, kde-format
 msgid "Missing from this theme"
 msgstr "Hiányzik ebből a témából"
 
-#: package/contents/ui/main.qml:249
+#: package/contents/ui/main.qml:250
 #, kde-format
 msgid "Present in this theme"
 msgstr "Jelen van ebben a témában"
 
-#: package/contents/ui/main.qml:254
+#: package/contents/ui/main.qml:255
 #, kde-format
 msgid "Show Margins"
 msgstr "Szegélyek megjelenítése"
 
-#: package/contents/ui/main.qml:257
+#: package/contents/ui/main.qml:258
 #, kde-format
 msgid "Create with Editor…"
 msgstr "Létrehozás a szerkesztővel…"
 
-#: package/contents/ui/main.qml:257
+#: package/contents/ui/main.qml:258
 #, kde-format
 msgid "Open In Editor…"
 msgstr "Megnyitás szerkesztővel…"

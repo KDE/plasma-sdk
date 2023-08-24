@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-17 02:07+0000\n"
+"POT-Creation-Date: 2023-08-24 01:57+0000\n"
 "PO-Revision-Date: 2023-08-02 12:38\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -160,133 +160,133 @@ msgstr "确定"
 msgid "Cancel"
 msgstr "取消"
 
-#: package/contents/ui/delegates/actionbutton.qml:34
-#: package/contents/ui/delegates/actionbutton.qml:38
-#: package/contents/ui/delegates/checkmarks.qml:30
-#: package/contents/ui/delegates/checkmarks.qml:34
-#: package/contents/ui/delegates/checkmarks.qml:38
-#: package/contents/ui/delegates/checkmarks.qml:42
+#: package/contents/ui/delegates/actionbutton.qml:35
+#: package/contents/ui/delegates/actionbutton.qml:39
+#: package/contents/ui/delegates/checkmarks.qml:31
+#: package/contents/ui/delegates/checkmarks.qml:35
+#: package/contents/ui/delegates/checkmarks.qml:39
+#: package/contents/ui/delegates/checkmarks.qml:43
 #, kde-format
 msgid "Option"
 msgstr "选项"
 
-#: package/contents/ui/delegates/button.qml:26
+#: package/contents/ui/delegates/button.qml:27
 #, kde-format
 msgid "ToolButton"
 msgstr "工具按钮"
 
-#: package/contents/ui/delegates/button.qml:30
+#: package/contents/ui/delegates/button.qml:31
 #: package/contents/ui/fakecontrols/Button.qml:22
 #, kde-format
 msgid "Button"
 msgstr "按钮"
 
-#: package/contents/ui/delegates/tabbar.qml:28
+#: package/contents/ui/delegates/tabbar.qml:29
 #, kde-format
 msgid "Tab1"
 msgstr "标签 1"
 
-#: package/contents/ui/delegates/tabbar.qml:31
+#: package/contents/ui/delegates/tabbar.qml:32
 #, kde-format
 msgid "Tab2"
 msgstr "标签 2"
 
-#: package/contents/ui/delegates/tabbar.qml:34
+#: package/contents/ui/delegates/tabbar.qml:35
 #, kde-format
 msgid "Tab3"
 msgstr "标签 3"
 
-#: package/contents/ui/delegates/textfield.qml:27
+#: package/contents/ui/delegates/textfield.qml:28
 #, kde-format
 msgid "Text"
 msgstr "文本"
 
-#: package/contents/ui/fakecontrols/CheckBox.qml:73
+#: package/contents/ui/fakecontrols/CheckBox.qml:74
 #, kde-format
 msgid "Checkbox"
 msgstr "复选框"
 
-#: package/contents/ui/fakecontrols/LineEdit.qml:33
+#: package/contents/ui/fakecontrols/LineEdit.qml:34
 #, kde-format
 msgid "Text input…"
 msgstr "文字输入…"
 
-#: package/contents/ui/main.qml:30
+#: package/contents/ui/main.qml:31
 #, kde-format
 msgid "New Theme…"
 msgstr "新主题…"
 
-#: package/contents/ui/main.qml:46
+#: package/contents/ui/main.qml:47
 #, kde-format
 msgid "Theme:"
 msgstr "主题："
 
-#: package/contents/ui/main.qml:58
+#: package/contents/ui/main.qml:59
 #, kde-format
 msgid "Open Folder"
 msgstr "打开文件夹"
 
-#: package/contents/ui/main.qml:63
+#: package/contents/ui/main.qml:64
 #, kde-format
 msgid "Edit Metadata…"
 msgstr "编辑元数据…"
 
-#: package/contents/ui/main.qml:80
+#: package/contents/ui/main.qml:81
 #, kde-format
 msgid "Edit Colors…"
 msgstr "编辑颜色…"
 
-#: package/contents/ui/main.qml:96
+#: package/contents/ui/main.qml:97
 #, kde-format
 msgid "Help"
 msgstr "帮助"
 
-#: package/contents/ui/main.qml:101
+#: package/contents/ui/main.qml:102
 #, kde-format
 msgid "Search…"
 msgstr "搜索…"
 
-#: package/contents/ui/main.qml:219
+#: package/contents/ui/main.qml:220
 #, kde-format
 msgid "This is a readonly, system wide installed theme"
 msgstr "这是一个在系统上全局安装的只读主题"
 
-#: package/contents/ui/main.qml:224
+#: package/contents/ui/main.qml:225
 #, kde-format
 msgid "Preview:"
 msgstr "预览："
 
-#: package/contents/ui/main.qml:239
+#: package/contents/ui/main.qml:240
 #, kde-format
 msgid "Image path: %1"
 msgstr "图像路径：%1"
 
-#: package/contents/ui/main.qml:244
+#: package/contents/ui/main.qml:245
 #, kde-format
 msgid "Description: %1"
 msgstr "描述：%1"
 
-#: package/contents/ui/main.qml:249
+#: package/contents/ui/main.qml:250
 #, kde-format
 msgid "Missing from this theme"
 msgstr "主题中缺失"
 
-#: package/contents/ui/main.qml:249
+#: package/contents/ui/main.qml:250
 #, kde-format
 msgid "Present in this theme"
 msgstr "主题中存在"
 
-#: package/contents/ui/main.qml:254
+#: package/contents/ui/main.qml:255
 #, kde-format
 msgid "Show Margins"
 msgstr "显示边距"
 
-#: package/contents/ui/main.qml:257
+#: package/contents/ui/main.qml:258
 #, kde-format
 msgid "Create with Editor…"
 msgstr "用编辑器创建…"
 
-#: package/contents/ui/main.qml:257
+#: package/contents/ui/main.qml:258
 #, kde-format
 msgid "Open In Editor…"
 msgstr "用编辑器中打开…"
