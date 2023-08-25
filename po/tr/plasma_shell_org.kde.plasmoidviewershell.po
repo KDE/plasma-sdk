@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-03 02:38+0000\n"
-"PO-Revision-Date: 2023-03-28 17:30+0300\n"
+"PO-Revision-Date: 2023-08-24 06:59+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.11.70\n"
 
 #: contents/applet/AppletError.qml:40
 msgid "Sorry! There was an error loading %1."
@@ -196,7 +196,7 @@ msgstr "Buraya Girin"
 
 #: contents/views/SdkButtons.qml:47
 msgid "FormFactors"
-msgstr "FormFactors"
+msgstr "Biçim Etmenleri"
 
 #: contents/views/SdkButtons.qml:55
 msgid "Planar"
