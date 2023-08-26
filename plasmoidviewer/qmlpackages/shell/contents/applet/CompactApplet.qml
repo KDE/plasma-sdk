@@ -8,29 +8,27 @@ import QtQuick.Layouts 1.15
 import QtQuick.Window 2.15
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.plasmoid 2.0
-import org.kde.kirigami 2.20 as Kirigami
-import org.kde.kquickcontrolsaddons 2.0
 import org.kde.ksvg 1.0 as KSvg
+import org.kde.plasma.plasmoid 2.0
+import org.kde.kquickcontrolsaddons 2.0
+import org.kde.kirigami 2.20 as Kirigami
 
 PlasmaCore.ToolTipArea {
     id: root
     objectName: "org.kde.desktop-CompactApplet"
     anchors.fill: parent
 
-    mainText: plasmoidItem?.toolTipMainText ?? ""
-    subText: plasmoidItem?.toolTipSubText ?? ""
+    mainText: plasmoidItem ? plasmoidItem.toolTipMainText : ""
+    subText: plasmoidItem ? plasmoidItem.toolTipSubText : ""
     location: Plasmoid.location
-
-    active: !plasmoidItem.expanded
-    textFormat: plasmoidItem?.toolTipTextFormat ?? Text.AutoText
-
-    mainItem: plasmoidItem?.toolTipItem ?? null
+    active: plasmoidItem ? !plasmoidItem.expanded : false
+    textFormat: plasmoidItem ? plasmoidItem.toolTipTextFormat : 0
+    mainItem: plasmoidItem && plasmoidItem.toolTipItem ? plasmoidItem.toolTipItem : null
 
     property Item fullRepresentation
     property Item compactRepresentation
     property Item expandedFeedback: expandedItem
-    property Item plasmoidItem
+    property PlasmoidItem plasmoidItem
 
     onCompactRepresentationChanged: {
         if (compactRepresentation) {
@@ -71,10 +69,11 @@ PlasmaCore.ToolTipArea {
             }
         }
 
+        objectName: "expandApplet"
         Accessible.name: root.mainText
-        Accessible.description: i18n("Open %1", root.subText)
+        Accessible.description: i18nd("plasma_shell_org.kde.plasma.desktop", "Open %1", root.subText)
         Accessible.role: Accessible.Button
-        Accessible.onPressAction: Plasmoid.nativeInterface.activated()
+        Accessible.onPressAction: Plasmoid.activated()
 
         Keys.onPressed: {
             switch (event.key) {
@@ -82,7 +81,7 @@ PlasmaCore.ToolTipArea {
                 case Qt.Key_Enter:
                 case Qt.Key_Return:
                 case Qt.Key_Select:
-                    Plasmoid.nativeInterface.activated();
+                    Plasmoid.activated();
                     break;
             }
         }
@@ -90,10 +89,29 @@ PlasmaCore.ToolTipArea {
 
     KSvg.FrameSvgItem {
         id: expandedItem
+        z: -100
 
-        // skip containerMargins code from plasma-desktop, as we are not on a panel here.
+        property var containerMargins: {
+            let item = root;
+            while (item.parent) {
+                item = item.parent;
+                if (item.isAppletContainer) {
+                    return item.getMargins;
+                }
+            }
+            return undefined;
+        }
 
-        anchors.fill: parent
+        anchors {
+            fill: parent
+            property bool returnAllMargins: true
+            // The above makes sure margin is returned even for side margins, that
+            // would be otherwise turned off.
+            bottomMargin: containerMargins ? -containerMargins('bottom', returnAllMargins) : 0;
+            topMargin: containerMargins ? -containerMargins('top', returnAllMargins) : 0;
+            leftMargin: containerMargins ? -containerMargins('left', returnAllMargins) : 0;
+            rightMargin: containerMargins ? -containerMargins('right', returnAllMargins) : 0;
+        }
         imagePath: "widgets/tabbar"
         visible: opacity > 0
         prefix: {
@@ -116,7 +134,7 @@ PlasmaCore.ToolTipArea {
             }
             return prefix;
         }
-        opacity: plasmoidItem.expanded ? 1 : 0
+        opacity: plasmoidItem && plasmoidItem.expanded ? 1 : 0
         Behavior on opacity {
             NumberAnimation {
                 duration: Kirigami.Units.shortDuration
@@ -128,14 +146,14 @@ PlasmaCore.ToolTipArea {
     Timer {
         id: expandedSync
         interval: 100
-        onTriggered: root.plasmoidItem.expanded = popupWindow.visible;
+        onTriggered: plasmoidItem.expanded = dialog.visible;
     }
 
     Connections {
         target: Plasmoid.internalAction("configure")
         function onTriggered() {
             if (root.plasmoidItem.hideOnWindowDeactivate) {
-                root.plasmoidItem.expanded = false
+                plasmoidItem.expanded = false
             }
         }
     }
@@ -146,23 +164,31 @@ PlasmaCore.ToolTipArea {
     }
 
     PlasmaCore.Dialog {
-        id: popupWindow
+        id: dialog
         objectName: "popupWindow"
         flags: Qt.WindowStaysOnTopHint
-        visible: root.plasmoidItem?.expanded && fullRepresentation
-        visualParent: root.compactRepresentation
         location: Plasmoid.location
-        hideOnWindowDeactivate: root.plasmoidItem.hideOnWindowDeactivate
+        hideOnWindowDeactivate: root.plasmoidItem && root.plasmoidItem.hideOnWindowDeactivate
+        visible: root.plasmoidItem && root.plasmoidItem.expanded && fullRepresentation
+        visualParent: root.compactRepresentation
         backgroundHints: (Plasmoid.containmentDisplayHints & PlasmaCore.Types.DesktopFullyCovered) ? PlasmaCore.Dialog.SolidBackground : PlasmaCore.Dialog.StandardBackground
+        type: PlasmaCore.Dialog.AppletPopup
+        appletInterface: fullRepresentation && fullRepresentation.appletInterface || null
 
         property var oldStatus: PlasmaCore.Types.UnknownStatus
-        appletInterface: {
-            if (!fullRepresentation || !fullRepresentation.appletInterface)
-                return null
-            return fullRepresentation.appletInterface
-        }
-        type: PlasmaCore.Dialog.AppletPopup
 
+        onVisibleChanged: {
+            if (!visible) {
+                expandedSync.restart();
+                Plasmoid.status = oldStatus;
+            } else {
+                oldStatus = Plasmoid.status;
+                Plasmoid.status = PlasmaCore.Types.RequiresAttentionStatus;
+                // This call currently fails and complains at runtime:
+                // QWindow::setWindowState: QWindow::setWindowState does not accept Qt::WindowActive
+                dialog.requestActivate();
+            }
+        }
         //It's a MouseEventListener to get all the events, so the eventfilter will be able to catch them
         mainItem: MouseEventListener {
             id: appletParent
@@ -172,9 +198,6 @@ PlasmaCore.ToolTipArea {
             Keys.onEscapePressed: {
                 root.plasmoidItem.expanded = false;
             }
-
-            LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
-            LayoutMirroring.childrenInherit: true
 
             Layout.minimumWidth: fullRepresentation ? fullRepresentation.Layout.minimumWidth : 0
             Layout.minimumHeight: fullRepresentation ? fullRepresentation.Layout.minimumHeight : 0
@@ -193,7 +216,7 @@ PlasmaCore.ToolTipArea {
                         return root.fullRepresentation.implicitWidth;
                     }
                 }
-                return Kirigami.Units.gridUnit * 35;
+                return Kirigami.Units.iconSizes.sizeForLabels * 35;
             }
             height: {
                 if (root.fullRepresentation !== null) {
@@ -203,7 +226,7 @@ PlasmaCore.ToolTipArea {
                         return fullRepresentation.implicitHeight;
                     }
                 }
-                return Kirigami.Units.gridUnit * 25;
+                return Kirigami.Units.iconSizes.sizeForLabels * 25;
             }
 
             onActiveFocusChanged: {
@@ -212,20 +235,30 @@ PlasmaCore.ToolTipArea {
                 }
             }
 
-            // skip a line between the applet dialog and the panel code from plasma-desktop, as we are not on a panel here.
-        }
-
-        onVisibleChanged: {
-            if (!visible) {
-                expandedSync.restart();
-                Plasmoid.status = oldStatus;
-            } else {
-                oldStatus = Plasmoid.status;
-                Plasmoid.status = PlasmaCore.Types.RequiresAttentionStatus;
-                // This call currently fails and complains at runtime:
-                // QWindow::setWindowState: QWindow::setWindowState does not accept Qt::WindowActive
-                popupWindow.requestActivate();
+            // Draws a line between the applet dialog and the panel
+            KSvg.SvgItem {
+                // Only draw for popups of panel applets, not desktop applets
+                visible: [PlasmaCore.Types.TopEdge, PlasmaCore.Types.LeftEdge, PlasmaCore.Types.RightEdge, PlasmaCore.Types.BottomEdge]
+                    .includes(Plasmoid.location)
+                anchors {
+                    top: Plasmoid.location === PlasmaCore.Types.BottomEdge ? undefined : parent.top
+                    left: Plasmoid.location === PlasmaCore.Types.RightEdge ? undefined : parent.left
+                    right: Plasmoid.location === PlasmaCore.Types.LeftEdge ? undefined : parent.right
+                    bottom: Plasmoid.location === PlasmaCore.Types.TopEdge ? undefined : parent.bottom
+                    topMargin: Plasmoid.location === PlasmaCore.Types.BottomEdge ? undefined : -dialog.margins.top
+                    leftMargin: Plasmoid.location === PlasmaCore.Types.RightEdge ? undefined : -dialog.margins.left
+                    rightMargin: Plasmoid.location === PlasmaCore.Types.LeftEdge ? undefined : -dialog.margins.right
+                    bottomMargin: Plasmoid.location === PlasmaCore.Types.TopEdge ? undefined : -dialog.margins.bottom
+                }
+                height: (Plasmoid.location === PlasmaCore.Types.TopEdge || Plasmoid.location === PlasmaCore.Types.BottomEdge) ? 1 : undefined
+                width: (Plasmoid.location === PlasmaCore.Types.LeftEdge || Plasmoid.location === PlasmaCore.Types.RightEdge) ? 1 : undefined
+                z: 999 /* Draw the line on top of the applet */
+                elementId: (Plasmoid.location === PlasmaCore.Types.TopEdge || Plasmoid.location === PlasmaCore.Types.BottomEdge) ? "horizontal-line" : "vertical-line"
+                imagePath: "widgets/line"
             }
+
+            LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
+            LayoutMirroring.childrenInherit: true
         }
     }
 }
