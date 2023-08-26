@@ -16,8 +16,7 @@ Item {
     signal location(int LocationType)
     signal requestScreenshot()
     property int backgroundHeight: refreshButton.implicitHeight * 2
-    property int backgroundWidth: (refreshButton.implicitWidth + konsoleButton.implicitWidth +
-                                  formFactorMenuButton.implicitWidth + locationMenuButton.implicitWidth) * 2
+    property int backgroundWidth: (refreshButton.implicitWidth + formFactorMenuButton.implicitWidth + locationMenuButton.implicitWidth) * 2
 
     RowLayout {
         id: buttonRow
@@ -35,12 +34,6 @@ Item {
                     }
                 }
             }
-        }
-        PlasmaComponents.Button {
-            id: konsoleButton
-            icon.name: "utilities-terminal"
-            visible: desktop.konsoleVisible
-            onClicked: konsolePreviewer.visible = !konsolePreviewer.visible
         }
         PlasmaComponents.Button {
             id: formFactorMenuButton
