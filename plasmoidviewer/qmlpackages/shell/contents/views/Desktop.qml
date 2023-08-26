@@ -1,17 +1,17 @@
 /*
  *  SPDX-FileCopyrightText: 2012 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.0
-//import org.kde.plasma 2.0
+import QtQuick
 
 import org.kde.kirigami 2.20 as Kirigami
 
-
 Rectangle {
     id: root
+
     color: "black"
     width: 640
     height: 480
@@ -19,39 +19,27 @@ Rectangle {
     property Item containment
 
     SdkButtons {
-        id: buttons
-        z: +1
+        z: 1
         anchors {
-            fill: backgroundButtons
-            leftMargin: backgroundButtons.margins.left
-            rightMargin: backgroundButtons.margins.right - 8
-            topMargin: backgroundButtons.margins.top
-            bottomMargin: backgroundButtons.margins.bottom
+            horizontalCenter: parent.horizontalCenter
+            bottom: parent.bottom
         }
 
-        onFormFactor: FormFactorType => {
-            desktop.changeFormFactor(FormFactorType);
+        containment: root.containment
+
+        onFormFactor: formFactorType => {
+            desktop.changeFormFactor(formFactorType);
         }
-        onLocation: LocationType => {
-            desktop.changeLocation(LocationType);
+        onLocation: locationType => {
+            desktop.changeLocation(locationType);
         }
         onRequestScreenshot: {
             desktop.takeScreenShot();
         }
     }
 
-    Background {
-        id: backgroundButtons
-        width: buttons.backgroundWidth
-        height: buttons.backgroundHeight
-        anchors {
-            horizontalCenter: root.horizontalCenter
-            bottom: root.bottom
-        }
-    }
-
     onContainmentChanged: {
-        print("New Containment: " + containment)
+        print("New Containment:", containment)
         //containment.parent = root
         containment.visible = true
         containment.anchors.fill = root
@@ -60,6 +48,6 @@ Rectangle {
     Component.onCompleted: {
         desktop.stayBehind = true;
         desktop.fillScreen = true;
-        print("View QML loaded")
+        print("View QML loaded");
     }
 }

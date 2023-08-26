@@ -1,40 +1,45 @@
 /*
  *   SPDX-FileCopyrightText: 2013 Antonis Tsiapaliokas <kok3rs@gmail.com>
+ *   SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
  *
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.1
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
+
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
-Item {
+FloatingToolBar {
     id: root
-    signal formFactor(int FormFactorType)
-    signal location(int LocationType)
-    signal requestScreenshot()
-    property int backgroundHeight: refreshButton.implicitHeight * 2
-    property int backgroundWidth: (refreshButton.implicitWidth + formFactorMenuButton.implicitWidth + locationMenuButton.implicitWidth) * 2
 
-    RowLayout {
-        id: buttonRow
-        anchors.fill: parent
+    property Item containment
+
+    signal formFactor(int formFactorType)
+    signal location(int locationType)
+    signal requestScreenshot()
+
+    function triggerAppletInternalAction(name: string) {
+        const applets = containment?.plasmoid.applets;
+        if (applets) {
+            const applet = applets[0];
+            const action = applet?.internalAction(name);
+            action?.trigger();
+        }
+    }
+
+    contentItem: RowLayout {
+        spacing: Kirigami.Units.smallSpacing
 
         PlasmaComponents.Button {
             id: refreshButton
             icon.name: "view-refresh"
-            onClicked: {
-                var applet = containment.applets[0];
-                if (applet) {
-                    var action = applet.internalAction('remove');
-                    if (action) {
-                        action.trigger();
-                    }
-                }
-            }
+            onClicked: root.triggerAppletInternalAction("remove")
         }
+
         PlasmaComponents.Button {
             id: formFactorMenuButton
             text: i18n("FormFactors")
@@ -46,23 +51,23 @@ Item {
             visualParent: formFactorMenuButton
             PlasmaExtras.MenuItem {
                 text: i18n("Planar")
-                onClicked: formFactor(PlasmaCore.Types.Planar)
+                onClicked: root.formFactor(PlasmaCore.Types.Planar)
             }
             PlasmaExtras.MenuItem {
                 text: i18n("Vertical")
-                onClicked: formFactor(PlasmaCore.Types.Vertical)
+                onClicked: root.formFactor(PlasmaCore.Types.Vertical)
             }
             PlasmaExtras.MenuItem {
                 text: i18n("Horizontal")
-                onClicked: formFactor(PlasmaCore.Types.Horizontal)
+                onClicked: root.formFactor(PlasmaCore.Types.Horizontal)
             }
             PlasmaExtras.MenuItem {
                 text: i18n("Mediacenter")
-                onClicked: formFactor(PlasmaCore.Types.MediaCenter)
+                onClicked: root.formFactor(PlasmaCore.Types.MediaCenter)
             }
             PlasmaExtras.MenuItem {
                 text: i18n("Application")
-                onClicked: formFactor(PlasmaCore.Types.Application)
+                onClicked: root.formFactor(PlasmaCore.Types.Application)
             }
         }
 
@@ -75,7 +80,7 @@ Item {
         PlasmaComponents.Button {
             id: screenshotButton
             icon.name: "ksnapshot"
-            onClicked: requestScreenshot()
+            onClicked: root.requestScreenshot()
         }
 
         PlasmaExtras.Menu {
@@ -83,58 +88,51 @@ Item {
             visualParent: locationMenuButton
             PlasmaExtras.MenuItem {
                 text: i18n("Floating")
-                onClicked: location(PlasmaCore.Types.Floating)
+                onClicked: root.location(PlasmaCore.Types.Floating)
             }
             PlasmaExtras.MenuItem {
                 text: i18n("Desktop")
-                onClicked: location(PlasmaCore.Types.Desktop)
+                onClicked: root.location(PlasmaCore.Types.Desktop)
             }
             PlasmaExtras.MenuItem {
                 text: i18n("Fullscreen")
-                onClicked: location(PlasmaCore.Types.FullScreen)
+                onClicked: root.location(PlasmaCore.Types.FullScreen)
             }
             PlasmaExtras.MenuItem {
                 text: i18n("Top Edge")
-                onClicked: location(PlasmaCore.Types.TopEdge)
+                onClicked: root.location(PlasmaCore.Types.TopEdge)
             }
             PlasmaExtras.MenuItem {
                 text: i18n("Bottom Edge")
-                onClicked: location(PlasmaCore.Types.BottomEdge)
+                onClicked: root.location(PlasmaCore.Types.BottomEdge)
             }
             PlasmaExtras.MenuItem {
                 text: i18n("Left Edge")
-                onClicked: location(PlasmaCore.Types.LeftEdge)
+                onClicked: root.location(PlasmaCore.Types.LeftEdge)
             }
             PlasmaExtras.MenuItem {
                 text: i18n("Right Edge")
-                onClicked: location(PlasmaCore.Types.RightEdge)
+                onClicked: root.location(PlasmaCore.Types.RightEdge)
             }
         }
 
         PlasmaComponents.Button {
             id: configButton
             icon.name: "configure"
-            onClicked: {
-                var applet = containment.plasmoid.applets[0];
-                if (applet) {
-                    var action = applet.internalAction('configure');
-                    if (action) {
-                        action.trigger();
-                    }
-                }
-            }
+            onClicked: root.triggerAppletInternalAction("configure")
         }
+
         PlasmaComponents.Button {
             text: i18n("Configure Containment")
             onClicked: {
-                var action = containment.plasmoid.internalAction('configure');
-                if (action) {
-                    action.trigger();
-                }
+                const containment = root.containment?.plasmoid;
+                const action = containment?.internalAction("configure");
+                action?.trigger();
             }
         }
+
         PlasmaComponents.Button {
-            icon.name: "hide_table_row"
+            icon.name: "view-hidden"
             onClicked: {
                 root.visible = false;
             }
