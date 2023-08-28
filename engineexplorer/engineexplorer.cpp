@@ -62,7 +62,6 @@ EngineExplorer::EngineExplorer(QWidget *parent)
 
     setupUi(mainWidget);
 
-    m_engineManager = Plasma5Support::PluginLoader::self();
     m_dataModel = new QStandardItemModel(this);
     const int size = m_title->style()->pixelMetric(QStyle::PM_LargeIconSize);
     m_title->setIconSize(QSize(size, size));
@@ -96,9 +95,6 @@ EngineExplorer::~EngineExplorer()
 
 void EngineExplorer::cleanUp()
 {
-    if (!m_engineName.isEmpty()) {
-        // m_engineManager->unloadEngine(m_engineName);
-    }
 }
 
 void EngineExplorer::setApp(const QString &app)
@@ -150,7 +146,7 @@ void EngineExplorer::dataUpdated(const QString &source, const Plasma5Support::Da
 void EngineExplorer::listEngines()
 {
     m_engines->clear();
-    QVector<KPluginMetaData> engines = m_engineManager->listDataEngineMetaData(m_app);
+    QVector<KPluginMetaData> engines = Plasma5Support::PluginLoader::listDataEngineMetaData(m_app);
     std::sort(engines.begin(), engines.end(), [](auto lhs, auto rhs) {
         if (lhs.category() < rhs.category()) {
             return true;
@@ -182,10 +178,6 @@ void EngineExplorer::showEngine(const QString &name)
     m_data->setColumnWidth(ColumnDataSourceAndKey, 200);
     m_engine = nullptr;
     m_sourceCount = 0;
-
-    if (!m_engineName.isEmpty()) {
-        // m_engineManager->unloadEngine(m_engineName);
-    }
 
     m_engineName = name;
     if (m_engineName.isEmpty()) {

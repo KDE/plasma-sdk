@@ -62,7 +62,6 @@ private:
     void enableButtons(bool enable);
     void removeExtraRows(QStandardItem *parent, int preserve);
 
-    Plasma5Support::PluginLoader *m_engineManager;
     QStandardItemModel *m_dataModel;
     QString m_app;
     QString m_engineName;
