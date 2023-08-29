@@ -11,7 +11,7 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
 
-ApplicationWindow {
+Kirigami.AbstractApplicationWindow {
     id: root
     width: Kirigami.Units.gridUnit * 50
     height: Kirigami.Units.gridUnit * 35
@@ -63,7 +63,7 @@ ApplicationWindow {
             ToolButton {
                 ToolTip.text: i18n("Edit Metadata…")
                 icon.name: "configure"
-                enabled: view.currentItem.modelData.isWritable
+                enabled: view.currentItem?.modelData.isWritable ?? false
                 onClicked: {
                     if (!root.metadataEditor) {
                         root.metadataEditor = metadataEditorComponent.createObject(root);
@@ -80,7 +80,7 @@ ApplicationWindow {
             ToolButton {
                 ToolTip.text: i18n("Edit Colors…")
                 icon.name: "color"
-                enabled: view.currentItem.modelData.isWritable
+                enabled: view.currentItem?.modelData.isWritable ?? false
                 onClicked: {
                     if (!root.colorEditor) {
                         root.colorEditor = colorEditorComponent.createObject(root);
@@ -137,7 +137,8 @@ ApplicationWindow {
 
     Rectangle {
         anchors.fill: scrollView
-        color: Kirigami.Theme.viewBackgroundColor
+        Kirigami.Theme.colorSet: Kirigami.Theme.View
+        color: Kirigami.Theme.backgroundColor
     }
     ScrollView {
         id: scrollView
@@ -216,7 +217,7 @@ ApplicationWindow {
             }
             Label {
                 Layout.fillWidth: true
-                visible: !view.currentItem.modelData.isWritable
+                visible: !view.currentItem?.modelData.isWritable ?? false
                 text: i18n("This is a readonly, system wide installed theme")
                 wrapMode: Text.WordWrap
             }
@@ -226,10 +227,10 @@ ApplicationWindow {
             }
             Loader {
                 id: extendedLoader
-                property QtObject model: view.currentItem.modelData
+                property QtObject model: view.currentItem?.modelData ?? null
                 Layout.fillWidth: true
                 Layout.minimumHeight: width
-                source: Qt.resolvedUrl("delegates/" + model.delegate + ".qml")
+                source: model ? Qt.resolvedUrl("delegates/" + model.delegate + ".qml") : ""
             }
             Item {
                 Layout.fillWidth: true
@@ -237,17 +238,17 @@ ApplicationWindow {
             }
             Label {
                 Layout.fillWidth: true
-                text: i18n("Image path: %1", view.currentItem.modelData.imagePath)
+                text: i18n("Image path: %1", view.currentItem?.modelData.imagePath ?? i18n("None"))
                 wrapMode: Text.WordWrap
             }
             Label {
                 Layout.fillWidth: true
-                text: i18n("Description: %1", view.currentItem.modelData.description)
+                text: i18n("Description: %1", view.currentItem?.modelData.description ?? "")
                 wrapMode: Text.WordWrap
             }
             Label {
                 Layout.fillWidth: true
-                text: view.currentItem.modelData.usesFallback ? i18n("Missing from this theme") : i18n("Present in this theme")
+                text: view.currentItem && view.currentItem.modelData.usesFallback ? i18n("Missing from this theme") : i18n("Present in this theme")
                 wrapMode: Text.WordWrap
             }
             CheckBox {
@@ -255,8 +256,8 @@ ApplicationWindow {
                 text: i18n("Show Margins")
             }
             Button {
-                text: view.currentItem.modelData.usesFallback ? i18n("Create with Editor…") : i18n("Open In Editor…")
-                enabled: view.currentItem.modelData.isWritable
+                text: view.currentItem && view.currentItem.modelData.usesFallback ? i18n("Create with Editor…") : i18n("Open In Editor…")
+                enabled: view.currentItem?.modelData.isWritable ?? false
                 Layout.alignment: Qt.AlignHCenter
                 onClicked: {
                     print(view.currentItem.modelData.svgAbsolutePath)
