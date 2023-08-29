@@ -10,6 +10,7 @@ import QtQuick.Layouts 1.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kitemmodels as KItemModels
 
 Kirigami.AbstractApplicationWindow {
     id: root
@@ -100,7 +101,7 @@ Kirigami.AbstractApplicationWindow {
             }
             TextField {
                 placeholderText: i18n("Search…")
-                onTextChanged: searchModel.filterRegExp = ".*" + text + ".*"
+                onTextChanged: searchModel.filterRegularExpression = RegExp(".*" + text + ".*")
             }
         }
     }
@@ -151,9 +152,9 @@ Kirigami.AbstractApplicationWindow {
         GridView {
             id: view
             anchors.fill: parent
-            model: PlasmaCore.SortFilterModel {
+            model: KItemModels.KSortFilterProxyModel {
                 id: searchModel
-                filterRole: "imagePath"
+                filterRoleName: "imagePath"
             }
             cellWidth: root.iconSize
             cellHeight: cellWidth

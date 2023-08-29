@@ -16,6 +16,7 @@ Dependencies:
     'frameworks/ki18n': '@latest-kf6'
     'frameworks/kiconthemes': '@latest-kf6'
     'frameworks/kio': '@latest-kf6'
+    'frameworks/kitemmodels': '@latest-kf6'
     'frameworks/kjobwidgets': '@latest-kf6'
     'frameworks/kpackage': '@latest-kf6'
     'frameworks/kparts': '@latest-kf6'
