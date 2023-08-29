@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-03 02:38+0000\n"
+"POT-Creation-Date: 2023-08-29 01:56+0000\n"
 "PO-Revision-Date: 2022-06-04 11:43+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -28,7 +28,7 @@ msgstr "S'ha produït un error en carregar %1."
 msgid "Copy Error Details to Clipboard"
 msgstr "Copia els detalls de l'error al porta-retalls"
 
-#: contents/applet/CompactApplet.qml:75
+#: contents/applet/CompactApplet.qml:74
 msgid "Open %1"
 msgstr "Obri %1"
 
@@ -195,62 +195,62 @@ msgstr "Accions del ratolí"
 msgid "Input Here"
 msgstr "Introduïu-ho ací"
 
-#: contents/views/SdkButtons.qml:47
+#: contents/views/SdkButtons.qml:45
 msgid "FormFactors"
 msgstr "Factors de format"
 
-#: contents/views/SdkButtons.qml:55
+#: contents/views/SdkButtons.qml:53
 msgid "Planar"
 msgstr "Pla"
 
-#: contents/views/SdkButtons.qml:59
+#: contents/views/SdkButtons.qml:57
 msgid "Vertical"
 msgstr "Vertical"
 
-#: contents/views/SdkButtons.qml:63
+#: contents/views/SdkButtons.qml:61
 msgid "Horizontal"
 msgstr "Horitzontal"
 
-#: contents/views/SdkButtons.qml:67
+#: contents/views/SdkButtons.qml:65
 msgid "Mediacenter"
 msgstr "Centre multimèdia"
 
-#: contents/views/SdkButtons.qml:71
+#: contents/views/SdkButtons.qml:69
 msgid "Application"
 msgstr "Aplicació"
 
-#: contents/views/SdkButtons.qml:78
+#: contents/views/SdkButtons.qml:76
 msgid "Location"
 msgstr "Ubicació"
 
-#: contents/views/SdkButtons.qml:92
+#: contents/views/SdkButtons.qml:90
 msgid "Floating"
 msgstr "Flotant"
 
-#: contents/views/SdkButtons.qml:96
+#: contents/views/SdkButtons.qml:94
 msgid "Desktop"
 msgstr "Escriptori"
 
-#: contents/views/SdkButtons.qml:100
+#: contents/views/SdkButtons.qml:98
 msgid "Fullscreen"
 msgstr "Pantalla completa"
 
-#: contents/views/SdkButtons.qml:104
+#: contents/views/SdkButtons.qml:102
 msgid "Top Edge"
 msgstr "Vora superior"
 
-#: contents/views/SdkButtons.qml:108
+#: contents/views/SdkButtons.qml:106
 msgid "Bottom Edge"
 msgstr "Vora inferior"
 
-#: contents/views/SdkButtons.qml:112
+#: contents/views/SdkButtons.qml:110
 msgid "Left Edge"
 msgstr "Vora esquerra"
 
-#: contents/views/SdkButtons.qml:116
+#: contents/views/SdkButtons.qml:114
 msgid "Right Edge"
 msgstr "Vora dreta"
 
-#: contents/views/SdkButtons.qml:135
+#: contents/views/SdkButtons.qml:126
 msgid "Configure Containment"
 msgstr "Configura el contenidor"

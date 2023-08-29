@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-03 02:38+0000\n"
+"POT-Creation-Date: 2023-08-29 01:56+0000\n"
 "PO-Revision-Date: 2023-04-14 07:06+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@lists.kde.org>\n"
@@ -26,7 +26,7 @@ msgstr "Pardonu! Okazis eraro dum la ŝarĝo de %1."
 msgid "Copy Error Details to Clipboard"
 msgstr "Kopii detalojn de eraro al Tondujo"
 
-#: contents/applet/CompactApplet.qml:75
+#: contents/applet/CompactApplet.qml:74
 msgid "Open %1"
 msgstr "Malfermi %1"
 
@@ -194,62 +194,62 @@ msgstr "Musaj Agoj"
 msgid "Input Here"
 msgstr "Enigu ĉi tie"
 
-#: contents/views/SdkButtons.qml:47
+#: contents/views/SdkButtons.qml:45
 msgid "FormFactors"
 msgstr "FormFaktoroj"
 
-#: contents/views/SdkButtons.qml:55
+#: contents/views/SdkButtons.qml:53
 msgid "Planar"
 msgstr "Plana"
 
-#: contents/views/SdkButtons.qml:59
+#: contents/views/SdkButtons.qml:57
 msgid "Vertical"
 msgstr "Vertikala"
 
-#: contents/views/SdkButtons.qml:63
+#: contents/views/SdkButtons.qml:61
 msgid "Horizontal"
 msgstr "Horizontala"
 
-#: contents/views/SdkButtons.qml:67
+#: contents/views/SdkButtons.qml:65
 msgid "Mediacenter"
 msgstr "Mediacenter"
 
-#: contents/views/SdkButtons.qml:71
+#: contents/views/SdkButtons.qml:69
 msgid "Application"
 msgstr "Apliko"
 
-#: contents/views/SdkButtons.qml:78
+#: contents/views/SdkButtons.qml:76
 msgid "Location"
 msgstr "Loko"
 
-#: contents/views/SdkButtons.qml:92
+#: contents/views/SdkButtons.qml:90
 msgid "Floating"
 msgstr "Flosanta"
 
-#: contents/views/SdkButtons.qml:96
+#: contents/views/SdkButtons.qml:94
 msgid "Desktop"
 msgstr "Surtabla"
 
-#: contents/views/SdkButtons.qml:100
+#: contents/views/SdkButtons.qml:98
 msgid "Fullscreen"
 msgstr "Plenekrane"
 
-#: contents/views/SdkButtons.qml:104
+#: contents/views/SdkButtons.qml:102
 msgid "Top Edge"
 msgstr "Supra Rando"
 
-#: contents/views/SdkButtons.qml:108
+#: contents/views/SdkButtons.qml:106
 msgid "Bottom Edge"
 msgstr "Malsupra Rando"
 
-#: contents/views/SdkButtons.qml:112
+#: contents/views/SdkButtons.qml:110
 msgid "Left Edge"
 msgstr "Maldekstra Rando"
 
-#: contents/views/SdkButtons.qml:116
+#: contents/views/SdkButtons.qml:114
 msgid "Right Edge"
 msgstr "Dekstra Rando"
 
-#: contents/views/SdkButtons.qml:135
+#: contents/views/SdkButtons.qml:126
 msgid "Configure Containment"
 msgstr "Agordi Entenon"

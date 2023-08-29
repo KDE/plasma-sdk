@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-17 02:07+0000\n"
+"POT-Creation-Date: 2023-08-29 01:56+0000\n"
 "PO-Revision-Date: 2021-06-15 21:52+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -45,49 +45,49 @@ msgstr "Visus suskleisti"
 msgid "Plasma Engine Explorer"
 msgstr "Plasma variklių naršyklė"
 
-#: engineexplorer.cpp:77
+#: engineexplorer.cpp:76
 #, kde-format
 msgid "Search"
 msgstr "Paieška"
 
-#: engineexplorer.cpp:180
+#: engineexplorer.cpp:176
 #, fuzzy, kde-format
 #| msgid "DataSource"
 msgid "DataSource/Key"
 msgstr "Duomenų šaltinis"
 
-#: engineexplorer.cpp:180
+#: engineexplorer.cpp:176
 #, kde-format
 msgid "Type"
 msgstr "Tipas"
 
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: engineexplorer.cpp:180 serviceviewer.cpp:153 serviceviewer.ui:78
+#: engineexplorer.cpp:176 serviceviewer.cpp:153 serviceviewer.ui:78
 #, kde-format
 msgid "Value"
 msgstr "Reikšmė"
 
-#: engineexplorer.cpp:304
+#: engineexplorer.cpp:296
 #, kde-format
 msgid "Get associated service"
 msgstr "Gauti susietą tarnybą"
 
-#: engineexplorer.cpp:305
+#: engineexplorer.cpp:297
 #, kde-format
 msgid "Get associated model"
 msgstr "Gauti susietą modelį"
 
-#: engineexplorer.cpp:306
+#: engineexplorer.cpp:298
 #, kde-format
 msgid "Update source now"
 msgstr "Atnaujinti šaltinį dabar"
 
-#: engineexplorer.cpp:307
+#: engineexplorer.cpp:299
 #, kde-format
 msgid "Remove source"
 msgstr "Šalinti šaltinį"
 
-#: engineexplorer.cpp:329
+#: engineexplorer.cpp:321
 #, kde-format
 msgid "<1 bit>"
 msgid_plural "<%1 bits>"
@@ -96,7 +96,7 @@ msgstr[1] "<%1 bitai>"
 msgstr[2] "<%1 bitų>"
 msgstr[3] "<%1 bitas>"
 
-#: engineexplorer.cpp:338
+#: engineexplorer.cpp:330
 #, kde-format
 msgid "<1 byte>"
 msgid_plural "<%1 bytes>"
@@ -105,7 +105,7 @@ msgstr[1] "<%1 baitai>"
 msgstr[2] "<%1 baitų>"
 msgstr[3] "<%1 baitas>"
 
-#: engineexplorer.cpp:360
+#: engineexplorer.cpp:352
 #, kde-format
 msgid "<1 item>"
 msgid_plural "<%1 items>"
@@ -114,13 +114,13 @@ msgstr[1] "<%1 elementai>"
 msgstr[2] "<%1 elementų>"
 msgstr[3] "<%1 elementas>"
 
-#: engineexplorer.cpp:440
+#: engineexplorer.cpp:432
 #, kde-format
 msgctxt "The user did a query to a dataengine and it returned empty data"
 msgid "<empty>"
 msgstr "<tuščia>"
 
-#: engineexplorer.cpp:446
+#: engineexplorer.cpp:438
 #, kde-format
 msgctxt ""
 "A the dataengine returned something that the humble view on the "
@@ -128,7 +128,7 @@ msgctxt ""
 msgid "<not displayable>"
 msgstr "<neparodoma>"
 
-#: engineexplorer.cpp:500 engineexplorer.cpp:515
+#: engineexplorer.cpp:492 engineexplorer.cpp:507
 #, fuzzy, kde-format
 #| msgid "<1 item>"
 #| msgid_plural "<%1 items>"
@@ -140,7 +140,7 @@ msgstr[1] "<%1 elementai>"
 msgstr[2] "<%1 elementų>"
 msgstr[3] "<%1 elementas>"
 
-#: engineexplorer.cpp:530
+#: engineexplorer.cpp:522
 #, kde-format
 msgctxt "Size of the map"
 msgid "<%1 pair>"
@@ -151,12 +151,12 @@ msgstr[2] ""
 msgstr[3] ""
 
 #. i18n: ectx: property (text), widget (KTitleWidget, m_title)
-#: engineexplorer.cpp:543 engineexplorer.ui:29
+#: engineexplorer.cpp:535 engineexplorer.ui:29
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Plasma duomenų variklių naršyklė"
 
-#: engineexplorer.cpp:547
+#: engineexplorer.cpp:539
 #, kde-format
 msgctxt "The name of the engine followed by the number of data sources"
 msgid "%1 Engine - 1 data source"

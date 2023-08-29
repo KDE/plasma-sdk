@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-03 02:38+0000\n"
+"POT-Creation-Date: 2023-08-29 01:56+0000\n"
 "PO-Revision-Date: 2022-06-04 10:05+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -26,7 +26,7 @@ msgstr "Wybacz! Wystąpił błąd podczas wczytywania %1."
 msgid "Copy Error Details to Clipboard"
 msgstr "Skopiuj szczegóły błędu do schowka"
 
-#: contents/applet/CompactApplet.qml:75
+#: contents/applet/CompactApplet.qml:74
 msgid "Open %1"
 msgstr "Otwórz %1"
 
@@ -192,63 +192,63 @@ msgstr "Działania myszy"
 msgid "Input Here"
 msgstr "Wprowadź tutaj"
 
-#: contents/views/SdkButtons.qml:47
+#: contents/views/SdkButtons.qml:45
 msgid "FormFactors"
 msgstr "Współczynniki kształtu"
 
-#: contents/views/SdkButtons.qml:55
+#: contents/views/SdkButtons.qml:53
 msgid "Planar"
 msgstr "Płaski"
 
-#: contents/views/SdkButtons.qml:59
+#: contents/views/SdkButtons.qml:57
 msgid "Vertical"
 msgstr "W pionie"
 
-#: contents/views/SdkButtons.qml:63
+#: contents/views/SdkButtons.qml:61
 msgid "Horizontal"
 msgstr "W poziomie"
 
-#: contents/views/SdkButtons.qml:67
+#: contents/views/SdkButtons.qml:65
 msgid "Mediacenter"
 msgstr "Centrum multimedialne"
 
-#: contents/views/SdkButtons.qml:71
+#: contents/views/SdkButtons.qml:69
 msgid "Application"
 msgstr "Program"
 
-#: contents/views/SdkButtons.qml:78
+#: contents/views/SdkButtons.qml:76
 msgid "Location"
 msgstr "Położenie"
 
-#: contents/views/SdkButtons.qml:92
+#: contents/views/SdkButtons.qml:90
 msgid "Floating"
 msgstr "Pływające"
 
-#: contents/views/SdkButtons.qml:96
+#: contents/views/SdkButtons.qml:94
 msgid "Desktop"
 msgstr "Pulpit"
 
-#: contents/views/SdkButtons.qml:100
+#: contents/views/SdkButtons.qml:98
 msgid "Fullscreen"
 msgstr "Pełny ekran"
 
-#: contents/views/SdkButtons.qml:104
+#: contents/views/SdkButtons.qml:102
 msgid "Top Edge"
 msgstr "Górna krawędź"
 
-#: contents/views/SdkButtons.qml:108
+#: contents/views/SdkButtons.qml:106
 msgid "Bottom Edge"
 msgstr "Dolna krawędź"
 
-#: contents/views/SdkButtons.qml:112
+#: contents/views/SdkButtons.qml:110
 msgid "Left Edge"
 msgstr "Lewa krawędź"
 
-#: contents/views/SdkButtons.qml:116
+#: contents/views/SdkButtons.qml:114
 msgid "Right Edge"
 msgstr "Prawa krawędź"
 
-#: contents/views/SdkButtons.qml:135
+#: contents/views/SdkButtons.qml:126
 msgid "Configure Containment"
 msgstr "Ustawienia pojemnika"
 

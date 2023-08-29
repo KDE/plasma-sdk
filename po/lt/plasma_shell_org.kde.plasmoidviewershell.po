@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trunk-kf 5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-03 02:38+0000\n"
+"POT-Creation-Date: 2023-08-29 01:56+0000\n"
 "PO-Revision-Date: 2019-07-26 15:22+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -28,7 +28,7 @@ msgstr ""
 msgid "Copy Error Details to Clipboard"
 msgstr ""
 
-#: contents/applet/CompactApplet.qml:75
+#: contents/applet/CompactApplet.qml:74
 msgid "Open %1"
 msgstr ""
 
@@ -201,63 +201,63 @@ msgstr "Pelės veiksmai"
 msgid "Input Here"
 msgstr "Įveskite čia"
 
-#: contents/views/SdkButtons.qml:47
+#: contents/views/SdkButtons.qml:45
 msgid "FormFactors"
 msgstr "Formos faktoriai"
 
-#: contents/views/SdkButtons.qml:55
+#: contents/views/SdkButtons.qml:53
 msgid "Planar"
 msgstr "Plokštuminis"
 
-#: contents/views/SdkButtons.qml:59
+#: contents/views/SdkButtons.qml:57
 msgid "Vertical"
 msgstr "Vertikalus"
 
-#: contents/views/SdkButtons.qml:63
+#: contents/views/SdkButtons.qml:61
 msgid "Horizontal"
 msgstr "Horizontalus"
 
-#: contents/views/SdkButtons.qml:67
+#: contents/views/SdkButtons.qml:65
 msgid "Mediacenter"
 msgstr "Įvairialypės terpės centras"
 
-#: contents/views/SdkButtons.qml:71
+#: contents/views/SdkButtons.qml:69
 msgid "Application"
 msgstr "Programa"
 
-#: contents/views/SdkButtons.qml:78
+#: contents/views/SdkButtons.qml:76
 msgid "Location"
 msgstr "Vieta"
 
-#: contents/views/SdkButtons.qml:92
+#: contents/views/SdkButtons.qml:90
 msgid "Floating"
 msgstr "Slankus"
 
-#: contents/views/SdkButtons.qml:96
+#: contents/views/SdkButtons.qml:94
 msgid "Desktop"
 msgstr "Darbalaukis"
 
-#: contents/views/SdkButtons.qml:100
+#: contents/views/SdkButtons.qml:98
 msgid "Fullscreen"
 msgstr "Visas ekranas"
 
-#: contents/views/SdkButtons.qml:104
+#: contents/views/SdkButtons.qml:102
 msgid "Top Edge"
 msgstr "Viršutinis kraštas"
 
-#: contents/views/SdkButtons.qml:108
+#: contents/views/SdkButtons.qml:106
 msgid "Bottom Edge"
 msgstr "Apatinis kraštas"
 
-#: contents/views/SdkButtons.qml:112
+#: contents/views/SdkButtons.qml:110
 msgid "Left Edge"
 msgstr "Kairysis kraštas"
 
-#: contents/views/SdkButtons.qml:116
+#: contents/views/SdkButtons.qml:114
 msgid "Right Edge"
 msgstr "Dešinysis kraštas"
 
-#: contents/views/SdkButtons.qml:135
+#: contents/views/SdkButtons.qml:126
 msgid "Configure Containment"
 msgstr "Konfigūruoti varžymą"
 

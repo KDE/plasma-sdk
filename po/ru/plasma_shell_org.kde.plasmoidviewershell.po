@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-03 02:38+0000\n"
+"POT-Creation-Date: 2023-08-29 01:56+0000\n"
 "PO-Revision-Date: 2022-08-13 15:42+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -27,7 +27,7 @@ msgstr "Ошибка загрузки %1."
 msgid "Copy Error Details to Clipboard"
 msgstr "Скопировать сведения об ошибке в буфер обмена"
 
-#: contents/applet/CompactApplet.qml:75
+#: contents/applet/CompactApplet.qml:74
 msgid "Open %1"
 msgstr "Открыть %1"
 
@@ -197,63 +197,63 @@ msgstr "Действия мыши"
 msgid "Input Here"
 msgstr "Нажимайте здесь"
 
-#: contents/views/SdkButtons.qml:47
+#: contents/views/SdkButtons.qml:45
 msgid "FormFactors"
 msgstr "Форм-фактор"
 
-#: contents/views/SdkButtons.qml:55
+#: contents/views/SdkButtons.qml:53
 msgid "Planar"
 msgstr "Плоский"
 
-#: contents/views/SdkButtons.qml:59
+#: contents/views/SdkButtons.qml:57
 msgid "Vertical"
 msgstr "Вертикальный"
 
-#: contents/views/SdkButtons.qml:63
+#: contents/views/SdkButtons.qml:61
 msgid "Horizontal"
 msgstr "Горизонтальный"
 
-#: contents/views/SdkButtons.qml:67
+#: contents/views/SdkButtons.qml:65
 msgid "Mediacenter"
 msgstr "Медиацентр"
 
-#: contents/views/SdkButtons.qml:71
+#: contents/views/SdkButtons.qml:69
 msgid "Application"
 msgstr "Приложение"
 
-#: contents/views/SdkButtons.qml:78
+#: contents/views/SdkButtons.qml:76
 msgid "Location"
 msgstr "Расположение"
 
-#: contents/views/SdkButtons.qml:92
+#: contents/views/SdkButtons.qml:90
 msgid "Floating"
 msgstr "Плавающее"
 
-#: contents/views/SdkButtons.qml:96
+#: contents/views/SdkButtons.qml:94
 msgid "Desktop"
 msgstr "Рабочий стол"
 
-#: contents/views/SdkButtons.qml:100
+#: contents/views/SdkButtons.qml:98
 msgid "Fullscreen"
 msgstr "На весь экран"
 
-#: contents/views/SdkButtons.qml:104
+#: contents/views/SdkButtons.qml:102
 msgid "Top Edge"
 msgstr "Верхний край"
 
-#: contents/views/SdkButtons.qml:108
+#: contents/views/SdkButtons.qml:106
 msgid "Bottom Edge"
 msgstr "Нижний край"
 
-#: contents/views/SdkButtons.qml:112
+#: contents/views/SdkButtons.qml:110
 msgid "Left Edge"
 msgstr "Левый край"
 
-#: contents/views/SdkButtons.qml:116
+#: contents/views/SdkButtons.qml:114
 msgid "Right Edge"
 msgstr "Правый край"
 
-#: contents/views/SdkButtons.qml:135
+#: contents/views/SdkButtons.qml:126
 msgid "Configure Containment"
 msgstr "Настроить контейнер..."
 
