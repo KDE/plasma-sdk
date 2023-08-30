@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-24 01:57+0000\n"
+"POT-Creation-Date: 2023-08-30 01:58+0000\n"
 "PO-Revision-Date: 2016-07-27 19:28+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-i18n-doc@kde.org>\n"
@@ -211,87 +211,92 @@ msgstr "Märkekast"
 msgid "Text input…"
 msgstr "Teksti sisestus..."
 
-#: package/contents/ui/main.qml:31
+#: package/contents/ui/main.qml:32
 #, fuzzy, kde-format
 #| msgid "New Theme"
 msgid "New Theme…"
 msgstr "Uus teema"
 
-#: package/contents/ui/main.qml:47
+#: package/contents/ui/main.qml:48
 #, kde-format
 msgid "Theme:"
 msgstr "Teema:"
 
-#: package/contents/ui/main.qml:59
+#: package/contents/ui/main.qml:60
 #, kde-format
 msgid "Open Folder"
 msgstr "Ava kataloog"
 
-#: package/contents/ui/main.qml:64
+#: package/contents/ui/main.qml:65
 #, fuzzy, kde-format
 #| msgid "Edit Metadata..."
 msgid "Edit Metadata…"
 msgstr "Muuda metaandmeid"
 
-#: package/contents/ui/main.qml:81
+#: package/contents/ui/main.qml:82
 #, fuzzy, kde-format
 #| msgid "Edit Colors"
 msgid "Edit Colors…"
 msgstr "Värvide muutmine"
 
-#: package/contents/ui/main.qml:97
+#: package/contents/ui/main.qml:98
 #, kde-format
 msgid "Help"
 msgstr "Abi"
 
-#: package/contents/ui/main.qml:102
+#: package/contents/ui/main.qml:103
 #, fuzzy, kde-format
 #| msgid "Search..."
 msgid "Search…"
 msgstr "Otsing..."
 
-#: package/contents/ui/main.qml:220
+#: package/contents/ui/main.qml:222
 #, kde-format
 msgid "This is a readonly, system wide installed theme"
 msgstr "See on kirjutuskaitstud süsteemselt paigaldatud teema"
 
-#: package/contents/ui/main.qml:225
+#: package/contents/ui/main.qml:227
 #, kde-format
 msgid "Preview:"
 msgstr "Eelvaatlus:"
 
-#: package/contents/ui/main.qml:240
+#: package/contents/ui/main.qml:242
+#, kde-format
+msgid "None"
+msgstr ""
+
+#: package/contents/ui/main.qml:242
 #, kde-format
 msgid "Image path: %1"
 msgstr "Pildi asukoht: %1"
 
-#: package/contents/ui/main.qml:245
+#: package/contents/ui/main.qml:247
 #, kde-format
 msgid "Description: %1"
 msgstr "Kirjeldus: %1"
 
-#: package/contents/ui/main.qml:250
+#: package/contents/ui/main.qml:252
 #, kde-format
 msgid "Missing from this theme"
 msgstr "Puudub sellest teemast"
 
-#: package/contents/ui/main.qml:250
+#: package/contents/ui/main.qml:252
 #, kde-format
 msgid "Present in this theme"
 msgstr "Olemas selles teemas"
 
-#: package/contents/ui/main.qml:255
+#: package/contents/ui/main.qml:257
 #, kde-format
 msgid "Show Margins"
 msgstr "Veeriste näitamine"
 
-#: package/contents/ui/main.qml:258
+#: package/contents/ui/main.qml:260
 #, fuzzy, kde-format
 #| msgid "Create with Editor..."
 msgid "Create with Editor…"
 msgstr "Loo redaktoriga..."
 
-#: package/contents/ui/main.qml:258
+#: package/contents/ui/main.qml:260
 #, fuzzy, kde-format
 #| msgid "Open In Editor..."
 msgid "Open In Editor…"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-24 01:57+0000\n"
+"POT-Creation-Date: 2023-08-30 01:58+0000\n"
 "PO-Revision-Date: 2021-05-28 19:43+0400\n"
 "Last-Translator: Kheyyam Gojayev <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -210,82 +210,87 @@ msgstr "İşarələmə qutusu"
 msgid "Text input…"
 msgstr "Mətn daxil etmək..."
 
-#: package/contents/ui/main.qml:31
+#: package/contents/ui/main.qml:32
 #, kde-format
 msgid "New Theme…"
 msgstr "Yeni Mövzu…"
 
-#: package/contents/ui/main.qml:47
+#: package/contents/ui/main.qml:48
 #, kde-format
 msgid "Theme:"
 msgstr "Mövzu:"
 
-#: package/contents/ui/main.qml:59
+#: package/contents/ui/main.qml:60
 #, kde-format
 msgid "Open Folder"
 msgstr "Qovluğu açmaq"
 
-#: package/contents/ui/main.qml:64
+#: package/contents/ui/main.qml:65
 #, kde-format
 msgid "Edit Metadata…"
 msgstr "Meta məlumatlarına düzəliş…"
 
-#: package/contents/ui/main.qml:81
+#: package/contents/ui/main.qml:82
 #, kde-format
 msgid "Edit Colors…"
 msgstr "Rənglərə düzəliş…"
 
-#: package/contents/ui/main.qml:97
+#: package/contents/ui/main.qml:98
 #, kde-format
 msgid "Help"
 msgstr "Kömək"
 
-#: package/contents/ui/main.qml:102
+#: package/contents/ui/main.qml:103
 #, kde-format
 msgid "Search…"
 msgstr "Axtarış…"
 
-#: package/contents/ui/main.qml:220
+#: package/contents/ui/main.qml:222
 #, kde-format
 msgid "This is a readonly, system wide installed theme"
 msgstr "Bu sistemə quraşdırılan mövzudur, ona düzəliş etmək olmaz"
 
-#: package/contents/ui/main.qml:225
+#: package/contents/ui/main.qml:227
 #, kde-format
 msgid "Preview:"
 msgstr "Öncədən baxış:"
 
-#: package/contents/ui/main.qml:240
+#: package/contents/ui/main.qml:242
+#, kde-format
+msgid "None"
+msgstr ""
+
+#: package/contents/ui/main.qml:242
 #, kde-format
 msgid "Image path: %1"
 msgstr "Şəkilə yol: %1"
 
-#: package/contents/ui/main.qml:245
+#: package/contents/ui/main.qml:247
 #, kde-format
 msgid "Description: %1"
 msgstr "Təsviri: %1"
 
-#: package/contents/ui/main.qml:250
+#: package/contents/ui/main.qml:252
 #, kde-format
 msgid "Missing from this theme"
 msgstr "Bu movzuda çatışmayan"
 
-#: package/contents/ui/main.qml:250
+#: package/contents/ui/main.qml:252
 #, kde-format
 msgid "Present in this theme"
 msgstr "Bu mövzuda movcud olan"
 
-#: package/contents/ui/main.qml:255
+#: package/contents/ui/main.qml:257
 #, kde-format
 msgid "Show Margins"
 msgstr "Sahəni göstərmək"
 
-#: package/contents/ui/main.qml:258
+#: package/contents/ui/main.qml:260
 #, kde-format
 msgid "Create with Editor…"
 msgstr "Redaktor ilə yaratmaq…"
 
-#: package/contents/ui/main.qml:258
+#: package/contents/ui/main.qml:260
 #, kde-format
 msgid "Open In Editor…"
 msgstr "Redaktorda açmaq…"

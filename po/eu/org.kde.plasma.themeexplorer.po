@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-24 01:57+0000\n"
+"POT-Creation-Date: 2023-08-30 01:58+0000\n"
 "PO-Revision-Date: 2022-11-27 09:17+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -216,82 +216,87 @@ msgstr "Kontrol-laukia"
 msgid "Text input…"
 msgstr "Testu sarrerakoa..."
 
-#: package/contents/ui/main.qml:31
+#: package/contents/ui/main.qml:32
 #, kde-format
 msgid "New Theme…"
 msgstr "Gai berria..."
 
-#: package/contents/ui/main.qml:47
+#: package/contents/ui/main.qml:48
 #, kde-format
 msgid "Theme:"
 msgstr "Gaia:"
 
-#: package/contents/ui/main.qml:59
+#: package/contents/ui/main.qml:60
 #, kde-format
 msgid "Open Folder"
 msgstr "Ireki karpeta"
 
-#: package/contents/ui/main.qml:64
+#: package/contents/ui/main.qml:65
 #, kde-format
 msgid "Edit Metadata…"
 msgstr "Editatu metadatuak..."
 
-#: package/contents/ui/main.qml:81
+#: package/contents/ui/main.qml:82
 #, kde-format
 msgid "Edit Colors…"
 msgstr "Editatu koloreak..."
 
-#: package/contents/ui/main.qml:97
+#: package/contents/ui/main.qml:98
 #, kde-format
 msgid "Help"
 msgstr "Laguntza"
 
-#: package/contents/ui/main.qml:102
+#: package/contents/ui/main.qml:103
 #, kde-format
 msgid "Search…"
 msgstr "Bilatu..."
 
-#: package/contents/ui/main.qml:220
+#: package/contents/ui/main.qml:222
 #, kde-format
 msgid "This is a readonly, system wide installed theme"
 msgstr "Hau irakurtzeko soilik, sistema osorako instalatutako gai bat da."
 
-#: package/contents/ui/main.qml:225
+#: package/contents/ui/main.qml:227
 #, kde-format
 msgid "Preview:"
 msgstr "Aurrebista:"
 
-#: package/contents/ui/main.qml:240
+#: package/contents/ui/main.qml:242
+#, kde-format
+msgid "None"
+msgstr ""
+
+#: package/contents/ui/main.qml:242
 #, kde-format
 msgid "Image path: %1"
 msgstr "Irudiaren bidea-izena: %1"
 
-#: package/contents/ui/main.qml:245
+#: package/contents/ui/main.qml:247
 #, kde-format
 msgid "Description: %1"
 msgstr "Deskribapena: %1"
 
-#: package/contents/ui/main.qml:250
+#: package/contents/ui/main.qml:252
 #, kde-format
 msgid "Missing from this theme"
 msgstr "Gai honetan falta da."
 
-#: package/contents/ui/main.qml:250
+#: package/contents/ui/main.qml:252
 #, kde-format
 msgid "Present in this theme"
 msgstr "Gai honetan dago."
 
-#: package/contents/ui/main.qml:255
+#: package/contents/ui/main.qml:257
 #, kde-format
 msgid "Show Margins"
 msgstr "Erakutsi marjinak"
 
-#: package/contents/ui/main.qml:258
+#: package/contents/ui/main.qml:260
 #, kde-format
 msgid "Create with Editor…"
 msgstr "Sortu editorearekin..."
 
-#: package/contents/ui/main.qml:258
+#: package/contents/ui/main.qml:260
 #, kde-format
 msgid "Open In Editor…"
 msgstr "Ireki editorean..."

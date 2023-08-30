@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-24 01:57+0000\n"
+"POT-Creation-Date: 2023-08-30 01:58+0000\n"
 "PO-Revision-Date: 2021-09-19 12:36+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -212,82 +212,87 @@ msgstr "Avkryssingsboks"
 msgid "Text input…"
 msgstr "Tekstfelt …"
 
-#: package/contents/ui/main.qml:31
+#: package/contents/ui/main.qml:32
 #, kde-format
 msgid "New Theme…"
 msgstr "Nytt tema …"
 
-#: package/contents/ui/main.qml:47
+#: package/contents/ui/main.qml:48
 #, kde-format
 msgid "Theme:"
 msgstr "Tema:"
 
-#: package/contents/ui/main.qml:59
+#: package/contents/ui/main.qml:60
 #, kde-format
 msgid "Open Folder"
 msgstr "Opna mappe"
 
-#: package/contents/ui/main.qml:64
+#: package/contents/ui/main.qml:65
 #, kde-format
 msgid "Edit Metadata…"
 msgstr "Rediger metadata …"
 
-#: package/contents/ui/main.qml:81
+#: package/contents/ui/main.qml:82
 #, kde-format
 msgid "Edit Colors…"
 msgstr "Rediger fargar …"
 
-#: package/contents/ui/main.qml:97
+#: package/contents/ui/main.qml:98
 #, kde-format
 msgid "Help"
 msgstr "Hjelp"
 
-#: package/contents/ui/main.qml:102
+#: package/contents/ui/main.qml:103
 #, kde-format
 msgid "Search…"
 msgstr "Søk …"
 
-#: package/contents/ui/main.qml:220
+#: package/contents/ui/main.qml:222
 #, kde-format
 msgid "This is a readonly, system wide installed theme"
 msgstr "Dette er eit skriveverna, systeminstallert tema"
 
-#: package/contents/ui/main.qml:225
+#: package/contents/ui/main.qml:227
 #, kde-format
 msgid "Preview:"
 msgstr "Førehandsvising:"
 
-#: package/contents/ui/main.qml:240
+#: package/contents/ui/main.qml:242
+#, kde-format
+msgid "None"
+msgstr ""
+
+#: package/contents/ui/main.qml:242
 #, kde-format
 msgid "Image path: %1"
 msgstr "Biletadresse: %1"
 
-#: package/contents/ui/main.qml:245
+#: package/contents/ui/main.qml:247
 #, kde-format
 msgid "Description: %1"
 msgstr "Skildring: %1"
 
-#: package/contents/ui/main.qml:250
+#: package/contents/ui/main.qml:252
 #, kde-format
 msgid "Missing from this theme"
 msgstr "Manglar i dette temaet"
 
-#: package/contents/ui/main.qml:250
+#: package/contents/ui/main.qml:252
 #, kde-format
 msgid "Present in this theme"
 msgstr "Finst i dette temaet"
 
-#: package/contents/ui/main.qml:255
+#: package/contents/ui/main.qml:257
 #, kde-format
 msgid "Show Margins"
 msgstr "Vis margar"
 
-#: package/contents/ui/main.qml:258
+#: package/contents/ui/main.qml:260
 #, kde-format
 msgid "Create with Editor…"
 msgstr "Lag med redigeringsprogram …"
 
-#: package/contents/ui/main.qml:258
+#: package/contents/ui/main.qml:260
 #, kde-format
 msgid "Open In Editor…"
 msgstr "Opna i redigeringsprogram …"

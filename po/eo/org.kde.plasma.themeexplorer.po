@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-24 01:57+0000\n"
+"POT-Creation-Date: 2023-08-30 01:58+0000\n"
 "PO-Revision-Date: 2023-04-14 07:06+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@lists.kde.org>\n"
@@ -211,82 +211,87 @@ msgstr "Markobutono"
 msgid "Text input…"
 msgstr "Enigo de teksto…"
 
-#: package/contents/ui/main.qml:31
+#: package/contents/ui/main.qml:32
 #, kde-format
 msgid "New Theme…"
 msgstr "Nova etoso…"
 
-#: package/contents/ui/main.qml:47
+#: package/contents/ui/main.qml:48
 #, kde-format
 msgid "Theme:"
 msgstr "Etoso:"
 
-#: package/contents/ui/main.qml:59
+#: package/contents/ui/main.qml:60
 #, kde-format
 msgid "Open Folder"
 msgstr "Malfermi Dosierujon"
 
-#: package/contents/ui/main.qml:64
+#: package/contents/ui/main.qml:65
 #, kde-format
 msgid "Edit Metadata…"
 msgstr "Redakti metadatumojn…"
 
-#: package/contents/ui/main.qml:81
+#: package/contents/ui/main.qml:82
 #, kde-format
 msgid "Edit Colors…"
 msgstr "Redakti Kolorojn…"
 
-#: package/contents/ui/main.qml:97
+#: package/contents/ui/main.qml:98
 #, kde-format
 msgid "Help"
 msgstr "Helpu"
 
-#: package/contents/ui/main.qml:102
+#: package/contents/ui/main.qml:103
 #, kde-format
 msgid "Search…"
 msgstr "Serĉu…"
 
-#: package/contents/ui/main.qml:220
+#: package/contents/ui/main.qml:222
 #, kde-format
 msgid "This is a readonly, system wide installed theme"
 msgstr "Ĉi tio estas nurlegebla, tutsistema instalita etoso"
 
-#: package/contents/ui/main.qml:225
+#: package/contents/ui/main.qml:227
 #, kde-format
 msgid "Preview:"
 msgstr "Antaŭrigardo:"
 
-#: package/contents/ui/main.qml:240
+#: package/contents/ui/main.qml:242
+#, kde-format
+msgid "None"
+msgstr ""
+
+#: package/contents/ui/main.qml:242
 #, kde-format
 msgid "Image path: %1"
 msgstr "Bilda vojo: %1"
 
-#: package/contents/ui/main.qml:245
+#: package/contents/ui/main.qml:247
 #, kde-format
 msgid "Description: %1"
 msgstr "Priskribo: %1"
 
-#: package/contents/ui/main.qml:250
+#: package/contents/ui/main.qml:252
 #, kde-format
 msgid "Missing from this theme"
 msgstr "Mankas el ĉi tiu etoso"
 
-#: package/contents/ui/main.qml:250
+#: package/contents/ui/main.qml:252
 #, kde-format
 msgid "Present in this theme"
 msgstr "Ĉeestas en ĉi tiu etoso"
 
-#: package/contents/ui/main.qml:255
+#: package/contents/ui/main.qml:257
 #, kde-format
 msgid "Show Margins"
 msgstr "Montri Marĝenojn"
 
-#: package/contents/ui/main.qml:258
+#: package/contents/ui/main.qml:260
 #, kde-format
 msgid "Create with Editor…"
 msgstr "Krei per Redaktilo…"
 
-#: package/contents/ui/main.qml:258
+#: package/contents/ui/main.qml:260
 #, kde-format
 msgid "Open In Editor…"
 msgstr "Malfermi en Redaktilo…"
