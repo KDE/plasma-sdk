@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2015, 2016, 2021.
+# Yuri Chornoivan <yurchor@ukr.net>, 2015, 2016, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: org.kde.plasma.themeexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-30 01:58+0000\n"
-"PO-Revision-Date: 2021-05-26 09:06+0300\n"
+"PO-Revision-Date: 2023-08-31 08:51+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -261,7 +261,7 @@ msgstr "Перегляд:"
 #: package/contents/ui/main.qml:242
 #, kde-format
 msgid "None"
-msgstr ""
+msgstr "Немає"
 
 #: package/contents/ui/main.qml:242
 #, kde-format

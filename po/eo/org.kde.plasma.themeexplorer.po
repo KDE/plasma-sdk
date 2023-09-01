@@ -259,7 +259,7 @@ msgstr "Antaŭrigardo:"
 #: package/contents/ui/main.qml:242
 #, kde-format
 msgid "None"
-msgstr ""
+msgstr "Neniu"
 
 #: package/contents/ui/main.qml:242
 #, kde-format
