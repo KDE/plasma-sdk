@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-30 01:58+0000\n"
-"PO-Revision-Date: 2023-06-07 09:20+0200\n"
+"PO-Revision-Date: 2023-09-03 11:25+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -249,7 +249,7 @@ msgstr "Buscar…"
 #: package/contents/ui/main.qml:222
 #, kde-format
 msgid "This is a readonly, system wide installed theme"
-msgstr "Este é un tema de só lectura instalado para todos os usuarios."
+msgstr "Este é un tema de só lectura instalado para todas as persoas usuarias."
 
 #: package/contents/ui/main.qml:227
 #, kde-format
@@ -259,7 +259,7 @@ msgstr "Vista previa:"
 #: package/contents/ui/main.qml:242
 #, kde-format
 msgid "None"
-msgstr ""
+msgstr "Ningunha"
 
 #: package/contents/ui/main.qml:242
 #, kde-format
@@ -309,7 +309,8 @@ msgstr "Editar o tema"
 #: package/contents/ui/MetadataEditor.qml:58
 #, kde-format
 msgid "Warning: don't change author or license for themes you don't own"
-msgstr "Aviso: non cambie o autor ou a licenza de temas que non lle pertencen."
+msgstr ""
+"Aviso: non cambie a autoría ou a licenza de temas que non lle pertencen."
 
 #: package/contents/ui/MetadataEditor.qml:69
 #, kde-format
@@ -324,7 +325,7 @@ msgstr "Xa existe un tema con ese nome."
 #: package/contents/ui/MetadataEditor.qml:94
 #, kde-format
 msgid "Author:"
-msgstr "Autor:"
+msgstr "Autoría:"
 
 #: package/contents/ui/MetadataEditor.qml:102
 #, kde-format
