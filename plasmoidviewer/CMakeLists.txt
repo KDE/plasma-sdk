@@ -29,3 +29,5 @@ install(FILES completions/plasmoidviewer.zsh RENAME _plasmoidviewer DESTINATION 
 
 #qml
 plasma_install_package(qmlpackages/shell org.kde.plasma.plasmoidviewershell shells shell)
+
+add_subdirectory(accessibletools)
