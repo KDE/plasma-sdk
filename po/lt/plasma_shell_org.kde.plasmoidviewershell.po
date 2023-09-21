@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trunk-kf 5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-29 01:56+0000\n"
+"POT-Creation-Date: 2023-09-21 01:57+0000\n"
 "PO-Revision-Date: 2019-07-26 15:22+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -189,11 +189,11 @@ msgstr ""
 msgid "This shortcut will activate the applet as though it had been clicked."
 msgstr ""
 
-#: contents/configuration/ContainmentConfiguration.qml:31
+#: contents/configuration/ContainmentConfiguration.qml:29
 msgid "Wallpaper"
 msgstr "Darbalaukio fonas"
 
-#: contents/configuration/ContainmentConfiguration.qml:36
+#: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Mouse Actions"
 msgstr "Pelės veiksmai"
 

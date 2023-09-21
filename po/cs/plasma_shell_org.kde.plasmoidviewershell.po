@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-29 01:56+0000\n"
+"POT-Creation-Date: 2023-09-21 01:57+0000\n"
 "PO-Revision-Date: 2023-02-21 09:40+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -182,11 +182,11 @@ msgid "This shortcut will activate the applet as though it had been clicked."
 msgstr ""
 "Tato klávesová zkratka applet aktivuje stejně jako by na něj uživatel klikl."
 
-#: contents/configuration/ContainmentConfiguration.qml:31
+#: contents/configuration/ContainmentConfiguration.qml:29
 msgid "Wallpaper"
 msgstr "Tapeta"
 
-#: contents/configuration/ContainmentConfiguration.qml:36
+#: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Mouse Actions"
 msgstr "Činnosti myši"
 

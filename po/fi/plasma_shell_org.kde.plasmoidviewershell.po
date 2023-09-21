@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-29 01:56+0000\n"
+"POT-Creation-Date: 2023-09-21 01:57+0000\n"
 "PO-Revision-Date: 2022-07-18 22:17+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -181,11 +181,11 @@ msgstr "Pikanäppäimet"
 msgid "This shortcut will activate the applet as though it had been clicked."
 msgstr "Tämä pikanäppäin aktivoi sovelman kuin sitä olisi napsautettu."
 
-#: contents/configuration/ContainmentConfiguration.qml:31
+#: contents/configuration/ContainmentConfiguration.qml:29
 msgid "Wallpaper"
 msgstr "Tausta"
 
-#: contents/configuration/ContainmentConfiguration.qml:36
+#: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Mouse Actions"
 msgstr "Hiiren toiminnot"
 

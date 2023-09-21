@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-29 01:56+0000\n"
+"POT-Creation-Date: 2023-09-21 01:57+0000\n"
 "PO-Revision-Date: 2022-08-13 15:42+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -185,11 +185,11 @@ msgstr ""
 "Эта комбинация клавиш активирует виджет таким же образом, как если бы вы "
 "нажали на него."
 
-#: contents/configuration/ContainmentConfiguration.qml:31
+#: contents/configuration/ContainmentConfiguration.qml:29
 msgid "Wallpaper"
 msgstr "Обои"
 
-#: contents/configuration/ContainmentConfiguration.qml:36
+#: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Mouse Actions"
 msgstr "Действия мыши"
 

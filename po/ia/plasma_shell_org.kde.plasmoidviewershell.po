@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-29 01:56+0000\n"
+"POT-Creation-Date: 2023-09-21 01:57+0000\n"
 "PO-Revision-Date: 2022-06-06 22:08+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -184,11 +184,11 @@ msgstr "Vias breve"
 msgid "This shortcut will activate the applet as though it had been clicked."
 msgstr "Iste via breve activara le applet como si illo ha essite pulsate."
 
-#: contents/configuration/ContainmentConfiguration.qml:31
+#: contents/configuration/ContainmentConfiguration.qml:29
 msgid "Wallpaper"
 msgstr "Tapete de papiro"
 
-#: contents/configuration/ContainmentConfiguration.qml:36
+#: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Mouse Actions"
 msgstr "Actiones de mus"
 
