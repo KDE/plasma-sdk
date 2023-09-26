@@ -59,7 +59,7 @@ int main(int argc, char **argv)
     KLocalizedString::setApplicationDomain("cuttlefish");
 
     app.setApplicationVersion(PROJECT_VERSION);
-    app.setDesktopFileName(QStringLiteral("org.kde.plasma.cuttlefish"));
+    app.setDesktopFileName(QStringLiteral("org.kde.cuttlefish"));
     app.setOrganizationName("KDE");
     app.setOrganizationDomain("org.kde");
     app.setApplicationName("Cuttlefish");
