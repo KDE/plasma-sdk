@@ -102,7 +102,7 @@ int main(int argc, char **argv)
     engine.rootContext()->setContextProperty("pickerMode", parser.isSet("picker"));
     engine.rootContext()->setContextProperty("colorSchemes", colorSchemes);
 
-    engine.load(QUrl("qrc:/qml/cuttlefish.qml"));
+    engine.loadFromModule("org.kde.cuttlefish", "Cuttlefish");
     if (engine.rootObjects().isEmpty()) {
         return -1;
     }
