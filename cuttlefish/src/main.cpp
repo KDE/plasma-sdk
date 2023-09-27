@@ -107,10 +107,5 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    qmlRegisterAnonymousType<CuttleFish::IconModel>("org.kde.plasma.sdk", 1);
-    qmlRegisterAnonymousType<CuttleFish::ColorSchemes>("org.kde.plasma.sdk", 1);
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    app.setAttribute(Qt::AA_UseHighDpiPixmaps);
-#endif
     return app.exec();
 }
