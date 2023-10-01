@@ -135,7 +135,7 @@ msgstr "Cancelar"
 #: src/lnflogic.cpp:85
 #, kde-format
 msgid "Cannot retrieve the current Plasma layout."
-msgstr "Non se pode obter a disposición actual de Plasma."
+msgstr "Non é posíbel obter a disposición actual de Plasma."
 
 #: src/lnflogic.cpp:93
 #, kde-format
