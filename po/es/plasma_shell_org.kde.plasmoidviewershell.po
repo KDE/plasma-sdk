@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Automatically generated, 2015.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2015, 2016, 2021, 2022.
+# SPDX-FileCopyrightText: 2015, 2016, 2021, 2022, 2023 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-21 01:57+0000\n"
-"PO-Revision-Date: 2022-06-04 18:10+0200\n"
+"PO-Revision-Date: 2023-10-02 22:24+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #: contents/applet/AppletError.qml:40
 msgid "Sorry! There was an error loading %1."
@@ -62,7 +62,7 @@ msgstr "Traductores"
 
 #: contents/configuration/AppletConfiguration.qml:55
 msgid "Keyboard Shortcuts"
-msgstr "Accesos rápidos de teclado"
+msgstr "Atajos de teclado"
 
 #: contents/configuration/AppletConfiguration.qml:294
 msgid "Apply Settings"
@@ -178,12 +178,13 @@ msgstr "Aplicar ahora"
 
 #: contents/configuration/ConfigurationShortcuts.qml:18
 msgid "Shortcuts"
-msgstr "Accesos rápidos"
+msgstr "Atajos de teclado"
 
 #: contents/configuration/ConfigurationShortcuts.qml:28
 msgid "This shortcut will activate the applet as though it had been clicked."
 msgstr ""
-"Este acceso rápido activará la miniaplicación como si se hubiera pulsado."
+"Este atajo de teclado activará la miniaplicación como su hubiera pulsado "
+"sobre ella."
 
 #: contents/configuration/ContainmentConfiguration.qml:29
 msgid "Wallpaper"
