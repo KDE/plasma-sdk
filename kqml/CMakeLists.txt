@@ -14,7 +14,8 @@ target_link_libraries(kqml
     Qt::Gui
     Qt::Widgets
     KF6::I18n
-    KF6::PlasmaQuick
+    KF6::CoreAddons
+    Plasma::PlasmaQuick
 )
 
 set_target_properties(kqml PROPERTIES WIN32_EXECUTABLE FALSE)
