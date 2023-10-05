@@ -23,7 +23,7 @@ FloatingToolBar {
     signal requestScreenshot()
 
     function triggerAppletInternalAction(name: string) {
-        const applets = containment?.plasmoid.applets;
+        const applets = containment?.Plasmoid.applets;
         if (applets) {
             const applet = applets[0];
             const action = applet?.internalAction(name);
