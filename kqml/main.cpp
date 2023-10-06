@@ -4,6 +4,7 @@
     SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+#include "KF6/PlasmaQuick/plasmaquick/sharedqmlengine.h"
 #include <QApplication>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
@@ -20,6 +21,8 @@
 #include <KLocalizedContext>
 #include <KLocalizedString>
 
+#include <PlasmaQuick/QuickViewSharedEngine>
+
 #include <stdio.h>
 
 void noFilesGiven()
@@ -28,83 +31,12 @@ void noFilesGiven()
     exit(1);
 }
 
-// Listens to the appEngine signals to determine if all files failed to load
-class LoadWatcher : public QObject
-{
-    Q_OBJECT
-
-public:
-    explicit LoadWatcher(QQmlApplicationEngine *engine, int expected);
-
-    int returnCode = 0;
-    bool earlyExit = false;
-
-public Q_SLOTS:
-    void checkFinished(QObject *object, const QUrl &url);
-    void quit();
-    void exit(int retCode);
-
-private:
-    void contain(QQuickItem *item);
-
-private:
-    int expectedFileCount;
-    int createdObjects;
-};
-
-LoadWatcher::LoadWatcher(QQmlApplicationEngine *engine, int expected)
-    : QObject(engine)
-    , expectedFileCount(expected)
-    , createdObjects(0)
-{
-    connect(engine, &QQmlApplicationEngine::objectCreated, this, &LoadWatcher::checkFinished);
-    // QQmlApplicationEngine also connects quit() to QCoreApplication::quit
-    // and exit() to QCoreApplication::exit but if called before exec()
-    // then QCoreApplication::quit or QCoreApplication::exit does nothing
-    connect(engine, &QQmlEngine::quit, this, &LoadWatcher::quit);
-    connect(engine, &QQmlEngine::exit, this, &LoadWatcher::exit);
-}
-
-void LoadWatcher::checkFinished(QObject *object, const QUrl &url)
-{
-    Q_UNUSED(url);
-
-    expectedFileCount -= 1;
-
-    if (object) {
-        createdObjects += 1;
-        if (auto item = qobject_cast<QQuickItem *>(object)) {
-            contain(item);
-        }
-    }
-
-    if (expectedFileCount == 0 && createdObjects == 0) {
-        printf("kqml: Did not load any objects, exiting.\n");
-        exit(2);
-        QCoreApplication::exit(2);
-    }
-}
-
-void LoadWatcher::quit()
-{
-    // Will be checked before calling exec()
-    earlyExit = true;
-    returnCode = 0;
-}
-
-void LoadWatcher::exit(int retCode)
-{
-    earlyExit = true;
-    returnCode = retCode;
-}
-
-void LoadWatcher::contain(QQuickItem *item)
+void contain(QQuickWindow *window, QQuickItem *item)
 {
     if (!item) {
         return;
     }
 
-    auto window = new QQuickWindow;
     auto contentItem = window->contentItem();
 
     window->setWidth(item->width());
@@ -113,7 +45,6 @@ void LoadWatcher::contain(QQuickItem *item)
     item->bindableWidth().setBinding(contentItem->bindableWidth().makeBinding());
     item->bindableHeight().setBinding(contentItem->bindableHeight().makeBinding());
     window->setVisible(true);
-    static_cast<QObject *>(window)->setParent(this);
 }
 
 int main(int argc, char *argv[])
@@ -147,15 +78,12 @@ int main(int argc, char *argv[])
 
     parser.process(app);
 
-    QQmlApplicationEngine engine;
-
     QString applicationDomain;
     if (parser.isSet(applicationDomainOption)) {
         applicationDomain = parser.value(applicationDomainOption);
     } else {
         applicationDomain = QStringLiteral("kqml");
     }
-    KLocalizedString::setApplicationDomain(qPrintable(applicationDomain));
 
     for (QString posArg : parser.positionalArguments()) {
         if (posArg == QLatin1String("--")) {
@@ -169,18 +97,13 @@ int main(int argc, char *argv[])
         noFilesGiven();
     }
 
-    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
-
     // Load files
-    QScopedPointer<LoadWatcher> lw(new LoadWatcher(&engine, files.size()));
-
     for (const QString &path : std::as_const(files)) {
         QUrl url = QUrl::fromUserInput(path, QDir::currentPath(), QUrl::AssumeLocalFile);
-        engine.load(url);
-    }
-
-    if (lw->earlyExit) {
-        return lw->returnCode;
+        auto window = new PlasmaQuick::QuickViewSharedEngine();
+        window->setTitle(url.fileName());
+        window->setSource(url);
+        window->show();
     }
 
     return app.exec();
