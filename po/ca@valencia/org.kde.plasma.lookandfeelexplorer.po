@@ -89,7 +89,7 @@ msgstr "Llicència:"
 #: package/contents/ui/main.qml:123
 #, kde-format
 msgid "Layout from current Plasma setup"
-msgstr "Disposició des de la configuració actual de Plasma"
+msgstr "Disposició a la configuració actual de Plasma"
 
 #: package/contents/ui/main.qml:128
 #, kde-format

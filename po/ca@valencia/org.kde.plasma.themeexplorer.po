@@ -39,7 +39,7 @@ msgstr "Edició de colors"
 #: package/contents/ui/ColorEditor.qml:67
 #, kde-format
 msgid "Select Color"
-msgstr "Seleccioneu el color"
+msgstr "Seleccioneu un color"
 
 #: package/contents/ui/ColorEditor.qml:109
 #, kde-format
