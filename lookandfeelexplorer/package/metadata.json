@@ -1,5 +1,4 @@
 {
-    "Categories": "Qt;KDE;Development;IDE",
     "KPlugin": {
         "Authors": [
             {
@@ -88,14 +87,7 @@
         "Name[uk]": "Навігатор загальними темами Плазми",
         "Name[x-test]": "xxPlasma Global Theme Explorerxx",
         "Name[zh_CN]": "Plasma 全局主题浏览器",
-        "Name[zh_TW]": "Plasma 全域主題探索器",
-        "ServiceTypes": [
-            "KPackage/GenericQML"
-        ],
-        "Version": "",
-        "Website": ""
+        "Name[zh_TW]": "Plasma 全域主題探索器"
     },
-    "Keywords": "",
-    "X-KDE-ParentApp": "",
-    "X-Plasma-MainScript": "ui/main.qml"
+    "KPackageStructure": "KPackage/GenericQML"
 }
