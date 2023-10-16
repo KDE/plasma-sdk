@@ -9,6 +9,7 @@ import QtQuick.Layouts 1.1
 
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.ksvg 1.0 as KSvg
+import org.kde.kirigami as Kirigami
 
 Item {
     KSvg.Svg {
@@ -21,7 +22,7 @@ Item {
         id: background
         anchors {
             fill: parent
-            margins: units.gridUnit
+            margins: Kirigami.Units.gridUnit
         }
         imagePath: model.imagePath
         onImagePathChanged: visible = hasElementPrefix("shadow")
