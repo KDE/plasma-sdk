@@ -57,6 +57,7 @@
         "Description[uk]": "Навігація вашими темами Плазми та редагування тем",
         "Description[x-test]": "xxExplore and edit your Plasma themesxx",
         "Description[zh_CN]": "浏览并编辑您的 Plasma 主题",
+        "Description[zh_TW]": "探索並編輯您的 Plasma 主題",
         "Icon": "preferences-desktop-theme",
         "Id": "org.kde.plasma.themeexplorer",
         "License": "GPL-2.0+",
