@@ -3,72 +3,71 @@
 #
 # Elkana Bardugo <ttv200@gmail.com>, 2016.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+# SPDX-FileCopyrightText: 2023 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-21 01:57+0000\n"
-"PO-Revision-Date: 2017-05-16 06:57-0400\n"
-"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
-"Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2023-10-22 22:04+0300\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Zanata 3.9.6\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #: contents/applet/AppletError.qml:40
 msgid "Sorry! There was an error loading %1."
-msgstr ""
+msgstr "אירעה שגיאה בטעינת %1, עמך הסליחה!"
 
 #: contents/applet/AppletError.qml:48
 msgid "Copy Error Details to Clipboard"
-msgstr ""
+msgstr "העתקת פרטי השגיאה ללוח הגזירים"
 
 #: contents/applet/CompactApplet.qml:74
 msgid "Open %1"
-msgstr ""
+msgstr "פתיחת %1"
 
 #: contents/configuration/AboutPlugin.qml:20
 #: contents/configuration/AppletConfiguration.qml:247
 msgid "About"
-msgstr ""
+msgstr "על אודות"
 
 #: contents/configuration/AboutPlugin.qml:46
 msgid "Send an email to %1"
-msgstr ""
+msgstr "שליחת דוא״ל אל %1"
 
 #: contents/configuration/AboutPlugin.qml:95
 msgid "Copyright"
-msgstr ""
+msgstr "זכויות יוצרים"
 
 #: contents/configuration/AboutPlugin.qml:115
 msgid "License:"
-msgstr ""
+msgstr "רישיון:"
 
 #: contents/configuration/AboutPlugin.qml:128
 msgid "Authors"
-msgstr ""
+msgstr "יוצרים"
 
 #: contents/configuration/AboutPlugin.qml:138
 msgid "Credits"
-msgstr ""
+msgstr "תודות"
 
 #: contents/configuration/AboutPlugin.qml:149
 msgid "Translators"
-msgstr ""
+msgstr "מתרגמים"
 
 #: contents/configuration/AppletConfiguration.qml:55
-#, fuzzy
-#| msgid "Keyboard shortcuts"
 msgid "Keyboard Shortcuts"
-msgstr "קיצורי מקלדת"
+msgstr "מקשי קיצור מקלדת"
 
 #: contents/configuration/AppletConfiguration.qml:294
 msgid "Apply Settings"
-msgstr "החל הגדרות"
+msgstr "החלת הגדרות"
 
 #: contents/configuration/AppletConfiguration.qml:297
 msgid ""
@@ -82,15 +81,15 @@ msgstr "אישור"
 
 #: contents/configuration/AppletConfiguration.qml:336
 msgid "Apply"
-msgstr "החל"
+msgstr "החלה"
 
 #: contents/configuration/AppletConfiguration.qml:342
 msgid "Cancel"
-msgstr "בטל"
+msgstr "ביטול"
 
 #: contents/configuration/ConfigCategoryDelegate.qml:28
 msgid "Open configuration page"
-msgstr ""
+msgstr "פתיחת עמוד הגדרות"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:19
 msgid "Left-Button"
@@ -105,14 +104,12 @@ msgid "Middle-Button"
 msgstr "לחצן אמצעי"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:22
-#, fuzzy
-#| msgid "Left-Button"
 msgid "Back-Button"
-msgstr "לחצן שמאלי"
+msgstr "כפתור חזרה"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:23
 msgid "Forward-Button"
-msgstr ""
+msgstr "כפתור קדימה"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:25
 msgid "Vertical-Scroll"
@@ -136,25 +133,25 @@ msgstr "Alt"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:31
 msgid "Meta"
-msgstr "Meta"
+msgstr "מטא"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:73
 msgctxt "Concatenation sign for shortcuts, e.g. Ctrl+Shift"
 msgid "+"
-msgstr ""
+msgstr "+"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:153
 #: contents/configuration/MouseEventInputButton.qml:14
 msgid "Add Action"
-msgstr "הוסף פעולה"
+msgstr "הוספת פעולה"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:26
 msgid "Appearance"
-msgstr ""
+msgstr "מראה"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:68
 msgid "Layout changes have been restricted by the system administrator"
-msgstr ""
+msgstr "שינויי פריסה הוגבלו על ידי הנהלת המערכת"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:83
 msgid "Layout:"
@@ -162,33 +159,31 @@ msgstr "פריסה:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:98
 msgid "Wallpaper Type:"
-msgstr "סוג רקע:"
+msgstr "סוג טפט:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:115
 msgid "Get New Plugins..."
-msgstr ""
+msgstr "הורדת תוספים חדשים…"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:127
 msgid "Layout changes must be applied before other changes can be made"
-msgstr ""
+msgstr "יש להחיל שינויי פריסה לפני שניתן יהיה לבצע שינויים אחרים"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:133
-#, fuzzy
-#| msgid "Apply"
 msgid "Apply now"
-msgstr "החל"
+msgstr "החלה כעת"
 
 #: contents/configuration/ConfigurationShortcuts.qml:18
 msgid "Shortcuts"
-msgstr ""
+msgstr "מקשי קיצור"
 
 #: contents/configuration/ConfigurationShortcuts.qml:28
 msgid "This shortcut will activate the applet as though it had been clicked."
-msgstr ""
+msgstr "מקש קיצור זה יפעיל את היישומונית כאילו היא נלחצה."
 
 #: contents/configuration/ContainmentConfiguration.qml:29
 msgid "Wallpaper"
-msgstr "רקע"
+msgstr "טפט"
 
 #: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Mouse Actions"
@@ -200,11 +195,11 @@ msgstr "קלט כאן"
 
 #: contents/views/SdkButtons.qml:45
 msgid "FormFactors"
-msgstr ""
+msgstr "מקדמי צורה"
 
 #: contents/views/SdkButtons.qml:53
 msgid "Planar"
-msgstr ""
+msgstr "שטוח"
 
 #: contents/views/SdkButtons.qml:57
 msgid "Vertical"
@@ -224,7 +219,7 @@ msgstr "יישומים"
 
 #: contents/views/SdkButtons.qml:76
 msgid "Location"
-msgstr "מיקום"
+msgstr "מקום"
 
 #: contents/views/SdkButtons.qml:90
 msgid "Floating"
@@ -248,11 +243,11 @@ msgstr "קצה תחתון"
 
 #: contents/views/SdkButtons.qml:110
 msgid "Left Edge"
-msgstr "קצה שמאל"
+msgstr "קצה שמאלי"
 
 #: contents/views/SdkButtons.qml:114
 msgid "Right Edge"
-msgstr "קצה ימין"
+msgstr "קצה ימני"
 
 #: contents/views/SdkButtons.qml:126
 msgid "Configure Containment"
