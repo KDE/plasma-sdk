@@ -78,7 +78,7 @@ void LnfLogic::dumpPlasmaLayout(const QString &pluginName)
 
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pcall, this);
 
-    QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [=](QDBusPendingCallWatcher *watcher) {
+    QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, pluginName](QDBusPendingCallWatcher *watcher) {
         const QDBusMessage &msg = watcher->reply();
         watcher->deleteLater();
         if (watcher->isError()) {
