@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-29 01:56+0000\n"
+"POT-Creation-Date: 2023-10-28 01:46+0000\n"
 "PO-Revision-Date: 2022-01-18 12:33+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -109,13 +109,13 @@ msgid_plural "<%1 items>"
 msgstr[0] "<1 elemento>"
 msgstr[1] "<%1 elementos>"
 
-#: engineexplorer.cpp:432
+#: engineexplorer.cpp:427
 #, kde-format
 msgctxt "The user did a query to a dataengine and it returned empty data"
 msgid "<empty>"
 msgstr "<vacío>"
 
-#: engineexplorer.cpp:438
+#: engineexplorer.cpp:433
 #, kde-format
 msgctxt ""
 "A the dataengine returned something that the humble view on the "
@@ -123,7 +123,7 @@ msgctxt ""
 msgid "<not displayable>"
 msgstr "<no mostrable>"
 
-#: engineexplorer.cpp:492 engineexplorer.cpp:507
+#: engineexplorer.cpp:487 engineexplorer.cpp:502
 #, kde-format
 msgctxt "Length of the list"
 msgid "<%1 item>"
@@ -131,7 +131,7 @@ msgid_plural "<%1 items>"
 msgstr[0] "<%1 elemento>"
 msgstr[1] "<%1 elementos>"
 
-#: engineexplorer.cpp:522
+#: engineexplorer.cpp:517
 #, kde-format
 msgctxt "Size of the map"
 msgid "<%1 pair>"
@@ -140,12 +140,12 @@ msgstr[0] "<%1 par>"
 msgstr[1] "<%1 pares>"
 
 #. i18n: ectx: property (text), widget (KTitleWidget, m_title)
-#: engineexplorer.cpp:535 engineexplorer.ui:29
+#: engineexplorer.cpp:530 engineexplorer.ui:29
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Explorador de motores de datos de Plasma"
 
-#: engineexplorer.cpp:539
+#: engineexplorer.cpp:534
 #, kde-format
 msgctxt "The name of the engine followed by the number of data sources"
 msgid "%1 Engine - 1 data source"
