@@ -4,7 +4,7 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include "cuttlefishplugin.h"
+#include "iconexplorer.h"
 
 #include <KTextEditor/Application>
 #include <KTextEditor/Editor>
@@ -15,7 +15,7 @@
 #include <QAction>
 #include <QStandardPaths>
 
-K_PLUGIN_FACTORY_WITH_JSON(CuttleFishPluginFactory, "cuttlefishplugin.json", registerPlugin<CuttleFishPlugin>();)
+K_PLUGIN_FACTORY_WITH_JSON(CuttleFishPluginFactory, "iconexplorer.json", registerPlugin<CuttleFishPlugin>();)
 
 CuttleFishPlugin::CuttleFishPlugin(QObject *parent, const QList<QVariant> &)
     : KTextEditor::Plugin(parent)

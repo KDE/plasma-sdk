@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop">
+  <id>org.kde.plasma.iconexplorer</id>
+  <launchable type="desktop-id">org.kde.iconexplorer.desktop</launchable>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <content_rating type="oars-1.0"/>
+  <name>Icon Explorer</name>
+  <summary>Icon Previewer for Artists and Developers</summary>
+  <summary xml:lang="az">Dizaynerlər və Tərtibatçılar üçün ikonlara baxış vasitəsi</summary>
+  <summary xml:lang="be">Сродак папярэдняга прагляду значкоў для мастакоў і распрацоўнікаў</summary>
+  <summary xml:lang="bg">Програма за преглед на икони за дизайнери и разработчици</summary>
+  <summary xml:lang="ca">Vista prèvia d'icones per als artistes i desenvolupadors</summary>
+  <summary xml:lang="ca-valencia">Vista prèvia d'icones per als artistes i desenvolupadors</summary>
+  <summary xml:lang="cs">Náhled ikon pro umělce a vývojáře</summary>
+  <summary xml:lang="da">Forhåndsvisning af ikoner til kunstnere og udviklere</summary>
+  <summary xml:lang="de">Symbolvorschau für Künstler und Entwickler</summary>
+  <summary xml:lang="el">Πρόγραμμα προεπισκόπησης εικονιδίων για καλλιτέχνες και προγραμματιστές</summary>
+  <summary xml:lang="en-GB">Icon Previewer for Artists and Developers</summary>
+  <summary xml:lang="eo">Piktograma Antaŭrigardilo por artistoj kaj evoluistoj</summary>
+  <summary xml:lang="es">Vista previa de iconos para artistas y desarrolladores</summary>
+  <summary xml:lang="et">Ikoonide eelvaatlus kunstnikele ja arendajatele</summary>
+  <summary xml:lang="eu">Artista eta garatzaileentzat ikono aurre-erakuslea</summary>
+  <summary xml:lang="fi">Kuvakkeiden esikatselu graafikoille ja kehittäjille</summary>
+  <summary xml:lang="fr">Afficheur d'icônes pour les artistes et développeurs</summary>
+  <summary xml:lang="gl">Visor de iconas para artistas e desenvolvedores.</summary>
+  <summary xml:lang="he">מציג סמלים לאומנים ולמפתחים</summary>
+  <summary xml:lang="hu">Ikonmegjelenítő művészeknek és fejlesztőknek</summary>
+  <summary xml:lang="ia">Monstrator preliminar de icone per artistas e disveloppatores</summary>
+  <summary xml:lang="id">Pempratinjau Ikon untuk Artis dan Developer</summary>
+  <summary xml:lang="it">Visore di anteprime di icone per artisti e sviluppatori</summary>
+  <summary xml:lang="ka">ხატულის გადახედვა პროგრამისტებისა და მხატვრებისთვის</summary>
+  <summary xml:lang="ko">예술가와 개발자용 아이콘 뷰어</summary>
+  <summary xml:lang="lt">Piktogramų peržiūros programa, skirta dailininkams ir kūrėjams</summary>
+  <summary xml:lang="nl">Pictogramviewer voor kunstenaars en ontwikkelaars</summary>
+  <summary xml:lang="nn">Førehandsvising av ikon for kunstnarar og utviklarar</summary>
+  <summary xml:lang="pl">Podglądanie ikon dla artystów i programistów</summary>
+  <summary xml:lang="pt">Antevisão de Ícones para Artistas e Programadores</summary>
+  <summary xml:lang="pt-BR">Visualizador de ícones para artistas e desenvolvedores</summary>
+  <summary xml:lang="ru">Инструмент просмотра значков для дизайнеров и разработчиков</summary>
+  <summary xml:lang="sk">Prehliadač ikon pre umelcov a vývojárov</summary>
+  <summary xml:lang="sl">Pregledovalnik ikon za umetnike in razvijalce</summary>
+  <summary xml:lang="sr">Приказивач иконица за графичаре и програмере</summary>
+  <summary xml:lang="sr-Latn">Prikazivač ikonica za grafičare i programere</summary>
+  <summary xml:lang="sr-ijekavian">Приказивач иконица за графичаре и програмере</summary>
+  <summary xml:lang="sr-ijekavianlatin">Prikazivač ikonica za grafičare i programere</summary>
+  <summary xml:lang="sv">Förhandsgranskning av ikoner för grafiker och utvecklare</summary>
+  <summary xml:lang="tg">Пешнамоиши нишонаҳо барои рассомон ва барномарезон</summary>
+  <summary xml:lang="tr">Sanatçılar ve Geliştiriciler için Simge Önizleyici</summary>
+  <summary xml:lang="uk">Засіб перегляду піктограм для художників та розробників</summary>
+  <summary xml:lang="x-test">xxIcon Previewer for Artists and Developersxx</summary>
+  <summary xml:lang="zh-CN">为艺术家和开发者设计的图标预览器</summary>
+  <summary xml:lang="zh-TW">給美工與開發者用的圖示預覽器</summary>
+  <description>
+    <p>Icon Explorer allows artists and developers to preview and pick icons. Icon Explorer attempts to render the icons exactly as they would look drawn in the application. It allows to filter based on category and name. Icon Explorer is not a general-purpose tool, but geared towards artists' and developers' use-cases.
+        Icon Explorer also provides a plugin for Kate and KDevelop to be used as icon picker.
+    </p>
+  </description>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Plasma%20SDK&amp;component=cuttlefish</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://www.kde.org/images/screenshots/cuttlefish.png</image>
+    </screenshot>
+  </screenshots>
+  <project_group>KDE</project_group>
+  <releases>
+    <release version="5.27.9" date="2023-10-24"/>
+    <release version="5.27.8" date="2023-09-12"/>
+    <release version="5.27.7" date="2023-08-01"/>
+    <release version="5.27.6" date="2023-06-20"/>
+  </releases>
+</component>

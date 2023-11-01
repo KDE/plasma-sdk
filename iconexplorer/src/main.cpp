@@ -56,13 +56,13 @@ int main(int argc, char **argv)
     qInstallMessageHandler(messageOutput);
 
     QApplication app(argc, argv);
-    KLocalizedString::setApplicationDomain("cuttlefish");
+    KLocalizedString::setApplicationDomain("iconexplorer");
 
     app.setApplicationVersion(PROJECT_VERSION);
-    app.setDesktopFileName(QStringLiteral("org.kde.cuttlefish"));
+    app.setDesktopFileName(QStringLiteral("org.kde.iconexplorerh"));
     app.setOrganizationName("KDE");
     app.setOrganizationDomain("org.kde");
-    app.setApplicationName("Cuttlefish");
+    app.setApplicationName("Icon Explorer");
 
     const static auto _category = QStringLiteral("category");
     QCommandLineOption category = QCommandLineOption(QStringList() << QStringLiteral("c") << _category, i18n("Start with category"), i18n("category"));
@@ -75,7 +75,7 @@ int main(int argc, char **argv)
 
     QCommandLineParser parser;
     parser.addVersionOption();
-    parser.setApplicationDescription("Cuttlefish Icon Browser");
+    parser.setApplicationDescription("Icon Browser");
     parser.addHelpOption();
     parser.addOption(category);
     parser.addOption(fullscreen);
@@ -88,7 +88,7 @@ int main(int argc, char **argv)
     QQmlApplicationEngine engine;
 
     auto l10nContext = new KLocalizedContext(&engine);
-    l10nContext->setTranslationDomain(QStringLiteral("cuttlefish"));
+    l10nContext->setTranslationDomain(QStringLiteral("iconexplorer"));
     engine.rootContext()->setContextObject(l10nContext);
 
     auto iconModel = new CuttleFish::IconModel(engine.rootContext());
@@ -102,7 +102,7 @@ int main(int argc, char **argv)
     engine.rootContext()->setContextProperty("pickerMode", parser.isSet("picker"));
     engine.rootContext()->setContextProperty("colorSchemes", colorSchemes);
 
-    engine.loadFromModule("org.kde.cuttlefish", "Cuttlefish");
+    engine.loadFromModule("org.kde.iconexplorer", "Iconexplorer");
     if (engine.rootObjects().isEmpty()) {
         return -1;
     }

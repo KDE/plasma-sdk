@@ -1,14 +1,14 @@
-set(cuttlefish_SRCS
+set(iconexplorer_SRCS
     main.cpp
     iconmodel.cpp
     colorschemes.cpp
     sortfiltermodel.cpp
 )
 
-add_executable(cuttlefish ${cuttlefish_SRCS})
-target_compile_definitions(cuttlefish PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
+add_executable(iconexplorer ${iconexplorer_SRCS})
+target_compile_definitions(iconexplorer PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
 
-target_link_libraries(cuttlefish PRIVATE
+target_link_libraries(iconexplorer PRIVATE
     Qt::Quick
     Qt::Gui
     Qt::Widgets # for QDirModel
@@ -20,12 +20,12 @@ target_link_libraries(cuttlefish PRIVATE
     Qt::DBus
 )
 
-ecm_add_qml_module(cuttlefish URI org.kde.cuttlefish)
+ecm_add_qml_module(iconexplorer URI org.kde.iconexplorer)
 
-ecm_target_qml_sources(cuttlefish SOURCES
+ecm_target_qml_sources(iconexplorer SOURCES
     qml/Actions.qml
     qml/Comparison.qml
-    qml/Cuttlefish.qml
+    qml/Iconexplorer.qml
     qml/GlobalMenuBar.qml
     qml/IconGridDelegate.qml
     qml/IconGrid.qml
@@ -38,6 +38,6 @@ ecm_target_qml_sources(cuttlefish SOURCES
     qml/ToolsResponsive.qml
 )
 
-install(TARGETS cuttlefish ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS iconexplorer ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 add_subdirectory(editorplugin)

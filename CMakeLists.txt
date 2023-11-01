@@ -76,7 +76,7 @@ ecm_set_disabled_deprecation_versions(
     KF 5.94.0
 )
 
-add_subdirectory(cuttlefish)
+add_subdirectory(iconexplorer)
 add_subdirectory(engineexplorer)
 add_subdirectory(kqml)
 add_subdirectory(plasmoidviewer)
