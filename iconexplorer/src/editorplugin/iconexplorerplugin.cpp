@@ -4,7 +4,7 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include "iconexplorer.h"
+#include "iconexplorerplugin.h"
 
 #include <KTextEditor/Application>
 #include <KTextEditor/Editor>
@@ -15,7 +15,7 @@
 #include <QAction>
 #include <QStandardPaths>
 
-K_PLUGIN_FACTORY_WITH_JSON(CuttleFishPluginFactory, "iconexplorer.json", registerPlugin<CuttleFishPlugin>();)
+K_PLUGIN_FACTORY_WITH_JSON(CuttleFishPluginFactory, "iconexplorerplugin.json", registerPlugin<CuttleFishPlugin>();)
 
 CuttleFishPlugin::CuttleFishPlugin(QObject *parent, const QList<QVariant> &)
     : KTextEditor::Plugin(parent)
@@ -86,6 +86,6 @@ void CuttleFishPlugin::contextMenuAboutToShow(KTextEditor::View *view, QMenu *me
 }
 
 // required for CuttleFishPluginFactory vtable
-#include "cuttlefishplugin.moc"
+#include "iconexplorerplugin.moc"
 
-#include "moc_cuttlefishplugin.cpp"
+#include "moc_iconexplorerplugin.cpp"
