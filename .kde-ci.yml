@@ -26,9 +26,9 @@ Dependencies:
     'frameworks/kwidgetsaddons': '@latest'
     'frameworks/kwindowsystem': '@latest'
     'frameworks/kxmlgui': '@latest'
-    'frameworks/plasma-framework': '@latest'
     'frameworks/solid': '@latest'
     'frameworks/sonnet': '@latest'
     'frameworks/syntax-highlighting': '@latest'
+    'plasma/plasma-framework': 'kf5'
 Options:
   require-passing-tests-on: [ 'Linux', 'FreeBSD']
