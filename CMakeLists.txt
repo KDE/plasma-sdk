@@ -58,7 +58,11 @@ set_package_properties(KF6Kirigami2 PROPERTIES
 
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     Archive Completion Config ConfigWidgets CoreAddons DBusAddons I18n IconThemes ItemModels
-    KIO Plasma Plasma5Support PlasmaQuick TextEditor WidgetsAddons DocTools Svg)
+    KIO TextEditor WidgetsAddons DocTools Svg)
+
+find_package(KF6Plasma ${PROJECT_VERSION} REQUIRED)
+find_package(KF6PlasmaQuick ${PROJECT_VERSION} REQUIRED)
+find_package(KF6Plasma5Support ${PROJECT_VERSION} REQUIRED)
 
 #########################################################################
 add_definitions(
