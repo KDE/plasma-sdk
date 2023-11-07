@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-04-06 00:20+0000\n"
+"POT-Creation-Date: 2023-11-07 02:44+0000\n"
 "PO-Revision-Date: 2019-07-31 00:36+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt\n"
@@ -19,7 +19,7 @@ msgstr ""
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: cuttlefishplugin.cpp:59
+#: iconexplorerplugin.cpp:59
 #, kde-format
 msgid "Insert Icon with Cuttlefish"
 msgstr "Įterpti piktogramą naudojant Cuttlefish"

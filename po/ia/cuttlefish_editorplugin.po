@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-04-06 00:20+0000\n"
+"POT-Creation-Date: 2023-11-07 02:44+0000\n"
 "PO-Revision-Date: 2017-01-06 17:18\n"
 "Last-Translator: Giovanni Sora <g.sora@kheper.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: cuttlefishplugin.cpp:59
+#: iconexplorerplugin.cpp:59
 #, kde-format
 msgid "Insert Icon with Cuttlefish"
 msgstr "Inserta Icone con Cuttlefish"
