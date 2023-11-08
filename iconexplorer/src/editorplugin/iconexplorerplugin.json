@@ -1,6 +1,16 @@
 {
     "KPlugin": {
         "Description": "Invokes Iconexplorer icon picker",
+        "Description[ca]": "Invoca el selector d'icones Iconexplorer",
+        "Description[eo]": "Alvokas Iconexplorer-piktogramelektilon",
+        "Description[es]": "Llama al selector de iconos",
+        "Description[eu]": "Ikono-esploratzaile ikono hautatzaileari dei egiten dio",
+        "Description[he]": "מפעיל את בורר הסמלים Iconexplorer",
+        "Description[ka]": "Iconexplorer - ხატულის ამრჩევის გაშვება",
+        "Description[nl]": "Start de pictogramkiezer Pictogramverkenner",
+        "Description[sl]": "Prikliče izbiralnik ikon",
+        "Description[uk]": "Запускає засіб вибору піктограми «Навігатора піктограмами»",
+        "Description[x-test]": "xxInvokes Iconexplorer icon pickerxx",
         "Name": "Icon Picker",
         "Name[az]": "İkon seçimi",
         "Name[be]": "Выбар значкоў",

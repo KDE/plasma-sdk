@@ -1,6 +1,16 @@
 [Desktop Entry]
 Terminal=false
 Name=Icon Explorer
+Name[ca]=Explorador d'icones
+Name[eo]=Piktogram-Esplorilo
+Name[es]=Explorador de iconos
+Name[eu]=Ikono esploratzailea
+Name[he]=סייר סמלים
+Name[ka]=ხატულების ბრაუზერი
+Name[nl]=Pictogramverkenner
+Name[sl]=Brskalnik po ikonah
+Name[uk]=Навігатор піктограмами
+Name[x-test]=xxIcon Explorerxx
 GenericName=Icon Viewer
 GenericName[az]=İkonlara baxış
 GenericName[be]=Прагляд значкоў
