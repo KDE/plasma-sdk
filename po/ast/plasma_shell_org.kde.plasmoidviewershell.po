@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-21 01:57+0000\n"
-"PO-Revision-Date: 2023-10-24 23:40+0200\n"
+"PO-Revision-Date: 2023-11-07 21:27+0100\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
 "Language: ast\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: contents/applet/AppletError.qml:40
 msgid "Sorry! There was an error loading %1."
-msgstr ""
+msgstr "Hebo un error al cargar «%1»."
 
 #: contents/applet/AppletError.qml:48
 msgid "Copy Error Details to Clipboard"
@@ -40,11 +40,11 @@ msgstr ""
 
 #: contents/configuration/AboutPlugin.qml:95
 msgid "Copyright"
-msgstr ""
+msgstr "Copyright"
 
 #: contents/configuration/AboutPlugin.qml:115
 msgid "License:"
-msgstr ""
+msgstr "Llicencia:"
 
 #: contents/configuration/AboutPlugin.qml:128
 msgid "Authors"
@@ -52,15 +52,15 @@ msgstr ""
 
 #: contents/configuration/AboutPlugin.qml:138
 msgid "Credits"
-msgstr ""
+msgstr "Creitos"
 
 #: contents/configuration/AboutPlugin.qml:149
 msgid "Translators"
-msgstr ""
+msgstr "Traductores"
 
 #: contents/configuration/AppletConfiguration.qml:55
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Atayos del tecláu"
 
 #: contents/configuration/AppletConfiguration.qml:294
 msgid "Apply Settings"
@@ -137,7 +137,7 @@ msgstr ""
 #: contents/configuration/ConfigurationContainmentActions.qml:73
 msgctxt "Concatenation sign for shortcuts, e.g. Ctrl+Shift"
 msgid "+"
-msgstr ""
+msgstr "+"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:153
 #: contents/configuration/MouseEventInputButton.qml:14
@@ -146,7 +146,7 @@ msgstr ""
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:26
 msgid "Appearance"
-msgstr ""
+msgstr "Aspeutu"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:68
 msgid "Layout changes have been restricted by the system administrator"
@@ -174,7 +174,7 @@ msgstr ""
 
 #: contents/configuration/ConfigurationShortcuts.qml:18
 msgid "Shortcuts"
-msgstr ""
+msgstr "Atayos"
 
 #: contents/configuration/ConfigurationShortcuts.qml:28
 msgid "This shortcut will activate the applet as though it had been clicked."
@@ -186,7 +186,7 @@ msgstr ""
 
 #: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Mouse Actions"
-msgstr ""
+msgstr "Aiciones del mur"
 
 #: contents/configuration/MouseEventInputButton.qml:21
 msgid "Input Here"
@@ -214,7 +214,7 @@ msgstr ""
 
 #: contents/views/SdkButtons.qml:69
 msgid "Application"
-msgstr ""
+msgstr "Aplicación"
 
 #: contents/views/SdkButtons.qml:76
 msgid "Location"
@@ -222,11 +222,11 @@ msgstr ""
 
 #: contents/views/SdkButtons.qml:90
 msgid "Floating"
-msgstr ""
+msgstr "Flotante"
 
 #: contents/views/SdkButtons.qml:94
 msgid "Desktop"
-msgstr ""
+msgstr "Escritoriu"
 
 #: contents/views/SdkButtons.qml:98
 msgid "Fullscreen"
