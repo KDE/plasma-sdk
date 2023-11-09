@@ -2,13 +2,17 @@
 Terminal=false
 Name=Icon Explorer
 Name[ca]=Explorador d'icones
+Name[ca@valencia]=Explorador d'icones
 Name[eo]=Piktogram-Esplorilo
 Name[es]=Explorador de iconos
 Name[eu]=Ikono esploratzailea
 Name[he]=סייר סמלים
+Name[ia]=Icon Explorer ( Explorator de icone) 
 Name[ka]=ხატულების ბრაუზერი
 Name[nl]=Pictogramverkenner
+Name[pt_BR]=Explorador de ícones
 Name[sl]=Brskalnik po ikonah
+Name[tr]=Simge Gezgini
 Name[uk]=Навігатор піктограмами
 Name[x-test]=xxIcon Explorerxx
 GenericName=Icon Viewer
