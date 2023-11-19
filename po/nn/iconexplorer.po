@@ -1,4 +1,4 @@
-# Translation of cuttlefish to Norwegian Nynorsk
+# Translation of iconexplorer to Norwegian Nynorsk
 #
 # Karl Ove Hufthammer <karl@huftis.org>, 2015, 2016, 2018, 2019, 2022, 2023.
 # Øystein Steffensen-Alværvik <oysteins.omsetting@protonmail.com>, 2021.
