@@ -9,6 +9,7 @@
   <name xml:lang="ast">Esplorador d'iconos</name>
   <name xml:lang="ca">Explorador d'icones</name>
   <name xml:lang="ca-valencia">Explorador d'icones</name>
+  <name xml:lang="eo">Icon Explorer</name>
   <name xml:lang="es">Explorador de iconos</name>
   <name xml:lang="eu">Ikono esploratzailea</name>
   <name xml:lang="fr">Navigateur d'icônes</name>
@@ -25,6 +26,7 @@
   <summary>Icon Previewer for Artists and Developers</summary>
   <summary xml:lang="ca">Vista prèvia de les icones per a artistes i desenvolupadors</summary>
   <summary xml:lang="ca-valencia">Vista prèvia de les icones per a artistes i desenvolupadors</summary>
+  <summary xml:lang="eo">Piktogram-Antaŭrigardilo por Artistoj kaj Evoluistoj</summary>
   <summary xml:lang="es">Visor de iconos para diseñadores y desarrolladores</summary>
   <summary xml:lang="eu">Artista eta garatzaileentzat ikono aurre-erakuslea</summary>
   <summary xml:lang="fr">Afficheur d'aperçus d'icônes pour les artistes et les équipes de développement</summary>
@@ -44,6 +46,7 @@
     </p>
     <p xml:lang="ca">L'Explorador d'icones permet als artistes i als desenvolupadors previsualitzar i seleccionar icones. L'Explorador d'icones intenta representar les icones exactament com es dibuixaran a l'aplicació. Permet filtrar segons la categoria i el nom. L'Explorador d'icones no és una eina d'utilitat general, sinó destinada als casos d'ús d'artistes i desenvolupadors. L'Explorador d'icones també proporciona un connector per al Kate i el KDevelop per a ser utilitzat com a selector d'icones.</p>
     <p xml:lang="ca-valencia">Explorador d'icones permet als artistes i als desenvolupadors previsualitzar i seleccionar icones. Explorador d'icones intenta representar les icones exactament com es dibuixaran en l'aplicació. Permet filtrar segons la categoria i el nom. Explorador d'icones no és una eina d'utilitat general, sinó destinada als casos d'ús d'artistes i desenvolupadors. Explorador d'icones també proporciona un connector per a Kate i KDevelop, per a ser utilitzat com a selector d'icones.</p>
+    <p xml:lang="eo">Icon Explorer permesas al artistoj kaj programistoj antaŭrigardi kaj elekti piktogramojn. Icon Explorer provas bildigi la piktogramojn ĝuste kiel ili aspektus desegnitaj en la aplikaĵo. Ĝi permesas filtri laŭ kategorio kaj nomo. Icon Explorer ne estas ĝeneraluzebla ilo, sed orientita al artistaj kaj programistaj uzokazoj. Icon Explorer ankaŭ disponigas kromprogramon por Kate kaj KDevelop por esti uzata kiel piktogram-elektilo.</p>
     <p xml:lang="es">El explorador de iconos permite a diseñadores y desarrolladores escoger iconos y mostrar una vista previa de ellos. Se intenta mostrar los iconos exactamente como se verían en las aplicaciones. Permite filtrar por categoría y nombre. Esta herramienta no está pensada para su uso general, sino para diseñadores y desarrolladores. El explorador de iconos también proporciona un complemento de selección de iconos para Kate y KDevelop.</p>
     <p xml:lang="eu">Ikono esploratzaileak artista eta garatzaileei ikonoak aurre-ikusi eta hautatzen uzten die. Ikono esploratzailea ikonoak aplikazioan izango luketen itxura zehatzarekin errendatzen saiatzen da. Kategoria eta izenean oinarrituz iragaztea eskaintzen du. Ikono esploratzailea ez da helburu orokorreko tresna bat, artista eta garatzaileen erabilera-kasuetara bideratua dago. Ikono esploratzaileak, ikono hautatzaile gisa erabilia izateko, «Kate» eta «KDevelop»erako plugin bat ere ematen du.</p>
     <p xml:lang="fr">Le logiciel « IconExplorer » permet aux artistes et aux équipes de développement d'afficher un aperçus des icônes et les sélectionner. Il tente de présenter le rendu des icônes exactement comme elles seraient dessinées dans l’application. Il permet de filtrer en fonction de la catégorie et du nom. Il n’est pas un outil généraliste, mais orienté pour les cas d’utilisation des artistes et des équipes de développement. Il fournit également un module externe pour Kate et KDevelop à utiliser comme sélecteur d’icônes.</p>
