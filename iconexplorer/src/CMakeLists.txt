@@ -12,7 +12,7 @@ target_link_libraries(iconexplorer PRIVATE
     Qt::Quick
     Qt::Gui
     Qt::Widgets # for QDirModel
-    KF6::Plasma
+    Plasma::Plasma
     KF6::KIOWidgets
     KF6::ConfigWidgets
     KF6::I18n
