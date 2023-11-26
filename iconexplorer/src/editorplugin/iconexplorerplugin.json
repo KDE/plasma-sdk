@@ -20,6 +20,7 @@
         "Description[tr]": "Simge Gezgini'ni çağırır",
         "Description[uk]": "Запускає засіб вибору піктограми «Навігатора піктограмами»",
         "Description[x-test]": "xxInvokes Iconexplorer icon pickerxx",
+        "Description[zh_CN]": "调用 Iconexplorer 图标选择器",
         "Description[zh_TW]": "呼叫 Iconexplorer 圖示挑選器",
         "Name": "Icon Picker",
         "Name[az]": "İkon seçimi",
