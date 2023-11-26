@@ -23,6 +23,7 @@
   <name xml:lang="tr">Simge Gezgini</name>
   <name xml:lang="uk">Навігатор піктограмами</name>
   <name xml:lang="x-test">xxIcon Explorerxx</name>
+  <name xml:lang="zh-CN">Icon Explorer 图标浏览器</name>
   <summary>Icon Previewer for Artists and Developers</summary>
   <summary xml:lang="ca">Vista prèvia de les icones per a artistes i desenvolupadors</summary>
   <summary xml:lang="ca-valencia">Vista prèvia de les icones per a artistes i desenvolupadors</summary>
@@ -40,6 +41,7 @@
   <summary xml:lang="tr">Sanatçılar ve Geliştiriciler için Simge Önizleyicisi</summary>
   <summary xml:lang="uk">Засіб перегляду піктограм для художників та розробників</summary>
   <summary xml:lang="x-test">xxIcon Previewer for Artists and Developersxx</summary>
+  <summary xml:lang="zh-CN">为美术人员和开发者设计的图标预览器</summary>
   <description>
     <p>Icon Explorer allows artists and developers to preview and pick icons. Icon Explorer attempts to render the icons exactly as they would look drawn in the application. It allows to filter based on category and name. Icon Explorer is not a general-purpose tool, but geared towards artists' and developers' use-cases.
         Icon Explorer also provides a plugin for Kate and KDevelop to be used as icon picker.
@@ -60,6 +62,7 @@
     <p xml:lang="tr">"Simge Gezgini, sanatçıların ve geliştiricilerin simgeleri önizlemesine ve seçmesine olanak tanır. Simge Gezgini, simgeleri tam olarak uygulamada çizilmiş gibi sunmaya çalışır. Kategori ve ada göre süzme yapmanızı sağlar. Simge Gezgini; genel amaçlı bir araç değil, sanatçıların ve geliştiricilerin kullanım durumlarına yöneliktir. Simge Gezgini, Kate ve K Geliştir'un simge seçici olarak kullanılması için bir eklenti de sağlar.</p>
     <p xml:lang="uk">«Навігатор піктограмами» надає змогу художникам і розробникам попередньо переглядати і вибирати піктограми. У «Навігаторі піктограмами» зроблено спробу показати піктограми точно так, як вони виглядатимуть у програмі. Передбачено можливість фільтрувати списки за категорією і назвою. «Навігатор піктограмами» не є інструментом загального призначення: програму призначено лише для потреб художників і розробників. У Cutlefish також передбачено додаток для Kate і KDevelop, яким можна скористатися для вибору піктограм.</p>
     <p xml:lang="x-test">xxIcon Explorer allows artists and developers to preview and pick icons. Icon Explorer attempts to render the icons exactly as they would look drawn in the application. It allows to filter based on category and name. Icon Explorer is not a general-purpose tool, but geared towards artists' and developers' use-cases. Icon Explorer also provides a plugin for Kate and KDevelop to be used as icon picker.xx</p>
+    <p xml:lang="zh-CN">Icon Explorer 图标浏览器用于让美术人员和开发者预览和选择图标。图标浏览器将尝试精确按程序中的方式渲染图标。它可以按分类和名称过滤。Icon Explorer 不是一款面向一般用户的工具，它是为美术人员和开发者的使用场景而设计的。Icon Explorer 也提供了 Kate 和 KDevelop 的图标选择器插件。</p>
   </description>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Plasma%20SDK&amp;component=cuttlefish</url>
   <screenshots>
