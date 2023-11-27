@@ -58,6 +58,7 @@ PlasmoidItem {
 
             text: root.errorInformation.errors.join("\n\n")
             readOnly: true
+            wrapMode: TextEdit.Wrap
             Layout.fillHeight: true
             Layout.fillWidth: true
 
