@@ -114,11 +114,7 @@ msgid "<empty>"
 msgstr "<malplena>"
 
 #: engineexplorer.cpp:445
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "A the dataengine returned something that the humble view on the "
-#| "¦engineexplorer can't display, like a picture"
-#| msgid "<not displayable>"
+#, kde-format
 msgctxt ""
 "A the dataengine returned something that the humble view on the "
 "engineexplorer can't display, like a picture"
