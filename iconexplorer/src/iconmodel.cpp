@@ -99,12 +99,12 @@ QString IconModel::key(int role) const
 
 void IconModel::add(const QFileInfo &info, const QString &cat)
 {
-    const auto category = cat.toLower();
-    if (category.isEmpty()) {
-        return;
+    QStringList cats;
+    for (const auto &c : std::as_const(m_categories)) {
+        cats << c.toLower();
     }
-    if (!m_categories.contains(category)) {
-        m_categories.append(category);
+    if (!m_categories.contains(cat)) {
+        m_categories.append(cat);
         Q_EMIT categoriesChanged();
     }
 
@@ -136,9 +136,9 @@ void IconModel::add(const QFileInfo &info, const QString &cat)
         data["scalable"] = true;
     }
 
-    QStringList split = info.path().split('/');
-    if (split.count() > 2) {
-        QString size = split[split.count() - 2]; // last but one is size, last is category
+    QStringList _s = info.path().split('/');
+    if (_s.count() > 2) {
+        QString size = _s[_s.count() - 2]; // last but one is size, last is category
         if (size.indexOf("x") > 1) {
             size = size.split("x")[0];
             QStringList sizes = data["sizes"].toStringList();
@@ -162,12 +162,15 @@ void IconModel::load()
     m_loading = true;
     Q_EMIT loadingChanged();
 
+    QElapsedTimer tt;
+    tt.start();
     const QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories;
     const QStringList nameFilters = QStringList();
 
     beginResetModel();
     m_data.clear();
     m_icons.clear();
+    // sm_categories.clear();
     QString iconTheme;
     if (KIconLoader::global()) {
         iconTheme = KIconLoader::global()->theme()->internalName();
@@ -191,20 +194,18 @@ void IconModel::load()
         searchPaths << hicolorThemePaths;
     }
 
-    for (const QString &iconPath : std::as_const(searchPaths)) {
+    for (const QString &iconPath : searchPaths) {
         QDirIterator cats(iconPath, nameFilters, QDir::Dirs, QDirIterator::NoIteratorFlags);
         while (cats.hasNext()) {
             cats.next();
             const QString fpath = cats.filePath();
             const QString category = cats.fileName();
-            if (category != QLatin1Char('.') && category != QLatin1String("..")) {
+            if (category != "." && category != "..") {
                 QDirIterator it(fpath, nameFilters, QDir::Files, flags);
                 while (it.hasNext()) {
                     it.next();
                     const QFileInfo &info = it.fileInfo();
-                    if (const auto category = categoryFromPath(info.absoluteFilePath()); !category.isEmpty()) {
-                        add(info, category);
-                    }
+                    add(info, categoryFromPath(info.absoluteFilePath()));
                 }
             }
         }
@@ -218,12 +219,16 @@ void IconModel::load()
 
 QString IconModel::categoryFromPath(const QString &path)
 {
-    const QStringList split = path.split("/icons/");
-    if (split.count() > 1) {
-        const auto subpath = split[1].toLower();
-        for (const QString &category : std::as_const(m_categories)) {
-            if (subpath.contains(category)) {
-                return category;
+    QStringList cats;
+    for (const auto &c : m_categories) {
+        cats << c.toLower();
+    }
+    // cats << "actions" << "apps" << "places" << "status";
+    const QStringList _p1 = path.split("/icons/");
+    if (_p1.count() > 1) {
+        for (const QString &cat : cats) {
+            if (_p1[1].indexOf(cat) != -1) {
+                return cat;
             }
         }
     }
