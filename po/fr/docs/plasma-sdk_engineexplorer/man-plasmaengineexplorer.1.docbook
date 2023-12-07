@@ -77,13 +77,13 @@
 ><option
 >--engine</option
 > <replaceable
->data engine</replaceable
+>moteur-données</replaceable
 ></group
 > <group choice="opt"
 ><option
 >--source</option
 > <replaceable
->data engine</replaceable
+>moteur-données</replaceable
 ></group
 > <group choice="opt"
 ><option
@@ -221,7 +221,7 @@
 >plasmaengineexplorer</command
 > avec le moteur de données actuellement spécifié. <parameter
 >moteur de données</parameter
-> est le nom interne du moteur de données fourni par la clé X-KDE-PluginInfo-Name du fichier de bureau.</para
+> est le nom interne du moteur de données fourni par la clé « X-KDE-PluginInfo-Name » du fichier de bureau.</para
 ></listitem>
 </varlistentry>
 <varlistentry>
