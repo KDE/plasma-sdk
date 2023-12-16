@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-05-24 00:45+0000\n"
-"PO-Revision-Date: 2023-12-11 18:58+0100\n"
+"PO-Revision-Date: 2023-12-15 20:45+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
@@ -49,10 +49,9 @@ msgid "Search"
 msgstr "Hľadať"
 
 #: engineexplorer.cpp:180
-#, fuzzy, kde-format
-#| msgid "DataSource"
+#, kde-format
 msgid "DataSource/Key"
-msgstr "Dátový zdroj"
+msgstr "Dátový zdroj/kľúč"
 
 #: engineexplorer.cpp:180
 #, kde-format
@@ -124,9 +123,7 @@ msgid "<not displayable>"
 msgstr "<nedá sa zobraziť>"
 
 #: engineexplorer.cpp:499 engineexplorer.cpp:514
-#, fuzzy, kde-format
-#| msgid "<1 item>"
-#| msgid_plural "<%1 items>"
+#, kde-format
 msgctxt "Length of the list"
 msgid "<%1 item>"
 msgid_plural "<%1 items>"
@@ -139,9 +136,9 @@ msgstr[2] "<%1 položiek>"
 msgctxt "Size of the map"
 msgid "<%1 pair>"
 msgid_plural "<%1 pairs>"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "<%1 pár>"
+msgstr[1] "<%1 páry>"
+msgstr[2] "<%1 párov>"
 
 #. i18n: ectx: property (text), widget (KTitleWidget, m_title)
 #: engineexplorer.cpp:542 engineexplorer.ui:29
