@@ -14,6 +14,7 @@
   <name xml:lang="eu">Ikono esploratzailea</name>
   <name xml:lang="fr">Navigateur d'icônes</name>
   <name xml:lang="he">דפדפן סמלים</name>
+  <name xml:lang="hu">Ikonböngésző</name>
   <name xml:lang="it">Esploratore di icone</name>
   <name xml:lang="ka">ხატულების დათვალიერება</name>
   <name xml:lang="nl">Pictogramverkenner</name>
@@ -34,6 +35,7 @@
   <summary xml:lang="eu">Artista eta garatzaileentzat ikono aurre-erakuslea</summary>
   <summary xml:lang="fr">Afficheur d'aperçus d'icônes pour les artistes et les équipes de développement</summary>
   <summary xml:lang="he">מציג סמלים לאומנים ומפתחים</summary>
+  <summary xml:lang="hu">Ikonnézőke művészeknek és fejlesztőknek</summary>
   <summary xml:lang="it">Anteprime delle icone per artisti e sviluppatori</summary>
   <summary xml:lang="ka">ხატულის გადახედვა პროგრამისტებისა და მხატვრებისთვის</summary>
   <summary xml:lang="nl">Pictogramviewer voor kunstenaars en ontwikkelaars</summary>
@@ -57,6 +59,7 @@
     <p xml:lang="eu">Ikono esploratzaileak artista eta garatzaileei ikonoak aurre-ikusi eta hautatzen uzten die. Ikono esploratzailea ikonoak aplikazioan izango luketen itxura zehatzarekin errendatzen saiatzen da. Kategoria eta izenean oinarrituz iragaztea eskaintzen du. Ikono esploratzailea ez da helburu orokorreko tresna bat, artista eta garatzaileen erabilera-kasuetara bideratua dago. Ikono esploratzaileak, ikono hautatzaile gisa erabilia izateko, «Kate» eta «KDevelop»erako plugin bat ere ematen du.</p>
     <p xml:lang="fr">Le logiciel « IconExplorer » permet aux artistes et aux équipes de développement d'afficher un aperçus des icônes et les sélectionner. Il tente de présenter le rendu des icônes exactement comme elles seraient dessinées dans l'application. Il permet de filtrer en fonction de la catégorie et du nom. Il n'est pas un outil généraliste, mais orienté pour les cas d'utilisation des artistes et des équipes de développement. Il fournit également un module externe pour Kate et KDevelop à utiliser comme sélecteur d'icônes.</p>
     <p xml:lang="he">דפדפן הסמלים מאפשר לאומנים ולמפתחים לראות תצוגה מקדימה ולבחור סמלים. דפדפן הסמלים מנסה לעבד את הסמלים בדיוק כפי שהם יופיעו כשיצוירו ביישומים. הוא מאפשר לסנן לפי קטגוריה ושם. דפדפן הסמלים אינו כלי לשימוש הקהל הרחב אלא יותר ממוקד לתת מענה לשאלות שעולות לאומנים ולמפתחים. דפדפן הסמלים מספק גם תוסף ל־Kate ול־KDevelop לשימוש כבורר סמלים.</p>
+    <p xml:lang="hu">Az Ikonböngésző lehetővé teszi a művészek és a fejlesztők számára az ikonok megtekintését és kiválasztását. Az Ikonböngésző  megpróbálja az ikonokat pontosan úgy megjeleníteni, ahogyan azok az alkalmazásban kirajzolódnának. Lehetővé teszi a szűrést kategória és név alapján. Az Ikonböngésző  em egy általános célú eszköz, hanem a művészek és fejlesztők felhasználási lehetőségeihez igazodik. Az Ikonböngésző egy bővítményt is biztosít a Kate-hez és a KDevelophoz, amelyet ikonválasztóként lehet használni.</p>
     <p xml:lang="it">Esploratore di icone permette agli artisti ed agli sviluppatori di visualizzare anteprime e scegliere icone. Esploratore di icone tenta di mostrare l'icona esattamente per come apparirebbe all'interno dell'applicazione. Permette di filtrare in base alla categoria ed al nome. Esploratore di icone non è uno strumento di uso generico, ma indirizzato ai casi d'uso di artisti e sviluppatori. Esploratore di icone fornisce inoltre un'estensione per Kate e KDevelop che permette la selezione delle icone.</p>
     <p xml:lang="ka">ხატულების დამთვალიერებელი ხელოვნებს და პროგრამისტებს ხატულების დათვალიერების და არჩევის საშუალებას აძლევს. ის ცდილობს, ხატულები ზუსტად ისე დახატოს, როგორც ის აპლიკაციაში გამოჩნდებოდა. ის საშუალებას გაძლევთ, გაფილტროთ ხატულები კატეგორიებითა და სახელით. ხატულების დამთვალიერებელი ჩვეულებრივი ყოველდღიურად გამოსაყენებელი პროგრამა არაა. ის ხელოვნებისა და პროგრამისტებისთვისაა დაწერილი. ის ასევე შეიცავს დამატებებს Kate-სა და KDevelop-სთვის, რათა ხატულის არჩევაში დაგეხმაროთ.</p>
     <p xml:lang="nl">Pictogramverkenner biedt artiesten en ontwikkelaars om pictogrammen te kiezen en te bekijken. Pictogramverkenner probeert de pictogrammen exact weer te geven zoals ze er uit zouden zien in de toepassing. Het biedt filtering gebaseerd op categorie en naam. Pictogramverkenner is geen hulpmiddel voor algemeen gebruik, maar is toegespitst op gebruik door artiesten en ontwikkelaars. Pictogramverkenner biedt ook een plug-in voor Kate en KDevelop om te worden gebruikt als kiezer voor pictogrammen.</p>
