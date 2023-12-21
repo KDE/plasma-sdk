@@ -62,7 +62,7 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
 
 find_package(Plasma ${PROJECT_VERSION} REQUIRED)
 find_package(PlasmaQuick ${PROJECT_VERSION} REQUIRED)
-find_package(KF6Plasma5Support ${PROJECT_VERSION} REQUIRED)
+find_package(Plasma5Support ${PROJECT_VERSION} REQUIRED)
 
 #########################################################################
 add_definitions(

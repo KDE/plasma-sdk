@@ -14,7 +14,7 @@ target_compile_definitions(plasmaengineexplorer PRIVATE -DPROJECT_VERSION="${PRO
 target_link_libraries(plasmaengineexplorer
     KF6::I18n
     KF6::Completion
-    KF6::Plasma5Support
+    Plasma::Plasma5Support
     KF6::I18n
     KF6::ConfigCore
     KF6::ConfigWidgets
