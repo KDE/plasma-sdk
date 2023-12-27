@@ -22,7 +22,8 @@
 #include <KAboutData>
 #include <KCompressionDevice>
 #include <KConfigGroup>
-#include <KIO/Job>
+#include <KIO/FileCopyJob>
+#include <KIO/MkdirJob>
 #include <KProcess>
 
 #include <Plasma/Theme>
