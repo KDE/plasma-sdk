@@ -26,7 +26,7 @@ msgstr "S'ha produït un error en carregar %1."
 
 #: contents/applet/AppletError.qml:48
 msgid "Copy Error Details to Clipboard"
-msgstr "Copia els detalls de l'error al porta-retalls"
+msgstr "Copia els detalls de l'error a dins del porta-retalls"
 
 #: contents/applet/CompactApplet.qml:74
 msgid "Open %1"

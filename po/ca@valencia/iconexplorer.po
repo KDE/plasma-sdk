@@ -60,12 +60,12 @@ msgstr "Inseriu un nom"
 #: src/qml/Actions.qml:26
 #, kde-format
 msgid "Copy Name to Clipboard"
-msgstr "Copia el nom al porta-retalls"
+msgstr "Copia el nom a dins del porta-retalls"
 
 #: src/qml/Actions.qml:30
 #, kde-format
 msgid "Icon name copied to clipboard"
-msgstr "S'ha copiat el nom de la icona al porta-retalls"
+msgstr "S'ha copiat el nom de la icona a dins del porta-retalls"
 
 #: src/qml/Actions.qml:36
 #, kde-format
