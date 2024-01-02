@@ -2,20 +2,20 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# A S Alam <aalam@users.sf.net>, 2007, 2009, 2012.
+# SPDX-FileCopyrightText: 2007, 2009, 2012, 2024 A S Alam <aalam@users.sf.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-28 01:46+0000\n"
-"PO-Revision-Date: 2012-05-08 22:16+0530\n"
-"Last-Translator: A S Alam <aalam@users.sf.net>\n"
-"Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
+"PO-Revision-Date: 2024-01-01 10:07-0600\n"
+"Last-Translator: A S Alam <aalam@punlinux.org>\n"
+"Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.4\n"
+"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -26,7 +26,7 @@ msgstr "ਅਮਨਪਰੀਤ ਸਿੰਘ ਆਲਮ"
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "aalam@users.sf.net"
+msgstr "aalam@punlinux.org"
 
 #: engineexplorer.cpp:45
 #, kde-format
@@ -90,22 +90,22 @@ msgstr "ਸਰੋਤ ਹਟਾਓ"
 #, kde-format
 msgid "<1 bit>"
 msgid_plural "<%1 bits>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<1 ਬਿੱਟ>"
+msgstr[1] "<%1 ਬਿੱਟ>"
 
 #: engineexplorer.cpp:330
 #, kde-format
 msgid "<1 byte>"
 msgid_plural "<%1 bytes>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<1 ਬਾਈਟ>"
+msgstr[1] "<%1 ਬਾਈਟ>"
 
 #: engineexplorer.cpp:352
 #, kde-format
 msgid "<1 item>"
 msgid_plural "<%1 items>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<1 ਚੀਜ਼>"
+msgstr[1] "<%1 ਚੀਜ਼ਾਂ>"
 
 #: engineexplorer.cpp:427
 #, kde-format
@@ -126,8 +126,8 @@ msgstr "<ਵੇਖਾਉਣ ਯੋਗ ਨਹੀਂ>"
 msgctxt "Length of the list"
 msgid "<%1 item>"
 msgid_plural "<%1 items>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<%1 ਚੀਜ਼>"
+msgstr[1] "<%1 ਚੀਜ਼ਾਂ>"
 
 #: engineexplorer.cpp:517
 #, kde-format
@@ -165,15 +165,13 @@ msgstr "ਲੋੜ ਉੱਤੇ ਅੱਪਡੇਟ"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
 #: engineexplorer.ui:81
-#, fuzzy, kde-format
-#| msgid "ms"
+#, kde-format
 msgid " ms"
-msgstr "ms"
+msgstr " ms"
 
 #. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
 #: engineexplorer.ui:84
-#, fuzzy, kde-format
-#| msgid "Update every "
+#, kde-format
 msgid "Update Every "
 msgstr "ਅੱਪਡੇਟ ਹਰੇਕ "
 
@@ -296,12 +294,10 @@ msgid ""
 msgstr ""
 
 #: modelviewer.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "%1 is a Plasma service name"
-#| msgid "%1 Service Explorer"
+#, kde-format
 msgctxt "%1 is a Plasma dataengine name"
 msgid "%1 Model Explorer"
-msgstr "%1 ਸਰਵਿਸ ਐਕਸਪੋਰਰ"
+msgstr "%1 ਮਾਡਲ ਐਕਸਪੋਰਰ"
 
 #: serviceviewer.cpp:27
 #, kde-format
@@ -328,12 +324,10 @@ msgid "%1 Service Explorer"
 msgstr "%1 ਸਰਵਿਸ ਐਕਸਪੋਰਰ"
 
 #: serviceviewer.cpp:77
-#, fuzzy, kde-format
-#| msgctxt "Source: name of the data, Service: writes data instead of fetching"
-#| msgid "DataEngine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
+#, kde-format
 msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
-msgstr "ਡਾਟਾ-ਇੰਜਣ: <b>%1</b>; ਸਰੋਤ: <b>%2</b>; ਸਰਵਿਸ <b>%3</b>"
+msgstr "ਇੰਜਣ: <b>%1</b>; ਸਰੋਤ: <b>%2</b>; ਸੇਵਾ: <b>%3</b>"
 
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
 #: serviceviewer.cpp:153 serviceviewer.ui:73
@@ -370,20 +364,17 @@ msgid ""
 msgstr "%1 ਓਪਰੇਸ਼ਨ ਟਿਕਾਣੇ %2 ਨਾਲ ਸਫ਼ਲ ਹੈ। ਨਤੀਜਾ ਹੈ:<p><b>%3</b>"
 
 #: serviceviewer.cpp:228
-#, fuzzy, kde-format
-#| msgid "One active operation ..."
-#| msgid_plural "%1 operations active ..."
+#, kde-format
 msgid "One active operation…"
 msgid_plural "%1 operations active…"
-msgstr[0] "ਇੱਕ ਸਰਗਰਮ ਓਪਰੇਸ਼ਨ..."
-msgstr[1] "%1 ਸਰਗਰਮ ਓਪਰੇਸ਼ਨ..."
+msgstr[0] "ਇੱਕ ਸਰਗਰਮ ਓਪਰੇਸ਼ਨ…"
+msgstr[1] "%1 ਸਰਗਰਮ ਓਪਰੇਸ਼ਨ…"
 
 #. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
 #: serviceviewer.ui:39
-#, fuzzy, kde-format
-#| msgid "&Operation:"
+#, kde-format
 msgid "Opera&tion:"
-msgstr "ਓਪਰੇਸ਼ਨ(&O):"
+msgstr "ਓਪਰੇਸ਼ਨ(&t):"
 
 #. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
 #: serviceviewer.ui:86
