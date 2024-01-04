@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Volkan Gezer <volkangezer@gmail.com>, 2017, 2022.
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-05 02:19+0000\n"
-"PO-Revision-Date: 2023-06-10 12:13+0300\n"
+"PO-Revision-Date: 2024-01-03 23:04+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.07.70\n"
+"X-Generator: Lokalize 24.01.85\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -76,7 +76,7 @@ msgstr "Sürüm:"
 #: package/contents/ui/main.qml:115 package/contents/ui/MetadataEditor.qml:92
 #, kde-format
 msgid "Website:"
-msgstr "Web site:"
+msgstr "Web sitesi:"
 
 #: package/contents/ui/main.qml:119 package/contents/ui/MetadataEditor.qml:97
 #, kde-format
@@ -111,7 +111,7 @@ msgstr "Yeni Tema"
 #: package/contents/ui/MetadataEditor.qml:57
 #, kde-format
 msgid "Theme Plugin Name:"
-msgstr "Tema Eklentisi Adı:"
+msgstr "Tema eklentisi adı:"
 
 #: package/contents/ui/MetadataEditor.qml:62
 #, kde-format
@@ -121,7 +121,7 @@ msgstr "Bu tema eklenti adı zaten var"
 #: package/contents/ui/MetadataEditor.qml:72
 #, kde-format
 msgid "Theme Name:"
-msgstr "Tema Adı:"
+msgstr "Tema adı:"
 
 #: package/contents/ui/MetadataEditor.qml:109
 #, kde-format
@@ -141,7 +141,7 @@ msgstr "Geçerli Plasma yerleşimi alınamadı."
 #: src/lnflogic.cpp:93
 #, kde-format
 msgid "Impossible to create the layouts directory in the look and feel package"
-msgstr "Görünüm ve His paketinde düzen dizini oluşturmak mümkün değil"
+msgstr "Görünüm ve His paketinde yerleşimler dizini oluşturmak olanaklı değil"
 
 #: src/lnflogic.cpp:104
 #, kde-format
@@ -151,7 +151,7 @@ msgstr "org.kde.plasma.desktop-layout.js dosyasına yazmak mümkün değil"
 #: src/lnflogic.cpp:107
 #, kde-format
 msgid "Plasma Layout successfully duplicated"
-msgstr "Plasma Düzeni başarıyla çoğaltıldı"
+msgstr "Plasma yerleşimi başarıyla çoğaltıldı"
 
 #: src/lnflogic.cpp:164
 #, kde-format
