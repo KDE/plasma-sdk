@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-28 01:46+0000\n"
-"PO-Revision-Date: 2023-04-14 07:06+0100\n"
+"PO-Revision-Date: 2024-01-04 17:19+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@lists.kde.org>\n"
 "Language: eo\n"
@@ -167,7 +167,7 @@ msgstr "Ĝisdatigi laŭpete"
 #: engineexplorer.ui:81
 #, kde-format
 msgid " ms"
-msgstr "ms"
+msgstr " ms"
 
 #. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
 #: engineexplorer.ui:84
