@@ -4,6 +4,7 @@ project(plasma-sdk)
 set(PROJECT_VERSION "6.0.80")
 set(PROJECT_VERSION_MAJOR 6)
 
+set(PROJECT_DEP_VERSION "6.0.80")
 set(QT_MIN_VERSION "6.6.0")
 set(KF6_MIN_VERSION "5.240.0")
 set(KDE_COMPILERSETTINGS_LEVEL "5.82")
@@ -60,9 +61,9 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     Archive Completion Config ConfigWidgets CoreAddons DBusAddons I18n IconThemes ItemModels
     KIO TextEditor WidgetsAddons DocTools Svg)
 
-find_package(Plasma ${PROJECT_VERSION} REQUIRED)
-find_package(PlasmaQuick ${PROJECT_VERSION} REQUIRED)
-find_package(Plasma5Support ${PROJECT_VERSION} REQUIRED)
+find_package(Plasma ${PROJECT_DEP_VERSION} REQUIRED)
+find_package(PlasmaQuick ${PROJECT_DEP_VERSION} REQUIRED)
+find_package(Plasma5Support ${PROJECT_DEP_VERSION} REQUIRED)
 
 #########################################################################
 add_definitions(
