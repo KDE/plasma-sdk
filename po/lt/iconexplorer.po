@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: trunk-kf 5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-22 02:00+0000\n"
-"PO-Revision-Date: 2021-06-15 21:50+0300\n"
+"PO-Revision-Date: 2024-01-31 19:31+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt\n"
 "Language: lt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: src/main.cpp:68
 #, kde-format
@@ -40,27 +40,24 @@ msgid "Run in icon-picker mode"
 msgstr "Paleisti piktogramos parinkiklio veiksenoje"
 
 #: src/qml/Actions.qml:16
-#, fuzzy, kde-format
-#| msgid "Open icon with external program"
+#, kde-format
 msgid "Open with External Program"
-msgstr "Atverti piktogramą naudojant išorinę programą"
+msgstr "Atverti naudojant išorinę programą"
 
 #: src/qml/Actions.qml:21
 #, kde-format
 msgid "Open Containing Folder"
-msgstr ""
+msgstr "Atverti vidinį aplanką"
 
 #: src/qml/Actions.qml:26
-#, fuzzy, kde-format
-#| msgid "Insert icon name"
+#, kde-format
 msgid "Insert Name"
-msgstr "Įterpti piktogramos pavadinimą"
+msgstr "Įterpti pavadinimą"
 
 #: src/qml/Actions.qml:26
-#, fuzzy, kde-format
-#| msgid "Copy icon name to clipboard"
+#, kde-format
 msgid "Copy Name to Clipboard"
-msgstr "Kopijuoti piktogramos pavadinimą į iškarpinę"
+msgstr "Kopijuoti pavadinimą į iškarpinę"
 
 #: src/qml/Actions.qml:30
 #, kde-format
@@ -70,7 +67,7 @@ msgstr "Piktogramos pavadinimas nukopijuotas į iškarpinę"
 #: src/qml/Actions.qml:36
 #, kde-format
 msgid "Take Screenshot…"
-msgstr ""
+msgstr "Padaryti ekrano kopiją…"
 
 #: src/qml/Actions.qml:39
 #, kde-format
@@ -93,16 +90,15 @@ msgid "Active Color Scheme"
 msgstr "Aktyvus spalvų rinkinys"
 
 #: src/qml/Actions.qml:56
-#, fuzzy, kde-format
-#| msgid "View icon in other themes"
+#, kde-format
 msgid "View in Other Icon Themes"
-msgstr "Rodyti piktogramą kituose apipavidalinimuose"
+msgstr "Rodyti kituose piktogramų apipavidalinimuose"
 
 #: src/qml/Comparison.qml:30
 #, kde-format
 msgctxt "@title placeholder is an icon name"
 msgid "Other versions of %1"
-msgstr ""
+msgstr "Kitos %1 versijos"
 
 #: src/qml/GlobalMenuBar.qml:19
 #, kde-format

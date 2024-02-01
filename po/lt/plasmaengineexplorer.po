@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-28 01:46+0000\n"
-"PO-Revision-Date: 2021-06-15 21:52+0300\n"
+"PO-Revision-Date: 2024-01-31 19:15+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -43,7 +43,7 @@ msgstr "Visus suskleisti"
 #: engineexplorer.cpp:48 main.cpp:56
 #, kde-format
 msgid "Plasma Engine Explorer"
-msgstr "Plasma variklių naršyklė"
+msgstr "Plasma modulių tyrinėtojas"
 
 #: engineexplorer.cpp:76
 #, kde-format
@@ -51,10 +51,9 @@ msgid "Search"
 msgstr "Paieška"
 
 #: engineexplorer.cpp:176
-#, fuzzy, kde-format
-#| msgid "DataSource"
+#, kde-format
 msgid "DataSource/Key"
-msgstr "Duomenų šaltinis"
+msgstr "Duomenų šaltinis/Raktas"
 
 #: engineexplorer.cpp:176
 #, kde-format
@@ -129,13 +128,11 @@ msgid "<not displayable>"
 msgstr "<neparodoma>"
 
 #: engineexplorer.cpp:487 engineexplorer.cpp:502
-#, fuzzy, kde-format
-#| msgid "<1 item>"
-#| msgid_plural "<%1 items>"
+#, kde-format
 msgctxt "Length of the list"
 msgid "<%1 item>"
 msgid_plural "<%1 items>"
-msgstr[0] "<1 elementas>"
+msgstr[0] "<%1 elementas>"
 msgstr[1] "<%1 elementai>"
 msgstr[2] "<%1 elementų>"
 msgstr[3] "<%1 elementas>"
@@ -145,16 +142,16 @@ msgstr[3] "<%1 elementas>"
 msgctxt "Size of the map"
 msgid "<%1 pair>"
 msgid_plural "<%1 pairs>"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "<%1 pora>"
+msgstr[1] "<%1 poros>"
+msgstr[2] "<%1 porų>"
+msgstr[3] "<%1 pora>"
 
 #. i18n: ectx: property (text), widget (KTitleWidget, m_title)
 #: engineexplorer.cpp:530 engineexplorer.ui:29
 #, kde-format
 msgid "Plasma DataEngine Explorer"
-msgstr "Plasma duomenų variklių naršyklė"
+msgstr "Plasma duomenų modulių tyrinėtojas"
 
 #: engineexplorer.cpp:534
 #, kde-format
@@ -251,7 +248,7 @@ msgstr "Autorius ir prižiūrėtojas"
 #: main.cpp:68
 #, kde-format
 msgid "Displays a list of known engines and their descriptions"
-msgstr "Rodo žinomų variklių ir jų aprašų sąrašą"
+msgstr "Rodo žinomų modulių ir jų aprašų sąrašą"
 
 #: main.cpp:69
 #, kde-format
@@ -276,7 +273,7 @@ msgstr "Pageidaujama y pozicija pikseliais"
 #: main.cpp:73
 #, kde-format
 msgid "The data engine to use"
-msgstr "Duomenų variklis, kurį naudoti"
+msgstr "Duomenų modulis, kurį naudoti"
 
 #: main.cpp:74
 #, kde-format
@@ -294,7 +291,7 @@ msgid ""
 "Only show engines associated with the parent application; maps to the X-KDE-"
 "ParentApp entry in the DataEngine's .desktop file."
 msgstr ""
-"Rodyti tik variklius, susietus su pirmine programa. Gretinama su X-KDE-"
+"Rodyti tik modulius, susietus su pirmine programa. Gretinama su X-KDE-"
 "ParentApp įrašu DataEngine .desktop faile."
 
 #: modelviewer.cpp:85 serviceviewer.cpp:53
@@ -316,7 +313,7 @@ msgstr ""
 #, kde-format
 msgctxt "%1 is a Plasma dataengine name"
 msgid "%1 Model Explorer"
-msgstr "%1 modėlių naršyklė"
+msgstr "%1 modelių tyrinėtojas"
 
 #: serviceviewer.cpp:27
 #, kde-format
@@ -346,12 +343,10 @@ msgid "%1 Service Explorer"
 msgstr "%1 tarnybos naršyklė"
 
 #: serviceviewer.cpp:77
-#, fuzzy, kde-format
-#| msgctxt "Source: name of the data, Service: writes data instead of fetching"
-#| msgid "DataEngine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
+#, kde-format
 msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
-msgstr "Duomenų variklis: <b>%1</b>; Šaltinis: <b>%2</b>; Tarnyba: <b>%3</b>"
+msgstr "Modulis: <b>%1</b>; Šaltinis: <b>%2</b>; Tarnyba: <b>%3</b>"
 
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
 #: serviceviewer.cpp:153 serviceviewer.ui:73
@@ -411,7 +406,7 @@ msgstr "Operacijų skaičius"
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
-msgstr "Duomenų varikliai"
+msgstr "Duomenų moduliai"
 
 #~ msgid "&lt;1 bit&gt;"
 #~ msgid_plural "&lt;%1 bits&gt;"

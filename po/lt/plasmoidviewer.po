@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: plasmoidviewer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-22 02:00+0000\n"
-"PO-Revision-Date: 2019-06-21 00:50+0300\n"
+"PO-Revision-Date: 2024-01-31 19:19+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -51,7 +51,7 @@ msgstr "Suvaržymo priedo pavadinimas"
 #: main.cpp:51
 #, kde-format
 msgid "The name of the applet plugin"
-msgstr "Įskiepio priedo pavadinimas"
+msgstr "Programėlės įskiepio pavadinimas"
 
 #: main.cpp:53
 #, kde-format
@@ -100,12 +100,12 @@ msgstr "Apipavidalinimo, kurį naudos apvalkalas, pavadinimas"
 #, kde-format
 msgid "Data that should be passed to the applet as 'externalData' event"
 msgstr ""
-"Duomenys, kurie turėtų būti perduoti į įskiepį kaip \"externalData\" įvykis"
+"Duomenys, kurie turėtų būti perduoti į programėlę kaip „externalData“ įvykis"
 
 #: view.cpp:123
 #, no-c-format, kde-format
 msgid "Applet %1 does not exist."
-msgstr "Įskiepio %1 nėra."
+msgstr "Programėlės %1 nėra."
 
 #: view.cpp:140
 #, no-c-format, kde-format
