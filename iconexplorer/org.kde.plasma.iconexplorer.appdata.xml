@@ -9,6 +9,7 @@
   <name xml:lang="ast">Esplorador d'iconos</name>
   <name xml:lang="ca">Explorador d'icones</name>
   <name xml:lang="ca-valencia">Explorador d'icones</name>
+  <name xml:lang="cs">Prohlížeč ikon</name>
   <name xml:lang="eo">Icon Explorer</name>
   <name xml:lang="es">Explorador de iconos</name>
   <name xml:lang="eu">Ikono esploratzailea</name>
@@ -32,6 +33,7 @@
   <summary>Icon Previewer for Artists and Developers</summary>
   <summary xml:lang="ca">Vista prèvia de les icones per a artistes i desenvolupadors</summary>
   <summary xml:lang="ca-valencia">Vista prèvia de les icones per a artistes i desenvolupadors</summary>
+  <summary xml:lang="cs">Náhled ikon pro umělce a vývojáře</summary>
   <summary xml:lang="eo">Piktogram-Antaŭrigardilo por Artistoj kaj Evoluistoj</summary>
   <summary xml:lang="es">Visor de iconos para diseñadores y desarrolladores</summary>
   <summary xml:lang="eu">Artista eta garatzaileentzat ikono aurre-erakuslea</summary>
