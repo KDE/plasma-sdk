@@ -267,7 +267,7 @@
 ></term>
 <listitem
 ><para
->Yalnızca ana uygulamayla ilişkili işletkeleri göster; DataEngine'in .desktop dosyasındaki X-KDE-ParentApp girişiyle eşleşir.</para
+>Yalnızca ana uygulamayla ilişkili işletkeleri göster; DataEngine’in .desktop dosyasındaki X-KDE-ParentApp girişiyle eşleşir.</para
 ></listitem>
 </varlistentry>
 
