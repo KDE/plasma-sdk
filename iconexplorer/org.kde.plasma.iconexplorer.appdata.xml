@@ -23,6 +23,7 @@
   <name xml:lang="nl">Pictogramverkenner</name>
   <name xml:lang="pl">Przeglądarka ikon</name>
   <name xml:lang="pt-BR">Explorador de ícones</name>
+  <name xml:lang="ro">Explorator de pictograme</name>
   <name xml:lang="ru">Просмотр значков</name>
   <name xml:lang="sk">Prieskumník ukon</name>
   <name xml:lang="sl">Icon Explorer</name>
@@ -48,6 +49,7 @@
   <summary xml:lang="nl">Pictogramviewer voor kunstenaars en ontwikkelaars</summary>
   <summary xml:lang="pl">Podgląd ikon dla artystów i programistów</summary>
   <summary xml:lang="pt-BR">Visualizador de ícones para artistas e desenvolvedores</summary>
+  <summary xml:lang="ro">Previzualizator de pictograme pentru pictori și dezvoltatori</summary>
   <summary xml:lang="ru">Инструмент просмотра значков для дизайнеров и разработчиков</summary>
   <summary xml:lang="sk">Prehliadač ikon pre umelcov a vývojárov</summary>
   <summary xml:lang="sl">Vpogledovalnik ikon za umetnike in razvijalce</summary>
