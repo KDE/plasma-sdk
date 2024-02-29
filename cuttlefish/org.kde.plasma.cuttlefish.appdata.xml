@@ -34,6 +34,7 @@
   <name xml:lang="pl">Cuttlefish</name>
   <name xml:lang="pt">Cuttlefish</name>
   <name xml:lang="pt-BR">Cuttlefish</name>
+  <name xml:lang="ro">Cuttlefish</name>
   <name xml:lang="ru">Cuttlefish</name>
   <name xml:lang="sk">Cuttlefish</name>
   <name xml:lang="sl">Cuttlefish</name>
@@ -77,6 +78,7 @@
   <summary xml:lang="pl">Podglądanie ikon dla artystów i programistów</summary>
   <summary xml:lang="pt">Antevisão de Ícones para Artistas e Programadores</summary>
   <summary xml:lang="pt-BR">Visualizador de ícones para artistas e desenvolvedores</summary>
+  <summary xml:lang="ro">Previzualizator de pictograme pentru pictori și dezvoltatori</summary>
   <summary xml:lang="ru">Инструмент просмотра значков для дизайнеров и разработчиков</summary>
   <summary xml:lang="sk">Prehliadač ikon pre umelcov a vývojárov</summary>
   <summary xml:lang="sl">Pregledovalnik ikon za umetnike in razvijalce</summary>

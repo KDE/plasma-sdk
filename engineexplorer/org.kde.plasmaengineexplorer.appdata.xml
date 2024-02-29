@@ -34,6 +34,7 @@
   <name xml:lang="pl">Przeglądarka silnika Plazmy</name>
   <name xml:lang="pt">Explorador de Motores do Plasma</name>
   <name xml:lang="pt-BR">Explorador de mecanismos do Plasma</name>
+  <name xml:lang="ro">Exploratorul de motor Plasma</name>
   <name xml:lang="ru">Диспетчер данных Plasma</name>
   <name xml:lang="sk">Prieskumník zdrojov Plasma</name>
   <name xml:lang="sl">Plasma Engine Explorer</name>
@@ -72,6 +73,7 @@
   <summary xml:lang="pl">Przeglądaj dane udostępniane przez silniki danych Plazmy</summary>
   <summary xml:lang="pt">Explorador dos dados publicados pelos Motores de Dados do Plasma</summary>
   <summary xml:lang="pt-BR">Explorador para os dados publicados pelo mecanismo de dados do Plasma</summary>
+  <summary xml:lang="ro">Explorator pentru datele publicate de către motoarele de date Plasma</summary>
   <summary xml:lang="ru">Просмотр данных, опубликованных поставщиками данных Plasma</summary>
   <summary xml:lang="sk">Prehliadač pre dáta publikované cez Plasma Data Engines</summary>
   <summary xml:lang="sl">Raziskovalec podatkov, ki jih je objavil Plasma Data Engines</summary>
