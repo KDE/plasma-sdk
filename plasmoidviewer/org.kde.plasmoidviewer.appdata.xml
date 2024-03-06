@@ -132,6 +132,7 @@
     <p xml:lang="zh-CN">Plasma 小程序查看器是给开发者测试 Plasma 小部件的图形工具。</p>
     <p xml:lang="zh-TW">Plasmoid 檢視器是個允許開發者測試 Plasma 元件的圖形化工具。</p>
   </description>
+  <url type="homepage">https://kde.org/plasma-desktop</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Plasma%20SDK&amp;component=plasmoidviewer</url>
   <project_group>KDE</project_group>
   <provides>
