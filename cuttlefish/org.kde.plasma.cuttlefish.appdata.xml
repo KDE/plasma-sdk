@@ -141,6 +141,7 @@
     <p xml:lang="zh-CN">Cuttlefish 允许艺术家和开发者预览和选择图标。 Cuttlefish 尝试精确按程序中的方式渲染图标。它允许按分类和名称过滤。 Cuttlefish 不是一个面向一般使用的工具，而是为艺术家和开发者使用设计 的工具。Cuttlefish 也提供了 Kate 和 KDevelop 的图标选择器插件。</p>
     <p xml:lang="zh-TW">Cuttlefish 讓藝術家與開發者可以預覽並挑選圖示。Cuttlefish 會盡量將圖示顯示為在應用程式裡時的樣子。它也可使用類別或名稱來過濾。Cuttlefish 並不是一個通用的工具，它是專為藝術家與開發者的需求設計。Cuttlefish 也提供一份給 Kate 與KDevelop 使用的外掛程式，讓它們也可以用於挑選圖示。</p>
   </description>
+  <url type="homepage">https://kde.org/plasma-desktop</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Plasma%20SDK&amp;component=cuttlefish</url>
   <screenshots>
     <screenshot type="default">

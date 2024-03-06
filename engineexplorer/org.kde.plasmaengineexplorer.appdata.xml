@@ -129,6 +129,7 @@
     <p xml:lang="zh-TW">Plasma 引擎瀏覽器是個圖形化工具，能讓開發者不用寫 Plasma 元件也能測試 Plasma DataEngines。</p>
   </description>
   <launchable type="desktop-id">org.kde.plasmaengineexplorer.desktop</launchable>
+  <url type="homepage">https://kde.org/plasma-desktop</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Plasma%20SDK&amp;component=engineexplorer</url>
   <project_group>KDE</project_group>
   <provides>
