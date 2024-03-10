@@ -15,8 +15,8 @@ import org.kde.ksvg 1.0 as KSvg
 Item {
     id: analogclock
 
-    width: units.gridUnit * 15
-    height: units.gridUnit * 15
+    width: Kirigami.Units.gridUnit * 15
+    height: Kirigami.Units.gridUnit * 15
     property int hours
     property int minutes
     property int seconds

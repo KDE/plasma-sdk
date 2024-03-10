@@ -67,7 +67,7 @@ void ThemeListModel::reload()
         const QDir cd(ppath);
         const QStringList &entries = cd.entryList(QDir::Dirs | QDir::Hidden);
         for (const QString &pack : entries) {
-            const QString _metadata = ppath + QLatin1Char('/') + pack + QStringLiteral("/metadata.desktop");
+            const QString _metadata = ppath + QLatin1Char('/') + pack + QStringLiteral("/metadata.json");
             if ((pack != "." && pack != "..") && (QFile::exists(_metadata))) {
                 themes << _metadata;
             }

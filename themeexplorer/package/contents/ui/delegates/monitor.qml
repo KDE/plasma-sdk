@@ -26,7 +26,7 @@ Item {
         anchors {
             horizontalCenter: parent.horizontalCenter
             top: screen.bottom
-            topMargin: -units.gridUnit
+            topMargin: -Kirigami.Units.gridUnit
         }
         imagePath: "widgets/monitor"
         elementId: "base"
@@ -37,7 +37,7 @@ Item {
             left: background.left
             top: background.top
             right: background.right
-            margins: units.gridUnit
+            margins: Kirigami.Units.gridUnit
         }
         height: width / 1.6
         imagePath: "widgets/monitor"

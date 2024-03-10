@@ -30,7 +30,7 @@ Item {
         clip: true
         anchors {
             fill: parent
-            margins: units.gridUnit * 2
+            margins: Kirigami.Units.gridUnit * 2
         }
         Repeater {
             model: delegateRoot.prefixes

@@ -25,17 +25,18 @@ Item {
     }
 
     property var iconElements: model.iconElements
+    property var imagePath: model.imagePath
 
     Flow {
         clip: true
         anchors {
             fill: background
-            margins: units.gridUnit
+            margins: Kirigami.Units.gridUnit
         }
         Repeater {
             model: iconsDelegate.iconElements
             delegate: KSvg.SvgItem {
-                imagePath: model.imagePath
+                imagePath: iconsDelegate.imagePath
                 elementId: modelData
                 width: naturalSize.width
                 height: naturalSize.height

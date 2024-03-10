@@ -15,7 +15,7 @@ Item {
         id: background
         anchors {
             fill: parent
-            margins: units.gridUnit
+            margins: Kirigami.Units.gridUnit
         }
         radius: 3
         color: Kirigami.Theme.backgroundColor

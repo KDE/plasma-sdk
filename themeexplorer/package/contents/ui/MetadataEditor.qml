@@ -8,6 +8,7 @@ import QtQuick 2.3
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.15
 import QtQuick.Dialogs
+import org.kde.kirigami as Kirigami
 
 Dialog {
     id: dialog
@@ -30,8 +31,8 @@ Dialog {
     //but unfortunately native standard buttons management
     //is completely broken
     contentItem: Rectangle {
-        implicitWidth:  layout.Layout.minimumWidth + units.smallSpacing*2
-        implicitHeight: layout.Layout.minimumHeight + units.smallSpacing*2
+        implicitWidth:  layout.Layout.minimumWidth + Kirigami.Units.smallSpacing*2
+        implicitHeight: layout.Layout.minimumHeight + Kirigami.Units.smallSpacing*2
 
         Keys.onPressed: {
             if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
@@ -50,7 +51,7 @@ Dialog {
             id: layout
             anchors {
                 fill: parent
-                margins: units.smallSpacing
+                margins: Kirigami.Units.smallSpacing
             }
             Label {
                 id: errorMessage
@@ -62,7 +63,7 @@ Dialog {
             GridLayout {
                 Layout.fillWidth: true
                 columns: 2
-                columnSpacing: units.smallSpacing
+                columnSpacing: Kirigami.Units.smallSpacing
 
                 FormLabel {
                     visible: newTheme
