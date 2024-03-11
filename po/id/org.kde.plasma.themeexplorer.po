@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-30 01:58+0000\n"
+"POT-Creation-Date: 2024-03-11 00:39+0000\n"
 "PO-Revision-Date: 2019-07-29 16:22+0700\n"
 "Last-Translator: Wantoyo <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -26,134 +26,134 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "wantoyek@gmail.com"
 
-#: package/contents/ui/ColorEditor.qml:38
+#: package/contents/ui/ColorEditor.qml:39
 #, kde-format
 msgid "Edit Colors"
 msgstr "Edit Warna"
 
-#: package/contents/ui/ColorEditor.qml:67
+#: package/contents/ui/ColorEditor.qml:68
 #, kde-format
 msgid "Select Color"
 msgstr "Pilih Warna"
 
-#: package/contents/ui/ColorEditor.qml:109
+#: package/contents/ui/ColorEditor.qml:110
 #, kde-format
 msgid "Normal text"
 msgstr "Teks normal"
 
-#: package/contents/ui/ColorEditor.qml:115
+#: package/contents/ui/ColorEditor.qml:116
 #, kde-format
 msgid "Link"
 msgstr "Taut"
 
-#: package/contents/ui/ColorEditor.qml:119
+#: package/contents/ui/ColorEditor.qml:120
 #, kde-format
 msgid "Visited Link"
 msgstr "Taut Dikunjungi"
 
-#: package/contents/ui/ColorEditor.qml:154
+#: package/contents/ui/ColorEditor.qml:155
 #, kde-format
 msgid "Complementary colors area:"
 msgstr "Komplementer area warna:"
 
-#: package/contents/ui/ColorEditor.qml:169
+#: package/contents/ui/ColorEditor.qml:170
 #, kde-format
 msgid "Label"
 msgstr "Label"
 
-#: package/contents/ui/ColorEditor.qml:192
+#: package/contents/ui/ColorEditor.qml:193
 #, kde-format
 msgid "Text color:"
 msgstr "Warna teks:"
 
-#: package/contents/ui/ColorEditor.qml:199
+#: package/contents/ui/ColorEditor.qml:200
 #, kde-format
 msgid "Background color:"
 msgstr "Warna latar-belakang:"
 
-#: package/contents/ui/ColorEditor.qml:206
+#: package/contents/ui/ColorEditor.qml:207
 #, kde-format
 msgid "Highlight color:"
 msgstr "Warna sorot:"
 
-#: package/contents/ui/ColorEditor.qml:213
+#: package/contents/ui/ColorEditor.qml:214
 #, kde-format
 msgid "Link color:"
 msgstr "Warna taut:"
 
-#: package/contents/ui/ColorEditor.qml:220
+#: package/contents/ui/ColorEditor.qml:221
 #, kde-format
 msgid "Visited link color:"
 msgstr "Warna taut dikunjungi:"
 
-#: package/contents/ui/ColorEditor.qml:228
+#: package/contents/ui/ColorEditor.qml:229
 #, kde-format
 msgid "Button text color:"
 msgstr "Warna teks tombol:"
 
-#: package/contents/ui/ColorEditor.qml:235
+#: package/contents/ui/ColorEditor.qml:236
 #, kde-format
 msgid "Button background color:"
 msgstr "Warna latar-belakang tombol:"
 
-#: package/contents/ui/ColorEditor.qml:242
+#: package/contents/ui/ColorEditor.qml:243
 #, kde-format
 msgid "Button mouse over color:"
 msgstr "Tombol mouse melintasi warna:"
 
-#: package/contents/ui/ColorEditor.qml:249
+#: package/contents/ui/ColorEditor.qml:250
 #, kde-format
 msgid "Button focus color:"
 msgstr "Warna fokus tombol:"
 
-#: package/contents/ui/ColorEditor.qml:257
+#: package/contents/ui/ColorEditor.qml:258
 #, kde-format
 msgid "Text view text color:"
 msgstr "Warna teks tampilan teks:"
 
-#: package/contents/ui/ColorEditor.qml:264
+#: package/contents/ui/ColorEditor.qml:265
 #, kde-format
 msgid "Text view background color:"
 msgstr "Warna latar-belakang tampilan teks:"
 
-#: package/contents/ui/ColorEditor.qml:271
+#: package/contents/ui/ColorEditor.qml:272
 #, kde-format
 msgid "Text view mouse over color:"
 msgstr "Tampilan teks mouse melintasi warna:"
 
-#: package/contents/ui/ColorEditor.qml:278
+#: package/contents/ui/ColorEditor.qml:279
 #, kde-format
 msgid "Text view focus color:"
 msgstr "Warna fokus tampilan teks:"
 
-#: package/contents/ui/ColorEditor.qml:286
+#: package/contents/ui/ColorEditor.qml:287
 #, kde-format
 msgid "Complementary text color:"
 msgstr "Warna teks komplementer:"
 
-#: package/contents/ui/ColorEditor.qml:293
+#: package/contents/ui/ColorEditor.qml:294
 #, kde-format
 msgid "Complementary background color:"
 msgstr "Warna latar-belakang komplementer:"
 
-#: package/contents/ui/ColorEditor.qml:300
+#: package/contents/ui/ColorEditor.qml:301
 #, kde-format
 msgid "Complementary mouse over color:"
 msgstr "Komplementer mouse melintasi warna:"
 
-#: package/contents/ui/ColorEditor.qml:307
+#: package/contents/ui/ColorEditor.qml:308
 #, kde-format
 msgid "Complementary focus color:"
 msgstr "Warna fokus komplementer:"
 
-#: package/contents/ui/ColorEditor.qml:322
-#: package/contents/ui/MetadataEditor.qml:136
+#: package/contents/ui/ColorEditor.qml:323
+#: package/contents/ui/MetadataEditor.qml:137
 #, kde-format
 msgid "OK"
 msgstr "Oke"
 
-#: package/contents/ui/ColorEditor.qml:327
-#: package/contents/ui/MetadataEditor.qml:142
+#: package/contents/ui/ColorEditor.qml:328
+#: package/contents/ui/MetadataEditor.qml:143
 #, kde-format
 msgid "Cancel"
 msgstr "Batal"
@@ -174,7 +174,7 @@ msgid "ToolButton"
 msgstr "TombolAlat"
 
 #: package/contents/ui/delegates/button.qml:31
-#: package/contents/ui/fakecontrols/Button.qml:22
+#: package/contents/ui/fakecontrols/Button.qml:23
 #, kde-format
 msgid "Button"
 msgstr "Tombol"
@@ -301,49 +301,49 @@ msgstr "Ciptakan dengan Pengedit..."
 msgid "Open In Editor…"
 msgstr "Buka Di Pengedit.."
 
-#: package/contents/ui/MetadataEditor.qml:23
+#: package/contents/ui/MetadataEditor.qml:24
 #, kde-format
 msgid "New Theme"
 msgstr "Tema Baru"
 
-#: package/contents/ui/MetadataEditor.qml:23
+#: package/contents/ui/MetadataEditor.qml:24
 #, kde-format
 msgid "Edit Theme"
 msgstr "Edit Tema"
 
-#: package/contents/ui/MetadataEditor.qml:58
+#: package/contents/ui/MetadataEditor.qml:59
 #, kde-format
 msgid "Warning: don't change author or license for themes you don't own"
 msgstr ""
 "Peringatan: jangan mengubah penulis atau lisensi untuk tema yang bukan "
 "milikmu"
 
-#: package/contents/ui/MetadataEditor.qml:69
+#: package/contents/ui/MetadataEditor.qml:70
 #, kde-format
 msgid "Theme Name:"
 msgstr "Nama Tema:"
 
-#: package/contents/ui/MetadataEditor.qml:85
+#: package/contents/ui/MetadataEditor.qml:86
 #, kde-format
 msgid "This theme name already exists"
 msgstr "Nama tema ini sudah ada"
 
-#: package/contents/ui/MetadataEditor.qml:94
+#: package/contents/ui/MetadataEditor.qml:95
 #, kde-format
 msgid "Author:"
 msgstr "Penulis:"
 
-#: package/contents/ui/MetadataEditor.qml:102
+#: package/contents/ui/MetadataEditor.qml:103
 #, kde-format
 msgid "Email:"
 msgstr "Email:"
 
-#: package/contents/ui/MetadataEditor.qml:110
+#: package/contents/ui/MetadataEditor.qml:111
 #, kde-format
 msgid "License:"
 msgstr "Lisensi:"
 
-#: package/contents/ui/MetadataEditor.qml:121
+#: package/contents/ui/MetadataEditor.qml:122
 #, kde-format
 msgid "Website:"
 msgstr "Situsweb:"

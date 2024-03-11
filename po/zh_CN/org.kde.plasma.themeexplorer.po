@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-30 01:58+0000\n"
+"POT-Creation-Date: 2024-03-11 00:39+0000\n"
 "PO-Revision-Date: 2024-03-09 04:45\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -28,134 +28,134 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kde-china@kde.org"
 
-#: package/contents/ui/ColorEditor.qml:38
+#: package/contents/ui/ColorEditor.qml:39
 #, kde-format
 msgid "Edit Colors"
 msgstr "编辑颜色"
 
-#: package/contents/ui/ColorEditor.qml:67
+#: package/contents/ui/ColorEditor.qml:68
 #, kde-format
 msgid "Select Color"
 msgstr "选择颜色"
 
-#: package/contents/ui/ColorEditor.qml:109
+#: package/contents/ui/ColorEditor.qml:110
 #, kde-format
 msgid "Normal text"
 msgstr "普通文字"
 
-#: package/contents/ui/ColorEditor.qml:115
+#: package/contents/ui/ColorEditor.qml:116
 #, kde-format
 msgid "Link"
 msgstr "链接"
 
-#: package/contents/ui/ColorEditor.qml:119
+#: package/contents/ui/ColorEditor.qml:120
 #, kde-format
 msgid "Visited Link"
 msgstr "已访问链接"
 
-#: package/contents/ui/ColorEditor.qml:154
+#: package/contents/ui/ColorEditor.qml:155
 #, kde-format
 msgid "Complementary colors area:"
 msgstr "补色区："
 
-#: package/contents/ui/ColorEditor.qml:169
+#: package/contents/ui/ColorEditor.qml:170
 #, kde-format
 msgid "Label"
 msgstr "标签"
 
-#: package/contents/ui/ColorEditor.qml:192
+#: package/contents/ui/ColorEditor.qml:193
 #, kde-format
 msgid "Text color:"
 msgstr "文本颜色："
 
-#: package/contents/ui/ColorEditor.qml:199
+#: package/contents/ui/ColorEditor.qml:200
 #, kde-format
 msgid "Background color:"
 msgstr "背景颜色："
 
-#: package/contents/ui/ColorEditor.qml:206
+#: package/contents/ui/ColorEditor.qml:207
 #, kde-format
 msgid "Highlight color:"
 msgstr "突出显示颜色："
 
-#: package/contents/ui/ColorEditor.qml:213
+#: package/contents/ui/ColorEditor.qml:214
 #, kde-format
 msgid "Link color:"
 msgstr "链接颜色："
 
-#: package/contents/ui/ColorEditor.qml:220
+#: package/contents/ui/ColorEditor.qml:221
 #, kde-format
 msgid "Visited link color:"
 msgstr "已访问链接颜色："
 
-#: package/contents/ui/ColorEditor.qml:228
+#: package/contents/ui/ColorEditor.qml:229
 #, kde-format
 msgid "Button text color:"
 msgstr "按钮文本颜色："
 
-#: package/contents/ui/ColorEditor.qml:235
+#: package/contents/ui/ColorEditor.qml:236
 #, kde-format
 msgid "Button background color:"
 msgstr "按钮背景颜色："
 
-#: package/contents/ui/ColorEditor.qml:242
+#: package/contents/ui/ColorEditor.qml:243
 #, kde-format
 msgid "Button mouse over color:"
 msgstr "按钮鼠标悬停颜色："
 
-#: package/contents/ui/ColorEditor.qml:249
+#: package/contents/ui/ColorEditor.qml:250
 #, kde-format
 msgid "Button focus color:"
 msgstr "按钮焦点颜色："
 
-#: package/contents/ui/ColorEditor.qml:257
+#: package/contents/ui/ColorEditor.qml:258
 #, kde-format
 msgid "Text view text color:"
 msgstr "文本视图文字颜色："
 
-#: package/contents/ui/ColorEditor.qml:264
+#: package/contents/ui/ColorEditor.qml:265
 #, kde-format
 msgid "Text view background color:"
 msgstr "文本视图背景颜色："
 
-#: package/contents/ui/ColorEditor.qml:271
+#: package/contents/ui/ColorEditor.qml:272
 #, kde-format
 msgid "Text view mouse over color:"
 msgstr "文本视图鼠标悬停颜色："
 
-#: package/contents/ui/ColorEditor.qml:278
+#: package/contents/ui/ColorEditor.qml:279
 #, kde-format
 msgid "Text view focus color:"
 msgstr "文本视图焦点颜色："
 
-#: package/contents/ui/ColorEditor.qml:286
+#: package/contents/ui/ColorEditor.qml:287
 #, kde-format
 msgid "Complementary text color:"
 msgstr "文本颜色补色："
 
-#: package/contents/ui/ColorEditor.qml:293
+#: package/contents/ui/ColorEditor.qml:294
 #, kde-format
 msgid "Complementary background color:"
 msgstr "背景颜色补色："
 
-#: package/contents/ui/ColorEditor.qml:300
+#: package/contents/ui/ColorEditor.qml:301
 #, kde-format
 msgid "Complementary mouse over color:"
 msgstr "鼠标悬停颜色补色："
 
-#: package/contents/ui/ColorEditor.qml:307
+#: package/contents/ui/ColorEditor.qml:308
 #, kde-format
 msgid "Complementary focus color:"
 msgstr "焦点颜色补色："
 
-#: package/contents/ui/ColorEditor.qml:322
-#: package/contents/ui/MetadataEditor.qml:136
+#: package/contents/ui/ColorEditor.qml:323
+#: package/contents/ui/MetadataEditor.qml:137
 #, kde-format
 msgid "OK"
 msgstr "确定"
 
-#: package/contents/ui/ColorEditor.qml:327
-#: package/contents/ui/MetadataEditor.qml:142
+#: package/contents/ui/ColorEditor.qml:328
+#: package/contents/ui/MetadataEditor.qml:143
 #, kde-format
 msgid "Cancel"
 msgstr "取消"
@@ -176,7 +176,7 @@ msgid "ToolButton"
 msgstr "工具按钮"
 
 #: package/contents/ui/delegates/button.qml:31
-#: package/contents/ui/fakecontrols/Button.qml:22
+#: package/contents/ui/fakecontrols/Button.qml:23
 #, kde-format
 msgid "Button"
 msgstr "按钮"
@@ -296,47 +296,47 @@ msgstr "用编辑器创建…"
 msgid "Open In Editor…"
 msgstr "用编辑器中打开…"
 
-#: package/contents/ui/MetadataEditor.qml:23
+#: package/contents/ui/MetadataEditor.qml:24
 #, kde-format
 msgid "New Theme"
 msgstr "新主题"
 
-#: package/contents/ui/MetadataEditor.qml:23
+#: package/contents/ui/MetadataEditor.qml:24
 #, kde-format
 msgid "Edit Theme"
 msgstr "编辑主题"
 
-#: package/contents/ui/MetadataEditor.qml:58
+#: package/contents/ui/MetadataEditor.qml:59
 #, kde-format
 msgid "Warning: don't change author or license for themes you don't own"
 msgstr "警告：不要更改非自己所有的主题的作者名称和许可"
 
-#: package/contents/ui/MetadataEditor.qml:69
+#: package/contents/ui/MetadataEditor.qml:70
 #, kde-format
 msgid "Theme Name:"
 msgstr "主题名称："
 
-#: package/contents/ui/MetadataEditor.qml:85
+#: package/contents/ui/MetadataEditor.qml:86
 #, kde-format
 msgid "This theme name already exists"
 msgstr "此主题名称已存在"
 
-#: package/contents/ui/MetadataEditor.qml:94
+#: package/contents/ui/MetadataEditor.qml:95
 #, kde-format
 msgid "Author:"
 msgstr "作者："
 
-#: package/contents/ui/MetadataEditor.qml:102
+#: package/contents/ui/MetadataEditor.qml:103
 #, kde-format
 msgid "Email:"
 msgstr "电子邮件："
 
-#: package/contents/ui/MetadataEditor.qml:110
+#: package/contents/ui/MetadataEditor.qml:111
 #, kde-format
 msgid "License:"
 msgstr "许可："
 
-#: package/contents/ui/MetadataEditor.qml:121
+#: package/contents/ui/MetadataEditor.qml:122
 #, kde-format
 msgid "Website:"
 msgstr "网站："

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-30 01:58+0000\n"
+"POT-Creation-Date: 2024-03-11 00:39+0000\n"
 "PO-Revision-Date: 2023-10-22 15:49+0300\n"
 "Last-Translator: \n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -29,134 +29,134 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kde-l10n-he@kde.org"
 
-#: package/contents/ui/ColorEditor.qml:38
+#: package/contents/ui/ColorEditor.qml:39
 #, kde-format
 msgid "Edit Colors"
 msgstr "עריכת צבעים"
 
-#: package/contents/ui/ColorEditor.qml:67
+#: package/contents/ui/ColorEditor.qml:68
 #, kde-format
 msgid "Select Color"
 msgstr "בחירת צבע"
 
-#: package/contents/ui/ColorEditor.qml:109
+#: package/contents/ui/ColorEditor.qml:110
 #, kde-format
 msgid "Normal text"
 msgstr "טקסט רגיל"
 
-#: package/contents/ui/ColorEditor.qml:115
+#: package/contents/ui/ColorEditor.qml:116
 #, kde-format
 msgid "Link"
 msgstr "קישור"
 
-#: package/contents/ui/ColorEditor.qml:119
+#: package/contents/ui/ColorEditor.qml:120
 #, kde-format
 msgid "Visited Link"
 msgstr "קישור בו ביקרת"
 
-#: package/contents/ui/ColorEditor.qml:154
+#: package/contents/ui/ColorEditor.qml:155
 #, kde-format
 msgid "Complementary colors area:"
 msgstr "אזור צבעים משלימים:"
 
-#: package/contents/ui/ColorEditor.qml:169
+#: package/contents/ui/ColorEditor.qml:170
 #, kde-format
 msgid "Label"
 msgstr "תווית"
 
-#: package/contents/ui/ColorEditor.qml:192
+#: package/contents/ui/ColorEditor.qml:193
 #, kde-format
 msgid "Text color:"
 msgstr "צבע טקסט:"
 
-#: package/contents/ui/ColorEditor.qml:199
+#: package/contents/ui/ColorEditor.qml:200
 #, kde-format
 msgid "Background color:"
 msgstr "צבע רקע:"
 
-#: package/contents/ui/ColorEditor.qml:206
+#: package/contents/ui/ColorEditor.qml:207
 #, kde-format
 msgid "Highlight color:"
 msgstr "צבע הדגשה:"
 
-#: package/contents/ui/ColorEditor.qml:213
+#: package/contents/ui/ColorEditor.qml:214
 #, kde-format
 msgid "Link color:"
 msgstr "צבע קישור:"
 
-#: package/contents/ui/ColorEditor.qml:220
+#: package/contents/ui/ColorEditor.qml:221
 #, kde-format
 msgid "Visited link color:"
 msgstr "צבע קישור בו ביקרת:"
 
-#: package/contents/ui/ColorEditor.qml:228
+#: package/contents/ui/ColorEditor.qml:229
 #, kde-format
 msgid "Button text color:"
 msgstr "צבע כתב כפתור:"
 
-#: package/contents/ui/ColorEditor.qml:235
+#: package/contents/ui/ColorEditor.qml:236
 #, kde-format
 msgid "Button background color:"
 msgstr "צבע רקע כפתור:"
 
-#: package/contents/ui/ColorEditor.qml:242
+#: package/contents/ui/ColorEditor.qml:243
 #, kde-format
 msgid "Button mouse over color:"
 msgstr "צבע מעבר עכבר על כפתור:"
 
-#: package/contents/ui/ColorEditor.qml:249
+#: package/contents/ui/ColorEditor.qml:250
 #, kde-format
 msgid "Button focus color:"
 msgstr "צבע מיקוד כפתור:"
 
-#: package/contents/ui/ColorEditor.qml:257
+#: package/contents/ui/ColorEditor.qml:258
 #, kde-format
 msgid "Text view text color:"
 msgstr "צבע כתב בתצוגת טקסט:"
 
-#: package/contents/ui/ColorEditor.qml:264
+#: package/contents/ui/ColorEditor.qml:265
 #, kde-format
 msgid "Text view background color:"
 msgstr "צבע רקע בתצוגת טקסט:"
 
-#: package/contents/ui/ColorEditor.qml:271
+#: package/contents/ui/ColorEditor.qml:272
 #, kde-format
 msgid "Text view mouse over color:"
 msgstr "צבע מעבר עכבר על תצוגת טקסט:"
 
-#: package/contents/ui/ColorEditor.qml:278
+#: package/contents/ui/ColorEditor.qml:279
 #, kde-format
 msgid "Text view focus color:"
 msgstr "צבע מיקוד תצוגת טקסט:"
 
-#: package/contents/ui/ColorEditor.qml:286
+#: package/contents/ui/ColorEditor.qml:287
 #, kde-format
 msgid "Complementary text color:"
 msgstr "צבע כתב משלים:"
 
-#: package/contents/ui/ColorEditor.qml:293
+#: package/contents/ui/ColorEditor.qml:294
 #, kde-format
 msgid "Complementary background color:"
 msgstr "צבע רקע משלים:"
 
-#: package/contents/ui/ColorEditor.qml:300
+#: package/contents/ui/ColorEditor.qml:301
 #, kde-format
 msgid "Complementary mouse over color:"
 msgstr "צבע מעבר עכבר על משלים:"
 
-#: package/contents/ui/ColorEditor.qml:307
+#: package/contents/ui/ColorEditor.qml:308
 #, kde-format
 msgid "Complementary focus color:"
 msgstr "צבע מיקוד משלים:"
 
-#: package/contents/ui/ColorEditor.qml:322
-#: package/contents/ui/MetadataEditor.qml:136
+#: package/contents/ui/ColorEditor.qml:323
+#: package/contents/ui/MetadataEditor.qml:137
 #, kde-format
 msgid "OK"
 msgstr "אישור"
 
-#: package/contents/ui/ColorEditor.qml:327
-#: package/contents/ui/MetadataEditor.qml:142
+#: package/contents/ui/ColorEditor.qml:328
+#: package/contents/ui/MetadataEditor.qml:143
 #, kde-format
 msgid "Cancel"
 msgstr "ביטול"
@@ -177,7 +177,7 @@ msgid "ToolButton"
 msgstr "כפתור כלי"
 
 #: package/contents/ui/delegates/button.qml:31
-#: package/contents/ui/fakecontrols/Button.qml:22
+#: package/contents/ui/fakecontrols/Button.qml:23
 #, kde-format
 msgid "Button"
 msgstr "כפתור"
@@ -297,47 +297,47 @@ msgstr "יצירה עם העורך…"
 msgid "Open In Editor…"
 msgstr "פתיחה בעורך…"
 
-#: package/contents/ui/MetadataEditor.qml:23
+#: package/contents/ui/MetadataEditor.qml:24
 #, kde-format
 msgid "New Theme"
 msgstr "ערכת עיצוב חדשה"
 
-#: package/contents/ui/MetadataEditor.qml:23
+#: package/contents/ui/MetadataEditor.qml:24
 #, kde-format
 msgid "Edit Theme"
 msgstr "עריכת ערכת עיצוב"
 
-#: package/contents/ui/MetadataEditor.qml:58
+#: package/contents/ui/MetadataEditor.qml:59
 #, kde-format
 msgid "Warning: don't change author or license for themes you don't own"
 msgstr "אזהרה: לא לשנות את היוצר או הרישיון לערכות עיצוב שאינן בבעלותך"
 
-#: package/contents/ui/MetadataEditor.qml:69
+#: package/contents/ui/MetadataEditor.qml:70
 #, kde-format
 msgid "Theme Name:"
 msgstr "שם ערכת עיצוב:"
 
-#: package/contents/ui/MetadataEditor.qml:85
+#: package/contents/ui/MetadataEditor.qml:86
 #, kde-format
 msgid "This theme name already exists"
 msgstr "שם ערכת העיצוב הזה כבר קיים"
 
-#: package/contents/ui/MetadataEditor.qml:94
+#: package/contents/ui/MetadataEditor.qml:95
 #, kde-format
 msgid "Author:"
 msgstr "יצירה:"
 
-#: package/contents/ui/MetadataEditor.qml:102
+#: package/contents/ui/MetadataEditor.qml:103
 #, kde-format
 msgid "Email:"
 msgstr "דוא״ל:"
 
-#: package/contents/ui/MetadataEditor.qml:110
+#: package/contents/ui/MetadataEditor.qml:111
 #, kde-format
 msgid "License:"
 msgstr "רישיון:"
 
-#: package/contents/ui/MetadataEditor.qml:121
+#: package/contents/ui/MetadataEditor.qml:122
 #, kde-format
 msgid "Website:"
 msgstr "אתר:"
