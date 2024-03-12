@@ -14,10 +14,7 @@
 #include <QFile>
 #include <QIcon>
 #include <QStandardPaths>
-
-#include <QXmlDefaultHandler>
-#include <QXmlInputSource>
-#include <QXmlSimpleReader>
+#include <QXmlStreamReader>
 
 #include <KAboutData>
 #include <KCompressionDevice>
@@ -27,39 +24,6 @@
 #include <KProcess>
 
 #include <Plasma/Theme>
-
-class IconsParserHandler : public QXmlDefaultHandler
-{
-public:
-    IconsParserHandler();
-    bool startElement(const QString &namespaceURI, const QString &localName, const QString &qName, const QXmlAttributes &atts) override;
-    QStringList m_ids;
-    QStringList m_prefixes;
-};
-
-IconsParserHandler::IconsParserHandler()
-    : QXmlDefaultHandler()
-{
-}
-
-bool IconsParserHandler::startElement(const QString &namespaceURI, const QString &localName, const QString &qName, const QXmlAttributes &atts)
-{
-    Q_UNUSED(namespaceURI)
-    Q_UNUSED(localName)
-    Q_UNUSED(qName)
-
-    const QString id = atts.value("id");
-    // qWarning() << "Start Element:"<<id;
-
-    if (!id.isEmpty() && !id.contains(QRegularExpression("\\d\\d$")) && id != "base" && !id.contains("layer")) {
-        m_ids << id;
-    }
-    if (id.endsWith(QLatin1String("-center")) && !id.contains("hint-")) {
-        // remove -center
-        m_prefixes << id.mid(0, id.length() - 7);
-    }
-    return true;
-}
 
 ThemeModel::ThemeModel(const KPackage::Package &package, QObject *parent)
     : QAbstractListModel(parent)
@@ -146,16 +110,28 @@ QVariant ThemeModel::data(const QModelIndex &index, int role) const
             return QVariant();
         }
 
-        QXmlSimpleReader reader;
-        IconsParserHandler handler;
-        reader.setContentHandler(&handler);
-        QXmlInputSource source(&file);
-        reader.parse(&source);
+        QStringList ids, prefixes;
+        QXmlStreamReader reader(&file);
+        while (!reader.atEnd() && !reader.hasError()) {
+            const auto token = reader.readNext();
+            if (token != QXmlStreamReader::StartElement) {
+                continue;
+            }
+
+            const QString id = reader.attributes().value("id").toString();
+            if (!id.isEmpty() && !id.contains(QRegularExpression("\\d\\d$")) && id != "base" && !id.contains("layer")) {
+                ids << id;
+            }
+            if (id.endsWith(QLatin1String("-center")) && !id.contains("hint-")) {
+                // remove -center
+                prefixes << id.mid(0, id.length() - 7);
+            }
+        }
 
         if (role == IconElements) {
-            return handler.m_ids;
+            return ids;
         } else {
-            return handler.m_prefixes;
+            return prefixes;
         }
     }
     }

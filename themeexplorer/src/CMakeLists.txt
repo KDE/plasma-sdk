@@ -25,7 +25,5 @@ target_link_libraries(plasmathemeexplorer
  Plasma::PlasmaQuick
 )
 
-target_link_libraries(plasmathemeexplorer Qt6::Core5Compat)
-
 install(TARGETS plasmathemeexplorer ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES org.kde.plasma.themeexplorer.desktop DESTINATION ${KDE_INSTALL_APPDIR})
