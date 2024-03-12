@@ -95,9 +95,9 @@
   </screenshots>
   <project_group>KDE</project_group>
   <releases>
+    <release version="6.0.2" date="2024-03-12"/>
     <release version="6.0.1" date="2024-03-05"/>
     <release version="6.0.0" date="2024-02-21"/>
     <release version="5.93.0" date="2024-01-31"/>
-    <release version="5.27.11" date="2024-03-06"/>
   </releases>
 </component>
