@@ -5,7 +5,6 @@
  */
 
 import QtQuick 2.3
-import Qt5Compat.GraphicalEffects
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.1
 import org.kde.kirigami 2.20 as Kirigami
@@ -27,12 +26,18 @@ MouseArea {
     RowLayout {
         id: layout
         height: Kirigami.Units.gridUnit * 1.6
-        Rectangle {
+        Kirigami.ShadowedRectangle {
             id: button
             radius: Kirigami.Units.smallSpacing/2
             color: buttonMouse.pressed ? Qt.darker(buttonBackgroundColor, 1.5) : buttonBackgroundColor
             height: parent.height / 1.2
             width: height
+            shadow {
+                xOffset: 0
+                yOffset: Kirigami.Units.smallSpacing/4
+                size: Kirigami.Units.smallSpacing
+                color: buttonMouse.pressed ? Qt.rgba(0, 0, 0, 0) : Qt.rgba(0, 0, 0, 0.5)
+            }
             Rectangle {
                 anchors.fill: parent
                 radius: Kirigami.Units.smallSpacing/2
@@ -60,17 +65,7 @@ MouseArea {
                 color: buttonMouse.complementary ? complementaryHoverColor : highlightColor
             }
         }
-        DropShadow {
-            anchors.fill: button
-            horizontalOffset: 0
-            verticalOffset: Kirigami.Units.smallSpacing/4
-            radius: Kirigami.Units.smallSpacing
-            samples: 16
-            color: buttonMouse.pressed ? Qt.rgba(0, 0, 0, 0) : Qt.rgba(0, 0, 0, 0.5)
-            source: button
-        }
         Label {
-            anchors.centerIn: parent
             text: i18n("Checkbox")
             color: buttonMouse.complementary ? complementaryTextColor : textColor
         }

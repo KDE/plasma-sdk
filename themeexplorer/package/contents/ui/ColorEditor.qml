@@ -5,7 +5,6 @@
  */
 
 import QtQuick 2.3
-import Qt5Compat.GraphicalEffects
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.15
 import QtQuick.Dialogs
@@ -96,13 +95,19 @@ Dialog {
                 //Layout.fillHeight: true
                 Layout.minimumHeight: Kirigami.Units.gridUnit * 15
                 color: palette.base
-                Rectangle {
+                Kirigami.ShadowedRectangle {
                     id: plasmoidPreview
                     anchors.centerIn: parent
                     width: parent.width/1.5
                     height: parent.height/1.5
                     radius: Kirigami.Units.smallSpacing
                     color: backgroundColor
+                    shadow {
+                        xOffset: 0
+                        yOffset: Kirigami.Units.smallSpacing/2
+                        size: Kirigami.Units.gridUnit / 2.2
+                        color: Qt.rgba(0, 0, 0, 0.5)
+                    }
                     ColumnLayout {
                         anchors.centerIn: parent
                         Label {
@@ -132,24 +137,12 @@ Dialog {
                         }
                     }
                 }
-                DropShadow {
-                    anchors.fill: plasmoidPreview
-                    horizontalOffset: 0
-                    verticalOffset: Kirigami.Units.smallSpacing/2
-                    radius: Kirigami.Units.gridUnit / 2.2
-                    samples: 16
-                    color: Qt.rgba(0, 0, 0, 0.5)
-                    source: plasmoidPreview
-                }
             }
             Rectangle {
                 id: complementaryBar
                 color: complementaryBackgroundColor
                 height: Kirigami.Units.gridUnit * 2
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
+                Layout.fillWidth: true
 
                 Label {
                     text: i18n("Complementary colors area:")
@@ -315,10 +308,7 @@ Dialog {
                 }
             }
             DialogButtonBox {
-                anchors {
-                    right: parent.right
-                    rightMargin: Kirigami.Units.smallSpacing
-                }
+                Layout.fillWidth: true
                 Button {
                     text: i18n("OK")
                     onClicked: dialog.accept()
