@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.kde.plasma.themeexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-11 00:39+0000\n"
+"POT-Creation-Date: 2024-03-15 00:39+0000\n"
 "PO-Revision-Date: 2023-10-21 17:29+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -28,133 +28,133 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "franklin@goodhorse.idv.tw, s8321414@gmail.com"
 
-#: package/contents/ui/ColorEditor.qml:39
+#: package/contents/ui/ColorEditor.qml:38
 #, kde-format
 msgid "Edit Colors"
 msgstr "編輯顏色"
 
-#: package/contents/ui/ColorEditor.qml:68
+#: package/contents/ui/ColorEditor.qml:67
 #, kde-format
 msgid "Select Color"
 msgstr "選擇顏色"
 
-#: package/contents/ui/ColorEditor.qml:110
+#: package/contents/ui/ColorEditor.qml:115
 #, kde-format
 msgid "Normal text"
 msgstr "正常文字"
 
-#: package/contents/ui/ColorEditor.qml:116
+#: package/contents/ui/ColorEditor.qml:121
 #, kde-format
 msgid "Link"
 msgstr "連結"
 
-#: package/contents/ui/ColorEditor.qml:120
+#: package/contents/ui/ColorEditor.qml:125
 #, kde-format
 msgid "Visited Link"
 msgstr "造訪過的連結"
 
-#: package/contents/ui/ColorEditor.qml:155
+#: package/contents/ui/ColorEditor.qml:148
 #, kde-format
 msgid "Complementary colors area:"
 msgstr "顏色區域補集："
 
-#: package/contents/ui/ColorEditor.qml:170
+#: package/contents/ui/ColorEditor.qml:163
 #, kde-format
 msgid "Label"
 msgstr "標籤"
 
-#: package/contents/ui/ColorEditor.qml:193
+#: package/contents/ui/ColorEditor.qml:186
 #, kde-format
 msgid "Text color:"
 msgstr "文字顏色："
 
-#: package/contents/ui/ColorEditor.qml:200
+#: package/contents/ui/ColorEditor.qml:193
 #, kde-format
 msgid "Background color:"
 msgstr "背景顏色："
 
-#: package/contents/ui/ColorEditor.qml:207
+#: package/contents/ui/ColorEditor.qml:200
 #, kde-format
 msgid "Highlight color:"
 msgstr "突顯顏色："
 
-#: package/contents/ui/ColorEditor.qml:214
+#: package/contents/ui/ColorEditor.qml:207
 #, kde-format
 msgid "Link color:"
 msgstr "連結顏色："
 
-#: package/contents/ui/ColorEditor.qml:221
+#: package/contents/ui/ColorEditor.qml:214
 #, kde-format
 msgid "Visited link color:"
 msgstr "造訪過的連結顏色："
 
-#: package/contents/ui/ColorEditor.qml:229
+#: package/contents/ui/ColorEditor.qml:222
 #, kde-format
 msgid "Button text color:"
 msgstr "按鍵文字顏色："
 
-#: package/contents/ui/ColorEditor.qml:236
+#: package/contents/ui/ColorEditor.qml:229
 #, kde-format
 msgid "Button background color:"
 msgstr "按鈕背景色："
 
-#: package/contents/ui/ColorEditor.qml:243
+#: package/contents/ui/ColorEditor.qml:236
 #, kde-format
 msgid "Button mouse over color:"
 msgstr "滑鼠覆蓋時的按鍵顏色："
 
-#: package/contents/ui/ColorEditor.qml:250
+#: package/contents/ui/ColorEditor.qml:243
 #, kde-format
 msgid "Button focus color:"
 msgstr "按鍵取得焦點顏色："
 
-#: package/contents/ui/ColorEditor.qml:258
+#: package/contents/ui/ColorEditor.qml:251
 #, kde-format
 msgid "Text view text color:"
 msgstr "文字檢視中的文字顏色："
 
-#: package/contents/ui/ColorEditor.qml:265
+#: package/contents/ui/ColorEditor.qml:258
 #, kde-format
 msgid "Text view background color:"
 msgstr "文字檢視背景色："
 
-#: package/contents/ui/ColorEditor.qml:272
+#: package/contents/ui/ColorEditor.qml:265
 #, kde-format
 msgid "Text view mouse over color:"
 msgstr "文字檢視模式中，滑鼠覆蓋時的顏色："
 
-#: package/contents/ui/ColorEditor.qml:279
+#: package/contents/ui/ColorEditor.qml:272
 #, kde-format
 msgid "Text view focus color:"
 msgstr "文字檢視模式取得焦點時的顏色："
 
-#: package/contents/ui/ColorEditor.qml:287
+#: package/contents/ui/ColorEditor.qml:280
 #, kde-format
 msgid "Complementary text color:"
 msgstr "文字顏色補集："
 
-#: package/contents/ui/ColorEditor.qml:294
+#: package/contents/ui/ColorEditor.qml:287
 #, kde-format
 msgid "Complementary background color:"
 msgstr "背景顏色補集："
 
-#: package/contents/ui/ColorEditor.qml:301
+#: package/contents/ui/ColorEditor.qml:294
 #, kde-format
 msgid "Complementary mouse over color:"
 msgstr "滑鼠覆蓋其上顏色補集："
 
-#: package/contents/ui/ColorEditor.qml:308
+#: package/contents/ui/ColorEditor.qml:301
 #, kde-format
 msgid "Complementary focus color:"
 msgstr "取得焦點顏色補集："
 
-#: package/contents/ui/ColorEditor.qml:323
+#: package/contents/ui/ColorEditor.qml:313
 #: package/contents/ui/MetadataEditor.qml:137
 #, kde-format
 msgid "OK"
 msgstr "確定"
 
-#: package/contents/ui/ColorEditor.qml:328
+#: package/contents/ui/ColorEditor.qml:318
 #: package/contents/ui/MetadataEditor.qml:143
 #, kde-format
 msgid "Cancel"
@@ -176,7 +176,7 @@ msgid "ToolButton"
 msgstr "工具按鍵"
 
 #: package/contents/ui/delegates/button.qml:31
-#: package/contents/ui/fakecontrols/Button.qml:23
+#: package/contents/ui/fakecontrols/Button.qml:28
 #, kde-format
 msgid "Button"
 msgstr "按鈕"
@@ -201,7 +201,7 @@ msgstr "分頁 3"
 msgid "Text"
 msgstr "文字"
 
-#: package/contents/ui/fakecontrols/CheckBox.qml:74
+#: package/contents/ui/fakecontrols/CheckBox.qml:69
 #, kde-format
 msgid "Checkbox"
 msgstr "CheckBox"
