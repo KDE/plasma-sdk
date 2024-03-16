@@ -59,7 +59,7 @@ int main(int argc, char **argv)
     KLocalizedString::setApplicationDomain("iconexplorer");
 
     app.setApplicationVersion(PROJECT_VERSION);
-    app.setDesktopFileName(QStringLiteral("org.kde.iconexplorerh"));
+    app.setDesktopFileName(QStringLiteral("org.kde.iconexplorer"));
     app.setOrganizationName("KDE");
     app.setOrganizationDomain("org.kde");
     app.setApplicationName("Icon Explorer");
