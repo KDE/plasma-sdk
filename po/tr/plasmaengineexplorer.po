@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: extragear-sdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-28 01:46+0000\n"
-"PO-Revision-Date: 2024-02-29 17:03+0300\n"
+"PO-Revision-Date: 2024-03-18 19:30+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -148,8 +148,8 @@ msgstr "Plasma Veri İşletkesi Tarayıcısı"
 msgctxt "The name of the engine followed by the number of data sources"
 msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
-msgstr[0] "%1 İşletkesi - %2 veri kaynağı"
-msgstr[1] "%1 İşletkesi - %2 veri kaynağı"
+msgstr[0] "%1 işletkesi — %2 veri kaynağı"
+msgstr[1] "%1 işletkesi — %2 veri kaynağı"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
 #: engineexplorer.ui:50
@@ -347,7 +347,7 @@ msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> failed. <p>The error was: "
 "<b>'%3: %4'</b></p>"
 msgstr ""
-"<b>%2</b> hedefi olan <b>'%1'</b> işlemi başarısız oldu. <p>Hata: <b>'%3: "
+"<b>%2</b> hedefi olan <b>“%1”</b> işlemi başarısız oldu. <p>Hata: <b>'%3: "
 "%4'</b></p>"
 
 #: serviceviewer.cpp:193 serviceviewer.cpp:206
