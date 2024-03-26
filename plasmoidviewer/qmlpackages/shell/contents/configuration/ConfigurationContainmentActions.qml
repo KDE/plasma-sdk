@@ -1,12 +1,14 @@
 /*
- *  SPDX-FileCopyrightText: 2013 Marco Martin <mart@kde.org>
- *
- *  SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2013 Marco Martin <mart@kde.org>
 
-import QtQuick 2.0
-import QtQuick.Controls 2.3 as QtControls
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
+
+import QtQuick
+import QtQuick.Controls 2.3 as QQC2
 import QtQuick.Layouts 1.0
+
+import org.kde.kirigami 2.20 as Kirigami
 
 Item {
     id: root
@@ -42,6 +44,26 @@ Item {
         }
     }
 
+    Component {
+        id: aboutComponent
+
+        Kirigami.OverlaySheet {
+            id: internalAboutDialog
+
+            property alias metaData: aboutPluginPage.metaData
+
+            width: Math.round(root.width * 0.8)
+            onClosed: destroy()
+
+            AboutPlugin {
+                id: aboutPluginPage
+                metaData: internalAboutDialog.metaData
+            }
+
+            Component.onCompleted: open();
+        }
+    }
+
     GridLayout {
         id: mainColumn
         flow: GridLayout.TopToBottom
@@ -70,7 +92,7 @@ Item {
 
                     return parts.map(function (item) {
                         return prettyStrings[item] || item;
-                    }).join(i18nc("Concatenation sign for shortcuts, e.g. Ctrl+Shift", "+"));
+                    }).join(i18ndc("plasma_shell_org.kde.plasma.desktop", "Concatenation sign for shortcuts, e.g. Ctrl+Shift", "+"));
                 }
                 eventString: model.action
                 onEventStringChanged: {
@@ -82,7 +104,7 @@ Item {
         Repeater {
             model: configDialog.currentContainmentActionsModel
 
-            QtControls.ComboBox {
+            QQC2.ComboBox {
                 id: pluginsCombo
                 // "index" argument of onActivated shadows the model index
                 readonly property int pluginIndex: index
@@ -124,7 +146,7 @@ Item {
                 Layout.column: 2
                 Layout.row: index
 
-                QtControls.Button {
+                QQC2.Button {
                     icon.name: "configure"
                     width: height
                     enabled: model.hasConfigurationInterface
@@ -132,14 +154,21 @@ Item {
                         configDialog.currentContainmentActionsModel.showConfiguration(index, this);
                     }
                 }
-                QtControls.Button {
+                QQC2.Button {
                     icon.name: "dialog-information"
                     width: height
                     onClicked: {
-                        configDialog.currentContainmentActionsModel.showAbout(index, this);
+                        const metaData = configDialog.currentContainmentActionsModel.aboutMetaData(index);
+                        if (!metaData) {
+                            return;
+                        }
+                        aboutComponent.incubateObject(root.Window.window.contentItem, {
+                            "metaData": metaData,
+                            "title": i18ndc("plasma_shell_org.kde.plasma.desktop", "@title", "About"),
+                        }, Qt.Asynchronous);
                     }
                 }
-                QtControls.Button {
+                QQC2.Button {
                     icon.name: "list-remove"
                     width: height
                     onClicked: {
@@ -151,6 +180,7 @@ Item {
 
         MouseEventInputButton {
             defaultText: i18nd("plasma_shell_org.kde.plasma.desktop", "Add Action");
+            icon.name: checked ? "input-mouse-symbolic" : "list-add"
             onEventStringChanged: {
                 configDialog.currentContainmentActionsModel.append(eventString, "org.kde.contextmenu");
             }

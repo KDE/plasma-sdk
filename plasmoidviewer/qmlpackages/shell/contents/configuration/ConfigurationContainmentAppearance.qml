@@ -1,52 +1,53 @@
 /*
- *  SPDX-FileCopyrightText: 2013 Marco Martin <mart@kde.org>
- *
- *  SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2013 Marco Martin <mart@kde.org>
 
-import QtQuick 2.0
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
+
+import QtQuick 2.15
 import org.kde.plasma.configuration 2.0
-import QtQuick.Controls 2.3 as QtControls
+import QtQuick.Controls 2.3 as QQC2
 import QtQuick.Layouts 1.1
 import QtQml 2.15
 
 import org.kde.newstuff 1.62 as NewStuff
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.plasma.plasmoid 2.0
 import org.kde.kcmutils
+import org.kde.plasma.plasmoid 2.0
+import org.kde.plasma.configuration 2.0
 
-AbstractKCM {
-    id: root
-    signal settingValueChanged
+Item {
+    id: appearanceRoot
+    signal configurationChanged
 
-    property int formAlignment: wallpaperComboBox.Kirigami.ScenePosition.x - root.Kirigami.ScenePosition.x + Kirigami.Units.largeSpacing
+    property int formAlignment: wallpaperComboBox.Kirigami.ScenePosition.x - appearanceRoot.Kirigami.ScenePosition.x + Kirigami.Units.smallSpacing
     property string currentWallpaper: ""
     property string containmentPlugin: ""
-
-    title: i18n("Appearance")
+    property alias parentLayout: parentLayout
 
     function saveConfig() {
         if (main.currentItem.saveConfig) {
             main.currentItem.saveConfig()
         }
+        configDialog.currentWallpaper = appearanceRoot.currentWallpaper;
         for (var key in configDialog.wallpaperConfiguration) {
             if (main.currentItem["cfg_"+key] !== undefined) {
                 configDialog.wallpaperConfiguration[key] = main.currentItem["cfg_"+key]
             }
         }
-        configDialog.currentWallpaper = root.currentWallpaper;
         configDialog.applyWallpaper()
-        configDialog.containmentPlugin = root.containmentPlugin
+        configDialog.containmentPlugin = appearanceRoot.containmentPlugin
     }
 
     ColumnLayout {
-        anchors.fill: parent
+        width: root.availableWidth
+        height: Math.max(implicitHeight, root.availableHeight)
         spacing: 0 // unless it's 0 there will be an additional gap between two FormLayouts
 
         Component.onCompleted: {
             for (var i = 0; i < configDialog.containmentPluginsConfigModel.count; ++i) {
-                var data = configDialog.containmentPluginsConfigModel.get(i);
-                if (configDialog.containmentPlugin === data.pluginName) {
+                var pluginName = configDialog.containmentPluginsConfigModel.data(configDialog.containmentPluginsConfigModel.index(i, 0), ConfigModel.PluginNameRole);
+                if (configDialog.containmentPlugin === pluginName) {
                     pluginComboBox.currentIndex = i
                     pluginComboBox.activated(i);
                     break;
@@ -54,8 +55,8 @@ AbstractKCM {
             }
 
             for (var i = 0; i < configDialog.wallpaperConfigModel.count; ++i) {
-                var data = configDialog.wallpaperConfigModel.get(i);
-                if (configDialog.currentWallpaper === data.pluginName) {
+                var pluginName = configDialog.wallpaperConfigModel.data(configDialog.wallpaperConfigModel.index(i, 0), ConfigModel.PluginNameRole);
+                if (configDialog.currentWallpaper === pluginName) {
                     wallpaperComboBox.currentIndex = i
                     wallpaperComboBox.activated(i);
                     break;
@@ -75,99 +76,80 @@ AbstractKCM {
 
         Kirigami.FormLayout {
             id: parentLayout // needed for twinFormLayouts to work in wallpaper plugins
-            twinFormLayouts: main.currentItem.formLayout
+            twinFormLayouts: main.currentItem.formLayout || []
             Layout.fillWidth: true
-            QtControls.ComboBox {
+            QQC2.ComboBox {
                 id: pluginComboBox
                 Layout.preferredWidth: Math.max(implicitWidth, wallpaperComboBox.implicitWidth)
                 Kirigami.FormData.label: i18nd("plasma_shell_org.kde.plasma.desktop", "Layout:")
                 enabled: !Plasmoid.immutable
                 model: configDialog.containmentPluginsConfigModel
-                implicitWidth: Kirigami.Units.gridUnit * 24
                 textRole: "name"
                 onActivated: {
                     var model = configDialog.containmentPluginsConfigModel.get(currentIndex)
-                    root.containmentPlugin = model.pluginName
-                    root.settingValueChanged()
+                    appearanceRoot.containmentPlugin = model.pluginName
+                    appearanceRoot.configurationChanged()
                 }
             }
 
             RowLayout {
                 Layout.fillWidth: true
-                visible: !switchContainmentWarning.visible
-                Kirigami.FormData.label: i18nd("plasma_shell_org.kde.plasma.desktop", "Wallpaper Type:")
-                QtControls.ComboBox {
+                enabled: main.currentItem.objectName !== "switchContainmentWarningItem"
+                Kirigami.FormData.label: i18nd("plasma_shell_org.kde.plasma.desktop", "Wallpaper type:")
+
+                QQC2.ComboBox {
                     id: wallpaperComboBox
                     Layout.preferredWidth: Math.max(implicitWidth, pluginComboBox.implicitWidth)
                     model: configDialog.wallpaperConfigModel
-                    implicitWidth: Kirigami.Units.gridUnit * 24
                     textRole: "name"
                     onActivated: {
-                        var model = configDialog.wallpaperConfigModel.get(currentIndex)
-                        root.currentWallpaper = model.pluginName
-                        configDialog.currentWallpaper = model.pluginName
-                        main.sourceFile = model.source
-                        root.settingValueChanged()
+                        var idx = configDialog.wallpaperConfigModel.index(currentIndex, 0)
+                        var pluginName = configDialog.wallpaperConfigModel.data(idx, ConfigModel.PluginNameRole)
+                        if (appearanceRoot.currentWallpaper === pluginName) {
+                            return;
+                        }
+                        appearanceRoot.currentWallpaper = pluginName
+                        configDialog.currentWallpaper = pluginName
+                        main.sourceFile = configDialog.wallpaperConfigModel.data(idx, ConfigModel.SourceRole)
+                        appearanceRoot.configurationChanged()
                     }
                 }
                 NewStuff.Button {
                     configFile: "wallpaperplugin.knsrc"
-                    text: i18nd("plasma_shell_org.kde.plasma.desktop", "Get New Plugins...")
+                    text: i18nd("plasma_shell_org.kde.plasma.desktop", "Get New Plugins…")
+                    visibleWhenDisabled: true // don't hide on disabled
                     Layout.preferredHeight: wallpaperComboBox.height
                 }
             }
-        }
-
-        ColumnLayout {
-            id: switchContainmentWarning
-            Layout.fillWidth: true
-            visible: configDialog.containmentPlugin !== root.containmentPlugin
-            QtControls.Label {
-                Layout.fillWidth: true
-                text: i18nd("plasma_shell_org.kde.plasma.desktop", "Layout changes must be applied before other changes can be made")
-                wrapMode: Text.Wrap
-                horizontalAlignment: Text.AlignHCenter
-            }
-            QtControls.Button {
-                Layout.alignment: Qt.AlignHCenter
-                text: i18nd("plasma_shell_org.kde.plasma.desktop", "Apply now")
-                onClicked: saveConfig()
-            }
-
-            Binding {
-                target: categoriesScroll //from parent scope AppletConfiguration
-                property: "enabled"
-                value: !switchContainmentWarning.visible
-                restoreMode: Binding.RestoreBinding
-            }
-        }
-
-        Item {
-            Layout.fillHeight: true
-            visible: switchContainmentWarning.visible
         }
 
         Item {
             id: emptyConfig
         }
 
-        QtControls.StackView {
+        QQC2.StackView {
             id: main
+
+            implicitHeight: main.empty ? 0 : currentItem.implicitHeight
 
             Layout.fillHeight: true;
             Layout.fillWidth: true;
-
-            visible: !switchContainmentWarning.visible
 
             // Bug 360862: if wallpaper has no config, sourceFile will be ""
             // so we wouldn't load emptyConfig and break all over the place
             // hence set it to some random value initially
             property string sourceFile: "tbd"
-            onSourceFileChanged: {
-                if (sourceFile) {
-                    var props = {}
 
-                    var wallpaperConfig = configDialog.wallpaperConfiguration
+            onSourceFileChanged: loadSourceFile()
+
+            function loadSourceFile() {
+                const wallpaperConfig = configDialog.wallpaperConfiguration
+                // BUG 407619: wallpaperConfig can be null before calling `ContainmentItem::loadWallpaper()`
+                if (wallpaperConfig && sourceFile) {
+                    var props = {
+                        "configDialog": configDialog
+                    }
+
                     for (var key in wallpaperConfig) {
                         props["cfg_" + key] = wallpaperConfig[key]
                     }
@@ -177,13 +159,51 @@ AbstractKCM {
                     for (var key in wallpaperConfig) {
                         var changedSignal = newItem["cfg_" + key + "Changed"]
                         if (changedSignal) {
-                            changedSignal.connect(root.settingValueChanged)
+                            changedSignal.connect(appearanceRoot.configurationChanged)
                         }
+                    }
+
+                    const configurationChangedSignal = newItem.configurationChanged
+                    if (configurationChangedSignal) {
+                        configurationChangedSignal.connect(appearanceRoot.configurationChanged)
                     }
                 } else {
                     replace(emptyConfig)
                 }
             }
+        }
+    }
+
+    Component {
+        id: switchContainmentWarning
+
+        Item {
+            objectName: "switchContainmentWarningItem"
+
+            Kirigami.PlaceholderMessage {
+                id: message
+                width: parent.width - Kirigami.Units.largeSpacing * 8
+                anchors.centerIn: parent
+
+                icon.name: "documentinfo"
+                text: i18nd("plasma_shell_org.kde.plasma.desktop", "Layout changes must be applied before other changes can be made")
+
+                helpfulAction: QQC2.Action {
+                    icon.name: "dialog-ok-apply"
+                    text: i18nd("plasma_shell_org.kde.plasma.desktop", "Apply Now")
+                    onTriggered: saveConfig()
+                }
+            }
+        }
+    }
+
+    onContainmentPluginChanged: {
+        if (configDialog.containmentPlugin !== appearanceRoot.containmentPlugin) {
+            main.push(switchContainmentWarning);
+            categoriesScroll.enabled = false;
+        } else if (main.currentItem.objectName === "switchContainmentWarningItem") {
+            main.pop();
+            categoriesScroll.enabled = true;
         }
     }
 }

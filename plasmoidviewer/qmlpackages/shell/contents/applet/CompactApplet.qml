@@ -25,6 +25,8 @@ PlasmaCore.ToolTipArea {
     textFormat: plasmoidItem ? plasmoidItem.toolTipTextFormat : 0
     mainItem: plasmoidItem && plasmoidItem.toolTipItem ? plasmoidItem.toolTipItem : null
 
+    readonly property bool vertical: location === PlasmaCore.Types.RightEdge || location === PlasmaCore.Types.LeftEdge
+
     property Item fullRepresentation
     property Item compactRepresentation
     property Item expandedFeedback: expandedItem
@@ -107,10 +109,10 @@ PlasmaCore.ToolTipArea {
             property bool returnAllMargins: true
             // The above makes sure margin is returned even for side margins, that
             // would be otherwise turned off.
-            bottomMargin: containerMargins ? -containerMargins('bottom', returnAllMargins) : 0;
-            topMargin: containerMargins ? -containerMargins('top', returnAllMargins) : 0;
-            leftMargin: containerMargins ? -containerMargins('left', returnAllMargins) : 0;
-            rightMargin: containerMargins ? -containerMargins('right', returnAllMargins) : 0;
+            bottomMargin: !vertical && containerMargins ? -containerMargins('bottom', returnAllMargins) : 0;
+            topMargin: !vertical && containerMargins ? -containerMargins('top', returnAllMargins) : 0;
+            leftMargin: vertical && containerMargins ? -containerMargins('left', returnAllMargins) : 0;
+            rightMargin: vertical && containerMargins ? -containerMargins('right', returnAllMargins) : 0;
         }
         imagePath: "widgets/tabbar"
         visible: opacity > 0
@@ -163,17 +165,31 @@ PlasmaCore.ToolTipArea {
         function onContextualActionsAboutToShow() { root.hideImmediately() }
     }
 
-    PlasmaCore.Dialog {
+    PlasmaCore.AppletPopup {
         id: dialog
         objectName: "popupWindow"
-        flags: Qt.WindowStaysOnTopHint
-        location: Plasmoid.location
+
+        popupDirection: switch (Plasmoid.location) {
+            case PlasmaCore.Types.TopEdge:
+                return Qt.BottomEdge
+            case PlasmaCore.Types.LeftEdge:
+                return Qt.RightEdge
+            case PlasmaCore.Types.RightEdge:
+                return Qt.LeftEdge
+            default:
+                return Qt.TopEdge
+        }
+        margin: (Plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentPrefersFloatingApplets) ? Kirigami.Units.largeSpacing : 0
+        floating: Plasmoid.location == PlasmaCore.Types.Floating
+        removeBorderStrategy: Plasmoid.location === PlasmaCore.Types.Floating
+            ? PlasmaCore.AppletPopup.AtScreenEdges
+            : PlasmaCore.AppletPopup.AtScreenEdges | PlasmaCore.AppletPopup.AtPanelEdges
+
         hideOnWindowDeactivate: root.plasmoidItem && root.plasmoidItem.hideOnWindowDeactivate
         visible: root.plasmoidItem && root.plasmoidItem.expanded && fullRepresentation
         visualParent: root.compactRepresentation
-        backgroundHints: (Plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentPrefersOpaqueBackground) ? PlasmaCore.Dialog.SolidBackground : PlasmaCore.Dialog.StandardBackground
-        type: PlasmaCore.Dialog.AppletPopup
-        appletInterface: fullRepresentation && fullRepresentation.appletInterface || null
+        backgroundHints: (Plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentPrefersOpaqueBackground) ? PlasmaCore.AppletPopup.SolidBackground : PlasmaCore.AppletPopup.StandardBackground
+        appletInterface: root.plasmoidItem
 
         property var oldStatus: PlasmaCore.Types.UnknownStatus
 
@@ -202,13 +218,10 @@ PlasmaCore.ToolTipArea {
             Layout.minimumWidth: fullRepresentation ? fullRepresentation.Layout.minimumWidth : 0
             Layout.minimumHeight: fullRepresentation ? fullRepresentation.Layout.minimumHeight : 0
 
-            Layout.preferredWidth: fullRepresentation ? fullRepresentation.Layout.preferredWidth : -1
-            Layout.preferredHeight: fullRepresentation ? fullRepresentation.Layout.preferredHeight : -1
-
             Layout.maximumWidth: fullRepresentation ? fullRepresentation.Layout.maximumWidth : Infinity
             Layout.maximumHeight: fullRepresentation ? fullRepresentation.Layout.maximumHeight : Infinity
 
-            width: {
+            implicitWidth: {
                 if (root.fullRepresentation !== null) {
                     /****/ if (root.fullRepresentation.Layout.preferredWidth > 0) {
                         return root.fullRepresentation.Layout.preferredWidth;
@@ -218,7 +231,7 @@ PlasmaCore.ToolTipArea {
                 }
                 return Kirigami.Units.iconSizes.sizeForLabels * 35;
             }
-            height: {
+            implicitHeight: {
                 if (root.fullRepresentation !== null) {
                     /****/ if (fullRepresentation.Layout.preferredHeight > 0) {
                         return fullRepresentation.Layout.preferredHeight;
@@ -237,24 +250,81 @@ PlasmaCore.ToolTipArea {
 
             // Draws a line between the applet dialog and the panel
             KSvg.SvgItem {
+                id: separator
                 // Only draw for popups of panel applets, not desktop applets
                 visible: [PlasmaCore.Types.TopEdge, PlasmaCore.Types.LeftEdge, PlasmaCore.Types.RightEdge, PlasmaCore.Types.BottomEdge]
-                    .includes(Plasmoid.location)
+                    .includes(Plasmoid.location) && !dialog.margin
                 anchors {
-                    top: Plasmoid.location === PlasmaCore.Types.BottomEdge ? undefined : parent.top
-                    left: Plasmoid.location === PlasmaCore.Types.RightEdge ? undefined : parent.left
-                    right: Plasmoid.location === PlasmaCore.Types.LeftEdge ? undefined : parent.right
-                    bottom: Plasmoid.location === PlasmaCore.Types.TopEdge ? undefined : parent.bottom
-                    topMargin: Plasmoid.location === PlasmaCore.Types.BottomEdge ? undefined : -dialog.margins.top
-                    leftMargin: Plasmoid.location === PlasmaCore.Types.RightEdge ? undefined : -dialog.margins.left
-                    rightMargin: Plasmoid.location === PlasmaCore.Types.LeftEdge ? undefined : -dialog.margins.right
-                    bottomMargin: Plasmoid.location === PlasmaCore.Types.TopEdge ? undefined : -dialog.margins.bottom
+                    topMargin: -dialog.topMargin
+                    leftMargin: -dialog.leftMargin
+                    rightMargin: -dialog.rightMargin
+                    bottomMargin: -dialog.bottomMargin
                 }
-                height: (Plasmoid.location === PlasmaCore.Types.TopEdge || Plasmoid.location === PlasmaCore.Types.BottomEdge) ? 1 : undefined
-                width: (Plasmoid.location === PlasmaCore.Types.LeftEdge || Plasmoid.location === PlasmaCore.Types.RightEdge) ? 1 : undefined
                 z: 999 /* Draw the line on top of the applet */
                 elementId: (Plasmoid.location === PlasmaCore.Types.TopEdge || Plasmoid.location === PlasmaCore.Types.BottomEdge) ? "horizontal-line" : "vertical-line"
                 imagePath: "widgets/line"
+                states: [
+                    State {
+                        when: Plasmoid.location === PlasmaCore.Types.TopEdge
+                        AnchorChanges {
+                            target: separator
+                            anchors {
+                                top: separator.parent.top
+                                left: separator.parent.left
+                                right: separator.parent.right
+                            }
+                        }
+                        PropertyChanges {
+                            target: separator
+                            height: 1
+                        }
+                    },
+                    State {
+                        when: Plasmoid.location === PlasmaCore.Types.LeftEdge
+                        AnchorChanges {
+                            target: separator
+                            anchors {
+                                left: separator.parent.left
+                                top: separator.parent.top
+                                bottom: separator.parent.bottom
+                            }
+                        }
+                        PropertyChanges {
+                            target: separator
+                            width: 1
+                        }
+                    },
+                    State {
+                        when: Plasmoid.location === PlasmaCore.Types.RightEdge
+                        AnchorChanges {
+                            target: separator
+                            anchors {
+                                top: separator.parent.top
+                                right: separator.parent.right
+                                bottom: separator.parent.bottom
+                            }
+                        }
+                        PropertyChanges {
+                            target: separator
+                            width: 1
+                        }
+                    },
+                    State {
+                        when: Plasmoid.location === PlasmaCore.Types.BottomEdge
+                        AnchorChanges {
+                            target: separator
+                            anchors {
+                                left: separator.parent.left
+                                right: separator.parent.right
+                                bottom: separator.parent.bottom
+                            }
+                        }
+                        PropertyChanges {
+                            target: separator
+                            height: 1
+                        }
+                    }
+                ]
             }
 
             LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft

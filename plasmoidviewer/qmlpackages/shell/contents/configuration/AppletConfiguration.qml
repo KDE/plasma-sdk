@@ -2,7 +2,7 @@
     SPDX-FileCopyrightText: 2013 Marco Martin <mart@kde.org>
     SPDX-FileCopyrightText: 2020 Nicolas Fella <nicolas.fella@gmx.de>
     SPDX-FileCopyrightText: 2020 Carl Schwan <carlschwan@kde.org>
-    SPDX-FileCopyrightText: 2022 ivan tkachenko <me@ratijas.tk>
+    SPDX-FileCopyrightText: 2022-2023 ivan tkachenko <me@ratijas.tk>
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -11,9 +11,10 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 import org.kde.kitemmodels 1.0 as KItemModels
 import org.kde.plasma.configuration 2.0
+import org.kde.plasma.plasmoid 2.0
 
 Rectangle {
     id: root
@@ -33,6 +34,8 @@ Rectangle {
 
     property ConfigModel globalConfigModel:  globalAppletConfigModel
 
+    property url currentSource
+
     function closing() {
         if (applyButton.enabled) {
             messageDialog.item = null;
@@ -40,6 +43,22 @@ Rectangle {
             return false;
         }
         return true;
+    }
+
+    function saveConfig() {
+        const config = Plasmoid.configuration; // type: KConfigPropertyMap
+
+        config.keys().forEach(key => {
+            const cfgKey = "cfg_" + key;
+            if (cfgKey in app.pageStack.currentItem) {
+                config[key] = app.pageStack.currentItem[cfgKey];
+            }
+        })
+
+        // For ConfigurationContainmentActions.qml
+        if (app.pageStack.currentItem.hasOwnProperty("saveConfig")) {
+            app.pageStack.currentItem.saveConfig()
+        }
     }
 
     Connections {
@@ -54,7 +73,7 @@ Rectangle {
         ConfigCategory {
             name: i18nd("plasma_shell_org.kde.plasma.desktop", "Keyboard Shortcuts")
             icon: "preferences-desktop-keyboard"
-            source: "ConfigurationShortcuts.qml"
+            source: Qt.resolvedUrl("ConfigurationShortcuts.qml")
         }
     }
 
@@ -87,9 +106,28 @@ Rectangle {
 
     function open(item) {
         app.isAboutPage = false;
+        root.currentSource = item.source
+
         if (item.source) {
-            app.isAboutPage = item.source === "AboutPlugin.qml";
-            pushReplace(Qt.resolvedUrl("ConfigurationAppletPage.qml"), {configItem: item, title: item.name});
+            app.isAboutPage = item.source === Qt.resolvedUrl("AboutPlugin.qml");
+
+            if (isContainment) {
+                pushReplace(Qt.resolvedUrl("ConfigurationAppletPage.qml"), {configItem: item});
+            } else {
+
+                const config = Plasmoid.configuration; // type: KConfigPropertyMap
+
+                const props = {
+                    "title": item.name
+                };
+
+                config.keys().forEach(key => {
+                    props["cfg_" + key] = config[key];
+                });
+
+                pushReplace(item.source, props);
+            }
+
         } else if (item.kcm) {
             pushReplace(configurationKcmPageComponent, {kcm: item.kcm, internalPage: item.kcm.mainUi});
         } else {
@@ -104,6 +142,28 @@ Rectangle {
 
         function onSettingValueChanged() {
             applyButton.enabled = true;
+        }
+    }
+
+    Connections {
+        target: app.pageStack
+
+        function onCurrentItemChanged() {
+            if (app.pageStack.currentItem !== null && !isContainment) {
+                const config = Plasmoid.configuration; // type: KConfigPropertyMap
+
+                config.keys().forEach(key => {
+                    const changedSignal = app.pageStack.currentItem["cfg_" + key + "Changed"];
+                    if (changedSignal) {
+                        changedSignal.connect(() => root.settingValueChanged());
+                    }
+                });
+
+                const configurationChangedSignal = app.pageStack.currentItem.configurationChanged;
+                if (configurationChangedSignal) {
+                    configurationChangedSignal.connect(() => root.settingValueChanged());
+                }
+            }
         }
     }
 
@@ -130,12 +190,9 @@ Rectangle {
             bottom: parent.bottom
         }
         width: Kirigami.Units.gridUnit * 7
+        contentWidth: availableWidth
         Kirigami.Theme.colorSet: Kirigami.Theme.View
         Kirigami.Theme.inherit: false
-        leftPadding: 0
-        rightPadding: 0
-        topPadding: 0
-        bottomPadding: 0
         activeFocusOnTab: true
         focus: true
         Accessible.role: Accessible.MenuBar
@@ -192,7 +249,7 @@ Rectangle {
             id: categories
 
             spacing: 0
-            width: categoriesScroll.width
+            width: categoriesScroll.contentWidth
             focus: true
 
             function openCategory(item) {
@@ -213,10 +270,8 @@ Rectangle {
                         if (app.pageStack.currentItem) {
                             if (model.kcm && app.pageStack.currentItem.kcm) {
                                 return model.kcm == app.pageStack.currentItem.kcm
-                            } else if (app.pageStack.currentItem.configItem) {
-                                return model.source == app.pageStack.currentItem.configItem.source
                             } else {
-                                return app.pageStack.currentItem.source == Qt.resolvedUrl(model.source)
+                                return root.currentSource == model.source
                             }
                         }
                         return false
@@ -246,7 +301,7 @@ Rectangle {
                     ConfigCategory{
                         name: i18nd("plasma_shell_org.kde.plasma.desktop", "About")
                         icon: "help-about"
-                        source: "AboutPlugin.qml"
+                        source: Qt.resolvedUrl("AboutPlugin.qml")
                     }
                 }
                 delegate: categoryDelegate
@@ -263,9 +318,10 @@ Rectangle {
         z: 1
     }
     Kirigami.Separator {
+        id: verticalSeparator
         anchors {
-            right: categoriesScroll.right
             top: parent.top
+            left: categoriesScroll.right
             bottom: parent.bottom
         }
         z: 1
@@ -274,8 +330,8 @@ Rectangle {
     Kirigami.ApplicationItem {
         id: app
         anchors {
-            left: categoriesScroll.right
             top: parent.top
+            left: verticalSeparator.right
             right: parent.right
             bottom: parent.bottom
         }
@@ -288,22 +344,20 @@ Rectangle {
         property var currentConfigPage: null
         property bool isAboutPage: false
 
-        QQC2.Dialog {
+        Kirigami.PromptDialog {
             id: messageDialog
             property var item
             title: i18nd("plasma_shell_org.kde.plasma.desktop", "Apply Settings")
-            QQC2.Label {
-                anchors.fill:parent
-                text: i18nd("plasma_shell_org.kde.plasma.desktop", "The settings of the current module have changed. Do you want to apply the changes or discard them?")
-            }
-            standardButtons: QQC2.Dialog.Apply | QQC2.Dialog.Discard | QQC2.Dialog.Cancel
-            onAccepted: {
+            subtitle: i18nd("plasma_shell_org.kde.plasma.desktop", "The settings of the current module have changed. Do you want to apply the changes or discard them?")
+            standardButtons: Kirigami.Dialog.Apply | Kirigami.Dialog.Discard | Kirigami.Dialog.Cancel
+            onApplied: {
                 applyAction.trigger()
-                discard();
+                discarded();
             }
-            onRejected: {
+            onDiscarded: {
                 if (item) {
                     root.open(item);
+                    messageDialog.close();
                 } else {
                     applyButton.enabled = false;
                     configDialog.close();
@@ -371,7 +425,11 @@ Rectangle {
         QQC2.Action {
             id: applyAction
             onTriggered: {
-                app.pageStack.get(0).saveConfig()
+                if (isContainment) {
+                    app.pageStack.get(0).saveConfig()
+                } else {
+                    root.saveConfig()
+                }
 
                 applyButton.enabled = false;
             }

@@ -1,13 +1,12 @@
 /*
- *  SPDX-FileCopyrightText: 2020 Nicolas Fella <nicolas.fella@gmx.de>
- *
- *  SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2020 Nicolas Fella <nicolas.fella@gmx.de>
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 import QtQuick 2.0
-
-import org.kde.kirigami 2.10 as Kirigami
 import org.kde.plasma.plasmoid 2.0
+import org.kde.kirigami 2.10 as Kirigami
 
 Kirigami.ScrollablePage {
     id: root
@@ -19,11 +18,14 @@ Kirigami.ScrollablePage {
     signal settingValueChanged()
 
     function saveConfig() {
-        for (let key in Plasmoid.configuration) {
-            if (loader.item["cfg_" + key] != undefined) {
-                Plasmoid.configuration[key] = loader.item["cfg_" + key]
+        const config = Plasmoid.configuration; // type: KConfigPropertyMap
+
+        config.keys().forEach(key => {
+            const cfgKey = "cfg_" + key;
+            if (cfgKey in loader.item) {
+                config[key] = loader.item[cfgKey];
             }
-        }
+        })
 
         // For ConfigurationContainmentActions.qml
         if (loader.item.hasOwnProperty("saveConfig")) {
@@ -32,6 +34,9 @@ Kirigami.ScrollablePage {
     }
 
     implicitHeight: loader.height
+
+    padding: configItem.includeMargins ? Kirigami.Units.largeSpacing : 0
+    bottomPadding: 0
 
     Loader {
         id: loader
@@ -44,25 +49,30 @@ Kirigami.ScrollablePage {
         height: Math.max(root.availableHeight, item.implicitHeight ? item.implicitHeight : item.childrenRect.height)
 
         Component.onCompleted: {
-            const plasmoidConfig = Plasmoid.configuration
+            const config = Plasmoid.configuration; // type: KConfigPropertyMap
 
-            const props = {}
-            for (let key in plasmoidConfig) {
-                props["cfg_" + key] = Plasmoid.configuration[key]
-            }
+            const props = {};
 
-            setSource(configItem.source, props)
+            config.keys().forEach(key => {
+                props["cfg_" + key] = config[key];
+            });
 
-            for (let key in plasmoidConfig) {
-                const changedSignal = item["cfg_" + key + "Changed"]
+            setSource(configItem.source, props);
+        }
+
+        onLoaded: {
+            const config = Plasmoid.configuration; // type: KConfigPropertyMap
+
+            config.keys().forEach(key => {
+                const changedSignal = item["cfg_" + key + "Changed"];
                 if (changedSignal) {
-                    changedSignal.connect(root.settingValueChanged)
+                    changedSignal.connect(() => root.settingValueChanged());
                 }
-            }
+            });
 
-            const configurationChangedSignal = item.configurationChanged
+            const configurationChangedSignal = item.configurationChanged;
             if (configurationChangedSignal) {
-                configurationChangedSignal.connect(root.settingValueChanged)
+                configurationChangedSignal.connect(() => root.settingValueChanged());
             }
         }
     }

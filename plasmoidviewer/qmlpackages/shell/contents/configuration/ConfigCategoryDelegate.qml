@@ -1,31 +1,31 @@
 /*
- *  SPDX-FileCopyrightText: 2013 Marco Martin <mart@kde.org>
- *  SPDX-FileCopyrightText: 2020 Carl Schwan <carlschwan@kde.org>
- *
- *  SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2013 Marco Martin <mart@kde.org>
+    SPDX-FileCopyrightText: 2020 Carl Schwan <carlschwan@kde.org>
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.3 as QtControls
+import QtQuick.Controls 2.3 as QQC2
 import QtQuick.Window 2.2
-import org.kde.kirigami 2.20 as Kirigami
 
+import org.kde.kquickcontrolsaddons 2.0
 import org.kde.kirigami 2.5 as Kirigami
 
-QtControls.ItemDelegate {
+QQC2.ItemDelegate {
     id: delegate
 
     signal activated()
 
 //BEGIN properties
     Layout.fillWidth: true
-    Layout.maximumWidth: Kirigami.Units.gridUnit * 7
     hoverEnabled: true
 
     Accessible.role: Accessible.MenuItem
     Accessible.name: model.name
-    Accessible.description: i18n("Open configuration page")
+    Accessible.description: i18nd("plasma_shell_org.kde.plasma.desktop", "Open configuration page")
+    Accessible.onPressAction: delegate.clicked()
 
     property var item
 //END properties
@@ -53,22 +53,18 @@ QtControls.ItemDelegate {
             selected: Window.active && (delegate.highlighted || delegate.pressed)
         }
 
-
-        QtControls.Label {
+        QQC2.Label {
             id: nameLabel
             Layout.fillWidth: true
             Layout.leftMargin: Kirigami.Units.smallSpacing
             Layout.rightMargin: Kirigami.Units.smallSpacing
             text: model.name
+            textFormat: Text.PlainText
             wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
-            color: highlighted && Window.active ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
-            Behavior on color {
-                ColorAnimation {
-                    duration: Kirigami.Units.longDuration
-                    easing.type: Easing.InOutQuad
-                }
-            }
+            color: Window.active && (delegate.highlighted || delegate.pressed) ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
+            font.bold: delegate.highlighted && delegate.parent.activeFocus
+            Accessible.ignored: true
         }
     }
 //END UI components

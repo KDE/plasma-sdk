@@ -1,10 +1,10 @@
 /*
- *  SPDX-FileCopyrightText: 2015 Marco Martin <mart@kde.org>
- *  SPDX-FileCopyrightText: 2020 Nicolas Fella <nicolas.fella@gmx.de>
- *  SPDX-FileCopyrightText: 2020 Carl Schwan <carlschwan@kde.org>
- *
- *  SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2015 Marco Martin <mart@kde.org>
+    SPDX-FileCopyrightText: 2020 Nicolas Fella <nicolas.fella@gmx.de>
+    SPDX-FileCopyrightText: 2020 Carl Schwan <carlschwan@kde.org>
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 import QtQuick 2.6
 import org.kde.kirigami 2.5 as Kirigami
@@ -23,7 +23,7 @@ Kirigami.Page {
     rightPadding: 0
     bottomPadding: 0
     flickable: internalPage.flickable
-    actions: internalPage.actions.main
+    actions: internalPage.actions
 
     onInternalPageChanged: {
         internalPage.parent = contentItem;
