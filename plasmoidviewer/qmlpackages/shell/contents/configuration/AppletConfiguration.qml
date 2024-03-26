@@ -3,6 +3,7 @@
     SPDX-FileCopyrightText: 2020 Nicolas Fella <nicolas.fella@gmx.de>
     SPDX-FileCopyrightText: 2020 Carl Schwan <carlschwan@kde.org>
     SPDX-FileCopyrightText: 2022-2023 ivan tkachenko <me@ratijas.tk>
+    SPDX-FileCopyrightText: 2024 Dorian Rodriguez <rodriguez.dorian+kde@pm.me>
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -139,6 +140,7 @@ Rectangle {
 
     Connections {
         target: app.currentConfigPage
+        ignoreUnknownSignals: true
 
         function onSettingValueChanged() {
             applyButton.enabled = true;
