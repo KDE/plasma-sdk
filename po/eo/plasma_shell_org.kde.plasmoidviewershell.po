@@ -1,121 +1,123 @@
+# translation of plasma_shell_org.kde.plasmoidviewershell.pot to esperanto
+# Copyright (C) 2015 Free Software Foundation, Inc.
+# This file is distributed under the same license as the plasma-sdk package.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: kdeorg\n"
+"Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:47+0000\n"
-"PO-Revision-Date: 2024-03-28 19:24\n"
-"Last-Translator: \n"
-"Language-Team: Chinese Simplified\n"
-"Language: zh_CN\n"
+"PO-Revision-Date: 2023-04-14 07:06+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"Language-Team: Esperanto <kde-i18n-eo@lists.kde.org>\n"
+"Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Crowdin-Project: kdeorg\n"
-"X-Crowdin-Project-ID: 269464\n"
-"X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-stable/messages/plasma-sdk/plasma_shell_org.kde."
-"plasmoidviewershell.pot\n"
-"X-Crowdin-File-ID: 2911\n"
+"X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: contents/applet/AppletError.qml:40
 msgid "Sorry! There was an error loading %1."
-msgstr "对不起，加载 %1 时发生错误。"
+msgstr "Pardonu! Okazis eraro dum la ŝarĝo de %1."
 
 #: contents/applet/AppletError.qml:48
 msgid "Copy Error Details to Clipboard"
-msgstr "复制错误详情到剪贴板"
+msgstr "Kopii detalojn de eraro al Tondujo"
 
 #: contents/applet/CompactApplet.qml:70
 msgid "Open %1"
-msgstr "打开 %1"
+msgstr "Malfermi %1"
 
 #: contents/configuration/AboutPlugin.qml:20
 #: contents/configuration/AppletConfiguration.qml:248
 msgid "About"
-msgstr "关于"
+msgstr "Pri"
 
 #: contents/configuration/AboutPlugin.qml:46
 msgid "Send an email to %1"
-msgstr "发送电子邮件给 %1"
+msgstr "Sendi retmesaĝon al %1"
 
 #: contents/configuration/AboutPlugin.qml:95
 msgid "Copyright"
-msgstr "Copyright"
+msgstr "Kopirajto"
 
 #: contents/configuration/AboutPlugin.qml:115
 msgid "License:"
-msgstr "许可证："
+msgstr "Permesilo:"
 
 #: contents/configuration/AboutPlugin.qml:128
 msgid "Authors"
-msgstr "开发人员"
+msgstr "Aŭtoroj"
 
 #: contents/configuration/AboutPlugin.qml:138
 msgid "Credits"
-msgstr "致谢"
+msgstr "Kreditoj"
 
 #: contents/configuration/AboutPlugin.qml:149
 msgid "Translators"
-msgstr "翻译人员"
+msgstr "Tradukistoj"
 
 #: contents/configuration/AppletConfiguration.qml:56
 msgid "Keyboard Shortcuts"
-msgstr "键盘快捷键"
+msgstr "Klavaraj ŝparvojoj"
 
 #: contents/configuration/AppletConfiguration.qml:296
 msgid "Apply Settings"
-msgstr "应用设置"
+msgstr "Apliki Agordojn"
 
 #: contents/configuration/AppletConfiguration.qml:297
 msgid ""
 "The settings of the current module have changed. Do you want to apply the "
 "changes or discard them?"
-msgstr "当前模块的设置已被更改。您想要应用更改，还是丢弃更改？"
+msgstr ""
+"La agordoj de la nuna modulo ŝanĝiĝis. Ĉu vi volas apliki la ŝanĝojn aŭ "
+"forĵeti ilin?"
 
 #: contents/configuration/AppletConfiguration.qml:327
 msgid "OK"
-msgstr "确定"
+msgstr "bone"
 
 #: contents/configuration/AppletConfiguration.qml:335
 msgid "Apply"
-msgstr "应用"
+msgstr "Apliki"
 
 #: contents/configuration/AppletConfiguration.qml:341
 msgid "Cancel"
-msgstr "取消"
+msgstr "Nuligi"
 
 #: contents/configuration/ConfigCategoryDelegate.qml:28
 msgid "Open configuration page"
-msgstr "打开配置页面"
+msgstr "Malfermi agordan paĝon"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:19
 msgid "Left-Button"
-msgstr "左键"
+msgstr "Maldekstra-Butono"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:20
 msgid "Right-Button"
-msgstr "右键"
+msgstr "Dekstra-Butono"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:21
 msgid "Middle-Button"
-msgstr "中键"
+msgstr "Meza-Butono"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:22
 msgid "Back-Button"
-msgstr "后退键"
+msgstr "Malantaŭa-Butono"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:23
 msgid "Forward-Button"
-msgstr "前进键"
+msgstr "Antaŭen-Butono"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:25
 msgid "Vertical-Scroll"
-msgstr "滚轮垂直滚动"
+msgstr "Vertikala-Scroll"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:26
 msgid "Horizontal-Scroll"
-msgstr "滚轮水平滚动"
+msgstr "Horizontala-Scroll"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:28
 msgid "Shift"
@@ -141,112 +143,113 @@ msgstr "+"
 #: contents/configuration/ConfigurationContainmentActions.qml:153
 #: contents/configuration/MouseEventInputButton.qml:15
 msgid "Add Action"
-msgstr "添加操作"
+msgstr "Aldoni Agon"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:27
 msgid "Appearance"
-msgstr "外观"
+msgstr "Aspekto"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:69
 msgid "Layout changes have been restricted by the system administrator"
-msgstr "布局更改操作已被系统管理员限制使用"
+msgstr "Aranĝŝanĝoj estis limigitaj de la sistemadministranto"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:84
 msgid "Layout:"
-msgstr "布局："
+msgstr "Aranĝo:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:99
 msgid "Wallpaper Type:"
-msgstr "壁纸类型："
+msgstr "Tapeta Tipo:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:116
 msgid "Get New Plugins..."
-msgstr "获取新插件..."
+msgstr "Akiri novajn kromprogramojn..."
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:128
 msgid "Layout changes must be applied before other changes can be made"
-msgstr "必须先保存布局更改才能更改其他选项"
+msgstr ""
+"Aranĝŝanĝoj devas esti aplikataj antaŭ ol aliaj ŝanĝoj povas esti faritaj"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:134
 msgid "Apply now"
-msgstr "立即应用"
+msgstr "Apliki nun"
 
 #: contents/configuration/ConfigurationShortcuts.qml:18
 msgid "Shortcuts"
-msgstr "快捷键"
+msgstr "Ŝparvojoj"
 
 #: contents/configuration/ConfigurationShortcuts.qml:28
 msgid "This shortcut will activate the applet as though it had been clicked."
-msgstr "此快捷键将激活这个小程序 (相当于直接点击它的效果)。"
+msgstr "Ĉi tiu ŝparvojo aktivigos la apleton kvazaŭ ĝi estus klakita."
 
 #: contents/configuration/ContainmentConfiguration.qml:33
 msgid "Wallpaper"
-msgstr "壁纸"
+msgstr "Tapeto"
 
 #: contents/configuration/ContainmentConfiguration.qml:38
 msgid "Mouse Actions"
-msgstr "鼠标操作"
+msgstr "Musaj Agoj"
 
 #: contents/configuration/MouseEventInputButton.qml:22
 msgid "Input Here"
-msgstr "在此输入"
+msgstr "Enigu ĉi tie"
 
 #: contents/views/SdkButtons.qml:47
 msgid "FormFactors"
-msgstr "窗体形式"
+msgstr "FormFaktoroj"
 
 #: contents/views/SdkButtons.qml:55
 msgid "Planar"
-msgstr "扁平"
+msgstr "Plana"
 
 #: contents/views/SdkButtons.qml:59
 msgid "Vertical"
-msgstr "垂直"
+msgstr "Vertikala"
 
 #: contents/views/SdkButtons.qml:63
 msgid "Horizontal"
-msgstr "水平"
+msgstr "Horizontala"
 
 #: contents/views/SdkButtons.qml:67
 msgid "Mediacenter"
-msgstr "媒体中心"
+msgstr "Mediacenter"
 
 #: contents/views/SdkButtons.qml:71
 msgid "Application"
-msgstr "应用程序"
+msgstr "Apliko"
 
 #: contents/views/SdkButtons.qml:78
 msgid "Location"
-msgstr "位置"
+msgstr "Loko"
 
 #: contents/views/SdkButtons.qml:92
 msgid "Floating"
-msgstr "浮动"
+msgstr "Flosanta"
 
 #: contents/views/SdkButtons.qml:96
 msgid "Desktop"
-msgstr "桌面"
+msgstr "Surtabla"
 
 #: contents/views/SdkButtons.qml:100
 msgid "Fullscreen"
-msgstr "全屏"
+msgstr "Plenekrane"
 
 #: contents/views/SdkButtons.qml:104
 msgid "Top Edge"
-msgstr "上边缘"
+msgstr "Supra Rando"
 
 #: contents/views/SdkButtons.qml:108
 msgid "Bottom Edge"
-msgstr "下边缘"
+msgstr "Malsupra Rando"
 
 #: contents/views/SdkButtons.qml:112
 msgid "Left Edge"
-msgstr "左边缘"
+msgstr "Maldekstra Rando"
 
 #: contents/views/SdkButtons.qml:116
 msgid "Right Edge"
-msgstr "右边缘"
+msgstr "Dekstra Rando"
 
 #: contents/views/SdkButtons.qml:135
 msgid "Configure Containment"
-msgstr "配置容器"
+msgstr "Agordi Entenon"
