@@ -16,6 +16,7 @@
   <name xml:lang="de">Plasmoid-Betrachter</name>
   <name xml:lang="el">Πρόγραμμα προβολής συστατικών Plasma</name>
   <name xml:lang="en-GB">Plasmoid Viewer</name>
+  <name xml:lang="eo">Plasmoid Viewer</name>
   <name xml:lang="es">Visor de plasmoides</name>
   <name xml:lang="et">Plasmoidide näitaja</name>
   <name xml:lang="eu">Plasmoide erakuslea</name>
@@ -55,6 +56,7 @@
   <summary xml:lang="de">Test-Werkzeug für Plasma-Miniprogramme</summary>
   <summary xml:lang="el">Εργαλείο δοκιμών για μικροεφαρμογές Plasma</summary>
   <summary xml:lang="en-GB">Testing tool for Plasma applets</summary>
+  <summary xml:lang="eo">Testilo por Plasma-apleto</summary>
   <summary xml:lang="es">Herramienta de prueba para miniaplicaciones de Plasma</summary>
   <summary xml:lang="et">Plasma aplettide testimise tööriist</summary>
   <summary xml:lang="eu">Plasma aplikaziotxoak probatzeko tresna</summary>

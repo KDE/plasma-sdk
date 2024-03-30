@@ -16,6 +16,7 @@
   <name xml:lang="de">Plasma-Datenquellen</name>
   <name xml:lang="el">Περιηγητής μηχανών Plasma</name>
   <name xml:lang="en-GB">Plasma Engine Explorer</name>
+  <name xml:lang="eo">Plasma Engine Explorer</name>
   <name xml:lang="es">Explorador de motores de Plasma</name>
   <name xml:lang="et">Plasma mootori uurija</name>
   <name xml:lang="eu">Plasma motorren esploratzailea</name>
@@ -55,6 +56,7 @@
   <summary xml:lang="de">Anzeige von Daten, die von Plasma-Datenquellen veröffentlicht werden.</summary>
   <summary xml:lang="el">Περιηγητής για τα δεδομένα που δημοσιεύουν οι μηχανές δεδομένων Plasma</summary>
   <summary xml:lang="en-GB">Explorer for the data published by Plasma Data Engines</summary>
+  <summary xml:lang="eo">Eksplorilo por la datumoj publikigitaj far la Plasma datummotoroj</summary>
   <summary xml:lang="es">Explorador para los datos publicados por los motores de datos de Plasma</summary>
   <summary xml:lang="et">Plasma andmemootorite avaldatud andmete uurija</summary>
   <summary xml:lang="eu">Plasma datu-motorrek argitaratutako datuen esploratzailea</summary>
