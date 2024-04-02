@@ -4,20 +4,20 @@
 #
 # Maciej Wikło <maciej.wiklo@wp.pl>, 2008.
 # Marta Rybczyńska <kde-i18n@rybczynska.net>, 2009, 2010, 2013.
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2012, 2015, 2016, 2017, 2018.
+# SPDX-FileCopyrightText: 2012, 2015, 2016, 2017, 2018, 2024 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasmoidviewer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-22 02:00+0000\n"
-"PO-Revision-Date: 2018-04-28 07:12+0100\n"
+"PO-Revision-Date: 2024-04-01 07:21+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
@@ -57,8 +57,8 @@ msgid ""
 "The formfactor to use (horizontal, vertical, mediacenter, planar or "
 "application)"
 msgstr ""
-"Używany współczynnik kształtu (poziomy, pionowy, centrum multimediów, "
-"powierzchniowy lub program)"
+"Współczynnik kształtu do użycia (horizontal, vertical, mediacenter, planar "
+"lub application)"
 
 #: main.cpp:58
 #, kde-format
@@ -66,23 +66,23 @@ msgid ""
 "The location constraint to start the Containment with (floating, desktop, "
 "fullscreen, topedge, bottomedge, leftedge, rightedge)"
 msgstr ""
-"Ograniczenie położenia przy uruchamianiu Kontenera (pływający, na pulpicie, "
-"pełnoekranowy, na górze, na dole, po lewej, po prawej)"
+"Położenia kontenera po jego uruchomieniu (floating, desktop, fullscreen, "
+"topedge, bottomedge, leftedge, rightedge)"
 
 #: main.cpp:63
 #, kde-format
 msgid "Set the x position of the plasmoidviewer on the Plasma desktop"
-msgstr "Ustaw współrzędną x Przeglądarki Plazmoidów na pulpicie Plazmy"
+msgstr "Ustaw współrzędną x przeglądarki plazmoidów na pulpicie Plazmy"
 
 #: main.cpp:66
 #, kde-format
 msgid "Set the y position of the plasmoidviewer on the Plasma desktop"
-msgstr "Ustaw współrzędną y Przeglądarki Plazmoidów na pulpicie Plazmy"
+msgstr "Ustaw współrzędną y przeglądarki plazmoidów na pulpicie Plazmy"
 
 #: main.cpp:69
 #, kde-format
 msgid "Set the window size of the plasmoidview"
-msgstr "Ustaw rozmiar okna Przeglądarki Plazmoidów"
+msgstr "Ustaw rozmiar okna przeglądarki plazmoidów"
 
 #: main.cpp:72
 #, kde-format
