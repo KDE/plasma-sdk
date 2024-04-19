@@ -49,9 +49,10 @@ Item {
 
     FileDialog {
         id: ssPicker
+        fileMode: FileDialog.SaveFile
         onAccepted: {
             selectedMontage.grabToImage(function(result) {
-                result.saveToFile(ssPicker.fileUrl.toString().slice(7))
+                result.saveToFile(ssPicker.selectedFile.toString().slice(7))
                 finished()
             });
         }
