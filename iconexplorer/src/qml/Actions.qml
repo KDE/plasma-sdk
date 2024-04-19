@@ -15,7 +15,7 @@ Item {
         Kirigami.Action {
             text: i18n("Open with External Program")
             icon.name: "document-open"
-            onTriggered: Qt.openUrlExternally(preview.fullPath)
+            onTriggered: Qt.openUrlExternally(Qt.url(`file://${preview.fullPath}`))
         },
         Kirigami.Action {
             text: i18n("Open Containing Folder")
