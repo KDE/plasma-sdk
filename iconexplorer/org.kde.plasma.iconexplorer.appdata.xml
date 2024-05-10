@@ -22,6 +22,7 @@
   <name xml:lang="ka">ხატულების დათვალიერება</name>
   <name xml:lang="ko">아이콘 탐색기</name>
   <name xml:lang="nl">Pictogramverkenner</name>
+  <name xml:lang="nn">Ikonutforskar</name>
   <name xml:lang="pl">Przeglądarka ikon</name>
   <name xml:lang="pt-BR">Explorador de ícones</name>
   <name xml:lang="ro">Explorator de pictograme</name>
@@ -49,6 +50,7 @@
   <summary xml:lang="ka">ხატულის გადახედვა პროგრამისტებისა და მხატვრებისთვის</summary>
   <summary xml:lang="ko">예술가와 개발자용 아이콘 뷰어</summary>
   <summary xml:lang="nl">Pictogramviewer voor kunstenaars en ontwikkelaars</summary>
+  <summary xml:lang="nn">Førehandsvising av ikon for kunstnarar og utviklarar</summary>
   <summary xml:lang="pl">Podgląd ikon dla artystów i programistów</summary>
   <summary xml:lang="pt-BR">Visualizador de ícones para artistas e desenvolvedores</summary>
   <summary xml:lang="ro">Previzualizator de pictograme pentru pictori și dezvoltatori</summary>
@@ -78,6 +80,7 @@
     <p xml:lang="ka">ხატულების დამთვალიერებელი ხელოვნებს და პროგრამისტებს ხატულების დათვალიერების და არჩევის საშუალებას აძლევს. ის ცდილობს, ხატულები ზუსტად ისე დახატოს, როგორც ის აპლიკაციაში გამოჩნდებოდა. ის საშუალებას გაძლევთ, გაფილტროთ ხატულები კატეგორიებითა და სახელით. ხატულების დამთვალიერებელი ჩვეულებრივი ყოველდღიურად გამოსაყენებელი პროგრამა არაა. ის ხელოვნებისა და პროგრამისტებისთვისაა დაწერილი. ის ასევე შეიცავს დამატებებს Kate-სა და KDevelop-სთვის, რათა ხატულის არჩევაში დაგეხმაროთ.</p>
     <p xml:lang="ko">아이콘 탐색기에서는 아이콘을 미리 보고 선택할 수 있습니다. 아이콘 탐색기는 아이콘을 최대한 앱에 표시되는 대로 그리며, 분류와 이름을 기준으로 필터링할 수 있습니다. 아이콘 탐색기는 디자이너와 개발자의 사용 방식에 최적화되어 있으며, Kate와 KDevelop에서 아이콘 선택기로 사용할 수 있도록 플러그인을 제공합니다.</p>
     <p xml:lang="nl">Pictogramverkenner biedt artiesten en ontwikkelaars om pictogrammen te kiezen en te bekijken. Pictogramverkenner probeert de pictogrammen exact weer te geven zoals ze er uit zouden zien in de toepassing. Het biedt filtering gebaseerd op categorie en naam. Pictogramverkenner is geen hulpmiddel voor algemeen gebruik, maar is toegespitst op gebruik door artiesten en ontwikkelaars. Pictogramverkenner biedt ook een plug-in voor Kate en KDevelop om te worden gebruikt als kiezer voor pictogrammen.</p>
+    <p xml:lang="nn">Ikonutforskaren lèt kunstnarar og utviklarar sjå gjennom og velja ikon. Han prøver å visa ikona akkurat slik dei vert viste i programma. Du kan òg filtrera på kategori eller namn. Ikon­utforskaren er ikkje eit vanleg sluttbrukarprogram, men er retta mot kunstnarar og utviklarar. Han har òg Kate- og KDevelop-tillegg for veljing av ikon.</p>
     <p xml:lang="pl">Przeglądarka ikon daje artystom i programistom podgląd i możliwość wyboru ikon. Przeglądarka ikon wyświetla ikony dokładnie tak jak będą one wyświetlane w aplikacji. Umożliwia filtrowanie na podstawie kategorii i nazwy. Przeglądarka ikon nie jest narzędziem ogólnego przeznaczenia, lecz przystosowanym do pracy artystów i programistów. Przeglądarka ikon dostarcza także wtyczki dla Kate oraz KDevelop.</p>
     <p xml:lang="pt-BR">O Explorador de ícones permite que artistas e desenvolvedores visualizem e escolham ícones. O Explorador de ícones tenta renderizar os ícones exatamente como seriam desenhados no aplicativo. Permite filtrar com base na categoria e no nome. O Explorador de ícones não é uma ferramenta de uso geral, mas voltada para o uso de caso de artistas e desenvolvedores. O Explorador de ícones também fornece um plugin para Kate e KDevelop para ser usado como seletor de ícones.</p>
     <p xml:lang="ru">Просмотр значков — инструмент просмотра и отбора значков для художников и  разработчиков. Приложение показывает значки именно так, как они будут выглядеть в приложении. В приложении реализован поиск и фильтрации списка значков по имени и категории. Кроме того, в состав приложения входит расширение для текстового редактора Kate и в среды разработки KDevelop, добавляющее в эти редакторы функционал выбора значков.</p>
