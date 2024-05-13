@@ -165,7 +165,7 @@ msgstr "Tipus de fons de pantalla:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:116
 msgid "Get New Plugins..."
-msgstr "Obtín connectors nous..."
+msgstr "Obtín connectors nous…"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:128
 msgid "Layout changes must be applied before other changes can be made"
