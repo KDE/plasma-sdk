@@ -90,7 +90,7 @@
    <item row="0" column="0" rowspan="2" colspan="5">
     <widget class="QLabel" name="m_title">
      <property name="text">
-      <string comment="KDE::DoNotExtract">Engine; Source; Service</string>
+      <string notr="true">Engine; Source; Service</string>
      </property>
     </widget>
    </item>
