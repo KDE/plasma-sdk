@@ -39,7 +39,6 @@
                 "Name[zh_TW]": "Marco Martin"
             }
         ],
-        "Category": "",
         "Description": "PlasmoidViewer Shell",
         "Description[be]": "Абалонка PlasmoidViewer",
         "Description[bg]": "Обвивка на PlasmoidViewer",
@@ -117,13 +116,8 @@
         "Name[x-test]": "xxPlasmoidViewerShellxx",
         "Name[zh_CN]": "Plasmoid 查看器外壳",
         "Name[zh_TW]": "PlasmoidViewerShell",
-        "ServiceTypes": [
-            "Plasma/Shell"
-        ],
-        "Version": "",
         "Website": "https://kde.org/plasma-desktop"
     },
-    "Keywords": "",
-    "X-KDE-ParentApp": "",
+    "KPackageStructure": "Plasma/Shell",
     "X-Plasma-MainScript": "layout.js"
 }
