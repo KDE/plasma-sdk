@@ -1,9 +1,11 @@
 {
     "KPlugin": {
         "Description": "Invokes Iconexplorer icon picker",
+        "Description[be]": "Выклікае сродак выбару значкоў Iconexplorer",
         "Description[bg]": "Извиква Iconexplorer за избор на икони",
         "Description[ca@valencia]": "Invoca el selector d'icones Iconexplorer",
         "Description[ca]": "Invoca el selector d'icones Iconexplorer",
+        "Description[en_GB]": "Invokes Iconexplorer icon picker",
         "Description[eo]": "Alvokas Iconexplorer-piktogramelektilon",
         "Description[es]": "Llama al selector de iconos",
         "Description[eu]": "Ikono-esploratzaile ikono hautatzaileari dei egiten dio",
