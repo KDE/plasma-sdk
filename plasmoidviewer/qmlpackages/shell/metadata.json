@@ -1,4 +1,5 @@
 {
+    "KPackageStructure": "Plasma/Shell",
     "KPlugin": {
         "Authors": [
             {
@@ -118,6 +119,5 @@
         "Name[zh_TW]": "PlasmoidViewerShell",
         "Website": "https://kde.org/plasma-desktop"
     },
-    "KPackageStructure": "Plasma/Shell",
     "X-Plasma-MainScript": "layout.js"
 }

@@ -1,5 +1,6 @@
 {
     "Categories": "Qt;KDE;Development;GUIDesigner",
+    "KPackageStructure": "KPackage/GenericQML",
     "KPlugin": {
         "Authors": [
             {
@@ -119,6 +120,5 @@
         "Name[zh_CN]": "Plasma 主题浏览器",
         "Name[zh_TW]": "Plasma 主題探索器",
         "Website": "https://kde.org/plasma-desktop"
-    },
-    "KPackageStructure": "KPackage/GenericQML"
+    }
 }
