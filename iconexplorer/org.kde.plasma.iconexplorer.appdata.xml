@@ -7,6 +7,7 @@
   <content_rating type="oars-1.0"/>
   <name>Icon Explorer</name>
   <name xml:lang="ast">Esplorador d'iconos</name>
+  <name xml:lang="bg">Преглед на икони</name>
   <name xml:lang="ca">Explorador d'icones</name>
   <name xml:lang="ca-valencia">Explorador d'icones</name>
   <name xml:lang="cs">Prohlížeč ikon</name>
@@ -35,6 +36,7 @@
   <name xml:lang="zh-CN">Icon Explorer 图标浏览器</name>
   <name xml:lang="zh-TW">圖示瀏覽器</name>
   <summary>Icon Previewer for Artists and Developers</summary>
+  <summary xml:lang="bg">Програма за преглед на икони за дизайнери и разработчици</summary>
   <summary xml:lang="ca">Vista prèvia de les icones per a artistes i desenvolupadors</summary>
   <summary xml:lang="ca-valencia">Vista prèvia de les icones per a artistes i desenvolupadors</summary>
   <summary xml:lang="cs">Náhled ikon pro umělce a vývojáře</summary>
@@ -66,6 +68,7 @@
     <p>Icon Explorer allows artists and developers to preview and pick icons. Icon Explorer attempts to render the icons exactly as they would look drawn in the application. It allows to filter based on category and name. Icon Explorer is not a general-purpose tool, but geared towards artists' and developers' use-cases.
         Icon Explorer also provides a plugin for Kate and KDevelop to be used as icon picker.
     </p>
+    <p xml:lang="bg">Програмата Преглед на икони позволява на дизайнерите и разработчиците да визуализират и да избират икони. Преглед на икони се опитва да изобрази иконите точно както ще изглеждат в приложението. Тя позволява да се филтрира въз основа на категория и име. Преглед на икони не е инструмент с общо предназначение, но насочен към дизайнерите и разработчиците. Преглед на икони също така осигурява плъгин за Kate и KDevelop, който да се използва като инструмент за взимане на икона.</p>
     <p xml:lang="ca">L'Explorador d'icones permet als artistes i als desenvolupadors previsualitzar i seleccionar icones. L'Explorador d'icones intenta representar les icones exactament com es dibuixaran a l'aplicació. Permet filtrar segons la categoria i el nom. L'Explorador d'icones no és una eina d'utilitat general, sinó destinada als casos d'ús d'artistes i desenvolupadors. L'Explorador d'icones també proporciona un connector per al Kate i el KDevelop per a ser utilitzat com a selector d'icones.</p>
     <p xml:lang="ca-valencia">Explorador d'icones permet als artistes i als desenvolupadors previsualitzar i seleccionar icones. Explorador d'icones intenta representar les icones exactament com es dibuixaran en l'aplicació. Permet filtrar segons la categoria i el nom. Explorador d'icones no és una eina d'utilitat general, sinó destinada als casos d'ús d'artistes i desenvolupadors. Explorador d'icones també proporciona un connector per a Kate i KDevelop, per a ser utilitzat com a selector d'icones.</p>
     <p xml:lang="en-GB">Icon Explorer allows artists and developers to preview and pick icons. Icon Explorer attempts to render the icons exactly as they would look drawn in the application. It allows to filter based on category and name. Icon Explorer is not a general-purpose tool, but geared towards artists' and developers' use-cases. Icon Explorer also provides a plugin for Kate and KDevelop to be used as icon picker.</p>
