@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: fc57ad16a28d02dea100ceb1c60de14e\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-05 02:19+0000\n"
-"PO-Revision-Date: 2024-02-11 18:56\n"
+"PO-Revision-Date: 2024-06-01 17:50\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian\n"
 "Language: be\n"
@@ -145,7 +145,7 @@ msgstr "Не ўдалося атрымаць бягучы макет Plasma."
 #: src/lnflogic.cpp:93
 #, kde-format
 msgid "Impossible to create the layouts directory in the look and feel package"
-msgstr "Немагчыма стварыць каталог макетаў у пакунку выгляду"
+msgstr "Немагчыма стварыць каталог макетаў у пакеце выгляду"
 
 #: src/lnflogic.cpp:104
 #, kde-format
