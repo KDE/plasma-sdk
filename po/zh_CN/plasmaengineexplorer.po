@@ -202,7 +202,7 @@ msgstr "搜索(&E)："
 #: main.cpp:35
 #, kde-format
 msgid "No description available"
-msgstr "无可用描述"
+msgstr "没有可用的描述"
 
 #: main.cpp:58
 #, kde-format
@@ -284,7 +284,7 @@ msgstr "未知"
 msgid ""
 "No valid model was returned. Verify that a model is available for this "
 "source."
-msgstr "无可用的模型。请检查这个数据源是否有可用模型。"
+msgstr "没有可用的模型。请检查这个数据源是否有可用模型。"
 
 #: modelviewer.cpp:103
 #, kde-format
@@ -308,7 +308,7 @@ msgstr "未知"
 msgid ""
 "No valid service was returned. Verify that a service is available for this "
 "source."
-msgstr "无可用的服务。请检查这个数据源是否有可用服务。"
+msgstr "没有可用的服务。请检查这个数据源是否有可用服务。"
 
 #: serviceviewer.cpp:74
 #, kde-format
