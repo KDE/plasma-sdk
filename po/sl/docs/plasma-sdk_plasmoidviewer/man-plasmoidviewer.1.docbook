@@ -1,0 +1,307 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Slovenian "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>Navodila za uporabo plazmoidviewerja</title>
+<date
+>09.01.2017</date>
+<releaseinfo
+>Plasma 5.8</releaseinfo>
+<productname
+>KDE Plasma</productname>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>plasmoidviewer</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>plasmoidviewer</command
+></refname>
+<refpurpose
+>Zaženi pripomočke Plasma v lastnem oknu</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>plasmoidviewer</command
+> <group choice="opt"
+><option
+>-v, --version</option
+></group
+> <group choice="opt"
+><option
+>-c, --containment</option
+> <replaceable
+>name</replaceable
+></group
+> <group choice="opt"
+><option
+>-a, --applet</option
+> <replaceable
+>name</replaceable
+></group
+> <group choice="opt"
+><option
+>-f, --formfactor</option
+> <replaceable
+>name</replaceable
+></group
+> <group choice="opt"
+><option
+>-l, --location</option
+> <replaceable
+>name</replaceable
+></group
+> <group choice="opt"
+><option
+>-x, --xPosition</option
+> <replaceable
+>xPosition</replaceable
+></group
+> <group choice="opt"
+><option
+>-y, --yPosition</option
+> <replaceable
+>yPosition</replaceable
+></group
+> <group choice="opt"
+><option
+>-s, --size</option
+> <replaceable
+>widthXheight</replaceable
+></group
+> <group choice="opt"
+><option
+>-p, --pixmapcache</option
+> <replaceable
+>size</replaceable
+></group
+> <group choice="opt"
+><option
+>-t, --theme</option
+> <replaceable
+>name</replaceable
+></group
+> <group choice="opt"
+><option
+>-h, --help</option
+></group
+> <arg choice="opt"
+>args</arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Opis</title>
+<para
+><command
+>plasmoidviewer</command
+> je grafično orodje, ki razvijalcem omogoča testiranje programčkov Plasma.</para>
+
+<para
+>Najdeni bodo samo nameščeni programčki. Morda bo treba zagnati <command
+>kbuildsycoca5</command
+>, da se najdejo na novo nameščeni programčki.</para>
+</refsect1>
+
+<refsect1>
+<title
+>Možnosti</title>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>-v, --različica</option
+></term>
+<listitem
+><para
+>Prikaže informacije o različici.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-c, --containment <replaceable
+>ime</replaceable
+></option
+></term>
+<listitem
+><para
+>Ime zadrževalnega vtičnika.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-a, --applet <replaceable
+>ime</replaceable
+></option
+></term>
+<listitem
+><para
+>Ime vtičnika programčka.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-f, --formfactor <replaceable
+>ime</replaceable
+></option
+></term>
+<listitem
+><para
+>Faktor oblike, ki ga želite uporabiti (vodoravno, navpično, mediacenter, ravninsko ali aplikacija).</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-l, --location <replaceable
+>ime</replaceable
+></option
+></term>
+<listitem
+><para
+>Omejitev lokacije za začetek zadrževalnika (lebdeči, namizje, celozaslonski, zgornji rob, spodnji rob, levi rob, desni rob).</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-x, --xPosition <replaceable
+>xPosition</replaceable
+></option
+></term>
+<listitem
+><para
+>Nastavite položaj x plasmoidviewerja na namizju Plasma.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-y, --yPosition <replaceable
+>yPosition</replaceable
+></option
+></term>
+<listitem
+><para
+>Nastavite položaj y plasmoidviewerja na namizju Plasma.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-s, --size <replaceable
+>widthXheight</replaceable
+></option
+></term>
+<listitem
+><para
+>Nastavite velikost okna plasmoidviewa.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-p, --pixmapcache <replaceable
+>velikost</replaceable
+></option
+></term>
+<listitem
+><para
+>Velikost v KB za nastavitev predpomnilnika pikslov.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-t, --theme <replaceable
+>ime</replaceable
+></option
+></term>
+<listitem
+><para
+>Ime teme, ki jo bo uporabila lupina.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-h, --pomoč</option
+></term>
+<listitem
+><para
+>Prikaže to pomoč.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+><replaceable
+>args</replaceable
+></option
+></term>
+<listitem
+><para
+>Podatki, ki jih je treba posredovati programčku kot dogodek 'externalData'.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</refsect1>
+
+<refsect1>
+<title
+>Glej tudi</title>
+
+<para
+>Podrobnejša uporabniška dokumentacija je na voljo na <ulink url="help:/plasma-desktop"
+>help:/plasma-desktop</ulink
+> (vnesite ta <acronym
+>URL</acronym
+> v &konqueror; ali zaženite <userinput 
+><command
+>khelpcenter</command
+> <parameter
+>help:/plasma-desktop</parameter
+></userinput
+>).</para>
+
+</refsect1>
+
+<refsect1>
+<title
+>Avtorji</title>
+<para
+><command
+>plasmoidviewer</command
+> je napisan s strani <personname
+><firstname
+>Aaron</firstname
+><surname
+>Seigo</surname
+></personname
+> <email
+>aseigo@kde.org</email
+>.</para>
+</refsect1>
+
+</refentry>
