@@ -32,6 +32,7 @@
   <name xml:lang="ru">Просмотр значков</name>
   <name xml:lang="sk">Prieskumník ukon</name>
   <name xml:lang="sl">Icon Explorer</name>
+  <name xml:lang="sv">Ikonutforskare</name>
   <name xml:lang="tr">Simge Gezgini</name>
   <name xml:lang="uk">Навігатор піктограмами</name>
   <name xml:lang="x-test">xxIcon Explorerxx</name>
@@ -63,6 +64,7 @@
   <summary xml:lang="ru">Инструмент просмотра значков для дизайнеров и разработчиков</summary>
   <summary xml:lang="sk">Prehliadač ikon pre umelcov a vývojárov</summary>
   <summary xml:lang="sl">Vpogledovalnik ikon za umetnike in razvijalce</summary>
+  <summary xml:lang="sv">Förhandsgranskning av ikoner för konstnärer och utvecklare</summary>
   <summary xml:lang="tr">Sanatçılar ve Geliştiriciler için Simge Önizleyicisi</summary>
   <summary xml:lang="uk">Засіб перегляду піктограм для художників та розробників</summary>
   <summary xml:lang="x-test">xxIcon Previewer for Artists and Developersxx</summary>
@@ -95,6 +97,7 @@
     <p xml:lang="ru">Просмотр значков — инструмент просмотра и отбора значков для художников и  разработчиков. Приложение показывает значки именно так, как они будут выглядеть в приложении. В приложении реализован поиск и фильтрации списка значков по имени и категории. Кроме того, в состав приложения входит расширение для текстового редактора Kate и в среды разработки KDevelop, добавляющее в эти редакторы функционал выбора значков.</p>
     <p xml:lang="sk">Icon Explorer umožňuje umelcom a vývojárom zobraziť ukážku a vybrať ikony. Prieskumník ikonasa pokúša vykresliť ikony presne tak, ako by vyzerali nakreslené vaplikácii. Umožňuje filtrovať na základe kategórie a názvu. Prieskumník ikon nie je univerzálny nástroj, ale je zameraný na umelcov aprípady použitia vývojárov. Icon Explorer tiež poskytuje doplnok pre Kate aKDevelop sa má použiť ako nástroj na výber ikon.</p>
     <p xml:lang="sl">Icon Explorer umetnikom in razvijalcem omogoča predogled in izbiro ikon. Icon Explorer  poskuša upodobiti ikone točno tako, kot bi bile videti narisane v aplikaciji. Omogoča filtriranje glede na kategorijo in ime. Icon Explorer ni orodje za splošne namene, temveč je namenjeno umetnikom na primerih uporabe razvijalcev. Icon Explorer ponuja tudi vtičnik za Kate in KDevelop za uporabo kot izbirnik ikon.</p>
+    <p xml:lang="sv">Ikonutforskaren låter konstnärer och utvecklare förhandsgranska och välja ikoner. Ikonutforskaren försöker återge ikonerna exakt som de skulle se ut ritade i programmet. Det gör det möjligt att filtrera baserat på kategori och namn. Ikonutforskaren är inte ett allmänt verktyg, utan inriktat på konstnärers och utvecklares användningsfall. Ikonutforskaren tillhandahåller också ett insticksprogram för Kate och KDevelop som kan användas som ikonväljare.</p>
     <p xml:lang="tr">Simge Gezgini, sanatçıların ve geliştiricilerin simgeleri önizlemesine ve seçmesine olanak tanır. Simge Gezgini, simgeleri tam olarak uygulamada çizilmiş gibi sunmaya çalışır. Kategori ve ada göre süzme yapmanızı sağlar. Simge Gezgini; genel amaçlı bir araç değil, sanatçıların ve geliştiricilerin kullanım durumlarına yöneliktir. Simge Gezgini, Kate ve K Geliştir'un simge seçici olarak kullanılması için bir eklenti de sağlar.</p>
     <p xml:lang="uk">«Навігатор піктограмами» надає змогу художникам і розробникам попередньо переглядати і вибирати піктограми. У «Навігаторі піктограмами» зроблено спробу показати піктограми точно так, як вони виглядатимуть у програмі. Передбачено можливість фільтрувати списки за категорією і назвою. «Навігатор піктограмами» не є інструментом загального призначення: програму призначено лише для потреб художників і розробників. У Cutlefish також передбачено додаток для Kate і KDevelop, яким можна скористатися для вибору піктограм.</p>
     <p xml:lang="x-test">xxIcon Explorer allows artists and developers to preview and pick icons. Icon Explorer attempts to render the icons exactly as they would look drawn in the application. It allows to filter based on category and name. Icon Explorer is not a general-purpose tool, but geared towards artists' and developers' use-cases. Icon Explorer also provides a plugin for Kate and KDevelop to be used as icon picker.xx</p>
