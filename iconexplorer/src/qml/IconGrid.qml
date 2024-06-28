@@ -12,14 +12,17 @@ import org.kde.kirigami 2.8 as Kirigami
 
 GridView {
     id: iconGrid
-    focus: true
+
+    topMargin: Kirigami.Units.gridUnit
+    leftMargin: Kirigami.Units.gridUnit
+    rightMargin: Kirigami.Units.gridUnit
+    bottomMargin: Kirigami.Units.gridUnit
 
     cellWidth: iconSize + Math.round(Kirigami.Units.gridUnit * 1.5)
     cellHeight: iconSize + Math.round(Kirigami.Units.gridUnit * 3.5)
 
     cacheBuffer: 20
     highlightMoveDuration: 0
-    boundsBehavior: Flickable.StopAtBounds
     model: proxyModel
     currentIndex: proxyModel.currentIndex
 

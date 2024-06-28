@@ -32,6 +32,7 @@ QQC2.ScrollView {
             Accessible.role: Accessible.Heading
             Layout.fillWidth: true
 
+            Layout.margins: Kirigami.Units.largeSpacing
             Layout.topMargin: Kirigami.Units.gridUnit * 2
 
             // Match `level: 1` in Kirigami.Heading
@@ -43,20 +44,24 @@ QQC2.ScrollView {
         }
         Kirigami.FormLayout {
             Layout.fillWidth: true
-            Layout.topMargin: Kirigami.Units.largeSpacing
+            Layout.margins: Kirigami.Units.largeSpacing
+            Layout.topMargin: 0
+
             QQC2.Label {
-                Layout.maximumWidth: Kirigami.Units.gridUnit * 15
                 Kirigami.FormData.label: i18n("File name:")
-                elide: Text.ElideRight
+                Layout.fillWidth: true
+                elide: Text.ElideMiddle
                 text: preview.fileName
             }
             QQC2.Label {
                 Kirigami.FormData.label: i18n("Category:")
+                Layout.fillWidth: true
                 font.capitalization: Font.Capitalize
                 text: preview.category
             }
             QQC2.Label {
                 Kirigami.FormData.label: i18n("Scalable:")
+                Layout.fillWidth: true
                 text: preview.scalable ? i18n("yes") : i18n("no")
                 font.capitalization: Font.Capitalize
             }

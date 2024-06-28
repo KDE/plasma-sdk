@@ -57,10 +57,13 @@ Kirigami.ApplicationWindow {
         id: menu
     }
     Settings {
+        id: settings
+
         property alias x: cuttlefish.x
         property alias y: cuttlefish.y
         property alias width: cuttlefish.width
         property alias height: cuttlefish.height
+        property var mainSplitView
     }
     Connections {
         target: loader.item
@@ -85,41 +88,38 @@ Kirigami.ApplicationWindow {
         id: tools
     }
 
-    RowLayout {
-        anchors.fill: parent
-        spacing: 0
+    QQC2.SplitView {
+        id: mainSplitView
 
-        // To set the scrollview's background color correctly without
-        // explicitly adding a frame
-        Rectangle {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
+        anchors.fill: parent
+
+        QQC2.Pane {
+            QQC2.SplitView.fillWidth: true
+            QQC2.SplitView.minimumWidth: Kirigami.Units.gridUnit * 15
 
             Kirigami.Theme.colorSet: Kirigami.Theme.View
-            color: Kirigami.Theme.backgroundColor
+            padding: 0
 
             QQC2.ScrollView {
                 id: grid
+
                 anchors.fill: parent
 
                 QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
                 IconGrid {
                     id: iconGrid
-                    anchors.fill: parent
-                    anchors.margins: Kirigami.Units.gridUnit
                 }
             }
         }
-        Kirigami.Separator {
-            Layout.fillHeight: true
-            visible: cuttlefish.widescreen
-        }
+
         Preview {
             id: previewPane
+
+            QQC2.SplitView.preferredWidth: Kirigami.Units.gridUnit * 22
+            QQC2.SplitView.minimumWidth: Kirigami.Units.gridUnit * 15
+
             visible: cuttlefish.widescreen
-            Layout.preferredWidth: Kirigami.Units.gridUnit * 22
-            Layout.fillHeight: true
         }
     }
 
@@ -179,5 +179,13 @@ Kirigami.ApplicationWindow {
                 ssLoader.active = false
             }
         }
+    }
+
+    Component.onCompleted: {
+        mainSplitView.restoreState(settings.mainSplitView);
+    }
+
+    Component.onDestruction: {
+        settings.mainSplitView = mainSplitView.saveState();
     }
 }
