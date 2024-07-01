@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-21 01:57+0000\n"
+"POT-Creation-Date: 2024-07-01 00:40+0000\n"
 "PO-Revision-Date: 2022-06-04 10:05+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -17,179 +17,368 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-#: contents/applet/AppletError.qml:40
-msgid "Sorry! There was an error loading %1."
-msgstr "Wybacz! Wystąpił błąd podczas wczytywania %1."
-
-#: contents/applet/AppletError.qml:48
-msgid "Copy Error Details to Clipboard"
+#: contents/applet/AppletError.qml:164
+#, fuzzy
+#| msgid "Copy Error Details to Clipboard"
+msgid "Copy to Clipboard"
 msgstr "Skopiuj szczegóły błędu do schowka"
 
-#: contents/applet/CompactApplet.qml:74
+#: contents/applet/AppletError.qml:187
+msgid "View Error Details…"
+msgstr ""
+
+#: contents/applet/CompactApplet.qml:76
 msgid "Open %1"
 msgstr "Otwórz %1"
 
-#: contents/configuration/AboutPlugin.qml:20
-#: contents/configuration/AppletConfiguration.qml:247
+#: contents/configuration/AboutPlugin.qml:21
+#: contents/configuration/AppletConfiguration.qml:304
 msgid "About"
 msgstr "O programie"
 
-#: contents/configuration/AboutPlugin.qml:46
+#: contents/configuration/AboutPlugin.qml:50
 msgid "Send an email to %1"
 msgstr "Wyślij wiadomość do %1"
 
-#: contents/configuration/AboutPlugin.qml:95
+#: contents/configuration/AboutPlugin.qml:64
+#, fuzzy
+#| msgid "Open %1"
+msgctxt "@info:tooltip %1 url"
+msgid "Open website %1"
+msgstr "Otwórz %1"
+
+#: contents/configuration/AboutPlugin.qml:137
 msgid "Copyright"
 msgstr "Prawa autorskie"
 
-#: contents/configuration/AboutPlugin.qml:115
+#: contents/configuration/AboutPlugin.qml:158
 msgid "License:"
 msgstr "Licencja:"
 
-#: contents/configuration/AboutPlugin.qml:128
+#: contents/configuration/AboutPlugin.qml:163
+msgctxt "@info:whatsthis"
+msgid "View license text"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:177
 msgid "Authors"
 msgstr "Autorzy"
 
-#: contents/configuration/AboutPlugin.qml:138
+#: contents/configuration/AboutPlugin.qml:189
 msgid "Credits"
 msgstr "Zasługi"
 
-#: contents/configuration/AboutPlugin.qml:149
+#: contents/configuration/AboutPlugin.qml:202
 msgid "Translators"
 msgstr "Tłumacze"
 
-#: contents/configuration/AppletConfiguration.qml:55
+#: contents/configuration/AboutPlugin.qml:220
+msgid "Report a Bug…"
+msgstr ""
+
+#: contents/configuration/AppletConfiguration.qml:75
 msgid "Keyboard Shortcuts"
 msgstr "Skróty klawiszowe"
 
-#: contents/configuration/AppletConfiguration.qml:294
+#: contents/configuration/AppletConfiguration.qml:352
 msgid "Apply Settings"
 msgstr "Zastosuj zmiany"
 
-#: contents/configuration/AppletConfiguration.qml:297
+#: contents/configuration/AppletConfiguration.qml:353
 msgid ""
 "The settings of the current module have changed. Do you want to apply the "
 "changes or discard them?"
 msgstr ""
 "Ustawienia bieżącego modułu uległy zmianie. Zapisać, czy porzucić zmiany?"
 
-#: contents/configuration/AppletConfiguration.qml:328
+#: contents/configuration/AppletConfiguration.qml:384
 msgid "OK"
 msgstr "OK"
 
-#: contents/configuration/AppletConfiguration.qml:336
+#: contents/configuration/AppletConfiguration.qml:392
 msgid "Apply"
 msgstr "Zastosuj"
 
-#: contents/configuration/AppletConfiguration.qml:342
+#: contents/configuration/AppletConfiguration.qml:398
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: contents/configuration/ConfigCategoryDelegate.qml:28
+#: contents/configuration/ConfigCategoryDelegate.qml:27
 msgid "Open configuration page"
 msgstr "Otwórz stronę ustawień"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:19
+#: contents/configuration/ConfigurationContainmentActions.qml:21
 msgid "Left-Button"
 msgstr "Lewy przycisk"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:20
+#: contents/configuration/ConfigurationContainmentActions.qml:22
 msgid "Right-Button"
 msgstr "Prawy przycisk"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:21
+#: contents/configuration/ConfigurationContainmentActions.qml:23
 msgid "Middle-Button"
 msgstr "Środkowy przycisk"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:22
+#: contents/configuration/ConfigurationContainmentActions.qml:24
 msgid "Back-Button"
 msgstr "Przycisk wstecz"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:23
+#: contents/configuration/ConfigurationContainmentActions.qml:25
 msgid "Forward-Button"
 msgstr "Przycisk wprzód"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:25
+#: contents/configuration/ConfigurationContainmentActions.qml:27
 msgid "Vertical-Scroll"
 msgstr "Przewijanie w pionie"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:26
+#: contents/configuration/ConfigurationContainmentActions.qml:28
 msgid "Horizontal-Scroll"
 msgstr "Przewijanie w poziomie"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:28
+#: contents/configuration/ConfigurationContainmentActions.qml:30
 msgid "Shift"
 msgstr "Shift"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:29
+#: contents/configuration/ConfigurationContainmentActions.qml:31
 msgid "Ctrl"
 msgstr "Ctrl"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:30
+#: contents/configuration/ConfigurationContainmentActions.qml:32
 msgid "Alt"
 msgstr "Alt"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:31
+#: contents/configuration/ConfigurationContainmentActions.qml:33
 msgid "Meta"
 msgstr "Meta"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:73
+#: contents/configuration/ConfigurationContainmentActions.qml:95
 msgctxt "Concatenation sign for shortcuts, e.g. Ctrl+Shift"
 msgid "+"
 msgstr "+"
 
-#: contents/configuration/ConfigurationContainmentActions.qml:153
+#: contents/configuration/ConfigurationContainmentActions.qml:167
+#, fuzzy
+#| msgid "About"
+msgctxt "@title"
+msgid "About"
+msgstr "O programie"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:182
 #: contents/configuration/MouseEventInputButton.qml:14
 msgid "Add Action"
 msgstr "Dodaj działanie"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:26
-msgid "Appearance"
-msgstr "Wygląd"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:68
+#: contents/configuration/ConfigurationContainmentAppearance.qml:69
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "Zmiany układu zostały ograniczone przez administratora systemu"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:83
+#: contents/configuration/ConfigurationContainmentAppearance.qml:84
 msgid "Layout:"
 msgstr "Układ:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:98
-msgid "Wallpaper Type:"
+#, fuzzy
+#| msgid "Wallpaper Type:"
+msgid "Wallpaper type:"
 msgstr "Rodzaj tapety:"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:115
-msgid "Get New Plugins..."
+#: contents/configuration/ConfigurationContainmentAppearance.qml:119
+#, fuzzy
+#| msgid "Get New Plugins..."
+msgid "Get New Plugins…"
 msgstr "Pobierz nową wtyczkę..."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:127
+#: contents/configuration/ConfigurationContainmentAppearance.qml:189
 msgid "Layout changes must be applied before other changes can be made"
 msgstr "Zmiany układu należy zastosować przed zastosowaniem kolejnych zmian"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:133
-msgid "Apply now"
+#: contents/configuration/ConfigurationContainmentAppearance.qml:193
+#, fuzzy
+#| msgid "Apply now"
+msgid "Apply Now"
 msgstr "Zastosuj teraz"
 
 #: contents/configuration/ConfigurationShortcuts.qml:18
 msgid "Shortcuts"
 msgstr "Skróty"
 
-#: contents/configuration/ConfigurationShortcuts.qml:28
+#: contents/configuration/ConfigurationShortcuts.qml:30
 msgid "This shortcut will activate the applet as though it had been clicked."
 msgstr "Ten skrót włączy aplet, tak jakby został on kliknięty."
 
-#: contents/configuration/ContainmentConfiguration.qml:29
+#: contents/configuration/ContainmentConfiguration.qml:27
 msgid "Wallpaper"
 msgstr "Tapeta"
 
-#: contents/configuration/ContainmentConfiguration.qml:34
+#: contents/configuration/ContainmentConfiguration.qml:32
 msgid "Mouse Actions"
 msgstr "Działania myszy"
 
 #: contents/configuration/MouseEventInputButton.qml:21
 msgid "Input Here"
 msgstr "Wprowadź tutaj"
+
+#: contents/configuration/PanelConfiguration.qml:97
+#, fuzzy
+#| msgid "Apply Settings"
+msgid "Panel Settings"
+msgstr "Zastosuj zmiany"
+
+#: contents/configuration/PanelConfiguration.qml:104
+msgid "Add Spacer"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:107
+msgid "Add spacer widget to the panel"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:114
+msgid "Add Widgets…"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:117
+msgid "Open the widget selector to drag and drop widgets to the panel"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:146
+#, fuzzy
+#| msgid "Location"
+msgid "Position"
+msgstr "Położenie"
+
+#: contents/configuration/PanelConfiguration.qml:151
+#: contents/configuration/PanelConfiguration.qml:266
+msgid "Top"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:152
+#: contents/configuration/PanelConfiguration.qml:268
+#, fuzzy
+#| msgid "Right Edge"
+msgid "Right"
+msgstr "Prawa krawędź"
+
+#: contents/configuration/PanelConfiguration.qml:153
+#: contents/configuration/PanelConfiguration.qml:266
+#, fuzzy
+#| msgid "Left Edge"
+msgid "Left"
+msgstr "Lewa krawędź"
+
+#: contents/configuration/PanelConfiguration.qml:154
+#: contents/configuration/PanelConfiguration.qml:268
+#, fuzzy
+#| msgid "Bottom Edge"
+msgid "Bottom"
+msgstr "Dolna krawędź"
+
+#: contents/configuration/PanelConfiguration.qml:174
+msgid "Set Position…"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:201
+msgid "Alignment"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:267
+msgid "Center"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:290
+msgid "Height"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:291
+msgid "Width"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:310
+msgid "Fill height"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:310
+msgid "Fill width"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:311
+msgid "Fit content"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:312
+msgid "Custom"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:338
+msgid "Visibility"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:351
+msgid "Always visible"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:352
+msgid "Auto hide"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:353
+msgid "Dodge windows"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:354
+msgid "Windows Go Below"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:397
+msgid "Opacity"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:411
+msgid "Adaptive"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:412
+msgid "Opaque"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:413
+#, fuzzy
+#| msgid "Translators"
+msgid "Translucent"
+msgstr "Tłumacze"
+
+#: contents/configuration/PanelConfiguration.qml:437
+msgid "Style"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:449
+#: contents/views/SdkButtons.qml:90
+msgid "Floating"
+msgstr "Pływające"
+
+#: contents/configuration/PanelConfiguration.qml:520
+msgid "Panel Width:"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:520
+msgid "Height:"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:555
+msgid "Focus shortcut:"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:566
+msgid "Press this keyboard shortcut to move focus to the Panel"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:582
+msgctxt "@action:button Delete the panel"
+msgid "Delete Panel"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:585
+msgid "Remove this panel; this action is undo-able"
+msgstr ""
 
 #: contents/views/SdkButtons.qml:45
 msgid "FormFactors"
@@ -219,10 +408,6 @@ msgstr "Program"
 msgid "Location"
 msgstr "Położenie"
 
-#: contents/views/SdkButtons.qml:90
-msgid "Floating"
-msgstr "Pływające"
-
 #: contents/views/SdkButtons.qml:94
 msgid "Desktop"
 msgstr "Pulpit"
@@ -250,6 +435,12 @@ msgstr "Prawa krawędź"
 #: contents/views/SdkButtons.qml:126
 msgid "Configure Containment"
 msgstr "Ustawienia pojemnika"
+
+#~ msgid "Sorry! There was an error loading %1."
+#~ msgstr "Wybacz! Wystąpił błąd podczas wczytywania %1."
+
+#~ msgid "Appearance"
+#~ msgstr "Wygląd"
 
 #~ msgid "Layout cannot be changed whilst widgets are locked"
 #~ msgstr "Nie można zmienić układu, gdy elementy interfejsu są zablokowane"
