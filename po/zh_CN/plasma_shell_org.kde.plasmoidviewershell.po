@@ -19,10 +19,8 @@ msgstr ""
 "X-Crowdin-File-ID: 42663\n"
 
 #: contents/applet/AppletError.qml:164
-#, fuzzy
-#| msgid "Copy Error Details to Clipboard"
 msgid "Copy to Clipboard"
-msgstr "复制错误详情到剪贴板"
+msgstr ""
 
 #: contents/applet/AppletError.qml:187
 msgid "View Error Details…"
@@ -42,11 +40,9 @@ msgid "Send an email to %1"
 msgstr "发送电子邮件给 %1"
 
 #: contents/configuration/AboutPlugin.qml:64
-#, fuzzy
-#| msgid "Open %1"
 msgctxt "@info:tooltip %1 url"
 msgid "Open website %1"
-msgstr "打开 %1"
+msgstr ""
 
 #: contents/configuration/AboutPlugin.qml:137
 msgid "Copyright"
@@ -157,11 +153,9 @@ msgid "+"
 msgstr "+"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:167
-#, fuzzy
-#| msgid "About"
 msgctxt "@title"
 msgid "About"
-msgstr "关于"
+msgstr ""
 
 #: contents/configuration/ConfigurationContainmentActions.qml:182
 #: contents/configuration/MouseEventInputButton.qml:14
@@ -177,26 +171,20 @@ msgid "Layout:"
 msgstr "布局："
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:98
-#, fuzzy
-#| msgid "Wallpaper Type:"
 msgid "Wallpaper type:"
-msgstr "壁纸类型："
+msgstr ""
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:119
-#, fuzzy
-#| msgid "Get New Plugins..."
 msgid "Get New Plugins…"
-msgstr "获取新插件..."
+msgstr ""
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:189
 msgid "Layout changes must be applied before other changes can be made"
 msgstr "必须先保存布局更改才能更改其他选项"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:193
-#, fuzzy
-#| msgid "Apply now"
 msgid "Apply Now"
-msgstr "立即应用"
+msgstr ""
 
 #: contents/configuration/ConfigurationShortcuts.qml:18
 msgid "Shortcuts"
@@ -219,10 +207,8 @@ msgid "Input Here"
 msgstr "在此输入"
 
 #: contents/configuration/PanelConfiguration.qml:97
-#, fuzzy
-#| msgid "Apply Settings"
 msgid "Panel Settings"
-msgstr "应用设置"
+msgstr ""
 
 #: contents/configuration/PanelConfiguration.qml:104
 msgid "Add Spacer"
@@ -241,10 +227,8 @@ msgid "Open the widget selector to drag and drop widgets to the panel"
 msgstr ""
 
 #: contents/configuration/PanelConfiguration.qml:146
-#, fuzzy
-#| msgid "Location"
 msgid "Position"
-msgstr "位置"
+msgstr ""
 
 #: contents/configuration/PanelConfiguration.qml:151
 #: contents/configuration/PanelConfiguration.qml:266
@@ -253,24 +237,18 @@ msgstr ""
 
 #: contents/configuration/PanelConfiguration.qml:152
 #: contents/configuration/PanelConfiguration.qml:268
-#, fuzzy
-#| msgid "Right Edge"
 msgid "Right"
-msgstr "右边缘"
+msgstr ""
 
 #: contents/configuration/PanelConfiguration.qml:153
 #: contents/configuration/PanelConfiguration.qml:266
-#, fuzzy
-#| msgid "Left Edge"
 msgid "Left"
-msgstr "左边缘"
+msgstr ""
 
 #: contents/configuration/PanelConfiguration.qml:154
 #: contents/configuration/PanelConfiguration.qml:268
-#, fuzzy
-#| msgid "Bottom Edge"
 msgid "Bottom"
-msgstr "下边缘"
+msgstr ""
 
 #: contents/configuration/PanelConfiguration.qml:174
 msgid "Set Position…"
@@ -341,10 +319,8 @@ msgid "Opaque"
 msgstr ""
 
 #: contents/configuration/PanelConfiguration.qml:413
-#, fuzzy
-#| msgid "Translators"
 msgid "Translucent"
-msgstr "翻译人员"
+msgstr ""
 
 #: contents/configuration/PanelConfiguration.qml:437
 msgid "Style"
@@ -435,9 +411,3 @@ msgstr "右边缘"
 #: contents/views/SdkButtons.qml:126
 msgid "Configure Containment"
 msgstr "配置容器"
-
-#~ msgid "Sorry! There was an error loading %1."
-#~ msgstr "对不起，加载 %1 时发生错误。"
-
-#~ msgid "Appearance"
-#~ msgstr "外观"
