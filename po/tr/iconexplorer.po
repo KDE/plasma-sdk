@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-22 02:00+0000\n"
+"POT-Creation-Date: 2024-07-03 00:40+0000\n"
 "PO-Revision-Date: 2023-08-22 15:50+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -139,27 +139,27 @@ msgstr "Yakınlaştır"
 msgid "Zoom Out"
 msgstr "Uzaklaştır"
 
-#: src/qml/Preview.qml:49 src/qml/ResponsivePreview.qml:37
+#: src/qml/Preview.qml:51 src/qml/ResponsivePreview.qml:37
 #, kde-format
 msgid "File name:"
 msgstr "Dosya adı:"
 
-#: src/qml/Preview.qml:54 src/qml/ResponsivePreview.qml:42
+#: src/qml/Preview.qml:57 src/qml/ResponsivePreview.qml:42
 #, kde-format
 msgid "Category:"
 msgstr "Kategori:"
 
-#: src/qml/Preview.qml:59 src/qml/ResponsivePreview.qml:47
+#: src/qml/Preview.qml:63 src/qml/ResponsivePreview.qml:47
 #, kde-format
 msgid "Scalable:"
 msgstr "Ölçeklenebilir:"
 
-#: src/qml/Preview.qml:60 src/qml/ResponsivePreview.qml:48
+#: src/qml/Preview.qml:65 src/qml/ResponsivePreview.qml:48
 #, kde-format
 msgid "yes"
 msgstr "evet"
 
-#: src/qml/Preview.qml:60 src/qml/ResponsivePreview.qml:48
+#: src/qml/Preview.qml:65 src/qml/ResponsivePreview.qml:48
 #, kde-format
 msgid "no"
 msgstr "hayır"

@@ -438,9 +438,3 @@ msgstr "Høgre kant"
 #: contents/views/SdkButtons.qml:126
 msgid "Configure Containment"
 msgstr "Set opp behaldar"
-
-#~ msgid "Sorry! There was an error loading %1."
-#~ msgstr "Det oppstod dessverre ein feil ved lasting av %1."
-
-#~ msgid "Appearance"
-#~ msgstr "Utsjånad"
