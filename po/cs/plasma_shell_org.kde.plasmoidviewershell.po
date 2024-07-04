@@ -1,6 +1,6 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Vít Pelčák <vit@pelcak.org>, 2015, 2016.
+# SPDX-FileCopyrightText: 2015, 2016, 2024 Vít Pelčák <vit@pelcak.org>
 # Vit Pelcak <vit@pelcak.org>, 2021, 2023.
 #
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-01 00:40+0000\n"
-"PO-Revision-Date: 2023-02-21 09:40+0100\n"
+"PO-Revision-Date: 2024-07-03 10:47+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -16,17 +16,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 24.05.1\n"
 
 #: contents/applet/AppletError.qml:164
-#, fuzzy
-#| msgid "Copy Error Details to Clipboard"
 msgid "Copy to Clipboard"
-msgstr "Zkopírovat podrobnosti chyby do schránky"
+msgstr "Zkopírovat do schránky"
 
 #: contents/applet/AppletError.qml:187
 msgid "View Error Details…"
-msgstr ""
+msgstr "Zobrazit podrobnosti chyby..."
 
 #: contents/applet/CompactApplet.qml:76
 msgid "Open %1"
@@ -42,11 +40,9 @@ msgid "Send an email to %1"
 msgstr "Odeslat e-mail %1"
 
 #: contents/configuration/AboutPlugin.qml:64
-#, fuzzy
-#| msgid "Open %1"
 msgctxt "@info:tooltip %1 url"
 msgid "Open website %1"
-msgstr "Otevřít %1"
+msgstr "Otevřít webovou stránku: %1"
 
 #: contents/configuration/AboutPlugin.qml:137
 msgid "Copyright"
@@ -59,7 +55,7 @@ msgstr "Licence:"
 #: contents/configuration/AboutPlugin.qml:163
 msgctxt "@info:whatsthis"
 msgid "View license text"
-msgstr ""
+msgstr "Zobrazit text licence"
 
 #: contents/configuration/AboutPlugin.qml:177
 msgid "Authors"
@@ -75,7 +71,7 @@ msgstr "Překladatelé"
 
 #: contents/configuration/AboutPlugin.qml:220
 msgid "Report a Bug…"
-msgstr ""
+msgstr "Nahlásit chybu…"
 
 #: contents/configuration/AppletConfiguration.qml:75
 msgid "Keyboard Shortcuts"
@@ -159,8 +155,6 @@ msgid "+"
 msgstr "+"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:167
-#, fuzzy
-#| msgid "About"
 msgctxt "@title"
 msgid "About"
 msgstr "O aplikaci"
@@ -179,24 +173,18 @@ msgid "Layout:"
 msgstr "Rozvržení:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:98
-#, fuzzy
-#| msgid "Wallpaper Type:"
 msgid "Wallpaper type:"
 msgstr "Typ tapety:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:119
-#, fuzzy
-#| msgid "Get New Plugins..."
 msgid "Get New Plugins…"
-msgstr "Získat nové moduly..."
+msgstr "Získat nové moduly…"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:189
 msgid "Layout changes must be applied before other changes can be made"
 msgstr "Změny rozložení musí být aplikovány před ostatními změnami"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:193
-#, fuzzy
-#| msgid "Apply now"
 msgid "Apply Now"
 msgstr "Aplikovat nyní"
 
@@ -222,14 +210,12 @@ msgid "Input Here"
 msgstr "Vstup zde"
 
 #: contents/configuration/PanelConfiguration.qml:97
-#, fuzzy
-#| msgid "Apply Settings"
 msgid "Panel Settings"
-msgstr "Provést nastavení"
+msgstr "Nastavení panelu"
 
 #: contents/configuration/PanelConfiguration.qml:104
 msgid "Add Spacer"
-msgstr ""
+msgstr "Přidat mezeru"
 
 #: contents/configuration/PanelConfiguration.qml:107
 msgid "Add spacer widget to the panel"
@@ -237,121 +223,112 @@ msgstr ""
 
 #: contents/configuration/PanelConfiguration.qml:114
 msgid "Add Widgets…"
-msgstr ""
+msgstr "Přidat widgety…"
 
 #: contents/configuration/PanelConfiguration.qml:117
 msgid "Open the widget selector to drag and drop widgets to the panel"
 msgstr ""
 
 #: contents/configuration/PanelConfiguration.qml:146
-#, fuzzy
-#| msgid "Location"
 msgid "Position"
-msgstr "Umístění"
+msgstr "Pozice"
 
 #: contents/configuration/PanelConfiguration.qml:151
 #: contents/configuration/PanelConfiguration.qml:266
 msgid "Top"
-msgstr ""
+msgstr "Nahoře"
 
 #: contents/configuration/PanelConfiguration.qml:152
 #: contents/configuration/PanelConfiguration.qml:268
-#, fuzzy
-#| msgid "Right Edge"
 msgid "Right"
-msgstr "Pravý okraj"
+msgstr "Vpravo"
 
 #: contents/configuration/PanelConfiguration.qml:153
 #: contents/configuration/PanelConfiguration.qml:266
-#, fuzzy
-#| msgid "Left Edge"
 msgid "Left"
-msgstr "Levý okraj"
+msgstr "Vlevo"
 
 #: contents/configuration/PanelConfiguration.qml:154
 #: contents/configuration/PanelConfiguration.qml:268
-#, fuzzy
-#| msgid "Bottom Edge"
 msgid "Bottom"
-msgstr "Spodní okraj"
+msgstr "Dole"
 
 #: contents/configuration/PanelConfiguration.qml:174
 msgid "Set Position…"
-msgstr ""
+msgstr "Nastavit pozici..."
 
 #: contents/configuration/PanelConfiguration.qml:201
 msgid "Alignment"
-msgstr ""
+msgstr "Zarovnání"
 
 #: contents/configuration/PanelConfiguration.qml:267
 msgid "Center"
-msgstr ""
+msgstr "Střed"
 
 #: contents/configuration/PanelConfiguration.qml:290
 msgid "Height"
-msgstr ""
+msgstr "Výška"
 
 #: contents/configuration/PanelConfiguration.qml:291
 msgid "Width"
-msgstr ""
+msgstr "Šířka"
 
 #: contents/configuration/PanelConfiguration.qml:310
 msgid "Fill height"
-msgstr ""
+msgstr "Vyplnit víšku"
 
 #: contents/configuration/PanelConfiguration.qml:310
 msgid "Fill width"
-msgstr ""
+msgstr "Vyplnit šířku"
 
 #: contents/configuration/PanelConfiguration.qml:311
 msgid "Fit content"
-msgstr ""
+msgstr "Přizpůsob obsah"
 
 #: contents/configuration/PanelConfiguration.qml:312
 msgid "Custom"
-msgstr ""
+msgstr "Vlastní"
 
 #: contents/configuration/PanelConfiguration.qml:338
 msgid "Visibility"
-msgstr ""
+msgstr "Viditelnost"
 
 #: contents/configuration/PanelConfiguration.qml:351
 msgid "Always visible"
-msgstr ""
+msgstr "Vždy viditelný"
 
+# 55051 AttribValues/label
 #: contents/configuration/PanelConfiguration.qml:352
 msgid "Auto hide"
-msgstr ""
+msgstr "Automatické schovávání"
 
 #: contents/configuration/PanelConfiguration.qml:353
 msgid "Dodge windows"
-msgstr ""
+msgstr "Vyhýbat se oknům"
 
 #: contents/configuration/PanelConfiguration.qml:354
 msgid "Windows Go Below"
-msgstr ""
+msgstr "Okna jdou pod"
 
 #: contents/configuration/PanelConfiguration.qml:397
 msgid "Opacity"
-msgstr ""
+msgstr "Krytí"
 
 #: contents/configuration/PanelConfiguration.qml:411
 msgid "Adaptive"
-msgstr ""
+msgstr "Adaptivní"
 
 #: contents/configuration/PanelConfiguration.qml:412
 msgid "Opaque"
-msgstr ""
+msgstr "Neprůhledné"
 
 #: contents/configuration/PanelConfiguration.qml:413
-#, fuzzy
-#| msgid "Translators"
 msgid "Translucent"
-msgstr "Překladatelé"
+msgstr "Průhledné"
 
 #: contents/configuration/PanelConfiguration.qml:437
 msgid "Style"
-msgstr ""
+msgstr "Styl"
 
 #: contents/configuration/PanelConfiguration.qml:449
 #: contents/views/SdkButtons.qml:90
@@ -360,11 +337,11 @@ msgstr "Plovoucí"
 
 #: contents/configuration/PanelConfiguration.qml:520
 msgid "Panel Width:"
-msgstr ""
+msgstr "Šířka panelu:"
 
 #: contents/configuration/PanelConfiguration.qml:520
 msgid "Height:"
-msgstr ""
+msgstr "Výška:"
 
 #: contents/configuration/PanelConfiguration.qml:555
 msgid "Focus shortcut:"
@@ -372,16 +349,16 @@ msgstr ""
 
 #: contents/configuration/PanelConfiguration.qml:566
 msgid "Press this keyboard shortcut to move focus to the Panel"
-msgstr ""
+msgstr "Touto klávesovou zkratkou se přepnete na panel7"
 
 #: contents/configuration/PanelConfiguration.qml:582
 msgctxt "@action:button Delete the panel"
 msgid "Delete Panel"
-msgstr ""
+msgstr "Smazat panel"
 
 #: contents/configuration/PanelConfiguration.qml:585
 msgid "Remove this panel; this action is undo-able"
-msgstr ""
+msgstr "Odstranit tento panel, tento krok nelze vzít zpět"
 
 #: contents/views/SdkButtons.qml:45
 msgid "FormFactors"
@@ -438,9 +415,3 @@ msgstr "Pravý okraj"
 #: contents/views/SdkButtons.qml:126
 msgid "Configure Containment"
 msgstr ""
-
-#~ msgid "Sorry! There was an error loading %1."
-#~ msgstr "Při načítání došlo k chybě %1."
-
-#~ msgid "Appearance"
-#~ msgstr "Vzhled"
