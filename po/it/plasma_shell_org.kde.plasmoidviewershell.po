@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the plasma-sdk package.
 # Simone Solinas <ksolsim@gmail.com>, 2015.
-# Vincenzo Reale <smart2128vr@gmail.com>, 2021, 2022.
+# SPDX-FileCopyrightText: 2021, 2022, 2024 Vincenzo Reale <smart2128vr@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-01 00:40+0000\n"
-"PO-Revision-Date: 2022-06-06 13:06+0200\n"
+"PO-Revision-Date: 2024-07-01 17:51+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -16,17 +16,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Lokalize 24.05.1\n"
 
 #: contents/applet/AppletError.qml:164
-#, fuzzy
-#| msgid "Copy Error Details to Clipboard"
 msgid "Copy to Clipboard"
-msgstr "Copia i dettagli dell'errore negli appunti"
+msgstr "Copia negli appunti"
 
 #: contents/applet/AppletError.qml:187
 msgid "View Error Details…"
-msgstr ""
+msgstr "Visualizza i dettagli dell'errore..."
 
 #: contents/applet/CompactApplet.qml:76
 msgid "Open %1"
@@ -42,11 +40,9 @@ msgid "Send an email to %1"
 msgstr "Invia un messaggio di posta elettronica a %1"
 
 #: contents/configuration/AboutPlugin.qml:64
-#, fuzzy
-#| msgid "Open %1"
 msgctxt "@info:tooltip %1 url"
 msgid "Open website %1"
-msgstr "Apri %1"
+msgstr "Apri il sito web %1"
 
 #: contents/configuration/AboutPlugin.qml:137
 msgid "Copyright"
@@ -59,7 +55,7 @@ msgstr "Licenza:"
 #: contents/configuration/AboutPlugin.qml:163
 msgctxt "@info:whatsthis"
 msgid "View license text"
-msgstr ""
+msgstr "Visualizza il testo della licenza"
 
 #: contents/configuration/AboutPlugin.qml:177
 msgid "Authors"
@@ -75,7 +71,7 @@ msgstr "Traduttori"
 
 #: contents/configuration/AboutPlugin.qml:220
 msgid "Report a Bug…"
-msgstr ""
+msgstr "Segnala un bug…"
 
 #: contents/configuration/AppletConfiguration.qml:75
 msgid "Keyboard Shortcuts"
@@ -159,8 +155,6 @@ msgid "+"
 msgstr "+"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:167
-#, fuzzy
-#| msgid "About"
 msgctxt "@title"
 msgid "About"
 msgstr "Informazioni"
@@ -181,14 +175,10 @@ msgid "Layout:"
 msgstr "Disposizione:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:98
-#, fuzzy
-#| msgid "Wallpaper Type:"
 msgid "Wallpaper type:"
 msgstr "Tipo di sfondo:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:119
-#, fuzzy
-#| msgid "Get New Plugins..."
 msgid "Get New Plugins…"
 msgstr "Ottieni nuove estensioni..."
 
@@ -199,8 +189,6 @@ msgstr ""
 "essere apportate delle altre"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:193
-#, fuzzy
-#| msgid "Apply now"
 msgid "Apply Now"
 msgstr "Applica adesso"
 
@@ -226,136 +214,126 @@ msgid "Input Here"
 msgstr "Digita qui"
 
 #: contents/configuration/PanelConfiguration.qml:97
-#, fuzzy
-#| msgid "Apply Settings"
 msgid "Panel Settings"
-msgstr "Applica le impostazioni"
+msgstr "Impostazioni del pannello"
 
 #: contents/configuration/PanelConfiguration.qml:104
 msgid "Add Spacer"
-msgstr ""
+msgstr "Aggiungi spaziatore"
 
 #: contents/configuration/PanelConfiguration.qml:107
 msgid "Add spacer widget to the panel"
-msgstr ""
+msgstr "Aggiungi l'oggetto spaziatore al pannello"
 
 #: contents/configuration/PanelConfiguration.qml:114
 msgid "Add Widgets…"
-msgstr ""
+msgstr "Aggiungi oggetti..."
 
 #: contents/configuration/PanelConfiguration.qml:117
 msgid "Open the widget selector to drag and drop widgets to the panel"
 msgstr ""
+"Apri il selettore degli oggetti per trascinare e rilasciare gli oggetti sul "
+"pannello"
 
 #: contents/configuration/PanelConfiguration.qml:146
-#, fuzzy
-#| msgid "Location"
 msgid "Position"
 msgstr "Posizione"
 
 #: contents/configuration/PanelConfiguration.qml:151
 #: contents/configuration/PanelConfiguration.qml:266
 msgid "Top"
-msgstr ""
+msgstr "In alto"
 
 #: contents/configuration/PanelConfiguration.qml:152
 #: contents/configuration/PanelConfiguration.qml:268
-#, fuzzy
-#| msgid "Right Edge"
 msgid "Right"
-msgstr "Bordo destro"
+msgstr "Destra"
 
 #: contents/configuration/PanelConfiguration.qml:153
 #: contents/configuration/PanelConfiguration.qml:266
-#, fuzzy
-#| msgid "Left Edge"
 msgid "Left"
-msgstr "Bordo sinistro"
+msgstr "Sinistra"
 
 #: contents/configuration/PanelConfiguration.qml:154
 #: contents/configuration/PanelConfiguration.qml:268
-#, fuzzy
-#| msgid "Bottom Edge"
 msgid "Bottom"
-msgstr "Bordo inferiore"
+msgstr "In basso"
 
 #: contents/configuration/PanelConfiguration.qml:174
 msgid "Set Position…"
-msgstr ""
+msgstr "Imposta la posizione…"
 
 #: contents/configuration/PanelConfiguration.qml:201
 msgid "Alignment"
-msgstr ""
+msgstr "Allineamento"
 
 #: contents/configuration/PanelConfiguration.qml:267
 msgid "Center"
-msgstr ""
+msgstr "Centro"
 
 #: contents/configuration/PanelConfiguration.qml:290
 msgid "Height"
-msgstr ""
+msgstr "Altezza"
 
 #: contents/configuration/PanelConfiguration.qml:291
 msgid "Width"
-msgstr ""
+msgstr "Larghezza"
 
 #: contents/configuration/PanelConfiguration.qml:310
 msgid "Fill height"
-msgstr ""
+msgstr "Riempi in altezza"
 
 #: contents/configuration/PanelConfiguration.qml:310
 msgid "Fill width"
-msgstr ""
+msgstr "Riempi in larghezza"
 
 #: contents/configuration/PanelConfiguration.qml:311
 msgid "Fit content"
-msgstr ""
+msgstr "Adatta il contenuto"
 
 #: contents/configuration/PanelConfiguration.qml:312
 msgid "Custom"
-msgstr ""
+msgstr "Personalizzato"
 
 #: contents/configuration/PanelConfiguration.qml:338
 msgid "Visibility"
-msgstr ""
+msgstr "Visibilità"
 
 #: contents/configuration/PanelConfiguration.qml:351
 msgid "Always visible"
-msgstr ""
+msgstr "Sempre visibile"
 
 #: contents/configuration/PanelConfiguration.qml:352
 msgid "Auto hide"
-msgstr ""
+msgstr "Nascondi automaticamente"
 
 #: contents/configuration/PanelConfiguration.qml:353
 msgid "Dodge windows"
-msgstr ""
+msgstr "Eludi le finestre"
 
 #: contents/configuration/PanelConfiguration.qml:354
 msgid "Windows Go Below"
-msgstr ""
+msgstr "Le finestre vanno sotto"
 
 #: contents/configuration/PanelConfiguration.qml:397
 msgid "Opacity"
-msgstr ""
+msgstr "Opacità"
 
 #: contents/configuration/PanelConfiguration.qml:411
 msgid "Adaptive"
-msgstr ""
+msgstr "Adattivo"
 
 #: contents/configuration/PanelConfiguration.qml:412
 msgid "Opaque"
-msgstr ""
+msgstr "Opaco"
 
 #: contents/configuration/PanelConfiguration.qml:413
-#, fuzzy
-#| msgid "Translators"
 msgid "Translucent"
-msgstr "Traduttori"
+msgstr "Trasparente"
 
 #: contents/configuration/PanelConfiguration.qml:437
 msgid "Style"
-msgstr ""
+msgstr "Stile"
 
 #: contents/configuration/PanelConfiguration.qml:449
 #: contents/views/SdkButtons.qml:90
@@ -364,28 +342,29 @@ msgstr "Mobile"
 
 #: contents/configuration/PanelConfiguration.qml:520
 msgid "Panel Width:"
-msgstr ""
+msgstr "Larghezza del pannello:"
 
 #: contents/configuration/PanelConfiguration.qml:520
 msgid "Height:"
-msgstr ""
+msgstr "Altezza:"
 
 #: contents/configuration/PanelConfiguration.qml:555
 msgid "Focus shortcut:"
-msgstr ""
+msgstr "Scorciatoia per messa a fuoco:"
 
 #: contents/configuration/PanelConfiguration.qml:566
 msgid "Press this keyboard shortcut to move focus to the Panel"
 msgstr ""
+"Premi questa scorciatoia da tastiera per spostare il fuoco sul pannello"
 
 #: contents/configuration/PanelConfiguration.qml:582
 msgctxt "@action:button Delete the panel"
 msgid "Delete Panel"
-msgstr ""
+msgstr "Elimina pannello"
 
 #: contents/configuration/PanelConfiguration.qml:585
 msgid "Remove this panel; this action is undo-able"
-msgstr ""
+msgstr "Rimuovi questo pannello; questa azione è annullabile"
 
 #: contents/views/SdkButtons.qml:45
 msgid "FormFactors"
