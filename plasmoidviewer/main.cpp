@@ -24,7 +24,7 @@
 
 int main(int argc, char **argv)
 {
-    QQmlDebuggingEnabler debugEnabler;
+    QQmlTriviallyDestructibleDebuggingEnabler debugEnabler;
 
     auto format = QSurfaceFormat::defaultFormat();
     format.setOption(QSurfaceFormat::ResetNotification);
