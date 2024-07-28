@@ -143,7 +143,7 @@ void View::addContainment(const QString &cont)
 
     setContainment(c);
 
-    connect(containment(), &Plasma::Containment::appletRemoved, [=](Plasma::Applet *applet) {
+    connect(containment(), &Plasma::Containment::appletRemoved, [this](Plasma::Applet *applet) {
         if (applet && applet->pluginMetaData().isValid()) {
             addApplet(applet->pluginMetaData().pluginId());
         }
