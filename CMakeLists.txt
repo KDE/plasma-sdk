@@ -41,7 +41,7 @@ set_package_properties(Qt6Test PROPERTIES
     PURPOSE "Required for tests"
     TYPE OPTIONAL
 )
-add_feature_info("Qt6Test" Qt5Test_FOUND "Required for building tests")
+add_feature_info("Qt6Test" Qt6Test_FOUND "Required for building tests")
 if (NOT Qt6Test_FOUND)
     set(BUILD_TESTING OFF CACHE BOOL "Build the testing tree.")
 endif()
