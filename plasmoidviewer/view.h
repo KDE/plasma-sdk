@@ -29,7 +29,7 @@ public:
     Q_INVOKABLE void changeLocation(int location);
     Q_INVOKABLE void takeScreenShot();
 
-    static ViewerCorona *createCorona();
+    static ViewerCorona *createCorona(QObject *parent);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;

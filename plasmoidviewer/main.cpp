@@ -95,12 +95,12 @@ int main(int argc, char **argv)
         theme.setThemeName(parser.value("theme"));
     }
 
-    View *v = new View(View::createCorona());
+    View v(View::createCorona(&app));
 
-    v->addContainment(parser.value("containment"));
-    v->addFormFactor(parser.value("formfactor"));
-    v->addApplet(applet);
-    v->addLocation(parser.value("location"));
+    v.addContainment(parser.value("containment"));
+    v.addFormFactor(parser.value("formfactor"));
+    v.addApplet(applet);
+    v.addLocation(parser.value("location"));
 
     if (parser.isSet("size")) {
         // The size could be 800X640 or 800x640, so always do toLower.
@@ -113,18 +113,18 @@ int main(int argc, char **argv)
             const int realWidth = realSize.at(0).toInt();
             const int realHeight = realSize.at(1).toInt();
             if (realWidth != 0 && realHeight != 0) {
-                v->setWidth(realWidth);
-                v->setHeight(realHeight);
+                v.setWidth(realWidth);
+                v.setHeight(realHeight);
             }
         }
     }
 
     if (parser.isSet("xPosition")) {
-        v->setX(parser.value("xPosition").toInt());
+        v.setX(parser.value("xPosition").toInt());
     }
 
     if (parser.isSet("yPosition")) {
-        v->setY(parser.value("yPosition").toInt());
+        v.setY(parser.value("yPosition").toInt());
     }
 
     if (parser.isSet("pixmapcache")) {
@@ -133,10 +133,10 @@ int main(int argc, char **argv)
 
     // emit externalData event so we you can launch e.g. an icon applet already with a proper URL
     if (parser.positionalArguments().count() == 1) {
-        v->emitExternalData(parser.positionalArguments().constFirst());
+        v.emitExternalData(parser.positionalArguments().constFirst());
     }
 
-    v->show();
+    v.show();
 
     return app.exec();
 }

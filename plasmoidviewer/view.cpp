@@ -25,8 +25,8 @@
 class ViewerCorona : public Plasma::Corona
 {
 public:
-    ViewerCorona()
-        : Plasma::Corona()
+    ViewerCorona(QObject *parent)
+        : Plasma::Corona(parent)
         , m_view(nullptr)
     {
     }
@@ -282,12 +282,12 @@ void View::changeLocation(int location)
     addLocation(locationType);
 }
 
-ViewerCorona *View::createCorona()
+ViewerCorona *View::createCorona(QObject *parent)
 {
     KPackage::Package package = KPackage::PackageLoader::self()->loadPackage("Plasma/Shell");
     package.setPath("org.kde.plasma.plasmoidviewershell");
 
-    ViewerCorona *cor = new ViewerCorona();
+    ViewerCorona *cor = new ViewerCorona(parent);
     cor->setKPackage(package);
 
     return cor;
