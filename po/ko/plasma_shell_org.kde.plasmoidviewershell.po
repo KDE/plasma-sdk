@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Shinjo Park <kde@peremen.name>, 2015, 2016, 2020, 2021, 2022.
+# SPDX-FileCopyrightText: 2015, 2016, 2020, 2021, 2022, 2024 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-01 00:40+0000\n"
-"PO-Revision-Date: 2022-07-13 12:04+0200\n"
+"PO-Revision-Date: 2024-08-21 00:20+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,17 +15,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: contents/applet/AppletError.qml:164
-#, fuzzy
-#| msgid "Copy Error Details to Clipboard"
 msgid "Copy to Clipboard"
-msgstr "클립보드에 오류 자세한 정보 복사"
+msgstr "클립보드에 복사"
 
 #: contents/applet/AppletError.qml:187
 msgid "View Error Details…"
-msgstr ""
+msgstr "자세한 오류 정보 표시…"
 
 #: contents/applet/CompactApplet.qml:76
 msgid "Open %1"
@@ -41,11 +39,9 @@ msgid "Send an email to %1"
 msgstr "%1(으)로 이메일 보내기"
 
 #: contents/configuration/AboutPlugin.qml:64
-#, fuzzy
-#| msgid "Open %1"
 msgctxt "@info:tooltip %1 url"
 msgid "Open website %1"
-msgstr "%1 열기"
+msgstr "%1 웹사이트 열기"
 
 #: contents/configuration/AboutPlugin.qml:137
 msgid "Copyright"
@@ -58,7 +54,7 @@ msgstr "라이선스:"
 #: contents/configuration/AboutPlugin.qml:163
 msgctxt "@info:whatsthis"
 msgid "View license text"
-msgstr ""
+msgstr "라이선스 텍스트 보기"
 
 #: contents/configuration/AboutPlugin.qml:177
 msgid "Authors"
@@ -74,7 +70,7 @@ msgstr "번역자"
 
 #: contents/configuration/AboutPlugin.qml:220
 msgid "Report a Bug…"
-msgstr ""
+msgstr "버그 보고…"
 
 #: contents/configuration/AppletConfiguration.qml:75
 msgid "Keyboard Shortcuts"
@@ -158,8 +154,6 @@ msgid "+"
 msgstr "+"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:167
-#, fuzzy
-#| msgid "About"
 msgctxt "@title"
 msgid "About"
 msgstr "정보"
@@ -178,24 +172,18 @@ msgid "Layout:"
 msgstr "레이아웃:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:98
-#, fuzzy
-#| msgid "Wallpaper Type:"
 msgid "Wallpaper type:"
 msgstr "배경 그림 종류:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:119
-#, fuzzy
-#| msgid "Get New Plugins..."
 msgid "Get New Plugins…"
-msgstr "새 플러그인 가져오기..."
+msgstr "새 플러그인 가져오기…"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:189
 msgid "Layout changes must be applied before other changes can be made"
 msgstr "다른 항목을 변경하기 전 레이아웃 변경 사항을 적용해야 합니다"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:193
-#, fuzzy
-#| msgid "Apply now"
 msgid "Apply Now"
 msgstr "지금 적용하기"
 
@@ -220,136 +208,124 @@ msgid "Input Here"
 msgstr "여기에 입력"
 
 #: contents/configuration/PanelConfiguration.qml:97
-#, fuzzy
-#| msgid "Apply Settings"
 msgid "Panel Settings"
-msgstr "설정 적용"
+msgstr "패널 설정"
 
 #: contents/configuration/PanelConfiguration.qml:104
 msgid "Add Spacer"
-msgstr ""
+msgstr "공백 추가"
 
 #: contents/configuration/PanelConfiguration.qml:107
 msgid "Add spacer widget to the panel"
-msgstr ""
+msgstr "패널에 공백 위젯 추가"
 
 #: contents/configuration/PanelConfiguration.qml:114
 msgid "Add Widgets…"
-msgstr ""
+msgstr "위젯 추가…"
 
 #: contents/configuration/PanelConfiguration.qml:117
 msgid "Open the widget selector to drag and drop widgets to the panel"
-msgstr ""
+msgstr "패널로 위젯을 드래그 앤 드롭할 수 있는 위젯 선택기 열기"
 
 #: contents/configuration/PanelConfiguration.qml:146
-#, fuzzy
-#| msgid "Location"
 msgid "Position"
 msgstr "위치"
 
 #: contents/configuration/PanelConfiguration.qml:151
 #: contents/configuration/PanelConfiguration.qml:266
 msgid "Top"
-msgstr ""
+msgstr "위"
 
 #: contents/configuration/PanelConfiguration.qml:152
 #: contents/configuration/PanelConfiguration.qml:268
-#, fuzzy
-#| msgid "Right Edge"
 msgid "Right"
-msgstr "오른쪽 경계"
+msgstr "오른쪽"
 
 #: contents/configuration/PanelConfiguration.qml:153
 #: contents/configuration/PanelConfiguration.qml:266
-#, fuzzy
-#| msgid "Left Edge"
 msgid "Left"
-msgstr "왼쪽 경계"
+msgstr "왼쪽"
 
 #: contents/configuration/PanelConfiguration.qml:154
 #: contents/configuration/PanelConfiguration.qml:268
-#, fuzzy
-#| msgid "Bottom Edge"
 msgid "Bottom"
-msgstr "아래쪽 경계"
+msgstr "아래"
 
 #: contents/configuration/PanelConfiguration.qml:174
 msgid "Set Position…"
-msgstr ""
+msgstr "위치 설정…"
 
 #: contents/configuration/PanelConfiguration.qml:201
 msgid "Alignment"
-msgstr ""
+msgstr "정렬"
 
 #: contents/configuration/PanelConfiguration.qml:267
 msgid "Center"
-msgstr ""
+msgstr "가운데"
 
 #: contents/configuration/PanelConfiguration.qml:290
 msgid "Height"
-msgstr ""
+msgstr "높이"
 
 #: contents/configuration/PanelConfiguration.qml:291
 msgid "Width"
-msgstr ""
+msgstr "너비"
 
 #: contents/configuration/PanelConfiguration.qml:310
 msgid "Fill height"
-msgstr ""
+msgstr "높이 채우기"
 
 #: contents/configuration/PanelConfiguration.qml:310
 msgid "Fill width"
-msgstr ""
+msgstr "너비 채우기"
 
 #: contents/configuration/PanelConfiguration.qml:311
 msgid "Fit content"
-msgstr ""
+msgstr "내용에 맞춤"
 
 #: contents/configuration/PanelConfiguration.qml:312
 msgid "Custom"
-msgstr ""
+msgstr "사용자 정의"
 
 #: contents/configuration/PanelConfiguration.qml:338
 msgid "Visibility"
-msgstr ""
+msgstr "표시 여부"
 
 #: contents/configuration/PanelConfiguration.qml:351
 msgid "Always visible"
-msgstr ""
+msgstr "항상 표시"
 
 #: contents/configuration/PanelConfiguration.qml:352
 msgid "Auto hide"
-msgstr ""
+msgstr "자동 숨기기"
 
 #: contents/configuration/PanelConfiguration.qml:353
 msgid "Dodge windows"
-msgstr ""
+msgstr "창이 있을 때 숨기기"
 
 #: contents/configuration/PanelConfiguration.qml:354
 msgid "Windows Go Below"
-msgstr ""
+msgstr "창 아래로 이동"
 
 #: contents/configuration/PanelConfiguration.qml:397
 msgid "Opacity"
-msgstr ""
+msgstr "불투명도"
 
 #: contents/configuration/PanelConfiguration.qml:411
 msgid "Adaptive"
-msgstr ""
+msgstr "적응형"
 
 #: contents/configuration/PanelConfiguration.qml:412
 msgid "Opaque"
-msgstr ""
+msgstr "불투명"
 
 #: contents/configuration/PanelConfiguration.qml:413
-#, fuzzy
-#| msgid "Translators"
 msgid "Translucent"
-msgstr "번역자"
+msgstr "반투명"
 
 #: contents/configuration/PanelConfiguration.qml:437
 msgid "Style"
-msgstr ""
+msgstr "스타일"
 
 #: contents/configuration/PanelConfiguration.qml:449
 #: contents/views/SdkButtons.qml:90
@@ -358,28 +334,28 @@ msgstr "떠다님"
 
 #: contents/configuration/PanelConfiguration.qml:520
 msgid "Panel Width:"
-msgstr ""
+msgstr "패널 너비:"
 
 #: contents/configuration/PanelConfiguration.qml:520
 msgid "Height:"
-msgstr ""
+msgstr "높이:"
 
 #: contents/configuration/PanelConfiguration.qml:555
 msgid "Focus shortcut:"
-msgstr ""
+msgstr "포커스 단축키:"
 
 #: contents/configuration/PanelConfiguration.qml:566
 msgid "Press this keyboard shortcut to move focus to the Panel"
-msgstr ""
+msgstr "패널에 포커스를 맞추려면 이 키보드 단축키를 누르십시오"
 
 #: contents/configuration/PanelConfiguration.qml:582
 msgctxt "@action:button Delete the panel"
 msgid "Delete Panel"
-msgstr ""
+msgstr "패널 삭제"
 
 #: contents/configuration/PanelConfiguration.qml:585
 msgid "Remove this panel; this action is undo-able"
-msgstr ""
+msgstr "이 패널을 삭제합니다. 실행 취소할 수 없습니다"
 
 #: contents/views/SdkButtons.qml:45
 msgid "FormFactors"
