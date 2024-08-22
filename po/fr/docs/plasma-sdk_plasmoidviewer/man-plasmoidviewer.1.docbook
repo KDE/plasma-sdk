@@ -45,25 +45,25 @@
 ><option
 >-c, --containment</option
 > <replaceable
->name</replaceable
+>nom</replaceable
 ></group
 > <group choice="opt"
 ><option
 >-a, --applet</option
 > <replaceable
->name</replaceable
+>nom</replaceable
 ></group
 > <group choice="opt"
 ><option
 >-f, --formfactor</option
 > <replaceable
->name</replaceable
+>nom</replaceable
 ></group
 > <group choice="opt"
 ><option
 >-l, --location</option
 > <replaceable
->name</replaceable
+>nom</replaceable
 ></group
 > <group choice="opt"
 ><option
@@ -81,7 +81,7 @@
 ><option
 >-s, --size</option
 > <replaceable
->widthXheight</replaceable
+>Largeur-x-hauteur</replaceable
 ></group
 > <group choice="opt"
 ><option
