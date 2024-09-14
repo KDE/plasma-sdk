@@ -416,9 +416,3 @@ msgstr "Vora dreta"
 #: contents/views/SdkButtons.qml:126
 msgid "Configure Containment"
 msgstr "Configura el contenidor"
-
-#~ msgid "Sorry! There was an error loading %1."
-#~ msgstr "S'ha produït un error en carregar %1."
-
-#~ msgid "Appearance"
-#~ msgstr "Aparença"
