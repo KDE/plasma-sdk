@@ -158,8 +158,6 @@ msgid "+"
 msgstr "+"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:167
-#, fuzzy
-#| msgid "About"
 msgctxt "@title"
 msgid "About"
 msgstr "Περίγραμμα"
@@ -179,24 +177,18 @@ msgid "Layout:"
 msgstr "Διάταξη:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:98
-#, fuzzy
-#| msgid "Wallpaper Type:"
 msgid "Wallpaper type:"
 msgstr "Τύπος ταπετσαρίας:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:119
-#, fuzzy
-#| msgid "Get New Plugins..."
 msgid "Get New Plugins…"
-msgstr "Ανάκτηση νέων πρόσθετων..."
+msgstr "Ανάκτηση νέων πρόσθετων…"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:189
 msgid "Layout changes must be applied before other changes can be made"
 msgstr "Οι αλλαγές στη διάταξη πρέπει να εφαρμοστούν πριν γίνουν άλλες αλλαγές"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:193
-#, fuzzy
-#| msgid "Apply now"
 msgid "Apply Now"
 msgstr "Εφαρμογή τώρα"
 
