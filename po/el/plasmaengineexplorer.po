@@ -53,10 +53,9 @@ msgid "Search"
 msgstr "Αναζήτηση"
 
 #: engineexplorer.cpp:176
-#, fuzzy, kde-format
-#| msgid "DataSource"
+#, kde-format
 msgid "DataSource/Key"
-msgstr "Πηγή δεδομένων"
+msgstr "Πηγή δεδομένων/κλειδί"
 
 #: engineexplorer.cpp:176
 #, kde-format
@@ -125,13 +124,11 @@ msgid "<not displayable>"
 msgstr "<μη εμφανίσιμο>"
 
 #: engineexplorer.cpp:487 engineexplorer.cpp:502
-#, fuzzy, kde-format
-#| msgid "<1 item>"
-#| msgid_plural "<%1 items>"
+#, kde-format
 msgctxt "Length of the list"
 msgid "<%1 item>"
 msgid_plural "<%1 items>"
-msgstr[0] "<1 αντικείμενο>"
+msgstr[0] "<%1 αντικείμενο>"
 msgstr[1] "<%1 αντικείμενα>"
 
 #: engineexplorer.cpp:517
@@ -335,12 +332,10 @@ msgid "%1 Service Explorer"
 msgstr "Περιηγητής υπηρεσίας %1"
 
 #: serviceviewer.cpp:77
-#, fuzzy, kde-format
-#| msgctxt "Source: name of the data, Service: writes data instead of fetching"
-#| msgid "DataEngine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
+#, kde-format
 msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
-msgstr "Μηχανή δεδομένων: <b>%1</b>; Πηγή: <b>%2</b>; Υπηρεσία: <b>%3</b>"
+msgstr "Μηχανή: <b>%1</b>; Πηγή: <b>%2</b>; Υπηρεσία: <b>%3</b>"
 
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
 #: serviceviewer.cpp:153 serviceviewer.ui:73
