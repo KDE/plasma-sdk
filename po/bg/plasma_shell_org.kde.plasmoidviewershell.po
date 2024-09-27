@@ -415,9 +415,3 @@ msgstr "Десен край"
 #: contents/views/SdkButtons.qml:126
 msgid "Configure Containment"
 msgstr "Конфигуриране на съдържание"
-
-#~ msgid "Sorry! There was an error loading %1."
-#~ msgstr "За съжаление, възникна грешка при зареждане на %1."
-
-#~ msgid "Appearance"
-#~ msgstr "Външен вид"
