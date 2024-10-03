@@ -117,8 +117,6 @@
   <project_group>KDE</project_group>
   <releases>
     <release version="6.2.0" date="2024-10-08"/>
-    <release version="6.2.0" date="2024-10-08"/>
-    <release version="6.2.0" date="2024-10-08"/>
     <release version="6.1.5" date="2024-09-10"/>
   </releases>
 </component>
