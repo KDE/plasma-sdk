@@ -22,6 +22,7 @@
   <name xml:lang="he">דפדפן סמלים</name>
   <name xml:lang="hu">Ikonböngésző</name>
   <name xml:lang="ia">Icon Explorer ( Explorator de icone) </name>
+  <name xml:lang="id">Icon Explorer</name>
   <name xml:lang="it">Esploratore di icone</name>
   <name xml:lang="ka">ხატულების დათვალიერება</name>
   <name xml:lang="ko">아이콘 탐색기</name>
@@ -56,6 +57,7 @@
   <summary xml:lang="he">מציג סמלים לאומנים ומפתחים</summary>
   <summary xml:lang="hu">Ikonnézőke művészeknek és fejlesztőknek</summary>
   <summary xml:lang="ia">Monstrator preliminar de icone per artistas e disveloppatores</summary>
+  <summary xml:lang="id">Pempratinjau Ikon untuk Seniman dan Pengembang</summary>
   <summary xml:lang="it">Anteprime delle icone per artisti e sviluppatori</summary>
   <summary xml:lang="ka">ხატულის გადახედვა პროგრამისტებისა და მხატვრებისთვის</summary>
   <summary xml:lang="ko">예술가와 개발자용 아이콘 뷰어</summary>
@@ -92,6 +94,7 @@
     <p xml:lang="he">דפדפן הסמלים מאפשר לאומנים ולמפתחים לראות תצוגה מקדימה ולבחור סמלים. דפדפן הסמלים מנסה לעבד את הסמלים בדיוק כפי שהם יופיעו כשיצוירו ביישומים. הוא מאפשר לסנן לפי קטגוריה ושם. דפדפן הסמלים אינו כלי לשימוש הקהל הרחב אלא יותר ממוקד לתת מענה לשאלות שעולות לאומנים ולמפתחים. דפדפן הסמלים מספק גם תוסף ל־Kate ול־KDevelop לשימוש כבורר סמלים.</p>
     <p xml:lang="hu">Az Ikonböngésző lehetővé teszi a művészek és a fejlesztők számára az ikonok megtekintését és kiválasztását. Az Ikonböngésző  megpróbálja az ikonokat pontosan úgy megjeleníteni, ahogyan azok az alkalmazásban kirajzolódnának. Lehetővé teszi a szűrést kategória és név alapján. Az Ikonböngésző  em egy általános célú eszköz, hanem a művészek és fejlesztők felhasználási lehetőségeihez igazodik. Az Ikonböngésző egy bővítményt is biztosít a Kate-hez és a KDevelophoz, amelyet ikonválasztóként lehet használni.</p>
     <p xml:lang="ia">Icon Explorer (Explorator de Icone) permitte a artistas e disveloppatores previsualizar e colliger icones. Icon Explorer essaya render le icones exactemente como illes deberea semblar designate in le application. Il permitte filtrar basate sur categorias e nomine. Icon explorer nones un instrumento de uso general,ma orientate per casos de usator de artistas e disveloppatores. Icon explorer anque forni un pluigin per Kate e Kdevelop que pote esser usate como colligitor de icone. </p>
+    <p xml:lang="id">Icon Explorer memungkinkan seniman dan pengembang untuk melihat dan memilih ikon. Icon Explorer berupaya untuk menampilkan ikon persis seperti yang akan terlihat pada aplikasi. Icon Explorer memungkinkan untuk memfilter berdasarkan kategori dan nama. Icon Explorer bukanlah alat serbaguna, tetapi ditujukan untuk kasus penggunaan seniman dan pengembang. Icon Explorer juga menyediakan plugin untuk Kate dan KDevelop untuk digunakan sebagai pemilih ikon.</p>
     <p xml:lang="it">Esploratore di icone permette agli artisti ed agli sviluppatori di visualizzare anteprime e scegliere icone. Esploratore di icone tenta di mostrare l'icona esattamente per come apparirebbe all'interno dell'applicazione. Permette di filtrare in base alla categoria ed al nome. Esploratore di icone non è uno strumento di uso generico, ma indirizzato ai casi d'uso di artisti e sviluppatori. Esploratore di icone fornisce inoltre un'estensione per Kate e KDevelop che permette la selezione delle icone.</p>
     <p xml:lang="ka">ხატულების დამთვალიერებელი ხელოვნებს და პროგრამისტებს ხატულების დათვალიერების და არჩევის საშუალებას აძლევს. ის ცდილობს, ხატულები ზუსტად ისე დახატოს, როგორც ის აპლიკაციაში გამოჩნდებოდა. ის საშუალებას გაძლევთ, გაფილტროთ ხატულები კატეგორიებითა და სახელით. ხატულების დამთვალიერებელი ჩვეულებრივი ყოველდღიურად გამოსაყენებელი პროგრამა არაა. ის ხელოვნებისა და პროგრამისტებისთვისაა დაწერილი. ის ასევე შეიცავს დამატებებს Kate-სა და KDevelop-სთვის, რათა ხატულის არჩევაში დაგეხმაროთ.</p>
     <p xml:lang="ko">아이콘 탐색기에서는 아이콘을 미리 보고 선택할 수 있습니다. 아이콘 탐색기는 아이콘을 최대한 앱에 표시되는 대로 그리며, 분류와 이름을 기준으로 필터링할 수 있습니다. 아이콘 탐색기는 디자이너와 개발자의 사용 방식에 최적화되어 있으며, Kate와 KDevelop에서 아이콘 선택기로 사용할 수 있도록 플러그인을 제공합니다.</p>
