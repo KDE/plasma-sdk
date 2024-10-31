@@ -16,7 +16,7 @@
 
 #include <KLocalizedString>
 #include <KPluginMetaData>
-#include <KStandardAction>
+#include <KStandardActions>
 #include <KStringHandler>
 #include <QAction>
 #include <QDateTime>
@@ -82,7 +82,7 @@ EngineExplorer::EngineExplorer(QWidget *parent)
     connect(m_expandButton, &QAbstractButton::clicked, m_data, &QTreeView::expandAll);
     enableButtons(false);
 
-    addAction(KStandardAction::quit(qApp, SLOT(quit()), this));
+    addAction(KStandardActions::quit(qApp, &QApplication::quit, this));
 
     connect(m_data, &QWidget::customContextMenuRequested, this, &EngineExplorer::showDataContextMenu);
     m_data->setContextMenuPolicy(Qt::CustomContextMenu);

@@ -17,7 +17,8 @@ target_link_libraries(plasmaengineexplorer
     Plasma::Plasma5Support
     KF6::I18n
     KF6::ConfigCore
-    KF6::ConfigWidgets
+    KF6::ConfigGui
+    KF6::WidgetsAddons
 )
 
 

@@ -10,7 +10,6 @@ Dependencies:
     'frameworks/kcodecs': '@latest-kf6'
     'frameworks/kcompletion': '@latest-kf6'
     'frameworks/kconfig': '@latest-kf6'
-    'frameworks/kconfigwidgets': '@latest-kf6'
     'frameworks/kcoreaddons': '@latest-kf6'
     'frameworks/kdbusaddons': '@latest-kf6'
     'frameworks/ki18n': '@latest-kf6'

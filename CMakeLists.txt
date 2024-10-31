@@ -58,7 +58,7 @@ set_package_properties(KF6Kirigami PROPERTIES
 )
 
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
-    Archive Completion Config ConfigWidgets CoreAddons DBusAddons I18n IconThemes ItemModels
+    Archive Completion Config CoreAddons DBusAddons I18n IconThemes ItemModels
     KIO TextEditor WidgetsAddons DocTools Svg)
 
 find_package(Plasma ${PROJECT_DEP_VERSION} REQUIRED)

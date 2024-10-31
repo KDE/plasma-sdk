@@ -13,8 +13,8 @@ target_link_libraries(iconexplorer PRIVATE
     Qt::Gui
     Qt::Widgets # for QDirModel
     Plasma::Plasma
-    KF6::KIOWidgets
-    KF6::ConfigWidgets
+    KF6::KIOGui
+    KF6::ColorScheme
     KF6::I18n
     KF6::IconThemes
     Qt::DBus
