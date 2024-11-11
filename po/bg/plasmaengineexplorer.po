@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-28 01:46+0000\n"
-"PO-Revision-Date: 2024-05-30 20:42+0200\n"
+"PO-Revision-Date: 2024-11-10 20:13+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.0\n"
+"X-Generator: Lokalize 24.11.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -344,7 +344,7 @@ msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> failed. <p>The error was: "
 "<b>'%3: %4'</b></p>"
 msgstr ""
-"Операцията <b> '%1' </b> с дестинация <b> '%2' </b> е неуспешна.<p>Грешката "
+"Операцията <b> „%1“ </b> с дестинация <b> „%2“ </b> е неуспешна.<p>Грешката "
 "беше:<b> '%3:%4' </b></p>"
 
 #: serviceviewer.cpp:193 serviceviewer.cpp:206
@@ -363,8 +363,8 @@ msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> returned successfully. "
 "<p>The result was: <b>'%3'</b></p>"
 msgstr ""
-"Операцията <b> '%1' </b> с дестинация <b> '%2' </b> се върна успешно.<p> "
-"Резултатът беше: <b>'%3'</b></p>"
+"Операцията <b> „%1“ </b> с дестинация <b> „%2“ </b> се върна успешно.<p> "
+"Резултатът беше: <b>„%3“</b></p>"
 
 #: serviceviewer.cpp:228
 #, kde-format
