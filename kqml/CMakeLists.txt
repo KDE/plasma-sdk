@@ -22,5 +22,4 @@ set_target_properties(kqml PROPERTIES WIN32_EXECUTABLE FALSE)
 
 install(TARGETS kqml ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
-kdoctools_create_manpage (man-kqml.1.docbook 1 INSTALL_DESTINATION ${KDE_INSTALL_MANDIR})
 install(FILES completions/kqml.zsh RENAME _kqml DESTINATION ${KDE_INSTALL_ZSHAUTOCOMPLETEDIR})
