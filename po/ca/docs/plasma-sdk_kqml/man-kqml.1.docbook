@@ -1,0 +1,188 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Catalan  "INCLUDE">
+]>
+<!--
+    SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+-->
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>Manual d'usuari del «kqml»</title>
+<date
+>10 de juny 2023</date>
+<releaseinfo
+>Plasma 6.0</releaseinfo>
+<productname
+>Plasma de KDE</productname>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kqml</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kqml</command
+></refname>
+<refpurpose
+>Entorn d'execució del QML amb KLocalizedContext</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>kqml</command
+> <group choice="opt"
+><option
+>-v, --version</option
+></group
+> <group choice="opt"
+><option
+>-h, --help</option
+></group
+> <group choice="opt"
+><option
+>-d, --domain</option
+> <replaceable
+>domain</replaceable
+></group
+> <arg choice="opt"
+><replaceable
+>files</replaceable
+>...</arg
+> <arg choice="opt"
+><option
+>--</option
+> <replaceable
+>arguments</replaceable
+>...</arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Descripció</title>
+<para
+><command
+>kqml</command
+> és un entorn d'execució del QML amb KLocalizedContext inicialitzat.</para>
+
+<para
+>A diferència de l'eina «qml» que ve amb el paquet «qt-declarative», el «kqml» inicialitza KLocalizedContext que permet provar aplicacions del món real i fitxers des de zero amb crides «i18n» a través del seu codi i biblioteques importades.</para>
+</refsect1>
+
+<refsect1>
+<title
+>Opcions</title>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>-v</option
+>, <option
+>--version</option
+></term>
+<listitem
+><para
+>Mostra informació de la versió.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-d</option
+>, <option
+>--domain</option
+> <replaceable
+>domini</replaceable
+></term>
+<listitem
+><para
+>El domini principal de localització.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-h</option
+>, <option
+>--help</option
+></term>
+<listitem
+><para
+>Mostra aquesta ajuda.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><replaceable
+>fitxers</replaceable
+>...</term>
+<listitem
+><para
+>Es poden carregar qualsevol nombre de fitxers QML. Compartiran el mateix motor.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><replaceable
+>arguments</replaceable
+>...</term>
+<listitem
+><para
+>Els arguments després de «<option
+>--</option
+>» s'ignoren, però es passen a través de la variable «application.arguments» al QML.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</refsect1>
+
+<refsect1>
+<title
+>Vegeu també</title>
+
+<para
+>Hi ha informació més detallada disponible en <ulink url="help:/plasma-desktop"
+>help:/plasma-desktop</ulink
+> (podeu emprar aquest &URL; al &konqueror; o bé executar <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/plasma-desktop</parameter
+></userinput
+>).</para>
+
+</refsect1>
+
+<refsect1>
+<title
+>Autors</title>
+<para
+>El <command
+>kqml</command
+> l'ha escrit <personname
+><firstname
+>ivan</firstname
+><surname
+>tkachenko</surname
+></personname
+> <email
+>me@raitjas.tk</email
+>.</para>
+</refsect1>
+
+</refentry>

@@ -1,0 +1,190 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Dutch "INCLUDE">
+]>
+<!--
+    SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+-->
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>Gebruikershandleiding voor kqml</title>
+<date
+>2023-06-10</date>
+<releaseinfo
+>Plasma 6.0</releaseinfo>
+<productname
+>KDE Plasma</productname>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kqml</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kqml</command
+></refname>
+<refpurpose
+>QML Runtime met KLocalizedContext</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>kqml</command
+> <group choice="opt"
+><option
+>-v, --version</option
+></group
+> <group choice="opt"
+><option
+>-h, --help</option
+></group
+> <group choice="opt"
+><option
+>-d, --domain</option
+> <replaceable
+>domein</replaceable
+></group
+> <arg choice="opt"
+><replaceable
+>bestanden</replaceable
+>...</arg
+> <arg choice="opt"
+><option
+>--</option
+> <replaceable
+>argumenten</replaceable
+>...</arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Beschrijving</title>
+<para
+><command
+>kqml</command
+> is een QML runtime met geïnitialiseerde KLocalizedContext.</para>
+
+<para
+>Anders dan het hulpmiddel qml dat komt met pakket qt-declarative, initialiseert kqml KLocalizedContext dat testen biedt van echte toepassingen en scratch-bestanden met i18n aanroepen overal in hun code en geïmporteerde bibliotheken.</para>
+</refsect1>
+
+<refsect1>
+<title
+>Opties</title>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>-v</option
+>, <option
+>--version</option
+></term>
+<listitem
+><para
+>Toont versie-informatie.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-d</option
+>, <option
+>--domain</option
+> <replaceable
+>domein</replaceable
+></term>
+<listitem
+><para
+>Het hoofddomein voor vertalingen.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-h</option
+>, <option
+>--help</option
+></term>
+<listitem
+><para
+>Toont deze help.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><replaceable
+>bestanden</replaceable
+>...</term>
+<listitem
+><para
+>Elk aantal QML-bestanden kan geladen worden. Ze zullen dezelfde engine delen.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><replaceable
+>argumenten</replaceable
+>...</term>
+<listitem
+><para
+>Argumenten na '<option
+>--</option
+>' worden genegeerd, maar doorgegeven aan de variabele application.arguments in QML.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</refsect1>
+
+<refsect1>
+<title
+>Zie ook</title>
+
+<para
+>Meer gedetailleerde gebruikersdocumentatie is beschikbaar op <ulink url="help:/plasma-desktop"
+>help:/plasma-desktop</ulink
+> (ofwel voer deze <acronym
+>URL</acronym
+> in in &konqueror; of voer uit <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/plasma-desktop</parameter
+></userinput
+>).</para>
+
+</refsect1>
+
+<refsect1>
+<title
+>Auteurs</title>
+<para
+><command
+>kqml</command
+> is geschreven door <personname
+><firstname
+>ivan</firstname
+><surname
+>tkachenko</surname
+></personname
+> <email
+>me@raitjas.tk</email
+>.</para>
+</refsect1>
+
+</refentry>
