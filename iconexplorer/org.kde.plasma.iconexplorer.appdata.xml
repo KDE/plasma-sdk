@@ -32,6 +32,7 @@
   <name xml:lang="pt-BR">Explorador de ícones</name>
   <name xml:lang="ro">Explorator de pictograme</name>
   <name xml:lang="ru">Просмотр значков</name>
+  <name xml:lang="sa">चिह्न अन्वेषक</name>
   <name xml:lang="sk">Prieskumník ukon</name>
   <name xml:lang="sl">Icon Explorer</name>
   <name xml:lang="sv">Ikonutforskare</name>
@@ -66,6 +67,7 @@
   <summary xml:lang="pt-BR">Visualizador de ícones para artistas e desenvolvedores</summary>
   <summary xml:lang="ro">Previzualizator de pictograme pentru pictori și dezvoltatori</summary>
   <summary xml:lang="ru">Инструмент просмотра значков для дизайнеров и разработчиков</summary>
+  <summary xml:lang="sa">कलाकारानां विकासकानां च कृते चिह्नपूर्वदर्शकः</summary>
   <summary xml:lang="sk">Prehliadač ikon pre umelcov a vývojárov</summary>
   <summary xml:lang="sl">Vpogledovalnik ikon za umetnike in razvijalce</summary>
   <summary xml:lang="sv">Förhandsgranskning av ikoner för konstnärer och utvecklare</summary>
@@ -101,6 +103,7 @@
     <p xml:lang="pl">Przeglądarka ikon daje artystom i programistom podgląd i możliwość wyboru ikon. Przeglądarka ikon wyświetla ikony dokładnie tak jak będą one wyświetlane w aplikacji. Umożliwia filtrowanie na podstawie kategorii i nazwy. Przeglądarka ikon nie jest narzędziem ogólnego przeznaczenia, lecz przystosowanym do pracy artystów i programistów. Przeglądarka ikon dostarcza także wtyczki dla Kate oraz KDevelop.</p>
     <p xml:lang="pt-BR">O Explorador de ícones permite que artistas e desenvolvedores visualizem e escolham ícones. O Explorador de ícones tenta renderizar os ícones exatamente como seriam desenhados no aplicativo. Permite filtrar com base na categoria e no nome. O Explorador de ícones não é uma ferramenta de uso geral, mas voltada para o uso de caso de artistas e desenvolvedores. O Explorador de ícones também fornece um plugin para Kate e KDevelop para ser usado como seletor de ícones.</p>
     <p xml:lang="ru">Просмотр значков — инструмент просмотра и отбора значков для художников и  разработчиков. Приложение показывает значки именно так, как они будут выглядеть в приложении. В приложении реализован поиск и фильтрации списка значков по имени и категории. Кроме того, в состав приложения входит расширение для текстового редактора Kate и в среды разработки KDevelop, добавляющее в эти редакторы функционал выбора значков.</p>
+    <p xml:lang="sa">Icon Explorer इत्यनेन कलाकाराः विकासकाः च चिह्नानां पूर्वावलोकनं, चयनं च कर्तुं शक्नुवन्ति । Icon Explorer चिह्नानि यथा अनुप्रयोगे आकृष्टानि दृश्यन्ते तथा रेण्डर् कर्तुं प्रयतते । एतत् श्रेणीं नाम च आधारीकृत्य फ़िल्टर कर्तुं शक्नोति । Icon Explorer सामान्य-उद्देश्य-उपकरणं नास्ति, अपितु कलाकारानां विकासकानां च उपयोग-प्रकरणानाम् प्रति सज्जम् अस्ति । Icon Explorer इत्यनेन Kate तथा KDevelop इत्येतयोः कृते icon picker इत्यस्य रूपेण उपयोगाय प्लगिन् अपि प्रदाति ।</p>
     <p xml:lang="sk">Icon Explorer umožňuje umelcom a vývojárom zobraziť ukážku a vybrať ikony. Prieskumník ikonasa pokúša vykresliť ikony presne tak, ako by vyzerali nakreslené vaplikácii. Umožňuje filtrovať na základe kategórie a názvu. Prieskumník ikon nie je univerzálny nástroj, ale je zameraný na umelcov aprípady použitia vývojárov. Icon Explorer tiež poskytuje doplnok pre Kate aKDevelop sa má použiť ako nástroj na výber ikon.</p>
     <p xml:lang="sl">Icon Explorer umetnikom in razvijalcem omogoča predogled in izbiro ikon. Icon Explorer  poskuša upodobiti ikone točno tako, kot bi bile videti narisane v aplikaciji. Omogoča filtriranje glede na kategorijo in ime. Icon Explorer ni orodje za splošne namene, temveč je namenjeno umetnikom na primerih uporabe razvijalcev. Icon Explorer ponuja tudi vtičnik za Kate in KDevelop za uporabo kot izbirnik ikon.</p>
     <p xml:lang="sv">Ikonutforskaren låter konstnärer och utvecklare förhandsgranska och välja ikoner. Ikonutforskaren försöker återge ikonerna exakt som de skulle se ut ritade i programmet. Det gör det möjligt att filtrera baserat på kategori och namn. Ikonutforskaren är inte ett allmänt verktyg, utan inriktat på konstnärers och utvecklares användningsfall. Ikonutforskaren tillhandahåller också ett insticksprogram för Kate och KDevelop som kan användas som ikonväljare.</p>
