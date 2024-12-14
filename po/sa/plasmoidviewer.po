@@ -1,0 +1,109 @@
+# Sanskrit translations for plasma-sdk package.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the plasma-sdk package.
+# Kali <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-sdk\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-08-22 02:00+0000\n"
+"PO-Revision-Date: 2024-12-13 19:09+0530\n"
+"Last-Translator: Kali <EMAIL@ADDRESS>\n"
+"Language-Team: Sanskrit\n"
+"Language: sa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+
+#: main.cpp:37
+#, kde-format
+msgid "Plasmoidviewer"
+msgstr "प्लाज्मोइडदर्शक"
+
+#: main.cpp:44
+#, kde-format
+msgid "Run Plasma widgets in their own window"
+msgstr "स्वस्य विण्डो मध्ये Plasma widgets चालयन्तु"
+
+#: main.cpp:47
+#, kde-format
+msgid "The name of the containment plugin"
+msgstr "निरोधप्लगिन् इत्यस्य नाम"
+
+#: main.cpp:51
+#, kde-format
+msgid "The name of the applet plugin"
+msgstr "एप्लेट् प्लगिन् इत्यस्य नाम"
+
+#: main.cpp:53
+#, kde-format
+msgid ""
+"The formfactor to use (horizontal, vertical, mediacenter, planar or "
+"application)"
+msgstr "उपयोगाय रूपकारकः (क्षैतिजः, ऊर्ध्वाधरः, मध्यकेन्द्रः, समतलः वा अनुप्रयोगः)"
+
+#: main.cpp:58
+#, kde-format
+msgid ""
+"The location constraint to start the Containment with (floating, desktop, "
+"fullscreen, topedge, bottomedge, leftedge, rightedge)"
+msgstr ""
+"Containment इत्यस्य आरम्भार्थं स्थानप्रतिबन्धः (floating, desktop, fullscreen, "
+"topedge, bottomedge, leftedge, rightedge)"
+
+#: main.cpp:63
+#, kde-format
+msgid "Set the x position of the plasmoidviewer on the Plasma desktop"
+msgstr "Plasma डेस्कटॉप् मध्ये plasmoidviewer इत्यस्य x स्थानं सेट् कुर्वन्तु"
+
+#: main.cpp:66
+#, kde-format
+msgid "Set the y position of the plasmoidviewer on the Plasma desktop"
+msgstr "Plasma डेस्कटॉप् मध्ये plasmoidviewer इत्यस्य y स्थानं सेट् कुर्वन्तु"
+
+#: main.cpp:69
+#, kde-format
+msgid "Set the window size of the plasmoidview"
+msgstr "प्लाज्मोइड्व्यू इत्यस्य विण्डो आकारं सेट् कुर्वन्तु"
+
+#: main.cpp:72
+#, kde-format
+msgid "The size in kB to set the pixmap cache to"
+msgstr "pixmap cache सेट् कर्तुं kB मध्ये आकारः"
+
+#: main.cpp:75
+#, kde-format
+msgid "The name of the theme which the shell will use"
+msgstr "यस्य विषयस्य नाम शेल् प्रयोक्ष्यति"
+
+#: main.cpp:78
+#, kde-format
+msgid "Data that should be passed to the applet as 'externalData' event"
+msgstr "यत् दत्तांशं 'externalData' इवेण्ट् इति एप्लेट् प्रति पारितव्यम्"
+
+#: view.cpp:123
+#, no-c-format, kde-format
+msgid "Applet %1 does not exist."
+msgstr "एप्लेट् %1 नास्ति ।"
+
+#: view.cpp:140
+#, no-c-format, kde-format
+msgid "Containment %1 does not exist."
+msgstr "%1 निरोधः नास्ति ।"
+
+#: view.cpp:313
+#, kde-format
+msgctxt "@title:window"
+msgid "Save Screenshot"
+msgstr ""

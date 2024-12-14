@@ -1,0 +1,177 @@
+# Sanskrit translations for plasma-sdk package.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the plasma-sdk package.
+# Kali <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-sdk\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-04-05 02:19+0000\n"
+"PO-Revision-Date: 2024-12-13 19:09+0530\n"
+"Last-Translator: Kali <EMAIL@ADDRESS>\n"
+"Language-Team: Sanskrit\n"
+"Language: sa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+
+#: package/contents/ui/main.qml:30
+#, kde-format
+msgid "Look And Feel"
+msgstr "Look And Feel इति"
+
+#: package/contents/ui/main.qml:46
+#, kde-format
+msgid "New Theme…"
+msgstr "नवीन विषयः..."
+
+#: package/contents/ui/main.qml:63
+#, kde-format
+msgid "Open Theme Folder"
+msgstr "Theme Folder उद्घाटयन्तु"
+
+#: package/contents/ui/main.qml:92
+#, kde-format
+msgid "Plugin name:"
+msgstr "प्लगिन् नाम : १."
+
+#: package/contents/ui/main.qml:95
+#, kde-format
+msgid "Name:"
+msgstr "नामः:"
+
+#: package/contents/ui/main.qml:99 package/contents/ui/MetadataEditor.qml:76
+#, kde-format
+msgid "Comment:"
+msgstr "टिप्पणी:"
+
+#: package/contents/ui/main.qml:103 package/contents/ui/MetadataEditor.qml:80
+#, kde-format
+msgid "Author:"
+msgstr "लेखकः:"
+
+#: package/contents/ui/main.qml:107 package/contents/ui/MetadataEditor.qml:84
+#, kde-format
+msgid "Email:"
+msgstr "ईमेल : १."
+
+#: package/contents/ui/main.qml:111 package/contents/ui/MetadataEditor.qml:88
+#, kde-format
+msgid "Version:"
+msgstr "संस्करण:"
+
+#: package/contents/ui/main.qml:115 package/contents/ui/MetadataEditor.qml:92
+#, kde-format
+msgid "Website:"
+msgstr "जालपुटम् : १."
+
+#: package/contents/ui/main.qml:119 package/contents/ui/MetadataEditor.qml:97
+#, kde-format
+msgid "License:"
+msgstr "अनुज्ञापत्रम् : १."
+
+#: package/contents/ui/main.qml:123
+#, kde-format
+msgid "Layout from current Plasma setup"
+msgstr "वर्तमान प्लाज्मा सेटअपतः लेआउट्"
+
+#: package/contents/ui/main.qml:128
+#, kde-format
+msgid "Defaults from current setup"
+msgstr "वर्तमानसेटअपतः पूर्वनिर्धारितम्"
+
+#: package/contents/ui/main.qml:149
+#, kde-format
+msgid "Click to open an image"
+msgstr "चित्रं उद्घाटयितुं क्लिक् कुर्वन्तु"
+
+#: package/contents/ui/main.qml:185
+#, kde-format
+msgid "Save"
+msgstr "रक्ष्"
+
+#: package/contents/ui/MetadataEditor.qml:28
+#, kde-format
+msgid "New Theme"
+msgstr "नवीन विषय"
+
+#: package/contents/ui/MetadataEditor.qml:57
+#, kde-format
+msgid "Theme Plugin Name:"
+msgstr "विषय प्लगिन् नाम:"
+
+#: package/contents/ui/MetadataEditor.qml:62
+#, kde-format
+msgid "This theme plugin name already exists"
+msgstr "इदं थीम् प्लगिन् नाम पूर्वमेव अस्ति"
+
+#: package/contents/ui/MetadataEditor.qml:72
+#, kde-format
+msgid "Theme Name:"
+msgstr "विषयनाम : १."
+
+#: package/contents/ui/MetadataEditor.qml:109
+#, kde-format
+msgid "OK "
+msgstr "अस्तु "
+
+#: package/contents/ui/MetadataEditor.qml:115
+#, kde-format
+msgid "Cancel"
+msgstr "निरसयतु"
+
+#: src/lnflogic.cpp:85
+#, kde-format
+msgid "Cannot retrieve the current Plasma layout."
+msgstr "वर्तमानं प्लाज्मा-विन्यासं पुनः प्राप्तुं न शक्यते ।"
+
+#: src/lnflogic.cpp:93
+#, kde-format
+msgid "Impossible to create the layouts directory in the look and feel package"
+msgstr "look and feel package इत्यस्मिन् layouts निर्देशिकां निर्मातुं असम्भवम्"
+
+#: src/lnflogic.cpp:104
+#, kde-format
+msgid "Impossible to write to org.kde.plasma.desktop-layout.js"
+msgstr "org.kde.plasma.desktop-layout.js इत्यत्र लिखितुं असम्भवम्"
+
+#: src/lnflogic.cpp:107
+#, kde-format
+msgid "Plasma Layout successfully duplicated"
+msgstr "प्लाज्मा लेआउट् सफलतया डुप्लिकेट् कृतम्"
+
+#: src/lnflogic.cpp:164
+#, kde-format
+msgid "Defaults config file saved from your current setup"
+msgstr "भवतः वर्तमानव्यवस्थापनात् रक्षितं विन्याससञ्चिकां पूर्वनिर्धारयति"
+
+#: src/lnflogic.cpp:487
+#, kde-format
+msgid "Open Image"
+msgstr "चित्रं उद्घाटयतु"
+
+#: src/lnflogic.cpp:489
+#, kde-format
+msgid "Image Files (*.png *.jpg *.bmp)"
+msgstr "चित्रसञ्चिकाः (*.png *.jpg *.bmp)"
+
+#: src/main.cpp:34
+#, kde-format
+msgid "Plasma Look And Feel Explorer"
+msgstr "प्लाज्मा लुक् एण्ड् फील् एक्सप्लोरर"
+
+#: src/main.cpp:38
+#, kde-format
+msgid "Look And Feel to open"
+msgstr "Look And Feel उद्घाटयितुं"
