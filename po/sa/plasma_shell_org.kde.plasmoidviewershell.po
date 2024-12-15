@@ -40,7 +40,7 @@ msgstr "%1 इत्यस्मै ईमेल प्रेषयन्तु"
 #: contents/configuration/AboutPlugin.qml:64
 msgctxt "@info:tooltip %1 url"
 msgid "Open website %1"
-msgstr ""
+msgstr "वेबसाइट् %1 उद्घाटयन्तु"
 
 #: contents/configuration/AboutPlugin.qml:137
 msgid "Copyright"
@@ -53,7 +53,7 @@ msgstr "अनुज्ञापत्रम् : १."
 #: contents/configuration/AboutPlugin.qml:163
 msgctxt "@info:whatsthis"
 msgid "View license text"
-msgstr ""
+msgstr "अनुज्ञापत्रपाठं पश्यन्तु"
 
 #: contents/configuration/AboutPlugin.qml:177
 msgid "Authors"
@@ -149,7 +149,7 @@ msgstr "मेटा"
 #: contents/configuration/ConfigurationContainmentActions.qml:95
 msgctxt "Concatenation sign for shortcuts, e.g. Ctrl+Shift"
 msgid "+"
-msgstr ""
+msgstr "+"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:167
 msgctxt "@title"
@@ -349,7 +349,7 @@ msgstr "Panel मध्ये फोकस गन्तुं एतत् क�
 #: contents/configuration/PanelConfiguration.qml:582
 msgctxt "@action:button Delete the panel"
 msgid "Delete Panel"
-msgstr ""
+msgstr "पटलं विलोपयन्तु"
 
 #: contents/configuration/PanelConfiguration.qml:585
 msgid "Remove this panel; this action is undo-able"

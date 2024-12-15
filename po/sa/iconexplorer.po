@@ -95,7 +95,7 @@ msgstr "अन्येषु चिह्नविषयेषु पश्य�
 #, kde-format
 msgctxt "@title placeholder is an icon name"
 msgid "Other versions of %1"
-msgstr ""
+msgstr "%1 इत्यस्य अन्ये संस्करणाः"
 
 #: src/qml/GlobalMenuBar.qml:19
 #, kde-format

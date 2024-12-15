@@ -3,29 +3,31 @@
 # This file is distributed under the same license as the plasma-sdk package.
 # Kali <EMAIL@ADDRESS>, 2024.
 #
+# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-28 01:46+0000\n"
-"PO-Revision-Date: 2024-12-13 19:09+0530\n"
-"Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
+"PO-Revision-Date: 2024-12-14 19:31+0530\n"
+"Last-Translator: kali <skkalwar999@gmail.com>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n>2);\n"
+"X-Generator: Poedit 3.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "भवतः नामानि"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "भवतः ईमेलपत्राणि"
 
 #: engineexplorer.cpp:45
 #, kde-format
@@ -87,28 +89,28 @@ msgstr "स्रोतः निष्कासयतु"
 #, kde-format
 msgid "<1 bit>"
 msgid_plural "<%1 bits>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<१ बिट्>"
+msgstr[1] "<%1 बिट्>"
 
 #: engineexplorer.cpp:330
 #, kde-format
 msgid "<1 byte>"
 msgid_plural "<%1 bytes>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<१ बाइट्>"
+msgstr[1] "<%1 बाइट्स>"
 
 #: engineexplorer.cpp:352
 #, kde-format
 msgid "<1 item>"
 msgid_plural "<%1 items>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<१ मद>"
+msgstr[1] "<%1 द्रव्यम्>"
 
 #: engineexplorer.cpp:427
 #, kde-format
 msgctxt "The user did a query to a dataengine and it returned empty data"
 msgid "<empty>"
-msgstr ""
+msgstr "<रिक्त>"
 
 #: engineexplorer.cpp:433
 #, kde-format
@@ -116,23 +118,23 @@ msgctxt ""
 "A the dataengine returned something that the humble view on the "
 "engineexplorer can't display, like a picture"
 msgid "<not displayable>"
-msgstr ""
+msgstr "<न प्रदर्श्यम्>"
 
 #: engineexplorer.cpp:487 engineexplorer.cpp:502
 #, kde-format
 msgctxt "Length of the list"
 msgid "<%1 item>"
 msgid_plural "<%1 items>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<%1 मद>"
+msgstr[1] "<%1 द्रव्यम्>"
 
 #: engineexplorer.cpp:517
 #, kde-format
 msgctxt "Size of the map"
 msgid "<%1 pair>"
 msgid_plural "<%1 pairs>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<%1 युग्मम्>"
+msgstr[1] "<%1 युग्मानि>"
 
 #. i18n: ectx: property (text), widget (KTitleWidget, m_title)
 #: engineexplorer.cpp:530 engineexplorer.ui:29
@@ -145,8 +147,8 @@ msgstr "प्लाज्मा डाटाइञ्जिन एक्सप�
 msgctxt "The name of the engine followed by the number of data sources"
 msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 इञ्जिन - 1 दत्तांशस्रोतः"
+msgstr[1] "%1 इञ्जिन - %2 दत्तांशस्रोताः"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
 #: engineexplorer.ui:50
@@ -283,7 +285,7 @@ msgstr ""
 #, kde-format
 msgctxt "Plasma engine with unknown name"
 msgid "Unknown"
-msgstr ""
+msgstr "अज्ञात"
 
 #: modelviewer.cpp:98
 #, kde-format
@@ -297,7 +299,7 @@ msgstr ""
 #, kde-format
 msgctxt "%1 is a Plasma dataengine name"
 msgid "%1 Model Explorer"
-msgstr ""
+msgstr "%1 मॉडल एक्सप्लोरर"
 
 #: serviceviewer.cpp:27
 #, kde-format
@@ -308,7 +310,7 @@ msgstr "संचालनम् आरभत"
 #, kde-format
 msgctxt "Plasma service with unknown name"
 msgid "Unknown"
-msgstr ""
+msgstr "अज्ञात"
 
 #: serviceviewer.cpp:69
 #, kde-format
@@ -321,13 +323,13 @@ msgstr "वैधसेवा न प्रत्यागतवती । अ�
 #, kde-format
 msgctxt "%1 is a Plasma service name"
 msgid "%1 Service Explorer"
-msgstr ""
+msgstr "%1 सेवा अन्वेषक"
 
 #: serviceviewer.cpp:77
 #, kde-format
 msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
-msgstr ""
+msgstr "इञ्जिनम् : <b>%1</b> ; स्रोतः <b>%2</b> ; सेवा: <b>%3</b>"
 
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
 #: serviceviewer.cpp:153 serviceviewer.ui:73
@@ -367,8 +369,8 @@ msgstr ""
 #, kde-format
 msgid "One active operation…"
 msgid_plural "%1 operations active…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "एकं सक्रियं कार्यं..."
+msgstr[1] "%1 कार्याणि सक्रियम्..."
 
 #. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
 #: serviceviewer.ui:39
