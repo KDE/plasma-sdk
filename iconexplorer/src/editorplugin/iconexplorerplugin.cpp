@@ -75,10 +75,8 @@ void CuttleFishPlugin::contextMenuAboutToShow(KTextEditor::View *view, QMenu *me
             cuttlefish->terminate();
         });
 
-        connect(cuttlefish, &QProcess::stateChanged, [cuttlefish](QProcess::ProcessState newState) {
-            if (newState == QProcess::NotRunning && KTextEditor::Editor::instance()->application()->activeMainWindow()) {
-                delete cuttlefish;
-            }
+        connect(cuttlefish, &QProcess::finished, [cuttlefish]() {
+            delete cuttlefish;
         });
 
         cuttlefish->start();
