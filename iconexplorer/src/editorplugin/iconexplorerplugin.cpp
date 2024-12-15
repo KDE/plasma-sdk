@@ -60,7 +60,7 @@ void CuttleFishPlugin::contextMenuAboutToShow(KTextEditor::View *view, QMenu *me
     menu->addAction(action);
 
     connect(action, &QAction::triggered, [this] {
-        const QString cfexe = QStandardPaths::findExecutable("cuttlefish");
+        const QString cfexe = QStandardPaths::findExecutable(QStringLiteral("iconexplorer"));
 
         QProcess *cuttlefish = new QProcess(this);
         cuttlefish->setProgram(cfexe);
