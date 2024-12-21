@@ -3,19 +3,21 @@
 # This file is distributed under the same license as the plasma-sdk package.
 # Kali <EMAIL@ADDRESS>, 2024.
 #
+# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-15 00:39+0000\n"
-"PO-Revision-Date: 2024-12-13 19:09+0530\n"
-"Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
+"PO-Revision-Date: 2024-12-20 21:54+0530\n"
+"Last-Translator: kali <skkalwar999@gmail.com>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n>2);\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -55,7 +57,7 @@ msgstr "विजिट् लिङ्क्"
 #: package/contents/ui/ColorEditor.qml:148
 #, kde-format
 msgid "Complementary colors area:"
-msgstr "पूरक रङ्ग क्षेत्र : १."
+msgstr "पूरक रङ्ग क्षेत्र :"
 
 #: package/contents/ui/ColorEditor.qml:163
 #, kde-format
@@ -65,32 +67,32 @@ msgstr "नामपत्र"
 #: package/contents/ui/ColorEditor.qml:186
 #, kde-format
 msgid "Text color:"
-msgstr "पाठवर्णः : १."
+msgstr "पाठवर्णः :"
 
 #: package/contents/ui/ColorEditor.qml:193
 #, kde-format
 msgid "Background color:"
-msgstr "पृष्ठभूमिवर्णः : १."
+msgstr "पृष्ठभूमिवर्णः :"
 
 #: package/contents/ui/ColorEditor.qml:200
 #, kde-format
 msgid "Highlight color:"
-msgstr "वर्णः प्रकाशयन्तु : १."
+msgstr "वर्णः प्रकाशयन्तु :"
 
 #: package/contents/ui/ColorEditor.qml:207
 #, kde-format
 msgid "Link color:"
-msgstr "लिङ्कस्य वर्णः : १."
+msgstr "लिङ्कस्य वर्णः :"
 
 #: package/contents/ui/ColorEditor.qml:214
 #, kde-format
 msgid "Visited link color:"
-msgstr "भ्रमणं कृतवान् लिङ्कवर्णः : १."
+msgstr "भ्रमणं कृतवान् लिङ्कवर्णः :"
 
 #: package/contents/ui/ColorEditor.qml:222
 #, kde-format
 msgid "Button text color:"
-msgstr "बटनपाठवर्णः : १."
+msgstr "बटनपाठवर्णः :"
 
 #: package/contents/ui/ColorEditor.qml:229
 #, kde-format
@@ -105,17 +107,17 @@ msgstr "बटनं मूषकं वर्णस्य उपरि:"
 #: package/contents/ui/ColorEditor.qml:243
 #, kde-format
 msgid "Button focus color:"
-msgstr "बटनकेन्द्रवर्णः : १."
+msgstr "बटनकेन्द्रवर्णः :"
 
 #: package/contents/ui/ColorEditor.qml:251
 #, kde-format
 msgid "Text view text color:"
-msgstr "पाठदृश्यपाठवर्णः : १."
+msgstr "पाठदृश्यपाठवर्णः :"
 
 #: package/contents/ui/ColorEditor.qml:258
 #, kde-format
 msgid "Text view background color:"
-msgstr "पाठदृश्यपृष्ठभूमिवर्णः : १."
+msgstr "पाठदृश्यपृष्ठभूमिवर्णः :"
 
 #: package/contents/ui/ColorEditor.qml:265
 #, kde-format
@@ -125,27 +127,27 @@ msgstr "वर्णस्य उपरि मूषकस्य पाठदृ
 #: package/contents/ui/ColorEditor.qml:272
 #, kde-format
 msgid "Text view focus color:"
-msgstr "पाठदृश्यकेन्द्रवर्णः : १."
+msgstr "पाठदृश्यकेन्द्रवर्णः :"
 
 #: package/contents/ui/ColorEditor.qml:280
 #, kde-format
 msgid "Complementary text color:"
-msgstr "पूरकपाठवर्णः : १."
+msgstr "पूरकपाठवर्णः :"
 
 #: package/contents/ui/ColorEditor.qml:287
 #, kde-format
 msgid "Complementary background color:"
-msgstr "पूरक पृष्ठभूमि रंग : १."
+msgstr "पूरक पृष्ठभूमि रंग :"
 
 #: package/contents/ui/ColorEditor.qml:294
 #, kde-format
 msgid "Complementary mouse over color:"
-msgstr "वर्णस्य उपरि पूरकः मूषकः : १."
+msgstr "वर्णस्य उपरि पूरकः मूषकः :"
 
 #: package/contents/ui/ColorEditor.qml:301
 #, kde-format
 msgid "Complementary focus color:"
-msgstr "पूरक फोकस वर्ण : १."
+msgstr "पूरक फोकस वर्ण :"
 
 #: package/contents/ui/ColorEditor.qml:313
 #: package/contents/ui/MetadataEditor.qml:137
@@ -253,7 +255,7 @@ msgstr "एषः पठनीयः, प्रणालीव्यापी �
 #: package/contents/ui/main.qml:227
 #, kde-format
 msgid "Preview:"
-msgstr "पूर्वावलोकनम् : १."
+msgstr "पूर्वावलोकनम् :"
 
 #: package/contents/ui/main.qml:242
 #, kde-format
@@ -313,7 +315,7 @@ msgstr "चेतावनी: भवतः स्वामित्वं न�
 #: package/contents/ui/MetadataEditor.qml:70
 #, kde-format
 msgid "Theme Name:"
-msgstr "विषयनाम : १."
+msgstr "विषयनाम :"
 
 #: package/contents/ui/MetadataEditor.qml:86
 #, kde-format
@@ -328,17 +330,17 @@ msgstr "लेखकः:"
 #: package/contents/ui/MetadataEditor.qml:103
 #, kde-format
 msgid "Email:"
-msgstr "ईमेलः १."
+msgstr "ईमेलः"
 
 #: package/contents/ui/MetadataEditor.qml:111
 #, kde-format
 msgid "License:"
-msgstr "अनुज्ञापत्रम् : १."
+msgstr "अनुज्ञापत्रम् :"
 
 #: package/contents/ui/MetadataEditor.qml:122
 #, kde-format
 msgid "Website:"
-msgstr "जालपुटम् : १."
+msgstr "जालपुटम् :"
 
 #: src/main.cpp:37
 #, kde-format

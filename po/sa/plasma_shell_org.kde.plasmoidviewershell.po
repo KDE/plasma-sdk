@@ -3,19 +3,21 @@
 # This file is distributed under the same license as the plasma-sdk package.
 # Kali <EMAIL@ADDRESS>, 2024.
 #
+# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-01 00:40+0000\n"
-"PO-Revision-Date: 2024-12-13 19:09+0530\n"
-"Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
+"PO-Revision-Date: 2024-12-20 21:54+0530\n"
+"Last-Translator: kali <skkalwar999@gmail.com>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n>2);\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: contents/applet/AppletError.qml:164
 msgid "Copy to Clipboard"
@@ -49,7 +51,7 @@ msgstr "प्रतिलिपि अधिकार"
 
 #: contents/configuration/AboutPlugin.qml:158
 msgid "License:"
-msgstr "अनुज्ञापत्रम् : १."
+msgstr "अनुज्ञापत्रम् :"
 
 #: contents/configuration/AboutPlugin.qml:163
 msgctxt "@info:whatsthis"
@@ -172,7 +174,7 @@ msgstr "प्रारूपं:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:98
 msgid "Wallpaper type:"
-msgstr "वॉलपेपर प्रकारः : १."
+msgstr "वॉलपेपर प्रकारः :"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:119
 msgid "Get New Plugins…"
@@ -333,7 +335,7 @@ msgstr "प्लवमानः"
 
 #: contents/configuration/PanelConfiguration.qml:520
 msgid "Panel Width:"
-msgstr "फलकस्य विस्तारः : १."
+msgstr "फलकस्य विस्तारः :"
 
 #: contents/configuration/PanelConfiguration.qml:520
 msgid "Height:"
@@ -341,7 +343,7 @@ msgstr "औनत्यम्‌:"
 
 #: contents/configuration/PanelConfiguration.qml:555
 msgid "Focus shortcut:"
-msgstr "फोकस शॉर्टकट् : १."
+msgstr "फोकस शॉर्टकट् :"
 
 #: contents/configuration/PanelConfiguration.qml:566
 msgid "Press this keyboard shortcut to move focus to the Panel"
