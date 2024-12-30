@@ -130,6 +130,9 @@
   </description>
   <url type="homepage">https://kde.org/plasma-desktop</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Plasma%20SDK&amp;component=plasmoidviewer</url>
+  <developer id="org.kde">
+    <name translate="no">KDE</name>
+  </developer>
   <project_group>KDE</project_group>
   <provides>
     <binary>plasmoidviewer</binary>

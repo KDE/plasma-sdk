@@ -143,6 +143,9 @@
   </description>
   <url type="homepage">https://kde.org/plasma-desktop</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Plasma%20SDK&amp;component=cuttlefish</url>
+  <developer id="org.kde">
+    <name translate="no">KDE</name>
+  </developer>
   <screenshots>
     <screenshot type="default">
       <image>https://www.kde.org/images/screenshots/cuttlefish.png</image>
