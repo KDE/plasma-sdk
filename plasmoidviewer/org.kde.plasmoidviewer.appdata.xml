@@ -137,15 +137,18 @@
   </description>
   <url type="homepage">https://kde.org/plasma-desktop</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Plasma%20SDK&amp;component=plasmoidviewer</url>
+  <developer id="org.kde">
+    <name translate="no">KDE</name>
+  </developer>
   <project_group>KDE</project_group>
   <provides>
     <binary>plasmoidviewer</binary>
   </provides>
   <releases>
+    <release version="6.2.5" date="2024-12-31"/>
     <release version="6.2.4" date="2024-11-26"/>
     <release version="6.2.3" date="2024-11-05"/>
     <release version="6.2.2" date="2024-10-22"/>
-    <release version="6.2.1" date="2024-10-15"/>
   </releases>
   <screenshots>
     <screenshot type="default">

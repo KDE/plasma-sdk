@@ -1,0 +1,190 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Italian "INCLUDE">
+]>
+<!--
+    SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+-->
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>Manuale utente di kqml</title>
+<date
+>2023-06-10</date>
+<releaseinfo
+>Plasma 6.0</releaseinfo>
+<productname
+>KDE Plasma</productname>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kqml</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kqml</command
+></refname>
+<refpurpose
+>Runtime QML con KLocalizedContext</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>kqml</command
+> <group choice="opt"
+><option
+>-v, --version</option
+></group
+> <group choice="opt"
+><option
+>-h, --help</option
+></group
+> <group choice="opt"
+><option
+>-d, --domain</option
+> <replaceable
+>dominio</replaceable
+></group
+> <arg choice="opt"
+><replaceable
+>file</replaceable
+>...</arg
+> <arg choice="opt"
+><option
+>--</option
+> <replaceable
+>argomenti</replaceable
+>...</arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Descrizione</title>
+<para
+><command
+>kqml</command
+> è un runtime QML in cui KLocalizedContext è inizializzato e attivo.</para>
+
+<para
+>Al contrario dello strumento qml fornito col pacchetto qt-declarative, kqml inizializza KLocalizedContext, e questo permette di testare vere applicazioni e provare file con chiamate a i18n nel loro codice e nelle librerie che importano.</para>
+</refsect1>
+
+<refsect1>
+<title
+>Opzioni</title>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>-v</option
+> <option
+>--version</option
+></term>
+<listitem
+><para
+>Mostra le informazioni di versione.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-d</option
+>, <option
+>--domain</option
+> <replaceable
+>dominio</replaceable
+></term>
+<listitem
+><para
+>Il dominio di localizzazione principale.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-h</option
+>, <option
+>--help</option
+></term>
+<listitem
+><para
+>Mostra questo messaggio di aiuto.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><replaceable
+>file</replaceable
+>...</term>
+<listitem
+><para
+>Può essere caricato un qualsiasi numero di file QML. Condivideranno lo stesso motore.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><replaceable
+>argomenti</replaceable
+>...</term>
+<listitem
+><para
+>Gli argomenti dopo «<option
+>--</option
+>» sono ignorati, ma passati tramite la variabile application.arguments in QML.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</refsect1>
+
+<refsect1>
+<title
+>Vedi anche</title>
+
+<para
+>Una documentazione più dettagliata è disponibile a <ulink url="help:/plasma-desktop"
+>help:/plasma-desktop</ulink
+> (inserisci questo <acronym
+>URL</acronym
+> in &konqueror; o esegui <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/plasma-desktop</parameter
+></userinput
+>).</para>
+
+</refsect1>
+
+<refsect1>
+<title
+>Autori</title>
+<para
+><command
+>kqml</command
+> è stato scritto da <personname
+><firstname
+>ivan</firstname
+><surname
+>tkachenko</surname
+></personname
+> <email
+>me@raitjas.tk</email
+>.</para>
+</refsect1>
+
+</refentry>
