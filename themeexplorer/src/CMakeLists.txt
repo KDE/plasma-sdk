@@ -26,4 +26,4 @@ target_link_libraries(plasmathemeexplorer
 )
 
 install(TARGETS plasmathemeexplorer ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
-install(FILES org.kde.plasma.themeexplorer.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+install(FILES org.kde.themeexplorer.desktop DESTINATION ${KDE_INSTALL_APPDIR})

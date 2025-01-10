@@ -82,7 +82,7 @@
         "Description[zh_CN]": "浏览并编辑您的 Plasma 主题",
         "Description[zh_TW]": "探索並編輯您的 Plasma 主題",
         "Icon": "preferences-desktop-theme",
-        "Id": "org.kde.plasma.themeexplorer",
+        "Id": "org.kde.themeexplorer",
         "License": "GPL-2.0+",
         "Name": "Plasma Theme Explorer",
         "Name[az]": "Plasma Mövzu Bələdçisi",

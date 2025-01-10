@@ -29,7 +29,7 @@ int main(int argc, char **argv)
     QApplication app(argc, argv);
 
     app.setApplicationVersion(PROJECT_VERSION);
-    app.setDesktopFileName(QStringLiteral("org.kde.plasma.themeexplorer"));
+    app.setDesktopFileName(QStringLiteral("org.kde.themeexplorer"));
 
     QCommandLineParser parser;
     parser.addVersionOption();
@@ -45,7 +45,7 @@ int main(int argc, char **argv)
 
     parser.process(app);
 
-    const QString packagePath("org.kde.plasma.themeexplorer");
+    const QString packagePath("org.kde.themeexplorer");
 
     // usually we have an ApplicationWindow here, so we do not need to create a window by ourselves
     auto obj = new PlasmaQuick::SharedQmlEngine();
