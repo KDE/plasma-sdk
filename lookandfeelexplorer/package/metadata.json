@@ -82,7 +82,7 @@
         "Description[zh_CN]": "浏览和编辑您的 Plasma 全局主题",
         "Description[zh_TW]": "探索並編輯您的 Plasma 全域主題",
         "Icon": "preferences-desktop-theme",
-        "Id": "org.kde.plasma.lookandfeelexplorer",
+        "Id": "org.kde.lookandfeelexplorer",
         "License": "GPL-2.0+",
         "Name": "Plasma Global Theme Explorer",
         "Name[az]": "Xarici görünüş tərzinə baxış",

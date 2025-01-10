@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 
     parser.process(app);
 
-    const QString packagePath("org.kde.plasma.lookandfeelexplorer");
+    const QString packagePath("org.kde.lookandfeelexplorer");
 
     // usually we have an ApplicationWindow here, so we do not need to create a window by ourselves
     PlasmaQuick::SharedQmlEngine obj;
