@@ -17,6 +17,7 @@ target_link_libraries(iconexplorer PRIVATE
     KF6::ColorScheme
     KF6::I18n
     KF6::IconThemes
+    KF6::I18nQml
     Qt::DBus
 )
 

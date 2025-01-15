@@ -15,6 +15,7 @@
 
 // Frameworks
 #include <KConfigGroup>
+#include <KLocalizedQmlContext>
 #include <KLocalizedString>
 #include <Plasma/Theme>
 
@@ -87,7 +88,7 @@ int main(int argc, char **argv)
 
     QQmlApplicationEngine engine;
 
-    auto l10nContext = new KLocalizedContext(&engine);
+    auto l10nContext = new KLocalizedQmlContext(&engine);
     l10nContext->setTranslationDomain(QStringLiteral("iconexplorer"));
     engine.rootContext()->setContextObject(l10nContext);
 

@@ -15,7 +15,7 @@ using namespace CuttleFish;
 
 ColorSchemes::ColorSchemes(QObject *parent)
     : QObject(parent)
-    , m_colorManager(new KColorSchemeManager(this))
+    , m_colorManager(KColorSchemeManager::instance())
 {
 }
 
