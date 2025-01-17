@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-03 00:40+0000\n"
+"POT-Creation-Date: 2025-01-17 00:43+0000\n"
 "PO-Revision-Date: 2016-08-31 10:57+0300\n"
 "Last-Translator: Safa Alfulaij <safa1996alfulaij@gmail.com>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -17,22 +17,22 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: src/main.cpp:68
+#: src/main.cpp:69
 #, kde-format
 msgid "Start with category"
 msgstr "ابدأ بالفئة"
 
-#: src/main.cpp:68
+#: src/main.cpp:69
 #, kde-format
 msgid "category"
 msgstr "الفئة"
 
-#: src/main.cpp:71
+#: src/main.cpp:72
 #, kde-format
 msgid "Start full-screen"
 msgstr "ابدأ بملء الشّاشة"
 
-#: src/main.cpp:74
+#: src/main.cpp:75
 #, kde-format
 msgid "Run in icon-picker mode"
 msgstr "ابدأ بوضع منتقي الأيقونات"
