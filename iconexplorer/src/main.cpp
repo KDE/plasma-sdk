@@ -14,15 +14,20 @@
 #include <QQmlEngine>
 
 // Frameworks
+#include <KAboutData>
 #include <KConfigGroup>
 #include <KLocalizedQmlContext>
 #include <KLocalizedString>
+
+// Plasma
 #include <Plasma/Theme>
 
 // Own
 #include "colorschemes.h"
 #include "iconmodel.h"
 #include "sortfiltermodel.h"
+
+using namespace Qt::Literals;
 
 void messageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
@@ -59,11 +64,8 @@ int main(int argc, char **argv)
     QApplication app(argc, argv);
     KLocalizedString::setApplicationDomain("iconexplorer");
 
-    app.setApplicationVersion(PROJECT_VERSION);
-    app.setDesktopFileName(QStringLiteral("org.kde.iconexplorer"));
-    app.setOrganizationName("KDE");
-    app.setOrganizationDomain("org.kde");
-    app.setApplicationName("Icon Explorer");
+    KAboutData about(u"iconexplorer"_s, i18n("Icon Explorer"), PROJECT_VERSION);
+    KAboutData::setApplicationData(about);
 
     const static auto _category = QStringLiteral("category");
     QCommandLineOption category = QCommandLineOption(QStringList() << QStringLiteral("c") << _category, i18n("Start with category"), i18n("category"));
