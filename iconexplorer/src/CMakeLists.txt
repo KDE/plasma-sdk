@@ -3,6 +3,7 @@ set(iconexplorer_SRCS
     iconmodel.cpp
     colorschemes.cpp
     sortfiltermodel.cpp
+    windowstate.cpp
 )
 
 add_executable(iconexplorer ${iconexplorer_SRCS})

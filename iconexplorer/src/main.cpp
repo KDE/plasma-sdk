@@ -12,6 +12,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQmlEngine>
+#include <QStandardPaths>
 
 // Frameworks
 #include <KAboutData>
@@ -87,6 +88,17 @@ int main(int argc, char **argv)
     parser.process(app);
 
     QString _cc = parser.value(category);
+
+    // Clean up old config files
+    const QString configFile = QStandardPaths::locate(QStandardPaths::ConfigLocation, "KDE/Icon Explorer.conf");
+    if (!configFile.isEmpty()) {
+        QFile::remove(configFile);
+    }
+
+    const QString oldConfigFile = QStandardPaths::locate(QStandardPaths::ConfigLocation, "KDE/Cuttlefish.conf");
+    if (!oldConfigFile.isEmpty()) {
+        QFile::remove(oldConfigFile);
+    }
 
     QQmlApplicationEngine engine;
 

@@ -12,6 +12,9 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 
 import org.kde.kirigami 2 as Kirigami
+import org.kde.config as KConfig
+
+import org.kde.iconexplorer
 
 Kirigami.ApplicationWindow {
     id: cuttlefish
@@ -43,6 +46,10 @@ Kirigami.ApplicationWindow {
         ssLoader.active = true
     }
 
+    KConfig.WindowStateSaver {
+        configGroupName: "MainWindow"
+    }
+
     Loader {
         // Use a Loader instead of creating a GMB directly,
         // so if the GMB errors, it doesn't affect Cuttlefish's operation
@@ -56,15 +63,7 @@ Kirigami.ApplicationWindow {
     Menu {
         id: menu
     }
-    Settings {
-        id: settings
 
-        property alias x: cuttlefish.x
-        property alias y: cuttlefish.y
-        property alias width: cuttlefish.width
-        property alias height: cuttlefish.height
-        property var mainSplitView
-    }
     Connections {
         target: loader.item
         function onQuit() { cuttlefish.close() }
@@ -181,11 +180,15 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    WindowState {
+        id: windowState
+    }
+
     Component.onCompleted: {
-        mainSplitView.restoreState(settings.mainSplitView);
+        mainSplitView.restoreState(windowState.mainSplitView);
     }
 
     Component.onDestruction: {
-        settings.mainSplitView = mainSplitView.saveState();
+        windowState.mainSplitView = mainSplitView.saveState();
     }
 }
