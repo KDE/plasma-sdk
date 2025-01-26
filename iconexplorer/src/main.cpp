@@ -17,6 +17,7 @@
 // Frameworks
 #include <KAboutData>
 #include <KConfigGroup>
+#include <KCrash>
 #include <KLocalizedQmlContext>
 #include <KLocalizedString>
 
@@ -67,6 +68,8 @@ int main(int argc, char **argv)
 
     KAboutData about(u"iconexplorer"_s, i18n("Icon Explorer"), PROJECT_VERSION);
     KAboutData::setApplicationData(about);
+
+    KCrash::initialize();
 
     const static auto _category = QStringLiteral("category");
     QCommandLineOption category = QCommandLineOption(QStringList() << QStringLiteral("c") << _category, i18n("Start with category"), i18n("category"));

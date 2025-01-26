@@ -19,6 +19,7 @@ target_link_libraries(iconexplorer PRIVATE
     KF6::I18n
     KF6::IconThemes
     KF6::I18nQml
+    KF6::Crash
     Qt::DBus
 )
 
