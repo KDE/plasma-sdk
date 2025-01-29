@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: iconexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-17 00:43+0000\n"
+"POT-Creation-Date: 2025-01-29 00:42+0000\n"
 "PO-Revision-Date: 2023-04-03 16:57+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -15,22 +15,37 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 22.12.3\n"
 
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+
 #: src/main.cpp:69
+#, kde-format
+msgid "Icon Explorer"
+msgstr ""
+
+#: src/main.cpp:75
 #, kde-format
 msgid "Start with category"
 msgstr "Mit Kategorie starten"
 
-#: src/main.cpp:69
+#: src/main.cpp:75
 #, kde-format
 msgid "category"
 msgstr "Kategorie"
 
-#: src/main.cpp:72
+#: src/main.cpp:78
 #, kde-format
 msgid "Start full-screen"
 msgstr "Im Vollbildmodus starten"
 
-#: src/main.cpp:75
+#: src/main.cpp:81
 #, kde-format
 msgid "Run in icon-picker mode"
 msgstr "Im Modus Symbol-Auswahl ausführen"

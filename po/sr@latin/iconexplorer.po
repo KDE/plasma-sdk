@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cuttlefish\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-17 00:43+0000\n"
+"POT-Creation-Date: 2025-01-29 00:42+0000\n"
 "PO-Revision-Date: 2017-05-07 22:20+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -18,22 +18,37 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+
 #: src/main.cpp:69
+#, kde-format
+msgid "Icon Explorer"
+msgstr ""
+
+#: src/main.cpp:75
 #, kde-format
 msgid "Start with category"
 msgstr "Pokreni sa kategorijom"
 
-#: src/main.cpp:69
+#: src/main.cpp:75
 #, kde-format
 msgid "category"
 msgstr "kategorija"
 
-#: src/main.cpp:72
+#: src/main.cpp:78
 #, kde-format
 msgid "Start full-screen"
 msgstr "Pokreni preko celog ekrana"
 
-#: src/main.cpp:75
+#: src/main.cpp:81
 #, kde-format
 msgid "Run in icon-picker mode"
 msgstr "Pokreni u režimu birača ikonica"
