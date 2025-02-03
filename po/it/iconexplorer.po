@@ -2,6 +2,7 @@
 # This file is distributed under the same license as the cuttlefish package.
 # Simone Solinas <ksolsim@gmail.com>, 2015.
 # Luigi Toscano <luigi.toscano@tiscali.it>, 2016, 2017, 2019, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2025 Vincenzo Reale <smart2128vr@gmail.com>
 #
 msgid ""
 msgstr ""
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #: src/main.cpp:68
 #, kde-format
