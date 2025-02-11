@@ -31,7 +31,7 @@ msgstr ""
 #: src/main.cpp:69
 #, kde-format
 msgid "Icon Explorer"
-msgstr ""
+msgstr "Prohlížeč ikon"
 
 #: src/main.cpp:75
 #, kde-format

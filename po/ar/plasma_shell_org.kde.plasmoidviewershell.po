@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-01 00:40+0000\n"
+"POT-Creation-Date: 2025-02-11 00:43+0000\n"
 "PO-Revision-Date: 2016-08-31 12:04+0300\n"
 "Last-Translator: Safa Alfulaij <safa1996alfulaij@gmail.com>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -83,9 +83,12 @@ msgid "Apply Settings"
 msgstr "طبّق الإعدادات"
 
 #: contents/configuration/AppletConfiguration.qml:353
+#, fuzzy
+#| msgid ""
+#| "The settings of the current module have changed. Do you want to apply the "
+#| "changes or discard them?"
 msgid ""
-"The settings of the current module have changed. Do you want to apply the "
-"changes or discard them?"
+"The current page has unsaved changes. Apply the changes or discard them?"
 msgstr "تغيّرت إعدادت الوحدة الحاليّة. أتريد تطبيقها أو رفضها؟"
 
 #: contents/configuration/AppletConfiguration.qml:384
