@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-11 00:43+0000\n"
-"PO-Revision-Date: 2024-07-01 20:44+0200\n"
+"PO-Revision-Date: 2025-02-12 07:01+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@lists.kde.org>\n"
 "Language: eo\n"
@@ -82,15 +82,11 @@ msgid "Apply Settings"
 msgstr "Apliki Agordojn"
 
 #: contents/configuration/AppletConfiguration.qml:353
-#, fuzzy
-#| msgid ""
-#| "The settings of the current module have changed. Do you want to apply the "
-#| "changes or discard them?"
 msgid ""
 "The current page has unsaved changes. Apply the changes or discard them?"
 msgstr ""
-"La agordoj de la nuna modulo ŝanĝiĝis. Ĉu vi volas apliki la ŝanĝojn aŭ "
-"forĵeti ilin?"
+"La nuna paĝo havas nekonservitajn ŝanĝojn. Ĉu apliki la ŝanĝojn aŭ forĵeti "
+"ilin?"
 
 #: contents/configuration/AppletConfiguration.qml:384
 msgid "OK"
