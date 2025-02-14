@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-sdk package.
 #
-# SPDX-FileCopyrightText: 2022, 2024 Mincho Kondarev <mkondarev@yahoo.de>
+# SPDX-FileCopyrightText: 2022, 2024, 2025 Mincho Kondarev <mkondarev@yahoo.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-11 00:43+0000\n"
-"PO-Revision-Date: 2024-07-05 15:58+0200\n"
+"PO-Revision-Date: 2025-02-13 09:14+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 25.03.70\n"
 
 #: contents/applet/AppletError.qml:164
 msgid "Copy to Clipboard"
@@ -81,15 +81,11 @@ msgid "Apply Settings"
 msgstr "Прилагане на настройките"
 
 #: contents/configuration/AppletConfiguration.qml:353
-#, fuzzy
-#| msgid ""
-#| "The settings of the current module have changed. Do you want to apply the "
-#| "changes or discard them?"
 msgid ""
 "The current page has unsaved changes. Apply the changes or discard them?"
 msgstr ""
-"Настройките на текущия модул са променени. Искате ли да приложите промените "
-"или да ги отхвърлите?"
+"Текущата страница има незапазени променени.Да се приложат ли или да се "
+"отхвърлят?"
 
 #: contents/configuration/AppletConfiguration.qml:384
 msgid "OK"
