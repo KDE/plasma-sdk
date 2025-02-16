@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-11 00:43+0000\n"
-"PO-Revision-Date: 2025-02-04 16:08-0300\n"
+"PO-Revision-Date: 2025-02-14 21:59-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 24.12.2\n"
 
 #: contents/applet/AppletError.qml:164
 msgid "Copy to Clipboard"
@@ -84,15 +84,11 @@ msgid "Apply Settings"
 msgstr "Aplicar configurações"
 
 #: contents/configuration/AppletConfiguration.qml:353
-#, fuzzy
-#| msgid ""
-#| "The settings of the current module have changed. Do you want to apply the "
-#| "changes or discard them?"
 msgid ""
 "The current page has unsaved changes. Apply the changes or discard them?"
 msgstr ""
-"As configurações do módulo atual foram alteradas. Deseja aplicar as "
-"alterações ou descartá-las?"
+"A página atual tem alterações não salvas. Aplicar as alterações ou descartá-"
+"las?"
 
 #: contents/configuration/AppletConfiguration.qml:384
 msgid "OK"
