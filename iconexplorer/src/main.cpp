@@ -9,6 +9,7 @@
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QDebug>
+#include <QIcon>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQmlEngine>
@@ -68,6 +69,7 @@ int main(int argc, char **argv)
 
     KAboutData about(u"iconexplorer"_s, i18n("Icon Explorer"), PROJECT_VERSION);
     KAboutData::setApplicationData(about);
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.iconexplorer")));
 
     KCrash::initialize();
 
