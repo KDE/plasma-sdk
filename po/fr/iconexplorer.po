@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-29 00:42+0000\n"
+"POT-Creation-Date: 2025-03-11 00:43+0000\n"
 "PO-Revision-Date: 2025-01-30 09:04+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -33,27 +33,27 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "xavier.besnard@neuf.fr"
 
-#: src/main.cpp:69
+#: src/main.cpp:70
 #, kde-format
 msgid "Icon Explorer"
 msgstr "Explorateur d'icônes"
 
-#: src/main.cpp:75
+#: src/main.cpp:77
 #, kde-format
 msgid "Start with category"
 msgstr "Démarrer avec la catégorie"
 
-#: src/main.cpp:75
+#: src/main.cpp:77
 #, kde-format
 msgid "category"
 msgstr "catégorie"
 
-#: src/main.cpp:78
+#: src/main.cpp:80
 #, kde-format
 msgid "Start full-screen"
 msgstr "Démarrer en plein écran"
 
-#: src/main.cpp:81
+#: src/main.cpp:83
 #, kde-format
 msgid "Run in icon-picker mode"
 msgstr "Exécuter en mode de choix d'icône"

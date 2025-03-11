@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cuttlefish\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-29 00:42+0000\n"
+"POT-Creation-Date: 2025-03-11 00:43+0000\n"
 "PO-Revision-Date: 2025-01-29 21:33+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -30,27 +30,27 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "xalba@ni.eus"
 
-#: src/main.cpp:69
+#: src/main.cpp:70
 #, kde-format
 msgid "Icon Explorer"
 msgstr "Ikono esploratzailea"
 
-#: src/main.cpp:75
+#: src/main.cpp:77
 #, kde-format
 msgid "Start with category"
 msgstr "Hasi kategoria honekin:"
 
-#: src/main.cpp:75
+#: src/main.cpp:77
 #, kde-format
 msgid "category"
 msgstr "kategoria"
 
-#: src/main.cpp:78
+#: src/main.cpp:80
 #, kde-format
 msgid "Start full-screen"
 msgstr "Hasi pantaila osoko moduan"
 
-#: src/main.cpp:81
+#: src/main.cpp:83
 #, kde-format
 msgid "Run in icon-picker mode"
 msgstr "Exekutatu ikono-hautatzeko moduan"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-29 00:42+0000\n"
+"POT-Creation-Date: 2025-03-11 00:43+0000\n"
 "PO-Revision-Date: 2025-02-21 11:49+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -28,27 +28,27 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "translator@legisign.org"
 
-#: src/main.cpp:69
+#: src/main.cpp:70
 #, kde-format
 msgid "Icon Explorer"
 msgstr "Kuvakekatselin"
 
-#: src/main.cpp:75
+#: src/main.cpp:77
 #, kde-format
 msgid "Start with category"
 msgstr "Käynnistä luokalla"
 
-#: src/main.cpp:75
+#: src/main.cpp:77
 #, kde-format
 msgid "category"
 msgstr "luokka"
 
-#: src/main.cpp:78
+#: src/main.cpp:80
 #, kde-format
 msgid "Start full-screen"
 msgstr "Käynnistä koko näytön tilassa"
 
-#: src/main.cpp:81
+#: src/main.cpp:83
 #, kde-format
 msgid "Run in icon-picker mode"
 msgstr "Suorita kuvakevalitsintilassa"

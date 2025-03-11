@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-29 00:42+0000\n"
+"POT-Creation-Date: 2025-03-11 00:43+0000\n"
 "PO-Revision-Date: 2025-01-29 11:11+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -27,27 +27,27 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "g.sora@tiscali.it"
 
-#: src/main.cpp:69
+#: src/main.cpp:70
 #, kde-format
 msgid "Icon Explorer"
 msgstr "Icon Explorer ( Explorator de icone) "
 
-#: src/main.cpp:75
+#: src/main.cpp:77
 #, kde-format
 msgid "Start with category"
 msgstr "Initia con Categoria"
 
-#: src/main.cpp:75
+#: src/main.cpp:77
 #, kde-format
 msgid "category"
 msgstr "categoria"
 
-#: src/main.cpp:78
+#: src/main.cpp:80
 #, kde-format
 msgid "Start full-screen"
 msgstr "Initia schermo integre"
 
-#: src/main.cpp:81
+#: src/main.cpp:83
 #, kde-format
 msgid "Run in icon-picker mode"
 msgstr "Executa in modo de selector de icone"

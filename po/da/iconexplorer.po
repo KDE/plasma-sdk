@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-29 00:42+0000\n"
+"POT-Creation-Date: 2025-03-11 00:43+0000\n"
 "PO-Revision-Date: 2024-07-18 12:14+0200\n"
 "Last-Translator: rasmus rosendahl-kaa <rasmus@rosendahl-kaa.name>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -28,27 +28,27 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
 
-#: src/main.cpp:69
+#: src/main.cpp:70
 #, kde-format
 msgid "Icon Explorer"
 msgstr ""
 
-#: src/main.cpp:75
+#: src/main.cpp:77
 #, kde-format
 msgid "Start with category"
 msgstr "Start med kategori"
 
-#: src/main.cpp:75
+#: src/main.cpp:77
 #, kde-format
 msgid "category"
 msgstr "kategori"
 
-#: src/main.cpp:78
+#: src/main.cpp:80
 #, kde-format
 msgid "Start full-screen"
 msgstr "Start fuldskærm"
 
-#: src/main.cpp:81
+#: src/main.cpp:83
 #, kde-format
 msgid "Run in icon-picker mode"
 msgstr "Kør i ikonvælger-tilstand"
