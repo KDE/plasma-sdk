@@ -82,15 +82,9 @@ msgid "Apply Settings"
 msgstr "Provést nastavení"
 
 #: contents/configuration/AppletConfiguration.qml:353
-#, fuzzy
-#| msgid ""
-#| "The settings of the current module have changed. Do you want to apply the "
-#| "changes or discard them?"
 msgid ""
 "The current page has unsaved changes. Apply the changes or discard them?"
 msgstr ""
-"V aktivním modulu jsou neuložené změny. Přejete si změny aplikovat, nebo "
-"zahodit?"
 
 #: contents/configuration/AppletConfiguration.qml:384
 msgid "OK"
