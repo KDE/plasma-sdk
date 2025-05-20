@@ -191,13 +191,36 @@ void LnfLogic::dumpCurrentPlasmaLayout()
 
 void LnfLogic::save()
 {
-    KConfig c(m_package.filePath("metadata"));
-    KConfigGroup cg(&c, "Desktop Entry");
+    QJsonObject obj{
+        {"KPackageStructure"_L1, "Plasma/LookAndFeel"_L1},
+        {"KPlugin"_L1,
+         QJsonObject{
+             {"Authors"_L1,
+              QJsonArray{QJsonObject{
+                  {"Name"_L1, author()},
+                  {"Email"_L1, email()},
+              }}},
+             {"Website"_L1, website()},
+             {"Description"_L1, comment()},
+             {"Id"_L1, m_package.metadata().pluginId()},
+             {"Name"_L1, name()},
+             {"License"_L1, license()},
+         }},
+        {"Keywords"_L1, "Desktop;Workspace;Appearance;Look and Feel;"_L1},
+        {"X-Plasma-APIVersion"_L1, "2"_L1},
+        {"X-Plasma-MainScript"_L1, "default"_L1},
+    };
 
-    QHash<QString, QString>::const_iterator i;
-    for (i = m_tempMetadata.constBegin(); i != m_tempMetadata.constEnd(); ++i) {
-        cg.writeEntry(i.key(), i.value());
+    QJsonDocument doc(obj);
+
+    QFile file(m_package.path() + u"/metadata.json"_s);
+    if (!file.open(QFile::WriteOnly)) {
+        Q_EMIT messageRequested(ErrorLevel::Error, file.errorString());
+        return;
     }
+
+    file.write(doc.toJson());
+
     m_tempMetadata.clear();
     m_needsSave = false;
     if (m_performLayoutDump) {
