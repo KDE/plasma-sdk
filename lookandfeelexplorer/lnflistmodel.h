@@ -30,7 +30,6 @@ public:
     QString package;
     QString description;
     QString author;
-    QString version;
     QString themeRoot;
 };
 
@@ -43,7 +42,6 @@ public:
         PackageNameRole = Qt::UserRole,
         PackageDescriptionRole = Qt::UserRole + 1,
         PackageAuthorRole = Qt::UserRole + 2,
-        PackageVersionRole = Qt::UserRole + 3,
     };
 
     explicit LnfListModel(QObject *parent = nullptr);
