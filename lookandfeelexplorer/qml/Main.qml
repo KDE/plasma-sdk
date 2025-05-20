@@ -80,7 +80,7 @@ Kirigami.ApplicationWindow {
             QQC2.ItemDelegate {
                 text: i18n("Open Theme Folder")
                 icon.name: "document-open-folder"
-                onClicked: Qt.openUrlExternally(lnfLogic.themeFolder);
+                onClicked: Qt.openUrlExternally('file:' + lnfLogic.themeFolder);
                 Layout.fillWidth: true
             }
 
