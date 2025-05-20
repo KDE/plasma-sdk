@@ -32,6 +32,7 @@ include(KDEGitCommitHooks)
 include(ECMDeprecationSettings)
 include(ECMOptionalAddSubdirectory)
 include(ECMQmlModule)
+include(ECMSetupVersion)
 include(FeatureSummary)
 
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core DBus Gui Qml Quick Svg Widgets Xml)
@@ -64,6 +65,11 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
 find_package(Plasma ${PROJECT_DEP_VERSION} REQUIRED)
 find_package(PlasmaQuick ${PROJECT_DEP_VERSION} REQUIRED)
 find_package(Plasma5Support ${PROJECT_DEP_VERSION} REQUIRED)
+
+ecm_setup_version(${PROJECT_VERSION}
+    VARIABLE_PREFIX PLASMA_SDK
+    VERSION_HEADER ${CMAKE_CURRENT_BINARY_DIR}/plasma-sdk-version.h
+)
 
 #########################################################################
 add_definitions(
