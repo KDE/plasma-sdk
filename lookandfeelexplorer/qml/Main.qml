@@ -14,8 +14,7 @@ import org.kde.kirigami as Kirigami
 Kirigami.ApplicationWindow {
     id: root
 
-    width: Kirigami.Units.gridUnit * 50
-    height: Kirigami.Units.gridUnit * 26
+    readonly property bool wideMode: root.width >= Kirigami.Units.gridUnit * 50
 
     Component.onCompleted: {
         for (var i = 0; i < lnfLogic.lnfList.count; ++i) {
@@ -26,26 +25,44 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    globalDrawer: Kirigami.GlobalDrawer {
-        title: i18n("Look And Feel")
-        titleIcon: "preferences-desktop-theme"
-        modal: true;
-        collapsible: false;
-        collapsed: false;
-        topContent: QQC2.ComboBox {
-            id: themeSelector
-            Layout.fillWidth: true
-            model: lnfLogic.lnfList
-            textRole: "displayRole"
-            onCurrentIndexChanged: {
-                lnfLogic.theme = lnfLogic.lnfList.get(currentIndex).packageNameRole;
+    globalDrawer: Kirigami.OverlayDrawer {
+        leftPadding: 0
+        rightPadding: 0
+        topPadding: 0
+        bottomPadding: 0
+
+        edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.RightEdge : Qt.LeftEdge
+        modal: !root.wideMode
+        handleVisible: modal
+        onModalChanged: drawerOpen = !modal
+        width: Kirigami.Units.gridUnit * 14
+
+        Kirigami.Theme.colorSet: Kirigami.Theme.Window
+        Kirigami.Theme.inherit: false
+
+        contentItem: ColumnLayout {
+            spacing: 0
+
+            QQC2.ToolBar {
+                Layout.fillWidth: true
+                Layout.preferredHeight: root.pageStack.globalToolBar.preferredHeight
+
+                contentItem: QQC2.ComboBox {
+                    id: themeSelector
+                    Layout.fillWidth: true
+                    model: lnfLogic.lnfList
+                    textRole: "displayRole"
+                    onCurrentIndexChanged: {
+                        lnfLogic.theme = lnfLogic.lnfList.get(currentIndex).packageNameRole;
+                    }
+                }
             }
-        }
-        actions: [
-            Kirigami.Action {
+
+            QQC2.ItemDelegate {
                 text: i18n("New Theme…")
                 icon.name: "document-new"
-                onTriggered: {
+                Layout.fillWidth: true
+                onClicked: {
                     if (!root.metadataEditor) {
                         root.metadataEditor = metadataEditorComponent.createObject(root);
                     }
@@ -58,13 +75,19 @@ Kirigami.ApplicationWindow {
                     root.metadataEditor.website = "";
                     root.metadataEditor.open();
                 }
-            },
-            Kirigami.Action {
+            }
+
+            QQC2.ItemDelegate {
                 text: i18n("Open Theme Folder")
                 icon.name: "document-open-folder"
-                onTriggered: Qt.openUrlExternally(lnfLogic.themeFolder);
+                onClicked: Qt.openUrlExternally(lnfLogic.themeFolder);
+                Layout.fillWidth: true
             }
-        ]
+
+            Item {
+                Layout.fillHeight: true
+            }
+        }
     }
 
     property QtObject metadataEditor
@@ -178,6 +201,8 @@ Kirigami.ApplicationWindow {
             }
         }
         footer: QQC2.ToolBar {
+            padding: Kirigami.Units.smallSpacing
+
             contentItem: QQC2.DialogButtonBox {
                 QQC2.Button {
                     text: i18n("Save")
