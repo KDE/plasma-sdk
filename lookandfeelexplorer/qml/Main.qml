@@ -60,7 +60,7 @@ Kirigami.ApplicationWindow {
 
             QQC2.ItemDelegate {
                 text: i18n("New Theme…")
-                icon.name: "document-new"
+                icon.name: "document-new-symbolic"
                 Layout.fillWidth: true
                 onClicked: {
                     if (!root.metadataEditor) {
@@ -79,7 +79,7 @@ Kirigami.ApplicationWindow {
 
             QQC2.ItemDelegate {
                 text: i18n("Open Theme Folder")
-                icon.name: "document-open-folder"
+                icon.name: "document-open-folder-symbolic"
                 onClicked: Qt.openUrlExternally('file:' + lnfLogic.themeFolder);
                 Layout.fillWidth: true
             }
