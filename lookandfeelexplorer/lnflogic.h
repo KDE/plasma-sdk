@@ -7,8 +7,8 @@
 #ifndef LNFLOGIC_H
 #define LNFLOGIC_H
 
+#include <KPackage/Package>
 #include <QAbstractListModel>
-#include <kpackage/package.h>
 #include <qqmlintegration.h>
 
 class LnfListModel;
