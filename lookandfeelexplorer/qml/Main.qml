@@ -70,7 +70,10 @@ Kirigami.ApplicationWindow {
     property QtObject metadataEditor
     Component {
         id: metadataEditorComponent
-        MetadataEditor {}
+
+        MetadataEditor {
+            anchors.centerIn: parent
+        }
     }
 
     pageStack.initialPage: Kirigami.ScrollablePage {

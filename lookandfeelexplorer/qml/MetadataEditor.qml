@@ -23,26 +23,18 @@ QQC2.Dialog {
     property bool canEdit: false
 
     width: 500
-    x: (parent.width - width) / 2
-    y: (parent.height - height) / 2
     title: i18n("New Theme")
 
     onVisibleChanged: {
         nameField.focus = true
     }
 
-    contentItem: Rectangle {
-        SystemPalette {
-            id: palette
-        }
-        color: palette.window
+    leftPadding: 0
+    rightPadding: 0
 
+    contentItem: QQC2.ScrollView {
         ColumnLayout {
             id: layout
-            anchors {
-                fill: parent
-                margins: Kirigami.Units.smallSpacing
-            }
             QQC2.Label {
                 id: errorMessage
                 text: ""
