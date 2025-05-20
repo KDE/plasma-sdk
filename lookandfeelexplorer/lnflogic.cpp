@@ -276,7 +276,6 @@ void LnfLogic::setTheme(const QString &theme)
     emit commentChanged();
     emit authorChanged();
     emit emailChanged();
-    emit versionChanged();
     emit websiteChanged();
     emit licenseChanged();
 }
@@ -365,26 +364,6 @@ void LnfLogic::setEmail(const QString &email)
     m_needsSave = true;
     emit needsSaveChanged();
     emit emailChanged();
-}
-
-QString LnfLogic::version() const
-{
-    if (m_tempMetadata.contains(QStringLiteral("X-KDE-PluginInfo-Version"))) {
-        return m_tempMetadata.value(QStringLiteral("X-KDE-PluginInfo-Version"));
-    }
-    return m_package.metadata().version();
-}
-
-void LnfLogic::setVersion(const QString &version)
-{
-    if (LnfLogic::version() == version) {
-        return;
-    }
-
-    m_tempMetadata[QStringLiteral("X-KDE-PluginInfo-Version")] = version;
-    m_needsSave = true;
-    emit needsSaveChanged();
-    emit versionChanged();
 }
 
 QString LnfLogic::website() const

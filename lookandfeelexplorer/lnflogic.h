@@ -28,7 +28,6 @@ class LnfLogic : public QObject
     Q_PROPERTY(QString comment READ comment WRITE setComment NOTIFY commentChanged)
     Q_PROPERTY(QString author READ author WRITE setAuthor NOTIFY authorChanged)
     Q_PROPERTY(QString email READ email WRITE setEmail NOTIFY emailChanged)
-    Q_PROPERTY(QString version READ version WRITE setVersion NOTIFY versionChanged)
     Q_PROPERTY(QString website READ website WRITE setWebsite NOTIFY websiteChanged)
     Q_PROPERTY(QString license READ license WRITE setLicense NOTIFY licenseChanged)
     Q_PROPERTY(QString thumbnailPath READ thumbnailPath NOTIFY thumbnailPathChanged)
@@ -67,9 +66,6 @@ public:
 
     QString email() const;
     void setEmail(const QString &email);
-
-    QString version() const;
-    void setVersion(const QString &version);
 
     QString website() const;
     void setWebsite(const QString &website);
@@ -111,7 +107,6 @@ Q_SIGNALS:
     void commentChanged();
     void authorChanged();
     void emailChanged();
-    void versionChanged();
     void websiteChanged();
     void licenseChanged();
     void performLayoutDumpChanged();

@@ -171,10 +171,6 @@ Kirigami.ApplicationWindow {
                 key: "email"
             }
             FormField {
-                label: i18n("Version:")
-                key: "version"
-            }
-            FormField {
                 label: i18n("Website:")
                 key: "website"
             }

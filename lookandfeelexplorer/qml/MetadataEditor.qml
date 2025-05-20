@@ -77,10 +77,6 @@ QQC2.Dialog {
                     Kirigami.FormData.label:  i18n("Email:")
                 }
                 QQC2.TextField {
-                    id: "versionField"
-                    Kirigami.FormData.label: i18n("Version:")
-                }
-                QQC2.TextField {
                     id: "websiteField"
                     Kirigami.FormData.label:  i18n("Website:")
                 }

@@ -40,7 +40,6 @@ LnfListModel::LnfListModel(QObject *parent)
     m_roleNames.insert(PackageNameRole, "packageNameRole");
     m_roleNames.insert(PackageDescriptionRole, "packageDescriptionRole");
     m_roleNames.insert(PackageAuthorRole, "packageAuthorRole");
-    m_roleNames.insert(PackageVersionRole, "packageVersionRole");
 
     reload();
 }
@@ -148,8 +147,6 @@ QVariant LnfListModel::data(const QModelIndex &index, int role) const
         return m_themes.value(index.row()).description;
     case PackageAuthorRole:
         return m_themes.value(index.row()).author;
-    case PackageVersionRole:
-        return m_themes.value(index.row()).version;
     default:
         return QVariant();
     }
@@ -165,7 +162,6 @@ QVariantMap LnfListModel::get(int row) const
     item["packageNameRole"] = data(idx, PackageNameRole);
     item["packageDescriptionRole"] = data(idx, PackageDescriptionRole);
     item["packageAuthorRole"] = data(idx, PackageAuthorRole);
-    item["packageVersionRole"] = data(idx, PackageVersionRole);
 
     return item;
 }
