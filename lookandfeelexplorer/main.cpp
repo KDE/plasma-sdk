@@ -52,12 +52,6 @@ int main(int argc, char **argv)
     engine.rootContext()->setContextProperty("commandlineTheme", parser.value(themeOption));
     engine.rootContext()->setContextProperty("commandlineArguments", parser.positionalArguments());
 
-    qmlRegisterAnonymousType<LnfLogic>("org.kde.plasma.sdk", 1);
-    qmlRegisterAnonymousType<LnfListModel>("org.kde.plasma.sdk", 1);
-
-    LnfLogic lnfLogic;
-    engine.rootContext()->setContextProperty("lnfLogic", QVariant::fromValue(&lnfLogic));
-
     engine.loadFromModule(u"org.kde.plasma.lookandfeelexplorer"_s, u"Main"_s);
 
     if (engine.rootObjects().isEmpty()) {

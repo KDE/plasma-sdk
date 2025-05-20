@@ -9,12 +9,15 @@
 
 #include <QAbstractListModel>
 #include <kpackage/package.h>
+#include <qqmlintegration.h>
 
 class LnfListModel;
 
 class LnfLogic : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 
     Q_PROPERTY(LnfListModel *lnfList READ lnfList CONSTANT)
     Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)

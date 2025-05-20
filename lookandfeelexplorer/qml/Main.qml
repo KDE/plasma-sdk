@@ -10,6 +10,7 @@ import QtQuick.Layouts
 
 import org.kde.draganddrop as DragAndDrop
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.lookandfeelexplorer
 
 Kirigami.ApplicationWindow {
     id: root
@@ -17,8 +18,8 @@ Kirigami.ApplicationWindow {
     readonly property bool wideMode: root.width >= Kirigami.Units.gridUnit * 50
 
     Component.onCompleted: {
-        for (var i = 0; i < lnfLogic.lnfList.count; ++i) {
-            if (commandlineTheme == lnfLogic.lnfList.get(i).packageNameRole) {
+        for (var i = 0; i < LnfLogic.lnfList.count; ++i) {
+            if (commandlineTheme == LnfLogic.lnfList.get(i).packageNameRole) {
                 themeSelector.currentIndex = i;
                 break;
             }
@@ -50,10 +51,10 @@ Kirigami.ApplicationWindow {
                 contentItem: QQC2.ComboBox {
                     id: themeSelector
                     Layout.fillWidth: true
-                    model: lnfLogic.lnfList
+                    model: LnfLogic.lnfList
                     textRole: "displayRole"
                     onCurrentIndexChanged: {
-                        lnfLogic.theme = lnfLogic.lnfList.get(currentIndex).packageNameRole;
+                        LnfLogic.theme = LnfLogic.lnfList.get(currentIndex).packageNameRole;
                     }
                 }
             }
@@ -80,7 +81,7 @@ Kirigami.ApplicationWindow {
             QQC2.ItemDelegate {
                 text: i18n("Open Theme Folder")
                 icon.name: "document-open-folder-symbolic"
-                onClicked: Qt.openUrlExternally('file:' + lnfLogic.themeFolder);
+                onClicked: Qt.openUrlExternally('file:' + LnfLogic.themeFolder);
                 Layout.fillWidth: true
             }
 
@@ -100,10 +101,10 @@ Kirigami.ApplicationWindow {
     }
 
     pageStack.initialPage: Kirigami.ScrollablePage {
-        title: lnfLogic.name
+        title: LnfLogic.name
 
         Kirigami.FormLayout {
-            enabled: lnfLogic.isWritable
+            enabled: LnfLogic.isWritable
 
             Rectangle {
                 Layout.preferredWidth: Kirigami.Units.gridUnit * 20
@@ -132,7 +133,7 @@ Kirigami.ApplicationWindow {
                         anchors.fill: parent
                         onDrop: event => {
                             if (event.mimeData.urls[0]) {
-                                lnfLogic.processThumbnail(event.mimeData.urls[0]);
+                                LnfLogic.processThumbnail(event.mimeData.urls[0]);
                             }
                             event.accept(Qt.CopyAction);
                             thumbnail.sourceChanged(thumbnail.source);
@@ -141,7 +142,7 @@ Kirigami.ApplicationWindow {
                     MouseArea {
                         anchors.fill:parent
                         onClicked: {
-                            lnfLogic.processThumbnail(lnfLogic.openFile());
+                            LnfLogic.processThumbnail(LnfLogic.openFile());
                             thumbnail.sourceChanged(thumbnail.source);
                         }
                     }
@@ -149,7 +150,7 @@ Kirigami.ApplicationWindow {
             }
 
             QQC2.Label {
-                text: i18n("Plugin name: %1", lnfLogic.theme)
+                text: i18n("Plugin name: %1", LnfLogic.theme)
             }
             FormField {
                 label: i18n("Name:")
@@ -181,20 +182,20 @@ Kirigami.ApplicationWindow {
             }
             QQC2.Button {
                 text: i18n("Layout from current Plasma setup")
-                onClicked: lnfLogic.performLayoutDump = true
+                onClicked: LnfLogic.performLayoutDump = true
                 Layout.fillWidth: true
             }
             QQC2.Button {
                 text: i18n("Defaults from current setup")
-                onClicked: lnfLogic.performDefaultsDump = true
+                onClicked: LnfLogic.performDefaultsDump = true
                 Layout.fillWidth: true
             }
         }
         Connections {
-            target: lnfLogic
+            target: LnfLogic
             function onThumbnailPathChanged() {
                 thumbnail.source = ""
-                thumbnail.source = lnfLogic.thumbnailPath
+                thumbnail.source = LnfLogic.thumbnailPath
             }
             function onMessageRequested(level, message) {
                 root.showPassiveNotification(message);
@@ -206,8 +207,8 @@ Kirigami.ApplicationWindow {
             contentItem: QQC2.DialogButtonBox {
                 QQC2.Button {
                     text: i18n("Save")
-                    enabled: lnfLogic.needsSave
-                    onClicked: lnfLogic.save()
+                    enabled: LnfLogic.needsSave
+                    onClicked: LnfLogic.save()
                 }
             }
         }
