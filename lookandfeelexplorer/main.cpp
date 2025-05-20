@@ -3,7 +3,6 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include "../plasma-sdk-version.h"
-#include "lnflistmodel.h"
 #include "lnflogic.h"
 
 #include <QApplication>
@@ -11,7 +10,6 @@
 #include <QCommandLineParser>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <QQuickItem>
 
 #include <KAboutData>
 #include <KLocalizedQmlContext>

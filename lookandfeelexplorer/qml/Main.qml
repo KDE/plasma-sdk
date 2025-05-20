@@ -55,7 +55,9 @@ Kirigami.ApplicationWindow {
                     }
 
                     onCurrentIndexChanged: {
-                        LnfLogic.theme = LnfLogic.lnfList.get(currentIndex).packageNameRole;
+                        if (currentIndex >= 0) {
+                            LnfLogic.theme = LnfLogic.lnfList.get(currentIndex).package;
+                        }
                     }
 
                     Layout.fillWidth: true

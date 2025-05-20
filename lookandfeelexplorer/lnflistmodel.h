@@ -25,6 +25,13 @@ namespace Plasma
 // Theme selector code by Andre Duffeck (modified to add package description)
 class ThemeInfo
 {
+    Q_GADGET
+    Q_PROPERTY(QString name MEMBER name)
+    Q_PROPERTY(QString package MEMBER package)
+    Q_PROPERTY(QString description MEMBER description)
+    Q_PROPERTY(QString author MEMBER author)
+    Q_PROPERTY(QString themeRoot MEMBER themeRoot)
+
 public:
     QString name;
     QString package;
@@ -53,20 +60,17 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QModelIndex indexOf(const QString &path) const;
     void reload();
-    void clearThemeList();
     int count() const
     {
         return rowCount();
     }
 
-    Q_INVOKABLE QVariantMap get(int index) const;
+    Q_INVOKABLE ThemeInfo get(int index) const;
 
 Q_SIGNALS:
     void countChanged();
 
 private:
-    QHash<int, QByteArray> m_roleNames;
-
     QList<ThemeInfo> m_themes;
 };
 
