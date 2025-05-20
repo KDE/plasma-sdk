@@ -17,14 +17,6 @@ Kirigami.ApplicationWindow {
 
     readonly property bool wideMode: root.width >= Kirigami.Units.gridUnit * 50
 
-    Component.onCompleted: {
-        for (var i = 0; i < LnfLogic.lnfList.count; ++i) {
-            if (commandlineTheme == LnfLogic.lnfList.get(i).packageNameRole) {
-                themeSelector.currentIndex = i;
-                break;
-            }
-        }
-    }
 
     globalDrawer: Kirigami.OverlayDrawer {
         leftPadding: 0
@@ -50,12 +42,23 @@ Kirigami.ApplicationWindow {
 
                 contentItem: QQC2.ComboBox {
                     id: themeSelector
-                    Layout.fillWidth: true
+
                     model: LnfLogic.lnfList
                     textRole: "displayRole"
+                    valueRole: "packageNameRole"
+                    currentIndex: {
+                        let index = indexOfValue(LnfLogic.them);
+                        if (index === -1) {
+                            index = 0;
+                        }
+                        return index;
+                    }
+
                     onCurrentIndexChanged: {
                         LnfLogic.theme = LnfLogic.lnfList.get(currentIndex).packageNameRole;
                     }
+
+                    Layout.fillWidth: true
                 }
             }
 
