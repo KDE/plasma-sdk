@@ -50,7 +50,7 @@ QQC2.Dialog {
                     Kirigami.FormData.label: i18n("Theme Plugin Name:")
                     onTextChanged: {
                         for (var i = 0; i < LnfLogic.lnfList.count; ++i) {
-                            if (pluginNameField.text == LnfLogic.lnfList.get(i).packageNameRole) {
+                            if (pluginNameField.text == LnfLogic.lnfList.get(i).package) {
                                 dialog.canEdit = false;
                                 errorMessage.text = i18n("This theme plugin name already exists");
                                 return;
@@ -110,7 +110,7 @@ QQC2.Dialog {
     onAccepted: {
         LnfLogic.createNewTheme(pluginNameField.text, nameField.text, commentField.text, authorField.text, emailField.text, licenseField.editText, websiteField.text);
         for (var i = 0; i < LnfLogic.lnfList.count; ++i) {
-            if (nameField.text == LnfLogic.lnfList.get(i).packageNameRole) {
+            if (nameField.text == LnfLogic.lnfList.get(i).package) {
                 themeSelector.currentIndex = i;
                 break;
             }

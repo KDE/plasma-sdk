@@ -36,33 +36,25 @@ using namespace Qt::StringLiterals;
 LnfListModel::LnfListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    m_roleNames.insert(Qt::DisplayRole, "displayRole");
-    m_roleNames.insert(PackageNameRole, "packageNameRole");
-    m_roleNames.insert(PackageDescriptionRole, "packageDescriptionRole");
-    m_roleNames.insert(PackageAuthorRole, "packageAuthorRole");
-
     reload();
 }
 
-LnfListModel::~LnfListModel()
-{
-    clearThemeList();
-}
+LnfListModel::~LnfListModel() = default;
 
 QHash<int, QByteArray> LnfListModel::roleNames() const
 {
-    return m_roleNames;
-}
-
-void LnfListModel::clearThemeList()
-{
-    m_themes.clear();
+    return {
+        {Qt::DisplayRole, "displayRole"},
+        {PackageNameRole, "packageNameRole"},
+        {PackageDescriptionRole, "packageDescriptionRole"},
+        {PackageAuthorRole, "packageAuthorRole"},
+    };
 }
 
 void LnfListModel::reload()
 {
     beginResetModel();
-    clearThemeList();
+    m_themes.clear();
 
     // get all desktop themes
     QStringList themes;
@@ -130,40 +122,27 @@ int LnfListModel::rowCount(const QModelIndex &) const
 
 QVariant LnfListModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid()) {
-        return QVariant();
-    }
+    Q_ASSERT(checkIndex(index, QAbstractItemModel::CheckIndexOption::IndexIsValid));
 
-    if (index.row() >= m_themes.size() || index.row() < 0) {
-        return QVariant();
-    }
+    const ThemeInfo &themeInfo = m_themes[index.row()];
 
     switch (role) {
     case Qt::DisplayRole:
-        return m_themes.value(index.row()).name;
+        return themeInfo.name;
     case PackageNameRole:
-        return m_themes.value(index.row()).package;
+        return themeInfo.package;
     case PackageDescriptionRole:
-        return m_themes.value(index.row()).description;
+        return themeInfo.description;
     case PackageAuthorRole:
-        return m_themes.value(index.row()).author;
+        return themeInfo.author;
     default:
-        return QVariant();
+        return {};
     }
 }
 
-QVariantMap LnfListModel::get(int row) const
+ThemeInfo LnfListModel::get(int row) const
 {
-    QVariantMap item;
-
-    QModelIndex idx = index(row, 0);
-
-    item["display"] = data(idx, Qt::DisplayRole);
-    item["packageNameRole"] = data(idx, PackageNameRole);
-    item["packageDescriptionRole"] = data(idx, PackageDescriptionRole);
-    item["packageAuthorRole"] = data(idx, PackageAuthorRole);
-
-    return item;
+    return m_themes[row];
 }
 
 QModelIndex LnfListModel::indexOf(const QString &name) const
