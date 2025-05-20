@@ -271,6 +271,7 @@ void LnfLogic::setTheme(const QString &theme)
     m_needsSave = false;
     emit needsSaveChanged();
     emit themeChanged();
+    emit thumbnailPathChanged();
     emit nameChanged();
     emit commentChanged();
     emit authorChanged();
@@ -468,7 +469,7 @@ bool LnfLogic::needsSave()
 QString LnfLogic::thumbnailPath() const
 {
     // don't fallback
-    QString path = m_package.filePath("previews", QStringLiteral("preview.png"));
+    const QString path = m_package.filePath("previews", QStringLiteral("preview.png"));
     if (path.contains(m_package.path())) {
         return path;
     }
@@ -521,7 +522,7 @@ void LnfLogic::processThumbnail(const QString &path)
     fullScreenImage.save(&fullScreenImageFile, "JPG"); // writes image into ba in PNG format
     fullScreenImageFile.close();
 
-    emit themeChanged();
+    Q_EMIT thumbnailPathChanged();
 }
 
 QString LnfLogic::openFile()

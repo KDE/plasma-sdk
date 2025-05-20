@@ -129,6 +129,7 @@ Kirigami.ApplicationWindow {
                     id: thumbnail
                     anchors.fill: parent
                     fillMode: Image.PreserveAspectFit
+                    source: 'file:' + LnfLogic.thumbnailPath
 
                     cache: false
                     DragAndDrop.DropArea {
@@ -139,14 +140,12 @@ Kirigami.ApplicationWindow {
                                 LnfLogic.processThumbnail(event.mimeData.urls[0]);
                             }
                             event.accept(Qt.CopyAction);
-                            thumbnail.sourceChanged(thumbnail.source);
                         }
                     }
                     MouseArea {
                         anchors.fill:parent
                         onClicked: {
                             LnfLogic.processThumbnail(LnfLogic.openFile());
-                            thumbnail.sourceChanged(thumbnail.source);
                         }
                     }
                 }
@@ -198,7 +197,7 @@ Kirigami.ApplicationWindow {
             target: LnfLogic
             function onThumbnailPathChanged() {
                 thumbnail.source = ""
-                thumbnail.source = LnfLogic.thumbnailPath
+                thumbnail.source = 'file:' + LnfLogic.thumbnailPath
             }
             function onMessageRequested(level, message) {
                 root.showPassiveNotification(message);
