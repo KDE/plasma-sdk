@@ -31,7 +31,7 @@ class LnfLogic : public QObject
     Q_PROPERTY(QString version READ version WRITE setVersion NOTIFY versionChanged)
     Q_PROPERTY(QString website READ website WRITE setWebsite NOTIFY websiteChanged)
     Q_PROPERTY(QString license READ license WRITE setLicense NOTIFY licenseChanged)
-    Q_PROPERTY(QString thumbnailPath READ thumbnailPath NOTIFY themeChanged)
+    Q_PROPERTY(QString thumbnailPath READ thumbnailPath NOTIFY thumbnailPathChanged)
 
     Q_PROPERTY(bool performLayoutDump READ performLayoutDump WRITE setPerformLayoutDump NOTIFY performLayoutDumpChanged)
     Q_PROPERTY(bool performDefaultsDump READ performDefaultsDump WRITE setPerformDefaultsDump NOTIFY performDefaultsDumpChanged)
@@ -116,6 +116,7 @@ Q_SIGNALS:
     void licenseChanged();
     void performLayoutDumpChanged();
     void performDefaultsDumpChanged();
+    void thumbnailPathChanged();
 
 private:
     QString m_themeName;
