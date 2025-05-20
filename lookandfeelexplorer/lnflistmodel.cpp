@@ -18,6 +18,9 @@
 #include <QApplication>
 #include <QDir>
 #include <QFile>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QPainter>
 #include <QStandardPaths>
 
@@ -25,9 +28,10 @@
 #include <KDesktopFile>
 
 #include <Plasma/Theme>
-#include <qstandardpaths.h>
 
 #include <QDebug>
+
+using namespace Qt::StringLiterals;
 
 LnfListModel::LnfListModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -68,7 +72,7 @@ void LnfListModel::reload()
         const QDir cd(ppath);
         const QStringList &entries = cd.entryList(QDir::Dirs | QDir::Hidden);
         for (const QString &pack : entries) {
-            const QString _metadata = ppath + QLatin1Char('/') + pack + QStringLiteral("/metadata.desktop");
+            const QString _metadata = ppath + u'/' + pack + QStringLiteral("/metadata.json");
             if ((pack != "." && pack != "..") && (QFile::exists(_metadata))) {
                 themes << _metadata;
             }
@@ -81,27 +85,38 @@ void LnfListModel::reload()
         int themeNameSepIndex = themeRoot.lastIndexOf('/', -1);
         QString packageName = themeRoot.right(themeRoot.length() - themeNameSepIndex - 1);
 
-        KDesktopFile df(theme);
-
-        if (df.noDisplay()) {
+        QFile file(theme);
+        if (!file.open(QFile::ReadOnly)) {
+            qWarning() << "Failed to open" << theme;
             continue;
         }
 
-        QString name = df.readName();
-        if (name.isEmpty()) {
-            name = packageName;
+        const auto doc = QJsonDocument::fromJson(file.readAll());
+        if (doc.isNull()) {
+            continue;
         }
-        const QString comment = df.readComment();
-        const QString author = df.desktopGroup().readEntry("X-KDE-PluginInfo-Author", QString());
-        const QString version = df.desktopGroup().readEntry("X-KDE-PluginInfo-Version", QString());
 
+        const auto obj = doc.object();
+
+        if (obj["KPackageStructure"_L1].toString() != "Plasma/LookAndFeel") {
+            continue;
+        }
+
+        const auto plugin = obj["KPlugin"].toObject();
         ThemeInfo info;
-        info.name = name;
         info.package = packageName;
-        info.description = comment;
-        info.author = author;
-        info.version = version;
         info.themeRoot = themeRoot;
+
+        info.name = plugin["Name"_L1].toString();
+        if (info.name.isEmpty()) {
+            info.name = packageName;
+        }
+        const auto authors = plugin["Authors"_L1].toArray();
+        for (const auto &author : authors) {
+            const auto authorObj = author.toObject();
+            info.author = authorObj["Name"].toString();
+        }
+        info.description = obj["Description"_L1].toString();
         m_themes << info;
     }
 
