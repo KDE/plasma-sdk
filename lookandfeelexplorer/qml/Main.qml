@@ -195,16 +195,19 @@ Kirigami.ApplicationWindow {
         }
         Connections {
             target: LnfLogic
-            function onThumbnailPathChanged() {
+            function onThumbnailPathChanged(): void {
                 thumbnail.source = ""
                 thumbnail.source = 'file:' + LnfLogic.thumbnailPath
             }
-            function onMessageRequested(level, message) {
+            function onMessageRequested(level: int, message: string): void {
                 root.showPassiveNotification(message);
             }
         }
         footer: QQC2.ToolBar {
-            padding: Kirigami.Units.smallSpacing
+            topPadding: 0
+            bottomPadding: 0
+            rightPadding: 0
+            leftPadding: 0
 
             contentItem: QQC2.DialogButtonBox {
                 QQC2.Button {
