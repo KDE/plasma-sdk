@@ -9,6 +9,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Dialogs
 import org.kde.kirigami 2.3 as Kirigami
+import org.kde.plasma.lookandfeelexplorer
 
 QQC2.Dialog {
     id: dialog
@@ -48,8 +49,8 @@ QQC2.Dialog {
                     Layout.fillWidth: true
                     Kirigami.FormData.label: i18n("Theme Plugin Name:")
                     onTextChanged: {
-                        for (var i = 0; i < lnfLogic.lnfList.count; ++i) {
-                            if (pluginNameField.text == lnfLogic.lnfList.get(i).packageNameRole) {
+                        for (var i = 0; i < LnfLogic.lnfList.count; ++i) {
+                            if (pluginNameField.text == LnfLogic.lnfList.get(i).packageNameRole) {
                                 dialog.canEdit = false;
                                 errorMessage.text = i18n("This theme plugin name already exists");
                                 return;
@@ -111,9 +112,9 @@ QQC2.Dialog {
     }
 
     onAccepted: {
-        lnfLogic.createNewTheme(pluginNameField.text, nameField.text, commentField.text, authorField.text, emailField.text, licenseField.editText, websiteField.text);
-        for (var i = 0; i < lnfLogic.lnfList.count; ++i) {
-            if (nameField.text == lnfLogic.lnfList.get(i).packageNameRole) {
+        LnfLogic.createNewTheme(pluginNameField.text, nameField.text, commentField.text, authorField.text, emailField.text, licenseField.editText, websiteField.text);
+        for (var i = 0; i < LnfLogic.lnfList.count; ++i) {
+            if (nameField.text == LnfLogic.lnfList.get(i).packageNameRole) {
                 themeSelector.currentIndex = i;
                 break;
             }
