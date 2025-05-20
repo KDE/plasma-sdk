@@ -48,11 +48,14 @@ int main(int argc, char **argv)
 
     KLocalization::setupLocalizedContext(&engine);
 
-    // usually we have an ApplicationWindow here, so we do not need to create a window by ourselves
-    engine.rootContext()->setContextProperty("commandlineTheme", parser.value(themeOption));
-    engine.rootContext()->setContextProperty("commandlineArguments", parser.positionalArguments());
-
     engine.loadFromModule(u"org.kde.plasma.lookandfeelexplorer"_s, u"Main"_s);
+
+    auto lnfLogic = engine.singletonInstance<LnfLogic *>(u"org.kde.plasma.lookandfeelexplorer"_s, u"Main"_s);
+
+    const auto commandlineTheme = parser.value(themeOption);
+    if (!commandlineTheme.isEmpty()) {
+        lnfLogic->setTheme(commandlineTheme);
+    }
 
     if (engine.rootObjects().isEmpty()) {
         return -1;
