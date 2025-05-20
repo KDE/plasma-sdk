@@ -11,6 +11,9 @@
 #include <QDir>
 #include <QFile>
 #include <QFileDialog>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QStandardPaths>
 #include <QUrl>
 
@@ -26,9 +29,11 @@
 #include <KPackage/PackageLoader>
 #include <KSharedConfig>
 
+using namespace Qt::StringLiterals;
+
 LnfLogic::LnfLogic(QObject *parent)
     : QObject(parent)
-    , m_themeName(QStringLiteral("org.kde.breeze.desktop"))
+    , m_themeName(QStringLiteral("org.kde.breeze.json"))
     , m_lnfListModel(new LnfListModel(this))
     , m_needsSave(false)
 {
@@ -47,23 +52,38 @@ void LnfLogic::createNewTheme(const QString &pluginName,
                               const QString &license,
                               const QString &website)
 {
-    const QString metadataPath(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/plasma/look-and-feel/") % pluginName
-                               % QLatin1String("/metadata.desktop"));
-    KConfig c(metadataPath);
+    const QString metadataPath(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + u"/plasma/look-and-feel/"_s + pluginName);
 
-    KConfigGroup cg(&c, "Desktop Entry");
-    cg.writeEntry("Name", name);
-    cg.writeEntry("Comment", comment);
-    cg.writeEntry("X-KDE-PluginInfo-Name", pluginName);
-    cg.writeEntry("X-KDE-ServiceTypes", "Plasma/LookAndFeel");
-    cg.writeEntry("X-KDE-PluginInfo-Author", author);
-    cg.writeEntry("X-KDE-PluginInfo-Email", email);
-    cg.writeEntry("X-KDE-PluginInfo-Website", website);
-    cg.writeEntry("X-KDE-PluginInfo-Category", "Plasma Look And Feel");
-    cg.writeEntry("X-KDE-PluginInfo-License", license);
-    cg.writeEntry("X-KDE-PluginInfo-EnabledByDefault", "true");
-    cg.writeEntry("X-KDE-PluginInfo-Version", "0.1");
-    cg.sync();
+    QJsonObject obj{
+        {"KPackageStructure"_L1, "Plasma/LookAndFeel"_L1},
+        {"KPlugin"_L1,
+         QJsonObject{
+             {"Authors"_L1,
+              QJsonArray{QJsonObject{
+                  {"Name"_L1, author},
+                  {"Email"_L1, email},
+              }}},
+             {"Website"_L1, website},
+             {"Description"_L1, comment},
+             {"Id"_L1, pluginName},
+             {"Name"_L1, name},
+             {"License"_L1, license},
+         }},
+        {"Keywords"_L1, "Desktop;Workspace;Appearance;Look and Feel;"_L1},
+        {"X-Plasma-APIVersion"_L1, "2"_L1},
+        {"X-Plasma-MainScript"_L1, "default"_L1},
+    };
+
+    QJsonDocument doc(obj);
+    QDir dir(metadataPath);
+    dir.mkpath(".");
+
+    QFile file(metadataPath + u"/metadata.json"_s);
+    if (!file.open(QFile::WriteOnly)) {
+        return;
+    }
+
+    file.write(doc.toJson());
 
     dumpPlasmaLayout(pluginName);
     dumpDefaultsConfigFile(pluginName);
