@@ -1,0 +1,10 @@
+# SPDX-FileCopyrightText: 2025 Carl Schwan <carl@carlschwan.eu>
+# SPDX-License-Identifier: LGPL-2.0-or-later
+
+[Desktop Entry]
+Terminal=false
+Name=Plasma Global Theme Explorer
+Icon=preferences-desktop-theme
+Exec=lookandfeelexplorer
+Categories=Qt;KDE;Development
+Type=Application

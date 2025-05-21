@@ -8,6 +8,7 @@
 #include <QApplication>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
+#include <QIcon>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
@@ -34,6 +35,9 @@ int main(int argc, char **argv)
     aboutData.setTranslator(i18nc("NAME OF TRANSLATORS", "Your names"), i18nc("EMAIL OF TRANSLATORS", "Your emails"));
 
     KAboutData::setApplicationData(aboutData);
+
+    QGuiApplication::setWindowIcon(QIcon::fromTheme(u"preferences-desktop-theme"_s));
+    QGuiApplication::setDesktopFileName(u"org.kde.plasma.lookandfeelexplorer"_s);
 
     QCommandLineOption themeOption({u"l"_s, u"lookandfeel"_s}, i18n("Look And Feel to open"), u"lookandfeel"_s);
     parser.addOption(themeOption);
