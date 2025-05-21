@@ -46,15 +46,14 @@ Kirigami.ApplicationWindow {
                     model: LnfLogic.lnfList
                     textRole: "displayRole"
                     valueRole: "packageNameRole"
-                    currentIndex: {
-                        let index = indexOfValue(LnfLogic.them);
-                        if (index === -1) {
-                            index = 0;
+                    Component.onCompleted: {
+                        currentIndex = indexOfValue(LnfLogic.theme);
+                        if (currentIndex === -1) {
+                            currentIndex = 0;
                         }
-                        return index;
                     }
 
-                    onCurrentIndexChanged: {
+                    onActivated: {
                         if (currentIndex >= 0) {
                             LnfLogic.theme = LnfLogic.lnfList.get(currentIndex).package;
                         }
@@ -199,6 +198,9 @@ Kirigami.ApplicationWindow {
             }
             function onMessageRequested(level: int, message: string): void {
                 root.showPassiveNotification(message);
+            }
+            function onThemeChanged(): void {
+                themeSelector.currentIndex = themeSelector.indexOfValue(LnfLogic.theme);
             }
         }
         footer: QQC2.ToolBar {
