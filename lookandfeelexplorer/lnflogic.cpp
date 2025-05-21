@@ -33,7 +33,7 @@ using namespace Qt::StringLiterals;
 
 LnfLogic::LnfLogic(QObject *parent)
     : QObject(parent)
-    , m_themeName(QStringLiteral("org.kde.breeze.json"))
+    , m_themeName(QStringLiteral("org.kde.breeze.desktop"))
     , m_lnfListModel(new LnfListModel(this))
     , m_needsSave(false)
 {

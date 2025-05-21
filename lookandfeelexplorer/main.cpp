@@ -52,7 +52,7 @@ int main(int argc, char **argv)
 
     engine.loadFromModule(u"org.kde.plasma.lookandfeelexplorer"_s, u"Main"_s);
 
-    auto lnfLogic = engine.singletonInstance<LnfLogic *>(u"org.kde.plasma.lookandfeelexplorer"_s, u"Main"_s);
+    auto lnfLogic = engine.singletonInstance<LnfLogic *>(u"org.kde.plasma.lookandfeelexplorer"_s, u"LnfLogic"_s);
 
     const auto commandlineTheme = parser.value(themeOption);
     if (!commandlineTheme.isEmpty()) {
