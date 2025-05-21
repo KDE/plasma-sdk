@@ -40,26 +40,41 @@ Kirigami.ApplicationWindow {
                 Layout.fillWidth: true
                 Layout.preferredHeight: root.pageStack.globalToolBar.preferredHeight
 
-                contentItem: QQC2.ComboBox {
-                    id: themeSelector
+                topPadding: Kirigami.Units.smallSpacing / 2
 
-                    model: LnfLogic.lnfList
-                    textRole: "displayRole"
-                    valueRole: "packageNameRole"
-                    Component.onCompleted: {
-                        currentIndex = indexOfValue(LnfLogic.theme);
-                        if (currentIndex === -1) {
-                            currentIndex = 0;
+                contentItem: RowLayout {
+                    spacing: Kirigami.Units.smallSpacing
+
+                    QQC2.ComboBox {
+                        id: themeSelector
+
+                        model: LnfLogic.lnfList
+                        textRole: "displayRole"
+                        valueRole: "packageNameRole"
+                        Component.onCompleted: {
+                            currentIndex = indexOfValue(LnfLogic.theme);
+                            if (currentIndex === -1) {
+                                currentIndex = 0;
+                            }
                         }
+
+                        onActivated: {
+                            if (currentIndex >= 0) {
+                                LnfLogic.theme = LnfLogic.lnfList.get(currentIndex).package;
+                            }
+                        }
+
+                        Layout.fillWidth: true
                     }
 
-                    onActivated: {
-                        if (currentIndex >= 0) {
-                            LnfLogic.theme = LnfLogic.lnfList.get(currentIndex).package;
-                        }
+                    QQC2.ToolButton {
+                        text: i18nc("@action:click", "About")
+                        icon.name: "documentinfo-symbolic"
+                        display: QQC2.ToolButton.IconOnly
+                        onClicked: root.pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutPage"), {}, {
+                            width: Kirigami.Units.gridUnit * 30,
+                        });
                     }
-
-                    Layout.fillWidth: true
                 }
             }
 

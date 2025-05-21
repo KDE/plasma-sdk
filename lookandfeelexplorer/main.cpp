@@ -32,12 +32,17 @@ int main(int argc, char **argv)
                          KAboutLicense::GPL_V2,
                          i18n("© KDE Community"));
     aboutData.addAuthor(i18nc("@info:credit", "Marco Martin"), i18nc("@info:credit", "Developer"));
+    aboutData.addAuthor(i18nc("@info:credit", "Carl Schwan"),
+                        i18nc("@info:credit", "Developer"),
+                        u"carl@carlschwan.eu"_s,
+                        u"https://carlschwan.eu"_s,
+                        QUrl(u"https://carlschwan.eu/avatar.png"_s));
     aboutData.setTranslator(i18nc("NAME OF TRANSLATORS", "Your names"), i18nc("EMAIL OF TRANSLATORS", "Your emails"));
+    aboutData.setDesktopFileName(u"org.kde.plasma.lookandfeelexplorer"_s);
 
     KAboutData::setApplicationData(aboutData);
 
     QGuiApplication::setWindowIcon(QIcon::fromTheme(u"preferences-desktop-theme"_s));
-    QGuiApplication::setDesktopFileName(u"org.kde.plasma.lookandfeelexplorer"_s);
 
     QCommandLineOption themeOption({u"l"_s, u"lookandfeel"_s}, i18n("Look And Feel to open"), u"lookandfeel"_s);
     parser.addOption(themeOption);
