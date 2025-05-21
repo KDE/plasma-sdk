@@ -33,3 +33,4 @@ target_link_libraries(lookandfeelexplorer PRIVATE
 )
 
 install(TARGETS lookandfeelexplorer ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(FILES org.kde.plasma.lookandfeelexplorer.desktop DESTINATION ${KDE_INSTALL_APPDIR})

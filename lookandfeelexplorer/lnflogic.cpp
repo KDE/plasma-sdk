@@ -265,6 +265,8 @@ void LnfLogic::setTheme(const QString &theme)
         return;
     }
 
+    qWarning() << "theme" << theme;
+
     m_tempMetadata.clear();
     m_themeName = theme;
     m_package.setPath(theme);
