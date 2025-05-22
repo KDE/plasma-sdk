@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # SPDX-FileCopyrightText: 2017, 2021, 2023 Kiszel Kristóf <kiszel.kristof@gmail.com>
-# SPDX-FileCopyrightText: 2024 Kristof Kiszel <ulysses@fsf.hu>
+# SPDX-FileCopyrightText: 2024, 2025 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-11 00:43+0000\n"
-"PO-Revision-Date: 2024-09-23 14:33+0200\n"
+"PO-Revision-Date: 2025-05-21 22:04+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #: contents/applet/AppletError.qml:164
 msgid "Copy to Clipboard"
@@ -82,14 +82,10 @@ msgid "Apply Settings"
 msgstr "Beállítások alkalmazása"
 
 #: contents/configuration/AppletConfiguration.qml:353
-#, fuzzy
-#| msgid ""
-#| "The settings of the current module have changed. Do you want to apply the "
-#| "changes or discard them?"
 msgid ""
 "The current page has unsaved changes. Apply the changes or discard them?"
 msgstr ""
-"Az aktuális modul beállításai megváltoztak. Szeretné menteni a "
+"A jelenlegi oldal beállításai megváltoztak. Szeretné menteni a "
 "módosításokat, vagy elveti azokat?"
 
 #: contents/configuration/AppletConfiguration.qml:384
