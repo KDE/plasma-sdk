@@ -99,7 +99,7 @@ msgstr "De manera predeterminada des de la configuració actual"
 #: package/contents/ui/main.qml:150
 #, kde-format
 msgid "Click to open an image"
-msgstr "Feu clic per a obrir una imatge"
+msgstr "Cliqueu per a obrir una imatge"
 
 #: package/contents/ui/main.qml:186
 #, kde-format
