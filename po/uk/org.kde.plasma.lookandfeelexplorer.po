@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.kde.plasma.lookandfeelexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-05 02:19+0000\n"
+"POT-Creation-Date: 2025-05-25 03:09+0000\n"
 "PO-Revision-Date: 2021-05-26 09:06+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -20,165 +20,201 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 20.12.0\n"
 
+#: lnflogic.cpp:105
+#, kde-format
+msgid "Cannot retrieve the current Plasma layout."
+msgstr "Не вдалося отримати поточне компонування Плазми."
+
+#: lnflogic.cpp:113
+#, kde-format
+msgid "Impossible to create the layouts directory in the look and feel package"
+msgstr "Неможливо створити каталог компонувань у пакунку вигляду"
+
+#: lnflogic.cpp:124
+#, kde-format
+msgid "Impossible to write to org.kde.plasma.desktop-layout.js"
+msgstr "Не вдалося записати дані до org.kde.plasma.desktop-layout.js"
+
+#: lnflogic.cpp:127
+#, kde-format
+msgid "Plasma Layout successfully duplicated"
+msgstr "Компонування Плазми успішно дубльовано"
+
+#: lnflogic.cpp:184
+#, kde-format
+msgid "Defaults config file saved from your current setup"
+msgstr "Файл типових налаштувань на основі поточних параметрів збережено"
+
+#: lnflogic.cpp:512
+#, kde-format
+msgid "Open Image"
+msgstr "Відкрити зображення"
+
+#: lnflogic.cpp:514
+#, kde-format
+msgid "Image Files (*.png *.jpg *.bmp)"
+msgstr "файли зображень (*.png *.jpg *.bmp)"
+
+#: main.cpp:29
+#, fuzzy, kde-format
+#| msgid "Plasma Look And Feel Explorer"
+msgctxt "@info:credit"
+msgid "Plasma Global Theme Explorer"
+msgstr "Навігатор темами вигляду Плазми"
+
+#: main.cpp:31
+#, kde-format
+msgctxt "@info:credit"
+msgid "Explore and edit your Plasma Global Themes"
+msgstr ""
+
+#: main.cpp:33
+#, kde-format
+msgid "© KDE Community"
+msgstr ""
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit"
+msgid "Marco Martin"
+msgstr ""
+
+#: main.cpp:34 main.cpp:36
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer"
+msgstr ""
+
+#: main.cpp:35
+#, kde-format
+msgctxt "@info:credit"
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:40
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Юрій Чорноіван"
 
+#: main.cpp:40
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "yurchor@ukr.net"
 
-#: package/contents/ui/main.qml:30
+#: main.cpp:47
 #, kde-format
-msgid "Look And Feel"
-msgstr "Вигляд і поведінка"
+msgid "Look And Feel to open"
+msgstr "Дані вигляду, які слід відкрити"
 
-#: package/contents/ui/main.qml:46
+#: qml/Main.qml:71
+#, kde-format
+msgctxt "@action:click"
+msgid "About"
+msgstr ""
+
+#: qml/Main.qml:82
 #, kde-format
 msgid "New Theme…"
 msgstr "Нова тема…"
 
-#: package/contents/ui/main.qml:63
+#: qml/Main.qml:101
 #, kde-format
 msgid "Open Theme Folder"
 msgstr "Відкрити теку теми"
 
-#: package/contents/ui/main.qml:92
-#, kde-format
-msgid "Plugin name:"
-msgstr "Назва додатка:"
-
-#: package/contents/ui/main.qml:95
-#, kde-format
-msgid "Name:"
-msgstr "Назва:"
-
-#: package/contents/ui/main.qml:99 package/contents/ui/MetadataEditor.qml:76
-#, kde-format
-msgid "Comment:"
-msgstr "Коментар:"
-
-#: package/contents/ui/main.qml:103 package/contents/ui/MetadataEditor.qml:80
-#, kde-format
-msgid "Author:"
-msgstr "Автор:"
-
-#: package/contents/ui/main.qml:107 package/contents/ui/MetadataEditor.qml:84
-#, kde-format
-msgid "Email:"
-msgstr "Ел. пошта:"
-
-#: package/contents/ui/main.qml:111 package/contents/ui/MetadataEditor.qml:88
-#, kde-format
-msgid "Version:"
-msgstr "Версія:"
-
-#: package/contents/ui/main.qml:115 package/contents/ui/MetadataEditor.qml:92
-#, kde-format
-msgid "Website:"
-msgstr "Сайт:"
-
-#: package/contents/ui/main.qml:119 package/contents/ui/MetadataEditor.qml:97
-#, kde-format
-msgid "License:"
-msgstr "Ліцензування:"
-
-#: package/contents/ui/main.qml:123
-#, kde-format
-msgid "Layout from current Plasma setup"
-msgstr "Компонування із поточних налаштувань Плазми"
-
-#: package/contents/ui/main.qml:128
-#, kde-format
-msgid "Defaults from current setup"
-msgstr "Типові значення з поточних налаштувань"
-
-#: package/contents/ui/main.qml:149
+#: qml/Main.qml:140
 #, kde-format
 msgid "Click to open an image"
 msgstr "Клацніть, щоб відкрити зображення"
 
-#: package/contents/ui/main.qml:185
+#: qml/Main.qml:171
+#, fuzzy, kde-format
+#| msgid "Plugin name:"
+msgid "Plugin name: %1"
+msgstr "Назва додатка:"
+
+#: qml/Main.qml:174
+#, kde-format
+msgid "Name:"
+msgstr "Назва:"
+
+#: qml/Main.qml:178 qml/MetadataEditor.qml:69
+#, kde-format
+msgid "Comment:"
+msgstr "Коментар:"
+
+#: qml/Main.qml:182 qml/MetadataEditor.qml:73
+#, kde-format
+msgid "Author:"
+msgstr "Автор:"
+
+#: qml/Main.qml:186 qml/MetadataEditor.qml:77
+#, kde-format
+msgid "Email:"
+msgstr "Ел. пошта:"
+
+#: qml/Main.qml:190 qml/MetadataEditor.qml:81
+#, kde-format
+msgid "Website:"
+msgstr "Сайт:"
+
+#: qml/Main.qml:194 qml/MetadataEditor.qml:86
+#, kde-format
+msgid "License:"
+msgstr "Ліцензування:"
+
+#: qml/Main.qml:198
+#, kde-format
+msgid "Layout from current Plasma setup"
+msgstr "Компонування із поточних налаштувань Плазми"
+
+#: qml/Main.qml:203
+#, kde-format
+msgid "Defaults from current setup"
+msgstr "Типові значення з поточних налаштувань"
+
+#: qml/Main.qml:229
 #, kde-format
 msgid "Save"
 msgstr "Зберегти"
 
-#: package/contents/ui/MetadataEditor.qml:28
+#: qml/MetadataEditor.qml:27
 #, kde-format
 msgid "New Theme"
 msgstr "Нова тема"
 
-#: package/contents/ui/MetadataEditor.qml:57
+#: qml/MetadataEditor.qml:50
 #, kde-format
 msgid "Theme Plugin Name:"
 msgstr "Назва додатка теми:"
 
-#: package/contents/ui/MetadataEditor.qml:62
+#: qml/MetadataEditor.qml:55
 #, kde-format
 msgid "This theme plugin name already exists"
 msgstr "Додаток теми із такою назвою вже існує"
 
-#: package/contents/ui/MetadataEditor.qml:72
+#: qml/MetadataEditor.qml:65
 #, kde-format
 msgid "Theme Name:"
 msgstr "Назва теми:"
 
-#: package/contents/ui/MetadataEditor.qml:109
+#: qml/MetadataEditor.qml:98
 #, kde-format
 msgid "OK "
 msgstr "Гаразд"
 
-#: package/contents/ui/MetadataEditor.qml:115
+#: qml/MetadataEditor.qml:104
 #, kde-format
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: src/lnflogic.cpp:85
-#, kde-format
-msgid "Cannot retrieve the current Plasma layout."
-msgstr "Не вдалося отримати поточне компонування Плазми."
+#~ msgid "Look And Feel"
+#~ msgstr "Вигляд і поведінка"
 
-#: src/lnflogic.cpp:93
-#, kde-format
-msgid "Impossible to create the layouts directory in the look and feel package"
-msgstr "Неможливо створити каталог компонувань у пакунку вигляду"
-
-#: src/lnflogic.cpp:104
-#, kde-format
-msgid "Impossible to write to org.kde.plasma.desktop-layout.js"
-msgstr "Не вдалося записати дані до org.kde.plasma.desktop-layout.js"
-
-#: src/lnflogic.cpp:107
-#, kde-format
-msgid "Plasma Layout successfully duplicated"
-msgstr "Компонування Плазми успішно дубльовано"
-
-#: src/lnflogic.cpp:164
-#, kde-format
-msgid "Defaults config file saved from your current setup"
-msgstr "Файл типових налаштувань на основі поточних параметрів збережено"
-
-#: src/lnflogic.cpp:487
-#, kde-format
-msgid "Open Image"
-msgstr "Відкрити зображення"
-
-#: src/lnflogic.cpp:489
-#, kde-format
-msgid "Image Files (*.png *.jpg *.bmp)"
-msgstr "файли зображень (*.png *.jpg *.bmp)"
-
-#: src/main.cpp:34
-#, kde-format
-msgid "Plasma Look And Feel Explorer"
-msgstr "Навігатор темами вигляду Плазми"
-
-#: src/main.cpp:38
-#, kde-format
-msgid "Look And Feel to open"
-msgstr "Дані вигляду, які слід відкрити"
+#~ msgid "Version:"
+#~ msgstr "Версія:"
 
 #~ msgid "New Theme..."
 #~ msgstr "Створити тему..."

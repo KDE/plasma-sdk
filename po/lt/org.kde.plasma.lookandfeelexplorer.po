@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-05 02:19+0000\n"
+"POT-Creation-Date: 2025-05-25 03:09+0000\n"
 "PO-Revision-Date: 2024-02-03 01:23+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt\n"
@@ -19,167 +19,203 @@ msgstr ""
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#, kde-format
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Moo"
-
-#, kde-format
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "<>"
-
-#: package/contents/ui/main.qml:30
-#, kde-format
-msgid "Look And Feel"
-msgstr "Išvaizda ir turinys"
-
-#: package/contents/ui/main.qml:46
-#, kde-format
-msgid "New Theme…"
-msgstr "Naujas apipavidalinimas…"
-
-#: package/contents/ui/main.qml:63
-#, kde-format
-msgid "Open Theme Folder"
-msgstr "Atverti apipavidalinimo aplanką"
-
-#: package/contents/ui/main.qml:92
-#, kde-format
-msgid "Plugin name:"
-msgstr "Įskiepio pavadinimas:"
-
-#: package/contents/ui/main.qml:95
-#, kde-format
-msgid "Name:"
-msgstr "Pavadinimas:"
-
-#: package/contents/ui/main.qml:99 package/contents/ui/MetadataEditor.qml:76
-#, kde-format
-msgid "Comment:"
-msgstr "Komentaras:"
-
-#: package/contents/ui/main.qml:103 package/contents/ui/MetadataEditor.qml:80
-#, kde-format
-msgid "Author:"
-msgstr "Autorius:"
-
-#: package/contents/ui/main.qml:107 package/contents/ui/MetadataEditor.qml:84
-#, kde-format
-msgid "Email:"
-msgstr "El. paštas:"
-
-#: package/contents/ui/main.qml:111 package/contents/ui/MetadataEditor.qml:88
-#, kde-format
-msgid "Version:"
-msgstr "Versija:"
-
-#: package/contents/ui/main.qml:115 package/contents/ui/MetadataEditor.qml:92
-#, kde-format
-msgid "Website:"
-msgstr "Internetinė svetainė:"
-
-#: package/contents/ui/main.qml:119 package/contents/ui/MetadataEditor.qml:97
-#, kde-format
-msgid "License:"
-msgstr "Licencija:"
-
-#: package/contents/ui/main.qml:123
-#, kde-format
-msgid "Layout from current Plasma setup"
-msgstr "Išdėstymas iš dabartinės Plasma sąrankos"
-
-#: package/contents/ui/main.qml:128
-#, kde-format
-msgid "Defaults from current setup"
-msgstr "Numatytosios reikšmės iš dabartinės sąrankos"
-
-#: package/contents/ui/main.qml:149
-#, kde-format
-msgid "Click to open an image"
-msgstr "Spustelėkite, norėdami atverti paveikslą"
-
-#: package/contents/ui/main.qml:185
-#, kde-format
-msgid "Save"
-msgstr "Įrašyti"
-
-#: package/contents/ui/MetadataEditor.qml:28
-#, kde-format
-msgid "New Theme"
-msgstr "Naujas apipavidalinimas"
-
-#: package/contents/ui/MetadataEditor.qml:57
-#, kde-format
-msgid "Theme Plugin Name:"
-msgstr "Apipavidalinimo įskiepio pavadinimas:"
-
-#: package/contents/ui/MetadataEditor.qml:62
-#, kde-format
-msgid "This theme plugin name already exists"
-msgstr "Šis apipavidalinimo įskiepio pavadinimas jau yra"
-
-#: package/contents/ui/MetadataEditor.qml:72
-#, kde-format
-msgid "Theme Name:"
-msgstr "Apipavidalinimo pavadinimas:"
-
-#: package/contents/ui/MetadataEditor.qml:109
-#, kde-format
-msgid "OK "
-msgstr "Gerai "
-
-#: package/contents/ui/MetadataEditor.qml:115
-#, kde-format
-msgid "Cancel"
-msgstr "Atsisakyti"
-
-#: src/lnflogic.cpp:85
+#: lnflogic.cpp:105
 #, kde-format
 msgid "Cannot retrieve the current Plasma layout."
 msgstr "Nepavyksta gauti dabartinio Plasma išdėstymo."
 
-#: src/lnflogic.cpp:93
+#: lnflogic.cpp:113
 #, kde-format
 msgid "Impossible to create the layouts directory in the look and feel package"
 msgstr "Neįmanoma išvaizdos ir turinio pakete sukurti išdėstymų katalogą"
 
-#: src/lnflogic.cpp:104
+#: lnflogic.cpp:124
 #, kde-format
 msgid "Impossible to write to org.kde.plasma.desktop-layout.js"
 msgstr "Neįmanoma rašyti į org.kde.plasma.desktop-layout.js"
 
-#: src/lnflogic.cpp:107
+#: lnflogic.cpp:127
 #, kde-format
 msgid "Plasma Layout successfully duplicated"
 msgstr "Plasma išdėstymas sėkmingai dubliuotas"
 
-#: src/lnflogic.cpp:164
+#: lnflogic.cpp:184
 #, kde-format
 msgid "Defaults config file saved from your current setup"
 msgstr ""
 "Nustato, iš jūsų dabartinės sąrankos įrašytą konfigūracijos failą, kaip "
 "numatytąjį"
 
-#: src/lnflogic.cpp:487
+#: lnflogic.cpp:512
 #, kde-format
 msgid "Open Image"
 msgstr "Atverti paveikslą"
 
-#: src/lnflogic.cpp:489
+#: lnflogic.cpp:514
 #, kde-format
 msgid "Image Files (*.png *.jpg *.bmp)"
 msgstr "Paveikslų failai (*.png *.jpg *.bmp)"
 
-#: src/main.cpp:34
-#, kde-format
-msgid "Plasma Look And Feel Explorer"
+#: main.cpp:29
+#, fuzzy, kde-format
+#| msgid "Plasma Look And Feel Explorer"
+msgctxt "@info:credit"
+msgid "Plasma Global Theme Explorer"
 msgstr "Plasma išvaizdos ir turinio tyrinėtojas"
 
-#: src/main.cpp:38
+#: main.cpp:31
+#, kde-format
+msgctxt "@info:credit"
+msgid "Explore and edit your Plasma Global Themes"
+msgstr ""
+
+#: main.cpp:33
+#, kde-format
+msgid "© KDE Community"
+msgstr ""
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit"
+msgid "Marco Martin"
+msgstr ""
+
+#: main.cpp:34 main.cpp:36
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer"
+msgstr ""
+
+#: main.cpp:35
+#, kde-format
+msgctxt "@info:credit"
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:40
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Moo"
+
+#: main.cpp:40
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "<>"
+
+#: main.cpp:47
 #, kde-format
 msgid "Look And Feel to open"
 msgstr "Norima atverti išvaizda ir turinys"
+
+#: qml/Main.qml:71
+#, kde-format
+msgctxt "@action:click"
+msgid "About"
+msgstr ""
+
+#: qml/Main.qml:82
+#, kde-format
+msgid "New Theme…"
+msgstr "Naujas apipavidalinimas…"
+
+#: qml/Main.qml:101
+#, kde-format
+msgid "Open Theme Folder"
+msgstr "Atverti apipavidalinimo aplanką"
+
+#: qml/Main.qml:140
+#, kde-format
+msgid "Click to open an image"
+msgstr "Spustelėkite, norėdami atverti paveikslą"
+
+#: qml/Main.qml:171
+#, fuzzy, kde-format
+#| msgid "Plugin name:"
+msgid "Plugin name: %1"
+msgstr "Įskiepio pavadinimas:"
+
+#: qml/Main.qml:174
+#, kde-format
+msgid "Name:"
+msgstr "Pavadinimas:"
+
+#: qml/Main.qml:178 qml/MetadataEditor.qml:69
+#, kde-format
+msgid "Comment:"
+msgstr "Komentaras:"
+
+#: qml/Main.qml:182 qml/MetadataEditor.qml:73
+#, kde-format
+msgid "Author:"
+msgstr "Autorius:"
+
+#: qml/Main.qml:186 qml/MetadataEditor.qml:77
+#, kde-format
+msgid "Email:"
+msgstr "El. paštas:"
+
+#: qml/Main.qml:190 qml/MetadataEditor.qml:81
+#, kde-format
+msgid "Website:"
+msgstr "Internetinė svetainė:"
+
+#: qml/Main.qml:194 qml/MetadataEditor.qml:86
+#, kde-format
+msgid "License:"
+msgstr "Licencija:"
+
+#: qml/Main.qml:198
+#, kde-format
+msgid "Layout from current Plasma setup"
+msgstr "Išdėstymas iš dabartinės Plasma sąrankos"
+
+#: qml/Main.qml:203
+#, kde-format
+msgid "Defaults from current setup"
+msgstr "Numatytosios reikšmės iš dabartinės sąrankos"
+
+#: qml/Main.qml:229
+#, kde-format
+msgid "Save"
+msgstr "Įrašyti"
+
+#: qml/MetadataEditor.qml:27
+#, kde-format
+msgid "New Theme"
+msgstr "Naujas apipavidalinimas"
+
+#: qml/MetadataEditor.qml:50
+#, kde-format
+msgid "Theme Plugin Name:"
+msgstr "Apipavidalinimo įskiepio pavadinimas:"
+
+#: qml/MetadataEditor.qml:55
+#, kde-format
+msgid "This theme plugin name already exists"
+msgstr "Šis apipavidalinimo įskiepio pavadinimas jau yra"
+
+#: qml/MetadataEditor.qml:65
+#, kde-format
+msgid "Theme Name:"
+msgstr "Apipavidalinimo pavadinimas:"
+
+#: qml/MetadataEditor.qml:98
+#, kde-format
+msgid "OK "
+msgstr "Gerai "
+
+#: qml/MetadataEditor.qml:104
+#, kde-format
+msgid "Cancel"
+msgstr "Atsisakyti"
+
+#~ msgid "Look And Feel"
+#~ msgstr "Išvaizda ir turinys"
+
+#~ msgid "Version:"
+#~ msgstr "Versija:"
 
 #~ msgid "New Theme..."
 #~ msgstr "Naujas apipavidalinimas..."

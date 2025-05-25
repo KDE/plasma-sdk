@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-05 02:19+0000\n"
+"POT-Creation-Date: 2025-05-25 03:09+0000\n"
 "PO-Revision-Date: 2024-12-24 20:39+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -19,162 +19,198 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n>2);\n"
 "X-Generator: Lokalize 24.08.2\n"
 
+#: lnflogic.cpp:105
+#, kde-format
+msgid "Cannot retrieve the current Plasma layout."
+msgstr "वर्तमानं प्लाज्मा-विन्यासं पुनः प्राप्तुं न शक्यते ।"
+
+#: lnflogic.cpp:113
+#, kde-format
+msgid "Impossible to create the layouts directory in the look and feel package"
+msgstr "look and feel package इत्यस्मिन् layouts निर्देशिकां निर्मातुं असम्भवम्"
+
+#: lnflogic.cpp:124
+#, kde-format
+msgid "Impossible to write to org.kde.plasma.desktop-layout.js"
+msgstr "org.kde.plasma.desktop-layout.js इत्यत्र लिखितुं असम्भवम्"
+
+#: lnflogic.cpp:127
+#, kde-format
+msgid "Plasma Layout successfully duplicated"
+msgstr "प्लाज्मा लेआउट् सफलतया डुप्लिकेट् कृतम्"
+
+#: lnflogic.cpp:184
+#, kde-format
+msgid "Defaults config file saved from your current setup"
+msgstr "भवतः वर्तमानव्यवस्थापनात् रक्षितं विन्याससञ्चिकां पूर्वनिर्धारयति"
+
+#: lnflogic.cpp:512
+#, kde-format
+msgid "Open Image"
+msgstr "चित्रं उद्घाटयतु"
+
+#: lnflogic.cpp:514
+#, kde-format
+msgid "Image Files (*.png *.jpg *.bmp)"
+msgstr "चित्रसञ्चिकाः (*.png *.jpg *.bmp)"
+
+#: main.cpp:29
+#, fuzzy, kde-format
+#| msgid "Plasma Look And Feel Explorer"
+msgctxt "@info:credit"
+msgid "Plasma Global Theme Explorer"
+msgstr "प्लाज्मा लुक् एण्ड् फील् एक्सप्लोरर"
+
+#: main.cpp:31
+#, kde-format
+msgctxt "@info:credit"
+msgid "Explore and edit your Plasma Global Themes"
+msgstr ""
+
+#: main.cpp:33
+#, kde-format
+msgid "© KDE Community"
+msgstr ""
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit"
+msgid "Marco Martin"
+msgstr ""
+
+#: main.cpp:34 main.cpp:36
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer"
+msgstr ""
+
+#: main.cpp:35
+#, kde-format
+msgctxt "@info:credit"
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:40
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "श्रीकान्त् कलवार्"
 
+#: main.cpp:40
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "skkalwar999@gmail.com"
 
-#: package/contents/ui/main.qml:30
+#: main.cpp:47
 #, kde-format
-msgid "Look And Feel"
-msgstr "Look And Feel इति"
+msgid "Look And Feel to open"
+msgstr "Look And Feel उद्घाटयितुं"
 
-#: package/contents/ui/main.qml:46
+#: qml/Main.qml:71
+#, kde-format
+msgctxt "@action:click"
+msgid "About"
+msgstr ""
+
+#: qml/Main.qml:82
 #, kde-format
 msgid "New Theme…"
 msgstr "नवीन विषयः..."
 
-#: package/contents/ui/main.qml:63
+#: qml/Main.qml:101
 #, kde-format
 msgid "Open Theme Folder"
 msgstr "Theme Folder उद्घाटयन्तु"
 
-#: package/contents/ui/main.qml:92
-#, kde-format
-msgid "Plugin name:"
-msgstr "प्लगिन् नाम :"
-
-#: package/contents/ui/main.qml:95
-#, kde-format
-msgid "Name:"
-msgstr "नामः:"
-
-#: package/contents/ui/main.qml:99 package/contents/ui/MetadataEditor.qml:76
-#, kde-format
-msgid "Comment:"
-msgstr "टिप्पणी:"
-
-#: package/contents/ui/main.qml:103 package/contents/ui/MetadataEditor.qml:80
-#, kde-format
-msgid "Author:"
-msgstr "लेखकः:"
-
-#: package/contents/ui/main.qml:107 package/contents/ui/MetadataEditor.qml:84
-#, kde-format
-msgid "Email:"
-msgstr "ईमेल :"
-
-#: package/contents/ui/main.qml:111 package/contents/ui/MetadataEditor.qml:88
-#, kde-format
-msgid "Version:"
-msgstr "संस्करण:"
-
-#: package/contents/ui/main.qml:115 package/contents/ui/MetadataEditor.qml:92
-#, kde-format
-msgid "Website:"
-msgstr "जालपुटम् :"
-
-#: package/contents/ui/main.qml:119 package/contents/ui/MetadataEditor.qml:97
-#, kde-format
-msgid "License:"
-msgstr "अनुज्ञापत्रम् :"
-
-#: package/contents/ui/main.qml:123
-#, kde-format
-msgid "Layout from current Plasma setup"
-msgstr "वर्तमान प्लाज्मा सेटअपतः लेआउट्"
-
-#: package/contents/ui/main.qml:128
-#, kde-format
-msgid "Defaults from current setup"
-msgstr "वर्तमानसेटअपतः पूर्वनिर्धारितम्"
-
-#: package/contents/ui/main.qml:149
+#: qml/Main.qml:140
 #, kde-format
 msgid "Click to open an image"
 msgstr "चित्रं उद्घाटयितुं क्लिक् कुर्वन्तु"
 
-#: package/contents/ui/main.qml:185
+#: qml/Main.qml:171
+#, fuzzy, kde-format
+#| msgid "Plugin name:"
+msgid "Plugin name: %1"
+msgstr "प्लगिन् नाम :"
+
+#: qml/Main.qml:174
+#, kde-format
+msgid "Name:"
+msgstr "नामः:"
+
+#: qml/Main.qml:178 qml/MetadataEditor.qml:69
+#, kde-format
+msgid "Comment:"
+msgstr "टिप्पणी:"
+
+#: qml/Main.qml:182 qml/MetadataEditor.qml:73
+#, kde-format
+msgid "Author:"
+msgstr "लेखकः:"
+
+#: qml/Main.qml:186 qml/MetadataEditor.qml:77
+#, kde-format
+msgid "Email:"
+msgstr "ईमेल :"
+
+#: qml/Main.qml:190 qml/MetadataEditor.qml:81
+#, kde-format
+msgid "Website:"
+msgstr "जालपुटम् :"
+
+#: qml/Main.qml:194 qml/MetadataEditor.qml:86
+#, kde-format
+msgid "License:"
+msgstr "अनुज्ञापत्रम् :"
+
+#: qml/Main.qml:198
+#, kde-format
+msgid "Layout from current Plasma setup"
+msgstr "वर्तमान प्लाज्मा सेटअपतः लेआउट्"
+
+#: qml/Main.qml:203
+#, kde-format
+msgid "Defaults from current setup"
+msgstr "वर्तमानसेटअपतः पूर्वनिर्धारितम्"
+
+#: qml/Main.qml:229
 #, kde-format
 msgid "Save"
 msgstr "रक्ष्"
 
-#: package/contents/ui/MetadataEditor.qml:28
+#: qml/MetadataEditor.qml:27
 #, kde-format
 msgid "New Theme"
 msgstr "नवीन विषय"
 
-#: package/contents/ui/MetadataEditor.qml:57
+#: qml/MetadataEditor.qml:50
 #, kde-format
 msgid "Theme Plugin Name:"
 msgstr "विषय प्लगिन् नाम:"
 
-#: package/contents/ui/MetadataEditor.qml:62
+#: qml/MetadataEditor.qml:55
 #, kde-format
 msgid "This theme plugin name already exists"
 msgstr "इदं थीम् प्लगिन् नाम पूर्वमेव अस्ति"
 
-#: package/contents/ui/MetadataEditor.qml:72
+#: qml/MetadataEditor.qml:65
 #, kde-format
 msgid "Theme Name:"
 msgstr "विषयनाम :"
 
-#: package/contents/ui/MetadataEditor.qml:109
+#: qml/MetadataEditor.qml:98
 #, kde-format
 msgid "OK "
 msgstr "अस्तु "
 
-#: package/contents/ui/MetadataEditor.qml:115
+#: qml/MetadataEditor.qml:104
 #, kde-format
 msgid "Cancel"
 msgstr "निरसयतु"
 
-#: src/lnflogic.cpp:85
-#, kde-format
-msgid "Cannot retrieve the current Plasma layout."
-msgstr "वर्तमानं प्लाज्मा-विन्यासं पुनः प्राप्तुं न शक्यते ।"
+#~ msgid "Look And Feel"
+#~ msgstr "Look And Feel इति"
 
-#: src/lnflogic.cpp:93
-#, kde-format
-msgid "Impossible to create the layouts directory in the look and feel package"
-msgstr "look and feel package इत्यस्मिन् layouts निर्देशिकां निर्मातुं असम्भवम्"
-
-#: src/lnflogic.cpp:104
-#, kde-format
-msgid "Impossible to write to org.kde.plasma.desktop-layout.js"
-msgstr "org.kde.plasma.desktop-layout.js इत्यत्र लिखितुं असम्भवम्"
-
-#: src/lnflogic.cpp:107
-#, kde-format
-msgid "Plasma Layout successfully duplicated"
-msgstr "प्लाज्मा लेआउट् सफलतया डुप्लिकेट् कृतम्"
-
-#: src/lnflogic.cpp:164
-#, kde-format
-msgid "Defaults config file saved from your current setup"
-msgstr "भवतः वर्तमानव्यवस्थापनात् रक्षितं विन्याससञ्चिकां पूर्वनिर्धारयति"
-
-#: src/lnflogic.cpp:487
-#, kde-format
-msgid "Open Image"
-msgstr "चित्रं उद्घाटयतु"
-
-#: src/lnflogic.cpp:489
-#, kde-format
-msgid "Image Files (*.png *.jpg *.bmp)"
-msgstr "चित्रसञ्चिकाः (*.png *.jpg *.bmp)"
-
-#: src/main.cpp:34
-#, kde-format
-msgid "Plasma Look And Feel Explorer"
-msgstr "प्लाज्मा लुक् एण्ड् फील् एक्सप्लोरर"
-
-#: src/main.cpp:38
-#, kde-format
-msgid "Look And Feel to open"
-msgstr "Look And Feel उद्घाटयितुं"
+#~ msgid "Version:"
+#~ msgstr "संस्करण:"

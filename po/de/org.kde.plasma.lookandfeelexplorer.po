@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.kde.plasma.lookandfeelexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-05 02:19+0000\n"
+"POT-Creation-Date: 2025-05-25 03:09+0000\n"
 "PO-Revision-Date: 2022-07-14 00:39+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -18,167 +18,203 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 22.07.70\n"
 
-#, kde-format
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Deutsches KDE-Übersetzungsteam"
-
-#, kde-format
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "kde-i18n-de@kde.org"
-
-#: package/contents/ui/main.qml:30
-#, kde-format
-msgid "Look And Feel"
-msgstr "Erscheinungsbild"
-
-#: package/contents/ui/main.qml:46
-#, kde-format
-msgid "New Theme…"
-msgstr "Neues Design ..."
-
-#: package/contents/ui/main.qml:63
-#, kde-format
-msgid "Open Theme Folder"
-msgstr "Design-Ordner öffnen"
-
-#: package/contents/ui/main.qml:92
-#, kde-format
-msgid "Plugin name:"
-msgstr "Modulname:"
-
-#: package/contents/ui/main.qml:95
-#, kde-format
-msgid "Name:"
-msgstr "Name:"
-
-#: package/contents/ui/main.qml:99 package/contents/ui/MetadataEditor.qml:76
-#, kde-format
-msgid "Comment:"
-msgstr "Kommentar:"
-
-#: package/contents/ui/main.qml:103 package/contents/ui/MetadataEditor.qml:80
-#, kde-format
-msgid "Author:"
-msgstr "Autor:"
-
-#: package/contents/ui/main.qml:107 package/contents/ui/MetadataEditor.qml:84
-#, kde-format
-msgid "Email:"
-msgstr "E-Mail:"
-
-#: package/contents/ui/main.qml:111 package/contents/ui/MetadataEditor.qml:88
-#, kde-format
-msgid "Version:"
-msgstr "Version:"
-
-#: package/contents/ui/main.qml:115 package/contents/ui/MetadataEditor.qml:92
-#, kde-format
-msgid "Website:"
-msgstr "Webseite:"
-
-#: package/contents/ui/main.qml:119 package/contents/ui/MetadataEditor.qml:97
-#, kde-format
-msgid "License:"
-msgstr "Lizenz:"
-
-#: package/contents/ui/main.qml:123
-#, kde-format
-msgid "Layout from current Plasma setup"
-msgstr "Layout der aktuellen Plasma-Einstellungen"
-
-#: package/contents/ui/main.qml:128
-#, kde-format
-msgid "Defaults from current setup"
-msgstr "Voreinstellungen aus aktuellen Einstellungen"
-
-#: package/contents/ui/main.qml:149
-#, kde-format
-msgid "Click to open an image"
-msgstr "Klicken, um ein Bild zu öffnen"
-
-#: package/contents/ui/main.qml:185
-#, kde-format
-msgid "Save"
-msgstr "Speichern"
-
-#: package/contents/ui/MetadataEditor.qml:28
-#, kde-format
-msgid "New Theme"
-msgstr "Neues Design"
-
-#: package/contents/ui/MetadataEditor.qml:57
-#, kde-format
-msgid "Theme Plugin Name:"
-msgstr "Name des Design-Moduls:"
-
-#: package/contents/ui/MetadataEditor.qml:62
-#, kde-format
-msgid "This theme plugin name already exists"
-msgstr "Ein Design-Modul mit diesem Namen existiert bereits"
-
-#: package/contents/ui/MetadataEditor.qml:72
-#, kde-format
-msgid "Theme Name:"
-msgstr "Design-Name:"
-
-#: package/contents/ui/MetadataEditor.qml:109
-#, kde-format
-msgid "OK "
-msgstr "OK "
-
-#: package/contents/ui/MetadataEditor.qml:115
-#, kde-format
-msgid "Cancel"
-msgstr "Abbrechen"
-
-#: src/lnflogic.cpp:85
+#: lnflogic.cpp:105
 #, kde-format
 msgid "Cannot retrieve the current Plasma layout."
 msgstr "Das aktuelle Plasma-Layout kann nicht ermittelt werden."
 
-#: src/lnflogic.cpp:93
+#: lnflogic.cpp:113
 #, kde-format
 msgid "Impossible to create the layouts directory in the look and feel package"
 msgstr "Der Layout-Ordner kann im Erscheinungsbild-Paket nicht erstellt werden"
 
-#: src/lnflogic.cpp:104
+#: lnflogic.cpp:124
 #, kde-format
 msgid "Impossible to write to org.kde.plasma.desktop-layout.js"
 msgstr "Es kann nicht nach org.kde.plasma.desktop-layout.js geschrieben werden"
 
-#: src/lnflogic.cpp:107
+#: lnflogic.cpp:127
 #, kde-format
 msgid "Plasma Layout successfully duplicated"
 msgstr "Das Plasma-Layout ist erfolgreich dupliziert worden"
 
-#: src/lnflogic.cpp:164
+#: lnflogic.cpp:184
 #, kde-format
 msgid "Defaults config file saved from your current setup"
 msgstr ""
 "Voreinstellungen-Konfigurationsdatei ist mit Ihren aktuellen Einstellungen "
 "gespeichert worden"
 
-#: src/lnflogic.cpp:487
+#: lnflogic.cpp:512
 #, kde-format
 msgid "Open Image"
 msgstr "Bild öffnen"
 
-#: src/lnflogic.cpp:489
+#: lnflogic.cpp:514
 #, kde-format
 msgid "Image Files (*.png *.jpg *.bmp)"
 msgstr "Bilddateien (*png *.jpg *.bmp)"
 
-#: src/main.cpp:34
-#, kde-format
-msgid "Plasma Look And Feel Explorer"
+#: main.cpp:29
+#, fuzzy, kde-format
+#| msgid "Plasma Look And Feel Explorer"
+msgctxt "@info:credit"
+msgid "Plasma Global Theme Explorer"
 msgstr "Plasma-Erscheinungsbild-Betrachter"
 
-#: src/main.cpp:38
+#: main.cpp:31
+#, kde-format
+msgctxt "@info:credit"
+msgid "Explore and edit your Plasma Global Themes"
+msgstr ""
+
+#: main.cpp:33
+#, kde-format
+msgid "© KDE Community"
+msgstr ""
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit"
+msgid "Marco Martin"
+msgstr ""
+
+#: main.cpp:34 main.cpp:36
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer"
+msgstr ""
+
+#: main.cpp:35
+#, kde-format
+msgctxt "@info:credit"
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:40
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Deutsches KDE-Übersetzungsteam"
+
+#: main.cpp:40
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "kde-i18n-de@kde.org"
+
+#: main.cpp:47
 #, kde-format
 msgid "Look And Feel to open"
 msgstr "Zu öffnendes Erscheinungsbild"
+
+#: qml/Main.qml:71
+#, kde-format
+msgctxt "@action:click"
+msgid "About"
+msgstr ""
+
+#: qml/Main.qml:82
+#, kde-format
+msgid "New Theme…"
+msgstr "Neues Design ..."
+
+#: qml/Main.qml:101
+#, kde-format
+msgid "Open Theme Folder"
+msgstr "Design-Ordner öffnen"
+
+#: qml/Main.qml:140
+#, kde-format
+msgid "Click to open an image"
+msgstr "Klicken, um ein Bild zu öffnen"
+
+#: qml/Main.qml:171
+#, fuzzy, kde-format
+#| msgid "Plugin name:"
+msgid "Plugin name: %1"
+msgstr "Modulname:"
+
+#: qml/Main.qml:174
+#, kde-format
+msgid "Name:"
+msgstr "Name:"
+
+#: qml/Main.qml:178 qml/MetadataEditor.qml:69
+#, kde-format
+msgid "Comment:"
+msgstr "Kommentar:"
+
+#: qml/Main.qml:182 qml/MetadataEditor.qml:73
+#, kde-format
+msgid "Author:"
+msgstr "Autor:"
+
+#: qml/Main.qml:186 qml/MetadataEditor.qml:77
+#, kde-format
+msgid "Email:"
+msgstr "E-Mail:"
+
+#: qml/Main.qml:190 qml/MetadataEditor.qml:81
+#, kde-format
+msgid "Website:"
+msgstr "Webseite:"
+
+#: qml/Main.qml:194 qml/MetadataEditor.qml:86
+#, kde-format
+msgid "License:"
+msgstr "Lizenz:"
+
+#: qml/Main.qml:198
+#, kde-format
+msgid "Layout from current Plasma setup"
+msgstr "Layout der aktuellen Plasma-Einstellungen"
+
+#: qml/Main.qml:203
+#, kde-format
+msgid "Defaults from current setup"
+msgstr "Voreinstellungen aus aktuellen Einstellungen"
+
+#: qml/Main.qml:229
+#, kde-format
+msgid "Save"
+msgstr "Speichern"
+
+#: qml/MetadataEditor.qml:27
+#, kde-format
+msgid "New Theme"
+msgstr "Neues Design"
+
+#: qml/MetadataEditor.qml:50
+#, kde-format
+msgid "Theme Plugin Name:"
+msgstr "Name des Design-Moduls:"
+
+#: qml/MetadataEditor.qml:55
+#, kde-format
+msgid "This theme plugin name already exists"
+msgstr "Ein Design-Modul mit diesem Namen existiert bereits"
+
+#: qml/MetadataEditor.qml:65
+#, kde-format
+msgid "Theme Name:"
+msgstr "Design-Name:"
+
+#: qml/MetadataEditor.qml:98
+#, kde-format
+msgid "OK "
+msgstr "OK "
+
+#: qml/MetadataEditor.qml:104
+#, kde-format
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#~ msgid "Look And Feel"
+#~ msgstr "Erscheinungsbild"
+
+#~ msgid "Version:"
+#~ msgstr "Version:"
 
 #~ msgid "New Theme..."
 #~ msgstr "Neues Design ..."

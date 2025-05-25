@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-05 02:19+0000\n"
+"POT-Creation-Date: 2025-05-25 03:09+0000\n"
 "PO-Revision-Date: 2024-01-03 23:04+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -18,165 +18,201 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 24.01.85\n"
 
+#: lnflogic.cpp:105
+#, kde-format
+msgid "Cannot retrieve the current Plasma layout."
+msgstr "Geçerli Plasma yerleşimi alınamadı."
+
+#: lnflogic.cpp:113
+#, kde-format
+msgid "Impossible to create the layouts directory in the look and feel package"
+msgstr "Görünüm ve His paketinde yerleşimler dizini oluşturmak olanaklı değil"
+
+#: lnflogic.cpp:124
+#, kde-format
+msgid "Impossible to write to org.kde.plasma.desktop-layout.js"
+msgstr "org.kde.plasma.desktop-layout.js dosyasına yazmak mümkün değil"
+
+#: lnflogic.cpp:127
+#, kde-format
+msgid "Plasma Layout successfully duplicated"
+msgstr "Plasma yerleşimi başarıyla çoğaltıldı"
+
+#: lnflogic.cpp:184
+#, kde-format
+msgid "Defaults config file saved from your current setup"
+msgstr "Geçerli kurulumunuzdan öntanımlı yapılandırma dosyası kaydedildi"
+
+#: lnflogic.cpp:512
+#, kde-format
+msgid "Open Image"
+msgstr "Görsel Aç"
+
+#: lnflogic.cpp:514
+#, kde-format
+msgid "Image Files (*.png *.jpg *.bmp)"
+msgstr "Görsel Dosyaları (*.png *.jpg *.bmp)"
+
+#: main.cpp:29
+#, fuzzy, kde-format
+#| msgid "Plasma Look And Feel Explorer"
+msgctxt "@info:credit"
+msgid "Plasma Global Theme Explorer"
+msgstr "Plasma Bak ve Hisset Gezgini"
+
+#: main.cpp:31
+#, kde-format
+msgctxt "@info:credit"
+msgid "Explore and edit your Plasma Global Themes"
+msgstr ""
+
+#: main.cpp:33
+#, kde-format
+msgid "© KDE Community"
+msgstr ""
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit"
+msgid "Marco Martin"
+msgstr ""
+
+#: main.cpp:34 main.cpp:36
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer"
+msgstr ""
+
+#: main.cpp:35
+#, kde-format
+msgctxt "@info:credit"
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:40
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Volkan Gezer"
 
+#: main.cpp:40
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "volkangezer@gmail.com"
 
-#: package/contents/ui/main.qml:30
+#: main.cpp:47
 #, kde-format
-msgid "Look And Feel"
-msgstr "Görünüm ve His"
+msgid "Look And Feel to open"
+msgstr "Açma için Görünüm ve His"
 
-#: package/contents/ui/main.qml:46
+#: qml/Main.qml:71
+#, kde-format
+msgctxt "@action:click"
+msgid "About"
+msgstr ""
+
+#: qml/Main.qml:82
 #, kde-format
 msgid "New Theme…"
 msgstr "Yeni Tem…"
 
-#: package/contents/ui/main.qml:63
+#: qml/Main.qml:101
 #, kde-format
 msgid "Open Theme Folder"
 msgstr "Tema Klasörünü Aç"
 
-#: package/contents/ui/main.qml:92
-#, kde-format
-msgid "Plugin name:"
-msgstr "Eklenti adı:"
-
-#: package/contents/ui/main.qml:95
-#, kde-format
-msgid "Name:"
-msgstr "Ad:"
-
-#: package/contents/ui/main.qml:99 package/contents/ui/MetadataEditor.qml:76
-#, kde-format
-msgid "Comment:"
-msgstr "Yorum:"
-
-#: package/contents/ui/main.qml:103 package/contents/ui/MetadataEditor.qml:80
-#, kde-format
-msgid "Author:"
-msgstr "Yazar:"
-
-#: package/contents/ui/main.qml:107 package/contents/ui/MetadataEditor.qml:84
-#, kde-format
-msgid "Email:"
-msgstr "E-posta:"
-
-#: package/contents/ui/main.qml:111 package/contents/ui/MetadataEditor.qml:88
-#, kde-format
-msgid "Version:"
-msgstr "Sürüm:"
-
-#: package/contents/ui/main.qml:115 package/contents/ui/MetadataEditor.qml:92
-#, kde-format
-msgid "Website:"
-msgstr "Web sitesi:"
-
-#: package/contents/ui/main.qml:119 package/contents/ui/MetadataEditor.qml:97
-#, kde-format
-msgid "License:"
-msgstr "Lisans:"
-
-#: package/contents/ui/main.qml:123
-#, kde-format
-msgid "Layout from current Plasma setup"
-msgstr "Geçerli Plasma kurulumundaki yerleşim"
-
-#: package/contents/ui/main.qml:128
-#, kde-format
-msgid "Defaults from current setup"
-msgstr "Geçerli kurulumdan öntanımlılar"
-
-#: package/contents/ui/main.qml:149
+#: qml/Main.qml:140
 #, kde-format
 msgid "Click to open an image"
 msgstr "Bir görsel açmak için tıkla"
 
-#: package/contents/ui/main.qml:185
+#: qml/Main.qml:171
+#, fuzzy, kde-format
+#| msgid "Plugin name:"
+msgid "Plugin name: %1"
+msgstr "Eklenti adı:"
+
+#: qml/Main.qml:174
+#, kde-format
+msgid "Name:"
+msgstr "Ad:"
+
+#: qml/Main.qml:178 qml/MetadataEditor.qml:69
+#, kde-format
+msgid "Comment:"
+msgstr "Yorum:"
+
+#: qml/Main.qml:182 qml/MetadataEditor.qml:73
+#, kde-format
+msgid "Author:"
+msgstr "Yazar:"
+
+#: qml/Main.qml:186 qml/MetadataEditor.qml:77
+#, kde-format
+msgid "Email:"
+msgstr "E-posta:"
+
+#: qml/Main.qml:190 qml/MetadataEditor.qml:81
+#, kde-format
+msgid "Website:"
+msgstr "Web sitesi:"
+
+#: qml/Main.qml:194 qml/MetadataEditor.qml:86
+#, kde-format
+msgid "License:"
+msgstr "Lisans:"
+
+#: qml/Main.qml:198
+#, kde-format
+msgid "Layout from current Plasma setup"
+msgstr "Geçerli Plasma kurulumundaki yerleşim"
+
+#: qml/Main.qml:203
+#, kde-format
+msgid "Defaults from current setup"
+msgstr "Geçerli kurulumdan öntanımlılar"
+
+#: qml/Main.qml:229
 #, kde-format
 msgid "Save"
 msgstr "Kaydet"
 
-#: package/contents/ui/MetadataEditor.qml:28
+#: qml/MetadataEditor.qml:27
 #, kde-format
 msgid "New Theme"
 msgstr "Yeni Tema"
 
-#: package/contents/ui/MetadataEditor.qml:57
+#: qml/MetadataEditor.qml:50
 #, kde-format
 msgid "Theme Plugin Name:"
 msgstr "Tema eklentisi adı:"
 
-#: package/contents/ui/MetadataEditor.qml:62
+#: qml/MetadataEditor.qml:55
 #, kde-format
 msgid "This theme plugin name already exists"
 msgstr "Bu tema eklenti adı zaten var"
 
-#: package/contents/ui/MetadataEditor.qml:72
+#: qml/MetadataEditor.qml:65
 #, kde-format
 msgid "Theme Name:"
 msgstr "Tema adı:"
 
-#: package/contents/ui/MetadataEditor.qml:109
+#: qml/MetadataEditor.qml:98
 #, kde-format
 msgid "OK "
 msgstr "Tamam "
 
-#: package/contents/ui/MetadataEditor.qml:115
+#: qml/MetadataEditor.qml:104
 #, kde-format
 msgid "Cancel"
 msgstr "İptal"
 
-#: src/lnflogic.cpp:85
-#, kde-format
-msgid "Cannot retrieve the current Plasma layout."
-msgstr "Geçerli Plasma yerleşimi alınamadı."
+#~ msgid "Look And Feel"
+#~ msgstr "Görünüm ve His"
 
-#: src/lnflogic.cpp:93
-#, kde-format
-msgid "Impossible to create the layouts directory in the look and feel package"
-msgstr "Görünüm ve His paketinde yerleşimler dizini oluşturmak olanaklı değil"
-
-#: src/lnflogic.cpp:104
-#, kde-format
-msgid "Impossible to write to org.kde.plasma.desktop-layout.js"
-msgstr "org.kde.plasma.desktop-layout.js dosyasına yazmak mümkün değil"
-
-#: src/lnflogic.cpp:107
-#, kde-format
-msgid "Plasma Layout successfully duplicated"
-msgstr "Plasma yerleşimi başarıyla çoğaltıldı"
-
-#: src/lnflogic.cpp:164
-#, kde-format
-msgid "Defaults config file saved from your current setup"
-msgstr "Geçerli kurulumunuzdan öntanımlı yapılandırma dosyası kaydedildi"
-
-#: src/lnflogic.cpp:487
-#, kde-format
-msgid "Open Image"
-msgstr "Görsel Aç"
-
-#: src/lnflogic.cpp:489
-#, kde-format
-msgid "Image Files (*.png *.jpg *.bmp)"
-msgstr "Görsel Dosyaları (*.png *.jpg *.bmp)"
-
-#: src/main.cpp:34
-#, kde-format
-msgid "Plasma Look And Feel Explorer"
-msgstr "Plasma Bak ve Hisset Gezgini"
-
-#: src/main.cpp:38
-#, kde-format
-msgid "Look And Feel to open"
-msgstr "Açma için Görünüm ve His"
+#~ msgid "Version:"
+#~ msgstr "Sürüm:"
 
 #~ msgid "New Theme..."
 #~ msgstr "Yeni Tema..."

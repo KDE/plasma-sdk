@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.kde.plasma.lookandfeelexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-05 02:19+0000\n"
+"POT-Creation-Date: 2025-05-25 03:09+0000\n"
 "PO-Revision-Date: 2023-10-22 15:41+0300\n"
 "Last-Translator: Elkana Bardugo <ttv200@gmail.com>\n"
 "Language-Team: Hebrew\n"
@@ -15,165 +15,201 @@ msgstr ""
 "n % 10 == 0) ? 2 : 3));\n"
 "X-Generator: Poedit 3.3.2\n"
 
+#: lnflogic.cpp:105
+#, kde-format
+msgid "Cannot retrieve the current Plasma layout."
+msgstr "לא ניתן למשוך את פריסת פלזמה הנוכחית."
+
+#: lnflogic.cpp:113
+#, kde-format
+msgid "Impossible to create the layouts directory in the look and feel package"
+msgstr "אי אפשר ליצור את תיקיית הפריסות בחבילת המראה והתחושה"
+
+#: lnflogic.cpp:124
+#, kde-format
+msgid "Impossible to write to org.kde.plasma.desktop-layout.js"
+msgstr "אי אפשר לכתוב אל org.kde.plasma.desktop-layout.js"
+
+#: lnflogic.cpp:127
+#, kde-format
+msgid "Plasma Layout successfully duplicated"
+msgstr "פריסת פלזמה שוכפלה בהצלחה"
+
+#: lnflogic.cpp:184
+#, kde-format
+msgid "Defaults config file saved from your current setup"
+msgstr "קובץ הגדרות ברירת המחדל נשמר מההתקנה הנוכחית"
+
+#: lnflogic.cpp:512
+#, kde-format
+msgid "Open Image"
+msgstr "פתיחת תמונה"
+
+#: lnflogic.cpp:514
+#, kde-format
+msgid "Image Files (*.png *.jpg *.bmp)"
+msgstr "קובצי תמונה (‎*.png‏ ‎*.jpg‏ ‎*.bmp)"
+
+#: main.cpp:29
+#, fuzzy, kde-format
+#| msgid "Plasma Look And Feel Explorer"
+msgctxt "@info:credit"
+msgid "Plasma Global Theme Explorer"
+msgstr "סייר מראה ותחושה של פלזמה"
+
+#: main.cpp:31
+#, kde-format
+msgctxt "@info:credit"
+msgid "Explore and edit your Plasma Global Themes"
+msgstr ""
+
+#: main.cpp:33
+#, kde-format
+msgid "© KDE Community"
+msgstr ""
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit"
+msgid "Marco Martin"
+msgstr ""
+
+#: main.cpp:34 main.cpp:36
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer"
+msgstr ""
+
+#: main.cpp:35
+#, kde-format
+msgctxt "@info:credit"
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:40
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "צוות התרגום של KDE ישראל"
 
+#: main.cpp:40
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kde-l10n-he@kde.org"
 
-#: package/contents/ui/main.qml:30
+#: main.cpp:47
 #, kde-format
-msgid "Look And Feel"
-msgstr "מראה ותחושה"
+msgid "Look And Feel to open"
+msgstr "מראה ותחושה לפתיחה"
 
-#: package/contents/ui/main.qml:46
+#: qml/Main.qml:71
+#, kde-format
+msgctxt "@action:click"
+msgid "About"
+msgstr ""
+
+#: qml/Main.qml:82
 #, kde-format
 msgid "New Theme…"
 msgstr "ערכת עיצוב חדשה…"
 
-#: package/contents/ui/main.qml:63
+#: qml/Main.qml:101
 #, kde-format
 msgid "Open Theme Folder"
 msgstr "פתיחת תיקיית ערכת עיצוב"
 
-#: package/contents/ui/main.qml:92
-#, kde-format
-msgid "Plugin name:"
-msgstr "שם תוסף:"
-
-#: package/contents/ui/main.qml:95
-#, kde-format
-msgid "Name:"
-msgstr "שם:"
-
-#: package/contents/ui/main.qml:99 package/contents/ui/MetadataEditor.qml:76
-#, kde-format
-msgid "Comment:"
-msgstr "הערה:"
-
-#: package/contents/ui/main.qml:103 package/contents/ui/MetadataEditor.qml:80
-#, kde-format
-msgid "Author:"
-msgstr "יצירה:"
-
-#: package/contents/ui/main.qml:107 package/contents/ui/MetadataEditor.qml:84
-#, kde-format
-msgid "Email:"
-msgstr "דוא״ל:"
-
-#: package/contents/ui/main.qml:111 package/contents/ui/MetadataEditor.qml:88
-#, kde-format
-msgid "Version:"
-msgstr "גרסה:"
-
-#: package/contents/ui/main.qml:115 package/contents/ui/MetadataEditor.qml:92
-#, kde-format
-msgid "Website:"
-msgstr "אתר:"
-
-#: package/contents/ui/main.qml:119 package/contents/ui/MetadataEditor.qml:97
-#, kde-format
-msgid "License:"
-msgstr "רישיון:"
-
-#: package/contents/ui/main.qml:123
-#, kde-format
-msgid "Layout from current Plasma setup"
-msgstr "פריסה מהתקנה נוכחית של פלזמה"
-
-#: package/contents/ui/main.qml:128
-#, kde-format
-msgid "Defaults from current setup"
-msgstr "ברירות מחדל מההתקנה הנוכחית"
-
-#: package/contents/ui/main.qml:149
+#: qml/Main.qml:140
 #, kde-format
 msgid "Click to open an image"
 msgstr "נא ללחוץ כי לפתוח תמונה"
 
-#: package/contents/ui/main.qml:185
+#: qml/Main.qml:171
+#, fuzzy, kde-format
+#| msgid "Plugin name:"
+msgid "Plugin name: %1"
+msgstr "שם תוסף:"
+
+#: qml/Main.qml:174
+#, kde-format
+msgid "Name:"
+msgstr "שם:"
+
+#: qml/Main.qml:178 qml/MetadataEditor.qml:69
+#, kde-format
+msgid "Comment:"
+msgstr "הערה:"
+
+#: qml/Main.qml:182 qml/MetadataEditor.qml:73
+#, kde-format
+msgid "Author:"
+msgstr "יצירה:"
+
+#: qml/Main.qml:186 qml/MetadataEditor.qml:77
+#, kde-format
+msgid "Email:"
+msgstr "דוא״ל:"
+
+#: qml/Main.qml:190 qml/MetadataEditor.qml:81
+#, kde-format
+msgid "Website:"
+msgstr "אתר:"
+
+#: qml/Main.qml:194 qml/MetadataEditor.qml:86
+#, kde-format
+msgid "License:"
+msgstr "רישיון:"
+
+#: qml/Main.qml:198
+#, kde-format
+msgid "Layout from current Plasma setup"
+msgstr "פריסה מהתקנה נוכחית של פלזמה"
+
+#: qml/Main.qml:203
+#, kde-format
+msgid "Defaults from current setup"
+msgstr "ברירות מחדל מההתקנה הנוכחית"
+
+#: qml/Main.qml:229
 #, kde-format
 msgid "Save"
 msgstr "שמירה"
 
-#: package/contents/ui/MetadataEditor.qml:28
+#: qml/MetadataEditor.qml:27
 #, kde-format
 msgid "New Theme"
 msgstr "ערכת עיצוב חדשה"
 
-#: package/contents/ui/MetadataEditor.qml:57
+#: qml/MetadataEditor.qml:50
 #, kde-format
 msgid "Theme Plugin Name:"
 msgstr "שם תוסף ערכת עיצוב:"
 
-#: package/contents/ui/MetadataEditor.qml:62
+#: qml/MetadataEditor.qml:55
 #, kde-format
 msgid "This theme plugin name already exists"
 msgstr "שם תוסף ערכת העיצוב כבר קיים"
 
-#: package/contents/ui/MetadataEditor.qml:72
+#: qml/MetadataEditor.qml:65
 #, kde-format
 msgid "Theme Name:"
 msgstr "שם ערכת עיצוב:"
 
-#: package/contents/ui/MetadataEditor.qml:109
+#: qml/MetadataEditor.qml:98
 #, kde-format
 msgid "OK "
 msgstr "אישור "
 
-#: package/contents/ui/MetadataEditor.qml:115
+#: qml/MetadataEditor.qml:104
 #, kde-format
 msgid "Cancel"
 msgstr "ביטול"
 
-#: src/lnflogic.cpp:85
-#, kde-format
-msgid "Cannot retrieve the current Plasma layout."
-msgstr "לא ניתן למשוך את פריסת פלזמה הנוכחית."
+#~ msgid "Look And Feel"
+#~ msgstr "מראה ותחושה"
 
-#: src/lnflogic.cpp:93
-#, kde-format
-msgid "Impossible to create the layouts directory in the look and feel package"
-msgstr "אי אפשר ליצור את תיקיית הפריסות בחבילת המראה והתחושה"
-
-#: src/lnflogic.cpp:104
-#, kde-format
-msgid "Impossible to write to org.kde.plasma.desktop-layout.js"
-msgstr "אי אפשר לכתוב אל org.kde.plasma.desktop-layout.js"
-
-#: src/lnflogic.cpp:107
-#, kde-format
-msgid "Plasma Layout successfully duplicated"
-msgstr "פריסת פלזמה שוכפלה בהצלחה"
-
-#: src/lnflogic.cpp:164
-#, kde-format
-msgid "Defaults config file saved from your current setup"
-msgstr "קובץ הגדרות ברירת המחדל נשמר מההתקנה הנוכחית"
-
-#: src/lnflogic.cpp:487
-#, kde-format
-msgid "Open Image"
-msgstr "פתיחת תמונה"
-
-#: src/lnflogic.cpp:489
-#, kde-format
-msgid "Image Files (*.png *.jpg *.bmp)"
-msgstr "קובצי תמונה (‎*.png‏ ‎*.jpg‏ ‎*.bmp)"
-
-#: src/main.cpp:34
-#, kde-format
-msgid "Plasma Look And Feel Explorer"
-msgstr "סייר מראה ותחושה של פלזמה"
-
-#: src/main.cpp:38
-#, kde-format
-msgid "Look And Feel to open"
-msgstr "מראה ותחושה לפתיחה"
+#~ msgid "Version:"
+#~ msgstr "גרסה:"
 
 #~ msgid "New Theme..."
 #~ msgstr "ערכת נושא חדשה..."

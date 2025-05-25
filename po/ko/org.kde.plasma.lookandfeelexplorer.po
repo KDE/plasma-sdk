@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-05 02:19+0000\n"
+"POT-Creation-Date: 2025-05-25 03:09+0000\n"
 "PO-Revision-Date: 2021-05-28 02:33+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,165 +17,201 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 20.12.3\n"
 
+#: lnflogic.cpp:105
+#, kde-format
+msgid "Cannot retrieve the current Plasma layout."
+msgstr "현재 Plasma 레이아웃을 가져올 수 없습니다."
+
+#: lnflogic.cpp:113
+#, kde-format
+msgid "Impossible to create the layouts directory in the look and feel package"
+msgstr "모습과 느낌 패키지에 레이아웃 디렉터리를 만들 수 없음"
+
+#: lnflogic.cpp:124
+#, kde-format
+msgid "Impossible to write to org.kde.plasma.desktop-layout.js"
+msgstr "org.kde.plasma.desktop-layout.js 파일에 쓸 수 없음"
+
+#: lnflogic.cpp:127
+#, kde-format
+msgid "Plasma Layout successfully duplicated"
+msgstr "Plasma 레이아웃을 복제함"
+
+#: lnflogic.cpp:184
+#, kde-format
+msgid "Defaults config file saved from your current setup"
+msgstr "현재 설정을 기반으로 기본 설정 파일을 저장했습니다"
+
+#: lnflogic.cpp:512
+#, kde-format
+msgid "Open Image"
+msgstr "그림 열기"
+
+#: lnflogic.cpp:514
+#, kde-format
+msgid "Image Files (*.png *.jpg *.bmp)"
+msgstr "그림 파일 (*.png *.jpg *.bmp)"
+
+#: main.cpp:29
+#, fuzzy, kde-format
+#| msgid "Plasma Look And Feel Explorer"
+msgctxt "@info:credit"
+msgid "Plasma Global Theme Explorer"
+msgstr "Plasma 모습과 느낌 탐색기"
+
+#: main.cpp:31
+#, kde-format
+msgctxt "@info:credit"
+msgid "Explore and edit your Plasma Global Themes"
+msgstr ""
+
+#: main.cpp:33
+#, kde-format
+msgid "© KDE Community"
+msgstr ""
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit"
+msgid "Marco Martin"
+msgstr ""
+
+#: main.cpp:34 main.cpp:36
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer"
+msgstr ""
+
+#: main.cpp:35
+#, kde-format
+msgctxt "@info:credit"
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:40
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "박신조"
 
+#: main.cpp:40
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kde@peremen.name"
 
-#: package/contents/ui/main.qml:30
+#: main.cpp:47
 #, kde-format
-msgid "Look And Feel"
-msgstr "모습과 느낌"
+msgid "Look And Feel to open"
+msgstr "열 모습과 느낌"
 
-#: package/contents/ui/main.qml:46
+#: qml/Main.qml:71
+#, kde-format
+msgctxt "@action:click"
+msgid "About"
+msgstr ""
+
+#: qml/Main.qml:82
 #, kde-format
 msgid "New Theme…"
 msgstr "새 테마…"
 
-#: package/contents/ui/main.qml:63
+#: qml/Main.qml:101
 #, kde-format
 msgid "Open Theme Folder"
 msgstr "테마 폴더 열기"
 
-#: package/contents/ui/main.qml:92
-#, kde-format
-msgid "Plugin name:"
-msgstr "플러그인 이름:"
-
-#: package/contents/ui/main.qml:95
-#, kde-format
-msgid "Name:"
-msgstr "이름:"
-
-#: package/contents/ui/main.qml:99 package/contents/ui/MetadataEditor.qml:76
-#, kde-format
-msgid "Comment:"
-msgstr "설명:"
-
-#: package/contents/ui/main.qml:103 package/contents/ui/MetadataEditor.qml:80
-#, kde-format
-msgid "Author:"
-msgstr "작성자:"
-
-#: package/contents/ui/main.qml:107 package/contents/ui/MetadataEditor.qml:84
-#, kde-format
-msgid "Email:"
-msgstr "이메일:"
-
-#: package/contents/ui/main.qml:111 package/contents/ui/MetadataEditor.qml:88
-#, kde-format
-msgid "Version:"
-msgstr "버전:"
-
-#: package/contents/ui/main.qml:115 package/contents/ui/MetadataEditor.qml:92
-#, kde-format
-msgid "Website:"
-msgstr "웹사이트:"
-
-#: package/contents/ui/main.qml:119 package/contents/ui/MetadataEditor.qml:97
-#, kde-format
-msgid "License:"
-msgstr "라이선스:"
-
-#: package/contents/ui/main.qml:123
-#, kde-format
-msgid "Layout from current Plasma setup"
-msgstr "현재 Plasma 설정 레이아웃"
-
-#: package/contents/ui/main.qml:128
-#, kde-format
-msgid "Defaults from current setup"
-msgstr "현재 설정 기본값"
-
-#: package/contents/ui/main.qml:149
+#: qml/Main.qml:140
 #, kde-format
 msgid "Click to open an image"
 msgstr "그림을 열려면 클릭하십시오"
 
-#: package/contents/ui/main.qml:185
+#: qml/Main.qml:171
+#, fuzzy, kde-format
+#| msgid "Plugin name:"
+msgid "Plugin name: %1"
+msgstr "플러그인 이름:"
+
+#: qml/Main.qml:174
+#, kde-format
+msgid "Name:"
+msgstr "이름:"
+
+#: qml/Main.qml:178 qml/MetadataEditor.qml:69
+#, kde-format
+msgid "Comment:"
+msgstr "설명:"
+
+#: qml/Main.qml:182 qml/MetadataEditor.qml:73
+#, kde-format
+msgid "Author:"
+msgstr "작성자:"
+
+#: qml/Main.qml:186 qml/MetadataEditor.qml:77
+#, kde-format
+msgid "Email:"
+msgstr "이메일:"
+
+#: qml/Main.qml:190 qml/MetadataEditor.qml:81
+#, kde-format
+msgid "Website:"
+msgstr "웹사이트:"
+
+#: qml/Main.qml:194 qml/MetadataEditor.qml:86
+#, kde-format
+msgid "License:"
+msgstr "라이선스:"
+
+#: qml/Main.qml:198
+#, kde-format
+msgid "Layout from current Plasma setup"
+msgstr "현재 Plasma 설정 레이아웃"
+
+#: qml/Main.qml:203
+#, kde-format
+msgid "Defaults from current setup"
+msgstr "현재 설정 기본값"
+
+#: qml/Main.qml:229
 #, kde-format
 msgid "Save"
 msgstr "저장"
 
-#: package/contents/ui/MetadataEditor.qml:28
+#: qml/MetadataEditor.qml:27
 #, kde-format
 msgid "New Theme"
 msgstr "새 테마"
 
-#: package/contents/ui/MetadataEditor.qml:57
+#: qml/MetadataEditor.qml:50
 #, kde-format
 msgid "Theme Plugin Name:"
 msgstr "테마 플러그인 이름:"
 
-#: package/contents/ui/MetadataEditor.qml:62
+#: qml/MetadataEditor.qml:55
 #, kde-format
 msgid "This theme plugin name already exists"
 msgstr "같은 이름의 테마 플러그인이 이미 존재합니다."
 
-#: package/contents/ui/MetadataEditor.qml:72
+#: qml/MetadataEditor.qml:65
 #, kde-format
 msgid "Theme Name:"
 msgstr "테마 이름:"
 
-#: package/contents/ui/MetadataEditor.qml:109
+#: qml/MetadataEditor.qml:98
 #, kde-format
 msgid "OK "
 msgstr "확인"
 
-#: package/contents/ui/MetadataEditor.qml:115
+#: qml/MetadataEditor.qml:104
 #, kde-format
 msgid "Cancel"
 msgstr "취소"
 
-#: src/lnflogic.cpp:85
-#, kde-format
-msgid "Cannot retrieve the current Plasma layout."
-msgstr "현재 Plasma 레이아웃을 가져올 수 없습니다."
+#~ msgid "Look And Feel"
+#~ msgstr "모습과 느낌"
 
-#: src/lnflogic.cpp:93
-#, kde-format
-msgid "Impossible to create the layouts directory in the look and feel package"
-msgstr "모습과 느낌 패키지에 레이아웃 디렉터리를 만들 수 없음"
-
-#: src/lnflogic.cpp:104
-#, kde-format
-msgid "Impossible to write to org.kde.plasma.desktop-layout.js"
-msgstr "org.kde.plasma.desktop-layout.js 파일에 쓸 수 없음"
-
-#: src/lnflogic.cpp:107
-#, kde-format
-msgid "Plasma Layout successfully duplicated"
-msgstr "Plasma 레이아웃을 복제함"
-
-#: src/lnflogic.cpp:164
-#, kde-format
-msgid "Defaults config file saved from your current setup"
-msgstr "현재 설정을 기반으로 기본 설정 파일을 저장했습니다"
-
-#: src/lnflogic.cpp:487
-#, kde-format
-msgid "Open Image"
-msgstr "그림 열기"
-
-#: src/lnflogic.cpp:489
-#, kde-format
-msgid "Image Files (*.png *.jpg *.bmp)"
-msgstr "그림 파일 (*.png *.jpg *.bmp)"
-
-#: src/main.cpp:34
-#, kde-format
-msgid "Plasma Look And Feel Explorer"
-msgstr "Plasma 모습과 느낌 탐색기"
-
-#: src/main.cpp:38
-#, kde-format
-msgid "Look And Feel to open"
-msgstr "열 모습과 느낌"
+#~ msgid "Version:"
+#~ msgstr "버전:"
 
 #~ msgid "New Theme..."
 #~ msgstr "새 테마..."

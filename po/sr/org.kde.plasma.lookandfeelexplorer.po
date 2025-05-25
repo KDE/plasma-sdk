@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.kde.plasma.lookandfeelexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-05 02:19+0000\n"
+"POT-Creation-Date: 2025-05-25 03:09+0000\n"
 "PO-Revision-Date: 2016-11-28 01:32+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -18,171 +18,206 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#, kde-format
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Часлав Илић"
-
-#, kde-format
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "caslav.ilic@gmx.net"
-
-#: package/contents/ui/main.qml:30
-#, kde-format
-msgid "Look And Feel"
-msgstr "Изглед и осећај"
-
-#: package/contents/ui/main.qml:46
-#, fuzzy, kde-format
-#| msgid "New Theme"
-msgid "New Theme…"
-msgstr "Нова тема"
-
-#: package/contents/ui/main.qml:63
-#, kde-format
-msgid "Open Theme Folder"
-msgstr "Отвори фасциклу теме"
-
-#: package/contents/ui/main.qml:92
-#, fuzzy, kde-format
-#| msgid "Plugin Name:"
-msgid "Plugin name:"
-msgstr "Име прикључка:"
-
-#: package/contents/ui/main.qml:95
-#, kde-format
-msgid "Name:"
-msgstr "Име:"
-
-#: package/contents/ui/main.qml:99 package/contents/ui/MetadataEditor.qml:76
-#, kde-format
-msgid "Comment:"
-msgstr "Коментар:"
-
-#: package/contents/ui/main.qml:103 package/contents/ui/MetadataEditor.qml:80
-#, kde-format
-msgid "Author:"
-msgstr "Аутор:"
-
-#: package/contents/ui/main.qml:107 package/contents/ui/MetadataEditor.qml:84
-#, kde-format
-msgid "Email:"
-msgstr "Е‑пошта:"
-
-#: package/contents/ui/main.qml:111 package/contents/ui/MetadataEditor.qml:88
-#, kde-format
-msgid "Version:"
-msgstr "Издање:"
-
-#: package/contents/ui/main.qml:115 package/contents/ui/MetadataEditor.qml:92
-#, kde-format
-msgid "Website:"
-msgstr "Веб сајт:"
-
-#: package/contents/ui/main.qml:119 package/contents/ui/MetadataEditor.qml:97
-#, kde-format
-msgid "License:"
-msgstr "Лиценца:"
-
-#: package/contents/ui/main.qml:123
-#, kde-format
-msgid "Layout from current Plasma setup"
-msgstr "Распоред из текуће поставе Плазме"
-
-#: package/contents/ui/main.qml:128
-#, kde-format
-msgid "Defaults from current setup"
-msgstr "Подразумевано на текућу поставу"
-
-#: package/contents/ui/main.qml:149
-#, fuzzy, kde-format
-#| msgid "click to open an image"
-msgid "Click to open an image"
-msgstr "Кликните да отворите слику"
-
-#: package/contents/ui/main.qml:185
-#, kde-format
-msgid "Save"
-msgstr "Сачувај"
-
-#: package/contents/ui/MetadataEditor.qml:28
-#, kde-format
-msgid "New Theme"
-msgstr "Нова тема"
-
-#: package/contents/ui/MetadataEditor.qml:57
-#, kde-format
-msgid "Theme Plugin Name:"
-msgstr "Име прикључка теме:"
-
-#: package/contents/ui/MetadataEditor.qml:62
-#, kde-format
-msgid "This theme plugin name already exists"
-msgstr "Ово име прикључка теме већ постоји."
-
-#: package/contents/ui/MetadataEditor.qml:72
-#, kde-format
-msgid "Theme Name:"
-msgstr "Име теме:"
-
-#: package/contents/ui/MetadataEditor.qml:109
-#, fuzzy, kde-format
-#| msgid "OK"
-msgid "OK "
-msgstr "У реду"
-
-#: package/contents/ui/MetadataEditor.qml:115
-#, kde-format
-msgid "Cancel"
-msgstr "Одустани"
-
-#: src/lnflogic.cpp:85
+#: lnflogic.cpp:105
 #, kde-format
 msgid "Cannot retrieve the current Plasma layout."
 msgstr "Не могу да добавим тренутни распоред Плазме."
 
-#: src/lnflogic.cpp:93
+#: lnflogic.cpp:113
 #, kde-format
 msgid "Impossible to create the layouts directory in the look and feel package"
 msgstr "Не могу да направим фасциклу распореда у пакету изгледа и осећаја."
 
-#: src/lnflogic.cpp:104
+#: lnflogic.cpp:124
 #, kde-format
 msgid "Impossible to write to org.kde.plasma.desktop-layout.js"
 msgstr "Не могу да пишем у org.kde.plasma.desktop-layout.js."
 
-#: src/lnflogic.cpp:107
+#: lnflogic.cpp:127
 #, kde-format
 msgid "Plasma Layout successfully duplicated"
 msgstr "Распоред Плазме успешно удвостручен"
 
-#: src/lnflogic.cpp:164
+#: lnflogic.cpp:184
 #, kde-format
 msgid "Defaults config file saved from your current setup"
 msgstr "Поставни фајл подразумеваног сачуван према тренутној постави."
 
 # >> @title:window
-#: src/lnflogic.cpp:487
+#: lnflogic.cpp:512
 #, kde-format
 msgid "Open Image"
 msgstr "Отварање слике"
 
 # >> @item
-#: src/lnflogic.cpp:489
+#: lnflogic.cpp:514
 #, kde-format
 msgid "Image Files (*.png *.jpg *.bmp)"
 msgstr "фајлови слика (*.png *.jpg *.bmp)"
 
-#: src/main.cpp:34
-#, kde-format
-msgid "Plasma Look And Feel Explorer"
+#: main.cpp:29
+#, fuzzy, kde-format
+#| msgid "Plasma Look And Feel Explorer"
+msgctxt "@info:credit"
+msgid "Plasma Global Theme Explorer"
 msgstr "Плазмин истраживач изгледа и осећаја"
 
-#: src/main.cpp:38
+#: main.cpp:31
+#, kde-format
+msgctxt "@info:credit"
+msgid "Explore and edit your Plasma Global Themes"
+msgstr ""
+
+#: main.cpp:33
+#, kde-format
+msgid "© KDE Community"
+msgstr ""
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit"
+msgid "Marco Martin"
+msgstr ""
+
+#: main.cpp:34 main.cpp:36
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer"
+msgstr ""
+
+#: main.cpp:35
+#, kde-format
+msgctxt "@info:credit"
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:40
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Часлав Илић"
+
+#: main.cpp:40
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "caslav.ilic@gmx.net"
+
+#: main.cpp:47
 #, kde-format
 msgid "Look And Feel to open"
 msgstr "Изглед и осећај за отварање."
+
+#: qml/Main.qml:71
+#, kde-format
+msgctxt "@action:click"
+msgid "About"
+msgstr ""
+
+#: qml/Main.qml:82
+#, fuzzy, kde-format
+#| msgid "New Theme"
+msgid "New Theme…"
+msgstr "Нова тема"
+
+#: qml/Main.qml:101
+#, kde-format
+msgid "Open Theme Folder"
+msgstr "Отвори фасциклу теме"
+
+#: qml/Main.qml:140
+#, fuzzy, kde-format
+#| msgid "click to open an image"
+msgid "Click to open an image"
+msgstr "Кликните да отворите слику"
+
+#: qml/Main.qml:171
+#, fuzzy, kde-format
+#| msgid "Plugin Name:"
+msgid "Plugin name: %1"
+msgstr "Име прикључка:"
+
+#: qml/Main.qml:174
+#, kde-format
+msgid "Name:"
+msgstr "Име:"
+
+#: qml/Main.qml:178 qml/MetadataEditor.qml:69
+#, kde-format
+msgid "Comment:"
+msgstr "Коментар:"
+
+#: qml/Main.qml:182 qml/MetadataEditor.qml:73
+#, kde-format
+msgid "Author:"
+msgstr "Аутор:"
+
+#: qml/Main.qml:186 qml/MetadataEditor.qml:77
+#, kde-format
+msgid "Email:"
+msgstr "Е‑пошта:"
+
+#: qml/Main.qml:190 qml/MetadataEditor.qml:81
+#, kde-format
+msgid "Website:"
+msgstr "Веб сајт:"
+
+#: qml/Main.qml:194 qml/MetadataEditor.qml:86
+#, kde-format
+msgid "License:"
+msgstr "Лиценца:"
+
+#: qml/Main.qml:198
+#, kde-format
+msgid "Layout from current Plasma setup"
+msgstr "Распоред из текуће поставе Плазме"
+
+#: qml/Main.qml:203
+#, kde-format
+msgid "Defaults from current setup"
+msgstr "Подразумевано на текућу поставу"
+
+#: qml/Main.qml:229
+#, kde-format
+msgid "Save"
+msgstr "Сачувај"
+
+#: qml/MetadataEditor.qml:27
+#, kde-format
+msgid "New Theme"
+msgstr "Нова тема"
+
+#: qml/MetadataEditor.qml:50
+#, kde-format
+msgid "Theme Plugin Name:"
+msgstr "Име прикључка теме:"
+
+#: qml/MetadataEditor.qml:55
+#, kde-format
+msgid "This theme plugin name already exists"
+msgstr "Ово име прикључка теме већ постоји."
+
+#: qml/MetadataEditor.qml:65
+#, kde-format
+msgid "Theme Name:"
+msgstr "Име теме:"
+
+#: qml/MetadataEditor.qml:98
+#, fuzzy, kde-format
+#| msgid "OK"
+msgid "OK "
+msgstr "У реду"
+
+#: qml/MetadataEditor.qml:104
+#, kde-format
+msgid "Cancel"
+msgstr "Одустани"
+
+#~ msgid "Look And Feel"
+#~ msgstr "Изглед и осећај"
+
+#~ msgid "Version:"
+#~ msgstr "Издање:"
 
 #~ msgid "New Theme..."
 #~ msgstr "Нова тема..."
