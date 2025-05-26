@@ -1,15 +1,15 @@
 # Spanish translations for org.kde.plasma.lookandfeelexplorer.po package.
-# Copyright (C) 2016 This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
-#
+# Copyright (C) 2016-2025 This file is copyright:
+# This file is distributed under the same license as the plasma-sdk package.
 # Automatically generated, 2016.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2016, 2019, 2021.
+#
+# SPDX-FileCopyrightText: 2016, 2019, 2021, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: org\n"
+"Project-Id-Version: org.kde.plasma.lookandfeelexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-25 03:09+0000\n"
-"PO-Revision-Date: 2021-05-27 00:54+0200\n"
+"PO-Revision-Date: 2025-05-25 23:47+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.04.1\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #: lnflogic.cpp:105
 #, kde-format
@@ -59,40 +59,39 @@ msgid "Image Files (*.png *.jpg *.bmp)"
 msgstr "Archivos de imágenes (*.png *.jpg *.bmp)"
 
 #: main.cpp:29
-#, fuzzy, kde-format
-#| msgid "Plasma Look And Feel Explorer"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Plasma Global Theme Explorer"
-msgstr "Explorador de temas de aspecto visual de Plasma"
+msgstr "Explorador de temas globales de Plasma"
 
 #: main.cpp:31
 #, kde-format
 msgctxt "@info:credit"
 msgid "Explore and edit your Plasma Global Themes"
-msgstr ""
+msgstr "Explorar y editar temas globales de Plasma"
 
 #: main.cpp:33
 #, kde-format
 msgid "© KDE Community"
-msgstr ""
+msgstr "© La comunidad KDE"
 
 #: main.cpp:34
 #, kde-format
 msgctxt "@info:credit"
 msgid "Marco Martin"
-msgstr ""
+msgstr "Marco Martin"
 
 #: main.cpp:34 main.cpp:36
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
-msgstr ""
+msgstr "Desarrollador"
 
 #: main.cpp:35
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: main.cpp:40
 #, kde-format
@@ -115,12 +114,12 @@ msgstr "Aspecto visual a abrir"
 #, kde-format
 msgctxt "@action:click"
 msgid "About"
-msgstr ""
+msgstr "Acerca de"
 
 #: qml/Main.qml:82
 #, kde-format
 msgid "New Theme…"
-msgstr "Nuevo tema..."
+msgstr "Nuevo tema…"
 
 #: qml/Main.qml:101
 #, kde-format
@@ -133,10 +132,9 @@ msgid "Click to open an image"
 msgstr "Pulse para abrir una imagen"
 
 #: qml/Main.qml:171
-#, fuzzy, kde-format
-#| msgid "Plugin name:"
+#, kde-format
 msgid "Plugin name: %1"
-msgstr "Nombre del complemento:"
+msgstr "Nombre del complemento: %1"
 
 #: qml/Main.qml:174
 #, kde-format
@@ -212,18 +210,3 @@ msgstr "Aceptar"
 #, kde-format
 msgid "Cancel"
 msgstr "Cancelar"
-
-#~ msgid "Look And Feel"
-#~ msgstr "Aspecto visual"
-
-#~ msgid "Version:"
-#~ msgstr "Versión:"
-
-#~ msgid "New Theme..."
-#~ msgstr "Nuevo tema..."
-
-#~ msgid "This theme name already exists"
-#~ msgstr "El nombre de este tema ya existe"
-
-#~ msgid "Ok"
-#~ msgstr "Aceptar"
