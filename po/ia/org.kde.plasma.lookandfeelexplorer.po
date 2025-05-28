@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Giovanni Sora <g.sora@kheper.it>, 2017, 2020.
-# giovanni <g.sora@tiscali.it>, 2021.
+# SPDX-FileCopyrightText: 2021, 2025 giovanni <g.sora@tiscali.it>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-25 03:09+0000\n"
-"PO-Revision-Date: 2021-06-24 23:34+0200\n"
+"PO-Revision-Date: 2025-05-27 15:49+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.04.2\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: lnflogic.cpp:105
 #, kde-format
@@ -57,40 +57,39 @@ msgid "Image Files (*.png *.jpg *.bmp)"
 msgstr "Files de Image  (*png *.jpg *.bmp)"
 
 #: main.cpp:29
-#, fuzzy, kde-format
-#| msgid "Plasma Look And Feel Explorer"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Plasma Global Theme Explorer"
-msgstr "Explorator de Aspecto (Look and feel) de Plasma"
+msgstr "Plasma Global Theme Explorer (Explorator de Thema Global de Plasma)"
 
 #: main.cpp:31
 #, kde-format
 msgctxt "@info:credit"
 msgid "Explore and edit your Plasma Global Themes"
-msgstr ""
+msgstr "Explora e modifica tu themas global de Plasma"
 
 #: main.cpp:33
 #, kde-format
 msgid "© KDE Community"
-msgstr ""
+msgstr "©  Communitate de KDE"
 
 #: main.cpp:34
 #, kde-format
 msgctxt "@info:credit"
 msgid "Marco Martin"
-msgstr ""
+msgstr "Marco Martin"
 
 #: main.cpp:34 main.cpp:36
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
-msgstr ""
+msgstr "Disveloppator"
 
 #: main.cpp:35
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: main.cpp:40
 #, kde-format
@@ -113,7 +112,7 @@ msgstr "Aspecto (Look And Feel ) a aperir"
 #, kde-format
 msgctxt "@action:click"
 msgid "About"
-msgstr ""
+msgstr "A proposito"
 
 #: qml/Main.qml:82
 #, kde-format
@@ -131,10 +130,9 @@ msgid "Click to open an image"
 msgstr "Pulsa pro aperir un imagine"
 
 #: qml/Main.qml:171
-#, fuzzy, kde-format
-#| msgid "Plugin name:"
+#, kde-format
 msgid "Plugin name: %1"
-msgstr "Nomine de Plugin:"
+msgstr "Nomine de Plugin: %1"
 
 #: qml/Main.qml:174
 #, kde-format
