@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the lookandfeelexplorer package.
-# Luigi Toscano <luigi.toscano@tiscali.it>, 2016, 2019, 2021.
+# SPDX-FileCopyrightText: 2016, 2019, 2021, 2025 Luigi Toscano <luigi.toscano@tiscali.it>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: lookandfeelexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-25 03:09+0000\n"
-"PO-Revision-Date: 2021-05-28 15:29+0200\n"
+"PO-Revision-Date: 2025-05-28 14:14+0200\n"
 "Last-Translator: Luigi Toscano <luigi.toscano@tiscali.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: lnflogic.cpp:105
 #, kde-format
@@ -55,40 +55,39 @@ msgid "Image Files (*.png *.jpg *.bmp)"
 msgstr "File di immagine (*.png *.jpg *.bmp)"
 
 #: main.cpp:29
-#, fuzzy, kde-format
-#| msgid "Plasma Look And Feel Explorer"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Plasma Global Theme Explorer"
-msgstr "Esploratore dell'aspetto di Plasma"
+msgstr "Esploratore dei temi globali di Plasma"
 
 #: main.cpp:31
 #, kde-format
 msgctxt "@info:credit"
 msgid "Explore and edit your Plasma Global Themes"
-msgstr ""
+msgstr "Esplora e modifica i tuoi temi globali di Plasma"
 
 #: main.cpp:33
 #, kde-format
 msgid "© KDE Community"
-msgstr ""
+msgstr "© Comunità KDE"
 
 #: main.cpp:34
 #, kde-format
 msgctxt "@info:credit"
 msgid "Marco Martin"
-msgstr ""
+msgstr "Marco Martin"
 
 #: main.cpp:34 main.cpp:36
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
-msgstr ""
+msgstr "Sviluppatore"
 
 #: main.cpp:35
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: main.cpp:40
 #, kde-format
@@ -111,7 +110,7 @@ msgstr "Aspetto da aprire"
 #, kde-format
 msgctxt "@action:click"
 msgid "About"
-msgstr ""
+msgstr "Informazioni"
 
 #: qml/Main.qml:82
 #, kde-format
@@ -129,10 +128,9 @@ msgid "Click to open an image"
 msgstr "Fai clic per aprire un'immagine"
 
 #: qml/Main.qml:171
-#, fuzzy, kde-format
-#| msgid "Plugin name:"
+#, kde-format
 msgid "Plugin name: %1"
-msgstr "Nome estensione:"
+msgstr "Nome estensione: %1"
 
 #: qml/Main.qml:174
 #, kde-format
