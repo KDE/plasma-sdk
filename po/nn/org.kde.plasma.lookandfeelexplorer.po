@@ -208,9 +208,3 @@ msgstr "OK "
 #, kde-format
 msgid "Cancel"
 msgstr "Avbryt"
-
-#~ msgid "Look And Feel"
-#~ msgstr "Utsjånad og åtferd"
-
-#~ msgid "Version:"
-#~ msgstr "Versjon:"

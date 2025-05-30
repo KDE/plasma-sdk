@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Alexander Potashev <aspotashev@gmail.com>, 2016, 2017.
-# Alexander Yavorsky <kekcuha@gmail.com>, 2018, 2020, 2021.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2018, 2020, 2021, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-25 00:45+0000\n"
-"PO-Revision-Date: 2021-06-07 21:41+0300\n"
-"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
+"PO-Revision-Date: 2025-05-29 21:34+0200\n"
+"Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.04.1\n"
+"X-Generator: Lokalize 21.08.3\n"
 
 #: lnflogic.cpp:105
 #, kde-format
@@ -58,40 +58,39 @@ msgid "Image Files (*.png *.jpg *.bmp)"
 msgstr "Файлы изображений (*.png *.jpg *.bmp)"
 
 #: main.cpp:29
-#, fuzzy, kde-format
-#| msgid "Plasma Look And Feel Explorer"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Plasma Global Theme Explorer"
-msgstr "Редактор оформлений Plasma"
+msgstr "Просмотр оформлений рабочей среды Plasma"
 
 #: main.cpp:31
 #, kde-format
 msgctxt "@info:credit"
 msgid "Explore and edit your Plasma Global Themes"
-msgstr ""
+msgstr "Просмотр и редактирование оформлений рабочей среды Plasma"
 
 #: main.cpp:33
 #, kde-format
 msgid "© KDE Community"
-msgstr ""
+msgstr "© Сообщество KDE"
 
 #: main.cpp:34
 #, kde-format
 msgctxt "@info:credit"
 msgid "Marco Martin"
-msgstr ""
+msgstr "Marco Martin"
 
 #: main.cpp:34 main.cpp:36
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
-msgstr ""
+msgstr "Разработчик"
 
 #: main.cpp:35
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: main.cpp:40
 #, kde-format
@@ -114,7 +113,7 @@ msgstr "Открываемое оформление Plasma."
 #, kde-format
 msgctxt "@action:click"
 msgid "About"
-msgstr ""
+msgstr "О программе"
 
 #: qml/Main.qml:82
 #, kde-format
@@ -133,10 +132,9 @@ msgid "Click to open an image"
 msgstr "Нажмите здесь, чтобы выбрать изображение"
 
 #: qml/Main.qml:171
-#, fuzzy, kde-format
-#| msgid "Plugin name:"
+#, kde-format
 msgid "Plugin name: %1"
-msgstr "Имя модуля:"
+msgstr "Имя модуля: %1"
 
 #: qml/Main.qml:174
 #, kde-format
