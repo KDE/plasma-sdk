@@ -1,15 +1,15 @@
-# Spanish translations for plasma_shell_org.kde.desktop.po package.
-# Copyright (C) 2015 This_file_is_part_of_KDE
+# Spanish translations for plasma_shell_org.kde.plasmoidviewershell.po package.
+# Copyright (C) 2015-2025 This file is copyright:
 # This file is distributed under the same license as the plasma-sdk package.
-#
 # Automatically generated, 2015.
+#
 # SPDX-FileCopyrightText: 2015, 2016, 2021, 2022, 2023, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_shell_org\n"
+"Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-11 00:43+0000\n"
-"PO-Revision-Date: 2025-02-11 19:51+0100\n"
+"PO-Revision-Date: 2025-06-04 19:23+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -25,7 +25,7 @@ msgstr "Copiar al portapapeles"
 
 #: contents/applet/AppletError.qml:187
 msgid "View Error Details…"
-msgstr "Ver detalles del error..."
+msgstr "Ver detalles del error…"
 
 #: contents/applet/CompactApplet.qml:76
 msgid "Open %1"
@@ -72,7 +72,7 @@ msgstr "Traductores"
 
 #: contents/configuration/AboutPlugin.qml:220
 msgid "Report a Bug…"
-msgstr "Informar de un fallo..."
+msgstr "Informar de un fallo…"
 
 #: contents/configuration/AppletConfiguration.qml:75
 msgid "Keyboard Shortcuts"
@@ -178,7 +178,7 @@ msgstr "Tipo de fondo del escritorio:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:119
 msgid "Get New Plugins…"
-msgstr "Obtener nuevos complementos..."
+msgstr "Obtener nuevos complementos…"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:189
 msgid "Layout changes must be applied before other changes can be made"
@@ -226,7 +226,7 @@ msgstr "Añadir elemento gráfico de espacio al panel"
 
 #: contents/configuration/PanelConfiguration.qml:114
 msgid "Add Widgets…"
-msgstr "Añadir elementos gráficos..."
+msgstr "Añadir elementos gráficos…"
 
 #: contents/configuration/PanelConfiguration.qml:117
 msgid "Open the widget selector to drag and drop widgets to the panel"
@@ -260,7 +260,7 @@ msgstr "Abajo"
 
 #: contents/configuration/PanelConfiguration.qml:174
 msgid "Set Position…"
-msgstr "Definir posición..."
+msgstr "Definir posición…"
 
 #: contents/configuration/PanelConfiguration.qml:201
 msgid "Alignment"
@@ -419,23 +419,3 @@ msgstr "Borde derecho"
 #: contents/views/SdkButtons.qml:126
 msgid "Configure Containment"
 msgstr "Configurar contenedor"
-
-#~ msgid "Sorry! There was an error loading %1."
-#~ msgstr "Ha ocurrido un error al cargar %1."
-
-#~ msgid "Appearance"
-#~ msgstr "Aspecto"
-
-#~ msgid "Layout cannot be changed whilst widgets are locked"
-#~ msgstr ""
-#~ "No se puede cambiar la distribución mientras los elementos gráficos estén "
-#~ "bloqueados"
-
-#~ msgid ""
-#~ "This shortcut will activate the applet: it will give the keyboard focus "
-#~ "to it, and if the applet has a popup (such as the start menu), the popup "
-#~ "will be open."
-#~ msgstr ""
-#~ "Este acceso rápido activará la miniaplicación: le cederá el foco del "
-#~ "teclado y, si la miniaplicación posee una ventana emergente (como el menú "
-#~ "de inicio), se abrirá dicha ventana emergente."

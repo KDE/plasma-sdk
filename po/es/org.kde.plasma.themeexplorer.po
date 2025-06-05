@@ -1,15 +1,15 @@
-# Spanish translations for themeexplorer.po package.
-# Copyright (C) 2015 This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
-#
+# Spanish translations for org.kde.plasma.themeexplorer.po package.
+# Copyright (C) 2015-2025 This file is copyright:
+# This file is distributed under the same license as the plasma-sdk package.
 # Automatically generated, 2015.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2015, 2016, 2021, 2023.
+#
+# SPDX-FileCopyrightText: 2015, 2016, 2021, 2023, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: themeexplorer\n"
+"Project-Id-Version: org.kde.plasma.themeexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-15 00:39+0000\n"
-"PO-Revision-Date: 2023-08-30 12:09+0200\n"
+"PO-Revision-Date: 2025-06-04 19:22+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -210,12 +210,12 @@ msgstr "Casilla de verificación"
 #: package/contents/ui/fakecontrols/LineEdit.qml:34
 #, kde-format
 msgid "Text input…"
-msgstr "Entrada de texto..."
+msgstr "Entrada de texto…"
 
 #: package/contents/ui/main.qml:32
 #, kde-format
 msgid "New Theme…"
-msgstr "Nuevo tema..."
+msgstr "Nuevo tema…"
 
 #: package/contents/ui/main.qml:48
 #, kde-format
@@ -230,12 +230,12 @@ msgstr "Abrir carpeta"
 #: package/contents/ui/main.qml:65
 #, kde-format
 msgid "Edit Metadata…"
-msgstr "Editar metadatos..."
+msgstr "Editar metadatos…"
 
 #: package/contents/ui/main.qml:82
 #, kde-format
 msgid "Edit Colors…"
-msgstr "Editar colores..."
+msgstr "Editar colores…"
 
 #: package/contents/ui/main.qml:98
 #, kde-format
@@ -245,7 +245,7 @@ msgstr "Ayuda"
 #: package/contents/ui/main.qml:103
 #, kde-format
 msgid "Search…"
-msgstr "Buscar..."
+msgstr "Buscar…"
 
 #: package/contents/ui/main.qml:222
 #, kde-format
@@ -290,12 +290,12 @@ msgstr "Mostrar márgenes"
 #: package/contents/ui/main.qml:260
 #, kde-format
 msgid "Create with Editor…"
-msgstr "Crear con el editor..."
+msgstr "Crear con el editor…"
 
 #: package/contents/ui/main.qml:260
 #, kde-format
 msgid "Open In Editor…"
-msgstr "Abrir en el editor..."
+msgstr "Abrir en el editor…"
 
 #: package/contents/ui/MetadataEditor.qml:24
 #, kde-format
@@ -353,12 +353,3 @@ msgstr "Explorador de temas de Plasma"
 #, kde-format
 msgid "The theme to open"
 msgstr "El tema a abrir"
-
-#~ msgid "New Theme..."
-#~ msgstr "Nuevo tema..."
-
-#~ msgid "Edit Colors..."
-#~ msgstr "Editar colores..."
-
-#~ msgid "Ok"
-#~ msgstr "Aceptar"
