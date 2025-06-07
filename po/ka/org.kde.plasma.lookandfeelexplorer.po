@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-25 03:09+0000\n"
-"PO-Revision-Date: 2022-12-06 09:09+0100\n"
+"PO-Revision-Date: 2025-06-06 06:13+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #: lnflogic.cpp:105
 #, kde-format
@@ -56,40 +56,39 @@ msgid "Image Files (*.png *.jpg *.bmp)"
 msgstr "გამოსახულების ფაილები (*.png *.jpg *.bmp)"
 
 #: main.cpp:29
-#, fuzzy, kde-format
-#| msgid "Plasma Look And Feel Explorer"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Plasma Global Theme Explorer"
-msgstr "Plasma-ის გარეგნობის დამთვალიერებელი"
+msgstr "Plasma-ის გლობალური თემების პოვნა"
 
 #: main.cpp:31
 #, kde-format
 msgctxt "@info:credit"
 msgid "Explore and edit your Plasma Global Themes"
-msgstr ""
+msgstr "Plasma-ის გლობალური თემების ნახვა და ჩასწორება"
 
 #: main.cpp:33
 #, kde-format
 msgid "© KDE Community"
-msgstr ""
+msgstr "© KDE-ის საზოგადოება"
 
 #: main.cpp:34
 #, kde-format
 msgctxt "@info:credit"
 msgid "Marco Martin"
-msgstr ""
+msgstr "მარკო მარტინი"
 
 #: main.cpp:34 main.cpp:36
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
-msgstr ""
+msgstr "პროგრამისტი"
 
 #: main.cpp:35
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: main.cpp:40
 #, kde-format
@@ -112,7 +111,7 @@ msgstr "გასახსნელი გარეგნობა"
 #, kde-format
 msgctxt "@action:click"
 msgid "About"
-msgstr ""
+msgstr "შესახებ"
 
 #: qml/Main.qml:82
 #, kde-format
@@ -130,10 +129,9 @@ msgid "Click to open an image"
 msgstr "დააწკაპუნეთ გამოსახულების გასახსნელად"
 
 #: qml/Main.qml:171
-#, fuzzy, kde-format
-#| msgid "Plugin name:"
+#, kde-format
 msgid "Plugin name: %1"
-msgstr "დამატების სახელი:"
+msgstr "დამატების სახელი: %1"
 
 #: qml/Main.qml:174
 #, kde-format
