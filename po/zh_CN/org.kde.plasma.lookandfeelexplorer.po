@@ -57,36 +57,36 @@ msgstr "图像文件 (*.png *.jpg *.bmp)"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Plasma Global Theme Explorer"
-msgstr ""
+msgstr "Plasma 全局主题浏览器"
 
 #: main.cpp:31
 #, kde-format
 msgctxt "@info:credit"
 msgid "Explore and edit your Plasma Global Themes"
-msgstr ""
+msgstr "浏览和编辑您的 Plasma 全局主题"
 
 #: main.cpp:33
 #, kde-format
 msgid "© KDE Community"
-msgstr ""
+msgstr "© KDE Community"
 
 #: main.cpp:34
 #, kde-format
 msgctxt "@info:credit"
 msgid "Marco Martin"
-msgstr ""
+msgstr "Marco Martin"
 
 #: main.cpp:34 main.cpp:36
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
-msgstr ""
+msgstr "开发者"
 
 #: main.cpp:35
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: main.cpp:40
 #, kde-format
@@ -109,7 +109,7 @@ msgstr "要打开的界面外观"
 #, kde-format
 msgctxt "@action:click"
 msgid "About"
-msgstr ""
+msgstr "关于"
 
 #: qml/Main.qml:82
 #, kde-format
@@ -129,7 +129,7 @@ msgstr "点击打开图像"
 #: qml/Main.qml:171
 #, kde-format
 msgid "Plugin name: %1"
-msgstr ""
+msgstr "插件名称：%1"
 
 #: qml/Main.qml:174
 #, kde-format
