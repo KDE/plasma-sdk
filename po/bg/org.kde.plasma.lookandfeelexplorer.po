@@ -207,9 +207,3 @@ msgstr "Добре "
 #, kde-format
 msgid "Cancel"
 msgstr "Отказ"
-
-#~ msgid "Look And Feel"
-#~ msgstr "Външен вид"
-
-#~ msgid "Version:"
-#~ msgstr "Версия:"
