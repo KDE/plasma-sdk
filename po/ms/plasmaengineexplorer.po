@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-24 00:45+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2010-11-25 23:33+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@gmail.com>\n"
 "Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
@@ -60,8 +60,7 @@ msgstr "SumberData"
 msgid "Type"
 msgstr "Jenis"
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
+#: engineexplorer.cpp:180 serviceviewer.cpp:151
 #, kde-format
 msgid "Value"
 msgstr "Nilai"
@@ -138,8 +137,7 @@ msgid_plural "<%1 pairs>"
 msgstr[0] ""
 msgstr[1] ""
 
-#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
-#: engineexplorer.cpp:542 engineexplorer.ui:29
+#: engineexplorer.cpp:542
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Penjelajah EnjinData Plasma"
@@ -151,54 +149,6 @@ msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
 msgstr[0] ""
 msgstr[1] ""
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
-#: engineexplorer.ui:50
-#, kde-format
-msgid "Source name"
-msgstr "Nama sumber"
-
-#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:75
-#, fuzzy, kde-format
-#| msgid "Update source now"
-msgid "Update on demand"
-msgstr "Kemaskini sumber sekarang"
-
-#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:81
-#, fuzzy, kde-format
-#| msgid "ms"
-msgid " ms"
-msgstr "ms"
-
-#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:84
-#, fuzzy, kde-format
-#| msgid "Update every "
-msgid "Update Every "
-msgstr "Kemaskini setiap"
-
-#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
-#: engineexplorer.ui:100
-#, fuzzy, kde-format
-#| msgid "Request"
-msgid "Request Source"
-msgstr "Permintaan"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
-#: engineexplorer.ui:120
-#, fuzzy, kde-format
-#| msgid "Remove source"
-msgid "Service for source"
-msgstr "Buang sumber"
-
-#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
-#: engineexplorer.ui:133
-#, fuzzy, kde-format
-#| msgid "Remove source"
-msgid "Request Service for Source"
-msgstr "Buang sumber"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -336,8 +286,7 @@ msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: serviceviewer.cpp:151 serviceviewer.ui:73
+#: serviceviewer.cpp:151
 #, kde-format
 msgid "Key"
 msgstr "Kekunci"
@@ -373,23 +322,51 @@ msgid_plural "%1 operations active…"
 msgstr[0] ""
 msgstr[1] ""
 
-#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
-#: serviceviewer.ui:39
-#, fuzzy, kde-format
-#| msgid "&Operation:"
-msgid "Opera&tion:"
-msgstr "&Operasi:"
-
-#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
-#: serviceviewer.ui:86
-#, kde-format
-msgid "Operation count"
-msgstr "Kiraan operasi"
-
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
 msgstr "Enjin Data"
+
+#~ msgid "Source name"
+#~ msgstr "Nama sumber"
+
+#, fuzzy
+#~| msgid "Update source now"
+#~ msgid "Update on demand"
+#~ msgstr "Kemaskini sumber sekarang"
+
+#, fuzzy
+#~| msgid "ms"
+#~ msgid " ms"
+#~ msgstr "ms"
+
+#, fuzzy
+#~| msgid "Update every "
+#~ msgid "Update Every "
+#~ msgstr "Kemaskini setiap"
+
+#, fuzzy
+#~| msgid "Request"
+#~ msgid "Request Source"
+#~ msgstr "Permintaan"
+
+#, fuzzy
+#~| msgid "Remove source"
+#~ msgid "Service for source"
+#~ msgstr "Buang sumber"
+
+#, fuzzy
+#~| msgid "Remove source"
+#~ msgid "Request Service for Source"
+#~ msgstr "Buang sumber"
+
+#, fuzzy
+#~| msgid "&Operation:"
+#~ msgid "Opera&tion:"
+#~ msgstr "&Operasi:"
+
+#~ msgid "Operation count"
+#~ msgstr "Kiraan operasi"
 
 #~ msgid "&lt;1 bit&gt;"
 #~ msgid_plural "&lt;%1 bits&gt;"

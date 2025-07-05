@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-24 00:45+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2023-01-04 10:03\n"
 "Last-Translator: Darafei Praliaskouski <komzpa@licei2.com>\n"
 "Language-Team: Belarusian\n"
@@ -61,8 +61,7 @@ msgstr "Крыніца даных / ключ"
 msgid "Type"
 msgstr "Тып"
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
+#: engineexplorer.cpp:180 serviceviewer.cpp:151
 #, kde-format
 msgid "Value"
 msgstr "Значэнне"
@@ -148,8 +147,7 @@ msgstr[1] "<%1 спалучэнні>"
 msgstr[2] "<%1 спалучэнняў>"
 msgstr[3] "<%1 спалучэнні>"
 
-#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
-#: engineexplorer.cpp:542 engineexplorer.ui:29
+#: engineexplorer.cpp:542
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Агляд DataEngine Plasma"
@@ -163,48 +161,6 @@ msgstr[0] "Рухавік \"%1\" - %2 крыніца даных"
 msgstr[1] "Рухавік \"%1\" - %2 крыніцы даных"
 msgstr[2] "Рухавік \"%1\" - %2 крыніц даных"
 msgstr[3] "Рухавік \"%1\" - %2 крыніцы даных"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
-#: engineexplorer.ui:50
-#, kde-format
-msgid "Source name"
-msgstr "Назва крыніцы"
-
-#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:75
-#, kde-format
-msgid "Update on demand"
-msgstr "Абнаўленне па патрабаванні"
-
-#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:81
-#, kde-format
-msgid " ms"
-msgstr " мс"
-
-#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:84
-#, kde-format
-msgid "Update Every "
-msgstr "Абнаўляць кожныя "
-
-#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
-#: engineexplorer.ui:100
-#, kde-format
-msgid "Request Source"
-msgstr "Запытванне крыніцы"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
-#: engineexplorer.ui:120
-#, kde-format
-msgid "Service for source"
-msgstr "Служба крыніцы"
-
-#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
-#: engineexplorer.ui:133
-#, kde-format
-msgid "Request Service for Source"
-msgstr "Запытванне службы крыніцы"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -348,8 +304,7 @@ msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "Рухавік: <b>%1</b>; Крыніца: <b>%2</b>; Служба: <b>%3</b>"
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: serviceviewer.cpp:151 serviceviewer.ui:73
+#: serviceviewer.cpp:151
 #, kde-format
 msgid "Key"
 msgstr "Клавіша"
@@ -391,22 +346,37 @@ msgstr[1] "%1 актыўныя аперацыі…"
 msgstr[2] "%1 актыўных аперацый…"
 msgstr[3] "%1 актыўныя аперацыі…"
 
-#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
-#: serviceviewer.ui:39
-#, kde-format
-msgid "Opera&tion:"
-msgstr "&Аперацыя:"
-
-#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
-#: serviceviewer.ui:86
-#, kde-format
-msgid "Operation count"
-msgstr "Колькасць аперацый"
-
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
 msgstr "Рухавікі даных"
+
+#~ msgid "Source name"
+#~ msgstr "Назва крыніцы"
+
+#~ msgid "Update on demand"
+#~ msgstr "Абнаўленне па патрабаванні"
+
+#~ msgid " ms"
+#~ msgstr " мс"
+
+#~ msgid "Update Every "
+#~ msgstr "Абнаўляць кожныя "
+
+#~ msgid "Request Source"
+#~ msgstr "Запытванне крыніцы"
+
+#~ msgid "Service for source"
+#~ msgstr "Служба крыніцы"
+
+#~ msgid "Request Service for Source"
+#~ msgstr "Запытванне службы крыніцы"
+
+#~ msgid "Opera&tion:"
+#~ msgstr "&Аперацыя:"
+
+#~ msgid "Operation count"
+#~ msgstr "Колькасць аперацый"
 
 #~ msgid "Form"
 #~ msgstr "Форма"

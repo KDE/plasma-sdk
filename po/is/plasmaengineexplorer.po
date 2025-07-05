@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-24 00:45+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2024-05-13 11:31+0000\n"
 "Last-Translator: Gummi <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -61,8 +61,7 @@ msgstr "Gagnagjafi/Lykill"
 msgid "Type"
 msgstr "Tegund"
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
+#: engineexplorer.cpp:180 serviceviewer.cpp:151
 #, kde-format
 msgid "Value"
 msgstr "Gildi"
@@ -138,8 +137,7 @@ msgid_plural "<%1 pairs>"
 msgstr[0] "<%1 par>"
 msgstr[1] "<%1 pör>"
 
-#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
-#: engineexplorer.cpp:542 engineexplorer.ui:29
+#: engineexplorer.cpp:542
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Plasma gagnavélakönnuður"
@@ -151,48 +149,6 @@ msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
 msgstr[0] "%1 gagnavél - 1 gagnagjafi"
 msgstr[1] "%1 gagnavél - %2 gagnagjafar"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
-#: engineexplorer.ui:50
-#, kde-format
-msgid "Source name"
-msgstr "Upprunanafn"
-
-#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:75
-#, kde-format
-msgid "Update on demand"
-msgstr "Uppfæra við beiðni"
-
-#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:81
-#, kde-format
-msgid " ms"
-msgstr " ms"
-
-#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:84
-#, kde-format
-msgid "Update Every "
-msgstr "Uppfæra á "
-
-#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
-#: engineexplorer.ui:100
-#, kde-format
-msgid "Request Source"
-msgstr "Upptök beiðni"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
-#: engineexplorer.ui:120
-#, kde-format
-msgid "Service for source"
-msgstr "Þjónusta fyrir upptök"
-
-#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
-#: engineexplorer.ui:133
-#, kde-format
-msgid "Request Service for Source"
-msgstr "Beiðniþjónusta fyrir upptök"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -337,8 +293,7 @@ msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "Gagnavél: <b>%1</b>; upptök: <b>%2</b>; þjónusta: <b>%3</b>"
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: serviceviewer.cpp:151 serviceviewer.ui:73
+#: serviceviewer.cpp:151
 #, kde-format
 msgid "Key"
 msgstr "Lykill"
@@ -378,22 +333,37 @@ msgid_plural "%1 operations active…"
 msgstr[0] "Ein virk aðgerð ..."
 msgstr[1] "%1 virkar aðgerðir ..."
 
-#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
-#: serviceviewer.ui:39
-#, kde-format
-msgid "Opera&tion:"
-msgstr "&Aðgerð:"
-
-#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
-#: serviceviewer.ui:86
-#, kde-format
-msgid "Operation count"
-msgstr "Fjöldi aðgerða"
-
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
 msgstr "Gagnavélar"
+
+#~ msgid "Source name"
+#~ msgstr "Upprunanafn"
+
+#~ msgid "Update on demand"
+#~ msgstr "Uppfæra við beiðni"
+
+#~ msgid " ms"
+#~ msgstr " ms"
+
+#~ msgid "Update Every "
+#~ msgstr "Uppfæra á "
+
+#~ msgid "Request Source"
+#~ msgstr "Upptök beiðni"
+
+#~ msgid "Service for source"
+#~ msgstr "Þjónusta fyrir upptök"
+
+#~ msgid "Request Service for Source"
+#~ msgstr "Beiðniþjónusta fyrir upptök"
+
+#~ msgid "Opera&tion:"
+#~ msgstr "&Aðgerð:"
+
+#~ msgid "Operation count"
+#~ msgstr "Fjöldi aðgerða"
 
 #~ msgid "&lt;1 bit&gt;"
 #~ msgid_plural "&lt;%1 bits&gt;"

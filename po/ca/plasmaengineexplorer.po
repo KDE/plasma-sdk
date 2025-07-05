@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-24 00:45+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2022-01-18 09:24+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -61,8 +61,7 @@ msgstr "Font de dades/Clau"
 msgid "Type"
 msgstr "Tipus"
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
+#: engineexplorer.cpp:180 serviceviewer.cpp:151
 #, kde-format
 msgid "Value"
 msgstr "Valor"
@@ -138,8 +137,7 @@ msgid_plural "<%1 pairs>"
 msgstr[0] "<%1 parell>"
 msgstr[1] "<%1 parells>"
 
-#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
-#: engineexplorer.cpp:542 engineexplorer.ui:29
+#: engineexplorer.cpp:542
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Explorador de motors de dades del Plasma"
@@ -151,48 +149,6 @@ msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
 msgstr[0] "Motor %1 - 1 font de dades"
 msgstr[1] "Motor %1 - %2 fonts de dades"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
-#: engineexplorer.ui:50
-#, kde-format
-msgid "Source name"
-msgstr "Nom de la font"
-
-#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:75
-#, kde-format
-msgid "Update on demand"
-msgstr "Actualitza a petició"
-
-#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:81
-#, kde-format
-msgid " ms"
-msgstr " ms"
-
-#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:84
-#, kde-format
-msgid "Update Every "
-msgstr "Actualitza cada "
-
-#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
-#: engineexplorer.ui:100
-#, kde-format
-msgid "Request Source"
-msgstr "Sol·licitud de font"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
-#: engineexplorer.ui:120
-#, kde-format
-msgid "Service for source"
-msgstr "Servei per font"
-
-#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
-#: engineexplorer.ui:133
-#, kde-format
-msgid "Request Service for Source"
-msgstr "Servei sol·licitat per font"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -337,8 +293,7 @@ msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "Motor: <b>%1</b>; font: <b>%2</b>; servei <b>%3</b>"
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: serviceviewer.cpp:151 serviceviewer.ui:73
+#: serviceviewer.cpp:151
 #, kde-format
 msgid "Key"
 msgstr "Clau"
@@ -378,19 +333,34 @@ msgid_plural "%1 operations active…"
 msgstr[0] "Una operació activa…"
 msgstr[1] "%1 operacions actives…"
 
-#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
-#: serviceviewer.ui:39
-#, kde-format
-msgid "Opera&tion:"
-msgstr "&Operació:"
-
-#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
-#: serviceviewer.ui:86
-#, kde-format
-msgid "Operation count"
-msgstr "Comptador d'operacions"
-
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
 msgstr "Motors de dades"
+
+#~ msgid "Source name"
+#~ msgstr "Nom de la font"
+
+#~ msgid "Update on demand"
+#~ msgstr "Actualitza a petició"
+
+#~ msgid " ms"
+#~ msgstr " ms"
+
+#~ msgid "Update Every "
+#~ msgstr "Actualitza cada "
+
+#~ msgid "Request Source"
+#~ msgstr "Sol·licitud de font"
+
+#~ msgid "Service for source"
+#~ msgstr "Servei per font"
+
+#~ msgid "Request Service for Source"
+#~ msgstr "Servei sol·licitat per font"
+
+#~ msgid "Opera&tion:"
+#~ msgstr "&Operació:"
+
+#~ msgid "Operation count"
+#~ msgstr "Comptador d'operacions"

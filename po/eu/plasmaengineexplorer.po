@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-24 00:45+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2022-07-31 08:11+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -62,8 +62,7 @@ msgstr "Datu-sorburua/Gakoa"
 msgid "Type"
 msgstr "Mota"
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
+#: engineexplorer.cpp:180 serviceviewer.cpp:151
 #, kde-format
 msgid "Value"
 msgstr "Balioa"
@@ -139,8 +138,7 @@ msgid_plural "<%1 pairs>"
 msgstr[0] "<pare %1>"
 msgstr[1] "<%1 pare>"
 
-#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
-#: engineexplorer.cpp:542 engineexplorer.ui:29
+#: engineexplorer.cpp:542
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Plasma datu-motore esploratzailea"
@@ -152,53 +150,6 @@ msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
 msgstr[0] "%1 Motorea - datu iturburu 1"
 msgstr[1] "%1 motore - %2 datu iturburu"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
-#: engineexplorer.ui:50
-#, kde-format
-msgid "Source name"
-msgstr "Iturburuaren izena"
-
-#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:75
-#, kde-format
-msgid "Update on demand"
-msgstr "Eguneratu eskatu ahala"
-
-#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:81
-#, kde-format
-msgid " ms"
-msgstr " ms"
-
-#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:84
-#, kde-format
-msgid "Update Every "
-msgstr "Eguneratu hainbestero: "
-
-# Jatorrizko mezua anbiguoa da:
-# 1. Eskariaren iturburua
-# 2. Eskatu iturburua
-# Gainerako hizkuntzen itzulpenean bi eratara itzulita agertzen da, batzutan era batera eta beste batzuetan bestera.
-# 1. aukera hobetsi dut.
-#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
-#: engineexplorer.ui:100
-#, kde-format
-msgid "Request Source"
-msgstr "Eskariaren iturburua"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
-#: engineexplorer.ui:120
-#, kde-format
-msgid "Service for source"
-msgstr "Zerbitzua iturburuarentzako"
-
-#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
-#: engineexplorer.ui:133
-#, kde-format
-msgid "Request Service for Source"
-msgstr "Eskatu zerbitzua iturburuarentzako"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -353,8 +304,7 @@ msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "Motorra: <b>%1</b>; Sorburua: <b>%2</b>; Zerbitzua: <b>%3</b>"
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: serviceviewer.cpp:151 serviceviewer.ui:73
+#: serviceviewer.cpp:151
 #, kde-format
 msgid "Key"
 msgstr "Gakoa"
@@ -394,22 +344,42 @@ msgid_plural "%1 operations active…"
 msgstr[0] "Eragiketa aktibo bat..."
 msgstr[1] "%1 eragiketa aktibo..."
 
-#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
-#: serviceviewer.ui:39
-#, kde-format
-msgid "Opera&tion:"
-msgstr "Eragike&ta:"
-
-#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
-#: serviceviewer.ui:86
-#, kde-format
-msgid "Operation count"
-msgstr "Eragiketa kopurua"
-
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
 msgstr "Datu motoreak"
+
+#~ msgid "Source name"
+#~ msgstr "Iturburuaren izena"
+
+#~ msgid "Update on demand"
+#~ msgstr "Eguneratu eskatu ahala"
+
+#~ msgid " ms"
+#~ msgstr " ms"
+
+#~ msgid "Update Every "
+#~ msgstr "Eguneratu hainbestero: "
+
+# Jatorrizko mezua anbiguoa da:
+# 1. Eskariaren iturburua
+# 2. Eskatu iturburua
+# Gainerako hizkuntzen itzulpenean bi eratara itzulita agertzen da, batzutan era batera eta beste batzuetan bestera.
+# 1. aukera hobetsi dut.
+#~ msgid "Request Source"
+#~ msgstr "Eskariaren iturburua"
+
+#~ msgid "Service for source"
+#~ msgstr "Zerbitzua iturburuarentzako"
+
+#~ msgid "Request Service for Source"
+#~ msgstr "Eskatu zerbitzua iturburuarentzako"
+
+#~ msgid "Opera&tion:"
+#~ msgstr "Eragike&ta:"
+
+#~ msgid "Operation count"
+#~ msgstr "Eragiketa kopurua"
 
 #~ msgid "&lt;1 bit&gt;"
 #~ msgid_plural "&lt;%1 bits&gt;"

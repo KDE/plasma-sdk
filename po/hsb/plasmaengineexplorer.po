@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: desktop_kdebase\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-24 00:45+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2008-11-22 12:57+0100\n"
 "Last-Translator: Eduard Werner <edi.werner@gmx.de>\n"
 "Language-Team: en_US <kde-i18n-doc@lists.kde.org>\n"
@@ -58,8 +58,7 @@ msgstr "Žórło za daty"
 msgid "Type"
 msgstr "Družina"
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
+#: engineexplorer.cpp:180 serviceviewer.cpp:151
 #, kde-format
 msgid "Value"
 msgstr "Hódnota"
@@ -148,8 +147,7 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
-#: engineexplorer.cpp:542 engineexplorer.ui:29
+#: engineexplorer.cpp:542
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Plasma DataEngine Explorer"
@@ -163,53 +161,6 @@ msgstr[0] "%1 engine - %2 žórło datow"
 msgstr[1] "%1 engine - %2 žórle datow"
 msgstr[2] "%1 engine - %2 žórła datow"
 msgstr[3] "%1 engine - %2 žórłow datow"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
-#: engineexplorer.ui:50
-#, kde-format
-msgid "Source name"
-msgstr "Mjeno žórła"
-
-#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:75
-#, kde-format
-msgid "Update on demand"
-msgstr "Aktualizowanje po požadanju"
-
-#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:81
-#, fuzzy, kde-format
-#| msgid "ms"
-msgid " ms"
-msgstr "ms"
-
-#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:84
-#, fuzzy, kde-format
-#| msgid "Update every "
-msgid "Update Every "
-msgstr "Aktualizować kóžde"
-
-#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
-#: engineexplorer.ui:100
-#, fuzzy, kde-format
-#| msgid "Request"
-msgid "Request Source"
-msgstr "Požadanje"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
-#: engineexplorer.ui:120
-#, fuzzy, kde-format
-#| msgid "Remove source"
-msgid "Service for source"
-msgstr "Žórło wotstronić"
-
-#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
-#: engineexplorer.ui:133
-#, fuzzy, kde-format
-#| msgid "Remove source"
-msgid "Request Service for Source"
-msgstr "Žórło wotstronić"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -354,8 +305,7 @@ msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "DataEngine: <b>%1</b>; Žórło: <b>%2</b>; Słužba <b>%3</b>"
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: serviceviewer.cpp:151 serviceviewer.ui:73
+#: serviceviewer.cpp:151
 #, kde-format
 msgid "Key"
 msgstr "Kluč"
@@ -400,23 +350,49 @@ msgstr[1] "Z akciju pokročować"
 msgstr[2] "Z akciju pokročować"
 msgstr[3] "Z akciju pokročować"
 
-#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
-#: serviceviewer.ui:39
-#, fuzzy, kde-format
-#| msgid "&Operation:"
-msgid "Opera&tion:"
-msgstr "&Operacija:"
-
-#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
-#: serviceviewer.ui:86
-#, kde-format
-msgid "Operation count"
-msgstr "Ličba operacijow"
-
 #: titlecombobox.h:41
 #, fuzzy, kde-format
 msgid "Data Engines"
 msgstr "Name=Datajowy manager"
+
+#~ msgid "Source name"
+#~ msgstr "Mjeno žórła"
+
+#~ msgid "Update on demand"
+#~ msgstr "Aktualizowanje po požadanju"
+
+#, fuzzy
+#~| msgid "ms"
+#~ msgid " ms"
+#~ msgstr "ms"
+
+#, fuzzy
+#~| msgid "Update every "
+#~ msgid "Update Every "
+#~ msgstr "Aktualizować kóžde"
+
+#, fuzzy
+#~| msgid "Request"
+#~ msgid "Request Source"
+#~ msgstr "Požadanje"
+
+#, fuzzy
+#~| msgid "Remove source"
+#~ msgid "Service for source"
+#~ msgstr "Žórło wotstronić"
+
+#, fuzzy
+#~| msgid "Remove source"
+#~ msgid "Request Service for Source"
+#~ msgstr "Žórło wotstronić"
+
+#, fuzzy
+#~| msgid "&Operation:"
+#~ msgid "Opera&tion:"
+#~ msgstr "&Operacija:"
+
+#~ msgid "Operation count"
+#~ msgstr "Ličba operacijow"
 
 #~ msgid "&lt;1 bit&gt;"
 #~ msgid_plural "&lt;%1 bits&gt;"

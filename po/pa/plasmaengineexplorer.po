@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-24 00:45+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2012-05-08 22:16+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
@@ -59,8 +59,7 @@ msgstr "ਡਾਟਾ-ਸੋਰਸ"
 msgid "Type"
 msgstr "ਟਾਈਪ"
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
+#: engineexplorer.cpp:180 serviceviewer.cpp:151
 #, kde-format
 msgid "Value"
 msgstr "ਮੁੱਲ"
@@ -137,8 +136,7 @@ msgid_plural "<%1 pairs>"
 msgstr[0] ""
 msgstr[1] ""
 
-#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
-#: engineexplorer.cpp:542 engineexplorer.ui:29
+#: engineexplorer.cpp:542
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "ਪਲਾਜ਼ਮਾ ਡਾਟਾ-ਇੰਜਣ ਐਕਸਪਲੋਰਰ"
@@ -150,50 +148,6 @@ msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
 msgstr[0] "%1 ਇੰਜਣ - 1 ਡਾਟਾ ਸਰੋਤ"
 msgstr[1] "%1 ਇੰਜਣ - %2 ਡਾਟਾ ਸਰੋਤ"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
-#: engineexplorer.ui:50
-#, kde-format
-msgid "Source name"
-msgstr "ਸਰੋਤ ਨਾਂ"
-
-#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:75
-#, kde-format
-msgid "Update on demand"
-msgstr "ਲੋੜ ਉੱਤੇ ਅੱਪਡੇਟ"
-
-#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:81
-#, fuzzy, kde-format
-#| msgid "ms"
-msgid " ms"
-msgstr "ms"
-
-#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:84
-#, fuzzy, kde-format
-#| msgid "Update every "
-msgid "Update Every "
-msgstr "ਅੱਪਡੇਟ ਹਰੇਕ "
-
-#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
-#: engineexplorer.ui:100
-#, kde-format
-msgid "Request Source"
-msgstr "ਬੇਨਤੀ ਸਰੋਤ"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
-#: engineexplorer.ui:120
-#, kde-format
-msgid "Service for source"
-msgstr "ਸਰੋਤ ਲਈ ਸਰਵਿਸ"
-
-#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
-#: engineexplorer.ui:133
-#, kde-format
-msgid "Request Service for Source"
-msgstr "ਸਰੋਤ ਲਈ ਸਰਵਿਸ ਮੰਗ"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -335,8 +289,7 @@ msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "ਡਾਟਾ-ਇੰਜਣ: <b>%1</b>; ਸਰੋਤ: <b>%2</b>; ਸਰਵਿਸ <b>%3</b>"
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: serviceviewer.cpp:151 serviceviewer.ui:73
+#: serviceviewer.cpp:151
 #, kde-format
 msgid "Key"
 msgstr "ਕੁੰਜੀ"
@@ -378,23 +331,43 @@ msgid_plural "%1 operations active…"
 msgstr[0] "ਇੱਕ ਸਰਗਰਮ ਓਪਰੇਸ਼ਨ..."
 msgstr[1] "%1 ਸਰਗਰਮ ਓਪਰੇਸ਼ਨ..."
 
-#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
-#: serviceviewer.ui:39
-#, fuzzy, kde-format
-#| msgid "&Operation:"
-msgid "Opera&tion:"
-msgstr "ਓਪਰੇਸ਼ਨ(&O):"
-
-#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
-#: serviceviewer.ui:86
-#, kde-format
-msgid "Operation count"
-msgstr "ਓਪਰੇਸ਼ਨ ਗਿਣਤੀ"
-
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
 msgstr "ਡਾਟਾ ਇੰਜਣ"
+
+#~ msgid "Source name"
+#~ msgstr "ਸਰੋਤ ਨਾਂ"
+
+#~ msgid "Update on demand"
+#~ msgstr "ਲੋੜ ਉੱਤੇ ਅੱਪਡੇਟ"
+
+#, fuzzy
+#~| msgid "ms"
+#~ msgid " ms"
+#~ msgstr "ms"
+
+#, fuzzy
+#~| msgid "Update every "
+#~ msgid "Update Every "
+#~ msgstr "ਅੱਪਡੇਟ ਹਰੇਕ "
+
+#~ msgid "Request Source"
+#~ msgstr "ਬੇਨਤੀ ਸਰੋਤ"
+
+#~ msgid "Service for source"
+#~ msgstr "ਸਰੋਤ ਲਈ ਸਰਵਿਸ"
+
+#~ msgid "Request Service for Source"
+#~ msgstr "ਸਰੋਤ ਲਈ ਸਰਵਿਸ ਮੰਗ"
+
+#, fuzzy
+#~| msgid "&Operation:"
+#~ msgid "Opera&tion:"
+#~ msgstr "ਓਪਰੇਸ਼ਨ(&O):"
+
+#~ msgid "Operation count"
+#~ msgstr "ਓਪਰੇਸ਼ਨ ਗਿਣਤੀ"
 
 #~ msgid "&lt;1 bit&gt;"
 #~ msgid_plural "&lt;%1 bits&gt;"

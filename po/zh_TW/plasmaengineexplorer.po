@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-24 00:45+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2023-03-07 03:03+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -64,8 +64,7 @@ msgstr "資料來源/鍵"
 msgid "Type"
 msgstr "型態"
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
+#: engineexplorer.cpp:180 serviceviewer.cpp:151
 #, kde-format
 msgid "Value"
 msgstr "數值"
@@ -136,8 +135,7 @@ msgid "<%1 pair>"
 msgid_plural "<%1 pairs>"
 msgstr[0] "<%1 個鍵值組>"
 
-#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
-#: engineexplorer.cpp:542 engineexplorer.ui:29
+#: engineexplorer.cpp:542
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Plasma 資料引擎探索器"
@@ -148,48 +146,6 @@ msgctxt "The name of the engine followed by the number of data sources"
 msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
 msgstr[0] "%1 引擎─%2 個資料來源"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
-#: engineexplorer.ui:50
-#, kde-format
-msgid "Source name"
-msgstr "來源名稱"
-
-#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:75
-#, kde-format
-msgid "Update on demand"
-msgstr "要求時更新"
-
-#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:81
-#, kde-format
-msgid " ms"
-msgstr " 毫秒"
-
-#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:84
-#, kde-format
-msgid "Update Every "
-msgstr "更新間隔："
-
-#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
-#: engineexplorer.ui:100
-#, kde-format
-msgid "Request Source"
-msgstr "請求來源"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
-#: engineexplorer.ui:120
-#, kde-format
-msgid "Service for source"
-msgstr "來源服務"
-
-#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
-#: engineexplorer.ui:133
-#, kde-format
-msgid "Request Service for Source"
-msgstr "請求來源服務"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -329,8 +285,7 @@ msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "引擎：<b>%1</b>；來源：<b>%2</b>；服務：<b>%3</b>"
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: serviceviewer.cpp:151 serviceviewer.ui:73
+#: serviceviewer.cpp:151
 #, kde-format
 msgid "Key"
 msgstr "鍵值"
@@ -365,19 +320,34 @@ msgid "One active operation…"
 msgid_plural "%1 operations active…"
 msgstr[0] "%1 個操作執行中…"
 
-#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
-#: serviceviewer.ui:39
-#, kde-format
-msgid "Opera&tion:"
-msgstr "操作(&T)："
-
-#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
-#: serviceviewer.ui:86
-#, kde-format
-msgid "Operation count"
-msgstr "操作計數"
-
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
 msgstr "資料引擎"
+
+#~ msgid "Source name"
+#~ msgstr "來源名稱"
+
+#~ msgid "Update on demand"
+#~ msgstr "要求時更新"
+
+#~ msgid " ms"
+#~ msgstr " 毫秒"
+
+#~ msgid "Update Every "
+#~ msgstr "更新間隔："
+
+#~ msgid "Request Source"
+#~ msgstr "請求來源"
+
+#~ msgid "Service for source"
+#~ msgstr "來源服務"
+
+#~ msgid "Request Service for Source"
+#~ msgstr "請求來源服務"
+
+#~ msgid "Opera&tion:"
+#~ msgstr "操作(&T)："
+
+#~ msgid "Operation count"
+#~ msgstr "操作計數"

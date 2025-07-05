@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-24 00:45+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2008-03-18 17:19+0530\n"
 "Last-Translator: ஆமாச்சு <amachu@ubuntu.com>\n"
 "Language-Team: தமிழ் <https://lists.ubuntu.com/mailman/listinfo/ubuntu-l10n-"
@@ -59,8 +59,7 @@ msgstr "தரவுமூலம்"
 msgid "Type"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
+#: engineexplorer.cpp:180 serviceviewer.cpp:151
 #, kde-format
 msgid "Value"
 msgstr "மதிப்பு"
@@ -137,8 +136,7 @@ msgid_plural "<%1 pairs>"
 msgstr[0] ""
 msgstr[1] ""
 
-#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
-#: engineexplorer.cpp:542 engineexplorer.ui:29
+#: engineexplorer.cpp:542
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "பிளாஸ்மா தரவு இயந்திர ஆய்வி"
@@ -150,53 +148,6 @@ msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
 msgstr[0] ""
 msgstr[1] ""
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
-#: engineexplorer.ui:50
-#, kde-format
-msgid "Source name"
-msgstr "மூலப் பெயர்"
-
-#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:75
-#, fuzzy, kde-format
-#| msgid "update every "
-msgid "Update on demand"
-msgstr "புதுப்பிப்பதற்கான நேர இடைவெளி"
-
-#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:81
-#, fuzzy, kde-format
-#| msgid "ms"
-msgid " ms"
-msgstr "மிநொ"
-
-#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:84
-#, fuzzy, kde-format
-#| msgid "update every "
-msgid "Update Every "
-msgstr "புதுப்பிப்பதற்கான நேர இடைவெளி"
-
-#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
-#: engineexplorer.ui:100
-#, fuzzy, kde-format
-#| msgid "Request"
-msgid "Request Source"
-msgstr "கோரிக்கை"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
-#: engineexplorer.ui:120
-#, kde-format
-msgid "Service for source"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
-#: engineexplorer.ui:133
-#, fuzzy, kde-format
-#| msgid "Request"
-msgid "Request Service for Source"
-msgstr "கோரிக்கை"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -335,8 +286,7 @@ msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: serviceviewer.cpp:151 serviceviewer.ui:73
+#: serviceviewer.cpp:151
 #, kde-format
 msgid "Key"
 msgstr "துருப்பு"
@@ -372,19 +322,35 @@ msgid_plural "%1 operations active…"
 msgstr[0] ""
 msgstr[1] ""
 
-#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
-#: serviceviewer.ui:39
-#, kde-format
-msgid "Opera&tion:"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
-#: serviceviewer.ui:86
-#, kde-format
-msgid "Operation count"
-msgstr ""
-
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
 msgstr ""
+
+#~ msgid "Source name"
+#~ msgstr "மூலப் பெயர்"
+
+#, fuzzy
+#~| msgid "update every "
+#~ msgid "Update on demand"
+#~ msgstr "புதுப்பிப்பதற்கான நேர இடைவெளி"
+
+#, fuzzy
+#~| msgid "ms"
+#~ msgid " ms"
+#~ msgstr "மிநொ"
+
+#, fuzzy
+#~| msgid "update every "
+#~ msgid "Update Every "
+#~ msgstr "புதுப்பிப்பதற்கான நேர இடைவெளி"
+
+#, fuzzy
+#~| msgid "Request"
+#~ msgid "Request Source"
+#~ msgstr "கோரிக்கை"
+
+#, fuzzy
+#~| msgid "Request"
+#~ msgid "Request Service for Source"
+#~ msgstr "கோரிக்கை"

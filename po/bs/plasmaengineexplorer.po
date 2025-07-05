@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-24 00:45+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2014-10-20 20:14+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -64,8 +64,7 @@ msgid "Type"
 msgstr "Tip"
 
 # >> @title:column
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
+#: engineexplorer.cpp:180 serviceviewer.cpp:151
 #, kde-format
 msgid "Value"
 msgstr "Vrijednost"
@@ -148,8 +147,7 @@ msgstr[1] ""
 msgstr[2] ""
 
 # >! Shouldn't this bje same as "Plasma Engine Explorer" above (or vici versa)
-#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
-#: engineexplorer.cpp:542 engineexplorer.ui:29
+#: engineexplorer.cpp:542
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Istraživač plasma datomotora"
@@ -162,51 +160,6 @@ msgid_plural "%1 Engine - %2 data sources"
 msgstr[0] "Pokretač %1 — %2 izvor"
 msgstr[1] "Pokretač %1 — %2 izvora"
 msgstr[2] "Pokretač %1 — %2 izvora"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
-#: engineexplorer.ui:50
-#, kde-format
-msgid "Source name"
-msgstr "Ime izvora"
-
-# >> @item:inlistbox Preceeded by 'Update every'
-#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:75
-#, kde-format
-msgid "Update on demand"
-msgstr "Na zahtjev"
-
-#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:81
-#, fuzzy, kde-format
-#| msgid "ms"
-msgid " ms"
-msgstr "ms"
-
-#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:84
-#, fuzzy, kde-format
-#| msgid "Update every "
-msgid "Update Every "
-msgstr "Ažuriraj svakih "
-
-#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
-#: engineexplorer.ui:100
-#, kde-format
-msgid "Request Source"
-msgstr "Izvor zahtjeva"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
-#: engineexplorer.ui:120
-#, kde-format
-msgid "Service for source"
-msgstr "Servis za izvor"
-
-#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
-#: engineexplorer.ui:133
-#, kde-format
-msgid "Request Service for Source"
-msgstr "Zahtijevaj servis za izvor"
 
 # >> @title:mijenu
 #: ktreeviewsearchline.cpp:423
@@ -360,8 +313,7 @@ msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "Pogon podataka: <b>%1</b>; Izvor: <b>%2</b>; Servis: <b>%3</b>"
 
 # >> @title:column
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: serviceviewer.cpp:151 serviceviewer.ui:73
+#: serviceviewer.cpp:151
 #, kde-format
 msgid "Key"
 msgstr "Ključ"
@@ -404,23 +356,44 @@ msgstr[0] "%1 operacija aktivna..."
 msgstr[1] "%1 operacije aktivne..."
 msgstr[2] "%1 operacija aktivno..."
 
-#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
-#: serviceviewer.ui:39
-#, fuzzy, kde-format
-#| msgid "&Operation:"
-msgid "Opera&tion:"
-msgstr "&Postupak:"
-
-#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
-#: serviceviewer.ui:86
-#, kde-format
-msgid "Operation count"
-msgstr "Broj postupaka"
-
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
 msgstr "Datomotori"
+
+#~ msgid "Source name"
+#~ msgstr "Ime izvora"
+
+# >> @item:inlistbox Preceeded by 'Update every'
+#~ msgid "Update on demand"
+#~ msgstr "Na zahtjev"
+
+#, fuzzy
+#~| msgid "ms"
+#~ msgid " ms"
+#~ msgstr "ms"
+
+#, fuzzy
+#~| msgid "Update every "
+#~ msgid "Update Every "
+#~ msgstr "Ažuriraj svakih "
+
+#~ msgid "Request Source"
+#~ msgstr "Izvor zahtjeva"
+
+#~ msgid "Service for source"
+#~ msgstr "Servis za izvor"
+
+#~ msgid "Request Service for Source"
+#~ msgstr "Zahtijevaj servis za izvor"
+
+#, fuzzy
+#~| msgid "&Operation:"
+#~ msgid "Opera&tion:"
+#~ msgstr "&Postupak:"
+
+#~ msgid "Operation count"
+#~ msgstr "Broj postupaka"
 
 #~ msgid "&lt;1 bit&gt;"
 #~ msgid_plural "&lt;%1 bits&gt;"

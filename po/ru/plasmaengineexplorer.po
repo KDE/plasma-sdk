@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-24 00:45+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2022-01-20 10:16+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -67,8 +67,7 @@ msgstr "Источник данных / Ключ"
 msgid "Type"
 msgstr "Тип"
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
+#: engineexplorer.cpp:180 serviceviewer.cpp:151
 #, kde-format
 msgid "Value"
 msgstr "Значение"
@@ -154,8 +153,7 @@ msgstr[1] "<%1 пары>"
 msgstr[2] "<%1 пар>"
 msgstr[3] "<%1 пара>"
 
-#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
-#: engineexplorer.cpp:542 engineexplorer.ui:29
+#: engineexplorer.cpp:542
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Диспетчер данных Plasma"
@@ -169,48 +167,6 @@ msgstr[0] "%1 — %2 источник"
 msgstr[1] "%1 — %2 источника"
 msgstr[2] "%1 — %2 источников"
 msgstr[3] "%1 — %2 источник"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
-#: engineexplorer.ui:50
-#, kde-format
-msgid "Source name"
-msgstr "Название источника"
-
-#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:75
-#, kde-format
-msgid "Update on demand"
-msgstr "Обновление по запросу"
-
-#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:81
-#, kde-format
-msgid " ms"
-msgstr " мс"
-
-#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:84
-#, kde-format
-msgid "Update Every "
-msgstr "Обновлять каждые "
-
-#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
-#: engineexplorer.ui:100
-#, kde-format
-msgid "Request Source"
-msgstr "Запросить источник"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
-#: engineexplorer.ui:120
-#, kde-format
-msgid "Service for source"
-msgstr "Служба для источника"
-
-#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
-#: engineexplorer.ui:133
-#, kde-format
-msgid "Request Service for Source"
-msgstr "Запросить службу"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -354,8 +310,7 @@ msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "Поставщик данных: <b>%1</b>; источник: <b>%2</b>; служба: <b>%3</b>"
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: serviceviewer.cpp:151 serviceviewer.ui:73
+#: serviceviewer.cpp:151
 #, kde-format
 msgid "Key"
 msgstr "Параметр"
@@ -397,22 +352,37 @@ msgstr[1] "Выполняется %1 действия..."
 msgstr[2] "Выполняется %1 действий..."
 msgstr[3] "Выполняется %1 действие..."
 
-#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
-#: serviceviewer.ui:39
-#, kde-format
-msgid "Opera&tion:"
-msgstr "&Действие:"
-
-#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
-#: serviceviewer.ui:86
-#, kde-format
-msgid "Operation count"
-msgstr "Количество действий"
-
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
 msgstr "Поставщики данных"
+
+#~ msgid "Source name"
+#~ msgstr "Название источника"
+
+#~ msgid "Update on demand"
+#~ msgstr "Обновление по запросу"
+
+#~ msgid " ms"
+#~ msgstr " мс"
+
+#~ msgid "Update Every "
+#~ msgstr "Обновлять каждые "
+
+#~ msgid "Request Source"
+#~ msgstr "Запросить источник"
+
+#~ msgid "Service for source"
+#~ msgstr "Служба для источника"
+
+#~ msgid "Request Service for Source"
+#~ msgstr "Запросить службу"
+
+#~ msgid "Opera&tion:"
+#~ msgstr "&Действие:"
+
+#~ msgid "Operation count"
+#~ msgstr "Количество действий"
 
 #~ msgid "&lt;1 bit&gt;"
 #~ msgid_plural "&lt;%1 bits&gt;"

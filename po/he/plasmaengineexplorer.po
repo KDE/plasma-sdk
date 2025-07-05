@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-24 00:45+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2017-05-16 06:57-0400\n"
 "Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -62,8 +62,7 @@ msgstr "מקור מידע"
 msgid "Type"
 msgstr "סוג"
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
+#: engineexplorer.cpp:180 serviceviewer.cpp:151
 #, kde-format
 msgid "Value"
 msgstr "ערך"
@@ -141,8 +140,7 @@ msgid_plural "<%1 pairs>"
 msgstr[0] ""
 msgstr[1] ""
 
-#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
-#: engineexplorer.cpp:542 engineexplorer.ui:29
+#: engineexplorer.cpp:542
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "דפדפן המנוע המידע של Plasma"
@@ -154,48 +152,6 @@ msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
 msgstr[0] "מנוע %1 - מקור מידע אחד"
 msgstr[1] "מנוע %1 - ‏%2 מקורות מידע"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
-#: engineexplorer.ui:50
-#, kde-format
-msgid "Source name"
-msgstr "שם המקור"
-
-#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:75
-#, kde-format
-msgid "Update on demand"
-msgstr "עדכן לפי דרישה"
-
-#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:81
-#, kde-format
-msgid " ms"
-msgstr " אלפיות השניה"
-
-#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
-#: engineexplorer.ui:84
-#, kde-format
-msgid "Update Every "
-msgstr "עדכון כל "
-
-#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
-#: engineexplorer.ui:100
-#, kde-format
-msgid "Request Source"
-msgstr "מקור בקשה"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
-#: engineexplorer.ui:120
-#, kde-format
-msgid "Service for source"
-msgstr "שירות למקור"
-
-#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
-#: engineexplorer.ui:133
-#, kde-format
-msgid "Request Service for Source"
-msgstr "בקש שירות למקור"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -335,8 +291,7 @@ msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "מנוע מידע: <b>%1</b>; מקור:<b>%2</b>; שירות <b>%3</b>"
 
-#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
-#: serviceviewer.cpp:151 serviceviewer.ui:73
+#: serviceviewer.cpp:151
 #, kde-format
 msgid "Key"
 msgstr "מפתח"
@@ -374,19 +329,34 @@ msgid_plural "%1 operations active…"
 msgstr[0] "פעילות אחת פעילה..."
 msgstr[1] "%1 פעילויות פעילות..."
 
-#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
-#: serviceviewer.ui:39
-#, kde-format
-msgid "Opera&tion:"
-msgstr "&פעולה:"
-
-#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
-#: serviceviewer.ui:86
-#, kde-format
-msgid "Operation count"
-msgstr "מספר הפעולה"
-
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
 msgstr "מנועי נתונים"
+
+#~ msgid "Source name"
+#~ msgstr "שם המקור"
+
+#~ msgid "Update on demand"
+#~ msgstr "עדכן לפי דרישה"
+
+#~ msgid " ms"
+#~ msgstr " אלפיות השניה"
+
+#~ msgid "Update Every "
+#~ msgstr "עדכון כל "
+
+#~ msgid "Request Source"
+#~ msgstr "מקור בקשה"
+
+#~ msgid "Service for source"
+#~ msgstr "שירות למקור"
+
+#~ msgid "Request Service for Source"
+#~ msgstr "בקש שירות למקור"
+
+#~ msgid "Opera&tion:"
+#~ msgstr "&פעולה:"
+
+#~ msgid "Operation count"
+#~ msgstr "מספר הפעולה"
