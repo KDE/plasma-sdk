@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2009-05-25 21:33+0300\n"
 "Last-Translator: Viesturs Zariņš <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -62,7 +62,8 @@ msgstr "Datu avots"
 msgid "Type"
 msgstr "Tips"
 
-#: engineexplorer.cpp:180 serviceviewer.cpp:151
+#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
+#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
 #, kde-format
 msgid "Value"
 msgstr "Vērtība"
@@ -144,7 +145,8 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: engineexplorer.cpp:542
+#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
+#: engineexplorer.cpp:542 engineexplorer.ui:29
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Plasma datu dzinēju pārlūks"
@@ -157,6 +159,53 @@ msgid_plural "%1 Engine - %2 data sources"
 msgstr[0] "%1 dzinējs - %2 datu avots"
 msgstr[1] "%1 dzinējs - %2 datu avoti"
 msgstr[2] "%1 dzinējs - %2 datu avotu"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
+#: engineexplorer.ui:50
+#, kde-format
+msgid "Source name"
+msgstr "Avota nosaukums"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:75
+#, kde-format
+msgid "Update on demand"
+msgstr "Atjaunināt pēc vajadzības"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:81
+#, fuzzy, kde-format
+#| msgid "ms"
+msgid " ms"
+msgstr "ms"
+
+#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:84
+#, fuzzy, kde-format
+#| msgid "Update every "
+msgid "Update Every "
+msgstr "Atjaunināt ik pēc "
+
+#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
+#: engineexplorer.ui:100
+#, fuzzy, kde-format
+#| msgid "Request"
+msgid "Request Source"
+msgstr "Pieprasīt"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
+#: engineexplorer.ui:120
+#, fuzzy, kde-format
+#| msgid "Remove source"
+msgid "Service for source"
+msgstr "Noņemt avotu"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
+#: engineexplorer.ui:133
+#, fuzzy, kde-format
+#| msgid "Remove source"
+msgid "Request Service for Source"
+msgstr "Noņemt avotu"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -300,7 +349,8 @@ msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "DatuDzinējs: <b>%1</b>; Avots: <b>%2</b>; Serviss <b>%3</b>"
 
-#: serviceviewer.cpp:151
+#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
+#: serviceviewer.cpp:151 serviceviewer.ui:73
 #, kde-format
 msgid "Key"
 msgstr "Atslēga"
@@ -343,49 +393,23 @@ msgstr[0] "%1 aktīva darbība ..."
 msgstr[1] "%1 aktīvas darbības ..."
 msgstr[2] "%1 aktīvas darbības ..."
 
+#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
+#: serviceviewer.ui:39
+#, fuzzy, kde-format
+#| msgid "&Operation:"
+msgid "Opera&tion:"
+msgstr "&Darbība:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
+#: serviceviewer.ui:86
+#, kde-format
+msgid "Operation count"
+msgstr "Darbību skaits"
+
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
 msgstr "Datu dzinēji"
-
-#~ msgid "Source name"
-#~ msgstr "Avota nosaukums"
-
-#~ msgid "Update on demand"
-#~ msgstr "Atjaunināt pēc vajadzības"
-
-#, fuzzy
-#~| msgid "ms"
-#~ msgid " ms"
-#~ msgstr "ms"
-
-#, fuzzy
-#~| msgid "Update every "
-#~ msgid "Update Every "
-#~ msgstr "Atjaunināt ik pēc "
-
-#, fuzzy
-#~| msgid "Request"
-#~ msgid "Request Source"
-#~ msgstr "Pieprasīt"
-
-#, fuzzy
-#~| msgid "Remove source"
-#~ msgid "Service for source"
-#~ msgstr "Noņemt avotu"
-
-#, fuzzy
-#~| msgid "Remove source"
-#~ msgid "Request Service for Source"
-#~ msgstr "Noņemt avotu"
-
-#, fuzzy
-#~| msgid "&Operation:"
-#~ msgid "Opera&tion:"
-#~ msgstr "&Darbība:"
-
-#~ msgid "Operation count"
-#~ msgstr "Darbību skaits"
 
 #~ msgid "&lt;1 bit&gt;"
 #~ msgid_plural "&lt;%1 bits&gt;"

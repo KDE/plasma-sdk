@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2010-01-31 23:56+0100\n"
 "Last-Translator: Bozidar Proevski <bobibobi@freemail.com.mk>\n"
 "Language-Team: Macedonian <mkde-l10n@lists.sourceforge.net>\n"
@@ -60,7 +60,8 @@ msgstr "Извор на податоци"
 msgid "Type"
 msgstr "Тип"
 
-#: engineexplorer.cpp:180 serviceviewer.cpp:151
+#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
+#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
 #, kde-format
 msgid "Value"
 msgstr "Вредност"
@@ -141,7 +142,8 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: engineexplorer.cpp:542
+#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
+#: engineexplorer.cpp:542 engineexplorer.ui:29
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr ""
@@ -154,6 +156,53 @@ msgid_plural "%1 Engine - %2 data sources"
 msgstr[0] "Машина %1 - %2 извор на податоци"
 msgstr[1] "Машина %1 - %2 извори на податоци"
 msgstr[2] "Машина %1 - %2 извори на податоци"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
+#: engineexplorer.ui:50
+#, kde-format
+msgid "Source name"
+msgstr "Име на извор"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:75
+#, kde-format
+msgid "Update on demand"
+msgstr "Ажурирај на барање"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:81
+#, fuzzy, kde-format
+#| msgid "ms"
+msgid " ms"
+msgstr "ms"
+
+#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:84
+#, fuzzy, kde-format
+#| msgid "Update every "
+msgid "Update Every "
+msgstr "Ажурирај на секои "
+
+#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
+#: engineexplorer.ui:100
+#, fuzzy, kde-format
+#| msgid "Request"
+msgid "Request Source"
+msgstr "Барање"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
+#: engineexplorer.ui:120
+#, fuzzy, kde-format
+#| msgid "Remove source"
+msgid "Service for source"
+msgstr "Отстрани извор"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
+#: engineexplorer.ui:133
+#, fuzzy, kde-format
+#| msgid "Remove source"
+msgid "Request Service for Source"
+msgstr "Отстрани извор"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -291,7 +340,8 @@ msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr ""
 
-#: serviceviewer.cpp:151
+#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
+#: serviceviewer.cpp:151 serviceviewer.ui:73
 #, kde-format
 msgid "Key"
 msgstr "Клуч"
@@ -328,49 +378,23 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
+#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
+#: serviceviewer.ui:39
+#, fuzzy, kde-format
+#| msgid "&Operation:"
+msgid "Opera&tion:"
+msgstr "&Операција:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
+#: serviceviewer.ui:86
+#, kde-format
+msgid "Operation count"
+msgstr "Број на операции"
+
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
 msgstr "Податочни машини"
-
-#~ msgid "Source name"
-#~ msgstr "Име на извор"
-
-#~ msgid "Update on demand"
-#~ msgstr "Ажурирај на барање"
-
-#, fuzzy
-#~| msgid "ms"
-#~ msgid " ms"
-#~ msgstr "ms"
-
-#, fuzzy
-#~| msgid "Update every "
-#~ msgid "Update Every "
-#~ msgstr "Ажурирај на секои "
-
-#, fuzzy
-#~| msgid "Request"
-#~ msgid "Request Source"
-#~ msgstr "Барање"
-
-#, fuzzy
-#~| msgid "Remove source"
-#~ msgid "Service for source"
-#~ msgstr "Отстрани извор"
-
-#, fuzzy
-#~| msgid "Remove source"
-#~ msgid "Request Service for Source"
-#~ msgstr "Отстрани извор"
-
-#, fuzzy
-#~| msgid "&Operation:"
-#~ msgid "Opera&tion:"
-#~ msgstr "&Операција:"
-
-#~ msgid "Operation count"
-#~ msgstr "Број на операции"
 
 #~ msgid "&lt;1 bit&gt;"
 #~ msgid_plural "&lt;%1 bits&gt;"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2022-02-20 21:13+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -58,7 +58,8 @@ msgstr "데이터 원본/키"
 msgid "Type"
 msgstr "종류"
 
-#: engineexplorer.cpp:180 serviceviewer.cpp:151
+#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
+#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
 #, kde-format
 msgid "Value"
 msgstr "값"
@@ -129,7 +130,8 @@ msgid "<%1 pair>"
 msgid_plural "<%1 pairs>"
 msgstr[0] "<쌍 %1개>"
 
-#: engineexplorer.cpp:542
+#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
+#: engineexplorer.cpp:542 engineexplorer.ui:29
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Plasma 데이터 엔진 탐색기"
@@ -140,6 +142,48 @@ msgctxt "The name of the engine followed by the number of data sources"
 msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
 msgstr[0] "%1 엔진 - 데이터 원본 %2개"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
+#: engineexplorer.ui:50
+#, kde-format
+msgid "Source name"
+msgstr "원본 이름"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:75
+#, kde-format
+msgid "Update on demand"
+msgstr "필요할 때 업데이트하기"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:81
+#, kde-format
+msgid " ms"
+msgstr "밀리초"
+
+#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:84
+#, kde-format
+msgid "Update Every "
+msgstr "업데이트 주기:"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
+#: engineexplorer.ui:100
+#, kde-format
+msgid "Request Source"
+msgstr "요정 원본"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
+#: engineexplorer.ui:120
+#, kde-format
+msgid "Service for source"
+msgstr "원본의 서비스"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
+#: engineexplorer.ui:133
+#, kde-format
+msgid "Request Service for Source"
+msgstr "원본의 서비스 요청"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -279,7 +323,8 @@ msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "엔진: <b>%1</b>; 원본: <b>%2</b>; 서비스: <b>%3</b>"
 
-#: serviceviewer.cpp:151
+#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
+#: serviceviewer.cpp:151 serviceviewer.ui:73
 #, kde-format
 msgid "Key"
 msgstr "키"
@@ -318,37 +363,22 @@ msgid "One active operation…"
 msgid_plural "%1 operations active…"
 msgstr[0] "작업 %1개 수행 중…"
 
+#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
+#: serviceviewer.ui:39
+#, kde-format
+msgid "Opera&tion:"
+msgstr "작업(&T):"
+
+#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
+#: serviceviewer.ui:86
+#, kde-format
+msgid "Operation count"
+msgstr "작업 수"
+
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
 msgstr "데이터 엔진"
-
-#~ msgid "Source name"
-#~ msgstr "원본 이름"
-
-#~ msgid "Update on demand"
-#~ msgstr "필요할 때 업데이트하기"
-
-#~ msgid " ms"
-#~ msgstr "밀리초"
-
-#~ msgid "Update Every "
-#~ msgstr "업데이트 주기:"
-
-#~ msgid "Request Source"
-#~ msgstr "요정 원본"
-
-#~ msgid "Service for source"
-#~ msgstr "원본의 서비스"
-
-#~ msgid "Request Service for Source"
-#~ msgstr "원본의 서비스 요청"
-
-#~ msgid "Opera&tion:"
-#~ msgstr "작업(&T):"
-
-#~ msgid "Operation count"
-#~ msgstr "작업 수"
 
 #~ msgid "&lt;1 bit&gt;"
 #~ msgid_plural "&lt;%1 bits&gt;"

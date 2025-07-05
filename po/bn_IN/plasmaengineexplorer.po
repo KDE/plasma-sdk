@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2009-01-02 14:48+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: Bengali INDIA <fedora-trans-bn_IN@redhat.com>\n"
@@ -59,7 +59,8 @@ msgstr "DataSource"
 msgid "Type"
 msgstr "প্রকৃতি"
 
-#: engineexplorer.cpp:180 serviceviewer.cpp:151
+#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
+#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
 #, kde-format
 msgid "Value"
 msgstr "মান"
@@ -136,7 +137,8 @@ msgid_plural "<%1 pairs>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: engineexplorer.cpp:542
+#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
+#: engineexplorer.cpp:542 engineexplorer.ui:29
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Plasma DataEngine Explorer"
@@ -148,6 +150,53 @@ msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
 msgstr[0] "%1 ইঞ্জিন - তথ্যের ১-টি উৎস"
 msgstr[1] "%1 ইঞ্জিন - তথ্যের %2-টি উৎস"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
+#: engineexplorer.ui:50
+#, kde-format
+msgid "Source name"
+msgstr "উৎসের নাম"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:75
+#, kde-format
+msgid "Update on demand"
+msgstr "প্রয়োজন অনুসারে আপডেট করা হবে"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:81
+#, fuzzy, kde-format
+#| msgid "ms"
+msgid " ms"
+msgstr "মিলিসেকেন্ড"
+
+#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:84
+#, fuzzy, kde-format
+#| msgid "Update every "
+msgid "Update Every "
+msgstr "আপডেট করা হবে, প্রতি"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
+#: engineexplorer.ui:100
+#, fuzzy, kde-format
+#| msgid "Request"
+msgid "Request Source"
+msgstr "অনুরোধ"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
+#: engineexplorer.ui:120
+#, fuzzy, kde-format
+#| msgid "Remove source"
+msgid "Service for source"
+msgstr "উৎস সরিয়ে ফেলুন"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
+#: engineexplorer.ui:133
+#, fuzzy, kde-format
+#| msgid "Remove source"
+msgid "Request Service for Source"
+msgstr "উৎস সরিয়ে ফেলুন"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -287,7 +336,8 @@ msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "DataEngine: <b>%1</b>; উৎস: <b>%2</b>; পরিসেবা <b>%3</b>"
 
-#: serviceviewer.cpp:151
+#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
+#: serviceviewer.cpp:151 serviceviewer.ui:73
 #, kde-format
 msgid "Key"
 msgstr "কি"
@@ -331,49 +381,23 @@ msgid_plural "%1 operations active…"
 msgstr[0] "একটি সক্রিয় কর্ম ..."
 msgstr[1] "%1-টি সক্রিয় কর্ম ..."
 
+#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
+#: serviceviewer.ui:39
+#, fuzzy, kde-format
+#| msgid "&Operation:"
+msgid "Opera&tion:"
+msgstr "কর্ম: (&O)"
+
+#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
+#: serviceviewer.ui:86
+#, kde-format
+msgid "Operation count"
+msgstr "কর্মের সংখ্যা"
+
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
 msgstr ""
-
-#~ msgid "Source name"
-#~ msgstr "উৎসের নাম"
-
-#~ msgid "Update on demand"
-#~ msgstr "প্রয়োজন অনুসারে আপডেট করা হবে"
-
-#, fuzzy
-#~| msgid "ms"
-#~ msgid " ms"
-#~ msgstr "মিলিসেকেন্ড"
-
-#, fuzzy
-#~| msgid "Update every "
-#~ msgid "Update Every "
-#~ msgstr "আপডেট করা হবে, প্রতি"
-
-#, fuzzy
-#~| msgid "Request"
-#~ msgid "Request Source"
-#~ msgstr "অনুরোধ"
-
-#, fuzzy
-#~| msgid "Remove source"
-#~ msgid "Service for source"
-#~ msgstr "উৎস সরিয়ে ফেলুন"
-
-#, fuzzy
-#~| msgid "Remove source"
-#~ msgid "Request Service for Source"
-#~ msgstr "উৎস সরিয়ে ফেলুন"
-
-#, fuzzy
-#~| msgid "&Operation:"
-#~ msgid "Opera&tion:"
-#~ msgstr "কর্ম: (&O)"
-
-#~ msgid "Operation count"
-#~ msgstr "কর্মের সংখ্যা"
 
 #~ msgid "&lt;1 bit&gt;"
 #~ msgid_plural "&lt;%1 bits&gt;"

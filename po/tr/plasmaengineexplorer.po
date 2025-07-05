@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-sdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2023-05-24 01:31+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -60,7 +60,8 @@ msgstr "Veri Kaynağı/Anahtar"
 msgid "Type"
 msgstr "Tür"
 
-#: engineexplorer.cpp:180 serviceviewer.cpp:151
+#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
+#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
 #, kde-format
 msgid "Value"
 msgstr "Değer"
@@ -136,7 +137,8 @@ msgid_plural "<%1 pairs>"
 msgstr[0] "<%1 eş>"
 msgstr[1] "<%1 eş>"
 
-#: engineexplorer.cpp:542
+#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
+#: engineexplorer.cpp:542 engineexplorer.ui:29
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Plasma Veri İşletkesi Tarayıcısı"
@@ -148,6 +150,48 @@ msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
 msgstr[0] "%1 İşletkesi - %2 veri kaynağı"
 msgstr[1] "%1 İşletkesi - %2 veri kaynağı"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
+#: engineexplorer.ui:50
+#, kde-format
+msgid "Source name"
+msgstr "Kaynak adı"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:75
+#, kde-format
+msgid "Update on demand"
+msgstr "İstenildiğinde güncelle"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:81
+#, kde-format
+msgid " ms"
+msgstr " ms"
+
+#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:84
+#, kde-format
+msgid "Update Every "
+msgstr "Güncelleme Aralığı "
+
+#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
+#: engineexplorer.ui:100
+#, kde-format
+msgid "Request Source"
+msgstr "Kaynak İste"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
+#: engineexplorer.ui:120
+#, kde-format
+msgid "Service for source"
+msgstr "Kaynak için hizmet"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
+#: engineexplorer.ui:133
+#, kde-format
+msgid "Request Service for Source"
+msgstr "Kaynak için Hizmet İste"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -291,7 +335,8 @@ msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "İşletke: <b>%1</b>; Kaynak: <b>%2</b>; Hizmet <b>%3</b>"
 
-#: serviceviewer.cpp:151
+#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
+#: serviceviewer.cpp:151 serviceviewer.ui:73
 #, kde-format
 msgid "Key"
 msgstr "Anahtar"
@@ -330,37 +375,22 @@ msgid_plural "%1 operations active…"
 msgstr[0] "1 etkin işlem"
 msgstr[1] "%1 etkin işlem…"
 
+#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
+#: serviceviewer.ui:39
+#, kde-format
+msgid "Opera&tion:"
+msgstr "&İşlem:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
+#: serviceviewer.ui:86
+#, kde-format
+msgid "Operation count"
+msgstr "İşlem sayısı"
+
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
 msgstr "Veri İşletkeleri"
-
-#~ msgid "Source name"
-#~ msgstr "Kaynak adı"
-
-#~ msgid "Update on demand"
-#~ msgstr "İstenildiğinde güncelle"
-
-#~ msgid " ms"
-#~ msgstr " ms"
-
-#~ msgid "Update Every "
-#~ msgstr "Güncelleme Aralığı "
-
-#~ msgid "Request Source"
-#~ msgstr "Kaynak İste"
-
-#~ msgid "Service for source"
-#~ msgstr "Kaynak için hizmet"
-
-#~ msgid "Request Service for Source"
-#~ msgstr "Kaynak için Hizmet İste"
-
-#~ msgid "Opera&tion:"
-#~ msgstr "&İşlem:"
-
-#~ msgid "Operation count"
-#~ msgstr "İşlem sayısı"
 
 #~ msgid "&lt;1 bit&gt;"
 #~ msgid_plural "&lt;%1 bits&gt;"

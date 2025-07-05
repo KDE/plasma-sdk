@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2008-12-26 03:29+0200\n"
 "Last-Translator: Omer Ensari <oensari@gmail.com>\n"
 "Language-Team: Kurdish <ubuntu-l10n-kur@lists.ubuntu.com>\n"
@@ -61,7 +61,8 @@ msgstr "ÇavkaniyaDaneyan"
 msgid "Type"
 msgstr "Cure"
 
-#: engineexplorer.cpp:180 serviceviewer.cpp:151
+#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
+#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
 #, kde-format
 msgid "Value"
 msgstr "Nirx"
@@ -138,7 +139,8 @@ msgid_plural "<%1 pairs>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: engineexplorer.cpp:542
+#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
+#: engineexplorer.cpp:542 engineexplorer.ui:29
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Kaşîfê Motora Daneyan a Plasmayê"
@@ -150,6 +152,53 @@ msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
 msgstr[0] "%1 Motor - çavkaniyeke daneyan"
 msgstr[1] "%1 Motor - %2 çavkaniyên daneyan"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
+#: engineexplorer.ui:50
+#, kde-format
+msgid "Source name"
+msgstr "Navê çavkaniyê"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:75
+#, kde-format
+msgid "Update on demand"
+msgstr "Li gorî daxwazê rojane bike"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:81
+#, fuzzy, kde-format
+#| msgid "ms"
+msgid " ms"
+msgstr "mç"
+
+#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:84
+#, fuzzy, kde-format
+#| msgid "Update every "
+msgid "Update Every "
+msgstr "Rojane bike, her "
+
+#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
+#: engineexplorer.ui:100
+#, fuzzy, kde-format
+#| msgid "Request"
+msgid "Request Source"
+msgstr "Daxwaz"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
+#: engineexplorer.ui:120
+#, fuzzy, kde-format
+#| msgid "Remove source"
+msgid "Service for source"
+msgstr "Çavkaniyê rake"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
+#: engineexplorer.ui:133
+#, fuzzy, kde-format
+#| msgid "Remove source"
+msgid "Request Service for Source"
+msgstr "Çavkaniyê rake"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -291,7 +340,8 @@ msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "MotoraDane: <b>%1</b>; Çavkanî: <b>%2</b>; Servîs <b>%3</b>"
 
-#: serviceviewer.cpp:151
+#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
+#: serviceviewer.cpp:151 serviceviewer.ui:73
 #, kde-format
 msgid "Key"
 msgstr "Mifte"
@@ -334,49 +384,23 @@ msgid_plural "%1 operations active…"
 msgstr[0] "Yek karê çalak..."
 msgstr[1] "%1 karên çalak..."
 
+#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
+#: serviceviewer.ui:39
+#, fuzzy, kde-format
+#| msgid "&Operation:"
+msgid "Opera&tion:"
+msgstr "&Kar:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
+#: serviceviewer.ui:86
+#, kde-format
+msgid "Operation count"
+msgstr "Hejmara karê"
+
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
 msgstr ""
-
-#~ msgid "Source name"
-#~ msgstr "Navê çavkaniyê"
-
-#~ msgid "Update on demand"
-#~ msgstr "Li gorî daxwazê rojane bike"
-
-#, fuzzy
-#~| msgid "ms"
-#~ msgid " ms"
-#~ msgstr "mç"
-
-#, fuzzy
-#~| msgid "Update every "
-#~ msgid "Update Every "
-#~ msgstr "Rojane bike, her "
-
-#, fuzzy
-#~| msgid "Request"
-#~ msgid "Request Source"
-#~ msgstr "Daxwaz"
-
-#, fuzzy
-#~| msgid "Remove source"
-#~ msgid "Service for source"
-#~ msgstr "Çavkaniyê rake"
-
-#, fuzzy
-#~| msgid "Remove source"
-#~ msgid "Request Service for Source"
-#~ msgstr "Çavkaniyê rake"
-
-#, fuzzy
-#~| msgid "&Operation:"
-#~ msgid "Opera&tion:"
-#~ msgstr "&Kar:"
-
-#~ msgid "Operation count"
-#~ msgstr "Hejmara karê"
 
 #~ msgid "&lt;1 bit&gt;"
 #~ msgid_plural "&lt;%1 bits&gt;"

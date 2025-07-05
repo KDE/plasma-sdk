@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2021-07-07 11:58+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -63,7 +63,8 @@ msgstr "Πηγή δεδομένων"
 msgid "Type"
 msgstr "Τύπος"
 
-#: engineexplorer.cpp:180 serviceviewer.cpp:151
+#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
+#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
 #, kde-format
 msgid "Value"
 msgstr "Τιμή"
@@ -141,7 +142,8 @@ msgid_plural "<%1 pairs>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: engineexplorer.cpp:542
+#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
+#: engineexplorer.cpp:542 engineexplorer.ui:29
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Περιηγητής μηχανής δεδομένων Plasma"
@@ -153,6 +155,48 @@ msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
 msgstr[0] "Μηχανή %1 - 1 πηγή δεδομένων"
 msgstr[1] "Μηχανή %1 - %2 πηγές δεδομένων"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
+#: engineexplorer.ui:50
+#, kde-format
+msgid "Source name"
+msgstr "Όνομα πηγής"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:75
+#, kde-format
+msgid "Update on demand"
+msgstr "Ενημέρωση κατ' αίτηση"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:81
+#, kde-format
+msgid " ms"
+msgstr " ms"
+
+#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:84
+#, kde-format
+msgid "Update Every "
+msgstr "Ενημέρωση κάθε "
+
+#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
+#: engineexplorer.ui:100
+#, kde-format
+msgid "Request Source"
+msgstr "Αίτηση πηγής"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
+#: engineexplorer.ui:120
+#, kde-format
+msgid "Service for source"
+msgstr "Υπηρεσία για την πηγή"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
+#: engineexplorer.ui:133
+#, kde-format
+msgid "Request Service for Source"
+msgstr "Αίτηση υπηρεσίας για την πηγή"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -298,7 +342,8 @@ msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "Μηχανή δεδομένων: <b>%1</b>; Πηγή: <b>%2</b>; Υπηρεσία: <b>%3</b>"
 
-#: serviceviewer.cpp:151
+#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
+#: serviceviewer.cpp:151 serviceviewer.ui:73
 #, kde-format
 msgid "Key"
 msgstr "Κλειδί"
@@ -338,37 +383,22 @@ msgid_plural "%1 operations active…"
 msgstr[0] "Μια ενεργή λειτουργία…"
 msgstr[1] "%1 ενεργές λειτουργίες…"
 
+#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
+#: serviceviewer.ui:39
+#, kde-format
+msgid "Opera&tion:"
+msgstr "&Λειτουργία:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
+#: serviceviewer.ui:86
+#, kde-format
+msgid "Operation count"
+msgstr "Πλήθος λειτουργιών:"
+
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
 msgstr "Μηχανές δεδομένων"
-
-#~ msgid "Source name"
-#~ msgstr "Όνομα πηγής"
-
-#~ msgid "Update on demand"
-#~ msgstr "Ενημέρωση κατ' αίτηση"
-
-#~ msgid " ms"
-#~ msgstr " ms"
-
-#~ msgid "Update Every "
-#~ msgstr "Ενημέρωση κάθε "
-
-#~ msgid "Request Source"
-#~ msgstr "Αίτηση πηγής"
-
-#~ msgid "Service for source"
-#~ msgstr "Υπηρεσία για την πηγή"
-
-#~ msgid "Request Service for Source"
-#~ msgstr "Αίτηση υπηρεσίας για την πηγή"
-
-#~ msgid "Opera&tion:"
-#~ msgstr "&Λειτουργία:"
-
-#~ msgid "Operation count"
-#~ msgstr "Πλήθος λειτουργιών:"
 
 #~ msgid "&lt;1 bit&gt;"
 #~ msgid_plural "&lt;%1 bits&gt;"

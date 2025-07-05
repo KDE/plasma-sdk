@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2023-12-15 20:45+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -58,7 +58,8 @@ msgstr "Dátový zdroj/kľúč"
 msgid "Type"
 msgstr "Typ"
 
-#: engineexplorer.cpp:180 serviceviewer.cpp:151
+#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
+#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
 #, kde-format
 msgid "Value"
 msgstr "Hodnota"
@@ -139,7 +140,8 @@ msgstr[0] "<%1 pár>"
 msgstr[1] "<%1 páry>"
 msgstr[2] "<%1 párov>"
 
-#: engineexplorer.cpp:542
+#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
+#: engineexplorer.cpp:542 engineexplorer.ui:29
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Prieskumník dátových nástrojov Plasma"
@@ -152,6 +154,48 @@ msgid_plural "%1 Engine - %2 data sources"
 msgstr[0] "%1 Nástroj - 1 dátový zdroj"
 msgstr[1] "%1 Nástroj - %2 dátové zdroje"
 msgstr[2] "%1 Nástroj - %2 dátových zdrojov"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
+#: engineexplorer.ui:50
+#, kde-format
+msgid "Source name"
+msgstr "Názov zdroja"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:75
+#, kde-format
+msgid "Update on demand"
+msgstr "Aktualizovať na požiadanie"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:81
+#, kde-format
+msgid " ms"
+msgstr " ms"
+
+#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:84
+#, kde-format
+msgid "Update Every "
+msgstr "Aktualizovať každých "
+
+#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
+#: engineexplorer.ui:100
+#, kde-format
+msgid "Request Source"
+msgstr "Vyžiadať zdroj"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
+#: engineexplorer.ui:120
+#, kde-format
+msgid "Service for source"
+msgstr "Služba pre zdroj"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
+#: engineexplorer.ui:133
+#, kde-format
+msgid "Request Service for Source"
+msgstr "Vyžiadať službu pre zdroj"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -295,7 +339,8 @@ msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "Nástroj: <b>%1</b>; Zdroj: <b>%2</b>; Služba <b>%3</b>"
 
-#: serviceviewer.cpp:151
+#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
+#: serviceviewer.cpp:151 serviceviewer.ui:73
 #, kde-format
 msgid "Key"
 msgstr "Kľúč"
@@ -336,37 +381,22 @@ msgstr[0] "Jedna aktívna operácia..."
 msgstr[1] "%1 aktívne operácie ..."
 msgstr[2] "%1 aktívnych operácií ..."
 
+#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
+#: serviceviewer.ui:39
+#, kde-format
+msgid "Opera&tion:"
+msgstr "Operácia:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
+#: serviceviewer.ui:86
+#, kde-format
+msgid "Operation count"
+msgstr "Počet operácií"
+
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
 msgstr "Dátové nástroje"
-
-#~ msgid "Source name"
-#~ msgstr "Názov zdroja"
-
-#~ msgid "Update on demand"
-#~ msgstr "Aktualizovať na požiadanie"
-
-#~ msgid " ms"
-#~ msgstr " ms"
-
-#~ msgid "Update Every "
-#~ msgstr "Aktualizovať každých "
-
-#~ msgid "Request Source"
-#~ msgstr "Vyžiadať zdroj"
-
-#~ msgid "Service for source"
-#~ msgstr "Služba pre zdroj"
-
-#~ msgid "Request Service for Source"
-#~ msgstr "Vyžiadať službu pre zdroj"
-
-#~ msgid "Opera&tion:"
-#~ msgstr "Operácia:"
-
-#~ msgid "Operation count"
-#~ msgstr "Počet operácií"
 
 #~ msgid "&lt;1 bit&gt;"
 #~ msgid_plural "&lt;%1 bits&gt;"

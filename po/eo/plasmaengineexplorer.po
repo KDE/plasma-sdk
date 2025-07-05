@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2023-04-14 07:06+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@lists.kde.org>\n"
@@ -60,7 +60,8 @@ msgstr "Datumfonto/Ŝlosilo"
 msgid "Type"
 msgstr "Tipo"
 
-#: engineexplorer.cpp:180 serviceviewer.cpp:151
+#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
+#: engineexplorer.cpp:180 serviceviewer.cpp:151 serviceviewer.ui:78
 #, kde-format
 msgid "Value"
 msgstr "Valoro"
@@ -136,7 +137,8 @@ msgid_plural "<%1 pairs>"
 msgstr[0] "<%1 paro>"
 msgstr[1] "<%1 paroj>"
 
-#: engineexplorer.cpp:542
+#. i18n: ectx: property (text), widget (KTitleWidget, m_title)
+#: engineexplorer.cpp:542 engineexplorer.ui:29
 #, kde-format
 msgid "Plasma DataEngine Explorer"
 msgstr "Plasma datumomotora foliumilo"
@@ -148,6 +150,48 @@ msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
 msgstr[0] "%1 Motoro - 1 datuma fonto"
 msgstr[1] "%1 Motoro - %2 datumaj fontoj"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
+#: engineexplorer.ui:50
+#, kde-format
+msgid "Source name"
+msgstr "Fontnomo"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:75
+#, kde-format
+msgid "Update on demand"
+msgstr "Ĝisdatigi laŭpete"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:81
+#, kde-format
+msgid " ms"
+msgstr "ms"
+
+#. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
+#: engineexplorer.ui:84
+#, kde-format
+msgid "Update Every "
+msgstr "Ĝisdatigi je Ĉiu"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
+#: engineexplorer.ui:100
+#, kde-format
+msgid "Request Source"
+msgstr "Peti Fonton"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
+#: engineexplorer.ui:120
+#, kde-format
+msgid "Service for source"
+msgstr "Servo por fonto"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
+#: engineexplorer.ui:133
+#, kde-format
+msgid "Request Service for Source"
+msgstr "Peti Servon por Fonto"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -288,7 +332,8 @@ msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
 msgstr "Motoro: <b>%1</b>; Fonto: <b>%2</b>; Servo: <b>%3</b>"
 
-#: serviceviewer.cpp:151
+#. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
+#: serviceviewer.cpp:151 serviceviewer.ui:73
 #, kde-format
 msgid "Key"
 msgstr "Klavo"
@@ -328,34 +373,19 @@ msgid_plural "%1 operations active…"
 msgstr[0] "Unu aktiva operacio…"
 msgstr[1] "%1 operacioj aktivaj…"
 
+#. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
+#: serviceviewer.ui:39
+#, kde-format
+msgid "Opera&tion:"
+msgstr "&Operacio:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
+#: serviceviewer.ui:86
+#, kde-format
+msgid "Operation count"
+msgstr "Nombro de operacioj"
+
 #: titlecombobox.h:41
 #, kde-format
 msgid "Data Engines"
 msgstr "Datumomotoroj"
-
-#~ msgid "Source name"
-#~ msgstr "Fontnomo"
-
-#~ msgid "Update on demand"
-#~ msgstr "Ĝisdatigi laŭpete"
-
-#~ msgid " ms"
-#~ msgstr "ms"
-
-#~ msgid "Update Every "
-#~ msgstr "Ĝisdatigi je Ĉiu"
-
-#~ msgid "Request Source"
-#~ msgstr "Peti Fonton"
-
-#~ msgid "Service for source"
-#~ msgstr "Servo por fonto"
-
-#~ msgid "Request Service for Source"
-#~ msgstr "Peti Servon por Fonto"
-
-#~ msgid "Opera&tion:"
-#~ msgstr "&Operacio:"
-
-#~ msgid "Operation count"
-#~ msgstr "Nombro de operacioj"
