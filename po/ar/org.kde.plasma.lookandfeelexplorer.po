@@ -87,12 +87,12 @@ msgstr "الرّخصة:"
 #: package/contents/ui/main.qml:124
 #, kde-format
 msgid "Layout from current Plasma setup"
-msgstr "التّخطيط من إعداد «بلازما» الحاليّ"
+msgstr "التخطيط من إعداد «بلازما» الحاليّ"
 
 #: package/contents/ui/main.qml:129
 #, kde-format
 msgid "Defaults from current setup"
-msgstr "الافتراضيّات من الإعداد الحاليّ"
+msgstr "المبدئيّات من الإعداد الحاليّ"
 
 #: package/contents/ui/main.qml:150
 #, fuzzy, kde-format
@@ -144,7 +144,7 @@ msgstr "تعذّر جلب تخطيط «بلازما» الحاليّ."
 #: src/lnflogic.cpp:93
 #, kde-format
 msgid "Impossible to create the layouts directory in the look and feel package"
-msgstr "تعذّر إنشاء دليل التّخطيطات في حزمة المظهر والملمس"
+msgstr "تعذّر إنشاء دليل التخطيطات في حزمة المظهر والملمس"
 
 #: src/lnflogic.cpp:104
 #, kde-format
@@ -159,7 +159,7 @@ msgstr "كُرّر تخطيط «بلازما» بنجاح"
 #: src/lnflogic.cpp:164
 #, kde-format
 msgid "Defaults config file saved from your current setup"
-msgstr "حُفظ ملفّ ضبط الافتراضيّات من الإعداد الحاليّ"
+msgstr "حُفظ ملفّ ضبط المبدئيّات من الإعداد الحاليّ"
 
 #: src/lnflogic.cpp:487
 #, kde-format
