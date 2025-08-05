@@ -174,7 +174,7 @@ msgstr ""
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:84
 msgid "Layout:"
-msgstr "التّخطيط:"
+msgstr "التخطيط:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:98
 #, fuzzy
