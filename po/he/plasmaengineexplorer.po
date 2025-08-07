@@ -6,20 +6,21 @@
 # Diego Iastrubni <elcuco@kde.org>, 2008.
 # Elkana Bardugo <ttv200@gmail.com>, 2016.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+# SPDX-FileCopyrightText: 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-05 05:54+0000\n"
-"PO-Revision-Date: 2017-05-16 06:57-0400\n"
-"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
-"Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2025-08-06 18:20+0300\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Zanata 3.9.6\n"
+"X-Generator: Poedit 3.6\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -34,17 +35,17 @@ msgstr "kde-l10n-he@kde.org"
 #: engineexplorer.cpp:45
 #, kde-format
 msgid "Expand All"
-msgstr "הרחב הכל"
+msgstr "הרחבה של הכול"
 
 #: engineexplorer.cpp:46
 #, kde-format
 msgid "Collapse All"
-msgstr "צמצם הכל"
+msgstr "צמצום של הכול"
 
 #: engineexplorer.cpp:48 main.cpp:56
 #, kde-format
 msgid "Plasma Engine Explorer"
-msgstr "מנוע הדפדפן של Plasma"
+msgstr "סייר המנועים של פלזמה"
 
 #: engineexplorer.cpp:77
 #, kde-format
@@ -52,10 +53,9 @@ msgid "Search"
 msgstr "חיפוש"
 
 #: engineexplorer.cpp:180
-#, fuzzy, kde-format
-#| msgid "DataSource"
+#, kde-format
 msgid "DataSource/Key"
-msgstr "מקור מידע"
+msgstr "מקור נתונים/מפתח"
 
 #: engineexplorer.cpp:180
 #, kde-format
@@ -71,35 +71,35 @@ msgstr "ערך"
 #: engineexplorer.cpp:303
 #, kde-format
 msgid "Get associated service"
-msgstr "קבל את השירות המשוייך"
+msgstr "קבלת השירות המשויך"
 
 #: engineexplorer.cpp:304
 #, kde-format
 msgid "Get associated model"
-msgstr "קבל מודל קשור"
+msgstr "קבלת מודל קשור"
 
 #: engineexplorer.cpp:305
 #, kde-format
 msgid "Update source now"
-msgstr "עדכן מקור כעת"
+msgstr "עדכון מקור כעת"
 
 #: engineexplorer.cpp:306
 #, kde-format
 msgid "Remove source"
-msgstr "הסר מקור"
+msgstr "הסרת מקור"
 
 #: engineexplorer.cpp:328
 #, kde-format
 msgid "<1 bit>"
 msgid_plural "<%1 bits>"
-msgstr[0] "<ביט אחד>"
-msgstr[1] "<%1 ביטים>"
+msgstr[0] "<סיבית>"
+msgstr[1] "<%1 סיביות>"
 
 #: engineexplorer.cpp:337
 #, kde-format
 msgid "<1 byte>"
 msgid_plural "<%1 bytes>"
-msgstr[0] "<בית אחד>"
+msgstr[0] "<בית>"
 msgstr[1] "<%1 בתים>"
 
 #: engineexplorer.cpp:359
@@ -107,7 +107,7 @@ msgstr[1] "<%1 בתים>"
 msgid "<1 item>"
 msgid_plural "<%1 items>"
 msgstr[0] "<פריט אחד>"
-msgstr[1] "<%1 פריטין>"
+msgstr[1] "<%1 פריטים>"
 
 #: engineexplorer.cpp:439
 #, kde-format
@@ -124,35 +124,33 @@ msgid "<not displayable>"
 msgstr "<לא ניתן להצגה>"
 
 #: engineexplorer.cpp:499 engineexplorer.cpp:514
-#, fuzzy, kde-format
-#| msgid "<1 item>"
-#| msgid_plural "<%1 items>"
+#, kde-format
 msgctxt "Length of the list"
 msgid "<%1 item>"
 msgid_plural "<%1 items>"
-msgstr[0] "<פריט אחד>"
-msgstr[1] "<%1 פריטין>"
+msgstr[0] "<פריט>"
+msgstr[1] "<%1 פריטים>"
 
 #: engineexplorer.cpp:529
 #, kde-format
 msgctxt "Size of the map"
 msgid "<%1 pair>"
 msgid_plural "<%1 pairs>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<צמד>"
+msgstr[1] "<%1 צמדים>"
 
 #. i18n: ectx: property (text), widget (KTitleWidget, m_title)
 #: engineexplorer.cpp:542 engineexplorer.ui:29
 #, kde-format
 msgid "Plasma DataEngine Explorer"
-msgstr "דפדפן המנוע המידע של Plasma"
+msgstr "סייר מנועי הנתונים של פלזמה"
 
 #: engineexplorer.cpp:546
 #, kde-format
 msgctxt "The name of the engine followed by the number of data sources"
 msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
-msgstr[0] "מנוע %1 - מקור מידע אחד"
+msgstr[0] "מנוע %1 - מקור מידע"
 msgstr[1] "מנוע %1 - ‏%2 מקורות מידע"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
@@ -165,7 +163,7 @@ msgstr "שם המקור"
 #: engineexplorer.ui:75
 #, kde-format
 msgid "Update on demand"
-msgstr "עדכן לפי דרישה"
+msgstr "עדכון לפי דרישה"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
 #: engineexplorer.ui:81
@@ -177,7 +175,7 @@ msgstr " אלפיות השניה"
 #: engineexplorer.ui:84
 #, kde-format
 msgid "Update Every "
-msgstr "עדכון כל "
+msgstr "לעדכן כל "
 
 #. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
 #: engineexplorer.ui:100
@@ -200,17 +198,17 @@ msgstr "בקש שירות למקור"
 #: ktreeviewsearchline.cpp:423
 #, kde-format
 msgid "Search Columns"
-msgstr "חיפוש בטורים"
+msgstr "חיפוש בעמודות"
 
 #: ktreeviewsearchline.cpp:425
 #, kde-format
 msgid "All Visible Columns"
-msgstr "כל הטורים הנראים"
+msgstr "כל העמודות הגלויות"
 
 #: ktreeviewsearchline.cpp:587
 #, kde-format
 msgid "S&earch:"
-msgstr "ח&יפוש:"
+msgstr "&חיפוש:"
 
 #: main.cpp:35
 #, kde-format
@@ -220,27 +218,27 @@ msgstr "אין תיאור זמין"
 #: main.cpp:58
 #, kde-format
 msgid "Explore the data published by Plasma DataEngines"
-msgstr "עיין במידע המופץ על ידי מנועי המידע של Plasma"
+msgstr "עיון בנתונים שמופצים על ידי מנועי הנתונים של פלזמה"
 
 #: main.cpp:60
 #, kde-format
 msgid "(c) 2006, The KDE Team"
-msgstr "‎(c) 2006, הצוות של KDE"
+msgstr "‏(c) 2006, צוות KDE"
 
 #: main.cpp:61
 #, kde-format
 msgid "Aaron J. Seigo"
-msgstr "Aaron J. Seigo"
+msgstr "אהרון ג׳. סייגו"
 
 #: main.cpp:61
 #, kde-format
 msgid "Author and maintainer"
-msgstr "עורך ומתחזק"
+msgstr "יוצר ומתחזק"
 
 #: main.cpp:68
 #, kde-format
 msgid "Displays a list of known engines and their descriptions"
-msgstr "מציג רשימת מנועים ידועים ותיאורם"
+msgstr "הצגת רשימת מנועים ידועים ותיאורם"
 
 #: main.cpp:69
 #, kde-format
@@ -255,17 +253,17 @@ msgstr "הרוחב הרצוי בפיקסלים"
 #: main.cpp:71
 #, kde-format
 msgid "The desired x position in pixels"
-msgstr "מיקום ה־x הרצוי בפיקסלים"
+msgstr "המקום הרצוי בציר x בפיקסלים"
 
 #: main.cpp:72
 #, kde-format
 msgid "The desired y position in pixels"
-msgstr "מיקום ה־y הרצוי בפיקסלים"
+msgstr "המקום הרצוי בציר y בפיקסלים"
 
 #: main.cpp:73
 #, kde-format
 msgid "The data engine to use"
-msgstr "מנוע המידע לשימוש"
+msgstr "מנוע הנתונים לשימוש"
 
 #: main.cpp:74
 #, kde-format
@@ -275,7 +273,7 @@ msgstr "המקור לבקשה"
 #: main.cpp:75
 #, kde-format
 msgid "Update interval in milliseconds"
-msgstr "תדירות העדכון באלפיות השניה"
+msgstr "תדירות העדכון במילישניות"
 
 #: main.cpp:77
 #, kde-format
@@ -283,21 +281,21 @@ msgid ""
 "Only show engines associated with the parent application; maps to the X-KDE-"
 "ParentApp entry in the DataEngine's .desktop file."
 msgstr ""
-"מראה רק מנועים הקשורים עם יישום האב; maps to the X-KDE-ParentApp entry in "
-"the DataEngine's .desktop file."
+"הצגת מנועים שמשויכים ליישום ההורה בלבד, מתמפה לרשומת X-KDE-ParentApp במנוע "
+"הנתונים של קובץ ה־‎.dekstop."
 
 #: modelviewer.cpp:85 serviceviewer.cpp:51
 #, kde-format
 msgctxt "Plasma engine with unknown name"
 msgid "Unknown"
-msgstr "לא ידוע "
+msgstr "לא ידוע"
 
 #: modelviewer.cpp:98
 #, kde-format
 msgid ""
 "No valid model was returned. Verify that a model is available for this "
 "source."
-msgstr ""
+msgstr "לא הוחזר דגם תקף. נא לוודא שהדגם זמין למקור הזה."
 
 #: modelviewer.cpp:103
 #, kde-format
@@ -314,14 +312,14 @@ msgstr "התחל פעולה"
 #, kde-format
 msgctxt "Plasma service with unknown name"
 msgid "Unknown"
-msgstr "לא ידוע "
+msgstr "לא ידוע"
 
 #: serviceviewer.cpp:67
 #, kde-format
 msgid ""
 "No valid service was returned. Verify that a service is available for this "
 "source."
-msgstr ""
+msgstr "לא הוחזר שירות תקף. נא לוודא שהשירות זמין למקור הזה."
 
 #: serviceviewer.cpp:72
 #, kde-format
@@ -330,10 +328,10 @@ msgid "%1 Service Explorer"
 msgstr "סייר שירות %1"
 
 #: serviceviewer.cpp:75
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
-msgstr "מנוע מידע: <b>%1</b>; מקור:<b>%2</b>; שירות <b>%3</b>"
+msgstr "מנוע: <b>%1</b>; מקור: <b>%2</b>; שירות: <b>%3</b>"
 
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
 #: serviceviewer.cpp:151 serviceviewer.ui:73
@@ -342,11 +340,13 @@ msgid "Key"
 msgstr "מפתח"
 
 #: serviceviewer.cpp:185
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> failed. <p>The error was: "
 "<b>'%3: %4'</b></p>"
-msgstr "הפעילות %1 עם יעד %2 נכשלה. השגיאה הייתה <p><b>%3</b>"
+msgstr ""
+"הפעילות <b>’%1‚</b> מול היעד <b>’%2‚</b> נכשלה. <p>השגיאה הייתה: <b>’%3: "
+"%4‚</b></p>"
 
 #: serviceviewer.cpp:191 serviceviewer.cpp:204
 #, kde-format
@@ -356,23 +356,23 @@ msgstr "תוצאת הפעילות"
 #: serviceviewer.cpp:195
 #, kde-format
 msgid "No response from job."
-msgstr "אין תגובה מהפעילות"
+msgstr "אין תגובה מהמשימה."
 
 #: serviceviewer.cpp:199
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> returned successfully. "
 "<p>The result was: <b>'%3'</b></p>"
-msgstr "הפעילות %1 עם יעד %2 חזרה בהצלחה. התוצאה הייתה: <p><b>%3</b>"
+msgstr ""
+"הפעילות <b>’%1‚</b> מול היעד <b>’%2‚</b> הסתיימה כראוי. <p>התוצאה הייתה: "
+"<b>’%3‚</b></p>"
 
 #: serviceviewer.cpp:226
-#, fuzzy, kde-format
-#| msgid "One active operation..."
-#| msgid_plural "%1 operations active..."
+#, kde-format
 msgid "One active operation…"
 msgid_plural "%1 operations active…"
-msgstr[0] "פעילות אחת פעילה..."
-msgstr[1] "%1 פעילויות פעילות..."
+msgstr[0] "פעילות אחת רצה…"
+msgstr[1] "%1 פעילויות רצות…"
 
 #. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
 #: serviceviewer.ui:39
@@ -384,7 +384,7 @@ msgstr "&פעולה:"
 #: serviceviewer.ui:86
 #, kde-format
 msgid "Operation count"
-msgstr "מספר הפעולה"
+msgstr "כמות הפעולות"
 
 #: titlecombobox.h:41
 #, kde-format
