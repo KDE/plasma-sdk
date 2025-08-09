@@ -23,6 +23,7 @@
   <name xml:lang="fi">Plasmoid Viewer</name>
   <name xml:lang="fr">Afficheur de composants graphiques</name>
   <name xml:lang="gl">Visor de trebellos</name>
+  <name xml:lang="he">מציג Plasmoids</name>
   <name xml:lang="hu">Plasmoidmegjelenítő</name>
   <name xml:lang="ia">Visor de plasmoid</name>
   <name xml:lang="id">Plasmoid Viewer</name>
@@ -63,6 +64,7 @@
   <summary xml:lang="fi">Plasma-sovelmien testaustyökalu</summary>
   <summary xml:lang="fr">Outil de test pour les applets Plasma</summary>
   <summary xml:lang="gl">Ferramenta de probas para trebellos de Plasma</summary>
+  <summary xml:lang="he">כלי בדיקה ליישומוניות פלזמה</summary>
   <summary xml:lang="hu">Tesztelő eszköz Plasma kisalkalmazásokhoz</summary>
   <summary xml:lang="ia">Instrumento de essayar pro applets de Plasma</summary>
   <summary xml:lang="id">Alat pengujian untuk applet Plasma</summary>
@@ -105,6 +107,7 @@
     <p xml:lang="fi">Plasmoid Viewer on graafinen työkalu, jolla kehittäjät voivat testata Plasma-sovelmia.</p>
     <p xml:lang="fr">L'afficheur de composants graphiques est un outil graphique qui permet aux développeurs de tester des applets Plasma.</p>
     <p xml:lang="gl">O visor de trebellos é unha ferramenta gráfica que permite aos desenvolvedores probar trebellos de Plasma.</p>
+    <p xml:lang="he">מציג הפלזמואידים הוא כלי גרפי שמאפשר למפתחים לבדוק יישומוניות של פלזמה.</p>
     <p xml:lang="hu">A Plasmoidmegjelenítő egy grafikus segédprogram fejlesztőknek Plasma kisalkalmazások teszteléséhez.</p>
     <p xml:lang="ia">Plasmoid Viewer (Visor de Plasmoid) es un instrumento graphic permettente a disveloppatores de testar applets de Plasma.</p>
     <p xml:lang="id">Plasmoid Viewer adalah sebuah alat grafik yang memungkinkan pengembang untuk menguji applet-applet Plasma.</p>
