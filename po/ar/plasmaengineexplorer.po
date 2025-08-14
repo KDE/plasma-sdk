@@ -307,7 +307,7 @@ msgid ""
 "Only show engines associated with the parent application; maps to the X-KDE-"
 "ParentApp entry in the DataEngine's .desktop file."
 msgstr ""
-"فقط تعرض المحركات المتصلة بالتطبيقات الوالدة ، تربط إلى مدخلة  X-KDE-"
+"فقط تعرض المحركات المتصلة بالتطبيقات الوالدة، تربط إلى مدخلة  X-KDE-"
 "ParentApp في ملف .desktop لمحرك البيانات."
 
 #: modelviewer.cpp:85 serviceviewer.cpp:51
