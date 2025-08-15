@@ -315,7 +315,7 @@ msgstr "اسم السّمة:"
 #: package/contents/ui/MetadataEditor.qml:86
 #, kde-format
 msgid "This theme name already exists"
-msgstr "اسم السّمة هذا موجود بالفعل"
+msgstr "اسم السّمة هذا موجود فعلًا"
 
 #: package/contents/ui/MetadataEditor.qml:95
 #, kde-format
