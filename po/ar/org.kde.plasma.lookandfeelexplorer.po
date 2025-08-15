@@ -192,7 +192,7 @@ msgstr "اسم ملحقة السّمة:"
 #: qml/MetadataEditor.qml:55
 #, kde-format
 msgid "This theme plugin name already exists"
-msgstr "اسم ملحقة السّمة هذا موجود بالفعل"
+msgstr "اسم ملحقة السّمة هذا موجود فعلًا"
 
 #: qml/MetadataEditor.qml:65
 #, kde-format
