@@ -127,10 +127,9 @@ msgid "Click to open an image"
 msgstr "Klikněte zde pro otevření obrázku"
 
 #: qml/Main.qml:171
-#, fuzzy, kde-format
-#| msgid "Plugin name:"
+#, kde-format
 msgid "Plugin name: %1"
-msgstr "Název modulu:"
+msgstr ""
 
 #: qml/Main.qml:174
 #, kde-format
@@ -206,9 +205,3 @@ msgstr "OK "
 #, kde-format
 msgid "Cancel"
 msgstr "Zrušit"
-
-#~ msgid "Look And Feel"
-#~ msgstr "Vzhled a chování"
-
-#~ msgid "Version:"
-#~ msgstr "Verze:"
