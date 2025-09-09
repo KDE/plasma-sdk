@@ -38,7 +38,6 @@
                 "Name[sv]": "Marco Martin",
                 "Name[tr]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
-                "Name[x-test]": "xxMarco Martinxx",
                 "Name[zh_CN]": "Marco Martin",
                 "Name[zh_TW]": "Marco Martin"
             }
@@ -76,7 +75,6 @@
         "Description[sv]": "Plasmoid-visningsskal",
         "Description[tr]": "PlasmoidViewer Kabuğu",
         "Description[uk]": "Оболонка перегляду плазмоїдів",
-        "Description[x-test]": "xxPlasmoidViewer Shellxx",
         "Description[zh_CN]": "Plasmoid 查看器外壳",
         "Description[zh_TW]": "Plasmoid 檢視器殼層",
         "Id": "org.kde.plasmoidviewershell",
@@ -122,7 +120,6 @@
         "Name[sv]": "Plasmoid-visningsskal",
         "Name[tr]": "PlasmoidViewerShell",
         "Name[uk]": "Оболонка перегляду плазмоїдів",
-        "Name[x-test]": "xxPlasmoidViewerShellxx",
         "Name[zh_CN]": "Plasmoid 查看器外壳",
         "Name[zh_TW]": "PlasmoidViewerShell",
         "Website": "https://kde.org/plasma-desktop"
