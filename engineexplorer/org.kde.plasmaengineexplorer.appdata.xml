@@ -44,7 +44,6 @@
   <name xml:lang="tg">Роҳнамои низоми Плазма</name>
   <name xml:lang="tr">Plasma İşletkesi Gezgini</name>
   <name xml:lang="uk">Навігатор рушіїв Плазми</name>
-  <name xml:lang="x-test">xxPlasma Engine Explorerxx</name>
   <name xml:lang="zh-CN">Plasma 引擎浏览器</name>
   <name xml:lang="zh-TW">Plasma 引擎瀏覽器</name>
   <summary>Explorer for the data published by Plasma Data Engines</summary>
@@ -85,7 +84,6 @@
   <summary xml:lang="tg">Роҳнамо барои иттилооти мунташир аз низомҳои иттилоотии Плазма</summary>
   <summary xml:lang="tr">Plasma Veri İşletkeleri tarafından yayımlanan veri için gezgin</summary>
   <summary xml:lang="uk">Навігатор для даних, оприлюднених рушіями даних Плазми</summary>
-  <summary xml:lang="x-test">xxExplorer for the data published by Plasma Data Enginesxx</summary>
   <summary xml:lang="zh-CN">Plasma 数据引擎发布的数据的浏览器</summary>
   <summary xml:lang="zh-TW">用來瀏覽 Plamsa 資料引擎發佈之資料的瀏覽器</summary>
   <description>
@@ -127,7 +125,6 @@
     <p xml:lang="tg">Роҳнамои низоми Плазма абзори графикиест, ки ба барномасозон барои санҷидани Plasma DataEngines бе навиштани зербарномаи Плазма имкон медиҳад.</p>
     <p xml:lang="tr">Plasma İşletkesi Gezgini, geliştiricilerin bir Plasma uygulamacığı yazmadan Plasma Veri İşletkelerine göz atabilmeleri için geliştirilmiş grafik arabirimli bir araçtır.</p>
     <p xml:lang="uk">Навігатор рушіїв Плазми — це графічний інструмент, який надає розробникам можливість перевірити рушії Плазми без написання аплету Плазми.</p>
-    <p xml:lang="x-test">xxPlasma Engine Explorer is a graphical tool allowing developers to test Plasma DataEngines without writing a Plasma applet.xx</p>
     <p xml:lang="zh-CN">Plasma 引擎浏览器是一款面向开发者的图形工具，用于在无需编写 Plasma 小程序的情况下测试 Plasma 数据引擎。</p>
     <p xml:lang="zh-TW">Plasma 引擎瀏覽器是個圖形化工具，能讓開發者不用寫 Plasma 元件也能測試 Plasma DataEngines。</p>
   </description>
