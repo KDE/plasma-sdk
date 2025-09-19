@@ -6,6 +6,7 @@
   <project_license>GPL-2.0+</project_license>
   <content_rating type="oars-1.0"/>
   <name>Plasmoid Viewer</name>
+  <name xml:lang="ar">عارض البلازمويدات</name>
   <name xml:lang="az">Plasmoidə baxış</name>
   <name xml:lang="be">Прагляд плазмоідаў</name>
   <name xml:lang="bg">Преглед на уиджети</name>
@@ -46,6 +47,7 @@
   <name xml:lang="zh-CN">Plasma 小程序查看器</name>
   <name xml:lang="zh-TW">Plasmoid 檢視器</name>
   <summary>Testing tool for Plasma applets</summary>
+  <summary xml:lang="ar">أداة اختبار لبلازمويدات بلازما</summary>
   <summary xml:lang="az">Plasma əlavələrinin test olunması aləti</summary>
   <summary xml:lang="be">Інструмент для тэставання аплетаў Plasma</summary>
   <summary xml:lang="bg">Инструмент за тестване на аплети на Plasma</summary>
@@ -88,6 +90,7 @@
   <summary xml:lang="zh-TW">用來測試 Plasma 元件的測試工具</summary>
   <description>
     <p>Plasmoid Viewer is a graphical tool allowing developers to test Plasma applets.</p>
+    <p xml:lang="ar">عارض بلازمويدات هو أداة رسومية تسمح للمطورين باختبار تطبيقات بلازما الصغيرة.</p>
     <p xml:lang="az">Plasmoidlərə baxış vasitəsi, tərtibatçılara Plasma əlavələrinin test olunmasına imkan verən qrafik alətidir.</p>
     <p xml:lang="be">Сродак прагляду плазмоідаў - графічны інструмент, які дазваляе распрацоўнікам тэставаць аплеты Plasma.</p>
     <p xml:lang="bg">Преглед на уиджети е графичен инструмент за тестване на аплети на Plasma.</p>
