@@ -5,6 +5,7 @@
             {
                 "Email": "mart@kde.org",
                 "Name": "Marco Martin",
+                "Name[ar]": "ماركو مارتن",
                 "Name[ast]": "Marco Martin",
                 "Name[be]": "Marco Martin",
                 "Name[bg]": "Marco Martin",
@@ -43,6 +44,7 @@
             }
         ],
         "Description": "PlasmoidViewer Shell",
+        "Description[ar]": "صدفة عارض بلازمويدات",
         "Description[be]": "Абалонка PlasmoidViewer",
         "Description[bg]": "Обвивка на PlasmoidViewer",
         "Description[ca@valencia]": "Intèrpret d'ordres del visor de plasmoides",
@@ -80,6 +82,7 @@
         "Id": "org.kde.plasmoidviewershell",
         "License": "GPL-2.0+",
         "Name": "PlasmoidViewerShell",
+        "Name[ar]": "صدفة عارض بلازمويدات",
         "Name[az]": "PlasmoidViewer üzlüyü",
         "Name[be]": "PlasmoidViewerShell",
         "Name[bg]": "PlasmoidViewerShell",

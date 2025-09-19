@@ -1,6 +1,7 @@
 {
     "KPlugin": {
         "Description": "Invokes Iconexplorer icon picker",
+        "Description[ar]": "يستدعي منتقي الأيقونة Iconexplorer",
         "Description[be]": "Выклікае сродак выбару значкоў Iconexplorer",
         "Description[bg]": "Извиква Iconexplorer за избор на икони",
         "Description[ca@valencia]": "Invoca el selector d'icones Iconexplorer",
@@ -34,6 +35,7 @@
         "Description[zh_CN]": "调用 Iconexplorer 图标选择器",
         "Description[zh_TW]": "呼叫 Iconexplorer 圖示挑選器",
         "Name": "Icon Picker",
+        "Name[ar]": "منتقي الأيقونة",
         "Name[az]": "İkon seçimi",
         "Name[be]": "Выбар значкоў",
         "Name[bg]": "Избор на икони",
