@@ -1,21 +1,23 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-#
 # Safa Alfulaij <safa1996alfulaij@gmail.com>, 2017.
+# SPDX-FileCopyrightText: 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-05 02:55+0000\n"
-"PO-Revision-Date: 2017-12-01 08:11+0300\n"
-"Last-Translator: Safa Alfulaij <safa1996alfulaij@gmail.com>\n"
-"Language-Team: Arabic <doc@arabeyes.org>\n"
+"PO-Revision-Date: 2025-09-18 11:28+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: ar\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -33,10 +35,9 @@ msgid "Look And Feel"
 msgstr "المظهر والملمس"
 
 #: package/contents/ui/main.qml:47
-#, fuzzy, kde-format
-#| msgid "New Theme"
+#, kde-format
 msgid "New Theme…"
-msgstr "سمة جديدة"
+msgstr "سمة جديدة…"
 
 #: package/contents/ui/main.qml:64
 #, kde-format
@@ -44,10 +45,9 @@ msgid "Open Theme Folder"
 msgstr "افتح مجلّد السّمات"
 
 #: package/contents/ui/main.qml:93
-#, fuzzy, kde-format
-#| msgid "Plugin Name:"
+#, kde-format
 msgid "Plugin name:"
-msgstr "اسم الملحقة:"
+msgstr "اسم الإضافة:"
 
 #: package/contents/ui/main.qml:96
 #, kde-format
@@ -95,10 +95,9 @@ msgid "Defaults from current setup"
 msgstr "المبدئيّات من الإعداد الحاليّ"
 
 #: package/contents/ui/main.qml:150
-#, fuzzy, kde-format
-#| msgid "click to open an image"
+#, kde-format
 msgid "Click to open an image"
-msgstr "انقر لفتح صورة"
+msgstr "انقر لتفتح "
 
 #: package/contents/ui/main.qml:186
 #, kde-format
@@ -126,10 +125,9 @@ msgid "Theme Name:"
 msgstr "اسم السّمة:"
 
 #: package/contents/ui/MetadataEditor.qml:109
-#, fuzzy, kde-format
-#| msgid "OK"
+#, kde-format
 msgid "OK "
-msgstr "حسنًا"
+msgstr "حسنًا "
 
 #: package/contents/ui/MetadataEditor.qml:115
 #, kde-format

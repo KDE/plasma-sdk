@@ -4,21 +4,22 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Youssef Chahibi <chahibi@gmail.com>, 2007.
 # Abdulaziz AlSharif <a.a-a.s@hotmail.com>, 2007.
-# zayed <zayed.alsaidi@gmail.com>, 2008.
+# SPDX-FileCopyrightText: 2008, 2025 zayed <zayed.alsaidi@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-05 05:54+0000\n"
-"PO-Revision-Date: 2008-12-20 20:58+0400\n"
-"Last-Translator: zayed <zayed.alsaidi@gmail.com>\n"
-"Language-Team: Arabic <linuxac-kde-arabic-team@googlegroups.com>\n"
+"PO-Revision-Date: 2025-09-18 11:43+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: ar\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -51,10 +52,9 @@ msgid "Search"
 msgstr "ابحث"
 
 #: engineexplorer.cpp:180
-#, fuzzy, kde-format
-#| msgid "DataSource"
+#, kde-format
 msgid "DataSource/Key"
-msgstr "مصدر البيانات"
+msgstr "مصدر البيانات/المفتاح"
 
 #: engineexplorer.cpp:180
 #, kde-format
@@ -73,10 +73,9 @@ msgid "Get associated service"
 msgstr "احصل على الخدمة المرتبطة"
 
 #: engineexplorer.cpp:304
-#, fuzzy, kde-format
-#| msgid "Get associated service"
+#, kde-format
 msgid "Get associated model"
-msgstr "احصل على الخدمة المرتبطة"
+msgstr "احصل على النموذج المرتبط"
 
 #: engineexplorer.cpp:305
 #, kde-format
@@ -191,35 +190,33 @@ msgstr "حدث عند الطلب"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
 #: engineexplorer.ui:81
-#, fuzzy, kde-format
-#| msgid "ms"
+#, kde-format
 msgid " ms"
-msgstr "م.ث"
+msgstr " م‌ث"
 
 #. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
 #: engineexplorer.ui:84
-#, fuzzy, kde-format
-#| msgid "Update every "
+#, kde-format
 msgid "Update Every "
 msgstr "حدّث كل"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
 #: engineexplorer.ui:100
-#, fuzzy, kde-format
+#, kde-format
 msgid "Request Source"
-msgstr "اطلب"
+msgstr "طلب المصدر"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
 #: engineexplorer.ui:120
-#, fuzzy, kde-format
+#, kde-format
 msgid "Service for source"
-msgstr "أزل المصدر"
+msgstr "خدمة المصدر"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
 #: engineexplorer.ui:133
-#, fuzzy, kde-format
+#, kde-format
 msgid "Request Service for Source"
-msgstr "أزل المصدر"
+msgstr "طلب خدمة للمصدر"
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -321,7 +318,7 @@ msgstr "مجهول"
 msgid ""
 "No valid model was returned. Verify that a model is available for this "
 "source."
-msgstr ""
+msgstr "لم يُرجع نموذج صالح. تحقق من توفر نموذج لهذا المصدر."
 
 #: modelviewer.cpp:103
 #, fuzzy, kde-format
@@ -404,10 +401,9 @@ msgstr[5] "%1 عملية نشطة..."
 
 #. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
 #: serviceviewer.ui:39
-#, fuzzy, kde-format
-#| msgid "&Operation:"
+#, kde-format
 msgid "Opera&tion:"
-msgstr "ال&عمليات:"
+msgstr "ال&عملية:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
 #: serviceviewer.ui:86

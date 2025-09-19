@@ -1,66 +1,66 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-#
 # Safa Alfulaij <safa1996alfulaij@gmail.com>, 2016.
+# SPDX-FileCopyrightText: 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:47+0000\n"
-"PO-Revision-Date: 2016-08-31 12:04+0300\n"
-"Last-Translator: Safa Alfulaij <safa1996alfulaij@gmail.com>\n"
-"Language-Team: Arabic <doc@arabeyes.org>\n"
+"PO-Revision-Date: 2025-09-18 11:27+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: ar\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: contents/applet/AppletError.qml:40
 msgid "Sorry! There was an error loading %1."
-msgstr ""
+msgstr "للأسف! حصل خطأ أثناء تحميل %1."
 
 #: contents/applet/AppletError.qml:48
 msgid "Copy Error Details to Clipboard"
-msgstr ""
+msgstr "انسخ تفاصيل الخطأ إلى الحافظة"
 
 #: contents/applet/CompactApplet.qml:70
 msgid "Open %1"
-msgstr ""
+msgstr "افتح %1"
 
 #: contents/configuration/AboutPlugin.qml:20
 #: contents/configuration/AppletConfiguration.qml:248
 msgid "About"
-msgstr ""
+msgstr "عن"
 
 #: contents/configuration/AboutPlugin.qml:46
 msgid "Send an email to %1"
-msgstr ""
+msgstr "أرسِل بريد الإلكتروني إلى %1"
 
 #: contents/configuration/AboutPlugin.qml:95
 msgid "Copyright"
-msgstr ""
+msgstr "حقوق النسخ"
 
 #: contents/configuration/AboutPlugin.qml:115
 msgid "License:"
-msgstr ""
+msgstr "الرّخصة:"
 
 #: contents/configuration/AboutPlugin.qml:128
 msgid "Authors"
-msgstr ""
+msgstr "المؤلفين"
 
 #: contents/configuration/AboutPlugin.qml:138
 msgid "Credits"
-msgstr ""
+msgstr "إشادات"
 
 #: contents/configuration/AboutPlugin.qml:149
 msgid "Translators"
-msgstr ""
+msgstr "المترجمون"
 
 #: contents/configuration/AppletConfiguration.qml:56
-#, fuzzy
-#| msgid "Keyboard shortcuts"
 msgid "Keyboard Shortcuts"
 msgstr "اختصارات لوحة المفاتيح"
 
@@ -88,7 +88,7 @@ msgstr "ألغِ"
 
 #: contents/configuration/ConfigCategoryDelegate.qml:28
 msgid "Open configuration page"
-msgstr ""
+msgstr "افتح صفحة الضبط"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:19
 msgid "Left-Button"
@@ -103,14 +103,12 @@ msgid "Middle-Button"
 msgstr "الزّرّ الأوسط"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:22
-#, fuzzy
-#| msgid "Left-Button"
 msgid "Back-Button"
-msgstr "الزّرّ الأيسر"
+msgstr "زرّ العودة"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:23
 msgid "Forward-Button"
-msgstr ""
+msgstr "زرّ التّقدّم"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:25
 msgid "Vertical-Scroll"
@@ -134,12 +132,12 @@ msgstr "Alt"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:31
 msgid "Meta"
-msgstr ""
+msgstr "Meta"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:73
 msgctxt "Concatenation sign for shortcuts, e.g. Ctrl+Shift"
 msgid "+"
-msgstr ""
+msgstr "+"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:153
 #: contents/configuration/MouseEventInputButton.qml:15
@@ -148,11 +146,11 @@ msgstr "أضف إجراء"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:27
 msgid "Appearance"
-msgstr ""
+msgstr "المظهر"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:69
 msgid "Layout changes have been restricted by the system administrator"
-msgstr ""
+msgstr "قُيد تغييرات التخطيط من قبل مسؤول النظام "
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:84
 msgid "Layout:"
@@ -164,25 +162,23 @@ msgstr "نوع الخلفيّة:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:116
 msgid "Get New Plugins..."
-msgstr ""
+msgstr "احصل على ملحقات جديدة…"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:128
 msgid "Layout changes must be applied before other changes can be made"
-msgstr ""
+msgstr "يجب تطبيق تغييرات التخطيط قبل إجراء تغييرات أخرى"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:134
-#, fuzzy
-#| msgid "Apply"
 msgid "Apply now"
-msgstr "طبّق"
+msgstr "طبّق الآن"
 
 #: contents/configuration/ConfigurationShortcuts.qml:18
 msgid "Shortcuts"
-msgstr ""
+msgstr "الاختصارات"
 
 #: contents/configuration/ConfigurationShortcuts.qml:28
 msgid "This shortcut will activate the applet as though it had been clicked."
-msgstr ""
+msgstr "سيؤدي هذا الاختصار إلى تنشيط التطبيق الصغير كما لو نُقر عليه."
 
 #: contents/configuration/ContainmentConfiguration.qml:33
 msgid "Wallpaper"
@@ -198,63 +194,63 @@ msgstr "أدخل هنا"
 
 #: contents/views/SdkButtons.qml:47
 msgid "FormFactors"
-msgstr ""
+msgstr "الشكل"
 
 #: contents/views/SdkButtons.qml:55
 msgid "Planar"
-msgstr ""
+msgstr "مستوى"
 
 #: contents/views/SdkButtons.qml:59
 msgid "Vertical"
-msgstr ""
+msgstr "رأسي"
 
 #: contents/views/SdkButtons.qml:63
 msgid "Horizontal"
-msgstr ""
+msgstr "أفقي"
 
 #: contents/views/SdkButtons.qml:67
 msgid "Mediacenter"
-msgstr ""
+msgstr "مركز وسائط"
 
 #: contents/views/SdkButtons.qml:71
 msgid "Application"
-msgstr ""
+msgstr "التطبيق"
 
 #: contents/views/SdkButtons.qml:78
 msgid "Location"
-msgstr ""
+msgstr "المكان"
 
 #: contents/views/SdkButtons.qml:92
 msgid "Floating"
-msgstr ""
+msgstr "عائم"
 
 #: contents/views/SdkButtons.qml:96
 msgid "Desktop"
-msgstr ""
+msgstr "سطح المكتب"
 
 #: contents/views/SdkButtons.qml:100
 msgid "Fullscreen"
-msgstr ""
+msgstr "ملء الشّاشة"
 
 #: contents/views/SdkButtons.qml:104
 msgid "Top Edge"
-msgstr ""
+msgstr "الحافّة العلويّة"
 
 #: contents/views/SdkButtons.qml:108
 msgid "Bottom Edge"
-msgstr ""
+msgstr "الحافّة السفليّة"
 
 #: contents/views/SdkButtons.qml:112
 msgid "Left Edge"
-msgstr ""
+msgstr "الحافّة اليسرى"
 
 #: contents/views/SdkButtons.qml:116
 msgid "Right Edge"
-msgstr ""
+msgstr "الحافّة اليمنى"
 
 #: contents/views/SdkButtons.qml:135
 msgid "Configure Containment"
-msgstr ""
+msgstr "اضبط الحاوية"
 
 #~ msgid "Layout cannot be changed whilst widgets are locked"
 #~ msgstr "لا يمكن تغير التّخطيط والودجات مقفلة"
