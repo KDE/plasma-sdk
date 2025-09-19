@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Explore and edit your Plasma Global Themes
+Comment[ar]=استكشف وحرر سمات البلازما العامة الخاصة بك
 Comment[az]=Plasma Qlobal Mövzularına baxış və onlara düzəliş etmək
 Comment[be]=Агляд і рэдагаванне глабальных тэмаў Plasma
 Comment[bg]=Разглеждане и редактиране вашите глобални теми на Plasma
@@ -40,6 +41,7 @@ Comment[zh_CN]=浏览并编辑您的 Plasma 全局主题
 Comment[zh_TW]=探索並編輯您的 Plasma 全域主題
 Keywords=
 Name=Plasma Global Theme Explorer
+Name[ar]=متصفّح بلازما للسّمات
 Name[az]=Plasma Qlobal Mövzu Bələdçisi
 Name[be]=Агляд глабальных тэмаў Plasma
 Name[bg]=Преглед на глобални теми на Plasma

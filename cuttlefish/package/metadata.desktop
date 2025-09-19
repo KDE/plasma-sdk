@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Cuttlefish
+Name[ar]=حبار
 Name[az]=Cuttlefish
 Name[be]=Cuttlefish
 Name[bg]=Cuttlefish
@@ -43,6 +44,7 @@ Name[uk]=Cuttlefish
 Name[zh_CN]=Cuttlefish
 Name[zh_TW]=Cuttlefish
 Comment=List and preview available icons
+Comment[ar]=قائمة الأيقونات المتاحة ومعاينتها
 Comment[az]=Mövcud ikonların siyahısı və onlara baxış
 Comment[be]=Спіс і папярэдні прагляд даступных значкоў
 Comment[bg]=Списък и визуализация на наличните икони
@@ -85,6 +87,7 @@ Comment[uk]=Показ списку і попередній перегляду �
 Comment[zh_CN]=列出和预览可用图标
 Comment[zh_TW]=列出並預覽可用的圖示
 GenericName=Icon Browser
+GenericName[ar]=متصفح الأيقونات
 GenericName[az]=İkon Bələdçisi
 GenericName[be]=Агляд значкоў
 GenericName[bg]=Браузър на икони

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=PlasmoidViewer Shell
+Comment[ar]=صدفة عارض بلازمويدات
 Comment[az]=Plasmoidlərə baxış üzlüyü
 Comment[be]=Абалонка PlasmoidViewer
 Comment[bg]=Обвивка на PlasmoidViewer
@@ -43,6 +44,7 @@ Comment[zh_CN]=Plasmoid 查看器外壳
 Comment[zh_TW]=Plasmoid 檢視器殼層
 Keywords=
 Name=PlasmoidViewerShell
+Name[ar]=صدفة عارض بلازمويدات
 Name[az]=PlasmoidViewer üzlüyü
 Name[be]=PlasmoidViewerShell
 Name[bg]=PlasmoidViewerShell
