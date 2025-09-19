@@ -6,6 +6,7 @@
             {
                 "Email": "mart@kde.org",
                 "Name": "Marco Martin",
+                "Name[ar]": "ماركو مارتن",
                 "Name[ast]": "Marco Martin",
                 "Name[be]": "Marco Martin",
                 "Name[bg]": "Marco Martin",
@@ -45,6 +46,7 @@
         ],
         "Category": "Themes",
         "Description": "Explore and edit your Plasma themes",
+        "Description[ar]": "استكشف وحرر سمات البلازما الخاصة بك",
         "Description[be]": "Агляд і рэдагаванне тэмаў Plasma",
         "Description[bg]": "Разглеждане и редактиране вашите теми на Plasma",
         "Description[ca@valencia]": "Explora i edita els temes de Plasma",
@@ -83,6 +85,7 @@
         "Id": "org.kde.plasma.themeexplorer",
         "License": "GPL-2.0+",
         "Name": "Plasma Theme Explorer",
+        "Name[ar]": "متصفّح بلازما للسّمات",
         "Name[az]": "Plasma Mövzu Bələdçisi",
         "Name[be]": "Агляд тэмаў Plasma",
         "Name[bg]": "Програма на Plasma за преглед на теми",

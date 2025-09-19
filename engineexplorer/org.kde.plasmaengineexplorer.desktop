@@ -1,6 +1,7 @@
 [Desktop Entry]
 Terminal=false
 Name=Plasma Engine Explorer
+Name[ar]=مستكشف محركات البلازما
 Name[az]=Plasma Mexanizmi Bələdçisi
 Name[be]=Агляд рухавіка Plasma
 Name[bg]=Преглед на енджини на Plasma
@@ -40,6 +41,7 @@ Name[uk]=Навігатор рушіїв Плазми
 Name[zh_CN]=Plasma 引擎浏览器
 Name[zh_TW]=Plasma 引擎探索器
 GenericName=Plasma Data Engines Viewing Tool
+GenericName[ar]=أداة عرض محركات بيانات البلازما
 GenericName[az]=Məlumat Mexanizmlərinə baxış aləti
 GenericName[be]=Інструмент для прагляду даных DataEngine Plasma
 GenericName[bg]=Инструмент на Plasma за преглед енджини за данни
@@ -79,6 +81,7 @@ GenericName[uk]=Інструмент для перегляду рушіїв да
 GenericName[zh_CN]=Plasma 数据引擎查看工具
 GenericName[zh_TW]=Plasma 資料引擎檢視工具
 Comment=Explorer for the data published by Plasma DataEngines
+Comment[ar]=مستكشف البيانات المنشورة بواسطة محركات بيانات البلازما
 Comment[az]=Yayınlanan Plasma Mexanizmləri məlumatlarına baxış
 Comment[be]=Сродак агляду даных ад Plasma DataEngines
 Comment[bg]=Преглед на данните, представени от Plasma енджин за данни

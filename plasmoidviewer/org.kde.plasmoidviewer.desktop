@@ -1,6 +1,7 @@
 [Desktop Entry]
 Terminal=false
 Name=Plasmoidviewer
+Name[ar]=عارض بلازمويدات
 Name[az]=Plasmoidlərə baxış
 Name[be]=Прагляд плазмоідаў
 Name[bg]=Преглед на уиджети
@@ -41,6 +42,7 @@ Name[uk]=Перегляд плазмоїдів
 Name[zh_CN]=Plasma 小程序查看器
 Name[zh_TW]=Plasmoidviewer
 GenericName=Plasma Widget Testing Tool
+GenericName[ar]=أداة اختبار بلازموديات بلازما
 GenericName[az]=Plasma vidjetlərini test olunma aləti
 GenericName[be]=Інструмент для тэставання віджэтаў Plasma
 GenericName[bg]=Инструмент за тестване на уиджети на Plasma
@@ -81,6 +83,7 @@ GenericName[uk]=Інструмент для тестування віджеті�
 GenericName[zh_CN]=Plasma 挂件测试工具
 GenericName[zh_TW]=Plasma 元件測試工具
 Comment=Testing tool for Plasma applets
+Comment[ar]=أداة اختبار لبلازمويدات بلازما
 Comment[az]=Plasma əlavələrinin test olunması aləti
 Comment[be]=Інструмент для тэставання аплетаў Plasma
 Comment[bg]=Инструмент за тестване на аплети на Plasma
