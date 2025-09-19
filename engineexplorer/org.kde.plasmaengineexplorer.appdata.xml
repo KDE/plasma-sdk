@@ -6,6 +6,7 @@
   <project_license>GPL-2.0+</project_license>
   <content_rating type="oars-1.0"/>
   <name>Plasma Engine Explorer</name>
+  <name xml:lang="ar">مستكشف محركات البلازما</name>
   <name xml:lang="az">Plasma Mexanizmi Bələdçisi</name>
   <name xml:lang="be">Агляд рухавіка Plasma</name>
   <name xml:lang="bg">Преглед на енджини на Plasma</name>
@@ -48,6 +49,7 @@
   <name xml:lang="zh-CN">Plasma 引擎浏览器</name>
   <name xml:lang="zh-TW">Plasma 引擎瀏覽器</name>
   <summary>Explorer for the data published by Plasma Data Engines</summary>
+  <summary xml:lang="ar">مستكشف البيانات المنشورة بواسطة محركات بيانات البلازما</summary>
   <summary xml:lang="az">Plasma Məlumat Mexanizmləri tərəfindən yayımlanan məlumatlara baxış</summary>
   <summary xml:lang="be">Сродак агляду даных ад Plasma DataEngines</summary>
   <summary xml:lang="bg">Преглед на данни, представени от Plasma енджини</summary>
@@ -90,6 +92,7 @@
   <summary xml:lang="zh-TW">用來瀏覽 Plamsa 資料引擎發佈之資料的瀏覽器</summary>
   <description>
     <p>Plasma Engine Explorer is a graphical tool allowing developers to test Plasma DataEngines without writing a Plasma applet.</p>
+    <p xml:lang="ar">مستكشف محرك البلازما هو أداة رسومية تسمح للمطورين باختبار محركات بيانات البلازما دون كتابة برنامج صغير للبلازما.</p>
     <p xml:lang="az">Plasmoidlərə baxış vasitəsi, tərtibatçılara Plasma əlavələrini yenidən  yazmadan onların test olunmasına imkan verən qrafik alətidir.</p>
     <p xml:lang="be">Сродак агляду даных ад Plasma DataEngines - графічны інструмент, які дазваляе распрацоўнікам тэставаць Plasma DataEngines без стварэння аплетаў Plasma.</p>
     <p xml:lang="bg">Преглед на енджини на Plasma е графичен инструмент, който позволява на разработчиците да тестват Plasma енджини за данни, без да пишат Plasma аплет.</p>
