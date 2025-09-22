@@ -59,13 +59,13 @@
 > <arg choice="opt"
 ><replaceable
 >archivos</replaceable
->...</arg
+>…</arg
 > <arg choice="opt"
 ><option
 >--</option
 > <replaceable
 >argumentos</replaceable
->...</arg
+>…</arg
 > </cmdsynopsis>
 </refsynopsisdiv>
 
@@ -128,7 +128,7 @@
 <term
 ><replaceable
 >archivos</replaceable
->...</term>
+>…</term>
 <listitem
 ><para
 >Se puede cargar cualquier número de archivos QML. Compartirán el mismo motor.</para
@@ -138,7 +138,7 @@
 <term
 ><replaceable
 >argumentos</replaceable
->...</term>
+>…</term>
 <listitem
 ><para
 >Los argumentos tras «<option
