@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-28 01:46+0000\n"
-"PO-Revision-Date: 2025-09-18 11:43+0400\n"
+"PO-Revision-Date: 2025-09-22 20:48+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -321,12 +321,10 @@ msgid ""
 msgstr "لم يُرجع نموذج صالح. تحقق من توفر نموذج لهذا المصدر."
 
 #: modelviewer.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "%1 is a Plasma service name"
-#| msgid "%1 Service Explorer"
+#, kde-format
 msgctxt "%1 is a Plasma dataengine name"
 msgid "%1 Model Explorer"
-msgstr "مستكشف خدمة %1"
+msgstr "مستكشف النماذج %1"
 
 #: serviceviewer.cpp:27
 #, kde-format
@@ -344,7 +342,7 @@ msgstr "مجهول"
 msgid ""
 "No valid service was returned. Verify that a service is available for this "
 "source."
-msgstr ""
+msgstr "لم تُرجع أي خدمة صالحة. تحقق من توفر خدمة لهذا المصدر."
 
 #: serviceviewer.cpp:74
 #, kde-format
@@ -353,10 +351,10 @@ msgid "%1 Service Explorer"
 msgstr "مستكشف خدمة %1"
 
 #: serviceviewer.cpp:77
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
-msgstr "محرك البيانات: <b>%1</b>، المصدر: <b>%2</b>، الخدمة <b>%3</b>"
+msgstr "المحرك: <b>%1</b>؛ المصدر: <b>%2</b>؛ الخدمة: <b>%3</b>"
 
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
 #: serviceviewer.cpp:153 serviceviewer.ui:73
@@ -365,11 +363,13 @@ msgid "Key"
 msgstr "المفتاح"
 
 #: serviceviewer.cpp:187
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> failed. <p>The error was: "
 "<b>'%3: %4'</b></p>"
-msgstr "فشلت العملية %1 مع الجهة %2 . كان الخطأ:<p><b>%3</b>"
+msgstr ""
+"فشلت عملية <b>’%1‘</b> مع الوجهة <b>’%2‘</b>. <p>الخطأ كان: <b>’%3: %4‘</b></"
+"p>"
 
 #: serviceviewer.cpp:193 serviceviewer.cpp:206
 #, kde-format
@@ -382,11 +382,13 @@ msgid "No response from job."
 msgstr "لا يوجد استجابة من الوظيفة."
 
 #: serviceviewer.cpp:201
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> returned successfully. "
 "<p>The result was: <b>'%3'</b></p>"
-msgstr "نجحت العملية %1 مع الجهة  %2 . كانت النتيجة هي:<p><b>%3</b>"
+msgstr ""
+"<b>’%1‘</b> العملية مع الوجهة <b>’%2‘</b> تمت بنجاح. <p>وكانت النتيجة: "
+"<b>’%3‘</b></p>"
 
 #: serviceviewer.cpp:228
 #, fuzzy, kde-format
