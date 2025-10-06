@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-05 05:54+0000\n"
-"PO-Revision-Date: 2025-09-22 20:48+0400\n"
+"PO-Revision-Date: 2025-10-05 10:50+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -91,23 +91,23 @@ msgstr "أزل المصدر"
 #, kde-format
 msgid "<1 bit>"
 msgid_plural "<%1 bits>"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "<0 بت>"
+msgstr[1] "<1 بت>"
+msgstr[2] "<بتان>"
+msgstr[3] "<%1 بتات>"
+msgstr[4] "<%1 بت>"
+msgstr[5] "<%1 بت>"
 
 #: engineexplorer.cpp:337
 #, kde-format
 msgid "<1 byte>"
 msgid_plural "<%1 bytes>"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "<0 بايت>"
+msgstr[1] "<1 بايت>"
+msgstr[2] "<بايتان>"
+msgstr[3] "<%1 بايت>"
+msgstr[4] "<%1 بايت>"
+msgstr[5] "<%1 بايت>"
 
 #: engineexplorer.cpp:359
 #, kde-format
@@ -251,7 +251,7 @@ msgstr "(c) 2006, فريق كِيدِي"
 #: main.cpp:61
 #, kde-format
 msgid "Aaron J. Seigo"
-msgstr "Aaron J. Seigo"
+msgstr "آرون ج. سيجو"
 
 #: main.cpp:61
 #, kde-format
