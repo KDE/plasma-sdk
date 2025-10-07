@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-28 01:46+0000\n"
-"PO-Revision-Date: 2025-10-05 10:50+0400\n"
+"PO-Revision-Date: 2025-10-06 13:22+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -113,12 +113,12 @@ msgstr[5] "<%1 بايت>"
 #, kde-format
 msgid "<1 item>"
 msgid_plural "<%1 items>"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "<0 عنصر>"
+msgstr[1] "<عنصر واحد>"
+msgstr[2] "<عنصران>"
+msgstr[3] "<%1 عناصر>"
+msgstr[4] "<%1 عنصرًا>"
+msgstr[5] "<%1 عنصر>"
 
 #: engineexplorer.cpp:427
 #, kde-format
@@ -139,24 +139,24 @@ msgstr "<غير قابل للعرض>"
 msgctxt "Length of the list"
 msgid "<%1 item>"
 msgid_plural "<%1 items>"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "<0 عنصر>"
+msgstr[1] "<عنصر واحد>"
+msgstr[2] "<عنصران>"
+msgstr[3] "<%1 عناصر>"
+msgstr[4] "<%1 عنصرًا>"
+msgstr[5] "<%1 عنصر>"
 
 #: engineexplorer.cpp:517
 #, kde-format
 msgctxt "Size of the map"
 msgid "<%1 pair>"
 msgid_plural "<%1 pairs>"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "<%1 زوج>"
+msgstr[1] "<زوج واحد>"
+msgstr[2] "<زوجان>"
+msgstr[3] "<%1 أزواج>"
+msgstr[4] "<%1 زوجًا>"
+msgstr[5] "<%1 زوج>"
 
 #. i18n: ectx: property (text), widget (KTitleWidget, m_title)
 #: engineexplorer.cpp:530 engineexplorer.ui:29
@@ -391,15 +391,15 @@ msgstr ""
 "<b>’%3‘</b></p>"
 
 #: serviceviewer.cpp:228
-#, fuzzy, kde-format
+#, kde-format
 msgid "One active operation…"
 msgid_plural "%1 operations active…"
-msgstr[0] "لا يوجد عملية..."
-msgstr[1] "عملية نشطة واحدة..."
-msgstr[2] "عمليتان نشيطتان..."
-msgstr[3] "%1 عمليات نشطة..."
-msgstr[4] "%1 عملية نشطة..."
-msgstr[5] "%1 عملية نشطة..."
+msgstr[0] "عملية نشطة واحدة…"
+msgstr[1] "عملية نشطة واحدة…"
+msgstr[2] "عمليتان نشيطتان…"
+msgstr[3] "%1 عمليات نشطة…"
+msgstr[4] "%1 عملية نشطة…"
+msgstr[5] "%1 عملية نشطة…"
 
 #. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
 #: serviceviewer.ui:39
