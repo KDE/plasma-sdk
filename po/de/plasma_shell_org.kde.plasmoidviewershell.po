@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2025 Flori G <Renner03@protonmail.com>
-# Burkhard Lück <lueck@hube-lueck.de>, 2015.
-# Frederik Schwarzer <schwarzer@kde.org>, 2016, 2022, 2023.
+# SPDX-FileCopyrightText: 2015 Burkhard Lück <lueck@hube-lueck.de>
+# SPDX-FileCopyrightText: 2016, 2022, 2023 Frederik Schwarzer <schwarzer@kde.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
