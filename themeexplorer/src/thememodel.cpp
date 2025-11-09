@@ -29,6 +29,7 @@ ThemeModel::ThemeModel(const KPackage::Package &package, QObject *parent)
     : QAbstractListModel(parent)
     , m_theme(new Plasma::Theme)
     , m_themeName(QStringLiteral("default"))
+    , m_imageSet(m_themeName, "plasma/desktoptheme")
     , m_package(package)
     , m_themeListModel(new ThemeListModel(this))
     , m_colorEditor(new ColorEditor(this))
@@ -89,9 +90,9 @@ QVariant ThemeModel::data(const QModelIndex &index, int role) const
     case Delegate:
         return value.value("delegate");
     case UsesFallback:
-        return !m_theme->currentThemeHasImage(value.value("imagePath").toString());
+        return !m_imageSet.currentImageSetHasImage(value.value("imagePath").toString());
     case SvgAbsolutePath: {
-        QString path = m_theme->imagePath(value.value("imagePath").toString());
+        QString path = m_imageSet.imagePath(value.value("imagePath").toString());
         if (!value.value("imagePath").toString().contains("translucent")) {
             path = path.replace("translucent/", "");
         }
@@ -101,7 +102,7 @@ QVariant ThemeModel::data(const QModelIndex &index, int role) const
         return QFile::exists(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/plasma/desktoptheme/" + m_themeName);
     case IconElements:
     case FrameSvgPrefixes: {
-        QString path = m_theme->imagePath(value.value("imagePath").toString());
+        QString path = m_imageSet.imagePath(value.value("imagePath").toString());
         if (!value.value("imagePath").toString().contains("translucent")) {
             path = path.replace("translucent/", "");
         }
@@ -192,6 +193,7 @@ void ThemeModel::setTheme(const QString &theme)
 
     m_themeName = theme;
     m_theme->setThemeName(theme);
+    m_imageSet.setImageSetName(theme);
     load();
     m_colorEditor->setTheme(theme);
     emit themeChanged();
@@ -199,14 +201,14 @@ void ThemeModel::setTheme(const QString &theme)
 
 void ThemeModel::editElement(const QString &imagePath)
 {
-    QString file = m_theme->imagePath(imagePath);
+    QString file = m_imageSet.imagePath(imagePath);
     if (!file.contains("translucent")) {
         file = file.replace("translucent/", "");
     }
 
     QString finalFile;
 
-    if (m_theme->currentThemeHasImage(imagePath)) {
+    if (m_imageSet.currentImageSetHasImage(imagePath)) {
         finalFile = file;
     } else {
         finalFile = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/plasma/desktoptheme/" + m_themeName + "/" + imagePath + ".svgz";

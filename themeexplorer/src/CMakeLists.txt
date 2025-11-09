@@ -22,6 +22,7 @@ target_link_libraries(plasmathemeexplorer
  KF6::KIOCore
  KF6::KIOWidgets
  KF6::Package
+ KF6::Svg
  Plasma::PlasmaQuick
 )
 
