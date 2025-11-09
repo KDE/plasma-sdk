@@ -7,6 +7,7 @@
 #ifndef THEMEMODEL_H
 #define THEMEMODEL_H
 
+#include <KSvg/ImageSet>
 #include <QAbstractListModel>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -84,6 +85,7 @@ private:
 
     Plasma::Theme *m_theme;
     QString m_themeName;
+    KSvg::ImageSet m_imageSet;
     KPackage::Package m_package;
     QJsonDocument m_jsonDoc;
     ThemeListModel *m_themeListModel;
