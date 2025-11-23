@@ -35,7 +35,7 @@ msgstr "Plasma 小程序查看器"
 #: main.cpp:44
 #, kde-format
 msgid "Run Plasma widgets in their own window"
-msgstr "在独立窗口中运行 Plasma 挂件"
+msgstr "在独立窗口中运行 Plasma 小部件"
 
 #: main.cpp:47
 #, kde-format
