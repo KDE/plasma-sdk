@@ -212,9 +212,3 @@ msgstr "D'acord"
 #, kde-format
 msgid "Cancel"
 msgstr "Cancel·la"
-
-#~ msgid "Look And Feel"
-#~ msgstr "Aspecte i comportament"
-
-#~ msgid "Version:"
-#~ msgstr "Versió:"
