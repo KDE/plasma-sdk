@@ -16,6 +16,7 @@
 #define THEMELISTMODEL_H
 
 #include <QAbstractItemView>
+#include <qqmlintegration.h>
 
 namespace Plasma
 {
@@ -35,6 +36,9 @@ public:
 class ThemeListModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
+
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 public:
     enum {

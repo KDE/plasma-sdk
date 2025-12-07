@@ -4,96 +4,60 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#include "coloreditor.h"
-#include "themelistmodel.h"
 #include "thememodel.h"
+
 #include <QApplication>
-
-#include <QQuickItem>
-#include <klocalizedstring.h>
-#include <qcommandlineoption.h>
-#include <qcommandlineparser.h>
-
-#include <KAboutData>
-#include <PlasmaQuick/SharedQmlEngine>
+#include <QCommandLineOption>
+#include <QCommandLineParser>
+#include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQmlEngine>
-#include <QQmlExpression>
-#include <QQmlProperty>
-#include <QQuickWindow>
-#include <kpackage/package.h>
-#include <kpackage/packageloader.h>
+#include <QQuickItem>
+
+#include <KAboutData>
+#include <KLocalizedQmlContext>
+#include <KLocalizedString>
+
+using namespace Qt::Literals::StringLiterals;
 
 int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
-
-    app.setApplicationVersion(PROJECT_VERSION);
-    app.setDesktopFileName(QStringLiteral("org.kde.plasma.themeexplorer"));
+    app.setOrganizationName(u"KDE"_s);
+    app.setOrganizationDomain(u"kde.org"_s);
 
     QCommandLineParser parser;
-    parser.addVersionOption();
-    parser.addHelpOption();
-    parser.setApplicationDescription(i18n("Plasma Theme Explorer"));
+    KAboutData aboutData("plasma-themeexplorer",
+                         i18n("Plasma Theme Explorer"),
+                         QStringLiteral(PROJECT_VERSION),
+                         i18n("Explore and edit your Plasma themes"),
+                         KAboutLicense::GPL_V2);
+    aboutData.addAuthor(u"Macro Martin"_s, {}, u"mart@kde.org"_s);
+    KAboutData::setApplicationData(aboutData);
+    aboutData.setupCommandLine(&parser);
+    app.setDesktopFileName(u"org.kde.plasma.themeexplorer"_s);
 
-    QCommandLineOption themeOption(QCommandLineOption(QStringList() << "t"
-                                                                    << "theme",
-                                                      i18n("The theme to open"),
-                                                      "theme"));
+    QCommandLineOption themeOption(QCommandLineOption(QStringList{"t", "theme"}, i18n("The theme to open"), "default"));
 
     parser.addOption(themeOption);
-
+    aboutData.processCommandLine(&parser);
     parser.process(app);
 
-    const QString packagePath("org.kde.plasma.themeexplorer");
+    KLocalizedString::setApplicationDomain(QByteArrayLiteral("org.kde.plasma.themeexplorer"));
 
-    // usually we have an ApplicationWindow here, so we do not need to create a window by ourselves
-    auto obj = new PlasmaQuick::SharedQmlEngine();
-    obj->setTranslationDomain(packagePath);
-    obj->setInitializationDelayed(true);
-    obj->engine()->rootContext()->setContextProperty("commandlineArguments", parser.positionalArguments());
-
-    QObject::connect(obj->engine().get(), &QQmlEngine::quit, &app, &QApplication::quit);
-
-    qmlRegisterAnonymousType<ThemeListModel>("org.kde.plasma.sdk", 1);
-    qmlRegisterAnonymousType<ColorEditor>("org.kde.plasma.sdk", 1);
-
-    KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("KPackage/GenericQML"));
-    package.setPath(packagePath);
-    obj->setSource(QUrl::fromLocalFile(package.filePath("mainscript")));
-    const KPluginMetaData data = package.metadata();
-    ThemeModel *themeModel = new ThemeModel(package);
+    QQmlApplicationEngine engine;
+    auto themeModel = new ThemeModel(&engine);
     if (parser.isSet(themeOption)) {
         themeModel->setTheme(parser.value(themeOption));
-        obj->engine()->rootContext()->setContextProperty("commandlineTheme", parser.value(themeOption));
+        engine.rootContext()->setContextProperty("commandlineTheme", parser.value(themeOption));
     } else {
-        themeModel->setTheme(parser.value("default"));
-        obj->engine()->rootContext()->setContextProperty("commandlineTheme", "default");
+        themeModel->setTheme("default");
+        engine.rootContext()->setContextProperty("commandlineTheme", "default");
     }
-    obj->engine()->rootContext()->setContextProperty("themeModel", QVariant::fromValue(themeModel));
+    engine.rootContext()->setContextProperty("themeModel", QVariant::fromValue(themeModel));
 
-    obj->completeInitialization();
-
-    if (!data.isValid()) {
-        return -1;
-    }
-
-    // About data
-    KAboutData aboutData(data.pluginId(), data.name(), data.version(), data.description(), KAboutLicense::byKeyword(data.license()).key());
-
-    for (auto author : data.authors()) {
-        aboutData.addAuthor(author.name(), author.task(), author.emailAddress(), author.webAddress());
-    }
-
-    // The root is not a window?
-    // have to use a normal QQuickWindow since the root item is already created
-    QWindow *window = qobject_cast<QWindow *>(obj->rootObject());
-    if (window) {
-        window->setTitle(data.name());
-        window->setIcon(QIcon::fromTheme(data.iconName()));
-    } else {
-        qWarning() << "Error loading the ApplicationWindow";
-    }
+    engine.rootContext()->setContextObject(new KLocalizedQmlContext(&engine));
+    engine.loadFromModule("org.kde.plasma.themeexplorer", "Main");
 
     return app.exec();
 }

@@ -20,6 +20,8 @@ Kirigami.AbstractApplicationWindow {
     property int iconSize: iconSizeSlider.value
     property alias showMargins: showMarginsCheckBox.checked
 
+    title: i18nc("@title:window", "Plasma Theme Explorer")
+
     Shortcut {
         sequence: StandardKey.Quit
         onActivated: Qt.quit()

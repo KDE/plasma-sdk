@@ -9,11 +9,13 @@
 
 #include <QColor>
 #include <QObject>
+#include <qqmlintegration.h>
 
 class ColorEditor : public QObject
 {
     Q_OBJECT
-    // Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
+    QML_ELEMENT
+    QML_UNCREATABLE("")
 
     Q_PROPERTY(QColor textColor READ textColor WRITE setTextColor NOTIFY colorsChanged)
     Q_PROPERTY(QColor highlightColor READ highlightColor WRITE setHighlightColor NOTIFY colorsChanged)
