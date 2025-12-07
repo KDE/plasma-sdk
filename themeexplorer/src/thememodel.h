@@ -48,7 +48,7 @@ public:
         FrameSvgPrefixes,
     };
 
-    explicit ThemeModel(const KPackage::Package &package, QObject *parent = nullptr);
+    explicit ThemeModel(QObject *parent = nullptr);
     ~ThemeModel() override;
 
     ThemeListModel *themeList();
@@ -86,7 +86,6 @@ private:
     Plasma::Theme *m_theme;
     QString m_themeName;
     KSvg::ImageSet m_imageSet;
-    KPackage::Package m_package;
     QJsonDocument m_jsonDoc;
     ThemeListModel *m_themeListModel;
     ColorEditor *m_colorEditor;

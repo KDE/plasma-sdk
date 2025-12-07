@@ -25,12 +25,13 @@
 
 #include <Plasma/Theme>
 
-ThemeModel::ThemeModel(const KPackage::Package &package, QObject *parent)
+using namespace Qt::Literals::StringLiterals;
+
+ThemeModel::ThemeModel(QObject *parent)
     : QAbstractListModel(parent)
     , m_theme(new Plasma::Theme)
     , m_themeName(QStringLiteral("default"))
     , m_imageSet(m_themeName, "plasma/desktoptheme")
-    , m_package(package)
     , m_themeListModel(new ThemeListModel(this))
     , m_colorEditor(new ColorEditor(this))
 {
@@ -143,10 +144,9 @@ QVariant ThemeModel::data(const QModelIndex &index, int role) const
 void ThemeModel::load()
 {
     beginResetModel();
-    qDebug() << "Loading theme description file" << m_package.filePath("data", "themeDescription.json");
 
-    QFile jsonFile(m_package.filePath("data", "themeDescription.json"));
-    jsonFile.open(QIODevice::ReadOnly);
+    QFile jsonFile(":/qt/qml/org/kde/plasma/themeexplorer/themeDescription.json");
+    (void)jsonFile.open(QIODevice::ReadOnly);
 
     QJsonParseError error;
     m_jsonDoc = QJsonDocument::fromJson(jsonFile.readAll(), &error);
@@ -221,12 +221,20 @@ void ThemeModel::editElement(const QString &imagePath)
         }
     }
 
-    // QProcess::startDetached("inkscape", QStringList() << finalFile);
-    KProcess *process = new KProcess();
-    // TODO: don't use the script to not depend from bash/linux?
-    process->setProgram("bash", QStringList() << m_package.filePath("scripts", "openInEditor.sh") << finalFile);
+    auto process = new QProcess(this);
+    process->execute("bash",
+                     {u"-c"_s,
+                      u""
+                      "cd %2;"
+                      "inkscape \"%1.svgz\";"
+                      "mv \"%1.svgz\" \"%1.svg.gz\";"
+                      "gunzip \"%1.svg.gz\";"
+                      "/usr/bin/perl -p -i -e \"s/color:#[^;]*;fill:currentColor/fill:currentColor/g\" \"%1.svg\";"
+                      "gzip  \"%1.svg\";"
+                      "mv \"%1.svg.gz\" \"%1.svgz\""
+                      ""_s.arg(finalFile.mid(finalFile.lastIndexOf("/") + 1).split(".")[0], finalFile.left(finalFile.lastIndexOf("/")))});
 
-    connect(process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &ThemeModel::processFinished);
+    connect(process, &QProcess::finished, this, &ThemeModel::processFinished);
     process->start();
 }
 
