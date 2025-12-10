@@ -1,6 +1,6 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Vít Pelčák <vit@pelcak.org>, 2016, 2020.
+# SPDX-FileCopyrightText: 2016, 2020, 2025 Vít Pelčák <vit@pelcak.org>
 # Vit Pelcak <vit@pelcak.org>, 2021.
 #
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:42+0000\n"
-"PO-Revision-Date: 2021-06-17 11:33+0200\n"
+"PO-Revision-Date: 2025-12-05 10:48+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.04.2\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #: lnflogic.cpp:105
 #, kde-format
@@ -57,13 +57,13 @@ msgstr "Soubory obrázků (*.png *.jpg *.bmp)"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Plasma Global Theme Explorer"
-msgstr ""
+msgstr "Průzkumník Globálních Motivů Plasma"
 
 #: main.cpp:31
 #, kde-format
 msgctxt "@info:credit"
 msgid "Explore and edit your Plasma Global Themes"
-msgstr ""
+msgstr "Prohlížejte a editujte Globální Motivy Plasma"
 
 #: main.cpp:33
 #, kde-format
@@ -109,7 +109,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:click"
 msgid "About"
-msgstr ""
+msgstr "O aplikaci"
 
 #: qml/Main.qml:82
 #, kde-format
@@ -129,7 +129,7 @@ msgstr "Klikněte zde pro otevření obrázku"
 #: qml/Main.qml:171
 #, kde-format
 msgid "Plugin name: %1"
-msgstr ""
+msgstr "Název modulu: %1"
 
 #: qml/Main.qml:174
 #, kde-format
