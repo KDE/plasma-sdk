@@ -1,0 +1,190 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Turkish "INCLUDE">
+]>
+<!--
+    SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+-->
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>kqml Kullanıcı Kılavuzu</title>
+<date
+>2023‒06‒10</date>
+<releaseinfo
+>Plasma 6.0</releaseinfo>
+<productname
+>KDE Plasma</productname>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kqml</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kqml</command
+></refname>
+<refpurpose
+>KLocalizedContext ile QML Çalışma Zamanı</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>kqml</command
+> <group choice="opt"
+><option
+>-v, --version</option
+></group
+> <group choice="opt"
+><option
+>-h, --help</option
+></group
+> <group choice="opt"
+><option
+>-d, --domain</option
+> <replaceable
+>etki alanı</replaceable
+></group
+> <arg choice="opt"
+><replaceable
+>dosyalar</replaceable
+>…</arg
+> <arg choice="opt"
+><option
+>--</option
+> <replaceable
+>argümanlar</replaceable
+>…</arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Açıklama</title>
+<para
+><command
+>kqml</command
+>, KLocalizedContext ile ilklendirilen bir QML çalışma zamanıdır.</para>
+
+<para
+>qt-declarative paketiyle birlikte gelen qml aracının aksine kqml, kod ve içe aktarılan kitaplıklar boyunca i18n çağrılarıyla gerçek dünya uygulamalarını ve eskiz dosyalarını sınamaya izin veren KLocalizedContext’i başlatır.</para>
+</refsect1>
+
+<refsect1>
+<title
+>Seçenekler</title>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>-v</option
+>, <option
+>--version</option
+></term>
+<listitem
+><para
+>Sürüm bilgisini görüntüler.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-d</option
+>, <option
+>--domain</option
+> <replaceable
+>etki alanı</replaceable
+></term>
+<listitem
+><para
+>Ana yerelleştirme etki alanı.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-h</option
+>, <option
+>--help</option
+></term>
+<listitem
+><para
+>Bu yardımı görüntüler.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><replaceable
+>files</replaceable
+>…</term>
+<listitem
+><para
+>Aynı işletkeyi paylaşan herhangi bir sayıda QML dosyası yüklenebilir.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><replaceable
+>argümanlar</replaceable
+>…</term>
+<listitem
+><para
+>“<option
+>--</option
+>” sonrası argümanlar yok sayılır; ancak QML’deki application.arguments değişkenine geçirilirler.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</refsect1>
+
+<refsect1>
+<title
+>Ayrıca</title>
+
+<para
+>Ayrıntılı kullanıcı belgelendirmesine <ulink url="help:/plasma-desktop"
+>help:/plasma-desktop</ulink
+> üzerinden ulaşılabilir (ya bu <acronym
+>URL</acronym
+>’yi &konqueror;’a girin ya da <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/plasma-desktop</parameter
+></userinput
+> çalıştırın).</para>
+
+</refsect1>
+
+<refsect1>
+<title
+>Yazarlar</title>
+<para
+><command
+>kqml</command
+>, <personname
+><firstname
+>İvan</firstname
+><surname
+>Tkaçenko</surname
+></personname
+> <email
+>me@raitjas.tk</email
+> tarafından yazılmıştır.</para>
+</refsect1>
+
+</refentry>

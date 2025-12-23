@@ -8,7 +8,7 @@
 <title
 >plasmaengineexplorer Kullanıcı Kılavuzu</title>
 <date
->2017-01-09</date>
+>2017‒01‒09</date>
 <releaseinfo
 >Plasma 5.8</releaseinfo>
 <productname
@@ -219,7 +219,7 @@
 ><para
 >Verilen veri işletkesiyle <command
 >plasmaengineexplorer</command
->'ı başlatın. <parameter
+>’ı başlatın. <parameter
 >veri işletkesi</parameter
 >, veri işletkesinin desktop dosyasının X-KDE-PluginInfo-Name anahtarı tarafından verilen iç adıdır.</para
 ></listitem>
@@ -282,7 +282,7 @@
 <para
 >Daha ayrıntılı kullanıcı belgelendirmesine <ulink url="help:/plasma-desktop"
 >help:/plasma-desktop</ulink
-> (ya bu &URL;'yi &konqueror;'a girin ya da <userinput
+> (ya bu &URL;’yi &konqueror;’a girin ya da <userinput
 ><command
 >khelpcenter</command
 > <parameter

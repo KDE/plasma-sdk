@@ -8,7 +8,7 @@
 <title
 >plasmoidviewer Kullanıcı Kılavuzu</title>
 <date
->2017-01-09</date>
+>2017‒01‒09</date>
 <releaseinfo
 >Plasma 5.8</releaseinfo>
 <productname
@@ -260,7 +260,7 @@
 ></term>
 <listitem
 ><para
->Uygulamacığa 'externalData' olayı olarak geçirilmesi gereken veri.</para
+>Uygulamacığa “externalData” olayı olarak geçirilmesi gereken veri.</para
 ></listitem>
 </varlistentry>
 
@@ -275,7 +275,7 @@
 <para
 >Daha ayrıntılı kullanıcı belgelendirmesine <ulink url="help:/plasma-desktop"
 >help:/plasma-desktop</ulink
-> (ya bu &URL;'yi &konqueror;'a girin ya da <userinput
+> (ya bu &URL;’yi &konqueror;’a girin ya da <userinput
 ><command
 >khelpcenter</command
 > <parameter
