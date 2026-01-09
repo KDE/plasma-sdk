@@ -47,9 +47,6 @@ if (NOT Qt6Test_FOUND)
     set(BUILD_TESTING OFF CACHE BOOL "Build the testing tree.")
 endif()
 
-find_package(Qt6Core5Compat)
-
-
 find_package(KF6Kirigami ${KF6_MIN_VERSION})
 set_package_properties(KF6Kirigami PROPERTIES
     DESCRIPTION "KDE's lightweight user interface framework for mobile and convergent applications"
@@ -64,7 +61,6 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
 
 find_package(Plasma ${PROJECT_DEP_VERSION} REQUIRED)
 find_package(PlasmaQuick ${PROJECT_DEP_VERSION} REQUIRED)
-find_package(Plasma5Support ${PROJECT_DEP_VERSION} REQUIRED)
 
 ecm_setup_version(${PROJECT_VERSION}
     VARIABLE_PREFIX PLASMA_SDK
@@ -88,7 +84,6 @@ ecm_set_disabled_deprecation_versions(
 )
 
 add_subdirectory(iconexplorer)
-add_subdirectory(engineexplorer)
 add_subdirectory(kqml)
 add_subdirectory(plasmoidviewer)
 add_subdirectory(themeexplorer)
