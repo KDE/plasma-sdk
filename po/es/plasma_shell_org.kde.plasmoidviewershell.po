@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the plasma-sdk package.
 # Automatically generated, 2015.
 #
-# SPDX-FileCopyrightText: 2015, 2016, 2021, 2022, 2023, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2015, 2016, 2021, 2022, 2023, 2024, 2025, 2026 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasmoidviewershell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2025-06-04 19:20+0100\n"
+"PO-Revision-Date: 2026-01-14 12:10+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.2\n"
+"X-Generator: Lokalize 25.12.0\n"
 
 #: contents/applet/AppletError.qml:164
 msgid "Copy to Clipboard"
@@ -280,7 +280,7 @@ msgstr "Anchura"
 
 #: contents/configuration/PanelConfiguration.qml:310
 msgid "Fill height"
-msgstr "Altura completa"
+msgstr "Rellenar la altura"
 
 #: contents/configuration/PanelConfiguration.qml:310
 msgid "Fill width"
