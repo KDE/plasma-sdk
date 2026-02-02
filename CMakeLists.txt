@@ -60,7 +60,13 @@ set_package_properties(KF6Kirigami PROPERTIES
 
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     Archive Completion Config CoreAddons Crash DBusAddons I18n IconThemes ItemModels
-    KIO TextEditor WidgetsAddons DocTools Svg)
+    KIO TextEditor WidgetsAddons Svg)
+
+find_package(KF6DocTools ${KF6_MIN_VERSION} CONFIG)
+set_package_properties(KF6DocTools PROPERTIES
+    PURPOSE "Enable building documentation"
+    TYPE OPTIONAL
+)
 
 find_package(Plasma ${PROJECT_DEP_VERSION} REQUIRED)
 find_package(PlasmaQuick ${PROJECT_DEP_VERSION} REQUIRED)
@@ -94,8 +100,10 @@ add_subdirectory(plasmoidviewer)
 add_subdirectory(themeexplorer)
 add_subdirectory(lookandfeelexplorer)
 
-add_subdirectory(doc)
-kdoctools_install(po)
+if (KF6DocTools_FOUND)
+    add_subdirectory(doc)
+    kdoctools_install(po)
+endif()
 
 # add clang-format target for all our real source files
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
