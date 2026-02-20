@@ -48,10 +48,9 @@ msgid "Search"
 msgstr "Cuardaigh"
 
 #: engineexplorer.cpp:180
-#, fuzzy, kde-format
-#| msgid "DataSource"
+#, kde-format
 msgid "DataSource/Key"
-msgstr "Foinse Sonraí"
+msgstr ""
 
 #: engineexplorer.cpp:180
 #, kde-format
@@ -70,10 +69,9 @@ msgid "Get associated service"
 msgstr "Faigh seirbhís a bhaineann leis"
 
 #: engineexplorer.cpp:304
-#, fuzzy, kde-format
-#| msgid "Get associated service"
+#, kde-format
 msgid "Get associated model"
-msgstr "Faigh seirbhís a bhaineann leis"
+msgstr ""
 
 #: engineexplorer.cpp:305
 #, kde-format
@@ -130,17 +128,12 @@ msgid "<not displayable>"
 msgstr "<ní féidir taispeáint>"
 
 #: engineexplorer.cpp:499 engineexplorer.cpp:514
-#, fuzzy, kde-format
-#| msgid "<1 item>"
-#| msgid_plural "<%1 items>"
+#, kde-format
 msgctxt "Length of the list"
 msgid "<%1 item>"
 msgid_plural "<%1 items>"
-msgstr[0] "<1 mhír>"
-msgstr[1] "<%1 mhír>"
-msgstr[2] "<%1 mhír>"
-msgstr[3] "<%1 mír>"
-msgstr[4] "<%1 mír>"
+msgstr[0] ""
+msgstr[1] ""
 
 #: engineexplorer.cpp:529
 #, kde-format
@@ -149,9 +142,6 @@ msgid "<%1 pair>"
 msgid_plural "<%1 pairs>"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
 
 #. i18n: ectx: property (text), widget (KTitleWidget, m_title)
 #: engineexplorer.cpp:542 engineexplorer.ui:29
@@ -184,38 +174,33 @@ msgstr "Nuashonrú ar éileamh"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, m_updateInterval)
 #: engineexplorer.ui:81
-#, fuzzy, kde-format
-#| msgid "ms"
+#, kde-format
 msgid " ms"
-msgstr "ms"
+msgstr ""
 
 #. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
 #: engineexplorer.ui:84
-#, fuzzy, kde-format
-#| msgid "Update every "
+#, kde-format
 msgid "Update Every "
-msgstr "Nuashonrú gach "
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, m_sourceRequesterButton)
 #: engineexplorer.ui:100
-#, fuzzy, kde-format
-#| msgid "Remove source"
+#, kde-format
 msgid "Request Source"
-msgstr "Bain foinse"
+msgstr ""
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_serviceRequester)
 #: engineexplorer.ui:120
-#, fuzzy, kde-format
-#| msgid "Remove source"
+#, kde-format
 msgid "Service for source"
-msgstr "Bain foinse"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, m_serviceRequesterButton)
 #: engineexplorer.ui:133
-#, fuzzy, kde-format
-#| msgid "Remove source"
+#, kde-format
 msgid "Request Service for Source"
-msgstr "Bain foinse"
+msgstr ""
 
 #: ktreeviewsearchline.cpp:423
 #, kde-format
@@ -320,12 +305,10 @@ msgid ""
 msgstr ""
 
 #: modelviewer.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "%1 is a Plasma service name"
-#| msgid "%1 Service Explorer"
+#, kde-format
 msgctxt "%1 is a Plasma dataengine name"
 msgid "%1 Model Explorer"
-msgstr "Taiscéalaí Seirbhíse %1"
+msgstr ""
 
 #: serviceviewer.cpp:27
 #, kde-format
@@ -352,12 +335,10 @@ msgid "%1 Service Explorer"
 msgstr "Taiscéalaí Seirbhíse %1"
 
 #: serviceviewer.cpp:75
-#, fuzzy, kde-format
-#| msgctxt "Source: name of the data, Service: writes data instead of fetching"
-#| msgid "DataEngine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
+#, kde-format
 msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
-msgstr "Inneall Sonraí: <b>%1</b>; Foinse: <b>%2</b>; Seirbhís <b>%3</b>"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
 #: serviceviewer.cpp:151 serviceviewer.ui:73
@@ -394,23 +375,17 @@ msgstr ""
 "toradh: <b>'%3'</b></p>"
 
 #: serviceviewer.cpp:226
-#, fuzzy, kde-format
-#| msgid "One active operation..."
-#| msgid_plural "%1 operations active..."
+#, kde-format
 msgid "One active operation…"
 msgid_plural "%1 operations active…"
-msgstr[0] "Oibríocht ghníomhach amháin..."
-msgstr[1] "%1 oibríocht ghníomhach..."
-msgstr[2] "%1 oibríocht ghníomhach..."
-msgstr[3] "%1 n-oibríocht ghníomhach..."
-msgstr[4] "%1 oibríocht ghníomhach..."
+msgstr[0] ""
+msgstr[1] ""
 
 #. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
 #: serviceviewer.ui:39
-#, fuzzy, kde-format
-#| msgid "&Operation:"
+#, kde-format
 msgid "Opera&tion:"
-msgstr "&Oibríocht:"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, m_operationStatus)
 #: serviceviewer.ui:86
@@ -422,33 +397,3 @@ msgstr "Líon na n-oibríochtaí"
 #, kde-format
 msgid "Data Engines"
 msgstr "Innill Sonraí"
-
-#~ msgid "&lt;1 bit&gt;"
-#~ msgid_plural "&lt;%1 bits&gt;"
-#~ msgstr[0] "&lt;1 ghiotán&gt;"
-#~ msgstr[1] "&lt;%1 ghiotán&gt;"
-#~ msgstr[2] "&lt;%1 ghiotán&gt;"
-#~ msgstr[3] "&lt;%1 ngiotán&gt;"
-#~ msgstr[4] "&lt;%1 giotán&gt;"
-
-#~ msgid "&lt;1 byte&gt;"
-#~ msgid_plural "&lt;%1 bytes&gt;"
-#~ msgstr[0] "&lt;1 bheart&gt;"
-#~ msgstr[1] "&lt;%1 bheart&gt;"
-#~ msgstr[2] "&lt;%1 bheart&gt;"
-#~ msgstr[3] "&lt;%1 mbeart&gt;"
-#~ msgstr[4] "&lt;%1 beart&gt;"
-
-#~ msgid "&lt;1 item&gt;"
-#~ msgid_plural "&lt;%1 items&gt;"
-#~ msgstr[0] "&lt;1 mhír&gt;"
-#~ msgstr[1] "&lt;%1 mhír&gt;"
-#~ msgstr[2] "&lt;%1 mhír&gt;"
-#~ msgstr[3] "&lt;%1 mír&gt;"
-#~ msgstr[4] "&lt;%1 mír&gt;"
-
-#~ msgid "Form"
-#~ msgstr "Foirm"
-
-#~ msgid "Unnamed"
-#~ msgstr "Gan ainm"
