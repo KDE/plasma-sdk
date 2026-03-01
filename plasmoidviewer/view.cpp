@@ -105,8 +105,8 @@ void View::addApplet(const QString &applet)
     if (metadataPath.isEmpty()) {
         a = containment()->createApplet(applet);
     } else {
-        a = Plasma::PluginLoader::self()->loadApplet(metadataPath);
-
+        auto appletUnique = Plasma::PluginLoader::self()->loadApplet(metadataPath);
+        a = appletUnique.get();
         // Load translations from KPackage files if bundled
         // TODO: what to do in KF6?
         /*const QString localePath = a->kPackage().filePath("translations");
@@ -115,7 +115,7 @@ void View::addApplet(const QString &applet)
             KLocalizedString::addDomainLocaleDir(localeDomain.toLatin1(), localePath);
         }*/
 
-        containment()->addApplet(a);
+        containment()->addApplet(std::move(appletUnique));
     }
 
     if (!a->pluginMetaData().isValid()) {
