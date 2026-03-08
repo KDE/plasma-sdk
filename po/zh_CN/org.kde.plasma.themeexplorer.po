@@ -41,7 +41,7 @@ msgstr "选择颜色"
 #: package/contents/ui/ColorEditor.qml:115
 #, kde-format
 msgid "Normal text"
-msgstr "普通文字"
+msgstr "正常文本"
 
 #: package/contents/ui/ColorEditor.qml:121
 #, kde-format
@@ -111,7 +111,7 @@ msgstr "按钮焦点颜色："
 #: package/contents/ui/ColorEditor.qml:251
 #, kde-format
 msgid "Text view text color:"
-msgstr "文本视图文字颜色："
+msgstr "文本视图文本颜色："
 
 #: package/contents/ui/ColorEditor.qml:258
 #, kde-format
@@ -209,7 +209,7 @@ msgstr "复选框"
 #: package/contents/ui/fakecontrols/LineEdit.qml:34
 #, kde-format
 msgid "Text input…"
-msgstr "文字输入…"
+msgstr "文本输入…"
 
 #: package/contents/ui/main.qml:32
 #, kde-format
