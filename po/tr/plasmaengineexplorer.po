@@ -4,13 +4,13 @@
 # Translators:
 # obsoleteman <tulliana@gmail.com>, 2007-2009,2012.
 # Volkan Gezer <volkangezer@gmail.com>, 2013-2014, 2021, 2022.
-# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025, 2026 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: extragear-sdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2025-03-07 23:32+0300\n"
+"PO-Revision-Date: 2026-03-09 21:10+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.03.70\n"
+"X-Generator: Lokalize 25.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -280,7 +280,7 @@ msgid ""
 "ParentApp entry in the DataEngine's .desktop file."
 msgstr ""
 "Yalnızca üst uygulama ile ilişkili olan işletkeleri göster; Veri "
-"İşletkesi'nin .desktop dosyasındaki X-KDE-ParentApp girdilerini listeler."
+"İşletkesi’nin .desktop dosyasındaki X-KDE-ParentApp girdilerini listeler."
 
 #: modelviewer.cpp:85 serviceviewer.cpp:53
 #, kde-format
@@ -347,8 +347,8 @@ msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> failed. <p>The error was: "
 "<b>'%3: %4'</b></p>"
 msgstr ""
-"<b>%2</b> hedefi olan <b>“%1”</b> işlemi başarısız oldu. <p>Hata: <b>'%3: "
-"%4'</b></p>"
+"<b>%2</b> hedefi olan <b>“%1”</b> işlemi başarısız oldu. <p>Hata: <b>“%3: "
+"%4”</b></p>"
 
 #: serviceviewer.cpp:193 serviceviewer.cpp:206
 #, kde-format
