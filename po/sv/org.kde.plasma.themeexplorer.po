@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-04-08 00:48+0000\n"
 "PO-Revision-Date: 2024-06-21 09:44+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -27,328 +27,334 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "stefan.asserhall@gmail.com"
 
-#: package/contents/ui/ColorEditor.qml:38
-#, kde-format
-msgid "Edit Colors"
-msgstr "Redigera färger"
-
-#: package/contents/ui/ColorEditor.qml:67
-#, kde-format
-msgid "Select Color"
-msgstr "Välj färg"
-
-#: package/contents/ui/ColorEditor.qml:115
-#, kde-format
-msgid "Normal text"
-msgstr "Normal text"
-
-#: package/contents/ui/ColorEditor.qml:121
-#, kde-format
-msgid "Link"
-msgstr "Länk"
-
-#: package/contents/ui/ColorEditor.qml:125
-#, kde-format
-msgid "Visited Link"
-msgstr "Besökt länk"
-
-#: package/contents/ui/ColorEditor.qml:148
-#, kde-format
-msgid "Complementary colors area:"
-msgstr "Komplementärt färgområde:"
-
-#: package/contents/ui/ColorEditor.qml:163
-#, kde-format
-msgid "Label"
-msgstr "Etikett"
-
-#: package/contents/ui/ColorEditor.qml:186
-#, kde-format
-msgid "Text color:"
-msgstr "Textfärg:"
-
-#: package/contents/ui/ColorEditor.qml:193
-#, kde-format
-msgid "Background color:"
-msgstr "Bakgrundsfärg:"
-
-#: package/contents/ui/ColorEditor.qml:200
-#, kde-format
-msgid "Highlight color:"
-msgstr "Markeringsfärg:"
-
-#: package/contents/ui/ColorEditor.qml:207
-#, kde-format
-msgid "Link color:"
-msgstr "Länkfärg:"
-
-#: package/contents/ui/ColorEditor.qml:214
-#, kde-format
-msgid "Visited link color:"
-msgstr "Besökt länkfärg:"
-
-#: package/contents/ui/ColorEditor.qml:222
-#, kde-format
-msgid "Button text color:"
-msgstr "Knappars textfärg:"
-
-#: package/contents/ui/ColorEditor.qml:229
-#, kde-format
-msgid "Button background color:"
-msgstr "Knappars bakgrundsfärg:"
-
-#: package/contents/ui/ColorEditor.qml:236
-#, kde-format
-msgid "Button mouse over color:"
-msgstr "Knappars färg för mus över:"
-
-#: package/contents/ui/ColorEditor.qml:243
-#, kde-format
-msgid "Button focus color:"
-msgstr "Knappars fokusfärg:"
-
-#: package/contents/ui/ColorEditor.qml:251
-#, kde-format
-msgid "Text view text color:"
-msgstr "Textvyns textfärg:"
-
-#: package/contents/ui/ColorEditor.qml:258
-#, kde-format
-msgid "Text view background color:"
-msgstr "Textvyns bakgrundsfärg:"
-
-#: package/contents/ui/ColorEditor.qml:265
-#, kde-format
-msgid "Text view mouse over color:"
-msgstr "Textvyns färg för mus över:"
-
-#: package/contents/ui/ColorEditor.qml:272
-#, kde-format
-msgid "Text view focus color:"
-msgstr "Textvyns fokusfärg:"
-
-#: package/contents/ui/ColorEditor.qml:280
-#, kde-format
-msgid "Complementary text color:"
-msgstr "Komplementär textfärg:"
-
-#: package/contents/ui/ColorEditor.qml:287
-#, kde-format
-msgid "Complementary background color:"
-msgstr "Komplementär bakgrundsfärg:"
-
-#: package/contents/ui/ColorEditor.qml:294
-#, kde-format
-msgid "Complementary mouse over color:"
-msgstr "Komplementär färg för mus över:"
-
-#: package/contents/ui/ColorEditor.qml:301
-#, kde-format
-msgid "Complementary focus color:"
-msgstr "Komplementär fokusfärg:"
-
-#: package/contents/ui/ColorEditor.qml:313
-#: package/contents/ui/MetadataEditor.qml:137
-#, kde-format
-msgid "OK"
-msgstr "Ok"
-
-#: package/contents/ui/ColorEditor.qml:318
-#: package/contents/ui/MetadataEditor.qml:143
-#, kde-format
-msgid "Cancel"
-msgstr "Avbryt"
-
-#: package/contents/ui/delegates/actionbutton.qml:35
-#: package/contents/ui/delegates/actionbutton.qml:39
-#: package/contents/ui/delegates/checkmarks.qml:31
-#: package/contents/ui/delegates/checkmarks.qml:35
-#: package/contents/ui/delegates/checkmarks.qml:39
-#: package/contents/ui/delegates/checkmarks.qml:43
-#, kde-format
-msgid "Option"
-msgstr "Alternativ"
-
-#: package/contents/ui/delegates/button.qml:27
-#, kde-format
-msgid "ToolButton"
-msgstr "Verktygsknapp"
-
-#: package/contents/ui/delegates/button.qml:31
-#: package/contents/ui/fakecontrols/Button.qml:28
-#, kde-format
-msgid "Button"
-msgstr "Knapp"
-
-#: package/contents/ui/delegates/tabbar.qml:29
-#, kde-format
-msgid "Tab1"
-msgstr "Flik 1"
-
-#: package/contents/ui/delegates/tabbar.qml:32
-#, kde-format
-msgid "Tab2"
-msgstr "Flik 2"
-
-#: package/contents/ui/delegates/tabbar.qml:35
-#, kde-format
-msgid "Tab3"
-msgstr "Flik 3"
-
-#: package/contents/ui/delegates/textfield.qml:28
-#, kde-format
-msgid "Text"
-msgstr "Text"
-
-#: package/contents/ui/fakecontrols/CheckBox.qml:69
-#, kde-format
-msgid "Checkbox"
-msgstr "Kryssruta"
-
-#: package/contents/ui/fakecontrols/LineEdit.qml:34
-#, kde-format
-msgid "Text input…"
-msgstr "Textinmatning…"
-
-#: package/contents/ui/main.qml:32
-#, kde-format
-msgid "New Theme…"
-msgstr "Nytt tema…"
-
-#: package/contents/ui/main.qml:48
-#, kde-format
-msgid "Theme:"
-msgstr "Tema:"
-
-#: package/contents/ui/main.qml:60
-#, kde-format
-msgid "Open Folder"
-msgstr "Öppna katalog"
-
-#: package/contents/ui/main.qml:65
-#, kde-format
-msgid "Edit Metadata…"
-msgstr "Redigera metadata…"
-
-#: package/contents/ui/main.qml:82
-#, kde-format
-msgid "Edit Colors…"
-msgstr "Redigera färger…"
-
-#: package/contents/ui/main.qml:98
-#, kde-format
-msgid "Help"
-msgstr "Hjälp"
-
-#: package/contents/ui/main.qml:103
-#, kde-format
-msgid "Search…"
-msgstr "Sök…"
-
-#: package/contents/ui/main.qml:222
-#, kde-format
-msgid "This is a readonly, system wide installed theme"
-msgstr "Det här är ett skrivskyddat, systemomfattande installerat tema"
-
-#: package/contents/ui/main.qml:227
-#, kde-format
-msgid "Preview:"
-msgstr "Förhandsgranskning:"
-
-#: package/contents/ui/main.qml:242
-#, kde-format
-msgid "None"
-msgstr "Ingen"
-
-#: package/contents/ui/main.qml:242
-#, kde-format
-msgid "Image path: %1"
-msgstr "Bildsökväg: %1"
-
-#: package/contents/ui/main.qml:247
-#, kde-format
-msgid "Description: %1"
-msgstr "Beskrivning: %1"
-
-#: package/contents/ui/main.qml:252
-#, kde-format
-msgid "Missing from this theme"
-msgstr "Saknas i temat"
-
-#: package/contents/ui/main.qml:252
-#, kde-format
-msgid "Present in this theme"
-msgstr "Finns i temat"
-
-#: package/contents/ui/main.qml:257
-#, kde-format
-msgid "Show Margins"
-msgstr "Visa marginaler"
-
-#: package/contents/ui/main.qml:260
-#, kde-format
-msgid "Create with Editor…"
-msgstr "Skapa med editor…"
-
-#: package/contents/ui/main.qml:260
-#, kde-format
-msgid "Open In Editor…"
-msgstr "Öppna i editor…"
-
-#: package/contents/ui/MetadataEditor.qml:24
-#, kde-format
-msgid "New Theme"
-msgstr "Nytt tema"
-
-#: package/contents/ui/MetadataEditor.qml:24
-#, kde-format
-msgid "Edit Theme"
-msgstr "Redigera tema"
-
-#: package/contents/ui/MetadataEditor.qml:59
-#, kde-format
-msgid "Warning: don't change author or license for themes you don't own"
-msgstr "Varning: Ändra inte upphovsman och licens för teman som du inte äger"
-
-#: package/contents/ui/MetadataEditor.qml:70
-#, kde-format
-msgid "Theme Name:"
-msgstr "Temanamn:"
-
-#: package/contents/ui/MetadataEditor.qml:86
-#, kde-format
-msgid "This theme name already exists"
-msgstr "Temanamnet finns redan"
-
-#: package/contents/ui/MetadataEditor.qml:95
-#, kde-format
-msgid "Author:"
-msgstr "Upphovsman:"
-
-#: package/contents/ui/MetadataEditor.qml:103
-#, kde-format
-msgid "Email:"
-msgstr "E-post:"
-
-#: package/contents/ui/MetadataEditor.qml:111
-#, kde-format
-msgid "License:"
-msgstr "Licens:"
-
-#: package/contents/ui/MetadataEditor.qml:122
-#, kde-format
-msgid "Website:"
-msgstr "Webbplats:"
-
-#: src/main.cpp:37
+#: src/main.cpp:31
 #, kde-format
 msgid "Plasma Theme Explorer"
 msgstr "Plasma temautforskare"
 
-#: src/main.cpp:41
+#: src/main.cpp:33
+#, kde-format
+msgid "Explore and edit your Plasma themes"
+msgstr ""
+
+#: src/main.cpp:40
 #, kde-format
 msgid "The theme to open"
 msgstr "Tema att öppna"
+
+#: src/qml/ColorEditor.qml:38
+#, kde-format
+msgid "Edit Colors"
+msgstr "Redigera färger"
+
+#: src/qml/ColorEditor.qml:67
+#, kde-format
+msgid "Select Color"
+msgstr "Välj färg"
+
+#: src/qml/ColorEditor.qml:115
+#, kde-format
+msgid "Normal text"
+msgstr "Normal text"
+
+#: src/qml/ColorEditor.qml:121
+#, kde-format
+msgid "Link"
+msgstr "Länk"
+
+#: src/qml/ColorEditor.qml:125
+#, kde-format
+msgid "Visited Link"
+msgstr "Besökt länk"
+
+#: src/qml/ColorEditor.qml:148
+#, kde-format
+msgid "Complementary colors area:"
+msgstr "Komplementärt färgområde:"
+
+#: src/qml/ColorEditor.qml:163
+#, kde-format
+msgid "Label"
+msgstr "Etikett"
+
+#: src/qml/ColorEditor.qml:186
+#, kde-format
+msgid "Text color:"
+msgstr "Textfärg:"
+
+#: src/qml/ColorEditor.qml:193
+#, kde-format
+msgid "Background color:"
+msgstr "Bakgrundsfärg:"
+
+#: src/qml/ColorEditor.qml:200
+#, kde-format
+msgid "Highlight color:"
+msgstr "Markeringsfärg:"
+
+#: src/qml/ColorEditor.qml:207
+#, kde-format
+msgid "Link color:"
+msgstr "Länkfärg:"
+
+#: src/qml/ColorEditor.qml:214
+#, kde-format
+msgid "Visited link color:"
+msgstr "Besökt länkfärg:"
+
+#: src/qml/ColorEditor.qml:222
+#, kde-format
+msgid "Button text color:"
+msgstr "Knappars textfärg:"
+
+#: src/qml/ColorEditor.qml:229
+#, kde-format
+msgid "Button background color:"
+msgstr "Knappars bakgrundsfärg:"
+
+#: src/qml/ColorEditor.qml:236
+#, kde-format
+msgid "Button mouse over color:"
+msgstr "Knappars färg för mus över:"
+
+#: src/qml/ColorEditor.qml:243
+#, kde-format
+msgid "Button focus color:"
+msgstr "Knappars fokusfärg:"
+
+#: src/qml/ColorEditor.qml:251
+#, kde-format
+msgid "Text view text color:"
+msgstr "Textvyns textfärg:"
+
+#: src/qml/ColorEditor.qml:258
+#, kde-format
+msgid "Text view background color:"
+msgstr "Textvyns bakgrundsfärg:"
+
+#: src/qml/ColorEditor.qml:265
+#, kde-format
+msgid "Text view mouse over color:"
+msgstr "Textvyns färg för mus över:"
+
+#: src/qml/ColorEditor.qml:272
+#, kde-format
+msgid "Text view focus color:"
+msgstr "Textvyns fokusfärg:"
+
+#: src/qml/ColorEditor.qml:280
+#, kde-format
+msgid "Complementary text color:"
+msgstr "Komplementär textfärg:"
+
+#: src/qml/ColorEditor.qml:287
+#, kde-format
+msgid "Complementary background color:"
+msgstr "Komplementär bakgrundsfärg:"
+
+#: src/qml/ColorEditor.qml:294
+#, kde-format
+msgid "Complementary mouse over color:"
+msgstr "Komplementär färg för mus över:"
+
+#: src/qml/ColorEditor.qml:301
+#, kde-format
+msgid "Complementary focus color:"
+msgstr "Komplementär fokusfärg:"
+
+#: src/qml/ColorEditor.qml:313 src/qml/MetadataEditor.qml:137
+#, kde-format
+msgid "OK"
+msgstr "Ok"
+
+#: src/qml/ColorEditor.qml:318 src/qml/MetadataEditor.qml:143
+#, kde-format
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: src/qml/delegates/actionbutton.qml:35 src/qml/delegates/actionbutton.qml:39
+#: src/qml/delegates/checkmarks.qml:31 src/qml/delegates/checkmarks.qml:35
+#: src/qml/delegates/checkmarks.qml:39 src/qml/delegates/checkmarks.qml:43
+#, kde-format
+msgid "Option"
+msgstr "Alternativ"
+
+#: src/qml/delegates/button.qml:27
+#, kde-format
+msgid "ToolButton"
+msgstr "Verktygsknapp"
+
+#: src/qml/delegates/button.qml:31 src/qml/fakecontrols/Button.qml:28
+#, kde-format
+msgid "Button"
+msgstr "Knapp"
+
+#: src/qml/delegates/tabbar.qml:29
+#, kde-format
+msgid "Tab1"
+msgstr "Flik 1"
+
+#: src/qml/delegates/tabbar.qml:32
+#, kde-format
+msgid "Tab2"
+msgstr "Flik 2"
+
+#: src/qml/delegates/tabbar.qml:35
+#, kde-format
+msgid "Tab3"
+msgstr "Flik 3"
+
+#: src/qml/delegates/textfield.qml:28
+#, kde-format
+msgid "Text"
+msgstr "Text"
+
+#: src/qml/fakecontrols/CheckBox.qml:69
+#, kde-format
+msgid "Checkbox"
+msgstr "Kryssruta"
+
+#: src/qml/fakecontrols/LineEdit.qml:34
+#, kde-format
+msgid "Text input…"
+msgstr "Textinmatning…"
+
+#: src/qml/Main.qml:23
+#, fuzzy, kde-format
+#| msgid "Plasma Theme Explorer"
+msgctxt "@title:window"
+msgid "Plasma Theme Explorer"
+msgstr "Plasma temautforskare"
+
+#: src/qml/Main.qml:34
+#, kde-format
+msgid "New Theme…"
+msgstr "Nytt tema…"
+
+#: src/qml/Main.qml:50
+#, kde-format
+msgid "Theme:"
+msgstr "Tema:"
+
+#: src/qml/Main.qml:62
+#, kde-format
+msgid "Open Folder"
+msgstr "Öppna katalog"
+
+#: src/qml/Main.qml:67
+#, kde-format
+msgid "Edit Metadata…"
+msgstr "Redigera metadata…"
+
+#: src/qml/Main.qml:84
+#, kde-format
+msgid "Edit Colors…"
+msgstr "Redigera färger…"
+
+#: src/qml/Main.qml:100
+#, kde-format
+msgid "Help"
+msgstr "Hjälp"
+
+#: src/qml/Main.qml:105
+#, kde-format
+msgid "Search…"
+msgstr "Sök…"
+
+#: src/qml/Main.qml:224
+#, kde-format
+msgid "This is a readonly, system wide installed theme"
+msgstr "Det här är ett skrivskyddat, systemomfattande installerat tema"
+
+#: src/qml/Main.qml:229
+#, kde-format
+msgid "Preview:"
+msgstr "Förhandsgranskning:"
+
+#: src/qml/Main.qml:244
+#, kde-format
+msgid "None"
+msgstr "Ingen"
+
+#: src/qml/Main.qml:244
+#, kde-format
+msgid "Image path: %1"
+msgstr "Bildsökväg: %1"
+
+#: src/qml/Main.qml:249
+#, kde-format
+msgid "Description: %1"
+msgstr "Beskrivning: %1"
+
+#: src/qml/Main.qml:254
+#, kde-format
+msgid "Missing from this theme"
+msgstr "Saknas i temat"
+
+#: src/qml/Main.qml:254
+#, kde-format
+msgid "Present in this theme"
+msgstr "Finns i temat"
+
+#: src/qml/Main.qml:259
+#, kde-format
+msgid "Show Margins"
+msgstr "Visa marginaler"
+
+#: src/qml/Main.qml:262
+#, kde-format
+msgid "Create with Editor…"
+msgstr "Skapa med editor…"
+
+#: src/qml/Main.qml:262
+#, kde-format
+msgid "Open In Editor…"
+msgstr "Öppna i editor…"
+
+#: src/qml/MetadataEditor.qml:24
+#, kde-format
+msgid "New Theme"
+msgstr "Nytt tema"
+
+#: src/qml/MetadataEditor.qml:24
+#, kde-format
+msgid "Edit Theme"
+msgstr "Redigera tema"
+
+#: src/qml/MetadataEditor.qml:59
+#, kde-format
+msgid "Warning: don't change author or license for themes you don't own"
+msgstr "Varning: Ändra inte upphovsman och licens för teman som du inte äger"
+
+#: src/qml/MetadataEditor.qml:70
+#, kde-format
+msgid "Theme Name:"
+msgstr "Temanamn:"
+
+#: src/qml/MetadataEditor.qml:86
+#, kde-format
+msgid "This theme name already exists"
+msgstr "Temanamnet finns redan"
+
+#: src/qml/MetadataEditor.qml:95
+#, kde-format
+msgid "Author:"
+msgstr "Upphovsman:"
+
+#: src/qml/MetadataEditor.qml:103
+#, kde-format
+msgid "Email:"
+msgstr "E-post:"
+
+#: src/qml/MetadataEditor.qml:111
+#, kde-format
+msgid "License:"
+msgstr "Licens:"
+
+#: src/qml/MetadataEditor.qml:122
+#, kde-format
+msgid "Website:"
+msgstr "Webbplats:"
 
 #~ msgid "New Theme..."
 #~ msgstr "Nytt tema..."
