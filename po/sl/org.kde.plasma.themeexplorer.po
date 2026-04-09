@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-08 00:48+0000\n"
-"PO-Revision-Date: 2023-08-30 10:21+0200\n"
+"PO-Revision-Date: 2026-04-08 07:18+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -36,7 +36,7 @@ msgstr "Raziskovalnik tem za Plasmo"
 #: src/main.cpp:33
 #, kde-format
 msgid "Explore and edit your Plasma themes"
-msgstr ""
+msgstr "Raziščite in uredite svoje teme Plasma"
 
 #: src/main.cpp:40
 #, kde-format
@@ -221,11 +221,10 @@ msgid "Text input…"
 msgstr "Vnos besedila…"
 
 #: src/qml/Main.qml:23
-#, fuzzy, kde-format
-#| msgid "Plasma Theme Explorer"
+#, kde-format
 msgctxt "@title:window"
 msgid "Plasma Theme Explorer"
-msgstr "Raziskovalnik tem za Plasmo"
+msgstr "Raziskovalec tem Plasma"
 
 #: src/qml/Main.qml:34
 #, kde-format

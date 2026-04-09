@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Volkan Gezer <volkangezer@gmail.com>, 2017, 2021.
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023, 2026 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-08 00:48+0000\n"
-"PO-Revision-Date: 2023-08-30 12:35+0300\n"
+"PO-Revision-Date: 2026-04-08 12:34+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.11.70\n"
+"X-Generator: Lokalize 25.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -36,7 +36,7 @@ msgstr "Plasma Tema Gezgini"
 #: src/main.cpp:33
 #, kde-format
 msgid "Explore and edit your Plasma themes"
-msgstr ""
+msgstr "Plasma temalarınızı keşfedin ve onları düzenleyin"
 
 #: src/main.cpp:40
 #, kde-format
@@ -221,8 +221,7 @@ msgid "Text input…"
 msgstr "Metin girişi…"
 
 #: src/qml/Main.qml:23
-#, fuzzy, kde-format
-#| msgid "Plasma Theme Explorer"
+#, kde-format
 msgctxt "@title:window"
 msgid "Plasma Theme Explorer"
 msgstr "Plasma Tema Gezgini"

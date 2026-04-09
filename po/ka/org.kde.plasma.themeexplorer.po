@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-08 00:48+0000\n"
-"PO-Revision-Date: 2023-09-01 04:46+0200\n"
+"PO-Revision-Date: 2026-04-08 07:08+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -31,12 +31,12 @@ msgstr "Temuri.doghonadze@gmail.com"
 #: src/main.cpp:31
 #, kde-format
 msgid "Plasma Theme Explorer"
-msgstr "Plasma -ის თემების დათვალიერება"
+msgstr "Plasma-ის თემების დათვალიერება"
 
 #: src/main.cpp:33
 #, kde-format
 msgid "Explore and edit your Plasma themes"
-msgstr ""
+msgstr "Plasma-ის თქვენი თემების ნახვა და ჩასწორება"
 
 #: src/main.cpp:40
 #, kde-format
@@ -221,11 +221,10 @@ msgid "Text input…"
 msgstr "ტექსტის შეყვანა…"
 
 #: src/qml/Main.qml:23
-#, fuzzy, kde-format
-#| msgid "Plasma Theme Explorer"
+#, kde-format
 msgctxt "@title:window"
 msgid "Plasma Theme Explorer"
-msgstr "Plasma -ის თემების დათვალიერება"
+msgstr "Plasma-ის თემების დათვალიერება"
 
 #: src/qml/Main.qml:34
 #, kde-format

@@ -221,11 +221,10 @@ msgid "Text input…"
 msgstr "文本输入…"
 
 #: src/qml/Main.qml:23
-#, fuzzy, kde-format
-#| msgid "Plasma Theme Explorer"
+#, kde-format
 msgctxt "@title:window"
 msgid "Plasma Theme Explorer"
-msgstr "Plasma 主题浏览器"
+msgstr ""
 
 #: src/qml/Main.qml:34
 #, kde-format

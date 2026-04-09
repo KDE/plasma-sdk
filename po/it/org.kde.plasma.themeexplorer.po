@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the themeexplorer package.
 # Simone Solinas <ksolsim@gmail.com>, 2015.
-# Luigi Toscano <luigi.toscano@tiscali.it>, 2016, 2021, 2023.
+# SPDX-FileCopyrightText: 2016, 2021, 2023, 2026 Luigi Toscano <luigi.toscano@tiscali.it>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-08 00:48+0000\n"
-"PO-Revision-Date: 2023-09-01 13:05+0200\n"
+"PO-Revision-Date: 2026-04-09 00:09+0200\n"
 "Last-Translator: Luigi Toscano <luigi.toscano@tiscali.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -36,7 +36,7 @@ msgstr "Plasma Theme Explorer"
 #: src/main.cpp:33
 #, kde-format
 msgid "Explore and edit your Plasma themes"
-msgstr ""
+msgstr "Esplora e modifica i tuoi temi di Plasma"
 
 #: src/main.cpp:40
 #, kde-format
@@ -221,8 +221,7 @@ msgid "Text input…"
 msgstr "Immissione testo…"
 
 #: src/qml/Main.qml:23
-#, fuzzy, kde-format
-#| msgid "Plasma Theme Explorer"
+#, kde-format
 msgctxt "@title:window"
 msgid "Plasma Theme Explorer"
 msgstr "Plasma Theme Explorer"
