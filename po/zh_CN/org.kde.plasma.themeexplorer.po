@@ -21,12 +21,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "KDE 中国"
+msgstr "KDE 中国, Tyson Tan"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "kde-china@kde.org"
+msgstr "kde-china@kde.org, tds00@qq.com"
 
 #: src/main.cpp:31
 #, kde-format
@@ -36,7 +36,7 @@ msgstr "Plasma 主题浏览器"
 #: src/main.cpp:33
 #, kde-format
 msgid "Explore and edit your Plasma themes"
-msgstr ""
+msgstr "浏览并编辑您的 Plasma 主题"
 
 #: src/main.cpp:40
 #, kde-format
@@ -224,7 +224,7 @@ msgstr "文本输入…"
 #, kde-format
 msgctxt "@title:window"
 msgid "Plasma Theme Explorer"
-msgstr ""
+msgstr "Plasma 主题浏览器"
 
 #: src/qml/Main.qml:34
 #, kde-format
