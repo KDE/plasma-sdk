@@ -2,21 +2,21 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Volkan Gezer <volkangezer@gmail.com>, 2017, 2022.
-# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025, 2026 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2025-05-25 19:33+0300\n"
-"Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
+"PO-Revision-Date: 2026-05-02 19:50+0300\n"
+"Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: lnflogic.cpp:105
 #, kde-format
@@ -92,7 +92,7 @@ msgstr "Carl Schwan"
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Volkan Gezer, Emir SARI"
+msgstr "Volkan GEZER, Emir SARI"
 
 #: main.cpp:40
 #, kde-format
@@ -189,7 +189,7 @@ msgstr "Tema eklentisi adı:"
 #: qml/MetadataEditor.qml:55
 #, kde-format
 msgid "This theme plugin name already exists"
-msgstr "Bu tema eklenti adı halihazırda var"
+msgstr "Bu tema eklenti adı hâlihazırda var"
 
 #: qml/MetadataEditor.qml:65
 #, kde-format
