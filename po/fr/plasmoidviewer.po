@@ -5,7 +5,7 @@
 # Arnaud <arnaud.bienner@gmail.com>, 2008.
 # Sébastien Renard <Sebastien.Renard@digitalfox.org>, 2008.
 # Sébastien Renard <renard@kde.org>, 2011.
-# Xavier Besnard <xavier.besnard@kde.org>, 2011, 2013.
+# SPDX-FileCopyrightText: 2011, 2013, 2026 Xavier Besnard <xavier.besnard@kde.org>
 # Joëlle Cornavin <jcorn@free.fr>, 2013.
 # Vincent Pinon <vpinon@kde.org>, 2016, 2017.
 # Simon Depiets <sdepiets@gmail.com>, 2018.
@@ -16,15 +16,15 @@ msgstr ""
 "Project-Id-Version: plasmoidviewer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2021-01-14 12:08+0100\n"
-"Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
-"Language-Team: French <kde-francophone@kde.org>\n"
+"PO-Revision-Date: 2026-05-03 12:15+0200\n"
+"Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
+"Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 25.12.3\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -128,7 +128,7 @@ msgstr "Le conteneur %1 n'existe pas."
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Screenshot"
-msgstr "Enregistrer une copie d'écran"
+msgstr "Enregistrer une capture d'écran"
 
 #~ msgid "No description available"
 #~ msgstr "Aucune description n'est disponible"
