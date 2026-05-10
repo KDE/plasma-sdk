@@ -20,35 +20,32 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "ئابدۇقادىر ئابلىز, غەيرەت كەنجى"
+msgstr "ئابدۇقادىر ئابلىز، غەيرەت كەنجى"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "sahran.ug@gmail.com,  gheyret@gmail.com"
+msgstr "sahranbay@gmail.com, gheyret@gmail.com"
 
 #: main.cpp:37
-#, fuzzy, kde-format
-#| msgid "Plasma Widget Viewer"
+#, kde-format
 msgid "Plasmoidviewer"
-msgstr "پلازما ۋىجېت كۆرگۈ"
+msgstr "Plasma ئەپچە كۆرگۈچ"
 
 #: main.cpp:44
 #, kde-format
 msgid "Run Plasma widgets in their own window"
-msgstr "پلازما ۋىجېتلىرىنى ئۆزىنىڭ كۆزنىكىدە ئىجرا قىلىدۇ"
+msgstr "Plasma ئەپچىسىنى ئۆزىنىڭ كۆزنىكىدە ئىجرا قىلىدۇ"
 
 #: main.cpp:47
-#, fuzzy, kde-format
-#| msgid "Name of the containment plugin"
+#, kde-format
 msgid "The name of the containment plugin"
-msgstr "قاچا قىستۇرمىسىنىڭ ئاتى"
+msgstr "يۈكدان قىستۇرمىسىنىڭ ئاتى"
 
 #: main.cpp:51
-#, fuzzy, kde-format
-#| msgid "Name of the wallpaper plugin"
+#, kde-format
 msgid "The name of the applet plugin"
-msgstr "قاچا قىستۇرمىسىنىڭ ئاتى"
+msgstr "قوللانچاق قىستۇرمىسىنىڭ ئاتى"
 
 #: main.cpp:53
 #, kde-format
@@ -56,67 +53,66 @@ msgid ""
 "The formfactor to use (horizontal, vertical, mediacenter, planar or "
 "application)"
 msgstr ""
+"ئىشلىتىدىغان كۆزنەك گەۋدىسىنىڭ شەكلى (توغرىسىغا، بويىغا، ئوتتۇرا، تەكشى ياكى "
+"پىروگرامما)"
 
 #: main.cpp:58
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Do not translate floating, desktop, fullscreen, top, bottom, left nor "
-#| "right"
-#| msgid ""
-#| "The location constraint to start the Containment with (floating, desktop, "
-#| "fullscreen, top, bottom, left, right)"
+#, kde-format
 msgid ""
 "The location constraint to start the Containment with (floating, desktop, "
 "fullscreen, topedge, bottomedge, leftedge, rightedge)"
 msgstr ""
-"قاچىنى قوزغاتقاندىكى ئورۇن چەكلىمىسى (لەيلىتىش، ئۈستەلئۈستى، پۈتۈن ئېكران، "
-"ئۈستى، ئاستى، سول، ئوڭ)"
+"يۈكداننى قوزغىتىشتىكى ئورۇن چەكلىمىسى (لەيلىمە، ئۈستەلئۈستى، پۈتۈن ئېكران، "
+"ئۈستى گىرۋەك، ئاستى گىرۋەك، سول گىرۋەك، ئوڭ گىرۋەك)"
 
 #: main.cpp:63
 #, kde-format
 msgid "Set the x position of the plasmoidviewer on the Plasma desktop"
 msgstr ""
+"Plasma ئەپچە كۆرگۈچنىڭ Plasma ئۈستەلئۈستىدىكى x ئوقىدىكى ئورنىنى تەڭشەيدۇ"
 
 #: main.cpp:66
 #, kde-format
 msgid "Set the y position of the plasmoidviewer on the Plasma desktop"
 msgstr ""
+"Plasma ئەپچە كۆرگۈچنىڭ Plasma ئۈستەلئۈستىدىكى y ئوقىدىكى ئورنىنى تەڭشەيدۇ"
 
 #: main.cpp:69
 #, kde-format
 msgid "Set the window size of the plasmoidview"
-msgstr ""
+msgstr "Plasma ئەپچە كۆرگۈچنىڭ كۆزنەك چوڭلۇقىنى تەڭشەيدۇ"
 
 #: main.cpp:72
 #, kde-format
 msgid "The size in kB to set the pixmap cache to"
-msgstr ""
+msgstr "بىتلىق تەسۋىر غەملەك چوڭلۇقى كىلوبايت(KB)"
 
 #: main.cpp:75
 #, kde-format
 msgid "The name of the theme which the shell will use"
-msgstr ""
+msgstr "shell ئىشلىتىدىغان ئۆرنەكنىڭ ئاتى"
 
 #: main.cpp:78
 #, kde-format
 msgid "Data that should be passed to the applet as 'externalData' event"
 msgstr ""
+"«externalData» ھادىسىسى سۈپىتىدە قوللانچاققا يەتكۈزۈلىدىغان سانلىق مەلۇمات"
 
 #: view.cpp:123
 #, no-c-format, kde-format
 msgid "Applet %1 does not exist."
-msgstr ""
+msgstr "قوللانچاق %1 مەۋجۇت ئەمەس."
 
 #: view.cpp:140
 #, no-c-format, kde-format
 msgid "Containment %1 does not exist."
-msgstr ""
+msgstr "يۈكدان %1 مەۋجۇت ئەمەس."
 
 #: view.cpp:313
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Screenshot"
-msgstr ""
+msgstr "ئېكران كەسمىسى ساقلا"
 
 #~ msgid "No description available"
 #~ msgstr "چۈشەندۈرۈشى يوق"
