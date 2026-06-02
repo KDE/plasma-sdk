@@ -1,0 +1,415 @@
+# Uyghur translation for plasma_shell_org.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-sdk package.
+# Abduqadir Abliz <sahranbay@gmail.com>, 2026., YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-sdk\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2026-06-01 18:11-0400\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
+"Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
+"Language: ug\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+
+#: contents/applet/AppletError.qml:164
+msgid "Copy to Clipboard"
+msgstr "چاپلاش تاختىسىغا كۆچۈر"
+
+#: contents/applet/AppletError.qml:187
+msgid "View Error Details…"
+msgstr "خاتالىق تەپسىلاتىنى كۆرسەت…"
+
+#: contents/applet/CompactApplet.qml:76
+msgid "Open %1"
+msgstr "%1 نى ئاچ"
+
+#: contents/configuration/AboutPlugin.qml:21
+#: contents/configuration/AppletConfiguration.qml:304
+msgid "About"
+msgstr "ھەققىدە"
+
+#: contents/configuration/AboutPlugin.qml:50
+msgid "Send an email to %1"
+msgstr "%1 غا ئېلخەت يوللايدۇ"
+
+#: contents/configuration/AboutPlugin.qml:64
+msgctxt "@info:tooltip %1 url"
+msgid "Open website %1"
+msgstr "%1 تور بېكەتنى ئاچ"
+
+#: contents/configuration/AboutPlugin.qml:137
+msgid "Copyright"
+msgstr "نەشر ھوقۇقى"
+
+#: contents/configuration/AboutPlugin.qml:158
+msgid "License:"
+msgstr "ئىجازەتنامە:"
+
+#: contents/configuration/AboutPlugin.qml:163
+msgctxt "@info:whatsthis"
+msgid "View license text"
+msgstr ""
+
+#: contents/configuration/AboutPlugin.qml:177
+msgid "Authors"
+msgstr "يازغۇچى"
+
+#: contents/configuration/AboutPlugin.qml:189
+msgid "Credits"
+msgstr "تەشەككۈر"
+
+#: contents/configuration/AboutPlugin.qml:202
+msgid "Translators"
+msgstr "تەرجىمان"
+
+#: contents/configuration/AboutPlugin.qml:220
+msgid "Report a Bug…"
+msgstr ""
+
+#: contents/configuration/AppletConfiguration.qml:75
+msgid "Keyboard Shortcuts"
+msgstr "ھەرپتاختا تېزلەتمىسى"
+
+#: contents/configuration/AppletConfiguration.qml:352
+msgid "Apply Settings"
+msgstr "تەڭشەك قوللان"
+
+#: contents/configuration/AppletConfiguration.qml:353
+msgid ""
+"The current page has unsaved changes. Apply the changes or discard them?"
+msgstr ""
+"نۆۋەتتىكى بەتتە تېخى ساقلانمىغان ئۆزگىرىش بار. ئۆزگىرىشنى قوللىنامدۇ ياكى "
+"تاشلىۋېتەمدۇ؟"
+
+#: contents/configuration/AppletConfiguration.qml:384
+msgid "OK"
+msgstr "جەزملە"
+
+#: contents/configuration/AppletConfiguration.qml:392
+msgid "Apply"
+msgstr "قوللان"
+
+#: contents/configuration/AppletConfiguration.qml:398
+msgid "Cancel"
+msgstr "ۋاز كەچ"
+
+#: contents/configuration/ConfigCategoryDelegate.qml:27
+msgid "Open configuration page"
+msgstr "سەپلىمە بەتنى ئاچ"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:21
+msgid "Left-Button"
+msgstr "سول توپچە"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:22
+msgid "Right-Button"
+msgstr "ئوڭ توپچە"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:23
+msgid "Middle-Button"
+msgstr "ئوتتۇرا توپچە"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:24
+msgid "Back-Button"
+msgstr "قايت توپچە"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:25
+msgid "Forward-Button"
+msgstr "ئالدىغا توپچە"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:27
+msgid "Vertical-Scroll"
+msgstr "بويىغا سۈرگۈچ"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:28
+msgid "Horizontal-Scroll"
+msgstr "توغرىسىغا سۈرگۈچ"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:30
+msgid "Shift"
+msgstr "Shift"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:31
+msgid "Ctrl"
+msgstr "Ctrl"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:32
+msgid "Alt"
+msgstr "Alt"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:33
+msgid "Meta"
+msgstr "Meta"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:95
+msgctxt "Concatenation sign for shortcuts, e.g. Ctrl+Shift"
+msgid "+"
+msgstr "+"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:167
+msgctxt "@title"
+msgid "About"
+msgstr "ھەققىدە"
+
+#: contents/configuration/ConfigurationContainmentActions.qml:182
+#: contents/configuration/MouseEventInputButton.qml:14
+msgid "Add Action"
+msgstr "مەشغۇلات قوش"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:69
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "جايلاشتۇرۇش ئۆزگەرتىشنى سىستېما باشقۇرغۇچى چەكلىگەن"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:84
+msgid "Layout:"
+msgstr "جايلاشتۇرۇش:"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:98
+msgid "Wallpaper type:"
+msgstr "تام قەغەز تۈرى:"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:119
+msgid "Get New Plugins…"
+msgstr "يېڭى قىستۇرمىغا ئېرىش…"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:189
+msgid "Layout changes must be applied before other changes can be made"
+msgstr ""
+"جايلاشتۇرۇش ئۆزگەرتىلسە ئۇنى قوللانغاندىن كېيىن ئاندىن باشقا ئۆزگەرتىش ئېلىپ "
+"بېرىشقا بولىدۇ"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:193
+msgid "Apply Now"
+msgstr "ھازىرلا قوللان"
+
+#: contents/configuration/ConfigurationShortcuts.qml:18
+msgid "Shortcuts"
+msgstr "تېزلەتمە"
+
+#: contents/configuration/ConfigurationShortcuts.qml:30
+msgid "This shortcut will activate the applet as though it had been clicked."
+msgstr ""
+
+#: contents/configuration/ContainmentConfiguration.qml:27
+msgid "Wallpaper"
+msgstr "تام قەغەز"
+
+#: contents/configuration/ContainmentConfiguration.qml:32
+msgid "Mouse Actions"
+msgstr "چاشقىنەك مەشغۇلاتى"
+
+#: contents/configuration/MouseEventInputButton.qml:21
+msgid "Input Here"
+msgstr "بۇ جايغا كىرگۈزۈلىدۇ"
+
+#: contents/configuration/PanelConfiguration.qml:97
+msgid "Panel Settings"
+msgstr "كۆزنەكچە تەڭشەك"
+
+#: contents/configuration/PanelConfiguration.qml:104
+msgid "Add Spacer"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:107
+msgid "Add spacer widget to the panel"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:114
+msgid "Add Widgets…"
+msgstr "ئەپچە قوش…"
+
+#: contents/configuration/PanelConfiguration.qml:117
+msgid "Open the widget selector to drag and drop widgets to the panel"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:146
+msgid "Position"
+msgstr "ئورنى"
+
+#: contents/configuration/PanelConfiguration.qml:151
+#: contents/configuration/PanelConfiguration.qml:266
+msgid "Top"
+msgstr "ئۈستى"
+
+#: contents/configuration/PanelConfiguration.qml:152
+#: contents/configuration/PanelConfiguration.qml:268
+msgid "Right"
+msgstr "ئوڭ"
+
+#: contents/configuration/PanelConfiguration.qml:153
+#: contents/configuration/PanelConfiguration.qml:266
+msgid "Left"
+msgstr "سول"
+
+#: contents/configuration/PanelConfiguration.qml:154
+#: contents/configuration/PanelConfiguration.qml:268
+msgid "Bottom"
+msgstr "ئاستى"
+
+#: contents/configuration/PanelConfiguration.qml:174
+msgid "Set Position…"
+msgstr "ئورۇن تەڭشىكى…"
+
+#: contents/configuration/PanelConfiguration.qml:201
+msgid "Alignment"
+msgstr "توغرىلاش"
+
+#: contents/configuration/PanelConfiguration.qml:267
+msgid "Center"
+msgstr "ئوتتۇرا"
+
+#: contents/configuration/PanelConfiguration.qml:290
+msgid "Height"
+msgstr "ئېگىزلىك"
+
+#: contents/configuration/PanelConfiguration.qml:291
+msgid "Width"
+msgstr "كەڭلىك"
+
+#: contents/configuration/PanelConfiguration.qml:310
+msgid "Fill height"
+msgstr "ئېگىزلىكنى تولدۇر"
+
+#: contents/configuration/PanelConfiguration.qml:310
+msgid "Fill width"
+msgstr "كەڭلىكنى تولدۇر"
+
+#: contents/configuration/PanelConfiguration.qml:311
+msgid "Fit content"
+msgstr "مەزمۇنغا ماسلاشتۇر"
+
+#: contents/configuration/PanelConfiguration.qml:312
+msgid "Custom"
+msgstr "ئىختىيارى"
+
+#: contents/configuration/PanelConfiguration.qml:338
+msgid "Visibility"
+msgstr "كۆرۈشچانلىقى"
+
+#: contents/configuration/PanelConfiguration.qml:351
+msgid "Always visible"
+msgstr "ھەمىشە كۆرسەت"
+
+#: contents/configuration/PanelConfiguration.qml:352
+msgid "Auto hide"
+msgstr "ئۆزلۈكىدىن يوشۇر"
+
+#: contents/configuration/PanelConfiguration.qml:353
+msgid "Dodge windows"
+msgstr "كۆزنەكتىن دالدىلان"
+
+#: contents/configuration/PanelConfiguration.qml:354
+msgid "Windows Go Below"
+msgstr ""
+
+#: contents/configuration/PanelConfiguration.qml:397
+msgid "Opacity"
+msgstr "غۇۋالىقى"
+
+#: contents/configuration/PanelConfiguration.qml:411
+msgid "Adaptive"
+msgstr "ماسلىشىشچان"
+
+#: contents/configuration/PanelConfiguration.qml:412
+msgid "Opaque"
+msgstr "تۇتۇق"
+
+#: contents/configuration/PanelConfiguration.qml:413
+msgid "Translucent"
+msgstr "يېرىم سۈزۈك"
+
+#: contents/configuration/PanelConfiguration.qml:437
+msgid "Style"
+msgstr "ئۇسلۇب"
+
+#: contents/configuration/PanelConfiguration.qml:449
+#: contents/views/SdkButtons.qml:90
+msgid "Floating"
+msgstr "لەيلىتىش"
+
+#: contents/configuration/PanelConfiguration.qml:520
+msgid "Panel Width:"
+msgstr "كۆزنەكچە كەڭلىكى:"
+
+#: contents/configuration/PanelConfiguration.qml:520
+msgid "Height:"
+msgstr "ئېگىزلىك:"
+
+#: contents/configuration/PanelConfiguration.qml:555
+msgid "Focus shortcut:"
+msgstr "مەركەزلەشتۈرۈش تېزلەتمىسى:"
+
+#: contents/configuration/PanelConfiguration.qml:566
+msgid "Press this keyboard shortcut to move focus to the Panel"
+msgstr "دىققەتنى كۆزنەكچىگە مەركەزلەشتۈرۈشتە بۇ ھەرپتاختا تېزلەتمىسى بېسىلىدۇ"
+
+#: contents/configuration/PanelConfiguration.qml:582
+msgctxt "@action:button Delete the panel"
+msgid "Delete Panel"
+msgstr "كۆزنەكچە ئۆچۈر"
+
+#: contents/configuration/PanelConfiguration.qml:585
+msgid "Remove this panel; this action is undo-able"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:45
+msgid "FormFactors"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:53
+msgid "Planar"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:57
+msgid "Vertical"
+msgstr "بويىغا"
+
+#: contents/views/SdkButtons.qml:61
+msgid "Horizontal"
+msgstr "توغرىسىغا"
+
+#: contents/views/SdkButtons.qml:65
+msgid "Mediacenter"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:69
+msgid "Application"
+msgstr "پىروگرامما"
+
+#: contents/views/SdkButtons.qml:76
+msgid "Location"
+msgstr "ئورنى"
+
+#: contents/views/SdkButtons.qml:94
+msgid "Desktop"
+msgstr "ئۈستەلئۈستى"
+
+#: contents/views/SdkButtons.qml:98
+msgid "Fullscreen"
+msgstr "تولۇق ئېكران"
+
+#: contents/views/SdkButtons.qml:102
+msgid "Top Edge"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:106
+msgid "Bottom Edge"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:110
+msgid "Left Edge"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:114
+msgid "Right Edge"
+msgstr ""
+
+#: contents/views/SdkButtons.qml:126
+msgid "Configure Containment"
+msgstr ""

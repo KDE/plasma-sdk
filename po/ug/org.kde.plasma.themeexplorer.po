@@ -1,0 +1,356 @@
+# Uyghur translation for org.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-sdk package.
+# Abduqadir Abliz <sahranbay@gmail.com>, 2026., YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-sdk\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-04-08 00:48+0000\n"
+"PO-Revision-Date: 2026-06-01 18:11-0400\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
+"Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
+"Language: ug\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "ئابدۇقادىر ئابلىز، غەيرەت كەنجى"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "sahranbay@gmail.com, gheyret@gmail.com"
+
+#: src/main.cpp:31
+#, kde-format
+msgid "Plasma Theme Explorer"
+msgstr ""
+
+#: src/main.cpp:33
+#, kde-format
+msgid "Explore and edit your Plasma themes"
+msgstr ""
+
+#: src/main.cpp:40
+#, kde-format
+msgid "The theme to open"
+msgstr ""
+
+#: src/qml/ColorEditor.qml:38
+#, kde-format
+msgid "Edit Colors"
+msgstr ""
+
+#: src/qml/ColorEditor.qml:67
+#, kde-format
+msgid "Select Color"
+msgstr "رەڭ تاللا"
+
+#: src/qml/ColorEditor.qml:115
+#, kde-format
+msgid "Normal text"
+msgstr "ئادەتتىكى تېكىست"
+
+#: src/qml/ColorEditor.qml:121
+#, kde-format
+msgid "Link"
+msgstr "ئۇلانما"
+
+#: src/qml/ColorEditor.qml:125
+#, kde-format
+msgid "Visited Link"
+msgstr ""
+
+#: src/qml/ColorEditor.qml:148
+#, kde-format
+msgid "Complementary colors area:"
+msgstr ""
+
+#: src/qml/ColorEditor.qml:163
+#, kde-format
+msgid "Label"
+msgstr "بەلگە"
+
+#: src/qml/ColorEditor.qml:186
+#, kde-format
+msgid "Text color:"
+msgstr "تېكىست رەڭگى:"
+
+#: src/qml/ColorEditor.qml:193
+#, kde-format
+msgid "Background color:"
+msgstr "تەگلىك رەڭگى:"
+
+#: src/qml/ColorEditor.qml:200
+#, kde-format
+msgid "Highlight color:"
+msgstr "يورۇتۇش رەڭگى:"
+
+#: src/qml/ColorEditor.qml:207
+#, kde-format
+msgid "Link color:"
+msgstr ""
+
+#: src/qml/ColorEditor.qml:214
+#, kde-format
+msgid "Visited link color:"
+msgstr ""
+
+#: src/qml/ColorEditor.qml:222
+#, kde-format
+msgid "Button text color:"
+msgstr ""
+
+#: src/qml/ColorEditor.qml:229
+#, kde-format
+msgid "Button background color:"
+msgstr ""
+
+#: src/qml/ColorEditor.qml:236
+#, kde-format
+msgid "Button mouse over color:"
+msgstr ""
+
+#: src/qml/ColorEditor.qml:243
+#, kde-format
+msgid "Button focus color:"
+msgstr ""
+
+#: src/qml/ColorEditor.qml:251
+#, kde-format
+msgid "Text view text color:"
+msgstr ""
+
+#: src/qml/ColorEditor.qml:258
+#, kde-format
+msgid "Text view background color:"
+msgstr ""
+
+#: src/qml/ColorEditor.qml:265
+#, kde-format
+msgid "Text view mouse over color:"
+msgstr ""
+
+#: src/qml/ColorEditor.qml:272
+#, kde-format
+msgid "Text view focus color:"
+msgstr ""
+
+#: src/qml/ColorEditor.qml:280
+#, kde-format
+msgid "Complementary text color:"
+msgstr ""
+
+#: src/qml/ColorEditor.qml:287
+#, kde-format
+msgid "Complementary background color:"
+msgstr ""
+
+#: src/qml/ColorEditor.qml:294
+#, kde-format
+msgid "Complementary mouse over color:"
+msgstr ""
+
+#: src/qml/ColorEditor.qml:301
+#, kde-format
+msgid "Complementary focus color:"
+msgstr ""
+
+#: src/qml/ColorEditor.qml:313 src/qml/MetadataEditor.qml:137
+#, kde-format
+msgid "OK"
+msgstr "جەزملە"
+
+#: src/qml/ColorEditor.qml:318 src/qml/MetadataEditor.qml:143
+#, kde-format
+msgid "Cancel"
+msgstr "ۋاز كەچ"
+
+#: src/qml/delegates/actionbutton.qml:35 src/qml/delegates/actionbutton.qml:39
+#: src/qml/delegates/checkmarks.qml:31 src/qml/delegates/checkmarks.qml:35
+#: src/qml/delegates/checkmarks.qml:39 src/qml/delegates/checkmarks.qml:43
+#, kde-format
+msgid "Option"
+msgstr "تاللانما"
+
+#: src/qml/delegates/button.qml:27
+#, kde-format
+msgid "ToolButton"
+msgstr ""
+
+#: src/qml/delegates/button.qml:31 src/qml/fakecontrols/Button.qml:28
+#, kde-format
+msgid "Button"
+msgstr "توپچە"
+
+#: src/qml/delegates/tabbar.qml:29
+#, kde-format
+msgid "Tab1"
+msgstr ""
+
+#: src/qml/delegates/tabbar.qml:32
+#, kde-format
+msgid "Tab2"
+msgstr ""
+
+#: src/qml/delegates/tabbar.qml:35
+#, kde-format
+msgid "Tab3"
+msgstr ""
+
+#: src/qml/delegates/textfield.qml:28
+#, kde-format
+msgid "Text"
+msgstr "تېكىست"
+
+#: src/qml/fakecontrols/CheckBox.qml:69
+#, kde-format
+msgid "Checkbox"
+msgstr "كۆپ تاللاش"
+
+#: src/qml/fakecontrols/LineEdit.qml:34
+#, kde-format
+msgid "Text input…"
+msgstr ""
+
+#: src/qml/Main.qml:23
+#, kde-format
+msgctxt "@title:window"
+msgid "Plasma Theme Explorer"
+msgstr ""
+
+#: src/qml/Main.qml:34
+#, kde-format
+msgid "New Theme…"
+msgstr ""
+
+#: src/qml/Main.qml:50
+#, kde-format
+msgid "Theme:"
+msgstr "ئۆرنەك:"
+
+#: src/qml/Main.qml:62
+#, kde-format
+msgid "Open Folder"
+msgstr "قىسقۇچ ئاچ"
+
+#: src/qml/Main.qml:67
+#, kde-format
+msgid "Edit Metadata…"
+msgstr ""
+
+#: src/qml/Main.qml:84
+#, kde-format
+msgid "Edit Colors…"
+msgstr ""
+
+#: src/qml/Main.qml:100
+#, kde-format
+msgid "Help"
+msgstr "ياردەم"
+
+#: src/qml/Main.qml:105
+#, kde-format
+msgid "Search…"
+msgstr "ئىزدە…"
+
+#: src/qml/Main.qml:224
+#, kde-format
+msgid "This is a readonly, system wide installed theme"
+msgstr ""
+
+#: src/qml/Main.qml:229
+#, kde-format
+msgid "Preview:"
+msgstr "ئالدىن كۆزەت:"
+
+#: src/qml/Main.qml:244
+#, kde-format
+msgid "None"
+msgstr "يوق"
+
+#: src/qml/Main.qml:244
+#, kde-format
+msgid "Image path: %1"
+msgstr ""
+
+#: src/qml/Main.qml:249
+#, kde-format
+msgid "Description: %1"
+msgstr "چۈشەندۈرۈش: %1"
+
+#: src/qml/Main.qml:254
+#, kde-format
+msgid "Missing from this theme"
+msgstr ""
+
+#: src/qml/Main.qml:254
+#, kde-format
+msgid "Present in this theme"
+msgstr ""
+
+#: src/qml/Main.qml:259
+#, kde-format
+msgid "Show Margins"
+msgstr ""
+
+#: src/qml/Main.qml:262
+#, kde-format
+msgid "Create with Editor…"
+msgstr ""
+
+#: src/qml/Main.qml:262
+#, kde-format
+msgid "Open In Editor…"
+msgstr ""
+
+#: src/qml/MetadataEditor.qml:24
+#, kde-format
+msgid "New Theme"
+msgstr "يېڭى ئۆرنەك"
+
+#: src/qml/MetadataEditor.qml:24
+#, kde-format
+msgid "Edit Theme"
+msgstr ""
+
+#: src/qml/MetadataEditor.qml:59
+#, kde-format
+msgid "Warning: don't change author or license for themes you don't own"
+msgstr ""
+
+#: src/qml/MetadataEditor.qml:70
+#, kde-format
+msgid "Theme Name:"
+msgstr ""
+
+#: src/qml/MetadataEditor.qml:86
+#, kde-format
+msgid "This theme name already exists"
+msgstr ""
+
+#: src/qml/MetadataEditor.qml:95
+#, kde-format
+msgid "Author:"
+msgstr "يازغۇچى:"
+
+#: src/qml/MetadataEditor.qml:103
+#, kde-format
+msgid "Email:"
+msgstr "ئېلخەت:"
+
+#: src/qml/MetadataEditor.qml:111
+#, kde-format
+msgid "License:"
+msgstr "ئىجازەتنامە:"
+
+#: src/qml/MetadataEditor.qml:122
+#, kde-format
+msgid "Website:"
+msgstr ""
