@@ -7,7 +7,7 @@
 #ifndef VIEW_H
 #define VIEW_H
 
-#include "privateheaders/containmentview.h"
+#include <PlasmaQuick/ContainmentView>
 
 class ViewerCorona;
 
