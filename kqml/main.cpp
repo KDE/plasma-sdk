@@ -22,11 +22,8 @@
 #include <QTimer>
 
 #include <KDirWatch>
-#include <KLocalizedContext>
+#include <KLocalizedQmlContext>
 #include <KLocalizedString>
-
-#include <PlasmaQuick/QuickViewSharedEngine>
-#include <PlasmaQuick/SharedQmlEngine>
 
 #include <stdio.h>
 
@@ -102,7 +99,12 @@ int main(int argc, char *argv[])
         noFilesGiven();
     }
 
-    auto engine = PlasmaQuick::SharedQmlEngine().engine();
+    auto engine = std::make_shared<QQmlEngine>();
+
+    auto context = new KLocalizedQmlContext(engine.get());
+    context->setTranslationDomain(applicationDomain);
+    engine->rootContext()->setContextObject(context);
+
     auto watcher = new QmlFileChangeWatcher(engine, &app);
     QObject::connect(watcher, &QmlFileChangeWatcher::dirty, [&engine, files]() {
         engine->clearComponentCache();
@@ -112,8 +114,7 @@ int main(int argc, char *argv[])
     // Load files
     for (const QString &path : std::as_const(files)) {
         QUrl url = QUrl::fromUserInput(path, QDir::currentPath(), QUrl::AssumeLocalFile);
-        auto window = new PlasmaQuick::QuickViewSharedEngine();
-        window->setTranslationDomain(applicationDomain);
+        auto window = new QQuickView(engine.get(), nullptr);
         window->setTitle(url.fileName());
         window->setSource(url);
         window->show();
@@ -134,8 +135,8 @@ int main(int argc, char *argv[])
             },
             Qt::QueuedConnection);
 
-        QObject::connect(window, &PlasmaQuick::QuickViewSharedEngine::statusChanged, window, [window](QQmlComponent::Status status) {
-            if (status == QQmlComponent::Error) {
+        QObject::connect(window, &QQuickView::statusChanged, window, [window](QQuickView::Status status) {
+            if (status == QQuickView::Error) {
                 qWarning() << "Error loading file";
             }
         });
