@@ -149,8 +149,8 @@ msgstr "Explorador de motors de dades de Plasma"
 msgctxt "The name of the engine followed by the number of data sources"
 msgid "%1 Engine - 1 data source"
 msgid_plural "%1 Engine - %2 data sources"
-msgstr[0] "Motor %1 - 1 font de dades"
-msgstr[1] "Motor %1 - %2 fonts de dades"
+msgstr[0] "Motor %1 – 1 font de dades"
+msgstr[1] "Motor %1 – %2 fonts de dades"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_sourceRequester)
 #: engineexplorer.ui:50
