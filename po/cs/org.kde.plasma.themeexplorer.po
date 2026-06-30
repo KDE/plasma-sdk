@@ -2,46 +2,47 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Vít Pelčák <vit@pelcak.org>, 2015, 2016.
 # SPDX-FileCopyrightText: 2021, 2024 Vit Pelcak <vit@pelcak.org>
+# SPDX-FileCopyrightText: 2026 Libor Filípek <libor.filipek@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-08 00:48+0000\n"
-"PO-Revision-Date: 2024-06-25 10:54+0200\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-06-29 16:46+0200\n"
+"Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 26.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Vít Pelčák"
+msgstr "Vít Pelčák,Libor Filípek"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "vit@pelcak.org"
+msgstr "vit@pelcak.org,libor.filipek@gmail.com"
 
 #: src/main.cpp:31
 #, kde-format
 msgid "Plasma Theme Explorer"
-msgstr ""
+msgstr "Průzkumník motivů Plasma"
 
 #: src/main.cpp:33
 #, kde-format
 msgid "Explore and edit your Plasma themes"
-msgstr ""
+msgstr "Prohlížejte a upravujte vaše Motivy Plasma"
 
 #: src/main.cpp:40
 #, kde-format
 msgid "The theme to open"
-msgstr ""
+msgstr "Motiv, který se má otevřít"
 
 #: src/qml/ColorEditor.qml:38
 #, kde-format
@@ -66,12 +67,12 @@ msgstr "Odkaz"
 #: src/qml/ColorEditor.qml:125
 #, kde-format
 msgid "Visited Link"
-msgstr ""
+msgstr "Navštívený odkaz"
 
 #: src/qml/ColorEditor.qml:148
 #, kde-format
 msgid "Complementary colors area:"
-msgstr ""
+msgstr "Oblast doplňkových barev:"
 
 #: src/qml/ColorEditor.qml:163
 #, kde-format
@@ -101,67 +102,67 @@ msgstr "Barva odkazu:"
 #: src/qml/ColorEditor.qml:214
 #, kde-format
 msgid "Visited link color:"
-msgstr ""
+msgstr "Barva navštíveného odkazu:"
 
 #: src/qml/ColorEditor.qml:222
 #, kde-format
 msgid "Button text color:"
-msgstr ""
+msgstr "Barva textu tlačítka:"
 
 #: src/qml/ColorEditor.qml:229
 #, kde-format
 msgid "Button background color:"
-msgstr ""
+msgstr "Barva pozadí tlačítka:"
 
 #: src/qml/ColorEditor.qml:236
 #, kde-format
 msgid "Button mouse over color:"
-msgstr ""
+msgstr "Barva při najetí myší na tlačítko:"
 
 #: src/qml/ColorEditor.qml:243
 #, kde-format
 msgid "Button focus color:"
-msgstr ""
+msgstr "Barva zvýraznění tlačítka:"
 
 #: src/qml/ColorEditor.qml:251
 #, kde-format
 msgid "Text view text color:"
-msgstr ""
+msgstr "Barva textu v textovém zobrazení:"
 
 #: src/qml/ColorEditor.qml:258
 #, kde-format
 msgid "Text view background color:"
-msgstr ""
+msgstr "Barva pozadí v textovém zobrazení:"
 
 #: src/qml/ColorEditor.qml:265
 #, kde-format
 msgid "Text view mouse over color:"
-msgstr ""
+msgstr "Barva textu při najetí myší:"
 
 #: src/qml/ColorEditor.qml:272
 #, kde-format
 msgid "Text view focus color:"
-msgstr ""
+msgstr "Barva zvýraznění v textovém zobrazení:"
 
 #: src/qml/ColorEditor.qml:280
 #, kde-format
 msgid "Complementary text color:"
-msgstr ""
+msgstr "Barva doplňkového textu:"
 
 #: src/qml/ColorEditor.qml:287
 #, kde-format
 msgid "Complementary background color:"
-msgstr ""
+msgstr "Doplňková barva pozadí:"
 
 #: src/qml/ColorEditor.qml:294
 #, kde-format
 msgid "Complementary mouse over color:"
-msgstr ""
+msgstr "Doplňková barva při najetí myší:"
 
 #: src/qml/ColorEditor.qml:301
 #, kde-format
 msgid "Complementary focus color:"
-msgstr ""
+msgstr "Doplňková barva zvýraznění:"
 
 #: src/qml/ColorEditor.qml:313 src/qml/MetadataEditor.qml:137
 #, kde-format
@@ -183,7 +184,7 @@ msgstr "Volba"
 #: src/qml/delegates/button.qml:27
 #, kde-format
 msgid "ToolButton"
-msgstr ""
+msgstr "Tlačítko nástroje"
 
 #: src/qml/delegates/button.qml:31 src/qml/fakecontrols/Button.qml:28
 #, kde-format
@@ -224,7 +225,7 @@ msgstr "Textový vstup..."
 #, kde-format
 msgctxt "@title:window"
 msgid "Plasma Theme Explorer"
-msgstr ""
+msgstr "Průzkumník motivů Plasma"
 
 #: src/qml/Main.qml:34
 #, kde-format
@@ -264,7 +265,7 @@ msgstr "Hledat…"
 #: src/qml/Main.qml:224
 #, kde-format
 msgid "This is a readonly, system wide installed theme"
-msgstr ""
+msgstr "Jedná se o systémově nainstalovaný motiv, který je pouze pro čtení."
 
 #: src/qml/Main.qml:229
 #, kde-format
@@ -295,7 +296,7 @@ msgstr "Chybí v tomto motivu"
 #: src/qml/Main.qml:254
 #, kde-format
 msgid "Present in this theme"
-msgstr ""
+msgstr "Obsah tohoto motivu"
 
 #: src/qml/Main.qml:259
 #, kde-format
@@ -325,7 +326,7 @@ msgstr "Upravit motiv"
 #: src/qml/MetadataEditor.qml:59
 #, kde-format
 msgid "Warning: don't change author or license for themes you don't own"
-msgstr ""
+msgstr "Upozornění: neměňte autora ani licenci u motivů, které nevlastníte"
 
 #: src/qml/MetadataEditor.qml:70
 #, kde-format
@@ -335,7 +336,7 @@ msgstr "Název motivu:"
 #: src/qml/MetadataEditor.qml:86
 #, kde-format
 msgid "This theme name already exists"
-msgstr ""
+msgstr "Tento název motivu již existuje"
 
 #: src/qml/MetadataEditor.qml:95
 #, kde-format
