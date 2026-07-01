@@ -127,7 +127,7 @@ msgstr "Salveguarda instantanee de schermo"
 #~ msgstr "Il monstra un lista de applets cognoscite"
 
 #~ msgid "Displays a list of known wallpapers"
-#~ msgstr "Il monstra un lista de tapete de papiro cognoscite"
+#~ msgstr "Il monstra un lista de fundo de schermo cognoscite"
 
 #~ msgid "Displays a list of known containments"
 #~ msgstr "Il monstra un lista de receptaculos cognoscite"
@@ -164,7 +164,7 @@ msgstr "Salveguarda instantanee de schermo"
 #~ "Name of the wallpaper plugin. Requires a containment plugin to be "
 #~ "specified."
 #~ msgstr ""
-#~ "Nomine del plugin de tapete de papiro. Il require que un plugin de "
+#~ "Nomine del plugin de fundo de schermo. Il require que un plugin de "
 #~ "receptaculo sia specificate."
 
 #~ msgid ""
