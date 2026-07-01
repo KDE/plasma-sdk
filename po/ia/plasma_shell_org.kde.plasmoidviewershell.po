@@ -174,7 +174,7 @@ msgstr "Disposition:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:98
 msgid "Wallpaper type:"
-msgstr "Typo de Tapete de papiro:"
+msgstr "Typo de Fundo de schermo:"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:119
 msgid "Get New Plugins…"
@@ -200,7 +200,7 @@ msgstr "Iste via breve activara le applet como si illo ha essite pulsate."
 
 #: contents/configuration/ContainmentConfiguration.qml:27
 msgid "Wallpaper"
-msgstr "Tapete de papiro"
+msgstr "Fundo de schermo"
 
 #: contents/configuration/ContainmentConfiguration.qml:32
 msgid "Mouse Actions"
