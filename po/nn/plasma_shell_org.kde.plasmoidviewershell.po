@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-04-18 15:40+0200\n"
+"PO-Revision-Date: 2026-07-07 18:39+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.11.70\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -195,11 +195,11 @@ msgstr "Denne snøggtasten vil starta skjermelementet som om du trykte på det."
 
 #: contents/configuration/ContainmentConfiguration.qml:27
 msgid "Wallpaper"
-msgstr "Bakgrunnsbilete"
+msgstr "Bakgrunns­bilete"
 
 #: contents/configuration/ContainmentConfiguration.qml:32
 msgid "Mouse Actions"
-msgstr "Musehandlingar"
+msgstr "Muse­handlingar"
 
 #: contents/configuration/MouseEventInputButton.qml:21
 msgid "Input Here"
