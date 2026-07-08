@@ -59,7 +59,7 @@ View::View(ViewerCorona *cor, QWindow *parent)
     : PlasmaQuick::ContainmentView(cor, parent)
 {
     cor->setView(this);
-    engine()->rootContext()->setContextProperty("desktop", this);
+    rootContext()->setContextProperty("desktop", this);
     setSource(QUrl::fromLocalFile(cor->kPackage().filePath("views", "Desktop.qml")));
 }
 
