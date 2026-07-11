@@ -56,7 +56,7 @@ void CuttleFishPlugin::contextMenuAboutToShow(KTextEditor::View *view, QMenu *me
     m_decorated << menu;
     QAction *action = new QAction(menu);
     action->setIcon(QIcon::fromTheme("cuttlefish"));
-    action->setText(i18n("Insert Icon with Cuttlefish"));
+    action->setText(i18n("Insert Icon with Icon Explorer"));
     menu->addAction(action);
 
     connect(action, &QAction::triggered, [this] {
