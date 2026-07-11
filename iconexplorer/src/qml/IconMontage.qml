@@ -68,7 +68,7 @@ Rectangle {
         }
         QQC2.Label {
             anchors.verticalCenter: parent.verticalCenter
-            text: "Montage made with Icon Explorer"
+            text: "Montage made with Cuttlefish"
         }
         Behavior on opacity {
             OpacityAnimator {
