@@ -59,6 +59,7 @@ MouseArea {
         font.pointSize: iconSize > 96 ? Kirigami.Theme.defaultFont.pointSize : Kirigami.Theme.smallFont.pointSize
         text: iconName
         wrapMode: Text.Wrap
+        elide: Text.ElideRight
         maximumLineCount: 3
         horizontalAlignment: Text.AlignHCenter
         opacity: delegateRoot.GridView.isCurrentItem ? 1.0 : 0.7
