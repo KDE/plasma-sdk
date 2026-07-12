@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cuttlefish_editorplugin\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-12 00:46+0000\n"
 "PO-Revision-Date: 2023-10-22 15:31+0300\n"
 "Last-Translator: Elkana Bardugo <ttv200@gmail.com>\n"
 "Language-Team: Hebrew\n"
@@ -16,6 +16,7 @@ msgstr ""
 "X-Generator: Poedit 3.3.2\n"
 
 #: iconexplorerplugin.cpp:59
-#, kde-format
-msgid "Insert Icon with Cuttlefish"
+#, fuzzy, kde-format
+#| msgid "Insert Icon with Cuttlefish"
+msgid "Insert Icon with Icon Explorer"
 msgstr "הוספת סמל עם Cuttlefish"

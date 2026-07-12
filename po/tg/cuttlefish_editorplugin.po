@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-12 00:46+0000\n"
 "PO-Revision-Date: 2019-09-18 10:45+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -18,6 +18,7 @@ msgstr ""
 "X-Generator: Lokalize 19.04.3\n"
 
 #: iconexplorerplugin.cpp:59
-#, kde-format
-msgid "Insert Icon with Cuttlefish"
+#, fuzzy, kde-format
+#| msgid "Insert Icon with Cuttlefish"
+msgid "Insert Icon with Icon Explorer"
 msgstr "Дарҷ кардани нишона ба воситаи Cuttlefish"

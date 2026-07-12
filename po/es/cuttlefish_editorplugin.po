@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cuttlefish_editorplugin\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-12 00:46+0000\n"
 "PO-Revision-Date: 2025-06-04 19:19+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -20,6 +20,7 @@ msgstr ""
 "X-Generator: Lokalize 1.5\n"
 
 #: iconexplorerplugin.cpp:59
-#, kde-format
-msgid "Insert Icon with Cuttlefish"
+#, fuzzy, kde-format
+#| msgid "Insert Icon with Cuttlefish"
+msgid "Insert Icon with Icon Explorer"
 msgstr "Insertar icono con Cuttlefish"
