@@ -18,7 +18,6 @@ msgstr ""
 "X-Crowdin-File-ID: 43391\n"
 
 #: iconexplorerplugin.cpp:59
-#, fuzzy, kde-format
-#| msgid "Insert Icon with Cuttlefish"
+#, kde-format
 msgid "Insert Icon with Icon Explorer"
-msgstr "使用 Cuttlefish 插入图标"
+msgstr ""
