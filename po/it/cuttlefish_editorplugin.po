@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Luigi Toscano <luigi.toscano@tiscali.it>, 2016.
+# SPDX-FileCopyrightText: 2016, 2026 Luigi Toscano <luigi.toscano@tiscali.it>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-12 00:46+0000\n"
-"PO-Revision-Date: 2016-02-08 22:48+0100\n"
+"PO-Revision-Date: 2026-07-13 18:08+0200\n"
 "Last-Translator: Luigi Toscano <luigi.toscano@tiscali.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,10 +15,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 26.04.0\n"
 
 #: iconexplorerplugin.cpp:59
-#, fuzzy, kde-format
-#| msgid "Insert Icon with Cuttlefish"
+#, kde-format
 msgid "Insert Icon with Icon Explorer"
-msgstr "Inserisci icona con Cuttlefish"
+msgstr "Inserisci icona con Esploratore di icone"
