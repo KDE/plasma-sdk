@@ -36,7 +36,7 @@ public:
         m_view = view;
     }
 
-    QRect screenGeometry(int id) const override
+    QRect screenGeometry(uint id) const override
     {
         Q_UNUSED(id);
         if (m_view) {
@@ -44,11 +44,6 @@ public:
         } else {
             return QRect();
         }
-    }
-
-    int screenForContainment(const Plasma::Containment *containment) const override
-    {
-        return 0;
     }
 
 private:
