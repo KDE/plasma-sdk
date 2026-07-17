@@ -1,11 +1,13 @@
 {
     "KPlugin": {
         "Description": "Invokes Icon Explorer icon picker",
+        "Description[ar]": "يستدعي منتقي الأيقونة لمتصفح الأيقونات",
         "Description[ca@valencia]": "Invoca el selector d'icones «Explorador d'icones»",
         "Description[ca]": "Invoca el selector d'icones «Explorador d'icones»",
         "Description[cs]": "Spustí nástroj pro výběr ikon Iconexplorer",
         "Description[es]": "Llama al selector de iconos del Explorador de iconos",
         "Description[eu]": "Ikono-esploratzailearen ikono-hautatzaileari dei egiten dio",
+        "Description[fr]": "Invoque le sélecteur d'icônes « IconExplorer »",
         "Description[he]": "הפעלת בורר הסמלים דפדפן הסמלים",
         "Description[it]": "Invoca il selettore di icone di Esploratore icone",
         "Description[ka]": "გაუშვებს ხატულების დამთვალიერებელს, რომლითაც ხატულას აირჩევთ",
