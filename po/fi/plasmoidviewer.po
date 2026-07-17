@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoidviewer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-17 00:46+0000\n"
 "PO-Revision-Date: 2018-03-18 17:00+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -100,17 +100,17 @@ msgstr "Työpöytäkuoren käyttämän teeman nimi"
 msgid "Data that should be passed to the applet as 'externalData' event"
 msgstr "Data, joka pitäisi välittää sovellukseen ”externalData”-tapahtumana"
 
-#: view.cpp:123
+#: view.cpp:118
 #, no-c-format, kde-format
 msgid "Applet %1 does not exist."
 msgstr "Sovelmaa %1 ei ole olemassa."
 
-#: view.cpp:140
+#: view.cpp:135
 #, no-c-format, kde-format
 msgid "Containment %1 does not exist."
 msgstr "Sovelmasäiliötä %1 ei ole olemassa."
 
-#: view.cpp:313
+#: view.cpp:308
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Screenshot"

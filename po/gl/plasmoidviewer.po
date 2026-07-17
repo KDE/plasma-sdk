@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmoidviewer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-17 00:46+0000\n"
 "PO-Revision-Date: 2023-06-11 21:52+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -106,17 +106,17 @@ msgid "Data that should be passed to the applet as 'externalData' event"
 msgstr ""
 "Data que debería pasarse ao miniaplicativo como o evento «externalData»."
 
-#: view.cpp:123
+#: view.cpp:118
 #, no-c-format, kde-format
 msgid "Applet %1 does not exist."
 msgstr "O miniaplicativo %1 non existe."
 
-#: view.cpp:140
+#: view.cpp:135
 #, no-c-format, kde-format
 msgid "Containment %1 does not exist."
 msgstr "O contedor %1 non existe."
 
-#: view.cpp:313
+#: view.cpp:308
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Screenshot"

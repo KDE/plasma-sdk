@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-17 00:46+0000\n"
 "PO-Revision-Date: 2022-12-06 09:10+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -96,17 +96,17 @@ msgstr "გარსის მიერ გამოყენებული თ
 msgid "Data that should be passed to the applet as 'externalData' event"
 msgstr "'externalData' მოვლენით აპლეტისთვის გადასაცემი მონაცემები"
 
-#: view.cpp:123
+#: view.cpp:118
 #, no-c-format, kde-format
 msgid "Applet %1 does not exist."
 msgstr "აპლეტი %1 არ არსებობს."
 
-#: view.cpp:140
+#: view.cpp:135
 #, no-c-format, kde-format
 msgid "Containment %1 does not exist."
 msgstr "შეზღუდვა %1 არ არსებობს."
 
-#: view.cpp:313
+#: view.cpp:308
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Screenshot"
