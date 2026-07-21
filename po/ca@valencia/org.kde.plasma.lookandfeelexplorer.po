@@ -75,7 +75,7 @@ msgstr "Explora i edita els vostres temes globals de Plasma"
 #: main.cpp:33
 #, kde-format
 msgid "© KDE Community"
-msgstr "© Comunitat KDE"
+msgstr "© La comunitat KDE"
 
 #: main.cpp:34
 #, kde-format
