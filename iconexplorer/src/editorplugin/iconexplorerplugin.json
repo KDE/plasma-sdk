@@ -2,6 +2,7 @@
     "KPlugin": {
         "Description": "Invokes Icon Explorer icon picker",
         "Description[ar]": "يستدعي منتقي الأيقونة لمتصفح الأيقونات",
+        "Description[bg]": "Извиква Icon Explorer за избор на икони",
         "Description[ca@valencia]": "Invoca el selector d'icones «Explorador d'icones»",
         "Description[ca]": "Invoca el selector d'icones «Explorador d'icones»",
         "Description[cs]": "Spustí nástroj pro výběr ikon Iconexplorer",
