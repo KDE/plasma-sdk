@@ -22,6 +22,7 @@
         "Description[sv]": "Startar ikonutforskarens ikonväljare",
         "Description[tr]": "Simge Gezgini’nin simge seçicisini çağırır",
         "Description[uk]": "Запускає засіб вибору піктограми «Навігатор піктограмами»",
+        "Description[zh_TW]": "呼叫圖示挑選器",
         "Name": "Icon Picker",
         "Name[ar]": "منتقي الأيقونة",
         "Name[az]": "İkon seçimi",
