@@ -12,7 +12,9 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QQmlEngine>
 #include <kpackage/package.h>
+#include <qqmlintegration.h>
 
 namespace Plasma
 {
@@ -25,6 +27,8 @@ class ColorEditor;
 class ThemeModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 
     Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
     Q_PROPERTY(ThemeListModel *themeList READ themeList CONSTANT)
@@ -48,8 +52,12 @@ public:
         FrameSvgPrefixes,
     };
 
-    explicit ThemeModel(QObject *parent = nullptr);
-    ~ThemeModel() override;
+    static ThemeModel *create(QQmlEngine *, QJSEngine *)
+    {
+        static ThemeModel instance;
+        QQmlEngine::setObjectOwnership(&instance, QQmlEngine::CppOwnership);
+        return &instance;
+    };
 
     ThemeListModel *themeList();
     ColorEditor *colorEditor();
@@ -82,6 +90,7 @@ private Q_SLOTS:
 
 private:
     QHash<int, QByteArray> m_roleNames;
+    explicit ThemeModel();
 
     Plasma::Theme *m_theme;
     QString m_themeName;

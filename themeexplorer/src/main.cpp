@@ -46,7 +46,8 @@ int main(int argc, char **argv)
     KLocalizedString::setApplicationDomain(QByteArrayLiteral("org.kde.plasma.themeexplorer"));
 
     QQmlApplicationEngine engine;
-    auto themeModel = new ThemeModel(&engine);
+
+    auto themeModel = ThemeModel::create(nullptr, nullptr);
     if (parser.isSet(themeOption)) {
         themeModel->setTheme(parser.value(themeOption));
         engine.rootContext()->setContextProperty("commandlineTheme", parser.value(themeOption));
@@ -54,7 +55,6 @@ int main(int argc, char **argv)
         themeModel->setTheme("default");
         engine.rootContext()->setContextProperty("commandlineTheme", "default");
     }
-    engine.rootContext()->setContextProperty("themeModel", QVariant::fromValue(themeModel));
 
     KLocalization::setupLocalizedContext(&engine);
     engine.loadFromModule("org.kde.plasma.themeexplorer", "Main");

@@ -11,6 +11,8 @@ import org.kde.kirigami as Kirigami
 
 import org.kde.ki18n
 
+import org.kde.plasma.themeexplorer
+
 QQC2.Dialog {
     id: dialog
 
@@ -125,15 +127,15 @@ QQC2.Dialog {
 
     onAccepted: {
         if (dialog.newTheme) {
-            themeModel.createNewTheme(nameField.text, authorField.text, emailField.text, licenseField.editText, websiteField.text);
-            for (let i = 0; i < themeModel.themeList.count; ++i) {
-                if (nameField.text == themeModel.themeList.get(i).packageNameRole) {
+            ThemeModel.createNewTheme(nameField.text, authorField.text, emailField.text, licenseField.editText, websiteField.text);
+            for (let i = 0; i < ThemeModel.themeList.count; ++i) {
+                if (nameField.text == ThemeModel.themeList.get(i).packageNameRole) {
                     themeSelector.currentIndex = i;
                     break;
                 }
             }
         } else {
-            themeModel.editThemeMetaData(nameField.text, authorField.text, emailField.text, licenseField.editText, websiteField.text);
+            ThemeModel.editThemeMetaData(nameField.text, authorField.text, emailField.text, licenseField.editText, websiteField.text);
         }
     }
 }

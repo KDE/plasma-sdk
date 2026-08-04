@@ -27,8 +27,8 @@
 
 using namespace Qt::Literals::StringLiterals;
 
-ThemeModel::ThemeModel(QObject *parent)
-    : QAbstractListModel(parent)
+ThemeModel::ThemeModel()
+    : QAbstractListModel(nullptr)
     , m_theme(new Plasma::Theme)
     , m_themeName(QStringLiteral("default"))
     , m_imageSet(m_themeName, "plasma/desktoptheme")
@@ -48,10 +48,6 @@ ThemeModel::ThemeModel(QObject *parent)
     m_roleNames.insert(FrameSvgPrefixes, "frameSvgPrefixes");
 
     load();
-}
-
-ThemeModel::~ThemeModel()
-{
 }
 
 ThemeListModel *ThemeModel::themeList()

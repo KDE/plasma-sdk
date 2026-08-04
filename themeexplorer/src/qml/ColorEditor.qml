@@ -4,13 +4,16 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.3
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.15
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 import QtQuick.Dialogs
 import org.kde.kirigami as Kirigami
 import "fakecontrols" as FakeControls
 
+import org.kde.ki18n
+
+import org.kde.plasma.themeexplorer
 
 Dialog {
     id: dialog
@@ -35,36 +38,36 @@ Dialog {
     property alias complementaryHoverColor: complementaryHoverButton.color
     property alias complementaryFocusColor: complementaryFocusButton.color
 
-    title: i18n("Edit Colors");
+    title: KI18n.i18n("Edit Colors");
 
     onVisibleChanged: {
         if (visible) {
-            textColor = themeModel.colorEditor.textColor;
-            backgroundColor = themeModel.colorEditor.backgroundColor;
-            highlightColor = themeModel.colorEditor.highlightColor;
-            linkColor = themeModel.colorEditor.linkColor;
-            visitedLinkColor = themeModel.colorEditor.visitedLinkColor;
+            textColor = ThemeModel.colorEditor.textColor;
+            backgroundColor = ThemeModel.colorEditor.backgroundColor;
+            highlightColor = ThemeModel.colorEditor.highlightColor;
+            linkColor = ThemeModel.colorEditor.linkColor;
+            visitedLinkColor = ThemeModel.colorEditor.visitedLinkColor;
 
-            buttonTextColor = themeModel.colorEditor.buttonTextColor;
-            buttonBackgroundColor = themeModel.colorEditor.buttonBackgroundColor;
-            buttonHoverColor = themeModel.colorEditor.buttonHoverColor;
-            buttonFocusColor = themeModel.colorEditor.buttonFocusColor;
+            buttonTextColor = ThemeModel.colorEditor.buttonTextColor;
+            buttonBackgroundColor = ThemeModel.colorEditor.buttonBackgroundColor;
+            buttonHoverColor = ThemeModel.colorEditor.buttonHoverColor;
+            buttonFocusColor = ThemeModel.colorEditor.buttonFocusColor;
 
-            viewTextColor = themeModel.colorEditor.viewTextColor;
-            viewBackgroundColor = themeModel.colorEditor.viewBackgroundColor;
-            viewHoverColor = themeModel.colorEditor.viewHoverColor;
-            viewFocusColor = themeModel.colorEditor.viewFocusColor;
+            viewTextColor = ThemeModel.colorEditor.viewTextColor;
+            viewBackgroundColor = ThemeModel.colorEditor.viewBackgroundColor;
+            viewHoverColor = ThemeModel.colorEditor.viewHoverColor;
+            viewFocusColor = ThemeModel.colorEditor.viewFocusColor;
 
-            complementaryTextColor = themeModel.colorEditor.complementaryTextColor;
-            complementaryBackgroundColor = themeModel.colorEditor.complementaryBackgroundColor;
-            complementaryHoverColor = themeModel.colorEditor.complementaryHoverColor;
-            complementaryFocusColor = themeModel.colorEditor.complementaryFocusColor;
+            complementaryTextColor = ThemeModel.colorEditor.complementaryTextColor;
+            complementaryBackgroundColor = ThemeModel.colorEditor.complementaryBackgroundColor;
+            complementaryHoverColor = ThemeModel.colorEditor.complementaryHoverColor;
+            complementaryFocusColor = ThemeModel.colorEditor.complementaryFocusColor;
         }
     }
     ColorDialog {
         id: colorDialog
         modality: Qt.WindowModal
-        title: i18n("Select Color")
+        title: KI18n.i18n("Select Color")
         property Item activeButton
         onAccepted: {
             activeButton.color = color;
@@ -74,18 +77,13 @@ Dialog {
         implicitWidth:  Kirigami.Units.gridUnit * 50
         implicitHeight: Kirigami.Units.gridUnit * 42
 
-        Keys.onPressed: {
+        Keys.onPressed: event => {
             if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
                 dialog.accept();
             } else if (event.key == Qt.Key_Escape) {
                 dialog.reject();
             }
         }
-
-        SystemPalette {
-            id: palette
-        }
-        color: palette.window
 
         ColumnLayout {
             anchors.fill: parent
@@ -112,17 +110,17 @@ Dialog {
                         anchors.centerIn: parent
                         Label {
                             Layout.alignment: Qt.AlignHCenter
-                            text: i18n("Normal text")
+                            text: KI18n.i18n("Normal text")
                             color: textColor
                         }
                         RowLayout {
                             Layout.alignment: Qt.AlignHCenter
                             Label {
-                                text: i18n("Link")
+                                text: KI18n.i18n("Link")
                                 color: linkColor
                             }
                             Label {
-                                text: i18n("Visited Link")
+                                text: KI18n.i18n("Visited Link")
                                 color: visitedLinkColor
                             }
                         }
@@ -160,7 +158,7 @@ Dialog {
                         horizontalCenter: complementaryBar.horizontalCenter
                     }
                     Label {
-                        text: i18n("Label")
+                        text: KI18n.i18n("Label")
                         color: complementaryTextColor
                     }
                     FakeControls.CheckBox {
@@ -183,35 +181,35 @@ Dialog {
                         columnSpacing: Kirigami.Units.smallSpacing
 
                         FormLabel {
-                            text: i18n("Text color:")
+                            text: KI18n.i18n("Text color:")
                             buddy: textButton
                         }
                         ColorButton {
                             id: textButton
                         }
                         FormLabel {
-                            text: i18n("Background color:")
+                            text: KI18n.i18n("Background color:")
                             buddy: backgroundButton
                         }
                         ColorButton {
                             id: backgroundButton
                         }
                         FormLabel {
-                            text: i18n("Highlight color:")
+                            text: KI18n.i18n("Highlight color:")
                             buddy: highlightButton
                         }
                         ColorButton {
                             id: highlightButton
                         }
                         FormLabel {
-                            text: i18n("Link color:")
+                            text: KI18n.i18n("Link color:")
                             buddy: linkButton
                         }
                         ColorButton {
                             id: linkButton
                         }
                         FormLabel {
-                            text: i18n("Visited link color:")
+                            text: KI18n.i18n("Visited link color:")
                             buddy: visitedLinkButton
                         }
                         ColorButton {
@@ -219,28 +217,28 @@ Dialog {
                         }
 
                         FormLabel {
-                            text: i18n("Button text color:")
+                            text: KI18n.i18n("Button text color:")
                             buddy: buttonTextButton
                         }
                         ColorButton {
                             id: buttonTextButton
                         }
                         FormLabel {
-                            text: i18n("Button background color:")
+                            text: KI18n.i18n("Button background color:")
                             buddy: buttonBackgroundButton
                         }
                         ColorButton {
                             id: buttonBackgroundButton
                         }
                         FormLabel {
-                            text: i18n("Button mouse over color:")
+                            text: KI18n.i18n("Button mouse over color:")
                             buddy: buttonHoverButton
                         }
                         ColorButton {
                             id: buttonHoverButton
                         }
                         FormLabel {
-                            text: i18n("Button focus color:")
+                            text: KI18n.i18n("Button focus color:")
                             buddy: buttonFocusButton
                         }
                         ColorButton {
@@ -248,28 +246,28 @@ Dialog {
                         }
 
                         FormLabel {
-                            text: i18n("Text view text color:")
+                            text: KI18n.i18n("Text view text color:")
                             buddy: viewTextButton
                         }
                         ColorButton {
                             id: viewTextButton
                         }
                         FormLabel {
-                            text: i18n("Text view background color:")
+                            text: KI18n.i18n("Text view background color:")
                             buddy: viewBackgroundButton
                         }
                         ColorButton {
                             id: viewBackgroundButton
                         }
                         FormLabel {
-                            text: i18n("Text view mouse over color:")
+                            text: KI18n.i18n("Text view mouse over color:")
                             buddy: viewHoverButton
                         }
                         ColorButton {
                             id: viewHoverButton
                         }
                         FormLabel {
-                            text: i18n("Text view focus color:")
+                            text: KI18n.i18n("Text view focus color:")
                             buddy: viewFocusButton
                         }
                         ColorButton {
@@ -277,28 +275,28 @@ Dialog {
                         }
 
                         FormLabel {
-                            text: i18n("Complementary text color:")
+                            text: KI18n.i18n("Complementary text color:")
                             buddy: complementaryTextButton
                         }
                         ColorButton {
                             id: complementaryTextButton
                         }
                         FormLabel {
-                            text: i18n("Complementary background color:")
+                            text: KI18n.i18n("Complementary background color:")
                             buddy: complementaryBackgroundButton
                         }
                         ColorButton {
                             id: complementaryBackgroundButton
                         }
                         FormLabel {
-                            text: i18n("Complementary mouse over color:")
+                            text: KI18n.i18n("Complementary mouse over color:")
                             buddy: complementaryHoverButton
                         }
                         ColorButton {
                             id: complementaryHoverButton
                         }
                         FormLabel {
-                            text: i18n("Complementary focus color:")
+                            text: KI18n.i18n("Complementary focus color:")
                             buddy: complementaryFocusButton
                         }
                         ColorButton {
@@ -310,12 +308,12 @@ Dialog {
             DialogButtonBox {
                 Layout.fillWidth: true
                 Button {
-                    text: i18n("OK")
+                    text: KI18n.i18n("OK")
                     onClicked: dialog.accept()
                     DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
                 }
                 Button {
-                    text: i18n("Cancel")
+                    text: KI18n.i18n("Cancel")
                     onClicked: dialog.reject()
                     DialogButtonBox.buttonRole: DialogButtonBox.DestructiveRole
                 }
@@ -324,27 +322,27 @@ Dialog {
     }
 
     onAccepted: {
-        themeModel.colorEditor.textColor = textColor;
-        themeModel.colorEditor.backgroundColor = backgroundColor;
-        themeModel.colorEditor.highlightColor = highlightColor;
-        themeModel.colorEditor.linkColor = linkColor;
-        themeModel.colorEditor.visitedLinkColor = visitedLinkColor;
+        ThemeModel.colorEditor.textColor = textColor;
+        ThemeModel.colorEditor.backgroundColor = backgroundColor;
+        ThemeModel.colorEditor.highlightColor = highlightColor;
+        ThemeModel.colorEditor.linkColor = linkColor;
+        ThemeModel.colorEditor.visitedLinkColor = visitedLinkColor;
 
-        themeModel.colorEditor.buttonTextColor = buttonTextColor;
-        themeModel.colorEditor.buttonBackgroundColor = buttonBackgroundColor;
-        themeModel.colorEditor.buttonHoverColor = buttonHoverColor;
-        themeModel.colorEditor.buttonFocusColor = buttonFocusColor;
+        ThemeModel.colorEditor.buttonTextColor = buttonTextColor;
+        ThemeModel.colorEditor.buttonBackgroundColor = buttonBackgroundColor;
+        ThemeModel.colorEditor.buttonHoverColor = buttonHoverColor;
+        ThemeModel.colorEditor.buttonFocusColor = buttonFocusColor;
 
-        themeModel.colorEditor.viewTextColor = viewTextColor;
-        themeModel.colorEditor.viewBackgroundColor = viewBackgroundColor;
-        themeModel.colorEditor.viewHoverColor = viewHoverColor;
-        themeModel.colorEditor.viewFocusColor = viewFocusColor;
+        ThemeModel.colorEditor.viewTextColor = viewTextColor;
+        ThemeModel.colorEditor.viewBackgroundColor = viewBackgroundColor;
+        ThemeModel.colorEditor.viewHoverColor = viewHoverColor;
+        ThemeModel.colorEditor.viewFocusColor = viewFocusColor;
 
-        themeModel.colorEditor.complementaryTextColor = complementaryTextColor;
-        themeModel.colorEditor.complementaryBackgroundColor = complementaryBackgroundColor;
-        themeModel.colorEditor.complementaryHoverColor = complementaryHoverColor;
-        themeModel.colorEditor.complementaryFocusColor = complementaryFocusColor;
+        ThemeModel.colorEditor.complementaryTextColor = complementaryTextColor;
+        ThemeModel.colorEditor.complementaryBackgroundColor = complementaryBackgroundColor;
+        ThemeModel.colorEditor.complementaryHoverColor = complementaryHoverColor;
+        ThemeModel.colorEditor.complementaryFocusColor = complementaryFocusColor;
 
-        themeModel.colorEditor.save();
+        ThemeModel.colorEditor.save();
     }
 }
