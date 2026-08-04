@@ -56,7 +56,7 @@ int main(int argc, char **argv)
     }
     engine.rootContext()->setContextProperty("themeModel", QVariant::fromValue(themeModel));
 
-    engine.rootContext()->setContextObject(new KLocalizedQmlContext(&engine));
+    KLocalization::setupLocalizedContext(&engine);
     engine.loadFromModule("org.kde.plasma.themeexplorer", "Main");
 
     return app.exec();

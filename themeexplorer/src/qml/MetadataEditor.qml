@@ -4,14 +4,16 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.3
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.15
-import QtQuick.Dialogs
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
-Dialog {
+import org.kde.ki18n
+
+QQC2.Dialog {
     id: dialog
+
     property alias name: nameField.text
     property alias author: authorField.text
     property alias email: emailField.text
@@ -21,20 +23,21 @@ Dialog {
 
     property bool canEdit: false
 
-    title: newTheme ? i18n("New Theme") : i18n("Edit Theme")
+    standardButtons: QQC2.DialogButtonBox.Ok | QQC2.DialogButtonBox.Cancel
+
+    Component.onCompleted: standardButton(QQC2.DialogButtonBox.Ok).enabled = Qt.binding(function(): bool {
+        return dialog.canEdit && nameField.text && authorField.text && emailField.text && websiteField.text
+    })
+
+
+    title: newTheme ? KI18n.i18nc("@title:dialog", "New Theme") : KI18n.i18nc("@title:dialog", "Edit Theme")
 
     onVisibleChanged: {
         nameField.focus = true
     }
 
-    //all this reimplementing shouldn't be necessary,
-    //but unfortunately native standard buttons management
-    //is completely broken
-    contentItem: Rectangle {
-        implicitWidth:  layout.Layout.minimumWidth + Kirigami.Units.smallSpacing*2
-        implicitHeight: layout.Layout.minimumHeight + Kirigami.Units.smallSpacing*2
-
-        Keys.onPressed: {
+    contentItem: ColumnLayout {
+        Keys.onPressed: event => {
             if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
                 dialog.accept();
             } else if (event.key == Qt.Key_Escape) {
@@ -42,115 +45,88 @@ Dialog {
             }
         }
 
-        SystemPalette {
-            id: palette
+        QQC2.Label {
+            id: errorMessage
+            text: ""
+            Layout.preferredHeight: visible ? implicitHeight : 0
+            visible: text.length > 0
+            readonly property string defaultMessage: dialog.newTheme ? "" : KI18n.i18nc("@info", "Warning: don't change author or license for themes you don't own")
+            wrapMode: Text.WordWrap
+            Layout.fillWidth: true
         }
-        color: palette.window
+        GridLayout {
+            Layout.fillWidth: true
+            columns: 2
+            columnSpacing: Kirigami.Units.smallSpacing
 
-        ColumnLayout {
-            id: layout
-            anchors {
-                fill: parent
-                margins: Kirigami.Units.smallSpacing
+            FormLabel {
+                visible: dialog.newTheme
+                text: KI18n.i18nc("@label", "Theme Name:")
+                buddy: nameField
             }
-            Label {
-                id: errorMessage
-                text: ""
-                property string defaultMEssage: newTheme ? "" : i18n("Warning: don't change author or license for themes you don't own")
-                wrapMode: Text.WordWrap
+            QQC2.TextField {
+                id: nameField
+                visible: dialog.newTheme
                 Layout.fillWidth: true
-            }
-            GridLayout {
-                Layout.fillWidth: true
-                columns: 2
-                columnSpacing: Kirigami.Units.smallSpacing
-
-                FormLabel {
-                    visible: newTheme
-                    text: i18n("Theme Name:")
-                    buddy: nameField
-                }
-                TextField {
-                    id: nameField
-                    visible: newTheme
-                    Layout.fillWidth: true
-                    onTextChanged: {
-                        if (!newTheme) {
-                            errorMessage.text = errorMessage.defaultMEssage;
-                            dialog.canEdit = true;
+                onTextChanged: {
+                    if (!dialog.newTheme) {
+                        errorMessage.text = errorMessage.defaultMessage;
+                        dialog.canEdit = true;
+                        return;
+                    }
+                    for (var i = 0; i < themeModel.themeList.count; ++i) {
+                        if (nameField.text == themeModel.themeList.get(i).packageNameRole) {
+                            dialog.canEdit = false;
+                            errorMessage.text = KI18n.i18nc("@info", "This theme name already exists");
                             return;
                         }
-                        for (var i = 0; i < themeModel.themeList.count; ++i) {
-                            if (nameField.text == themeModel.themeList.get(i).packageNameRole) {
-                                dialog.canEdit = false;
-                                errorMessage.text = i18n("This theme name already exists");
-                                return;
-                            }
-                        }
-                        errorMessage.text = "";
-                        dialog.canEdit = true;
                     }
-                }
-                FormLabel {
-                    text: i18n("Author:")
-                    buddy: authorField
-                }
-                TextField {
-                    id: authorField
-                    Layout.fillWidth: true
-                }
-                FormLabel {
-                    text: i18n("Email:")
-                    buddy: emailField
-                }
-                TextField {
-                    id: emailField
-                    Layout.fillWidth: true
-                }
-                FormLabel {
-                    text: i18n("License:")
-                    buddy: licenseField
-                }
-                ComboBox {
-                    id: licenseField
-                    Layout.fillWidth: true
-                    editable: true
-                    editText: "LGPL 2.1+"
-                    model: ["LGPL 2.1+", "GPL 2+", "GPL 3+", "LGPL 3+", "BSD"]
-                }
-                FormLabel {
-                    text: i18n("Website:")
-                    buddy: websiteField
-                }
-                TextField {
-                    id: websiteField
-                    Layout.fillWidth: true
+                    errorMessage.text = "";
+                    dialog.canEdit = true;
                 }
             }
-            Item {
-                Layout.fillHeight: true
+            FormLabel {
+                text: KI18n.i18nc("@label", "Author:")
+                buddy: authorField
             }
-            DialogButtonBox {
-                Layout.alignment: Qt.AlignRight
-                Button {
-                    DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
-                    text: i18n("OK")
-                    onClicked: dialog.accept()
-                    enabled: canEdit && nameField.text && authorField.text && emailField.text && websiteField.text
-                }
-                Button {
-                    DialogButtonBox.buttonRole: DialogButtonBox.DestructiveRole
-                    text: i18n("Cancel")
-                    onClicked: dialog.reject()
-                }
+            QQC2.TextField {
+                id: authorField
+                Layout.fillWidth: true
+            }
+            FormLabel {
+                text: KI18n.i18nc("@label", "Email:")
+                buddy: emailField
+            }
+            QQC2.TextField {
+                id: emailField
+                Layout.fillWidth: true
+            }
+            FormLabel {
+                text: KI18n.i18nc("@label", "License:")
+                buddy: licenseField
+            }
+            QQC2.ComboBox {
+                id: licenseField
+                Layout.fillWidth: true
+                editable: true
+                editText: "LGPL 2.1+"
+                model: ["LGPL 2.1+", "GPL 2+", "GPL 3+", "LGPL 3+", "BSD"]
+            }
+            FormLabel {
+                text: KI18n.i18nc("@label", "Website:")
+                buddy: websiteField
+            }
+            QQC2.TextField {
+                id: websiteField
+                Layout.fillWidth: true
             }
         }
     }
 
     onAccepted: {
-        if (newTheme) {
+        if (dialog.newTheme) {
             themeModel.createNewTheme(nameField.text, authorField.text, emailField.text, licenseField.editText, websiteField.text);
-            for (var i = 0; i < themeModel.themeList.count; ++i) {
+            for (let i = 0; i < themeModel.themeList.count; ++i) {
                 if (nameField.text == themeModel.themeList.get(i).packageNameRole) {
                     themeSelector.currentIndex = i;
                     break;
