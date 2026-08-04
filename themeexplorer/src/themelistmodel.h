@@ -49,7 +49,6 @@ public:
     };
 
     explicit ThemeListModel(QObject *parent = nullptr);
-    ~ThemeListModel() override;
 
     QHash<int, QByteArray> roleNames() const override;
 
@@ -57,7 +56,6 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QModelIndex indexOf(const QString &path) const;
     void reload();
-    void clearThemeList();
     int count() const
     {
         return rowCount();
@@ -69,8 +67,6 @@ Q_SIGNALS:
     void countChanged();
 
 private:
-    QHash<int, QByteArray> m_roleNames;
-
     QMap<QString, ThemeInfo> m_themes;
 };
 

@@ -24,75 +24,63 @@
 #include <KDesktopFile>
 
 #include <Plasma/Theme>
-#include <qstandardpaths.h>
 
 #include <QDebug>
 
 ThemeListModel::ThemeListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    m_roleNames.insert(Qt::DisplayRole, "display");
-    m_roleNames.insert(PackageNameRole, "packageNameRole");
-    m_roleNames.insert(PackageDescriptionRole, "packageDescriptionRole");
-    m_roleNames.insert(PackageAuthorRole, "packageAuthorRole");
-    m_roleNames.insert(PackageVersionRole, "packageVersionRole");
-
     reload();
-}
-
-ThemeListModel::~ThemeListModel()
-{
-    clearThemeList();
 }
 
 QHash<int, QByteArray> ThemeListModel::roleNames() const
 {
-    return m_roleNames;
-}
-
-void ThemeListModel::clearThemeList()
-{
-    m_themes.clear();
+    return {
+        {Qt::DisplayRole, "display"},
+        {PackageNameRole, "packageNameRole"},
+        {PackageDescriptionRole, "packageDescriptionRole"},
+        {PackageAuthorRole, "packageAuthorRole"},
+        {PackageVersionRole, "packageVersionRole"},
+    };
 }
 
 void ThemeListModel::reload()
 {
     beginResetModel();
-    clearThemeList();
+    m_themes.clear();
 
-    // get all desktop themes
     QStringList themes;
     const QStringList &packs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "plasma/desktoptheme", QStandardPaths::LocateDirectory);
     for (const QString &ppath : packs) {
         const QDir cd(ppath);
-        const QStringList &entries = cd.entryList(QDir::Dirs | QDir::Hidden);
+        const QStringList &entries = cd.entryList(QDir::Dirs | QDir::Hidden | QDir::NoDotAndDotDot);
         for (const QString &pack : entries) {
-            const QString _metadata = ppath + QLatin1Char('/') + pack + QStringLiteral("/metadata.json");
-            if ((pack != "." && pack != "..") && (QFile::exists(_metadata))) {
-                themes << _metadata;
+            const QString metadata = ppath + QLatin1Char('/') + pack + QStringLiteral("/metadata.json");
+            if (QFile::exists(metadata)) {
+                themes << metadata;
             }
         }
     }
 
     for (const QString &theme : themes) {
-        int themeSepIndex = theme.lastIndexOf('/', -1);
-        QString themeRoot = theme.left(themeSepIndex);
-        int themeNameSepIndex = themeRoot.lastIndexOf('/', -1);
-        QString packageName = themeRoot.right(themeRoot.length() - themeNameSepIndex - 1);
+        const auto themeSepIndex = theme.lastIndexOf('/', -1);
+        const auto themeRoot = theme.left(themeSepIndex);
+        const auto themeNameSepIndex = themeRoot.lastIndexOf('/', -1);
+        const auto packageName = themeRoot.right(themeRoot.length() - themeNameSepIndex - 1);
 
-        KDesktopFile df(theme);
+        KDesktopFile desktopFile(theme);
 
-        if (df.noDisplay()) {
+        if (desktopFile.noDisplay()) {
             continue;
         }
 
-        QString name = df.readName();
+        QString name = desktopFile.readName();
         if (name.isEmpty()) {
             name = packageName;
         }
-        const QString comment = df.readComment();
-        const QString author = df.desktopGroup().readEntry("X-KDE-PluginInfo-Author", QString());
-        const QString version = df.desktopGroup().readEntry("X-KDE-PluginInfo-Version", QString());
+        const QString comment = desktopFile.readComment();
+        const QString author = desktopFile.desktopGroup().readEntry("X-KDE-PluginInfo-Author", QString());
+        const QString version = desktopFile.desktopGroup().readEntry("X-KDE-PluginInfo-Version", QString());
 
         ThemeInfo info;
         info.package = packageName;
@@ -123,21 +111,19 @@ QVariant ThemeListModel::data(const QModelIndex &index, int role) const
     }
 
     QMap<QString, ThemeInfo>::const_iterator it = m_themes.constBegin();
-    for (int i = 0; i < index.row(); ++i) {
-        ++it;
-    }
+    std::advance(it, index.row());
 
     switch (role) {
     case Qt::DisplayRole:
         return it.key();
     case PackageNameRole:
-        return (*it).package;
+        return it->package;
     case PackageDescriptionRole:
-        return (*it).description;
+        return it->description;
     case PackageAuthorRole:
-        return (*it).author;
+        return it->author;
     case PackageVersionRole:
-        return (*it).version;
+        return it->version;
     default:
         return QVariant();
     }
