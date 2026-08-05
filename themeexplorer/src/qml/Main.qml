@@ -66,7 +66,7 @@ Kirigami.AbstractApplicationWindow {
             ToolButton {
                 ToolTip.text: i18n("Edit Metadata…")
                 icon.name: "configure"
-                enabled: themeModel.isWritable
+                enabled: view.currentItem?.modelData.isWritable ?? false
                 onClicked: {
                     if (!root.metadataEditor) {
                         root.metadataEditor = metadataEditorComponent.createObject(root);
@@ -83,7 +83,7 @@ Kirigami.AbstractApplicationWindow {
             ToolButton {
                 ToolTip.text: i18n("Edit Colors…")
                 icon.name: "color"
-                enabled: themeModel.isWritable
+                enabled: view.currentItem?.modelData.isWritable ?? false
                 onClicked: {
                     if (!root.colorEditor) {
                         root.colorEditor = colorEditorComponent.createObject(root);
@@ -260,7 +260,7 @@ Kirigami.AbstractApplicationWindow {
             }
             Button {
                 text: view.currentItem && view.currentItem.modelData.usesFallback ? i18n("Create with Editor…") : i18n("Open In Editor…")
-                enabled: themeModel.isWritable
+                enabled: view.currentItem?.modelData.isWritable ?? false
                 Layout.alignment: Qt.AlignHCenter
                 onClicked: {
                     print(view.currentItem.modelData.svgAbsolutePath)
