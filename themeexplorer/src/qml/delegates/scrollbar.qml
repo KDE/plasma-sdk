@@ -4,16 +4,18 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+import QtQuick
 
-import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.kirigami as Kirigami
 
 Item {
+    id: root
+
+    property string imagePath
+
     Rectangle {
-        id: background
+        id: backgroundRect
         anchors {
             fill: parent
             margins: Kirigami.Units.gridUnit
@@ -23,19 +25,22 @@ Item {
         opacity: 0.6
     }
     Column {
-        anchors.centerIn: background
-        PlasmaExtras.ScrollArea {
-            width: background.width - units.gridUnit*2
+        anchors.centerIn: backgroundRect
+        PlasmaComponents.ScrollView {
+            width: backgroundRect.width - Kirigami.Units.gridUnit * 2
             height: width
+            contentWidth: item.width
+            contentHeight: item.height
             Item {
-                width: background.width * 2
+                id: item
+                width: backgroundRect.width * 2
                 height: width
             }
         }
         PlasmaComponents.Label {
             anchors.horizontalCenter: parent.horizontalCenter
-            text: model.imagePath
-            visible: width < background.width
+            text: root.imagePath
+            visible: width < backgroundRect.width
         }
     }
 }

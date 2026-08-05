@@ -4,16 +4,23 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Controls as QQC2
 
-import org.kde.ksvg 1.0 as KSvg
-import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.ksvg as KSvg
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.kirigami as Kirigami
+
+import org.kde.plasma.themeexplorer
 
 Item {
+    id: root
+
+    property string imagePath
+    property bool showMargins
+
     KSvg.Svg {
-        imagePath: model.imagePath
+        imagePath: root.imagePath
         onRepaintNeeded: {
             bottomPanelShadow.visible = bottomPanelShadow.hasElementPrefix("shadow")
             topPanelShadow.visible = topPanelShadow.hasElementPrefix("shadow")
@@ -41,7 +48,7 @@ Item {
         width: background.width * 0.7
         height: background.width * 0.2
         enabledBorders: KSvg.FrameSvgItem.TopBorder | KSvg.FrameSvgItem.LeftBorder | KSvg.FrameSvgItem.RightBorder
-        imagePath: model.imagePath
+        imagePath: root.imagePath
         onImagePathChanged: visible = hasElementPrefix("shadow")
         prefix: "shadow"
     }
@@ -54,7 +61,7 @@ Item {
             rightMargin: bottomPanelShadow.margins.right
             bottomMargin: bottomPanelShadow.margins.bottom
         }
-        imagePath: model.imagePath
+        imagePath: root.imagePath
         enabledBorders: bottomPanelShadow.enabledBorders
 
         Rectangle {
@@ -81,7 +88,7 @@ Item {
         height: background.height - background.width * 0.2
         width: background.width * 0.2
         enabledBorders: KSvg.FrameSvgItem.TopBorder | KSvg.FrameSvgItem.BottomBorder | KSvg.FrameSvgItem.RightBorder
-        imagePath: model.imagePath
+        imagePath: root.imagePath
         onImagePathChanged: visible = hasElementPrefix("shadow")
         prefix: "shadow"
     }
@@ -94,7 +101,7 @@ Item {
             rightMargin: leftPanelShadow.margins.right
             bottomMargin: leftPanelShadow.margins.bottom
         }
-        imagePath: model.imagePath
+        imagePath: root.imagePath
         enabledBorders: leftPanelShadow.enabledBorders
 
         Rectangle {
@@ -120,7 +127,7 @@ Item {
         width: background.width * 0.7
         height: background.width * 0.2
         enabledBorders: KSvg.FrameSvgItem.BottomBorder | KSvg.FrameSvgItem.LeftBorder | KSvg.FrameSvgItem.RightBorder
-        imagePath: model.imagePath
+        imagePath: root.imagePath
         onImagePathChanged: visible = hasElementPrefix("shadow")
         prefix: "shadow"
     }
@@ -133,7 +140,7 @@ Item {
             rightMargin: topPanelShadow.margins.right
             bottomMargin: topPanelShadow.margins.bottom
         }
-        imagePath: model.imagePath
+        imagePath: root.imagePath
         enabledBorders: topPanelShadow.enabledBorders
 
         Rectangle {
@@ -159,7 +166,7 @@ Item {
         height: background.height - background.width * 0.2
         width: background.width * 0.2
         enabledBorders: KSvg.FrameSvgItem.TopBorder | KSvg.FrameSvgItem.BottomBorder | KSvg.FrameSvgItem.LeftBorder
-        imagePath: model.imagePath
+        imagePath: root.imagePath
         onImagePathChanged: visible = hasElementPrefix("shadow")
         prefix: "shadow"
     }
@@ -172,7 +179,7 @@ Item {
             rightMargin: rightPanelShadow.margins.right
             bottomMargin: rightPanelShadow.margins.bottom
         }
-        imagePath: model.imagePath
+        imagePath: root.imagePath
         enabledBorders: rightPanelShadow.enabledBorders
 
         Rectangle {
@@ -190,8 +197,10 @@ Item {
     }
 
     PlasmaComponents.Label {
-        anchors.centerIn: parent
-        text: model.imagePath
-        visible: width < marginsRectangle.width
+        anchors.fill: parent
+        text: root.imagePath
+        wrapMode: PlasmaComponents.Label.Wrap
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
     }
 }

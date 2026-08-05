@@ -40,8 +40,8 @@ int main(int argc, char **argv)
     QCommandLineOption themeOption(QCommandLineOption(QStringList{"t", "theme"}, i18n("The theme to open"), "default"));
 
     parser.addOption(themeOption);
-    aboutData.processCommandLine(&parser);
     parser.process(app);
+    aboutData.processCommandLine(&parser);
 
     KLocalizedString::setApplicationDomain(QByteArrayLiteral("org.kde.plasma.themeexplorer"));
 

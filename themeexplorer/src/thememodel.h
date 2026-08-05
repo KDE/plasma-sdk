@@ -38,6 +38,7 @@ class ThemeModel : public QAbstractListModel
     Q_PROPERTY(QString email READ email NOTIFY themeChanged)
     Q_PROPERTY(QString license READ license NOTIFY themeChanged)
     Q_PROPERTY(QString website READ website NOTIFY themeChanged)
+    Q_PROPERTY(bool isWritable READ isWritable NOTIFY isWritableChanged)
 
     Q_PROPERTY(QString themeFolder READ themeFolder NOTIFY themeChanged)
 public:
@@ -47,7 +48,6 @@ public:
         Delegate,
         UsesFallback,
         SvgAbsolutePath,
-        IsWritable,
         IconElements,
         FrameSvgPrefixes,
     };
@@ -74,6 +74,8 @@ public:
     QString license() const;
     QString website() const;
 
+    bool isWritable() const;
+
     void load();
 
     Q_INVOKABLE void editElement(const QString &imagePath);
@@ -84,6 +86,7 @@ public:
 
 Q_SIGNALS:
     void themeChanged();
+    void isWritableChanged();
 
 private Q_SLOTS:
     void processFinished();
