@@ -4,17 +4,22 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+pragma ComponentBehavior: Bound
 
-import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.ksvg 1.0 as KSvg
-import org.kde.kirigami 2.20 as Kirigami
+import QtQuick
+
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.ksvg as KSvg
+import org.kde.kirigami as Kirigami
 
 Item {
-    id: iconsDelegate
+    id: root
+
+    property string iconElements //TODO add
+    property string imagePath
+
     Rectangle {
-        id: background
+        id: backgroundRect
         anchors {
             fill: parent
             margins: Kirigami.Units.gridUnit
@@ -24,19 +29,17 @@ Item {
         opacity: 0.6
     }
 
-    property var iconElements: model.iconElements
-    property var imagePath: model.imagePath
-
     Flow {
         clip: true
         anchors {
-            fill: background
+            fill: backgroundRect
             margins: Kirigami.Units.gridUnit
         }
         Repeater {
-            model: iconsDelegate.iconElements
+            model: root.iconElements
             delegate: KSvg.SvgItem {
-                imagePath: iconsDelegate.imagePath
+                required property string modelData
+                imagePath: root.imagePath
                 elementId: modelData
                 width: naturalSize.width
                 height: naturalSize.height
@@ -46,10 +49,10 @@ Item {
 
     PlasmaComponents.Label {
         anchors {
-            horizontalCenter: background.horizontalCenter
-            bottom: background.bottom
+            horizontalCenter: backgroundRect.horizontalCenter
+            bottom: backgroundRect.bottom
         }
-        text: model.imagePath
-        visible: width < background.width
+        text: root.imagePath
+        visible: width < backgroundRect.width
     }
 }

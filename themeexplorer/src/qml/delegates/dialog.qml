@@ -4,16 +4,23 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Controls as QQC2
 
-import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.ksvg 1.0 as KSvg
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.ksvg as KSvg
 import org.kde.kirigami as Kirigami
 
+import org.kde.plasma.themeexplorer
+
 Item {
+    id: root
+
+    property string imagePath
+    property bool showMargins
+
     KSvg.Svg {
-        imagePath: model.imagePath
+        imagePath: root.imagePath
         onRepaintNeeded: {
             background.visible = background.hasElementPrefix("shadow")
         }
@@ -24,7 +31,7 @@ Item {
             fill: parent
             margins: Kirigami.Units.gridUnit
         }
-        imagePath: model.imagePath
+        imagePath: root.imagePath
         onImagePathChanged: visible = hasElementPrefix("shadow")
         prefix: "shadow"
     }
@@ -37,7 +44,7 @@ Item {
             rightMargin: background.margins.right
             bottomMargin: background.margins.bottom
         }
-        imagePath: model.imagePath
+        imagePath: root.imagePath
 
         Rectangle {
             id: marginsRectangle
@@ -56,7 +63,7 @@ Item {
 
     PlasmaComponents.Label {
         anchors.centerIn: parent
-        text: model.imagePath
+        text: root.imagePath
         visible: width < marginsRectangle.width
     }
 }

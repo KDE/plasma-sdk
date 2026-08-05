@@ -6,44 +6,30 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+import QtQuick
 
-import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.clock
+
 import org.kde.ksvg 1.0 as KSvg
+import org.kde.kirigami as Kirigami
 
 Item {
     id: analogclock
 
     width: Kirigami.Units.gridUnit * 15
     height: Kirigami.Units.gridUnit * 15
-    property int hours
-    property int minutes
-    property int seconds
+
+    property int hours: clockSource.dateTime.getHours()
+    property int minutes: clockSource.dateTime.getMinutes()
+    property int seconds: clockSource.dateTime.getSeconds()
     property bool showSecondsHand: true
 
- 
-    PlasmaCore.DataSource {
-        id: dataSource
-        engine: "time"
-        connectedSources: "Local"
-        interval: showSecondsHand ? 1000 : 30000
-        onDataChanged: {
-            var date = new Date(data["Local"]["DateTime"]);
-            hours = date.getHours();
-            minutes = date.getMinutes();
-            seconds = date.getSeconds();
-        }
-        Component.onCompleted: {
-            onDataChanged();
-        }
+    // TODO seconds hand rotation center
+
+    Clock {
+        id: clockSource
+        trackSeconds: analogclock.showSecondsHand
     }
-
-
-    Component.onCompleted: {
-        dataSource.onDataChanged.connect(dateTimeChanged);
-    }
-
 
     KSvg.Svg {
         id: clockSvg

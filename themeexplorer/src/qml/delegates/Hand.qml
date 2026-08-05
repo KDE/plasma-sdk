@@ -13,7 +13,6 @@ import org.kde.ksvg 1.0 as KSvg
 KSvg.SvgItem {
     id: handRoot
 
-    property alias rotation: rotation.angle
     property double svgScale
     property double horizontalRotationOffset: 0
     property double verticalRotationOffset: 0

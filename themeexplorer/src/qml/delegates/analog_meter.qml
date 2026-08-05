@@ -6,15 +6,18 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 
-import org.kde.ksvg 1.0 as KSvg
-import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.ksvg as KSvg
+import org.kde.plasma.components as PlasmaComponents
 
 Item {
+    id: root
 
     property int value: 30
+
+    property string imagePath
 
     KSvg.SvgItem {
         id: face
@@ -29,10 +32,11 @@ Item {
         id: centerScrew
         imagePath: "widgets/analog_meter"
         elementId: "rotatecenter"
-        rotation: value + 90
+        rotation: root.value + 90
 
-        x: face.x + meterSvg.elementRect("rotatecenter").x * svgScale
-        y: face.y + meterSvg.elementRect("rotatecenter").y * svgScale
+        //TODO ??
+        // x: face.x + face.elementRect("rotatecenter").x * svgScale
+        // y: face.y + face.elementRect("rotatecenter").y * svgScale
 
         property real svgScale: face.width / face.naturalSize.width
         width: naturalSize.width * svgScale
@@ -71,7 +75,7 @@ Item {
             horizontalCenter: parent.horizontalCenter
             top: face.bottom
         }
-        text: model.imagePath
+        text: root.imagePath
         visible: width < parent.width
     }
 

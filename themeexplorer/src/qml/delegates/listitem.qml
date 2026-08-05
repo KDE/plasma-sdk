@@ -4,16 +4,25 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+pragma ComponentBehavior: Bound
 
-import org.kde.ksvg 1.0 as KSvg
-import org.kde.plasma.components 3.0 as PlasmaComponents
+import QtQuick
+import QtQuick.Controls as QQC2
+
+import org.kde.ksvg as KSvg
+import org.kde.plasma.components as PlasmaComponents
 import org.kde.kirigami as Kirigami
 
+import org.kde.plasma.themeexplorer
+
 Item {
+    id: root
+
+    property string imagePath
+    property string showMargins
+
     Item {
-        id: background
+        id: backgroundRect
         anchors {
             fill: parent
             margins: Kirigami.Units.gridUnit
@@ -21,17 +30,15 @@ Item {
         clip: true
 
         Column {
-            anchors {
-                fill: parent
-                bottomMargin: label.top
-            }
+            anchors.fill: parent
             Repeater {
                 model: 5
                 KSvg.FrameSvgItem {
-                    width: background.width
+                    required property int index
+                    width: backgroundRect.width
                     height: Kirigami.Units.gridUnit * 3
                     imagePath: "widgets/listitem"
-                    prefix: modelData == 0 ? "section" : (modelData == 1 ? "pressed" : "normal")
+                    prefix: index === 0 ? "section" : (index === 1 ? "pressed" : "normal")
 
                     Rectangle {
                         id: marginsRectangle
@@ -71,7 +78,7 @@ Item {
             horizontalCenter: parent.horizontalCenter
             bottom: parent.bottom
         }
-        text: model.imagePath
-        visible: width < marginsRectangle.width
+        text: root.imagePath
+        visible: width < backgroundRect.width
     }
 }

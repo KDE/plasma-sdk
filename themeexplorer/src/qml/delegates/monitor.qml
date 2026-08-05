@@ -4,16 +4,20 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+import QtQuick
 
-import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.ksvg 1.0 as KSvg
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.ksvg as KSvg
+import org.kde.kirigami as Kirigami
 
 Item {
+    id: root
+
+    property string imagePath
+    property string showMargins
+
     Rectangle {
-        id: background
+        id: backgroundRect
         anchors {
             fill: parent
             margins: Kirigami.Units.gridUnit
@@ -34,9 +38,9 @@ Item {
     KSvg.FrameSvgItem {
         id: screen
         anchors {
-            left: background.left
-            top: background.top
-            right: background.right
+            left: backgroundRect.left
+            top: backgroundRect.top
+            right: backgroundRect.right
             margins: Kirigami.Units.gridUnit
         }
         height: width / 1.6
@@ -59,10 +63,10 @@ Item {
 
     PlasmaComponents.Label {
         anchors {
-            horizontalCenter: background.horizontalCenter
-            bottom: background.bottom
+            horizontalCenter: backgroundRect.horizontalCenter
+            bottom: backgroundRect.bottom
         }
-        text: model.imagePath
-        visible: width < background.width
+        text: root.imagePath
+        visible: width < backgroundRect.width
     }
 }
