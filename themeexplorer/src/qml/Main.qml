@@ -99,7 +99,7 @@ Kirigami.AbstractApplicationWindow {
             QQC2.ToolButton {
                 QQC2.ToolTip.text: KI18n.i18n("Help")
                 icon.name: "help-contents"
-                onClicked: Qt.openUrlExternally("https://techbase.kde.org/Development/Tutorials/Plasma5/ThemeDetails");
+                onClicked: Qt.openUrlExternally("https://develop.kde.org/docs/plasma/theme/");
             }
             QQC2.TextField {
                 placeholderText: KI18n.i18n("Search…")
