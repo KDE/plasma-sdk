@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-08 00:48+0000\n"
+"POT-Creation-Date: 2026-08-07 00:48+0000\n"
 "PO-Revision-Date: 2016-07-27 19:28+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-i18n-doc@kde.org>\n"
@@ -42,132 +42,132 @@ msgstr ""
 msgid "The theme to open"
 msgstr "Avatav teema"
 
-#: src/qml/ColorEditor.qml:38
+#: src/qml/ColorEditor.qml:41
 #, kde-format
 msgid "Edit Colors"
 msgstr "Värvide muutmine"
 
-#: src/qml/ColorEditor.qml:67
+#: src/qml/ColorEditor.qml:70
 #, kde-format
 msgid "Select Color"
 msgstr "Värvi valimine"
 
-#: src/qml/ColorEditor.qml:115
+#: src/qml/ColorEditor.qml:113
 #, kde-format
 msgid "Normal text"
 msgstr "Tavaline tekst"
 
-#: src/qml/ColorEditor.qml:121
+#: src/qml/ColorEditor.qml:119
 #, kde-format
 msgid "Link"
 msgstr "Link"
 
-#: src/qml/ColorEditor.qml:125
+#: src/qml/ColorEditor.qml:123
 #, kde-format
 msgid "Visited Link"
 msgstr "Külastatud link"
 
-#: src/qml/ColorEditor.qml:148
+#: src/qml/ColorEditor.qml:146
 #, kde-format
 msgid "Complementary colors area:"
 msgstr "Täiendvärvi ala:"
 
-#: src/qml/ColorEditor.qml:163
+#: src/qml/ColorEditor.qml:161
 #, kde-format
 msgid "Label"
 msgstr "Pealdis"
 
-#: src/qml/ColorEditor.qml:186
+#: src/qml/ColorEditor.qml:184
 #, kde-format
 msgid "Text color:"
 msgstr "Teksti värv:"
 
-#: src/qml/ColorEditor.qml:193
+#: src/qml/ColorEditor.qml:191
 #, kde-format
 msgid "Background color:"
 msgstr "Tausta värv:"
 
-#: src/qml/ColorEditor.qml:200
+#: src/qml/ColorEditor.qml:198
 #, kde-format
 msgid "Highlight color:"
 msgstr "Esiletõstmise värv:"
 
-#: src/qml/ColorEditor.qml:207
+#: src/qml/ColorEditor.qml:205
 #, kde-format
 msgid "Link color:"
 msgstr "Lingi värv:"
 
-#: src/qml/ColorEditor.qml:214
+#: src/qml/ColorEditor.qml:212
 #, kde-format
 msgid "Visited link color:"
 msgstr "Külastatud lingi värv:"
 
-#: src/qml/ColorEditor.qml:222
+#: src/qml/ColorEditor.qml:220
 #, kde-format
 msgid "Button text color:"
 msgstr "Nupu teksti värv:"
 
-#: src/qml/ColorEditor.qml:229
+#: src/qml/ColorEditor.qml:227
 #, kde-format
 msgid "Button background color:"
 msgstr "Nupu tausta värv:"
 
-#: src/qml/ColorEditor.qml:236
+#: src/qml/ColorEditor.qml:234
 #, kde-format
 msgid "Button mouse over color:"
 msgstr "Nupu värv hiire all:"
 
-#: src/qml/ColorEditor.qml:243
+#: src/qml/ColorEditor.qml:241
 #, kde-format
 msgid "Button focus color:"
 msgstr "Nupu värv fookuse korral:"
 
-#: src/qml/ColorEditor.qml:251
+#: src/qml/ColorEditor.qml:249
 #, kde-format
 msgid "Text view text color:"
 msgstr "Tekstivaate teksti värv:"
 
-#: src/qml/ColorEditor.qml:258
+#: src/qml/ColorEditor.qml:256
 #, kde-format
 msgid "Text view background color:"
 msgstr "Tekstivaate tausta värv:"
 
-#: src/qml/ColorEditor.qml:265
+#: src/qml/ColorEditor.qml:263
 #, kde-format
 msgid "Text view mouse over color:"
 msgstr "Tekstivaate värv hiire all:"
 
-#: src/qml/ColorEditor.qml:272
+#: src/qml/ColorEditor.qml:270
 #, kde-format
 msgid "Text view focus color:"
 msgstr "Tekstivaate värv fookuse korral:"
 
-#: src/qml/ColorEditor.qml:280
+#: src/qml/ColorEditor.qml:278
 #, kde-format
 msgid "Complementary text color:"
 msgstr "Teksti täiendvärv:"
 
-#: src/qml/ColorEditor.qml:287
+#: src/qml/ColorEditor.qml:285
 #, kde-format
 msgid "Complementary background color:"
 msgstr "Tausta täiendvärv:"
 
-#: src/qml/ColorEditor.qml:294
+#: src/qml/ColorEditor.qml:292
 #, kde-format
 msgid "Complementary mouse over color:"
 msgstr "Täiendvärv hiire all:"
 
-#: src/qml/ColorEditor.qml:301
+#: src/qml/ColorEditor.qml:299
 #, kde-format
 msgid "Complementary focus color:"
 msgstr "Täiendvärv fookuse korral:"
 
-#: src/qml/ColorEditor.qml:313 src/qml/MetadataEditor.qml:137
+#: src/qml/ColorEditor.qml:311
 #, kde-format
 msgid "OK"
 msgstr "OK"
 
-#: src/qml/ColorEditor.qml:318 src/qml/MetadataEditor.qml:143
+#: src/qml/ColorEditor.qml:316
 #, kde-format
 msgid "Cancel"
 msgstr "Loobu"
@@ -220,36 +220,36 @@ msgstr "Märkekast"
 msgid "Text input…"
 msgstr "Teksti sisestus..."
 
-#: src/qml/Main.qml:23
+#: src/qml/Main.qml:26
 #, fuzzy, kde-format
 #| msgid "Plasma Theme Explorer"
 msgctxt "@title:window"
 msgid "Plasma Theme Explorer"
 msgstr "Plasma teemade uurija"
 
-#: src/qml/Main.qml:34
+#: src/qml/Main.qml:37
 #, fuzzy, kde-format
 #| msgid "New Theme"
 msgid "New Theme…"
 msgstr "Uus teema"
 
-#: src/qml/Main.qml:50
+#: src/qml/Main.qml:53
 #, kde-format
 msgid "Theme:"
 msgstr "Teema:"
 
-#: src/qml/Main.qml:62
+#: src/qml/Main.qml:65
 #, kde-format
 msgid "Open Folder"
 msgstr "Ava kataloog"
 
-#: src/qml/Main.qml:67
+#: src/qml/Main.qml:70
 #, fuzzy, kde-format
 #| msgid "Edit Metadata..."
 msgid "Edit Metadata…"
 msgstr "Muuda metaandmeid"
 
-#: src/qml/Main.qml:84
+#: src/qml/Main.qml:87
 #, fuzzy, kde-format
 #| msgid "Edit Colors"
 msgid "Edit Colors…"
@@ -266,101 +266,119 @@ msgstr "Abi"
 msgid "Search…"
 msgstr "Otsing..."
 
-#: src/qml/Main.qml:224
+#: src/qml/Main.qml:219
 #, kde-format
 msgid "This is a readonly, system wide installed theme"
 msgstr "See on kirjutuskaitstud süsteemselt paigaldatud teema"
 
-#: src/qml/Main.qml:229
+#: src/qml/Main.qml:224
 #, kde-format
 msgid "Preview:"
 msgstr "Eelvaatlus:"
 
-#: src/qml/Main.qml:244
+#: src/qml/Main.qml:239
 #, kde-format
 msgid "None"
 msgstr ""
 
-#: src/qml/Main.qml:244
+#: src/qml/Main.qml:239
 #, kde-format
 msgid "Image path: %1"
 msgstr "Pildi asukoht: %1"
 
-#: src/qml/Main.qml:249
+#: src/qml/Main.qml:244
 #, kde-format
 msgid "Description: %1"
 msgstr "Kirjeldus: %1"
 
-#: src/qml/Main.qml:254
+#: src/qml/Main.qml:249
 #, kde-format
 msgid "Missing from this theme"
 msgstr "Puudub sellest teemast"
 
-#: src/qml/Main.qml:254
+#: src/qml/Main.qml:249
 #, kde-format
 msgid "Present in this theme"
 msgstr "Olemas selles teemas"
 
-#: src/qml/Main.qml:259
+#: src/qml/Main.qml:254
 #, kde-format
 msgid "Show Margins"
 msgstr "Veeriste näitamine"
 
-#: src/qml/Main.qml:262
+#: src/qml/Main.qml:257
 #, fuzzy, kde-format
 #| msgid "Create with Editor..."
 msgid "Create with Editor…"
 msgstr "Loo redaktoriga..."
 
-#: src/qml/Main.qml:262
+#: src/qml/Main.qml:257
 #, fuzzy, kde-format
 #| msgid "Open In Editor..."
 msgid "Open In Editor…"
 msgstr "Ava redaktoris..."
 
-#: src/qml/MetadataEditor.qml:24
-#, kde-format
+#: src/qml/MetadataEditor.qml:35
+#, fuzzy, kde-format
+#| msgid "New Theme"
+msgctxt "@title:dialog"
 msgid "New Theme"
 msgstr "Uus teema"
 
-#: src/qml/MetadataEditor.qml:24
-#, kde-format
+#: src/qml/MetadataEditor.qml:35
+#, fuzzy, kde-format
+#| msgid "Edit Theme"
+msgctxt "@title:dialog"
 msgid "Edit Theme"
 msgstr "Teema muutmine"
 
-#: src/qml/MetadataEditor.qml:59
-#, kde-format
+#: src/qml/MetadataEditor.qml:55
+#, fuzzy, kde-format
+#| msgid "Warning: don't change author or license for themes you don't own"
+msgctxt "@info"
 msgid "Warning: don't change author or license for themes you don't own"
 msgstr ""
 "Hoiatus: ära muuda teema autorit või litsentsi, kui see ei ole sinu teema"
 
-#: src/qml/MetadataEditor.qml:70
-#, kde-format
+#: src/qml/MetadataEditor.qml:66
+#, fuzzy, kde-format
+#| msgid "Theme Name:"
+msgctxt "@label"
 msgid "Theme Name:"
 msgstr "Teema nimi:"
 
-#: src/qml/MetadataEditor.qml:86
-#, kde-format
+#: src/qml/MetadataEditor.qml:82
+#, fuzzy, kde-format
+#| msgid "This theme name already exists"
+msgctxt "@info"
 msgid "This theme name already exists"
 msgstr "Selle nimega teema on juba olemas"
 
-#: src/qml/MetadataEditor.qml:95
-#, kde-format
+#: src/qml/MetadataEditor.qml:91
+#, fuzzy, kde-format
+#| msgid "Author:"
+msgctxt "@label"
 msgid "Author:"
 msgstr "Autor:"
 
-#: src/qml/MetadataEditor.qml:103
-#, kde-format
+#: src/qml/MetadataEditor.qml:99
+#, fuzzy, kde-format
+#| msgid "Email:"
+msgctxt "@label"
 msgid "Email:"
 msgstr "E-post:"
 
-#: src/qml/MetadataEditor.qml:111
-#, kde-format
+#: src/qml/MetadataEditor.qml:107
+#, fuzzy, kde-format
+#| msgid "License:"
+msgctxt "@label"
 msgid "License:"
 msgstr "Litsents:"
 
-#: src/qml/MetadataEditor.qml:122
-#, kde-format
+#: src/qml/MetadataEditor.qml:118
+#, fuzzy, kde-format
+#| msgid "Website:"
+msgctxt "@label"
 msgid "Website:"
 msgstr "Veebilehekülg:"
 

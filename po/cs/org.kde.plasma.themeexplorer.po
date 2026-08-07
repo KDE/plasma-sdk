@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-08 00:48+0000\n"
+"POT-Creation-Date: 2026-08-07 00:48+0000\n"
 "PO-Revision-Date: 2026-06-29 16:46+0200\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -44,132 +44,132 @@ msgstr "Prohlížejte a upravujte vaše Motivy Plasma"
 msgid "The theme to open"
 msgstr "Motiv, který se má otevřít"
 
-#: src/qml/ColorEditor.qml:38
+#: src/qml/ColorEditor.qml:41
 #, kde-format
 msgid "Edit Colors"
 msgstr "Upravit barvy"
 
-#: src/qml/ColorEditor.qml:67
+#: src/qml/ColorEditor.qml:70
 #, kde-format
 msgid "Select Color"
 msgstr "Vybrat barvu"
 
-#: src/qml/ColorEditor.qml:115
+#: src/qml/ColorEditor.qml:113
 #, kde-format
 msgid "Normal text"
 msgstr "Normální text"
 
-#: src/qml/ColorEditor.qml:121
+#: src/qml/ColorEditor.qml:119
 #, kde-format
 msgid "Link"
 msgstr "Odkaz"
 
-#: src/qml/ColorEditor.qml:125
+#: src/qml/ColorEditor.qml:123
 #, kde-format
 msgid "Visited Link"
 msgstr "Navštívený odkaz"
 
-#: src/qml/ColorEditor.qml:148
+#: src/qml/ColorEditor.qml:146
 #, kde-format
 msgid "Complementary colors area:"
 msgstr "Oblast doplňkových barev:"
 
-#: src/qml/ColorEditor.qml:163
+#: src/qml/ColorEditor.qml:161
 #, kde-format
 msgid "Label"
 msgstr "Popisek"
 
-#: src/qml/ColorEditor.qml:186
+#: src/qml/ColorEditor.qml:184
 #, kde-format
 msgid "Text color:"
 msgstr "Barva textu:"
 
-#: src/qml/ColorEditor.qml:193
+#: src/qml/ColorEditor.qml:191
 #, kde-format
 msgid "Background color:"
 msgstr "Barva pozadí:"
 
-#: src/qml/ColorEditor.qml:200
+#: src/qml/ColorEditor.qml:198
 #, kde-format
 msgid "Highlight color:"
 msgstr "Barva zvýraznění:"
 
-#: src/qml/ColorEditor.qml:207
+#: src/qml/ColorEditor.qml:205
 #, kde-format
 msgid "Link color:"
 msgstr "Barva odkazu:"
 
-#: src/qml/ColorEditor.qml:214
+#: src/qml/ColorEditor.qml:212
 #, kde-format
 msgid "Visited link color:"
 msgstr "Barva navštíveného odkazu:"
 
-#: src/qml/ColorEditor.qml:222
+#: src/qml/ColorEditor.qml:220
 #, kde-format
 msgid "Button text color:"
 msgstr "Barva textu tlačítka:"
 
-#: src/qml/ColorEditor.qml:229
+#: src/qml/ColorEditor.qml:227
 #, kde-format
 msgid "Button background color:"
 msgstr "Barva pozadí tlačítka:"
 
-#: src/qml/ColorEditor.qml:236
+#: src/qml/ColorEditor.qml:234
 #, kde-format
 msgid "Button mouse over color:"
 msgstr "Barva při najetí myší na tlačítko:"
 
-#: src/qml/ColorEditor.qml:243
+#: src/qml/ColorEditor.qml:241
 #, kde-format
 msgid "Button focus color:"
 msgstr "Barva zvýraznění tlačítka:"
 
-#: src/qml/ColorEditor.qml:251
+#: src/qml/ColorEditor.qml:249
 #, kde-format
 msgid "Text view text color:"
 msgstr "Barva textu v textovém zobrazení:"
 
-#: src/qml/ColorEditor.qml:258
+#: src/qml/ColorEditor.qml:256
 #, kde-format
 msgid "Text view background color:"
 msgstr "Barva pozadí v textovém zobrazení:"
 
-#: src/qml/ColorEditor.qml:265
+#: src/qml/ColorEditor.qml:263
 #, kde-format
 msgid "Text view mouse over color:"
 msgstr "Barva textu při najetí myší:"
 
-#: src/qml/ColorEditor.qml:272
+#: src/qml/ColorEditor.qml:270
 #, kde-format
 msgid "Text view focus color:"
 msgstr "Barva zvýraznění v textovém zobrazení:"
 
-#: src/qml/ColorEditor.qml:280
+#: src/qml/ColorEditor.qml:278
 #, kde-format
 msgid "Complementary text color:"
 msgstr "Barva doplňkového textu:"
 
-#: src/qml/ColorEditor.qml:287
+#: src/qml/ColorEditor.qml:285
 #, kde-format
 msgid "Complementary background color:"
 msgstr "Doplňková barva pozadí:"
 
-#: src/qml/ColorEditor.qml:294
+#: src/qml/ColorEditor.qml:292
 #, kde-format
 msgid "Complementary mouse over color:"
 msgstr "Doplňková barva při najetí myší:"
 
-#: src/qml/ColorEditor.qml:301
+#: src/qml/ColorEditor.qml:299
 #, kde-format
 msgid "Complementary focus color:"
 msgstr "Doplňková barva zvýraznění:"
 
-#: src/qml/ColorEditor.qml:313 src/qml/MetadataEditor.qml:137
+#: src/qml/ColorEditor.qml:311
 #, kde-format
 msgid "OK"
 msgstr "OK"
 
-#: src/qml/ColorEditor.qml:318 src/qml/MetadataEditor.qml:143
+#: src/qml/ColorEditor.qml:316
 #, kde-format
 msgid "Cancel"
 msgstr "Zrušit"
@@ -221,33 +221,33 @@ msgstr "Přepínač"
 msgid "Text input…"
 msgstr "Textový vstup..."
 
-#: src/qml/Main.qml:23
+#: src/qml/Main.qml:26
 #, kde-format
 msgctxt "@title:window"
 msgid "Plasma Theme Explorer"
 msgstr "Průzkumník motivů Plasma"
 
-#: src/qml/Main.qml:34
+#: src/qml/Main.qml:37
 #, kde-format
 msgid "New Theme…"
 msgstr "Nový motiv…"
 
-#: src/qml/Main.qml:50
+#: src/qml/Main.qml:53
 #, kde-format
 msgid "Theme:"
 msgstr "Motiv:"
 
-#: src/qml/Main.qml:62
+#: src/qml/Main.qml:65
 #, kde-format
 msgid "Open Folder"
 msgstr "Otevřít složku"
 
-#: src/qml/Main.qml:67
+#: src/qml/Main.qml:70
 #, kde-format
 msgid "Edit Metadata…"
 msgstr "Upravit metadata…"
 
-#: src/qml/Main.qml:84
+#: src/qml/Main.qml:87
 #, kde-format
 msgid "Edit Colors…"
 msgstr "Upravit barvy…"
@@ -262,98 +262,116 @@ msgstr "Nápověda"
 msgid "Search…"
 msgstr "Hledat…"
 
-#: src/qml/Main.qml:224
+#: src/qml/Main.qml:219
 #, kde-format
 msgid "This is a readonly, system wide installed theme"
 msgstr "Jedná se o systémově nainstalovaný motiv, který je pouze pro čtení."
 
-#: src/qml/Main.qml:229
+#: src/qml/Main.qml:224
 #, kde-format
 msgid "Preview:"
 msgstr "Náhled:"
 
 # žádné parametry funkce v inspektoru funkcí
-#: src/qml/Main.qml:244
+#: src/qml/Main.qml:239
 #, kde-format
 msgid "None"
 msgstr "Nic"
 
-#: src/qml/Main.qml:244
+#: src/qml/Main.qml:239
 #, kde-format
 msgid "Image path: %1"
 msgstr "Cesta k obrázku: %1"
 
-#: src/qml/Main.qml:249
+#: src/qml/Main.qml:244
 #, kde-format
 msgid "Description: %1"
 msgstr "Popis: %1"
 
-#: src/qml/Main.qml:254
+#: src/qml/Main.qml:249
 #, kde-format
 msgid "Missing from this theme"
 msgstr "Chybí v tomto motivu"
 
-#: src/qml/Main.qml:254
+#: src/qml/Main.qml:249
 #, kde-format
 msgid "Present in this theme"
 msgstr "Obsah tohoto motivu"
 
-#: src/qml/Main.qml:259
+#: src/qml/Main.qml:254
 #, kde-format
 msgid "Show Margins"
 msgstr "Zobrazit okraje"
 
-#: src/qml/Main.qml:262
+#: src/qml/Main.qml:257
 #, kde-format
 msgid "Create with Editor…"
 msgstr "Vytvořit editorem..."
 
-#: src/qml/Main.qml:262
+#: src/qml/Main.qml:257
 #, kde-format
 msgid "Open In Editor…"
 msgstr "Otevřít v editoru..."
 
-#: src/qml/MetadataEditor.qml:24
-#, kde-format
+#: src/qml/MetadataEditor.qml:35
+#, fuzzy, kde-format
+#| msgid "New Theme"
+msgctxt "@title:dialog"
 msgid "New Theme"
 msgstr "Nový motiv"
 
-#: src/qml/MetadataEditor.qml:24
-#, kde-format
+#: src/qml/MetadataEditor.qml:35
+#, fuzzy, kde-format
+#| msgid "Edit Theme"
+msgctxt "@title:dialog"
 msgid "Edit Theme"
 msgstr "Upravit motiv"
 
-#: src/qml/MetadataEditor.qml:59
-#, kde-format
+#: src/qml/MetadataEditor.qml:55
+#, fuzzy, kde-format
+#| msgid "Warning: don't change author or license for themes you don't own"
+msgctxt "@info"
 msgid "Warning: don't change author or license for themes you don't own"
 msgstr "Upozornění: neměňte autora ani licenci u motivů, které nevlastníte"
 
-#: src/qml/MetadataEditor.qml:70
-#, kde-format
+#: src/qml/MetadataEditor.qml:66
+#, fuzzy, kde-format
+#| msgid "Theme Name:"
+msgctxt "@label"
 msgid "Theme Name:"
 msgstr "Název motivu:"
 
-#: src/qml/MetadataEditor.qml:86
-#, kde-format
+#: src/qml/MetadataEditor.qml:82
+#, fuzzy, kde-format
+#| msgid "This theme name already exists"
+msgctxt "@info"
 msgid "This theme name already exists"
 msgstr "Tento název motivu již existuje"
 
-#: src/qml/MetadataEditor.qml:95
-#, kde-format
+#: src/qml/MetadataEditor.qml:91
+#, fuzzy, kde-format
+#| msgid "Author:"
+msgctxt "@label"
 msgid "Author:"
 msgstr "Autor:"
 
-#: src/qml/MetadataEditor.qml:103
-#, kde-format
+#: src/qml/MetadataEditor.qml:99
+#, fuzzy, kde-format
+#| msgid "Email:"
+msgctxt "@label"
 msgid "Email:"
 msgstr "E-mail:"
 
-#: src/qml/MetadataEditor.qml:111
-#, kde-format
+#: src/qml/MetadataEditor.qml:107
+#, fuzzy, kde-format
+#| msgid "License:"
+msgctxt "@label"
 msgid "License:"
 msgstr "Licence:"
 
-#: src/qml/MetadataEditor.qml:122
-#, kde-format
+#: src/qml/MetadataEditor.qml:118
+#, fuzzy, kde-format
+#| msgid "Website:"
+msgctxt "@label"
 msgid "Website:"
 msgstr "Webová stránka:"

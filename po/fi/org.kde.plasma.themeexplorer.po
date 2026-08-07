@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-08 00:48+0000\n"
+"POT-Creation-Date: 2026-08-07 00:48+0000\n"
 "PO-Revision-Date: 2023-10-30 14:08+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -42,132 +42,132 @@ msgstr ""
 msgid "The theme to open"
 msgstr "Avattava teema"
 
-#: src/qml/ColorEditor.qml:38
+#: src/qml/ColorEditor.qml:41
 #, kde-format
 msgid "Edit Colors"
 msgstr "Muokkaa värejä"
 
-#: src/qml/ColorEditor.qml:67
+#: src/qml/ColorEditor.qml:70
 #, kde-format
 msgid "Select Color"
 msgstr "Valitse väri"
 
-#: src/qml/ColorEditor.qml:115
+#: src/qml/ColorEditor.qml:113
 #, kde-format
 msgid "Normal text"
 msgstr "Tavallinen teksti"
 
-#: src/qml/ColorEditor.qml:121
+#: src/qml/ColorEditor.qml:119
 #, kde-format
 msgid "Link"
 msgstr "Linkki"
 
-#: src/qml/ColorEditor.qml:125
+#: src/qml/ColorEditor.qml:123
 #, kde-format
 msgid "Visited Link"
 msgstr "Vierailtu linkki"
 
-#: src/qml/ColorEditor.qml:148
+#: src/qml/ColorEditor.qml:146
 #, kde-format
 msgid "Complementary colors area:"
 msgstr "Vastavärien alue:"
 
-#: src/qml/ColorEditor.qml:163
+#: src/qml/ColorEditor.qml:161
 #, kde-format
 msgid "Label"
 msgstr "Selite"
 
-#: src/qml/ColorEditor.qml:186
+#: src/qml/ColorEditor.qml:184
 #, kde-format
 msgid "Text color:"
 msgstr "Tekstiväri:"
 
-#: src/qml/ColorEditor.qml:193
+#: src/qml/ColorEditor.qml:191
 #, kde-format
 msgid "Background color:"
 msgstr "Taustaväri:"
 
-#: src/qml/ColorEditor.qml:200
+#: src/qml/ColorEditor.qml:198
 #, kde-format
 msgid "Highlight color:"
 msgstr "Korostusväri:"
 
-#: src/qml/ColorEditor.qml:207
+#: src/qml/ColorEditor.qml:205
 #, kde-format
 msgid "Link color:"
 msgstr "Linkkiväri:"
 
-#: src/qml/ColorEditor.qml:214
+#: src/qml/ColorEditor.qml:212
 #, kde-format
 msgid "Visited link color:"
 msgstr "Vieraillun linkin väri:"
 
-#: src/qml/ColorEditor.qml:222
+#: src/qml/ColorEditor.qml:220
 #, kde-format
 msgid "Button text color:"
 msgstr "Painikkeen tekstiväri:"
 
-#: src/qml/ColorEditor.qml:229
+#: src/qml/ColorEditor.qml:227
 #, kde-format
 msgid "Button background color:"
 msgstr "Painikkeen taustaväri:"
 
-#: src/qml/ColorEditor.qml:236
+#: src/qml/ColorEditor.qml:234
 #, kde-format
 msgid "Button mouse over color:"
 msgstr "Painikkeen osoittamisen väri:"
 
-#: src/qml/ColorEditor.qml:243
+#: src/qml/ColorEditor.qml:241
 #, kde-format
 msgid "Button focus color:"
 msgstr "Hiirikohdistuksen väri:"
 
-#: src/qml/ColorEditor.qml:251
+#: src/qml/ColorEditor.qml:249
 #, kde-format
 msgid "Text view text color:"
 msgstr "Tekstinäkymän tekstiväri:"
 
-#: src/qml/ColorEditor.qml:258
+#: src/qml/ColorEditor.qml:256
 #, kde-format
 msgid "Text view background color:"
 msgstr "Tekstinäkymän taustaväri:"
 
-#: src/qml/ColorEditor.qml:265
+#: src/qml/ColorEditor.qml:263
 #, kde-format
 msgid "Text view mouse over color:"
 msgstr "Tekstinäkymän osoittamisen väri:"
 
-#: src/qml/ColorEditor.qml:272
+#: src/qml/ColorEditor.qml:270
 #, kde-format
 msgid "Text view focus color:"
 msgstr "Tekstinäkymän kohdistuksen väri:"
 
-#: src/qml/ColorEditor.qml:280
+#: src/qml/ColorEditor.qml:278
 #, kde-format
 msgid "Complementary text color:"
 msgstr "Komplementaarinen tekstiväri:"
 
-#: src/qml/ColorEditor.qml:287
+#: src/qml/ColorEditor.qml:285
 #, kde-format
 msgid "Complementary background color:"
 msgstr "Komplementaarinen taustaväri:"
 
-#: src/qml/ColorEditor.qml:294
+#: src/qml/ColorEditor.qml:292
 #, kde-format
 msgid "Complementary mouse over color:"
 msgstr "Komplementaarinen osoittamisen väri:"
 
-#: src/qml/ColorEditor.qml:301
+#: src/qml/ColorEditor.qml:299
 #, kde-format
 msgid "Complementary focus color:"
 msgstr "Komplementaarinen kohdistuksen väri:"
 
-#: src/qml/ColorEditor.qml:313 src/qml/MetadataEditor.qml:137
+#: src/qml/ColorEditor.qml:311
 #, kde-format
 msgid "OK"
 msgstr "OK"
 
-#: src/qml/ColorEditor.qml:318 src/qml/MetadataEditor.qml:143
+#: src/qml/ColorEditor.qml:316
 #, kde-format
 msgid "Cancel"
 msgstr "Peru"
@@ -219,34 +219,34 @@ msgstr "Valintaruutu"
 msgid "Text input…"
 msgstr "Tekstikenttä…"
 
-#: src/qml/Main.qml:23
+#: src/qml/Main.qml:26
 #, fuzzy, kde-format
 #| msgid "Plasma Theme Explorer"
 msgctxt "@title:window"
 msgid "Plasma Theme Explorer"
 msgstr "Plasma-teemaselain"
 
-#: src/qml/Main.qml:34
+#: src/qml/Main.qml:37
 #, kde-format
 msgid "New Theme…"
 msgstr "Uusi teema…"
 
-#: src/qml/Main.qml:50
+#: src/qml/Main.qml:53
 #, kde-format
 msgid "Theme:"
 msgstr "Teema:"
 
-#: src/qml/Main.qml:62
+#: src/qml/Main.qml:65
 #, kde-format
 msgid "Open Folder"
 msgstr "Avaa kansio"
 
-#: src/qml/Main.qml:67
+#: src/qml/Main.qml:70
 #, kde-format
 msgid "Edit Metadata…"
 msgstr "Muokkaa metatietoja…"
 
-#: src/qml/Main.qml:84
+#: src/qml/Main.qml:87
 #, kde-format
 msgid "Edit Colors…"
 msgstr "Muokkaa värejä…"
@@ -261,98 +261,116 @@ msgstr "Ohje"
 msgid "Search…"
 msgstr "Etsi…"
 
-#: src/qml/Main.qml:224
+#: src/qml/Main.qml:219
 #, kde-format
 msgid "This is a readonly, system wide installed theme"
 msgstr "Tämä on vain luettavissa oleva järjestelmänlaajuisesti asennettu teema"
 
-#: src/qml/Main.qml:229
+#: src/qml/Main.qml:224
 #, kde-format
 msgid "Preview:"
 msgstr "Esikatselu:"
 
-#: src/qml/Main.qml:244
+#: src/qml/Main.qml:239
 #, kde-format
 msgid "None"
 msgstr "Ei mitään"
 
-#: src/qml/Main.qml:244
+#: src/qml/Main.qml:239
 #, kde-format
 msgid "Image path: %1"
 msgstr "Kuvan sijainti: %1"
 
-#: src/qml/Main.qml:249
+#: src/qml/Main.qml:244
 #, kde-format
 msgid "Description: %1"
 msgstr "Kuvaus: %1"
 
-#: src/qml/Main.qml:254
+#: src/qml/Main.qml:249
 #, kde-format
 msgid "Missing from this theme"
 msgstr "Puuttuu tästä teemasta"
 
-#: src/qml/Main.qml:254
+#: src/qml/Main.qml:249
 #, kde-format
 msgid "Present in this theme"
 msgstr "Kuuluu tähän teemaan"
 
-#: src/qml/Main.qml:259
+#: src/qml/Main.qml:254
 #, kde-format
 msgid "Show Margins"
 msgstr "Näytä reunukset"
 
-#: src/qml/Main.qml:262
+#: src/qml/Main.qml:257
 #, kde-format
 msgid "Create with Editor…"
 msgstr "Luo muokkaimella…"
 
-#: src/qml/Main.qml:262
+#: src/qml/Main.qml:257
 #, kde-format
 msgid "Open In Editor…"
 msgstr "Avaa muokkaimeen…"
 
-#: src/qml/MetadataEditor.qml:24
-#, kde-format
+#: src/qml/MetadataEditor.qml:35
+#, fuzzy, kde-format
+#| msgid "New Theme"
+msgctxt "@title:dialog"
 msgid "New Theme"
 msgstr "Uusi teema"
 
-#: src/qml/MetadataEditor.qml:24
-#, kde-format
+#: src/qml/MetadataEditor.qml:35
+#, fuzzy, kde-format
+#| msgid "Edit Theme"
+msgctxt "@title:dialog"
 msgid "Edit Theme"
 msgstr "Muokkaa teemaa"
 
-#: src/qml/MetadataEditor.qml:59
-#, kde-format
+#: src/qml/MetadataEditor.qml:55
+#, fuzzy, kde-format
+#| msgid "Warning: don't change author or license for themes you don't own"
+msgctxt "@info"
 msgid "Warning: don't change author or license for themes you don't own"
 msgstr "Varoitus: älä muuta teeman tekijää tai lisenssiä, jos et omista sitä"
 
-#: src/qml/MetadataEditor.qml:70
-#, kde-format
+#: src/qml/MetadataEditor.qml:66
+#, fuzzy, kde-format
+#| msgid "Theme Name:"
+msgctxt "@label"
 msgid "Theme Name:"
 msgstr "Teeman nimi:"
 
-#: src/qml/MetadataEditor.qml:86
-#, kde-format
+#: src/qml/MetadataEditor.qml:82
+#, fuzzy, kde-format
+#| msgid "This theme name already exists"
+msgctxt "@info"
 msgid "This theme name already exists"
 msgstr "Tämän niminen teema on jo olemassa"
 
-#: src/qml/MetadataEditor.qml:95
-#, kde-format
+#: src/qml/MetadataEditor.qml:91
+#, fuzzy, kde-format
+#| msgid "Author:"
+msgctxt "@label"
 msgid "Author:"
 msgstr "Tekijä:"
 
-#: src/qml/MetadataEditor.qml:103
-#, kde-format
+#: src/qml/MetadataEditor.qml:99
+#, fuzzy, kde-format
+#| msgid "Email:"
+msgctxt "@label"
 msgid "Email:"
 msgstr "Sähköposti:"
 
-#: src/qml/MetadataEditor.qml:111
-#, kde-format
+#: src/qml/MetadataEditor.qml:107
+#, fuzzy, kde-format
+#| msgid "License:"
+msgctxt "@label"
 msgid "License:"
 msgstr "Lisenssi:"
 
-#: src/qml/MetadataEditor.qml:122
-#, kde-format
+#: src/qml/MetadataEditor.qml:118
+#, fuzzy, kde-format
+#| msgid "Website:"
+msgctxt "@label"
 msgid "Website:"
 msgstr "Sivusto:"
 

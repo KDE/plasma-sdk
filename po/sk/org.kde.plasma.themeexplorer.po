@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: themeexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-08 00:48+0000\n"
+"POT-Creation-Date: 2026-08-07 00:48+0000\n"
 "PO-Revision-Date: 2023-12-05 17:29+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -41,132 +41,132 @@ msgstr "Preskúmať a upraviť vaše témy Plasma"
 msgid "The theme to open"
 msgstr "Téma na otvorenie"
 
-#: src/qml/ColorEditor.qml:38
+#: src/qml/ColorEditor.qml:41
 #, kde-format
 msgid "Edit Colors"
 msgstr "Upraviť farby"
 
-#: src/qml/ColorEditor.qml:67
+#: src/qml/ColorEditor.qml:70
 #, kde-format
 msgid "Select Color"
 msgstr "Vybrať farbu"
 
-#: src/qml/ColorEditor.qml:115
+#: src/qml/ColorEditor.qml:113
 #, kde-format
 msgid "Normal text"
 msgstr "Normálny text"
 
-#: src/qml/ColorEditor.qml:121
+#: src/qml/ColorEditor.qml:119
 #, kde-format
 msgid "Link"
 msgstr "Odkaz"
 
-#: src/qml/ColorEditor.qml:125
+#: src/qml/ColorEditor.qml:123
 #, kde-format
 msgid "Visited Link"
 msgstr "Navštívený odkaz"
 
-#: src/qml/ColorEditor.qml:148
+#: src/qml/ColorEditor.qml:146
 #, kde-format
 msgid "Complementary colors area:"
 msgstr "Komplementárna oblasť farieb:"
 
-#: src/qml/ColorEditor.qml:163
+#: src/qml/ColorEditor.qml:161
 #, kde-format
 msgid "Label"
 msgstr "Štítok"
 
-#: src/qml/ColorEditor.qml:186
+#: src/qml/ColorEditor.qml:184
 #, kde-format
 msgid "Text color:"
 msgstr "Farba textu:"
 
-#: src/qml/ColorEditor.qml:193
+#: src/qml/ColorEditor.qml:191
 #, kde-format
 msgid "Background color:"
 msgstr "Farba pozadia:"
 
-#: src/qml/ColorEditor.qml:200
+#: src/qml/ColorEditor.qml:198
 #, kde-format
 msgid "Highlight color:"
 msgstr "Farba zvýraznenia:"
 
-#: src/qml/ColorEditor.qml:207
+#: src/qml/ColorEditor.qml:205
 #, kde-format
 msgid "Link color:"
 msgstr "Farba odkazu:"
 
-#: src/qml/ColorEditor.qml:214
+#: src/qml/ColorEditor.qml:212
 #, kde-format
 msgid "Visited link color:"
 msgstr "Farba navštíveného odkazu:"
 
-#: src/qml/ColorEditor.qml:222
+#: src/qml/ColorEditor.qml:220
 #, kde-format
 msgid "Button text color:"
 msgstr "Farba textu tlačidla:"
 
-#: src/qml/ColorEditor.qml:229
+#: src/qml/ColorEditor.qml:227
 #, kde-format
 msgid "Button background color:"
 msgstr "Farba pozadia tlačidla:"
 
-#: src/qml/ColorEditor.qml:236
+#: src/qml/ColorEditor.qml:234
 #, kde-format
 msgid "Button mouse over color:"
 msgstr "Farba tlačidla pri prechode myši:"
 
-#: src/qml/ColorEditor.qml:243
+#: src/qml/ColorEditor.qml:241
 #, kde-format
 msgid "Button focus color:"
 msgstr "Farba zvýraznenia tlačidla:"
 
-#: src/qml/ColorEditor.qml:251
+#: src/qml/ColorEditor.qml:249
 #, kde-format
 msgid "Text view text color:"
 msgstr "Farba textu textového poľa:"
 
-#: src/qml/ColorEditor.qml:258
+#: src/qml/ColorEditor.qml:256
 #, kde-format
 msgid "Text view background color:"
 msgstr "Farba pozadia textového poľa:"
 
-#: src/qml/ColorEditor.qml:265
+#: src/qml/ColorEditor.qml:263
 #, kde-format
 msgid "Text view mouse over color:"
 msgstr "Farba textového poľa pri prechode myši:"
 
-#: src/qml/ColorEditor.qml:272
+#: src/qml/ColorEditor.qml:270
 #, kde-format
 msgid "Text view focus color:"
 msgstr "Farba zvýraznenia textového poľa:"
 
-#: src/qml/ColorEditor.qml:280
+#: src/qml/ColorEditor.qml:278
 #, kde-format
 msgid "Complementary text color:"
 msgstr "Komplementárna farba textu:"
 
-#: src/qml/ColorEditor.qml:287
+#: src/qml/ColorEditor.qml:285
 #, kde-format
 msgid "Complementary background color:"
 msgstr "Komplementárna farba pozadia:"
 
-#: src/qml/ColorEditor.qml:294
+#: src/qml/ColorEditor.qml:292
 #, kde-format
 msgid "Complementary mouse over color:"
 msgstr "Komplementárna farba prechodu myši:"
 
-#: src/qml/ColorEditor.qml:301
+#: src/qml/ColorEditor.qml:299
 #, kde-format
 msgid "Complementary focus color:"
 msgstr "Komplementárna farba zvýraznenia:"
 
-#: src/qml/ColorEditor.qml:313 src/qml/MetadataEditor.qml:137
+#: src/qml/ColorEditor.qml:311
 #, kde-format
 msgid "OK"
 msgstr "OK"
 
-#: src/qml/ColorEditor.qml:318 src/qml/MetadataEditor.qml:143
+#: src/qml/ColorEditor.qml:316
 #, kde-format
 msgid "Cancel"
 msgstr "Zrušiť"
@@ -218,33 +218,33 @@ msgstr "Zaškrtávacie pole"
 msgid "Text input…"
 msgstr "Textový vstup..."
 
-#: src/qml/Main.qml:23
+#: src/qml/Main.qml:26
 #, kde-format
 msgctxt "@title:window"
 msgid "Plasma Theme Explorer"
 msgstr "Prehliadač Plasma tém"
 
-#: src/qml/Main.qml:34
+#: src/qml/Main.qml:37
 #, kde-format
 msgid "New Theme…"
 msgstr "Nová téma..."
 
-#: src/qml/Main.qml:50
+#: src/qml/Main.qml:53
 #, kde-format
 msgid "Theme:"
 msgstr "Téma:"
 
-#: src/qml/Main.qml:62
+#: src/qml/Main.qml:65
 #, kde-format
 msgid "Open Folder"
 msgstr "Otvoriť priečinok"
 
-#: src/qml/Main.qml:67
+#: src/qml/Main.qml:70
 #, kde-format
 msgid "Edit Metadata…"
 msgstr "Upraviť metadáta..."
 
-#: src/qml/Main.qml:84
+#: src/qml/Main.qml:87
 #, kde-format
 msgid "Edit Colors…"
 msgstr "Upraviť farby..."
@@ -259,98 +259,116 @@ msgstr "Pomocník"
 msgid "Search…"
 msgstr "Hľadať..."
 
-#: src/qml/Main.qml:224
+#: src/qml/Main.qml:219
 #, kde-format
 msgid "This is a readonly, system wide installed theme"
 msgstr "Toto je systémová téma iba na čítanie"
 
-#: src/qml/Main.qml:229
+#: src/qml/Main.qml:224
 #, kde-format
 msgid "Preview:"
 msgstr "Náhľad:"
 
-#: src/qml/Main.qml:244
+#: src/qml/Main.qml:239
 #, kde-format
 msgid "None"
 msgstr "Žiadne"
 
-#: src/qml/Main.qml:244
+#: src/qml/Main.qml:239
 #, kde-format
 msgid "Image path: %1"
 msgstr "Cesta obrázku: %1"
 
-#: src/qml/Main.qml:249
+#: src/qml/Main.qml:244
 #, kde-format
 msgid "Description: %1"
 msgstr "Popis: %1"
 
-#: src/qml/Main.qml:254
+#: src/qml/Main.qml:249
 #, kde-format
 msgid "Missing from this theme"
 msgstr "Chýba v tejto téme"
 
-#: src/qml/Main.qml:254
+#: src/qml/Main.qml:249
 #, kde-format
 msgid "Present in this theme"
 msgstr "Dostupné v tejto téme"
 
-#: src/qml/Main.qml:259
+#: src/qml/Main.qml:254
 #, kde-format
 msgid "Show Margins"
 msgstr "Zobraziť okraje"
 
-#: src/qml/Main.qml:262
+#: src/qml/Main.qml:257
 #, kde-format
 msgid "Create with Editor…"
 msgstr "Vytvoriť s editorom..."
 
-#: src/qml/Main.qml:262
+#: src/qml/Main.qml:257
 #, kde-format
 msgid "Open In Editor…"
 msgstr "Otvoriť v editore..."
 
-#: src/qml/MetadataEditor.qml:24
-#, kde-format
+#: src/qml/MetadataEditor.qml:35
+#, fuzzy, kde-format
+#| msgid "New Theme"
+msgctxt "@title:dialog"
 msgid "New Theme"
 msgstr "Nová téma"
 
-#: src/qml/MetadataEditor.qml:24
-#, kde-format
+#: src/qml/MetadataEditor.qml:35
+#, fuzzy, kde-format
+#| msgid "Edit Theme"
+msgctxt "@title:dialog"
 msgid "Edit Theme"
 msgstr "Upraviť tému"
 
-#: src/qml/MetadataEditor.qml:59
-#, kde-format
+#: src/qml/MetadataEditor.qml:55
+#, fuzzy, kde-format
+#| msgid "Warning: don't change author or license for themes you don't own"
+msgctxt "@info"
 msgid "Warning: don't change author or license for themes you don't own"
 msgstr "Upozornenie: nemeňte autora alebo licenciu tém, ktoré nevlastníte"
 
-#: src/qml/MetadataEditor.qml:70
-#, kde-format
+#: src/qml/MetadataEditor.qml:66
+#, fuzzy, kde-format
+#| msgid "Theme Name:"
+msgctxt "@label"
 msgid "Theme Name:"
 msgstr "Názov témy:"
 
-#: src/qml/MetadataEditor.qml:86
-#, kde-format
+#: src/qml/MetadataEditor.qml:82
+#, fuzzy, kde-format
+#| msgid "This theme name already exists"
+msgctxt "@info"
 msgid "This theme name already exists"
 msgstr "Tento názov témy už existuje"
 
-#: src/qml/MetadataEditor.qml:95
-#, kde-format
+#: src/qml/MetadataEditor.qml:91
+#, fuzzy, kde-format
+#| msgid "Author:"
+msgctxt "@label"
 msgid "Author:"
 msgstr "Autor:"
 
-#: src/qml/MetadataEditor.qml:103
-#, kde-format
+#: src/qml/MetadataEditor.qml:99
+#, fuzzy, kde-format
+#| msgid "Email:"
+msgctxt "@label"
 msgid "Email:"
 msgstr "E-mail:"
 
-#: src/qml/MetadataEditor.qml:111
-#, kde-format
+#: src/qml/MetadataEditor.qml:107
+#, fuzzy, kde-format
+#| msgid "License:"
+msgctxt "@label"
 msgid "License:"
 msgstr "Licencia:"
 
-#: src/qml/MetadataEditor.qml:122
-#, kde-format
+#: src/qml/MetadataEditor.qml:118
+#, fuzzy, kde-format
+#| msgid "Website:"
+msgctxt "@label"
 msgid "Website:"
 msgstr "Webová stránka:"
 
