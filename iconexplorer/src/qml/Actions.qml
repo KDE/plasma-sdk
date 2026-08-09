@@ -14,17 +14,17 @@ Item {
     property list<Kirigami.Action> actions:[
         Kirigami.Action {
             text: i18n("Open with External Program")
-            icon.name: "document-open"
+            icon.name: "document-open-symbolic"
             onTriggered: Qt.openUrlExternally(Qt.url(`file://${preview.fullPath}`))
         },
         Kirigami.Action {
             text: i18n("Open Containing Folder")
-            icon.name: "document-open-folder"
+            icon.name: "document-open-folder-symbolic"
             onTriggered: iconModel.openContainingFolder(preview.fullPath)
         },
         Kirigami.Action {
             text: pickerMode ? i18n("Insert Name") : i18n("Copy Name to Clipboard")
-            icon.name: "edit-copy"
+            icon.name: "edit-copy-symbolic"
             onTriggered: {
                 clipboard(preview.iconName)
                 cuttlefish.showPassiveNotification(i18n("Icon name copied to clipboard"), "short")
@@ -54,7 +54,7 @@ Item {
         },
         Kirigami.Action {
             text: i18n("View in Other Icon Themes")
-            icon.name: "document-equal"
+            icon.name: "document-equal-symbolic"
             onTriggered: comparison.open()
         }
     ]
