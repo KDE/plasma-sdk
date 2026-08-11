@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-07 00:48+0000\n"
-"PO-Revision-Date: 2026-04-09 11:26+0400\n"
+"PO-Revision-Date: 2026-08-10 15:00+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -313,64 +313,55 @@ msgid "Open In Editor…"
 msgstr "افتح في المحرّر…"
 
 #: src/qml/MetadataEditor.qml:35
-#, fuzzy, kde-format
-#| msgid "New Theme"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "New Theme"
 msgstr "سمة جديدة"
 
 #: src/qml/MetadataEditor.qml:35
-#, fuzzy, kde-format
-#| msgid "Edit Theme"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Edit Theme"
 msgstr "حرّر السّمة"
 
 #: src/qml/MetadataEditor.qml:55
-#, fuzzy, kde-format
-#| msgid "Warning: don't change author or license for themes you don't own"
+#, kde-format
 msgctxt "@info"
 msgid "Warning: don't change author or license for themes you don't own"
 msgstr "تحذير: لا تغيّر مؤلّف أو رخصة السّمات التي لا تعرفها"
 
 #: src/qml/MetadataEditor.qml:66
-#, fuzzy, kde-format
-#| msgid "Theme Name:"
+#, kde-format
 msgctxt "@label"
 msgid "Theme Name:"
 msgstr "اسم السّمة:"
 
 #: src/qml/MetadataEditor.qml:82
-#, fuzzy, kde-format
-#| msgid "This theme name already exists"
+#, kde-format
 msgctxt "@info"
 msgid "This theme name already exists"
 msgstr "اسم السّمة هذا موجود فعلًا"
 
 #: src/qml/MetadataEditor.qml:91
-#, fuzzy, kde-format
-#| msgid "Author:"
+#, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "المؤلّف:"
 
 #: src/qml/MetadataEditor.qml:99
-#, fuzzy, kde-format
-#| msgid "Email:"
+#, kde-format
 msgctxt "@label"
 msgid "Email:"
 msgstr "البريد الإلكترونيّ:"
 
 #: src/qml/MetadataEditor.qml:107
-#, fuzzy, kde-format
-#| msgid "License:"
+#, kde-format
 msgctxt "@label"
 msgid "License:"
 msgstr "الرّخصة:"
 
 #: src/qml/MetadataEditor.qml:118
-#, fuzzy, kde-format
-#| msgid "Website:"
+#, kde-format
 msgctxt "@label"
 msgid "Website:"
 msgstr "موقع الوِبّ:"
