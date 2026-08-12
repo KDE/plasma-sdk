@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: trunk-kf 5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-07 00:48+0000\n"
-"PO-Revision-Date: 2026-06-23 16:33+0300\n"
+"PO-Revision-Date: 2026-08-11 16:45+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -315,22 +315,19 @@ msgid "Open In Editor…"
 msgstr "Atverti redaktoriuje…"
 
 #: src/qml/MetadataEditor.qml:35
-#, fuzzy, kde-format
-#| msgid "New Theme"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "New Theme"
 msgstr "Naujas apipavidalinimas"
 
 #: src/qml/MetadataEditor.qml:35
-#, fuzzy, kde-format
-#| msgid "Edit Theme"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Edit Theme"
 msgstr "Taisyti apipavidalinimą"
 
 #: src/qml/MetadataEditor.qml:55
-#, fuzzy, kde-format
-#| msgid "Warning: don't change author or license for themes you don't own"
+#, kde-format
 msgctxt "@info"
 msgid "Warning: don't change author or license for themes you don't own"
 msgstr ""
@@ -338,46 +335,40 @@ msgstr ""
 "nepriklauso"
 
 #: src/qml/MetadataEditor.qml:66
-#, fuzzy, kde-format
-#| msgid "Theme Name:"
+#, kde-format
 msgctxt "@label"
 msgid "Theme Name:"
 msgstr "Apipavidalinimo pavadinimas:"
 
 #: src/qml/MetadataEditor.qml:82
-#, fuzzy, kde-format
-#| msgid "This theme name already exists"
+#, kde-format
 msgctxt "@info"
 msgid "This theme name already exists"
 msgstr "Apipavidalinimas tokiu pavadinimu jau yra"
 
 #: src/qml/MetadataEditor.qml:91
-#, fuzzy, kde-format
-#| msgid "Author:"
+#, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Autorius:"
 
 #: src/qml/MetadataEditor.qml:99
-#, fuzzy, kde-format
-#| msgid "Email:"
+#, kde-format
 msgctxt "@label"
 msgid "Email:"
 msgstr "El. paštas:"
 
 #: src/qml/MetadataEditor.qml:107
-#, fuzzy, kde-format
-#| msgid "License:"
+#, kde-format
 msgctxt "@label"
 msgid "License:"
 msgstr "Licencija:"
 
 #: src/qml/MetadataEditor.qml:118
-#, fuzzy, kde-format
-#| msgid "Website:"
+#, kde-format
 msgctxt "@label"
 msgid "Website:"
-msgstr "Svetainė:"
+msgstr "Internetinė svetainė:"
 
 #~ msgid "New Theme..."
 #~ msgstr "Naujas apipavidalinimas..."
