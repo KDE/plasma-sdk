@@ -16,7 +16,6 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: iconexplorerplugin.cpp:59
-#, fuzzy, kde-format
-#| msgid "Insert Icon with Cuttlefish"
+#, kde-format
 msgid "Insert Icon with Icon Explorer"
-msgstr "Vložiť ikonu s Cuttlefish"
+msgstr "Vložiť ikonu pomocou Prehliadača ikon"
