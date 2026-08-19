@@ -314,44 +314,44 @@ msgstr "用编辑器中打开…"
 #: src/qml/MetadataEditor.qml:24
 #, kde-format
 msgid "New Theme"
-msgstr "新主题"
+msgstr ""
 
 #: src/qml/MetadataEditor.qml:24
 #, kde-format
 msgid "Edit Theme"
-msgstr "编辑主题"
+msgstr ""
 
 #: src/qml/MetadataEditor.qml:59
 #, kde-format
 msgid "Warning: don't change author or license for themes you don't own"
-msgstr "警告：不要更改非自己所有的主题的作者名称和许可"
+msgstr ""
 
 #: src/qml/MetadataEditor.qml:70
 #, kde-format
 msgid "Theme Name:"
-msgstr "主题名称："
+msgstr ""
 
 #: src/qml/MetadataEditor.qml:86
 #, kde-format
 msgid "This theme name already exists"
-msgstr "此主题名称已存在"
+msgstr ""
 
 #: src/qml/MetadataEditor.qml:95
 #, kde-format
 msgid "Author:"
-msgstr "作者："
+msgstr ""
 
 #: src/qml/MetadataEditor.qml:103
 #, kde-format
 msgid "Email:"
-msgstr "电子邮件："
+msgstr ""
 
 #: src/qml/MetadataEditor.qml:111
 #, kde-format
 msgid "License:"
-msgstr "许可："
+msgstr ""
 
 #: src/qml/MetadataEditor.qml:122
 #, kde-format
 msgid "Website:"
-msgstr "网站："
+msgstr ""
