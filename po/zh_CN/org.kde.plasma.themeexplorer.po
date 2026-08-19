@@ -312,64 +312,55 @@ msgid "Open In Editor…"
 msgstr "用编辑器中打开…"
 
 #: src/qml/MetadataEditor.qml:35
-#, fuzzy, kde-format
-#| msgid "New Theme"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "New Theme"
-msgstr "新主题"
+msgstr ""
 
 #: src/qml/MetadataEditor.qml:35
-#, fuzzy, kde-format
-#| msgid "Edit Theme"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Edit Theme"
-msgstr "编辑主题"
+msgstr ""
 
 #: src/qml/MetadataEditor.qml:55
-#, fuzzy, kde-format
-#| msgid "Warning: don't change author or license for themes you don't own"
+#, kde-format
 msgctxt "@info"
 msgid "Warning: don't change author or license for themes you don't own"
-msgstr "警告：不要更改非自己所有的主题的作者名称和许可"
+msgstr ""
 
 #: src/qml/MetadataEditor.qml:66
-#, fuzzy, kde-format
-#| msgid "Theme Name:"
+#, kde-format
 msgctxt "@label"
 msgid "Theme Name:"
-msgstr "主题名称："
+msgstr ""
 
 #: src/qml/MetadataEditor.qml:82
-#, fuzzy, kde-format
-#| msgid "This theme name already exists"
+#, kde-format
 msgctxt "@info"
 msgid "This theme name already exists"
-msgstr "此主题名称已存在"
+msgstr ""
 
 #: src/qml/MetadataEditor.qml:91
-#, fuzzy, kde-format
-#| msgid "Author:"
+#, kde-format
 msgctxt "@label"
 msgid "Author:"
-msgstr "作者："
+msgstr ""
 
 #: src/qml/MetadataEditor.qml:99
-#, fuzzy, kde-format
-#| msgid "Email:"
+#, kde-format
 msgctxt "@label"
 msgid "Email:"
-msgstr "电子邮件："
+msgstr ""
 
 #: src/qml/MetadataEditor.qml:107
-#, fuzzy, kde-format
-#| msgid "License:"
+#, kde-format
 msgctxt "@label"
 msgid "License:"
-msgstr "许可："
+msgstr ""
 
 #: src/qml/MetadataEditor.qml:118
-#, fuzzy, kde-format
-#| msgid "Website:"
+#, kde-format
 msgctxt "@label"
 msgid "Website:"
-msgstr "网站："
+msgstr ""
