@@ -20,4 +20,4 @@ msgstr ""
 #: iconexplorerplugin.cpp:59
 #, kde-format
 msgid "Insert Icon with Icon Explorer"
-msgstr ""
+msgstr "插入图标 (通过图标浏览器)"
