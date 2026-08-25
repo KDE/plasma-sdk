@@ -4,15 +4,22 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+pragma ComponentBehavior: Bound
 
-import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.kirigami 2.20 as Kirigami
+import QtQuick
+
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.kirigami as Kirigami
+
+import org.kde.ki18n
 
 Item {
+    id: root
+
+    property string imagePath
+
     Rectangle {
-        id: background
+        id: backgroundRect
         anchors {
             fill: parent
             margins: Kirigami.Units.gridUnit
@@ -24,17 +31,17 @@ Item {
     Column {
         anchors.centerIn: parent
         PlasmaComponents.ToolButton {
-            text: i18n("ToolButton")
-            width: background.width - 10
+            text: KI18n.i18n("ToolButton")
+            width: backgroundRect.width - 10
         }
         PlasmaComponents.Button {
-            text: i18n("Button")
-            width: background.width - 10
+            text: KI18n.i18n("Button")
+            width: backgroundRect.width - 10
         }
         PlasmaComponents.Label {
             anchors.horizontalCenter: parent.horizontalCenter
-            text: model.imagePath
-            visible: width < background.width
+            text: root.imagePath
+            visible: width < backgroundRect.width
         }
     }
 }

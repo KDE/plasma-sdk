@@ -11,8 +11,9 @@ ecm_add_qml_module(plasmathemeexplorer
     QML_FILES
         qml/Main.qml
         qml/ColorButton.qml
-        qml/ColorEditor.qml
+        qml/ColorEditorDialog.qml
         qml/FormLabel.qml
+        qml/GridDelegate.qml
         qml/MetadataEditor.qml
         qml/delegates/actionbutton.qml
         qml/delegates/allframesvgs.qml

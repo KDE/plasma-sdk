@@ -4,15 +4,18 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+import QtQuick
 
-import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.kirigami as Kirigami
 
 Item {
+    id: root
+
+    property string imagePath
+
     Rectangle {
-        id: background
+        id: backgroundRect
         anchors {
             fill: parent
             margins: Kirigami.Units.gridUnit
@@ -22,9 +25,9 @@ Item {
         opacity: 0.6
     }
     Column {
-        anchors.centerIn: background
+        anchors.centerIn: backgroundRect
         PlasmaComponents.TabBar {
-            width: background.width - 10
+            width: backgroundRect.width - 10
             PlasmaComponents.TabButton {
                 text: i18n("Tab1")
             }
@@ -37,8 +40,8 @@ Item {
         }
         PlasmaComponents.Label {
             anchors.horizontalCenter: parent.horizontalCenter
-            text: model.imagePath
-            visible: width < background.width
+            text: root.imagePath
+            visible: width < backgroundRect.width
         }
     }
 }

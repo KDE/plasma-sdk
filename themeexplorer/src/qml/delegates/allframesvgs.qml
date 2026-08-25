@@ -4,19 +4,23 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+pragma ComponentBehavior: Bound
 
-import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.ksvg 1.0 as KSvg
-import org.kde.kirigami 2.20 as Kirigami
+import QtQuick
+
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.ksvg as KSvg
+import org.kde.kirigami as Kirigami
 
 Item {
-    id: delegateRoot
-    property var prefixes: model.frameSvgPrefixes
-    property var imagePath: model.imagePath
+    id: root
+
+    property string imagePath
+    property string frameSvgPrefixes
+    property string showMargins
+
     Rectangle {
-        id: background
+        id: backgroundRect
         anchors {
             fill: parent
             margins: Kirigami.Units.gridUnit
@@ -33,15 +37,17 @@ Item {
             margins: Kirigami.Units.gridUnit * 2
         }
         Repeater {
-            model: delegateRoot.prefixes
+            model: root.frameSvgPrefixes
             delegate: KSvg.FrameSvgItem {
+                id: svgItem
+                required property string modelData
                 width: flow.width / 2
                 height: flow.height / 3
-                imagePath: delegateRoot.imagePath
+                imagePath: root.imagePath
                 prefix: modelData
                 PlasmaComponents.Label {
                     anchors.centerIn: parent
-                    text: modelData
+                    text: svgItem.modelData
                     visible: width < parent.width
                 }
 
@@ -64,10 +70,10 @@ Item {
 
     PlasmaComponents.Label {
         anchors {
-            horizontalCenter: background.horizontalCenter
-            bottom: background.bottom
+            horizontalCenter: backgroundRect.horizontalCenter
+            bottom: backgroundRect.bottom
         }
-        text: model.imagePath
+        text: root.imagePath
         visible: width < flow.width
     }
 }

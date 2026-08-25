@@ -54,8 +54,7 @@ Kirigami.AbstractApplicationWindow {
             }
             QQC2.ComboBox {
                 id: themeSelector
-                //FIXME: why crashes?
-                //model: 3//ThemeModel.themeList
+                model: ThemeModel.themeList
                 textRole: "display"
                 onCurrentIndexChanged: {
                     ThemeModel.theme = ThemeModel.themeList.get(currentIndex).packageNameRole;
@@ -64,12 +63,12 @@ Kirigami.AbstractApplicationWindow {
             QQC2.ToolButton {
                 QQC2.ToolTip.text: KI18n.i18n("Open Folder")
                 icon.name: "document-open-folder"
-                onClicked: Qt.openUrlExternally(ThemeModel.themeFolder);
+                onClicked: Qt.openUrlExternally("file://" + ThemeModel.themeFolder);
             }
             QQC2.ToolButton {
                 QQC2.ToolTip.text: KI18n.i18n("Edit Metadata…")
                 icon.name: "configure"
-                enabled: view.currentItem?.modelData.isWritable ?? false
+                enabled: ThemeModel.isWritable
                 onClicked: {
                     if (!root.metadataEditor) {
                         root.metadataEditor = metadataEditorComponent.createObject(root);
@@ -86,9 +85,9 @@ Kirigami.AbstractApplicationWindow {
             QQC2.ToolButton {
                 QQC2.ToolTip.text: KI18n.i18n("Edit Colors…")
                 icon.name: "color"
-                enabled: view.currentItem?.modelData.isWritable ?? false
+                enabled: ThemeModel.isWritable
                 onClicked: {
-                    let colorEditor = Qt.createComponent("org.kde.plasma.themeexplorer", "ColorEditor").createObject(root) as ColorEditor;
+                    let colorEditor = Qt.createComponent("org.kde.plasma.themeexplorer", "ColorEditorDialog").createObject(root) as ColorEditorDialog;
                     colorEditor.open();
                 }
             }
@@ -108,7 +107,7 @@ Kirigami.AbstractApplicationWindow {
         }
     }
 
-    property QtObject metadataEditor
+    property MetadataEditor metadataEditor
     Component {
         id: metadataEditorComponent
         MetadataEditor {}
@@ -118,15 +117,12 @@ Kirigami.AbstractApplicationWindow {
         running: true
         interval: 200
         onTriggered: {
-            themeSelector.model = ThemeModel.themeList
             for (let i = 0; i < ThemeModel.themeList.count; ++i) {
                 if (commandlineTheme == ThemeModel.themeList.get(i).packageNameRole) {
                     themeSelector.currentIndex = i;
                     break;
                 }
             }
-            //NOTE:assigning this in a second moment solves a crash in some versions of Qt 5.8
-            searchModel.sourceModel= ThemeModel
         }
     }
     SystemPalette {
@@ -149,9 +145,12 @@ Kirigami.AbstractApplicationWindow {
         GridView {
             id: view
             anchors.fill: parent
+
+            onCurrentIndexChanged: extendedLoader.update()
             model: KItemModels.KSortFilterProxyModel {
                 id: searchModel
                 filterRoleName: "imagePath"
+                sourceModel: ThemeModel
             }
             cellWidth: root.iconSize
             cellHeight: cellWidth
@@ -161,34 +160,8 @@ Kirigami.AbstractApplicationWindow {
                 radius: 3
                 color: palette.highlight
             }
-            delegate: Item {
-                width: view.cellWidth
-                height: view.cellHeight
-                property QtObject modelData: model
-                MouseArea {
-                    z: 2
-                    anchors.fill: parent
-                    onClicked: {
-                        view.currentIndex = index;
-                    }
-                }
-                Loader {
-                    z: -1
-                    anchors.fill: parent
-                    source: Qt.resolvedUrl("delegates/" + model.delegate + ".qml")
-                }
-                Rectangle {
-                    anchors {
-                        right: parent.right
-                        bottom: parent.bottom
-                        margins: Kirigami.Units.gridUnit
-                    }
-                    width: Kirigami.Units.gridUnit
-                    height: Kirigami.Units.gridUnit
-                    radius: Kirigami.Units.gridUnit
-                    opacity: 0.5
-                    color: model.usesFallback ? "red" : "green"
-                }
+            delegate: GridDelegate {
+                showMargins: root.showMargins
             }
         }
     }
@@ -213,22 +186,29 @@ Kirigami.AbstractApplicationWindow {
                 fill: parent
                 margins: Kirigami.Units.gridUnit
             }
-            QQC2.Label {
-                Layout.fillWidth: true
-                visible: !view.currentItem?.modelData.isWritable ?? false
-                text: KI18n.i18n("This is a readonly, system wide installed theme")
-                wrapMode: Text.WordWrap
-            }
-            QQC2.Label {
-                Layout.fillWidth: true
-                text: KI18n.i18n("Preview:")
-            }
             Loader {
                 id: extendedLoader
-                property QtObject model: view.currentItem?.modelData ?? null
                 Layout.fillWidth: true
                 Layout.minimumHeight: width
-                source: model ? Qt.resolvedUrl("delegates/" + model.delegate + ".qml") : ""
+                source: Qt.resolvedUrl("delegates/" + (view.currentItem as GridDelegate).delegate + ".qml")
+                onLoaded: update()
+                function update(): void {
+                    if (!item) return
+                    if ("showMargins" in item) {
+                        item.showMargins = Qt.binding(function() {
+                            return (view.currentItem as GridDelegate).showMargins
+                        });
+                    }
+                    if ("imagePath" in item) {
+                        item.imagePath = (view.currentItem as GridDelegate).imagePath;
+                    }
+                    if ("frameSvgPrefixes" in item) {
+                        item.frameSvgPrefixes = (view.currentItem as GridDelegate).frameSvgPrefixes
+                    }
+                    if ("iconElements" in item) {
+                        item.iconElements = (view.currentItem as GridDelegate).iconElements
+                    }
+                }
             }
             Item {
                 Layout.fillWidth: true
@@ -236,31 +216,29 @@ Kirigami.AbstractApplicationWindow {
             }
             QQC2.Label {
                 Layout.fillWidth: true
-                text: KI18n.i18n("Image path: %1", view.currentItem?.modelData.imagePath ?? KI18n.i18n("None"))
-                wrapMode: Text.WordWrap
+                text: KI18n.i18n("Image path: %1", (view.currentItem as GridDelegate).imagePath)
+                wrapMode: Text.Wrap
             }
             QQC2.Label {
                 Layout.fillWidth: true
-                text: KI18n.i18n("Description: %1", view.currentItem?.modelData.description ?? "")
-                wrapMode: Text.WordWrap
+                text: KI18n.i18n("Description: %1", (view.currentItem as GridDelegate).description ?? "")
+                wrapMode: Text.Wrap
             }
             QQC2.Label {
                 Layout.fillWidth: true
-                text: view.currentItem && view.currentItem.modelData.usesFallback ? KI18n.i18n("Missing from this theme") : KI18n.i18n("Present in this theme")
-                wrapMode: Text.WordWrap
+                text: view.currentItem && (view.currentItem as GridDelegate).usesFallback ? KI18n.i18n("Missing from this theme") : KI18n.i18n("Present in this theme")
+                wrapMode: Text.Wrap
             }
             QQC2.CheckBox {
                 id: showMarginsCheckBox
-                text: i18n("Show Margins")
+                text: KI18n.i18n("Show Margins")
             }
             QQC2.Button {
-                text: view.currentItem && view.currentItem.modelData.usesFallback ? KI18n.i18n("Create with Editor…") : KI18n.i18n("Open In Editor…")
-                enabled: view.currentItem?.modelData.isWritable ?? false
+                text: view.currentItem && (view.currentItem as GridDelegate).usesFallback ? KI18n.i18n("Create with Editor…") : KI18n.i18n("Open In Editor…")
+                enabled: ThemeModel.isWritable
                 Layout.alignment: Qt.AlignHCenter
                 onClicked: {
-                    print(view.currentItem.modelData.svgAbsolutePath)
-                    ThemeModel.editElement(view.currentItem.modelData.imagePath)
-                    //Qt.openUrlExternally(view.currentItem.modelData.svgAbsolutePath)
+                    ThemeModel.editElement((view.currentItem as GridDelegate).imagePath)
                 }
             }
             QQC2.Slider {

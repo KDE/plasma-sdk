@@ -17,10 +17,12 @@
 #include <QApplication>
 #include <QDir>
 #include <QFile>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QPainter>
 #include <QStandardPaths>
 
-#include <KConfigGroup>
 #include <KDesktopFile>
 
 #include <Plasma/Theme>
@@ -68,19 +70,19 @@ void ThemeListModel::reload()
         const auto themeNameSepIndex = themeRoot.lastIndexOf('/', -1);
         const auto packageName = themeRoot.right(themeRoot.length() - themeNameSepIndex - 1);
 
-        KDesktopFile desktopFile(theme);
+        QFile file(theme);
+        (void)file.open(QFile::ReadOnly);
+        const auto json = QJsonDocument::fromJson(file.readAll()).object();
 
-        if (desktopFile.noDisplay()) {
-            continue;
-        }
-
-        QString name = desktopFile.readName();
+        auto name = json["KPlugin"]["Name"].toString();
         if (name.isEmpty()) {
             name = packageName;
         }
-        const QString comment = desktopFile.readComment();
-        const QString author = desktopFile.desktopGroup().readEntry("X-KDE-PluginInfo-Author", QString());
-        const QString version = desktopFile.desktopGroup().readEntry("X-KDE-PluginInfo-Version", QString());
+        const auto comment = json["KPlugin"]["Description"].toString();
+
+        auto authors = json["KPlugin"]["Author"].toArray();
+        const auto author = authors.size() > 0 ? authors[0].toObject()["Name"].toString() : QString();
+        const auto version = json["KPlugin"]["Version"].toString();
 
         ThemeInfo info;
         info.package = packageName;

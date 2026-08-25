@@ -4,9 +4,9 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.3
+import QtQuick
 import Qt5Compat.GraphicalEffects
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 
 Item {
     implicitWidth: parent.width/1.2
@@ -31,6 +31,7 @@ Item {
                 verticalCenter: parent.verticalCenter
                 margins: Kirigami.Units.smallSpacing
             }
+            clip: true
             text: i18n("Text input…")
             color: viewTextColor
         }

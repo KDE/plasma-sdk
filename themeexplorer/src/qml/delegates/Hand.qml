@@ -13,7 +13,7 @@ import org.kde.ksvg 1.0 as KSvg
 KSvg.SvgItem {
     id: handRoot
 
-    property alias rotation: rotation.angle
+    property alias handRotation: rotationTransform.angle
     property double svgScale
     property double horizontalRotationOffset: 0
     property double verticalRotationOffset: 0
@@ -48,7 +48,7 @@ KSvg.SvgItem {
 
     svg: clockSvg
     transform: Rotation {
-        id: rotation
+        id: rotationTransform
         angle: 0
         origin {
             x: handRoot.horizontalRotationCenter

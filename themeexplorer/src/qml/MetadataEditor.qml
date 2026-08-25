@@ -53,7 +53,7 @@ QQC2.Dialog {
             Layout.preferredHeight: visible ? implicitHeight : 0
             visible: text.length > 0
             readonly property string defaultMessage: dialog.newTheme ? "" : KI18n.i18nc("@info", "Warning: don't change author or license for themes you don't own")
-            wrapMode: Text.WordWrap
+            wrapMode: Text.Wrap
             Layout.fillWidth: true
         }
         GridLayout {
