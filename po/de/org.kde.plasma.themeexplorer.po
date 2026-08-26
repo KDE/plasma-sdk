@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.kde.plasma.themeexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-07 00:48+0000\n"
+"POT-Creation-Date: 2026-08-26 00:50+0000\n"
 "PO-Revision-Date: 2026-04-24 00:08+0200\n"
 "Last-Translator: Alexander Becker <alex-at-kde-l10n-de@freenet.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -41,169 +41,169 @@ msgstr "Erforschen und bearbeiten Sie Ihre Plasma-Designs"
 msgid "The theme to open"
 msgstr "Das zu öffnende Design"
 
-#: src/qml/ColorEditor.qml:41
+#: src/qml/ColorEditorDialog.qml:42
 #, kde-format
 msgid "Edit Colors"
 msgstr "Farben bearbeiten"
 
-#: src/qml/ColorEditor.qml:70
+#: src/qml/ColorEditorDialog.qml:74
 #, kde-format
 msgid "Select Color"
 msgstr "Farbe auswählen"
 
-#: src/qml/ColorEditor.qml:113
+#: src/qml/ColorEditorDialog.qml:104
 #, kde-format
 msgid "Normal text"
 msgstr "Normaler Text"
 
-#: src/qml/ColorEditor.qml:119
+#: src/qml/ColorEditorDialog.qml:110
 #, kde-format
 msgid "Link"
 msgstr "Verknüpfung"
 
-#: src/qml/ColorEditor.qml:123
+#: src/qml/ColorEditorDialog.qml:114
 #, kde-format
 msgid "Visited Link"
 msgstr "Besuchte Verknüpfung"
 
-#: src/qml/ColorEditor.qml:146
+#: src/qml/ColorEditorDialog.qml:137
 #, kde-format
 msgid "Complementary colors area:"
 msgstr "Komplementärfarbenbereich:"
 
-#: src/qml/ColorEditor.qml:161
+#: src/qml/ColorEditorDialog.qml:152
 #, kde-format
 msgid "Label"
 msgstr "Beschriftung"
 
-#: src/qml/ColorEditor.qml:184
+#: src/qml/ColorEditorDialog.qml:174
 #, kde-format
 msgid "Text color:"
 msgstr "Textfarbe:"
 
-#: src/qml/ColorEditor.qml:191
+#: src/qml/ColorEditorDialog.qml:181
 #, kde-format
 msgid "Background color:"
 msgstr "Hintergrundfarbe:"
 
-#: src/qml/ColorEditor.qml:198
+#: src/qml/ColorEditorDialog.qml:188
 #, kde-format
 msgid "Highlight color:"
 msgstr "Farbe für Hervorhebungen:"
 
-#: src/qml/ColorEditor.qml:205
+#: src/qml/ColorEditorDialog.qml:195
 #, kde-format
 msgid "Link color:"
 msgstr "Farbe für Verknüpfungen:"
 
-#: src/qml/ColorEditor.qml:212
+#: src/qml/ColorEditorDialog.qml:202
 #, kde-format
 msgid "Visited link color:"
 msgstr "Farbe für besuchte Verknüpfungen:"
 
-#: src/qml/ColorEditor.qml:220
+#: src/qml/ColorEditorDialog.qml:210
 #, kde-format
 msgid "Button text color:"
 msgstr "Farbe für Knopfbeschriftung:"
 
-#: src/qml/ColorEditor.qml:227
+#: src/qml/ColorEditorDialog.qml:217
 #, kde-format
 msgid "Button background color:"
 msgstr "Farbe für Knopfhintergrund:"
 
-#: src/qml/ColorEditor.qml:234
+#: src/qml/ColorEditorDialog.qml:224
 #, kde-format
 msgid "Button mouse over color:"
 msgstr "Knopffarbe bei Mausberührung:"
 
-#: src/qml/ColorEditor.qml:241
+#: src/qml/ColorEditorDialog.qml:231
 #, kde-format
 msgid "Button focus color:"
 msgstr "Knopffarbe bei Aktivierung:"
 
-#: src/qml/ColorEditor.qml:249
+#: src/qml/ColorEditorDialog.qml:239
 #, kde-format
 msgid "Text view text color:"
 msgstr "Textfarbe der Textansicht:"
 
-#: src/qml/ColorEditor.qml:256
+#: src/qml/ColorEditorDialog.qml:246
 #, kde-format
 msgid "Text view background color:"
 msgstr "Hintergrundfarbe der Textansicht:"
 
-#: src/qml/ColorEditor.qml:263
+#: src/qml/ColorEditorDialog.qml:253
 #, kde-format
 msgid "Text view mouse over color:"
 msgstr "Farbe der Textansicht bei Mausberührung:"
 
-#: src/qml/ColorEditor.qml:270
+#: src/qml/ColorEditorDialog.qml:260
 #, kde-format
 msgid "Text view focus color:"
 msgstr "Farbe der Textansicht bei Aktivierung:"
 
-#: src/qml/ColorEditor.qml:278
+#: src/qml/ColorEditorDialog.qml:268
 #, kde-format
 msgid "Complementary text color:"
 msgstr "Komplementäre Textfarbe:"
 
-#: src/qml/ColorEditor.qml:285
+#: src/qml/ColorEditorDialog.qml:275
 #, kde-format
 msgid "Complementary background color:"
 msgstr "Komplementäre Hintergrundfarbe:"
 
-#: src/qml/ColorEditor.qml:292
+#: src/qml/ColorEditorDialog.qml:282
 #, kde-format
 msgid "Complementary mouse over color:"
 msgstr "Komplementäre Farbe bei Mausberührung:"
 
-#: src/qml/ColorEditor.qml:299
+#: src/qml/ColorEditorDialog.qml:289
 #, kde-format
 msgid "Complementary focus color:"
 msgstr "Komplementäre Farbe bei Aktivierung:"
 
-#: src/qml/ColorEditor.qml:311
+#: src/qml/ColorEditorDialog.qml:301
 #, kde-format
-msgid "OK"
+msgid "Ok"
 msgstr "OK"
 
-#: src/qml/ColorEditor.qml:316
+#: src/qml/ColorEditorDialog.qml:306
 #, kde-format
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: src/qml/delegates/actionbutton.qml:35 src/qml/delegates/actionbutton.qml:39
-#: src/qml/delegates/checkmarks.qml:31 src/qml/delegates/checkmarks.qml:35
-#: src/qml/delegates/checkmarks.qml:39 src/qml/delegates/checkmarks.qml:43
+#: src/qml/delegates/actionbutton.qml:38 src/qml/delegates/actionbutton.qml:42
+#: src/qml/delegates/checkmarks.qml:34 src/qml/delegates/checkmarks.qml:38
+#: src/qml/delegates/checkmarks.qml:42 src/qml/delegates/checkmarks.qml:46
 #, kde-format
 msgid "Option"
 msgstr "Einstellung"
 
-#: src/qml/delegates/button.qml:27
+#: src/qml/delegates/button.qml:34
 #, kde-format
 msgid "ToolButton"
 msgstr "Werkzeugleisten-Knopf"
 
-#: src/qml/delegates/button.qml:31 src/qml/fakecontrols/Button.qml:28
+#: src/qml/delegates/button.qml:38 src/qml/fakecontrols/Button.qml:28
 #, kde-format
 msgid "Button"
 msgstr "Knopf"
 
-#: src/qml/delegates/tabbar.qml:29
+#: src/qml/delegates/tabbar.qml:32
 #, kde-format
 msgid "Tab1"
 msgstr "Karteikarte 1"
 
-#: src/qml/delegates/tabbar.qml:32
+#: src/qml/delegates/tabbar.qml:35
 #, kde-format
 msgid "Tab2"
 msgstr "Karteikarte 2"
 
-#: src/qml/delegates/tabbar.qml:35
+#: src/qml/delegates/tabbar.qml:38
 #, kde-format
 msgid "Tab3"
 msgstr "Karteikarte 3"
 
-#: src/qml/delegates/textfield.qml:28
+#: src/qml/delegates/textfield.qml:31
 #, kde-format
 msgid "Text"
 msgstr "Text"
@@ -213,7 +213,7 @@ msgstr "Text"
 msgid "Checkbox"
 msgstr "Ankreuzfeld"
 
-#: src/qml/fakecontrols/LineEdit.qml:34
+#: src/qml/fakecontrols/LineEdit.qml:35
 #, kde-format
 msgid "Text input…"
 msgstr "Texteingabe …"
@@ -234,77 +234,62 @@ msgstr "Neues Design …"
 msgid "Theme:"
 msgstr "Design:"
 
-#: src/qml/Main.qml:65
+#: src/qml/Main.qml:64
 #, kde-format
 msgid "Open Folder"
 msgstr "Ordner öffnen"
 
-#: src/qml/Main.qml:70
+#: src/qml/Main.qml:69
 #, kde-format
 msgid "Edit Metadata…"
 msgstr "Metadaten bearbeiten …"
 
-#: src/qml/Main.qml:87
+#: src/qml/Main.qml:86
 #, kde-format
 msgid "Edit Colors…"
 msgstr "Farben bearbeiten …"
 
-#: src/qml/Main.qml:100
+#: src/qml/Main.qml:99
 #, kde-format
 msgid "Help"
 msgstr "Hilfe"
 
-#: src/qml/Main.qml:105
+#: src/qml/Main.qml:104
 #, kde-format
 msgid "Search…"
 msgstr "Suchen …"
 
 #: src/qml/Main.qml:219
 #, kde-format
-msgid "This is a readonly, system wide installed theme"
-msgstr "Dies ist ein schreibgeschützt, systemweit installiertes Design"
-
-#: src/qml/Main.qml:224
-#, kde-format
-msgid "Preview:"
-msgstr "Vorschau:"
-
-#: src/qml/Main.qml:239
-#, kde-format
-msgid "None"
-msgstr "Keine"
-
-#: src/qml/Main.qml:239
-#, kde-format
 msgid "Image path: %1"
 msgstr "Bildpfad: %1"
 
-#: src/qml/Main.qml:244
+#: src/qml/Main.qml:224
 #, kde-format
 msgid "Description: %1"
 msgstr "Beschreibung: %1"
 
-#: src/qml/Main.qml:249
+#: src/qml/Main.qml:229
 #, kde-format
 msgid "Missing from this theme"
 msgstr "In diesem Design nicht vorhanden"
 
-#: src/qml/Main.qml:249
+#: src/qml/Main.qml:229
 #, kde-format
 msgid "Present in this theme"
 msgstr "In diesem Design vorhanden"
 
-#: src/qml/Main.qml:254
+#: src/qml/Main.qml:234
 #, kde-format
 msgid "Show Margins"
 msgstr "Ränder anzeigen"
 
-#: src/qml/Main.qml:257
+#: src/qml/Main.qml:237
 #, kde-format
 msgid "Create with Editor…"
 msgstr "Mit Editor erstellen …"
 
-#: src/qml/Main.qml:257
+#: src/qml/Main.qml:237
 #, kde-format
 msgid "Open In Editor…"
 msgstr "In Editor öffnen …"
@@ -374,11 +359,20 @@ msgctxt "@label"
 msgid "Website:"
 msgstr "Webseite:"
 
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "This is a readonly, system wide installed theme"
+#~ msgstr "Dies ist ein schreibgeschützt, systemweit installiertes Design"
+
+#~ msgid "Preview:"
+#~ msgstr "Vorschau:"
+
+#~ msgid "None"
+#~ msgstr "Keine"
+
 #~ msgid "New Theme..."
 #~ msgstr "Neues Design ..."
 
 #~ msgid "Edit Colors..."
 #~ msgstr "Farben bearbeiten ..."
-
-#~ msgid "Ok"
-#~ msgstr "OK"

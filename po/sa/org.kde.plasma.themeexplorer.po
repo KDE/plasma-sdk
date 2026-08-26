@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-07 00:48+0000\n"
+"POT-Creation-Date: 2026-08-26 00:50+0000\n"
 "PO-Revision-Date: 2024-12-24 20:39+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -44,169 +44,169 @@ msgstr ""
 msgid "The theme to open"
 msgstr "उद्घाटयितुं विषयः"
 
-#: src/qml/ColorEditor.qml:41
+#: src/qml/ColorEditorDialog.qml:42
 #, kde-format
 msgid "Edit Colors"
 msgstr "रङ्ग सम्पादयतु"
 
-#: src/qml/ColorEditor.qml:70
+#: src/qml/ColorEditorDialog.qml:74
 #, kde-format
 msgid "Select Color"
 msgstr "Color इति चिनोतु"
 
-#: src/qml/ColorEditor.qml:113
+#: src/qml/ColorEditorDialog.qml:104
 #, kde-format
 msgid "Normal text"
 msgstr "सामान्यः पाठः"
 
-#: src/qml/ColorEditor.qml:119
+#: src/qml/ColorEditorDialog.qml:110
 #, kde-format
 msgid "Link"
 msgstr "सम्बन्ध"
 
-#: src/qml/ColorEditor.qml:123
+#: src/qml/ColorEditorDialog.qml:114
 #, kde-format
 msgid "Visited Link"
 msgstr "विजिट् लिङ्क्"
 
-#: src/qml/ColorEditor.qml:146
+#: src/qml/ColorEditorDialog.qml:137
 #, kde-format
 msgid "Complementary colors area:"
 msgstr "पूरक रङ्ग क्षेत्र :"
 
-#: src/qml/ColorEditor.qml:161
+#: src/qml/ColorEditorDialog.qml:152
 #, kde-format
 msgid "Label"
 msgstr "नामपत्र"
 
-#: src/qml/ColorEditor.qml:184
+#: src/qml/ColorEditorDialog.qml:174
 #, kde-format
 msgid "Text color:"
 msgstr "पाठवर्णः :"
 
-#: src/qml/ColorEditor.qml:191
+#: src/qml/ColorEditorDialog.qml:181
 #, kde-format
 msgid "Background color:"
 msgstr "पृष्ठभूमिवर्णः :"
 
-#: src/qml/ColorEditor.qml:198
+#: src/qml/ColorEditorDialog.qml:188
 #, kde-format
 msgid "Highlight color:"
 msgstr "वर्णः प्रकाशयन्तु :"
 
-#: src/qml/ColorEditor.qml:205
+#: src/qml/ColorEditorDialog.qml:195
 #, kde-format
 msgid "Link color:"
 msgstr "लिङ्कस्य वर्णः :"
 
-#: src/qml/ColorEditor.qml:212
+#: src/qml/ColorEditorDialog.qml:202
 #, kde-format
 msgid "Visited link color:"
 msgstr "भ्रमणं कृतवान् लिङ्कवर्णः :"
 
-#: src/qml/ColorEditor.qml:220
+#: src/qml/ColorEditorDialog.qml:210
 #, kde-format
 msgid "Button text color:"
 msgstr "बटनपाठवर्णः :"
 
-#: src/qml/ColorEditor.qml:227
+#: src/qml/ColorEditorDialog.qml:217
 #, kde-format
 msgid "Button background color:"
 msgstr "बटन पृष्ठभूमि रंग: 1।"
 
-#: src/qml/ColorEditor.qml:234
+#: src/qml/ColorEditorDialog.qml:224
 #, kde-format
 msgid "Button mouse over color:"
 msgstr "बटनं मूषकं वर्णस्य उपरि:"
 
-#: src/qml/ColorEditor.qml:241
+#: src/qml/ColorEditorDialog.qml:231
 #, kde-format
 msgid "Button focus color:"
 msgstr "बटनकेन्द्रवर्णः :"
 
-#: src/qml/ColorEditor.qml:249
+#: src/qml/ColorEditorDialog.qml:239
 #, kde-format
 msgid "Text view text color:"
 msgstr "पाठदृश्यपाठवर्णः :"
 
-#: src/qml/ColorEditor.qml:256
+#: src/qml/ColorEditorDialog.qml:246
 #, kde-format
 msgid "Text view background color:"
 msgstr "पाठदृश्यपृष्ठभूमिवर्णः :"
 
-#: src/qml/ColorEditor.qml:263
+#: src/qml/ColorEditorDialog.qml:253
 #, kde-format
 msgid "Text view mouse over color:"
 msgstr "वर्णस्य उपरि मूषकस्य पाठदृश्यम्:"
 
-#: src/qml/ColorEditor.qml:270
+#: src/qml/ColorEditorDialog.qml:260
 #, kde-format
 msgid "Text view focus color:"
 msgstr "पाठदृश्यकेन्द्रवर्णः :"
 
-#: src/qml/ColorEditor.qml:278
+#: src/qml/ColorEditorDialog.qml:268
 #, kde-format
 msgid "Complementary text color:"
 msgstr "पूरकपाठवर्णः :"
 
-#: src/qml/ColorEditor.qml:285
+#: src/qml/ColorEditorDialog.qml:275
 #, kde-format
 msgid "Complementary background color:"
 msgstr "पूरक पृष्ठभूमि रंग :"
 
-#: src/qml/ColorEditor.qml:292
+#: src/qml/ColorEditorDialog.qml:282
 #, kde-format
 msgid "Complementary mouse over color:"
 msgstr "वर्णस्य उपरि पूरकः मूषकः :"
 
-#: src/qml/ColorEditor.qml:299
+#: src/qml/ColorEditorDialog.qml:289
 #, kde-format
 msgid "Complementary focus color:"
 msgstr "पूरक फोकस वर्ण :"
 
-#: src/qml/ColorEditor.qml:311
+#: src/qml/ColorEditorDialog.qml:301
 #, kde-format
-msgid "OK"
-msgstr "अस्तु"
+msgid "Ok"
+msgstr ""
 
-#: src/qml/ColorEditor.qml:316
+#: src/qml/ColorEditorDialog.qml:306
 #, kde-format
 msgid "Cancel"
 msgstr "निरसयतु"
 
-#: src/qml/delegates/actionbutton.qml:35 src/qml/delegates/actionbutton.qml:39
-#: src/qml/delegates/checkmarks.qml:31 src/qml/delegates/checkmarks.qml:35
-#: src/qml/delegates/checkmarks.qml:39 src/qml/delegates/checkmarks.qml:43
+#: src/qml/delegates/actionbutton.qml:38 src/qml/delegates/actionbutton.qml:42
+#: src/qml/delegates/checkmarks.qml:34 src/qml/delegates/checkmarks.qml:38
+#: src/qml/delegates/checkmarks.qml:42 src/qml/delegates/checkmarks.qml:46
 #, kde-format
 msgid "Option"
 msgstr "विकल्प"
 
-#: src/qml/delegates/button.qml:27
+#: src/qml/delegates/button.qml:34
 #, kde-format
 msgid "ToolButton"
 msgstr "टूलबटन"
 
-#: src/qml/delegates/button.qml:31 src/qml/fakecontrols/Button.qml:28
+#: src/qml/delegates/button.qml:38 src/qml/fakecontrols/Button.qml:28
 #, kde-format
 msgid "Button"
 msgstr "कड्मल"
 
-#: src/qml/delegates/tabbar.qml:29
+#: src/qml/delegates/tabbar.qml:32
 #, kde-format
 msgid "Tab1"
 msgstr "टब१"
 
-#: src/qml/delegates/tabbar.qml:32
+#: src/qml/delegates/tabbar.qml:35
 #, kde-format
 msgid "Tab2"
 msgstr "टब2"
 
-#: src/qml/delegates/tabbar.qml:35
+#: src/qml/delegates/tabbar.qml:38
 #, kde-format
 msgid "Tab3"
 msgstr "टब३"
 
-#: src/qml/delegates/textfield.qml:28
+#: src/qml/delegates/textfield.qml:31
 #, kde-format
 msgid "Text"
 msgstr "पाठ"
@@ -216,7 +216,7 @@ msgstr "पाठ"
 msgid "Checkbox"
 msgstr "चेकबॉक्स"
 
-#: src/qml/fakecontrols/LineEdit.qml:34
+#: src/qml/fakecontrols/LineEdit.qml:35
 #, kde-format
 msgid "Text input…"
 msgstr "पाठनिवेशः..."
@@ -238,77 +238,62 @@ msgstr "नवीन विषयः..."
 msgid "Theme:"
 msgstr "विषयवस्तु:"
 
-#: src/qml/Main.qml:65
+#: src/qml/Main.qml:64
 #, kde-format
 msgid "Open Folder"
 msgstr "Folder उद्घाटयन्तु"
 
-#: src/qml/Main.qml:70
+#: src/qml/Main.qml:69
 #, kde-format
 msgid "Edit Metadata…"
 msgstr "मेटाडाटा सम्पादयतु..."
 
-#: src/qml/Main.qml:87
+#: src/qml/Main.qml:86
 #, kde-format
 msgid "Edit Colors…"
 msgstr "रङ्ग सम्पादयतु..."
 
-#: src/qml/Main.qml:100
+#: src/qml/Main.qml:99
 #, kde-format
 msgid "Help"
 msgstr "साहाय्यम्‌"
 
-#: src/qml/Main.qml:105
+#: src/qml/Main.qml:104
 #, kde-format
 msgid "Search…"
 msgstr "अन्वेषण…"
 
 #: src/qml/Main.qml:219
 #, kde-format
-msgid "This is a readonly, system wide installed theme"
-msgstr "एषः पठनीयः, प्रणालीव्यापी संस्थापितः विषयः अस्ति"
-
-#: src/qml/Main.qml:224
-#, kde-format
-msgid "Preview:"
-msgstr "पूर्वावलोकनम् :"
-
-#: src/qml/Main.qml:239
-#, kde-format
-msgid "None"
-msgstr "न कश्चित्"
-
-#: src/qml/Main.qml:239
-#, kde-format
 msgid "Image path: %1"
 msgstr "चित्रमार्गः %1"
 
-#: src/qml/Main.qml:244
+#: src/qml/Main.qml:224
 #, kde-format
 msgid "Description: %1"
 msgstr "विवरणम् : %1"
 
-#: src/qml/Main.qml:249
+#: src/qml/Main.qml:229
 #, kde-format
 msgid "Missing from this theme"
 msgstr "अस्मात् विषयात् लुप्तः"
 
-#: src/qml/Main.qml:249
+#: src/qml/Main.qml:229
 #, kde-format
 msgid "Present in this theme"
 msgstr "अस्मिन् विषये वर्तमानः"
 
-#: src/qml/Main.qml:254
+#: src/qml/Main.qml:234
 #, kde-format
 msgid "Show Margins"
 msgstr "मार्जिन दर्शयतु"
 
-#: src/qml/Main.qml:257
+#: src/qml/Main.qml:237
 #, kde-format
 msgid "Create with Editor…"
 msgstr "सम्पादकेन सह रचयन्तु..."
 
-#: src/qml/Main.qml:257
+#: src/qml/Main.qml:237
 #, kde-format
 msgid "Open In Editor…"
 msgstr "Open In Editor..."
@@ -375,3 +360,15 @@ msgstr "अनुज्ञापत्रम् :"
 msgctxt "@label"
 msgid "Website:"
 msgstr "जालपुटम् :"
+
+#~ msgid "OK"
+#~ msgstr "अस्तु"
+
+#~ msgid "This is a readonly, system wide installed theme"
+#~ msgstr "एषः पठनीयः, प्रणालीव्यापी संस्थापितः विषयः अस्ति"
+
+#~ msgid "Preview:"
+#~ msgstr "पूर्वावलोकनम् :"
+
+#~ msgid "None"
+#~ msgstr "न कश्चित्"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-07 00:48+0000\n"
+"POT-Creation-Date: 2026-08-26 00:50+0000\n"
 "PO-Revision-Date: 2026-06-18 21:41+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -43,169 +43,169 @@ msgstr "Fedezze fel és szerkessze a Plasma témáit"
 msgid "The theme to open"
 msgstr "A megnyitandó téma"
 
-#: src/qml/ColorEditor.qml:41
+#: src/qml/ColorEditorDialog.qml:42
 #, kde-format
 msgid "Edit Colors"
 msgstr "Színek szerkesztése"
 
-#: src/qml/ColorEditor.qml:70
+#: src/qml/ColorEditorDialog.qml:74
 #, kde-format
 msgid "Select Color"
 msgstr "Színválasztás"
 
-#: src/qml/ColorEditor.qml:113
+#: src/qml/ColorEditorDialog.qml:104
 #, kde-format
 msgid "Normal text"
 msgstr "Normál szöveg"
 
-#: src/qml/ColorEditor.qml:119
+#: src/qml/ColorEditorDialog.qml:110
 #, kde-format
 msgid "Link"
 msgstr "Hivatkozás"
 
-#: src/qml/ColorEditor.qml:123
+#: src/qml/ColorEditorDialog.qml:114
 #, kde-format
 msgid "Visited Link"
 msgstr "Meglátogatott hivatkozás"
 
-#: src/qml/ColorEditor.qml:146
+#: src/qml/ColorEditorDialog.qml:137
 #, kde-format
 msgid "Complementary colors area:"
 msgstr "Komplementer színek területe:"
 
-#: src/qml/ColorEditor.qml:161
+#: src/qml/ColorEditorDialog.qml:152
 #, kde-format
 msgid "Label"
 msgstr "Címke"
 
-#: src/qml/ColorEditor.qml:184
+#: src/qml/ColorEditorDialog.qml:174
 #, kde-format
 msgid "Text color:"
 msgstr "Betűszín:"
 
-#: src/qml/ColorEditor.qml:191
+#: src/qml/ColorEditorDialog.qml:181
 #, kde-format
 msgid "Background color:"
 msgstr "Háttérszín:"
 
-#: src/qml/ColorEditor.qml:198
+#: src/qml/ColorEditorDialog.qml:188
 #, kde-format
 msgid "Highlight color:"
 msgstr "Kiemelés:"
 
-#: src/qml/ColorEditor.qml:205
+#: src/qml/ColorEditorDialog.qml:195
 #, kde-format
 msgid "Link color:"
 msgstr "Hivatkozás:"
 
-#: src/qml/ColorEditor.qml:212
+#: src/qml/ColorEditorDialog.qml:202
 #, kde-format
 msgid "Visited link color:"
 msgstr "Meglátogatott hivatkozás:"
 
-#: src/qml/ColorEditor.qml:220
+#: src/qml/ColorEditorDialog.qml:210
 #, kde-format
 msgid "Button text color:"
 msgstr "Gombszöveg:"
 
-#: src/qml/ColorEditor.qml:227
+#: src/qml/ColorEditorDialog.qml:217
 #, kde-format
 msgid "Button background color:"
 msgstr "Gombháttér:"
 
-#: src/qml/ColorEditor.qml:234
+#: src/qml/ColorEditorDialog.qml:224
 #, kde-format
 msgid "Button mouse over color:"
 msgstr "Gomb, ha az egér rajta van:"
 
-#: src/qml/ColorEditor.qml:241
+#: src/qml/ColorEditorDialog.qml:231
 #, kde-format
 msgid "Button focus color:"
 msgstr "Gomb fókuszszín:"
 
-#: src/qml/ColorEditor.qml:249
+#: src/qml/ColorEditorDialog.qml:239
 #, kde-format
 msgid "Text view text color:"
 msgstr "Szövegnézet szövegszín:"
 
-#: src/qml/ColorEditor.qml:256
+#: src/qml/ColorEditorDialog.qml:246
 #, kde-format
 msgid "Text view background color:"
 msgstr "Szövegnézet háttérszín:"
 
-#: src/qml/ColorEditor.qml:263
+#: src/qml/ColorEditorDialog.qml:253
 #, kde-format
 msgid "Text view mouse over color:"
 msgstr "Szövegnézet, ha fölötte van az egér:"
 
-#: src/qml/ColorEditor.qml:270
+#: src/qml/ColorEditorDialog.qml:260
 #, kde-format
 msgid "Text view focus color:"
 msgstr "Szövegnézet fókuszszín:"
 
-#: src/qml/ColorEditor.qml:278
+#: src/qml/ColorEditorDialog.qml:268
 #, kde-format
 msgid "Complementary text color:"
 msgstr "Komplementer szövegszín:"
 
-#: src/qml/ColorEditor.qml:285
+#: src/qml/ColorEditorDialog.qml:275
 #, kde-format
 msgid "Complementary background color:"
 msgstr "Komplementer háttérszín:"
 
-#: src/qml/ColorEditor.qml:292
+#: src/qml/ColorEditorDialog.qml:282
 #, kde-format
 msgid "Complementary mouse over color:"
 msgstr "Komplementer egér föléviteli szín:"
 
-#: src/qml/ColorEditor.qml:299
+#: src/qml/ColorEditorDialog.qml:289
 #, kde-format
 msgid "Complementary focus color:"
 msgstr "Komplementer fókuszszín:"
 
-#: src/qml/ColorEditor.qml:311
+#: src/qml/ColorEditorDialog.qml:301
 #, kde-format
-msgid "OK"
-msgstr "OK"
+msgid "Ok"
+msgstr ""
 
-#: src/qml/ColorEditor.qml:316
+#: src/qml/ColorEditorDialog.qml:306
 #, kde-format
 msgid "Cancel"
 msgstr "Mégse"
 
-#: src/qml/delegates/actionbutton.qml:35 src/qml/delegates/actionbutton.qml:39
-#: src/qml/delegates/checkmarks.qml:31 src/qml/delegates/checkmarks.qml:35
-#: src/qml/delegates/checkmarks.qml:39 src/qml/delegates/checkmarks.qml:43
+#: src/qml/delegates/actionbutton.qml:38 src/qml/delegates/actionbutton.qml:42
+#: src/qml/delegates/checkmarks.qml:34 src/qml/delegates/checkmarks.qml:38
+#: src/qml/delegates/checkmarks.qml:42 src/qml/delegates/checkmarks.qml:46
 #, kde-format
 msgid "Option"
 msgstr "Opció"
 
-#: src/qml/delegates/button.qml:27
+#: src/qml/delegates/button.qml:34
 #, kde-format
 msgid "ToolButton"
 msgstr "Eszköztárgomb"
 
-#: src/qml/delegates/button.qml:31 src/qml/fakecontrols/Button.qml:28
+#: src/qml/delegates/button.qml:38 src/qml/fakecontrols/Button.qml:28
 #, kde-format
 msgid "Button"
 msgstr "Gomb"
 
-#: src/qml/delegates/tabbar.qml:29
+#: src/qml/delegates/tabbar.qml:32
 #, kde-format
 msgid "Tab1"
 msgstr "Lap 1"
 
-#: src/qml/delegates/tabbar.qml:32
+#: src/qml/delegates/tabbar.qml:35
 #, kde-format
 msgid "Tab2"
 msgstr "Lap 2"
 
-#: src/qml/delegates/tabbar.qml:35
+#: src/qml/delegates/tabbar.qml:38
 #, kde-format
 msgid "Tab3"
 msgstr "Lap 3"
 
-#: src/qml/delegates/textfield.qml:28
+#: src/qml/delegates/textfield.qml:31
 #, kde-format
 msgid "Text"
 msgstr "Szöveg"
@@ -215,7 +215,7 @@ msgstr "Szöveg"
 msgid "Checkbox"
 msgstr "Jelölőnégyzet"
 
-#: src/qml/fakecontrols/LineEdit.qml:34
+#: src/qml/fakecontrols/LineEdit.qml:35
 #, kde-format
 msgid "Text input…"
 msgstr "Szövegbevitel…"
@@ -236,77 +236,62 @@ msgstr "Új téma…"
 msgid "Theme:"
 msgstr "Téma:"
 
-#: src/qml/Main.qml:65
+#: src/qml/Main.qml:64
 #, kde-format
 msgid "Open Folder"
 msgstr "Mappa megnyitása"
 
-#: src/qml/Main.qml:70
+#: src/qml/Main.qml:69
 #, kde-format
 msgid "Edit Metadata…"
 msgstr "Metaadatok szerkesztése…"
 
-#: src/qml/Main.qml:87
+#: src/qml/Main.qml:86
 #, kde-format
 msgid "Edit Colors…"
 msgstr "Színek szerkesztése…"
 
-#: src/qml/Main.qml:100
+#: src/qml/Main.qml:99
 #, kde-format
 msgid "Help"
 msgstr "Súgó"
 
-#: src/qml/Main.qml:105
+#: src/qml/Main.qml:104
 #, kde-format
 msgid "Search…"
 msgstr "Keresés…"
 
 #: src/qml/Main.qml:219
 #, kde-format
-msgid "This is a readonly, system wide installed theme"
-msgstr "Ez egy csak olvasható, rendszerszinten telepített téma"
-
-#: src/qml/Main.qml:224
-#, kde-format
-msgid "Preview:"
-msgstr "Előnézet:"
-
-#: src/qml/Main.qml:239
-#, kde-format
-msgid "None"
-msgstr "Nincs"
-
-#: src/qml/Main.qml:239
-#, kde-format
 msgid "Image path: %1"
 msgstr "Kép útvonala: %1"
 
-#: src/qml/Main.qml:244
+#: src/qml/Main.qml:224
 #, kde-format
 msgid "Description: %1"
 msgstr "Leírás: %1"
 
-#: src/qml/Main.qml:249
+#: src/qml/Main.qml:229
 #, kde-format
 msgid "Missing from this theme"
 msgstr "Hiányzik ebből a témából"
 
-#: src/qml/Main.qml:249
+#: src/qml/Main.qml:229
 #, kde-format
 msgid "Present in this theme"
 msgstr "Jelen van ebben a témában"
 
-#: src/qml/Main.qml:254
+#: src/qml/Main.qml:234
 #, kde-format
 msgid "Show Margins"
 msgstr "Szegélyek megjelenítése"
 
-#: src/qml/Main.qml:257
+#: src/qml/Main.qml:237
 #, kde-format
 msgid "Create with Editor…"
 msgstr "Létrehozás a szerkesztővel…"
 
-#: src/qml/Main.qml:257
+#: src/qml/Main.qml:237
 #, kde-format
 msgid "Open In Editor…"
 msgstr "Megnyitás szerkesztővel…"
@@ -375,6 +360,18 @@ msgstr "Licenc:"
 msgctxt "@label"
 msgid "Website:"
 msgstr "Weboldal:"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "This is a readonly, system wide installed theme"
+#~ msgstr "Ez egy csak olvasható, rendszerszinten telepített téma"
+
+#~ msgid "Preview:"
+#~ msgstr "Előnézet:"
+
+#~ msgid "None"
+#~ msgstr "Nincs"
 
 #~ msgid "New Theme..."
 #~ msgstr "Új téma…"
