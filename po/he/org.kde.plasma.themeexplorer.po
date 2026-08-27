@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-26 00:50+0000\n"
-"PO-Revision-Date: 2026-08-07 08:03+0300\n"
+"PO-Revision-Date: 2026-08-26 08:36+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -166,7 +166,7 @@ msgstr "צבע מיקוד משלים:"
 #: src/qml/ColorEditorDialog.qml:301
 #, kde-format
 msgid "Ok"
-msgstr ""
+msgstr "אישור"
 
 #: src/qml/ColorEditorDialog.qml:306
 #, kde-format

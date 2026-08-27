@@ -167,7 +167,7 @@ msgstr "Doplňková barva zvýraznění:"
 #: src/qml/ColorEditorDialog.qml:301
 #, kde-format
 msgid "Ok"
-msgstr ""
+msgstr "OK"
 
 #: src/qml/ColorEditorDialog.qml:306
 #, kde-format

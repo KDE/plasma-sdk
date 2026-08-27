@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: org.kde.plasma.themeexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-26 00:50+0000\n"
-"PO-Revision-Date: 2026-08-07 12:02+0100\n"
+"PO-Revision-Date: 2026-08-26 23:45+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -167,7 +167,7 @@ msgstr "Color complementario cuando contiene el foco:"
 #: src/qml/ColorEditorDialog.qml:301
 #, kde-format
 msgid "Ok"
-msgstr ""
+msgstr "Aceptar"
 
 #: src/qml/ColorEditorDialog.qml:306
 #, kde-format
@@ -352,15 +352,3 @@ msgstr "Licencia:"
 msgctxt "@label"
 msgid "Website:"
 msgstr "Página web:"
-
-#~ msgid "OK"
-#~ msgstr "Aceptar"
-
-#~ msgid "This is a readonly, system wide installed theme"
-#~ msgstr "Este es un tema de solo lectura instalado en el sistema"
-
-#~ msgid "Preview:"
-#~ msgstr "Vista previa:"
-
-#~ msgid "None"
-#~ msgstr "Ninguna"
