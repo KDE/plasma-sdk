@@ -167,7 +167,7 @@ msgstr "Couleur complémentaire lors du focus :"
 #: src/qml/ColorEditorDialog.qml:301
 #, kde-format
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: src/qml/ColorEditorDialog.qml:306
 #, kde-format
