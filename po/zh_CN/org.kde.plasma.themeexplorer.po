@@ -349,15 +349,3 @@ msgstr "许可证："
 msgctxt "@label"
 msgid "Website:"
 msgstr "网站："
-
-#~ msgid "OK"
-#~ msgstr "确定"
-
-#~ msgid "This is a readonly, system wide installed theme"
-#~ msgstr "这是一个在系统上全局安装的只读主题"
-
-#~ msgid "Preview:"
-#~ msgstr "预览："
-
-#~ msgid "None"
-#~ msgstr "无"

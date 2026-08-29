@@ -352,15 +352,3 @@ msgstr "Lisens:"
 msgctxt "@label"
 msgid "Website:"
 msgstr "Heimeside:"
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#~ msgid "This is a readonly, system wide installed theme"
-#~ msgstr "Dette er eit skriveverna, systeminstallert tema"
-
-#~ msgid "Preview:"
-#~ msgstr "Førehandsvising:"
-
-#~ msgid "None"
-#~ msgstr "Ingen"
