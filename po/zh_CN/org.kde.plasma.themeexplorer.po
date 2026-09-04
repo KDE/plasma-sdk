@@ -166,7 +166,7 @@ msgstr "焦点颜色补色："
 #: src/qml/ColorEditorDialog.qml:301
 #, kde-format
 msgid "Ok"
-msgstr ""
+msgstr "确定"
 
 #: src/qml/ColorEditorDialog.qml:306
 #, kde-format
