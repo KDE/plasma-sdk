@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-26 00:50+0000\n"
-"PO-Revision-Date: 2026-06-01 18:11-0400\n"
+"PO-Revision-Date: 2026-09-22 18:03+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
@@ -166,7 +166,7 @@ msgstr ""
 #: src/qml/ColorEditorDialog.qml:301
 #, kde-format
 msgid "Ok"
-msgstr ""
+msgstr "جەزملە"
 
 #: src/qml/ColorEditorDialog.qml:306
 #, kde-format
@@ -297,18 +297,16 @@ msgid "Open In Editor…"
 msgstr ""
 
 #: src/qml/MetadataEditor.qml:35
-#, fuzzy, kde-format
-#| msgid "New Theme"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "New Theme"
 msgstr "يېڭى ئۆرنەك"
 
 #: src/qml/MetadataEditor.qml:35
-#, fuzzy, kde-format
-#| msgid "New Theme"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Edit Theme"
-msgstr "يېڭى ئۆرنەك"
+msgstr ""
 
 #: src/qml/MetadataEditor.qml:55
 #, kde-format
@@ -317,11 +315,10 @@ msgid "Warning: don't change author or license for themes you don't own"
 msgstr ""
 
 #: src/qml/MetadataEditor.qml:66
-#, fuzzy, kde-format
-#| msgid "Theme:"
+#, kde-format
 msgctxt "@label"
 msgid "Theme Name:"
-msgstr "ئۆرنەك:"
+msgstr ""
 
 #: src/qml/MetadataEditor.qml:82
 #, kde-format
@@ -330,22 +327,19 @@ msgid "This theme name already exists"
 msgstr ""
 
 #: src/qml/MetadataEditor.qml:91
-#, fuzzy, kde-format
-#| msgid "Author:"
+#, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "يازغۇچى:"
 
 #: src/qml/MetadataEditor.qml:99
-#, fuzzy, kde-format
-#| msgid "Email:"
+#, kde-format
 msgctxt "@label"
 msgid "Email:"
 msgstr "ئېلخەت:"
 
 #: src/qml/MetadataEditor.qml:107
-#, fuzzy, kde-format
-#| msgid "License:"
+#, kde-format
 msgctxt "@label"
 msgid "License:"
 msgstr "ئىجازەتنامە:"

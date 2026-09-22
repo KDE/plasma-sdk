@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-06-01 18:11-0400\n"
+"PO-Revision-Date: 2026-09-22 18:03+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
@@ -71,7 +71,7 @@ msgstr "تەرجىمان"
 
 #: contents/configuration/AboutPlugin.qml:220
 msgid "Report a Bug…"
-msgstr ""
+msgstr "كەمتۈك مەلۇم قىل…"
 
 #: contents/configuration/AppletConfiguration.qml:75
 msgid "Keyboard Shortcuts"
@@ -85,8 +85,6 @@ msgstr "تەڭشەك قوللان"
 msgid ""
 "The current page has unsaved changes. Apply the changes or discard them?"
 msgstr ""
-"نۆۋەتتىكى بەتتە تېخى ساقلانمىغان ئۆزگىرىش بار. ئۆزگىرىشنى قوللىنامدۇ ياكى "
-"تاشلىۋېتەمدۇ؟"
 
 #: contents/configuration/AppletConfiguration.qml:384
 msgid "OK"
@@ -134,24 +132,24 @@ msgstr "توغرىسىغا سۈرگۈچ"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:30
 msgid "Shift"
-msgstr "Shift"
+msgstr ""
 
 #: contents/configuration/ConfigurationContainmentActions.qml:31
 msgid "Ctrl"
-msgstr "Ctrl"
+msgstr ""
 
 #: contents/configuration/ConfigurationContainmentActions.qml:32
 msgid "Alt"
-msgstr "Alt"
+msgstr ""
 
 #: contents/configuration/ConfigurationContainmentActions.qml:33
 msgid "Meta"
-msgstr "Meta"
+msgstr ""
 
 #: contents/configuration/ConfigurationContainmentActions.qml:95
 msgctxt "Concatenation sign for shortcuts, e.g. Ctrl+Shift"
 msgid "+"
-msgstr "+"
+msgstr ""
 
 #: contents/configuration/ConfigurationContainmentActions.qml:167
 msgctxt "@title"
