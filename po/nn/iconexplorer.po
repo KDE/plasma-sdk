@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-04-18 15:40+0200\n"
+"PO-Revision-Date: 2026-09-25 17:23+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.08.1\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -103,7 +103,7 @@ msgstr "Breeze (normal) and Breeze mørk"
 #: src/qml/Actions.qml:51 src/qml/GlobalMenuBar.qml:23
 #, kde-format
 msgid "Active Color Scheme"
-msgstr "Gjeldande fargeoppsett"
+msgstr "Gjeldande fargetema"
 
 #: src/qml/Actions.qml:56
 #, kde-format
@@ -124,7 +124,7 @@ msgstr "Fil"
 #: src/qml/GlobalMenuBar.qml:21
 #, kde-format
 msgid "Export Montage with Color Scheme…"
-msgstr "Eksporter montasje med fargeoppsett …"
+msgstr "Eksporter montasje med fargetema …"
 
 #: src/qml/GlobalMenuBar.qml:27
 #, kde-format
@@ -184,4 +184,4 @@ msgstr "nei"
 #: src/qml/Tools.qml:97
 #, kde-format
 msgid "Color scheme:"
-msgstr "Fargeoppsett:"
+msgstr "Fargetema:"
