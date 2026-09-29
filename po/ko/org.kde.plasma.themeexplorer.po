@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-26 00:50+0000\n"
-"PO-Revision-Date: 2026-04-26 20:44+0200\n"
+"PO-Revision-Date: 2026-09-28 23:41+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -163,8 +163,7 @@ msgid "Complementary focus color:"
 msgstr "보조 포커스 색:"
 
 #: src/qml/ColorEditorDialog.qml:301
-#, fuzzy, kde-format
-#| msgid "Ok"
+#, kde-format
 msgid "Ok"
 msgstr "확인"
 
@@ -297,64 +296,55 @@ msgid "Open In Editor…"
 msgstr "편집기에서 열기…"
 
 #: src/qml/MetadataEditor.qml:35
-#, fuzzy, kde-format
-#| msgid "New Theme"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "New Theme"
 msgstr "새 테마"
 
 #: src/qml/MetadataEditor.qml:35
-#, fuzzy, kde-format
-#| msgid "Edit Theme"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Edit Theme"
 msgstr "테마 편집"
 
 #: src/qml/MetadataEditor.qml:55
-#, fuzzy, kde-format
-#| msgid "Warning: don't change author or license for themes you don't own"
+#, kde-format
 msgctxt "@info"
 msgid "Warning: don't change author or license for themes you don't own"
 msgstr "경고: 직접 만들지 않은 테마의 작성자나 라이선스를 바꾸지 마십시오"
 
 #: src/qml/MetadataEditor.qml:66
-#, fuzzy, kde-format
-#| msgid "Theme Name:"
+#, kde-format
 msgctxt "@label"
 msgid "Theme Name:"
 msgstr "테마 이름:"
 
 #: src/qml/MetadataEditor.qml:82
-#, fuzzy, kde-format
-#| msgid "This theme name already exists"
+#, kde-format
 msgctxt "@info"
 msgid "This theme name already exists"
-msgstr "같은 이름의 테마가 이미 존재합니다."
+msgstr "같은 이름의 테마가 이미 존재함"
 
 #: src/qml/MetadataEditor.qml:91
-#, fuzzy, kde-format
-#| msgid "Author:"
+#, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "작성자:"
 
 #: src/qml/MetadataEditor.qml:99
-#, fuzzy, kde-format
-#| msgid "Email:"
+#, kde-format
 msgctxt "@label"
 msgid "Email:"
 msgstr "이메일:"
 
 #: src/qml/MetadataEditor.qml:107
-#, fuzzy, kde-format
-#| msgid "License:"
+#, kde-format
 msgctxt "@label"
 msgid "License:"
 msgstr "라이선스:"
 
 #: src/qml/MetadataEditor.qml:118
-#, fuzzy, kde-format
-#| msgid "Website:"
+#, kde-format
 msgctxt "@label"
 msgid "Website:"
 msgstr "웹사이트:"

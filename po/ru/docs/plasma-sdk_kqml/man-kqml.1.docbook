@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-<!ENTITY % Catalan  "INCLUDE">
+<!ENTITY % Russian "INCLUDE">
 ]>
 <!--
     SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
@@ -11,13 +11,13 @@
 <refentry lang="&language;">
 <refentryinfo>
 <title
->Manual d'usuari del «kqml»</title>
+>Руководство пользователя kqml</title>
 <date
->10 de juny de 2023</date>
+>2023-06-10</date>
 <releaseinfo
 >Plasma 6.0</releaseinfo>
 <productname
->Plasma de KDE</productname>
+>KDE Plasma</productname>
 </refentryinfo>
 
 <refmeta>
@@ -35,7 +35,7 @@
 >kqml</command
 ></refname>
 <refpurpose
->Entorn d'execució del QML amb KLocalizedContext</refpurpose>
+>Среда выполнения QML с KLocalizedContext</refpurpose>
 </refnamediv>
 
 <refsynopsisdiv>
@@ -54,36 +54,36 @@
 ><option
 >-d, --domain</option
 > <replaceable
->domain</replaceable
+>домен</replaceable
 ></group
 > <arg choice="opt"
 ><replaceable
->files</replaceable
+>файлы</replaceable
 >...</arg
 > <arg choice="opt"
 ><option
 >--</option
 > <replaceable
->arguments</replaceable
+>аргументы</replaceable
 >...</arg
 > </cmdsynopsis>
 </refsynopsisdiv>
 
 <refsect1>
 <title
->Descripció</title>
+>Описание</title>
 <para
 ><command
 >kqml</command
-> és un entorn d'execució del QML amb KLocalizedContext inicialitzat.</para>
+> — среда выполнения QML с инициализированным KLocalizedContext.</para>
 
 <para
->A diferència de l'eina «qml» que ve amb el paquet «qt-declarative», el «kqml» inicialitza KLocalizedContext que permet provar aplicacions del món real i fitxers des de zero amb crides «i18n» a través del seu codi i biblioteques importades.</para>
+>В отличие от средства qml, входящего в пакет qt-declarative, kqml инициализирует KLocalizedContext, что позволяет тестировать реальные приложения и черновые файлы с вызовами i18n во всём их коде и импортированных библиотеках.</para>
 </refsect1>
 
 <refsect1>
 <title
->Opcions</title>
+>Параметры</title>
 
 <variablelist>
 <varlistentry>
@@ -95,7 +95,7 @@
 ></term>
 <listitem
 ><para
->Mostra informació de la versió.</para
+>Показывает сведения о версии.</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -105,11 +105,11 @@
 >, <option
 >--domain</option
 > <replaceable
->domini</replaceable
+>domain</replaceable
 ></term>
 <listitem
 ><para
->El domini principal de traducció.</para
+>Основной домен локализации.</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -121,29 +121,29 @@
 ></term>
 <listitem
 ><para
->Mostra aquesta ajuda.</para
+>Показывает эту справку.</para
 ></listitem>
 </varlistentry>
 <varlistentry>
 <term
 ><replaceable
->fitxers</replaceable
+>files</replaceable
 >...</term>
 <listitem
 ><para
->Es poden carregar qualsevol nombre de fitxers QML. Compartiran el mateix motor.</para
+>Можно загрузить любое количество файлов QML. Все они используют общий механизм.</para
 ></listitem>
 </varlistentry>
 <varlistentry>
 <term
 ><replaceable
->arguments</replaceable
+>args</replaceable
 >...</term>
 <listitem
 ><para
->Els arguments després de «<option
+>Аргументы после «<option
 >--</option
->» s'ignoren, però es passen a través de la variable «application.arguments» al QML.</para
+>» игнорируются, но передаются в переменную application.arguments в QML.</para
 ></listitem>
 </varlistentry>
 
@@ -153,12 +153,14 @@
 
 <refsect1>
 <title
->Vegeu també</title>
+>Смотрите также</title>
 
 <para
->Hi ha informació més detallada disponible en <ulink url="help:/plasma-desktop"
+>Более подробная документация для пользователя доступна по адресу <ulink url="help:/plasma-desktop"
 >help:/plasma-desktop</ulink
-> (podeu emprar aquest &URL; al &konqueror; o bé executar <userinput
+> (введите этот <acronym
+>URL</acronym
+> в &konqueror; или выполните <userinput
 ><command
 >khelpcenter</command
 > <parameter
@@ -170,11 +172,11 @@
 
 <refsect1>
 <title
->Autors</title>
+>Авторы</title>
 <para
->El <command
+>Автор <command
 >kqml</command
-> l'ha escrit <personname
+> — <personname
 ><firstname
 >ivan</firstname
 ><surname
