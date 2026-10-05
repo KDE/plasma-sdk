@@ -39,6 +39,7 @@
                 "Name[sl]": "Marco Martin",
                 "Name[sv]": "Marco Martin",
                 "Name[tr]": "Marco Martin",
+                "Name[ug]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
                 "Name[zh_CN]": "Marco Martin",
                 "Name[zh_TW]": "Marco Martin"
@@ -79,6 +80,7 @@
         "Description[sl]": "Lupina PlasmoidViewer",
         "Description[sv]": "Plasmoid-visningsskal",
         "Description[tr]": "PlasmoidViewer Kabuğu",
+        "Description[ug]": "Plasmoid كۆرگۈچ شاكىلى",
         "Description[uk]": "Оболонка перегляду плазмоїдів",
         "Description[zh_CN]": "Plasmoid 查看器外壳",
         "Description[zh_TW]": "Plasmoid 檢視器殼層",
@@ -127,6 +129,7 @@
         "Name[sr]": "Шкољка приказивача плазмоида",
         "Name[sv]": "Plasmoid-visningsskal",
         "Name[tr]": "PlasmoidViewerShell",
+        "Name[ug]": "Plasmoid كۆرگۈچ شاكىلى",
         "Name[uk]": "Оболонка перегляду плазмоїдів",
         "Name[zh_CN]": "Plasmoid 查看器外壳",
         "Name[zh_TW]": "PlasmoidViewerShell",
