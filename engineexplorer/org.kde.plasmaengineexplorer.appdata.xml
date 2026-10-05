@@ -89,6 +89,7 @@
   <summary xml:lang="sv">Utforskare av data som publiceras av datagränssnitt i Plasma</summary>
   <summary xml:lang="tg">Роҳнамо барои иттилооти мунташир аз низомҳои иттилоотии Плазма</summary>
   <summary xml:lang="tr">Plasma Veri İşletkeleri tarafından yayımlanan veri için gezgin</summary>
+  <summary xml:lang="ug">Plasma سانلىق مەلۇمات موتورىدا ئېلان قىلغان سانلىق مەلۇماتنى كۆزىتىدۇ</summary>
   <summary xml:lang="uk">Навігатор для даних, оприлюднених рушіями даних Плазми</summary>
   <summary xml:lang="zh-CN">Plasma 数据引擎发布的数据的浏览器</summary>
   <summary xml:lang="zh-TW">用來瀏覽 Plamsa 資料引擎發佈之資料的瀏覽器</summary>
@@ -132,6 +133,7 @@
     <p xml:lang="sv">Gränssnittsutforskare för Plasma är ett grafiskt verktyg som låter utvecklare testa Plasma datagränssnitt utan att skriva ett Plasma miniprogram.</p>
     <p xml:lang="tg">Роҳнамои низоми Плазма абзори графикиест, ки ба барномасозон барои санҷидани Plasma DataEngines бе навиштани зербарномаи Плазма имкон медиҳад.</p>
     <p xml:lang="tr">Plasma İşletkesi Gezgini, geliştiricilerin bir Plasma uygulamacığı yazmadan Plasma Veri İşletkelerine göz atabilmeleri için geliştirilmiş grafik arabirimli bir araçtır.</p>
+    <p xml:lang="ug">Plasma موتورى كۆرگۈچ ئىجادكارلارنىڭ Plasma ئەپچە يازماي تۇرۇپلا Plasma موتورىنى سىناشقا يول قويىدىغان گىرافىكىلىق قورال.</p>
     <p xml:lang="uk">Навігатор рушіїв Плазми — це графічний інструмент, який надає розробникам можливість перевірити рушії Плазми без написання аплету Плазми.</p>
     <p xml:lang="zh-CN">Plasma 引擎浏览器是一款面向开发者的图形工具，用于在无需编写 Plasma 小程序的情况下测试 Plasma 数据引擎。</p>
     <p xml:lang="zh-TW">Plasma 引擎瀏覽器是個圖形化工具，能讓開發者不用寫 Plasma 元件也能測試 Plasma DataEngines。</p>
