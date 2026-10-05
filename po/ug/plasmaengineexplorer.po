@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-09-23 06:56+0900\n"
+"PO-Revision-Date: 2026-10-03 19:35-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
@@ -159,7 +159,7 @@ msgstr "ئىلتىماس بويىچە يېڭىلا"
 #: engineexplorer.ui:81
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " ms"
 
 #. i18n: ectx: property (prefix), widget (QSpinBox, m_updateInterval)
 #: engineexplorer.ui:84
@@ -218,7 +218,7 @@ msgstr "(c) 2006، KDE قوشۇنى"
 #: main.cpp:61
 #, kde-format
 msgid "Aaron J. Seigo"
-msgstr ""
+msgstr "Aaron J. Seigo"
 
 #: main.cpp:61
 #, kde-format
@@ -286,6 +286,8 @@ msgid ""
 "No valid model was returned. Verify that a model is available for this "
 "source."
 msgstr ""
+"ئىشلەتكىلى بولىدىغان ئۆرنەك يوق. بۇ سانلىق مەلۇمات مەنبەسىنىڭ ئىشلەتكىلى "
+"بولىدىغان مودېلىنىڭ بار يوقلۇقىنى تەكشۈرۈڭ."
 
 #: modelviewer.cpp:103
 #, kde-format
@@ -310,6 +312,8 @@ msgid ""
 "No valid service was returned. Verify that a service is available for this "
 "source."
 msgstr ""
+"ئىشلەتكىلى بولىدىغان مۇلازىمەت يوق. بۇ سانلىق مەلۇمات مەنبەسىنىڭ ئىشلەتكىلى "
+"بولىدىغان مۇلازىمەتنىڭ بار يوقلۇقىنى تەكشۈرۈڭ."
 
 #: serviceviewer.cpp:74
 #, kde-format
@@ -335,6 +339,8 @@ msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> failed. <p>The error was: "
 "<b>'%3: %4'</b></p>"
 msgstr ""
+"<b>«%2»</b> نىشاندىكى <b>«%1»</b> مەشغۇلاتى مەغلۇپ بولدى.<p>خاتالىق: <b>«%3："
+"%4’»</b></p>"
 
 #: serviceviewer.cpp:193 serviceviewer.cpp:206
 #, kde-format
@@ -352,6 +358,8 @@ msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> returned successfully. "
 "<p>The result was: <b>'%3'</b></p>"
 msgstr ""
+"<b>«%2»</b> نىشاندىكى <b>«%1»</b> مەشغۇلاتى مۇۋەپپەقىيەتلىك بولدى."
+"<p>خاتالىق: <b>«%3»</b></p>"
 
 #: serviceviewer.cpp:228
 #, kde-format

@@ -113,7 +113,7 @@
 > — графическая утилита, позволяющая разработчикам тестировать аплеты Plasma.</para>
 
 <para
->Будут найдены только установленные аплеты. Для поиска только что установленных аплетов возможно выполнить команду <command
+>Будут найдены только установленные аплеты. Для поиска только что установленных аплетов может потребоваться выполнить команду <command
 >kbuildsycoca5</command
 >.</para>
 </refsect1>
@@ -178,7 +178,7 @@
 ></term>
 <listitem
 ><para
->Ограничение расположение, с которым следует запускать оболочку (floating, desktop, fullscreen, topedge, bottomedge, leftedge, rightedge).</para
+>Ограничение расположения, с которым следует запускать контейнер (floating, desktop, fullscreen, topedge, bottomedge, leftedge, rightedge).</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -276,7 +276,7 @@
 >Более подробная документация доступна по ссылке <ulink url="help:/plasma-desktop"
 >help:/plasma-desktop</ulink
 > (либо укажите этот <acronym
->URL-адрес</acronym
+>URL</acronym
 > в &konqueror;, либо выполните команду <userinput
 ><command
 >khelpcenter</command

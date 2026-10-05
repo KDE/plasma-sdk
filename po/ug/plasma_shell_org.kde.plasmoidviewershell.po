@@ -1,22 +1,22 @@
 # Uyghur translation for plasma_shell_org.
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-sdk package.
-# Abduqadir Abliz <sahranbay@gmail.com>, 2026., YEAR.
+# Abduqadir Abliz <sahranbay@gmail.com>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-09-23 06:56+0900\n"
+"PO-Revision-Date: 2026-10-03 19:34-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.9\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.9\n"
 
 #: contents/applet/AppletError.qml:164
 msgid "Copy to Clipboard"
@@ -55,7 +55,7 @@ msgstr "ئىجازەتنامە:"
 #: contents/configuration/AboutPlugin.qml:163
 msgctxt "@info:whatsthis"
 msgid "View license text"
-msgstr ""
+msgstr "ئىجازەتنامە ئۇچۇرىنى كۆرسەت"
 
 #: contents/configuration/AboutPlugin.qml:177
 msgid "Authors"
@@ -85,6 +85,8 @@ msgstr "تەڭشەك قوللان"
 msgid ""
 "The current page has unsaved changes. Apply the changes or discard them?"
 msgstr ""
+"نۆۋەتتىكى بەتتە تېخى ساقلانمىغان ئۆزگىرىش بار. ئۆزگىرىشنى قوللىنامدۇ ياكى "
+"تاشلىۋېتەمدۇ؟"
 
 #: contents/configuration/AppletConfiguration.qml:384
 msgid "OK"
@@ -132,24 +134,24 @@ msgstr "توغرىسىغا سۈرگۈچ"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:30
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:31
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:32
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:33
 msgid "Meta"
-msgstr ""
+msgstr "Meta"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:95
 msgctxt "Concatenation sign for shortcuts, e.g. Ctrl+Shift"
 msgid "+"
-msgstr ""
+msgstr "+"
 
 #: contents/configuration/ConfigurationContainmentActions.qml:167
 msgctxt "@title"
@@ -193,7 +195,7 @@ msgstr "تېزلەتمە"
 
 #: contents/configuration/ConfigurationShortcuts.qml:30
 msgid "This shortcut will activate the applet as though it had been clicked."
-msgstr ""
+msgstr "بۇ تېزلەتمە ئەپچىنى ئاكتىپلايدۇ خۇددى ئۇنى بىۋاسىتە چەككەنگە ئوخشاش."
 
 #: contents/configuration/ContainmentConfiguration.qml:27
 msgid "Wallpaper"
@@ -213,11 +215,11 @@ msgstr "كۆزنەكچە تەڭشەك"
 
 #: contents/configuration/PanelConfiguration.qml:104
 msgid "Add Spacer"
-msgstr ""
+msgstr "بوشلۇق قوش"
 
 #: contents/configuration/PanelConfiguration.qml:107
 msgid "Add spacer widget to the panel"
-msgstr ""
+msgstr "كۆزنەكچىگە بوشلۇق ئەپچە قوشىدۇ"
 
 #: contents/configuration/PanelConfiguration.qml:114
 msgid "Add Widgets…"
@@ -225,7 +227,7 @@ msgstr "ئەپچە قوش…"
 
 #: contents/configuration/PanelConfiguration.qml:117
 msgid "Open the widget selector to drag and drop widgets to the panel"
-msgstr ""
+msgstr "ئەپچىنى كۆزنەكچىگە سۆرەپ تاشلاش ئۈچۈن ئەپچە تاللىغۇچنى ئاچىدۇ"
 
 #: contents/configuration/PanelConfiguration.qml:146
 msgid "Position"
@@ -305,7 +307,7 @@ msgstr "كۆزنەكتىن دالدىلان"
 
 #: contents/configuration/PanelConfiguration.qml:354
 msgid "Windows Go Below"
-msgstr ""
+msgstr "كۆزنەكنى تۆۋەنلەت"
 
 #: contents/configuration/PanelConfiguration.qml:397
 msgid "Opacity"
@@ -355,15 +357,15 @@ msgstr "كۆزنەكچە ئۆچۈر"
 
 #: contents/configuration/PanelConfiguration.qml:585
 msgid "Remove this panel; this action is undo-able"
-msgstr ""
+msgstr "بۇ كۆزنەكچىنى چىقىرىۋېتىدۇ؛ بۇ مەشغۇلاتتىن يېنىۋالغىلى بولىدۇ"
 
 #: contents/views/SdkButtons.qml:45
 msgid "FormFactors"
-msgstr ""
+msgstr "كۆزنەكچە ئامىلى"
 
 #: contents/views/SdkButtons.qml:53
 msgid "Planar"
-msgstr ""
+msgstr "تەكشىلىك"
 
 #: contents/views/SdkButtons.qml:57
 msgid "Vertical"
@@ -375,7 +377,7 @@ msgstr "توغرىسىغا"
 
 #: contents/views/SdkButtons.qml:65
 msgid "Mediacenter"
-msgstr ""
+msgstr "ۋاسىتە مەركىزى"
 
 #: contents/views/SdkButtons.qml:69
 msgid "Application"
@@ -395,20 +397,20 @@ msgstr "تولۇق ئېكران"
 
 #: contents/views/SdkButtons.qml:102
 msgid "Top Edge"
-msgstr ""
+msgstr "ئۈستى گىرۋەك"
 
 #: contents/views/SdkButtons.qml:106
 msgid "Bottom Edge"
-msgstr ""
+msgstr "ئاستى گىرۋەك"
 
 #: contents/views/SdkButtons.qml:110
 msgid "Left Edge"
-msgstr ""
+msgstr "سول گىرۋەك"
 
 #: contents/views/SdkButtons.qml:114
 msgid "Right Edge"
-msgstr ""
+msgstr "ئوڭ گىرۋەك"
 
 #: contents/views/SdkButtons.qml:126
 msgid "Configure Containment"
-msgstr ""
+msgstr "يۈكدان سەپلە"

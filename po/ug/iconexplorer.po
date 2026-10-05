@@ -1,22 +1,22 @@
 # Uyghur translation for iconexplorer.
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-sdk package.
-# Abduqadir Abliz <sahranbay@gmail.com>, 2026., YEAR.
+# Abduqadir Abliz <sahranbay@gmail.com>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-09-23 06:56+0900\n"
+"PO-Revision-Date: 2026-10-03 19:32-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.9\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -36,27 +36,27 @@ msgstr "سىنبەلگە كۆرگۈچ"
 #: src/main.cpp:77
 #, kde-format
 msgid "Start with category"
-msgstr ""
+msgstr "سەھىپە بىلەن باشلا"
 
 #: src/main.cpp:77
 #, kde-format
 msgid "category"
-msgstr ""
+msgstr "سەھىپە"
 
 #: src/main.cpp:80
 #, kde-format
 msgid "Start full-screen"
-msgstr ""
+msgstr "پۈتۈن ئېكراندا باشلا"
 
 #: src/main.cpp:83
 #, kde-format
 msgid "Run in icon-picker mode"
-msgstr ""
+msgstr "سىنبەلگە تاللىغۇچ ھالىتىدە ئىجرا قىل"
 
 #: src/qml/Actions.qml:16
 #, kde-format
 msgid "Open with External Program"
-msgstr ""
+msgstr "سىرتقى پىروگراممىدا ئاچ"
 
 #: src/qml/Actions.qml:21
 #, kde-format
@@ -66,53 +66,53 @@ msgstr "ئىچىدىكى قىسقۇچنى ئاچ"
 #: src/qml/Actions.qml:26
 #, kde-format
 msgid "Insert Name"
-msgstr ""
+msgstr "ئىسىم قىستۇر"
 
 #: src/qml/Actions.qml:26
 #, kde-format
 msgid "Copy Name to Clipboard"
-msgstr ""
+msgstr "ئىسىمنى چاپلاش تاختىسىغا كۆچۈر"
 
 #: src/qml/Actions.qml:30
 #, kde-format
 msgid "Icon name copied to clipboard"
-msgstr ""
+msgstr "سىنبەلگە ئىسمى چاپلاش تاختىسىغا كۆچۈرۈلدى"
 
 #: src/qml/Actions.qml:36
 #, kde-format
 msgid "Take Screenshot…"
-msgstr ""
+msgstr "ئېكران كەسمىسى تۇت…"
 
 #: src/qml/Actions.qml:39
 #, kde-format
 msgid "Breeze Colors"
-msgstr ""
+msgstr "مەيىن شامال رەڭگى"
 
 #: src/qml/Actions.qml:43
 #, kde-format
 msgid "Breeze Dark Colors"
-msgstr ""
+msgstr "مەيىن شامال قاراڭغۇ رەڭگى"
 
 #: src/qml/Actions.qml:47 src/qml/GlobalMenuBar.qml:35
 #, kde-format
 msgid "Breeze (Normal) and Breeze Dark"
-msgstr ""
+msgstr "مەيىن شامال (ئادەتتىكى) ۋە مەيىن شامال قاراڭغۇ"
 
 #: src/qml/Actions.qml:51 src/qml/GlobalMenuBar.qml:23
 #, kde-format
 msgid "Active Color Scheme"
-msgstr ""
+msgstr "ئاكتىپ رەڭ لايىھەسى"
 
 #: src/qml/Actions.qml:56
 #, kde-format
 msgid "View in Other Icon Themes"
-msgstr ""
+msgstr "باشقا سىنبەلگە ئۆرنىكىدە كۆرسەت"
 
 #: src/qml/Comparison.qml:30
 #, kde-format
 msgctxt "@title placeholder is an icon name"
 msgid "Other versions of %1"
-msgstr ""
+msgstr "%1 نىڭ باشقا نەشرى"
 
 #: src/qml/GlobalMenuBar.qml:19
 #, kde-format
@@ -122,12 +122,12 @@ msgstr "ھۆججەت"
 #: src/qml/GlobalMenuBar.qml:21
 #, kde-format
 msgid "Export Montage with Color Scheme…"
-msgstr ""
+msgstr "مونتاژنى رەڭ لايىھەسى بىلەن بىللە چىقار…"
 
 #: src/qml/GlobalMenuBar.qml:27
 #, kde-format
 msgid "Breeze (Normal)"
-msgstr ""
+msgstr "مەيىن شامال (ئادەتتىكى)"
 
 #: src/qml/GlobalMenuBar.qml:31
 #, kde-format
@@ -167,7 +167,7 @@ msgstr "سەھىپە:"
 #: src/qml/Preview.qml:63 src/qml/ResponsivePreview.qml:47
 #, kde-format
 msgid "Scalable:"
-msgstr ""
+msgstr "نىسبەتلىك:"
 
 #: src/qml/Preview.qml:65 src/qml/ResponsivePreview.qml:48
 #, kde-format
@@ -182,4 +182,4 @@ msgstr "ياق"
 #: src/qml/Tools.qml:97
 #, kde-format
 msgid "Color scheme:"
-msgstr ""
+msgstr "رەڭ لايىھەسى:"

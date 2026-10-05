@@ -1,47 +1,48 @@
 # Uyghur translation for org.
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-sdk package.
-# Abduqadir Abliz <sahranbay@gmail.com>, 2026., YEAR.
+# Abduqadir Abliz <sahranbay@gmail.com>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-sdk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-09-23 06:56+0900\n"
+"PO-Revision-Date: 2026-10-03 19:33-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.9\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.9\n"
 
 #: lnflogic.cpp:105
 #, kde-format
 msgid "Cannot retrieve the current Plasma layout."
-msgstr ""
+msgstr "نۆۋەتتىكى Plasma ئۇسلۇبىنىڭ جايلاشتۇرۇلۇشىغا ئېرىشەلمىدى."
 
 #: lnflogic.cpp:113
 #, kde-format
 msgid "Impossible to create the layouts directory in the look and feel package"
 msgstr ""
+"كۆرۈنۈش ۋە تۇيغۇ بوغچىسىدا جايلاشتۇرۇش مۇندەرىجىسى قۇرۇشقا مۇمكىن بولمىدى"
 
 #: lnflogic.cpp:124
 #, kde-format
 msgid "Impossible to write to org.kde.plasma.desktop-layout.js"
-msgstr ""
+msgstr "org.kde.plasma.desktop-layout.js غا يېزىشقا مۇمكىن بولمىدى"
 
 #: lnflogic.cpp:127
 #, kde-format
 msgid "Plasma Layout successfully duplicated"
-msgstr ""
+msgstr "Plasma ئۇسلۇبى مۇۋەپپەقىيەتلىك نۇسخىلاندى"
 
 #: lnflogic.cpp:184
 #, kde-format
 msgid "Defaults config file saved from your current setup"
-msgstr ""
+msgstr "كۆڭۈلدىكى سەپلىمە ھۆججەت نۆۋەتتىكى تەڭشىكىڭىزدىن ساقلاندى"
 
 #: lnflogic.cpp:512
 #, kde-format
@@ -51,19 +52,19 @@ msgstr "سۈرەت ئاچ"
 #: lnflogic.cpp:514
 #, kde-format
 msgid "Image Files (*.png *.jpg *.bmp)"
-msgstr ""
+msgstr "سۈرەت ھۆججەت (*.png *.jpg *.bmp)"
 
 #: main.cpp:29
 #, kde-format
 msgctxt "@info:credit"
 msgid "Plasma Global Theme Explorer"
-msgstr ""
+msgstr "Plasma ئومۇمىيەت ئۆرنەك كۆرگۈچ"
 
 #: main.cpp:31
 #, kde-format
 msgctxt "@info:credit"
 msgid "Explore and edit your Plasma Global Themes"
-msgstr ""
+msgstr "Plasma ئومۇمىيەت ئۆرنەككە كۆز يۈگۈرتۈپ ۋە تەھرىرلەيدۇ"
 
 #: main.cpp:33
 #, kde-format
@@ -74,7 +75,7 @@ msgstr "© KDE جامائىتى"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Marco Martin"
-msgstr ""
+msgstr "Marco Martin"
 
 #: main.cpp:34 main.cpp:36
 #, kde-format
@@ -86,7 +87,7 @@ msgstr "ئىجادكار"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: main.cpp:40
 #, kde-format
@@ -103,7 +104,7 @@ msgstr "sahranbay@gmail.com, gheyret@gmail.com"
 #: main.cpp:47
 #, kde-format
 msgid "Look And Feel to open"
-msgstr ""
+msgstr "ئاچىدىغان كۆرۈنۈش ۋە تۇيغۇ"
 
 #: qml/Main.qml:71
 #, kde-format
@@ -114,22 +115,22 @@ msgstr "ھەققىدە"
 #: qml/Main.qml:82
 #, kde-format
 msgid "New Theme…"
-msgstr ""
+msgstr "يېڭى ئۆرنەك…"
 
 #: qml/Main.qml:101
 #, kde-format
 msgid "Open Theme Folder"
-msgstr ""
+msgstr "ئۆرنەك قىسقۇچىنى ئاچ"
 
 #: qml/Main.qml:140
 #, kde-format
 msgid "Click to open an image"
-msgstr ""
+msgstr "چېكىلسە سۈرەتنى ئاچىدۇ"
 
 #: qml/Main.qml:171
 #, kde-format
 msgid "Plugin name: %1"
-msgstr ""
+msgstr "قىستۇرما ئاتى: %1"
 
 #: qml/Main.qml:174
 #, kde-format
@@ -154,7 +155,7 @@ msgstr "ئېلخەت:"
 #: qml/Main.qml:190 qml/MetadataEditor.qml:81
 #, kde-format
 msgid "Website:"
-msgstr ""
+msgstr "تور بېكەت:"
 
 #: qml/Main.qml:194 qml/MetadataEditor.qml:86
 #, kde-format
@@ -164,12 +165,12 @@ msgstr "ئىجازەتنامە:"
 #: qml/Main.qml:198
 #, kde-format
 msgid "Layout from current Plasma setup"
-msgstr ""
+msgstr "نۆۋەتتىكى Plasma تەڭشىكىدىن كەلگەن جايلاشتۇرۇش"
 
 #: qml/Main.qml:203
 #, kde-format
 msgid "Defaults from current setup"
-msgstr ""
+msgstr "نۆۋەتتىكى تەڭشەكتىن كەلگەن كۆڭۈلدىكى قىممەت"
 
 #: qml/Main.qml:229
 #, kde-format
@@ -184,17 +185,17 @@ msgstr "يېڭى ئۆرنەك"
 #: qml/MetadataEditor.qml:50
 #, kde-format
 msgid "Theme Plugin Name:"
-msgstr ""
+msgstr "ئۆرنەك قىستۇرما ئىسمى:"
 
 #: qml/MetadataEditor.qml:55
 #, kde-format
 msgid "This theme plugin name already exists"
-msgstr ""
+msgstr "بۇ ئۆرنەك قىستۇرمىسىنىڭ ئاتى مەۋجۇد"
 
 #: qml/MetadataEditor.qml:65
 #, kde-format
 msgid "Theme Name:"
-msgstr ""
+msgstr "ئۆرنەك ئىسمى:"
 
 #: qml/MetadataEditor.qml:98
 #, kde-format
