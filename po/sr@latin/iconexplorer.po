@@ -1,12 +1,13 @@
 # Translation of cuttlefish.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2015, 2016, 2017.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: cuttlefish\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2017-05-07 22:20+0200\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-06 10:30+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@latin\n"
 "MIME-Version: 1.0\n"
@@ -21,17 +22,17 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Časlav Ilić,Nemanja Hiršl"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "caslav.ilic@gmx.net,nemhirsl@gmail.com"
 
 #: src/main.cpp:70
 #, kde-format
 msgid "Icon Explorer"
-msgstr ""
+msgstr "Istraživač ikonica"
 
 #: src/main.cpp:77
 #, kde-format
@@ -56,111 +57,106 @@ msgstr "Pokreni u režimu birača ikonica"
 #: src/qml/Actions.qml:16
 #, kde-format
 msgid "Open with External Program"
-msgstr ""
+msgstr "Otvori spoljašnjim programom"
 
 #: src/qml/Actions.qml:21
 #, kde-format
 msgid "Open Containing Folder"
-msgstr ""
+msgstr "Otvori obuhvatajuću fasciklu"
 
 #: src/qml/Actions.qml:26
-#, fuzzy, kde-format
-#| msgid "Insert icon name"
+#, kde-format
 msgid "Insert Name"
-msgstr "Unesite ime ikonice"
+msgstr "Umetni ime"
 
 #: src/qml/Actions.qml:26
-#, fuzzy, kde-format
-#| msgid "Copy icon name to clipboard"
+#, kde-format
 msgid "Copy Name to Clipboard"
-msgstr "Kopiraj ime ikonice u klipbord"
+msgstr "Kopiraj ime u klipbord"
 
 #: src/qml/Actions.qml:30
-#, fuzzy, kde-format
-#| msgid "Copy icon name to clipboard"
+#, kde-format
 msgid "Icon name copied to clipboard"
-msgstr "Kopiraj ime ikonice u klipbord"
+msgstr "Ime ikonice je kopirano u klipbord"
 
 #: src/qml/Actions.qml:36
 #, kde-format
 msgid "Take Screenshot…"
-msgstr ""
+msgstr "Uhvati snimak…"
 
 #: src/qml/Actions.qml:39
 #, kde-format
 msgid "Breeze Colors"
-msgstr ""
+msgstr "Boje Povetarca"
 
 #: src/qml/Actions.qml:43
 #, kde-format
 msgid "Breeze Dark Colors"
-msgstr ""
+msgstr "Tamne boje Povetarca"
 
 #: src/qml/Actions.qml:47 src/qml/GlobalMenuBar.qml:35
 #, kde-format
 msgid "Breeze (Normal) and Breeze Dark"
-msgstr ""
+msgstr "Povetarac (obični) i Povetarac tamni"
 
 #: src/qml/Actions.qml:51 src/qml/GlobalMenuBar.qml:23
 #, kde-format
 msgid "Active Color Scheme"
-msgstr ""
+msgstr "Aktivna šema boja"
 
 #: src/qml/Actions.qml:56
 #, kde-format
 msgid "View in Other Icon Themes"
-msgstr ""
+msgstr "Prikaži u drugim temama ikonica"
 
 #: src/qml/Comparison.qml:30
 #, kde-format
 msgctxt "@title placeholder is an icon name"
 msgid "Other versions of %1"
-msgstr ""
+msgstr "Drugi oblici ikonice %1"
 
 #: src/qml/GlobalMenuBar.qml:19
-#, fuzzy, kde-format
-#| msgid "Filename:"
+#, kde-format
 msgid "File"
-msgstr "Ime fajla:"
+msgstr "Fajl"
 
 #: src/qml/GlobalMenuBar.qml:21
 #, kde-format
 msgid "Export Montage with Color Scheme…"
-msgstr ""
+msgstr "Izvezi montažu sa šemom boja…"
 
 #: src/qml/GlobalMenuBar.qml:27
 #, kde-format
 msgid "Breeze (Normal)"
-msgstr ""
+msgstr "Povetarac (obični)"
 
 #: src/qml/GlobalMenuBar.qml:31
 #, kde-format
 msgid "Breeze Dark"
-msgstr ""
+msgstr "Povetarac tamni"
 
 #: src/qml/GlobalMenuBar.qml:42
 #, kde-format
 msgid "Quit"
-msgstr ""
+msgstr "Napusti"
 
 #: src/qml/GlobalMenuBar.qml:48
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "Prikaz"
 
 #: src/qml/GlobalMenuBar.qml:51
 #, kde-format
 msgid "Zoom In"
-msgstr ""
+msgstr "Uveličaj"
 
 #: src/qml/GlobalMenuBar.qml:57
 #, kde-format
 msgid "Zoom Out"
-msgstr ""
+msgstr "Umanji"
 
 #: src/qml/Preview.qml:51 src/qml/ResponsivePreview.qml:37
-#, fuzzy, kde-format
-#| msgid "Filename:"
+#, kde-format
 msgid "File name:"
 msgstr "Ime fajla:"
 
@@ -188,4 +184,4 @@ msgstr "ne"
 #: src/qml/Tools.qml:97
 #, kde-format
 msgid "Color scheme:"
-msgstr ""
+msgstr "Šema boja:"

@@ -1,12 +1,13 @@
 # Translation of org.kde.plasma.themeexplorer.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2015, 2016.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: org.kde.plasma.themeexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-26 00:50+0000\n"
-"PO-Revision-Date: 2016-04-15 23:42+0200\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-06 10:30+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavianlatin\n"
 "MIME-Version: 1.0\n"
@@ -21,12 +22,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Časlav Ilić"
+msgstr "Časlav Ilić,Nemanja Hiršl"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "caslav.ilic@gmx.net"
+msgstr "caslav.ilic@gmx.net,nemhirsl@gmail.com"
 
 #: src/main.cpp:31
 #, kde-format
@@ -36,7 +37,7 @@ msgstr "Istraživač plasma tema"
 #: src/main.cpp:33
 #, kde-format
 msgid "Explore and edit your Plasma themes"
-msgstr ""
+msgstr "Istražujte i uređujte plasma teme"
 
 #: src/main.cpp:40
 #, kde-format
@@ -68,7 +69,7 @@ msgstr "Veza"
 #: src/qml/ColorEditorDialog.qml:114
 #, kde-format
 msgid "Visited Link"
-msgstr "Posećena veza"
+msgstr "Posjećena veza"
 
 #: src/qml/ColorEditorDialog.qml:137
 #, kde-format
@@ -103,7 +104,7 @@ msgstr "Boja veza:"
 #: src/qml/ColorEditorDialog.qml:202
 #, kde-format
 msgid "Visited link color:"
-msgstr "Boja posećenih veza:"
+msgstr "Boja posjećenih veza:"
 
 #: src/qml/ColorEditorDialog.qml:210
 #, kde-format
@@ -168,7 +169,7 @@ msgstr "Komplementarna boja fokusa:"
 #: src/qml/ColorEditorDialog.qml:301
 #, kde-format
 msgid "Ok"
-msgstr ""
+msgstr "U redu"
 
 #: src/qml/ColorEditorDialog.qml:306
 #, kde-format
@@ -218,24 +219,21 @@ msgid "Checkbox"
 msgstr "Kućica"
 
 #: src/qml/fakecontrols/LineEdit.qml:35
-#, fuzzy, kde-format
-#| msgid "Text input..."
+#, kde-format
 msgid "Text input…"
-msgstr "Unos teksta..."
+msgstr "Unos teksta…"
 
 #: src/qml/Main.qml:26
-#, fuzzy, kde-format
-#| msgid "Plasma Theme Explorer"
+#, kde-format
 msgctxt "@title:window"
 msgid "Plasma Theme Explorer"
 msgstr "Istraživač plasma tema"
 
 # >> @title:window
 #: src/qml/Main.qml:37
-#, fuzzy, kde-format
-#| msgid "New Theme"
+#, kde-format
 msgid "New Theme…"
-msgstr "Nova tema"
+msgstr "Nova tema…"
 
 #: src/qml/Main.qml:53
 #, kde-format
@@ -248,17 +246,15 @@ msgid "Open Folder"
 msgstr "Otvori fasciklu"
 
 #: src/qml/Main.qml:69
-#, fuzzy, kde-format
-#| msgid "Edit Metadata..."
+#, kde-format
 msgid "Edit Metadata…"
-msgstr "Uredi metapodatke..."
+msgstr "Uredi metapodatke…"
 
 # >> @title:window
 #: src/qml/Main.qml:86
-#, fuzzy, kde-format
-#| msgid "Edit Colors"
+#, kde-format
 msgid "Edit Colors…"
-msgstr "Uređivanje boja"
+msgstr "Uredi boje…"
 
 #: src/qml/Main.qml:99
 #, kde-format
@@ -266,10 +262,9 @@ msgid "Help"
 msgstr "Pomoć"
 
 #: src/qml/Main.qml:104
-#, fuzzy, kde-format
-#| msgid "Search..."
+#, kde-format
 msgid "Search…"
-msgstr "Traži..."
+msgstr "Traži…"
 
 #: src/qml/Main.qml:219
 #, kde-format
@@ -297,93 +292,67 @@ msgid "Show Margins"
 msgstr "Prikaži margine"
 
 #: src/qml/Main.qml:237
-#, fuzzy, kde-format
-#| msgid "Create with Editor..."
+#, kde-format
 msgid "Create with Editor…"
-msgstr "Napravi uređivačem..."
+msgstr "Napravi uređivačem…"
 
 #: src/qml/Main.qml:237
-#, fuzzy, kde-format
-#| msgid "Open In Editor..."
+#, kde-format
 msgid "Open In Editor…"
-msgstr "Otvori uređivačem..."
+msgstr "Otvori uređivačem…"
 
 # >> @title:window
 #: src/qml/MetadataEditor.qml:35
-#, fuzzy, kde-format
-#| msgid "New Theme"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "New Theme"
 msgstr "Nova tema"
 
 # >> @title:window
 #: src/qml/MetadataEditor.qml:35
-#, fuzzy, kde-format
-#| msgid "Edit Theme"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Edit Theme"
 msgstr "Uređivanje teme"
 
 #: src/qml/MetadataEditor.qml:55
-#, fuzzy, kde-format
-#| msgid "Warning: don't change author or license for themes you don't own"
+#, kde-format
 msgctxt "@info"
 msgid "Warning: don't change author or license for themes you don't own"
-msgstr "Upozorenje: ne menjajte autora i licencu u temi koja nije vaša."
+msgstr "Upozorenje: ne mijenjajte autora i licencu u temi koja nije vaša."
 
 #: src/qml/MetadataEditor.qml:66
-#, fuzzy, kde-format
-#| msgid "Theme Name:"
+#, kde-format
 msgctxt "@label"
 msgid "Theme Name:"
 msgstr "Ime teme:"
 
 #: src/qml/MetadataEditor.qml:82
-#, fuzzy, kde-format
-#| msgid "This theme name already exists"
+#, kde-format
 msgctxt "@info"
 msgid "This theme name already exists"
 msgstr "Istoimena tema već postoji."
 
 #: src/qml/MetadataEditor.qml:91
-#, fuzzy, kde-format
-#| msgid "Author:"
+#, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Autor:"
 
 #: src/qml/MetadataEditor.qml:99
-#, fuzzy, kde-format
-#| msgid "Email:"
+#, kde-format
 msgctxt "@label"
 msgid "Email:"
 msgstr "E‑pošta:"
 
 #: src/qml/MetadataEditor.qml:107
-#, fuzzy, kde-format
-#| msgid "License:"
+#, kde-format
 msgctxt "@label"
 msgid "License:"
 msgstr "Licenca:"
 
 #: src/qml/MetadataEditor.qml:118
-#, fuzzy, kde-format
-#| msgid "Website:"
+#, kde-format
 msgctxt "@label"
 msgid "Website:"
 msgstr "Veb sajt:"
-
-#~ msgid "OK"
-#~ msgstr "U redu"
-
-#~ msgid "This is a readonly, system wide installed theme"
-#~ msgstr "Ova tema je samo za čitanje, instalirana za ceo sistem."
-
-#~ msgid "Preview:"
-#~ msgstr "Pregled:"
-
-#~ msgid "New Theme..."
-#~ msgstr "Nova tema..."
-
-#~ msgid "Edit Colors..."
-#~ msgstr "Uredi boje..."

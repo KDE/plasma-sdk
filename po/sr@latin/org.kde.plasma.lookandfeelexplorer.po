@@ -1,12 +1,13 @@
 # Translation of org.kde.plasma.lookandfeelexplorer.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2016.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: org.kde.plasma.lookandfeelexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2016-11-28 01:32+0100\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-06 10:30+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@latin\n"
 "MIME-Version: 1.0\n"
@@ -56,52 +57,51 @@ msgid "Image Files (*.png *.jpg *.bmp)"
 msgstr "fajlovi slika (*.png *.jpg *.bmp)"
 
 #: main.cpp:29
-#, fuzzy, kde-format
-#| msgid "Plasma Look And Feel Explorer"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Plasma Global Theme Explorer"
-msgstr "Plasmin istraživač izgleda i osećaja"
+msgstr "Plasmin istraživač globalnih tema"
 
 #: main.cpp:31
 #, kde-format
 msgctxt "@info:credit"
 msgid "Explore and edit your Plasma Global Themes"
-msgstr ""
+msgstr "Istražujte i uređujte plasma globalne teme"
 
 #: main.cpp:33
 #, kde-format
 msgid "© KDE Community"
-msgstr ""
+msgstr "© zajednica KDE‑a"
 
 #: main.cpp:34
 #, kde-format
 msgctxt "@info:credit"
 msgid "Marco Martin"
-msgstr ""
+msgstr "Marko Martin"
 
 #: main.cpp:34 main.cpp:36
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
-msgstr ""
+msgstr "Programer"
 
 #: main.cpp:35
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: main.cpp:40
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Časlav Ilić"
+msgstr "Časlav Ilić,Nemanja Hiršl"
 
 #: main.cpp:40
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "caslav.ilic@gmx.net"
+msgstr "caslav.ilic@gmx.net,nemhirsl@gmail.com"
 
 #: main.cpp:47
 #, kde-format
@@ -112,13 +112,12 @@ msgstr "Izgled i osećaj za otvaranje."
 #, kde-format
 msgctxt "@action:click"
 msgid "About"
-msgstr ""
+msgstr "O programu"
 
 #: qml/Main.qml:82
-#, fuzzy, kde-format
-#| msgid "New Theme"
+#, kde-format
 msgid "New Theme…"
-msgstr "Nova tema"
+msgstr "Nova tema…"
 
 #: qml/Main.qml:101
 #, kde-format
@@ -126,16 +125,14 @@ msgid "Open Theme Folder"
 msgstr "Otvori fasciklu teme"
 
 #: qml/Main.qml:140
-#, fuzzy, kde-format
-#| msgid "click to open an image"
+#, kde-format
 msgid "Click to open an image"
 msgstr "Kliknite da otvorite sliku"
 
 #: qml/Main.qml:171
-#, fuzzy, kde-format
-#| msgid "Plugin Name:"
+#, kde-format
 msgid "Plugin name: %1"
-msgstr "Ime priključka:"
+msgstr "Ime priključka: %1"
 
 #: qml/Main.qml:174
 #, kde-format
@@ -203,21 +200,11 @@ msgid "Theme Name:"
 msgstr "Ime teme:"
 
 #: qml/MetadataEditor.qml:98
-#, fuzzy, kde-format
-#| msgid "OK"
+#, kde-format
 msgid "OK "
-msgstr "U redu"
+msgstr "U redu "
 
 #: qml/MetadataEditor.qml:104
 #, kde-format
 msgid "Cancel"
 msgstr "Odustani"
-
-#~ msgid "Look And Feel"
-#~ msgstr "Izgled i osećaj"
-
-#~ msgid "Version:"
-#~ msgstr "Izdanje:"
-
-#~ msgid "New Theme..."
-#~ msgstr "Nova tema..."
