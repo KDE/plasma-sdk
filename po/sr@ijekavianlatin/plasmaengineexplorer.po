@@ -1,13 +1,14 @@
 # Translation of plasmaengineexplorer.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2007, 2008, 2009, 2012, 2015, 2016, 2017.
 # Dalibor Djuric <dalibor.djuric@mozilla-srbija.org>, 2009.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasmaengineexplorer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2017-09-28 17:58+0200\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-06 10:30+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavianlatin\n"
 "MIME-Version: 1.0\n"
@@ -22,12 +23,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Časlav Ilić"
+msgstr "Časlav Ilić,Nemanja Hiršl"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "caslav.ilic@gmx.net"
+msgstr "caslav.ilic@gmx.net,nemhirsl@gmail.com"
 
 #: engineexplorer.cpp:45
 #, kde-format
@@ -55,10 +56,9 @@ msgstr "Traži"
 
 # >> @title:column
 #: engineexplorer.cpp:176
-#, fuzzy, kde-format
-#| msgid "DataSource"
+#, kde-format
 msgid "DataSource/Key"
-msgstr "izvor"
+msgstr "izvor/ključ"
 
 # >> @title:column
 #: engineexplorer.cpp:176
@@ -135,9 +135,7 @@ msgid "<not displayable>"
 msgstr "<neprikazivo>"
 
 #: engineexplorer.cpp:487 engineexplorer.cpp:502
-#, fuzzy, kde-format
-#| msgid "<1 item>"
-#| msgid_plural "<%1 items>"
+#, kde-format
 msgctxt "Length of the list"
 msgid "<%1 item>"
 msgid_plural "<%1 items>"
@@ -151,10 +149,10 @@ msgstr[3] "<%1 stavka>"
 msgctxt "Size of the map"
 msgid "<%1 pair>"
 msgid_plural "<%1 pairs>"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "<%1 par>"
+msgstr[1] "<%1 para>"
+msgstr[2] "<%1 parova>"
+msgstr[3] "<%1 par>"
 
 #. i18n: ectx: property (text), widget (KTitleWidget, m_title)
 #: engineexplorer.cpp:530 engineexplorer.ui:29
@@ -318,7 +316,7 @@ msgid ""
 "No valid model was returned. Verify that a model is available for this "
 "source."
 msgstr ""
-"Nije vraćen nijedan dobar model. Proverite da li je za ovaj izvor dostupan "
+"Nije vraćen nijedan dobar model. Provjerite da li je za ovaj izvor dostupan "
 "neki model."
 
 #: modelviewer.cpp:103
@@ -344,7 +342,7 @@ msgid ""
 "No valid service was returned. Verify that a service is available for this "
 "source."
 msgstr ""
-"Nije vraćen nijedan dobar servis. Proverite da li je za ovaj izvor dostupan "
+"Nije vraćen nijedan dobar servis. Provjerite da li je za ovaj izvor dostupan "
 "neki servis."
 
 #: serviceviewer.cpp:74
@@ -354,12 +352,10 @@ msgid "%1 Service Explorer"
 msgstr "Istraživač servisa %1|/|Istraživač servisa $[gen %1]"
 
 #: serviceviewer.cpp:77
-#, fuzzy, kde-format
-#| msgctxt "Source: name of the data, Service: writes data instead of fetching"
-#| msgid "DataEngine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
+#, kde-format
 msgctxt "Source: name of the data, Service: writes data instead of fetching"
 msgid "Engine: <b>%1</b>; Source: <b>%2</b>; Service: <b>%3</b>"
-msgstr "datomotor: <b>%1</b>; izvor: <b>%2</b>; servis: <b>%3</b>"
+msgstr "motor: <b>%1</b>; izvor: <b>%2</b>; servis: <b>%3</b>"
 
 # >> @title:column
 #. i18n: ectx: property (text), widget (QTableWidget, m_operationDescription)
@@ -374,7 +370,7 @@ msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> failed. <p>The error was: "
 "<b>'%3: %4'</b></p>"
 msgstr ""
-"<p>Postupak <b>%1</b> sa odredištem <b>%2</b> nije uspeo.</p><p>Prijavljena "
+"<p>Postupak <b>%1</b> sa odredištem <b>%2</b> nije uspio.</p><p>Prijavljena "
 "greška: <b>%3: %4</b></p>"
 
 #: serviceviewer.cpp:193 serviceviewer.cpp:206
@@ -393,19 +389,17 @@ msgid ""
 "<b>'%1'</b> operation with destination <b>'%2'</b> returned successfully. "
 "<p>The result was: <b>'%3'</b></p>"
 msgstr ""
-"<p>Postupak <b>%1</b> sa odredištem <b>%2</b> uspešno je okončan.</"
+"<p>Postupak <b>%1</b> sa odredištem <b>%2</b> uspješno je okončan.</"
 "p><p>Vraćeni rezultat: <b>%3</b></p>"
 
 #: serviceviewer.cpp:228
-#, fuzzy, kde-format
-#| msgid "One active operation..."
-#| msgid_plural "%1 operations active..."
+#, kde-format
 msgid "One active operation…"
 msgid_plural "%1 operations active…"
-msgstr[0] "%1 aktivan postupak..."
-msgstr[1] "%1 aktivna postupka..."
-msgstr[2] "%1 aktivnih postupaka..."
-msgstr[3] "%1 aktivan postupak..."
+msgstr[0] "%1 aktivan postupak…"
+msgstr[1] "%1 aktivna postupka…"
+msgstr[2] "%1 aktivnih postupaka…"
+msgstr[3] "%1 aktivan postupak…"
 
 #. i18n: ectx: property (text), widget (QLabel, m_operationsLabel)
 #: serviceviewer.ui:39
