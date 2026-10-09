@@ -42,6 +42,10 @@
   <name xml:lang="sa">प्लाज्मा इञ्जिन एक्सप्लोरर</name>
   <name xml:lang="sk">Prieskumník zdrojov Plasma</name>
   <name xml:lang="sl">Plasma Engine Explorer</name>
+  <name xml:lang="sr">Плазмин истраживач мотора</name>
+  <name xml:lang="sr-Latn">Plasmin istraživač motora</name>
+  <name xml:lang="sr-ijekavian">Плазмин истраживач мотора</name>
+  <name xml:lang="sr-ijekavianlatin">Plasmin istraživač motora</name>
   <name xml:lang="sv">Gränssnittsutforskare för Plasma</name>
   <name xml:lang="tg">Роҳнамои низоми Плазма</name>
   <name xml:lang="tr">Plasma İşletkesi Gezgini</name>
@@ -86,6 +90,10 @@
   <summary xml:lang="sa">प्लाज्मा डाटा इञ्जिन्स् द्वारा प्रकाशितस्य आँकडानां कृते एक्स्प्लोरर्</summary>
   <summary xml:lang="sk">Prehliadač pre dáta publikované cez Plasma Data Engines</summary>
   <summary xml:lang="sl">Raziskovalec podatkov, ki jih je objavil Plasma Data Engines</summary>
+  <summary xml:lang="sr">Истраживач података које дојављују плазма датомотори</summary>
+  <summary xml:lang="sr-Latn">Istraživač podataka koje dojavljuju plasma datomotori</summary>
+  <summary xml:lang="sr-ijekavian">Истраживач података које дојављују плазма датомотори</summary>
+  <summary xml:lang="sr-ijekavianlatin">Istraživač podataka koje dojavljuju plasma datomotori</summary>
   <summary xml:lang="sv">Utforskare av data som publiceras av datagränssnitt i Plasma</summary>
   <summary xml:lang="tg">Роҳнамо барои иттилооти мунташир аз низомҳои иттилоотии Плазма</summary>
   <summary xml:lang="tr">Plasma Veri İşletkeleri tarafından yayımlanan veri için gezgin</summary>
@@ -129,6 +137,10 @@
     <p xml:lang="sa">प्लाज्मा इञ्जिन् एक्स्प्लोरर् इति एकं चित्रात्मकं साधनं यत् विकासकाः प्लाज्मा एप्लेट् लिखित्वा विना प्लाज्मा डाटाइञ्जिन्स् इत्यस्य परीक्षणं कर्तुं शक्नुवन्ति ।</p>
     <p xml:lang="sk">Plasma Engine Explorer je grafický nástroj umožnujúci vývojárom testovať Plasma DataEngines bez písania Plasma appletu.</p>
     <p xml:lang="sl">Plasma Engine Explorer je grafično orodje, ki razvijalcem omogoča testiranje Plasma DataEngines, ne da bi pisali Plazmin applet.</p>
+    <p xml:lang="sr">Плазмин истраживач мотора је графичка алатка која програмерима омогућава да испробају датомоторе Плазме без писања плазма аплета.</p>
+    <p xml:lang="sr-Latn">Plasmin istraživač motora je grafička alatka koja programerima omogućava da isprobaju datomotore Plasme bez pisanja plasma apleta.</p>
+    <p xml:lang="sr-ijekavian">Плазмин истраживач мотора је графичка алатка која програмерима омогућава да испробају датомоторе Плазме без писања плазма аплета.</p>
+    <p xml:lang="sr-ijekavianlatin">Plasmin istraživač motora je grafička alatka koja programerima omogućava da isprobaju datomotore Plasme bez pisanja plasma apleta.</p>
     <p xml:lang="sv">Gränssnittsutforskare för Plasma är ett grafiskt verktyg som låter utvecklare testa Plasma datagränssnitt utan att skriva ett Plasma miniprogram.</p>
     <p xml:lang="tg">Роҳнамои низоми Плазма абзори графикиест, ки ба барномасозон барои санҷидани Plasma DataEngines бе навиштани зербарномаи Плазма имкон медиҳад.</p>
     <p xml:lang="tr">Plasma İşletkesi Gezgini, geliştiricilerin bir Plasma uygulamacığı yazmadan Plasma Veri İşletkelerine göz atabilmeleri için geliştirilmiş grafik arabirimli bir araçtır.</p>

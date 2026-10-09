@@ -38,6 +38,10 @@
   <name xml:lang="sa">चिह्न अन्वेषक</name>
   <name xml:lang="sk">Prieskumník ukon</name>
   <name xml:lang="sl">Icon Explorer</name>
+  <name xml:lang="sr">Истраживач иконица</name>
+  <name xml:lang="sr-Latn">Istraživač ikonica</name>
+  <name xml:lang="sr-ijekavian">Истраживач иконица</name>
+  <name xml:lang="sr-ijekavianlatin">Istraživač ikonica</name>
   <name xml:lang="sv">Ikonutforskare</name>
   <name xml:lang="tr">Simge Gezgini</name>
   <name xml:lang="ug">سىنبەلگە كۆرگۈچ</name>
@@ -76,6 +80,10 @@
   <summary xml:lang="sa">कलाकारानां विकासकानां च कृते चिह्नपूर्वदर्शकः</summary>
   <summary xml:lang="sk">Prehliadač ikon pre umelcov a vývojárov</summary>
   <summary xml:lang="sl">Vpogledovalnik ikon za umetnike in razvijalce</summary>
+  <summary xml:lang="sr">Приказивач иконица за графичаре и програмере</summary>
+  <summary xml:lang="sr-Latn">Prikazivač ikonica za grafičare i programere</summary>
+  <summary xml:lang="sr-ijekavian">Приказивач иконица за графичаре и програмере</summary>
+  <summary xml:lang="sr-ijekavianlatin">Prikazivač ikonica za grafičare i programere</summary>
   <summary xml:lang="sv">Förhandsgranskning av ikoner för konstnärer och utvecklare</summary>
   <summary xml:lang="tr">Sanatçılar ve Geliştiriciler için Simge Önizleyicisi</summary>
   <summary xml:lang="uk">Засіб перегляду піктограм для художників та розробників</summary>
@@ -115,6 +123,10 @@
     <p xml:lang="sa">Icon Explorer इत्यनेन कलाकाराः विकासकाः च चिह्नानां पूर्वावलोकनं, चयनं च कर्तुं शक्नुवन्ति । Icon Explorer चिह्नानि यथा अनुप्रयोगे आकृष्टानि दृश्यन्ते तथा रेण्डर् कर्तुं प्रयतते । एतत् श्रेणीं नाम च आधारीकृत्य फ़िल्टर कर्तुं शक्नोति । Icon Explorer सामान्य-उद्देश्य-उपकरणं नास्ति, अपितु कलाकारानां विकासकानां च उपयोग-प्रकरणानाम् प्रति सज्जम् अस्ति । Icon Explorer इत्यनेन Kate तथा KDevelop इत्येतयोः कृते icon picker इत्यस्य रूपेण उपयोगाय प्लगिन् अपि प्रदाति ।</p>
     <p xml:lang="sk">Icon Explorer umožňuje umelcom a vývojárom zobraziť ukážku a vybrať ikony. Prieskumník ikonasa pokúša vykresliť ikony presne tak, ako by vyzerali nakreslené vaplikácii. Umožňuje filtrovať na základe kategórie a názvu. Prieskumník ikon nie je univerzálny nástroj, ale je zameraný na umelcov aprípady použitia vývojárov. Icon Explorer tiež poskytuje doplnok pre Kate aKDevelop sa má použiť ako nástroj na výber ikon.</p>
     <p xml:lang="sl">Icon Explorer umetnikom in razvijalcem omogoča predogled in izbiro ikon. Icon Explorer  poskuša upodobiti ikone točno tako, kot bi bile videti narisane v aplikaciji. Omogoča filtriranje glede na kategorijo in ime. Icon Explorer ni orodje za splošne namene, temveč je namenjeno umetnikom na primerih uporabe razvijalcev. Icon Explorer ponuja tudi vtičnik za Kate in KDevelop za uporabo kot izbirnik ikon.</p>
+    <p xml:lang="sr">Истраживач иконица омогућава графичарима и програмерима да прегледају и бирају иконице. Истраживач иконица покушава да рендерује иконице тачно онако како би изгледале у програму. Омогућава филтрирање по категорији и имену. Истраживач иконица није алатка опште намене, већ је прилагођен потребама графичара и програмера. Истраживач иконица пружа и прикључак за Кејт и К‑девелоп који служи као бирач иконица.</p>
+    <p xml:lang="sr-Latn">Istraživač ikonica omogućava grafičarima i programerima da pregledaju i biraju ikonice. Istraživač ikonica pokušava da renderuje ikonice tačno onako kako bi izgledale u programu. Omogućava filtriranje po kategoriji i imenu. Istraživač ikonica nije alatka opšte namene, već je prilagođen potrebama grafičara i programera. Istraživač ikonica pruža i priključak za Kate i KDevelop koji služi kao birač ikonica.</p>
+    <p xml:lang="sr-ijekavian">Истраживач иконица омогућава графичарима и програмерима да прегледају и бирају иконице. Истраживач иконица покушава да рендерује иконице тачно онако како би изгледале у програму. Омогућава филтрирање по категорији и имену. Истраживач иконица није алатка опште намјене, већ је прилагођен потребама графичара и програмера. Истраживач иконица пружа и прикључак за Кејт и К‑девелоп који служи као бирач иконица.</p>
+    <p xml:lang="sr-ijekavianlatin">Istraživač ikonica omogućava grafičarima i programerima da pregledaju i biraju ikonice. Istraživač ikonica pokušava da renderuje ikonice tačno onako kako bi izgledale u programu. Omogućava filtriranje po kategoriji i imenu. Istraživač ikonica nije alatka opšte namjene, već je prilagođen potrebama grafičara i programera. Istraživač ikonica pruža i priključak za Kate i KDevelop koji služi kao birač ikonica.</p>
     <p xml:lang="sv">Ikonutforskaren låter konstnärer och utvecklare förhandsgranska och välja ikoner. Ikonutforskaren försöker återge ikonerna exakt som de skulle se ut ritade i programmet. Det gör det möjligt att filtrera baserat på kategori och namn. Ikonutforskaren är inte ett allmänt verktyg, utan inriktat på konstnärers och utvecklares användningsfall. Ikonutforskaren tillhandahåller också ett insticksprogram för Kate och KDevelop som kan användas som ikonväljare.</p>
     <p xml:lang="tr">Simge Gezgini, sanatçıların ve geliştiricilerin simgeleri önizlemesine ve seçmesine olanak tanır. Simge Gezgini, simgeleri tam olarak uygulamada çizilmiş gibi sunmaya çalışır. Kategori ve ada göre süzme yapmanızı sağlar. Simge Gezgini; genel amaçlı bir araç değil, sanatçıların ve geliştiricilerin kullanım durumlarına yöneliktir. Simge Gezgini, Kate ve K Geliştir’in simge seçici olarak kullanılması için bir eklenti de sağlar.</p>
     <p xml:lang="uk">«Навігатор піктограмами» надає змогу художникам і розробникам попередньо переглядати і вибирати піктограми. У «Навігаторі піктограмами» зроблено спробу показати піктограми точно так, як вони виглядатимуть у програмі. Передбачено можливість фільтрувати списки за категорією і назвою. «Навігатор піктограмами» не є інструментом загального призначення: програму призначено лише для потреб художників і розробників. У Cutlefish також передбачено додаток для Kate і KDevelop, яким можна скористатися для вибору піктограм.</p>

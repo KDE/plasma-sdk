@@ -42,6 +42,10 @@
   <name xml:lang="sa">प्लाज्मोइड दर्शक</name>
   <name xml:lang="sk">Plasmoid Viewer</name>
   <name xml:lang="sl">Plasmoid Viewer</name>
+  <name xml:lang="sr">Приказивач плазмоида</name>
+  <name xml:lang="sr-Latn">Prikazivač plazmoida</name>
+  <name xml:lang="sr-ijekavian">Приказивач плазмоида</name>
+  <name xml:lang="sr-ijekavianlatin">Prikazivač plazmoida</name>
   <name xml:lang="sv">Plasmoid-visning</name>
   <name xml:lang="tg">Намоишгари Плазмойд</name>
   <name xml:lang="tr">Plasmoid Görüntüleyicisi</name>
@@ -86,6 +90,10 @@
   <summary xml:lang="sa">प्लाज्मा एप्लेट् कृते परीक्षणसाधनम्</summary>
   <summary xml:lang="sk">Testovací nástroj pre Plasma applety</summary>
   <summary xml:lang="sl">Orodje za testiranje Plasminih appletov</summary>
+  <summary xml:lang="sr">Алатка за испробавање плазма аплета</summary>
+  <summary xml:lang="sr-Latn">Alatka za isprobavanje plasma apleta</summary>
+  <summary xml:lang="sr-ijekavian">Алатка за испробавање плазма аплета</summary>
+  <summary xml:lang="sr-ijekavianlatin">Alatka za isprobavanje plasma apleta</summary>
   <summary xml:lang="sv">Testverktyg för Plasma miniprogram</summary>
   <summary xml:lang="tg">Абзорҳои санҷишӣ барои зербарномаҳои Плазма</summary>
   <summary xml:lang="tr">Plasma uygulamacıkları için sınama aracı</summary>
@@ -129,6 +137,10 @@
     <p xml:lang="sa">Plasmoid Viewer इति एकं चित्रात्मकं साधनं यत् विकासकाः Plasma applets इत्यस्य परीक्षणं कर्तुं शक्नुवन्ति ।</p>
     <p xml:lang="sk">Plasmoid Viewer je grafický nástroj na umožnenie vývojárom testovať Plasma applety.</p>
     <p xml:lang="sl">Plasmoid Viewer je grafično orodje, ki razvijalcem omogoča testiranje Plasminih apletov.</p>
+    <p xml:lang="sr">Приказивач плазмоида је графичка алатка која програмерима омогућава да испробају плазма аплете.</p>
+    <p xml:lang="sr-Latn">Prikazivač plazmoida je grafička alatka koja programerima omogućava da isprobaju plasma aplete.</p>
+    <p xml:lang="sr-ijekavian">Приказивач плазмоида је графичка алатка која програмерима омогућава да испробају плазма аплете.</p>
+    <p xml:lang="sr-ijekavianlatin">Prikazivač plazmoida je grafička alatka koja programerima omogućava da isprobaju plasma aplete.</p>
     <p xml:lang="sv">Plasmoid-visning är ett grafiskt verktyg som låter utvecklare prova Plasma miniprogram.</p>
     <p xml:lang="tg">Намоишгари Плазмойд абзори графикие мебошад, ки ба барномарезон барои гузаронидани санҷишҳо бо зербарномаҳои Плазма имкон медиҳад.</p>
     <p xml:lang="tr">Plasmoid Görüntüleyicisi, geliştiricilerin Plasma uygulamacıklarını sınamalarına izin veren bir grafik arabirimli araçtır.</p>
