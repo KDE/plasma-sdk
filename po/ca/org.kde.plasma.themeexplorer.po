@@ -354,15 +354,3 @@ msgstr "Llicència:"
 msgctxt "@label"
 msgid "Website:"
 msgstr "Lloc web:"
-
-#~ msgid "OK"
-#~ msgstr "D'acord"
-
-#~ msgid "This is a readonly, system wide installed theme"
-#~ msgstr "Aquest és un tema instal·lat del sistema, només de lectura"
-
-#~ msgid "Preview:"
-#~ msgstr "Vista prèvia:"
-
-#~ msgid "None"
-#~ msgstr "Sense"
