@@ -164,7 +164,8 @@ msgid "Complementary focus color:"
 msgstr "Cor do foco complementaria:"
 
 #: src/qml/ColorEditorDialog.qml:301
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Ok"
 msgid "Ok"
 msgstr "Aceptar"
 
