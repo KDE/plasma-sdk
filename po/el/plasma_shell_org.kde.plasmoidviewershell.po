@@ -4,34 +4,33 @@
 # Dimitris Kardarakos <dimkard@gmail.com>, 2017.
 # Stelios <sstavra@gmail.com>, 2020, 2021.
 # SPDX-FileCopyrightText: 2024 Antonis Geralis <capoiosct@gmail.com>
+# SPDX-FileCopyrightText: 2026 Petros Vidalis <pvidalis@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2024-09-14 09:49+0300\n"
-"Last-Translator: Antonis Geralis <capoiosct@gmail.com>\n"
+"PO-Revision-Date: 2026-11-03 23:36+0200\n"
+"Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: contents/applet/AppletError.qml:164
-#, fuzzy
-#| msgid "Copy Error Details to Clipboard"
 msgid "Copy to Clipboard"
-msgstr "Αντιγραφή λεπτομερειών σφάλματος στο πρόχειρο"
+msgstr "Αντιγραφή στο πρόχειρο"
 
 #: contents/applet/AppletError.qml:187
 msgid "View Error Details…"
-msgstr ""
+msgstr "Προβολή λεπτομερειών σφάλματος…"
 
 #: contents/applet/CompactApplet.qml:76
 msgid "Open %1"
-msgstr ""
+msgstr "Άνοιγμα του %1"
 
 #: contents/configuration/AboutPlugin.qml:21
 #: contents/configuration/AppletConfiguration.qml:304
@@ -45,7 +44,7 @@ msgstr "Αποστολή αλληλογραφίας στο %1"
 #: contents/configuration/AboutPlugin.qml:64
 msgctxt "@info:tooltip %1 url"
 msgid "Open website %1"
-msgstr ""
+msgstr "Άνοιγμα του ιστοτόπου %1"
 
 #: contents/configuration/AboutPlugin.qml:137
 msgid "Copyright"
@@ -58,7 +57,7 @@ msgstr "Άδεια χρήσης:"
 #: contents/configuration/AboutPlugin.qml:163
 msgctxt "@info:whatsthis"
 msgid "View license text"
-msgstr ""
+msgstr "Προβολή κειμένου άδειας χρήσης"
 
 #: contents/configuration/AboutPlugin.qml:177
 msgid "Authors"
@@ -74,7 +73,7 @@ msgstr "Μεταφραστές"
 
 #: contents/configuration/AboutPlugin.qml:220
 msgid "Report a Bug…"
-msgstr ""
+msgstr "Αναφορά σφάλματος…"
 
 #: contents/configuration/AppletConfiguration.qml:75
 msgid "Keyboard Shortcuts"
@@ -85,15 +84,11 @@ msgid "Apply Settings"
 msgstr "Εφαρμογή ρυθμίσεων"
 
 #: contents/configuration/AppletConfiguration.qml:353
-#, fuzzy
-#| msgid ""
-#| "The settings of the current module have changed. Do you want to apply the "
-#| "changes or discard them?"
 msgid ""
 "The current page has unsaved changes. Apply the changes or discard them?"
 msgstr ""
-"Οι ρυθμίσεις του τρέχοντος αρθρώματος τροποποιήθηκαν. Επιθυμείτε την "
-"εφαρμογή των τροποποιήσεων ή την απόρριψή τους;"
+"Η τρέχουσα σελίδα περιέχει μη αποθηκευμένες αλλαγές. Θέλετε να τις "
+"εφαρμόσετε ή να τις απορρίψετε;"
 
 #: contents/configuration/AppletConfiguration.qml:384
 msgid "OK"
@@ -218,136 +213,126 @@ msgid "Input Here"
 msgstr "Είσοδος εδώ"
 
 #: contents/configuration/PanelConfiguration.qml:97
-#, fuzzy
-#| msgid "Apply Settings"
 msgid "Panel Settings"
-msgstr "Εφαρμογή ρυθμίσεων"
+msgstr "Ρυθμίσεις πίνακα"
 
 #: contents/configuration/PanelConfiguration.qml:104
 msgid "Add Spacer"
-msgstr ""
+msgstr "Προσθήκη διαχωριστικού χώρου"
 
 #: contents/configuration/PanelConfiguration.qml:107
 msgid "Add spacer widget to the panel"
-msgstr ""
+msgstr "Προσθήκη γραφικού συστατικού κενού χώρου στον πίνακα"
 
 #: contents/configuration/PanelConfiguration.qml:114
 msgid "Add Widgets…"
-msgstr ""
+msgstr "Προσθήκη γραφικών συστατικών…"
 
 #: contents/configuration/PanelConfiguration.qml:117
 msgid "Open the widget selector to drag and drop widgets to the panel"
 msgstr ""
+"Άνοιγμα της επιλογής γραφικών συστατικών για μεταφορά και απόθεσή τους στον "
+"πίνακα"
 
 #: contents/configuration/PanelConfiguration.qml:146
-#, fuzzy
-#| msgid "Location"
 msgid "Position"
-msgstr "Τοποθεσία"
+msgstr "Θέση"
 
 #: contents/configuration/PanelConfiguration.qml:151
 #: contents/configuration/PanelConfiguration.qml:266
 msgid "Top"
-msgstr ""
+msgstr "Επάνω"
 
 #: contents/configuration/PanelConfiguration.qml:152
 #: contents/configuration/PanelConfiguration.qml:268
-#, fuzzy
-#| msgid "Right Edge"
 msgid "Right"
-msgstr "Δεξί άκρο"
+msgstr "Δεξιά"
 
 #: contents/configuration/PanelConfiguration.qml:153
 #: contents/configuration/PanelConfiguration.qml:266
-#, fuzzy
-#| msgid "Left Edge"
 msgid "Left"
-msgstr "Αριστερό άκρο"
+msgstr "Αριστερά"
 
 #: contents/configuration/PanelConfiguration.qml:154
 #: contents/configuration/PanelConfiguration.qml:268
-#, fuzzy
-#| msgid "Bottom Edge"
 msgid "Bottom"
-msgstr "Κάτω άκρο"
+msgstr "Κάτω"
 
 #: contents/configuration/PanelConfiguration.qml:174
 msgid "Set Position…"
-msgstr ""
+msgstr "Ορισμός θέσης…"
 
 #: contents/configuration/PanelConfiguration.qml:201
 msgid "Alignment"
-msgstr ""
+msgstr "Στοίχιση"
 
 #: contents/configuration/PanelConfiguration.qml:267
 msgid "Center"
-msgstr ""
+msgstr "Κέντρο"
 
 #: contents/configuration/PanelConfiguration.qml:290
 msgid "Height"
-msgstr ""
+msgstr "Ύψος"
 
 #: contents/configuration/PanelConfiguration.qml:291
 msgid "Width"
-msgstr ""
+msgstr "Πλάτος"
 
 #: contents/configuration/PanelConfiguration.qml:310
 msgid "Fill height"
-msgstr ""
+msgstr "Κάλυψη ύψους"
 
 #: contents/configuration/PanelConfiguration.qml:310
 msgid "Fill width"
-msgstr ""
+msgstr "Κάλυψη πλάτους"
 
 #: contents/configuration/PanelConfiguration.qml:311
 msgid "Fit content"
-msgstr ""
+msgstr "Προσαρμογή στο περιεχόμενο"
 
 #: contents/configuration/PanelConfiguration.qml:312
 msgid "Custom"
-msgstr ""
+msgstr "Προσαρμοσμένο"
 
 #: contents/configuration/PanelConfiguration.qml:338
 msgid "Visibility"
-msgstr ""
+msgstr "Ορατότητα"
 
 #: contents/configuration/PanelConfiguration.qml:351
 msgid "Always visible"
-msgstr ""
+msgstr "Πάντα ορατός"
 
 #: contents/configuration/PanelConfiguration.qml:352
 msgid "Auto hide"
-msgstr ""
+msgstr "Αυτόματη απόκρυψη"
 
 #: contents/configuration/PanelConfiguration.qml:353
 msgid "Dodge windows"
-msgstr ""
+msgstr "Αποφυγή παραθύρων"
 
 #: contents/configuration/PanelConfiguration.qml:354
 msgid "Windows Go Below"
-msgstr ""
+msgstr "Τα παράθυρα περνούν από κάτω"
 
 #: contents/configuration/PanelConfiguration.qml:397
 msgid "Opacity"
-msgstr ""
+msgstr "Αδιαφάνεια"
 
 #: contents/configuration/PanelConfiguration.qml:411
 msgid "Adaptive"
-msgstr ""
+msgstr "Προσαρμοζόμενη"
 
 #: contents/configuration/PanelConfiguration.qml:412
 msgid "Opaque"
-msgstr ""
+msgstr "Αδιαφανής"
 
 #: contents/configuration/PanelConfiguration.qml:413
-#, fuzzy
-#| msgid "Translators"
 msgid "Translucent"
-msgstr "Μεταφραστές"
+msgstr "Ημιδιαφανής"
 
 #: contents/configuration/PanelConfiguration.qml:437
 msgid "Style"
-msgstr ""
+msgstr "Στυλ"
 
 #: contents/configuration/PanelConfiguration.qml:449
 #: contents/views/SdkButtons.qml:90
@@ -356,28 +341,30 @@ msgstr "Αιωρούμενο"
 
 #: contents/configuration/PanelConfiguration.qml:520
 msgid "Panel Width:"
-msgstr ""
+msgstr "Πλάτος πίνακα:"
 
 #: contents/configuration/PanelConfiguration.qml:520
 msgid "Height:"
-msgstr ""
+msgstr "Ύψος:"
 
 #: contents/configuration/PanelConfiguration.qml:555
 msgid "Focus shortcut:"
-msgstr ""
+msgstr "Συντόμευση εστίασης:"
 
 #: contents/configuration/PanelConfiguration.qml:566
 msgid "Press this keyboard shortcut to move focus to the Panel"
 msgstr ""
+"Πατήστε αυτή τη συντόμευση πληκτρολογίου για να μεταφέρετε την εστίαση στον "
+"πίνακα"
 
 #: contents/configuration/PanelConfiguration.qml:582
 msgctxt "@action:button Delete the panel"
 msgid "Delete Panel"
-msgstr ""
+msgstr "Διαγραφή πίνακα"
 
 #: contents/configuration/PanelConfiguration.qml:585
 msgid "Remove this panel; this action is undo-able"
-msgstr ""
+msgstr "Αφαίρεση αυτού του πίνακα. Μπορείτε να αναιρέσετε αυτή την ενέργεια."
 
 #: contents/views/SdkButtons.qml:45
 msgid "FormFactors"

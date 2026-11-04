@@ -4,35 +4,36 @@
 # Dimitris Kardarakos <dimkard@gmail.com>, 2016, 2017.
 # Stelios <sstavra@gmail.com>, 2020, 2021.
 # SPDX-FileCopyrightText: 2024 Antonis Geralis <capoiosct@gmail.com>
+# SPDX-FileCopyrightText: 2026 Petros Vidalis <pvidalis@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2024-09-19 16:43+0300\n"
-"Last-Translator: Antonis Geralis <capoiosct@gmail.com>\n"
+"PO-Revision-Date: 2026-11-03 23:33+0200\n"
+"Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.1\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Πέτρος Βιδάλης"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "pvidalis@gmail.com"
 
 #: src/main.cpp:70
 #, kde-format
 msgid "Icon Explorer"
-msgstr ""
+msgstr "Περιηγητής εικονιδίων"
 
 #: src/main.cpp:77
 #, kde-format
@@ -55,27 +56,24 @@ msgid "Run in icon-picker mode"
 msgstr "Εκτέλεση σε λειτουργία επιλογής εικονιδίου"
 
 #: src/qml/Actions.qml:16
-#, fuzzy, kde-format
-#| msgid "Open icon with external program"
+#, kde-format
 msgid "Open with External Program"
-msgstr "Άνοιγμα εικονιδίου με εξωτερικό πρόγραμμα"
+msgstr "Άνοιγμα με εξωτερικό πρόγραμμα"
 
 #: src/qml/Actions.qml:21
 #, kde-format
 msgid "Open Containing Folder"
-msgstr ""
+msgstr "Άνοιγμα φακέλου που το περιέχει"
 
 #: src/qml/Actions.qml:26
-#, fuzzy, kde-format
-#| msgid "Insert icon name"
+#, kde-format
 msgid "Insert Name"
-msgstr "Εισαγωγή ονόματος εικονιδίου"
+msgstr "Εισαγωγή ονόματος"
 
 #: src/qml/Actions.qml:26
-#, fuzzy, kde-format
-#| msgid "Copy icon name to clipboard"
+#, kde-format
 msgid "Copy Name to Clipboard"
-msgstr "Αντιγραφή ονόματος εικονιδίου στο πρόχειρο"
+msgstr "Αντιγραφή ονόματος στο πρόχειρο"
 
 #: src/qml/Actions.qml:30
 #, kde-format
@@ -85,7 +83,7 @@ msgstr "Το όνομα του εικονιδίου αντιγράφτηκε σ�
 #: src/qml/Actions.qml:36
 #, kde-format
 msgid "Take Screenshot…"
-msgstr ""
+msgstr "Λήψη στιγμιότυπου οθόνης…"
 
 #: src/qml/Actions.qml:39
 #, kde-format
@@ -108,16 +106,15 @@ msgid "Active Color Scheme"
 msgstr "Ενεργό σχήμα χρώματος"
 
 #: src/qml/Actions.qml:56
-#, fuzzy, kde-format
-#| msgid "View icon in other themes"
+#, kde-format
 msgid "View in Other Icon Themes"
-msgstr "Προβολή εικοβιδίου σε άλλα θέματα"
+msgstr "Προβολή σε άλλα θέματα εικονιδίων"
 
 #: src/qml/Comparison.qml:30
 #, kde-format
 msgctxt "@title placeholder is an icon name"
 msgid "Other versions of %1"
-msgstr ""
+msgstr "Άλλες εκδόσεις του %1"
 
 #: src/qml/GlobalMenuBar.qml:19
 #, kde-format
