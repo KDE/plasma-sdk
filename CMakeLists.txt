@@ -90,7 +90,7 @@ add_definitions(
 )
 
 ecm_set_disabled_deprecation_versions(
-    KF 6.10.0
+    KF 6.32.0
 )
 
 add_subdirectory(iconexplorer)
