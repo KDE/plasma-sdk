@@ -1,0 +1,190 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Arabic "INCLUDE">
+]>
+<!--
+    SPDX-FileCopyrightText: 2023 ivan tkachenko <me@ratijas.tk>
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+-->
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>دليل مستخدم kqml</title>
+<date
+>2023-06-10</date>
+<releaseinfo
+>بلازما 6.0</releaseinfo>
+<productname
+>كِيدِي بلازما </productname>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kqml</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kqml</command
+></refname>
+<refpurpose
+>بيئة تشغيل QML مع KLocalizedContext</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>kqml</command
+> <group choice="opt"
+><option
+>-v, --version</option
+></group
+> <group choice="opt"
+><option
+>-h, --help</option
+></group
+> <group choice="opt"
+><option
+>-d, --domain</option
+> <replaceable
+>نطاق</replaceable
+></group
+> <arg choice="opt"
+><replaceable
+>ملفات</replaceable
+>...</arg
+> <arg choice="opt"
+><option
+>--</option
+> <replaceable
+>وسائط</replaceable
+>...</arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>الوصف</title>
+<para
+><command
+>kqml</command
+> هي بيئة تشغيل QML مع KLocalizedContext مهيأ.</para>
+
+<para
+>على عكس أداة qml المرفقة مع حزمة qt-declarative، يهيئ kqml KLocalizedContext الذي يسمح باختبار التطبيقات الواقعية والملفات التجريبية مع استدعاءات i18n عبر الكود والمكتبات المستوردة.</para>
+</refsect1>
+
+<refsect1>
+<title
+>خيارات</title>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>-v</option
+>، <option
+>--version</option
+></term>
+<listitem
+><para
+>يعرض معلومات الإصدار.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-d</option
+>، <option
+>--domain</option
+> <replaceable
+>نطاق</replaceable
+></term>
+<listitem
+><para
+>نطاق التعريب الرئيس.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-h</option
+>، <option
+>--help</option
+></term>
+<listitem
+><para
+>يعرض هذه المساعدة.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><replaceable
+>ملفات</replaceable
+>...</term>
+<listitem
+><para
+>يمكن تحميل أي عدد من ملفات QML. ستشارك نفس المحرك.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><replaceable
+>وسائط</replaceable
+>...</term>
+<listitem
+><para
+>الوسائط بعد '<option
+>--</option
+>' تُتجاهل، لكن تُمرر إلى متغير application.arguments في QML.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</refsect1>
+
+<refsect1>
+<title
+>انظر أيضًا</title>
+
+<para
+>وثائق المستخدم الأكثر تفصيلًا متوفرة من <ulink url="help:/plasma-desktop"
+>help:/plasma-desktop</ulink
+> (إما أدخل هذا <acronym
+>الرابط</acronym
+> في &konqueror;، أو شغّل <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/plasma-desktop</parameter
+></userinput
+>).</para>
+
+</refsect1>
+
+<refsect1>
+<title
+>المؤلفون</title>
+<para
+><command
+>kqml</command
+> كُتب بواسطة <personname
+><firstname
+>إيفان</firstname
+><surname
+>تكاشينكو</surname
+></personname
+> <email
+>me@raitjas.tk</email
+>.</para>
+</refsect1>
+
+</refentry>

@@ -1,0 +1,307 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Arabic "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>دليل مستخدم plasmoidviewer</title>
+<date
+>2017-01-09</date>
+<releaseinfo
+>بلازما 5.8</releaseinfo>
+<productname
+>كِيدِي بلازما </productname>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>plasmoidviewer</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>plasmoidviewer</command
+></refname>
+<refpurpose
+>تشغيل ودجات بلازما في نافذتها الخاصة</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>plasmoidviewer</command
+> <group choice="opt"
+><option
+>-v, --version</option
+></group
+> <group choice="opt"
+><option
+>-c, --containment</option
+> <replaceable
+>الاسم</replaceable
+></group
+> <group choice="opt"
+><option
+>-a, --applet</option
+> <replaceable
+>الاسم</replaceable
+></group
+> <group choice="opt"
+><option
+>-f, --formfactor</option
+> <replaceable
+>الاسم</replaceable
+></group
+> <group choice="opt"
+><option
+>-l, --location</option
+> <replaceable
+>الاسم</replaceable
+></group
+> <group choice="opt"
+><option
+>-x, --xPosition</option
+> <replaceable
+>الموضع السيني</replaceable
+></group
+> <group choice="opt"
+><option
+>-y, --yPosition</option
+> <replaceable
+>الموضع الصادي</replaceable
+></group
+> <group choice="opt"
+><option
+>-s, --size</option
+> <replaceable
+>العرض×الارتفاع</replaceable
+></group
+> <group choice="opt"
+><option
+>-p, --pixmapcache</option
+> <replaceable
+>الحجم</replaceable
+></group
+> <group choice="opt"
+><option
+>-t, --theme</option
+> <replaceable
+>الاسم</replaceable
+></group
+> <group choice="opt"
+><option
+>-h, --help</option
+></group
+> <arg choice="opt"
+>الوسائط</arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>الوصف</title>
+<para
+><command
+>plasmoidviewer</command
+> هي أداة رسومية تسمح للمطورين باختبار ملحقات بلازما.</para>
+
+<para
+>سيُعثر فقط على الملحقات المثبتة. قد يلزم تشغيل <command
+>kbuildsycoca5</command
+> للعثور على الملحقات المثبتة حديثًا.</para>
+</refsect1>
+
+<refsect1>
+<title
+>خيارات</title>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>-v, --version</option
+></term>
+<listitem
+><para
+>يعرض معلومات الإصدار.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-c, --containment <replaceable
+>الاسم</replaceable
+></option
+></term>
+<listitem
+><para
+>اسم ملحق الاحتواء.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-a, --applet <replaceable
+>الاسم</replaceable
+></option
+></term>
+<listitem
+><para
+>اسم ملحق الملحق.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-f, --formfactor <replaceable
+>الاسم</replaceable
+></option
+></term>
+<listitem
+><para
+>عامل الشكل المستخدم (أفقي، عمودي، مركز وسائط، مستوٍ أو تطبيق).</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-l, --location <replaceable
+>الاسم</replaceable
+></option
+></term>
+<listitem
+><para
+>قيد الموقع لبدء الاحتواء به (عائم، سطح مكتب، ملء الشاشة، حافة علوية، حافة سفلية، حافة يسرى، حافة يمنى).</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-x, --xPosition <replaceable
+>الموضع السيني</replaceable
+></option
+></term>
+<listitem
+><para
+>اضبط الموضع السيني لعارض الملحق على سطح مكتب بلازما.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-y, --yPosition <replaceable
+>الموضع الصادي</replaceable
+></option
+></term>
+<listitem
+><para
+>اضبط الموضع الصادي لعارض الملحق على سطح مكتب بلازما.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-s, --size <replaceable
+>العرض×الارتفاع</replaceable
+></option
+></term>
+<listitem
+><para
+>اضبط حجم نافذة عارض الملحق.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-p, --pixmapcache <replaceable
+>الحجم</replaceable
+></option
+></term>
+<listitem
+><para
+>الحجم بالكيلوبايت لتعيين خبيئة الصور النقطية إليه.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-t, --theme <replaceable
+>الاسم</replaceable
+></option
+></term>
+<listitem
+><para
+>اسم السمة التي ستستخدمها الصدفة.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-h, --help</option
+></term>
+<listitem
+><para
+>يعرض هذه المساعدة.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+><replaceable
+>المعطيات</replaceable
+></option
+></term>
+<listitem
+><para
+>البيانات التي ينبغي تمريرها إلى الملحق كحدث 'externalData'.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</refsect1>
+
+<refsect1>
+<title
+>انظر أيضًا</title>
+
+<para
+>وثائق المستخدم الأكثر تفصيلًا متوفرة من <ulink url="help:/plasma-desktop"
+>help:/plasma-desktop</ulink
+> (إما أدخل هذا <acronym
+>الرابط</acronym
+> في &konqueror;، أو شغّل <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/plasma-desktop</parameter
+></userinput
+>).</para>
+
+</refsect1>
+
+<refsect1>
+<title
+>المؤلفون</title>
+<para
+><command
+>plasmoidviewer</command
+> كُتب بواسطة <personname
+><firstname
+>هارون</firstname
+><surname
+>سيغو</surname
+></personname
+> <email
+>aseigo@kde.org</email
+>.</para>
+</refsect1>
+
+</refentry>
