@@ -1,0 +1,334 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Arabic "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>دليل مستخدم plasmaengineexplorer</title>
+<date
+>2017-01-09</date>
+<releaseinfo
+>بلازما 5.8</releaseinfo>
+<productname
+>سطح مكتب بلازما</productname>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>plasmaengineexplorer</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>plasmaengineexplorer</command
+></refname>
+<refpurpose
+>يوفر وصولًا مباشرًا إلى محركات بيانات بلازما</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>plasmaengineexplorer</command
+> <group choice="opt"
+><option
+>-v, --version</option
+></group
+> <group choice="opt"
+><option
+>-h, --help</option
+></group
+> <group choice="opt"
+><option
+>--list</option
+></group
+> <group choice="opt"
+><option
+>--height</option
+> <replaceable
+>بكسل</replaceable
+></group
+> <group choice="opt"
+><option
+>--width</option
+> <replaceable
+>بكسل</replaceable
+></group
+> <group choice="opt"
+><option
+>-x</option
+> <replaceable
+>بكسل</replaceable
+></group
+> <group choice="opt"
+><option
+>-y</option
+> <replaceable
+>بكسل</replaceable
+></group
+> <group choice="opt"
+><option
+>--engine</option
+> <replaceable
+>محرك بيانات</replaceable
+></group
+> <group choice="opt"
+><option
+>--source</option
+> <replaceable
+>محرك بيانات</replaceable
+></group
+> <group choice="opt"
+><option
+>--interval</option
+> <replaceable
+>مللي ثانية</replaceable
+></group
+> <group choice="opt"
+><option
+>--app</option
+> <replaceable
+>تطبيق</replaceable
+></group
+> </cmdsynopsis>
+<cmdsynopsis
+><command
+>plasmaengineexplorer</command
+> <arg choice="opt"
+>خيارات كيدي العامة</arg
+> <arg choice="opt"
+>خيارات كيوت العامة</arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>الوصف</title>
+<para
+><command
+>plasmaengineexplorer</command
+> هي أداة رسومية تسمح للمطورين باختبار محركات بيانات بلازما دون كتابة بريمج بلازما.</para>
+
+<para
+>إذا لم تُعطَ أي خيارات، فستبدأ دون تحديد أي محرك بيانات. يمكن اختيار محرك البيانات المطلوب من قائمة منسدلة.</para>
+
+<para
+>سيتم العثور على محركات البيانات المثبتة فقط. قد يلزم تشغيل <command
+>kbuildsycoca4</command
+> للعثور على محركات بيانات مثبتة حديثًا.</para>
+</refsect1>
+
+<refsect1>
+<title
+>خيارات</title>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>-v, --version</option
+></term>
+<listitem
+><para
+>يعرض معلومات الإصدار.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-h, --help</option
+></term>
+<listitem
+><para
+>يعرض هذه المساعدة.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>--list <replaceable
+>بكسل</replaceable
+></option
+></term>
+<listitem
+><para
+>يعرض قائمة بالمحركات المعروفة وأوصافها.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>--height</option
+></term>
+<listitem
+><para
+>يضبط ارتفاع النافذة، بالبكسل.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>--width <replaceable
+>بكسل</replaceable
+></option
+></term>
+<listitem
+><para
+>يضبط عرض النافذة، بالبكسل.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-x <replaceable
+>بكسل</replaceable
+></option
+></term>
+<listitem
+><para
+>يضبط الإحداثي السيني (الأفقي) للزاوية العليا اليسرى من النافذة، بالبكسل.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>-y <replaceable
+>بكسل</replaceable
+></option
+></term>
+<listitem
+><para
+>يضبط الإحداثي الصادي (العمودي) للزاوية العليا اليسرى من النافذة، بالبكسل.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>--engine <replaceable
+>محرك بيانات</replaceable
+></option
+></term>
+<listitem
+><para
+>ابدأ <command
+>plasmaengineexplorer</command
+> مع تحديد محرك البيانات المعطى. <parameter
+>محرك البيانات</parameter
+> هو الاسم الداخلي لمحرك البيانات المعطى بواسطة مفتاح X-KDE-PluginInfo-Name لملف سطح المكتب.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>--source <replaceable
+>محرك بيانات</replaceable
+></option
+></term>
+<listitem
+><para
+>صالح فقط مع <option
+>--engine</option
+>. يطلب مصدرًا محددًا من محرك البيانات عند بدء <command
+>plasmaengineexplorer</command
+>.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>--interval <replaceable
+>وقت</replaceable
+></option
+></term>
+<listitem
+><para
+>يضبط فترة التحديث المبدئية للمصادر المطلوبة إلى <parameter
+>وقت</parameter
+> مللي ثانية. إذا لم يُضبط، فسيتم تحديث المصدر عند الطلب (لبعض المصادر، سيكون هذا عند توفر بيانات جديدة).</para>
+<para
+>إذا حُدد <option
+>--source</option
+>، فهذه هي فترة التحديث التي ستُستخدم عند طلب ذلك المصدر.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><option
+>--app <replaceable
+>تطبيق</replaceable
+></option
+></term>
+<listitem
+><para
+>أظهر فقط المحركات المرتبطة بالتطبيق الأصلي؛ يُرسم إلى إدخال X-KDE-ParentApp في ملف .desktop لمحرك البيانات.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</refsect1>
+
+<refsect1>
+<title
+>انظر أيضًا</title>
+
+<para
+>وثائق المستخدم الأكثر تفصيلًا متاحة من <ulink url="help:/plasma-desktop"
+>help:/plasma-desktop</ulink
+> (إما أدخل <acronym
+>URL</acronym
+> هذا في &konqueror;، أو شغّل <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/plasma-desktop</parameter
+></userinput
+>).</para>
+
+</refsect1>
+
+<refsect1>
+<title
+>أمثلة</title>
+<para
+>حمّل محرك بيانات الوقت، مع عرض الوقت المحلي وتحديثه كل ثانية:</para>
+<screen
+><userinput
+><command
+>plasmaengineexplorer</command
+> <option
+>--engine time</option
+> <option
+>--source Local</option
+> <option
+>--interval 1000</option
+></userinput
+></screen>
+
+</refsect1>
+
+<refsect1>
+<title
+>المؤلفون</title>
+<para
+><command
+>plasmaengineexplorer</command
+> كُتب بواسطة <personname
+><firstname
+>آرون</firstname
+><surname
+>سيغو</surname
+></personname
+> <email
+>aseigo@kde.org</email
+>.</para>
+</refsect1>
+
+</refentry>
