@@ -30,7 +30,7 @@ msgstr "kde-china@kde.org, i@guoyunhe.me, tds00@qq.com"
 #: src/main.cpp:70
 #, kde-format
 msgid "Icon Explorer"
-msgstr "Icon Explorer 图标浏览器"
+msgstr "图标浏览器"
 
 #: src/main.cpp:77
 #, kde-format
