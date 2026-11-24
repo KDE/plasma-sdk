@@ -249,7 +249,7 @@
 ></term>
 <listitem
 ><para
->İstenen kaynaklar için öntanımlı güncelleme aralığını <parameter
+>İstenen kaynaklar için varsayılan güncelleme aralığını <parameter
 >time</parameter
 > milisaniye olarak ayarlar. Ayarlanmazsa kaynak istek üzerine güncellenecektir (bazı kaynaklar için bu, yeni veri kullanılabilirken olur).</para>
 <para
